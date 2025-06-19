@@ -26,7 +26,7 @@ jobs:
     - name: Deploy to Raidboxes
       run: |
         # WordPress Theme Ordner (anpassen je nach Setup)
-        THEME_PATH="/home/wp/disk/wordpress/wp-content/themes/dein-theme-name"
+       THEME_PATH="/home/wp/disk/wordpress/wp-content/themes/blocksy-child"
         
         # Code zu Raidboxes übertragen
         rsync -avz --delete \
