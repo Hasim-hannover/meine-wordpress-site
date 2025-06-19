@@ -1,0 +1,41 @@
+name: Deploy to Raidboxes
+
+# Wird ausgelöst bei Push zum main Branch
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # Manueller Start möglich
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      
+    - name: Setup SSH Key
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        
+    - name: Add Raidboxes to known hosts
+      run: |
+        ssh-keyscan -H busi79rl.ssh.myrdbx.io >> ~/.ssh/known_hosts
+        
+    - name: Deploy to Raidboxes
+      run: |
+        # WordPress Theme Ordner (anpassen je nach Setup)
+        THEME_PATH="/home/wp/disk/wordpress/wp-content/themes/dein-theme-name"
+        
+        # Code zu Raidboxes übertragen
+        rsync -avz --delete \
+          --exclude='.git/' \
+          --exclude='.github/' \
+          --exclude='node_modules/' \
+          --exclude='.DS_Store' \
+          ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:$THEME_PATH
+          
+    - name: WordPress Cache leeren (optional)
+      run: |
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/wp/disk/wordpress && wp cache flush"
