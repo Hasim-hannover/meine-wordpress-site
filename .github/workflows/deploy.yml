@@ -1,24 +1,26 @@
-name: Deploy WordPress Theme
+name: Deploy to Raidboxes
+
+# Wird ausgelöst bei Push zum main Branch
 on:
   push:
     branches: [ main ]
+  workflow_dispatch: # Manueller Start möglich
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v4
       
-      - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: sftp.raidboxes.de
-          username: ${{ secrets.SFTP_USERNAME }}
-          password: ${{ secrets.SFTP_PASSWORD }}
-          protocol: sftp
-          server-dir: /home/wp/disk/wordpress/wp-content/themes/blocksy-child/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.DS_Store
+    - name: Deploy via SFTP
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        server: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: 22
+        local_path: './*'
+        remote_path: '/home/wp/disk/wordpress/wp-content/themes/blocksy-child/'
+        sftpArgs: '-o ConnectTimeout=5'
