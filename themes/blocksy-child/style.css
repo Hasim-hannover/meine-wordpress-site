@@ -1,0 +1,10 @@
+/**
+ * Theme Name: Blocksy Child
+ * Description: Blocksy Child theme
+ * Author: Creative Themes
+ * Template: blocksy
+ * Text Domain: blocksy
+ */
+/* Test Änderung */
+.site-header { background: red; }
+body { background: yellow; }
