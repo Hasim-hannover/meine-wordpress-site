@@ -14,28 +14,19 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
       
-    - name: Setup SSH Key
-      uses: webfactory/ssh-agent@v0.7.0
+    - name: Deploy via SFTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        
-    - name: Add Raidboxes to known hosts
-      run: |
-        ssh-keyscan -H busi79rl.ssh.myrdbx.io >> ~/.ssh/known_hosts
-        
-    - name: Deploy to Raidboxes
-      run: |
-        # WordPress Theme Ordner (anpassen je nach Setup)
-        THEME_PATH="/home/wp/disk/wordpress/wp-content/themes/blocksy-child"
-        
-        # Code zu Raidboxes übertragen
-        rsync -avz --delete \
-          --exclude='.git/' \
-          --exclude='.github/' \
-          --exclude='node_modules/' \
-          --exclude='.DS_Store' \
-          ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:$THEME_PATH
-          
-    - name: WordPress Cache leeren (optional)
-      run: |
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/wp/disk/wordpress && wp cache flush"
+        server: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: 22
+        protocol: sftp
+        local-dir: ./
+        server-dir: /home/wp/disk/wordpress/wp-content/themes/blocksy-child/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/.DS_Store
+          **/.github/**
