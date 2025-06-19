@@ -1,0 +1,14 @@
+# WordPress
+wp-config.php
+.htaccess
+wp-content/uploads/
+wp-content/cache/
+
+# Development
+node_modules/
+.DS_Store
+.env
+*.log
+
+# Git
+.git/
