@@ -1,26 +1,32 @@
-name: Deploy to Raidboxes (Final)
-
+name: Deploy Theme
 on:
   push:
-    branches: [main]
+    branches: [ main ]
     paths:
       - 'blocksy-child/**'
+      - '.github/workflows/deploy.yml'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Deploy to Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: sftp.raidboxes.de
-          username: RB606538
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "--- Verbindung erfolgreich ---"
-            cd /www/wp-content/themes/
-            rsync -avzr --delete ${{ github.workspace }}/blocksy-child/ ./blocksy-child/
-            echo "--- Deployment erfolgreich abgeschlossen ---"
+      - name: Prepare SSH key
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p 22 ${{ secrets.FTP_HOST }} >> ~/.ssh/known_hosts || true
+
+      - name: SFTP upload
+        env:
+          HOST: ${{ secrets.FTP_HOST }}
+          USER: ${{ secrets.FTP_USER }}
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          sftp -i ~/.ssh/id_rsa -oBatchMode=yes -oStrictHostKeyChecking=yes "$USER@$HOST" << 'EOF'
+          mkdir -p www/wp-content/themes/blocksy-child
+          put -r blocksy-child/* www/wp-content/themes/blocksy-child
+          bye
+          EOF
