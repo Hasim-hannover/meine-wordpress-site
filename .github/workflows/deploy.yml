@@ -13,13 +13,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Dieser neue Schritt lädt den SSH-Schlüssel korrekt.
+      # DIESER NEUE SCHRITT LÄDT DEN SSH-SCHLÜSSEL KORREKT
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      # Dieser Schritt führt das eigentliche Deployment aus.
+      # DIESER SCHRITT FÜHRT DAS DEPLOYMENT AUS
       - name: Deploy Theme to Server
         uses: burnett01/rsync-deployments@6.0.0
         with:
