@@ -2,7 +2,7 @@ name: Deploy Theme
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
     paths:
       - 'blocksy-child/**'
       - '.github/workflows/deploy.yml'
@@ -13,29 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: List files for verification
-        run: |
-          echo "Repository structure:"
-          ls -la
-          echo "Blocksy child content:"
-          ls -la blocksy-child/
-
-      - name: Test SFTP connection
-        run: |
-          echo "Testing connection to ${{ secrets.FTP_HOST }}..."
-          if nc -z -w 5 ${{ secrets.FTP_HOST }} 22; then
-            echo "SFTP port is accessible"
-          else
-            echo "ERROR: Cannot reach SFTP port"
-            exit 1
-          fi
-
-      - name: Deploy via SFTP
-        uses: SamKirkland/SFTP-Deploy-Action@v1.3.1
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          localPath: './blocksy-child/'
-          remotePath: '/www/wp-content/themes/blocksy-child/'
-          debug: true
+      - name: List files
+        run: ls -la
