@@ -1,4 +1,4 @@
-name: Deploy Theme via RSYNC
+name: Deploy Theme via SSH/RSYNC
 
 on:
   push:
@@ -21,4 +21,4 @@ jobs:
           remote_path: /www/wp-content/themes/blocksy-child/
           remote_host: sftp.raidboxes.de
           remote_user: RB606538
-          remote_key: ${{ secrets.FTP_PASS }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
