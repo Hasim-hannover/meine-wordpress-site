@@ -1,4 +1,4 @@
-name: Deploy Theme
+name: Deploy Theme via RSYNC
 
 on:
   push:
@@ -10,16 +10,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # Entfernt .git und .github-Verzeichnisse vor dem Deployment
-      - name: Remove git files 
-        run: |
-          rm -rf ./blocksy-child/.git
-          rm -rf ./blocksy-child/.github
-
-      # Der eigentliche Deployment-Schritt mit rsync
-      - name: Deploy via RSYNC
+      - name: Deploy Theme to Server
         uses: burnett01/rsync-deployments@6.0.0
         with:
           switches: -avzr --delete
