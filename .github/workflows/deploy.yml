@@ -1,4 +1,5 @@
 name: Deploy Theme
+
 on:
   push:
     branches: [ main ]
@@ -12,10 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via SFTP (git-ftp)
-        uses: dfedde/git-ftp-action@releases/v4
+      - name: Deploy via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
-          url: sftp://sftp.raidboxes.de/www/wp-content/themes/blocksy-child
-          user: ${{ secrets.FTP_USER }}
+          server: sftp.raidboxes.de
+          username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          syncroot: blocksy-child
+          port: 22 # Standard-SFTP-Port, falls nicht explizit anders konfiguriert
+          protocol: sftp
+          server-dir: /www/wp-content/themes/blocksy-child/
+          local-dir: ./blocksy-child/
+          dangerous-clean-slate: true # Nutze dies, um alle Dateien zu synchronisieren.
