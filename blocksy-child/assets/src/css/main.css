@@ -120,3 +120,22 @@ body.archive .entries .entry-card {
   font-size:1.12rem; line-height:1.65; color:#fafafa; margin:0 auto; font-weight:600;
   text-shadow:0 2px 6px rgba(0,0,0,.45);
 }
+/* === Startseite: exakt 50px Abstand über dem Hero – auf ALLEN Breakpoints === */
+.home .hu-hero,
+.front-page .hu-hero {
+  margin-top: 50px !important;
+}
+
+/* Alte Notlösung entfernen (sonst doppelter Abstand auf Mobile) */
+@media (max-width: 768px) {
+  main > section:first-of-type,
+  main > div:first-of-type {
+    padding-top: 0 !important;
+  }
+}
+
+/* Fallback: falls dein erstes Element NICHT .hu-hero ist */
+.home main > *:first-child,
+.front-page main > *:first-child {
+  margin-top: 50px !important;
+}
