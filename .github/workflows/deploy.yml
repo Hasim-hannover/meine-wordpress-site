@@ -1,4 +1,4 @@
-name: Deploy Theme via SSH/RSYNC
+name: Deploy to Raidboxes (Final)
 
 on:
   push:
@@ -10,21 +10,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      # DIESER NEUE SCHRITT LÄDT DEN SSH-SCHLÜSSEL KORREKT
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # DIESER SCHRITT FÜHRT DAS DEPLOYMENT AUS
-      - name: Deploy Theme to Server
-        uses: burnett01/rsync-deployments@6.0.0
-        with:
-          switches: -avzr --delete
-          path: ./blocksy-child/
-          remote_path: /www/wp-content/themes/blocksy-child/
-          remote_host: sftp.raidboxes.de
-          remote_user: RB606538
+          host: sftp.raidboxes.de
+          username: RB606538
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "--- Verbindung erfolgreich ---"
+            cd /www/wp-content/themes/
+            rsync -avzr --delete ${{ github.workspace }}/blocksy-child/ ./blocksy-child/
+            echo "--- Deployment erfolgreich abgeschlossen ---"
