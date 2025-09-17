@@ -1,38 +1,42 @@
 <?php
-if (!defined('ABSPATH')) { exit; }
+if ( ! defined('ABSPATH') ) { exit; }
 
 /**
  * Blocksy Child – Fonts & Basics (Raidboxes-ready, ohne Cloudflare)
+ * Champions-League-Version (optimiert: filemtime versioning, Reihenfolge, defer, nur Startseite)
  */
 
-/* 1) Parent- und Child-Styles laden */
+/* 1) Parent- und Child-Styles laden (mit Cache-Busting per filemtime) */
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('blocksy-parent-style', get_template_directory_uri() . '/style.css');
-    wp_enqueue_style(
-        'blocksy-child-style',
-        get_stylesheet_directory_uri() . '/style.css',
-        ['blocksy-parent-style'],
-        wp_get_theme()->get('Version')
-    );
-});
+    $child_css_path  = get_stylesheet_directory() . '/style.css';
+    $parent_css_path = get_template_directory()   . '/style.css';
 
-/* 2) Fonts lokal einbinden + Preload */
+    $ver_child  = file_exists($child_css_path)  ? filemtime($child_css_path)  : wp_get_theme()->get('Version');
+    $ver_parent = file_exists($parent_css_path) ? filemtime($parent_css_path) : null;
+
+    wp_enqueue_style('blocksy-parent-style', get_template_directory_uri() . '/style.css', [], $ver_parent);
+    wp_enqueue_style('blocksy-child-style',  get_stylesheet_directory_uri() . '/style.css', ['blocksy-parent-style'], $ver_child);
+}, 10);
+
+
+/* 2) Fonts lokal einbinden + Preload (sehr früh) */
 add_action('wp_head', function () {
     $theme_uri = get_stylesheet_directory_uri();
     ?>
-    <link rel="preload" href="<?php echo $theme_uri; ?>/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="<?php echo $theme_uri; ?>/fonts/Satoshi-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Bold.woff2"    as="font" type="font/woff2" crossorigin="anonymous">
 
     <style id="blocksy-custom-fonts">
       @font-face{
         font-family:'Satoshi';
-        src:url('<?php echo $theme_uri; ?>/fonts/Satoshi-Regular.woff2') format('woff2');
+        src:url('<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Regular.woff2') format('woff2');
         font-weight:400; font-style:normal; font-display:swap;
       }
       @font-face{
         font-family:'Satoshi';
-        src:url('<?php echo $theme_uri; ?>/fonts/Satoshi-Bold.woff2') format('woff2');
-        font-weight:600 900; font-style:normal; font-display:swap;
+        src:url('<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Bold.woff2') format('woff2');
+        font-weight:700; /* korrigiert: kein Intervall, fester Bold-Wert */
+        font-style:normal; font-display:swap;
       }
       body,button,input,textarea,select{
         font-family:'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -43,6 +47,7 @@ add_action('wp_head', function () {
     <?php
 }, 1);
 
+
 /* 3) (Optional) Blocksy-Customizer Default auf Satoshi setzen (wirkt nur im Customizer) */
 add_action('wp_head', function () {
     ?>
@@ -50,36 +55,36 @@ add_action('wp_head', function () {
     document.addEventListener('DOMContentLoaded',function(){
       if(typeof wp!=='undefined' && wp.customize){
         wp.customize('font_family_primary',   s=>s.set('Satoshi'));
-        wp.customize('font_family_secondary',s=>s.set('Satoshi'));
+        wp.customize('font_family_secondary', s=>s.set('Satoshi'));
       }
     });
     </script>
     <?php
 }, 100);
 
-/* 4) (Optional) Schlanke Cache-Header NUR für Font-Dateien – Raidboxes-kompatibel
-     -> Aktivieren, wenn du Browser-Caching nicht schon via LiteSpeed/Server setzt. */
+
+/* 4) (Optional) Schlanke Cache-Header NUR für Font-Dateien – Raidboxes-kompatibel */
 add_action('send_headers', function () {
     if (empty($_SERVER['REQUEST_URI'])) return;
     $uri = $_SERVER['REQUEST_URI'];
     if (preg_match('~\.(woff2|woff|ttf|otf)$~i', $uri)) {
-        // 1 Jahr, immutable = Datei ändert sich nicht ohne neue URL
-        header('Cache-Control: public, max-age=31536000, immutable');
-        header_remove('Pragma'); // alte Header aufräumen
+        header('Cache-Control: public, max-age=31536000, immutable'); // 1 Jahr
+        header_remove('Pragma');
         header_remove('Expires');
     }
 });
 
-/* 5) (Nur falls du dynamische Seiten NICHT cachen willst – normalerweise NICHT nötig):
-       Raidboxes-Dynamic-Cache umgehen (auskommentiert lassen, außer du weißt warum). */
+
+/* 5) (Nur falls du dynamische Seiten NICHT cachen willst – normalerweise NICHT nötig) */
 // add_filter('wp_headers', function($headers){
 //     $headers['X-Raidboxes-Dynamic-Cache'] = 'bypass';
 //     return $headers;
 // });
 
+
 /* 6) Ajax-Endpunkt für PDF-Report einbinden (falls vorhanden) */
 $ajax_file = get_stylesheet_directory() . '/inc/ajax-generate-report.php';
-if (file_exists($ajax_file)) { require_once $ajax_file; }
+if ( file_exists($ajax_file) ) { require_once $ajax_file; }
 
 
 // ===================================================================
@@ -87,47 +92,93 @@ if (file_exists($ajax_file)) { require_once $ajax_file; }
 // ===================================================================
 
 /**
- * Lädt alle notwendigen Skripte, Stile und Head-Inhalte für die Startseite.
+ * 7) src-Assets NUR auf der Startseite laden – FRÜHER als homepage.css/js
+ *    (Prio 5 vor Standard-10, plus filemtime-Versionen, plus defer)
  */
+add_action('wp_enqueue_scripts', function () {
+    if ( ! is_front_page() ) return;
 
-// 1. Stile und Skripte für die Startseite in die Lade-Warteschlange einreihen
-add_action( 'wp_enqueue_scripts', 'hu_homepage_assets' );
-function hu_homepage_assets() {
-    // Diese Funktion wird auf JEDER Seite ausgeführt,
-    // daher prüfen wir, ob wir uns auf der Startseite befinden.
-    if ( is_front_page() ) {
-        
-        // Lade die CSS-Datei
+    $base     = get_stylesheet_directory();
+    $base_uri = get_stylesheet_directory_uri();
+
+    // CSS aus src
+    $css_src = $base . '/assets/src/css/main.css';
+    if ( file_exists($css_src) ) {
         wp_enqueue_style(
-            'hu-homepage-styles', // Eindeutiger Name für den Style
-            get_stylesheet_directory_uri() . '/assets/css/homepage.css',
-            [], // Keine Abhängigkeiten von anderen Styles
-            '1.0.1' // Versionsnummer, bei Änderungen erhöhen
+            'child-src',
+            $base_uri . '/assets/src/css/main.css',
+            [],
+            filemtime($css_src)
         );
-        
-        // Lade die JavaScript-Datei
+    }
+
+    // JS aus src
+    $js_src = $base . '/assets/src/js/main.js';
+    if ( file_exists($js_src) ) {
         wp_enqueue_script(
-            'hu-homepage-script', // Eindeutiger Name für das Skript
-            get_stylesheet_directory_uri() . '/assets/js/homepage.js',
-            [], // Keine Abhängigkeiten von anderen Skripten
-            [
-                'version' => '1.0.1', // Versionsnummer
-                'in_footer' => true   // Lädt das Skript im Footer für bessere Performance
-            ]
+            'child-src',
+            $base_uri . '/assets/src/js/main.js',
+            [],
+            filemtime($js_src),
+            true // im Footer
         );
+        if ( function_exists('wp_script_add_data') ) {
+            wp_script_add_data('child-src', 'defer', true);
+        }
+    }
+}, 5); // vor hu_homepage_assets()
+
+
+/**
+ * 8) Stile und Skripte für die Startseite (buildfreie Assets)
+ */
+add_action('wp_enqueue_scripts', 'hu_homepage_assets', 10);
+function hu_homepage_assets() {
+    if ( ! is_front_page() ) return;
+
+    $base     = get_stylesheet_directory();
+    $base_uri = get_stylesheet_directory_uri();
+
+    // CSS
+    $css = $base . '/assets/css/homepage.css';
+    if ( file_exists($css) ) {
+        wp_enqueue_style(
+            'hu-homepage-styles',
+            $base_uri . '/assets/css/homepage.css',
+            [],
+            filemtime($css)
+        );
+    }
+
+    // JS
+    $js = $base . '/assets/js/homepage.js';
+    if ( file_exists($js) ) {
+        wp_enqueue_script(
+            'hu-homepage-script',
+            $base_uri . '/assets/js/homepage.js',
+            [],
+            filemtime($js),
+            true
+        );
+        if ( function_exists('wp_script_add_data') ) {
+            wp_script_add_data('hu-homepage-script', 'defer', true);
+        }
     }
 }
 
-// 2. Meta-Tags und Schema-Daten in den <head> der Startseite einfügen
+
+/**
+ * 9) Meta-Tags und JSON-LD in den <head> der Startseite einfügen
+ */
 add_action('wp_head', 'hu_homepage_head_content', 20);
 function hu_homepage_head_content() {
-    if (!is_front_page()) return;
+    if ( ! is_front_page() ) return;
 
     // gängige SEO-Plugins erkennen
     $seo_plugin_active = defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION') || class_exists('All_in_One_SEO_Pack');
 
     // ===== Meta/OG/Twitter – nur wenn KEIN SEO-Plugin aktiv ist =====
-    if (!$seo_plugin_active) {
+    if ( ! $seo_plugin_active ) {
     ?>
     <link rel="canonical" href="https://hasimuener.de/">
     <meta name="description" content="Ihr strategischer Partner für digitales Wachstum. Gemeinsam finden wir den klaren Weg zum Erfolg für Ihr Shopify- oder WordPress-Projekt in Hannover.">
@@ -249,20 +300,4 @@ function hu_homepage_head_content() {
 }
 </script>
 <?php
-} // <-- Ende hu_homepage_head_content()
-
-
-// === Build-Assets laden (nur wenn vorhanden) ===
-add_action('wp_enqueue_scripts', function() {
-  $ver = wp_get_theme()->get('Version');
-
-  $css = get_stylesheet_directory() . '/assets/src/css/main.css';
-  if ( file_exists($css) ) {
-    wp_enqueue_style('child-src', get_stylesheet_directory_uri() . '/assets/src/css/main.css', [], $ver);
-  }
-
-  $js = get_stylesheet_directory() . '/assets/src/js/main.js';
-  if ( file_exists($js) ) {
-    wp_enqueue_script('child-src', get_stylesheet_directory_uri() . '/assets/src/js/main.js', [], $ver, true);
-  }
-}, 20);
+} // Ende hu_homepage_head_content()
