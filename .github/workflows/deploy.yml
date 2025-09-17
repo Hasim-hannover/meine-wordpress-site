@@ -14,13 +14,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
+        uses: ssh-action/sftp-upload@v2
         with:
-          server: sftp.raidboxes.de
+          host: sftp.raidboxes.de
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          port: 22 # Standard-SFTP-Port, falls nicht explizit anders konfiguriert
-          protocol: sftp
-          server-dir: /www/wp-content/themes/blocksy-child/
-          local-dir: ./blocksy-child/
-          dangerous-clean-slate: true # Nutze dies, um alle Dateien zu synchronisieren.
+          port: 22
+          remote_path: /www/wp-content/themes/blocksy-child/
+          local_path: ./blocksy-child/
