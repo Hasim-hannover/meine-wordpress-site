@@ -10,16 +10,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Deploy via SFTP (Raidboxes)
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_HOST }}          # sftp.raidboxes.de
+          server: ${{ secrets.FTP_HOST }}          # z.B. sftp.raidboxes.de
           port: 22
-          username: ${{ secrets.FTP_USER }}        # RB606538
-          password: ${{ secrets.FTP_PASS }}        # Dein RB-Passwort
-          local_path: ./blocksy-child              # Theme-Ordner lokal
-          remote_path: wp-content/themes           # Ziel auf Server (ohne /)
-          sftp_only: true
+          username: ${{ secrets.FTP_USER }}        # z.B. RB606538
+          password: ${{ secrets.FTP_PASS }}        # Dein RB-Dashboard-Passwort
+          local_path: ./blocksy-child/*            # Dein Child-Theme lokal
+          remote_path: wp-content/themes/blocksy-child/  # Zielordner auf Raidboxes
