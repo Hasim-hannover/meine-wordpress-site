@@ -1,23 +1,24 @@
-name: Deploy Theme
+name: Deploy Theme via SSH/RSYNC
+
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'blocksy-child/**'
-      - '.github/workflows/deploy.yml'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Deploy via SFTP (Raidboxes)
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Deploy Theme to Server
+        uses: burnett01/rsync-deployments@6.0.0
         with:
-          server: ${{ secrets.FTP_HOST }}          # z.B. sftp.raidboxes.de
-          port: 22
-          username: ${{ secrets.FTP_USER }}        # z.B. RB606538
-          password: ${{ secrets.FTP_PASS }}        # Dein RB-Dashboard-Passwort
-          local_path: ./blocksy-child/*            # Dein Child-Theme lokal
-          remote_path: wp-content/themes/blocksy-child/  # Zielordner auf Raidboxes
+          switches: -avzr --delete
+          path: ./blocksy-child/
+          remote_path: /www/wp-content/themes/blocksy-child/
+          remote_host: sftp.raidboxes.de
+          remote_user: RB606538
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
