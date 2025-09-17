@@ -1,4 +1,5 @@
-name: Deploy Theme
+name: Deploy Theme (SSH)
+
 on:
   push:
     branches: [ main ]
@@ -17,16 +18,11 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p 22 ${{ secrets.FTP_HOST }} >> ~/.ssh/known_hosts || true
+          ssh-keyscan -p 22 "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: SFTP upload
-        env:
-          HOST: ${{ secrets.FTP_HOST }}
-          USER: ${{ secrets.FTP_USER }}
+      - name: Deploy via rsync over SSH
         run: |
-          cd "$GITHUB_WORKSPACE"
-          sftp -i ~/.ssh/id_rsa -oBatchMode=yes -oStrictHostKeyChecking=yes "$USER@$HOST" << 'EOF'
-          mkdir -p www/wp-content/themes/blocksy-child
-          put -r blocksy-child/* www/wp-content/themes/blocksy-child
-          bye
-          EOF
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/id_rsa -p 22 -o StrictHostKeyChecking=yes" \
+            ./blocksy-child/ \
+            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:www/wp-content/themes/blocksy-child/"
