@@ -12,11 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Remove git files
+      # Entfernt .git und .github-Verzeichnisse vor dem Deployment
+      - name: Remove git files 
         run: |
           rm -rf ./blocksy-child/.git
           rm -rf ./blocksy-child/.github
 
+      # Der eigentliche Deployment-Schritt mit rsync
       - name: Deploy via RSYNC
         uses: burnett01/rsync-deployments@6.0.0
         with:
