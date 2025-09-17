@@ -12,12 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy via SFTP (git-ftp)
+        uses: dfedde/git-ftp-action@releases/v4
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
+          url: sftp://sftp.raidboxes.de/www/wp-content/themes/blocksy-child
+          user: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          protocol: sftp
-          local-dir: ./blocksy-child
-          server-dir: www/wp-content/themes/blocksy-child
+          syncroot: blocksy-child
