@@ -17,7 +17,7 @@ jobs:
         run: ls -la
 
       - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.4
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: sftp.raidboxes.de
           username: RB606538
