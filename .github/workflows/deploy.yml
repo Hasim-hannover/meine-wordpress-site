@@ -16,7 +16,7 @@ jobs:
       - name: Deploy via SFTP
         uses: ssh-action/sftp-upload@v2
         with:
-          host: sftp.raidboxes.de
+          host: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           port: 22
