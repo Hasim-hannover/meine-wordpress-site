@@ -16,12 +16,12 @@ jobs:
       - name: List files
         run: ls -la
 
-      - name: Deploy via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.7
         with:
-          username: 'RB606538'
-          server: 'sftp.raidboxes.de'
+          host: sftp.raidboxes.de
+          username: RB606538
           password: ${{ secrets.FTP_PASS }}
-          local_path: './blocksy-child/'
-          remote_path: '/www/wp-content/themes/blocksy-child/'
           port: 22
+          source: './blocksy-child/*'
+          target: '/www/wp-content/themes/blocksy-child/'
