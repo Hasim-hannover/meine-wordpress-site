@@ -1,8 +1,28 @@
-- name: Deploy via SFTP
-  uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-  with:
-    username: ${{ secrets.FTP_USER }}
-    server: ${{ secrets.FTP_HOST }}
-    password: ${{ secrets.FTP_PASS }}
-    local_path: './blocksy-child/*'
-    remote_path: '/www/wp-content/themes/blocksy-child/'
+name: Deploy Theme
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blocksy-child/**'
+      - '.github/workflows/deploy.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: List files
+        run: ls -la
+
+      - name: Deploy via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.4
+        with:
+          server: sftp.raidboxes.de
+          username: RB606538
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: './blocksy-child/'
+          server-dir: '/www/wp-content/themes/blocksy-child/'
+          protocol: sftp
+          port: 22
