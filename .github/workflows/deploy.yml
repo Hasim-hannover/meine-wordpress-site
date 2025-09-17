@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - 'blocksy-child/**'
-      - '.github/workflows/deploy.yml'
 
 jobs:
   deploy:
@@ -13,13 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via SCP
-        uses: appleboy/scp-action@v0.1.3
+      - name: Remove git files
+        run: |
+          rm -rf ./blocksy-child/.git
+          rm -rf ./blocksy-child/.github
+
+      - name: Deploy via RSYNC
+        uses: burnett01/rsync-deployments@6.0.0
         with:
-          host: sftp.raidboxes.de
-          username: RB606538
-          password: ${{ secrets.FTP_PASS }}
-          port: 22
-          source: './blocksy-child/'
-          target: '/www/wp-content/themes/'
-          scp_options: '-r'
+          switches: -avzr --delete
+          path: ./blocksy-child/
+          remote_path: /www/wp-content/themes/blocksy-child/
+          remote_host: sftp.raidboxes.de
+          remote_user: RB606538
+          remote_key: ${{ secrets.FTP_PASS }}
