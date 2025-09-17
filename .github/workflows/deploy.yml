@@ -12,12 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via SFTP (Raidboxes)
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      - name: Deploy via FTP/SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.FTP_HOST }}
-          port: 22
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          local_path: ./blocksy-child
-          remote_path: www/wp-content/themes/blocksy-child
+          protocol: sftp
+          local-dir: ./blocksy-child
+          server-dir: www/wp-content/themes/blocksy-child
