@@ -147,168 +147,122 @@ function hu_homepage_head_content() {
     }
 
     // ===== JSON-LD Schema =====
-    ?>
-    <script type="application/ld+json">
+?>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
+      "@type": "WebSite",
+      "@id": "https://hasimuener.de/#website",
+      "url": "https://hasimuener.de/",
+      "name": "Hasim Üner",
+      "inLanguage": "de-DE",
+      "publisher": { "@id": "https://hasimuener.de/#org" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://hasimuener.de/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://hasimuener.de/#webpage",
+      "url": "https://hasimuener.de/",
+      "name": "Shopify & WordPress Growth Architect | Hasim Üner Hannover",
+      "isPartOf": { "@id": "https://hasimuener.de/#website" },
+      "about": { "@id": "https://hasimuener.de/#org" },
+      "inLanguage": "de-DE",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp"
+      },
+      "mainEntity": { "@id": "https://hasimuener.de/#org" }
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://hasimuener.de/#org",
+      "name": "Hasim Üner – Digital Growth Partner",
+      "url": "https://hasimuener.de/",
+      "description": "Strategischer Growth-Partner für WordPress & Shopify: Entwicklung, SEO, Tracking und Conversion-Optimierung.",
+      "logo": { "@type": "ImageObject", "url": "https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp" },
+      "image": { "@type": "ImageObject", "url": "https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp" },
+      "telephone": "+49 176 81407134",
+      "email": "hallo@hasimuener.de",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Warschauer Str. 5",
+        "postalCode": "30982",
+        "addressLocality": "Pattensen",
+        "addressRegion": "Niedersachsen",
+        "addressCountry": "DE"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 52.27419, "longitude": 9.73462 },
+      "areaServed": ["Hannover","Niedersachsen","DACH"],
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "08:30", "closes": "16:00" }
+      ],
+      "priceRange": "€€€",
+      "founder": { "@id": "https://hasimuener.de/#person" },
+      "owner": { "@id": "https://hasimuener.de/#person" },
+      "sameAs": ["https://www.linkedin.com/in/hasim-uener/"],
+      "contactPoint": [
         {
-          "@type": "WebSite",
-          "@id": "https://hasimuener.de/#website",
-          "url": "https://hasimuener.de/",
-          "name": "Hasim Üner",
-          "inLanguage": "de-DE",
-          "publisher": { "@id": "https://hasimuener.de/#org" },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://hasimuener.de/?s={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "WebPage",
-          "@id": "https://hasimuener.de/#webpage",
-          "url": "https://hasimuener.de/",
-          "name": "Shopify & WordPress Growth Architect | Hasim Üner Hannover",
-          "isPartOf": { "@id": "https://hasimuener.de/#website" },
-          "about": { "@id": "https://hasimuener.de/#org" },
-          "inLanguage": "de-DE",
-          "primaryImageOfPage": {
-            "@type": "ImageObject",
-            "url": "https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp"
-          },
-          "mainEntity": { "@id": "https://hasimuener.de/#org" }
-        },
-        {
-          "@type": "ProfessionalService",
-          "@id": "https://hasimuener.de/#org",
-          "name": "Hasim Üner – Digital Growth Partner",
-          "url": "https://hasimuener.de/",
-          "description": "Strategischer Growth-Partner für WordPress & Shopify: Entwicklung, SEO, Tracking und Conversion-Optimierung.",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp"
-          },
-          "image": {
-            "@type": "ImageObject",
-            "url": "https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp"
-          },
-          "telephone": "+49 176 81407134",
+          "@type": "ContactPoint",
+          "contactType": "customer service",
           "email": "hallo@hasimuener.de",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Warschauer Str. 5",
-            "postalCode": "30982",
-            "addressLocality": "Pattensen",
-            "addressRegion": "Niedersachsen",
-            "addressCountry": "DE"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 52.27419,
-            "longitude": 9.73462
-          },
-          "areaServed": ["Hannover","Niedersachsen","DACH"],
-          "openingHoursSpecification": [
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"],
-              "opens": "08:30",
-              "closes": "16:00"
-            }
-          ],
-          "priceRange": "€€€",
-          "founder": { "@id": "https://hasimuener.de/#person" },
-          "owner": { "@id": "https://hasimuener.de/#person" },
-          "sameAs": [
-            "https://www.linkedin.com/in/hasim-uener/"
-          ],
-          "contactPoint": [
-            {
-              "@type": "ContactPoint",
-              "contactType": "customer service",
-              "email": "hallo@hasimuener.de",
-              "telephone": "+49 176 81407134",
-              "availableLanguage": ["de","en"],
-              "areaServed": ["DE","AT","CH"]
-            }
-          ],
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Kernleistungen",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Shopify Lösungen",
-                  "url": "https://hasimuener.de/shopify-agentur-hannover/"
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "WordPress Lösungen",
-                  "url": "https://hasimuener.de/wordpress-agentur-hannover/"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://hasimuener.de/#faq",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Wie schnell kann unser Projekt starten?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce-Projekte in 4–8 Wochen."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Was kostet eine professionelle Website?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Starter-Projekte beginnen ab 3.500€. Im Erstgespräch klären wir den Bedarf und erstellen ein passgenaues Angebot."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Bieten Sie auch Wartung & Support an?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Ja. Flexible Service-Pakete für Updates, Backups, Sicherheits-Checks und Performance-Monitoring."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Wie wird der Erfolg des Projekts gemessen?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Über KPIs wie Conversion-Rate, ROAS, CPL oder organischen Traffic. Sie erhalten transparente Reportings."
-              }
-            }
-          ]
-        },
-        {
-          "@type": "Person",
-          "@id": "https://hasimuener.de/#person",
-          "name": "Hasim Üner",
-          "url": "https://hasimuener.de/ueber-mich/",
-          "image": {
-            "@type": "ImageObject",
-            "url": "https://hasimuener.de/wp-content/uploads/2024/09/1f15d682-34e3-475d-9be1-add51e9b9d3b.jpg"
-          },
-          "jobTitle": "Growth Architect – WordPress & Shopify",
-          "worksFor": { "@id": "https://hasimuener.de/#org" },
-          "sameAs": ["https://www.linkedin.com/in/hasim-uener/"]
+          "telephone": "+49 176 81407134",
+          "availableLanguage": ["de","en"],
+          "areaServed": ["DE","AT","CH"]
         }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Kernleistungen",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Shopify Lösungen", "url": "https://hasimuener.de/shopify-agentur-hannover/" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WordPress Lösungen", "url": "https://hasimuener.de/wordpress-agentur-hannover/" } }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://hasimuener.de/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Wie schnell kann unser Projekt starten?", "acceptedAnswer": { "@type": "Answer", "text": "Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce-Projekte in 4–8 Wochen." } },
+        { "@type": "Question", "name": "Was kostet eine professionelle Website?", "acceptedAnswer": { "@type": "Answer", "text": "Starter-Projekte beginnen ab 3.500€. Im Erstgespräch klären wir den Bedarf und erstellen ein passgenaues Angebot." } },
+        { "@type": "Question", "name": "Bieten Sie auch Wartung & Support an?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Flexible Service-Pakete für Updates, Backups, Sicherheits-Checks und Performance-Monitoring." } },
+        { "@type": "Question", "name": "Wie wird der Erfolg des Projekts gemessen?", "acceptedAnswer": { "@type": "Answer", "text": "Über KPIs wie Conversion-Rate, ROAS, CPL oder organischen Traffic. Sie erhalten transparente Reportings." } }
       ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://hasimuener.de/#person",
+      "name": "Hasim Üner",
+      "url": "https://hasimuener.de/ueber-mich/",
+      "image": { "@type": "ImageObject", "url": "https://hasimuener.de/wp-content/uploads/2024/09/1f15d682-34e3-475d-9be1-add51e9b9d3b.jpg" },
+      "jobTitle": "Growth Architect – WordPress & Shopify",
+      "worksFor": { "@id": "https://hasimuener.de/#org" },
+      "sameAs": ["https://www.linkedin.com/in/hasim-uener/"]
     }
-    </script>
-    <?php
+  ]
 }
+</script>
+<?php
+} // <-- Ende hu_homepage_head_content()
+
+
+// === Build-Assets laden (nur wenn vorhanden) ===
+add_action('wp_enqueue_scripts', function() {
+  $ver = wp_get_theme()->get('Version');
+
+  $css = get_stylesheet_directory() . '/assets/src/css/main.css';
+  if ( file_exists($css) ) {
+    wp_enqueue_style('child-src', get_stylesheet_directory_uri() . '/assets/src/css/main.css', [], $ver);
+  }
+
+  $js = get_stylesheet_directory() . '/assets/src/js/main.js';
+  if ( file_exists($js) ) {
+    wp_enqueue_script('child-src', get_stylesheet_directory_uri() . '/assets/src/js/main.js', [], $ver, true);
+  }
+}, 20);
