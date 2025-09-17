@@ -15,9 +15,9 @@ jobs:
       - name: Deploy via SFTP (Raidboxes)
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_HOST }}          # z.B. sftp.raidboxes.de
+          server: ${{ secrets.FTP_HOST }}
           port: 22
-          username: ${{ secrets.FTP_USER }}        # RB606538
-          password: ${{ secrets.FTP_PASS }}        # Dein RB-Dashboard-Passwort
-          local_path: ./blocksy-child              # Dein Child-Theme lokal
-          remote_path: www/wp-content/themes/blocksy-child  # Zielordner auf Raidboxes
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local_path: ./blocksy-child
+          remote_path: www/wp-content/themes/blocksy-child
