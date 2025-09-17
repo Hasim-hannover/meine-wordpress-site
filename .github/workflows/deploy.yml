@@ -13,13 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          protocol: sftp
-          port: 22
-          local-dir: ./blocksy-child/
-          server-dir: /www/wp-content/themes/blocksy-child/
+      - name: Deploy via SFTP using `lftp`
+        run: |
+          sudo apt-get update
+          sudo apt-get install lftp -y
+          lftp -c "open sftp://${{ secrets.FTP_USER }}:${{ secrets.FTP_PASS }}@${{ secrets.FTP_HOST }}; mirror --reverse --verbose blocksy-child/ /www/wp-content/themes/blocksy-child/"
