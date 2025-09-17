@@ -18,3 +18,5 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./blocksy-child/
           server-dir: /wp-content/themes/blocksy-child/
+          server-dir: /wp-content/themes/blocksy-child/
+
