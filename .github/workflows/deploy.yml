@@ -13,11 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Show directory structure
+        run: ls -la
+
       - name: Deploy via SFTP
         uses: SamKirkland/SFTP-Deploy-Action@v1.3.1
         with:
-          host: ${{ secrets.FTP_HOST }}
+          server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          local-path: './blocksy-child/'
-          remote-path: '/www/wp-content/themes/blocksy-child/'
+          localPath: './blocksy-child/'
+          remotePath: '/www/wp-content/themes/blocksy-child/'
+          # Debug-Optionen
+          debug: true
+          dangerousCleanRemote: false
