@@ -18,7 +18,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}          # sftp.raidboxes.de
           port: 22
           username: ${{ secrets.FTP_USER }}        # RB606538
-          password: ${{ secrets.FTP_PASS }}        # Dein RB-Dashboard-Passwort
-          local_path: ./blocksy-child/**
-          remote_path: /wp-content/themes/blocksy-child/
-          sftp_only: true
+          password: ${{ secrets.FTP_PASS }}        # Dein RB-Passwort
+          local_path: ./blocksy-child/*            # Dateien/Ordner im Theme
+          remote_path: /wp-content/themes/blocksy-child/  # Zielordner
+          # sftp_only entfernt -> Action legt Verzeichnis an
