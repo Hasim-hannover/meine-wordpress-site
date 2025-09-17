@@ -17,12 +17,11 @@ jobs:
         run: ls -la
 
       - name: Deploy via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: sftp.raidboxes.de
-          username: RB606538
+          username: 'RB606538'
+          server: 'sftp.raidboxes.de'
           password: ${{ secrets.FTP_PASS }}
-          local-dir: './blocksy-child/'
-          server-dir: '/www/wp-content/themes/blocksy-child/'
-          protocol: sftp
+          local_path: './blocksy-child/'
+          remote_path: '/www/wp-content/themes/blocksy-child/'
           port: 22
