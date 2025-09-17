@@ -14,10 +14,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Deploy via SFTP
-        uses: SamKirkland/SFTP-Deploy-Action@v1.3.1
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.0
         with:
-          host: ${{ secrets.FTP_HOST }}
+          server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          local-path: './blocksy-child/'
-          remote-path: '/www/wp-content/themes/blocksy-child/'
+          protocol: sftp
+          port: 22
+          local-dir: ./blocksy-child/
+          server-dir: /www/wp-content/themes/blocksy-child/
