@@ -13,8 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via SFTP using `lftp`
+      - name: Install lftp
         run: |
           sudo apt-get update
           sudo apt-get install lftp -y
+
+      - name: Deploy via SFTP
+        run: |
           lftp -c "open sftp://${{ secrets.FTP_USER }}:${{ secrets.FTP_PASS }}@${{ secrets.FTP_HOST }}; mirror --reverse --verbose blocksy-child/ /www/wp-content/themes/blocksy-child/"
