@@ -23,7 +23,7 @@ get_header();
   <div class="container">
     <div class="section-title">
       <span class="badge">Hasim Üner – Ihr Growth Partner</span>
-      <h1><h1>CHAMPIONS LEAGUE! Unser Test war erfolgreich.</h1></h1>
+      <h1>Ihr Weg zu digitalem Wachstum. Klar und strategisch.</h1>
       <p class="sub">Sie haben das Ziel. Gemeinsam finden wir den passenden Weg und setzen ihn technisch exzellent um.</p>
     </div>
     <div class="switch-grid" aria-label="Wählen Sie Ihren strategischen Pfad">
