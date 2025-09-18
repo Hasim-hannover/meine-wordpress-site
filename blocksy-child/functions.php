@@ -39,20 +39,8 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('hu-header-script', $base_uri . '/assets/js/header.js', [], filemtime($header_js), true);
     }
 
-    // -- Homepage-spezifische Assets (nur auf der Startseite) --
+    // -- Homepage-spezifische Assets (falls noch benötigt) --
     if (is_front_page()) {
-        // Assets aus dem 'src' Ordner
-        $src_css = $base . '/assets/src/css/main.css';
-        if (file_exists($src_css)) {
-            wp_enqueue_style('child-src-styles', $base_uri . '/assets/src/css/main.css', [], filemtime($src_css));
-        }
-        $src_js = $base . '/assets/src/js/main.js';
-        if (file_exists($src_js)) {
-            wp_enqueue_script('child-src-script', $base_uri . '/assets/src/js/main.js', [], filemtime($src_js), true);
-            wp_script_add_data('child-src-script', 'defer', true);
-        }
-
-        // Assets aus dem 'build' Ordner
         $homepage_css = $base . '/assets/css/homepage.css';
         if (file_exists($homepage_css)) {
             wp_enqueue_style('hu-homepage-styles', $base_uri . '/assets/css/homepage.css', [], filemtime($homepage_css));
@@ -60,16 +48,16 @@ add_action('wp_enqueue_scripts', function () {
         $homepage_js = $base . '/assets/js/homepage.js';
         if (file_exists($homepage_js)) {
             wp_enqueue_script('hu-homepage-script', $base_uri . '/assets/js/homepage.js', [], filemtime($homepage_js), true);
-            wp_script_add_data('hu-homepage-script', 'defer', true);
         }
     }
 }, 15);
 
 
 // -------------------------------------------------------------------
-// 3. Lokale Fonts & Head-Inhalte
+// 3. Alle Inhalte für den <head> (Fonts, Meta, Schema)
 // -------------------------------------------------------------------
 add_action('wp_head', function () {
+    // ---- 3.1 Lokale Fonts ----
     $theme_uri = get_stylesheet_directory_uri();
     ?>
     <link rel="preload" href="<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
@@ -81,12 +69,11 @@ add_action('wp_head', function () {
       h1,h2,h3,h4,h5,h6{ font-weight:700; }
     </style>
     <?php
-}, 1);
 
-add_action('wp_head', function () {
+    // ---- 3.2 SEO Meta & JSON-LD (nur auf der Startseite) ----
     if ( ! is_front_page() ) return;
 
-    // SEO-Plugins erkennen und nur wenn keins aktiv ist, eigene Tags ausgeben
+    // SEO-Plugin-Check
     $seo_plugin_active = defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION') || class_exists('All_in_One_SEO_Pack');
 
     if ( ! $seo_plugin_active ) {
@@ -108,7 +95,7 @@ add_action('wp_head', function () {
         <?php
     }
 
-    // JSON-LD Schema
+    // Vollständiges und korrektes JSON-LD Schema
     $schema = [
         '@context' => 'https://schema.org',
         '@graph'   => [
@@ -220,16 +207,31 @@ add_action('wp_head', function () {
                 'sameAs'   => ['https://www.linkedin.com/in/hasim-uener/'],
             ],
         ],
-    ]; // <-- DIESE KLAMMER HAT GEFEHLT
-
+    ];
     echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>';
 
 }, 20);
 
+// -------------------------------------------------------------------
+// 4. Helfer- & Server-Funktionen
+// -------------------------------------------------------------------
 
-// -------------------------------------------------------------------
-// 4. Server- & Helfer-Funktionen
-// -------------------------------------------------------------------
+/**
+ * (Optional) Setzt die Default-Schrift im Blocksy Customizer auf 'Satoshi'.
+ */
+add_action('wp_head', function () {
+    if ( ! is_customize_preview() ) return;
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded',function(){
+      if(typeof wp!=='undefined' && wp.customize){
+        wp.customize('font_family_primary',   s => s.set('Satoshi'));
+        wp.customize('font_family_secondary', s => s.set('Satoshi'));
+      }
+    });
+    </script>
+    <?php
+}, 100);
 
 /**
  * Setzt langlebige Cache-Header für Font-Dateien.
