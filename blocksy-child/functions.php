@@ -2,22 +2,31 @@
 if ( ! defined('ABSPATH') ) { exit; }
 
 /**
- * ===================================================================
- * Blocksy Child Theme: functions.php
- * ===================================================================
- * Angepasst für einen vollständig entkoppelten, Code-basierten Header.
+ * = "================================================================="
+ * Blocksy Child Theme: functions.php (Finale & vollständige Version)
+ * "================================================================="
+ * Enthält alle Funktionen (Fonts, SEO, etc.). Der Custom Header ist
+ * zur Sicherheit noch deaktiviert, kann aber einfach aktiviert werden.
  */
 
+/*
 // -------------------------------------------------------------------
-// 1. Blocksy-Header entfernen & eigenen Header laden
+// 1. SCHALTER: Blocksy-Header entfernen & eigenen Header laden
 // -------------------------------------------------------------------
-remove_action('blocksy:header:render', 'blocksy_output_header');
-add_action('blocksy:header:render', function() {
-    get_template_part('template-parts/header/site-header');
-});
+// Um den eigenen Header zu aktivieren, entferne die Kommentarzeichen /* und */
+/*
+function hu_override_blocksy_header() {
+    remove_action('blocksy:header:render', 'blocksy_output_header');
+    add_action('blocksy:header:render', function() {
+        get_template_part('template-parts/header/site-header');
+    });
+}
+add_action('after_setup_theme', 'hu_override_blocksy_header');
+*/
+
 
 // -------------------------------------------------------------------
-// 2. Alle Styles & Scripts laden (inkl. Custom Header)
+// 2. Alle Styles & Scripts laden
 // -------------------------------------------------------------------
 add_action('wp_enqueue_scripts', function () {
     $base     = get_stylesheet_directory();
@@ -29,7 +38,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_style('blocksy-child-style', $base_uri . '/style.css', ['blocksy-parent-style'], filemtime($base . '/style.css'));
     }
 
-    // -- Eigene Header Assets --
+    // -- Eigene Header Assets (werden geladen, aber noch nicht angezeigt) --
     $header_css = $base . '/assets/css/header.css';
     if (file_exists($header_css)) {
         wp_enqueue_style('hu-header-styles', $base_uri . '/assets/css/header.css', [], filemtime($header_css));
@@ -39,7 +48,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('hu-header-script', $base_uri . '/assets/js/header.js', [], filemtime($header_js), true);
     }
 
-    // -- Homepage-spezifische Assets (falls noch benötigt) --
+    // -- Homepage-spezifische Assets --
     if (is_front_page()) {
         $homepage_css = $base . '/assets/css/homepage.css';
         if (file_exists($homepage_css)) {
@@ -54,10 +63,10 @@ add_action('wp_enqueue_scripts', function () {
 
 
 // -------------------------------------------------------------------
-// 3. Alle Inhalte für den <head> (Fonts, Meta, Schema)
+// 3. Alle Inhalte für den <head> (Fonts, Meta, Schema, etc.)
 // -------------------------------------------------------------------
 add_action('wp_head', function () {
-    // ---- 3.1 Lokale Fonts ----
+    // ---- Lokale Fonts ----
     $theme_uri = get_stylesheet_directory_uri();
     ?>
     <link rel="preload" href="<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
@@ -70,12 +79,24 @@ add_action('wp_head', function () {
     </style>
     <?php
 
-    // ---- 3.2 SEO Meta & JSON-LD (nur auf der Startseite) ----
+    // ---- Customizer Helfer-Script ----
+    if ( is_customize_preview() ) {
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded',function(){
+          if(typeof wp!=='undefined' && wp.customize){
+            wp.customize('font_family_primary',   s => s.set('Satoshi'));
+            wp.customize('font_family_secondary', s => s.set('Satoshi'));
+          }
+        });
+        </script>
+        <?php
+    }
+
+    // ---- SEO Meta & JSON-LD (nur auf der Startseite) ----
     if ( ! is_front_page() ) return;
 
-    // SEO-Plugin-Check
     $seo_plugin_active = defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION') || class_exists('All_in_One_SEO_Pack');
-
     if ( ! $seo_plugin_active ) {
         ?>
         <link rel="canonical" href="https://hasimuener.de/">
@@ -95,7 +116,6 @@ add_action('wp_head', function () {
         <?php
     }
 
-    // Vollständiges und korrektes JSON-LD Schema
     $schema = [
         '@context' => 'https://schema.org',
         '@graph'   => [
@@ -210,28 +230,12 @@ add_action('wp_head', function () {
     ];
     echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>';
 
-}, 20);
+}, 1);
+
 
 // -------------------------------------------------------------------
 // 4. Helfer- & Server-Funktionen
 // -------------------------------------------------------------------
-
-/**
- * (Optional) Setzt die Default-Schrift im Blocksy Customizer auf 'Satoshi'.
- */
-add_action('wp_head', function () {
-    if ( ! is_customize_preview() ) return;
-    ?>
-    <script>
-    document.addEventListener('DOMContentLoaded',function(){
-      if(typeof wp!=='undefined' && wp.customize){
-        wp.customize('font_family_primary',   s => s.set('Satoshi'));
-        wp.customize('font_family_secondary', s => s.set('Satoshi'));
-      }
-    });
-    </script>
-    <?php
-}, 100);
 
 /**
  * Setzt langlebige Cache-Header für Font-Dateien.
