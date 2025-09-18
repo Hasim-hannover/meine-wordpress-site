@@ -38,3 +38,27 @@ h1, h2, h3, h4, h5, h6 {
 }/* TEMP: Blocksy-Header ausblenden – NUR Header-Container, restlicher Inhalt bleibt */
 .site-header,
 .ct-header { display: none !important; }
+
+/* === HU Custom Header v1 === */
+:root{ --hu-h:72px; --hu-bg:rgba(13,13,13,.70); --hu-b:rgba(255,255,255,.08); }
+
+.hu-header{ position:sticky; top:0; z-index:1000; background:var(--hu-bg);
+  backdrop-filter:saturate(1.1) blur(8px); border-bottom:1px solid var(--hu-b); }
+
+.hu-header__inner{ max-width:1200px; margin:0 auto; padding:12px 16px;
+  display:flex; align-items:center; gap:16px; }
+
+.hu-logo{ color:#fff; text-decoration:none; }
+.hu-logo img{ height:32px; width:auto; }
+.hu-logo__text{ color:#fff; font-weight:800; font-size:1rem; line-height:1; }
+
+.hu-nav{ margin-left:auto; display:flex; align-items:center; gap:22px; }
+.hu-menu{ list-style:none; display:flex; gap:20px; margin:0; padding:0; }
+.hu-menu a{ color:#fff; text-decoration:none; font-weight:700; opacity:.9; }
+.hu-menu a:hover{ opacity:1; }
+
+.hu-cta{ display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:12px; font-weight:800; text-decoration:none;
+  background:linear-gradient(90deg,#ff8a00,#e67e00); color:#fff;
+  box-shadow:0 8px 24px rgba(255,138,0,.25); }
+
