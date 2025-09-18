@@ -35,4 +35,6 @@ h1, h2, h3, h4, h5, h6 {
     --theme-font-family-secondary: 'Satoshi';
     --theme-heading-font-family: 'Satoshi';
     --theme-heading-font-weight: 700;
-}
+}/* TEMP: Blocksy-Header ausblenden – NUR Header-Container, restlicher Inhalt bleibt */
+.site-header,
+.ct-header { display: none !important; }
