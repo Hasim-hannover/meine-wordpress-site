@@ -1,33 +1,29 @@
 <?php
 if ( ! defined('ABSPATH') ) { exit; }
 
-/**
- * Registriert alle benutzerdefinierten ACF Gutenberg Blöcke.
- * FINALE KORRIGIERTE VERSION
- */
 add_action('acf/init', 'hu_register_blocks');
 function hu_register_blocks() {
+    if (!function_exists('acf_register_block_type')) return;
 
-    if (!function_exists('acf_register_block_type')) {
-        return;
-    }
-
-    // FAQ Accordion Block
     acf_register_block_type([
-        'name'            => 'faq-accordion',
-        'title'           => __('FAQ Akkordeon'),
-        'description'     => __('Ein Block für aufklappbare Fragen und Antworten.'),
-        'render_template' => 'blocks/faq-accordion/faq-accordion.php',
+        'name'            => 'faq-container',
+        'title'           => __('FAQ Container'),
+        'render_template' => 'blocks/faq-container/faq-container.php',
         'category'        => 'layout',
-        'icon'            => 'editor-help',
-        'keywords'        => ['faq', 'accordion', 'fragen'],
-        'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-accordion/faq-accordion.css',
-        
-        // --- DAS IST DIE LÖSUNG ---
-        'mode'            => 'preview', // 1. Zwingt den Block, immer in der Vorschau zu starten.
-        'supports'        => [
-            'mode' => false, // 2. Deaktiviert den "Bearbeiten/Vorschau"-Schalter für den User.
-        ],
+        'icon'            => 'archive',
+        'mode'            => 'preview',
+        'supports'        => [ 'mode' => false, 'align' => false ],
     ]);
 
+    acf_register_block_type([
+        'name'            => 'faq-item',
+        'title'           => __('FAQ Item'),
+        'render_template' => 'blocks/faq-item/faq-item.php',
+        'category'        => 'layout',
+        'icon'            => 'editor-help',
+        'parent'          => ['acf/faq-container'],
+        'mode'            => 'preview',
+        'supports'        => [ 'mode' => false, 'align' => false ],
+        'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-item/faq-item.css',
+    ]);
 }
