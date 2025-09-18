@@ -129,4 +129,6 @@ details[open] { border-color: rgba(255,176,32,0.3); }
   .hero-card{ display:block !important; }
   .hero-card img{ width:100%; height:auto; display:block; }
   .blog-grid{grid-template-columns:1fr;}
-}
+}/* Header→Hero Abstand (nur Startseite) */
+.home .hu-hero,
+.front-page .hu-hero { margin-top: 100px !important; }
