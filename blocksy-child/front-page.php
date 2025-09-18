@@ -7,9 +7,6 @@
 // Lade den Header (wichtig für <head>, <body> usw.)
 get_header();
 
-// eigenen Header einbinden (Navigation/Logo)
-get_template_part('header/site-header'); // lädt blocksy-child/header/site-header.php
-?>
 
 <!-- danach kommt dein Frontpage-Content -->
 <main id="main-content" role="main">
