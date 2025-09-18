@@ -3,6 +3,7 @@ if ( ! defined('ABSPATH') ) { exit; }
 
 /**
  * Registriert alle benutzerdefinierten ACF Gutenberg Blöcke.
+ * FINALE KORRIGIERTE VERSION
  */
 add_action('acf/init', 'hu_register_blocks');
 function hu_register_blocks() {
@@ -21,8 +22,13 @@ function hu_register_blocks() {
         'icon'            => 'editor-help',
         'keywords'        => ['faq', 'accordion', 'fragen'],
         'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-accordion/faq-accordion.css',
-        'enqueue_script'  => get_stylesheet_directory_uri() . '/blocks/faq-accordion/faq-accordion.js',
-        'mode'            => 'preview',
-        'supports'        => [ 'mode' => false ],
+        
+        // --- HIER IST DIE MAGIE ---
+        'mode'            => 'preview', // 1. Zwingt den Block, immer in der Vorschau zu starten.
+        'supports'        => [
+            'mode' => false, // 2. Deaktiviert den "Bearbeiten/Vorschau"-Schalter für den User.
+        ],
     ]);
+
+    // Hier registrieren wir in Zukunft weitere Blöcke...
 }
