@@ -5,7 +5,7 @@
  */
 
 // Lade den Header (wichtig für <head>, <body> und unseren Custom Header)
-get_template_part('header/site-header');
+
 ?>
 
 <main id="main-content" role="main">
