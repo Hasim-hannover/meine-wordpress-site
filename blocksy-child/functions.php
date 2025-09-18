@@ -3,28 +3,14 @@ if ( ! defined('ABSPATH') ) { exit; }
 
 /**
  * ===================================================================
- * Blocksy Child Theme: functions.php (Sichere Version)
+ * Blocksy Child Theme: functions.php (Finale & vollständige Version)
  * ===================================================================
- * Der Custom Header ist jetzt deaktiviert, um den originalen 
- * Blocksy-Header wiederherzustellen.
+ * Stellt den Originalzustand mit allen Funktionen (Fonts, SEO, etc.)
+ * und dem standardmäßigen, funktionierenden Blocksy-Header wieder her.
  */
 
 // -------------------------------------------------------------------
-// 1. SCHALTER: Eigener Header ist jetzt DEAKTIVIERT
-// -------------------------------------------------------------------
-/*
-function hu_override_blocksy_header() {
-    remove_action('blocksy:header:render', 'blocksy_output_header');
-    add_action('blocksy:header:render', function() {
-        get_template_part('template-parts/header/site-header');
-    });
-}
-add_action('after_setup_theme', 'hu_override_blocksy_header');
-*/
-
-
-// -------------------------------------------------------------------
-// 2. Alle Styles & Scripts laden
+// 1. Alle Styles & Scripts laden
 // -------------------------------------------------------------------
 add_action('wp_enqueue_scripts', function () {
     $base     = get_stylesheet_directory();
@@ -36,7 +22,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_style('blocksy-child-style', $base_uri . '/style.css', ['blocksy-parent-style'], filemtime($base . '/style.css'));
     }
 
-    // -- Eigene Header Assets (werden aktuell nicht verwendet, aber sicher ist sicher) --
+    // -- Eigene Header Assets (werden geladen, aber nicht aktiv genutzt) --
     $header_css = $base . '/assets/css/header.css';
     if (file_exists($header_css)) {
         wp_enqueue_style('hu-header-styles', $base_uri . '/assets/css/header.css', [], filemtime($header_css));
@@ -61,7 +47,7 @@ add_action('wp_enqueue_scripts', function () {
 
 
 // -------------------------------------------------------------------
-// 3. Alle Inhalte für den <head> (Fonts, Meta, Schema, etc.)
+// 2. Alle Inhalte für den <head> (Fonts, Meta, Schema, etc.)
 // -------------------------------------------------------------------
 add_action('wp_head', function () {
     // ---- Lokale Fonts ----
