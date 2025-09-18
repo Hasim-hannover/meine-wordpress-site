@@ -23,12 +23,11 @@ function hu_register_blocks() {
         'keywords'        => ['faq', 'accordion', 'fragen'],
         'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-accordion/faq-accordion.css',
         
-        // --- HIER IST DIE MAGIE ---
+        // --- DAS IST DIE LÖSUNG ---
         'mode'            => 'preview', // 1. Zwingt den Block, immer in der Vorschau zu starten.
         'supports'        => [
             'mode' => false, // 2. Deaktiviert den "Bearbeiten/Vorschau"-Schalter für den User.
         ],
     ]);
 
-    // Hier registrieren wir in Zukunft weitere Blöcke...
 }
