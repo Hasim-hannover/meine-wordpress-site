@@ -240,4 +240,3 @@ $ajax_file = get_stylesheet_directory() . '/inc/ajax-generate-report.php';
 if ( file_exists($ajax_file) ) {
     require_once $ajax_file;
 }
-
