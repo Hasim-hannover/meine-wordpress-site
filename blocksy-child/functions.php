@@ -2,11 +2,15 @@
 if ( ! defined('ABSPATH') ) { exit; }
 
 /**
- * Blocksy Child – Fonts & Basics (Raidboxes-ready, ohne Cloudflare)
- * Champions-League-Version (optimiert: filemtime versioning, Reihenfolge, defer, nur Startseite)
+ * Blocksy Child – Champions-League functions.php
+ * - Cache-Busting via filemtime
+ * - Lokale Fonts + Preload
+ * - Startseiten-Assets (src + homepage)
+ * - Meta/OG + JSON-LD (nur Startseite)
+ * - Eigener Header via Hook (Menü + großer CTA, Dropdowns erlaubt)
  */
 
-/* 1) Parent- und Child-Styles laden (mit Cache-Busting per filemtime) */
+/* 1) Parent- und Child-Styles laden (mit Cache-Busting) */
 add_action('wp_enqueue_scripts', function () {
     $child_css_path  = get_stylesheet_directory() . '/style.css';
     $parent_css_path = get_template_directory()   . '/style.css';
@@ -35,8 +39,7 @@ add_action('wp_head', function () {
       @font-face{
         font-family:'Satoshi';
         src:url('<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Bold.woff2') format('woff2');
-        font-weight:700; /* korrigiert: kein Intervall, fester Bold-Wert */
-        font-style:normal; font-display:swap;
+        font-weight:700; font-style:normal; font-display:swap;
       }
       body,button,input,textarea,select{
         font-family:'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -48,7 +51,7 @@ add_action('wp_head', function () {
 }, 1);
 
 
-/* 3) (Optional) Blocksy-Customizer Default auf Satoshi setzen (wirkt nur im Customizer) */
+/* 3) (Optional) Blocksy-Customizer Default auf Satoshi setzen (nur im Customizer sichtbar) */
 add_action('wp_head', function () {
     ?>
     <script>
@@ -63,38 +66,30 @@ add_action('wp_head', function () {
 }, 100);
 
 
-/* 4) (Optional) Schlanke Cache-Header NUR für Font-Dateien – Raidboxes-kompatibel */
+/* 4) Schlanke Cache-Header NUR für Font-Dateien – Raidboxes-kompatibel */
 add_action('send_headers', function () {
     if (empty($_SERVER['REQUEST_URI'])) return;
-    $uri = $_SERVER['REQUEST_URI'];
-    if (preg_match('~\.(woff2|woff|ttf|otf)$~i', $uri)) {
-        header('Cache-Control: public, max-age=31536000, immutable'); // 1 Jahr
+    if (preg_match('~\.(woff2|woff|ttf|otf)$~i', $_SERVER['REQUEST_URI'])) {
+        header('Cache-Control: public, max-age=31536000, immutable');
         header_remove('Pragma');
         header_remove('Expires');
     }
 });
 
 
-/* 5) (Nur falls du dynamische Seiten NICHT cachen willst – normalerweise NICHT nötig) */
+/* 5) (Optional) Raidboxes Dynamic Cache umgehen – i.d.R. NICHT nötig */
 // add_filter('wp_headers', function($headers){
 //     $headers['X-Raidboxes-Dynamic-Cache'] = 'bypass';
 //     return $headers;
 // });
 
 
-/* 6) Ajax-Endpunkt für PDF-Report einbinden (falls vorhanden) */
+/* 6) Ajax-Endpunkt einbinden (falls vorhanden) */
 $ajax_file = get_stylesheet_directory() . '/inc/ajax-generate-report.php';
 if ( file_exists($ajax_file) ) { require_once $ajax_file; }
 
 
-// ===================================================================
-// START: Code für die Startseite
-// ===================================================================
-
-/**
- * 7) src-Assets NUR auf der Startseite laden – FRÜHER als homepage.css/js
- *    (Prio 5 vor Standard-10, plus filemtime-Versionen, plus defer)
- */
+/* 7) src-Assets NUR auf der Startseite laden – früher als homepage.css/js */
 add_action('wp_enqueue_scripts', function () {
     if ( ! is_front_page() ) return;
 
@@ -120,19 +115,16 @@ add_action('wp_enqueue_scripts', function () {
             $base_uri . '/assets/src/js/main.js',
             [],
             filemtime($js_src),
-            true // im Footer
+            true // Footer
         );
         if ( function_exists('wp_script_add_data') ) {
             wp_script_add_data('child-src', 'defer', true);
         }
     }
-}, 5); // vor hu_homepage_assets()
+}, 5);
 
 
-/**
- * 8) Stile und Skripte für die Startseite (buildfreie Assets)
- */
-add_action('wp_enqueue_scripts', 'hu_homepage_assets', 10);
+/* 8) Startseiten-Assets (buildfreie Dateien) */
 function hu_homepage_assets() {
     if ( ! is_front_page() ) return;
 
@@ -165,170 +157,204 @@ function hu_homepage_assets() {
         }
     }
 }
+add_action('wp_enqueue_scripts', 'hu_homepage_assets', 10);
 
 
-/**
- * 9) Meta-Tags und JSON-LD in den <head> der Startseite einfügen
- */
-add_action('wp_head', 'hu_homepage_head_content', 20);
+/* 9) Meta/OG + JSON-LD (nur Startseite) */
 function hu_homepage_head_content() {
     if ( ! is_front_page() ) return;
 
-    // gängige SEO-Plugins erkennen
+    // SEO-Plugins erkennen
     $seo_plugin_active = defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION') || class_exists('All_in_One_SEO_Pack');
 
-    // ===== Meta/OG/Twitter – nur wenn KEIN SEO-Plugin aktiv ist =====
+    // Meta/OG/Twitter nur ohne SEO-Plugin
     if ( ! $seo_plugin_active ) {
-    ?>
-    <link rel="canonical" href="https://hasimuener.de/">
-    <meta name="description" content="Ihr strategischer Partner für digitales Wachstum. Gemeinsam finden wir den klaren Weg zum Erfolg für Ihr Shopify- oder WordPress-Projekt in Hannover.">
-    <meta name="theme-color" content="#0d0d0d">
-    <meta property="og:locale" content="de_DE">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hasimuener.de/">
-    <meta property="og:site_name" content="Hasim Üner – Digital Growth Partner">
-    <meta property="og:title" content="Shopify &amp; WordPress Growth Architect | Hasim Üner Hannover">
-    <meta property="og:description" content="Ihr strategischer Partner für digitales Wachstum. Ich verbinde Technologie & Marketing zu einer ganzheitlichen Strategie für messbaren Erfolg.">
-    <meta property="og:image" content="https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Shopify &amp; WordPress Growth Architect | Hasim Üner Hannover">
-    <meta name="twitter:description" content="Ihr strategischer Partner für digitales Wachstum. Ganzheitliche Strategie für messbaren Erfolg.">
-    <meta name="twitter:image" content="https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp">
-    <?php
+        ?>
+        <link rel="canonical" href="https://hasimuener.de/">
+        <meta name="description" content="Ihr strategischer Partner für digitales Wachstum. Gemeinsam finden wir den klaren Weg zum Erfolg für Ihr Shopify- oder WordPress-Projekt in Hannover.">
+        <meta name="theme-color" content="#0d0d0d">
+        <meta property="og:locale" content="de_DE">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://hasimuener.de/">
+        <meta property="og:site_name" content="Hasim Üner – Digital Growth Partner">
+        <meta property="og:title" content="Shopify &amp; WordPress Growth Architect | Hasim Üner Hannover">
+        <meta property="og:description" content="Ihr strategischer Partner für digitales Wachstum. Ich verbinde Technologie & Marketing zu einer ganzheitlichen Strategie für messbaren Erfolg.">
+        <meta property="og:image" content="https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Shopify &amp; WordPress Growth Architect | Hasim Üner Hannover">
+        <meta name="twitter:description" content="Ihr strategischer Partner für digitales Wachstum. Ganzheitliche Strategie für messbaren Erfolg.">
+        <meta name="twitter:image" content="https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp">
+        <?php
     }
 
-    // ===== JSON-LD Schema =====
-?>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://hasimuener.de/#website",
-      "url": "https://hasimuener.de/",
-      "name": "Hasim Üner",
-      "inLanguage": "de-DE",
-      "publisher": { "@id": "https://hasimuener.de/#org" },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://hasimuener.de/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://hasimuener.de/#webpage",
-      "url": "https://hasimuener.de/",
-      "name": "Shopify & WordPress Growth Architect | Hasim Üner Hannover",
-      "isPartOf": { "@id": "https://hasimuener.de/#website" },
-      "about": { "@id": "https://hasimuener.de/#org" },
-      "inLanguage": "de-DE",
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": "https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp"
-      },
-      "mainEntity": { "@id": "https://hasimuener.de/#org" }
-    },
-    {
-      "@type": "ProfessionalService",
-      "@id": "https://hasimuener.de/#org",
-      "name": "Hasim Üner – Digital Growth Partner",
-      "url": "https://hasimuener.de/",
-      "description": "Strategischer Growth-Partner für WordPress & Shopify: Entwicklung, SEO, Tracking und Conversion-Optimierung.",
-      "logo": { "@type": "ImageObject", "url": "https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp" },
-      "image": { "@type": "ImageObject", "url": "https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp" },
-      "telephone": "+49 176 81407134",
-      "email": "hallo@hasimuener.de",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Warschauer Str. 5",
-        "postalCode": "30982",
-        "addressLocality": "Pattensen",
-        "addressRegion": "Niedersachsen",
-        "addressCountry": "DE"
-      },
-      "geo": { "@type": "GeoCoordinates", "latitude": 52.27419, "longitude": 9.73462 },
-      "areaServed": ["Hannover","Niedersachsen","DACH"],
-      "openingHoursSpecification": [
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "08:30", "closes": "16:00" }
-      ],
-      "priceRange": "€€€",
-      "founder": { "@id": "https://hasimuener.de/#person" },
-      "owner": { "@id": "https://hasimuener.de/#person" },
-      "sameAs": ["https://www.linkedin.com/in/hasim-uener/"],
-      "contactPoint": [
-        {
-          "@type": "ContactPoint",
-          "contactType": "customer service",
-          "email": "hallo@hasimuener.de",
-          "telephone": "+49 176 81407134",
-          "availableLanguage": ["de","en"],
-          "areaServed": ["DE","AT","CH"]
-        }
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Kernleistungen",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Shopify Lösungen", "url": "https://hasimuener.de/shopify-agentur-hannover/" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "WordPress Lösungen", "url": "https://hasimuener.de/wordpress-agentur-hannover/" } }
-        ]
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://hasimuener.de/#faq",
-      "mainEntity": [
-        { "@type": "Question", "name": "Wie schnell kann unser Projekt starten?", "acceptedAnswer": { "@type": "Answer", "text": "Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce-Projekte in 4–8 Wochen." } },
-        { "@type": "Question", "name": "Was kostet eine professionelle Website?", "acceptedAnswer": { "@type": "Answer", "text": "Starter-Projekte beginnen ab 3.500€. Im Erstgespräch klären wir den Bedarf und erstellen ein passgenaues Angebot." } },
-        { "@type": "Question", "name": "Bieten Sie auch Wartung & Support an?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Flexible Service-Pakete für Updates, Backups, Sicherheits-Checks und Performance-Monitoring." } },
-        { "@type": "Question", "name": "Wie wird der Erfolg des Projekts gemessen?", "acceptedAnswer": { "@type": "Answer", "text": "Über KPIs wie Conversion-Rate, ROAS, CPL oder organischen Traffic. Sie erhalten transparente Reportings." } }
-      ]
-    },
-    {
-      "@type": "Person",
-      "@id": "https://hasimuener.de/#person",
-      "name": "Hasim Üner",
-      "url": "https://hasimuener.de/ueber-mich/",
-      "image": { "@type": "ImageObject", "url": "https://hasimuener.de/wp-content/uploads/2024/09/1f15d682-34e3-475d-9be1-add51e9b9d3b.jpg" },
-      "jobTitle": "Growth Architect – WordPress & Shopify",
-      "worksFor": { "@id": "https://hasimuener.de/#org" },
-      "sameAs": ["https://www.linkedin.com/in/hasim-uener/"]
-    }
-  ]
+    // JSON-LD via PHP-Array -> sauberes Encoding
+    $json = [
+        '@context' => 'https://schema.org',
+        '@graph'   => [
+            [
+                '@type' => 'WebSite',
+                '@id'   => 'https://hasimuener.de/#website',
+                'url'   => 'https://hasimuener.de/',
+                'name'  => 'Hasim Üner',
+                'inLanguage' => 'de-DE',
+                'publisher'  => [ '@id' => 'https://hasimuener.de/#org' ],
+                'potentialAction' => [
+                    '@type' => 'SearchAction',
+                    'target' => 'https://hasimuener.de/?s={search_term_string}',
+                    'query-input' => 'required name=search_term_string',
+                ],
+            ],
+            [
+                '@type' => 'WebPage',
+                '@id'   => 'https://hasimuener.de/#webpage',
+                'url'   => 'https://hasimuener.de/',
+                'name'  => 'Shopify & WordPress Growth Architect | Hasim Üner Hannover',
+                'isPartOf' => [ '@id' => 'https://hasimuener.de/#website' ],
+                'about'    => [ '@id' => 'https://hasimuener.de/#org' ],
+                'inLanguage' => 'de-DE',
+                'primaryImageOfPage' => [
+                    '@type' => 'ImageObject',
+                    'url'   => 'https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp',
+                ],
+                'mainEntity' => [ '@id' => 'https://hasimuener.de/#org' ],
+            ],
+            [
+                '@type' => 'ProfessionalService',
+                '@id'   => 'https://hasimuener.de/#org',
+                'name'  => 'Hasim Üner – Digital Growth Partner',
+                'url'   => 'https://hasimuener.de/',
+                'description' => 'Strategischer Growth-Partner für WordPress & Shopify: Entwicklung, SEO, Tracking und Conversion-Optimierung.',
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url'   => 'https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp',
+                ],
+                'image' => [
+                    '@type' => 'ImageObject',
+                    'url'   => 'https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp',
+                ],
+                'telephone' => '+49 176 81407134',
+                'email'     => 'hallo@hasimuener.de',
+                'address'   => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress'   => 'Warschauer Str. 5',
+                    'postalCode'      => '30982',
+                    'addressLocality' => 'Pattensen',
+                    'addressRegion'   => 'Niedersachsen',
+                    'addressCountry'  => 'DE',
+                ],
+                'geo' => [
+                    '@type' => 'GeoCoordinates',
+                    'latitude'  => 52.27419,
+                    'longitude' => 9.73462,
+                ],
+                'areaServed' => ['Hannover','Niedersachsen','DACH'],
+                'openingHoursSpecification' => [[
+                    '@type' => 'OpeningHoursSpecification',
+                    'dayOfWeek' => ['Monday','Tuesday','Wednesday','Thursday'],
+                    'opens'  => '08:30',
+                    'closes' => '16:00',
+                ]],
+                'priceRange' => '€€€',
+                'founder'   => [ '@id' => 'https://hasimuener.de/#person' ],
+                'owner'     => [ '@id' => 'https://hasimuener.de/#person' ],
+                'sameAs'    => ['https://www.linkedin.com/in/hasim-uener/'],
+                'contactPoint' => [[
+                    '@type' => 'ContactPoint',
+                    'contactType' => 'customer service',
+                    'email' => 'hallo@hasimuener.de',
+                    'telephone' => '+49 176 81407134',
+                    'availableLanguage' => ['de','en'],
+                    'areaServed' => ['DE','AT','CH'],
+                ]],
+                'hasOfferCatalog' => [
+                    '@type' => 'OfferCatalog',
+                    'name'  => 'Kernleistungen',
+                    'itemListElement' => [
+                        ['@type'=>'Offer','itemOffered'=>['@type'=>'Service','name'=>'Shopify Lösungen','url'=>'https://hasimuener.de/shopify-agentur-hannover/']],
+                        ['@type'=>'Offer','itemOffered'=>['@type'=>'Service','name'=>'WordPress Lösungen','url'=>'https://hasimuener.de/wordpress-agentur-hannover/']],
+                    ],
+                ],
+            ],
+            [
+                '@type' => 'FAQPage',
+                '@id'   => 'https://hasimuener.de/#faq',
+                'mainEntity' => [
+                    ['@type'=>'Question','name'=>'Wie schnell kann unser Projekt starten?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce-Projekte in 4–8 Wochen.']],
+                    ['@type'=>'Question','name'=>'Was kostet eine professionelle Website?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Starter-Projekte beginnen ab 3.500€. Im Erstgespräch klären wir den Bedarf und erstellen ein passgenaues Angebot.']],
+                    ['@type'=>'Question','name'=>'Bieten Sie auch Wartung & Support an?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Ja. Flexible Service-Pakete für Updates, Backups, Sicherheits-Checks und Performance-Monitoring.']],
+                    ['@type'=>'Question','name'=>'Wie wird der Erfolg des Projekts gemessen?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Über KPIs wie Conversion-Rate, ROAS, CPL oder organischen Traffic. Sie erhalten transparente Reportings.']],
+                ],
+            ],
+            [
+                '@type' => 'Person',
+                '@id'   => 'https://hasimuener.de/#person',
+                'name'  => 'Hasim Üner',
+                'url'   => 'https://hasimuener.de/ueber-mich/',
+                'image' => [
+                    '@type' => 'ImageObject',
+                    'url'   => 'https://hasimuener.de/wp-content/uploads/2024/09/1f15d682-34e3-475d-9be1-add51e9b9d3b.jpg',
+                ],
+                'jobTitle' => 'Growth Architect – WordPress & Shopify',
+                'worksFor' => [ '@id' => 'https://hasimuener.de/#org' ],
+                'sameAs'   => ['https://www.linkedin.com/in/hasim-uener/'],
+            ],
+        ],
+    ];
+
+    echo '<script type="application/ld+json">' .
+         wp_json_encode( $json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) .
+         '</script>';
 }
-</script>
+add_action('wp_head', 'hu_homepage_head_content', 20);
 
-<?php
-// === HU Header (Markup) – Menü + CTA ===
+
+/* 10) Eigener Header (Markup via Hook) – Menü + großer CTA
+       - Menü-Slot: hu_header (Dropdowns erlaubt, depth 2)
+       - CTA rechts: "Gratis Growth Blueprint"  */
 add_action('after_setup_theme', function () {
-  register_nav_menus(['hu_header' => __('HU Header Navigation', 'blocksy-child')]);
+    register_nav_menus([
+        'hu_header' => __('HU Header Navigation', 'blocksy-child'),
+    ]);
 });
 
-add_action('wp_body_open', function () { ?>
-  <header class="hu-header" role="banner">
-    <div class="hu-header__inner">
-      <a class="hu-logo" href="<?php echo esc_url(home_url('/')); ?>">
-        <?php if ( function_exists('the_custom_logo') && has_custom_logo() ) { the_custom_logo(); } else { bloginfo('name'); } ?>
-      </a>
+add_action('wp_body_open', function () {
+    ?>
+    <header class="hu-header" role="banner">
+      <div class="hu-header__inner">
+        <a class="hu-logo" href="<?php echo esc_url( home_url('/') ); ?>" aria-label="<?php echo esc_attr( get_bloginfo('name') ); ?>">
+          <?php
+          if ( function_exists('the_custom_logo') && has_custom_logo() ) {
+              the_custom_logo();
+          } else {
+              echo '<strong class="hu-logo__text">'. esc_html( get_bloginfo('name') ) .'</strong>';
+          }
+          ?>
+        </a>
 
-      <nav class="hu-nav" role="navigation" aria-label="<?php esc_attr_e('Hauptmenü','blocksy-child'); ?>">
-        <?php
+        <nav id="hu-nav" class="hu-nav" role="navigation" aria-label="<?php esc_attr_e('Hauptmenü','blocksy-child'); ?>">
+          <?php
           wp_nav_menu([
-            'theme_location' => 'hu_header',
-            'container'      => false,
-            'menu_class'     => 'hu-menu',
-            'fallback_cb'    => '__return_false',
-            'depth'          => 2, // Dropdowns erlaubt
+              'theme_location' => 'hu_header',
+              'container'      => false,
+              'menu_class'     => 'hu-menu',
+              'fallback_cb'    => '__return_false',
+              'depth'          => 2,
           ]);
-        ?>
-      </nav>
-
-      <a class="hu-cta" href="/kontakt/">Gratis Growth Blueprint</a>
-    </div>
-  </header>
-<?php });
-
-<?php
-} // Ende hu_homepage_head_content()
+          ?>
+          <a class="hu-cta" href="/kontakt/">Gratis Growth Blueprint</a>
+        </nav>
+      </div>
+    </header>
+    <script>
+      (function(){
+        var b=document.querySelector('.hu-burger'), n=document.getElementById('hu-nav');
+        if(!b||!n) return;
+        b.addEventListener('click', function(){
+          var ex = b.getAttribute('aria-expanded') === 'true';
+          b.setAttribute('aria-expanded', (!ex).toString());
+          n.classList.toggle('is-open');
+        });
+      })();
+    </script>
+    <?php
+}, 5);
