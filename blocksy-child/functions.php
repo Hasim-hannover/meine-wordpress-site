@@ -299,5 +299,36 @@ function hu_homepage_head_content() {
   ]
 }
 </script>
+
+<?php
+// === HU Header (Markup) – Menü + CTA ===
+add_action('after_setup_theme', function () {
+  register_nav_menus(['hu_header' => __('HU Header Navigation', 'blocksy-child')]);
+});
+
+add_action('wp_body_open', function () { ?>
+  <header class="hu-header" role="banner">
+    <div class="hu-header__inner">
+      <a class="hu-logo" href="<?php echo esc_url(home_url('/')); ?>">
+        <?php if ( function_exists('the_custom_logo') && has_custom_logo() ) { the_custom_logo(); } else { bloginfo('name'); } ?>
+      </a>
+
+      <nav class="hu-nav" role="navigation" aria-label="<?php esc_attr_e('Hauptmenü','blocksy-child'); ?>">
+        <?php
+          wp_nav_menu([
+            'theme_location' => 'hu_header',
+            'container'      => false,
+            'menu_class'     => 'hu-menu',
+            'fallback_cb'    => '__return_false',
+            'depth'          => 2, // Dropdowns erlaubt
+          ]);
+        ?>
+      </nav>
+
+      <a class="hu-cta" href="/kontakt/">Gratis Growth Blueprint</a>
+    </div>
+  </header>
+<?php });
+
 <?php
 } // Ende hu_homepage_head_content()
