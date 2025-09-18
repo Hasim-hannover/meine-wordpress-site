@@ -5,11 +5,12 @@ if ( ! defined('ABSPATH') ) { exit; }
  * ===================================================================
  * Blocksy Child Theme: functions.php
  * ===================================================================
- * Finale Version mit korrekter Hook-Priorität zum Entkoppeln des Headers.
+ * Temporäre Version, um den originalen Blocksy-Header wieder zu aktivieren.
  */
 
+/*
 // -------------------------------------------------------------------
-// 1. Blocksy-Header zur richtigen Zeit entfernen & eigenen Header laden
+// 1. Blocksy-Header entfernen & eigenen Header laden (AUSGESCHALTET)
 // -------------------------------------------------------------------
 function hu_override_blocksy_header() {
     remove_action('blocksy:header:render', 'blocksy_output_header');
@@ -18,10 +19,11 @@ function hu_override_blocksy_header() {
     });
 }
 add_action('after_setup_theme', 'hu_override_blocksy_header');
+*/
 
 
 // -------------------------------------------------------------------
-// 2. Alle Styles & Scripts laden (inkl. Custom Header)
+// 2. Alle Styles & Scripts laden
 // -------------------------------------------------------------------
 add_action('wp_enqueue_scripts', function () {
     $base     = get_stylesheet_directory();
@@ -33,7 +35,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_style('blocksy-child-style', $base_uri . '/style.css', ['blocksy-parent-style'], filemtime($base . '/style.css'));
     }
 
-    // -- Eigene Header Assets --
+    // -- Eigene Header Assets (werden geladen, aber nicht verwendet) --
     $header_css = $base . '/assets/css/header.css';
     if (file_exists($header_css)) {
         wp_enqueue_style('hu-header-styles', $base_uri . '/assets/css/header.css', [], filemtime($header_css));
