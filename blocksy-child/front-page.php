@@ -1,214 +1,256 @@
 <?php
+if ( ! defined('ABSPATH') ) { exit; }
+
 /**
- * Die Template-Datei für die Startseite mit deinem vollständigen Inhalt.
- * Diese Datei MUSS mit get_header() beginnen und mit get_footer() enden.
+ * = "================================================================="
+ * Blocksy Child Theme: functions.php (Finale & vollständige Version)
+ * "================================================================="
+ * Enthält alle Funktionen (Fonts, SEO, etc.). Der Custom Header ist
+ * jetzt aktiviert.
  */
 
-// Lade den Header (löst den Tausch in functions.php aus)
-get_header(); 
-?>
+// -------------------------------------------------------------------
+// 1. SCHALTER: Blocksy-Header entfernen & eigenen Header laden
+// -------------------------------------------------------------------
+// Dieser Code ist jetzt AKTIV und tauscht den Header aus.
+function hu_override_blocksy_header() {
+    remove_action('blocksy:header:render', 'blocksy_output_header');
+    add_action('blocksy:header:render', function() {
+        get_template_part('template-parts/header/site-header');
+    });
+}
+add_action('after_setup_theme', 'hu_override_blocksy_header');
 
-<main id="main-content" role="main">
 
-  <nav id="toc-nav" aria-label="Seiten-Navigation">
-    <h4>Navigation</h4>
-    <ul>
-      <li><a href="#partner">Ihr Partner</a></li>
-      <li><a href="#erfolge">Ergebnisse</a></li>
-      <li><a href="#prozess">Prozess</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#blog">Blog</a></li>
-      <li><a href="#cta">Kontakt</a></li>
-    </ul>
-  </nav>
+// -------------------------------------------------------------------
+// 2. Alle Styles & Scripts laden
+// -------------------------------------------------------------------
+add_action('wp_enqueue_scripts', function () {
+    $base     = get_stylesheet_directory();
+    $base_uri = get_stylesheet_directory_uri();
 
-  <header class="hero-section" role="banner" id="start">
-    <div class="container">
-      <div class="section-title">
-        <span class="badge">Hasim Üner – Ihr Growth Partner</span>
-        <h1>Ihr Weg zu digitalem Wachstum. Klar und strategisch.</h1>
-        <p class="sub">Sie haben das Ziel. Gemeinsam finden wir den passenden Weg und setzen ihn technisch exzellent um.</p>
-      </div>
-      <div class="switch-grid" aria-label="Wählen Sie Ihren strategischen Pfad">
-        <div class="switch-card">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <h2>E-Commerce & Shopify</h2>
-          <p>Für Online-Shops, die nicht nur gut aussehen, sondern vor allem verkaufen und durch Daten profitabel wachsen sollen.</p>
-          <a href="/shopify-agentur-hannover/" class="btn btn-primary">Lösungen für Shopify</a>
-        </div>
-        <div class="switch-card">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-          <h2>Website & WordPress</h2>
-          <p>Für Dienstleister & B2B-Unternehmen, deren Website als überzeugende Lead-Quelle arbeiten und die Marke optimal repräsentieren soll.</p>
-          <a href="/wordpress-agentur-hannover/" class="btn btn-ghost">Lösungen für WordPress</a>
-        </div>
-      </div>
-      <div class="hero-stats" role="group" aria-label="Erfolgsstatistiken">
-        <div class="stat"><div class="num" data-target="34">0</div><div class="label">Max ROAS</div></div>
-        <div class="stat"><div class="num" data-target="2500">0</div><div class="label">Leads</div></div>
-        <div class="stat"><div class="num" data-target="83">0</div><div class="label">% CPL ↓</div></div>
-        <div class="stat"><div class="num" data-target="500">0</div><div class="label">SEO ↑ (%)</div></div>
-      </div>
-    </div>
-  </header>
+    // -- Parent- und Child-Theme Haupt-Stylesheets --
+    wp_enqueue_style('blocksy-parent-style', get_template_directory_uri() . '/style.css', [], null);
+    if (file_exists($base . '/style.css')) {
+        wp_enqueue_style('blocksy-child-style', $base_uri . '/style.css', ['blocksy-parent-style'], filemtime($base . '/style.css'));
+    }
 
-  <section id="partner" class="architect-section" aria-labelledby="architect-heading">
-    <div class="container">
-      <div class="architect-grid">
-        <div class="hero-card">
-          <img src="https://hasimuener.de/wp-content/uploads/2025/08/Shopify-WordPress-Growth-Architect-400-x-400-px.webp" 
-               alt="Growth Partner Hannover – Hasim Üner (Shopify & WordPress)" 
-               loading="lazy" width="400" height="400" decoding="async">
-        </div>
-        <div class="architect-content">
-          <span class="badge">Ihr Partner</span>
-          <h2 id="architect-heading">Ich bin Hasim Üner – Ihr Growth Architect in Hannover.</h2>
-          <p class="lead">Als Ihr strategischer Growth Architect verbinde ich die Welten von Shopify & WordPress mit datengetriebenem Marketing. Das Ziel: Eine ganzheitliche Strategie für Ihren messbaren Erfolg.</p>
-          <a href="/uber-mich/" class="btn btn-ghost">Mehr über meine Arbeitsweise</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    // -- Eigene Header Assets (werden jetzt verwendet) --
+    $header_css = $base . '/assets/css/header.css';
+    if (file_exists($header_css)) {
+        wp_enqueue_style('hu-header-styles', $base_uri . '/assets/css/header.css', [], filemtime($header_css));
+    }
+    $header_js = $base . '/assets/js/header.js';
+    if (file_exists($header_js)) {
+        wp_enqueue_script('hu-header-script', $base_uri . '/assets/js/header.js', [], filemtime($header_js), true);
+    }
 
-  <section id="erfolge" aria-labelledby="cases-heading" style="background:var(--glass-bg); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
-    <div class="container">
-      <div class="section-title">
-        <span class="badge">Ergebnisse</span>
-        <h2 id="cases-heading">Wachstum, das man messen kann.</h2>
-        <p>Hier sehen Sie konkrete Resultate aus realen Projekten. Sie zeigen, wie eine integrierte Strategie den entscheidenden Unterschied macht.</p>
-      </div>
-      <article class="success-card">
-        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center">
-          <div>
-            <h3>E3 New Energy — B2C Leadgenerierung</h3>
-            <p class="muted">Erneuerbare Energien · Tech-Marketing-Integration · 8 Monate</p>
-          </div>
-          <span class="badge">Erneuerbare Energie</span>
-        </div>
-        <div class="metrics">
-          <div class="metric"><div style="color:var(--success);font-weight:800;font-size:1.4rem;">1.750+</div><div class="muted">Qualifizierte Leads</div></div>
-          <div class="metric"><div style="color:var(--success)">120€ → 25€</div><div class="muted">CPL-Reduktion (-83%)</div></div>
-          <div class="metric"><div style="color:var(--gold);font-weight:800;font-size:1.4rem;">28–34×</div><div class="muted">Konstanter ROAS</div></div>
-          <div class="metric"><div style="color:var(--success)">+500%</div><div class="muted">Organischer Traffic</div></div>
-        </div>
-      </article>
-      <article class="success-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-          <div>
-            <h3>DOMDAR — E-Commerce Transformation</h3>
-            <p class="muted">Sustainable E-Commerce · Shopify Plus · UX/CRO · 6 Monate</p>
-          </div>
-          <span class="badge">E-Commerce</span>
-        </div>
-        <div class="metrics">
-          <div class="metric"><div style="color:var(--success)">+270%</div><div class="muted">Conversion Rate</div></div>
-          <div class="metric"><div style="color:var(--gold)">22€ → 120€</div><div class="muted">Ø Bestellwert</div></div>
-          <div class="metric"><div style="color:var(--success)">70€ → 26€</div><div class="muted">Kundenakquisekosten</div></div>
-          <div class="metric"><div style="color:var(--success)">-62%</div><div class="muted">Warenkorbabbrüche</div></div>
-        </div>
-      </article>
-      <div style="text-align:center; margin-top: 2rem;">
-        <a href="/case-studies/" class="btn btn-ghost">Weitere Fallstudien ansehen</a>
-      </div>
-    </div>
-  </section>
+    // -- Homepage-spezifische Assets --
+    if (is_front_page()) {
+        $homepage_css = $base . '/assets/css/homepage.css';
+        if (file_exists($homepage_css)) {
+            wp_enqueue_style('hu-homepage-styles', $base_uri . '/assets/css/homepage.css', [], filemtime($homepage_css));
+        }
+        $homepage_js = $base . '/assets/js/homepage.js';
+        if (file_exists($homepage_js)) {
+            wp_enqueue_script('hu-homepage-script', $base_uri . '/assets/js/homepage.js', [], filemtime($homepage_js), true);
+        }
+    }
+}, 15);
 
-  <section id="prozess" aria-labelledby="process-heading">
-    <div class="container">
-      <div class="section-title">
-        <span class="badge">Der Prozess</span>
-        <h2 id="process-heading">Unser gemeinsamer Weg zum Erfolg</h2>
-        <p>Ein transparenter und bewährter 4-Schritte-Fahrplan — von der ersten Analyse bis zur nachhaltigen Skalierung.</p>
-      </div>
-      <div class="process">
-        <article class="step"><div class="num">1</div><h3>Analyse & Strategie</h3><p class="muted">Wir starten mit einem Deep-Dive: Aktueller Status, Ziele, Quick-Wins. Daraus entsteht eine klare, umsetzbare Roadmap.</p></article>
-        <article class="step"><div class="num">2</div><h3>Konzeption & Design</h3><p class="muted">Auf Basis der Strategie entwickeln wir ein conversion-orientiertes Design und eine technische Architektur, die auf Ihre Ziele einzahlt.</p></article>
-        <article class="step"><div class="num">3</div><h3>Entwicklung & Umsetzung</h3><p class="muted">Die Umsetzung erfolgt in agilen Sprints. Sie erhalten regelmäßig Updates und können den Fortschritt live mitverfolgen.</p></article>
-        <article class="step"><div class="num">4</div><h3>Optimierung & Skalierung</h3><p class="muted">Nach dem Launch beginnt die wichtigste Phase: Wir messen, testen und optimieren kontinuierlich, um Ihr Wachstum zu maximieren.</p></article>
-      </div>
-    </div>
-  </section>
 
-  <section id="faq" aria-labelledby="faq-heading">
-    <div class="container">
-      <div class="section-title">
-        <span class="badge">FAQ</span>
-        <h2 id="faq-heading">Häufig gestellte Fragen</h2>
-        <p>Antworten auf die wichtigsten Fragen rund um unsere Zusammenarbeit.</p>
-      </div>
-      <div class="faq">
-        <details><summary>Wie schnell kann unser Projekt starten?</summary><div class="faq-content">Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce Projekte in 4–8 Wochen.</div></details>
-        <details><summary>Was kostet eine professionelle Website?</summary><div class="faq-content">Starter-Projekte beginnen ab 3.500€. In unserem kostenlosen Erstgespräch ermitteln wir den genauen Bedarf und erstellen ein passgenaues Angebot.</div></details>
-        <details><summary>Bieten Sie auch Wartung & Support an?</summary><div class="faq-content">Ja. Ich biete flexible Service-Pakete für regelmäßige Updates, Backups, Sicherheits-Checks und Performance-Monitoring an.</div></details>
-        <details><summary>Wie wird der Erfolg des Projekts gemessen?</summary><div class="faq-content">Anhand klar definierter KPIs, die wir gemeinsam festlegen: z. B. Conversion-Rate, ROAS, Cost-per-Lead oder organischen Traffic. Sie erhalten transparente Reportings.</div></details>
-      </div>
-    </div>
-  </section>
+// -------------------------------------------------------------------
+// 3. Alle Inhalte für den <head> (Fonts, Meta, Schema, etc.)
+// -------------------------------------------------------------------
+add_action('wp_head', function () {
+    // ---- Lokale Fonts ----
+    $theme_uri = get_stylesheet_directory_uri();
+    ?>
+    <link rel="preload" href="<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Bold.woff2"    as="font" type="font/woff2" crossorigin="anonymous">
+    <style id="blocksy-custom-fonts">
+      @font-face{ font-family:'Satoshi'; src:url('<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Regular.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+      @font-face{ font-family:'Satoshi'; src:url('<?php echo esc_url($theme_uri); ?>/fonts/Satoshi-Bold.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap; }
+      body,button,input,textarea,select{ font-family:'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight:400; }
+      h1,h2,h3,h4,h5,h6{ font-weight:700; }
+    </style>
+    <?php
 
-  <section id="blog" aria-labelledby="blog-heading">
-    <div class="container">
-      <div class="section-title">
-        <span class="badge">Wissen & Einblicke</span>
-        <h2 id="blog-heading">Aktuelle Artikel aus dem Blog</h2>
-        <p>Hier teile ich meine Erfahrungen, Analysen und Strategien rund um E-Commerce, WordPress und digitales Wachstum.</p>
-      </div>
-      <div class="blog-grid">
-        <article class="blog-card">
-          <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1">
-            <img src="https://placehold.co/600x400/0a0a0a/ffb020?text=Design+%26+CRO" alt="Beitragsbild zum Artikel Design ist mehr als Ästhetik">
-          </a>
-          <div class="blog-card-content">
-            <span class="blog-card-cat">E-Commerce-Architektur</span>
-            <h3><a href="https://hasimuener.de/design-ist-mehr-als-aesthetik/" class="blog-card-title">Design ist mehr als Ästhetik</a></h3>
-            <p class="muted">Gutes Design ist mehr als Optik. Es ist ein direkter Hebel für eine höhere Conversion Rate und besseren ROAS.</p>
-            <a href="https://hasimuener.de/design-ist-mehr-als-aesthetik/" class="read-more">Artikel lesen →</a>
-          </div>
-        </article>
-        <article class="blog-card">
-          <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1">
-            <img src="https://placehold.co/600x400/0a0a0a/0ea5e9?text=Data+%26+GTM" alt="Beitragsbild zum Artikel Datenhoheit mit server-side-gtm">
-          </a>
-          <div class="blog-card-content">
-            <span class="blog-card-cat">Impulse</span>
-            <h3><a href="#" class="blog-card-title">Datenhoheit mit server-side-gtm – Ihr digitales Außenministerium</a></h3>
-            <p class="muted">Erobern Sie Ihre Datenhoheit zurück und machen Sie sich unabhängig von Drittanbieter-Pixeln.</p>
-            <a href="https://hasimuener.de/datenhoheit-mit-server-side-gtm/" class="read-more">Artikel lesen →</a>
-          </div>
-        </article>
-        <article class="blog-card">
-          <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1">
-            <img src="https://placehold.co/600x400/0a0a0a/10b981?text=Performance" alt="Beitragsbild zum Artikel Performance ist Profit">
-          </a>
-          <div class="blog-card-content">
-            <span class="blog-card-cat">Impulse</span>
-            <h3><a href="#" class="blog-card-title">Performance ist Profit: Warum Core Web Vitals Wachstum, SEO und ROAS treiben</a></h3>
-            <p class="muted">Jede Millisekunde Ladezeit entscheidet über Profit. So treiben die Core Web Vitals Ihr gesamtes Wachstum.</p>
-            <a href="https://hasimuener.de/core-web-vitals-wachstum-seo-und-roas/" class="read-more">Artikel lesen →</a>
-          </div>
-        </article>
-      </div>
-      <div style="text-align:center; margin-top: 3rem;">
-        <a href="https://hasimuener.de/aktuelle-blogbeitrage/" class="btn btn-ghost">Zum Blog</a>
-      </div>
-    </div>
-  </section>
+    // ---- Customizer Helfer-Script ----
+    if ( is_customize_preview() ) {
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded',function(){
+          if(typeof wp!=='undefined' && wp.customize){
+            wp.customize('font_family_primary',   s => s.set('Satoshi'));
+            wp.customize('font_family_secondary', s => s.set('Satoshi'));
+          }
+        });
+        </script>
+        <?php
+    }
 
-  <section id="cta" aria-labelledby="cta-heading" style="background:var(--glass-bg); border-top: 1px solid var(--glass-border);">
-    <div class="container">
-      <div class="section-title">
-        <span class="badge">Bereit für den nächsten Schritt?</span>
-        <h2 id="cta-heading">Lassen Sie uns über Ihr Wachstum sprechen.</h2>
-        <p>Sie haben das Ziel, ich bringe die Strategie und die technische Expertise mit. Finden wir in einem kostenlosen Erstgespräch heraus, wie wir Ihren Erfolg planbar machen können.</p>
-      </div>
-      <div style="text-align:center; display:flex; flex-wrap:wrap; justify-content:center; gap: 1rem;">
-        <a class="btn btn-primary" href="https://hasimuener.de/growth-blueprint/">🚀 Kostenloses Growth Blueprint anfordern</a>
-        <a class="btn btn-ghost" href="https://cal.com/hasim/30min">📞 Direkt Gespräch vereinbaren</a>
-      </div>
-    </div>
-  </section>
-</main>
+    // ---- SEO Meta & JSON-LD (nur auf der Startseite) ----
+    if ( ! is_front_page() ) return;
 
-<?php
-// Lade den Footer (wichtig für </body>, </html> und Skripte, die im Footer geladen werden)
-get_footer();
+    $seo_plugin_active = defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION') || class_exists('All_in_One_SEO_Pack');
+    if ( ! $seo_plugin_active ) {
+        ?>
+        <link rel="canonical" href="https://hasimuener.de/">
+        <meta name="description" content="Ihr strategischer Partner für digitales Wachstum. Gemeinsam finden wir den klaren Weg zum Erfolg für Ihr Shopify- oder WordPress-Projekt in Hannover.">
+        <meta name="theme-color" content="#0d0d0d">
+        <meta property="og:locale" content="de_DE">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://hasimuener.de/">
+        <meta property="og:site_name" content="Hasim Üner – Digital Growth Partner">
+        <meta property="og:title" content="Shopify &amp; WordPress Growth Architect | Hasim Üner Hannover">
+        <meta property="og:description" content="Ihr strategischer Partner für digitales Wachstum. Ich verbinde Technologie & Marketing zu einer ganzheitlichen Strategie für messbaren Erfolg.">
+        <meta property="og:image" content="https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Shopify &amp; WordPress Growth Architect | Hasim Üner Hannover">
+        <meta name="twitter:description" content="Ihr strategischer Partner für digitales Wachstum. Ganzheitliche Strategie für messbaren Erfolg.">
+        <meta name="twitter:image" content="https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp">
+        <?php
+    }
+
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@graph'   => [
+            [
+                '@type' => 'WebSite',
+                '@id'   => 'https://hasimuener.de/#website',
+                'url'   => 'https://hasimuener.de/',
+                'name'  => 'Hasim Üner',
+                'inLanguage' => 'de-DE',
+                'publisher'  => [ '@id' => 'https://hasimuener.de/#org' ],
+                'potentialAction' => [
+                    '@type' => 'SearchAction',
+                    'target' => 'https://hasimuener.de/?s={search_term_string}',
+                    'query-input' => 'required name=search_term_string',
+                ],
+            ],
+            [
+                '@type' => 'WebPage',
+                '@id'   => 'https://hasimuener.de/#webpage',
+                'url'   => 'https://hasimuener.de/',
+                'name'  => 'Shopify & WordPress Growth Architect | Hasim Üner Hannover',
+                'isPartOf' => [ '@id' => 'https://hasimuener.de/#website' ],
+                'about'    => [ '@id' => 'https://hasimuener.de/#org' ],
+                'inLanguage' => 'de-DE',
+                'primaryImageOfPage' => [
+                    '@type' => 'ImageObject',
+                    'url'   => 'https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp',
+                ],
+                'mainEntity' => [ '@id' => 'https://hasimuener.de/#org' ],
+            ],
+            [
+                '@type' => 'ProfessionalService',
+                '@id'   => 'https://hasimuener.de/#org',
+                'name'  => 'Hasim Üner – Digital Growth Partner',
+                'url'   => 'https://hasimuener.de/',
+                'description' => 'Strategischer Growth-Partner für WordPress & Shopify: Entwicklung, SEO, Tracking und Conversion-Optimierung.',
+                'logo' => [
+                    '@type' => 'ImageObject',
+                    'url'   => 'https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp',
+                ],
+                'image' => [
+                    '@type' => 'ImageObject',
+                    'url'   => 'https://hasimuener.de/wp-content/uploads/2025/09/Gemini_Generated_Image_ku26wmku26wmku26.webp',
+                ],
+                'telephone' => '+49 176 81407134',
+                'email'     => 'hallo@hasimuener.de',
+                'address'   => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress'   => 'Warschauer Str. 5',
+                    'postalCode'      => '30982',
+                    'addressLocality' => 'Pattensen',
+                    'addressRegion'   => 'Niedersachsen',
+                    'addressCountry'  => 'DE',
+                ],
+                'geo' => [
+                    '@type' => 'GeoCoordinates',
+                    'latitude'  => 52.27419,
+                    'longitude' => 9.73462,
+                ],
+                'areaServed' => ['Hannover','Niedersachsen','DACH'],
+                'openingHoursSpecification' => [[
+                    '@type' => 'OpeningHoursSpecification',
+                    'dayOfWeek' => ['Monday','Tuesday','Wednesday','Thursday'],
+                    'opens'  => '08:30',
+                    'closes' => '16:00',
+                ]],
+                'priceRange' => '€€€',
+                'founder'   => [ '@id' => 'https://hasimuener.de/#person' ],
+                'owner'     => [ '@id' => 'https://hasimuener.de/#person' ],
+                'sameAs'    => ['https://www.linkedin.com/in/hasim-uener/'],
+                'contactPoint' => [[
+                    '@type' => 'ContactPoint',
+                    'contactType' => 'customer service',
+                    'email' => 'hallo@hasimuener.de',
+                    'telephone' => '+49 176 81407134',
+                    'availableLanguage' => ['de','en'],
+                    'areaServed' => ['DE','AT','CH'],
+                ]],
+                'hasOfferCatalog' => [
+                    '@type' => 'OfferCatalog',
+                    'name'  => 'Kernleistungen',
+                    'itemListElement' => [
+                        ['@type'=>'Offer','itemOffered'=>['@type'=>'Service','name'=>'Shopify Lösungen','url'=>'https://hasimuener.de/shopify-agentur-hannover/']],
+                        ['@type'=>'Offer','itemOffered'=>['@type'=>'Service','name'=>'WordPress Lösungen','url'=>'https://hasimuener.de/wordpress-agentur-hannover/']],
+                    ],
+                ],
+            ],
+            [
+                '@type' => 'FAQPage',
+                '@id'   => 'https://hasimuener.de/#faq',
+                'mainEntity' => [
+                    ['@type'=>'Question','name'=>'Wie schnell kann unser Projekt starten?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce-Projekte in 4–8 Wochen.']],
+                    ['@type'=>'Question','name'=>'Was kostet eine professionelle Website?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Starter-Projekte beginnen ab 3.500€. Im Erstgespräch klären wir den Bedarf und erstellen ein passgenaues Angebot.']],
+                    ['@type'=>'Question','name'=>'Bieten Sie auch Wartung & Support an?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Ja. Flexible Service-Pakete für Updates, Backups, Sicherheits-Checks und Performance-Monitoring.']],
+                    ['@type'=>'Question','name'=>'Wie wird der Erfolg des Projekts gemessen?','acceptedAnswer'=>['@type'=>'Answer','text'=>'Über KPIs wie Conversion-Rate, ROAS, CPL oder organischen Traffic. Sie erhalten transparente Reportings.']],
+                ],
+            ],
+            [
+                '@type' => 'Person',
+                '@id'   => 'https://hasimuener.de/#person',
+                'name'  => 'Hasim Üner',
+                'url'   => 'https://hasimuener.de/ueber-mich/',
+                'image' => [
+                    '@type' => 'ImageObject',
+                    'url'   => 'https://hasimuener.de/wp-content/uploads/2024/09/1f15d682-34e3-475d-9be1-add51e9b9d3b.jpg',
+                ],
+                'jobTitle' => 'Growth Architect – WordPress & Shopify',
+                'worksFor' => [ '@id' => 'https://hasimuener.de/#org' ],
+                'sameAs'   => ['https://www.linkedin.com/in/hasim-uener/'],
+            ],
+        ],
+    ];
+    echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>';
+
+}, 1);
+
+
+// -------------------------------------------------------------------
+// 4. Helfer- & Server-Funktionen
+// -------------------------------------------------------------------
+
+/**
+ * Setzt langlebige Cache-Header für Font-Dateien.
+ */
+add_action('send_headers', function () {
+    if ( empty($_SERVER['REQUEST_URI']) ) return;
+    if ( preg_match('~\.(woff2|woff|ttf|otf)$~i', $_SERVER['REQUEST_URI']) ) {
+        header('Cache-Control: public, max-age=31536000, immutable');
+        header_remove('Pragma');
+        header_remove('Expires');
+    }
+});
+
+/**
+ * Lädt Ajax-Handler, falls die Datei existiert.
+ */
+$ajax_file = get_stylesheet_directory() . '/inc/ajax-generate-report.php';
+if ( file_exists($ajax_file) ) {
+    require_once $ajax_file;
+}
 
