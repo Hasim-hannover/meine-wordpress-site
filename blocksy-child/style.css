@@ -35,4 +35,14 @@ h1, h2, h3, h4, h5, h6 {
     --theme-font-family-secondary: 'Satoshi';
     --theme-heading-font-family: 'Satoshi';
     --theme-heading-font-weight: 700;
+}/* TEMP: Blocksy-Header vollständig verstecken (global) */
+.site-header,
+.ct-header,
+.ct-header [class*="ct-"] {
+  display: none !important;
+}
+
+/* Falls Blocksy einen Sticky/Overlap-Platzhalter injiziert */
+[data-header*="sticky"] {
+  display: none !important;
 }
