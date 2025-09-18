@@ -5,8 +5,12 @@
  */
 
 // Lade den Header (wichtig für <head>, <body> und unseren Custom Header)
-
+<?php
+// front-page.php
+// eigenen Header einbinden
+get_template_part( 'header/site-header' ); // lädt blocksy-child/header/site-header.php
 ?>
+<!-- danach kommt dein Frontpage-Content -->
 
 <main id="main-content" role="main">
 
