@@ -1,55 +1,57 @@
 <?php
 /**
  * Die Template-Datei für die Startseite.
+ * Diese Datei MUSS mit get_header() beginnen und mit get_footer() enden.
  */
 
-// Lade den Header (wichtig für <head>, <body> und Menüs)
+// Lade den Header (wichtig für <head>, <body> und unseren Custom Header)
 get_header();
 ?>
 
-<nav id="toc-nav" aria-label="Seiten-Navigation">
-  <h4>Navigation</h4>
-  <ul>
-    <li><a href="#partner">Ihr Partner</a></li>
-    <li><a href="#erfolge">Ergebnisse</a></li>
-    <li><a href="#prozess">Prozess</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#cta">Kontakt</a></li>
-  </ul>
-</nav>
-
-<header class="hero-section" role="banner" id="start">
-  <div class="container">
-    <div class="section-title">
-      <span class="badge">Hasim Üner – Ihr Growth Partner</span>
-      <h1>Ihr Weg zu digitalem Wachstum. Klar und strategisch.</</h1>
-      <p class="sub">Sie haben das Ziel. Gemeinsam finden wir den passenden Weg und setzen ihn technisch exzellent um.</p>
-    </div>
-    <div class="switch-grid" aria-label="Wählen Sie Ihren strategischen Pfad">
-      <div class="switch-card">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <h2>E-Commerce & Shopify</h2>
-        <p>Für Online-Shops, die nicht nur gut aussehen, sondern vor allem verkaufen und durch Daten profitabel wachsen sollen.</p>
-        <a href="/shopify-agentur-hannover/" class="btn btn-primary">Lösungen für Shopify</a>
-      </div>
-      <div class="switch-card">
-        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-        <h2>Website & WordPress</h2>
-        <p>Für Dienstleister & B2B-Unternehmen, deren Website als überzeugende Lead-Quelle arbeiten und die Marke optimal repräsentieren soll.</p>
-        <a href="/wordpress-agentur-hannover/" class="btn btn-ghost">Lösungen für WordPress</a>
-      </div>
-    </div>
-    <div class="hero-stats" role="group" aria-label="Erfolgsstatistiken">
-      <div class="stat"><div class="num" data-target="34">0</div><div class="label">Max ROAS</div></div>
-      <div class="stat"><div class="num" data-target="2500">0</div><div class="label">Leads</div></div>
-      <div class="stat"><div class="num" data-target="83">0</div><div class="label">% CPL ↓</div></div>
-      <div class="stat"><div class="num" data-target="500">0</div><div class="label">SEO ↑ (%)</div></div>
-    </div>
-  </div>
-</header>
-
 <main id="main-content" role="main">
+
+  <nav id="toc-nav" aria-label="Seiten-Navigation">
+    <h4>Navigation</h4>
+    <ul>
+      <li><a href="#partner">Ihr Partner</a></li>
+      <li><a href="#erfolge">Ergebnisse</a></li>
+      <li><a href="#prozess">Prozess</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#cta">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero-section" role="banner" id="start">
+    <div class="container">
+      <div class="section-title">
+        <span class="badge">Hasim Üner – Ihr Growth Partner</span>
+        <h1>Ihr Weg zu digitalem Wachstum. Klar und strategisch.</h1>
+        <p class="sub">Sie haben das Ziel. Gemeinsam finden wir den passenden Weg und setzen ihn technisch exzellent um.</p>
+      </div>
+      <div class="switch-grid" aria-label="Wählen Sie Ihren strategischen Pfad">
+        <div class="switch-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <h2>E-Commerce & Shopify</h2>
+          <p>Für Online-Shops, die nicht nur gut aussehen, sondern vor allem verkaufen und durch Daten profitabel wachsen sollen.</p>
+          <a href="/shopify-agentur-hannover/" class="btn btn-primary">Lösungen für Shopify</a>
+        </div>
+        <div class="switch-card">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          <h2>Website & WordPress</h2>
+          <p>Für Dienstleister & B2B-Unternehmen, deren Website als überzeugende Lead-Quelle arbeiten und die Marke optimal repräsentieren soll.</p>
+          <a href="/wordpress-agentur-hannover/" class="btn btn-ghost">Lösungen für WordPress</a>
+        </div>
+      </div>
+      <div class="hero-stats" role="group" aria-label="Erfolgsstatistiken">
+        <div class="stat"><div class="num" data-target="34">0</div><div class="label">Max ROAS</div></div>
+        <div class="stat"><div class="num" data-target="2500">0</div><div class="label">Leads</div></div>
+        <div class="stat"><div class="num" data-target="83">0</div><div class="label">% CPL ↓</div></div>
+        <div class="stat"><div class="num" data-target="500">0</div><div class="label">SEO ↑ (%)</div></div>
+      </div>
+    </div>
+  </header>
+
   <section id="partner" class="architect-section" aria-labelledby="architect-heading">
     <div class="container">
       <div class="architect-grid">
@@ -204,8 +206,11 @@ get_header();
       </div>
     </div>
   </section>
+
 </main>
 
 <?php
 // Lade den Footer (wichtig für </body>, </html> und Skripte, die im Footer geladen werden)
 get_footer();
+?>
+
