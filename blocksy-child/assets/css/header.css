@@ -1,0 +1,76 @@
+/* Custom Header Styling */
+.hu-header {
+    background-color: #ffffff;
+    padding: 15px 5%;
+    border-bottom: 1px solid #eaeaea;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.hu-header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.hu-logo img {
+    max-height: 40px;
+    width: auto;
+}
+.hu-menu {
+    list-style: none; margin: 0; padding: 0; display: flex; align-items: center;
+}
+.hu-menu li {
+    position: relative; margin: 0 15px;
+}
+.hu-menu a {
+    text-decoration: none; color: #333; font-weight: 500; padding: 10px 5px; transition: color 0.2s ease-in-out;
+}
+.hu-menu a:hover {
+    color: #007bff;
+}
+.hu-menu .sub-menu {
+    display: none; position: absolute; top: 100%; left: 0; background-color: #fff;
+    border: 1px solid #eaeaea; border-radius: 5px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    list-style: none; padding: 10px 0; margin: 10px 0 0; min-width: 200px;
+}
+.hu-menu li:hover > .sub-menu {
+    display: block;
+}
+.hu-menu .sub-menu a {
+    display: block; padding: 8px 20px;
+}
+.hu-menu .menu-item-has-children > a {
+    position: relative; padding-right: 15px;
+}
+.hu-menu .menu-item-has-children > a::after {
+    content: '▼'; font-size: 0.6em; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: #999;
+}
+.hu-cta {
+    background-color: #007bff; color: #fff; padding: 12px 24px; text-decoration: none;
+    border-radius: 5px; font-weight: 700; transition: all 0.2s ease;
+}
+.hu-cta:hover {
+    background-color: #0056b3; transform: translateY(-2px); color: #fff;
+}
+.hu-burger {
+    display: none; background: none; border: none; cursor: pointer; padding: 10px; z-index: 1001;
+}
+.hu-burger span {
+    display: block; width: 25px; height: 3px; background-color: #333; margin: 5px 0; transition: all 0.3s ease-in-out;
+}
+@media (max-width: 992px) {
+    .hu-nav, .hu-cta { display: none; }
+    .hu-burger { display: block; }
+    .hu-nav.is-open {
+        display: flex; flex-direction: column; position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.98);
+        align-items: center; justify-content: center;
+    }
+    .hu-menu { flex-direction: column; }
+    .hu-menu li { margin: 20px 0; }
+    .hu-menu a { font-size: 1.5rem; }
+    .hu-menu .sub-menu { display: none !important; }
+    .hu-cta.is-open { display: block; margin-top: 30px; }
+}
