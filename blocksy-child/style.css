@@ -62,8 +62,3 @@ h1, h2, h3, h4, h5, h6 {
   background:linear-gradient(90deg,#ff8a00,#e67e00); color:#fff;
   box-shadow:0 8px 24px rgba(255,138,0,.25); }
 
-/* Startseiten-Titel ausblenden (nur Home) */
-.home .entry-title,
-.front-page .entry-title,
-.home .page-title,
-.front-page .page-title { display: none !important; }
