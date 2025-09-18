@@ -1,0 +1,40 @@
+.faq-accordion-block details {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.25rem 0;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.faq-accordion-block details[open] {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.faq-accordion-block summary {
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    list-style: none; /* Entfernt den Standard-Pfeil */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-accordion-block summary::-webkit-details-marker {
+    display: none; /* Entfernt den Standard-Pfeil für Chrome/Safari */
+}
+
+/* Eigener animierter Pfeil */
+.faq-accordion-block summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 400;
+    transition: transform 0.2s ease-in-out;
+}
+
+.faq-accordion-block details[open] summary::after {
+    transform: rotate(45deg);
+}
+
+.faq-accordion-block .faq-content {
+    padding: 1rem 0 0 0;
+    color: rgba(255, 255, 255, 0.7);
+}

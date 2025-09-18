@@ -7,12 +7,23 @@ if ( ! defined('ABSPATH') ) { exit; }
 add_action('acf/init', 'hu_register_blocks');
 function hu_register_blocks() {
 
-    // Prüfen, ob ACF Pro aktiv ist
     if (!function_exists('acf_register_block_type')) {
         return;
     }
 
-    // Hier werden wir in Zukunft unsere Blöcke registrieren.
-    // Beispiel: acf_register_block_type([...]);
+    // FAQ Accordion Block
+    acf_register_block_type([
+        'name'            => 'faq-accordion',
+        'title'           => __('FAQ Akkordeon'),
+        'description'     => __('Ein Block für aufklappbare Fragen und Antworten.'),
+        'render_template' => 'blocks/faq-accordion/faq-accordion.php',
+        'category'        => 'layout',
+        'icon'            => 'editor-help',
+        'keywords'        => ['faq', 'accordion', 'fragen'],
+        'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-accordion/faq-accordion.css',
+        'enqueue_script'  => get_stylesheet_directory_uri() . '/blocks/faq-accordion/faq-accordion.js',
+    ]);
+
+    // Hier registrieren wir in Zukunft weitere Blöcke...
 
 }
