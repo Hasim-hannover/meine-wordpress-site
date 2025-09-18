@@ -1,14 +1,13 @@
 <?php
 /**
  * Die Template-Datei für die Startseite.
- * Diese Datei MUSS mit get_header() beginnen und mit get_footer() enden.
  */
 
-// Lade den Header (wichtig für <head>, <body> usw.)
-get_header();
+// Lade den Header (wichtig für <head>, <body> und unseren Custom Header)
+// eigenen Header einbinden
+get_template_part( 'header/site-header' ); // lädt blocksy-child/header/site-header.php
+?>
 
-
-<!-- danach kommt dein Frontpage-Content -->
 <main id="main-content" role="main">
 
   <nav id="toc-nav" aria-label="Seiten-Navigation">
@@ -84,7 +83,7 @@ get_header();
             <h3>E3 New Energy — B2C Leadgenerierung</h3>
             <p class="muted">Erneuerbare Energien · Tech-Marketing-Integration · 8 Monate</p>
           </div>
-            <span class="badge">Erneuerbare Energie</span>
+          <span class="badge">Erneuerbare Energie</span>
         </div>
         <div class="metrics">
           <div class="metric"><div style="color:var(--success);font-weight:800;font-size:1.4rem;">1.750+</div><div class="muted">Qualifizierte Leads</div></div>
@@ -99,7 +98,7 @@ get_header();
             <h3>DOMDAR — E-Commerce Transformation</h3>
             <p class="muted">Sustainable E-Commerce · Shopify Plus · UX/CRO · 6 Monate</p>
           </div>
-            <span class="badge">E-Commerce</span>
+          <span class="badge">E-Commerce</span>
         </div>
         <div class="metrics">
           <div class="metric"><div style="color:var(--success)">+270%</div><div class="muted">Conversion Rate</div></div>
