@@ -1,19 +1,12 @@
 <?php
 /**
  * Block: FAQ Item
- * Stellt ein einzelnes FAQ-Item dar, basierend auf den übergebenen ACF-Daten.
+ * Stellt ein einzelnes aufklappbares Frage-Antwort-Element dar.
  */
-
-// Stelle sicher, dass die Daten verfügbar sind
-if (empty($args['item'])) {
-    return;
-}
-
-$item = $args['item'];
+$item = $args['item'] ?? [];
 $question = $item['faq_question'] ?? '';
 $answer = $item['faq_answer'] ?? '';
 
-// Prüfe, ob Frage und Antwort vorhanden sind
 if (empty($question) || empty($answer)) {
     return;
 }
