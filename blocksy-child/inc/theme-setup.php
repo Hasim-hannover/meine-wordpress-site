@@ -27,6 +27,18 @@ add_action('wp_enqueue_scripts', function () {
             wp_enqueue_script('hu-homepage-script', $base_uri . '/assets/js/homepage.js', [], filemtime($homepage_js), true);
         }
     }
+
+    // -- NEU: FAQ‑CSS und -JS einbinden --
+    $faq_css = $base . '/assets/css/faq.css';
+    if (file_exists($faq_css)) {
+        wp_enqueue_style('hu-faq-styles', $base_uri . '/assets/css/faq.css', [], filemtime($faq_css));
+    }
+
+    $faq_js = $base . '/assets/js/faq.js';
+    if (file_exists($faq_js)) {
+        wp_enqueue_script('hu-faq-script', $base_uri . '/assets/js/faq.js', [], filemtime($faq_js), true);
+    }
+
 }, 15);
 
 
