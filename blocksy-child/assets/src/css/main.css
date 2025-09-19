@@ -6,9 +6,29 @@ body, button, input, textarea, select {
 }
 h1, h2, h3, h4, h5, h6 { font-family: inherit; }
 
-/* Header/Body oben bündig (Blocksy) */
-.site-header { margin-top:0 !important; padding-top:0 !important; }
-body { margin-top:0 !important; padding-top:0 !important; }
+/*
+ * ===================================================================
+ * Globale Layout-Regel (Header bündig oben)
+ * ===================================================================
+ */
+.site-header { 
+    margin-top: 0 !important; 
+    padding-top: 0 !important; 
+}
+
+body { 
+    margin-top: 0 !important; 
+    padding-top: 0 !important; 
+}
+
+/* * AUSNAHME: Gib NUR der Startseite den nötigen Abstand nach oben,
+ * da sie ein benutzerdefiniertes Template ohne die Standard-Container nutzt.
+ */
+body.home,
+body.front-page {
+    padding-top: 50px !important; /* Passe diesen Wert an, bis es perfekt ist */
+}
+
 
 /* Mobile: etwas Luft für ersten Abschnitt */
 @media (max-width: 768px) {
