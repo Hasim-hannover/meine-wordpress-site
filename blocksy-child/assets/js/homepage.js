@@ -28,16 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { threshold: 0.8 });
   document.querySelectorAll('.hero-stats .num').forEach(num => statsObserver.observe(num));
 
-  // FAQ – nur eine offen
-  document.querySelectorAll('.faq details').forEach(detailsEl => {
-    detailsEl.addEventListener('toggle', () => {
-      if (detailsEl.open) {
-        document.querySelectorAll('.faq details').forEach(other => {
-          if (other !== detailsEl) other.open = false;
-        });
-      }
-    });
-  });
+  
 
   // Sticky TOC
   const tocNav = document.getElementById('toc-nav');

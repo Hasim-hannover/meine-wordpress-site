@@ -137,22 +137,6 @@ get_header();
                 </div>
             </section>
 
-            <section id="faq" aria-labelledby="faq-heading">
-                <div class="container">
-                    <div class="section-title">
-                        <span class="badge">FAQ</span>
-                        <h2 id="faq-heading">Häufig gestellte Fragen</h2>
-                        <p>Antworten auf die wichtigsten Fragen rund um unsere Zusammenarbeit.</p>
-                    </div>
-                    <div class="faq">
-                        <details><summary>Wie schnell kann unser Projekt starten?</summary><div class="faq-content">Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce Projekte in 4–8 Wochen.</div></details>
-                        <details><summary>Was kostet eine professionelle Website?</summary><div class="faq-content">Starter-Projekte beginnen ab 3.500€. In unserem kostenlosen Erstgespräch ermitteln wir den genauen Bedarf und erstellen ein passgenaues Angebot.</div></details>
-                        <details><summary>Bieten Sie auch Wartung & Support an?</summary><div class="faq-content">Ja. Ich biete flexible Service-Pakete für regelmäßige Updates, Backups, Sicherheits-Checks und Performance-Monitoring an.</div></details>
-                        <details><summary>Wie wird der Erfolg des Projekts gemessen?</summary><div class="faq-content">Anhand klar definierter KPIs, die wir gemeinsam festlegen: z. B. Conversion-Rate, ROAS, Cost-per-Lead oder organischen Traffic. Sie erhalten transparente Reportings.</div></details>
-                    </div>
-                </div>
-            </section>
-
             <section id="blog" aria-labelledby="blog-heading">
                 <div class="container">
                     <div class="section-title">
