@@ -218,4 +218,4 @@ get_header();
 <?php
 // Lade den Standard-Footer
 get_footer();
-?>
+?>  //test war erfolgreich
