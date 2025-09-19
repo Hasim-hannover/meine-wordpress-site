@@ -1,19 +1,21 @@
 <?php
-if ( ! defined('ABSPATH') ) { exit; }
-
 /**
- * ===================================================================
- * Blocksy Child Theme: functions.php (Der Dirigent)
- * ===================================================================
- * Diese Datei lädt nur die spezialisierten Konfigurationsdateien.
- * Die eigentliche Logik liegt im /inc Ordner.
+ * Blocksy Child Theme functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package Blocksy Child
  */
 
-// Lädt Theme-Einstellungen (Styles, Scripts, Fonts, etc.)
-require_once get_stylesheet_directory() . '/inc/theme-setup.php';
+// Laden des Haupt-Stylesheets des Eltern-Themes.
+add_action( 'wp_enqueue_scripts', 'blocksy_child_enqueue_styles' );
+function blocksy_child_enqueue_styles() {
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_directory_uri() . '/style.css' );
+}
 
-// Lädt die Registrierung für alle ACF Gutenberg Blöcke
-require_once get_stylesheet_directory() . '/inc/block-registration.php';
-
-// Lädt die Registrierung des FAQ-Custom-Post-Types
-require_once get_stylesheet_directory() . '/inc/faq-cpt.php';
+/**
+ * Custom Theme Setup
+ */
+if ( file_exists( __DIR__ . '/inc/theme-setup.php' ) ) {
+    require_once __DIR__ . '/inc/theme-setup.php';
+}
