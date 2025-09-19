@@ -219,14 +219,3 @@ get_header();
 // Lade den Standard-Footer
 get_footer();
 ?>
-EOFcat > blocksy-child/style.css << 'EOF'
-/*
-Theme Name: Blocksy Child
-Description: Ein Child-Theme für Blocksy
-Author: Hasim Üner
-Template: blocksy
-Version: 1.0.0
-*/
-
-/* Füge deinen benutzerdefinierten CSS-Code hier ein */
-
