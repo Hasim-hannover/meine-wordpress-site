@@ -18,9 +18,23 @@ if ($faq_items) : ?>
         <div class="faq">
             <?php
             foreach ($faq_items as $item) :
-                get_template_part('blocks/faq-item/faq-item', null, ['item' => $item]);
-            endforeach;
-            ?>
+                $question = $item['faq_question'] ?? '';
+                $answer = $item['faq_answer'] ?? '';
+
+                if (empty($question) || empty($answer)) {
+                    continue;
+                }
+                ?>
+                <details class="faq-item-block">
+                    <summary>
+                        <h3 class="faq-question"><?php echo esc_html($question); ?></h3>
+                        <span class="faq-toggle-icon">+</span>
+                    </summary>
+                    <div class="faq-item-content">
+                        <?php echo apply_filters('the_content', $answer); ?>
+                    </div>
+                </details>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
