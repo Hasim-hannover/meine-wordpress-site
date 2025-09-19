@@ -2,39 +2,45 @@
 if ( ! defined('ABSPATH') ) { exit; }
 
 /**
- * Registriert alle benutzerdefinierten Blöcke mit der nativen WordPress-Funktion.
+ * Registriert alle benutzerdefinierten ACF Gutenberg Blöcke.
+ * FINALE VERSION
  */
-add_action('init', 'hu_register_native_blocks');
-function hu_register_native_blocks() {
+add_action('acf/init', 'hu_register_blocks');
+function hu_register_blocks() {
 
-    // Prüfen, ob die Funktion existiert (ab WP 5.0)
-    if (!function_exists('register_block_type')) {
+    if (!function_exists('acf_register_block_type')) {
         return;
     }
 
     // Block 1: Der äußere Container
-    register_block_type( get_stylesheet_directory() . '/blocks/faq-container', [
-        'render_callback' => 'hu_render_block',
+    acf_register_block_type([
+        'name'            => 'faq-container',
+        'title'           => __('FAQ Container'),
+        'description'     => __('Ein Container für mehrere FAQ-Items.'),
+        'render_template' => 'blocks/faq-container/faq-container.php',
+        'category'        => 'layout',
+        'icon'            => 'archive',
+        'mode'            => 'preview',
+        'supports'        => [
+            'mode' => false,
+            'align' => false,
+        ],
     ]);
 
     // Block 2: Das einzelne aufklappbare Item
-    register_block_type( get_stylesheet_directory() . '/blocks/faq-item', [
-        'render_callback' => 'hu_render_block',
+    acf_register_block_type([
+        'name'            => 'faq-item',
+        'title'           => __('FAQ Item'),
+        'description'     => __('Ein einzelnes aufklappbares Frage-Antwort-Element.'),
+        'render_template' => 'blocks/faq-item/faq-item.php',
+        'category'        => 'layout',
+        'icon'            => 'editor-help',
+        'parent'          => ['acf/faq-container'], // Wichtig: Kann nur im Container platziert werden
+        'mode'            => 'preview',
+        'supports'        => [
+            'mode' => false,
+            'align' => false,
+        ],
+        'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-item/faq-item.css',
     ]);
-}
-
-/**
- * Eine universelle Render-Funktion, die einfach die PHP-Datei des Blocks lädt.
- */
-function hu_render_block($attributes, $content, $block) {
-    // Baue den Pfad zur Template-Datei des Blocks zusammen
-    $template_path = get_stylesheet_directory() . '/blocks/' . $block->name . '/' . $block->name . '.php';
-
-    if (file_exists($template_path)) {
-        ob_start();
-        include $template_path;
-        return ob_get_clean();
-    }
-
-    return '<div>Block Template not found: ' . esc_html($template_path) . '</div>';
 }
