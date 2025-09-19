@@ -1,13 +1,11 @@
 <?php
 /**
  * Block: FAQ Container
- * ACF-Felder werden hier ausgelesen und an das Template weitergegeben.
+ * Dieser Block dient als Container für die FAQ-Einträge.
+ * Er liest die ACF-Felder aus und gibt sie an das Item-Template weiter.
  */
-
-// Rufe das Repeater-Feld 'faq_items' ab
 $faq_items = get_field('faq_items');
 
-// Überprüfe, ob das Feld existiert und nicht leer ist
 if ($faq_items) : ?>
 
 <section id="faq" aria-labelledby="faq-heading">
@@ -19,10 +17,7 @@ if ($faq_items) : ?>
         </div>
         <div class="faq">
             <?php
-            // Schleife durch die FAQ-Einträge
             foreach ($faq_items as $item) :
-                // Lade das Template für das einzelne FAQ-Item
-                // Die ACF-Daten ($item) werden an das Template übergeben
                 get_template_part('blocks/faq-item/faq-item', null, ['item' => $item]);
             endforeach;
             ?>
@@ -30,4 +25,6 @@ if ($faq_items) : ?>
     </div>
 </section>
 
+<?php else : ?>
+    <p>Keine FAQs gefunden. Bitte fügen Sie welche im Editor hinzu.</p>
 <?php endif; ?>
