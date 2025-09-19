@@ -17,5 +17,3 @@ require_once get_stylesheet_directory() . '/inc/block-registration.php';
 
 // Lädt die Registrierung des FAQ-Custom-Post-Types
 require_once get_stylesheet_directory() . '/inc/faq-cpt.php';
-
-Speichere die Datei, committe die Änderung und pushe sie ins Repository. Dadurch wi
