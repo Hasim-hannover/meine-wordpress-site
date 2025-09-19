@@ -130,19 +130,15 @@ details[open] { border-color: rgba(255,176,32,0.3); }
   .hero-card img{ width:100%; height:auto; display:block; }
   .blog-grid{grid-template-columns:1fr;}
 
-
 /*
- * LÖSUNG 2: Innenabstand für Hero-Inhalt
- * Verschiebt den Text und Button nach unten, ohne die Sektion selbst zu bewegen.
- * Dies ist stabiler und vermeidet Konflikte mit dem Header.
+ * ===================================================================
+ * KORREKTUR: Abstand für den Startseiten-Inhalt
+ * ===================================================================
+ * Da der Header global auf 0 gesetzt ist, braucht der Inhalt
+ * der `front-page.php` einen eigenen Abstand nach oben.
+ * Diese Regel gilt AUSSCHLIESSLICH für die Startseite.
  */
-.hero-content {
-  padding-top: 80px; /* Du kannst diesen Wert anpassen (z.B. 60px oder 100px) */
-}
-
-/* Anpassung für mobile Geräte */
-@media (max-width: 768px) {
-  .hero-content {
-    padding-top: 40px; /* Ein kleinerer Wert für Handys */
-  }
+.home #main-content,
+.front-page #main-content {
+    margin-top: 80px !important; /* Du kannst diesen Wert anpassen, z.B. 60px oder 100px */
 }
