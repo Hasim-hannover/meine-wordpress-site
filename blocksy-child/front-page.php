@@ -9,7 +9,7 @@
 
 // Lade den Standard-Header von Blocksy.
 get_header();
-    echo '<div style="height: 80px;"></div>';
+    echo '<div style="height: 40px;"></div>';
 ?>
 
 <div id="content" class="site-content">
