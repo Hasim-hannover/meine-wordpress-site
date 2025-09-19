@@ -3,7 +3,7 @@ if ( ! defined('ABSPATH') ) { exit; }
 
 /**
  * Registriert alle benutzerdefinierten ACF Gutenberg Blöcke.
- * FINALE KORRIGIERTE VERSION
+ * FINALE VERSION
  */
 add_action('acf/init', 'hu_register_blocks');
 function hu_register_blocks() {
@@ -12,23 +12,35 @@ function hu_register_blocks() {
         return;
     }
 
-    // FAQ Accordion Block
+    // Block 1: Der äußere Container
     acf_register_block_type([
-        'name'            => 'faq-accordion',
-        'title'           => __('FAQ Akkordeon'),
-        'description'     => __('Ein Block für aufklappbare Fragen und Antworten.'),
-        'render_template' => 'blocks/faq-accordion/faq-accordion.php',
+        'name'            => 'faq-container',
+        'title'           => __('FAQ Container'),
+        'description'     => __('Ein Container für mehrere FAQ-Items.'),
+        'render_template' => 'blocks/faq-container/faq-container.php',
         'category'        => 'layout',
-        'icon'            => 'editor-help',
-        'keywords'        => ['faq', 'accordion', 'fragen'],
-        'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-accordion/faq-accordion.css',
-        
-        // --- HIER IST DIE MAGIE ---
-        'mode'            => 'preview', // 1. Zwingt den Block, immer in der Vorschau zu starten.
+        'icon'            => 'archive',
+        'mode'            => 'preview',
         'supports'        => [
-            'mode' => false, // 2. Deaktiviert den "Bearbeiten/Vorschau"-Schalter für den User.
+            'mode' => false,
+            'align' => false,
         ],
     ]);
 
-    // Hier registrieren wir in Zukunft weitere Blöcke...
+    // Block 2: Das einzelne aufklappbare Item
+    acf_register_block_type([
+        'name'            => 'faq-item',
+        'title'           => __('FAQ Item'),
+        'description'     => __('Ein einzelnes aufklappbares Frage-Antwort-Element.'),
+        'render_template' => 'blocks/faq-item/faq-item.php',
+        'category'        => 'layout',
+        'icon'            => 'editor-help',
+        'parent'          => ['acf/faq-container'], // Wichtig: Kann nur im Container platziert werden
+        'mode'            => 'preview',
+        'supports'        => [
+            'mode' => false,
+            'align' => false,
+        ],
+        'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-item/faq-item.css',
+    ]);
 }
