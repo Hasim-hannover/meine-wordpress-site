@@ -25,6 +25,8 @@ function hu_register_blocks() {
             'mode' => false,
             'align' => false,
         ],
+        'enqueue_style'   => get_stylesheet_directory_uri() . '/assets/css/faq.css',
+        'enqueue_script'  => get_stylesheet_directory_uri() . '/assets/js/faq.js',
     ]);
 
     // Block 2: Das einzelne aufklappbare Item
@@ -41,20 +43,5 @@ function hu_register_blocks() {
             'mode' => false,
             'align' => false,
         ],
-        'enqueue_style'   => get_stylesheet_directory_uri() . '/blocks/faq-item/faq-item.css',
     ]);
-    // Block 3: Der Hero-Bereich
-acf_register_block_type([
-    'name'            => 'hero-block',
-    'title'           => __('Hero Block'),
-    'description'     => __('Der Hauptbereich der Startseite mit Titel, Untertitel, Karten und Statistiken.'),
-    'render_template' => 'blocks/hero-block/hero-block.php',
-    'category'        => 'common',
-    'icon'            => 'align-wide',
-    'supports'        => [
-        'mode' => false,
-        'align' => false,
-    ],
-]);
-
 }
