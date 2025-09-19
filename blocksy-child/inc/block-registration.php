@@ -20,13 +20,27 @@ function hu_register_blocks() {
         'render_template' => 'blocks/faq-container/faq-container.php',
         'category'        => 'layout',
         'icon'            => 'archive',
-        'mode'            => 'preview',
         'supports'        => [
             'mode' => false,
             'align' => false,
         ],
         'enqueue_style'   => get_stylesheet_directory_uri() . '/assets/css/faq.css',
         'enqueue_script'  => get_stylesheet_directory_uri() . '/assets/js/faq.js',
+    ]);
+
+    // Block 2: Das einzelne aufklappbare Item
+    acf_register_block_type([
+        'name'            => 'faq-item',
+        'title'           => __('FAQ Item'),
+        'description'     => __('Ein einzelnes aufklappbares Frage-Antwort-Element.'),
+        'render_template' => 'blocks/faq-item/faq-item.php',
+        'category'        => 'layout',
+        'icon'            => 'editor-help',
+        'parent'          => ['acf/faq-container'],
+        'supports'        => [
+            'mode' => false,
+            'align' => false,
+        ],
     ]);
 }
 ?>

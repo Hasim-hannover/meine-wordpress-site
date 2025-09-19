@@ -1,12 +1,12 @@
 <?php
 /**
  * Block: FAQ Container
- * Dieser Block dient als Container für die FAQ-Einträge.
- * Er liest die ACF-Felder aus und gibt sie an das Item-Template weiter.
+ * Erlaubt das Hinzufügen von FAQ-Item-Blöcken.
  */
-$faq_items = get_field('faq_items');
 
-if ($faq_items) : ?>
+$allowed_blocks = ['acf/faq-item'];
+$template = [['acf/faq-item']];
+?>
 
 <section id="faq" aria-labelledby="faq-heading">
     <div class="container">
@@ -16,29 +16,7 @@ if ($faq_items) : ?>
             <p>Antworten auf die wichtigsten Fragen rund um unsere Zusammenarbeit.</p>
         </div>
         <div class="faq">
-            <?php
-            foreach ($faq_items as $item) :
-                $question = $item['faq_question'] ?? '';
-                $answer = $item['faq_answer'] ?? '';
-
-                if (empty($question) || empty($answer)) {
-                    continue;
-                }
-                ?>
-                <details class="faq-item-block">
-                    <summary>
-                        <h3 class="faq-question"><?php echo esc_html($question); ?></h3>
-                        <span class="faq-toggle-icon">+</span>
-                    </summary>
-                    <div class="faq-item-content">
-                        <?php echo apply_filters('the_content', $answer); ?>
-                    </div>
-                </details>
-            <?php endforeach; ?>
+            <InnerBlocks allowedBlocks="<?php echo esc_attr(wp_json_encode($allowed_blocks)); ?>" template="<?php echo esc_attr(wp_json_encode($template)); ?>" />
         </div>
     </div>
 </section>
-
-<?php else : ?>
-    <p>Keine FAQs gefunden. Bitte fügen Sie welche im Editor hinzu.</p>
-<?php endif; ?>
