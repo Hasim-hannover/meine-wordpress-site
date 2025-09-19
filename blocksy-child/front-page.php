@@ -2,14 +2,10 @@
 /**
  * Die Template-Datei für die Startseite.
  *
- * KORREKTUR: Der gesamte Inhalt wurde in die von Blocksy erwartete
- * Container-Struktur (<div id="content">, <div class="container">, <main id="main">)
- * eingefügt, damit das Theme die korrekten Layout-Stile anwenden kann.
  */
 
 // Lade den Standard-Header von Blocksy.
 get_header();
-    echo '<div style="height: 40px;"></div>';
 ?>
 
 <div id="content" class="site-content">
@@ -196,7 +192,7 @@ get_header();
                         </article>
                     </div>
                     <div style="text-align:center; margin-top: 3rem;">
-                        <a href="https.hasimuener.de/aktuelle-blogbeitrage/" class="btn btn-ghost">Zum Blog</a>
+                        <a href="https://hasimuener.de/aktuelle-blogbeitrage/" class="btn btn-ghost">Zum Blog</a>
                     </div>
                 </div>
             </section>
@@ -215,9 +211,9 @@ get_header();
                 </div>
             </section>
 
-        </main> <?php // Ende #main ?>
-    </div> <?php // Ende .container ?>
-</div> <?php // Ende #content ?>
+        </main>
+    </div>
+</div>
 
 <?php
 // Lade den Standard-Footer
