@@ -1,0 +1,39 @@
+/**
+ * Theme Name: Blocksy Child
+ * Description: Blocksy Child theme for custom modifications.
+ * Author: Creative Themes (customized by Hasim Üner)
+ * Template: blocksy
+ * Text Domain: blocksy-child
+ * Version: 1.0.3
+ */
+
+/*
+=================================================================
+ Globale Schriftart-Anwendung
+=================================================================
+*/
+
+body, button, input, textarea, select {
+    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400; /* Explizit setzen */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: 700; /* Fett für Überschriften */
+}
+
+/* OPTIONAL: Blocksy-spezifische Variablen überschreiben */
+:root {
+    --theme-font-family-primary: 'Satoshi';
+    --theme-font-family-secondary: 'Satoshi';
+    --theme-heading-font-family: 'Satoshi';
+    --theme-heading-font-weight: 700;
+}
+
+/*
+ * HINWEIS: Alle widersprüchlichen Header-Regeln wurden entfernt.
+ * Der Standard-Blocksy-Header wird jetzt über die front-page.php
+ * mit get_header() geladen und hier nicht mehr blockiert.
+ * Deine Homepage-Styles in assets/css/homepage.css sind davon nicht betroffen.
+ */

@@ -1,3 +1,26 @@
+/*
+ * =========================================
+ * Font Definitions for Satoshi (LOKAL)
+ * =========================================
+ */
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../../fonts/Satoshi-Variable.woff2') format('woff2'),
+         url('../../fonts/Satoshi-Variable.woff') format('woff');
+    font-weight: 300 900;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../../fonts/Satoshi-VariableItalic.woff2') format('woff2'),
+         url('../../fonts/Satoshi-VariableItalic.woff') format('woff');
+    font-weight: 300 900;
+    font-display: swap;
+    font-style: italic;
+}
+
 :root{
   --silver-shine:#FFFFFF; --silver-light:#E6E6E6; --silver-base:#D9D9D9;
   --silver-medium:#A6A6A6; --silver-dark:#737373; --silver-shadow:#1A1A1A;
