@@ -36,6 +36,7 @@ if ( file_exists( $shortcodes_path ) ) {
         wp_die('FEHLER: Die Datei /inc/shortcodes.php konnte nicht gefunden werden. Bitte Pfad prüfen!');
     }
 }
+
 /**
  * Macht den Inhalt von der Startseite, der durch Shortcodes generiert wird,
  * für die Rank Math SEO-Analyse sichtbar.
