@@ -12,8 +12,8 @@ function homepage_hero_shortcode() {
         <div class="container">
             <div class="hero-content">
                 <span class="badge">Web- & Wachstums-Architekt</span>
-                <h1 class="hero-title">Ich baue digitale Fundamente, die Ihr Unternehmen wachsen lassen.</h1>
-                <p class="hero-subtitle">Von der technischen Entwicklung mit WordPress & Shopify bis zur strategischen Vermarktung – für messbare Ergebnisse und nachhaltigen Erfolg.</p>
+                <h1 class="hero-title">Ich entwickle digitale Strategien, die Ihr Unternehmen wachsen lassen.</h1>
+                <p class="hero-subtitle">Vom technischen Fundament mit WordPress & Shopify bis zur Vermarktung – für messbare Ergebnisse und nachhaltigen Erfolg.</p>
                 <div class="hero-buttons">
                     <a href="#prozess" class="btn btn-primary">So arbeite ich</a>
                     <a href="/kontakt/" class="btn btn-secondary">Jetzt anfragen</a>
@@ -25,6 +25,7 @@ function homepage_hero_shortcode() {
     return ob_get_clean();
 }
 add_shortcode( 'homepage_hero', 'homepage_hero_shortcode' );
+}
 
 // Shortcode für den Partner-Bereich
 function homepage_partner_shortcode() {
