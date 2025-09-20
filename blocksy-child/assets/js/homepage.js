@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+  // ======================================================
+  // TEIL 1: Dein bestehender Code für die Animationen
+  // ======================================================
+
   // Zahlen-Animation
   const statsObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -27,8 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, { threshold: 0.8 });
   document.querySelectorAll('.hero-stats .num').forEach(num => statsObserver.observe(num));
-
-  
 
   // Sticky TOC
   const tocNav = document.getElementById('toc-nav');
@@ -84,4 +86,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { rootMargin: '-40% 0px -60% 0px', threshold: 0 });
     sections.forEach(section => sectionObserver.observe(section));
   }
+
+  // ======================================================
+  // TEIL 2: Der neue Code für die FAQ-Funktion
+  // ======================================================
+  const allFaqItems = document.querySelectorAll('.faq details');
+
+  allFaqItems.forEach(faqItem => {
+      faqItem.addEventListener('toggle', (event) => {
+          if (faqItem.open) {
+              allFaqItems.forEach(otherItem => {
+                  if (otherItem !== faqItem) {
+                      otherItem.open = false;
+                  }
+              });
+          }
+      });
+  });
+
 });
