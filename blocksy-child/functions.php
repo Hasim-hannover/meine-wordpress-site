@@ -29,10 +29,16 @@ require_once CHILD_THEME_PATH . '/inc/theme-setup.php';
 require_once CHILD_THEME_PATH . '/inc/shortcodes.php';
 
 /**
+ * ===================================================================
+ * KORRIGIERTER RANK MATH FILTER
+ * ===================================================================
  * Macht den Inhalt der Startseite, der durch Shortcodes generiert wird,
- * für die Rank Math SEO-Analyse sichtbar.
+ * für die Rank Math SEO-Analyse im WordPress-Editor sichtbar.
+ *
+ * @param string $content Der ursprüngliche Inhalt aus dem Editor.
+ * @return string Der neue Inhalt, der an Rank Math übergeben wird.
  */
-add_filter( 'rank_math/frontend/builder/content', function( $content ) {
+add_filter( 'rank_math/analyzer/content', function( $content ) {
     // Führt diesen Code nur auf der designierten Startseite aus.
     if ( ! is_front_page() ) {
         return $content;
@@ -41,14 +47,15 @@ add_filter( 'rank_math/frontend/builder/content', function( $content ) {
     // Erstellt einen leeren String, um den Inhalt zu sammeln.
     $custom_content = '';
 
-    // Definiert die Shortcodes in der korrekten Reihenfolge.
+    // Definiert die KORREKTEN Shortcodes in der richtigen Reihenfolge.
     $shortcodes = [
-        '[homepage_hero_shortcode]',
-        '[homepage_partner_shortcode]',
-        '[homepage_about_shortcode]',
-        '[homepage_services_shortcode]',
-        '[homepage_cta_shortcode]',
-        '[homepage_faq_shortcode]',
+        '[hu_hero]',
+        '[hu_partner]',
+        '[hu_erfolge]',
+        '[hu_prozess]',
+        '[hu_faq]',
+        '[hu_blog]',
+        '[hu_cta]',
     ];
 
     // Führt jeden Shortcode aus und fügt das Ergebnis zum Inhalt hinzu.
@@ -56,6 +63,6 @@ add_filter( 'rank_math/frontend/builder/content', function( $content ) {
         $custom_content .= do_shortcode( $shortcode );
     }
 
-    // Gibt den reinen Textinhalt an Rank Math zurück.
+    // Gibt den reinen Textinhalt (ohne HTML) an Rank Math zurück.
     return strip_tags( $custom_content );
 } );
