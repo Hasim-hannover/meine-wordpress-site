@@ -1,6 +1,7 @@
 <?php
 /**
  * Schema.org JSON-LD Markup
+ * Finale Version inkl. FAQ-Schema
  *
  * @package Blocksy Child
  */
@@ -27,6 +28,7 @@ function hu_output_schema_markup() {
         $schema = [
             "@context" => "https://schema.org",
             "@graph" => [
+                // Person, Organization, WebSite... (wie bisher)
                 [
                     "@type" => "Person",
                     "@id" => "https://hasimuener.de/#person",
@@ -62,9 +64,9 @@ function hu_output_schema_markup() {
                     "publisher" => [ "@id" => "https://hasimuener.de/#organization" ],
                     "inLanguage" => "de-DE",
                     "hasPart" => [
-                        [ "@id" => "https://hasimuener.de/ueber-mich/#webpage" ],
-                        [ "@id" => "https://hasimuener.de/shopify-agentur-hannover/#webpage" ],
-                        [ "@id" => "https://hasimuener.de/wordpress-agentur-hannover/#webpage" ],
+                         [ "@id" => "https://hasimuener.de/ueber-mich/#webpage" ],
+                         [ "@id" => "https://hasimuener.de/shopify-agentur-hannover/#webpage" ],
+                         [ "@id" => "https://hasimuener.de/wordpress-agentur-hannover/#webpage" ],
                     ]
                 ],
                 [
@@ -73,16 +75,95 @@ function hu_output_schema_markup() {
                     "url" => "https://hasimuener.de/",
                     "name" => "Shopify & WordPress Growth Architect | Hasim Üner Hannover",
                     "isPartOf" => [ "@id" => "https://hasimuener.de/#website" ]
+                ],
+                // NEU: FAQPage Schema für die Startseite
+                [
+                    "@type" => "FAQPage",
+                    "@id" => "https://hasimuener.de/#faq",
+                    "mainEntity" => [
+                        [
+                            "@type" => "Question",
+                            "name" => "Wie schnell kann unser Projekt starten?",
+                            "acceptedAnswer" => [
+                                "@type" => "Answer",
+                                "text" => "Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce Projekte in 4–8 Wochen."
+                            ]
+                        ],
+                        [
+                            "@type" => "Question",
+                            "name" => "Was kostet eine professionelle Website?",
+                            "acceptedAnswer" => [
+                                "@type" => "Answer",
+                                "text" => "Starter-Projekte beginnen ab 3.500€. In unserem kostenlosen Erstgespräch ermitteln wir den genauen Bedarf und erstellen ein passgenaues Angebot."
+                            ]
+                        ],
+                        [
+                            "@type" => "Question",
+                            "name" => "Bieten Sie auch Wartung & Support an?",
+                            "acceptedAnswer" => [
+                                "@type" => "Answer",
+                                "text" => "Ja. Ich biete flexible Service-Pakete für regelmäßige Updates, Backups, Sicherheits-Checks und Performance-Monitoring an."
+                            ]
+                        ],
+                        [
+                            "@type" => "Question",
+                            "name" => "Wie wird der Erfolg des Projekts gemessen?",
+                            "acceptedAnswer" => [
+                                "@type" => "Answer",
+                                "text" => "Anhand klar definierter KPIs, die wir gemeinsam festlegen: z. B. Conversion-Rate, ROAS, Cost-per-Lead oder organischen Traffic. Sie erhalten transparente Reportings."
+                            ]
+                        ]
+                    ]
                 ]
             ]
         ];
     }
-    
-    // Fügen Sie hier weitere `elseif ( is_page('slug') ) { ... }` Blöcke für andere Seiten ein.
+    // ===================================================================
+    // SCHEMA FÜR DIE WORDPRESS-SEITE
+    // ===================================================================
+    elseif ( is_page('wordpress-agentur-hannover') ) {
+        $schema = [
+            "@context" => "https://schema.org",
+            "@graph" => [
+                // Hier könnten die allgemeinen Definitionen (Person, Org etc.) wiederholt werden
+                // ...
+                // NEU: FAQPage Schema für die WordPress-Seite
+                [
+                    "@type" => "FAQPage",
+                    "@id" => "https://hasimuener.de/wordpress-agentur-hannover/#faq",
+                    "mainEntity" => [
+                        [
+                            "@type" => "Question",
+                            "name" => "Was unterscheidet Sie von einer typischen Webdesign-Agentur?",
+                            "acceptedAnswer" => [
+                                "@type" => "Answer",
+                                "text" => "Ich liefere keine reinen 'Designs', sondern unternehmerische Lösungen. Mein Fokus liegt auf messbaren Ergebnissen wie Lead-Generierung und Umsatzsteigerung, nicht nur auf der Ästhetik."
+                            ]
+                        ],
+                        [
+                            "@type" => "Question",
+                            "name" => "Was kostet eine WordPress-Website, die wirklich Leads generiert?",
+                            "acceptedAnswer" => [
+                                "@type" => "Answer",
+                                "text" => "Strategische WordPress-Systeme starten bei 3.500€. Der genaue Preis hängt von der Komplexität und den Zielen ab, die wir im kostenlosen Erstgespräch definieren."
+                            ]
+                        ],
+                        [
+                            "@type" => "Question",
+                            "name" => "Ich habe bereits eine Website. Können Sie diese optimieren?",
+                            "acceptedAnswer" => [
+                                "@type" => "Answer",
+                                "text" => "Ja, absolut. In einem Website-Audit analysiere ich die bestehende Seite auf technische und strategische Schwächen und entwickle einen klaren Plan zur Performance- und Conversion-Steigerung."
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+    }
 
     if ( ! empty( $schema ) ) {
-       // Komprimierte Ausgabe für maximale Performance
-echo '<script type="application/ld+json">' . json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>';
+        echo '<script type="application/ld+json">' . json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>';
     }
 }
 add_action( 'wp_footer', 'hu_output_schema_markup' );
