@@ -15,7 +15,7 @@ function blocksy_child_enqueue_styles() {
 // --- Start der Fehlersuche ---
 
 // Schritt 2: Entferne das '#' vor der nächsten Zeile und speichere.
-// require_once get_stylesheet_directory() . '/inc/theme-setup.php';
+require_once get_stylesheet_directory() . '/inc/theme-setup.php';
 
 // Schritt 3: Wenn die Seite immer noch läuft, entferne das '#' vor der nächsten Zeile und speichere.
 // require_once get_stylesheet_directory() . '/inc/shortcodes.php';
