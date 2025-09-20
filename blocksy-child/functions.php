@@ -5,64 +5,47 @@
  * @package Blocksy Child
  */
 
-// Stellt sicher, dass diese Datei nicht direkt aufgerufen wird.
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-/**
- * Definiert den Pfad zum Child-Theme-Verzeichnis für saubere Lade-Anweisungen.
- */
 define( 'CHILD_THEME_PATH', get_stylesheet_directory() );
 
-/**
- * Lädt das Haupt-Stylesheet des Child-Themes.
- */
+// Lädt das Haupt-Stylesheet
 add_action( 'wp_enqueue_scripts', function() {
     wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri() );
 } );
 
-/**
- * Lädt die Konfigurationsdateien des Themes, die für Skripte, Styles und Shortcodes zuständig sind.
- */
+// Lädt die Theme-Konfigurationsdateien
 require_once CHILD_THEME_PATH . '/inc/theme-setup.php';
 require_once CHILD_THEME_PATH . '/inc/shortcodes.php';
 
 /**
  * ===================================================================
- * KORRIGIERTER RANK MATH FILTER
+ * FINALE RANK MATH INTEGRATION (per JavaScript)
  * ===================================================================
- * Macht den Inhalt der Startseite, der durch Shortcodes generiert wird,
- * für die Rank Math SEO-Analyse im WordPress-Editor sichtbar.
- *
- * @param string $content Der ursprüngliche Inhalt aus dem Editor.
- * @return string Der neue Inhalt, der an Rank Math übergeben wird.
+ * Lädt das Integrations-Skript, das den Shortcode-Inhalt für die
+ * Rank Math Analyse im Editor bereitstellt.
  */
-add_filter( 'rank_math/analyzer/content', function( $content ) {
-    // Führt diesen Code nur auf der designierten Startseite aus.
-    if ( ! is_front_page() ) {
-        return $content;
+add_action( 'admin_enqueue_scripts', function( $hook ) {
+    // Stellt sicher, dass das Skript nur auf "post.php" (Beiträge/Seiten bearbeiten) geladen wird.
+    if ( 'post.php' !== $hook ) {
+        return;
     }
 
-    // Erstellt einen leeren String, um den Inhalt zu sammeln.
-    $custom_content = '';
+    // Holt die ID des aktuellen Posts
+    $post_id = get_the_ID();
+    // Holt die ID der als Startseite festgelegten Seite
+    $front_page_id = get_option( 'page_on_front' );
 
-    // Definiert die KORREKTEN Shortcodes in der richtigen Reihenfolge.
-    $shortcodes = [
-        '[hu_hero]',
-        '[hu_partner]',
-        '[hu_erfolge]',
-        '[hu_prozess]',
-        '[hu_faq]',
-        '[hu_blog]',
-        '[hu_cta]',
-    ];
-
-    // Führt jeden Shortcode aus und fügt das Ergebnis zum Inhalt hinzu.
-    foreach ( $shortcodes as $shortcode ) {
-        $custom_content .= do_shortcode( $shortcode );
+    // Lädt das Skript nur, wenn die bearbeitete Seite die Startseite ist.
+    if ( $post_id == $front_page_id ) {
+        wp_enqueue_script(
+            'rank-math-child-integration',
+            get_stylesheet_directory_uri() . '/assets/js/rank-math-integration.js',
+            [ 'wp-hooks', 'wp-data' ], // Wichtige Abhängigkeiten für Rank Math
+            filemtime( get_stylesheet_directory() . '/assets/js/rank-math-integration.js' ),
+            true
+        );
     }
-
-    // Gibt den reinen Textinhalt (ohne HTML) an Rank Math zurück.
-    return strip_tags( $custom_content );
 } );
