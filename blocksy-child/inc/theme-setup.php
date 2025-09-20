@@ -24,6 +24,23 @@ function ct_enqueue_assets() {
             true // Lädt das Skript im Footer.
         );
     }
+    // Lädt die Styles und Skripte für die Blog-Startseite.
+    if ( is_home() ) {
+        wp_enqueue_style(
+            'blocksy-child-blog-archive',
+            get_stylesheet_directory_uri() . '/assets/css/blog-archive.css',
+            [],
+            filemtime( get_stylesheet_directory() . '/assets/css/blog-archive.css' )
+        );
+
+        wp_enqueue_script(
+            'blocksy-child-blog-archive',
+            get_stylesheet_directory_uri() . '/assets/js/blog-archive.js',
+            [],
+            filemtime( get_stylesheet_directory() . '/assets/js/blog-archive.js' ),
+            true
+        );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'ct_enqueue_assets' );
 

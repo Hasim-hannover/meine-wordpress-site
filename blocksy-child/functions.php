@@ -62,3 +62,69 @@ add_action( 'template_redirect', function() {
 
 // Lädt die Schema.org Markup Logik.
 require_once get_stylesheet_directory() . '/inc/schema.php';
+
+/**
+ * ===================================================================
+ * HILFSFUNKTIONEN FÜR DEN BLOG
+ * ===================================================================
+ */
+
+// Stellt eine Fallback-URL für Beitragsbilder bereit.
+if ( ! function_exists('hu_fallback_thumb_url') ) {
+    function hu_fallback_thumb_url() {
+        return 'https://hasimuener.de/wp-content/uploads/2025/09/Impulse_Hasim_uener_Blog.webp';
+    }
+}
+
+// Hängt einen "Weiterlesen"-Link an einen Text an, falls er fehlt.
+if ( ! function_exists('hu_append_readmore_once') ) {
+    function hu_append_readmore_once($text, $permalink) {
+        $text = preg_replace('/Weiterlesen.*$/ui', '', $text);
+        $text = rtrim($text, " \t\n\r\0\x0B…");
+        if (stripos($text, 'Weiterlesen') !== false) {
+            return $text;
+        }
+        return $text . '… <a href="' . esc_url($permalink) . '">Weiterlesen &rarr;</a>';
+    }
+}
+
+// Bereinigt Text von unerwünschten Elementen für saubere Auszüge.
+if ( ! function_exists('hu_scrub_text') ) {
+    function hu_scrub_text($text) {
+        $text = wp_strip_all_tags($text, true);
+        $lines = preg_split('/\r\n|\r|\n/u', $text);
+        $clean_lines = [];
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if ($line === '') continue;
+            $is_breadcrumb = ((preg_match('/\b(Home|Startseite|Blog)\b/ui', $line) && preg_match('/[›»>\|]/u', $line)) || (substr_count($line, '›') + substr_count($line, '»') + substr_count($line, '>') + substr_count($line, '|')) >= 2);
+            if ($is_breadcrumb || preg_match('/^(inhalt|table of contents|verzeichnis)\b/ui', $line) || preg_match('/^\s*[✦•·\-\|]\s*\p{L}+/u', $line)) continue;
+            $clean_lines[] = $line;
+        }
+        $text = trim(implode(' ', $clean_lines));
+        $text = preg_replace('/\b(?:Home|Startseite|Blog)\b(?:\s*[›»>\|]\s*[\p{L}\d \-]+){1,}/ui', '', $text);
+        $text = preg_replace('/\s*[✦•·\-\|]\s*[\p{L}\d&\/\.,]+/u', '', $text);
+        $text = preg_replace('/Weiterlesen.*$/ui', '', $text);
+        return trim(preg_replace('/\s{2,}/u', ' ', $text));
+    }
+}
+
+// Erstellt einen sauberen Textauszug aus dem Beitragsinhalt.
+if ( ! function_exists('hu_make_excerpt_raw') ) {
+    function hu_make_excerpt_raw($post_id, $word_count = 30) {
+        $excerpt = (string) get_post_field('post_excerpt', $post_id);
+        $content = $excerpt !== '' ? $excerpt : (function_exists('excerpt_remove_blocks') ? excerpt_remove_blocks(get_post_field('post_content', $post_id)) : get_post_field('post_content', $post_id));
+        $content = strip_shortcodes($content);
+        $content = hu_scrub_text($content);
+        $trimmed_text = wp_trim_words($content, $word_count, '…');
+        return trim(preg_replace('/…+$/u', '…', $trimmed_text));
+    }
+}
+
+// Gibt das Beitragsbild oder ein Fallback-Bild zurück.
+if ( ! function_exists('hu_thumb_or_fallback') ) {
+    function hu_thumb_or_fallback($post_id, $size) {
+        $thumbnail_url = get_the_post_thumbnail_url($post_id, $size);
+        return $thumbnail_url ? $thumbnail_url : hu_fallback_thumb_url();
+    }
+}
