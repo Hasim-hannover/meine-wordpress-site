@@ -1,38 +1,36 @@
 <?php
 /**
- * Theme setup.
+ * Theme Setup: Einbinden von Styles und Skripten.
  *
- * @package Blocksy
+ * @package Blocksy Child
  */
 
-if ( ! function_exists( 'ct_enqueue_assets' ) ) {
-	/**
-	 * Enqueue theme related assets.
-	 *
-	 * @return void
-	 */
-	function ct_enqueue_assets() {
-		// KORREKTE BEDINGUNG: Prüft, ob dies die als Startseite definierte Seite ist.
-		if ( get_option('page_on_front') == get_the_ID() ) {
-			wp_enqueue_style(
-				'blocksy-child-homepage',
-				get_stylesheet_directory_uri() . '/assets/css/homepage.css',
-				[], // Abhängigkeiten
-				filemtime(get_stylesheet_directory() . '/assets/css/homepage.css') // Cache-Busting
-			);
-
-            /*
-             * Aktuell nicht benötigt, aber für später aufbewahrt.
-			wp_enqueue_script(
-				'blocksy-child-homepage',
-				get_stylesheet_directory_uri() . '/assets/js/homepage.js',
-				[],
-				filemtime(get_stylesheet_directory() . '/assets/js/homepage.js'),
-				true
-			);
-            */
-		}
-	}
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
 
-add_action( 'wp_enqueue_scripts', 'ct_enqueue_assets' );
+/**
+ * Lädt die CSS- und JS-Dateien des Child-Themes.
+ * Diese Funktion wird über einen Hook in WordPress aufgerufen.
+ */
+function ct_enqueue_assets() {
+    // Lädt das dedizierte Stylesheet für die Startseite nur auf der Startseite.
+    if ( is_front_page() ) {
+        wp_enqueue_style(
+            'blocksy-child-homepage',
+            get_stylesheet_directory_uri() . '/assets/css/homepage.css',
+            [],
+            filemtime( get_stylesheet_directory() . '/assets/css/homepage.css' )
+        );
+
+        // Lädt das dedizierte JavaScript für die Startseite und behebt den PageSpeed-Fehler.
+        wp_enqueue_script(
+            'blocksy-child-homepage',
+            get_stylesheet_directory_uri() . '/assets/js/homepage.js',
+            [],
+            filemtime( get_stylesheet_directory() . '/assets/js/homepage.js' ),
+            true
+        );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'ct_enqueue_assets', 15 );
