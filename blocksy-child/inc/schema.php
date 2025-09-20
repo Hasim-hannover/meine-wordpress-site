@@ -81,7 +81,8 @@ function hu_output_schema_markup() {
     // Fügen Sie hier weitere `elseif ( is_page('slug') ) { ... }` Blöcke für andere Seiten ein.
 
     if ( ! empty( $schema ) ) {
-        echo '<script type="application/ld+json">' . json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>';
+       // Komprimierte Ausgabe für maximale Performance
+echo '<script type="application/ld+json">' . json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>';
     }
 }
 add_action( 'wp_footer', 'hu_output_schema_markup' );
