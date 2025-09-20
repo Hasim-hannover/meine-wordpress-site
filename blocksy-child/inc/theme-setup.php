@@ -17,7 +17,7 @@ add_action('wp_enqueue_scripts', function () {
     }
 
     // -- HINWEIS: Diese Homepage-Assets werden wir später entfernen, sobald alle Blöcke umgebaut sind --
-    if (is_front_page()) {
+    if ( get_option('page_on_front') == get_the_ID() ) {
         $homepage_css = $base . '/assets/css/homepage.css';
         if (file_exists($homepage_css)) {
             wp_enqueue_style('hu-homepage-styles', $base_uri . '/assets/css/homepage.css', [], filemtime($homepage_css));
