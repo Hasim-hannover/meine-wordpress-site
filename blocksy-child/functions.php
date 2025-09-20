@@ -60,3 +60,5 @@ add_action( 'template_redirect', function() {
     }
 } );
 
+// Lädt die Schema.org Markup Logik.
+require_once get_stylesheet_directory() . '/inc/schema.php';
