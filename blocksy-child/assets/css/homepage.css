@@ -253,3 +253,5 @@ details[open] { border-color: rgba(255,176,32,0.3); }
 .front-page #main-content {
     margin-top: 80px !important; /* Du kannst diesen Wert anpassen, z.B. 60px oder 100px */
 }
+/* SICHTBARER TEST */
+body { border: 5px solid red !important; }
