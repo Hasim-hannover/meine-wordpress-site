@@ -131,29 +131,14 @@ if ( ! function_exists('hu_thumb_or_fallback') ) {
 
 /**
  * ===================================================================
- * Blog Header-Anpassung: Menü per PHP entfernen (FINALE VERSION)
+ * Blog Header-Anpassung: Menü per Inline-CSS entfernen (FINALE LÖSUNG)
  * ===================================================================
- * Entfernt das Hauptmenü-Element aus dem Header auf der Blog-Übersichtsseite
- * und auf einzelnen Blogbeiträgen.
+ * Dieser Code fügt eine CSS-Regel direkt in den <head> der Blog-Seiten ein,
+ * um das Hauptmenü mit höchster Priorität zu entfernen.
  */
-add_filter( 'blocksy:header:items', function( $header_items ) {
-
-    // Die präzise Bedingung: Nur auf der Blog-Startseite ODER bei einem einzelnen BlogBEITRAG.
+add_action( 'wp_head', function () {
+    // Führt den Code nur auf der Blog-Übersichtsseite ODER bei einzelnen Blogbeiträgen aus.
     if ( is_home() || is_singular('post') ) {
-
-        foreach ( $header_items as $row_id => &$row ) { // Note the & to modify the array directly
-            if ( isset( $row['placements'] ) ) {
-                foreach ( $row['placements'] as $placement_id => &$placement ) {
-                    if ( isset( $placement['items'] ) ) {
-                        $placement['items'] = array_filter( $placement['items'], function( $item ) {
-                            return isset( $item['id'] ) && $item['id'] !== 'menu';
-                        } );
-                    }
-                }
-            }
-        }
+        echo '<style id="hide-blog-menu">[data-id="menu"] { display: none !important; }</style>';
     }
-
-    return $header_items;
-
-}, 20 );
+}, 999 );
