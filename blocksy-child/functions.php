@@ -7,7 +7,7 @@
  */
 
 // Wir bündeln alle Lade-Anweisungen in EINER Funktion für maximale Stabilität.
-add_action('wp_enqueue_scripts', 'hu_load_theme_assets', 20);
+add_action('wp_enqueue_scripts', 'hu_load_theme_assets');
 
 function hu_load_theme_assets()
 {
@@ -86,4 +86,6 @@ function hu_load_theme_assets()
         }
     }
 }
+
+// Hier können weitere, andere PHP-Funktionen aus deiner alten functions.php folgen, falls vorhanden.
 
