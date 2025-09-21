@@ -22,6 +22,35 @@ require_once CHILD_THEME_PATH . '/inc/shortcodes.php';
 
 /**
  * ===================================================================
+ * NEU: Skripte und Styles für einzelne Blogbeiträge laden
+ * ===================================================================
+ */
+function hu_enqueue_single_post_assets() {
+    // Nur laden, wenn es sich um einen einzelnen Beitrag handelt.
+    if ( is_singular('post') ) {
+        // Lade das CSS für Blogartikel
+        wp_enqueue_style(
+            'hu-blog-single-style',
+            get_stylesheet_directory_uri() . '/assets/css/blog-single.css',
+            [],
+            filemtime( get_stylesheet_directory() . '/assets/css/blog-single.css' )
+        );
+
+        // Lade das JavaScript für Blogartikel
+        wp_enqueue_script(
+            'hu-blog-single-script',
+            get_stylesheet_directory_uri() . '/assets/js/blog-single.js',
+            [],
+            filemtime( get_stylesheet_directory() . '/assets/js/blog-single.js' ),
+            true // Lädt das Skript im Footer
+        );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'hu_enqueue_single_post_assets' );
+
+
+/**
+ * ===================================================================
  * FINALE RANK MATH INTEGRATION (per JavaScript)
  * ===================================================================
  * Lädt das Integrations-Skript, das den Shortcode-Inhalt für die
@@ -49,6 +78,7 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
         );
     }
 } );
+
 /**
  * Leitet alle Autoren-Archivseiten auf die "Über Mich"-Seite um.
  * Das vermeidet doppelten Inhalt und verbessert die User Experience.
@@ -142,3 +172,4 @@ add_action( 'wp_head', function () {
         echo '<style id="hide-blog-menu">[data-id="menu"] { display: none !important; }</style>';
     }
 }, 999 );
+
