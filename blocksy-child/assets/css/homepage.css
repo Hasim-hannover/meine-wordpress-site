@@ -1,12 +1,9 @@
 /*
- * =========================================
- * Font Definitions for Satoshi (LOKAL)
- * =========================================
+ * Homepage-spezifische Stile
  */
 
-/*
- * Ergänzung für Sticky Table of Contents Layout
- * ============================================ */
+/
+/
 
 /* Das Layout für den Hauptinhalt und die TOC-Sidebar */
 .layout {
@@ -88,6 +85,11 @@ aside#toc-container.is-visible {
 
 /* Ende der Ergänzung
  * ============================================ */
+
+/* HIER BEGINNEN DEINE WEITEREN STILE FÜR DIE STARTSEITE... */
+/* ... (Lass hier den Rest deiner ursprünglichen CSS-Datei folgen, falls noch mehr da war) ... */
+
+
 
 @font-face {
     font-family: 'Satoshi';
