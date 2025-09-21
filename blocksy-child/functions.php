@@ -1,17 +1,29 @@
 <?php
 /**
  * Blocksy Child Theme Functions
- * Die finale, konsolidierte Version zur korrekten Asset-Verwaltung.
+ * Die finale, reparierte und vollständige Version, die alle Systeme vereint.
  *
  * @package Blocksy Child
  */
 
-// Wir bündeln alle Lade-Anweisungen in EINER Funktion für maximale Stabilität.
-add_action('wp_enqueue_scripts', 'hu_load_theme_assets');
+// =============================================================================
+// SCHRITT 1: DEIN ÖKOSYSTEM WIEDERHERSTELLEN
+// Diese Zeile ist entscheidend. Sie lädt deine Setup-Datei, die dann
+// dein Schema und andere wichtige Funktionen lädt.
+// =============================================================================
+require_once get_stylesheet_directory() . '/inc/theme-setup.php';
+
+
+// =============================================================================
+// SCHRITT 2: EFFIZIENTES LADEN VON CSS & JAVASCRIPT
+// Dies ist unsere optimierte Funktion, die sicherstellt, dass die richtigen
+// Dateien nur auf den richtigen Seiten geladen werden.
+// =============================================================================
+add_action('wp_enqueue_scripts', 'hu_load_theme_assets', 20);
 
 function hu_load_theme_assets()
 {
-    // Schritt 1: Lade die Parent- und Child-Haupt-Stylesheets auf JEDER Seite.
+    // Lade die Parent- und Child-Haupt-Stylesheets auf JEDER Seite.
     wp_enqueue_style(
         'blocksy-parent-style',
         get_template_directory_uri() . '/style.css',
@@ -26,7 +38,7 @@ function hu_load_theme_assets()
         filemtime(get_stylesheet_directory() . '/style.css') // Cache-Buster
     );
 
-    // Schritt 2: Lade die spezifischen Assets nur dort, wo sie gebraucht werden.
+    // Lade die spezifischen Assets nur dort, wo sie gebraucht werden.
     if (is_front_page()) {
         // --- NUR FÜR DIE STARTSEITE ---
         $css_path_home = get_stylesheet_directory() . '/assets/css/homepage.css';
@@ -86,6 +98,4 @@ function hu_load_theme_assets()
         }
     }
 }
-
-// Hier können weitere, andere PHP-Funktionen aus deiner alten functions.php folgen, falls vorhanden.
 
