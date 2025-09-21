@@ -1,110 +1,118 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
+  // Zustand der Seite speichern (z.B. ob das TOC "scharfgeschaltet" ist)
+  const state = {
+    isTocArmed: false,
+    tocHideTimer: null,
+  };
 
-    // DIAGNOSE-NACHRICHT 1: Prüfen, ob die Datei überhaupt geladen wird.
-    console.log("✅ Schritt 1: homepage.js wurde erfolgreich geladen.");
+  // Alle wichtigen Elemente der Benutzeroberfläche (UI) an einem Ort sammeln
+  const UI = {
+    mainContent: document.querySelector('main'), // Hauptinhaltsbereich der Startseite
+    tocContainer: document.getElementById('toc-container'),
+    tocList: document.getElementById('toc-list'),
+    // Alle section-Elemente im main-Bereich, die eine ID haben, sind unsere TOC-Ziele
+    headings: document.querySelectorAll('main section[id]'), 
+  };
 
-    // Dein bestehender Code für die Animationen
-    const statsObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                el.classList.add('animating');
-                const target = parseInt(el.dataset.target, 10);
-                const duration = 2000;
-                let startTime = null;
-                function animationStep(timestamp) {
-                    if (!startTime) startTime = timestamp;
-                    const progress = timestamp - startTime;
-                    const currentNum = Math.min(Math.floor(progress / duration * target), target);
-                    el.textContent = currentNum.toLocaleString('de-DE');
-                    if (progress < duration) {
-                        window.requestAnimationFrame(animationStep);
-                    } else {
-                        el.textContent = target.toLocaleString('de-DE');
-                        el.classList.remove('animating');
-                    }
-                }
-                window.requestAnimationFrame(animationStep);
-                observer.unobserve(el);
-            }
-        });
-    }, { threshold: 0.8 });
-    document.querySelectorAll('.hero-stats .num').forEach(num => statsObserver.observe(num));
-
-    const tocNav = document.getElementById('toc-nav');
-    const heroSection = document.getElementById('start');
-    const sections = document.querySelectorAll('main section[id]');
-    const tocLinks = document.querySelectorAll('#toc-nav a');
-    if (tocNav && heroSection && sections.length) {
-        let idleTimeout;
-        let isTocVisible = false;
-        const resetTocIdleTimer = () => {
-            if (!isTocVisible) return;
-            tocNav.classList.add('visible');
-            clearTimeout(idleTimeout);
-            idleTimeout = setTimeout(() => {
-                tocNav.classList.remove('visible');
-            }, 3000);
-        }
-        const heroObserver = new IntersectionObserver(entries => {
-            const [entry] = entries;
-            const pastHero = !entry.isIntersecting;
-            if (pastHero && !isTocVisible) {
-                isTocVisible = true;
-                resetTocIdleTimer();
-                window.addEventListener('mousemove', resetTocIdleTimer, { passive: true });
-                window.addEventListener('scroll', resetTocIdleTimer, { passive: true });
-            } else if (!pastHero && isTocVisible) {
-                isTocVisible = false;
-                tocNav.classList.remove('visible');
-                clearTimeout(idleTimeout);
-                window.removeEventListener('mousemove', resetTocIdleTimer);
-                window.removeEventListener('scroll', resetTocIdleTimer);
-            }
-        }, { rootMargin: "0px 0px -250px 0px", threshold: 0 });
-        heroObserver.observe(heroSection);
-        const sectionObserver = new IntersectionObserver(entries => {
-            let activeSectionId = null;
-            entries.forEach(entry => { if (entry.isIntersecting) activeSectionId = entry.target.id; });
-            if (!activeSectionId) {
-                for (let i = sections.length - 1; i >= 0; i--) {
-                    const section = sections[i];
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top < window.innerHeight / 2) { activeSectionId = section.id; break; }
-                }
-            }
-            tocLinks.forEach(link => {
-                const linkId = link.getAttribute('href').substring(1);
-                link.classList.toggle('active', linkId === activeSectionId);
-            });
-        }, { rootMargin: '-40% 0px -60% 0px', threshold: 0 });
-        sections.forEach(section => sectionObserver.observe(section));
+  /**
+   * Erstellt das Inhaltsverzeichnis (TOC) dynamisch aus den gefundenen Sections.
+   */
+  function initTOC() {
+    // Nur ausführen, wenn die TOC-Liste und mindestens eine Section vorhanden sind
+    if (!UI.tocList || UI.headings.length === 0) {
+      console.log('TOC-Liste oder Sections nicht gefunden. TOC wird nicht initialisiert.');
+      return;
     }
+    
+    // Leeres Dokumenten-Fragment erstellen, um Performance zu verbessern
+    const frag = document.createDocumentFragment();
 
-    // ======================================================
-    // DIAGNOSE FÜR DIE FAQ-FUNKTION
-    // ======================================================
-    const allFaqItems = document.querySelectorAll('.faq details');
+    UI.headings.forEach(section => {
+      const id = section.id;
+      const title = section.getAttribute('aria-label'); // Den Titel aus aria-label holen
 
-    // DIAGNOSE-NACHRICHT 2: Prüfen, ob die FAQ-Elemente gefunden werden.
-    if (allFaqItems.length > 0) {
-        console.log(`✅ Schritt 2: ${allFaqItems.length} FAQ-Elemente im HTML gefunden.`);
-    } else {
-        console.error("❌ FEHLER bei Schritt 2: Es wurden keine FAQ-Elemente (.faq details) auf der Seite gefunden!");
-    }
+      if (!id || !title) return; // Überspringen, wenn ID oder Titel fehlen
 
-    allFaqItems.forEach((faqItem, index) => {
-        faqItem.addEventListener('toggle', (event) => {
-            // DIAGNOSE-NACHRICHT 3: Prüfen, ob das Öffnen/Schließen erkannt wird.
-            console.log(`➡️ Schritt 3: FAQ-Element #${index + 1} wurde getoggelt. Status: ${faqItem.open ? 'geöffnet' : 'geschlossen'}.`);
-
-            if (faqItem.open) {
-                allFaqItems.forEach(otherItem => {
-                    if (otherItem !== faqItem) {
-                        otherItem.open = false;
-                    }
-                });
-            }
-        });
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${id}`;
+      a.textContent = title;
+      li.appendChild(a);
+      frag.appendChild(li);
     });
+
+    UI.tocList.appendChild(frag); // Das gefüllte Fragment zur Liste hinzufügen
+  }
+
+  /**
+   * Richtet den IntersectionObserver ein, um zu beobachten, welche Section gerade sichtbar ist.
+   */
+  function setupIntersectionObserver() {
+    if (UI.headings.length < 1 || !UI.tocContainer) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      // Finde die erste sichtbare Section von oben
+      const firstVisibleEntry = entries.find(entry => entry.isIntersecting);
+      
+      let activeId = null;
+      if (firstVisibleEntry) {
+        activeId = firstVisibleEntry.target.id;
+      }
+
+      // Aktiviere den passenden Link im TOC
+      UI.tocList.querySelectorAll('a').forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${activeId}`);
+      });
+      
+      // Das TOC "scharfschalten", wenn die zweite Section erreicht wird
+      const secondSection = UI.headings[1]; 
+      if (secondSection) {
+        const secondSectionEntry = entries.find(e => e.target === secondSection);
+        if (secondSectionEntry) {
+           state.isTocArmed = secondSectionEntry.isIntersecting || secondSectionEntry.boundingClientRect.top < window.innerHeight;
+            if (!state.isTocArmed) {
+                UI.tocContainer.classList.remove('is-visible');
+            }
+        }
+      }
+
+    }, { 
+      rootMargin: '0px 0px -75% 0px', // Eine Section ist "aktiv", wenn sie im oberen 25% des Viewports ist
+      threshold: 0 
+    });
+
+    UI.headings.forEach(h => observer.observe(h));
+  }
+
+   /**
+   * Steuert die Sichtbarkeit des TOC. Es wird kurz angezeigt, wenn die Maus bewegt wird.
+   */
+  function setupTocVisibility() {
+    if (!UI.tocContainer) return;
+    
+    const show = () => {
+      // Nur anzeigen, wenn das TOC "scharfgeschaltet" ist (man weit genug gescrollt hat)
+      if (!state.isTocArmed) return;
+      
+      UI.tocContainer.classList.add('is-visible');
+      clearTimeout(state.tocHideTimer); // Alten Timer löschen
+      // Das TOC nach 2.5 Sekunden Inaktivität wieder ausblenden
+      state.tocHideTimer = setTimeout(() => UI.tocContainer.classList.remove('is-visible'), 2500);
+    };
+    
+    // Auf Mausbewegung und Klicks hören, um das TOC zu zeigen
+    window.addEventListener('mousemove', show, { passive: true });
+    window.addEventListener('click', show);
+  }
+
+  /**
+   * Hauptfunktion, die alle Initialisierungen startet.
+   */
+  function init() {
+    initTOC();
+    setupIntersectionObserver();
+    setupTocVisibility();
+  }
+
+  init(); // Start!
 });
