@@ -131,32 +131,29 @@ if ( ! function_exists('hu_thumb_or_fallback') ) {
 
 /**
  * ===================================================================
- * Blog Header-Anpassung: Menü per PHP entfernen
+ * Blog Header-Anpassung: Menü per PHP entfernen (FINALE VERSION)
  * ===================================================================
  * Entfernt das Hauptmenü-Element aus dem Header auf der Blog-Übersichtsseite
- * und auf einzelnen Blogbeiträgen. Dies ist die sauberste Methode.
+ * und auf einzelnen Blogbeiträgen.
  */
 add_filter( 'blocksy:header:items', function( $header_items ) {
 
-    // Prüft, ob wir auf der Blog-Startseite ODER auf einem einzelnen Beitrag sind.
-    if ( is_home() || is_single() ) {
+    // Die präzise Bedingung: Nur auf der Blog-Startseite ODER bei einem einzelnen BlogBEITRAG.
+    if ( is_home() || is_singular('post') ) {
 
-        // Geht durch alle Reihen und Platzierungen im Header...
-        foreach ( $header_items as $row_id => $row_data ) {
-            foreach ( $row_data['placements'] as $placement_id => $placement_data ) {
-
-                // ...und filtert das Element mit der ID 'menu' heraus.
-                $header_items[$row_id]['placements'][$placement_id]['items'] = array_filter(
-                    $placement_data['items'],
-                    function( $item ) {
-                        return $item['id'] !== 'menu';
+        foreach ( $header_items as $row_id => &$row ) { // Note the & to modify the array directly
+            if ( isset( $row['placements'] ) ) {
+                foreach ( $row['placements'] as $placement_id => &$placement ) {
+                    if ( isset( $placement['items'] ) ) {
+                        $placement['items'] = array_filter( $placement['items'], function( $item ) {
+                            return isset( $item['id'] ) && $item['id'] !== 'menu';
+                        } );
                     }
-                );
+                }
             }
         }
     }
 
-    // Gibt die (möglicherweise geänderte) Liste der Header-Elemente zurück.
     return $header_items;
 
 }, 20 );
