@@ -1,108 +1,106 @@
-window.addEventListener('load', () => {
-  const state = {
-    isTocArmed: false,
-    tocHideTimer: null,
-  };
+/**
+ * TOC-Skript für die Startseite, basierend auf der finalen Analyse.
+ * Führt die Initialisierung sofort aus, anstatt auf das 'load'-Event zu warten.
+ */
 
-  const UI = {
-    tocContainer: document.getElementById('toc-container'),
-    tocList: document.getElementById('toc-list'),
-    // STRATEGIEWECHSEL: Wir suchen direkt nach den Überschriften mit IDs. Das ist robust.
-    headings: document.querySelectorAll('main h2[id]'),
-  };
+function initHomepageTOC() {
+    // UI-Elemente und Zustand initialisieren
+    const UI = {
+        mainContent: document.querySelector('main'),
+        tocContainer: document.getElementById('toc-container'),
+        tocList: document.getElementById('toc-list'),
+    };
 
-  console.log(`TOC Initialisierung: ${UI.headings.length} klickbare Überschriften gefunden.`);
-
-  /**
-   * Baut das Inhaltsverzeichnis (TOC) aus den gefundenen Überschriften.
-   */
-  function initTOC() {
-    if (!UI.tocList || UI.headings.length < 2) { // Weniger als 2 Überschriften machen kein TOC
-      if (UI.tocContainer) {
-        UI.tocContainer.style.display = 'none';
-      }
-      return;
+    // Prüfen, ob die notwendigen Elemente vorhanden sind.
+    if (!UI.mainContent || !UI.tocContainer || !UI.tocList) {
+        console.log('TOC init abgebrochen: Wichtige HTML-Elemente fehlen.');
+        if (UI.tocContainer) UI.tocContainer.style.display = 'none';
+        return;
     }
 
-    const frag = document.createDocumentFragment();
-    UI.headings.forEach(heading => {
-      const id = heading.id;
-      const title = heading.textContent.trim();
+    // Finde alle h2-Überschriften im main-Bereich, die eine ID haben.
+    const headings = Array.from(UI.mainContent.querySelectorAll('h2[id]'));
 
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = `#${id}`;
-      a.textContent = title;
-      li.appendChild(a);
-      frag.appendChild(li);
-    });
-    UI.tocList.appendChild(frag);
-  }
+    // Wenn weniger als 2 Überschriften gefunden werden, macht ein TOC keinen Sinn.
+    if (headings.length < 2) {
+        console.log('TOC init abgebrochen: Weniger als 2 relevante Überschriften gefunden.');
+        UI.tocContainer.style.display = 'none';
+        return;
+    }
 
-  /**
-   * IntersectionObserver, der die Überschriften beobachtet und den aktiven Link hervorhebt.
-   * Das ist sehr performant, da es nicht bei jedem Pixel-Scrollen feuert.
-   */
-  function setupIntersectionObserver() {
-    if (UI.headings.length < 2 || !UI.tocContainer) return;
+    /**
+     * Baut das Inhaltsverzeichnis (TOC) aus den gefundenen Überschriften.
+     */
+    function buildTOC() {
+        const fragment = document.createDocumentFragment();
+        headings.forEach(h => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = `#${h.id}`;
+            // Bereinige den Text von eventuellen inneren HTML-Tags (z.B. <br>)
+            a.textContent = h.textContent.trim();
+            li.appendChild(a);
+            fragment.appendChild(li);
+        });
+        UI.tocList.appendChild(fragment);
+    }
 
-    const observer = new IntersectionObserver((entries) => {
-      let activeId = null;
-      // Finde die oberste sichtbare Überschrift
-      const firstVisible = entries.find(entry => entry.isIntersecting);
-      if (firstVisible) {
-        activeId = firstVisible.target.id;
-      } else {
-        // Fallback für schnelles Scrollen: Nimm die letzte, die oben verschwunden ist
-        for (let i = UI.headings.length - 1; i >= 0; i--) {
-          if (UI.headings[i].getBoundingClientRect().top < 150) {
-            activeId = UI.headings[i].id;
-            break;
-          }
-        }
-      }
+    /**
+     * Initialisiert den IntersectionObserver, um die aktive Überschrift zu verfolgen.
+     */
+    function setupIntersectionObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            let firstVisibleId = null;
 
-      UI.tocList.querySelectorAll('a').forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${activeId}`);
-      });
-      
-      // TOC "scharfschalten" und anzeigen, wenn die erste Überschrift erreicht wird
-      const firstHeadingEntry = entries.find(e => e.target === UI.headings[0]);
-      if (firstHeadingEntry) {
-        state.isTocArmed = firstHeadingEntry.isIntersecting || firstHeadingEntry.boundingClientRect().top < window.innerHeight;
-        if (!state.isTocArmed) {
-          UI.tocContainer.classList.remove('is-visible');
-        }
-      }
-    }, { 
-      rootMargin: '0px 0px -80% 0px', // Löst aus, wenn eine H2 die oberen 20% des Bildschirms erreicht
-      threshold: 0 
-    });
+            // Finde die erste sichtbare Überschrift von oben.
+            for (const entry of entries) {
+                if (entry.isIntersecting) {
+                    firstVisibleId = entry.target.id;
+                    break;
+                }
+            }
 
-    UI.headings.forEach(heading => observer.observe(heading));
-  }
+            // Fallback: Wenn keine Überschrift im Threshold sichtbar ist,
+            // nimm die letzte, die über dem Viewport liegt.
+            if (!firstVisibleId) {
+                for (let i = headings.length - 1; i >= 0; i--) {
+                    if (headings[i].getBoundingClientRect().top < 150) {
+                        firstVisibleId = headings[i].id;
+                        break;
+                    }
+                }
+            }
 
-  /**
-   * Steuert die Sichtbarkeit des TOC bei Mausbewegung.
-   */
-  function setupTocVisibility() {
-    if (!UI.tocContainer) return;
-    const show = () => {
-      if (!state.isTocArmed) return;
-      UI.tocContainer.classList.add('is-visible');
-      clearTimeout(state.tocHideTimer);
-      state.tocHideTimer = setTimeout(() => UI.tocContainer.classList.remove('is-visible'), 2500);
-    };
-    window.addEventListener('mousemove', show, { passive: true });
-    window.addEventListener('click', show);
-  }
+            // Aktualisiere die 'active' Klasse im TOC.
+            UI.tocList.querySelectorAll('a').forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === `#${firstVisibleId}`);
+            });
+            
+            // Logik zum Einblenden des TOC-Containers
+            const firstHeadingEntry = entries.find(e => e.target === headings[0]);
+            if (firstHeadingEntry) {
+                 const isTocVisible = firstHeadingEntry.boundingClientRect.top < window.innerHeight / 2;
+                 UI.tocContainer.classList.toggle('is-visible', isTocVisible);
+            }
 
-  function init() {
-    initTOC();
+        }, {
+            rootMargin: '0px 0px -80% 0px', // Beobachtet einen schmalen Streifen am oberen Rand des Viewports
+            threshold: 0
+        });
+
+        headings.forEach(h => observer.observe(h));
+    }
+    
+    // Führe die Hauptfunktionen aus
+    buildTOC();
     setupIntersectionObserver();
-    setupTocVisibility();
-  }
+    console.log(`TOC erfolgreich initialisiert mit ${headings.length} Überschriften.`);
+}
 
-  init();
-});
+// =============================================================================
+// SOFORTIGER AUFRUF
+// Die Funktion wird direkt ausgeführt, da das Skript im Footer geladen wird
+// und das DOM zu diesem Zeitpunkt bereit ist.
+// =============================================================================
+initHomepageTOC();
 
