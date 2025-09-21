@@ -37,3 +37,15 @@ h1, h2, h3, h4, h5, h6 {
  * mit get_header() geladen und hier nicht mehr blockiert.
  * Deine Homepage-Styles in assets/css/homepage.css sind davon nicht betroffen.
  */
+
+ /**
+ * ===================================================================
+ * Blog Header-Anpassung: Menü ausblenden
+ * ===================================================================
+ * Dieser Code blendet die Hauptnavigation auf der Blog-Übersichtsseite
+ * und auf einzelnen Blogbeiträgen aus, um einen cleanen Look zu schaffen.
+ */
+.blog #header-menu,
+.single-post #header-menu {
+    display: none;
+}
