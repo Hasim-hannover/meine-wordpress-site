@@ -128,3 +128,35 @@ if ( ! function_exists('hu_thumb_or_fallback') ) {
         return $thumbnail_url ? $thumbnail_url : hu_fallback_thumb_url();
     }
 }
+
+/**
+ * ===================================================================
+ * Blog Header-Anpassung: Menü per PHP entfernen
+ * ===================================================================
+ * Entfernt das Hauptmenü-Element aus dem Header auf der Blog-Übersichtsseite
+ * und auf einzelnen Blogbeiträgen. Dies ist die sauberste Methode.
+ */
+add_filter( 'blocksy:header:items', function( $header_items ) {
+
+    // Prüft, ob wir auf der Blog-Startseite ODER auf einem einzelnen Beitrag sind.
+    if ( is_home() || is_single() ) {
+
+        // Geht durch alle Reihen und Platzierungen im Header...
+        foreach ( $header_items as $row_id => $row_data ) {
+            foreach ( $row_data['placements'] as $placement_id => $placement_data ) {
+
+                // ...und filtert das Element mit der ID 'menu' heraus.
+                $header_items[$row_id]['placements'][$placement_id]['items'] = array_filter(
+                    $placement_data['items'],
+                    function( $item ) {
+                        return $item['id'] !== 'menu';
+                    }
+                );
+            }
+        }
+    }
+
+    // Gibt die (möglicherweise geänderte) Liste der Header-Elemente zurück.
+    return $header_items;
+
+}, 20 );

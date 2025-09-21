@@ -38,14 +38,4 @@ h1, h2, h3, h4, h5, h6 {
  * Deine Homepage-Styles in assets/css/homepage.css sind davon nicht betroffen.
  */
 
- //**
- * ===================================================================
- * Blog Header-Anpassung: Menü ausblenden (FINALE VERSION)
- * ===================================================================
- * Dieser Code blendet die Hauptnavigation auf der Blog-Übersichtsseite
- * und auf einzelnen Blogbeiträgen mit hoher Priorität aus.
- */
-.blog [data-id="menu"],
-.single-post [data-id="menu"] {
-    display: none !important;
-}
+ 
