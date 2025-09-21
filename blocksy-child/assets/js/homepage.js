@@ -1,4 +1,3 @@
-// Wir warten, bis die GESAMTE Seite geladen ist, inklusive aller Bilder und Inhalte.
 window.addEventListener('load', () => {
   const state = {
     isTocArmed: false,
@@ -8,36 +7,27 @@ window.addEventListener('load', () => {
   const UI = {
     tocContainer: document.getElementById('toc-container'),
     tocList: document.getElementById('toc-list'),
-    // Wir verwenden einen allgemeineren Selektor, der auch verschachtelte Sektionen findet.
-    sections: document.querySelectorAll('main section[id]'),
+    // STRATEGIEWECHSEL: Wir suchen direkt nach den Überschriften mit IDs. Das ist robust.
+    headings: document.querySelectorAll('main h2[id]'),
   };
 
-  // DEBUG: Gib in der Browser-Konsole aus, wie viele Sektionen gefunden wurden.
-  console.log(`TOC Initialisierung: ${UI.sections.length} Sektionen gefunden.`);
-
+  console.log(`TOC Initialisierung: ${UI.headings.length} klickbare Überschriften gefunden.`);
 
   /**
-   * Baut das Inhaltsverzeichnis (TOC) dynamisch auf.
+   * Baut das Inhaltsverzeichnis (TOC) aus den gefundenen Überschriften.
    */
   function initTOC() {
-    if (!UI.tocList || UI.sections.length === 0) {
-      if(UI.tocContainer) {
-        UI.tocContainer.style.display = 'none'; // Verstecke das TOC komplett, wenn es nichts anzuzeigen gibt.
+    if (!UI.tocList || UI.headings.length < 2) { // Weniger als 2 Überschriften machen kein TOC
+      if (UI.tocContainer) {
+        UI.tocContainer.style.display = 'none';
       }
       return;
     }
 
     const frag = document.createDocumentFragment();
-
-    UI.sections.forEach(section => {
-      const id = section.id;
-      const titleElement = section.querySelector('h2');
-
-      if (!id || !titleElement) {
-        return;
-      }
-      
-      const title = titleElement.textContent.trim();
+    UI.headings.forEach(heading => {
+      const id = heading.id;
+      const title = heading.textContent.trim();
 
       const li = document.createElement('li');
       const a = document.createElement('a');
@@ -46,30 +36,27 @@ window.addEventListener('load', () => {
       li.appendChild(a);
       frag.appendChild(li);
     });
-
     UI.tocList.appendChild(frag);
   }
 
   /**
-   * Richtet den IntersectionObserver ein, um die Sichtbarkeit der Sektionen zu verfolgen.
+   * IntersectionObserver, der die Überschriften beobachtet und den aktiven Link hervorhebt.
+   * Das ist sehr performant, da es nicht bei jedem Pixel-Scrollen feuert.
    */
   function setupIntersectionObserver() {
-    if (UI.sections.length < 1 || !UI.tocContainer) return;
+    if (UI.headings.length < 2 || !UI.tocContainer) return;
 
     const observer = new IntersectionObserver((entries) => {
       let activeId = null;
-
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          activeId = entry.target.id;
-          break;
-        }
-      }
-      
-      if (!activeId) {
-        for (let i = UI.sections.length - 1; i >= 0; i--) {
-          if (UI.sections[i].getBoundingClientRect().top < 150) {
-            activeId = UI.sections[i].id;
+      // Finde die oberste sichtbare Überschrift
+      const firstVisible = entries.find(entry => entry.isIntersecting);
+      if (firstVisible) {
+        activeId = firstVisible.target.id;
+      } else {
+        // Fallback für schnelles Scrollen: Nimm die letzte, die oben verschwunden ist
+        for (let i = UI.headings.length - 1; i >= 0; i--) {
+          if (UI.headings[i].getBoundingClientRect().top < 150) {
+            activeId = UI.headings[i].id;
             break;
           }
         }
@@ -79,23 +66,20 @@ window.addEventListener('load', () => {
         a.classList.toggle('active', a.getAttribute('href') === `#${activeId}`);
       });
       
-      const secondSection = UI.sections[1];
-      if (secondSection) {
-        const secondSectionEntry = entries.find(e => e.target === secondSection);
-        if (secondSectionEntry) {
-           state.isTocArmed = secondSectionEntry.isIntersecting || secondSectionEntry.boundingClientRect.top < window.innerHeight;
-            if (!state.isTocArmed) {
-                UI.tocContainer.classList.remove('is-visible');
-            }
+      // TOC "scharfschalten" und anzeigen, wenn die erste Überschrift erreicht wird
+      const firstHeadingEntry = entries.find(e => e.target === UI.headings[0]);
+      if (firstHeadingEntry) {
+        state.isTocArmed = firstHeadingEntry.isIntersecting || firstHeadingEntry.boundingClientRect().top < window.innerHeight;
+        if (!state.isTocArmed) {
+          UI.tocContainer.classList.remove('is-visible');
         }
       }
-
     }, { 
-      rootMargin: '0px 0px -70% 0px', 
+      rootMargin: '0px 0px -80% 0px', // Löst aus, wenn eine H2 die oberen 20% des Bildschirms erreicht
       threshold: 0 
     });
 
-    UI.sections.forEach(section => observer.observe(section));
+    UI.headings.forEach(heading => observer.observe(heading));
   }
 
   /**
@@ -103,15 +87,12 @@ window.addEventListener('load', () => {
    */
   function setupTocVisibility() {
     if (!UI.tocContainer) return;
-    
     const show = () => {
       if (!state.isTocArmed) return;
-      
       UI.tocContainer.classList.add('is-visible');
       clearTimeout(state.tocHideTimer);
       state.tocHideTimer = setTimeout(() => UI.tocContainer.classList.remove('is-visible'), 2500);
     };
-    
     window.addEventListener('mousemove', show, { passive: true });
     window.addEventListener('click', show);
   }
