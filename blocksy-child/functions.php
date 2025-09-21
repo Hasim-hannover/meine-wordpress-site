@@ -1,14 +1,17 @@
 <?php
 /**
  * Blocksy Child Theme Functions
+ * Die finale, konsolidierte Version zur korrekten Asset-Verwaltung.
  *
  * @package Blocksy Child
  */
 
-// Korrektes Einbinden von Parent- und Child-Theme-Stylesheets
-add_action('wp_enqueue_scripts', 'hu_enqueue_theme_styles');
-function hu_enqueue_theme_styles()
+// Wir bündeln alle Lade-Anweisungen in EINER Funktion für maximale Stabilität.
+add_action('wp_enqueue_scripts', 'hu_load_theme_assets');
+
+function hu_load_theme_assets()
 {
+    // Schritt 1: Lade die Parent- und Child-Haupt-Stylesheets auf JEDER Seite.
     wp_enqueue_style(
         'blocksy-parent-style',
         get_template_directory_uri() . '/style.css',
@@ -20,85 +23,69 @@ function hu_enqueue_theme_styles()
         'blocksy-child-style',
         get_stylesheet_uri(),
         ['blocksy-parent-style'],
-        filemtime(get_stylesheet_directory() . '/style.css')
+        filemtime(get_stylesheet_directory() . '/style.css') // Cache-Buster
     );
-}
 
-
-// Assets für die Startseite (front-page.php) laden
-add_action('wp_enqueue_scripts', 'hu_enqueue_homepage_assets');
-function hu_enqueue_homepage_assets()
-{
+    // Schritt 2: Lade die spezifischen Assets nur dort, wo sie gebraucht werden.
     if (is_front_page()) {
-        $css_path = get_stylesheet_directory() . '/assets/css/homepage.css';
-        $js_path = get_stylesheet_directory() . '/assets/js/homepage.js';
+        // --- NUR FÜR DIE STARTSEITE ---
+        $css_path_home = get_stylesheet_directory() . '/assets/css/homepage.css';
+        $js_path_home = get_stylesheet_directory() . '/assets/js/homepage.js';
 
-        if (file_exists($css_path)) {
+        if (file_exists($css_path_home)) {
             wp_enqueue_style(
                 'hu-homepage-style',
                 get_stylesheet_directory_uri() . '/assets/css/homepage.css',
                 [],
-                filemtime($css_path)
+                filemtime($css_path_home) // Cache-Buster
             );
         }
 
-        if (file_exists($js_path)) {
+        if (file_exists($js_path_home)) {
             wp_enqueue_script(
                 'hu-homepage-script',
                 get_stylesheet_directory_uri() . '/assets/js/homepage.js',
-                [], // Keine Abhängigkeiten wie jQuery nötig -> effizienter
-                filemtime($js_path),
+                [], // Keine Abhängigkeiten -> Effizient
+                filemtime($js_path_home), // Cache-Buster
                 true
             );
         }
-    }
-}
-
-
-// Assets für die Blog-Übersichtsseite (home.php) laden
-add_action('wp_enqueue_scripts', 'hu_enqueue_blog_archive_assets');
-function hu_enqueue_blog_archive_assets()
-{
-    if (is_home()) {
-        $css_path = get_stylesheet_directory() . '/assets/css/blog-archive.css';
-        if (file_exists($css_path)) {
+    } elseif (is_home()) {
+        // --- NUR FÜR DIE BLOG-ÜBERSICHT ---
+        $css_path_archive = get_stylesheet_directory() . '/assets/css/blog-archive.css';
+        if (file_exists($css_path_archive)) {
             wp_enqueue_style(
                 'hu-blog-archive-style',
                 get_stylesheet_directory_uri() . '/assets/css/blog-archive.css',
                 [],
-                filemtime($css_path)
+                filemtime($css_path_archive) // Cache-Buster
             );
         }
-    }
-}
+    } elseif (is_singular('post')) {
+        // --- NUR FÜR EINZELNE BLOGARTIKEL ---
+        $css_path_single = get_stylesheet_directory() . '/assets/css/blog-single.css';
+        $js_path_single = get_stylesheet_directory() . '/assets/js/blog-single.js';
 
-
-// Assets für einzelne Blogartikel (single-post.php) laden
-add_action('wp_enqueue_scripts', 'hu_enqueue_single_post_assets');
-function hu_enqueue_single_post_assets()
-{
-    if (is_singular('post')) {
-        $css_path = get_stylesheet_directory() . '/assets/css/blog-single.css';
-        $js_path = get_stylesheet_directory() . '/assets/js/blog-single.js';
-
-        if (file_exists($css_path)) {
+        if (file_exists($css_path_single)) {
             wp_enqueue_style(
                 'hu-single-post-style',
                 get_stylesheet_directory_uri() . '/assets/css/blog-single.css',
                 [],
-                filemtime($css_path)
+                filemtime($css_path_single) // Cache-Buster
             );
         }
 
-        if (file_exists($js_path)) {
+        if (file_exists($js_path_single)) {
             wp_enqueue_script(
                 'hu-single-post-script',
                 get_stylesheet_directory_uri() . '/assets/js/blog-single.js',
                 [],
-                filemtime($js_path),
+                filemtime($js_path_single), // Cache-Buster
                 true
             );
         }
     }
 }
+
+// Hier können weitere, andere PHP-Funktionen aus deiner alten functions.php folgen, falls vorhanden.
 
