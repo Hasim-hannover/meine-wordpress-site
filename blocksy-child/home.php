@@ -23,11 +23,10 @@ $categories = get_categories(['hide_empty' => true, 'exclude' => 1]);
 
     <div class="hu-hero" role="banner" aria-label="Impulse – Blogübersicht" style="background-image:url('https://hasimuener.de/wp-content/uploads/2025/09/Impulse_Hasim_uener_Blog.webp')">
         <div class="hu-hero__inner">
-            <span class="hu-eyebrow">Hasim Üner – Impulse</span>
-            <h1>Impulse</h1>
+            <span class="hu-eyebrow">Impulse</span>
+            <h1>Digitale Klarheit</h1>
             <p class="hu-hero__subline">
-                Kurze, präzise Gedanken zu Performance, SEO, Tracking & E-Commerce-Architektur.
-                Kein News-Rauschen – nur Hebel, die Wachstum bringen.
+                Jenseits des Hypes: Analysen zu den digitalen Hebeln, die wirklich Wert schaffen. Für eine Technik, die dem Menschen dient – und dem Geschäftserfolg.
             </p>
             <a class="hu-hero__cta" href="#impulse-list" aria-label="Zu den neuesten Beiträgen springen">Neueste Beiträge</a>
         </div>
