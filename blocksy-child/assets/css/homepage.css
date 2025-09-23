@@ -165,3 +165,10 @@ details[open] { border-color: rgba(255,176,32,0.3); }
 .front-page #main-content {
     margin-top: 80px !important; /* Du kannst diesen Wert anpassen, z.B. 60px oder 100px */
 }
+
+#toc-nav a.active {
+    background: linear-gradient(135deg, rgba(255,176,32,0.15), rgba(255,138,0,0.08));
+    color: var(--gold); /* Deine orange Farbe */
+    font-weight: 700;
+    border-color: rgba(255,176,32,0.3);
+}
