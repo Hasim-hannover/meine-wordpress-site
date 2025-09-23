@@ -4,13 +4,11 @@
  * Version: FINAL
  */
 
-/* FINALER VERSUCH: Menü auf Blog & Beiträgen ausblenden */
-#header-menu-1,
-[data-id="menu"],
-[data-component="menu"] {
+/*
+ * Blog-Archiv & Einzelbeiträge: Hauptmenü im Header ausblenden
+ * (Basierend auf dem exakten Quellcode der Seite)
+ */
+body.blog [data-row="top"] [data-id="navigation"],
+body.single-post [data-row="top"] [data-id="navigation"] {
     display: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
 }
