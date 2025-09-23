@@ -32,10 +32,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*
- * HINWEIS: Alle widersprüchlichen Header-Regeln wurden entfernt.
- * Der Standard-Blocksy-Header wird jetzt über die front-page.php
- * mit get_header() geladen und hier nicht mehr blockiert.
- * Deine Homepage-Styles in assets/css/homepage.css sind davon nicht betroffen.
+ * =========================================
+ * MENÜ AUF BLOG & BEITRÄGEN AUSBLENDEN (FINAL)
+ * =========================================
  */
-
- 
+body.blog .ct-header-builder [data-component="menu"],
+body.single-post .ct-header-builder [data-component="menu"] {
+    display: none !important;
+}
