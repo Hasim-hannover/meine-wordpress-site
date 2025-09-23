@@ -4,12 +4,6 @@
  * Version: FINAL
  */
 
-/**
- * Theme Name: Blocksy Child
- * Template: blocksy
- * Version: FINAL
- */
-
 /* Blog-Archiv & Einzelbeiträge: Hauptmenü im Header ausblenden (Fix für obere Reihe) */
 body.blog [data-row="top"] [data-component="menu"],
 body.single-post [data-row="top"] [data-component="menu"] {
