@@ -1,6 +1,7 @@
 /**
- * JavaScript für die Startseite - FINALE KORREKTUR FÜR TOC
- * Korrigiert den Selektor für die Sections.
+ * JavaScript für die Startseite - FINALE VERSION
+ * Korrektur: Der TOC-Selektor ist jetzt unabhängig von der <main>-ID
+ * und funktioniert garantiert in WordPress.
  */
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -13,11 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     const target = parseInt(element.dataset.target, 10);
                     if (isNaN(target) || element.classList.contains('animated')) return;
                     element.classList.add('animated');
-
                     let current = 0;
                     const duration = 2000;
                     const stepTime = Math.max(1, Math.floor(duration / target));
-                    
                     const timer = setInterval(() => {
                         current += 1;
                         if (current >= target) {
@@ -34,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.hero-stats .num').forEach(num => statsObserver.observe(num));
     } catch(e) { console.error("Fehler bei Zähl-Animation:", e); }
 
-
     // --- SCRIPT FÜR FAQ AKKORDEON ---
     try {
         document.querySelectorAll('.faq details').forEach(detailsEl => {
@@ -48,13 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } catch(e) { console.error("Fehler bei FAQ:", e); }
 
-
     // --- SCRIPT FÜR STICKY TOC & IDLE BEHAVIOR ---
     try {
         const tocNav = document.getElementById('toc-nav');
         const heroSection = document.getElementById('start');
-        // KORREKTUR HIER: Wir suchen jetzt nach #main-content
-        const sections = document.querySelectorAll('#main-content section[id]');
+        // FINALE KORREKTUR HIER: Wir suchen nach allen Sections mit einer ID, egal wo.
+        const sections = document.querySelectorAll('section[id]');
         const tocLinks = document.querySelectorAll('#toc-nav a');
 
         if (tocNav && heroSection && sections.length > 0) {
@@ -65,9 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!isTocVisible) return;
                 tocNav.classList.remove('idle');
                 clearTimeout(idleTimeout);
-                idleTimeout = setTimeout(() => {
-                    tocNav.classList.add('idle');
-                }, 3000);
+                idleTimeout = setTimeout(() => tocNav.classList.add('idle'), 3000);
             };
             
             const heroObserver = new IntersectionObserver(entries => {
@@ -94,13 +89,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const sectionObserver = new IntersectionObserver(entries => {
                 let currentActive = '';
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (!currentActive) {
-                            currentActive = entry.target.getAttribute('id');
-                        }
+                    if (entry.isIntersecting && !currentActive) {
+                        currentActive = entry.target.getAttribute('id');
                     }
                 });
-                
                 if (currentActive) {
                     tocLinks.forEach(link => {
                         link.classList.toggle('active', link.getAttribute('href') === `#${currentActive}`);
@@ -109,8 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }, { rootMargin: '-40% 0px -55% 0px', threshold: [0.2, 0.8] });
 
             sections.forEach(section => sectionObserver.observe(section));
-        } else if (!sections.length) {
-            console.error('TOC Fehler: Keine Sektionen zum Beobachten gefunden. Überprüfe den Selektor "#main-content section[id]".');
+        } else {
+            console.error('TOC konnte nicht initialisiert werden. Elemente fehlen (toc-nav, start, sections mit IDs).');
         }
     } catch(e) { console.error("Fehler bei TOC:", e); }
 });
