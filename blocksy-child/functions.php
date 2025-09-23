@@ -1,41 +1,24 @@
 <?php
 /**
- * Blocksy Child Theme - Finale, stabile Version
+ * Blocksy Child Theme - Finale, stabile Version mit Blog-Integration
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 add_action( 'wp_enqueue_scripts', function () {
     // Lädt die globale style.css auf ALLEN Seiten.
-    wp_enqueue_style(
-        'blocksy-child-style',
-        get_stylesheet_uri(),
-        [ 'blocksy-stylesheet' ],
-        filemtime( get_stylesheet_directory() . '/style.css' )
-    );
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [ 'blocksy-stylesheet' ], filemtime( get_stylesheet_directory() . '/style.css' ) );
 
     // Lädt Homepage-Assets NUR auf der Startseite.
     if ( is_front_page() ) {
-        wp_enqueue_style(
-            'homepage-style',
-            get_stylesheet_directory_uri() . '/assets/css/homepage.css',
-            [],
-            filemtime( get_stylesheet_directory() . '/assets/css/homepage.css' )
-        );
-        wp_enqueue_script(
-            'homepage-script',
-            get_stylesheet_directory_uri() . '/assets/js/homepage.js',
-            [], null, true
-        );
+        wp_enqueue_style( 'homepage-style', get_stylesheet_directory_uri() . '/assets/css/homepage.css', [], filemtime( get_stylesheet_directory() . '/assets/css/homepage.css' ) );
+        wp_enqueue_script( 'homepage-script', get_stylesheet_directory_uri() . '/assets/js/homepage.js', [], null, true );
     }
 
     // Lädt Blog-Assets NUR auf der Blog-Seite und auf Einzelbeiträgen.
     if ( is_home() || is_single() ) {
-         wp_enqueue_style(
-            'blog-archive-style',
-            get_stylesheet_directory_uri() . '/assets/css/blog-archive.css',
-             [],
-             filemtime( get_stylesheet_directory() . '/assets/css/blog-archive.css' )
-        );
+         wp_enqueue_style( 'blog-archive-style', get_stylesheet_directory_uri() . '/assets/css/blog-archive.css', [], filemtime( get_stylesheet_directory() . '/assets/css/blog-archive.css' ) );
+         // NEU: Lädt das JavaScript für den Blog-Filter
+         wp_enqueue_script( 'blog-archive-script', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], null, true );
     }
 }, 100 );
 
@@ -46,6 +29,7 @@ add_action( 'wp_head', function () {
         @font-face { font-family: 'Satoshi'; src: url('/wp-content/themes/blocksy-child/fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
         @font-face { font-family: 'Satoshi'; src: url('/wp-content/themes/blocksy-child/fonts/Satoshi-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
     </style>
+
    <script type="application/ld+json">
   {
     "@context": "https://schema.org",

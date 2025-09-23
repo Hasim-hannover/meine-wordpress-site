@@ -1,11 +1,20 @@
 <?php
 /**
- * Das Template für die Blog-Startseite (Beitragsübersicht).
- *
- * @package Blocksy Child
+ * Das Template für die Blog-Startseite (Beitragsübersicht) - KOMBINIERTE VERSION
  */
 
 get_header();
+
+// ===================================================================
+// HELPER-FUNKTIONEN AUS DEM SNIPPET (werden hier benötigt)
+// ===================================================================
+if (!function_exists('hu_fallback_thumb_url')) {
+    function hu_fallback_thumb_url() { return 'https://hasimuener.de/wp-content/uploads/2025/09/Impulse_Hasim_uener_Blog.webp'; }
+    function hu_append_readmore_once($t, $p) { $t = preg_replace('/Weiterlesen.*$/ui', '', $t); $t = rtrim($t, " \t\n\r\0\x0B…"); if (stripos($t, 'Weiterlesen') !== false) return $t; return $t . '… <a href="' . esc_url($p) . '">Weiterlesen &rarr;</a>'; }
+    function hu_scrub_text($x) { $x = wp_strip_all_tags($x, true); $lines = preg_split('/\r\n|\r|\n/u', $x); $c = []; foreach ($lines as $l) { $l = trim($l); if ($l === '') continue; $bc = ((preg_match('/\b(Home|Startseite|Blog)\b/ui', $l) && preg_match('/[›»>\|]/u', $l)) || (substr_count($l, '›') + substr_count($l, '»') + substr_count($l, '>') + substr_count($l, '|')) >= 2); if ($bc || preg_match('/^(inhalt|table of contents|verzeichnis)\b/ui', $l) || preg_match('/^\s*[✦•·\-\|]\s*\p{L}+/u', $l)) continue; $c[] = $l; } $x = trim(implode(' ', $c)); $x = preg_replace('/\b(?:Home|Startseite|Blog)\b(?:\s*[›»>\|]\s*[\p{L}\d \-]+){1,}/ui', '', $x); $x = preg_replace('/\s*[✦•·\-\|]\s*[\p{L}\d&\/\.,]+/u', '', $x); $x = preg_replace('/Weiterlesen.*$/ui', '', $x); return trim(preg_replace('/\s{2,}/u', ' ', $x)); }
+    function hu_make_excerpt_raw($id, $w = 30) { $e = (string)get_post_field('post_excerpt', $id); $b = $e !== '' ? $e : (function_exists('excerpt_remove_blocks') ? excerpt_remove_blocks(get_post_field('post_content', $id)) : get_post_field('post_content', $id)); $b = strip_shortcodes($b); $b = hu_scrub_text($b); $t = wp_trim_words($b, $w, '…'); return trim(preg_replace('/…+$/u', '…', $t)); }
+    function hu_thumb_or_fallback($id, $s) { $u = get_the_post_thumbnail_url($id, $s); return $u ? $u : hu_fallback_thumb_url(); }
+}
 
 // Holen der Beitragsdaten
 $featured_q = new WP_Query(['post_type' => 'post', 'posts_per_page' => 1, 'ignore_sticky_posts' => 1]);
