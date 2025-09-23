@@ -1,6 +1,6 @@
 <?php
 /**
- * Blocksy Child Theme - Finale, stabile Version mit SEO-optimiertem Schema
+ * Blocksy Child Theme - Finale, stabile Version mit komplettem SEO-Schema
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -16,7 +16,6 @@ add_action( 'wp_enqueue_scripts', function () {
 
     // Lädt Blog-Assets NUR auf der Blog-Seite und auf Einzelbeiträgen.
     if ( is_home() || is_single() ) {
-         // Lädt das JavaScript für den Blog-Filter
          wp_enqueue_script( 'blog-archive-script', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], null, true );
     }
 }, 100 );
@@ -32,48 +31,84 @@ add_action( 'wp_head', function () {
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Hasim Üner - Growth Partner",
-        "url": "https://hasimuener.de/",
-        "logo": "https://hasimuener.de/wp-content/uploads/2025/08/Logo_Hasim-Uener-.png",
-        "telephone": "+49-162-3727548",
-        "priceRange": "€€",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Warschauer Str. 5",
-            "addressLocality": "Pattensen",
-            "addressRegion": "Niedersachsen",
-            "postalCode": "30982",
-            "addressCountry": "DE"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "52.264660",
-            "longitude": "9.761210"
-        },
-        "areaServed": {
-            "@type": "GeoCircle",
-            "geoMidpoint": {
-                "@type": "GeoCoordinates",
-                "latitude": "52.375892",
-                "longitude": "9.732011"
+        "@graph": [
+            {
+                "@type": "ProfessionalService",
+                "name": "Hasim Üner - Growth Partner",
+                "url": "https://hasimuener.de/",
+                "logo": "https://hasimuener.de/wp-content/uploads/2025/08/Logo_Hasim-Uener-.png",
+                "telephone": "+49-162-3727548",
+                "priceRange": "€€",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Warschauer Str. 5",
+                    "addressLocality": "Pattensen",
+                    "addressRegion": "Niedersachsen",
+                    "postalCode": "30982",
+                    "addressCountry": "DE"
+                },
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "52.264660",
+                    "longitude": "9.761210"
+                },
+                "areaServed": {
+                    "@type": "GeoCircle",
+                    "geoMidpoint": {
+                        "@type": "GeoCoordinates",
+                        "latitude": "52.375892",
+                        "longitude": "9.732011"
+                    },
+                    "geoRadius": "30000"
+                },
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "email": "hallo@hasimuener.de",
+                    "contactType": "Customer Service"
+                },
+                "founder": {
+                    "@type": "Person",
+                    "name": "Hasim Üner"
+                }
             },
-            "geoRadius": "30000"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "hallo@hasimuener.de",
-            "contactType": "Customer Service"
-        },
-        "founder": {
-            "@type": "Person",
-            "name": "Hasim Üner",
-            "url": "https://hasimuener.de/uber-mich/",
-            "jobTitle": "Growth Partner & Digital Architect",
-            "sameAs": [
-                "https://www.linkedin.com/in/hasim-uener/"
-            ]
-        }
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Wie schnell kann unser Projekt starten?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Nach unserem Erstgespräch meist innerhalb von 3-5 Werktagen. Einfache WordPress-Sites sind oft in 2-3 Wochen live, komplexere E-Commerce Projekte in 4-8 Wochen."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Was kostet eine professionelle Website?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Starter-Projekte beginnen ab 3.500€. In unserem kostenlosen Erstgespräch ermitteln wir den genauen Bedarf und erstellen ein passgenaues Angebot."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Bieten Sie auch Wartung & Support an?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Ja. Ich biete flexible Service-Pakete für regelmäßige Updates, Backups, Sicherheits-Checks und Performance-Monitoring an."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Wie wird der Erfolg des Projekts gemessen?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Anhand klar definierter KPIs, die wir gemeinsam festlegen: z.B. Conversion-Rate, ROAS, Cost-per-Lead oder organischen Traffic. Sie erhalten transparente Reportings."
+                        }
+                    }
+                ]
+            }
+        ]
     }
     </script>
     <?php
