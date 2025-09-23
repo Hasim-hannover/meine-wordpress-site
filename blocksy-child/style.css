@@ -4,8 +4,3 @@
  * Version: FINAL
  */
 
-/* Blog-Archiv & Einzelbeiträge: Hauptmenü im Header ausblenden */
-body.blog .ct-header-builder [data-component="menu"],
-body.single-post .ct-header-builder [data-component="menu"] {
-    display: none !important;
-}
