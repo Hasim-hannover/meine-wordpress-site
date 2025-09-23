@@ -1,13 +1,83 @@
 <?php
 /**
- * Das Template für die Blog-Startseite (Beitragsübersicht) - FINALE VERSION MIT INLINE CSS
+ * Das Template für die Blog-Startseite (Beitragsübersicht) - FINALE VERSION MIT KOMPLETTEM CSS
  */
 
 get_header();
 ?>
 
 <style>
-/* KRITISCHES CSS FÜR SOFORTIGES LADEN */
+/* =================================================================== */
+/* NEU: CSS FÜR DEN HERO-BEREICH (DAS FEHLENDE TEIL)                 */
+/* =================================================================== */
+.hu-hero {
+    position: relative;
+    padding: 6rem 1.5rem;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+.hu-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 17, 17, 0.7); /* Dunkler Overlay für Lesbarkeit */
+    z-index: 1;
+}
+.hu-hero__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+.hu-eyebrow {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #FF8A00; /* Orange Akzentfarbe */
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+.hu-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: #fff;
+    line-height: 1.1;
+}
+.hu-hero__subline {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #d4d4d8;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+}
+.hu-hero__cta {
+    display: inline-block;
+    background-color: #FF8A00;
+    color: #111;
+    padding: 0.8rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.hu-hero__cta:hover {
+    background-color: #fff;
+    transform: translateY(-3px);
+}
+
+/* =================================================================== */
+/* BESTEHENDES CSS FÜR DEN BLOG-GRID (bleibt wie es war)           */
+/* =================================================================== */
 .hu-blog-wrapper a { text-decoration: none; }
 .hu-blog-wrapper h1, .hu-blog-wrapper h2, .hu-blog-wrapper h3, .hu-blog-wrapper h4 { color: #fafafa; }
 .hu-blog-wrapper p { color: #d4d4d8; }
