@@ -1,9 +1,6 @@
 /**
- * JavaScript für die Startseite - BASIEREND AUF DEM ORIGINALCODE
- * Enthält:
- * 1. Zähl-Animation (Original-Logik)
- * 2. FAQ-Akkordeon (Original-Logik)
- * 3. Sticky Table of Contents (Original-Logik)
+ * JavaScript für die Startseite - FINALE KORREKTUR FÜR TOC
+ * Korrigiert den Selektor für die Sections.
  */
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -13,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const element = entry.target;
-                    // HINWEIS: Dein HTML nutzt "data-target", nicht "data-ziel"
                     const target = parseInt(element.dataset.target, 10);
                     if (isNaN(target) || element.classList.contains('animated')) return;
                     element.classList.add('animated');
@@ -57,10 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
         const tocNav = document.getElementById('toc-nav');
         const heroSection = document.getElementById('start');
-        const sections = document.querySelectorAll('main section[id]');
+        // KORREKTUR HIER: Wir suchen jetzt nach #main-content
+        const sections = document.querySelectorAll('#main-content section[id]');
         const tocLinks = document.querySelectorAll('#toc-nav a');
 
-        if (tocNav && heroSection && sections.length) {
+        if (tocNav && heroSection && sections.length > 0) {
             let idleTimeout;
             let isTocVisible = false;
 
@@ -112,6 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }, { rootMargin: '-40% 0px -55% 0px', threshold: [0.2, 0.8] });
 
             sections.forEach(section => sectionObserver.observe(section));
+        } else if (!sections.length) {
+            console.error('TOC Fehler: Keine Sektionen zum Beobachten gefunden. Überprüfe den Selektor "#main-content section[id]".');
         }
     } catch(e) { console.error("Fehler bei TOC:", e); }
 });
