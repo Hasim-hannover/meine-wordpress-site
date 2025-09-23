@@ -4,20 +4,8 @@
  * Version: FINAL
  */
 
-/*
- * Blog-Archiv & Einzelbeiträge: Hauptmenü im Header ausblenden
- * (Finale "Brute-Force"-Methode mit maximaler Spezifität)
- */
+/* Blog-Archiv & Einzelbeiträge: Hauptmenü im Header ausblenden (ID-basierter Fix) */
 body.blog #header-menu-1,
-body.single-post #header-menu-1,
-body.blog [data-id='navigation'],
-body.single-post [data-id='navigation'] {
+body.single-post #header-menu-1 {
     display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    width: 0 !important;
-    overflow: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
 }
