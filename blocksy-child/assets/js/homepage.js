@@ -1,104 +1,117 @@
 /**
- * JavaScript für die Startseite:
- * 1. FAQ-Akkordeon
- * 2. Sticky Table of Contents
- * 3. NEU: Zähl-Animation für Erfolgszahlen
+ * JavaScript für die Startseite - BASIEREND AUF DEM ORIGINALCODE
+ * Enthält:
+ * 1. Zähl-Animation (Original-Logik)
+ * 2. FAQ-Akkordeon (Original-Logik)
+ * 3. Sticky Table of Contents (Original-Logik)
  */
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
 
-    // ======================================================
-    // FUNKTION 1: FAQ-Akkordeon (bleibt erhalten)
-    // ======================================================
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const frage = item.querySelector('.faq-frage');
-        if (frage) {
-            frage.addEventListener('click', () => {
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                        const otherAntwort = otherItem.querySelector('.faq-antwort');
-                        if (otherAntwort) otherAntwort.style.maxHeight = null;
+    // --- SCRIPT FÜR NUMMERN-ANIMATION ---
+    try {
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    // HINWEIS: Dein HTML nutzt "data-target", nicht "data-ziel"
+                    const target = parseInt(element.dataset.target, 10);
+                    if (isNaN(target) || element.classList.contains('animated')) return;
+                    element.classList.add('animated');
+
+                    let current = 0;
+                    const duration = 2000;
+                    const stepTime = Math.max(1, Math.floor(duration / target));
+                    
+                    const timer = setInterval(() => {
+                        current += 1;
+                        if (current >= target) {
+                            element.textContent = target.toLocaleString('de-DE');
+                            clearInterval(timer);
+                        } else {
+                           element.textContent = current;
+                        }
+                    }, stepTime);
+                    observer.unobserve(element);
+                }
+            });
+        }, { threshold: 0.8 });
+        document.querySelectorAll('.hero-stats .num').forEach(num => statsObserver.observe(num));
+    } catch(e) { console.error("Fehler bei Zähl-Animation:", e); }
+
+
+    // --- SCRIPT FÜR FAQ AKKORDEON ---
+    try {
+        document.querySelectorAll('.faq details').forEach(detailsEl => {
+            detailsEl.addEventListener('toggle', () => {
+                if (detailsEl.open) {
+                    document.querySelectorAll('.faq details').forEach(other => {
+                        if (other !== detailsEl) other.open = false;
+                    });
+                }
+            });
+        });
+    } catch(e) { console.error("Fehler bei FAQ:", e); }
+
+
+    // --- SCRIPT FÜR STICKY TOC & IDLE BEHAVIOR ---
+    try {
+        const tocNav = document.getElementById('toc-nav');
+        const heroSection = document.getElementById('start');
+        const sections = document.querySelectorAll('main section[id]');
+        const tocLinks = document.querySelectorAll('#toc-nav a');
+
+        if (tocNav && heroSection && sections.length) {
+            let idleTimeout;
+            let isTocVisible = false;
+
+            const resetTocIdleTimer = () => {
+                if (!isTocVisible) return;
+                tocNav.classList.remove('idle');
+                clearTimeout(idleTimeout);
+                idleTimeout = setTimeout(() => {
+                    tocNav.classList.add('idle');
+                }, 3000);
+            };
+            
+            const heroObserver = new IntersectionObserver(entries => {
+                const [entry] = entries;
+                const shouldBeVisible = !entry.isIntersecting;
+                
+                if (shouldBeVisible && !isTocVisible) {
+                    isTocVisible = true;
+                    tocNav.classList.add('visible');
+                    resetTocIdleTimer();
+                    window.addEventListener('mousemove', resetTocIdleTimer, { passive: true });
+                    window.addEventListener('scroll', resetTocIdleTimer, { passive: true });
+                } else if (!shouldBeVisible && isTocVisible) {
+                    isTocVisible = false;
+                    tocNav.classList.remove('visible');
+                    clearTimeout(idleTimeout);
+                    window.removeEventListener('mousemove', resetTocIdleTimer);
+                    window.removeEventListener('scroll', resetTocIdleTimer);
+                }
+            }, { rootMargin: "0px 0px -250px 0px", threshold: 0 });
+            
+            heroObserver.observe(heroSection);
+
+            const sectionObserver = new IntersectionObserver(entries => {
+                let currentActive = '';
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!currentActive) {
+                            currentActive = entry.target.getAttribute('id');
+                        }
                     }
                 });
-                item.classList.toggle('active');
-                const antwort = item.querySelector('.faq-antwort');
-                if (item.classList.contains('active') && antwort) {
-                    antwort.style.maxHeight = antwort.scrollHeight + 'px';
-                } else if (antwort) {
-                    antwort.style.maxHeight = null;
-                }
-            });
-        }
-    });
-
-    // ======================================================
-    // FUNKTION 2: Sticky Table of Contents (bleibt erhalten)
-    // ======================================================
-    const tocNav = document.getElementById('toc-nav');
-    if (tocNav) {
-        const sections = document.querySelectorAll('section[id]');
-        const tocLinks = tocNav.querySelectorAll('a');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 200) {
-                tocNav.classList.add('visible');
-            } else {
-                tocNav.classList.remove('visible');
-            }
-        }, { passive: true });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                
+                if (currentActive) {
                     tocLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${entry.target.id}`) {
-                            link.classList.add('active');
-                        }
+                        link.classList.toggle('active', link.getAttribute('href') === `#${currentActive}`);
                     });
                 }
-            });
-        }, { rootMargin: '-50% 0px -50% 0px' });
-        sections.forEach(section => observer.observe(section));
-    }
+            }, { rootMargin: '-40% 0px -55% 0px', threshold: [0.2, 0.8] });
 
-    // ======================================================
-    // NEUE FUNKTION 3: Zähl-Animation
-    // ======================================================
-    const statsContainer = document.querySelector('.hero-stats');
-    if (statsContainer) {
-        const animateNumbers = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const numberElements = entry.target.querySelectorAll('.num[data-ziel]');
-                    numberElements.forEach(el => {
-                        const ziel = parseFloat(el.getAttribute('data-ziel'));
-                        let start = 0;
-                        const dauer = 2000; // 2 Sekunden für die Animation
-                        const schritte = 100;
-                        const intervall = dauer / schritte;
-                        const schrittweite = ziel / schritte;
-
-                        let aktuellerSchritt = 0;
-                        const timer = setInterval(() => {
-                            aktuellerSchritt++;
-                            start += schrittweite;
-                            if (aktuellerSchritt >= schritte) {
-                                el.textContent = ziel.toLocaleString('de-DE'); // Formatiert die Endzahl
-                                clearInterval(timer);
-                            } else {
-                                el.textContent = Math.round(start).toLocaleString('de-DE');
-                            }
-                        }, intervall);
-                    });
-                    observer.unobserve(entry.target); // Animation nur einmal ausführen
-                }
-            });
-        };
-
-        const statObserver = new IntersectionObserver(animateNumbers, {
-            threshold: 0.5 // Startet, wenn 50% des Bereichs sichtbar sind
-        });
-
-        statObserver.observe(statsContainer);
-    }
+            sections.forEach(section => sectionObserver.observe(section));
+        }
+    } catch(e) { console.error("Fehler bei TOC:", e); }
 });
