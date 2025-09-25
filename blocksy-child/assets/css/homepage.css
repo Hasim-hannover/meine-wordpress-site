@@ -54,7 +54,7 @@ section{padding:clamp(3.5rem,8vw,5rem) 0;}
 .btn-primary{background:linear-gradient(135deg,var(--gold),var(--orange-glow));color:#111;box-shadow:0 8px 24px rgba(255,176,32,0.25);font-weight:800}
 .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,176,32,0.35);background:linear-gradient(135deg,var(--gold-hover),#ea580c)}
 .btn-ghost{background:linear-gradient(135deg,rgba(217,217,217,0.08),rgba(166,166,166,0.05));border:1px solid var(--glass-border);color:var(--silver-light);backdrop-filter:blur(10px)}
-.btn-ghost:hover{background:linear-gradient(135deg,rgba(230,230,230,0.12),rgba(217,217,217,0.08));border-color:var(--glass-border-hover);transform:translateY(-2px);box-shadow:0 8px 25px rgba(217,217,217,0.1);color:var(--white)}
+.btn-ghost:hover{background:linear-gradient(135deg,rgba(230,230,217,0.12),rgba(217,217,217,0.08));border-color:var(--glass-border-hover);transform:translateY(-2px);box-shadow:0 8px 25px rgba(217,217,217,0.1);color:var(--white)}
 /* Sticky TOC */
 #toc-nav{
   position:fixed; top:50%; right:2rem;
@@ -148,37 +148,31 @@ details[open] { border-color: rgba(255,176,32,0.3); }
 .blog-card p{color:var(--muted);font-size:0.95rem;margin:0 0 1.5rem;flex-grow:1}
 .blog-card .read-more{color:var(--silver-light);text-decoration:none;font-weight:700;font-size:0.9rem;align-self:flex-start}
 .blog-card .read-more:hover{color:var(--gold)}
-@media (max-width: 640px){
-  .hero-card{ display:block !important; }
-  .hero-card img{ width:100%; height:auto; display:block; }
-  .blog-grid{grid-template-columns:1fr;}
+
+/* --- KORRIGIERTER MEDIA QUERY BLOCK --- */
+@media (max-width: 640px) {
+  .hero-card { display:block !important; }
+  .hero-card img { width:100%; height:auto; display:block; }
+  .blog-grid { grid-template-columns:1fr; }
+} /* <-- DIESE KLAMMER HAT GEFEHLT */
+
 
 /*
  * ===================================================================
  * DEFINITIVER ABSTAND FÜR STARTSEITEN-INHALT (DESKTOP & MOBIL)
  * ===================================================================
- * Diese Regel nutzt eine hohe Spezifität, um sicherzustellen, 
- * dass sie auf der Startseite angewendet wird.
  */
 
 /* Standard-Abstand für Desktop */
 body.home #main-content,
 body.front-page #main-content {
-    margin-top: 120px !important;
+    margin-top: 80px !important;
 }
 
 /* Angepasster, größerer Abstand für mobile Geräte (alles unter 768px Breite) */
 @media (max-width: 768px) {
     body.home #main-content,
     body.front-page #main-content {
-        margin-top: 150px !important; /* Mehr Platz für das mobile Logo */
+        margin-top: 100px !important; /* Mehr Platz für das mobile Logo */
     }
-}
-
-
-#toc-nav a.active {
-    background: linear-gradient(135deg, rgba(255,176,32,0.15), rgba(255,138,0,0.08));
-    color: var(--gold); /* Deine orange Farbe */
-    font-weight: 700;
-    border-color: rgba(255,176,32,0.3);
 }
