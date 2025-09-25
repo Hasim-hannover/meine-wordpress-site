@@ -3,9 +3,3 @@
  * Template: blocksy
  * Version: FINAL
  */
-
-/* Blog-Archiv & Einzelbeiträge: Hauptmenü im Header ausblenden (ID-basierter Fix) */
-body.blog #header-menu-1,
-body.single-post #header-menu-1 {
-    display: none !important;
-}
