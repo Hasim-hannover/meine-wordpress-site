@@ -155,16 +155,26 @@ details[open] { border-color: rgba(255,176,32,0.3); }
 
 /*
  * ===================================================================
- * KORREKTUR: Abstand für den Startseiten-Inhalt
+ * DEFINITIVER ABSTAND FÜR STARTSEITEN-INHALT (DESKTOP & MOBIL)
  * ===================================================================
- * Da der Header global auf 0 gesetzt ist, braucht der Inhalt
- * der `front-page.php` einen eigenen Abstand nach oben.
- * Diese Regel gilt AUSSCHLIESSLICH für die Startseite.
+ * Diese Regel nutzt eine hohe Spezifität, um sicherzustellen, 
+ * dass sie auf der Startseite angewendet wird.
  */
-.home #main-content,
-.front-page #main-content {
-    margin-top: 80px !important; /* Du kannst diesen Wert anpassen, z.B. 60px oder 100px */
+
+/* Standard-Abstand für Desktop */
+body.home #main-content,
+body.front-page #main-content {
+    margin-top: 80px !important;
 }
+
+/* Angepasster, größerer Abstand für mobile Geräte (alles unter 768px Breite) */
+@media (max-width: 768px) {
+    body.home #main-content,
+    body.front-page #main-content {
+        margin-top: 100px !important; /* Mehr Platz für das mobile Logo */
+    }
+}
+
 
 #toc-nav a.active {
     background: linear-gradient(135deg, rgba(255,176,32,0.15), rgba(255,138,0,0.08));
