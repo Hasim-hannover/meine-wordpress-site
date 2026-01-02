@@ -1,5 +1,5 @@
 /**
- * JavaScript für die Startseite - FINALE VERSION
+ * JavaScript  die Startseite - FINALE VERSION
  * Korrektur: Der TOC-Selektor ist jetzt unabhängig von der <main>-ID
  * und funktioniert garantiert in WordPress.
  */
