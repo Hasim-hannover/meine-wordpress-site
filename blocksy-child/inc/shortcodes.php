@@ -1,7 +1,8 @@
 <?php
 /**
  * Shortcodes für die Startseite.
- * Finale Version, basierend auf dem bereitgestellten HTML.
+ * STRATEGIE-UPDATE: 100% WordPress & Growth Fokus.
+ * Keine Shopify-Dienstleistung mehr.
  *
  * @package Blocksy Child
  */
@@ -10,36 +11,52 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-// 1. Hero Section
+// 1. Hero Section (POSITIONIERUNG: WordPress Specialist)
 function hu_hero_section_shortcode() {
     ob_start();
     ?>
+    <nav id="toc-nav" aria-label="Inhaltsverzeichnis">
+        <h4>Inhalt</h4>
+        <ul>
+            <li><a href="#start">Start</a></li>
+            <li><a href="#partner">Über mich</a></li>
+            <li><a href="#erfolge">Ergebnisse</a></li>
+            <li><a href="#prozess">Prozess</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#cta">Kontakt</a></li>
+        </ul>
+    </nav>
+
     <header class="hero-section" role="banner" id="start">
         <div class="container">
             <div class="section-title">
-                <span class="badge">Hasim Üner – Ihr Growth Partner</span>
-                <h1>Ihr Weg zu digitalem Wachstum. Klar und strategisch.</h1>
-                <p class="sub">Sie haben das Ziel. Gemeinsam finden wir den passenden Weg und setzen ihn technisch exzellent um.</p>
+                <span class="badge">Hasim Üner – WordPress & Growth Partner</span>
+                <h1>High-End WordPress.<br>Messbares Wachstum.</h1>
+                <p class="sub">Schluss mit "Zeit gegen Geld". Ich biete Ihnen modulare Lösungen für technische Exzellenz und datengetriebenen Erfolg. Skalierbar, sicher und transparent.</p>
             </div>
-            <div class="switch-grid" aria-label="Wählen Sie Ihren strategischen Pfad">
-                <div class="switch-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                    <h2>E-Commerce & Shopify</h2>
-                    <p>Für Online-Shops, die nicht nur gut aussehen, sondern vor allem verkaufen und durch Daten profitabel wachsen sollen.</p>
-                    <a href="/shopify-agentur-hannover/" class="btn btn-primary">Lösungen für Shopify</a>
-                </div>
+            
+            <div class="switch-grid" aria-label="Meine Kompetenzfelder">
+                
                 <div class="switch-card">
                      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                    <h2>Website & WordPress</h2>
-                    <p>Für Dienstleister & B2B-Unternehmen, deren Website als überzeugende Lead-Quelle arbeiten und die Marke optimal repräsentieren soll.</p>
-                    <a href="/wordpress-agentur-hannover/" class="btn btn-ghost">Lösungen für WordPress</a>
+                    <h2>Technische Exzellenz</h2>
+                    <p>Individuelle WordPress-Entwicklung ohne Bloatware. Fokus auf Core Web Vitals, Sicherheit und eine Architektur, die mit Ihrem Business wächst.</p>
+                    <a href="/wordpress-agentur-hannover/" class="btn btn-primary">WordPress Module ansehen</a>
+                </div>
+
+                <div class="switch-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                    <h2>Daten & Strategie</h2>
+                    <p>Wachstum ist kein Zufall. Mit Server-Side Tracking (GA4), Conversion-Optimierung und SEO-Automatisierung machen wir Ihren Erfolg planbar.</p>
+                    <a href="/growth-blueprint/" class="btn btn-ghost">Growth Strategie</a>
                 </div>
             </div>
+
             <div class="hero-stats" role="group" aria-label="Erfolgsstatistiken">
-                <div class="stat"><div class="num" data-target="34">0</div><div class="label">Max ROAS</div></div>
-                <div class="stat"><div class="num" data-target="2500">0</div><div class="label">Leads</div></div>
-                <div class="stat"><div class="num" data-target="83">0</div><div class="label">% CPL ↓</div></div>
-                <div class="stat"><div class="num" data-target="500">0</div><div class="label">SEO ↑ (%)</div></div>
+                <div class="stat"><div class="num" data-target="98">0</div><div class="label">Google PageSpeed</div></div>
+                <div class="stat"><div class="num" data-target="2500">0</div><div class="label">Leads generiert</div></div>
+                <div class="stat"><div class="num" data-target="100">0</div><div class="label">% Datenhoheit</div></div>
+                <div class="stat"><div class="num" data-target="45">0</div><div class="label">Module deployed</div></div>
             </div>
         </div>
     </header>
@@ -48,7 +65,7 @@ function hu_hero_section_shortcode() {
 }
 add_shortcode( 'hu_hero', 'hu_hero_section_shortcode' );
 
-// 2. Partner Section
+// 2. Partner Section (BEREINIGT: Kein Shopify mehr)
 function hu_partner_section_shortcode() {
     ob_start();
     ?>
@@ -56,13 +73,13 @@ function hu_partner_section_shortcode() {
         <div class="container">
             <div class="architect-grid">
                 <div class="hero-card">
-                    <img src="https://hasimuener.de/wp-content/uploads/2025/08/Shopify-WordPress-Growth-Architect-400-x-400-px.webp" alt="Growth Partner Hannover – Hasim Üner (Shopify & WordPress)" loading="lazy" width="400" height="400">
+                    <img src="https://hasimuener.de/wp-content/uploads/2025/08/Shopify-WordPress-Growth-Architect-400-x-400-px.webp" alt="Hasim Üner – WordPress Experte Hannover" loading="lazy" width="400" height="400">
                 </div>
                 <div class="architect-content">
-                    <span class="badge">Ihr Partner</span>
-                    <h2 id="architect-heading">Ich bin Hasim Üner – Ihr Growth Architect in Hannover.</h2>
-                    <p class="lead">Als Ihr strategischer Growth Architect verbinde ich die Welten von Shopify & WordPress mit datengetriebenem Marketing – von sauberem <a href="https://hasimuener.de/ga4-tracking-setup/" style="color:var(--gold); text-decoration: underline;">GA4-Tracking</a> bis zur <a href="https://hasimuener.de/core-web-vitals-optimierung/" style="color:var(--gold); text-decoration: underline;">Core Web Vitals Optimierung</a>. Das Ziel: Eine ganzheitliche Strategie für Ihren messbaren Erfolg.</p>
-                    <a href="/uber-mich/" class="btn btn-ghost">Mehr über meine Arbeitsweise</a>
+                    <span class="badge">Ihr Strategischer Partner</span>
+                    <h2 id="architect-heading">Ich bin Hasim Üner – Ihr WordPress Specialist.</h2>
+                    <p class="lead">Ich verbinde tiefes technisches Verständnis mit strategischem Marketing. Mein Ansatz ist nicht "Stunden abarbeiten", sondern <strong>Ergebnisse liefern</strong>. Von der sauberen <a href="https://hasimuener.de/ga4-tracking-setup/" style="color:var(--gold); text-decoration: underline;">Daten-Infrastruktur</a> bis zur <a href="https://hasimuener.de/core-web-vitals-optimierung/" style="color:var(--gold); text-decoration: underline;">Performance-Optimierung</a> erhalten Sie fertige Module, die Ihr Business voranbringen.</p>
+                    <a href="/uber-mich/" class="btn btn-ghost">Meine Arbeitsweise kennenlernen</a>
                 </div>
             </div>
         </div>
@@ -72,39 +89,42 @@ function hu_partner_section_shortcode() {
 }
 add_shortcode( 'hu_partner', 'hu_partner_section_shortcode' );
 
-// 3. Erfolge Section
+// 3. Erfolge Section (NEUTRALISIERT: E-Commerce statt Shopify Plus)
 function hu_erfolge_section_shortcode() {
     ob_start();
     ?>
      <section id="erfolge" aria-labelledby="cases-heading" style="background:var(--glass-bg); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
         <div class="container">
             <div class="section-title">
-                <span class="badge">Ergebnisse</span>
-                <h2 id="cases-heading">Wachstum, das man messen kann.</h2>
-                <p>Hier sehen Sie konkrete Resultate aus realen Projekten. Sie zeigen, wie eine integrierte Strategie den entscheidenden Unterschied macht.</p>
+                <span class="badge">Track Record</span>
+                <h2 id="cases-heading">Ergebnisse statt Versprechen.</h2>
+                <p>Echte Zahlen aus Projekten, bei denen Strategie und Technik perfekt ineinandergreifen.</p>
             </div>
+            
             <article class="success-card">
-                <h3>E3 New Energy — B2C Leadgenerierung</h3>
-                <p class="muted">Erneuerbare Energien · Tech-Marketing-Integration · 8 Monate</p>
+                <h3>E3 New Energy — Lead-Maschine</h3>
+                <p class="muted">B2C Leadgen · High-Performance WordPress · 8 Monate</p>
                 <div class="metrics">
                     <div class="metric"><div style="color:var(--success);font-weight:800;font-size:1.4rem;">1.750+</div><div class="muted">Qualifizierte Leads</div></div>
-                    <div class="metric"><div style="color:var(--success)">120€ → 25€</div><div class="muted">CPL-Reduktion (-83%)</div></div>
-                    <div class="metric"><div style="color:var(--gold);font-weight:800;font-size:1.4rem;">28–34×</div><div class="muted">Konstanter ROAS</div></div>
-                    <div class="metric"><div style="color:var(--success)">+500%</div><div class="muted">Organischer Traffic</div></div>
+                    <div class="metric"><div style="color:var(--success)">-83%</div><div class="muted">CPL Reduktion</div></div>
+                    <div class="metric"><div style="color:var(--gold);font-weight:800;font-size:1.4rem;">Top 3</div><div class="muted">SEO Rankings</div></div>
+                    <div class="metric"><div style="color:var(--success)">100%</div><div class="muted">DSGVO Tracking</div></div>
                 </div>
             </article>
+
             <article class="success-card">
-                <h3>DOMDAR — E-Commerce Transformation</h3>
-                <p class="muted">Sustainable E-Commerce · Shopify Plus · UX/CRO · 6 Monate</p>
+                <h3>DOMDAR — E-Commerce Scaling</h3>
+                <p class="muted">Performance Relaunch · CRO & UX Strategy · 6 Monate</p>
                 <div class="metrics">
                     <div class="metric"><div style="color:var(--success)">+270%</div><div class="muted">Conversion Rate</div></div>
-                    <div class="metric"><div style="color:var(--gold)">22€ → 120€</div><div class="muted">Ø Bestellwert</div></div>
-                    <div class="metric"><div style="color:var(--success)">70€ → 26€</div><div class="muted">Kundenakquisekosten</div></div>
-                    <div class="metric"><div style="color:var(--success)">-62%</div><div class="muted">Warenkorbabbrüche</div></div>
+                    <div class="metric"><div style="color:var(--gold)">+445%</div><div class="muted">Warenkorb-Wert</div></div>
+                    <div class="metric"><div style="color:var(--success)">-62%</div><div class="muted">Abbrüche</div></div>
+                    <div class="metric"><div style="color:var(--success)">0.4s</div><div class="muted">Ladezeit</div></div>
                 </div>
             </article>
+
             <div style="text-align:center; margin-top: 2rem;">
-                <a href="/case-studies/" class="btn btn-ghost">Weitere Fallstudien ansehen</a>
+                <a href="/case-studies/" class="btn btn-ghost">Alle Case Studies ansehen</a>
             </div>
         </div>
     </section>
@@ -113,22 +133,22 @@ function hu_erfolge_section_shortcode() {
 }
 add_shortcode( 'hu_erfolge', 'hu_erfolge_section_shortcode' );
 
-// 4. Prozess Section
+// 4. Prozess Section (Bleibt fast gleich, passt super)
 function hu_prozess_section_shortcode() {
     ob_start();
     ?>
     <section id="prozess" aria-labelledby="process-heading">
         <div class="container">
             <div class="section-title">
-                <span class="badge">Der Prozess</span>
-                <h2 id="process-heading">Unser gemeinsamer Weg zum Erfolg</h2>
-                <p>Ein transparenter und bewährter 4-Schritte-Fahrplan — von der ersten Analyse bis zur nachhaltigen Skalierung.</p>
+                <span class="badge">Retainer & Module</span>
+                <h2 id="process-heading">So arbeiten wir zusammen</h2>
+                <p>Kein unübersichtliches Stundenschreiben. Wir definieren Ziele und ich setze diese in klaren Sprints und Modulen um.</p>
             </div>
             <div class="process">
-                <article class="step"><div class="num">1</div><h3>Analyse & Strategie</h3><p class="muted">Wir starten mit einem Deep-Dive: Aktueller Status, Ziele, Quick-Wins. Daraus entsteht eine klare, umsetzbare Roadmap.</p></article>
-                <article class="step"><div class="num">2</div><h3>Konzeption & Design</h3><p class="muted">Auf Basis der Strategie entwickeln wir ein conversion-orientiertes Design und eine technische Architektur, die auf Ihre Ziele einzahlt.</p></article>
-                <article class="step"><div class="num">3</div><h3>Entwicklung & Umsetzung</h3><p class="muted">Die Umsetzung erfolgt in agilen Sprints. Sie erhalten regelmäßig Updates und können den Fortschritt live mitverfolgen.</p></article>
-                <article class="step"><div class="num">4</div><h3>Optimierung & Skalierung</h3><p class="muted">Nach dem Launch beginnt die wichtigste Phase: Wir messen, testen und optimieren kontinuierlich, um Ihr Wachstum zu maximieren.</p></article>
+                <article class="step"><div class="num">1</div><h3>Audit & Roadmap</h3><p class="muted">Wir analysieren den Ist-Zustand Ihrer WordPress-Installation und Ihrer Daten. Sie erhalten einen klaren Maßnahmen-Plan.</p></article>
+                <article class="step"><div class="num">2</div><h3>Modulare Umsetzung</h3><p class="muted">Ob Performance-Boost, Tracking-Setup oder Design-Refresh: Ich setze die definierten Pakete technisch sauber um.</p></article>
+                <article class="step"><div class="num">3</div><h3>Review & Deployment</h3><p class="muted">Jedes Modul wird getestet und abgenommen, bevor es live geht. Volle Transparenz über GitHub und Staging-Umgebungen.</p></article>
+                <article class="step"><div class="num">4</div><h3>Growth Retainer</h3><p class="muted">Nach dem Launch optimieren wir weiter. Im monatlichen Retainer überwache ich Core Web Vitals, Rankings und Conversions.</p></article>
             </div>
         </div>
     </section>
@@ -137,7 +157,7 @@ function hu_prozess_section_shortcode() {
 }
 add_shortcode( 'hu_prozess', 'hu_prozess_section_shortcode' );
 
-// 5. FAQ Section
+// 5. FAQ Section (Angepasst auf WordPress Only)
 function hu_faq_section_shortcode() {
     ob_start();
     ?>
@@ -145,14 +165,14 @@ function hu_faq_section_shortcode() {
         <div class="container">
             <div class="section-title">
                 <span class="badge">FAQ</span>
-                <h2 id="faq-heading">Häufig gestellte Fragen</h2>
-                <p>Antworten auf die wichtigsten Fragen rund um unsere Zusammenarbeit.</p>
+                <h2 id="faq-heading">Häufige Fragen</h2>
+                <p>Klarheit vor dem Start.</p>
             </div>
             <div class="faq">
-                <details><summary>Wie schnell kann unser Projekt starten?</summary><div class="faq-content">Nach unserem Erstgespräch meist innerhalb von 3–5 Werktagen. Einfache WordPress-Sites sind oft in 2–3 Wochen live, komplexere E-Commerce Projekte in 4–8 Wochen.</div></details>
-                <details><summary>Was kostet eine professionelle Website?</summary><div class="faq-content">Starter-Projekte beginnen ab 3.500€. In unserem kostenlosen Erstgespräch ermitteln wir den genauen Bedarf und erstellen ein passgenaues Angebot.</div></details>
-                <details><summary>Bieten Sie auch Wartung & Support an?</summary><div class="faq-content">Ja. Ich biete flexible Service-Pakete für regelmäßige Updates, Backups, Sicherheits-Checks und Performance-Monitoring an.</div></details>
-                <details><summary>Wie wird der Erfolg des Projekts gemessen?</summary><div class="faq-content">Anhand klar definierter KPIs, die wir gemeinsam festlegen: z. B. Conversion-Rate, ROAS, Cost-per-Lead oder organischen Traffic. Sie erhalten transparente Reportings.</div></details>
+                <details><summary>Übernehmen Sie auch bestehende Seiten?</summary><div class="faq-content">Ja. Mein Spezialgebiet ist es, bestehende WordPress-Seiten zu auditieren, zu reparieren und auf High-Performance-Niveau zu bringen.</div></details>
+                <details><summary>Was bedeutet "Arbeit in Modulen"?</summary><div class="faq-content">Statt "Ich brauche 5 Stunden", verkaufe ich Ihnen das Ergebnis "Performance-Optimierung" oder "Tracking-Setup" zum Festpreis. Das gibt Ihnen Planungssicherheit.</div></details>
+                <details><summary>Machen Sie auch Design?</summary><div class="faq-content">Ich fokussiere mich auf technische Umsetzung und CRO-Design. Für komplexes Branding arbeite ich mit spezialisierten Designern aus meinem Netzwerk zusammen.</div></details>
+                <details><summary>Wie schnell sind Ergebnisse sichtbar?</summary><div class="faq-content">Technische Optimierungen (Speed) greifen sofort. SEO- und Conversion-Maßnahmen zeigen in der Regel nach 4–8 Wochen messbare Wirkung in den Daten.</div></details>
             </div>
         </div>
     </section>
@@ -168,41 +188,41 @@ function hu_blog_section_shortcode() {
     <section id="blog" aria-labelledby="blog-heading">
         <div class="container">
             <div class="section-title">
-                <span class="badge">Wissen & Einblicke</span>
-                <h2 id="blog-heading">Aktuelle Artikel aus dem Blog</h2>
-                <p>Hier teile ich meine Erfahrungen, Analysen und Strategien rund um E-Commerce, WordPress und digitales Wachstum.</p>
+                <span class="badge">Insights</span>
+                <h2 id="blog-heading">Wissen für Entscheider</h2>
+                <p>Strategische Einblicke in WordPress-Entwicklung und Digitales Wachstum.</p>
             </div>
             <div class="blog-grid">
                 <article class="blog-card">
-                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/ffb020?text=Design+%26+CRO" alt="Beitragsbild"></a>
+                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/ffb020?text=Tech+SEO" alt="Beitragsbild"></a>
                     <div class="blog-card-content">
-                        <span class="blog-card-cat">E-Commerce-Architektur</span>
-                        <h3><a href="#" class="blog-card-title">Design ist mehr als Ästhetik</a></h3>
-                        <p class="muted">Gutes Design ist mehr als Optik. Es ist ein direkter Hebel für eine höhere Conversion Rate und besseren ROAS.</p>
+                        <span class="blog-card-cat">WordPress Technik</span>
+                        <h3><a href="#" class="blog-card-title">Core Web Vitals als Ranking-Faktor</a></h3>
+                        <p class="muted">Warum grüne Balken bei Google PageSpeed bares Geld wert sind und wie wir sie in WordPress erreichen.</p>
                         <a href="#" class="read-more">Artikel lesen →</a>
                     </div>
                 </article>
                 <article class="blog-card">
-                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/0ea5e9?text=Data+%26+GTM" alt="Beitragsbild"></a>
+                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/0ea5e9?text=Tracking" alt="Beitragsbild"></a>
                     <div class="blog-card-content">
-                        <span class="blog-card-cat">Impulse</span>
-                        <h3><a href="#" class="blog-card-title">Datenhoheit mit server-side-gtm</a></h3>
-                        <p class="muted">Erobern Sie Ihre Datenhoheit zurück und machen Sie sich unabhängig von Drittanbieter-Pixeln.</p>
+                        <span class="blog-card-cat">Daten & Analyse</span>
+                        <h3><a href="#" class="blog-card-title">Server-Side GTM für WordPress</a></h3>
+                        <p class="muted">Wie Sie mit serverseitigem Tracking die Datenqualität um 30% steigern und unabhängig von Blockern werden.</p>
                         <a href="#" class="read-more">Artikel lesen →</a>
                     </div>
                 </article>
                 <article class="blog-card">
-                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/10b981?text=Performance" alt="Beitragsbild"></a>
+                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/10b981?text=Retainer" alt="Beitragsbild"></a>
                     <div class="blog-card-content">
-                        <span class="blog-card-cat">Impulse</span>
-                        <h3><a href="#" class="blog-card-title">Performance ist Profit</a></h3>
-                        <p class="muted">Jede Millisekunde Ladezeit entscheidet über Profit. So treiben die Core Web Vitals Ihr gesamtes Wachstum.</p>
+                        <span class="blog-card-cat">Business</span>
+                        <h3><a href="#" class="blog-card-title">Warum Retainer für Sie günstiger sind</a></h3>
+                        <p class="muted">Die Rechnung ist einfach: Kontinuierliche Optimierung verhindert teure Relaunches alle 2 Jahre.</p>
                         <a href="#" class="read-more">Artikel lesen →</a>
                     </div>
                 </article>
             </div>
             <div style="text-align:center; margin-top: 3rem;">
-                <a href="https://hasimuener.de/aktuelle-blogbeitrage/" class="btn btn-ghost">Zum Blog</a>
+                <a href="https://hasimuener.de/blog/" class="btn btn-ghost">Zum Strategie-Blog</a>
             </div>
         </div>
     </section>
@@ -218,13 +238,13 @@ function hu_cta_section_shortcode() {
     <section id="cta" aria-labelledby="cta-heading" style="background:var(--glass-bg); border-top: 1px solid var(--glass-border);">
         <div class="container">
             <div class="section-title">
-                <span class="badge">Bereit für den nächsten Schritt?</span>
-                <h2 id="cta-heading">Lassen Sie uns über Ihr Wachstum sprechen.</h2>
-                <p>Sie haben das Ziel, ich bringe die Strategie und die technische Expertise mit. Finden wir in einem kostenlosen Erstgespräch heraus, wie wir Ihren Erfolg planbar machen können.</p>
+                <span class="badge">Nächster Schritt</span>
+                <h2 id="cta-heading">Lassen Sie uns Ihr Potenzial heben.</h2>
+                <p>Sie suchen einen Partner, der WordPress technisch und strategisch meistert? Dann lassen Sie uns sprechen.</p>
             </div>
             <div style="text-align:center; display:flex; flex-wrap:wrap; justify-content:center; gap: 1rem;">
-                <a class="btn btn-primary" href="https://hasimuener.de/growth-blueprint/">🚀 Kostenloses Growth Blueprint anfordern</a>
-                <a class="btn btn-ghost" href="https://cal.com/hasim/30min">📞 Direkt Gespräch vereinbaren</a>
+                <a class="btn btn-primary" href="https://hasimuener.de/kontakt/">🚀 Projekt anfragen</a>
+                <a class="btn btn-ghost" href="https://cal.com/hasim/30min">📞 Kennenlerngespräch buchen</a>
             </div>
         </div>
     </section>
