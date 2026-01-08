@@ -1,108 +1,78 @@
-/**
- * JavaScript  die Startseite - FINALE VERSION
- * Korrektur: Der TOC-Selektor ist jetzt unabhängig von der <main>-ID
- * und funktioniert garantiert in WordPress.
- */
 document.addEventListener('DOMContentLoaded', function() {
-
-    // --- SCRIPT FÜR NUMMERN-ANIMATION ---
-    try {
-        const statsObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const element = entry.target;
-                    const target = parseInt(element.dataset.target, 10);
-                    if (isNaN(target) || element.classList.contains('animated')) return;
-                    element.classList.add('animated');
-                    let current = 0;
-                    const duration = 2000;
-                    const stepTime = Math.max(1, Math.floor(duration / target));
-                    const timer = setInterval(() => {
-                        current += 1;
-                        if (current >= target) {
-                            element.textContent = target.toLocaleString('de-DE');
-                            clearInterval(timer);
-                        } else {
-                           element.textContent = current;
-                        }
-                    }, stepTime);
-                    observer.unobserve(element);
-                }
-            });
-        }, { threshold: 0.8 });
-        document.querySelectorAll('.hero-stats .num').forEach(num => statsObserver.observe(num));
-    } catch(e) { console.error("Fehler bei Zähl-Animation:", e); }
-
-    // --- SCRIPT FÜR FAQ AKKORDEON ---
-    try {
-        document.querySelectorAll('.faq details').forEach(detailsEl => {
-            detailsEl.addEventListener('toggle', () => {
-                if (detailsEl.open) {
-                    document.querySelectorAll('.faq details').forEach(other => {
-                        if (other !== detailsEl) other.open = false;
-                    });
-                }
-            });
+      
+    // FAQ Accordion Logic
+    const details = document.querySelectorAll("details");
+    details.forEach((targetDetail) => {
+      targetDetail.addEventListener("click", () => {
+        details.forEach((detail) => {
+          if (detail !== targetDetail) {
+            detail.removeAttribute("open");
+          }
         });
-    } catch(e) { console.error("Fehler bei FAQ:", e); }
+      });
+    });
 
-    // --- SCRIPT FÜR STICKY TOC & IDLE BEHAVIOR ---
-    try {
-        const tocNav = document.getElementById('toc-nav');
-        const heroSection = document.getElementById('start');
-        // FINALE KORREKTUR HIER: Wir suchen nach allen Sections mit einer ID, egal wo.
-        const sections = document.querySelectorAll('section[id]');
-        const tocLinks = document.querySelectorAll('#toc-nav a');
+    // Sticky TOC Logic (Only shows after Hero)
+    const tocNav = document.getElementById('wpTocNav');
+    const heroSection = document.getElementById('hero');
+    
+    // Check if elements exist and if we are on desktop
+    if (tocNav && heroSection && window.innerWidth > 1024) {
+      
+      const observerOptions = {
+        root: null,
+        threshold: 0,
+        // Trigger when the bottom of hero passes the top of viewport
+        rootMargin: "-100px 0px 0px 0px" 
+      };
 
-        if (tocNav && heroSection && sections.length > 0) {
-            let idleTimeout;
-            let isTocVisible = false;
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // If Hero is NOT intersecting (scrolled past), show TOC
+          if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+            tocNav.classList.add('is-visible');
+          } else {
+            tocNav.classList.remove('is-visible');
+          }
+        });
+      }, observerOptions);
 
-            const resetTocIdleTimer = () => {
-                if (!isTocVisible) return;
-                tocNav.classList.remove('idle');
-                clearTimeout(idleTimeout);
-                idleTimeout = setTimeout(() => tocNav.classList.add('idle'), 3000);
-            };
-            
-            const heroObserver = new IntersectionObserver(entries => {
-                const [entry] = entries;
-                const shouldBeVisible = !entry.isIntersecting;
-                
-                if (shouldBeVisible && !isTocVisible) {
-                    isTocVisible = true;
-                    tocNav.classList.add('visible');
-                    resetTocIdleTimer();
-                    window.addEventListener('mousemove', resetTocIdleTimer, { passive: true });
-                    window.addEventListener('scroll', resetTocIdleTimer, { passive: true });
-                } else if (!shouldBeVisible && isTocVisible) {
-                    isTocVisible = false;
-                    tocNav.classList.remove('visible');
-                    clearTimeout(idleTimeout);
-                    window.removeEventListener('mousemove', resetTocIdleTimer);
-                    window.removeEventListener('scroll', resetTocIdleTimer);
-                }
-            }, { rootMargin: "0px 0px -250px 0px", threshold: 0 });
-            
-            heroObserver.observe(heroSection);
+      heroObserver.observe(heroSection);
 
-            const sectionObserver = new IntersectionObserver(entries => {
-                let currentActive = '';
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !currentActive) {
-                        currentActive = entry.target.getAttribute('id');
-                    }
-                });
-                if (currentActive) {
-                    tocLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === `#${currentActive}`);
-                    });
-                }
-            }, { rootMargin: '-40% 0px -55% 0px', threshold: [0.2, 0.8] });
+      // Highlight active section in TOC
+      const sections = document.querySelectorAll('section[id]');
+      const tocLinks = document.querySelectorAll('.wp-toc-link');
 
-            sections.forEach(section => sectionObserver.observe(section));
-        } else {
-            console.error('TOC konnte nicht initialisiert werden. Elemente fehlen (toc-nav, start, sections mit IDs).');
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            tocLinks.forEach(link => {
+              link.classList.remove('wp-active');
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('wp-active');
+              }
+            });
+          }
+        });
+      }, { rootMargin: "-50% 0px -50% 0px" });
+
+      sections.forEach(section => {
+        sectionObserver.observe(section);
+      });
+    }
+
+    // Smooth Scroll for TOC links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
         }
-    } catch(e) { console.error("Fehler bei TOC:", e); }
-});
+      });
+    });
+
+  });
