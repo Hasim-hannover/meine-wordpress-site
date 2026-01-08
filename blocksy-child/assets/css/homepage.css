@@ -45,8 +45,9 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
   color: var(--white);
+  /* Background slightly adjusted to remove green tint, focusing on Gold/Silver */
   background: radial-gradient(circle at 20% 20%, rgba(217,217,217,0.03) 0%, transparent 40%), 
-              radial-gradient(circle at 80% 80%, rgba(16,185,129,0.04) 0%, transparent 40%), 
+              radial-gradient(circle at 80% 80%, rgba(255,176,32,0.03) 0%, transparent 40%), 
               radial-gradient(circle at 40% 60%, rgba(255,176,32,0.02) 0%, transparent 30%), 
               var(--page-bg);
   background-attachment: fixed;
@@ -167,11 +168,15 @@
   margin-right: auto;
 }
 
+/* NEXUS EDIT: Changed to Gold to match branding instead of Green */
 .wp-hero-title span {
-  background: linear-gradient(135deg, var(--success), #34d399);
+  background: linear-gradient(135deg, var(--gold), var(--orange-glow));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* Option for pure silver (uncomment if preferred): 
+  background: linear-gradient(135deg, #fff, #e4e4e7); 
+  */
 }
 
 .wp-hero-kicker {
@@ -179,12 +184,12 @@
   align-items: center;
   padding: 0.5rem 1.2rem;
   border-radius: 999px;
-  background: rgba(16,185,129,0.1);
-  color: var(--success);
+  background: rgba(255, 255, 255, 0.05); /* Neutraler Hintergrund */
+  color: var(--silver-light); /* Silber statt Grün */
   font-weight: 700;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(16,185,129,0.2);
+  border: 1px solid var(--glass-border);
   backdrop-filter: blur(10px);
   text-transform: uppercase;
   letter-spacing: 0.05em;
