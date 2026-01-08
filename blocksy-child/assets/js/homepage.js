@@ -75,4 +75,47 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 
+    // NEXUS ADDITION: Number Counter Animation
+    const stats = document.querySelectorAll('.wp-metric-value');
+    
+    if (stats.length > 0) {
+        const statsObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-target'));
+                    
+                    if (!target) return; // Skip if no data-target
+
+                    let count = 0;
+                    const duration = 2000; // 2 seconds
+                    const increment = target / (duration / 16); // 60fps
+                    
+                    const updateCount = () => {
+                        count += increment;
+                        if (count < target) {
+                            // Format number based on context (if needed) or just Int
+                            el.innerText = Math.ceil(count) + (el.innerText.includes('%') ? '%' : '') + (el.innerText.includes('+') ? '+' : ''); 
+                            
+                            // Simple Int for now, preserve suffixes manually if needed
+                            let display = Math.ceil(count);
+                            // Add back suffix from original HTML if it had one like "+" or "%" in the target? 
+                            // Simplified: Just count to number.
+                            el.innerText = display;
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            el.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        stats.forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    }
+
   });
