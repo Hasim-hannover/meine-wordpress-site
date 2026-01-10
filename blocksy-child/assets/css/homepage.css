@@ -2,8 +2,7 @@
  * Final Merge: Content + System
  */
 
-/* Import Google Fonts - Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* Google Fonts Import entfernt für lokale Satoshi-Nutzung */
 
 :root {
   /* Design System */
@@ -42,7 +41,8 @@
 
 /* Ensure full width and reset overrides */
 .cs-page {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* HIER GEÄNDERT: Satoshi als primäre Schrift gesetzt */
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
   color: var(--white);
   background: radial-gradient(circle at 20% 20%, rgba(217,217,217,0.03) 0%, transparent 40%), 
@@ -85,7 +85,8 @@
   visibility: hidden;
   transition: all 0.5s cubic-bezier(0.2,0.8,0.2,1);
   box-shadow: 0 12px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
-  font-family: 'Inter', sans-serif;
+  /* Fallbackfont auch hier sicherstellen, falls spezifisch überschrieben */
+  font-family: 'Satoshi', 'Inter', sans-serif;
 }
 
 /* Class to show TOC */
