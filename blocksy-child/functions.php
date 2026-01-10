@@ -1,7 +1,7 @@
 <?php
 /**
  * Blocksy Child Theme - Finale, stabile Version
- * mit radikal getrenntem, seiten-spezifischem Schema-Markup
+ * mit radikal getrenntem, seiten-spezifischem Schema-Markup und Fonts
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -22,14 +22,28 @@ add_action( 'wp_enqueue_scripts', function () {
     }
 }, 100 );
 
-// Funktion NUR für das Schema.org Markup
+// Funktion für Schema.org Markup UND lokale Schriften
 add_action( 'wp_head', function () {
-    // Schriften werden immer geladen
+    // NEXUS FIX: Dynamischer Pfad zum Child-Theme Ordner für Fonts
+    $font_path = get_stylesheet_directory_uri() . '/fonts';
     ?>
     <style id="local-fonts">
-        @font-face { font-family: 'Satoshi'; src: url('/wp-content/themes/blocksy-child/fonts/Satoshi-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
-        @font-face { font-family: 'Satoshi'; src: url('/wp-content/themes/blocksy-child/fonts/Satoshi-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
-        @font-face { font-family: 'Satoshi'; src: url('/wp-content/themes/blocksy-child/fonts/Satoshi-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+        /* Variable Font: Deckt alles von Thin (100) bis Black (900) ab */
+        @font-face {
+            font-family: 'Satoshi';
+            src: url('<?php echo $font_path; ?>/Satoshi-Variable.woff2') format('woff2-variations');
+            font-weight: 300 900;
+            font-display: swap;
+            font-style: normal;
+        }
+        /* Fallback für Kursiv */
+        @font-face {
+            font-family: 'Satoshi';
+            src: url('<?php echo $font_path; ?>/Satoshi-VariableItalic.woff2') format('woff2-variations');
+            font-weight: 300 900;
+            font-display: swap;
+            font-style: italic;
+        }
     </style>
     <?php
 
