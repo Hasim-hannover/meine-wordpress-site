@@ -1,19 +1,17 @@
-/**
- * Theme Name: Blocksy Child
- * Template: blocksy
- * Version: FINAL
- */
+/*
+Theme Name: Blocksy Child
+Template: blocksy
+*/
 
-/* NEXUS SYSTEM: Sanfte Integration */
+/* NEXUS SYSTEM: Globale Schriftart - Sicherer Modus */
 
 :root {
-    /* Wir überschreiben Blocksys interne Variablen */
-    --theme-font-family: 'Satoshi', sans-serif !important;
-    --theme-headings-font-family: 'Satoshi', sans-serif !important;
-    --button-font-family: 'Satoshi', sans-serif !important;
+    /* Wir sagen Blocksy: "Das ist jetzt deine Schrift." */
+    --theme-font-family: 'Satoshi', sans-serif;
+    --theme-headings-font-family: 'Satoshi', sans-serif;
+    --button-font-family: 'Satoshi', sans-serif;
 }
 
-/* Fallback für Elemente, die Variablen ignorieren */
 body {
     font-family: 'Satoshi', sans-serif;
 }
@@ -23,8 +21,8 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-/* Fix für das Menü: Verhindert, dass es durch die breitere Schrift umbricht */
+/* MENÜ FIX: Verhindert Umbruch im Header */
 .ct-header .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
-    letter-spacing: -0.01em; /* Macht die Schrift im Menü minimal enger */
+    letter-spacing: -0.015em; /* Macht die Schrift minimal schmaler damit alles passt */
 }
