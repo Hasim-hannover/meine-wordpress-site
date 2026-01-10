@@ -1,5 +1,27 @@
-/**
+//**
  * Theme Name: Blocksy Child
  * Template: blocksy
  * Version: FINAL
- *//* Trigger Deploy Fix */
+ */
+
+/* NEXUS SYSTEM: Globale Schriftart-Steuerung */
+
+:root {
+    --font-primary: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Erzwingt Satoshi für den gesamten Body */
+body {
+    font-family: var(--font-primary) !important;
+}
+
+/* Erzwingt Satoshi für alle Überschriften */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary) !important;
+    font-weight: 700;
+}
+
+/* Input-Felder und Buttons sollen auch die Schrift erben */
+input, textarea, button, select {
+    font-family: inherit;
+}
