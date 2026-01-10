@@ -1,4 +1,4 @@
-//**
+/**
  * Theme Name: Blocksy Child
  * Template: blocksy
  * Version: FINAL
@@ -19,9 +19,4 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-primary) !important;
     font-weight: 700;
-}
-
-/* Input-Felder und Buttons sollen auch die Schrift erben */
-input, textarea, button, select {
-    font-family: inherit;
 }

@@ -59,7 +59,7 @@ add_action( 'wp_head', function () {
                     "name": "Hasim Üner - Growth Partner",
                     "url": "https://hasimuener.de/",
                     "logo": "https://hasimuener.de/wp-content/uploads/2025/08/Logo_Hasim-Uener-.png",
-                    "telephone": "+49-176-81407134",
+                    "telephone": "+49-162-3727548",
                     "priceRange": "€€",
                     "address": {
                         "@type": "PostalAddress",
