@@ -110,5 +110,5 @@ add_action( 'wp_head', function () {
         }
         </script>
         <?php
-    }
+    } // <--- DIESE KLAMMER HAT GEFEHLT!
 }, 1 );

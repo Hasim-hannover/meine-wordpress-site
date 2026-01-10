@@ -4,19 +4,27 @@
  * Version: FINAL
  */
 
-/* NEXUS SYSTEM: Globale Schriftart-Steuerung */
+/* NEXUS SYSTEM: Sanfte Integration */
 
 :root {
-    --font-primary: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    /* Wir überschreiben Blocksys interne Variablen */
+    --theme-font-family: 'Satoshi', sans-serif !important;
+    --theme-headings-font-family: 'Satoshi', sans-serif !important;
+    --button-font-family: 'Satoshi', sans-serif !important;
 }
 
-/* Erzwingt Satoshi für den gesamten Body */
+/* Fallback für Elemente, die Variablen ignorieren */
 body {
-    font-family: var(--font-primary) !important;
+    font-family: 'Satoshi', sans-serif;
 }
 
-/* Erzwingt Satoshi für alle Überschriften */
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-primary) !important;
+    font-family: 'Satoshi', sans-serif;
     font-weight: 700;
+}
+
+/* Fix für das Menü: Verhindert, dass es durch die breitere Schrift umbricht */
+.ct-header .ct-menu-link {
+    font-family: 'Satoshi', sans-serif;
+    letter-spacing: -0.01em; /* Macht die Schrift im Menü minimal enger */
 }
