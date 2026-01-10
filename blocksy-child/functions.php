@@ -1,7 +1,7 @@
 <?php
 /**
  * Blocksy Child Theme - Finale, stabile Version
- * mit radikal getrenntem, seiten-spezifischem Schema-Markup und Fonts
+ * mit radikal getrenntem, seiten-spezifischem Schema-Markup
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -22,13 +22,13 @@ add_action( 'wp_enqueue_scripts', function () {
     }
 }, 100 );
 
-// Funktion für Schema.org Markup UND lokale Schriften
+// Funktion NUR für das Schema.org Markup UND Schriften
 add_action( 'wp_head', function () {
-    // NEXUS FIX: Dynamischer Pfad zum Child-Theme Ordner für Fonts
+    // NEXUS FIX: Dynamischer Pfad für Schriften (Variable Fonts)
     $font_path = get_stylesheet_directory_uri() . '/fonts';
     ?>
     <style id="local-fonts">
-        /* Variable Font: Deckt alles von Thin (100) bis Black (900) ab */
+        /* Variable Font für alle Gewichtungen (300-900) */
         @font-face {
             font-family: 'Satoshi';
             src: url('<?php echo $font_path; ?>/Satoshi-Variable.woff2') format('woff2-variations');
@@ -59,7 +59,7 @@ add_action( 'wp_head', function () {
                     "name": "Hasim Üner - Growth Partner",
                     "url": "https://hasimuener.de/",
                     "logo": "https://hasimuener.de/wp-content/uploads/2025/08/Logo_Hasim-Uener-.png",
-                    "telephone": "+49-162-3727548",
+                    "telephone": "+49-176-81407134",
                     "priceRange": "€€",
                     "address": {
                         "@type": "PostalAddress",
