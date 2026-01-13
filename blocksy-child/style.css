@@ -1,28 +1,109 @@
 /*
 Theme Name: Blocksy Child
 Template: blocksy
+Version: 1.1.0 (Nexus Clean Edition)
 */
 
-/* NEXUS SYSTEM: Globale Schriftart - Sicherer Modus */
-
+/* 1. GLOBALE SCHRIFTEN & SYSTEM
+   Wir zwingen Blocksy, unsere lokale Schrift zu nutzen.
+-------------------------------------------------- */
 :root {
-    /* Wir sagen Blocksy: "Das ist jetzt deine Schrift." */
     --theme-font-family: 'Satoshi', sans-serif;
     --theme-headings-font-family: 'Satoshi', sans-serif;
     --button-font-family: 'Satoshi', sans-serif;
+    --mega-sep: rgba(255,255,255,0.08); /* Variable für Menü-Trennlinien */
 }
 
-body {
-    font-family: 'Satoshi', sans-serif;
-}
+body { font-family: 'Satoshi', sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; font-weight: 700; }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Satoshi', sans-serif;
-    font-weight: 700;
-}
-
-/* MENÜ FIX: Verhindert Umbruch im Header */
+/* Menü-Schrift */
 .ct-header .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
-    letter-spacing: -0.015em; /* Macht die Schrift minimal schmaler damit alles passt */
+    letter-spacing: -0.015em;
 }
+
+/* =========================================
+   2. NEXUS MODUL: MEGA MENU (Dein Customizer Code)
+   Hier ist das 4-Spalten Grid und das Styling integriert
+   ========================================= */
+
+/* Das Grid-System (4 Spalten) */
+.ct-header nav .menu-item.mega > .sub-menu {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* Die einzelnen Menü-Items */
+.ct-header nav .menu-item.mega > .sub-menu > li {
+    width: auto !important;
+    border: none !important;
+    padding: 0 15px !important;
+    position: relative;
+    min-width: 0 !important;
+}
+
+/* Vertikale Trennlinien (Subtil) */
+.ct-header nav .menu-item.mega > .sub-menu > li:not(:last-child):after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 10%;
+    height: 80%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--mega-sep), transparent);
+}
+
+/* Überschriften (Kategorien) in Orange */
+.ct-header nav .menu-item.mega > .sub-menu > li > a {
+    font-size: 0.75rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+    font-weight: 700 !important;
+    color: #FF8A00 !important; /* Dein Marken-Orange */
+    margin-bottom: 18px !important;
+    padding: 0 !important;
+    display: block !important;
+    opacity: 0.9;
+    /* pointer-events: none;  <-- Falls du willst, dass man die Überschrift nicht klicken kann, Kommentar entfernen */
+}
+
+/* =========================================
+   3. NEXUS MODUL: SLIM FOOTER (Widget Design)
+   Damit der Footer nicht "scheiße" aussieht
+   ========================================= */
+.ft {
+    --bg: #0a0a0a; --fg: #fafafa; --muted: #a1a1aa; --line: rgba(255,255,255,.08);
+    --cta: #ffb020; --cta2: #ff8a00; --accent: #0ea5e9; --mw: 1200px;
+    background: var(--bg); color: var(--fg); width: 100%; border-top: 1px solid var(--line);
+    margin: 0; padding: 0;
+}
+.ft * { box-sizing: border-box; }
+.ft__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.ft__top { max-width: var(--mw); margin: 0 auto; padding: 48px 20px; display: grid; gap: 24px; grid-template-columns: 1.2fr 2fr; border-bottom: 1px solid var(--line); }
+.ft__brand { display: flex; flex-direction: column; gap: 10px; }
+.ft__logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -.01em; color: var(--fg); }
+.ft__tag { color: var(--muted); margin: 0; }
+.ft__cta { display: inline-block; margin-top: 6px; padding: .7rem 1rem; border-radius: 12px; background: linear-gradient(135deg,var(--cta),var(--cta2)); color: #111; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+.ft__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,176,32,.28); }
+
+.ft__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.ft__col h3 { font-size: 1rem; margin: 0 0 .6rem; color: var(--fg); font-weight: 700; }
+.ft__list { padding: 0; list-style: none; margin: 0; }
+.ft__list li { margin: .45rem 0; }
+.ft a { color: var(--fg); text-decoration: none; opacity: .86; transition: all 0.2s; }
+.ft a:hover { opacity: 1; transform: translateX(2px); }
+.ft__link-strong { font-weight: 700; color: var(--accent); }
+
+.ft__bottom { max-width: var(--mw); margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
+.ft__social { display: flex; gap: 14px; }
+.ft__social a { color: var(--muted); }
+.ft__social a:hover { color: var(--fg); }
+
+/* Responsive */
+@media (max-width: 920px) { .ft__top { grid-template-columns: 1fr; } .ft__cols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .ft__cols { grid-template-columns: 1fr; } .ft__bottom { flex-direction: column; align-items: flex-start; } }
+/* Fix für Blocksy Widget Container */
+.widget .ft { margin: 0; }
