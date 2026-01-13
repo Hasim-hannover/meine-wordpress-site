@@ -1,28 +1,38 @@
 <?php
 /**
- * Blocksy Child Theme - Nexus Edition
- * Stabil getrennte Funktionen für maximale Sicherheit.
+ * Blocksy Child Theme - Nexus Edition (Final Cleaned)
+ * Alle Funktionen zentralisiert. Keine doppelten Ladevorgänge.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-// 1. STYLES & SCRIPTS LADEN
+// 1. ASSETS & STYLES LADEN (Optimiert)
 add_action( 'wp_enqueue_scripts', function () {
-    // Globale Style.css
+    // A. Das Wichtigste: Die Child-Theme style.css
     wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [ 'blocksy-stylesheet' ], filemtime( get_stylesheet_directory() . '/style.css' ) );
 
-    // Startseite
+    // B. Javascript Logik
     if ( is_front_page() ) {
-        wp_enqueue_style( 'homepage-style', get_stylesheet_directory_uri() . '/assets/css/homepage.css', [], filemtime( get_stylesheet_directory() . '/assets/css/homepage.css' ) );
-        wp_enqueue_script( 'homepage-script', get_stylesheet_directory_uri() . '/assets/js/homepage.js', [], null, true );
+        // Lädt homepage.js nur EINMAL
+        wp_enqueue_script( 'nexus-homepage-js', get_stylesheet_directory_uri() . '/assets/js/homepage.js', [], filemtime( get_stylesheet_directory() . '/assets/js/homepage.js' ), true );
     }
 
-    // Blog
     if ( is_home() || is_single() ) {
-         wp_enqueue_script( 'blog-archive-script', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], null, true );
+         wp_enqueue_script( 'nexus-blog-js', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], filemtime( get_stylesheet_directory() . '/assets/js/blog-archive.js' ), true );
     }
 }, 100 );
 
-// 2. SCHRIFTEN LADEN (Immer & Überall)
+// 2. CRITICAL CSS INLINEN (Performance-Boost für Startseite)
+// Statt die CSS-Datei normal zu laden, drucken wir sie direkt in den Header. Das verhindert Flackern (FOUC).
+add_action( 'wp_head', function () {
+    if ( is_front_page() ) {
+        $css_path = get_stylesheet_directory() . '/assets/css/homepage.css';
+        if ( file_exists( $css_path ) ) {
+            echo '<style id="nexus-homepage-inline">' . file_get_contents( $css_path ) . '</style>';
+        }
+    }
+}, 1 ); // Priorität 1 = Ganz oben im Head
+
+// 3. LOKALE SCHRIFTEN (Satoshi)
 add_action( 'wp_head', function () {
     $font_path = get_stylesheet_directory_uri() . '/fonts';
     ?>
@@ -43,11 +53,11 @@ add_action( 'wp_head', function () {
         }
     </style>
     <?php
-}, 5 ); // Priorität 5: Lädt sehr früh
+}, 5 );
 
-// 3. SCHEMA MARKUP (Nur Startseite)
+// 4. SCHEMA MARKUP (SEO für Startseite)
 add_action( 'wp_head', function () {
-    if ( ! is_front_page() ) { return; } // Abbruch, wenn nicht Startseite
+    if ( ! is_front_page() ) { return; }
     ?>
     <script type="application/ld+json">
     {
@@ -67,13 +77,6 @@ add_action( 'wp_head', function () {
                     "addressCountry": "DE"
                 },
                 "founder": { "@type": "Person", "name": "Hasim Üner" }
-            },
-            {
-                "@type": "FAQPage",
-                "mainEntity": [
-                    { "@type": "Question", "name": "Wie schnell kann unser Projekt starten?", "acceptedAnswer": { "@type": "Answer", "text": "Meist innerhalb von 3-5 Werktagen..." } },
-                    { "@type": "Question", "name": "Was kostet eine professionelle Website?", "acceptedAnswer": { "@type": "Answer", "text": "Starter-Projekte ab 3.500€..." } }
-                ]
             }
         ]
     }
