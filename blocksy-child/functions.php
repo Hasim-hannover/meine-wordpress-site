@@ -1,21 +1,20 @@
 <?php
 /**
- * Blocksy Child - Nexus Final Edition
+ * Blocksy Child - Nexus Final Fix
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-// 1. CSS & SCRIPTS (Der Fix!)
+// 1. CSS & SCRIPTS LADEN
 add_action( 'wp_enqueue_scripts', function () {
-    // Wir definieren eine Version, die sich garantiert ändert
-    // Ändere '1.5.0' jedes Mal, wenn du CSS änderst und es nicht sichtbar wird.
-    $version = '1.5.0-nexus-fix'; 
+    // WICHTIG: Version hochsetzen, um Cache zu zwingen!
+    $version = '2.0.0-RELOAD'; 
 
-    // Style.css laden
+    // Hier war der Fehler: Wir entfernen [ 'blocksy-stylesheet' ] und nutzen []
     wp_enqueue_style( 
         'blocksy-child-style', 
         get_stylesheet_uri(), 
-        [ 'blocksy-stylesheet' ], 
-        $version // Hier zwingen wir das Update
+        [], // Keine Abhängigkeit = Lädt immer!
+        $version 
     );
 
     // JS laden
@@ -25,9 +24,9 @@ add_action( 'wp_enqueue_scripts', function () {
     if ( is_home() || is_single() ) {
          wp_enqueue_script( 'nexus-blog', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], $version, true );
     }
-}, 100 );
+}, 100 ); // Priorität 100 sorgt dafür, dass es nach dem Theme lädt
 
-// 2. CRITICAL CSS (Bleibt gleich)
+// 2. CRITICAL CSS (Inline für Speed)
 add_action( 'wp_head', function () {
     if ( is_front_page() ) {
         $css = get_stylesheet_directory() . '/assets/css/homepage.css';
@@ -35,7 +34,7 @@ add_action( 'wp_head', function () {
     }
 }, 1 );
 
-// 3. SATOSHI LOKAL (Bleibt gleich)
+// 3. SATOSHI LOKAL (Sicherheitsnetz im Head)
 add_action( 'wp_head', function () {
     $font = get_stylesheet_directory_uri() . '/fonts';
     echo "<style>
