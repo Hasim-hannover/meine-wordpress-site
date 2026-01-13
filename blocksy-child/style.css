@@ -1,50 +1,56 @@
 /*
 Theme Name: Blocksy Child
 Template: blocksy
-Version: 1.1.0 (Nexus Clean Edition)
+Version: 1.2.0 (Nexus Repair)
 */
 
-/* 1. GLOBALE SCHRIFTEN & SYSTEM
-   Wir zwingen Blocksy, unsere lokale Schrift zu nutzen.
--------------------------------------------------- */
+/* ==========================================================================
+   1. SCHRIFTARTEN (SATOSHI SYSTEM)
+   Hier laden wir deine Schrift lokal.
+   ========================================================================== */
 :root {
     --theme-font-family: 'Satoshi', sans-serif;
     --theme-headings-font-family: 'Satoshi', sans-serif;
     --button-font-family: 'Satoshi', sans-serif;
-    --mega-sep: rgba(255,255,255,0.08); /* Variable für Menü-Trennlinien */
+    --mega-sep: rgba(255,255,255,0.08);
 }
 
 body { font-family: 'Satoshi', sans-serif; }
 h1, h2, h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; font-weight: 700; }
 
-/* Menü-Schrift */
 .ct-header .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
     letter-spacing: -0.015em;
 }
 
-/* =========================================
-   2. NEXUS MODUL: MEGA MENU (Dein Customizer Code)
-   Hier ist das 4-Spalten Grid und das Styling integriert
-   ========================================= */
+/* ==========================================================================
+   2. MEGA MENU DESIGN (Wiederhergestellt aus deinem Customizer!)
+   Das 4-Spalten Grid, Linien und Farben sind hier sicher.
+   ========================================================================== */
 
-/* Das Grid-System (4 Spalten) */
+/* Das Grid aufräumen - 4 Spalten */
 .ct-header nav .menu-item.mega > .sub-menu {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
-/* Die einzelnen Menü-Items */
+/* Einzelne Menüpunkte */
 .ct-header nav .menu-item.mega > .sub-menu > li {
     width: auto !important;
+    margin: 0 !important;
     border: none !important;
-    padding: 0 15px !important;
-    position: relative;
     min-width: 0 !important;
+    padding: 10px 22px !important;
+    position: relative;
 }
 
 /* Vertikale Trennlinien (Subtil) */
+.ct-header nav .menu-item.mega > .sub-menu > li:not(:first-child) {
+    border-left: 1px solid var(--mega-sep) !important;
+}
+
+/* Subtile Linie rechts (aus deinem Code) */
 .ct-header nav .menu-item.mega > .sub-menu > li:not(:last-child):after {
     content: "";
     position: absolute;
@@ -52,58 +58,144 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; font-weight: 700; }
     top: 10%;
     height: 80%;
     width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--mega-sep), transparent);
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.08), transparent);
 }
 
-/* Überschriften (Kategorien) in Orange */
+/* Überschriften (Kategorien) - ORANGE & GROSS */
 .ct-header nav .menu-item.mega > .sub-menu > li > a {
-    font-size: 0.75rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.12em !important;
-    font-weight: 700 !important;
-    color: #FF8A00 !important; /* Dein Marken-Orange */
-    margin-bottom: 18px !important;
-    padding: 0 !important;
+    font-size: 13px !important; /* Dein Wert war 13px, unten 0.75rem. Ich nehme den lesbareren. */
+    font-weight: 850 !important;
+    color: rgba(255,255,255,0.92) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 8px 10px !important;
+    margin: 0 0 12px 0 !important;
+    border-radius: 10px !important;
     display: block !important;
-    opacity: 0.9;
-    /* pointer-events: none;  <-- Falls du willst, dass man die Überschrift nicht klicken kann, Kommentar entfernen */
+    pointer-events: auto !important;
+    position: relative;
+    transition: background .15s ease, color .15s ease;
 }
 
-/* =========================================
-   3. NEXUS MODUL: SLIM FOOTER (Widget Design)
-   Damit der Footer nicht "scheiße" aussieht
-   ========================================= */
-.ft {
-    --bg: #0a0a0a; --fg: #fafafa; --muted: #a1a1aa; --line: rgba(255,255,255,.08);
-    --cta: #ffb020; --cta2: #ff8a00; --accent: #0ea5e9; --mw: 1200px;
-    background: var(--bg); color: var(--fg); width: 100%; border-top: 1px solid var(--line);
-    margin: 0; padding: 0;
+/* Hover Effekt für die Überschriften */
+.ct-header nav .menu-item.mega > .sub-menu > li > a:hover,
+.ct-header nav .menu-item.mega > .sub-menu > li > a:focus-visible {
+    background: rgba(255,138,0,0.10) !important;
+    color: #fff !important;
+    outline: none !important;
 }
+
+/* Die kleine goldene Linie unter der Überschrift */
+.ct-header nav .menu-item.mega > .sub-menu > li > a::after {
+    content: "";
+    display: block;
+    width: 34px;
+    height: 2px;
+    background-color: #ffb020; /* Nexus Gold */
+    margin-top: 5px;
+    opacity: 0.7;
+}
+
+/* Falls du Orange als Textfarbe wolltest (aus deinem 2. Snippet): */
+/* .ct-header nav .menu-item.mega > .sub-menu > li > a { color: #FF8A00 !important; } */
+
+
+/* ==========================================================================
+   3. FOOTER / "FUTTER" DESIGN (Das fehlende CSS)
+   ========================================================================== */
+.ft {
+    --bg: #0a0a0a;
+    --fg: #fafafa;
+    --muted: #a1a1aa;
+    --line: rgba(255,255,255,.08);
+    --cta: #ffb020;
+    --cta2: #ff8a00;
+    --accent: #0ea5e9;
+    --radius: 14px;
+    --mw: 1200px;
+    --t: .24s cubic-bezier(.4,0,.2,1);
+
+    background: var(--bg);
+    color: var(--fg);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-top: 1px solid var(--line);
+}
+
 .ft * { box-sizing: border-box; }
+
 .ft__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-.ft__top { max-width: var(--mw); margin: 0 auto; padding: 48px 20px; display: grid; gap: 24px; grid-template-columns: 1.2fr 2fr; border-bottom: 1px solid var(--line); }
+.ft__top {
+    max-width: var(--mw);
+    margin: 0 auto;
+    padding: 48px 20px;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1.2fr 2fr;
+    border-bottom: 1px solid var(--line);
+}
+
 .ft__brand { display: flex; flex-direction: column; gap: 10px; }
 .ft__logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -.01em; color: var(--fg); }
 .ft__tag { color: var(--muted); margin: 0; }
-.ft__cta { display: inline-block; margin-top: 6px; padding: .7rem 1rem; border-radius: 12px; background: linear-gradient(135deg,var(--cta),var(--cta2)); color: #111; font-weight: 800; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+
+.ft__cta {
+    display: inline-block;
+    margin-top: 6px;
+    padding: .7rem 1rem;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--cta), var(--cta2));
+    color: #111;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform var(--t), box-shadow var(--t);
+}
 .ft__cta:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,176,32,.28); }
 
 .ft__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .ft__col h3 { font-size: 1rem; margin: 0 0 .6rem; color: var(--fg); font-weight: 700; }
-.ft__list { padding: 0; list-style: none; margin: 0; }
+.ft__list { margin: 0; padding: 0; list-style: none; }
 .ft__list li { margin: .45rem 0; }
-.ft a { color: var(--fg); text-decoration: none; opacity: .86; transition: all 0.2s; }
-.ft a:hover { opacity: 1; transform: translateX(2px); }
-.ft__link-strong { font-weight: 700; color: var(--accent); }
 
-.ft__bottom { max-width: var(--mw); margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
+.ft a {
+    color: var(--fg);
+    text-decoration: none;
+    opacity: .86;
+    transition: opacity var(--t), transform var(--t);
+    display: inline-block;
+}
+.ft a:hover { opacity: 1; transform: translateX(2px); }
+
+.ft__link-strong { font-weight: 700; color: var(--accent); }
+.ft__legal a { color: var(--muted); font-size: 0.9rem; }
+
+.ft__bottom {
+    max-width: var(--mw);
+    margin: 0 auto;
+    padding: 18px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .ft__social { display: flex; gap: 14px; }
 .ft__social a { color: var(--muted); }
 .ft__social a:hover { color: var(--fg); }
 
 /* Responsive */
-@media (max-width: 920px) { .ft__top { grid-template-columns: 1fr; } .ft__cols { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px) { .ft__cols { grid-template-columns: 1fr; } .ft__bottom { flex-direction: column; align-items: flex-start; } }
-/* Fix für Blocksy Widget Container */
+@media (max-width: 920px) {
+    .ft__top { grid-template-columns: 1fr; }
+    .ft__cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+    .ft__cols { grid-template-columns: 1fr; }
+    .ft__col h3 { margin-top: 1rem; }
+    .ft__col:first-of-type h3 { margin-top: 0; }
+    .ft__bottom { flex-direction: column; align-items: flex-start; }
+}
+/* Blocksy Widget Fix */
 .widget .ft { margin: 0; }
