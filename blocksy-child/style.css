@@ -1,13 +1,12 @@
 /*
 Theme Name: Blocksy Child
 Template: blocksy
-Version: 1.4.0 (Nexus Final Robust)
+Version: 3.0.0
 */
 
-/* ==========================================================================
-   1. SCHRIFTEN LADEN (Wegweiser zu deinen Dateien)
-   Dies sucht im Ordner 'fonts' innerhalb deines Child-Themes.
-   ========================================================================== */
+/* =========================================
+   1. CORE: SCHRIFTEN & SYSTEM
+   ========================================= */
 @font-face {
     font-family: 'Satoshi';
     src: url('fonts/Satoshi-Variable.woff2') format('woff2-variations'),
@@ -16,51 +15,31 @@ Version: 1.4.0 (Nexus Final Robust)
     font-display: swap;
     font-style: normal;
 }
+:root { --theme-font-family: 'Satoshi', sans-serif; --mega-sep: rgba(255,255,255,0.08); }
+body, h1, h2, h3, h4, h5, h6, .ct-menu-link { font-family: 'Satoshi', sans-serif; }
 
-@font-face {
-    font-family: 'Satoshi';
-    src: url('fonts/Satoshi-VariableItalic.woff2') format('woff2-variations'),
-         url('fonts/Satoshi-VariableItalic.woff') format('woff');
-    font-weight: 300 900;
-    font-display: swap;
-    font-style: italic;
-}
+/* =========================================
+   2. MEGA MENÜ (DEIN ORIGINAL CODE)
+   Exakt wie du es wolltest.
+   ========================================= */
 
-/* System-Zuweisung */
-:root {
-    --theme-font-family: 'Satoshi', sans-serif;
-    --theme-headings-font-family: 'Satoshi', sans-serif;
-    --button-font-family: 'Satoshi', sans-serif;
-    --mega-sep: rgba(255,255,255,0.08);
-}
-
-body { font-family: 'Satoshi', sans-serif; }
-h1, h2, h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; font-weight: 700; }
-
-.ct-header .ct-menu-link {
-    font-family: 'Satoshi', sans-serif;
-    letter-spacing: -0.015em;
-}
-
-/* ==========================================================================
-   2. HEADER & MEGA MENU (Dein 4-Spalten Design)
-   ========================================================================== */
+/* Das Grid aufräumen */
 .ct-header nav .menu-item.mega > .sub-menu {
     display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(4, 1fr) !important; /* 4 Spalten Layout */
     gap: 20px !important;
     width: 100% !important;
 }
 
 .ct-header nav .menu-item.mega > .sub-menu > li {
-    width: auto !important;
-    border: none !important;
+    width: auto !important; /* Überschreibt Blocksy Standard */
+    border: none !important; /* Entfernt die Standard-Linien */
     padding: 0 15px !important;
     position: relative;
     min-width: 0 !important;
 }
 
-/* Vertikale Linie */
+/* Elegante Trennlinie */
 .ct-header nav .menu-item.mega > .sub-menu > li:not(:last-child):after {
     content: "";
     position: absolute;
@@ -71,22 +50,23 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; font-weight: 700; }
     background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.08), transparent);
 }
 
-/* Überschriften Orange */
+/* ÜBERSCHRIFTEN */
 .ct-header nav .menu-item.mega > .sub-menu > li > a {
     font-size: 0.75rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.12em !important;
     font-weight: 700 !important;
-    color: #FF8A00 !important;
+    color: #FF8A00 !important; /* Dein Marken-Orange */
     margin-bottom: 18px !important;
     padding: 0 !important;
     display: block !important;
     opacity: 0.9;
+    /* pointer-events: none; <--- Optional: Wenn Links nicht klickbar sein sollen, Kommentar entfernen */
 }
 
-/* ==========================================================================
-   3. FOOTER (Nexus Slim Dark)
-   ========================================================================== */
+/* =========================================
+   3. FOOTER (FUTTER) DESIGN
+   ========================================= */
 .ft {
     --bg: #0a0a0a; --fg: #fafafa; --muted: #a1a1aa; --line: rgba(255,255,255,.08);
     --cta: #ffb020; --cta2: #ff8a00; --accent: #0ea5e9; --radius: 14px; --mw: 1200px;
@@ -95,7 +75,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; font-weight: 700; }
 }
 .ft * { box-sizing: border-box; }
 .ft__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
 .ft__top { max-width: var(--mw); margin: 0 auto; padding: 48px 20px; display: grid; gap: 24px; grid-template-columns: 1.2fr 2fr; border-bottom: 1px solid var(--line); }
 .ft__brand { display: flex; flex-direction: column; gap: 10px; }
 .ft__logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -.01em; color: var(--fg); }
@@ -110,8 +89,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Satoshi', sans-serif; font-weight: 700; }
 .ft__bottom { max-width: var(--mw); margin: 0 auto; padding: 18px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
 .ft__social { display: flex; gap: 14px; }
 .ft__social a { color: var(--muted); }
-
-/* Responsive */
 @media (max-width: 920px) { .ft__top { grid-template-columns: 1fr; } .ft__cols { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .ft__cols { grid-template-columns: 1fr; } .ft__bottom { flex-direction: column; align-items: flex-start; } }
 .widget .ft { margin: 0; }
