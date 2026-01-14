@@ -22,7 +22,6 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
 
-
 /* --- 2. NEXUS MEGA MENÜ (PRECISION GLASS EDITION) --- */
 
 /* 1. Container Setup */
@@ -115,6 +114,8 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     color: #ffffff;
     transform: translateX(4px);
 }
+
+
 /* --- 3. FOOTER (Von dir übernommen) --- */
 .ft {
     --bg: #0a0a0a; --fg: #fafafa; --line: rgba(255,255,255,.08); --cta: #ffb020;
