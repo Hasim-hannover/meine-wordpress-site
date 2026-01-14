@@ -31,7 +31,7 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (TABLE OF CONTENT - CLEAN) --- */
+/* --- Navigation (TABLE OF CONTENT - RECHTS & ORANGE) --- */
 #wpTocNav {
   position: fixed !important;
   top: 50% !important;
@@ -89,7 +89,7 @@
     opacity: 1 !important;
 }
 
-/* ACTIVE STATE */
+/* ACTIVE STATE (Orange) */
 .wp-toc-link.active {
     color: var(--gold) !important;
     opacity: 1 !important;
@@ -107,7 +107,7 @@
 }
 
 
-/* --- FAQ DESIGN --- */
+/* --- FAQ DESIGN (Accordion Style) --- */
 .wp-faq { max-width: 800px; margin: 0 auto; }
 
 .wp-faq-item {
@@ -130,6 +130,7 @@
 
 .wp-faq-item summary:hover { color: var(--gold); }
 
+/* Plus Icon */
 .wp-faq-item summary::after {
     content: '+';
     font-weight: 300;
@@ -139,6 +140,7 @@
     transition: transform 0.3s ease;
 }
 
+/* Offen */
 .wp-faq-item[open] summary::after {
     transform: rotate(45deg);
     color: var(--white);
@@ -152,49 +154,82 @@
     padding-right: 2rem;
 }
 
-/* --- BLOG GRID / CARD STYLE (Generisch) --- */
-/* Das hier greift auf ALLES, was im letzten Abschnitt ist und eine Liste oder Grid sein könnte */
-.wp-section:nth-last-of-type(2) ul, /* Zweitletzte Section ist oft der Blog (vor CTA) */
-.wp-section:nth-last-of-type(2) .posts-grid,
-.wp-section:nth-last-of-type(2) .entries {
+/* --- BLOG GRID / CARD STYLE (Der finale Fix) --- */
+
+/* 1. Wir identifizieren die Blog-Sektion daran, dass sie KEINE ID hat (alle anderen haben #hero, #faq etc.) */
+section.wp-section:not([id]) .wp-container,
+section.wp-section:not([id]) .wp-container > div,
+section.wp-section:not([id]) .wp-container > ul {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    /* DESKTOP (MacBook 15"): 3 Spalten */
+    grid-template-columns: repeat(3, 1fr) !important; 
     gap: 2rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
+/* TABLET: 2 Spalten */
 @media (max-width: 1024px) {
-    .wp-section:nth-last-of-type(2) ul,
-    .wp-section:nth-last-of-type(2) .posts-grid,
-    .wp-section:nth-last-of-type(2) .entries {
+    section.wp-section:not([id]) .wp-container,
+    section.wp-section:not([id]) .wp-container > div,
+    section.wp-section:not([id]) .wp-container > ul {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
+/* MOBILE: 1 Spalte */
 @media (max-width: 768px) {
-    .wp-section:nth-last-of-type(2) ul,
-    .wp-section:nth-last-of-type(2) .posts-grid,
-    .wp-section:nth-last-of-type(2) .entries {
+    section.wp-section:not([id]) .wp-container,
+    section.wp-section:not([id]) .wp-container > div,
+    section.wp-section:not([id]) .wp-container > ul {
         grid-template-columns: 1fr !important;
     }
 }
 
-/* Card Styling für die Items darin */
-.wp-section:nth-last-of-type(2) li,
-.wp-section:nth-last-of-type(2) article {
+/* 2. Styling der Karten (Items) */
+/* Wir machen jedes direkte Kind im Grid zu einer Karte */
+section.wp-section:not([id]) .wp-container > *,
+section.wp-section:not([id]) .wp-container > div > *,
+section.wp-section:not([id]) .wp-container > ul > * {
     background: var(--dark-light) !important;
     border: 1px solid rgba(255,255,255,0.05) !important;
     border-radius: 16px !important;
     padding: 2rem !important;
     transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 250px !important; /* Mindesthöhe damit es gut aussieht */
+    box-sizing: border-box !important;
+    margin: 0 !important; /* Reset margin damit Grid greift */
+    width: 100% !important; /* Füllt die Grid-Zelle */
 }
 
-.wp-section:nth-last-of-type(2) li:hover,
-.wp-section:nth-last-of-type(2) article:hover {
+/* Hover Effekt */
+section.wp-section:not([id]) .wp-container > *:hover,
+section.wp-section:not([id]) .wp-container > div > *:hover,
+section.wp-section:not([id]) .wp-container > ul > *:hover {
     transform: translateY(-8px) !important;
     border-color: var(--gold) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
 }
 
-/* CTA Design */
+/* Überschriften in den Karten */
+section.wp-section:not([id]) h2, 
+section.wp-section:not([id]) h3,
+section.wp-section:not([id]) h4 {
+    font-size: 1.3rem !important;
+    margin-bottom: 1rem !important;
+    line-height: 1.3 !important;
+    color: var(--white) !important;
+}
+
+/* Links in den Karten */
+section.wp-section:not([id]) a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+/* CTA Design (Der Bereich darunter) */
 #cta .wp-container {
     background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
     border: 1px solid rgba(255,255,255,0.05);
@@ -203,6 +238,8 @@
     text-align: center;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     margin-top: 4rem; 
+    /* CTA darf kein Grid sein! Reset: */
+    display: block !important; 
 }
 
 #cta .wp-section-h2 {
@@ -214,6 +251,7 @@
 .wp-section { padding: var(--spacing-section) 0; }
 .wp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
+/* Hero */
 .wp-hero {
   min-height: 90vh;
   display: flex;
@@ -272,7 +310,8 @@
 }
 @media (min-width: 768px) { .wp-metrics { grid-template-columns: repeat(4, 1fr); } }
 .wp-metric-value {
-  display: block; font-size: 2rem; font-weight: 800; color: var(--white); font-variant-numeric: tabular-nums; 
+  display: block; font-size: 2rem; font-weight: 800; color: var(--white); 
+  font-variant-numeric: tabular-nums; 
 }
 .wp-metric-label { font-size: 0.9rem; color: var(--muted); }
 .wp-metric-label small { display: block; font-size: 0.7em; opacity: 0.6; margin-top: 4px; }
