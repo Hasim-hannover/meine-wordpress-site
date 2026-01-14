@@ -21,42 +21,41 @@ Version: 7.1.0-FIXED
 body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
-/* --- 2. NEXUS MEGA MENÜ (COMPACT EDITION) --- */
+
+/* --- 2. NEXUS MEGA MENÜ (AUTO-FIT EDITION) --- */
 
 /* Container Setup */
 .ct-header .menu-item.mega {
-    position: static !important;
+    position: relative !important; /* Wichtig: Relativ zum Menüpunkt, nicht zur Seite! */
 }
 
-/* Das Dropdown-Fenster - Jetzt kompakter & schärfer */
+/* Das Dropdown-Fenster - Passt sich jetzt dem Inhalt an */
 .ct-header .menu-item.mega > .sub-menu {
-    width: 100%;
-    /* HIER DIE ÄNDERUNG: 960px statt 1200px wirkt straffer */
-    max-width: 960px; 
+    width: max-content; /* Nimmt nur so viel Platz wie nötig! */
+    max-width: 900px;   /* Obergrenze, falls es zu voll wird */
+    min-width: 600px;   /* Mindestbreite für Stabilität */
+    
+    /* Positionierung: Zentriert unter dem Menüpunkt */
     left: 50% !important;
     transform: translateX(-50%) translateY(10px);
     
     /* Grid Layout */
     display: grid;
-    /* 4 Spalten, die sich den Platz teilen */
-    grid-template-columns: repeat(4, 1fr); 
-    /* Weniger Lücke zwischen den Spalten */
-    gap: 20px; 
-    /* Weniger Innenabstand */
-    padding: 30px; 
+    grid-template-columns: repeat(4, minmax(140px, 1fr)); /* Spalten sind flexibel, aber nicht zu schmal */
+    gap: 20px;
+    padding: 25px; /* Kompakteres Padding */
     
-    /* Champions Look */
+    /* Design */
     background-color: #0a0a0a;
-    /* Etwas feinerer Border */
-    border: 1px solid rgba(255, 255, 255, 0.06); 
-    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    border-radius: 8px; /* Etwas kantiger/technischer */
     
     /* Animation */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-    margin-top: 10px; /* Näher am Menüpunkt */
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+    margin-top: 10px;
     z-index: 999;
 }
 
@@ -67,25 +66,26 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     transform: translateX(-50%) translateY(0);
 }
 
-/* Spalten-Überschriften (Build & Care etc.) */
+/* Spalten-Überschriften */
 .ct-header .menu-item.mega > .sub-menu > li > a {
-    font-size: 13px; /* Minimal kleiner für mehr Eleganz */
+    font-size: 13px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     color: #ffb020;
-    margin-bottom: 12px; /* Weniger Abstand nach unten */
+    margin-bottom: 10px;
     display: block;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    padding-bottom: 6px;
+    padding-bottom: 5px;
     pointer-events: none;
+    white-space: nowrap; /* Verhindert Umbruch bei kurzen Titeln */
 }
 
-/* Container für Links */
+/* Links Container */
 .ct-header .menu-item.mega .sub-menu .sub-menu {
     display: flex;
     flex-direction: column;
-    gap: 6px; /* Links rücken näher zusammen */
+    gap: 5px;
     background: transparent !important;
     box-shadow: none !important;
     padding: 0;
@@ -96,18 +96,19 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     border: none;
 }
 
-/* Die einzelnen Links */
+/* Links Styling */
 .ct-header .menu-item.mega .sub-menu .sub-menu li a {
     color: #a0a0a0;
-    font-size: 15px; /* Lesbarkeit bleibt */
+    font-size: 14px;
     font-weight: 500;
-    padding: 3px 0; /* Kompakter */
+    padding: 2px 0;
     transition: 0.2s ease;
+    white-space: nowrap; /* Hält das Menü sauber */
 }
 
 .ct-header .menu-item.mega .sub-menu .sub-menu li a:hover {
     color: #ffffff;
-    transform: translateX(4px);
+    transform: translateX(3px);
 }
 
 /* --- 3. FOOTER (Von dir übernommen) --- */
