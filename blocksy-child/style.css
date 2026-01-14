@@ -1,12 +1,10 @@
 /*
 Theme Name: Blocksy Child
 Template: blocksy
-Version: 5.0.0-FINAL-CHAMPIONS
+Version: 7.0.0-CLEAN
 */
 
-/* ==========================================================================
-   1. CORE: SATOSHI (Die Basis)
-   ========================================================================== */
+/* 1. CORE: SATOSHI SCHRIFTEN (Muss hier bleiben!) */
 @font-face {
     font-family: 'Satoshi';
     src: url('fonts/Satoshi-Variable.woff2') format('woff2-variations'),
@@ -17,105 +15,27 @@ Version: 5.0.0-FINAL-CHAMPIONS
 }
 
 :root {
-    --nexus-bg: #0a0a0a;
-    --nexus-gold: #ffb020;
-    --nexus-border: rgba(255,255,255,0.08);
+    --theme-font-family: 'Satoshi', sans-serif;
 }
 
 body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
 
-/* ==========================================================================
-   2. NEXUS MEGA MENU (Dein Original-Design - Veredelt)
-   ========================================================================== */
-
-/* A. Der Container (Das Grid) */
-.ct-header nav .menu-item.mega > .sub-menu {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 0 !important; /* Kein Gap, damit die Linien exakt sitzen */
-    width: 100% !important;
-    padding: 30px 0 !important;
-    background: var(--nexus-bg) !important;
-    border-top: 2px solid var(--nexus-gold) !important;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6) !important;
+/* 2. FOOTER (FUTTER) */
+.ft {
+    --bg: #0a0a0a; --fg: #fafafa; --line: rgba(255,255,255,.08); --cta: #ffb020;
+    background: var(--bg); color: var(--fg); width: 100%; border-top: 1px solid var(--line);
 }
-
-/* B. Die Spalten (Items) */
-.ct-header nav .menu-item.mega > .sub-menu > li {
-    width: auto !important;
-    margin: 0 !important;
-    border: none !important;
-    padding: 0 30px !important; /* Dein Padding */
-    position: relative;
-    min-width: 0 !important;
-}
-
-/* C. Die Vertikalen Trennlinien (EXAKT WIE DEIN CODE) */
-/* Linie rechts von jedem Item, außer dem letzten */
-.ct-header nav .menu-item.mega > .sub-menu > li:not(:last-child):after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%; /* Volle Höhe */
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15), transparent) !important;
-}
-
-/* D. Die Überschriften (Dein Style: Fett & Uppercase) */
-.ct-header nav .menu-item.mega > .sub-menu > li > a {
-    font-size: 13px !important;
-    font-weight: 850 !important; /* Deine spezifische Dicke */
-    color: #ffffff !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.08em !important;
-    padding: 0 !important;
-    margin: 0 0 15px 0 !important;
-    display: block !important;
-    position: relative;
-    pointer-events: none; /* Nur Überschrift, nicht klickbar */
-}
-
-/* E. Die Akzent-Linie unter der Überschrift (Dein Gold-Strich) */
-.ct-header nav .menu-item.mega > .sub-menu > li > a::after {
-    content: "";
-    display: block;
-    width: 40px;
-    height: 2px;
-    background-color: var(--nexus-gold);
-    margin-top: 8px;
-    box-shadow: 0 0 10px rgba(255, 176, 32, 0.5); /* Glow Effekt */
-}
-
-/* F. Die Links darunter (Sub-Menü Items) */
-.ct-header nav .menu-item.mega > .sub-menu > li > ul > li > a {
-    color: #a1a1aa !important;
-    font-size: 15px !important;
-    font-weight: 500 !important;
-    padding: 6px 0 !important;
-    transition: all 0.2s ease !important;
-    display: block !important;
-}
-
-.ct-header nav .menu-item.mega > .sub-menu > li > ul > li > a:hover {
-    color: #fff !important;
-    transform: translateX(5px);
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-/* ==========================================================================
-   3. FOOTER (Ist erledigt, bleibt hier sicher drin)
-   ========================================================================== */
-.ft { --bg: #0a0a0a; --fg: #fafafa; --line: rgba(255,255,255,.08); --cta: #ffb020; width: 100%; border-top: 1px solid var(--line); background: var(--bg); color: var(--fg); }
 .ft * { box-sizing: border-box; }
 .ft__top { max-width: 1200px; margin: 0 auto; padding: 48px 20px; display: grid; gap: 24px; grid-template-columns: 1.2fr 2fr; border-bottom: 1px solid var(--line); }
 .ft__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.ft__logo { font-weight: 800; font-size: 1.6rem; }
+.ft__brand { display: flex; flex-direction: column; gap: 10px; }
+.ft__logo { font-size: 1.6rem; font-weight: 800; color: var(--fg); }
 .ft__cta { display: inline-block; padding: .7rem 1rem; background: var(--cta); color: #000; font-weight: 800; border-radius: 12px; text-decoration: none; margin-top: 10px; }
 .ft__list { list-style: none; padding: 0; } .ft__list li { margin: 8px 0; }
-.ft a { color: var(--fg); text-decoration: none; opacity: 0.7; } .ft a:hover { opacity: 1; }
+.ft a { color: var(--fg); text-decoration: none; opacity: 0.8; } .ft a:hover { opacity: 1; }
 .ft__bottom { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; justify-content: space-between; flex-wrap: wrap; }
+.ft__social { display: flex; gap: 15px; }
 @media (max-width: 900px) { .ft__top, .ft__cols { grid-template-columns: 1fr; } }
 .widget .ft { margin: 0; }
