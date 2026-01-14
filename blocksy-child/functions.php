@@ -1,21 +1,32 @@
 <?php
 /**
- * Blocksy Child - Nexus Final Rescue
- * FIX: Shortcodes (Resultate) und Homepage wiederhergestellt.
+ * Blocksy Child - Nexus Ultimate Edition
+ * INCLUDES: Shortcodes, Schema & Snippets (Alles wird geladen!)
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-// --- 1. EXTERNE DATEIEN LADEN (HIER FEHLTE WAS!) ---
-// Lädt deine Shortcodes für die "Resultate" Sektion
-$shortcodes = get_stylesheet_directory() . '/inc/shortcodes.php';
-if ( file_exists( $shortcodes ) ) {
-    require_once $shortcodes;
+// --- 1. EXTERNE DATEIEN AUS DEM INC-ORDNER LADEN ---
+$inc_dir = get_stylesheet_directory() . '/inc/';
+
+// Liste der wichtigen Dateien, die geladen werden MÜSSEN ("Rippe")
+$files_to_load = [
+    'shortcodes.php',  // Deine Resultate
+    'org-schema.php',  // Dein "Ork Schema" (SEO)
+    'schema.php',      // Fallback Name für Schema
+    'snippets.php',    // Deine Code Snippets
+    'custom.php'       // Weitere Custom Functions
+];
+
+foreach ( $files_to_load as $file ) {
+    if ( file_exists( $inc_dir . $file ) ) {
+        require_once $inc_dir . $file;
+    }
 }
 
 // --- 2. STYLES & SCRIPTS ---
 add_action( 'wp_enqueue_scripts', function () {
-    // Haupt-Style laden (Version erhöht, damit Browser neu lädt)
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '8.0.0-FIXED' );
+    // Version hochsetzen (Cache Buster für CSS Änderungen)
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.0.0-FINAL' );
 
     // JS für Homepage
     if ( is_front_page() ) {
@@ -27,12 +38,12 @@ add_action( 'wp_enqueue_scripts', function () {
     }
 }, 20 );
 
-// --- 3. CRITICAL CSS (HOMEPAGE DESIGN) ---
+// --- 3. CRITICAL CSS (HOMEPAGE RETTUNG) ---
 add_action( 'wp_head', function () {
     // Footer Background Fix
     echo '<style>.ft { background: #0a0a0a; }</style>';
 
-    // Homepage CSS direkt laden (verhindert "nackte" Seite)
+    // Homepage CSS direkt laden (verhindert weiße Seite)
     if ( is_front_page() ) {
         $css = get_stylesheet_directory() . '/assets/css/homepage.css';
         if ( file_exists( $css ) ) {
