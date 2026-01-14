@@ -22,47 +22,47 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
 
-/* --- 2. NEXUS MEGA MENÜ (ULTIMATE SYMMETRY) --- */
+/* --- 2. NEXUS MEGA MENÜ (RIGHT ALIGN FIX) --- */
 
-/* 1. Entkopplung vom Menüpunkt */
+/* 1. Container Setup */
 .ct-header .menu-item.mega {
-    position: static !important; /* WICHTIG: Erlaubt Ausrichtung an der gesamten Seite */
+    /* Wir machen es relativ, damit das Dropdown am Menüpunkt klebt, aber wir steuern es anders */
+    position: relative !important;
 }
 
-/* 2. Das Dropdown - Jetzt perfekt zentriert zur SEITE */
+/* 2. Das Dropdown - Jetzt rechtsbündig verankert */
 .ct-header .menu-item.mega > .sub-menu {
-    /* Feste Breite für stabilen Content */
-    width: 1000px; 
+    /* WICHTIG: Wir verankern es rechts, damit es nicht raus rutscht */
+    left: auto !important;
+    right: -100px !important; /* Zieht es etwas nach rechts für Balance, aber hält es im Bild */
     
-    /* Sicherheits-Limit für kleinere Bildschirme */
-    max-width: 94vw; 
+    /* Alternativ: Wenn es immer noch abschneidet, setze right: 0 !important; */
     
-    /* DIE MAGISCHE ZENTRIERUNG */
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    /* Breite: Kompakt genug für alle Screens */
+    width: 900px; 
+    max-width: 90vw; /* Sicherheitsnetz für kleine Laptops */
     
     /* Position von oben */
-    transform: translateY(10px);
+    transform: none !important; /* Kein Verschieben mehr, wir nutzen feste Anker */
+    top: 100%;
+    margin-top: 15px;
     
-    /* Grid Layout - 4 identische Spalten */
+    /* Design & Grid */
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0; /* Wir nutzen Padding in den Spalten für sauberere Trennung */
+    grid-template-columns: repeat(4, 1fr); /* Die 4 heiligen Spalten */
+    gap: 20px;
+    padding: 35px;
     
-    /* Design: High-End Dark Mode */
+    /* Champions League Look */
     background-color: #0a0a0a;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6); /* Mächtiger Schatten für 3D-Effekt */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.7);
     border-radius: 12px;
-    padding: 40px; /* Großzügiger Innenabstand */
     
     /* Animation */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-    margin-top: 15px; 
+    transition: all 0.25s ease;
     z-index: 9999;
 }
 
@@ -70,39 +70,27 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ct-header .menu-item.mega:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
 
-/* 4. Die Spalten (<li>) */
-.ct-header .menu-item.mega > .sub-menu > li {
-    padding: 0 20px; /* Abstand zwischen den Spalten-Inhalten */
-    border-right: 1px solid rgba(255,255,255,0.03); /* Hauchdünne Trennlinien */
-}
-
-/* Die letzte Spalte braucht keinen Strich rechts */
-.ct-header .menu-item.mega > .sub-menu > li:last-child {
-    border-right: none;
-}
-
-/* 5. Überschriften (Build & Care etc.) */
+/* 4. Spalten-Überschriften */
 .ct-header .menu-item.mega > .sub-menu > li > a {
     font-size: 13px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     color: #ffb020;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     display: block;
-    padding-bottom: 0;
-    border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 8px;
     pointer-events: none;
 }
 
-/* 6. Links Container */
+/* 5. Links Container */
 .ct-header .menu-item.mega .sub-menu .sub-menu {
     display: flex;
     flex-direction: column;
-    gap: 12px; /* Mehr Luft zwischen den Links für Lesbarkeit */
+    gap: 8px;
     background: transparent !important;
     box-shadow: none !important;
     padding: 0;
@@ -113,21 +101,18 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     transform: none;
 }
 
-/* 7. Die Links */
+/* 6. Die Links */
 .ct-header .menu-item.mega .sub-menu .sub-menu li a {
-    color: #b0b0b0;
-    font-size: 15px;
+    color: #a0a0a0;
+    font-size: 14px;
     font-weight: 500;
-    padding: 0;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
+    padding: 2px 0;
+    transition: 0.2s ease;
 }
 
-/* Hover Effekt für Links */
 .ct-header .menu-item.mega .sub-menu .sub-menu li a:hover {
     color: #ffffff;
-    transform: translateX(6px); /* Klares visuelles Feedback */
+    transform: translateX(5px);
 }
 
 /* --- 3. FOOTER (Von dir übernommen) --- */
