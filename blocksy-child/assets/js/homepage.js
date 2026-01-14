@@ -1,21 +1,61 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // --- 0. ZOMBIE KILLER ---
+    // 1. ZOMBIE KILLER (Sicherheit)
     const zombieCode = document.getElementById('nexus-home-critical');
     if (zombieCode) zombieCode.remove();
 
-    // --- 1. Sticky Navigation & Scroll Spy ---
+    // 2. FORCE BLOG GRID (Die Brechstange für deine Karten)
+    function forceBlogGrid() {
+        // Wir suchen alle Artikel im Inhaltsbereich
+        const articles = document.querySelectorAll('.cs-page article, .cs-page .post, .cs-page .type-post');
+        
+        if (articles.length > 0) {
+            // Nimm das Elternelement des ersten Artikels (das ist der Container)
+            const container = articles[0].parentElement;
+            
+            if (container) {
+                // Erzwinge Grid-Layout direkt am Element
+                container.style.display = 'grid';
+                container.style.gap = '2rem';
+                container.style.listStyle = 'none';
+                container.style.padding = '0';
+                
+                // Responsive Logik für den Container
+                const updateGrid = () => {
+                    if (window.innerWidth > 1024) {
+                        container.style.gridTemplateColumns = 'repeat(3, 1fr)'; // Desktop: 3 Spalten
+                    } else if (window.innerWidth > 768) {
+                        container.style.gridTemplateColumns = 'repeat(2, 1fr)'; // Tablet: 2 Spalten
+                    } else {
+                        container.style.gridTemplateColumns = '1fr'; // Mobile: 1 Spalte
+                    }
+                };
+                
+                // Initial und bei Resize ausführen
+                updateGrid();
+                window.addEventListener('resize', updateGrid);
+                
+                // Styling für die Karten selbst erzwingen
+                articles.forEach(art => {
+                    art.style.boxSizing = 'border-box';
+                    art.style.width = '100%';
+                    art.style.maxWidth = '100%';
+                    art.classList.add('nexus-card-forced'); // Klasse für CSS-Styling (Hover etc.)
+                });
+                
+                console.log('Nexus: Blog Grid wurde erzwungen.');
+            }
+        }
+    }
+    // Kurz warten, damit Shortcodes geladen sind, dann feuern
+    setTimeout(forceBlogGrid, 100);
+
+
+    // 3. STICKY NAVIGATION & SCROLL SPY
     const nav = document.getElementById('wpTocNav');
     const hero = document.getElementById('hero');
     const tocLinks = document.querySelectorAll('.wp-toc-link');
     
-    const sectionIds = Array.from(tocLinks).map(link => {
-        const href = link.getAttribute('href');
-        return href.startsWith('#') ? href.substring(1) : null;
-    }).filter(id => id); 
-
-    const sections = sectionIds.map(id => document.getElementById(id)).filter(sec => sec);
-
     if (nav && hero) {
         // Sichtbarkeit
         const heroObserver = new IntersectionObserver((entries) => {
@@ -27,44 +67,34 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         }, { rootMargin: "-100px 0px 0px 0px" });
-
         heroObserver.observe(hero);
 
-        // Active State
+        // Active State (Leuchten)
+        const sectionIds = Array.from(tocLinks).map(link => link.getAttribute('href').substring(1));
+        const sections = sectionIds.map(id => document.getElementById(id)).filter(s => s);
+
         const highlightObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     tocLinks.forEach(link => link.classList.remove('active'));
                     const activeLink = document.querySelector(`.wp-toc-link[href="#${entry.target.id}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                    }
+                    if (activeLink) activeLink.classList.add('active');
                 }
             });
-        }, { 
-            root: null, 
-            rootMargin: "-20% 0px -60% 0px", 
-            threshold: 0 
-        });
+        }, { root: null, rootMargin: "-30% 0px -50% 0px", threshold: 0 });
 
-        sections.forEach(section => {
-            highlightObserver.observe(section);
-        });
+        sections.forEach(sec => highlightObserver.observe(sec));
     }
 
-    // --- 2. FAQ Accordion ---
+    // 4. FAQ ACCORDION
     const details = document.querySelectorAll("details.wp-faq-item");
-    details.forEach((targetDetail) => {
-        targetDetail.addEventListener("click", () => {
-            details.forEach((detail) => {
-                if (detail !== targetDetail) {
-                    detail.removeAttribute("open");
-                }
-            });
+    details.forEach((target) => {
+        target.addEventListener("click", () => {
+            details.forEach((d) => { if (d !== target) d.removeAttribute("open"); });
         });
     });
 
-    // --- 3. KPI Animation ---
+    // 5. KPI ANIMATION
     const metrics = document.querySelectorAll('.wp-metric-value');
     const animateValue = (obj, start, end, duration) => {
         let startTimestamp = null;
@@ -72,52 +102,27 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const ease = 1 - Math.pow(1 - progress, 3);
-            const currentVal = Math.floor(ease * (end - start) + start);
-            obj.innerText = currentVal;
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            } else {
-                obj.innerText = end; 
-            }
+            obj.innerText = Math.floor(ease * (end - start) + start);
+            if (progress < 1) window.requestAnimationFrame(step);
+            else obj.innerText = end;
         };
         window.requestAnimationFrame(step);
     };
 
-    const metricsObserver = new IntersectionObserver((entries, observer) => {
+    const metricsObserver = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const target = entry.target;
-                const targetValue = parseInt(target.getAttribute('data-target'));
-                if (!isNaN(targetValue)) {
-                    animateValue(target, 0, targetValue, 2000);
-                    observer.unobserve(target);
+                const t = entry.target;
+                const v = parseInt(t.getAttribute('data-target'));
+                if (!isNaN(v)) {
+                    animateValue(t, 0, v, 2000);
+                    obs.unobserve(t);
                 }
             }
         });
-    }, { threshold: 0.1 }); 
+    }, { threshold: 0.1 });
 
-    metrics.forEach(metric => {
-        if(metric.getAttribute('data-target')) {
-            metric.innerText = "0"; 
-            metricsObserver.observe(metric);
-        }
-    });
-
-    // --- 4. BLOG GRID ENFORCER (Der Hammer für das Layout) ---
-    // Wir suchen den Bereich, wo der Blog sein könnte (letzte Section vor Footer oft)
-    // Da wir wissen, dass er im Container nach dem FAQ kommt:
-    
-    // Versuch 1: Wir suchen Listen (ul) die Artikel enthalten
-    const possibleBlogLists = document.querySelectorAll('.wp-section ul, .wp-section ol, .entries');
-    
-    possibleBlogLists.forEach(list => {
-        // Prüfen ob es nach Blog aussieht (hat mehr als 1 Kind, keine Navigation)
-        if (list.children.length > 1 && !list.classList.contains('wp-toc-nav') && !list.closest('nav')) {
-            list.style.display = 'grid';
-            list.style.gridTemplateColumns = 'repeat(auto-fit, minmax(300px, 1fr))';
-            list.style.gap = '2rem';
-            list.style.listStyle = 'none';
-            list.style.padding = '0';
-        }
+    metrics.forEach(m => {
+        if(m.getAttribute('data-target')) { m.innerText = "0"; metricsObserver.observe(m); }
     });
 });
