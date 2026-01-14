@@ -34,7 +34,6 @@
 /* --- Navigation (TABLE OF CONTENT - CASE STUDY STYLE) --- */
 #wpTocNav {
   position: fixed !important;
-  
   /* Vertikal Zentriert Rechts */
   top: 50% !important;
   right: 20px !important;
@@ -45,15 +44,14 @@
   /* Z-Index: Unter dem Header (der hat meist 1000+) */
   z-index: 90 !important;
   
-  /* WICHTIG: Die Box ist "Luft". Klicks gehen durch! 
-     Dadurch funktionieren deine Dropdowns oben wieder. */
+  /* WICHTIG: Die Box ist "Luft". Klicks gehen durch! */
   pointer-events: none !important;
   
   /* Styling: Minimalistischer Sidebar Look */
   background: rgba(10, 10, 10, 0.8) !important;
   padding: 1.5rem !important;
   border-radius: 12px !important;
-  border-right: 2px solid var(--gold) !important; /* Akzent rechts */
+  border-right: 2px solid rgba(255,255,255,0.1) !important; /* Standard Linie rechts grau */
   border: 1px solid rgba(255,255,255,0.05); /* Zarter Rand sonst */
   backdrop-filter: blur(10px) !important;
   
@@ -101,11 +99,29 @@
     font-size: 0.85rem !important;
     transition: all 0.3s !important;
     opacity: 0.6 !important;
-    display: inline-block !important;
+    display: block !important; /* Block damit Border rechts funktioniert */
+    padding: 2px 0 !important;
     
     /* Hier aktivieren wir die Maus wieder */
     pointer-events: auto !important; 
     cursor: pointer !important;
+    border-right: 2px solid transparent; /* Platzhalter für Border */
+    margin-right: -1.6rem; /* Zieht Border an den Rand des Containers */
+    padding-right: 1.6rem; /* Text wieder reinrücken */
+}
+
+.wp-toc-link:hover { 
+    color: var(--gold) !important; 
+    opacity: 1 !important;
+    transform: translateX(-5px); 
+}
+
+/* --- ACTIVE STATE (Das Leuchten) --- */
+.wp-toc-link.active {
+    color: var(--gold) !important;
+    opacity: 1 !important;
+    font-weight: 700 !important;
+    border-right: 2px solid var(--gold) !important; /* Orangene Linie rechts */
 }
 
 .wp-toc-link:hover { 
