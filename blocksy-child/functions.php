@@ -2,14 +2,14 @@
 /**
  * Blocksy Child - Nexus Ultimate Edition
  * INCLUDES: Shortcodes, Schema & Snippets (Alles wird geladen!)
- * FIXED: Kein Inline-Style mehr, Dropdowns funktionieren wieder.
+ * FIX: "Critical CSS" Injektion entfernt, damit das Menü nicht mehr blockiert.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // --- 1. EXTERNE DATEIEN AUS DEM INC-ORDNER LADEN ---
 $inc_dir = get_stylesheet_directory() . '/inc/';
 
-// Liste der wichtigen Dateien
+// Liste der Module, die geladen werden (Shortcodes, SEO etc.)
 $files_to_load = [
     'shortcodes.php',  
     'org-schema.php',  
@@ -24,22 +24,23 @@ foreach ( $files_to_load as $file ) {
     }
 }
 
-// --- 2. STYLES & SCRIPTS (HIER IST DER FIX) ---
+// --- 2. STYLES & SCRIPTS (SAUBER GELADEN) ---
 add_action( 'wp_enqueue_scripts', function () {
-    // 1. Parent & Child Styles laden
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.0.2' );
+    // 1. Parent & Child Styles
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.0.5' );
 
     // 2. HOMEPAGE ASSETS (Nur auf der Startseite)
     if ( is_front_page() ) {
-        // CSS sauber registrieren (Zwingt Browser zum Neuladen)
+        // WICHTIG: Wir laden das CSS als DATEI, nicht als Inline-Code.
+        // Das erlaubt dem Browser, unsere Fixes (z-index, pointer-events) zu lesen.
         wp_enqueue_style( 
             'nexus-homepage-css', 
             get_stylesheet_directory_uri() . '/assets/css/homepage.css', 
             [], 
-            time() 
+            time() // Cache-Buster: Zwingt Browser zum Neuladen
         );
 
-        // JS laden
+        // JS laden (Menü-Logik)
         wp_enqueue_script( 
             'nexus-home', 
             get_stylesheet_directory_uri() . '/assets/js/homepage.js', 
@@ -55,16 +56,16 @@ add_action( 'wp_enqueue_scripts', function () {
     }
 }, 20 );
 
-// --- 3. SCHRIFTEN & KLEINKRAM (PERFORMANCE) ---
-// Der "Critical CSS" Block wurde hier entfernt!
+// --- 3. SCHRIFTEN & PERFORMANCE ---
+// HIER WURDE DER FEHLERHAFTE "CRITICAL CSS" BLOCK ENTFERNT!
 add_action( 'wp_head', function () {
     $font = get_stylesheet_directory_uri() . '/fonts';
     
-    // Preload Fonts
+    // Schriftarten vorladen
     echo '<link rel="preload" href="' . $font . '/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>';
     echo "<style>@font-face { font-family: 'Satoshi'; src: url('$font/Satoshi-Variable.woff2') format('woff2-variations'); font-weight: 300 900; font-display: swap; font-style: normal; }</style>";
     
-    // Footer Background Fix (der darf bleiben)
+    // Footer Background Fix
     echo '<style>.ft { background: #0a0a0a; }</style>';
 }, 5 );
 ?>
