@@ -50,7 +50,7 @@ add_action( 'wp_head', function() {
             'https://www.linkedin.com/in/hasim-%C3%BCner/',
             'https://github.com/Hasim-hannover'
         ],
-        'priceRange'    => '$$$'
+        'priceRange'    => '€€€'
     ];
 
     echo '<script type="application/ld+json">' . json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . '</script>';
