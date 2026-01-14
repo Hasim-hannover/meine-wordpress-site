@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const zombieCode = document.getElementById('nexus-home-critical');
     if (zombieCode) zombieCode.remove();
 
-    // --- 1. Sticky Navigation & Scroll Spy (Active State) ---
+    // --- 1. Sticky Navigation & Scroll Spy ---
     const nav = document.getElementById('wpTocNav');
     const hero = document.getElementById('hero');
     const tocLinks = document.querySelectorAll('.wp-toc-link');
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const sections = sectionIds.map(id => document.getElementById(id)).filter(sec => sec);
 
     if (nav && hero) {
-        // A. Sichtbarkeit (Menü einblenden nach Hero)
+        // Sichtbarkeit
         const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) {
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         heroObserver.observe(hero);
 
-        // B. Active State Highlighting
+        // Active State
         const highlightObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }, { 
             root: null, 
-            rootMargin: "-30% 0px -50% 0px", // Trigger-Bereich optimiert
+            rootMargin: "-20% 0px -60% 0px", 
             threshold: 0 
         });
 
@@ -52,9 +52,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // --- 2. FAQ Accordion (Auto-Close) ---
+    // --- 2. FAQ Accordion ---
     const details = document.querySelectorAll("details.wp-faq-item");
-
     details.forEach((targetDetail) => {
         targetDetail.addEventListener("click", () => {
             details.forEach((detail) => {
@@ -65,19 +64,16 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // --- 3. KPI Animation (Zuverlässiger) ---
+    // --- 3. KPI Animation ---
     const metrics = document.querySelectorAll('.wp-metric-value');
-
     const animateValue = (obj, start, end, duration) => {
         let startTimestamp = null;
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const ease = 1 - Math.pow(1 - progress, 3);
-            
             const currentVal = Math.floor(ease * (end - start) + start);
             obj.innerText = currentVal;
-            
             if (progress < 1) {
                 window.requestAnimationFrame(step);
             } else {
@@ -92,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function() {
             if (entry.isIntersecting) {
                 const target = entry.target;
                 const targetValue = parseInt(target.getAttribute('data-target'));
-                
                 if (!isNaN(targetValue)) {
                     animateValue(target, 0, targetValue, 2000);
                     observer.unobserve(target);
@@ -105,6 +100,24 @@ document.addEventListener("DOMContentLoaded", function() {
         if(metric.getAttribute('data-target')) {
             metric.innerText = "0"; 
             metricsObserver.observe(metric);
+        }
+    });
+
+    // --- 4. BLOG GRID ENFORCER (Der Hammer für das Layout) ---
+    // Wir suchen den Bereich, wo der Blog sein könnte (letzte Section vor Footer oft)
+    // Da wir wissen, dass er im Container nach dem FAQ kommt:
+    
+    // Versuch 1: Wir suchen Listen (ul) die Artikel enthalten
+    const possibleBlogLists = document.querySelectorAll('.wp-section ul, .wp-section ol, .entries');
+    
+    possibleBlogLists.forEach(list => {
+        // Prüfen ob es nach Blog aussieht (hat mehr als 1 Kind, keine Navigation)
+        if (list.children.length > 1 && !list.classList.contains('wp-toc-nav') && !list.closest('nav')) {
+            list.style.display = 'grid';
+            list.style.gridTemplateColumns = 'repeat(auto-fit, minmax(300px, 1fr))';
+            list.style.gap = '2rem';
+            list.style.listStyle = 'none';
+            list.style.padding = '0';
         }
     });
 });

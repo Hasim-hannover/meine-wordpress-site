@@ -31,7 +31,7 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (TABLE OF CONTENT - RECHTS & ORANGE) --- */
+/* --- Navigation (TABLE OF CONTENT - CLEAN) --- */
 #wpTocNav {
   position: fixed !important;
   top: 50% !important;
@@ -89,7 +89,7 @@
     opacity: 1 !important;
 }
 
-/* ACTIVE STATE (Orange) */
+/* ACTIVE STATE */
 .wp-toc-link.active {
     color: var(--gold) !important;
     opacity: 1 !important;
@@ -107,7 +107,7 @@
 }
 
 
-/* --- FAQ DESIGN (Accordion Style) --- */
+/* --- FAQ DESIGN --- */
 .wp-faq { max-width: 800px; margin: 0 auto; }
 
 .wp-faq-item {
@@ -130,7 +130,6 @@
 
 .wp-faq-item summary:hover { color: var(--gold); }
 
-/* Plus Icon */
 .wp-faq-item summary::after {
     content: '+';
     font-weight: 300;
@@ -140,7 +139,6 @@
     transition: transform 0.3s ease;
 }
 
-/* Offen */
 .wp-faq-item[open] summary::after {
     transform: rotate(45deg);
     color: var(--white);
@@ -154,68 +152,49 @@
     padding-right: 2rem;
 }
 
-/* --- BLOG GRID / CARD STYLE (Der Fix für "nebeneinander") --- */
-
-/* Wir suchen den Container, der Blog-Posts enthält. Oft ist das ein <ul> oder <div> */
-/* Selektor 1: Wenn es eine Liste ist (ul.posts-list oder ähnlich) */
-.wp-section:has([hu_blog]) ul, 
-/* Selektor 2: Wenn es ein Div-Wrapper ist */
-.wp-section:has([hu_blog]) .posts-grid,
-/* Selektor 3: Fallback für Blocksy Standard Loops */
-.wp-section:has([hu_blog]) .entries {
+/* --- BLOG GRID / CARD STYLE (Generisch) --- */
+/* Das hier greift auf ALLES, was im letzten Abschnitt ist und eine Liste oder Grid sein könnte */
+.wp-section:nth-last-of-type(2) ul, /* Zweitletzte Section ist oft der Blog (vor CTA) */
+.wp-section:nth-last-of-type(2) .posts-grid,
+.wp-section:nth-last-of-type(2) .entries {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important; /* ZWINGEND 3 Spalten */
+    grid-template-columns: repeat(3, 1fr) !important;
     gap: 2rem !important;
-    list-style: none !important; /* Keine Punkte */
-    padding: 0 !important;
-    margin: 0 !important;
 }
 
-/* Tablet (2 Spalten) */
 @media (max-width: 1024px) {
-    .wp-section:has([hu_blog]) ul, 
-    .wp-section:has([hu_blog]) .posts-grid,
-    .wp-section:has([hu_blog]) .entries {
+    .wp-section:nth-last-of-type(2) ul,
+    .wp-section:nth-last-of-type(2) .posts-grid,
+    .wp-section:nth-last-of-type(2) .entries {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
-/* Mobile (1 Spalte) */
 @media (max-width: 768px) {
-    .wp-section:has([hu_blog]) ul, 
-    .wp-section:has([hu_blog]) .posts-grid,
-    .wp-section:has([hu_blog]) .entries {
+    .wp-section:nth-last-of-type(2) ul,
+    .wp-section:nth-last-of-type(2) .posts-grid,
+    .wp-section:nth-last-of-type(2) .entries {
         grid-template-columns: 1fr !important;
     }
 }
 
-/* Das Styling der einzelnen Karte (Item) */
-.wp-section:has([hu_blog]) li, 
-.wp-section:has([hu_blog]) article {
+/* Card Styling für die Items darin */
+.wp-section:nth-last-of-type(2) li,
+.wp-section:nth-last-of-type(2) article {
     background: var(--dark-light) !important;
     border: 1px solid rgba(255,255,255,0.05) !important;
     border-radius: 16px !important;
     padding: 2rem !important;
     transition: all 0.3s ease !important;
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important; /* Alle Karten gleich hoch */
 }
 
-.wp-section:has([hu_blog]) li:hover, 
-.wp-section:has([hu_blog]) article:hover {
+.wp-section:nth-last-of-type(2) li:hover,
+.wp-section:nth-last-of-type(2) article:hover {
     transform: translateY(-8px) !important;
     border-color: var(--gold) !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
 }
 
-/* Link Styling innerhalb der Karte */
-.wp-section:has([hu_blog]) a {
-    text-decoration: none !important;
-    color: var(--white) !important;
-}
-
-/* CTA Design (Der Bereich darunter) */
+/* CTA Design */
 #cta .wp-container {
     background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
     border: 1px solid rgba(255,255,255,0.05);
@@ -235,7 +214,6 @@
 .wp-section { padding: var(--spacing-section) 0; }
 .wp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* Hero */
 .wp-hero {
   min-height: 90vh;
   display: flex;
@@ -294,8 +272,7 @@
 }
 @media (min-width: 768px) { .wp-metrics { grid-template-columns: repeat(4, 1fr); } }
 .wp-metric-value {
-  display: block; font-size: 2rem; font-weight: 800; color: var(--white); 
-  font-variant-numeric: tabular-nums; 
+  display: block; font-size: 2rem; font-weight: 800; color: var(--white); font-variant-numeric: tabular-nums; 
 }
 .wp-metric-label { font-size: 0.9rem; color: var(--muted); }
 .wp-metric-label small { display: block; font-size: 0.7em; opacity: 0.6; margin-top: 4px; }
