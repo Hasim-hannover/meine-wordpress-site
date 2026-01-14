@@ -1,18 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-      
-    // FAQ Accordion Logic
-    const details = document.querySelectorAll("details");
-    details.forEach((targetDetail) => {
-      targetDetail.addEventListener("click", () => {
-        details.forEach((detail) => {
-          if (detail !== targetDetail) {
-            detail.removeAttribute("open");
-          }
-        });
-      });
-    });
-
-   // ... existing code ...
+// ... existing code ...
 
 /**
  * NEXUS: Homepage Scripts & Styles laden

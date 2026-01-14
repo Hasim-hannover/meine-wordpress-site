@@ -31,28 +31,25 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (Updated: Rechts & Hidden) --- */
+/* --- Navigation (Rechts & Hidden) --- */
 .wp-toc-nav {
   position: fixed;
-  right: 20px; /* Jetzt rechts */
-  left: auto; /* Reset left */
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
-  background: rgba(10, 10, 10, 0.9); /* Etwas dunkler für mehr Kontrast */
+  background: rgba(10, 10, 10, 0.9);
   padding: 1.5rem;
   border-radius: var(--border-radius);
-  border: 1px solid rgba(255,176,32,0.15); /* Subtiler Gold-Rand */
-  backdrop-filter: blur(10px); /* Glas-Effekt für "Style" */
+  border: 1px solid rgba(255,176,32,0.15);
+  backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   
-  /* Initial Hidden State */
   opacity: 0;
-  pointer-events: none; /* Klickbar nur wenn sichtbar */
+  pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Klasse für JS, wenn Hero vorbei ist */
 .wp-toc-nav.is-visible {
     opacity: 1;
     pointer-events: auto;
@@ -68,7 +65,7 @@
     letter-spacing: 1.5px;
     margin-bottom: 1rem;
     color: var(--muted);
-    text-align: right; /* Rechtsbündig für den Look */
+    text-align: right;
 }
 
 .wp-toc-nav ul {
@@ -87,7 +84,7 @@
     transition: all 0.3s;
     opacity: 0.7;
     position: relative;
-    padding-right: 15px; /* Platz für Marker */
+    padding-right: 15px;
 }
 
 .wp-toc-link:hover { 
@@ -95,7 +92,6 @@
     opacity: 1;
 }
 
-/* Kleiner Gold-Punkt bei Hover oder Active (Optional für Style) */
 .wp-toc-link:hover::after {
     content: '';
     position: absolute;
@@ -120,12 +116,20 @@
   padding: 0 20px;
 }
 
-/* --- Hero Section --- */
+/* --- Hero Section (ZENTRIERT) --- */
 .wp-hero {
   min-height: 90vh;
   display: flex;
   align-items: center;
+  justify-content: center; /* Zentriert vertikal & horizontal */
   padding-top: 80px; 
+  text-align: center; /* Text zentrieren */
+}
+
+.wp-hero > .wp-container > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Flex Items zentrieren */
 }
 
 .wp-hero-kicker {
@@ -149,7 +153,7 @@
 
 .wp-hero-title span {
   color: var(--gold);
-  display: block; 
+  display: inline-block; /* Damit es im Flow bleibt oder Block für Umbruch */
 }
 
 .wp-hero-subtitle {
@@ -158,6 +162,8 @@
   color: var(--muted);
   max-width: 700px;
   margin-bottom: 2rem;
+  margin-left: auto; /* Auto margin für Zentrierung */
+  margin-right: auto;
 }
 
 .wp-trust-stack {
@@ -186,6 +192,8 @@
   transition: transform 0.3s, border-color 0.3s;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Inhalte in der Karte zentrieren */
+  text-align: center; /* Text in der Karte zentrieren */
 }
 
 .wp-card:hover {
@@ -211,14 +219,31 @@
   line-height: 1.5;
 }
 
+/* Liste in der Karte: Text linksbündig für Lesbarkeit, aber Block zentriert */
 .wp-card-list {
     margin: 1rem 0;
     font-size: 0.9em;
     color: var(--muted);
     list-style: none;
     padding: 0;
-    flex-grow: 1; /* Schiebt Button nach unten */
+    flex-grow: 1;
+    text-align: left; /* Zurück auf Links für die Liste selbst */
+    width: 100%; /* Volle Breite damit Text-Align wirkt */
+    max-width: 300px; /* Optional: Begrenzung damit es nicht zu breit wird */
 }
+
+.wp-card-list li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+}
+/* Kleiner Hack für die Checkmarks falls sie Text sind */
+.wp-card-list li::before {
+    /* content: '✓';  <- Falls nicht im HTML, hier hinzufügen. Du hast es im HTML */
+    margin-right: 8px;
+    color: var(--gold);
+}
+
 
 .wp-price-tag {
     margin-top: 1rem;
@@ -232,7 +257,7 @@
     font-size: 0.9em;
 }
 
-.wp-btn-wrapper { margin-top: 1.5rem; }
+.wp-btn-wrapper { margin-top: 1.5rem; width: 100%; }
 
 /* --- Success / Metrics --- */
 .wp-success-card {
@@ -240,6 +265,7 @@
     border-radius: var(--border-radius);
     padding: 2rem;
     border: 1px solid rgba(255,255,255,0.05);
+    text-align: center; /* Zentriert */
 }
 
 .wp-metrics {
@@ -247,6 +273,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 2rem;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
@@ -258,6 +285,8 @@
   font-size: 2rem;
   font-weight: 800;
   color: var(--white);
+  /* Monospace Ziffern verhindern Springen während der Animation */
+  font-variant-numeric: tabular-nums; 
 }
 
 .wp-metric-label {
@@ -322,6 +351,14 @@
     filter: grayscale(10%);
 }
 
+.wp-partner-content {
+    text-align: left; /* Partner Content oft besser linksbündig für Textfluss */
+}
+/* Wenn du Partner auch zentriert willst, entferne oben .wp-partner-content { text-align: left; } und füge dies hinzu: */
+/* .wp-partner-grid { text-align: center; } 
+.wp-partner-content { text-align: center; }
+*/
+
 .wp-badge {
     text-transform: uppercase;
     color: var(--gold);
@@ -347,6 +384,10 @@
     padding: 1.5rem;
     border-radius: var(--border-radius);
     border: 1px solid rgba(255,255,255,0.05);
+    text-align: center; /* Steps Zentriert */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .wp-step-num {
@@ -373,9 +414,24 @@
 }
 
 /* --- FAQ --- */
+/* FAQ ist meist besser linksbündig lesbar, aber Titel zentriert */
+.wp-section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.wp-section-h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+.wp-section-p {
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
 .wp-faq-item {
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding: 1.5rem 0;
+    text-align: left; /* FAQ Items links */
 }
 
 .wp-faq-item summary {
