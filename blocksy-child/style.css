@@ -22,57 +22,105 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
 
-/* --- 2. NEXUS MEGA MENÜ (RIGHT ALIGN FIX) --- */
 
-/* 1. Container Setup */
+/* --- 2. NEXUS MEGA MENÜ (VIEWPORT FIX) --- */
+
+/* 1. Reset für das List-Item */
+/* Wir nehmen dem Menüpunkt die Kontrolle über die Positionierung */
 .ct-header .menu-item.mega {
-    /* Wir machen es relativ, damit das Dropdown am Menüpunkt klebt, aber wir steuern es anders */
-    position: relative !important;
+    position: static !important;
 }
 
-/* 2. Das Dropdown - Jetzt rechtsbündig verankert */
+/* 2. Das Dropdown - Jetzt orientiert am VIEWPORT (Bildschirm) */
 .ct-header .menu-item.mega > .sub-menu {
-    /* WICHTIG: Wir verankern es rechts, damit es nicht raus rutscht */
-    left: auto !important;
-    right: -100px !important; /* Zieht es etwas nach rechts für Balance, aber hält es im Bild */
+    /* Trick 17: Wir machen es so breit wie den ganzen verdammten Bildschirm */
+    width: 100vw; 
     
-    /* Alternativ: Wenn es immer noch abschneidet, setze right: 0 !important; */
+    /* Dann zentrieren wir es relativ zum Bildschirm */
+    position: fixed; /* Fixed = klebt am Browserfenster, nicht am Menü! */
+    left: 0;
+    right: 0;
     
-    /* Breite: Kompakt genug für alle Screens */
-    width: 900px; 
-    max-width: 90vw; /* Sicherheitsnetz für kleine Laptops */
+    /* Wir schieben es auf die richtige Höhe (unter den Header) */
+    /* Pass diesen Wert an, falls es zu hoch/tief ist (z.B. 80px oder 100px) */
+    top: 85px; 
     
-    /* Position von oben */
-    transform: none !important; /* Kein Verschieben mehr, wir nutzen feste Anker */
-    top: 100%;
-    margin-top: 15px;
+    /* Design des "Streifens" (optional, falls du einen durchgehenden Hintergrund willst) */
+    background: transparent; 
+    padding: 0;
+    margin: 0;
+    pointer-events: none; /* Wichtig: Lässt Klicks durch, solange man nicht auf den Inhalt klickt */
     
-    /* Design & Grid */
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Die 4 heiligen Spalten */
-    gap: 20px;
-    padding: 35px;
-    
-    /* Champions League Look */
-    background-color: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.7);
-    border-radius: 12px;
-    
-    /* Animation */
+    /* Sichtbarkeit */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.25s ease;
-    z-index: 9999;
+    transition: all 0.2s ease;
+    z-index: 99999;
 }
 
-/* 3. Hover - Einblenden */
+/* 3. Der eigentliche Container INHALT (Der schwarze Kasten) */
+/* Wir nutzen das innere Grid als eigentliche Box */
+.ct-header .menu-item.mega > .sub-menu {
+    display: flex; /* Flexbox um den Kasten zu zentrieren */
+    justify-content: center; /* Zentriert den Kasten horizontal */
+}
+
+/* Hier stylen wir das Raster selbst */
+.ct-header .menu-item.mega > .sub-menu::before {
+    /* Dummy-Element, falls nötig. Aber wir stylen lieber das Grid direkt. */
+    content: none;
+}
+
+/* Wir müssen das Grid-Layout auf das Dropdown anwenden, aber begrenzt auf eine Breite */
+.ct-header .menu-item.mega > .sub-menu {
+    /* KORREKTUR: Wir bauen den Container anders auf, damit es funktioniert */
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Das ist der "Wrapper", der den Inhalt hält */
+.ct-header .menu-item.mega > .sub-menu > li {
+    /* Versteckt die Standard-Listen-Logik */
+    display: block;
+}
+
+/* --- DER EIGENTLICHE SCHWARZE KASTEN --- */
+/* Wir missbrauchen das Grid nicht direkt, sondern bauen einen Wrapper, 
+   aber da wir keinen Zugriff auf HTML haben, stylen wir das sub-menu um. */
+
 .ct-header .menu-item.mega:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto; /* Jetzt darf man klicken */
 }
 
-/* 4. Spalten-Überschriften */
+/* FINALE LOGIK: Wir machen das sub-menu zum "Wrapper" und nutzen Grid darin */
+.ct-header .menu-item.mega > .sub-menu {
+    /* Zurücksetzen der Fixed-Idee oben für das Styling, behalten Positionierung */
+    display: grid;
+    /* Hier definieren wir die MAXIMALE Breite des Inhalts */
+    grid-template-columns: repeat(4, 1fr);
+    width: 1100px !important; /* Breite des Inhalts */
+    max-width: 95vw;
+    
+    /* Zentrierung auf dem Bildschirm */
+    left: 50% !important;
+    transform: translateX(-50%);
+    position: fixed !important;
+    top: 90px !important; /* Abstand von oben - ANPASSEN! */
+    
+    /* Der Champions League Look */
+    background-color: #0a0a0a !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8) !important;
+    border-radius: 12px;
+    padding: 40px;
+    gap: 30px;
+    height: auto;
+}
+
+/* Spalten Styling (Bleibt gleich) */
 .ct-header .menu-item.mega > .sub-menu > li > a {
     font-size: 13px;
     font-weight: 800;
@@ -86,7 +134,6 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     pointer-events: none;
 }
 
-/* 5. Links Container */
 .ct-header .menu-item.mega .sub-menu .sub-menu {
     display: flex;
     flex-direction: column;
@@ -94,26 +141,20 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     background: transparent !important;
     box-shadow: none !important;
     padding: 0;
-    border: none;
     position: static;
-    visibility: visible;
-    opacity: 1;
-    transform: none;
+    border: none;
 }
 
-/* 6. Die Links */
 .ct-header .menu-item.mega .sub-menu .sub-menu li a {
     color: #a0a0a0;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
-    padding: 2px 0;
-    transition: 0.2s ease;
 }
-
 .ct-header .menu-item.mega .sub-menu .sub-menu li a:hover {
-    color: #ffffff;
+    color: #fff;
     transform: translateX(5px);
 }
+
 
 /* --- 3. FOOTER (Von dir übernommen) --- */
 .ft {
