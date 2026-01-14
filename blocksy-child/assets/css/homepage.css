@@ -36,7 +36,7 @@
   position: fixed !important;
   /* Vertikal Zentriert Rechts */
   top: 50% !important;
-  right: 20px !important;
+  right: 40px !important; /* MEHR ABSTAND VOM RAND (war 20px) */
   bottom: auto !important;
   left: auto !important;
   transform: translateY(-50%) !important;
@@ -49,17 +49,17 @@
   
   /* Styling: Minimalistischer Sidebar Look */
   background: rgba(10, 10, 10, 0.8) !important;
-  padding: 1.5rem !important;
+  padding: 2rem !important; /* MEHR INNENABSTAND (war 1.5rem) */
   border-radius: 12px !important;
-  border-right: 2px solid rgba(255,255,255,0.1) !important; /* Standard Linie rechts grau */
-  border: 1px solid rgba(255,255,255,0.05); /* Zarter Rand sonst */
+  border-right: 2px solid rgba(255,255,255,0.1) !important; 
+  border: 1px solid rgba(255,255,255,0.05); 
   backdrop-filter: blur(10px) !important;
   
   opacity: 0 !important;
   transition: opacity 0.4s ease !important;
   
   width: auto !important;
-  min-width: 140px;
+  min-width: 180px; /* BREITER GEMACHT (war 140px) */
 }
 
 /* Sichtbarkeit */
@@ -96,18 +96,18 @@
 .wp-toc-link {
     color: var(--white) !important;
     text-decoration: none !important;
-    font-size: 0.85rem !important;
+    font-size: 0.9rem !important; /* ETWAS GRÖSSERE SCHRIFT (war 0.85rem) */
     transition: all 0.3s !important;
     opacity: 0.6 !important;
-    display: block !important; /* Block damit Border rechts funktioniert */
-    padding: 2px 0 !important;
+    display: block !important; 
+    padding: 4px 0 !important; /* MEHR PLATZ ZWISCHEN DEN LINKS */
     
     /* Hier aktivieren wir die Maus wieder */
     pointer-events: auto !important; 
     cursor: pointer !important;
-    border-right: 2px solid transparent; /* Platzhalter für Border */
-    margin-right: -1.6rem; /* Zieht Border an den Rand des Containers */
-    padding-right: 1.6rem; /* Text wieder reinrücken */
+    border-right: 2px solid transparent; 
+    margin-right: -2.1rem; /* ANGEPASST AN NEUES PADDING */
+    padding-right: 2.1rem; /* ANGEPASST AN NEUES PADDING */
 }
 
 .wp-toc-link:hover { 
