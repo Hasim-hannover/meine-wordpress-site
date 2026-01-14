@@ -31,27 +31,31 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (SAFE ZONE & GHOST MODE) --- */
+/* --- Navigation (FIXED & SAFE) --- */
 #wpTocNav {
   position: fixed !important;
-  right: 20px !important;
+  
+  /* Wir setzen es nach UNTEN RECHTS */
   bottom: 30px !important; 
-  top: auto !important;
+  right: 20px !important;
+  top: auto !important; 
   left: auto !important;
   
-  /* Wir senken den Z-Index auf 1, damit Dropdowns (meist 100+) DRÜBER liegen */
-  z-index: 1 !important;
+  /* Z-Index: Niedrig genug, um unter dem Header zu bleiben */
+  z-index: 90 !important;
   
-  /* WICHTIG: Die Box ist für die Maus unsichtbar. Man klickt hindurch. */
+  /* WICHTIG: Die Box selbst fängt keine Klicks ab. Man klickt durch sie hindurch. */
   pointer-events: none !important;
   
+  /* Styling */
   background: rgba(10, 10, 10, 0.85) !important;
-  padding: 1.2rem !important;
+  padding: 1rem !important;
   border-radius: var(--border-radius) !important;
   border: 1px solid rgba(255,176,32,0.15) !important;
   backdrop-filter: blur(8px) !important;
   box-shadow: 0 5px 20px rgba(0,0,0,0.4) !important;
   
+  /* Animation */
   opacity: 0 !important;
   transform: translateY(20px) !important;
   transition: opacity 0.4s ease, transform 0.4s ease !important;
@@ -60,6 +64,7 @@
   max-width: 180px !important;
 }
 
+/* Sichtbarkeit */
 #wpTocNav.is-visible {
     opacity: 1 !important;
     transform: translateY(0) !important;
@@ -73,7 +78,7 @@
     font-size: 0.7rem !important;
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
-    margin-bottom: 0.8rem !important;
+    margin-bottom: 0.5rem !important;
     color: var(--muted) !important;
     text-align: right !important;
 }
@@ -85,9 +90,9 @@
     text-align: right !important;
 }
 
-#wpTocNav li { margin-bottom: 0.5rem !important; }
+#wpTocNav li { margin-bottom: 0.4rem !important; }
 
-/* NUR DIE LINKS SIND KLICKBAR */
+/* Links aktivieren (Nur der Text ist klickbar) */
 .wp-toc-link {
     color: var(--white) !important;
     text-decoration: none !important;
@@ -120,11 +125,10 @@
     border-radius: 50% !important;
 }
 
-/* --- Layout --- */
+/* --- Layout Styles (Zentriert) --- */
 .wp-section { padding: var(--spacing-section) 0; }
 .wp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* Hero Zentriert */
 .wp-hero {
   min-height: 90vh;
   display: flex;
@@ -233,14 +237,3 @@
 }
 .wp-faq-content { margin-top: 1rem; color: var(--muted); line-height: 1.6; }
 .cta-disclaimer { margin-top: 1rem; font-size: 0.85rem; opacity: 0.6; color: var(--muted); }
-
-/* --- NOTFALL FIX FÜR DEIN HEADER-PROBLEM --- */
-/* Wir zwingen dein Hauptmenü an die Spitze der Nahrungskette */
-header.site-header, 
-#main-header,
-.ct-header,
-.sub-menu,
-.ct-dropdown {
-    z-index: 999999 !important;
-    position: relative !important;
-}

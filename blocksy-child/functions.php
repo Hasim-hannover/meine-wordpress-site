@@ -2,7 +2,7 @@
 /**
  * Blocksy Child - Nexus Ultimate Edition
  * INCLUDES: Shortcodes, Schema & Snippets (Alles wird geladen!)
- * FIXED: CSS wird jetzt sauber geladen, kein "Zombie-Code" mehr im Head.
+ * FIXED: Kein Inline-Style mehr, Dropdowns funktionieren wieder.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -27,16 +27,16 @@ foreach ( $files_to_load as $file ) {
 // --- 2. STYLES & SCRIPTS (HIER IST DER FIX) ---
 add_action( 'wp_enqueue_scripts', function () {
     // 1. Parent & Child Styles laden
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.0.1' );
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.0.2' );
 
     // 2. HOMEPAGE ASSETS (Nur auf der Startseite)
     if ( is_front_page() ) {
-        // CSS sauber registrieren (statt hart in den Head zu schreiben)
+        // CSS sauber registrieren (Zwingt Browser zum Neuladen)
         wp_enqueue_style( 
             'nexus-homepage-css', 
             get_stylesheet_directory_uri() . '/assets/css/homepage.css', 
             [], 
-            time() // Cache-Busting: Zwingt Browser zum Neuladen
+            time() 
         );
 
         // JS laden
@@ -56,7 +56,7 @@ add_action( 'wp_enqueue_scripts', function () {
 }, 20 );
 
 // --- 3. SCHRIFTEN & KLEINKRAM (PERFORMANCE) ---
-// HIER WURDE DER "NEXUS-HOME-CRITICAL" BLOCK ENTFERNT!
+// Der "Critical CSS" Block wurde hier entfernt!
 add_action( 'wp_head', function () {
     $font = get_stylesheet_directory_uri() . '/fonts';
     
