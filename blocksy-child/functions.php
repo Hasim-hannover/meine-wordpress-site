@@ -1,31 +1,38 @@
 <?php
 /**
- * Blocksy Child - Nexus Emergency Fix
- * REPARATUR: Homepage Styles wiederhergestellt.
+ * Blocksy Child - Nexus Final Rescue
+ * FIX: Shortcodes (Resultate) und Homepage wiederhergestellt.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-// 1. STANDARD STYLES & SCRIPTS
-add_action( 'wp_enqueue_scripts', function () {
-    // Haupt-Style laden
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '7.2.0-RESCUE' );
+// --- 1. EXTERNE DATEIEN LADEN (HIER FEHLTE WAS!) ---
+// Lädt deine Shortcodes für die "Resultate" Sektion
+$shortcodes = get_stylesheet_directory() . '/inc/shortcodes.php';
+if ( file_exists( $shortcodes ) ) {
+    require_once $shortcodes;
+}
 
-    // JS laden
+// --- 2. STYLES & SCRIPTS ---
+add_action( 'wp_enqueue_scripts', function () {
+    // Haupt-Style laden (Version erhöht, damit Browser neu lädt)
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '8.0.0-FIXED' );
+
+    // JS für Homepage
     if ( is_front_page() ) {
         wp_enqueue_script( 'nexus-home', get_stylesheet_directory_uri() . '/assets/js/homepage.js', [], '6.0.0', true );
     }
+    // JS für Blog
     if ( is_home() || is_single() ) {
          wp_enqueue_script( 'nexus-blog', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], '6.0.0', true );
     }
 }, 20 );
 
-// 2. CRITICAL CSS & HOMEPAGE STYLE (WICHTIG!)
+// --- 3. CRITICAL CSS (HOMEPAGE DESIGN) ---
 add_action( 'wp_head', function () {
-    // Kleiner Footer Fix (behalten wir sicherheitshalber)
+    // Footer Background Fix
     echo '<style>.ft { background: #0a0a0a; }</style>';
 
-    // --- HIER WAR DER FEHLER: DAS MUSS DRIN BLEIBEN! ---
-    // Lädt die assets/css/homepage.css direkt in den Header
+    // Homepage CSS direkt laden (verhindert "nackte" Seite)
     if ( is_front_page() ) {
         $css = get_stylesheet_directory() . '/assets/css/homepage.css';
         if ( file_exists( $css ) ) {
@@ -34,7 +41,7 @@ add_action( 'wp_head', function () {
     }
 }, 1 );
 
-// 3. FONTS PRELOAD
+// --- 4. SCHRIFTEN (PERFORMANCE) ---
 add_action( 'wp_head', function () {
     $font = get_stylesheet_directory_uri() . '/fonts';
     echo '<link rel="preload" href="' . $font . '/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>';
