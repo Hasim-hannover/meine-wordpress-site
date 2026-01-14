@@ -12,7 +12,7 @@
 .cs-page {
   background-color: var(--dark);
   color: var(--white);
-  font-family: 'Satoshi', sans-serif; /* Fallback zur Theme Font */
+  font-family: 'Satoshi', sans-serif;
   overflow-x: hidden;
 }
 
@@ -31,48 +31,83 @@
     text-decoration: underline;
 }
 
-/* --- Navigation --- */
+/* --- Navigation (Updated: Rechts & Hidden) --- */
 .wp-toc-nav {
   position: fixed;
-  left: 20px;
+  right: 20px; /* Jetzt rechts */
+  left: auto; /* Reset left */
   top: 50%;
   transform: translateY(-50%);
   z-index: 100;
-  background: rgba(0,0,0,0.8);
+  background: rgba(10, 10, 10, 0.9); /* Etwas dunkler für mehr Kontrast */
   padding: 1.5rem;
   border-radius: var(--border-radius);
-  border: 1px solid rgba(255,255,255,0.1);
-  display: none; /* Mobile hidden default */
+  border: 1px solid rgba(255,176,32,0.15); /* Subtiler Gold-Rand */
+  backdrop-filter: blur(10px); /* Glas-Effekt für "Style" */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  
+  /* Initial Hidden State */
+  opacity: 0;
+  pointer-events: none; /* Klickbar nur wenn sichtbar */
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-@media (min-width: 1200px) {
-  .wp-toc-nav { display: block; }
+/* Klasse für JS, wenn Hero vorbei ist */
+.wp-toc-nav.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (max-width: 1200px) {
+  .wp-toc-nav { display: none !important; }
 }
 
 .wp-toc-nav h4 {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-bottom: 1rem;
     color: var(--muted);
+    text-align: right; /* Rechtsbündig für den Look */
 }
 
 .wp-toc-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    text-align: right;
 }
 
-.wp-toc-nav li { margin-bottom: 0.5rem; }
+.wp-toc-nav li { margin-bottom: 0.6rem; }
 
 .wp-toc-link {
     color: var(--white);
     text-decoration: none;
     font-size: 0.9rem;
-    transition: color 0.3s;
+    transition: all 0.3s;
+    opacity: 0.7;
+    position: relative;
+    padding-right: 15px; /* Platz für Marker */
 }
 
-.wp-toc-link:hover { color: var(--gold); }
+.wp-toc-link:hover { 
+    color: var(--gold); 
+    opacity: 1;
+}
+
+/* Kleiner Gold-Punkt bei Hover oder Active (Optional für Style) */
+.wp-toc-link:hover::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+}
+
 
 /* --- Layout --- */
 .wp-section {
@@ -90,7 +125,7 @@
   min-height: 90vh;
   display: flex;
   align-items: center;
-  padding-top: 80px; /* Offset for Header */
+  padding-top: 80px; 
 }
 
 .wp-hero-kicker {
@@ -114,7 +149,7 @@
 
 .wp-hero-title span {
   color: var(--gold);
-  display: block; /* Break line on visual */
+  display: block; 
 }
 
 .wp-hero-subtitle {
@@ -149,6 +184,8 @@
   border-radius: var(--border-radius);
   border: 1px solid rgba(255,255,255,0.05);
   transition: transform 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
 .wp-card:hover {
@@ -180,6 +217,7 @@
     color: var(--muted);
     list-style: none;
     padding: 0;
+    flex-grow: 1; /* Schiebt Button nach unten */
 }
 
 .wp-price-tag {
@@ -302,7 +340,6 @@
 
 @media (min-width: 768px) {
     .wp-process { grid-template-columns: repeat(5, 1fr); }
-    /* Horizontal flow for desktop logic could be added here */
 }
 
 .wp-step {
