@@ -31,94 +31,96 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (Rechts & Hidden) --- */
-/* Das ist der "Geist": Die Box fängt keine Klicks ab */
+/* --- Navigation (DIE ATOMBOMBEN-LÖSUNG) --- */
 .wp-toc-nav {
-  position: fixed;
-  right: 20px;
-  top: 60%; 
-  transform: translateY(-50%);
-  z-index: 10; 
+  position: fixed !important;
   
-  background: rgba(10, 10, 10, 0.9);
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  border: 1px solid rgba(255,176,32,0.15);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  /* 1. Wir zwingen es nach UNTEN RECHTS */
+  top: auto !important; 
+  bottom: 30px !important; 
+  right: 20px !important;
   
-  /* Initial unsichtbar */
-  opacity: 0;
+  /* 2. Wir zwingen es GANZ NACH HINTEN */
+  z-index: 1 !important; 
   
-  /* WICHTIG: Die Box selbst ist durchklickbar (Geist-Modus) */
-  pointer-events: none; 
+  /* 3. Wir zwingen es, KEINE MAUSKLICKS abzufangen */
+  pointer-events: none !important;
   
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  width: auto;
-  max-width: 200px;
+  /* Styling */
+  background: rgba(10, 10, 10, 0.9) !important;
+  padding: 1.5rem !important;
+  border-radius: var(--border-radius) !important;
+  border: 1px solid rgba(255,176,32,0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  
+  /* Animation */
+  opacity: 0 !important; /* Initial versteckt */
+  width: auto !important;
+  max-width: 180px !important;
+  transform: none !important; /* Transform resetten, falls Zombie es nutzt */
 }
 
-/* Sichtbarkeit steuern */
+/* Wenn sichtbar */
 .wp-toc-nav.is-visible {
-    opacity: 1;
-    /* Auch wenn sichtbar: Box bleibt durchklickbar, nur Links werden aktiv */
+    opacity: 1 !important;
 }
 
 @media (max-width: 1200px) {
   .wp-toc-nav { display: none !important; }
 }
 
+/* Styling Reset für Innenleben */
 .wp-toc-nav h4 {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 1rem;
-    color: var(--muted);
-    text-align: right;
+    font-size: 0.7rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    margin-bottom: 0.8rem !important;
+    color: var(--muted) !important;
+    text-align: right !important;
 }
 
 .wp-toc-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: right;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: right !important;
 }
 
-.wp-toc-nav li { margin-bottom: 0.6rem; }
+.wp-toc-nav li { margin-bottom: 0.5rem !important; }
 
-/* Das sind die Links: Die einzigen Teile, die Klicks annehmen */
+/* Links wieder klickbar machen - WICHTIG */
 .wp-toc-link {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-    opacity: 0.7;
-    position: relative;
-    padding-right: 15px;
-    display: inline-block;
+    color: var(--white) !important;
+    text-decoration: none !important;
+    font-size: 0.85rem !important;
+    transition: all 0.3s !important;
+    opacity: 0.7 !important;
+    position: relative !important;
+    padding-right: 15px !important;
+    display: inline-block !important;
     
-    /* WICHTIG: Links sind klickbar */
-    pointer-events: auto; 
-    cursor: pointer;
+    /* WICHTIG: Hier aktivieren wir die Maus wieder NUR für den Text */
+    pointer-events: auto !important; 
+    cursor: pointer !important;
 }
 
 .wp-toc-link:hover { 
-    color: var(--gold); 
-    opacity: 1;
+    color: var(--gold) !important; 
+    opacity: 1 !important;
 }
 
 .wp-toc-link:hover::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
+    content: '' !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 5px !important;
+    height: 5px !important;
+    background: var(--gold) !important;
+    border-radius: 50% !important;
 }
-
 
 /* --- Layout --- */
 .wp-section {
@@ -131,7 +133,7 @@
   padding: 0 20px;
 }
 
-/* --- Hero Section (ZENTRIERT) --- */
+/* --- Hero Section (Zentriert) --- */
 .wp-hero {
   min-height: 90vh;
   display: flex;
@@ -464,4 +466,15 @@
     font-size: 0.85rem;
     opacity: 0.6;
     color: var(--muted);
+}
+
+/* --- NOTFALL FIX FÜR DEIN HEADER-PROBLEM --- */
+/* Das ist der letzte Nagel im Sarg des Problems */
+header.site-header, 
+#main-header,
+.ct-header,
+.sub-menu,
+.ct-dropdown {
+    z-index: 999999 !important;
+    position: relative !important;
 }
