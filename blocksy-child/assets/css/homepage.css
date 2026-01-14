@@ -35,13 +35,13 @@
 .wp-toc-nav {
   position: fixed;
   right: 20px;
-  /* NEXUS FIX: Tiefer gesetzt, damit es nicht mit dem Header kollidiert */
+  /* NEXUS FIX: 60% von oben, damit es weit weg vom Header ist */
   top: 60%; 
   transform: translateY(-50%);
   
-  /* NEXUS FIX: Z-Index auf 10 gesenkt. 
-     Header hat meist 100+. Jetzt klappt das Menü sicher DRÜBER auf. */
-  z-index: 10;
+  /* NEXUS FIX: Z-Index auf 5 (Extrem niedrig). 
+     Es schwebt über dem Text (Index 0-1), aber unter JEDEM Header (Index 100+) */
+  z-index: 5;
   
   background: rgba(10, 10, 10, 0.9);
   padding: 1.5rem;
@@ -55,8 +55,9 @@
   pointer-events: none; 
   transition: opacity 0.4s ease, transform 0.4s ease;
   
-  /* Sicherheitsbreite, damit es nicht den halben Screen blockiert */
+  /* Sicherheitsbegrenzung */
   max-width: 200px; 
+  width: auto;
 }
 
 /* Wenn sichtbar, dann klickbar machen */
@@ -96,6 +97,7 @@
     position: relative;
     padding-right: 15px;
     display: inline-block;
+    cursor: pointer; /* Zeigt Klickbarkeit an */
 }
 
 .wp-toc-link:hover { 
