@@ -23,40 +23,44 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 }
 
 
-/* --- 2. NEXUS MEGA MENÜ (GOLDILOCKS EDITION - 1050px) --- */
+/* --- 2. NEXUS MEGA MENÜ (PRECISION GLASS EDITION) --- */
 
-/* 1. Container Setup - Wichtig für die Zentrierung */
+/* 1. Container Setup */
 .ct-header .menu-item.mega {
-    position: static !important; /* Erlaubt die Orientierung an der ganzen Seite */
+    position: static !important;
 }
 
-/* 2. Das Dropdown-Fenster */
+/* 2. Das Dropdown-Fenster - High-End Finish */
 .ct-header .menu-item.mega > .sub-menu {
-    /* Feste Breite: Nicht zu riesig, nicht zu klein. Genau richtig. */
-    width: 1050px; 
-    max-width: 95vw; /* Sicherheit für kleinere Laptops */
+    /* Exakte Breite für perfekte Proportionen (4x 220px Spalten) */
+    width: 880px; 
+    max-width: 95vw;
     
-    /* Perfekte Zentrierung auf dem Bildschirm */
+    /* Zentrierung */
     left: 50% !important;
     transform: translateX(-50%) translateY(10px);
     
-    /* Grid Layout: 4 gleich große Spalten für Symmetrie */
+    /* Grid Layout */
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 30px; /* Genug Luft zwischen den Themen */
-    padding: 35px; /* Ordentlicher Innenabstand wirkt edel */
+    grid-template-columns: repeat(4, 1fr); /* 4 gleichmäßige Spalten */
+    gap: 25px; /* Perfekter Abstand */
+    padding: 30px; /* Nicht zu viel, nicht zu wenig Luft */
     
-    /* Design & Hintergrund */
-    background-color: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.08); /* Subtiler Rahmen */
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6); /* Tiefer Schatten */
-    border-radius: 12px;
+    /* CHAMPIONS LEAGUE STYLE: Glassmorphism */
+    background-color: rgba(10, 10, 10, 0.95); /* Leicht transparentes Schwarz */
+    backdrop-filter: blur(12px); /* Der Weichzeichner-Effekt im Hintergrund */
+    -webkit-backdrop-filter: blur(12px); /* Safari Support */
+    
+    /* Ränder & Schatten */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    border-radius: 10px;
     
     /* Animation */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    margin-top: 15px;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    margin-top: 10px; /* Enger am Header für besseren Maus-Übergang */
     z-index: 999;
 }
 
@@ -67,17 +71,17 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     transform: translateX(-50%) translateY(0);
 }
 
-/* 4. Spalten-Überschriften (Orange) */
+/* 4. Spalten-Überschriften (Kompakt & Edel) */
 .ct-header .menu-item.mega > .sub-menu > li > a {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em; /* Etwas breiter gesperrt für Luxus-Look */
     color: #ffb020;
-    margin-bottom: 18px; /* Klarer Abstand zum Inhalt */
+    margin-bottom: 15px;
     display: block;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 8px;
     pointer-events: none;
 }
 
@@ -85,7 +89,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ct-header .menu-item.mega .sub-menu .sub-menu {
     display: flex;
     flex-direction: column;
-    gap: 8px; /* Abstand zwischen Links */
+    gap: 6px; /* Schön eng beieinander */
     background: transparent !important;
     box-shadow: none !important;
     padding: 0;
@@ -96,20 +100,21 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     border: none;
 }
 
-/* 6. Die einzelnen Links (Weiß/Grau) */
+/* 6. Die einzelnen Links */
 .ct-header .menu-item.mega .sub-menu .sub-menu li a {
     color: #a0a0a0;
-    font-size: 15px;
+    font-size: 14px; /* Gut lesbar */
     font-weight: 500;
     padding: 3px 0;
     transition: 0.2s ease;
+    display: inline-block; /* Wichtig für die Transform-Animation */
 }
 
+/* Hover Effekt: Weiß werden + kleiner Ruck nach rechts */
 .ct-header .menu-item.mega .sub-menu .sub-menu li a:hover {
     color: #ffffff;
-    transform: translateX(5px);
+    transform: translateX(4px);
 }
-
 /* --- 3. FOOTER (Von dir übernommen) --- */
 .ft {
     --bg: #0a0a0a; --fg: #fafafa; --line: rgba(255,255,255,.08); --cta: #ffb020;
