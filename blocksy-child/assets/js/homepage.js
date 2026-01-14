@@ -1,15 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // --- 0. ZOMBIE KILLER (Sicherheit) ---
+    // --- 0. ZOMBIE KILLER ---
     const zombieCode = document.getElementById('nexus-home-critical');
     if (zombieCode) zombieCode.remove();
 
-    // --- 1. Sticky Navigation & Scroll Spy ---
+    // --- 1. Sticky Navigation & Scroll Spy (Active State) ---
     const nav = document.getElementById('wpTocNav');
     const hero = document.getElementById('hero');
     const tocLinks = document.querySelectorAll('.wp-toc-link');
     
-    // Sektionen finden
     const sectionIds = Array.from(tocLinks).map(link => {
         const href = link.getAttribute('href');
         return href.startsWith('#') ? href.substring(1) : null;
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         heroObserver.observe(hero);
 
-        // B. Active State Highlighting (Welcher Punkt leuchtet?)
+        // B. Active State Highlighting
         const highlightObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }, { 
             root: null, 
-            rootMargin: "-20% 0px -60% 0px", 
+            rootMargin: "-30% 0px -50% 0px", // Trigger-Bereich optimiert
             threshold: 0 
         });
 
@@ -53,12 +52,11 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // --- 2. FAQ Accordion (Exklusiv: Eins auf, andere zu) ---
+    // --- 2. FAQ Accordion (Auto-Close) ---
     const details = document.querySelectorAll("details.wp-faq-item");
 
     details.forEach((targetDetail) => {
         targetDetail.addEventListener("click", () => {
-            // Schließe alle anderen Details-Elemente
             details.forEach((detail) => {
                 if (detail !== targetDetail) {
                     detail.removeAttribute("open");
@@ -67,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // --- 3. KPI Animation (Zuverlässiger Start) ---
+    // --- 3. KPI Animation (Zuverlässiger) ---
     const metrics = document.querySelectorAll('.wp-metric-value');
 
     const animateValue = (obj, start, end, duration) => {
@@ -75,19 +73,15 @@ document.addEventListener("DOMContentLoaded", function() {
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            
-            // Easing (Schnell starten, sanft bremsen)
             const ease = 1 - Math.pow(1 - progress, 3);
             
             const currentVal = Math.floor(ease * (end - start) + start);
-            
-            // Check auf Vorzeichen im HTML (optional, hier einfach Zahl)
             obj.innerText = currentVal;
             
             if (progress < 1) {
                 window.requestAnimationFrame(step);
             } else {
-                obj.innerText = end; // Endwert sicherstellen
+                obj.innerText = end; 
             }
         };
         window.requestAnimationFrame(step);
@@ -100,17 +94,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 const targetValue = parseInt(target.getAttribute('data-target'));
                 
                 if (!isNaN(targetValue)) {
-                    // Animation starten
                     animateValue(target, 0, targetValue, 2000);
-                    observer.unobserve(target); // Beobachtung stoppen
+                    observer.unobserve(target);
                 }
             }
         });
-    }, { threshold: 0.1 }); // Feuert, sobald 10% sichtbar sind
+    }, { threshold: 0.1 }); 
 
     metrics.forEach(metric => {
         if(metric.getAttribute('data-target')) {
-            metric.innerText = "0"; // Startwert auf 0 setzen
+            metric.innerText = "0"; 
             metricsObserver.observe(metric);
         }
     });

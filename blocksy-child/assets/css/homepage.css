@@ -34,14 +34,20 @@
 /* --- Navigation (TABLE OF CONTENT - RECHTS & ORANGE) --- */
 #wpTocNav {
   position: fixed !important;
+  /* Vertikal Zentriert Rechts mit gutem Abstand */
   top: 50% !important;
   right: 40px !important;
   bottom: auto !important;
   left: auto !important;
   transform: translateY(-50%) !important;
+  
+  /* Z-Index: Unter dem Header */
   z-index: 90 !important;
+  
+  /* WICHTIG: Container ist 'Luft' für Klicks */
   pointer-events: none !important;
   
+  /* Styling: Minimalistisch */
   background: transparent !important;
   padding: 0 !important;
   border: none !important;
@@ -52,12 +58,18 @@
   transition: opacity 0.4s ease !important;
   
   width: auto !important;
-  min-width: 140px;
+  min-width: 160px;
 }
 
-#wpTocNav.is-visible { opacity: 1 !important; }
+/* Sichtbarkeit */
+#wpTocNav.is-visible {
+    opacity: 1 !important;
+}
 
-@media (max-width: 1200px) { #wpTocNav { display: none !important; } }
+/* Auf Tablets und Mobile ausblenden */
+@media (max-width: 1200px) {
+  #wpTocNav { display: none !important; }
+}
 
 #wpTocNav h4 { display: none !important; }
 
@@ -71,10 +83,11 @@
 
 #wpTocNav li { margin-bottom: 0 !important; }
 
+/* Links */
 .wp-toc-link {
     color: var(--muted) !important;
     text-decoration: none !important;
-    font-size: 0.85rem !important;
+    font-size: 0.9rem !important;
     transition: all 0.3s !important;
     opacity: 0.6 !important;
     display: block !important; 
@@ -89,11 +102,11 @@
     opacity: 1 !important;
 }
 
-/* ACTIVE STATE (Orange) */
+/* ACTIVE STATE (Orange Leuchten beim Scrollen) */
 .wp-toc-link.active {
     color: var(--gold) !important;
     opacity: 1 !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
 }
 
 .wp-toc-link.active::after {
@@ -107,7 +120,7 @@
 }
 
 
-/* --- FAQ DESIGN (Accordion - Case Study Style) --- */
+/* --- FAQ DESIGN (Accordion Style) --- */
 .wp-faq { max-width: 800px; margin: 0 auto; }
 
 .wp-faq-item {
@@ -154,31 +167,69 @@
     padding-right: 2rem;
 }
 
-/* --- BLOG GRID / CTA SECTION (Der "letzte Abschnitt") --- */
-/* Wir gehen davon aus, dass der Shortcode eine Liste (ul/div) ausgibt. */
-/* Dieser Selektor versucht, den Inhalt des Shortcodes zu greifen */
-.wp-section:has([hu_blog]) .wp-container > div, 
-.wp-section:has([hu_blog]) ul.post-list, 
-.wp-section:has([hu_blog]) .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Grid */
-    gap: 2rem;
+/* --- BLOG GRID / CARD STYLE (Der "letzte Abschnitt") --- */
+
+/* Wir zielen auf den Bereich, der den Shortcode [hu_blog] enthält */
+/* ACHTUNG: :has() ist modern, funktioniert in allen modernen Browsern */
+.wp-section:has(article), 
+.wp-section:has(.post) {
+    /* Optional: Hintergrund etwas abheben für diesen Bereich */
+    position: relative;
 }
 
-/* Karten-Look für Blog-Items (Generisch, falls Klassen fehlen) */
-.wp-section:has([hu_blog]) article, 
-.wp-section:has([hu_blog]) li {
+/* Das Grid-Layout erzwingen */
+/* Wir nehmen an, dass WordPress Artikel in 'article' Tags oder divs packt */
+.wp-section:has(article) .wp-container > div, /* Falls ein Wrapper div da ist */
+.wp-section:has(article) .wp-container {      /* Falls direkt im Container */
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* 3 Nebeneinander */
+    gap: 2rem !important;
+}
+
+/* Tablet: 2 Nebeneinander */
+@media (max-width: 1024px) {
+    .wp-section:has(article) .wp-container > div,
+    .wp-section:has(article) .wp-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Mobile: 1 Untereinander */
+@media (max-width: 768px) {
+    .wp-section:has(article) .wp-container > div,
+    .wp-section:has(article) .wp-container {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Der Karten-Style für jeden Artikel */
+article, .post {
     background: var(--dark-light);
     border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 2rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.wp-section:has([hu_blog]) article:hover, 
-.wp-section:has([hu_blog]) li:hover {
-    transform: translateY(-5px);
+article:hover, .post:hover {
+    transform: translateY(-8px);
     border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Überschriften im Blog */
+article h2, article h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+article a {
+    text-decoration: none;
+    color: var(--white);
 }
 
 /* CTA Design */
@@ -189,7 +240,18 @@
     padding: 4rem 2rem;
     text-align: center;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    margin-top: 4rem; /* Abstand zum Blog */
+    margin-top: 4rem; 
+}
+
+#cta .wp-section-h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* --- KPI / Metrics Fix --- */
+.wp-metric-value {
+    font-variant-numeric: tabular-nums; 
+    display: inline-block;
 }
 
 /* --- Layout Rest --- */
@@ -295,13 +357,7 @@
 .highlight-step { border-color: var(--gold); background: rgba(255,176,32,0.05); }
 .highlight-num { background: var(--gold); color: black; border-color: var(--gold); }
 
-/* FAQ */
-.wp-section-title { text-align: center; margin-bottom: 3rem; }
-.wp-section-h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-.wp-section-p { color: var(--muted); font-size: 1.1rem; }
-.cta-disclaimer { margin-top: 1rem; font-size: 0.85rem; opacity: 0.6; color: var(--muted); }
-
-/* Header Fix */
+/* Header Fix (Kein Position Relative, nur Z-Index!) */
 header.site-header, #main-header, .ct-header {
     z-index: 999999 !important;
 }
