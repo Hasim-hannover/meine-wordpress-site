@@ -35,11 +35,13 @@
 .wp-toc-nav {
   position: fixed;
   right: 20px;
-  /* NEXUS FIX: Tiefer gesetzt (65%), damit es das Hauptmenü nicht stört */
-  top: 65%; 
+  /* NEXUS FIX: Tiefer gesetzt, damit es nicht mit dem Header kollidiert */
+  top: 60%; 
   transform: translateY(-50%);
-  /* NEXUS FIX: Z-Index auf 90 reduziert (Blocksy Header ist meist höher) */
-  z-index: 90;
+  
+  /* NEXUS FIX: Z-Index auf 10 gesenkt. 
+     Header hat meist 100+. Jetzt klappt das Menü sicher DRÜBER auf. */
+  z-index: 10;
   
   background: rgba(10, 10, 10, 0.9);
   padding: 1.5rem;
@@ -48,14 +50,19 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   
+  /* Initial unsichtbar & nicht klickbar */
   opacity: 0;
-  pointer-events: none; /* Klicke werden ignoriert, wenn unsichtbar */
+  pointer-events: none; 
   transition: opacity 0.4s ease, transform 0.4s ease;
+  
+  /* Sicherheitsbreite, damit es nicht den halben Screen blockiert */
+  max-width: 200px; 
 }
 
+/* Wenn sichtbar, dann klickbar machen */
 .wp-toc-nav.is-visible {
     opacity: 1;
-    pointer-events: auto; /* WICHTIG: Jetzt darf geklickt werden */
+    pointer-events: auto; 
 }
 
 @media (max-width: 1200px) {
@@ -88,9 +95,7 @@
     opacity: 0.7;
     position: relative;
     padding-right: 15px;
-    /* NEXUS FIX: Sicherstellen, dass Links immer klickbar sind, wenn Parent sichtbar */
-    pointer-events: auto;
-    display: inline-block; /* Hilft bei Klick-Flächen */
+    display: inline-block;
 }
 
 .wp-toc-link:hover { 
