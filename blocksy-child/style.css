@@ -21,41 +21,46 @@ Version: 7.1.0-FIXED
 body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
-
-/* --- 2. NEXUS MEGA MENÜ (Champions League Style) --- */
+/* --- 2. NEXUS MEGA MENÜ (COMPACT EDITION) --- */
 
 /* Container Setup */
 .ct-header .menu-item.mega {
-    position: static !important; /* Erlaubt volle Breite */
+    position: static !important;
 }
 
-/* Das Dropdown-Fenster */
+/* Das Dropdown-Fenster - Jetzt kompakter & schärfer */
 .ct-header .menu-item.mega > .sub-menu {
     width: 100%;
-    max-width: 1200px; /* Begrenzt die Breite auf Content-Breite */
+    /* HIER DIE ÄNDERUNG: 960px statt 1200px wirkt straffer */
+    max-width: 960px; 
     left: 50% !important;
-    transform: translateX(-50%) translateY(10px); /* Mittig + Startposition */
+    transform: translateX(-50%) translateY(10px);
     
     /* Grid Layout */
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 Spalten */
-    gap: 30px;
-    padding: 40px;
+    /* 4 Spalten, die sich den Platz teilen */
+    grid-template-columns: repeat(4, 1fr); 
+    /* Weniger Lücke zwischen den Spalten */
+    gap: 20px; 
+    /* Weniger Innenabstand */
+    padding: 30px; 
     
     /* Champions Look */
     background-color: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-    border-radius: 12px;
+    /* Etwas feinerer Border */
+    border: 1px solid rgba(255, 255, 255, 0.06); 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+    border-radius: 10px;
     
-    /* Initialzustand (Versteckt) */
+    /* Animation */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    margin-top: 15px; /* Abstand zum Header */
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    margin-top: 10px; /* Näher am Menüpunkt */
+    z-index: 999;
 }
 
-/* Hover Zustand - Jetzt anzeigen! */
+/* Hover Zustand */
 .ct-header .menu-item.mega:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
@@ -64,23 +69,23 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 
 /* Spalten-Überschriften (Build & Care etc.) */
 .ct-header .menu-item.mega > .sub-menu > li > a {
-    font-size: 14px;
+    font-size: 13px; /* Minimal kleiner für mehr Eleganz */
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #ffb020; /* Dein Akzent-Gelb/Orange */
-    margin-bottom: 15px;
+    letter-spacing: 0.08em;
+    color: #ffb020;
+    margin-bottom: 12px; /* Weniger Abstand nach unten */
     display: block;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 8px;
-    pointer-events: none; /* Überschriften nicht klickbar machen */
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 6px;
+    pointer-events: none;
 }
 
-/* Die Unter-Links (Unterpunkt) */
+/* Container für Links */
 .ct-header .menu-item.mega .sub-menu .sub-menu {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px; /* Links rücken näher zusammen */
     background: transparent !important;
     box-shadow: none !important;
     padding: 0;
@@ -88,20 +93,21 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     visibility: visible;
     opacity: 1;
     transform: none;
+    border: none;
 }
 
-/* Styling der einzelnen Links */
+/* Die einzelnen Links */
 .ct-header .menu-item.mega .sub-menu .sub-menu li a {
     color: #a0a0a0;
-    font-size: 15px;
+    font-size: 15px; /* Lesbarkeit bleibt */
     font-weight: 500;
-    padding: 4px 0;
+    padding: 3px 0; /* Kompakter */
     transition: 0.2s ease;
 }
 
 .ct-header .menu-item.mega .sub-menu .sub-menu li a:hover {
     color: #ffffff;
-    transform: translateX(5px);
+    transform: translateX(4px);
 }
 
 /* --- 3. FOOTER (Von dir übernommen) --- */
