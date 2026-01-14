@@ -31,24 +31,18 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (TABLE OF CONTENT - CLEAN & ELEGANT) --- */
+/* --- Navigation (TABLE OF CONTENT - RECHTS & ORANGE) --- */
 #wpTocNav {
   position: fixed !important;
-  /* Vertikal Zentriert Rechts mit gutem Abstand */
   top: 50% !important;
-  right: 40px !important; /* Genug Luft zum Rand */
+  right: 40px !important;
   bottom: auto !important;
   left: auto !important;
   transform: translateY(-50%) !important;
-  
-  /* Z-Index: Unter dem Header */
   z-index: 90 !important;
-  
-  /* WICHTIG: Container ist 'Luft' für Klicks */
   pointer-events: none !important;
   
-  /* Styling: Minimalistisch, keine schwere Box */
-  background: transparent !important; /* Transparenter Hintergrund für Clean Look */
+  background: transparent !important;
   padding: 0 !important;
   border: none !important;
   backdrop-filter: none !important;
@@ -61,31 +55,22 @@
   min-width: 140px;
 }
 
-/* Sichtbarkeit */
-#wpTocNav.is-visible {
-    opacity: 1 !important;
-}
+#wpTocNav.is-visible { opacity: 1 !important; }
 
-/* Auf Tablets und Mobile ausblenden */
-@media (max-width: 1200px) {
-  #wpTocNav { display: none !important; }
-}
+@media (max-width: 1200px) { #wpTocNav { display: none !important; } }
 
-#wpTocNav h4 {
-    display: none !important; /* Label 'Navigation' weg für Cleaner Look */
-}
+#wpTocNav h4 { display: none !important; }
 
 #wpTocNav ul {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
     text-align: right !important;
-    border-right: 1px solid rgba(255,255,255,0.1); /* Feine Linie rechts */
+    border-right: 1px solid rgba(255,255,255,0.1); 
 }
 
 #wpTocNav li { margin-bottom: 0 !important; }
 
-/* Links */
 .wp-toc-link {
     color: var(--muted) !important;
     text-decoration: none !important;
@@ -93,10 +78,8 @@
     transition: all 0.3s !important;
     opacity: 0.6 !important;
     display: block !important; 
-    padding: 8px 20px 8px 0 !important; /* Platz rechts für die Linie */
+    padding: 8px 20px 8px 0 !important; 
     position: relative;
-    
-    /* Hier aktivieren wir die Maus wieder */
     pointer-events: auto !important; 
     cursor: pointer !important;
 }
@@ -106,18 +89,17 @@
     opacity: 1 !important;
 }
 
-/* --- ACTIVE STATE (Das orangene Leuchten) --- */
+/* ACTIVE STATE (Orange) */
 .wp-toc-link.active {
     color: var(--gold) !important;
     opacity: 1 !important;
     font-weight: 600 !important;
 }
 
-/* Der Indikator-Strich rechts für das aktive Element */
 .wp-toc-link.active::after {
     content: '';
     position: absolute;
-    right: -1px; /* Genau auf der Border-Linie */
+    right: -1px; 
     top: 0;
     bottom: 0;
     width: 2px;
@@ -125,26 +107,20 @@
 }
 
 
-/* --- FAQ DESIGN (Accordion Style) --- */
-.wp-faq {
-    max-width: 800px;
-    margin: 0 auto;
-}
+/* --- FAQ DESIGN (Accordion - Case Study Style) --- */
+.wp-faq { max-width: 800px; margin: 0 auto; }
 
 .wp-faq-item {
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding: 1.5rem 0;
 }
-
-.wp-faq-item:first-child {
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
+.wp-faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
 
 .wp-faq-item summary {
     cursor: pointer;
     font-weight: 600;
     font-size: 1.1rem;
-    list-style: none;
+    list-style: none; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -152,11 +128,9 @@
     transition: color 0.3s ease;
 }
 
-.wp-faq-item summary:hover {
-    color: var(--gold);
-}
+.wp-faq-item summary:hover { color: var(--gold); }
 
-/* Custom Plus Icon */
+/* Plus Icon */
 .wp-faq-item summary::after {
     content: '+';
     font-weight: 300;
@@ -166,7 +140,7 @@
     transition: transform 0.3s ease;
 }
 
-/* Offener Zustand */
+/* Offen */
 .wp-faq-item[open] summary::after {
     transform: rotate(45deg);
     color: var(--white);
@@ -180,14 +154,34 @@
     padding-right: 2rem;
 }
 
-/* --- CTA & BLOG SECTION (Card Style) --- */
-/* Wir stylen den Container um den Blog-Shortcode und CTA herum */
-#cta, .wp-section:has([hu_blog]) {
-    position: relative;
-    z-index: 1;
+/* --- BLOG GRID / CTA SECTION (Der "letzte Abschnitt") --- */
+/* Wir gehen davon aus, dass der Shortcode eine Liste (ul/div) ausgibt. */
+/* Dieser Selektor versucht, den Inhalt des Shortcodes zu greifen */
+.wp-section:has([hu_blog]) .wp-container > div, 
+.wp-section:has([hu_blog]) ul.post-list, 
+.wp-section:has([hu_blog]) .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Grid */
+    gap: 2rem;
 }
 
-/* Der eigentliche Card-Look für den CTA Bereich */
+/* Karten-Look für Blog-Items (Generisch, falls Klassen fehlen) */
+.wp-section:has([hu_blog]) article, 
+.wp-section:has([hu_blog]) li {
+    background: var(--dark-light);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.wp-section:has([hu_blog]) article:hover, 
+.wp-section:has([hu_blog]) li:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+/* CTA Design */
 #cta .wp-container {
     background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
     border: 1px solid rgba(255,255,255,0.05);
@@ -195,23 +189,14 @@
     padding: 4rem 2rem;
     text-align: center;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-}
-
-#cta .wp-section-h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-/* --- KPI / Metrics Fix --- */
-.wp-metric-value {
-    font-variant-numeric: tabular-nums; 
-    display: inline-block;
+    margin-top: 4rem; /* Abstand zum Blog */
 }
 
 /* --- Layout Rest --- */
 .wp-section { padding: var(--spacing-section) 0; }
 .wp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
+/* Hero */
 .wp-hero {
   min-height: 90vh;
   display: flex;
@@ -271,6 +256,7 @@
 @media (min-width: 768px) { .wp-metrics { grid-template-columns: repeat(4, 1fr); } }
 .wp-metric-value {
   display: block; font-size: 2rem; font-weight: 800; color: var(--white); 
+  font-variant-numeric: tabular-nums; 
 }
 .wp-metric-label { font-size: 0.9rem; color: var(--muted); }
 .wp-metric-label small { display: block; font-size: 0.7em; opacity: 0.6; margin-top: 4px; }
@@ -308,6 +294,12 @@
 }
 .highlight-step { border-color: var(--gold); background: rgba(255,176,32,0.05); }
 .highlight-num { background: var(--gold); color: black; border-color: var(--gold); }
+
+/* FAQ */
+.wp-section-title { text-align: center; margin-bottom: 3rem; }
+.wp-section-h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+.wp-section-p { color: var(--muted); font-size: 1.1rem; }
+.cta-disclaimer { margin-top: 1rem; font-size: 0.85rem; opacity: 0.6; color: var(--muted); }
 
 /* Header Fix */
 header.site-header, #main-header, .ct-header {
