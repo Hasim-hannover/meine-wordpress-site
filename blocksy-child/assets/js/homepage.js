@@ -1,21 +1,24 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // --- ZOMBIE KILLER ---
+    // --- 0. ZOMBIE KILLER ---
     const zombieCode = document.getElementById('nexus-home-critical');
     if (zombieCode) zombieCode.remove();
 
     // --- 1. Sticky Navigation & Scroll Spy ---
     const nav = document.getElementById('wpTocNav');
     const hero = document.getElementById('hero');
-    // Alle Links im Inhaltsverzeichnis holen
     const tocLinks = document.querySelectorAll('.wp-toc-link');
     
-    // Array der Sektions-IDs, die wir beobachten wollen (basierend auf den Links)
-    const sectionIds = Array.from(tocLinks).map(link => link.getAttribute('href').substring(1));
-    const sections = sectionIds.map(id => document.getElementById(id)).filter(sec => sec); // Nur existierende Sektionen
+    // Array der Sektions-IDs holen
+    const sectionIds = Array.from(tocLinks).map(link => {
+        const href = link.getAttribute('href');
+        return href.startsWith('#') ? href.substring(1) : null;
+    }).filter(id => id); // Nulls filtern
+
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(sec => sec);
 
     if (nav && hero) {
-        // A. Sichtbarkeit des Menüs (erst nach Hero)
+        // A. Sichtbarkeit (erst nach Hero)
         const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) {
@@ -29,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         heroObserver.observe(hero);
 
         // B. Active State Highlighting (Scroll Spy)
+        // Wir nutzen einen Observer mit 50% Threshold, um zu wissen, wo wir sind
         const highlightObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -44,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }, { 
             root: null, 
-            rootMargin: "-40% 0px -40% 0px", // Aktiviert Sektion, wenn sie in der Mitte des Screens ist
+            rootMargin: "-20% 0px -60% 0px", // Trigger Zone in der oberen Mitte
             threshold: 0 
         });
 
@@ -53,7 +57,21 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // --- 2. KPI Zahlen Animation ---
+    // --- 2. FAQ Accordion (Nur eins offen) ---
+    const details = document.querySelectorAll("details.wp-faq-item");
+
+    details.forEach((targetDetail) => {
+        targetDetail.addEventListener("click", () => {
+            // Alle anderen schließen, wenn man eines öffnet
+            details.forEach((detail) => {
+                if (detail !== targetDetail) {
+                    detail.removeAttribute("open");
+                }
+            });
+        });
+    });
+
+    // --- 3. KPI Animation ---
     const metrics = document.querySelectorAll('.wp-metric-value');
 
     const animateValue = (obj, start, end, duration) => {

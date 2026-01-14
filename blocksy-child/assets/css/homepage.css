@@ -31,35 +31,34 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (TABLE OF CONTENT - CASE STUDY STYLE) --- */
+/* --- Navigation (TABLE OF CONTENT - CLEAN & ELEGANT) --- */
 #wpTocNav {
   position: fixed !important;
-  /* Vertikal Zentriert Rechts */
+  /* Vertikal Zentriert Rechts mit gutem Abstand */
   top: 50% !important;
-  right: 40px !important; /* MEHR ABSTAND VOM RAND (war 20px) */
+  right: 40px !important; /* Genug Luft zum Rand */
   bottom: auto !important;
   left: auto !important;
   transform: translateY(-50%) !important;
   
-  /* Z-Index: Unter dem Header (der hat meist 1000+) */
+  /* Z-Index: Unter dem Header */
   z-index: 90 !important;
   
-  /* WICHTIG: Die Box ist "Luft". Klicks gehen durch! */
+  /* WICHTIG: Container ist 'Luft' für Klicks */
   pointer-events: none !important;
   
-  /* Styling: Minimalistischer Sidebar Look */
-  background: rgba(10, 10, 10, 0.8) !important;
-  padding: 2rem !important; /* MEHR INNENABSTAND (war 1.5rem) */
-  border-radius: 12px !important;
-  border-right: 2px solid rgba(255,255,255,0.1) !important; 
-  border: 1px solid rgba(255,255,255,0.05); 
-  backdrop-filter: blur(10px) !important;
+  /* Styling: Minimalistisch, keine schwere Box */
+  background: transparent !important; /* Transparenter Hintergrund für Clean Look */
+  padding: 0 !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
   
   opacity: 0 !important;
   transition: opacity 0.4s ease !important;
   
   width: auto !important;
-  min-width: 180px; /* BREITER GEMACHT (war 140px) */
+  min-width: 140px;
 }
 
 /* Sichtbarkeit */
@@ -67,20 +66,13 @@
     opacity: 1 !important;
 }
 
-/* Auf kleinen Tablets und Mobile ausblenden */
-@media (max-width: 1024px) {
+/* Auf Tablets und Mobile ausblenden */
+@media (max-width: 1200px) {
   #wpTocNav { display: none !important; }
 }
 
 #wpTocNav h4 {
-    font-size: 0.65rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 2px !important;
-    margin-bottom: 1rem !important;
-    color: var(--muted) !important;
-    text-align: right !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 0.5rem;
+    display: none !important; /* Label 'Navigation' weg für Cleaner Look */
 }
 
 #wpTocNav ul {
@@ -88,47 +80,50 @@
     padding: 0 !important;
     margin: 0 !important;
     text-align: right !important;
+    border-right: 1px solid rgba(255,255,255,0.1); /* Feine Linie rechts */
 }
 
-#wpTocNav li { margin-bottom: 0.8rem !important; }
+#wpTocNav li { margin-bottom: 0 !important; }
 
-/* Links aktivieren (Nur Text klickbar) */
+/* Links */
 .wp-toc-link {
-    color: var(--white) !important;
+    color: var(--muted) !important;
     text-decoration: none !important;
-    font-size: 0.9rem !important; /* ETWAS GRÖSSERE SCHRIFT (war 0.85rem) */
+    font-size: 0.85rem !important;
     transition: all 0.3s !important;
     opacity: 0.6 !important;
     display: block !important; 
-    padding: 4px 0 !important; /* MEHR PLATZ ZWISCHEN DEN LINKS */
+    padding: 8px 20px 8px 0 !important; /* Platz rechts für die Linie */
+    position: relative;
     
     /* Hier aktivieren wir die Maus wieder */
     pointer-events: auto !important; 
     cursor: pointer !important;
-    border-right: 2px solid transparent; 
-    margin-right: -2.1rem; /* ANGEPASST AN NEUES PADDING */
-    padding-right: 2.1rem; /* ANGEPASST AN NEUES PADDING */
 }
 
 .wp-toc-link:hover { 
-    color: var(--gold) !important; 
+    color: var(--white) !important; 
     opacity: 1 !important;
-    transform: translateX(-5px); 
 }
 
-/* --- ACTIVE STATE (Das Leuchten) --- */
+/* --- ACTIVE STATE (Das orangene Leuchten) --- */
 .wp-toc-link.active {
     color: var(--gold) !important;
     opacity: 1 !important;
-    font-weight: 700 !important;
-    border-right: 2px solid var(--gold) !important; /* Orangene Linie rechts */
+    font-weight: 600 !important;
 }
 
-.wp-toc-link:hover { 
-    color: var(--gold) !important; 
-    opacity: 1 !important;
-    transform: translateX(-5px); /* Kleiner Hover-Effekt nach links */
+/* Der Indikator-Strich rechts für das aktive Element */
+.wp-toc-link.active::after {
+    content: '';
+    position: absolute;
+    right: -1px; /* Genau auf der Border-Linie */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gold);
 }
+
 
 /* --- FAQ DESIGN (Accordion Style) --- */
 .wp-faq {
@@ -149,7 +144,7 @@
     cursor: pointer;
     font-weight: 600;
     font-size: 1.1rem;
-    list-style: none; /* Standard Dreieck weg */
+    list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -173,7 +168,7 @@
 
 /* Offener Zustand */
 .wp-faq-item[open] summary::after {
-    transform: rotate(45deg); /* Plus zu X */
+    transform: rotate(45deg);
     color: var(--white);
 }
 
@@ -185,9 +180,31 @@
     padding-right: 2rem;
 }
 
+/* --- CTA & BLOG SECTION (Card Style) --- */
+/* Wir stylen den Container um den Blog-Shortcode und CTA herum */
+#cta, .wp-section:has([hu_blog]) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Der eigentliche Card-Look für den CTA Bereich */
+#cta .wp-container {
+    background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 24px;
+    padding: 4rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+#cta .wp-section-h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
 /* --- KPI / Metrics Fix --- */
 .wp-metric-value {
-    font-variant-numeric: tabular-nums; /* Verhindert Wackeln der Zahlen */
+    font-variant-numeric: tabular-nums; 
     display: inline-block;
 }
 
