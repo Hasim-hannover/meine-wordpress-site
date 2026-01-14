@@ -35,9 +35,12 @@
 .wp-toc-nav {
   position: fixed;
   right: 20px;
-  top: 50%;
+  /* NEXUS FIX: Tiefer gesetzt (65%), damit es das Hauptmenü nicht stört */
+  top: 65%; 
   transform: translateY(-50%);
-  z-index: 100;
+  /* NEXUS FIX: Z-Index auf 90 reduziert (Blocksy Header ist meist höher) */
+  z-index: 90;
+  
   background: rgba(10, 10, 10, 0.9);
   padding: 1.5rem;
   border-radius: var(--border-radius);
@@ -46,13 +49,13 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none; /* Klicke werden ignoriert, wenn unsichtbar */
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .wp-toc-nav.is-visible {
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: auto; /* WICHTIG: Jetzt darf geklickt werden */
 }
 
 @media (max-width: 1200px) {
@@ -85,6 +88,9 @@
     opacity: 0.7;
     position: relative;
     padding-right: 15px;
+    /* NEXUS FIX: Sicherstellen, dass Links immer klickbar sind, wenn Parent sichtbar */
+    pointer-events: auto;
+    display: inline-block; /* Hilft bei Klick-Flächen */
 }
 
 .wp-toc-link:hover { 
@@ -121,15 +127,15 @@
   min-height: 90vh;
   display: flex;
   align-items: center;
-  justify-content: center; /* Zentriert vertikal & horizontal */
+  justify-content: center;
   padding-top: 80px; 
-  text-align: center; /* Text zentrieren */
+  text-align: center;
 }
 
 .wp-hero > .wp-container > div {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Flex Items zentrieren */
+    align-items: center;
 }
 
 .wp-hero-kicker {
@@ -153,7 +159,7 @@
 
 .wp-hero-title span {
   color: var(--gold);
-  display: inline-block; /* Damit es im Flow bleibt oder Block für Umbruch */
+  display: inline-block;
 }
 
 .wp-hero-subtitle {
@@ -162,7 +168,7 @@
   color: var(--muted);
   max-width: 700px;
   margin-bottom: 2rem;
-  margin-left: auto; /* Auto margin für Zentrierung */
+  margin-left: auto;
   margin-right: auto;
 }
 
@@ -192,8 +198,8 @@
   transition: transform 0.3s, border-color 0.3s;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Inhalte in der Karte zentrieren */
-  text-align: center; /* Text in der Karte zentrieren */
+  align-items: center;
+  text-align: center;
 }
 
 .wp-card:hover {
@@ -219,7 +225,7 @@
   line-height: 1.5;
 }
 
-/* Liste in der Karte: Text linksbündig für Lesbarkeit, aber Block zentriert */
+/* Liste in der Karte */
 .wp-card-list {
     margin: 1rem 0;
     font-size: 0.9em;
@@ -227,9 +233,9 @@
     list-style: none;
     padding: 0;
     flex-grow: 1;
-    text-align: left; /* Zurück auf Links für die Liste selbst */
-    width: 100%; /* Volle Breite damit Text-Align wirkt */
-    max-width: 300px; /* Optional: Begrenzung damit es nicht zu breit wird */
+    text-align: left; /* Text links für Lesbarkeit */
+    width: 100%;
+    max-width: 300px;
 }
 
 .wp-card-list li {
@@ -237,9 +243,8 @@
     display: flex;
     align-items: flex-start;
 }
-/* Kleiner Hack für die Checkmarks falls sie Text sind */
+
 .wp-card-list li::before {
-    /* content: '✓';  <- Falls nicht im HTML, hier hinzufügen. Du hast es im HTML */
     margin-right: 8px;
     color: var(--gold);
 }
@@ -265,7 +270,7 @@
     border-radius: var(--border-radius);
     padding: 2rem;
     border: 1px solid rgba(255,255,255,0.05);
-    text-align: center; /* Zentriert */
+    text-align: center;
 }
 
 .wp-metrics {
@@ -285,7 +290,6 @@
   font-size: 2rem;
   font-weight: 800;
   color: var(--white);
-  /* Monospace Ziffern verhindern Springen während der Animation */
   font-variant-numeric: tabular-nums; 
 }
 
@@ -352,12 +356,8 @@
 }
 
 .wp-partner-content {
-    text-align: left; /* Partner Content oft besser linksbündig für Textfluss */
+    text-align: left;
 }
-/* Wenn du Partner auch zentriert willst, entferne oben .wp-partner-content { text-align: left; } und füge dies hinzu: */
-/* .wp-partner-grid { text-align: center; } 
-.wp-partner-content { text-align: center; }
-*/
 
 .wp-badge {
     text-transform: uppercase;
@@ -384,7 +384,7 @@
     padding: 1.5rem;
     border-radius: var(--border-radius);
     border: 1px solid rgba(255,255,255,0.05);
-    text-align: center; /* Steps Zentriert */
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -414,7 +414,6 @@
 }
 
 /* --- FAQ --- */
-/* FAQ ist meist besser linksbündig lesbar, aber Titel zentriert */
 .wp-section-title {
     text-align: center;
     margin-bottom: 3rem;
@@ -431,7 +430,7 @@
 .wp-faq-item {
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding: 1.5rem 0;
-    text-align: left; /* FAQ Items links */
+    text-align: left;
 }
 
 .wp-faq-item summary {
