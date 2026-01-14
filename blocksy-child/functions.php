@@ -26,8 +26,11 @@ foreach ( $files_to_load as $file ) {
 
 // --- 2. STYLES & SCRIPTS (SAUBER GELADEN) ---
 add_action( 'wp_enqueue_scripts', function () {
+    // Versionsnummer für Child Theme definieren
+    $child_version = '9.0.5';
+
     // 1. Parent & Child Styles
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.0.5' );
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], $child_version );
 
     // 2. HOMEPAGE ASSETS (Nur auf der Startseite)
     if ( is_front_page() ) {
