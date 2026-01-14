@@ -1,10 +1,10 @@
 /*
 Theme Name: Blocksy Child
 Template: blocksy
-Version: 7.0.0-CLEAN
+Version: 7.1.0-FIXED
 */
 
-/* 1. CORE: SATOSHI SCHRIFTEN (Muss hier bleiben!) */
+/* --- 1. CORE: SATOSHI SCHRIFTEN --- */
 @font-face {
     font-family: 'Satoshi';
     src: url('fonts/Satoshi-Variable.woff2') format('woff2-variations'),
@@ -22,7 +22,89 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
 
-/* 2. FOOTER (FUTTER) */
+/* --- 2. NEXUS MEGA MENÜ (Champions League Style) --- */
+
+/* Container Setup */
+.ct-header .menu-item.mega {
+    position: static !important; /* Erlaubt volle Breite */
+}
+
+/* Das Dropdown-Fenster */
+.ct-header .menu-item.mega > .sub-menu {
+    width: 100%;
+    max-width: 1200px; /* Begrenzt die Breite auf Content-Breite */
+    left: 50% !important;
+    transform: translateX(-50%) translateY(10px); /* Mittig + Startposition */
+    
+    /* Grid Layout */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 Spalten */
+    gap: 30px;
+    padding: 40px;
+    
+    /* Champions Look */
+    background-color: #0a0a0a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    border-radius: 12px;
+    
+    /* Initialzustand (Versteckt) */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-top: 15px; /* Abstand zum Header */
+}
+
+/* Hover Zustand - Jetzt anzeigen! */
+.ct-header .menu-item.mega:hover > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Spalten-Überschriften (Build & Care etc.) */
+.ct-header .menu-item.mega > .sub-menu > li > a {
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ffb020; /* Dein Akzent-Gelb/Orange */
+    margin-bottom: 15px;
+    display: block;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 8px;
+    pointer-events: none; /* Überschriften nicht klickbar machen */
+}
+
+/* Die Unter-Links (Unterpunkt) */
+.ct-header .menu-item.mega .sub-menu .sub-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0;
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+}
+
+/* Styling der einzelnen Links */
+.ct-header .menu-item.mega .sub-menu .sub-menu li a {
+    color: #a0a0a0;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 4px 0;
+    transition: 0.2s ease;
+}
+
+.ct-header .menu-item.mega .sub-menu .sub-menu li a:hover {
+    color: #ffffff;
+    transform: translateX(5px);
+}
+
+/* --- 3. FOOTER (Von dir übernommen) --- */
 .ft {
     --bg: #0a0a0a; --fg: #fafafa; --line: rgba(255,255,255,.08); --cta: #ffb020;
     background: var(--bg); color: var(--fg); width: 100%; border-top: 1px solid var(--line);
