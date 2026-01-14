@@ -49,15 +49,15 @@ add_action( 'wp_head', function() {
         'openingHoursSpecification' => [
             [
                 '@type' => 'OpeningHoursSpecification',
-                'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-                'opens' => '09:00',
-                'closes' => '18:00'
+                'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday',],
+                'opens' => '08:30',
+                'closes' => '16:00'
             ]
         ],
         
         'sameAs'        => [
-            'https://www.linkedin.com/in/hasim-uener/',
-            'https://github.com/hasimuener'
+            'https://www.linkedin.com/in/hasim-%C3%BCner/',
+            'https://github.com/Hasim-hannover/'
         ]
     ];
 
