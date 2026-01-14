@@ -31,23 +31,16 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (FIXED & SAFE) --- */
+/* --- Navigation (Sticky) --- */
 #wpTocNav {
   position: fixed !important;
-  
-  /* Wir setzen es nach UNTEN RECHTS */
   bottom: 30px !important; 
   right: 20px !important;
   top: auto !important; 
   left: auto !important;
-  
-  /* Z-Index: Niedrig genug, um unter dem Header zu bleiben */
   z-index: 90 !important;
-  
-  /* WICHTIG: Die Box selbst fängt keine Klicks ab. Man klickt durch sie hindurch. */
   pointer-events: none !important;
   
-  /* Styling */
   background: rgba(10, 10, 10, 0.85) !important;
   padding: 1rem !important;
   border-radius: var(--border-radius) !important;
@@ -55,7 +48,6 @@
   backdrop-filter: blur(8px) !important;
   box-shadow: 0 5px 20px rgba(0,0,0,0.4) !important;
   
-  /* Animation */
   opacity: 0 !important;
   transform: translateY(20px) !important;
   transition: opacity 0.4s ease, transform 0.4s ease !important;
@@ -64,13 +56,14 @@
   max-width: 180px !important;
 }
 
-/* Sichtbarkeit */
 #wpTocNav.is-visible {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
 
-@media (max-width: 1200px) {
+/* NEXUS FIX: Tablet Anpassung */
+/* Verstecken erst ab 900px (Hochformat Tablet), sichtbar im Querformat */
+@media (max-width: 900px) {
   #wpTocNav { display: none !important; }
 }
 
@@ -92,7 +85,7 @@
 
 #wpTocNav li { margin-bottom: 0.4rem !important; }
 
-/* Links aktivieren (Nur der Text ist klickbar) */
+/* Links aktivieren */
 .wp-toc-link {
     color: var(--white) !important;
     text-decoration: none !important;
@@ -102,8 +95,6 @@
     position: relative !important;
     padding-right: 15px !important;
     display: inline-block !important;
-    
-    /* Hier aktivieren wir die Maus wieder */
     pointer-events: auto !important; 
     cursor: pointer !important;
 }
@@ -125,10 +116,17 @@
     border-radius: 50% !important;
 }
 
-/* --- Layout Styles (Zentriert) --- */
+/* --- Layout Styles --- */
 .wp-section { padding: var(--spacing-section) 0; }
 .wp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
+/* Tablet Optimierung für Container */
+@media (max-width: 1024px) {
+    .wp-section { padding: 4rem 0; }
+    .wp-container { padding: 0 30px; } /* Mehr Rand auf Tablets */
+}
+
+/* Hero */
 .wp-hero {
   min-height: 90vh;
   display: flex;
@@ -226,14 +224,66 @@
 .highlight-step { border-color: var(--gold); background: rgba(255,176,32,0.05); }
 .highlight-num { background: var(--gold); color: black; border-color: var(--gold); }
 
-/* FAQ */
+/* --- NEXUS FAQ DESIGN (Case Study Style) --- */
 .wp-section-title { text-align: center; margin-bottom: 3rem; }
 .wp-section-h2 { font-size: 2.5rem; margin-bottom: 1rem; }
 .wp-section-p { color: var(--muted); font-size: 1.1rem; }
-.wp-faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1.5rem 0; text-align: left; }
-.wp-faq-item summary {
-    cursor: pointer; font-weight: 600; font-size: 1.1rem; list-style: none; display: flex;
-    justify-content: space-between; align-items: center;
+
+/* FAQ Container */
+.wp-faq { max-width: 800px; margin: 0 auto; }
+
+/* Einzelnes Item */
+.wp-faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 1.5rem 0;
+    text-align: left;
+    transition: all 0.3s ease;
 }
-.wp-faq-content { margin-top: 1rem; color: var(--muted); line-height: 1.6; }
-.cta-disclaimer { margin-top: 1rem; font-size: 0.85rem; opacity: 0.6; color: var(--muted); }
+
+/* Frage (Summary) */
+.wp-faq-item summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.2rem;
+    list-style: none; /* Standard Dreieck weg */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+    padding-right: 10px;
+}
+
+/* Custom Plus Icon via CSS */
+.wp-faq-item summary::after {
+    content: '+';
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: var(--gold);
+    transition: transform 0.3s ease;
+}
+
+/* Wenn offen: Minus Icon (Drehung) */
+.wp-faq-item[open] summary::after {
+    transform: rotate(45deg); /* Macht aus + ein x */
+    color: var(--white);
+}
+
+/* Antwort */
+.wp-faq-content {
+    margin-top: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 1rem;
+    padding-right: 2rem; /* Platz damit Text nicht zu breit wird */
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header Fix */
+header.site-header, #main-header, .ct-header {
+    z-index: 999999 !important;
+}
