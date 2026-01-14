@@ -31,49 +31,58 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (Sticky) --- */
+/* --- Navigation (TABLE OF CONTENT - CASE STUDY STYLE) --- */
 #wpTocNav {
   position: fixed !important;
-  bottom: 30px !important; 
+  
+  /* Vertikal Zentriert Rechts */
+  top: 50% !important;
   right: 20px !important;
-  top: auto !important; 
+  bottom: auto !important;
   left: auto !important;
+  transform: translateY(-50%) !important;
+  
+  /* Z-Index: Unter dem Header (der hat meist 1000+) */
   z-index: 90 !important;
+  
+  /* WICHTIG: Die Box ist "Luft". Klicks gehen durch! 
+     Dadurch funktionieren deine Dropdowns oben wieder. */
   pointer-events: none !important;
   
-  background: rgba(10, 10, 10, 0.85) !important;
-  padding: 1rem !important;
-  border-radius: var(--border-radius) !important;
-  border: 1px solid rgba(255,176,32,0.15) !important;
-  backdrop-filter: blur(8px) !important;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4) !important;
+  /* Styling: Minimalistischer Sidebar Look */
+  background: rgba(10, 10, 10, 0.8) !important;
+  padding: 1.5rem !important;
+  border-radius: 12px !important;
+  border-right: 2px solid var(--gold) !important; /* Akzent rechts */
+  border: 1px solid rgba(255,255,255,0.05); /* Zarter Rand sonst */
+  backdrop-filter: blur(10px) !important;
   
   opacity: 0 !important;
-  transform: translateY(20px) !important;
-  transition: opacity 0.4s ease, transform 0.4s ease !important;
+  transition: opacity 0.4s ease !important;
   
   width: auto !important;
-  max-width: 180px !important;
+  min-width: 140px;
 }
 
+/* Sichtbarkeit */
 #wpTocNav.is-visible {
     opacity: 1 !important;
-    transform: translateY(0) !important;
 }
 
-/* NEXUS FIX: Tablet Anpassung */
-/* Verstecken erst ab 900px (Hochformat Tablet), sichtbar im Querformat */
-@media (max-width: 900px) {
+/* Auf kleinen Tablets und Mobile ausblenden */
+@media (max-width: 1024px) {
   #wpTocNav { display: none !important; }
 }
 
 #wpTocNav h4 {
-    font-size: 0.7rem !important;
+    font-size: 0.65rem !important;
     text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    margin-bottom: 0.5rem !important;
+    letter-spacing: 2px !important;
+    margin-bottom: 1rem !important;
     color: var(--muted) !important;
     text-align: right !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.5rem;
 }
 
 #wpTocNav ul {
@@ -83,18 +92,18 @@
     text-align: right !important;
 }
 
-#wpTocNav li { margin-bottom: 0.4rem !important; }
+#wpTocNav li { margin-bottom: 0.8rem !important; }
 
-/* Links aktivieren */
+/* Links aktivieren (Nur Text klickbar) */
 .wp-toc-link {
     color: var(--white) !important;
     text-decoration: none !important;
     font-size: 0.85rem !important;
     transition: all 0.3s !important;
-    opacity: 0.7 !important;
-    position: relative !important;
-    padding-right: 15px !important;
+    opacity: 0.6 !important;
     display: inline-block !important;
+    
+    /* Hier aktivieren wir die Maus wieder */
     pointer-events: auto !important; 
     cursor: pointer !important;
 }
@@ -102,31 +111,74 @@
 .wp-toc-link:hover { 
     color: var(--gold) !important; 
     opacity: 1 !important;
+    transform: translateX(-5px); /* Kleiner Hover-Effekt nach links */
 }
 
-.wp-toc-link:hover::after {
-    content: '' !important;
-    position: absolute !important;
-    right: 0 !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    width: 5px !important;
-    height: 5px !important;
-    background: var(--gold) !important;
-    border-radius: 50% !important;
+/* --- FAQ DESIGN (Accordion Style) --- */
+.wp-faq {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* --- Layout Styles --- */
+.wp-faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 1.5rem 0;
+}
+
+.wp-faq-item:first-child {
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.wp-faq-item summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    list-style: none; /* Standard Dreieck weg */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+    transition: color 0.3s ease;
+}
+
+.wp-faq-item summary:hover {
+    color: var(--gold);
+}
+
+/* Custom Plus Icon */
+.wp-faq-item summary::after {
+    content: '+';
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Offener Zustand */
+.wp-faq-item[open] summary::after {
+    transform: rotate(45deg); /* Plus zu X */
+    color: var(--white);
+}
+
+.wp-faq-content {
+    margin-top: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 1rem;
+    padding-right: 2rem;
+}
+
+/* --- KPI / Metrics Fix --- */
+.wp-metric-value {
+    font-variant-numeric: tabular-nums; /* Verhindert Wackeln der Zahlen */
+    display: inline-block;
+}
+
+/* --- Layout Rest --- */
 .wp-section { padding: var(--spacing-section) 0; }
 .wp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* Tablet Optimierung für Container */
-@media (max-width: 1024px) {
-    .wp-section { padding: 4rem 0; }
-    .wp-container { padding: 0 30px; } /* Mehr Rand auf Tablets */
-}
-
-/* Hero */
 .wp-hero {
   min-height: 90vh;
   display: flex;
@@ -185,7 +237,7 @@
 }
 @media (min-width: 768px) { .wp-metrics { grid-template-columns: repeat(4, 1fr); } }
 .wp-metric-value {
-  display: block; font-size: 2rem; font-weight: 800; color: var(--white); font-variant-numeric: tabular-nums; 
+  display: block; font-size: 2rem; font-weight: 800; color: var(--white); 
 }
 .wp-metric-label { font-size: 0.9rem; color: var(--muted); }
 .wp-metric-label small { display: block; font-size: 0.7em; opacity: 0.6; margin-top: 4px; }
@@ -223,65 +275,6 @@
 }
 .highlight-step { border-color: var(--gold); background: rgba(255,176,32,0.05); }
 .highlight-num { background: var(--gold); color: black; border-color: var(--gold); }
-
-/* --- NEXUS FAQ DESIGN (Case Study Style) --- */
-.wp-section-title { text-align: center; margin-bottom: 3rem; }
-.wp-section-h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-.wp-section-p { color: var(--muted); font-size: 1.1rem; }
-
-/* FAQ Container */
-.wp-faq { max-width: 800px; margin: 0 auto; }
-
-/* Einzelnes Item */
-.wp-faq-item {
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding: 1.5rem 0;
-    text-align: left;
-    transition: all 0.3s ease;
-}
-
-/* Frage (Summary) */
-.wp-faq-item summary {
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.2rem;
-    list-style: none; /* Standard Dreieck weg */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--white);
-    padding-right: 10px;
-}
-
-/* Custom Plus Icon via CSS */
-.wp-faq-item summary::after {
-    content: '+';
-    font-weight: 300;
-    font-size: 1.5rem;
-    color: var(--gold);
-    transition: transform 0.3s ease;
-}
-
-/* Wenn offen: Minus Icon (Drehung) */
-.wp-faq-item[open] summary::after {
-    transform: rotate(45deg); /* Macht aus + ein x */
-    color: var(--white);
-}
-
-/* Antwort */
-.wp-faq-content {
-    margin-top: 1rem;
-    color: var(--muted);
-    line-height: 1.6;
-    font-size: 1rem;
-    padding-right: 2rem; /* Platz damit Text nicht zu breit wird */
-    animation: fadeIn 0.4s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
 
 /* Header Fix */
 header.site-header, #main-header, .ct-header {
