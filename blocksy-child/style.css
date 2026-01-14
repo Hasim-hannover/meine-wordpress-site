@@ -22,6 +22,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
 
+
 /* --- 2. NEXUS MEGA MENÜ (AUTO-FIT EDITION) --- */
 
 /* Container Setup */
@@ -110,6 +111,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     color: #ffffff;
     transform: translateX(3px);
 }
+
 
 /* --- 3. FOOTER (Von dir übernommen) --- */
 .ft {
