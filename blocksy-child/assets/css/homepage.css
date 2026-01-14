@@ -31,65 +31,67 @@
     text-decoration: underline;
 }
 
-/* --- Navigation (DIE ATOMBOMBEN-LÖSUNG) --- */
-.wp-toc-nav {
+/* --- Navigation (SAFE ZONE: Unten Rechts) --- */
+#wpTocNav {
   position: fixed !important;
-  
-  /* 1. Wir zwingen es nach UNTEN RECHTS */
-  top: auto !important; 
-  bottom: 30px !important; 
+  /* Ganz rechts unten, wo kein Dropdown hinkommt */
   right: 20px !important;
+  bottom: 30px !important; 
+  top: auto !important; /* Reset top */
+  left: auto !important;
   
-  /* 2. Wir zwingen es GANZ NACH HINTEN */
-  z-index: 1 !important; 
-  
-  /* 3. Wir zwingen es, KEINE MAUSKLICKS abzufangen */
-  pointer-events: none !important;
+  /* Z-Index: 100 ist sicher über dem Text, aber unter dem Header (Header ist meist 1000) */
+  z-index: 100 !important;
   
   /* Styling */
-  background: rgba(10, 10, 10, 0.9) !important;
-  padding: 1.5rem !important;
+  background: rgba(10, 10, 10, 0.85) !important;
+  padding: 1.2rem !important;
   border-radius: var(--border-radius) !important;
   border: 1px solid rgba(255,176,32,0.15) !important;
-  backdrop-filter: blur(10px) !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4) !important;
   
-  /* Animation */
-  opacity: 0 !important; /* Initial versteckt */
+  /* Initial unsichtbar */
+  opacity: 0 !important;
+  transform: translateY(20px) !important;
+  transition: opacity 0.4s ease, transform 0.4s ease !important;
+  
+  /* WICHTIG: Die Box selbst ist für die Maus "Luft" */
+  pointer-events: none !important;
+  
   width: auto !important;
   max-width: 180px !important;
-  transform: none !important; /* Transform resetten, falls Zombie es nutzt */
 }
 
 /* Wenn sichtbar */
-.wp-toc-nav.is-visible {
+#wpTocNav.is-visible {
     opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 @media (max-width: 1200px) {
-  .wp-toc-nav { display: none !important; }
+  #wpTocNav { display: none !important; }
 }
 
-/* Styling Reset für Innenleben */
-.wp-toc-nav h4 {
+#wpTocNav h4 {
     font-size: 0.7rem !important;
     text-transform: uppercase !important;
-    letter-spacing: 1.5px !important;
+    letter-spacing: 1px !important;
     margin-bottom: 0.8rem !important;
     color: var(--muted) !important;
     text-align: right !important;
 }
 
-.wp-toc-nav ul {
+#wpTocNav ul {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
     text-align: right !important;
 }
 
-.wp-toc-nav li { margin-bottom: 0.5rem !important; }
+#wpTocNav li { margin-bottom: 0.5rem !important; }
 
-/* Links wieder klickbar machen - WICHTIG */
+/* Die Links sind das EINZIGE, was klickbar ist */
 .wp-toc-link {
     color: var(--white) !important;
     text-decoration: none !important;
@@ -100,7 +102,7 @@
     padding-right: 15px !important;
     display: inline-block !important;
     
-    /* WICHTIG: Hier aktivieren wir die Maus wieder NUR für den Text */
+    /* Hier wird die Maus wieder aktiviert */
     pointer-events: auto !important; 
     cursor: pointer !important;
 }
@@ -121,6 +123,7 @@
     background: var(--gold) !important;
     border-radius: 50% !important;
 }
+
 
 /* --- Layout --- */
 .wp-section {
