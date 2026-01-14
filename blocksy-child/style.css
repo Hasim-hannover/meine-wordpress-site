@@ -1,7 +1,7 @@
 /*
 Theme Name: Blocksy Child
 Template: blocksy
-Version: 7.1.0-FIXED
+Version: 7.1.1-FIXED
 */
 
 /* --- 1. CORE: SATOSHI SCHRIFTEN --- */
@@ -26,91 +26,66 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 /* --- 2. NEXUS MEGA MENÜ (VIEWPORT FIX) --- */
 
 /* 1. Reset für das List-Item */
-/* Wir nehmen dem Menüpunkt die Kontrolle über die Positionierung */
 .ct-header .menu-item.mega {
     position: static !important;
 }
 
 /* 2. Das Dropdown - Jetzt orientiert am VIEWPORT (Bildschirm) */
 .ct-header .menu-item.mega > .sub-menu {
-    /* Trick 17: Wir machen es so breit wie den ganzen verdammten Bildschirm */
     width: 100vw; 
-    
-    /* Dann zentrieren wir es relativ zum Bildschirm */
-    position: fixed; /* Fixed = klebt am Browserfenster, nicht am Menü! */
+    position: fixed; 
     left: 0;
     right: 0;
-    
-    /* Wir schieben es auf die richtige Höhe (unter den Header) */
-    /* Pass diesen Wert an, falls es zu hoch/tief ist (z.B. 80px oder 100px) */
     top: 85px; 
-    
-    /* Design des "Streifens" (optional, falls du einen durchgehenden Hintergrund willst) */
     background: transparent; 
     padding: 0;
     margin: 0;
-    pointer-events: none; /* Wichtig: Lässt Klicks durch, solange man nicht auf den Inhalt klickt */
-    
-    /* Sichtbarkeit */
+    pointer-events: none; /* Container lässt Klicks durch - OK */
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
     z-index: 99999;
 }
 
-/* 3. Der eigentliche Container INHALT (Der schwarze Kasten) */
-/* Wir nutzen das innere Grid als eigentliche Box */
+/* 3. Der eigentliche Container INHALT */
 .ct-header .menu-item.mega > .sub-menu {
-    display: flex; /* Flexbox um den Kasten zu zentrieren */
-    justify-content: center; /* Zentriert den Kasten horizontal */
+    display: flex; 
+    justify-content: center; 
 }
 
-/* Hier stylen wir das Raster selbst */
 .ct-header .menu-item.mega > .sub-menu::before {
-    /* Dummy-Element, falls nötig. Aber wir stylen lieber das Grid direkt. */
     content: none;
 }
 
-/* Wir müssen das Grid-Layout auf das Dropdown anwenden, aber begrenzt auf eine Breite */
 .ct-header .menu-item.mega > .sub-menu {
-    /* KORREKTUR: Wir bauen den Container anders auf, damit es funktioniert */
     background: transparent !important;
     box-shadow: none !important;
     border: none !important;
 }
 
-/* Das ist der "Wrapper", der den Inhalt hält */
 .ct-header .menu-item.mega > .sub-menu > li {
-    /* Versteckt die Standard-Listen-Logik */
     display: block;
 }
 
 /* --- DER EIGENTLICHE SCHWARZE KASTEN --- */
-/* Wir missbrauchen das Grid nicht direkt, sondern bauen einen Wrapper, 
-   aber da wir keinen Zugriff auf HTML haben, stylen wir das sub-menu um. */
-
 .ct-header .menu-item.mega:hover > .sub-menu {
     opacity: 1;
     visibility: visible;
-    pointer-events: auto; /* Jetzt darf man klicken */
+    pointer-events: auto; /* Container wird interaktiv */
 }
 
 /* FINALE LOGIK: Wir machen das sub-menu zum "Wrapper" und nutzen Grid darin */
 .ct-header .menu-item.mega > .sub-menu {
-    /* Zurücksetzen der Fixed-Idee oben für das Styling, behalten Positionierung */
     display: grid;
-    /* Hier definieren wir die MAXIMALE Breite des Inhalts */
     grid-template-columns: repeat(4, 1fr);
-    width: 1100px !important; /* Breite des Inhalts */
+    width: 1100px !important; 
     max-width: 95vw;
     
-    /* Zentrierung auf dem Bildschirm */
     left: 50% !important;
     transform: translateX(-50%);
     position: fixed !important;
-    top: 90px !important; /* Abstand von oben - ANPASSEN! */
+    top: 90px !important; 
     
-    /* Der Champions League Look */
     background-color: #0a0a0a !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: 0 40px 80px rgba(0,0,0,0.8) !important;
@@ -120,7 +95,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     height: auto;
 }
 
-/* Spalten Styling (Bleibt gleich) */
+/* Spalten Styling (HIER WAR DER FEHLER!) */
 .ct-header .menu-item.mega > .sub-menu > li > a {
     font-size: 13px;
     font-weight: 800;
@@ -131,7 +106,10 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     display: block;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding-bottom: 8px;
-    pointer-events: none;
+    
+    /* NEXUS FIX: Vorher stand hier 'none'. Jetzt 'auto', damit man klicken kann! */
+    pointer-events: auto !important; 
+    cursor: pointer;
 }
 
 .ct-header .menu-item.mega .sub-menu .sub-menu {
@@ -156,7 +134,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 }
 
 
-/* --- 3. FOOTER (Von dir übernommen) --- */
+/* --- 3. FOOTER --- */
 .ft {
     --bg: #0a0a0a; --fg: #fafafa; --line: rgba(255,255,255,.08); --cta: #ffb020;
     background: var(--bg); color: var(--fg); width: 100%; border-top: 1px solid var(--line);
