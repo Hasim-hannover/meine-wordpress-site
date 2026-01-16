@@ -32,16 +32,16 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setTimeout(forceBlogGrid, 100);
 
-    // 3. SMART STICKY NAV (Der Fix)
+    // 3. SMART STICKY NAV (Korrigiert für neue HTML-Struktur)
     const navLinks = document.querySelectorAll('.smart-nav a');
-    const sections = document.querySelectorAll('section[id], div[id="audit"]'); // Findet auch die Audit-Karte
+    const sections = document.querySelectorAll('section[id], div[id="audit"]');
 
     function updateNav() {
         let current = "";
         sections.forEach((section) => {
             const sectionTop = section.offsetTop;
-            // Wenn wir 250px vor der Section sind, aktivieren wir sie
-            if (window.scrollY >= (sectionTop - 250)) {
+            // Wenn wir 300px vor der Section sind
+            if (window.scrollY >= (sectionTop - 300)) {
                 current = section.getAttribute("id");
             }
         });
@@ -53,9 +53,9 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-    if (navLinks.length > 0) {
+    if(navLinks.length > 0) {
         window.addEventListener("scroll", updateNav);
-        updateNav(); // Initialer Check
+        updateNav();
     }
 
     // 4. FAQ
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // 5. KPI ANIMATION (Der Fix für -83%)
+    // 5. KPI ANIMATION (Korrigiert für -83%)
     const metrics = document.querySelectorAll('.wp-metric-value');
     
     const animateValue = (obj, start, end, duration, prefix = "", suffix = "") => {
@@ -77,8 +77,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const ease = 1 - Math.pow(1 - progress, 3);
             
             const currentVal = Math.floor(ease * (end - start) + start);
-            
-            // Hier bauen wir den String zusammen: "- 83 %"
             obj.innerText = prefix + currentVal + suffix;
 
             if (progress < 1) window.requestAnimationFrame(step);
@@ -91,42 +89,26 @@ document.addEventListener("DOMContentLoaded", function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const t = entry.target;
-                
-                // Wir holen die Rohdaten aus den Attributen (falls gesetzt)
-                // Beispiel HTML: <span data-value="-83" data-suffix="%">
                 let rawVal = t.getAttribute('data-value');
-                
-                // Falls kein Attribut da ist, nimm den Textinhalt (Fallback)
                 if (!rawVal) rawVal = t.innerText;
 
-                // Prüfen ob es Text ist (z.B. "High") -> Keine Animation
                 if (isNaN(parseInt(rawVal))) {
                     t.innerText = rawVal;
                     obs.unobserve(t);
                     return;
                 }
 
-                // Zahl extrahieren und Vorzeichen merken
                 let val = parseInt(rawVal);
                 let prefix = t.getAttribute('data-prefix') || ""; 
                 let suffix = t.getAttribute('data-suffix') || "";
-
-                // Automatisches Erkennen von Minus im Wert
-                if (val < 0) {
-                     // Wenn die Zahl negativ ist (z.B. -83), ist das Minus schon in 'val' enthalten
-                     // Wir müssen es nicht extra als Prefix setzen, JS macht das bei negativen Zahlen automatisch.
-                } else if (rawVal.includes('+')) {
-                    prefix = "+"; // Pluszeichen erzwingen wenn im Text
-                }
                 
-                // Start Animation (immer von 0 auf Zielwert)
+                if (rawVal.includes('+') && !prefix) prefix = "+";
+
                 animateValue(t, 0, val, 2000, prefix, suffix);
                 obs.unobserve(t);
             }
         });
     }, { threshold: 0.1 });
 
-    metrics.forEach(m => {
-        metricsObserver.observe(m);
-    });
+    metrics.forEach(m => { metricsObserver.observe(m); });
 });
