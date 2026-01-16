@@ -1,291 +1,140 @@
-/* --- Variables & Base --- */
+/* =========================================
+   NEXUS MASTER CSS (Stable Layout + New Features)
+   ========================================= */
+
 :root {
   --gold: #FFB020;
-  --gold-glow: rgba(255, 176, 32, 0.4);
   --dark: #050505;
-  --dark-glass: rgba(20, 20, 20, 0.7);
-  --border-radius: 16px;
-  --spacing-section: 6rem;
+  --dark-glass: rgba(20, 20, 20, 0.9);
+  --text-main: #ffffff;
+  --text-dim: #a1a1aa;
+  --border: rgba(255, 255, 255, 0.1);
 }
 
 .cs-page {
   background-color: var(--dark);
-  color: #ffffff;
+  color: var(--text-main);
   font-family: 'Satoshi', sans-serif;
   overflow-x: hidden;
 }
 
-/* --- Utilities --- */
-.text-gold { color: var(--gold) !important; }
-.font-bold { font-weight: 700; }
-.text-center { text-align: center; }
-.full-width { width: 100%; }
-.mt-large { margin-top: 3rem; }
-
-/* --- HERO CARD: CHAMPIONS LEAGUE DESIGN (Glassmorphism) --- */
-.audit-card-premium {
-    position: relative;
-    background: linear-gradient(145deg, rgba(30, 30, 30, 0.6), rgba(10, 10, 10, 0.8));
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 3rem;
-    max-width: 600px;
-    margin: 3rem auto 0;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
-    overflow: hidden;
-}
-
-/* Der leuchtende Gold-Rand */
-.audit-card-premium::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 24px;
-    padding: 1.5px; /* Dicke des Randes */
-    background: linear-gradient(180deg, rgba(255, 176, 32, 0.5), transparent 60%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-}
-
-.audit-card-premium:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 176, 32, 0.1);
-}
-
-.audit-card-premium h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #fff, #aaa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.premium-list {
-    text-align: left;
-    margin: 2rem 0;
-    padding: 0;
-    list-style: none;
-}
-
-.premium-list li {
-    padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    color: #a0a0a0;
-    display: flex;
-    align-items: center;
-}
-
-.premium-list li:last-child { border-bottom: none; }
-.premium-list li strong { color: #fff; margin-right: 5px; }
-.check-icon { color: var(--gold); margin-right: 12px; font-weight: bold; }
-
-.price-box {
-    background: rgba(255, 176, 32, 0.1);
-    border: 1px solid rgba(255, 176, 32, 0.2);
-    border-radius: 8px;
-    padding: 1rem;
-    margin-top: 1.5rem;
-    color: var(--gold);
-}
-
-/* --- BUTTONS --- */
-.wp-btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
-    cursor: pointer;
-    font-size: 1.1rem;
-}
-.wp-btn-primary {
-    background: var(--gold);
-    color: #000;
-    box-shadow: 0 4px 15px rgba(255, 176, 32, 0.3);
-}
-.wp-btn-primary:hover {
-    background: #ffc14d;
-    box-shadow: 0 8px 25px rgba(255, 176, 32, 0.5);
-    transform: translateY(-2px);
-}
-.wp-btn-secondary {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-}
-.wp-btn-secondary:hover {
-    border-color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-/* --- BLOG GRID FIX (Die Brechstange) --- */
-.blog-grid-wrapper {
-    margin-top: 3rem;
-}
-
-/* Wir zielen auf JEDEN direkten Container, den das Plugin ausspuckt */
-.blog-grid-wrapper > ul, 
-.blog-grid-wrapper > div,
-.blog-grid-wrapper .hu-blog-listing { 
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 2rem !important;
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-/* Responsive Grid */
-@media (max-width: 1024px) {
-    .blog-grid-wrapper > ul, .blog-grid-wrapper > div { grid-template-columns: repeat(2, 1fr) !important; }
-}
-@media (max-width: 768px) {
-    .blog-grid-wrapper > ul, .blog-grid-wrapper > div { grid-template-columns: 1fr !important; }
-}
-
-/* Karten-Styling für die Artikel selbst */
-.blog-grid-wrapper article, 
-.blog-grid-wrapper li,
-.blog-grid-wrapper .post {
-    background: rgba(25, 25, 25, 1);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: transform 0.3s;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.blog-grid-wrapper article:hover {
-    transform: translateY(-5px);
-    border-color: var(--gold);
-}
-
-.blog-grid-wrapper h2, .blog-grid-wrapper h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: #fff;
-}
-
-.blog-grid-wrapper a {
-    text-decoration: none;
-    color: inherit;
-}
-
-/* --- REST LAYOUT --- */
-.wp-section { padding: var(--spacing-section) 0; }
-.wp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.wp-hero { min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-.wp-hero-title { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; font-weight: 800; margin-bottom: 1.5rem; }
-.wp-hero-title span { color: var(--gold); }
-.wp-hero-subtitle { font-size: 1.2rem; color: #a0a0a0; max-width: 700px; margin: 0 auto 2rem; }
-.wp-trust-stack { color: #666; font-size: 0.9rem; margin-bottom: 2rem; }
-.wp-badge { text-transform: uppercase; color: var(--gold); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; display: block; margin-bottom: 1rem; }
-.wp-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; }
-.wp-metric-value { font-size: 2.5rem; font-weight: 800; display: block; }
-.wp-metric-label { font-size: 0.9rem; color: #888; }
-@media (max-width: 768px) { .wp-metrics { grid-template-columns: 1fr 1fr; } }
-
-/* ToC Reset */
-/* =========================================
-   SMART STICKY NAV (Global Style)
-   ========================================= */
-.smart-nav {
-  position: fixed;
-  top: 50%;
-  left: 20px; /* Links angedockt */
-  transform: translateY(-50%);
-  z-index: 1000; /* Muss über allem liegen */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: rgba(10, 10, 10, 0.6);
-  backdrop-filter: blur(12px);
-  padding: 1.5rem 0.8rem;
-  border-radius: 50px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  width: 60px;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.smart-nav:hover {
-  width: 200px; /* Klappt auf beim Hover */
-  border-color: rgba(255, 176, 32, 0.3);
-  background: rgba(10, 10, 10, 0.95);
-  align-items: flex-start;
-  border-radius: 20px;
-  padding-left: 1.5rem;
-}
-
-.smart-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.2rem; width: 100%; }
-.smart-nav li { display: block; width: 100%; }
-.smart-nav a { display: flex; align-items: center; gap: 15px; color: #a1a1aa; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
-
-/* Die Punkte und Texte */
-.nav-dot { width: 8px; height: 8px; background: #444; border-radius: 50%; flex-shrink: 0; transition: all 0.3s; box-shadow: 0 0 0 2px transparent; }
-.smart-nav a.active .nav-dot, .smart-nav a:hover .nav-dot { background: #FFB020; box-shadow: 0 0 10px #FFB020; transform: scale(1.2); }
-.smart-nav a.active, .smart-nav a:hover { color: #fff; }
-
-.nav-text { opacity: 0; transform: translateX(10px); transition: all 0.3s ease; }
-.smart-nav:hover .nav-text { opacity: 1; transform: translateX(0); }
-
-/* Ausblenden auf Mobile */
-@media (max-width: 1024px) { .smart-nav { display: none; } }
-
-.wp-toc-link { color: #666; text-decoration: none; padding: 5px 15px; display: block; font-size: 0.9rem; transition: 0.3s; }
-.wp-toc-link:hover, .wp-toc-link.active { color: var(--gold); }
-
-/* --- SMART NAV STYLES --- */
+/* --- 1. SMART NAV (Die neue Navi) --- */
 .smart-nav {
   position: fixed; top: 50%; left: 20px; transform: translateY(-50%); z-index: 1000;
   display: flex; flex-direction: column; gap: 1rem;
   background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(12px);
-  padding: 1.5rem 0.8rem; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.08);
-  width: 60px; overflow: hidden; white-space: nowrap; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 1.5rem 0.8rem; border-radius: 50px; border: 1px solid var(--border);
+  width: 60px; overflow: hidden; white-space: nowrap; transition: all 0.4s ease;
 }
 .smart-nav:hover { width: 200px; background: rgba(10, 10, 10, 0.95); border-radius: 20px; padding-left: 1.5rem; align-items: flex-start; }
 .smart-nav ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.2rem; width: 100%; }
 .smart-nav li { display: block; width: 100%; }
-.smart-nav a { display: flex; align-items: center; gap: 15px; color: #a1a1aa; text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
+.smart-nav a { display: flex; align-items: center; gap: 15px; color: var(--text-dim); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
 .smart-nav a.active { color: #fff; }
 .nav-dot { width: 8px; height: 8px; background: #444; border-radius: 50%; transition: 0.3s; }
-.smart-nav a.active .nav-dot { background: #FFB020; box-shadow: 0 0 10px #FFB020; transform: scale(1.2); }
+.smart-nav a.active .nav-dot { background: var(--gold); box-shadow: 0 0 10px var(--gold); transform: scale(1.2); }
 .nav-text { opacity: 0; transform: translateX(10px); transition: 0.3s; }
 .smart-nav:hover .nav-text { opacity: 1; transform: translateX(0); }
 @media (max-width: 1024px) { .smart-nav { display: none; } }
 
-/* --- VERTIKALE KPIs --- */
+/* --- 2. HERO & KPIs (Das Vertikale) --- */
+.wp-hero { padding: 6rem 0; min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+.wp-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+.wp-hero-title { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; color: #fff; }
+.wp-hero-title span { color: var(--gold); }
+.wp-hero-subtitle { font-size: 1.2rem; color: var(--text-dim); max-width: 700px; margin: 0 auto 2rem; }
+.wp-badge { display: inline-block; padding: 6px 12px; background: rgba(255, 176, 32, 0.1); color: var(--gold); border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 1px; text-transform: uppercase; }
+.wp-trust-stack { color: #666; font-size: 0.9rem; margin-bottom: 2rem; }
+
+/* Vertikale KPIs */
 .vertical-metrics {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1.5rem !important;
-    max-width: 300px;
-    margin: 4rem auto 0 auto;
+    display: flex; flex-direction: column; gap: 1rem;
+    max-width: 300px; margin: 4rem auto 0 auto;
+    background: rgba(255,255,255,0.02); padding: 2rem; border-radius: 16px; border: 1px solid var(--border);
 }
-.vertical-metrics .wp-metric {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 0.8rem;
-    width: 100%;
+.wp-metric { display: flex; justify-content: space-between; align-items: center; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.wp-metric:last-child { border-bottom: none; }
+.wp-metric-value { font-size: 1.8rem; font-weight: 800; color: #fff; order: 2; }
+.wp-metric-label { font-size: 0.9rem; color: var(--text-dim); order: 1; text-align: left; }
+.text-gold { color: var(--gold) !important; }
+
+/* --- 3. AUDIT CARD (Premium Look) --- */
+.audit-card-premium {
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.6), rgba(10, 10, 10, 0.8));
+    border: 1px solid var(--border); border-radius: 24px; padding: 3rem;
+    max-width: 600px; margin: 2rem auto; box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5);
+    position: relative; overflow: hidden;
 }
-.vertical-metrics .wp-metric-value {
-    font-size: 2rem;
-    order: 2; /* Zahl rechts */
+.audit-card-premium::before {
+    content: ''; position: absolute; inset: 0; border-radius: 24px; padding: 1px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
 }
-.vertical-metrics .wp-metric-label {
-    order: 1; /* Label links */
-    text-align: left;
+.premium-list { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+.premium-list li { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--text-dim); }
+.check-icon { color: var(--gold); font-weight: bold; }
+.price-box { background: rgba(255, 176, 32, 0.1); color: var(--gold); padding: 1rem; border-radius: 8px; margin-top: 1.5rem; font-weight: 600; }
+
+/* --- 4. SYSTEM & CARDS (Die "Alte Logik" wiederhergestellt) --- */
+.wp-section { padding: 6rem 0; }
+.wp-section-h2 { font-size: 2.5rem; margin-bottom: 1rem; color: #fff; font-weight: 800; }
+.wp-section-p { color: var(--text-dim); max-width: 600px; margin: 0 auto 3rem; }
+
+/* Das Grid Layout für Success Cards */
+.wp-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;
+    margin-top: 2rem;
 }
+.wp-success-card {
+    background: var(--dark-glass); border: 1px solid var(--border); border-radius: 16px;
+    padding: 2rem; transition: transform 0.3s;
+}
+.wp-success-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+.wp-success-title { font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
+.wp-success-subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Metriken innerhalb der Karten */
+.wp-success-card .wp-metrics {
+    display: flex; justify-content: space-between; margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem;
+}
+.wp-success-card .wp-metric { border: none; padding: 0; display: block; }
+.wp-success-card .wp-metric-value { font-size: 1.5rem; display: block; margin-bottom: 5px; order: unset; }
+.wp-success-card .wp-metric-label { font-size: 0.8rem; display: block; order: unset; }
+
+/* Prozess Schritte (WGOS) */
+.wp-process {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;
+}
+.wp-step {
+    background: var(--dark-glass); border: 1px solid var(--border); border-radius: 16px;
+    padding: 2rem; position: relative; transition: 0.3s;
+}
+.wp-step:hover { border-color: var(--gold); }
+.wp-step-num {
+    background: var(--gold); color: #000; width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-weight: 800;
+    margin-bottom: 1rem;
+}
+.wp-step h3 { color: #fff; margin-bottom: 0.5rem; font-size: 1.3rem; }
+.wp-step p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
+
+/* Highlight Step (Gold) */
+.highlight-step { border-color: var(--gold); background: rgba(255, 176, 32, 0.05); }
+
+/* Buttons */
+.wp-btn { display: inline-block; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700; transition: 0.3s; cursor: pointer; text-align: center; }
+.wp-btn-primary { background: var(--gold); color: #000; box-shadow: 0 4px 15px rgba(255, 176, 32, 0.3); }
+.wp-btn-primary:hover { background: #ffc14d; transform: translateY(-2px); }
+.wp-btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; }
+.wp-btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+.full-width { width: 100%; display: block; }
+.mt-large { margin-top: 3rem; }
+
+/* FAQ */
+.wp-faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; }
+.wp-faq-item summary { cursor: pointer; font-weight: 600; color: #fff; list-style: none; display: flex; justify-content: space-between; }
+.wp-faq-item summary::after { content: '+'; color: var(--gold); font-size: 1.5rem; }
+.wp-faq-item[open] summary::after { content: '-'; }
+.wp-faq-content { margin-top: 1rem; color: var(--text-dim); line-height: 1.6; }
