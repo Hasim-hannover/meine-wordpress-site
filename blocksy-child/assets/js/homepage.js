@@ -1,14 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // ==========================================
-    // 1. ZOMBIE KILLER (Sicherheit)
-    // ==========================================
+    // 1. ZOMBIE KILLER
     const zombieCode = document.getElementById('nexus-home-critical');
     if (zombieCode) zombieCode.remove();
 
-    // ==========================================
-    // 2. FORCE BLOG GRID (Design-Brechstange)
-    // ==========================================
+    // 2. FORCE BLOG GRID
     function forceBlogGrid() {
         const articles = document.querySelectorAll('.cs-page article, .cs-page .post, .cs-page .type-post');
         if (articles.length > 0) {
@@ -18,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 container.style.gap = '2rem';
                 container.style.listStyle = 'none';
                 container.style.padding = '0';
-                
                 const updateGrid = () => {
                     if (window.innerWidth > 1024) container.style.gridTemplateColumns = 'repeat(3, 1fr)';
                     else if (window.innerWidth > 768) container.style.gridTemplateColumns = 'repeat(2, 1fr)';
@@ -37,47 +32,39 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(forceBlogGrid, 100);
 
     // ==========================================
-    // 3. SMART STICKY NAV (LASER SCHRANKE - V2)
+    // 3. SMART STICKY NAV (WGOS LOGIK - SIMPEL & STABIL)
     // ==========================================
     const navLinks = document.querySelectorAll('.smart-nav a');
-    const sections = document.querySelectorAll('section[id], div[id="audit"]'); // Deine Ziele
+    // Wir holen alle Sections UND das Audit-Div
+    const sections = document.querySelectorAll('section[id], div[id="audit"]');
 
-    // Optionen für den "Laser": 
-    // rootMargin: '-50% 0px -50% 0px' bedeutet: Es feuert GENAU in der Mitte des Bildschirms.
-    const observerOptions = {
-        root: null,
-        rootMargin: '-45% 0px -55% 0px', 
-        threshold: 0
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // 1. Welche ID ist gerade in der Mitte?
-                const activeId = entry.target.getAttribute('id');
-                // console.log("Sektion aktiv:", activeId); // Zum Testen
-
-                // 2. Alle Links ausschalten
-                navLinks.forEach(link => link.classList.remove('active'));
-
-                // 3. Den passenden Link suchen und anschalten
-                // Wir nutzen .includes(), das ist toleranter als ein exakter Vergleich
-                const activeLink = document.querySelector(`.smart-nav a[href*="#${activeId}"]`);
-                
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
+    function updateNav() {
+        let current = "";
+        
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            // Wenn wir bis zu 300px an den Bereich herangescrollt sind
+            if (window.scrollY >= (sectionTop - 300)) {
+                current = section.getAttribute("id");
             }
         });
-    }, observerOptions);
 
-    // Observer starten
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-    // ==========================================
+        navLinks.forEach((a) => {
+            a.classList.remove("active");
+            // Checkt, ob der Link die ID enthält (z.B. "#hero" enthält "hero")
+            if (current && a.getAttribute("href").includes(current)) {
+                a.classList.add("active");
+            }
+        });
+    }
+
+    // Feuern beim Scrollen
+    window.addEventListener("scroll", updateNav);
+    // Feuern beim Laden (wichtig, falls man F5 drückt und unten ist)
+    updateNav();
+
+
     // 4. FAQ ACCORDION
-    // ==========================================
     const details = document.querySelectorAll("details.wp-faq-item, details");
     details.forEach((target) => {
         target.addEventListener("click", () => {
@@ -85,9 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // ==========================================
-    // 5. KPI ANIMATION (Mit Minus-Support)
-    // ==========================================
+    // 5. KPI ANIMATION (-83% Fix)
     const metrics = document.querySelectorAll('.wp-metric-value');
     
     const animateValue = (obj, start, end, duration, prefix = "", suffix = "") => {
@@ -96,10 +81,8 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
             const ease = 1 - Math.pow(1 - progress, 3);
-            
             const currentVal = Math.floor(ease * (end - start) + start);
             obj.innerText = prefix + currentVal + suffix;
-
             if (progress < 1) window.requestAnimationFrame(step);
             else obj.innerText = prefix + end + suffix;
         };
@@ -122,7 +105,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 let val = parseInt(rawVal);
                 let prefix = t.getAttribute('data-prefix') || ""; 
                 let suffix = t.getAttribute('data-suffix') || "";
-                
                 if (rawVal.includes('+') && !prefix) prefix = "+";
 
                 animateValue(t, 0, val, 2000, prefix, suffix);
