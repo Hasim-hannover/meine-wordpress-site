@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // 1. ZOMBIE KILLER
+    // ==========================================
+    // 1. ZOMBIE KILLER (Sicherheit)
+    // ==========================================
     const zombieCode = document.getElementById('nexus-home-critical');
     if (zombieCode) zombieCode.remove();
 
-    // 2. FORCE BLOG GRID
+    // ==========================================
+    // 2. FORCE BLOG GRID (Design-Brechstange)
+    // ==========================================
     function forceBlogGrid() {
         const articles = document.querySelectorAll('.cs-page article, .cs-page .post, .cs-page .type-post');
         if (articles.length > 0) {
@@ -32,33 +36,49 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     setTimeout(forceBlogGrid, 100);
 
-    // 3. SMART STICKY NAV (Korrigiert für neue HTML-Struktur)
+    // ==========================================
+    // 3. SMART STICKY NAV (FIXED & ROBUST)
+    // ==========================================
     const navLinks = document.querySelectorAll('.smart-nav a');
+    
+    // Wir holen alle relevanten Bereiche: Sections UND die Audit-Karte
     const sections = document.querySelectorAll('section[id], div[id="audit"]');
 
     function updateNav() {
         let current = "";
+        
         sections.forEach((section) => {
             const sectionTop = section.offsetTop;
-            // Wenn wir 300px vor der Section sind
+            // Logik: Wenn wir bis zu 300px an den Bereich herangescrollt sind, wird er aktiv.
             if (window.scrollY >= (sectionTop - 300)) {
                 current = section.getAttribute("id");
             }
         });
-        
+
         navLinks.forEach((a) => {
+            // Erstmal alle ausmachen
             a.classList.remove("active");
-            if (a.getAttribute("href").includes(current)) {
-                a.classList.add("active");
+            
+            // Sicherheits-Check: Haben wir eine ID gefunden?
+            if (current) {
+                // EXAKTER Vergleich: Ist das href "#hero" gleich "#" + "hero"?
+                if (a.getAttribute("href") === "#" + current) {
+                    a.classList.add("active");
+                }
             }
         });
     }
-    if(navLinks.length > 0) {
+
+    // Event Listener: Feuert beim Scrollen
+    if (navLinks.length > 0) {
         window.addEventListener("scroll", updateNav);
-        updateNav();
+        // Einmal initial feuern, damit beim Neuladen der richtige Punkt leuchtet
+        setTimeout(updateNav, 100); 
     }
 
-    // 4. FAQ
+    // ==========================================
+    // 4. FAQ ACCORDION
+    // ==========================================
     const details = document.querySelectorAll("details.wp-faq-item, details");
     details.forEach((target) => {
         target.addEventListener("click", () => {
@@ -66,7 +86,9 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // 5. KPI ANIMATION (Korrigiert für -83%)
+    // ==========================================
+    // 5. KPI ANIMATION (Mit Minus-Support)
+    // ==========================================
     const metrics = document.querySelectorAll('.wp-metric-value');
     
     const animateValue = (obj, start, end, duration, prefix = "", suffix = "") => {
