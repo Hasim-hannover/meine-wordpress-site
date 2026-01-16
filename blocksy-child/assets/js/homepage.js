@@ -37,45 +37,44 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(forceBlogGrid, 100);
 
     // ==========================================
-    // 3. SMART STICKY NAV (FIXED & ROBUST)
+    // 3. SMART STICKY NAV (LASER SCHRANKE - V2)
     // ==========================================
     const navLinks = document.querySelectorAll('.smart-nav a');
-    
-    // Wir holen alle relevanten Bereiche: Sections UND die Audit-Karte
-    const sections = document.querySelectorAll('section[id], div[id="audit"]');
+    const sections = document.querySelectorAll('section[id], div[id="audit"]'); // Deine Ziele
 
-    function updateNav() {
-        let current = "";
-        
-        sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            // Logik: Wenn wir bis zu 300px an den Bereich herangescrollt sind, wird er aktiv.
-            if (window.scrollY >= (sectionTop - 300)) {
-                current = section.getAttribute("id");
-            }
-        });
+    // Optionen für den "Laser": 
+    // rootMargin: '-50% 0px -50% 0px' bedeutet: Es feuert GENAU in der Mitte des Bildschirms.
+    const observerOptions = {
+        root: null,
+        rootMargin: '-45% 0px -55% 0px', 
+        threshold: 0
+    };
 
-        navLinks.forEach((a) => {
-            // Erstmal alle ausmachen
-            a.classList.remove("active");
-            
-            // Sicherheits-Check: Haben wir eine ID gefunden?
-            if (current) {
-                // EXAKTER Vergleich: Ist das href "#hero" gleich "#" + "hero"?
-                if (a.getAttribute("href") === "#" + current) {
-                    a.classList.add("active");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // 1. Welche ID ist gerade in der Mitte?
+                const activeId = entry.target.getAttribute('id');
+                // console.log("Sektion aktiv:", activeId); // Zum Testen
+
+                // 2. Alle Links ausschalten
+                navLinks.forEach(link => link.classList.remove('active'));
+
+                // 3. Den passenden Link suchen und anschalten
+                // Wir nutzen .includes(), das ist toleranter als ein exakter Vergleich
+                const activeLink = document.querySelector(`.smart-nav a[href*="#${activeId}"]`);
+                
+                if (activeLink) {
+                    activeLink.classList.add('active');
                 }
             }
         });
-    }
+    }, observerOptions);
 
-    // Event Listener: Feuert beim Scrollen
-    if (navLinks.length > 0) {
-        window.addEventListener("scroll", updateNav);
-        // Einmal initial feuern, damit beim Neuladen der richtige Punkt leuchtet
-        setTimeout(updateNav, 100); 
-    }
-
+    // Observer starten
+    sections.forEach(section => {
+        observer.observe(section);
+    });
     // ==========================================
     // 4. FAQ ACCORDION
     // ==========================================
