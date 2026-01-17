@@ -1,0 +1,111 @@
+/* --- NEXUS SINGLE POST ARCHITECTURE --- */
+
+/* 1. Progress Bar (Lesefortschritt) */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--gold, #d4af37); /* Fallback Gold */
+    z-index: 9999;
+    width: 0%;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* 2. Hero Section (Der Titel) */
+.hero-nexus {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 2rem;
+}
+
+.wp-hero-title {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-top: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+/* 3. Badges (Strategie-Label) */
+.wp-badge {
+    display: inline-block;
+    padding: 0.35em 0.8em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    color: var(--gold, #d4af37);
+    backdrop-filter: blur(5px);
+}
+
+/* 4. Layout Grid (Inhalt + Sidebar) */
+.layout-nexus {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+/* Desktop: Sidebar rechts daneben */
+@media (min-width: 1024px) {
+    .layout-nexus {
+        grid-template-columns: 1fr 300px; /* Inhalt breit, Sidebar schmal */
+        gap: 4rem;
+    }
+}
+
+/* 5. Typografie im Text (Prose) */
+.prose-nexus {
+    color: #e0e0e0; /* Helles Grau statt hartes Weiß */
+    font-size: 1.125rem;
+    line-height: 1.8;
+}
+
+.prose-nexus h2 {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-weight: 800;
+}
+
+.prose-nexus h3 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--gold, #d4af37);
+    font-weight: 700;
+}
+
+.prose-nexus p {
+    margin-bottom: 1.5rem;
+}
+
+/* 6. Inhaltsverzeichnis (Sticky Sidebar) */
+.toc-card-nexus {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.toc-card-nexus ul li {
+    margin-bottom: 0.8rem;
+}
+
+.toc-card-nexus ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.toc-card-nexus ul li a:hover {
+    color: var(--gold, #d4af37);
+}

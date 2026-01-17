@@ -18,21 +18,18 @@ foreach ( $files_to_load as $file ) {
 
 // --- 2. STYLES & SCRIPTS ---
 add_action( 'wp_enqueue_scripts', function () {
-    $child_version = '9.0.6'; // Version hochgezählt für Cache-Busting
+    $child_version = '9.1.0'; // Neue Version
     wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], $child_version );
 
-    // FIX: 'is_single()' ENTFERNT. Das CSS darf nur auf der Übersicht laden!
+    // A) STARTSEITE & ARCHIV (Das Grid-Layout)
     if ( is_front_page() || is_home() || is_archive() ) {
         wp_enqueue_style( 
             'nexus-homepage-css', 
             get_stylesheet_directory_uri() . '/assets/css/homepage.css', 
             [], 
-            time() // Dev-Mode: Cache verhindern
+            time() 
         );
-    }
-
-    // Menü-Logik (JS) - Ebenfalls nur auf Übersichtsseiten
-    if ( is_front_page() || is_home() || is_archive() ) {
+        
         wp_enqueue_script( 
             'nexus-home', 
             get_stylesheet_directory_uri() . '/assets/js/homepage.js', 
@@ -41,6 +38,28 @@ add_action( 'wp_enqueue_scripts', function () {
             true 
         );
     }
+    
+    // B) EINZELNER BLOG-POST (Das Lese-Erlebnis)
+    if ( is_single() ) {
+        // Hier laden wir das neue CSS für die Analyse-Ansicht
+        wp_enqueue_style( 
+            'nexus-single-css', 
+            get_stylesheet_directory_uri() . '/assets/css/single.css', 
+            [], 
+            time() 
+        );
+
+        // Optional: JS für die Progress-Bar & TOC
+        wp_enqueue_script( 
+            'nexus-blog', 
+            get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', 
+            [], 
+            '6.0.0', 
+            true 
+        );
+    }
+
+}, 20 );
     
     // Blog Archive Logik
     if ( is_home() ) {
