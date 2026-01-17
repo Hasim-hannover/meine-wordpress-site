@@ -1,9 +1,22 @@
 <?php
-/**
- * NEXUS ELITE: Das Master-Template für Blog-Artikel
- */
 get_header();
+
+// Prüfen, ob der Beitrag zu deinen Blog-Kategorien gehört
+$is_analysis = has_category(array('wordpress-engineering', 'daten-integritat', 'verkaufspsychologie'));
 ?>
+
+<?php if ($is_analysis) : ?>
+    <div id="progress-bar" style="position:fixed; top:0; left:0; height:3px; background:var(--gold); z-index:9999; width:0;"></div>
+    <main class="wp-container" style="padding-top:2rem;">
+        <?php else : ?>
+    <main class="wp-container">
+        <article class="entry-content">
+            <?php the_content(); ?>
+        </article>
+    </main>
+<?php endif; ?>
+
+<?php get_footer(); ?>
 
 <div id="progress-bar" style="position:fixed; top:0; left:0; height:3px; background:var(--gold); z-index:9999; width:0; transition:width .1s linear;"></div>
 
