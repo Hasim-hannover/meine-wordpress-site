@@ -18,7 +18,7 @@ foreach ( $files_to_load as $file ) {
 
 // --- 2. STYLES & SCRIPTS ---
 add_action( 'wp_enqueue_scripts', function () {
-    $child_version = '9.1.0'; // Neue Version
+    $child_version = '9.1.1'; // Version hochgezählt
     wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], $child_version );
 
     // A) STARTSEITE & ARCHIV (Das Grid-Layout)
@@ -50,27 +50,27 @@ add_action( 'wp_enqueue_scripts', function () {
         );
 
         // Optional: JS für die Progress-Bar & TOC
-        wp_enqueue_script( 
-            'nexus-blog', 
-            get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', 
-            [], 
-            '6.0.0', 
-            true 
-        );
+        if (file_exists(get_stylesheet_directory() . '/assets/js/blog-archive.js')) {
+            wp_enqueue_script( 
+                'nexus-blog', 
+                get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', 
+                [], 
+                '6.0.0', 
+                true 
+            );
+        }
     }
 
-}, 20 );
-    
-    // Blog Archive Logik
+    // C) BLOG ARCHIVE LOGIK (Nur auf der Blog-Übersicht)
     if ( is_home() ) {
-         wp_enqueue_script( 'nexus-blog', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], '6.0.0', true );
+         wp_enqueue_script( 'nexus-blog-archive', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], '6.0.0', true );
     }
-}, 20 );
+
+}, 20 ); // <--- HIER wird die Funktion EINMALIG und KORREKT geschlossen.
 
 // --- 3. PERFORMANCE & SCHRIFTEN ---
 add_action( 'wp_head', function () {
     $font = get_stylesheet_directory_uri() . '/fonts';
-    // Preload nur, wenn wirklich benötigt
     echo '<link rel="preload" href="' . $font . '/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>';
     echo "<style>@font-face { font-family: 'Satoshi'; src: url('$font/Satoshi-Variable.woff2') format('woff2-variations'); font-weight: 300 900; font-display: swap; font-style: normal; }</style>";
     echo '<style>.ft { background: #0a0a0a; }</style>';
