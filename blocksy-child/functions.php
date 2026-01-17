@@ -1,13 +1,12 @@
 <?php
 /**
  * Blocksy Child - Nexus Ultimate Edition
- * INCLUDES: Shortcodes, Schema & Snippets (Alles wird geladen!)
+ * FINALER STAND: Layout-Logik + Titel-Killer (Global)
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // --- 1. EXTERNE DATEIEN LADEN ---
 $inc_dir = get_stylesheet_directory() . '/inc/';
-// ACHTUNG: Prüfe bitte unbedingt 'snippets.php' oder 'custom.php' nach dem "Geister-Titel" Code!
 $files_to_load = ['shortcodes.php', 'org-schema.php', 'schema.php', 'snippets.php', 'custom.php'];
 
 foreach ( $files_to_load as $file ) {
@@ -16,59 +15,38 @@ foreach ( $files_to_load as $file ) {
     }
 }
 
-// --- 2. STYLES & SCRIPTS ---
+// --- 2. STYLES & SCRIPTS (Der Traffic-Controller) ---
 add_action( 'wp_enqueue_scripts', function () {
-    $child_version = '9.1.1'; // Version hochgezählt
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], $child_version );
-
-    // A) STARTSEITE & ARCHIV (Das Grid-Layout)
-    if ( is_front_page() || is_home() || is_archive() ) {
-        wp_enqueue_style( 
-            'nexus-homepage-css', 
-            get_stylesheet_directory_uri() . '/assets/css/homepage.css', 
-            [], 
-            time() 
-        );
-        
-        wp_enqueue_script( 
-            'nexus-home', 
-            get_stylesheet_directory_uri() . '/assets/js/homepage.js', 
-            [], 
-            time(), 
-            true 
-        );
-    }
     
-    // B) EINZELNER BLOG-POST (Das Lese-Erlebnis)
-    if ( is_single() ) {
-        // Hier laden wir das neue CSS für die Analyse-Ansicht
-        wp_enqueue_style( 
-            'nexus-single-css', 
-            get_stylesheet_directory_uri() . '/assets/css/single.css', 
-            [], 
-            time() 
-        );
+    // Parent Theme Styles
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.3.0' );
 
-        // Optional: JS für die Progress-Bar & TOC
-        if (file_exists(get_stylesheet_directory() . '/assets/js/blog-archive.js')) {
-            wp_enqueue_script( 
-                'nexus-blog', 
-                get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', 
-                [], 
-                '6.0.0', 
-                true 
-            );
+    // A) NUR Startseite & Archiv (Grid-Layout & JS)
+    if ( is_front_page() || is_home() || is_archive() ) {
+        wp_enqueue_style( 'nexus-home-css', get_stylesheet_directory_uri() . '/assets/css/homepage.css', [], time() );
+        wp_enqueue_script( 'nexus-home-js', get_stylesheet_directory_uri() . '/assets/js/homepage.js', [], time(), true );
+    }
+
+    // B) NUR Blog-Archive (Kategorie-Seiten etc.)
+    if ( is_home() ) {
+         wp_enqueue_script( 'nexus-archive-js', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], '6.0.0', true );
+    }
+
+    // C) NUR Einzelbeitrag (Dein Analyse-Design)
+    // WICHTIG: Das hattest du gelöscht. Ich habe es wieder eingefügt, 
+    // damit deine Blog-Artikel ("Analysen") gut aussehen!
+    if ( is_single() ) {
+        if ( file_exists( get_stylesheet_directory() . '/assets/css/single.css' ) ) {
+            wp_enqueue_style( 'nexus-single-css', get_stylesheet_directory_uri() . '/assets/css/single.css', [], time() );
+        }
+        if ( file_exists( get_stylesheet_directory() . '/assets/js/blog-archive.js' ) ) {
+            wp_enqueue_script( 'nexus-single-js', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], '6.0.0', true );
         }
     }
 
-    // C) BLOG ARCHIVE LOGIK (Nur auf der Blog-Übersicht)
-    if ( is_home() ) {
-         wp_enqueue_script( 'nexus-blog-archive', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], '6.0.0', true );
-    }
+}, 20 );
 
-}, 20 ); // <--- HIER wird die Funktion EINMALIG und KORREKT geschlossen.
-
-// --- 3. PERFORMANCE & SCHRIFTEN ---
+// --- 3. PERFORMANCE & FONTS ---
 add_action( 'wp_head', function () {
     $font = get_stylesheet_directory_uri() . '/fonts';
     echo '<link rel="preload" href="' . $font . '/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>';
@@ -76,12 +54,11 @@ add_action( 'wp_head', function () {
     echo '<style>.ft { background: #0a0a0a; }</style>';
 }, 5 );
 
-/**
- * FIX: Titel-Steuerung (Nur für Blog-Beiträge!)
- * 1. 'blocksy:post_types:post:has_page_title' -> Zielt NUR auf den Typ "post" (Artikel).
- * 2. Seiten (Typ "page") werden NICHT beeinflusst.
- */
+// --- 4. DER TITEL-KILLER (RADIKAL) ---
+
+// A) Titel auf Blog-Posts (post) entfernen -> Dein single.php Layout greift.
 add_filter('blocksy:post_types:post:has_page_title', '__return_false');
 
-// ACHTUNG: Entfernt den automatischen Titel auf ALLEN Seiten (auch Impressum!)
-add_filter( 'blocksy:post_types:page:has_page_title', '__return_false' );
+// B) Titel auf ALLEN Seiten (page) entfernen -> Auch auf deiner Agentur-Seite.
+// HINWEIS: Wenn du auf dem Impressum einen Titel brauchst, füge ihn dort einfach im Editor als H1 ein.
+add_filter('blocksy:post_types:page:has_page_title', '__return_false');
