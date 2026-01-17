@@ -181,26 +181,21 @@ function hu_faq_section_shortcode() {
 }
 add_shortcode( 'hu_faq', 'hu_faq_section_shortcode' );
 
-// 6. Blog Section (STRATEGIE: Expertise als Growth-Beweis)
+// 6. Blog Section - NEXUS Strategie-Update
 function hu_blog_section_shortcode() {
     ob_start();
     ?>
     <section id="blog" class="wp-section" aria-labelledby="blog-heading">
         <div class="wp-container">
             <div class="section-title" style="text-align:center; margin-bottom: 4rem;">
-                <span class="wp-badge">Hebel für Wachstum</span>
-                <h2 id="blog-heading" class="wp-hero-title">Expertise, die <span>skaliert.</span></h2>
-                <p class="wp-hero-subtitle">Keine vagen Tipps. [cite_start]Hier erfährst du, wie wir technische Präzision und psychologische Trigger in messbare B2B-Leads übersetzen[cite: 382, 605].</p>
+                <span class="wp-badge">Insights für Entscheider</span>
+                <h2 id="blog-heading" class="wp-hero-title">Expertise, die <span>Wachstum</span> steuert.</h2>
+                <p class="wp-hero-subtitle">Wir analysieren die technischen und psychologischen Hebel, die aus Ihrer WordPress-Seite einen messbaren B2B-Vertriebskanal machen.</p>
             </div>
             
             <div class="wp-cards">
                 <?php
-                $args = array(
-                    'post_type'      => 'post',
-                    'posts_per_page' => 3,
-                    'post_status'    => 'publish',
-                    'ignore_sticky_posts' => true
-                );
+                $args = array('post_type' => 'post', 'posts_per_page' => 3, 'post_status' => 'publish', 'ignore_sticky_posts' => true);
                 $blog_query = new WP_Query($args);
 
                 if ($blog_query->have_posts()) :
@@ -212,32 +207,21 @@ function hu_blog_section_shortcode() {
                         <article class="wp-success-card" onclick="window.location='<?php the_permalink(); ?>';" style="cursor:pointer; display:flex; flex-direction:column;">
                             <?php if ($thumb_url) : ?>
                                 <div class="card-image-wrapper" style="border-radius:12px; overflow:hidden; margin-bottom:1.5rem; border:1px solid var(--border);">
-                                    <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php the_title(); ?>" style="width:100%; transition: transform 0.4s ease;" loading="lazy">
+                                    <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php the_title(); ?>" style="width:100%; height:200px; object-fit:cover;">
                                 </div>
                             <?php endif; ?>
-                            
                             <div class="card-content">
-                                <span class="wp-metric-label" style="display:block; margin-bottom:0.5rem; text-transform:uppercase; font-size:0.75rem; letter-spacing:1px; color:var(--gold); font-weight:700;">
+                                <span class="wp-metric-label" style="display:block; margin-bottom:0.5rem; color:var(--gold); font-weight:700; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px;">
                                     <?php echo esc_html($cat_name); ?>
                                 </span>
-                                <h3 class="wp-success-title" style="min-height: 3.5rem; line-height:1.3;"><?php the_title(); ?></h3>
-                                <p style="color:var(--text-dim); font-size:0.95rem; line-height:1.6; margin: 1rem 0;">
-                                    <?php echo wp_trim_words(get_the_excerpt(), 18); ?>
+                                <h3 class="wp-success-title"><?php the_title(); ?></h3>
+                                <p style="color:var(--text-dim); font-size:0.95rem; margin: 1rem 0;">
+                                    <?php echo wp_trim_words(get_the_excerpt(), 15); ?>
                                 </p>
-                                <span class="text-gold" style="font-weight:700; font-size:0.9rem; display:inline-block; margin-top:auto;">Analyse lesen →</span>
+                                <span class="text-gold" style="font-weight:700; font-size:0.9rem;">Analyse lesen →</span>
                             </div>
                         </article>
-                    <?php
-                    endwhile;
-                    wp_reset_postdata();
-                else :
-                    echo '<p style="text-align:center; width:100%; opacity:0.6;">Aktuell werden neue Case Studies vorbereitet.</p>';
-                endif;
-                ?>
-            </div>
-            
-            <div style="text-align:center; margin-top: 4rem;">
-                <a href="/blog/" class="wp-btn wp-btn-secondary">Das gesamte Archiv öffnen</a>
+                <?php endwhile; wp_reset_postdata(); endif; ?>
             </div>
         </div>
     </section>
