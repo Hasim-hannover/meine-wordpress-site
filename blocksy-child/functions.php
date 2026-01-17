@@ -68,3 +68,15 @@ add_filter('blocksy:post_types:post:has_page_title', '__return_false');
 
 // Titel auf ALLEN Seiten (page) entfernen (Agentur, Kontakt, etc.)
 add_filter('blocksy:post_types:page:has_page_title', '__return_false');
+
+// D) CSS-NOTBREMSE GEGEN TITEL (Wird auf jeder Seite geladen)
+$custom_css = "
+    .page .entry-header .entry-title,
+    .page .ct-page-title,
+    .single-post .entry-header .entry-title,
+    .single-post .ct-page-title,
+    .page-title { /* eigene Klasse aus single.php */
+        display: none !important;
+    }
+";
+wp_add_inline_style( 'blocksy-child-style', $custom_css );
