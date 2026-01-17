@@ -33,15 +33,14 @@ add_action( 'wp_enqueue_scripts', function () {
     wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], $child_version );
 
     // 2. HOMEPAGE ASSETS (Nur auf der Startseite)
-    if ( is_front_page() ) {
-        // WICHTIG: Wir laden das CSS als DATEI, nicht als Inline-Code.
-        // Das erlaubt dem Browser, unsere Fixes (z-index, pointer-events) zu lesen.
-        wp_enqueue_style( 
-            'nexus-homepage-css', 
-            get_stylesheet_directory_uri() . '/assets/css/homepage.css', 
-            [], 
-            time() // Cache-Buster: Zwingt Browser zum Neuladen
-        );
+   if ( is_front_page() || is_home() || is_archive() || is_single() ) {
+    wp_enqueue_style( 
+        'nexus-homepage-css', 
+        get_stylesheet_directory_uri() . '/assets/css/homepage.css', 
+        [], 
+        time() 
+    );
+}
 
         // JS laden (Menü-Logik)
         wp_enqueue_script( 
