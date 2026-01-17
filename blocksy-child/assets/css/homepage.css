@@ -261,3 +261,15 @@
 }
 
 .prose-nexus strong { color: #fff; }
+
+@media (min-width: 1024px) {
+    .layout-nexus {
+        grid-template-columns: 2fr 1fr !important; /* Nur auf Desktop zwei Spalten */
+    }
+}
+
+@media (max-width: 1023px) {
+    .toc-sidebar {
+        display: none; /* Auf dem Handy das Inhaltsverzeichnis ausblenden für bessere Lesbarkeit */
+    }
+}
