@@ -59,3 +59,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const content = document.getElementById('article-content');
+    if (!content) return;
+
+    const tocList = document.getElementById('toc-list');
+    const progressBar = document.getElementById('progress-bar');
+    const headings = content.querySelectorAll('h2');
+
+    // 1. Inhaltsverzeichnis dynamisch generieren
+    headings.forEach((h2, index) => {
+        const id = `nexus-h2-${index}`;
+        h2.id = id;
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${id}">${h2.innerText}</a>`;
+        tocList.appendChild(li);
+    });
+
+    // 2. Lesefortschritt & TOC Highlighting
+    window.addEventListener('scroll', () => {
+        const scroll = window.scrollY;
+        const height = document.documentElement.scrollHeight - window.innerHeight;
+        if (progressBar) progressBar.style.width = `${(scroll / height) * 100}%`;
+
+        headings.forEach(h2 => {
+            if (scroll >= h2.offsetTop - 150) {
+                document.querySelectorAll('.toc-nexus a').forEach(a => a.classList.remove('active'));
+                const activeLink = document.querySelector(`.toc-nexus a[href="#${h2.id}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        });
+    }, { passive: true });
+});
