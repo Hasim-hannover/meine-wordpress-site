@@ -182,7 +182,7 @@ function hu_faq_section_shortcode() {
 add_shortcode( 'hu_faq', 'hu_faq_section_shortcode' );
 
 
-// 6. Blog Section (Knowledge Base - Dynamisch & Strategisch)
+// 6. Blog Section (CLEAN CODE: Valide Links statt Onclick-Events)
 function hu_blog_section_shortcode() {
     ob_start();
     ?>
@@ -210,23 +210,29 @@ function hu_blog_section_shortcode() {
                         $categories = get_the_category();
                         $cat_name = !empty($categories) ? $categories[0]->name : 'Insights';
                         ?>
-                        <article class="wp-success-card" onclick="window.location='<?php the_permalink(); ?>';" style="cursor:pointer; display:flex; flex-direction:column;">
-                            <?php if ($thumb_url) : ?>
-                                <div class="card-image-wrapper" style="border-radius:12px; overflow:hidden; margin-bottom:1.5rem; border:1px solid var(--border);">
-                                    <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php the_title(); ?>" style="width:100%; height:200px; object-fit:cover; transition: transform 0.4s ease;" loading="lazy">
+                        <article class="wp-success-card" style="position: relative; display: flex; flex-direction: column;">
+                            <a href="<?php the_permalink(); ?>" class="card-link-wrapper" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;">
+                                
+                                <?php if ($thumb_url) : ?>
+                                    <div class="card-image-wrapper" style="border-radius:12px; overflow:hidden; margin-bottom:1.5rem; border:1px solid var(--border);">
+                                        <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php the_title_attribute(); ?>" style="width:100%; height:200px; object-fit:cover; transition: transform 0.4s ease;" loading="lazy">
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
+                                    <span class="wp-metric-label" style="display:block; margin-bottom:0.5rem; text-transform:uppercase; font-size:0.75rem; color:var(--gold); font-weight:700;">
+                                        <?php echo esc_html($cat_name); ?>
+                                    </span>
+                                    
+                                    <h3 class="wp-success-title" style="min-height: 3.5rem; line-height:1.3; font-size: 1.4rem; color: #fff; margin: 0 0 1rem 0;"><?php the_title(); ?></h3>
+                                    
+                                    <p style="color:var(--text-dim); font-size:0.95rem; line-height:1.6; margin: 0 0 1.5rem 0;">
+                                        <?php echo wp_trim_words(get_the_excerpt(), 15); ?>
+                                    </p>
+                                    
+                                    <span class="text-gold" style="font-weight:700; font-size:0.9rem; margin-top:auto; display: inline-block;">Analyse lesen →</span>
                                 </div>
-                            <?php endif; ?>
-                            
-                            <div class="card-content">
-                                <span class="wp-metric-label" style="display:block; margin-bottom:0.5rem; text-transform:uppercase; font-size:0.75rem; color:var(--gold); font-weight:700;">
-                                    <?php echo esc_html($cat_name); ?>
-                                </span>
-                                <h3 class="wp-success-title" style="min-height: 3.5rem; line-height:1.3; font-size: 1.4rem; color: #fff;"><?php the_title(); ?></h3>
-                                <p style="color:var(--text-dim); font-size:0.95rem; line-height:1.6; margin: 1rem 0;">
-                                    <?php echo wp_trim_words(get_the_excerpt(), 15); ?>
-                                </p>
-                                <span class="text-gold" style="font-weight:700; font-size:0.9rem; margin-top:auto;">Analyse lesen →</span>
-                            </div>
+                            </a>
                         </article>
                     <?php
                     endwhile;
@@ -245,9 +251,7 @@ function hu_blog_section_shortcode() {
     <?php
     return ob_get_clean();
 }
-// Registrierung am Dateiende (WICHTIG: Keine extra } danach!)
 add_shortcode( 'hu_blog', 'hu_blog_section_shortcode' );
-
 
 // 7. CTA Section
 function hu_cta_section_shortcode() {
