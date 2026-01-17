@@ -75,3 +75,10 @@ add_action( 'wp_head', function () {
     echo "<style>@font-face { font-family: 'Satoshi'; src: url('$font/Satoshi-Variable.woff2') format('woff2-variations'); font-weight: 300 900; font-display: swap; font-style: normal; }</style>";
     echo '<style>.ft { background: #0a0a0a; }</style>';
 }, 5 );
+
+/**
+ * FIX: Titel-Steuerung (Nur für Blog-Beiträge!)
+ * 1. 'blocksy:post_types:post:has_page_title' -> Zielt NUR auf den Typ "post" (Artikel).
+ * 2. Seiten (Typ "page") werden NICHT beeinflusst.
+ */
+add_filter('blocksy:post_types:post:has_page_title', '__return_false');
