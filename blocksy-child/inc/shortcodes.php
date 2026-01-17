@@ -181,55 +181,69 @@ function hu_faq_section_shortcode() {
 }
 add_shortcode( 'hu_faq', 'hu_faq_section_shortcode' );
 
-// 6. Blog Section
+// 6. Blog Section (STRATEGIE: Expertise als Growth-Beweis)
 function hu_blog_section_shortcode() {
     ob_start();
     ?>
-    <section id="blog" aria-labelledby="blog-heading">
-        <div class="container">
-            <div class="section-title">
-                <span class="badge">Insights</span>
-                <h2 id="blog-heading">Wissen für Entscheider</h2>
-                <p>Strategische Einblicke in WordPress-Entwicklung und Digitales Wachstum.</p>
+    <section id="blog" class="wp-section" aria-labelledby="blog-heading">
+        <div class="wp-container">
+            <div class="section-title" style="text-align:center; margin-bottom: 4rem;">
+                <span class="wp-badge">Hebel für Wachstum</span>
+                <h2 id="blog-heading" class="wp-hero-title">Expertise, die <span>skaliert.</span></h2>
+                <p class="wp-hero-subtitle">Keine vagen Tipps. [cite_start]Hier erfährst du, wie wir technische Präzision und psychologische Trigger in messbare B2B-Leads übersetzen[cite: 382, 605].</p>
             </div>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/ffb020?text=Tech+SEO" alt="Beitragsbild"></a>
-                    <div class="blog-card-content">
-                        <span class="blog-card-cat">WordPress Technik</span>
-                        <h3><a href="#" class="blog-card-title">Core Web Vitals als Ranking-Faktor</a></h3>
-                        <p class="muted">Warum grüne Balken bei Google PageSpeed bares Geld wert sind und wie wir sie in WordPress erreichen.</p>
-                        <a href="#" class="read-more">Artikel lesen →</a>
-                    </div>
-                </article>
-                <article class="blog-card">
-                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/0ea5e9?text=Tracking" alt="Beitragsbild"></a>
-                    <div class="blog-card-content">
-                        <span class="blog-card-cat">Daten & Analyse</span>
-                        <h3><a href="#" class="blog-card-title">Server-Side GTM für WordPress</a></h3>
-                        <p class="muted">Wie Sie mit serverseitigem Tracking die Datenqualität um 30% steigern und unabhängig von Blockern werden.</p>
-                        <a href="#" class="read-more">Artikel lesen →</a>
-                    </div>
-                </article>
-                <article class="blog-card">
-                    <a href="#" class="blog-card-img" aria-hidden="true" tabindex="-1"><img src="https://placehold.co/600x400/0a0a0a/10b981?text=Retainer" alt="Beitragsbild"></a>
-                    <div class="blog-card-content">
-                        <span class="blog-card-cat">Business</span>
-                        <h3><a href="#" class="blog-card-title">Warum Retainer für Sie günstiger sind</a></h3>
-                        <p class="muted">Die Rechnung ist einfach: Kontinuierliche Optimierung verhindert teure Relaunches alle 2 Jahre.</p>
-                        <a href="#" class="read-more">Artikel lesen →</a>
-                    </div>
-                </article>
+            
+            <div class="wp-cards">
+                <?php
+                $args = array(
+                    'post_type'      => 'post',
+                    'posts_per_page' => 3,
+                    'post_status'    => 'publish',
+                    'ignore_sticky_posts' => true
+                );
+                $blog_query = new WP_Query($args);
+
+                if ($blog_query->have_posts()) :
+                    while ($blog_query->have_posts()) : $blog_query->the_post();
+                        $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'medium_large');
+                        $categories = get_the_category();
+                        $cat_name = !empty($categories) ? $categories[0]->name : 'Insights';
+                        ?>
+                        <article class="wp-success-card" onclick="window.location='<?php the_permalink(); ?>';" style="cursor:pointer; display:flex; flex-direction:column;">
+                            <?php if ($thumb_url) : ?>
+                                <div class="card-image-wrapper" style="border-radius:12px; overflow:hidden; margin-bottom:1.5rem; border:1px solid var(--border);">
+                                    <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php the_title(); ?>" style="width:100%; transition: transform 0.4s ease;" loading="lazy">
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="card-content">
+                                <span class="wp-metric-label" style="display:block; margin-bottom:0.5rem; text-transform:uppercase; font-size:0.75rem; letter-spacing:1px; color:var(--gold); font-weight:700;">
+                                    <?php echo esc_html($cat_name); ?>
+                                </span>
+                                <h3 class="wp-success-title" style="min-height: 3.5rem; line-height:1.3;"><?php the_title(); ?></h3>
+                                <p style="color:var(--text-dim); font-size:0.95rem; line-height:1.6; margin: 1rem 0;">
+                                    <?php echo wp_trim_words(get_the_excerpt(), 18); ?>
+                                </p>
+                                <span class="text-gold" style="font-weight:700; font-size:0.9rem; display:inline-block; margin-top:auto;">Analyse lesen →</span>
+                            </div>
+                        </article>
+                    <?php
+                    endwhile;
+                    wp_reset_postdata();
+                else :
+                    echo '<p style="text-align:center; width:100%; opacity:0.6;">Aktuell werden neue Case Studies vorbereitet.</p>';
+                endif;
+                ?>
             </div>
-            <div style="text-align:center; margin-top: 3rem;">
-                <a href="https://hasimuener.de/blog/" class="btn btn-ghost">Zum Strategie-Blog</a>
+            
+            <div style="text-align:center; margin-top: 4rem;">
+                <a href="/blog/" class="wp-btn wp-btn-secondary">Das gesamte Archiv öffnen</a>
             </div>
         </div>
     </section>
     <?php
     return ob_get_clean();
 }
-add_shortcode( 'hu_blog', 'hu_blog_section_shortcode' );
 
 // 7. CTA Section
 function hu_cta_section_shortcode() {
