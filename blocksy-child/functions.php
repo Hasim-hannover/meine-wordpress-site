@@ -1,7 +1,7 @@
 <?php
 /**
  * Blocksy Child - Nexus Ultimate Edition
- * FINALER STAND: Layout-Logik + Titel-Killer (Doppelt abgesichert)
+ * STATUS: CLEAN & SAFE. Keine globalen Zerstörer mehr.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -15,68 +15,59 @@ foreach ( $files_to_load as $file ) {
     }
 }
 
-// --- 2. STYLES & SCRIPTS (Der Traffic-Controller) ---
+// --- 2. STYLES & SCRIPTS (Performance-Optimiert) ---
 add_action( 'wp_enqueue_scripts', function () {
     
     // Parent Theme Styles
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.4.0' );
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.4.1' );
 
-    // A) NUR Startseite & Archiv
+    // A) Startseite, Archiv & Home
     if ( is_front_page() || is_home() || is_archive() ) {
         wp_enqueue_style( 'nexus-home-css', get_stylesheet_directory_uri() . '/assets/css/homepage.css', [], time() );
         wp_enqueue_script( 'nexus-home-js', get_stylesheet_directory_uri() . '/assets/js/homepage.js', [], time(), true );
     }
 
-    // B) NUR Blog-Archive
+    // B) Blog-Archive Skripte
     if ( is_home() ) {
          wp_enqueue_script( 'nexus-archive-js', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], '6.0.0', true );
     }
 
-    // C) NUR Einzelbeitrag (Blog Post)
+    // C) NUR Einzelbeitrag (Blog Post) - Nexus Layout
     if ( is_single() ) {
+        // Falls du eine separate CSS Datei für Single Posts hast:
         if ( file_exists( get_stylesheet_directory() . '/assets/css/single.css' ) ) {
             wp_enqueue_style( 'nexus-single-css', get_stylesheet_directory_uri() . '/assets/css/single.css', [], time() );
         }
+        
+        // CSS-Fix NUR für Blog-Beiträge (damit der doppelte Titel verschwindet)
+        // Wir verstecken hier NUR den Standard-Titel des Themes, weil wir unseren eigenen in single.php haben.
+        $custom_css = "
+            .single-post .entry-header .entry-title,
+            .single-post .ct-page-title {
+                display: none !important;
+            }
+        ";
+        wp_add_inline_style( 'blocksy-child-style', $custom_css );
     }
-    
-    // D) CSS-NOTBREMSE GEGEN TITEL (Wird auf jeder Seite geladen)
-    // Das hier versteckt den Titel visuell, falls der PHP-Filter unten ignoriert wird.
-    $custom_css = "
-        .page .entry-header .entry-title, 
-        .page .ct-page-title,
-        .single-post .entry-header .entry-title,
-        .single-post .ct-page-title {
-            display: none !important;
-        }
-    ";
-    wp_add_inline_style( 'blocksy-child-style', $custom_css );
 
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
 add_action( 'wp_head', function () {
     $font = get_stylesheet_directory_uri() . '/fonts';
+    
+    // Preload Satoshi
     echo '<link rel="preload" href="' . $font . '/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>';
     echo "<style>@font-face { font-family: 'Satoshi'; src: url('$font/Satoshi-Variable.woff2') format('woff2-variations'); font-weight: 300 900; font-display: swap; font-style: normal; }</style>";
+    
+    // Footer Background Fix
     echo '<style>.ft { background: #0a0a0a; }</style>';
 }, 5 );
 
-// --- 4. DER LOGIK-KILLER (PHP) ---
+// --- 4. TITEL-LOGIK (NUR FÜR BLOG-POSTS) ---
 
-// Titel auf Blog-Posts (post) entfernen
+// Wir entfernen den Titel NUR bei Posts via Filter, nicht bei Pages!
 add_filter('blocksy:post_types:post:has_page_title', '__return_false');
 
-// Titel auf ALLEN Seiten (page) entfernen (Agentur, Kontakt, etc.)
-add_filter('blocksy:post_types:page:has_page_title', '__return_false');
-
-// D) CSS-NOTBREMSE GEGEN TITEL (Wird auf jeder Seite geladen)
-$custom_css = "
-    .page .entry-header .entry-title,
-    .page .ct-page-title,
-    .single-post .entry-header .entry-title,
-    .single-post .ct-page-title,
-    .page-title { /* eigene Klasse aus single.php */
-        display: none !important;
-    }
-";
-wp_add_inline_style( 'blocksy-child-style', $custom_css );
+// WICHTIG: Der Filter für 'page' wurde GELÖSCHT. Deine Seiten sind jetzt wieder normal.
+?>
