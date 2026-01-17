@@ -83,19 +83,5 @@ add_action( 'wp_head', function () {
  */
 add_filter('blocksy:post_types:post:has_page_title', '__return_false');
 
-/**
- * FIX: Titel-Steuerung für SEITEN (Page)
- * Deaktiviert den Blocksy-Titel NUR auf spezifischen Landingpages,
- * damit wir dort volle Design-Kontrolle haben.
- */
-add_filter('blocksy:post_types:page:has_page_title', function ($has_title) {
-    
-    // Liste der Seiten-IDs oder Slugs, wo der Titel WEG soll:
-    // Beispiel: 'wordpress-agentur-hannover', 'seo-audit', 'kontakt'
-    if ( is_page( array( 'wordpress-agentur-hannover', 'seo-landingpage-slug-hier-einfuegen' ) ) ) {
-        return false;
-    }
-
-    // Auf allen anderen Seiten (Impressum etc.) bleibt der Titel da.
-    return $has_title;
-});
+// ACHTUNG: Entfernt den automatischen Titel auf ALLEN Seiten (auch Impressum!)
+add_filter( 'blocksy:post_types:page:has_page_title', '__return_false' );
