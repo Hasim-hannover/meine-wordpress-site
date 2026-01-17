@@ -283,3 +283,134 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     .nexus-title { font-size: 2.2rem; }
     .nexus-article-hero { padding-top: 120px; }
 }
+
+/* --- NEXUS ARCHIVE LAYOUT --- */
+
+/* Hero Anpassungen für Archive */
+.nexus-archive-container {
+    background-color: #0a0a0a;
+    min-height: 100vh;
+    color: #fafafa;
+}
+
+.nexus-archive-hero {
+    padding: 140px 20px 60px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #0a0a0a 0%, #111 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.nexus-archive-desc {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #b0b0b0;
+    margin-top: 24px;
+}
+
+/* Entfernt den Standard-Abstand von P-Tags in der Beschreibung */
+.nexus-archive-desc p {
+    margin-bottom: 0; 
+}
+
+/* --- DAS CARD GRID --- */
+.nexus-grid-wrapper {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.nexus-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+/* Die einzelne Karte */
+.nexus-card {
+    background: #121212;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.nexus-card:hover {
+    transform: translateY(-5px);
+    border-color: #ffb020;
+}
+
+.nexus-card-link {
+    text-decoration: none;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: inherit;
+}
+
+.nexus-card-date {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+}
+
+.nexus-card-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.nexus-card-excerpt {
+    font-size: 1rem;
+    color: #999;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    flex-grow: 1; /* Schiebt den Button nach unten */
+}
+
+.nexus-read-more {
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffb020;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Pagination Styling */
+.nexus-pagination {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.nexus-pagination .page-numbers {
+    display: inline-block;
+    padding: 10px 16px;
+    margin: 0 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.nexus-pagination .page-numbers.current,
+.nexus-pagination .page-numbers:hover {
+    background: #ffb020;
+    color: #000;
+    border-color: #ffb020;
+    font-weight: 700;
+}
+
+/* Mobile Fix */
+@media (max-width: 600px) {
+    .nexus-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
