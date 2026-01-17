@@ -2,7 +2,7 @@
 /**
  * Shortcodes für die Startseite.
  * STRATEGIE-UPDATE: 100% WordPress & Growth Fokus.
- * Keine Shopify-Dienstleistung mehr.
+ * Keine Shopify-Dienstleistung mehr testen.
  *
  * @package Blocksy Child
  */
