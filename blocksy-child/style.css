@@ -151,3 +151,135 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ft__social { display: flex; gap: 15px; }
 @media (max-width: 900px) { .ft__top, .ft__cols { grid-template-columns: 1fr; } }
 .widget .ft { margin: 0; }
+
+
+/* --- NEXUS SINGLE PAGE LAYOUT --- */
+
+/* Container Reset */
+.nexus-single-container {
+    background-color: #0a0a0a; /* Dark Background wie vereinbart */
+    color: #fafafa;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* 1. HERO SECTION */
+.nexus-article-hero {
+    padding: 160px 20px 80px 20px; /* Viel Raum oben (Whitespace) */
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.nexus-meta-top {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+.nexus-meta-top a {
+    color: #ffb020; /* Dein Akzent-Gold */
+    text-decoration: none;
+}
+
+.nexus-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 3.5rem; /* Massive Headline */
+    line-height: 1.1;
+    font-weight: 900;
+    margin-bottom: 40px;
+    color: #ffffff;
+}
+
+/* Autor Box */
+.nexus-author-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.nexus-author-row img {
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+.nexus-author-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.nexus-author-info .by { color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+.nexus-author-info .name { color: #fff; font-weight: 700; }
+.nexus-author-info .role { color: #ffb020; font-size: 12px; }
+
+/* 2. CONTENT BEREICH */
+.nexus-article-content {
+    max-width: 740px; /* Optimale Lesebreite (ca. 75 Zeichen) */
+    margin: 80px auto;
+    padding: 0 20px;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: #d0d0d0; /* Leicht abgedunkeltes Weiß für entspanntes Lesen */
+}
+
+/* Gutenberg Überschriften im Content */
+.nexus-article-content h2 {
+    font-size: 2rem;
+    margin-top: 60px;
+    margin-bottom: 24px;
+    color: #fff;
+    font-weight: 800;
+}
+
+.nexus-article-content h3 {
+    font-size: 1.5rem;
+    margin-top: 40px;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+.nexus-article-content p {
+    margin-bottom: 24px;
+}
+
+/* 3. FOOTER CTA */
+.nexus-post-footer-cta {
+    text-align: center;
+    padding: 80px 20px;
+    background: rgba(255,255,255,0.03);
+    margin-top: 80px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.nexus-post-footer-cta h3 { font-size: 2rem; margin-bottom: 10px; color: #fff; }
+.nexus-post-footer-cta p { color: #999; margin-bottom: 30px; }
+
+.nexus-btn {
+    display: inline-block;
+    background: #ffb020;
+    color: #000;
+    font-weight: 800;
+    padding: 16px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s;
+}
+
+.nexus-btn:hover {
+    transform: translateY(-2px);
+    background: #ffc040;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nexus-title { font-size: 2.2rem; }
+    .nexus-article-hero { padding-top: 120px; }
+}
