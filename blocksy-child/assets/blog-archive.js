@@ -1,35 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const content = document.getElementById('article-content');
+    // 1. Suche den Inhaltsbereich und die TOC-Liste
+    const article = document.getElementById('article-content');
     const tocList = document.getElementById('toc-list');
     
-    if (!content || !tocList) return;
+    // Wenn eins von beiden fehlt, brechen wir ab
+    if (!article || !tocList) {
+        console.log("Nexus-Error: article-content oder toc-list nicht gefunden.");
+        return;
+    }
 
-    // Alle H2 Überschriften im Content suchen
-    const headings = content.querySelectorAll('h2');
-
+    // 2. Suche alle H2 Überschriften
+    const headings = article.querySelectorAll('h2');
+    
     if (headings.length === 0) {
         document.getElementById('toc-container').style.display = 'none';
         return;
     }
 
+    // 3. Generiere die Punkte
     headings.forEach((h2, index) => {
-        // ID für den Anker vergeben, falls keine da ist
-        const id = `nexus-anchor-${index}`;
-        h2.id = id;
+        const id = `section-${index}`;
+        h2.id = id; // Setzt den Anker für den Klick
 
-        // Listen-Element für das TOC erstellen
         const li = document.createElement('li');
-        li.style.marginBottom = '10px';
-        li.innerHTML = `<a href="#${id}" style="text-decoration:none; color:var(--text-dim); font-size:0.9rem;">${h2.innerText}</a>`;
+        li.style.marginBottom = "12px";
+        li.innerHTML = `<a href="#${id}" style="color:var(--text-dim); text-decoration:none; font-size:0.95rem; transition:0.2s;">${h2.innerText}</a>`;
         tocList.appendChild(li);
     });
 
-    // Scroll-Effekt für den Fortschrittsbalken
-    window.addEventListener('scroll', () => {
-        const scroll = window.scrollY;
-        const height = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = (scroll / height) * 100;
-        const bar = document.getElementById('progress-bar');
-        if (bar) bar.style.width = `${progress}%`;
-    });
+    console.log(`${headings.length} Punkte im TOC generiert.`);
 });
