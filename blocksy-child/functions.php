@@ -67,4 +67,14 @@ add_action( 'wp_head', function () {
 
 // --- 4. TITEL-LOGIK ---
 add_filter('blocksy:post_types:post:has_page_title', '__return_false');
+
+/**
+ * NEXUS FEATURE: Automatische Lesezeit
+ */
+function nexus_get_reading_time() {
+    $content = get_post_field( 'post_content', get_the_ID() );
+    $word_count = str_word_count( strip_tags( $content ) );
+    $reading_time = ceil( $word_count / 200 ); // Annahme: 200 Wörter pro Minute
+    return $reading_time;
+}
 ?>
