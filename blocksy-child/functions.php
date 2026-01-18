@@ -77,4 +77,42 @@ function nexus_get_reading_time() {
     $reading_time = ceil( $word_count / 200 ); // Annahme: 200 Wörter pro Minute
     return $reading_time;
 }
+
+// In functions.php einfügen:
+add_action('wp_footer', function() {
+    if (!is_single()) return;
+    ?>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 1. Inhaltsverzeichnis generieren
+        const tocList = document.getElementById('toc-list');
+        const headings = document.querySelectorAll('#article-content h2, #article-content h3');
+        
+        if (tocList && headings.length > 0) {
+            headings.forEach((heading, index) => {
+                // ID vergeben, falls keine da ist
+                if (!heading.id) {
+                    heading.id = 'toc-' + index;
+                }
+                
+                // Link erstellen
+                const li = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#' + heading.id;
+                link.textContent = heading.textContent;
+                
+                // Einrücken für H3
+                if (heading.tagName === 'H3') {
+                    li.style.marginLeft = '15px';
+                    li.style.fontSize = '0.9em';
+                }
+                
+                li.appendChild(link);
+                tocList.appendChild(li);
+            });
+        }
+    });
+    </script>
+    <?php
+});
 ?>
