@@ -1,7 +1,8 @@
 <?php
 /**
  * NEXUS ULTIMATE SINGLE POST TEMPLATE
- * Update: CTA auf "Sie"-Form geändert.
+ * LEVEL: CHAMPIONS LEAGUE
+ * Features: Dynamisches Hero-Bild, Insta-Button, Dual-Share, Sie-Form.
  */
 
 get_header(); 
@@ -11,7 +12,17 @@ get_header();
 
     <?php while ( have_posts() ) : the_post(); ?>
 
-        <header class="nexus-article-hero">
+        <?php
+        // 1. CHAMPIONS LEAGUE HERO LOGIK
+        // Wir holen uns das Beitragsbild URL. Wenn keins da ist, nehmen wir ein Fallback-Grau.
+        $hero_bg = get_the_post_thumbnail_url(get_the_ID(), 'full');
+        $hero_style = $hero_bg ? 'style="background-image: url(' . esc_url($hero_bg) . ');"' : '';
+        ?>
+
+        <header class="nexus-article-hero has-bg" <?php echo $hero_style; ?>>
+            
+            <div class="nexus-hero-overlay"></div>
+
             <div class="nexus-hero-inner">
                 
                 <div class="nexus-meta-top">
@@ -26,6 +37,8 @@ get_header();
                     </span>
                     <span class="separator">|</span>
                     <span class="nexus-date"><?php echo get_the_date('d. M Y'); ?></span>
+                    <span class="separator">|</span>
+                    <span class="nexus-reading-time">⏱ <?php echo nexus_get_reading_time(); ?> Min. Lesezeit</span>
                 </div>
 
                 <h1 class="nexus-title"><?php the_title(); ?></h1>
@@ -39,21 +52,7 @@ get_header();
                         </div>
                     </div>
 
-                    <div class="nexus-share-box">
-                        <span class="share-label">Teilen:</span>
-                        
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink(); ?>" target="_blank" rel="noopener" class="nexus-share-btn linkedin" title="Auf LinkedIn teilen">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                        </a>
-
-                        <a href="https://wa.me/?text=<?php echo urlencode(get_the_title() . ' - ' . get_the_permalink()); ?>" target="_blank" rel="noopener" class="nexus-share-btn whatsapp" title="Per WhatsApp senden">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                        </a>
-
-                        <button onclick="navigator.clipboard.writeText('<?php the_permalink(); ?>');alert('Link in Zwischenablage kopiert!');" class="nexus-share-btn copy" title="Link kopieren">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                        </button>
-                    </div>
+                    <?php nexus_render_share_buttons(); ?>
                 </div>
 
             </div>
@@ -62,6 +61,11 @@ get_header();
         <article class="nexus-article-content">
             <?php the_content(); ?>
         </article>
+
+        <div class="nexus-bottom-share">
+            <h3>Diesen Artikel teilen</h3>
+            <?php nexus_render_share_buttons(); ?>
+        </div>
 
         <div class="nexus-post-footer-cta">
             <h3>Genug der Theorie?</h3>
@@ -73,4 +77,31 @@ get_header();
 
 </main>
 
-<?php get_footer(); ?>
+<?php 
+// Hilfsfunktion für die Share-Buttons (damit wir den Code nicht doppelt schreiben müssen)
+function nexus_render_share_buttons() {
+    ?>
+    <div class="nexus-share-box">
+        <span class="share-label">Teilen:</span>
+        
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink(); ?>" target="_blank" rel="noopener" class="nexus-share-btn linkedin" title="Auf LinkedIn teilen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+
+        <a href="https://wa.me/?text=<?php echo urlencode(get_the_title() . ' - ' . get_the_permalink()); ?>" target="_blank" rel="noopener" class="nexus-share-btn whatsapp" title="Per WhatsApp senden">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
+
+        <a href="https://instagram.com/hasimuener" target="_blank" rel="noopener" class="nexus-share-btn instagram" title="Auf Instagram besuchen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+
+        <button onclick="navigator.clipboard.writeText('<?php the_permalink(); ?>');alert('Link in Zwischenablage kopiert!');" class="nexus-share-btn copy" title="Link kopieren">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+        </button>
+    </div>
+    <?php
+}
+
+get_footer(); 
+?>
