@@ -1,7 +1,7 @@
 <?php
 /**
  * NEXUS ULTIMATE SINGLE POST TEMPLATE
- * Update: Lesezeit & Social Sharing integriert.
+ * Update: CTA auf "Sie"-Form geändert.
  */
 
 get_header(); 
@@ -26,8 +26,6 @@ get_header();
                     </span>
                     <span class="separator">|</span>
                     <span class="nexus-date"><?php echo get_the_date('d. M Y'); ?></span>
-                    <span class="separator">|</span>
-                    <span class="nexus-reading-time">⏱ <?php echo nexus_get_reading_time(); ?> Min. Lesezeit</span>
                 </div>
 
                 <h1 class="nexus-title"><?php the_title(); ?></h1>
@@ -66,8 +64,8 @@ get_header();
         </article>
 
         <div class="nexus-post-footer-cta">
-            <h3>Genug Theorie?</h3>
-            <p>Lass uns prüfen, ob deine Website technisch bereit für mehr Leads ist.</p>
+            <h3>Genug der Theorie?</h3>
+            <p>Lassen Sie uns gemeinsam prüfen, ob Ihre Website technisch bereit für mehr Leads ist.</p>
             <a href="/audit" class="nexus-btn">Kostenloses Audit buchen</a>
         </div>
 
