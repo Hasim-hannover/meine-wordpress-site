@@ -1,13 +1,15 @@
 <?php
 /**
  * Blocksy Child - Nexus Ultimate Edition
- * STATUS: CLEAN & SAFE. Keine globalen Zerstörer mehr.
+ * STATUS: CLEAN & SAFE. Bereinigt.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 // --- 1. EXTERNE DATEIEN LADEN ---
 $inc_dir = get_stylesheet_directory() . '/inc/';
-$files_to_load = ['shortcodes.php', 'org-schema.php', 'schema.php', 'snippets.php', 'custom.php'];
+
+// Nur Dateien laden, die es wirklich gibt
+$files_to_load = ['shortcodes.php', 'org-schema.php'];
 
 foreach ( $files_to_load as $file ) {
     if ( file_exists( $inc_dir . $file ) ) {
@@ -39,8 +41,7 @@ add_action( 'wp_enqueue_scripts', function () {
             wp_enqueue_style( 'nexus-single-css', get_stylesheet_directory_uri() . '/assets/css/single.css', [], time() );
         }
         
-        // CSS-Fix NUR für Blog-Beiträge (damit der doppelte Titel verschwindet)
-        // Wir verstecken hier NUR den Standard-Titel des Themes, weil wir unseren eigenen in single.php haben.
+        // CSS-Fix NUR für Blog-Beiträge
         $custom_css = "
             .single-post .entry-header .entry-title,
             .single-post .ct-page-title {
@@ -64,10 +65,6 @@ add_action( 'wp_head', function () {
     echo '<style>.ft { background: #0a0a0a; }</style>';
 }, 5 );
 
-// --- 4. TITEL-LOGIK (NUR FÜR BLOG-POSTS) ---
-
-// Wir entfernen den Titel NUR bei Posts via Filter, nicht bei Pages!
+// --- 4. TITEL-LOGIK ---
 add_filter('blocksy:post_types:post:has_page_title', '__return_false');
-
-// WICHTIG: Der Filter für 'page' wurde GELÖSCHT. Deine Seiten sind jetzt wieder normal.
 ?>
