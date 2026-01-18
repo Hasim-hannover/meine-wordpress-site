@@ -414,3 +414,23 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
         grid-template-columns: 1fr;
     }
 }
+
+/* NOTFALL-FIX: Versteckt den Hero auf allen Seiten, die KEIN Blogpost sind */
+body:not(.single-post) .nexus-article-hero,
+body:not(.single-post) .nexus-post-footer-cta {
+    display: none !important;
+}
+
+/* Setzt das Layout auf normalen Seiten zurück */
+body:not(.single-post) .nexus-single-container {
+    background: transparent !important;
+    min-height: auto !important;
+    display: block !important;
+}
+
+/* Korrigiert die Verschachtelung optisch */
+body:not(.single-post) .nexus-article-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+}
