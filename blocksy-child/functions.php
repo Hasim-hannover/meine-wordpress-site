@@ -1,7 +1,7 @@
 <?php
 /**
  * Blocksy Child - Nexus Ultimate Edition
- * STATUS: CLEAN & SAFE. Bereinigt.
+ * STATUS: CLEAN & SAFE. Bereinigt & Präzise.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -35,7 +35,8 @@ add_action( 'wp_enqueue_scripts', function () {
     }
 
     // C) NUR Einzelbeitrag (Blog Post) - Nexus Layout
-    if ( is_single() ) {
+    // Hier nutzen wir is_singular('post') für absolute Präzision
+    if ( is_singular('post') ) {
         // Falls du eine separate CSS Datei für Single Posts hast:
         if ( file_exists( get_stylesheet_directory() . '/assets/css/single.css' ) ) {
             wp_enqueue_style( 'nexus-single-css', get_stylesheet_directory_uri() . '/assets/css/single.css', [], time() );
@@ -78,14 +79,23 @@ function nexus_get_reading_time() {
     return $reading_time;
 }
 
-// In functions.php einfügen:
+// --- 5. JS-INJEKTION (TOC / Inhaltsverzeichnis) ---
 add_action('wp_footer', function() {
-    if (!is_single()) return;
+    
+    // ⚠️ DER GATEKEEPER:
+    // is_singular('post') = Nur auf echten Blog-Artikeln.
+    // !is_singular('post') = Wenn KEIN Blog-Artikel, dann sofort raus hier.
+    // Damit wird der Code auf "normalen" Seiten (Impressum, Startseite) NICHT geladen.
+    if ( ! is_singular( 'post' ) ) {
+        return; 
+    }
+
     ?>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         // 1. Inhaltsverzeichnis generieren
         const tocList = document.getElementById('toc-list');
+        // Wir suchen nur innerhalb von article-content nach Headlines, um Sidebars etc. nicht zu erwischen
         const headings = document.querySelectorAll('#article-content h2, #article-content h3');
         
         if (tocList && headings.length > 0) {
