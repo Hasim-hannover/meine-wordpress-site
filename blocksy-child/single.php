@@ -68,9 +68,9 @@ get_header();
         </div>
 
        <div class="nexus-post-footer-cta">
-            <h3>Tech, SEO & Content: Wo verliert Ihre Seite Geld?</h3>
-            <p>Ein reines Speed-Audit greift zu kurz. Meine KI-Analyse prüft Ihre <strong>Core Web Vitals</strong>, <strong>technisches SEO</strong> und <strong>Content-Signale</strong> ganzheitlich. Finden Sie die versteckten Bremsen in Ihrem System.</p>
-            <a href="https://hasimuener.de/wordpress-tech-audit/" class="nexus-btn">🚀 Zum 360° Growth-Audit (Kostenlos)</a>
+            <h3>Wo verbrennt Ihre Website gerade Geld?</h3>
+            <p>Ein Speed-Test reicht nicht. Mein 360° Audit prüft <strong>Tech, SEO & Content</strong> im Zusammenspiel. Finden wir die echten Umsatz-Bremsen.</p>
+            <a href="https://hasimuener.de/wordpress-tech-audit/" class="nexus-btn">🚀 Zum 360° Growth-Audit</a>
         </div>
 
     <?php endwhile; ?>
