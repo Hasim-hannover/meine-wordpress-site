@@ -67,10 +67,10 @@ get_header();
             <?php if ( function_exists( 'nexus_render_share_buttons' ) ) { nexus_render_share_buttons(); } ?>
         </div>
 
-        <div class="nexus-post-footer-cta">
-            <h3>Genug der Theorie?</h3>
-            <p>Lassen Sie uns gemeinsam prüfen, ob Ihre Website technisch bereit für mehr Leads ist.</p>
-            <a href="/audit" class="nexus-btn">Kostenloses Audit buchen</a>
+       <div class="nexus-post-footer-cta">
+            <h3>Tech, SEO & Content: Wo verliert Ihre Seite Geld?</h3>
+            <p>Ein reines Speed-Audit greift zu kurz. Meine KI-Analyse prüft Ihre <strong>Core Web Vitals</strong>, <strong>technisches SEO</strong> und <strong>Content-Signale</strong> ganzheitlich. Finden Sie die versteckten Bremsen in Ihrem System.</p>
+            <a href="https://hasimuener.de/wordpress-tech-audit/" class="nexus-btn">🚀 Zum 360° Growth-Audit (Kostenlos)</a>
         </div>
 
     <?php endwhile; ?>
