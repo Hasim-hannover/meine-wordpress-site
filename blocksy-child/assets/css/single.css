@@ -1,5 +1,5 @@
 /* =========================================
-   NEXUS SINGLE POST CSS (Dein Original-Design)
+   NEXUS SINGLE POST CSS (Dein High-End Design)
    ========================================= */
 
 /* 1. CONTAINER & BASIS */
@@ -10,10 +10,10 @@
     min-height: 100vh;
 }
 
-/* 2. CHAMPIONS LEAGUE HERO (Dein spezifisches Design) */
+/* 2. HERO SECTION */
 .nexus-article-hero { 
     position: relative; 
-    padding: 160px 40px 80px 40px; /* Deine Maße */
+    padding: 160px 40px 80px 40px; 
     margin-bottom: 4rem; 
     color: #fff; 
     background-color: #1a1a1a;  
@@ -25,20 +25,12 @@
 
 .nexus-hero-overlay { 
     position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
+    top: 0; left: 0; width: 100%; height: 100%; 
     background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4)); 
     z-index: 1; 
 } 
 
-.nexus-hero-inner { 
-    position: relative; 
-    z-index: 2; 
-    max-width: 900px; 
-    margin: 0 auto; 
-} 
+.nexus-hero-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; } 
 
 .nexus-title {
     font-family: 'Satoshi', sans-serif;
@@ -50,20 +42,15 @@
 }
 
 .nexus-meta-top {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #ffb020; /* Dein Gold */
-    margin-bottom: 24px;
-    font-weight: 700;
+    font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #ffb020; margin-bottom: 24px; font-weight: 700;
 }
 .nexus-meta-top a { color: inherit; text-decoration: none; }
-.nexus-meta-top .separator { margin: 0 10px; color: rgba(255, 255, 255, 0.2); }
 
 /* 3. HERO FOOTER (Autor & Share) */
 .nexus-hero-footer {
     display: flex;
-    justify-content: space-between; /* Autor links, Share rechts */
+    justify-content: space-between; 
     align-items: center;
     margin-top: 40px;
     padding-top: 30px;
@@ -73,33 +60,20 @@
 }
 
 .nexus-author-row {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-align: left;
+    display: flex; align-items: center; gap: 15px; text-align: left;
 }
 .nexus-author-row img { border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); }
 .nexus-author-info .name { color: #fff; font-weight: 700; }
 .nexus-author-info .by { color: #666; font-size: 12px; text-transform: uppercase; }
 
-/* 4. SHARE BUTTONS (Der wichtige Fix: Flexbox) */
+/* 4. SHARE BUTTONS (FIX: Damit sie nebeneinander stehen!) */
 .nexus-share-box {
-    display: flex;          /* Zwingt sie nebeneinander */
+    display: flex;          /* Zwingt Elemente nebeneinander */
     align-items: center;
     gap: 12px;
 }
-
-.share-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #666;
-    letter-spacing: 1px;
-    font-weight: 700;
-    margin-right: 5px;
-}
-
 .nexus-share-btn {
-    display: flex;          /* Zentriert Icon */
+    display: flex;          /* Zentriert Icon im Kreis */
     align-items: center;
     justify-content: center;
     width: 40px;
@@ -111,7 +85,6 @@
     transition: all 0.3s ease;
     cursor: pointer;
 }
-
 .nexus-share-btn:hover {
     transform: translateY(-3px);
     background: #ffb020;
@@ -119,104 +92,29 @@
     border-color: #ffb020;
 }
 
-/* 5. CONTENT DESIGN (.prose & Typo) */
+/* 5. TEXT CONTENT */
 .nexus-article-content, .prose {
-    max-width: 800px; 
-    margin: 80px auto; 
-    padding: 0 20px;
-    font-size: 1.15rem; 
-    line-height: 1.8; 
-    color: #d4d4d4; 
+    max-width: 800px; margin: 80px auto; padding: 0 20px;
+    font-size: 1.15rem; line-height: 1.8; color: #d4d4d4; 
 }
-
-.nexus-article-content h2, .prose h2 { 
-    font-size: 1.8rem; 
-    color: #fff; 
-    margin-top: 3rem; 
-    margin-bottom: 1rem; 
-    border-left: 3px solid #ffb020; 
-    padding-left: 15px; 
-    font-weight: 800;
+.nexus-article-content h2 { 
+    font-size: 1.8rem; color: #fff; margin-top: 3rem; margin-bottom: 1rem; 
+    border-left: 3px solid #ffb020; padding-left: 15px; font-weight: 800;
 } 
 
-.nexus-article-content h3, .prose h3 { 
-    font-size: 1.4rem; 
-    color: #f0f0f0; 
-    margin-top: 2rem; 
-    font-weight: 600; 
-} 
-
-.nexus-article-content ul, .prose ul { 
-    list-style: none; 
-    padding-left: 0; 
-    margin-bottom: 2rem; 
-} 
-.nexus-article-content ul li, .prose ul li { 
-    position: relative; 
-    padding-left: 20px; 
-    margin-bottom: 10px; 
-} 
-.nexus-article-content ul li::before, .prose ul li::before { 
-    content: "•"; 
-    color: #ffb020; 
-    font-weight: bold; 
-    position: absolute; 
-    left: 0; 
-} 
-
-/* 6. FLOATING TOC (Schwebendes Inhaltsverzeichnis) */
-.nexus-floating-toc { 
-    position: fixed; 
-    top: 50%; 
-    right: 30px; 
-    transform: translateY(-50%); 
-    width: 240px; 
-    background: rgba(15, 15, 15, 0.6); 
-    backdrop-filter: blur(20px); 
-    border: 1px solid rgba(255, 255, 255, 0.08); 
-    border-radius: 16px; 
-    padding: 25px; 
-    z-index: 999; 
-    transition: opacity 0.5s ease;
-} 
-@media (max-width: 1400px) { .nexus-floating-toc { display: none; } }
-
-.nexus-floating-toc h4 {
-    color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;
-}
-.nexus-floating-toc ul { list-style: none; padding: 0; margin: 0; }
-.nexus-floating-toc a { display: block; color: #ccc; text-decoration: none; font-size: 0.9rem; padding: 5px 0 5px 10px; border-left: 2px solid transparent; transition: all 0.3s; }
-.nexus-floating-toc a:hover { color: #ffb020; border-left-color: #ffb020; padding-left: 15px; }
-
-/* 7. UNTERER BEREICH (Share & CTA) */
+/* 6. BOTTOM BEREICH */
 .nexus-bottom-share { 
-    max-width: 800px; 
-    margin: 4rem auto; 
-    padding-top: 2rem; 
-    border-top: 1px solid rgba(255,255,255,0.1); 
-    text-align: center; 
+    max-width: 800px; margin: 4rem auto; padding-top: 2rem; 
+    border-top: 1px solid rgba(255,255,255,0.1); text-align: center; 
 } 
 .nexus-bottom-share .nexus-share-box { justify-content: center; }
 
 .nexus-post-footer-cta {
-    background: rgba(255,255,255,0.03);
-    padding: 80px 20px;
-    text-align: center;
-    margin-top: 80px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03); padding: 80px 20px; text-align: center;
+    margin-top: 80px; border-top: 1px solid rgba(255,255,255,0.08);
 }
-.nexus-post-footer-cta h3 { font-size: 2rem; margin-bottom: 10px; color: #fff; }
-.nexus-post-footer-cta p { color: #999; margin-bottom: 30px; }
-
 .nexus-btn {
-    display: inline-block;
-    background: #ffb020;
-    color: #000;
-    font-weight: 800;
-    padding: 16px 32px;
-    border-radius: 4px;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: transform 0.2s;
+    display: inline-block; background: #ffb020; color: #000; font-weight: 800;
+    padding: 16px 32px; border-radius: 4px; text-decoration: none; text-transform: uppercase;
+    margin-top: 20px;
 }
-.nexus-btn:hover { transform: translateY(-2px); background: #ffc040; }
