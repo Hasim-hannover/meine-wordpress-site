@@ -63,7 +63,30 @@ function hu_output_schema() {
             // Tagline emphasises protection of digital revenue and emergency help【309226683931710†L70-L78】.
             'description' => 'Der Schutzschild für Ihren digitalen Umsatz: Regelmässige Updates, präventive Abwehr, Performance‑Monitoring und Express‑Hilfe【309226683931710†L70-L78】.',
             'serviceType' => 'Wartungsvertrag & Support',
-            'serviceOutput' => 'Maximale Performance, gehärtete Sicherheit und schnelle Notfall‑Unterstützung'
+            'serviceOutput' => 'Maximale Performance, gehärtete Sicherheit und schnelle Notfall‑Unterstützung',
+            'offers'      => [
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Basis – kleine Infoseiten & Blogs',
+                    'price'         => '49',
+                    'priceCurrency' => 'EUR',
+                    'description'   => 'Wöchentliche Updates, monatliches Cloud‑Backup, Basis Uptime‑Monitoring und Support per E‑Mail (48h)【588342120472337†L113-L118】'
+                ],
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Performance‑Wächter – Firmen & Dienstleister',
+                    'price'         => '79',
+                    'priceCurrency' => 'EUR',
+                    'description'   => 'Tägliche Sicherheits‑Backups, proaktiver Malware‑Scan, monatlicher Performance‑Report, Wiederherstellung inkl. (Hack‑Schutz) und Support per Mail (24h)【588342120472337†L128-L135】'
+                ],
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'VIP & E‑Commerce – Shops & kritische Seiten',
+                    'price'         => '139',
+                    'priceCurrency' => 'EUR',
+                    'description'   => 'Echtzeit‑Backups, WooCommerce Datenbank‑Optimierung, Telefon & WhatsApp Support, bevorzugte Behandlung bei Ausfall und 1h Content‑Pflege【588342120472337†L142-L149】'
+                ]
+            ]
         ],
         'wordpress-seo' => [
             'name'        => 'WordPress SEO',
@@ -75,7 +98,16 @@ function hu_output_schema() {
             'name'        => 'Speed & Core Web Vitals Optimierung',
             'description' => 'Performance‑Optimierung mit Fokus auf Ladezeit, INP/LCP und Nutzererlebnis.',
             'serviceType' => 'Performance Optimierung',
-            'serviceOutput' => 'Grüne Core Web Vitals und schnellere Ladezeiten'
+            'serviceOutput' => 'Grüne Core Web Vitals und schnellere Ladezeiten',
+            'offers'      => [
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Performance Architektur Paket',
+                    'price'         => '649',
+                    'priceCurrency' => 'EUR',
+                    'description'   => 'Umfassendes Audit & Strategieplan, tiefgreifende technische Optimierung, Caching & CDN‑Setup, Live‑Performance‑Dashboard und 3 Monate Support【103301788764763†L175-L180】'
+                ]
+            ]
         ],
         'tracking-data' => [
             'name'        => 'GA4 & Server‑Side Tracking',
@@ -95,7 +127,17 @@ function hu_output_schema() {
             // Provides an AI audit delivering numbers on tech, speed and tracking gaps in five minutes【743685003484771†L70-L75】.
             'description' => 'KI‑gestütztes Tech‑Audit, das in 5 Minuten die nackten Zahlen zu Technik, PageSpeed und Tracking‑Lücken liefert【743685003484771†L70-L75】.',
             'serviceType' => 'Technisches Audit & Analyse',
-            'serviceOutput' => 'Objektives Protokoll mit Core Web Vitals, Data‑Integrity und Conversion‑Insights【743685003484771†L105-L116】'
+            'serviceOutput' => 'Objektives Protokoll mit Core Web Vitals, Data‑Integrity und Conversion‑Insights【743685003484771†L105-L116】',
+            'offers'      => [
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Kostenloses Tech‑Audit',
+                    'price'         => '0',
+                    'priceCurrency' => 'EUR',
+                    'isAccessibleForFree' => true,
+                    'description'   => 'Kostenlose 5‑Minuten‑Analyse, die die nackten Zahlen zu Technik, Speed und Tracking aufdeckt【743685003484771†L70-L75】'
+                ]
+            ]
         ],
         // Performance Marketing: Systematisches Marketing für messbaren ROI
         'performance-marketing' => [
@@ -127,7 +169,30 @@ function hu_output_schema() {
             // Growth as a system, not chance: combines tech, ads and strategy in a monthly retainer【728862304409385†L69-L74】.
             'description' => 'Wachstum als System: Das WGOS vereint High‑Performance Tech, Tracking, CRO, SEO und Ads in einem transparenten Retainer【728862304409385†L69-L74】【728862304409385†L79-L128】.',
             'serviceType' => 'Growth Operating System',
-            'serviceOutput' => 'Modulares 7‑Module‑Framework mit Credits für kontinuierliche Entwicklung, Ads und Reporting【728862304409385†L79-L128】【728862304409385†L132-L174】'
+            'serviceOutput' => 'Modulares 7‑Module‑Framework mit Credits für kontinuierliche Entwicklung, Ads und Reporting【728862304409385†L79-L128】【728862304409385†L132-L174】',
+            'offers'      => [
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Maintenance & Sicherheit',
+                    'price'         => '490',
+                    'priceCurrency' => 'EUR',
+                    'description'   => 'Tägliche Updates & Backups, Security‑Monitoring, Uptime‑Check und keine Entwicklungs‑Credits【937433392367584†L170-L180】'
+                ],
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Growth Partner',
+                    'price'         => '1850',
+                    'priceCurrency' => 'EUR',
+                    'description'   => 'Alles aus Maintenance plus 50 Credits pro Monat zur freien Verfügung für Ads, Features oder SEO, inklusive Priority Support und Strategie‑Report【937433392367584†L187-L200】'
+                ],
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Dominance',
+                    'price'         => '3200',
+                    'priceCurrency' => 'EUR',
+                    'description'   => 'Alles aus Maintenance plus 100 Credits, wöchentliche Fixes und direkter Slack‑Zugang【937433392367584†L203-L217】'
+                ]
+            ]
         ],
         // Add more services here as needed
     ];
@@ -150,6 +215,10 @@ function hu_output_schema() {
                 'areaServed' => ['@type' => 'AdministrativeArea', 'name' => 'DACH'],
                 // Optionally add offers, brand, image etc.
             ];
+            // Append offers if defined for this service
+            if ( isset($def['offers']) ) {
+                $service['offers'] = $def['offers'];
+            }
             $schemas[] = $service;
         }
 
