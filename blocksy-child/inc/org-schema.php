@@ -57,11 +57,13 @@ function hu_output_schema() {
             'serviceType' => 'WordPress Agentur',
             'serviceOutput' => 'Modulare WordPress‑Lösungen mit technischer Exzellenz'
         ],
-        'wordpress-wartung-betreuung' => [
+        // WordPress Wartung & Betreuung: use correct slug "wordpress-wartung-hannover"
+        'wordpress-wartung-hannover' => [
             'name'        => 'WordPress Wartung & Betreuung',
-            'description' => 'Kontinuierliche Pflege, Sicherheits‑Updates und Performance‑Monitoring für Ihre WordPress‑Site.',
-            'serviceType' => 'Wartung & Support',
-            'serviceOutput' => 'Sichere, stabile Website mit Top‑Performance'
+            // Tagline emphasises protection of digital revenue and emergency help【309226683931710†L70-L78】.
+            'description' => 'Der Schutzschild für Ihren digitalen Umsatz: Regelmässige Updates, präventive Abwehr, Performance‑Monitoring und Express‑Hilfe【309226683931710†L70-L78】.',
+            'serviceType' => 'Wartungsvertrag & Support',
+            'serviceOutput' => 'Maximale Performance, gehärtete Sicherheit und schnelle Notfall‑Unterstützung'
         ],
         'wordpress-seo' => [
             'name'        => 'WordPress SEO',
@@ -87,6 +89,46 @@ function hu_output_schema() {
             'serviceType' => 'Conversion Rate Optimization',
             'serviceOutput' => 'Höhere Conversion Rates und Umsatz'
         ],
+        // Tech Audit: AI‑gestütztes Performance‑Protokoll für B2B WordPress
+        'wordpress-tech-audit' => [
+            'name'        => 'WordPress Tech‑Audit',
+            // Provides an AI audit delivering numbers on tech, speed and tracking gaps in five minutes【743685003484771†L70-L75】.
+            'description' => 'KI‑gestütztes Tech‑Audit, das in 5 Minuten die nackten Zahlen zu Technik, PageSpeed und Tracking‑Lücken liefert【743685003484771†L70-L75】.',
+            'serviceType' => 'Technisches Audit & Analyse',
+            'serviceOutput' => 'Objektives Protokoll mit Core Web Vitals, Data‑Integrity und Conversion‑Insights【743685003484771†L105-L116】'
+        ],
+        // Performance Marketing: Systematisches Marketing für messbaren ROI
+        'performance-marketing' => [
+            'name'        => 'Performance Marketing',
+            // Emphasises data‑driven architecture delivering measurable return for every euro invested【755669623013005†L66-L70】.
+            'description' => 'Datengetriebenes Performance Marketing: Jeder investierte Euro bringt einen messbaren Ertrag – weg von Zufall, hin zu System【755669623013005†L66-L70】.',
+            'serviceType' => 'Performance Marketing & Ads',
+            'serviceOutput' => 'Messbares Wachstum durch orchestrierte Ads, Daten‑Analyse und Conversion‑Optimierung'
+        ],
+        // Conversion Rate Optimization (English slug)
+        'conversion-rate-optimization' => [
+            'name'        => 'Conversion Rate Optimization',
+            // From chaos to clarity: building direct paths from visit to conversion【583847575741155†L69-L73】.
+            'description' => 'Vom Chaos zur Klarheit: Wir analysieren Nutzerverhalten und bauen den direktesten Weg zum messbaren Ergebnis【583847575741155†L69-L73】.',
+            'serviceType' => 'Conversion Rate Optimization',
+            'serviceOutput' => 'Steigerung von Leads, Sales und ROAS durch datenbasierte Tests und Optimierungen【583847575741155†L119-L145】'
+        ],
+        // GA4 & Tracking Setup
+        'ga4-tracking-setup' => [
+            'name'        => 'GA4 & Tracking Setup',
+            // Provides a tracking foundation turning data noise into clarity【306576807650241†L66-L70】.
+            'description' => 'Vom Daten‑Nebel zur Klarheit: DSGVO‑konformes GA4 und Server‑Side Tracking, das Ihnen die Wahrheit über Ihr Business verrät【306576807650241†L66-L70】.',
+            'serviceType' => 'Tracking & Analytics',
+            'serviceOutput' => 'Lückenloses Tracking‑Fundament mit GA4/GTM, Consent‑Management und individuellen Dashboards【306576807650241†L95-L119】'
+        ],
+        // WordPress Growth Operating System (WGOS)
+        'wordpress-growth-operating-system' => [
+            'name'        => 'WordPress Growth Operating System',
+            // Growth as a system, not chance: combines tech, ads and strategy in a monthly retainer【728862304409385†L69-L74】.
+            'description' => 'Wachstum als System: Das WGOS vereint High‑Performance Tech, Tracking, CRO, SEO und Ads in einem transparenten Retainer【728862304409385†L69-L74】【728862304409385†L79-L128】.',
+            'serviceType' => 'Growth Operating System',
+            'serviceOutput' => 'Modulares 7‑Module‑Framework mit Credits für kontinuierliche Entwicklung, Ads und Reporting【728862304409385†L79-L128】【728862304409385†L132-L174】'
+        ],
         // Add more services here as needed
     ];
 
@@ -111,7 +153,7 @@ function hu_output_schema() {
             $schemas[] = $service;
         }
 
-        // For the "Über mich" page, generate Person and AboutPage schemas
+        // For the "Über mich" page, generate Person and ProfilePage schemas
         if ($slug === 'uber-mich') {
             $person = [
                 '@context' => 'https://schema.org',
@@ -147,6 +189,74 @@ function hu_output_schema() {
             $schemas[] = $profilePage;
             // Add founder relationship to the organization object
             $schemas[0]['founder'] = ['@id' => home_url('/uber-mich/#person')];
+        }
+
+        // Case study pages: output Article schema with headline and description
+        if ($slug === 'case-studies' || $slug === 'case-studies-e-commerce') {
+            // Choose details based on the slug
+            if ($slug === 'case-studies') {
+                $headline = 'Vom Kostenfaktor zur Profit‑Maschine mit 34× ROAS';
+                $description = 'Eine zweiphasige Growth‑Strategie revolutionierte die Lead‑Generierung, senkte Kosten um 83 % und optimierte zwei Conversion‑Raten【296424233364953†L67-L71】.';
+                $datePublished = '2025-08-08'; // approximate date from insights header
+            } else {
+                $headline = 'Nachhaltigkeit skaliert nicht mit Ideologie, sondern mit System';
+                $description = 'Vom 46 € Warenkorb zur 120 € Profit‑Maschine in neun Monaten: Ein Nischen‑Shop wurde durch psychologisches Pricing und Prozess‑Optimierung transformiert【753813627795344†L75-L79】.';
+                $datePublished = '2026-01-06'; // approximate date from insights header
+            }
+            $article = [
+                '@context' => 'https://schema.org',
+                '@type'    => 'Article',
+                '@id'      => home_url('/' . $slug . '/#article'),
+                'headline' => $headline,
+                'description' => $description,
+                'url'      => home_url('/' . $slug . '/'),
+                'inLanguage' => 'de',
+                'author'   => [
+                    '@type' => 'Person',
+                    'name'  => 'Hasim Üner',
+                    'url'   => home_url('/uber-mich/')
+                ],
+                'publisher' => ['@id' => home_url('/#organization')],
+                'datePublished' => $datePublished,
+                // Use Organization logo as image
+                'image' => $org['logo']
+            ];
+            $schemas[] = $article;
+        }
+
+        // Kostenlose Tools page: output a CollectionPage listing available tools
+        if ($slug === 'kostenlose-tools') {
+            $toolsPage = [
+                '@context' => 'https://schema.org',
+                '@type'    => 'CollectionPage',
+                '@id'      => home_url('/kostenlose-tools/#collection'),
+                'url'      => home_url('/kostenlose-tools/'),
+                'name'     => 'Kostenlose Tools für dein Wachstum',
+                'description' => 'Kostenlose Tools zur Berechnung deiner Kampagnenrentabilität, Solarpotenziale und Website‑Performance【344650427800265†L64-L73】.',
+                'hasPart'  => [
+                    [
+                        '@type' => 'SoftwareApplication',
+                        'name'  => 'ROI‑Rechner',
+                        'description' => 'Berechnet die Rentabilität und den Break‑even‑Point deiner Marketing‑Kampagnen',
+                        'url' => home_url('/kostenlose-tools/roi-rechner/')
+                    ],
+                    [
+                        '@type' => 'SoftwareApplication',
+                        'name'  => 'Solarrechner',
+                        'description' => 'Analysiert das Potenzial und die Wirtschaftlichkeit einer Photovoltaikanlage',
+                        'url' => home_url('/kostenlose-tools/solar-rechner/')
+                    ],
+                    [
+                        '@type' => 'SoftwareApplication',
+                        'name'  => 'Website Performance Analyse',
+                        'description' => 'Analysiert Ladezeiten und identifiziert Engpässe, um die User Experience zu verbessern',
+                        'url' => home_url('/kostenlose-tools/website-performance-analyse/')
+                    ]
+                ],
+                'inLanguage' => 'de',
+                'publisher'  => ['@id' => home_url('/#organization')]
+            ];
+            $schemas[] = $toolsPage;
         }
     }
 
