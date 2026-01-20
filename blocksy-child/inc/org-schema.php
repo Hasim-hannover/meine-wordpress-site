@@ -93,6 +93,7 @@ function hu_output_schema() {
     // Check current page slug and append corresponding service schema
     if (is_page()) {
         $slug = basename( get_permalink() );
+        // Generate Service schema for known service pages
         if (array_key_exists($slug, $service_definitions)) {
             $def = $service_definitions[$slug];
             $service = [
@@ -108,6 +109,41 @@ function hu_output_schema() {
                 // Optionally add offers, brand, image etc.
             ];
             $schemas[] = $service;
+        }
+
+        // For the "Über mich" page, generate Person and AboutPage schemas
+        if ($slug === 'uber-mich') {
+            $person = [
+                '@context' => 'https://schema.org',
+                '@type'    => 'Person',
+                '@id'      => home_url('/uber-mich/#person'),
+                'name'     => 'Hasim Üner',
+                'jobTitle' => 'Growth Architect & Medienwissenschaftler',
+                'url'      => home_url('/uber-mich/'),
+                'image'    => 'https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp',
+                'worksFor' => ['@id' => home_url('/#organization')],
+                'sameAs'   => [
+                    'https://www.linkedin.com/in/hasim-%C3%BCner/',
+                    'https://github.com/Hasim-hannover/'
+                ],
+                'description' => 'Growth Architect & Medienwissenschaftler, spezialisiert auf High‑Performance WordPress‑Systeme, Tracking und Conversion‑Optimierung.'
+            ];
+
+            $aboutPage = [
+                '@context' => 'https://schema.org',
+                '@type'    => 'AboutPage',
+                '@id'      => home_url('/uber-mich/#about'),
+                'url'      => home_url('/uber-mich/'),
+                'name'     => 'Über mich – Hasim Üner',
+                'mainEntity' => ['@id' => home_url('/uber-mich/#person')],
+                'inLanguage' => 'de',
+                'about'    => ['@id' => home_url('/#organization')]
+            ];
+
+            $schemas[] = $person;
+            $schemas[] = $aboutPage;
+            // Add founder relationship to the organization object
+            $schemas[0]['founder'] = ['@id' => home_url('/uber-mich/#person')];
         }
     }
 
