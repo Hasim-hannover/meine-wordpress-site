@@ -1,11 +1,14 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 /**
  * Output organization and service schemas dynamically.
  * This file centralizes all structured data logic. Include it once in your child theme.
  */
-function hu_output_schema() {
+function hu_output_schema()
+{
     // Organization / LocalBusiness schema
     $org = [
         '@context' => 'https://schema.org',
@@ -35,7 +38,7 @@ function hu_output_schema() {
         'openingHoursSpecification' => [
             [
                 '@type'    => 'OpeningHoursSpecification',
-                'dayOfWeek' => ['Monday','Tuesday','Wednesday','Thursday'],
+                'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
                 'opens'     => '08:30',
                 'closes'    => '16:00'
             ]
@@ -68,21 +71,21 @@ function hu_output_schema() {
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Basis – kleine Infoseiten & Blogs',
-                    'price'         => '49',
+                    'price'         => 49,
                     'priceCurrency' => 'EUR',
                     'description'   => 'Wöchentliche Updates, monatliches Cloud‑Backup, Basis Uptime‑Monitoring und Support per E‑Mail (48h)【588342120472337†L113-L118】'
                 ],
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Performance‑Wächter – Firmen & Dienstleister',
-                    'price'         => '79',
+                    'price'         => 79,
                     'priceCurrency' => 'EUR',
                     'description'   => 'Tägliche Sicherheits‑Backups, proaktiver Malware‑Scan, monatlicher Performance‑Report, Wiederherstellung inkl. (Hack‑Schutz) und Support per Mail (24h)【588342120472337†L128-L135】'
                 ],
                 [
                     '@type'         => 'Offer',
                     'name'          => 'VIP & E‑Commerce – Shops & kritische Seiten',
-                    'price'         => '139',
+                    'price'         => 139,
                     'priceCurrency' => 'EUR',
                     'description'   => 'Echtzeit‑Backups, WooCommerce Datenbank‑Optimierung, Telefon & WhatsApp Support, bevorzugte Behandlung bei Ausfall und 1h Content‑Pflege【588342120472337†L142-L149】'
                 ]
@@ -103,7 +106,7 @@ function hu_output_schema() {
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Performance Architektur Paket',
-                    'price'         => '649',
+                    'price'         => 649,
                     'priceCurrency' => 'EUR',
                     'description'   => 'Umfassendes Audit & Strategieplan, tiefgreifende technische Optimierung, Caching & CDN‑Setup, Live‑Performance‑Dashboard und 3 Monate Support【103301788764763†L175-L180】'
                 ]
@@ -132,7 +135,7 @@ function hu_output_schema() {
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Kostenloses Tech‑Audit',
-                    'price'         => '0',
+                    'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
                     'description'   => 'Kostenlose 5‑Minuten‑Analyse, die die nackten Zahlen zu Technik, Speed und Tracking aufdeckt【743685003484771†L70-L75】'
@@ -174,21 +177,21 @@ function hu_output_schema() {
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Maintenance & Sicherheit',
-                    'price'         => '490',
+                    'price'         => 490,
                     'priceCurrency' => 'EUR',
                     'description'   => 'Tägliche Updates & Backups, Security‑Monitoring, Uptime‑Check und keine Entwicklungs‑Credits【937433392367584†L170-L180】'
                 ],
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Growth Partner',
-                    'price'         => '1850',
+                    'price'         => 1850,
                     'priceCurrency' => 'EUR',
                     'description'   => 'Alles aus Maintenance plus 50 Credits pro Monat zur freien Verfügung für Ads, Features oder SEO, inklusive Priority Support und Strategie‑Report【937433392367584†L187-L200】'
                 ],
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Dominance',
-                    'price'         => '3200',
+                    'price'         => 3200,
                     'priceCurrency' => 'EUR',
                     'description'   => 'Alles aus Maintenance plus 100 Credits, wöchentliche Fixes und direkter Slack‑Zugang【937433392367584†L203-L217】'
                 ]
@@ -199,24 +202,24 @@ function hu_output_schema() {
 
     // Check current page slug and append corresponding service schema
     if (is_page()) {
-        $slug = basename( get_permalink() );
+        $slug = basename(get_permalink());
         // Generate Service schema for known service pages
         if (array_key_exists($slug, $service_definitions)) {
             $def = $service_definitions[$slug];
             $service = [
                 '@context'   => 'https://schema.org',
                 '@type'      => 'Service',
-                '@id'        => home_url( '/' . $slug . '/#service' ),
+                '@id'        => home_url('/' . $slug . '/#service'),
                 'name'       => $def['name'],
-                'description'=> $def['description'],
+                'description' => $def['description'],
                 'provider'   => ['@id' => home_url('/#organization')],
-                'serviceType'=> $def['serviceType'],
+                'serviceType' => $def['serviceType'],
                 'serviceOutput' => $def['serviceOutput'],
                 'areaServed' => ['@type' => 'AdministrativeArea', 'name' => 'DACH'],
                 // Optionally add offers, brand, image etc.
             ];
             // Append offers if defined for this service
-            if ( isset($def['offers']) ) {
+            if (isset($def['offers'])) {
                 $service['offers'] = $def['offers'];
             }
             $schemas[] = $service;
@@ -326,6 +329,43 @@ function hu_output_schema() {
                 'publisher'  => ['@id' => home_url('/#organization')]
             ];
             $schemas[] = $toolsPage;
+        }
+
+        /*
+         * Dynamically generate FAQ schema by scanning the page content for
+         * <details><summary>…</summary><div …>…</div></details> patterns.
+         * This allows pages using the hu_faq shortcode or native HTML details
+         * blocks to automatically output a FAQPage schema for rich results.
+         */
+        global $post;
+        if (isset($post)) {
+            // Apply the_content filters so shortcodes are rendered and HTML is complete
+            $content = apply_filters('the_content', $post->post_content);
+            $faq_matches = [];
+            if (preg_match_all('/<details>\s*<summary>(.*?)<\/summary>\s*<div[^>]*>(.*?)<\/div>\s*<\/details>/is', $content, $faq_matches, PREG_SET_ORDER)) {
+                $faq_entities = [];
+                foreach ($faq_matches as $faq_match) {
+                    $question = wp_strip_all_tags($faq_match[1]);
+                    $answer   = wp_strip_all_tags($faq_match[2]);
+                    $faq_entities[] = [
+                        '@type' => 'Question',
+                        'name'  => $question,
+                        'acceptedAnswer' => [
+                            '@type' => 'Answer',
+                            'text'  => $answer,
+                        ],
+                    ];
+                }
+                if (!empty($faq_entities)) {
+                    $faq_schema = [
+                        '@context'   => 'https://schema.org',
+                        '@type'      => 'FAQPage',
+                        '@id'        => home_url('/' . $slug . '/#faq'),
+                        'mainEntity' => $faq_entities,
+                    ];
+                    $schemas[] = $faq_schema;
+                }
+            }
         }
     }
 
