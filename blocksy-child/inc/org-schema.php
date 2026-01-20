@@ -129,19 +129,22 @@ function hu_output_schema() {
                 'description' => 'Growth Architect & Medienwissenschaftler, spezialisiert auf High‑Performance WordPress‑Systeme, Tracking und Conversion‑Optimierung.'
             ];
 
-            $aboutPage = [
+            // Replace AboutPage schema with ProfilePage to enable rich result eligibility.
+            $profilePage = [
                 '@context' => 'https://schema.org',
-                '@type'    => 'AboutPage',
-                '@id'      => home_url('/uber-mich/#about'),
+                '@type'    => 'ProfilePage',
+                '@id'      => home_url('/uber-mich/#profile'),
+                // URL of the profile page
                 'url'      => home_url('/uber-mich/'),
                 'name'     => 'Über mich – Hasim Üner',
                 'mainEntity' => ['@id' => home_url('/uber-mich/#person')],
                 'inLanguage' => 'de',
-                'about'    => ['@id' => home_url('/#organization')]
+                // The page is about the person, not the organization, per ProfilePage guidelines
+                'about'    => ['@id' => home_url('/uber-mich/#person')]
             ];
 
             $schemas[] = $person;
-            $schemas[] = $aboutPage;
+            $schemas[] = $profilePage;
             // Add founder relationship to the organization object
             $schemas[0]['founder'] = ['@id' => home_url('/uber-mich/#person')];
         }
