@@ -509,6 +509,12 @@ button.nexus-share-btn {
     line-height: 0;
 }
 
+/* BLUESKY (Original Blau) */
+.btn-bsky{
+  background: #228DFF;
+}
+
+
 /* Mobile Optimierung */
 @media (max-width: 600px) {
     .nexus-hero-footer {
