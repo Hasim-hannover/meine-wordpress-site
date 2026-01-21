@@ -22,6 +22,9 @@
     --shadow-earth: 0 12px 40px rgba(16, 185, 129, 0.15);
     --shadow-theory: 0 12px 40px rgba(168, 85, 247, 0.15);
     --max-width: 1200px;
+    --gold: #ffb020;
+    --text-dim: var(--muted);
+    --border: rgba(255, 255, 255, 0.1);
 
     background: var(--page-bg);
     color: var(--white);
@@ -545,47 +548,94 @@
     text-align: center;
 }
 
-.nexus-about .toc-section {
-    padding: 40px 0 20px;
+.nexus-about .smart-nav {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(12px);
+    padding: 1.5rem 0.8rem;
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 60px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-.nexus-about .toc-card-nexus {
-    background: var(--glass-bg);
-    padding: 2rem;
-    border-radius: 16px;
-    border: 1px solid var(--glass-border);
-    max-width: 720px;
-    margin: 0 auto;
-    text-align: left;
+.nexus-about .smart-nav:hover {
+    width: 200px;
+    border-color: rgba(255, 176, 32, 0.3);
+    background: rgba(10, 10, 10, 0.95);
+    align-items: flex-start;
+    border-radius: 20px;
+    padding-left: 1.5rem;
 }
 
-.nexus-about .toc-nexus h4 {
-    color: var(--earth);
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    margin-bottom: 1.5rem;
-    letter-spacing: 1px;
-}
-
-.nexus-about .toc-nexus ul {
+.nexus-about .smart-nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
 }
 
-.nexus-about .toc-nexus a {
-    display: block;
-    color: var(--muted);
+.nexus-about .smart-nav li { display: block; width: 100%; }
+
+.nexus-about .smart-nav a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-dim);
     text-decoration: none;
-    padding: 0.5rem 0;
-    font-size: 0.95rem;
-    border-bottom: 1px solid transparent;
+    font-size: 0.9rem;
+    font-weight: 600;
     transition: color 0.2s;
 }
 
-.nexus-about .toc-nexus a:hover,
-.nexus-about .toc-nexus a:focus {
-    color: var(--earth);
-    font-weight: 700;
+.nexus-about .nav-dot {
+    width: 8px;
+    height: 8px;
+    background: #444;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    box-shadow: 0 0 0 2px transparent;
+}
+
+.nexus-about .smart-nav a.active .nav-dot,
+.nexus-about .smart-nav a:hover .nav-dot {
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+    transform: scale(1.2);
+}
+
+.nexus-about .smart-nav a.active,
+.nexus-about .smart-nav a:hover {
+    color: #fff;
+}
+
+.nexus-about .nav-text {
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+}
+
+.nexus-about .smart-nav:hover .nav-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 900px) {
+    .nexus-about .smart-nav { display: none; }
 }
 
 .nexus-about .cta-story-box {
@@ -687,7 +737,7 @@
 
 .nexus-about .wp-faq-item summary::after {
     content: '+';
-    color: var(--earth);
+    color: var(--gold);
     font-size: 1.5rem;
 }
 
