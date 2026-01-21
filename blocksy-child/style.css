@@ -1072,8 +1072,17 @@ button.nexus-share-btn {
         margin-top: 16px;
     }
 
-    .ct-panel-content .ct-panel-close {
-        display: none;
+    .ct-panel .ct-panel-close {
+        display: flex;
+    }
+
+    .ct-panel .ct-panel-content .ct-panel-close,
+    .ct-panel .ct-panel-content .ct-close-button,
+    .ct-panel .ct-panel-content .ct-offcanvas-close,
+    .ct-panel .ct-panel-inner .ct-panel-close,
+    .ct-panel .ct-panel-inner .ct-close-button,
+    .ct-panel .ct-panel-inner .ct-offcanvas-close {
+        display: none !important;
     }
 
     .ct-panel .site-logo img {
