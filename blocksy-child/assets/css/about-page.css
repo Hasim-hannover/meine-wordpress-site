@@ -545,6 +545,49 @@
     text-align: center;
 }
 
+.nexus-about .toc-section {
+    padding: 40px 0 20px;
+}
+
+.nexus-about .toc-card-nexus {
+    background: var(--glass-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.nexus-about .toc-nexus h4 {
+    color: var(--earth);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.nexus-about .toc-nexus ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nexus-about .toc-nexus a {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s;
+}
+
+.nexus-about .toc-nexus a:hover,
+.nexus-about .toc-nexus a:focus {
+    color: var(--earth);
+    font-weight: 700;
+}
+
 .nexus-about .cta-story-box {
     max-width: 800px;
     margin: 0 auto;
@@ -626,6 +669,36 @@
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 2rem;
+}
+
+.nexus-about .wp-faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem 0;
+}
+
+.nexus-about .wp-faq-item summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--white);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nexus-about .wp-faq-item summary::after {
+    content: '+';
+    color: var(--earth);
+    font-size: 1.5rem;
+}
+
+.nexus-about .wp-faq-item[open] summary::after {
+    content: '-';
+}
+
+.nexus-about .wp-faq-content {
+    margin-top: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
 }
 
 @media (min-width: 992px) {
