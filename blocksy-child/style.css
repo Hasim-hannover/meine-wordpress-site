@@ -1077,11 +1077,15 @@ button.nexus-share-btn {
     }
 
     .ct-panel .ct-panel-content .ct-panel-close,
-    .ct-panel .ct-panel-content .ct-close-button,
-    .ct-panel .ct-panel-content .ct-offcanvas-close,
     .ct-panel .ct-panel-inner .ct-panel-close,
+    .ct-panel .ct-panel-content .ct-close-button,
     .ct-panel .ct-panel-inner .ct-close-button,
-    .ct-panel .ct-panel-inner .ct-offcanvas-close {
+    .ct-panel .ct-panel-content .ct-offcanvas-close,
+    .ct-panel .ct-panel-inner .ct-offcanvas-close,
+    .ct-panel .ct-panel-content .ct-drawer-close,
+    .ct-panel .ct-panel-inner .ct-drawer-close,
+    .ct-panel .ct-panel-content [class*="close"],
+    .ct-panel .ct-panel-inner [class*="close"] {
         display: none !important;
     }
 
