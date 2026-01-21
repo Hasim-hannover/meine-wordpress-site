@@ -50,6 +50,9 @@ add_action( 'after_setup_theme', function() {
 } );
 
 add_filter( 'show_admin_bar', function( $show ) {
+    if ( is_page_template( 'template-portal.php' ) ) {
+        return false;
+    }
     if ( ! current_user_can( 'manage_options' ) ) {
         return false;
     }
