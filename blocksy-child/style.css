@@ -519,3 +519,171 @@ button.nexus-share-btn {
     }
 }
 
+/* --- NEXUS CLIENT PORTAL --- */
+.nexus-dashboard {
+    --nd-bg: var(--bg, var(--paletteColor6));
+    --nd-fg: var(--fg, var(--paletteColor5));
+    --nd-line: var(--line, color-mix(in srgb, var(--nd-fg) 12%, transparent));
+    --nd-accent: var(--cta, var(--paletteColor2));
+    --nd-glass: color-mix(in srgb, var(--nd-fg) 6%, transparent);
+    --nd-glow: color-mix(in srgb, var(--nd-accent) 40%, transparent);
+
+    font-family: var(--theme-font-family);
+    color: var(--nd-fg);
+    background: var(--nd-bg);
+    padding: 4rem 1.5rem;
+    border-radius: 24px;
+    border: 1px solid var(--nd-line);
+}
+
+.nexus-dashboard .nd-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.nexus-dashboard .nd-welcome h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    margin: 0.4rem 0 0;
+}
+
+.nexus-dashboard .nd-badge {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--nd-accent) 16%, transparent);
+    color: var(--nd-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.nexus-dashboard .nd-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.nexus-dashboard .nd-card {
+    background: var(--nd-glass);
+    border: 1px solid var(--nd-line);
+    border-radius: 18px;
+    padding: 1.75rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 40px color-mix(in srgb, var(--nd-bg) 70%, transparent);
+}
+
+.nexus-dashboard .nd-card h3 {
+    margin-top: 0;
+}
+
+.nexus-dashboard .span-2 {
+    grid-column: span 2;
+}
+
+.nexus-dashboard .span-full {
+    grid-column: 1 / -1;
+}
+
+.nexus-dashboard .nd-progress-wrap {
+    height: 10px;
+    background: color-mix(in srgb, var(--nd-fg) 12%, transparent);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 1rem 0 0.75rem;
+}
+
+.nexus-dashboard .nd-progress-bar {
+    height: 100%;
+    background: var(--nd-accent);
+    box-shadow: 0 0 18px var(--nd-glow);
+    border-radius: 999px;
+}
+
+.nexus-dashboard .nd-stats {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.nexus-dashboard .kpi-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.nexus-dashboard .kpi-val {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.nexus-dashboard .nd-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--nd-line);
+}
+
+.nexus-dashboard .nd-item:last-child {
+    border-bottom: 0;
+}
+
+.nexus-dashboard .nd-item .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--nd-fg) 30%, transparent);
+}
+
+.nexus-dashboard .nd-item.status-done .dot {
+    background: var(--nd-accent);
+    box-shadow: 0 0 10px var(--nd-glow);
+}
+
+.nexus-dashboard .nd-item.status-active .dot {
+    background: color-mix(in srgb, var(--nd-accent) 70%, transparent);
+    box-shadow: 0 0 10px var(--nd-glow);
+}
+
+.nexus-dashboard .muted {
+    color: var(--text-dim, color-mix(in srgb, var(--nd-fg) 65%, transparent));
+}
+
+.nexus-dashboard .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1.2rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nexus-dashboard .btn-ghost {
+    border: 1px solid var(--nd-line);
+    color: var(--nd-fg);
+    background: transparent;
+}
+
+.nexus-dashboard .btn-ghost:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px color-mix(in srgb, var(--nd-bg) 70%, transparent);
+}
+
+.nexus-dashboard .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+    .nexus-dashboard .span-2 {
+        grid-column: span 1;
+    }
+}
