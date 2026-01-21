@@ -23,6 +23,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 }
 
 
+@media (min-width: 1024px) {
 /* --- 2. NEXUS MEGA MENÜ (VIEWPORT FIX) --- */
 
 /* 1. Reset für das List-Item */
@@ -131,6 +132,8 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ct-header .menu-item.mega .sub-menu .sub-menu li a:hover {
     color: #fff;
     transform: translateX(5px);
+}
+
 }
 
 

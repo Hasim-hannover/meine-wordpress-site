@@ -89,6 +89,34 @@
 .wp-metric-label { font-size: 0.9rem; color: var(--text-dim); order: 1; text-align: left; }
 .text-gold { color: var(--gold) !important; }
 
+@media (min-width: 1024px) {
+    .switch-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: stretch;
+    }
+
+    .hero-stats {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 1023px) {
+    .switch-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .switch-card {
+        width: 100%;
+    }
+}
+
 /* --- 3. AUDIT CARD (Premium Look) --- */
 .audit-card-premium {
     background: linear-gradient(145deg, rgba(30, 30, 30, 0.6), rgba(10, 10, 10, 0.8));
