@@ -1090,3 +1090,8 @@ button.nexus-share-btn {
         height: auto;
     }
 }
+
+/* --- NEXUS: Hide Customizer Shortcut X (only in Customizer) --- */
+body.wp-customizer .ct-customizer-shortcut {
+    display: none !important;
+}
