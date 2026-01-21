@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 $inc_dir = get_stylesheet_directory() . '/inc/';
 
 // Nur Dateien laden, die es wirklich gibt
-$files_to_load = ['shortcodes.php', 'org-schema.php', 'client-portal.php', 'admin-manager.php'];
+$files_to_load = ['shortcodes.php', 'org-schema.php', 'client-portal.php', 'admin-manager.php', 'snippets.php'];
 
 foreach ( $files_to_load as $file ) {
     if ( file_exists( $inc_dir . $file ) ) {

@@ -830,3 +830,55 @@ button.nexus-share-btn {
     .nd-grid { grid-template-columns: 1fr; }
     .span-2 { grid-column: span 1; }
 }
+
+/* --- NEXUS HEADER BUTTON --- */
+.nexus-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+/* Zustand: Ausgeloggt (Ghost Button) */
+.nexus-nav-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff !important;
+}
+.nexus-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Zustand: Eingeloggt (Active / Gold) */
+.nexus-nav-btn.active {
+    background: rgba(255, 176, 32, 0.15);
+    border: 1px solid rgba(255, 176, 32, 0.3);
+    color: #ffb020 !important;
+}
+.nexus-nav-btn.active:hover {
+    background: rgba(255, 176, 32, 0.25);
+    box-shadow: 0 0 15px rgba(255, 176, 32, 0.2);
+}
+
+/* Der goldene Punkt */
+.indicator {
+    font-size: 1.2em;
+    line-height: 0;
+    color: #ffb020;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
