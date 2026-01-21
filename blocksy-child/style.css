@@ -831,6 +831,103 @@ button.nexus-share-btn {
     .span-2 { grid-column: span 1; }
 }
 
+/* --- NEXUS LOGIN --- */
+.nexus-login {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.nexus-login-card {
+    background: color-mix(in srgb, var(--fg, #fff) 6%, transparent);
+    border: 1px solid var(--line, rgba(255, 255, 255, 0.08));
+    border-radius: 20px;
+    padding: 48px 40px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 24px 60px color-mix(in srgb, var(--bg, #000) 70%, transparent);
+    text-align: left;
+}
+
+.nexus-login-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--cta, #ffb020) 18%, transparent);
+    color: var(--cta, #ffb020);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.nexus-login-card h2 {
+    margin: 0 0 12px;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.nexus-login-subtitle {
+    color: var(--text-dim, rgba(255, 255, 255, 0.6));
+    margin-bottom: 28px;
+}
+
+.nexus-login-card #nexus-login-form {
+    display: grid;
+    gap: 16px;
+}
+
+.nexus-login-card #nexus-login-form label {
+    font-weight: 600;
+    color: var(--fg, #fff);
+}
+
+.nexus-login-card #nexus-login-form input[type="text"],
+.nexus-login-card #nexus-login-form input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--line, rgba(255, 255, 255, 0.1));
+    background: color-mix(in srgb, var(--bg, #000) 70%, transparent);
+    color: var(--fg, #fff);
+}
+
+.nexus-login-card #nexus-login-form input[type="text"]:focus,
+.nexus-login-card #nexus-login-form input[type="password"]:focus {
+    outline: none;
+    border-color: color-mix(in srgb, var(--cta, #ffb020) 60%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cta, #ffb020) 25%, transparent);
+}
+
+.nexus-login-card #nexus-login-form .login-remember {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nexus-login-card #nexus-login-form input[type="submit"] {
+    background: var(--cta, #ffb020);
+    color: #000;
+    border: 0;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nexus-login-card #nexus-login-form input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--cta, #ffb020) 35%, transparent);
+}
+
+@media (max-width: 700px) {
+    .nexus-login-card {
+        padding: 32px 24px;
+    }
+}
+
 /* --- NEXUS HEADER BUTTON --- */
 .nexus-nav-btn {
     display: inline-flex;

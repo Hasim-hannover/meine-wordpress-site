@@ -169,8 +169,29 @@ function hu_render_performance_cockpit() {
 add_shortcode( 'hu_performance_cockpit', 'hu_render_performance_cockpit' );
 
 function hu_render_custom_login_form() {
+    $form = wp_login_form(
+        [
+            'echo'           => false,
+            'redirect'       => get_permalink(),
+            'form_id'        => 'nexus-login-form',
+            'label_username' => 'E-Mail oder Benutzername',
+            'label_password' => 'Passwort',
+            'label_remember' => 'Angemeldet bleiben',
+            'label_log_in'   => 'Login',
+        ]
+    );
+
     ob_start();
-    wp_login_form( [ 'redirect' => get_permalink() ] );
+    ?>
+    <section class="nexus-login">
+        <div class="nexus-login-card">
+            <span class="nexus-login-badge">Client Access</span>
+            <h2>Performance Cockpit</h2>
+            <p class="nexus-login-subtitle">Bitte einloggen, um Ihr Dashboard zu sehen.</p>
+            <?php echo $form; ?>
+        </div>
+    </section>
+    <?php
     return ob_get_clean();
 }
 
