@@ -882,3 +882,15 @@ button.nexus-share-btn {
     50% { opacity: 1; }
     100% { opacity: 0.6; }
 }
+
+/* --- NEXUS PORTAL LAYOUT --- */
+.nexus-portal {
+    background: var(--bg);
+    color: var(--fg);
+    padding: 80px 20px;
+}
+
+.nexus-portal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
