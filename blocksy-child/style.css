@@ -1055,3 +1055,20 @@ button.nexus-share-btn {
         grid-template-columns: 1fr;
     }
 }
+
+/* --- NEXUS MOBILE MENU SPACING FIX --- */
+@media (max-width: 1023px) {
+    .ct-panel,
+    .ct-panel-content,
+    .ct-panel-inner {
+        padding-top: calc(env(safe-area-inset-top, 0px) + 72px);
+    }
+
+    .ct-panel .ct-panel-close {
+        top: calc(env(safe-area-inset-top, 0px) + 16px);
+    }
+
+    .ct-panel .ct-menu {
+        margin-top: 16px;
+    }
+}
