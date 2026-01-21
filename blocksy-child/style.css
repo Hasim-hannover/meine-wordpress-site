@@ -894,3 +894,62 @@ button.nexus-share-btn {
     max-width: 1200px;
     margin: 0 auto;
 }
+
+/* --- NEXUS PORTAL UPLOADS --- */
+.nd-upload-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.nd-upload-form input[type="file"] {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+.nd-upload-list {
+    display: grid;
+    gap: 10px;
+}
+
+.nd-upload-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nd-upload-item a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.nd-upload-note {
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nd-upload-note.success {
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.nd-upload-note.error {
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+@media (max-width: 900px) {
+    .nd-upload-form {
+        grid-template-columns: 1fr;
+    }
+}
