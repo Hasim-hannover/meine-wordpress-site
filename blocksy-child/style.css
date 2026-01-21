@@ -687,3 +687,146 @@ button.nexus-share-btn {
         grid-column: span 1;
     }
 }
+
+/* =========================================
+   NEXUS DASHBOARD - ULTIMATE DARK MODE
+   ========================================= */
+
+/* 1. Container & Reset */
+.nexus-dashboard {
+    max-width: 1100px;
+    margin: 60px auto;
+    font-family: 'Satoshi', sans-serif;
+    color: #ffffff;
+    background: transparent;
+}
+
+/* 2. Grid Layout */
+.nd-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+/* 3. The "Glass" Card Design (Der High-End Look) */
+.nd-card {
+    background: #0f0f0f;
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.nd-card:hover {
+    border-color: rgba(255, 176, 32, 0.3);
+    transform: translateY(-2px);
+}
+
+/* 4. Header Section */
+.nd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+.nd-welcome h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 10px 0 0 0;
+    color: #ffffff;
+}
+
+.nd-badge {
+    display: inline-block;
+    background: rgba(255, 176, 32, 0.1);
+    color: #ffb020;
+    border: 1px solid rgba(255, 176, 32, 0.2);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    border-radius: 100px;
+}
+
+/* 5. Progress Bar (Budget) */
+.nd-progress-wrap {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.nd-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ffb020 0%, #ff8c00 100%);
+    border-radius: 6px;
+    box-shadow: 0 0 15px rgba(255, 176, 32, 0.4);
+}
+
+/* 6. Typography Helpers */
+.nd-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #a0a0a0;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.muted {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+.kpi-val {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff;
+    display: block;
+    line-height: 1;
+    margin-top: 10px;
+}
+
+/* 7. Roadmap Items */
+.nd-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.nd-item:last-child { border-bottom: none; }
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #333;
+}
+.status-active .dot { background: #ffb020; box-shadow: 0 0 8px #ffb020; }
+.status-done .dot { background: #10b981; box-shadow: 0 0 8px #10b981; }
+
+/* 8. Layout Helper */
+.span-2 { grid-column: span 2; }
+.span-full { grid-column: 1 / -1; }
+
+/* Mobile */
+@media (max-width: 900px) {
+    .nd-grid { grid-template-columns: 1fr; }
+    .span-2 { grid-column: span 1; }
+}
