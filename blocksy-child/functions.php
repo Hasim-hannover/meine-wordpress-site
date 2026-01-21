@@ -63,6 +63,17 @@ add_action( 'wp_enqueue_scripts', function () {
                 filemtime( $about_css )
             );
         }
+
+        $about_js = get_stylesheet_directory() . '/assets/js/about-page.js';
+        if ( file_exists( $about_js ) ) {
+            wp_enqueue_script(
+                'nexus-about-js',
+                get_stylesheet_directory_uri() . '/assets/js/about-page.js',
+                [],
+                filemtime( $about_js ),
+                true
+            );
+        }
     }
 
 }, 20 );
