@@ -1,0 +1,650 @@
+/* =========================================
+   Nexus About Page (Scoped Styles)
+   ========================================= */
+
+.nexus-about {
+    --bg: #0d0d0d;
+    --page-bg: #0a0a0a;
+    --glass-bg: rgba(15, 15, 15, 0.55);
+    --glass-border: rgba(82, 82, 91, 0.28);
+    --accent: #0ea5e9;
+    --accent-2: #06b6d4;
+    --earth: #10b981;
+    --earth-hover: #059669;
+    --growth: #84cc16;
+    --theory: #a855f7;
+    --white: #fafafa;
+    --muted: #a1a1aa;
+    --success: #10b981;
+    --radius: 12px;
+    --radius-lg: 16px;
+    --shadow-glow: 0 12px 40px rgba(14, 165, 233, 0.12);
+    --shadow-earth: 0 12px 40px rgba(16, 185, 129, 0.15);
+    --shadow-theory: 0 12px 40px rgba(168, 85, 247, 0.15);
+    --max-width: 1200px;
+
+    background: var(--page-bg);
+    color: var(--white);
+    line-height: 1.6;
+}
+
+.nexus-about,
+.nexus-about * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.nexus-about .nexus-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.nexus-about .hero-story {
+    padding: 100px 0 60px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nexus-about .hero-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+}
+
+.nexus-about .story-opener {
+    animation: fadeInUp 0.6s ease;
+}
+
+.nexus-about .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.nexus-about .hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+}
+
+.nexus-about .hero-image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: 20px;
+    bottom: 20px;
+    background: linear-gradient(135deg, var(--earth), var(--growth));
+    border-radius: var(--radius-lg);
+    opacity: 0.1;
+    z-index: -1;
+    animation: float 4s ease-in-out infinite;
+}
+
+.nexus-about .hero-image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.nexus-about .story-headline {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin: 0 0 2rem;
+    font-weight: 800;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.nexus-about .story-headline .highlight {
+    background: linear-gradient(135deg, var(--earth) 0%, var(--growth) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nexus-about .story-paragraph {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.8s ease 0.4s both;
+    max-width: 650px;
+}
+
+.nexus-about .story-paragraph.no-animate {
+    animation: none;
+}
+
+.nexus-about .story-paragraph strong {
+    color: var(--white);
+    font-weight: 600;
+}
+
+.nexus-about .location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 999px;
+    color: var(--success);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.nexus-about .location-wrap {
+    margin-top: 1.5rem;
+}
+
+.nexus-about .growth-animation {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nexus-about .plant-visual {
+    position: relative;
+    width: 100px;
+    height: 180px;
+}
+
+.nexus-about .stem {
+    position: absolute;
+    width: 8px;
+    height: 0;
+    background: linear-gradient(to top, var(--earth), var(--growth));
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+    animation: growStem 2s ease-in-out forwards 0.5s;
+}
+
+.nexus-about .leaf {
+    position: absolute;
+    width: 20px;
+    height: 12px;
+    background-color: var(--growth);
+    border-radius: 50% 0 50% 50%;
+    opacity: 0;
+    transform-origin: bottom left;
+}
+
+.nexus-about .leaf-1 {
+    left: 50%;
+    top: 40%;
+    transform: rotate(-20deg);
+    animation: growLeaf 0.8s ease-in-out forwards 2s;
+}
+
+.nexus-about .leaf-2 {
+    left: 50%;
+    top: 60%;
+    transform: rotate(20deg) scaleX(-1);
+    animation: growLeaf 0.8s ease-in-out forwards 2.4s;
+}
+
+.nexus-about .flower {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-radius: 50%;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    animation: bloom 1s ease-in-out forwards 3s;
+}
+
+@keyframes growStem {
+    from { height: 0; }
+    to { height: 120px; }
+}
+
+@keyframes growLeaf {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bloom {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.nexus-about .method-section,
+.nexus-about .theory-section,
+.nexus-about .journey-section,
+.nexus-about .values-story,
+.nexus-about .cta-section {
+    padding: 80px 0;
+}
+
+.nexus-about .method-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.nexus-about .method-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.07);
+    color: var(--earth);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.nexus-about .method-badge--theory {
+    background: rgba(168, 85, 247, 0.07);
+    color: var(--theory);
+}
+
+.nexus-about h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin: 0 0 1.5rem;
+    background: linear-gradient(135deg, var(--white), #cfcfcf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nexus-about .method-subtitle {
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+
+.nexus-about .growth-visual {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 4rem auto;
+}
+
+.nexus-about .growth-step {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nexus-about .growth-step:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-earth);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.nexus-about .growth-step::before {
+    content: attr(data-step);
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: rgba(16, 185, 129, 0.3);
+}
+
+.nexus-about .step-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    line-height: 1;
+}
+
+.nexus-about .step-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.nexus-about .step-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.nexus-about .theory-section {
+    background: linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.05), transparent);
+}
+
+.nexus-about .theory-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+.nexus-about .theory-text {
+    animation: fadeInUp 0.8s ease;
+}
+
+.nexus-about .theory-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.nexus-about .theory-box {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nexus-about .theory-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--theory), var(--accent));
+}
+
+.nexus-about .theory-heading {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, var(--theory), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nexus-about .theory-list {
+    list-style: none;
+    margin-top: 1.5rem;
+}
+
+.nexus-about .theory-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.nexus-about .theory-item:last-child {
+    border-bottom: none;
+}
+
+.nexus-about .theory-icon {
+    font-size: 1.5rem;
+    color: var(--theory);
+    margin-top: 4px;
+}
+
+.nexus-about .theory-desc {
+    flex: 1;
+    color: var(--muted);
+}
+
+.nexus-about .journey-intro {
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    text-align: center;
+}
+
+.nexus-about .journey-intro p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.nexus-about .milestone-grid {
+    display: grid;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.nexus-about .milestone {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.nexus-about .milestone-year {
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(132, 204, 22, 0.05));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    font-weight: 700;
+    color: var(--earth);
+    font-size: 0.9rem;
+}
+
+.nexus-about .milestone-content {
+    padding-bottom: 2rem;
+    border-left: 2px solid var(--glass-border);
+    padding-left: 2rem;
+    position: relative;
+}
+
+.nexus-about .milestone-content::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    background: var(--earth);
+    border-radius: 50%;
+}
+
+.nexus-about .milestone-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--white);
+}
+
+.nexus-about .milestone-story {
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.nexus-about .milestone-learning {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--earth);
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.nexus-about .values-story {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.03), rgba(132, 204, 22, 0.02));
+}
+
+.nexus-about .values-narrative {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.nexus-about .value-story-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.nexus-about .value-story-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nexus-about .value-story-title span {
+    font-size: 2rem;
+}
+
+.nexus-about .value-story-text {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.nexus-about .cta-section {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.nexus-about .cta-story-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(132, 204, 22, 0.03));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.nexus-about .cta-story-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--earth), var(--growth));
+}
+
+.nexus-about .cta-headline {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, var(--earth), var(--growth));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nexus-about .cta-story {
+    font-size: 1.15rem;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.nexus-about .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.05rem;
+}
+
+.nexus-about .btn-primary {
+    background: linear-gradient(90deg, var(--earth), var(--earth-hover));
+    color: #111;
+    box-shadow: var(--shadow-earth);
+}
+
+.nexus-about .btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(16, 185, 129, 0.25);
+}
+
+.nexus-about .btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+
+.nexus-about .btn-ghost:hover {
+    border-color: var(--earth);
+    background: rgba(16, 185, 129, 0.05);
+    transform: translateY(-2px);
+}
+
+.nexus-about .btn-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+@media (min-width: 992px) {
+    .nexus-about .hero-content { grid-template-columns: 1.2fr 0.8fr; }
+    .nexus-about .story-opener { text-align: left; }
+    .nexus-about .theory-content { grid-template-columns: 1fr 1fr; align-items: center; }
+}
+
+@media (max-width: 768px) {
+    .nexus-about .hero-content { grid-template-columns: 1fr; }
+    .nexus-about .hero-visual { order: -1; margin-bottom: 2rem; }
+    .nexus-about .story-opener,
+    .nexus-about .story-paragraph { text-align: center; margin-left: auto; margin-right: auto; }
+    .nexus-about .theory-content { grid-template-columns: 1fr; }
+    .nexus-about .milestone { grid-template-columns: 1fr; gap: 1rem; }
+    .nexus-about .milestone-year { justify-self: start; }
+    .nexus-about .milestone-content { border-left: none; padding-left: 0; padding-bottom: 1rem; }
+    .nexus-about .milestone-content::before { display: none; }
+    .nexus-about .btn-group { flex-direction: column; align-items: center; }
+    .nexus-about .btn { width: 100%; max-width: 300px; }
+    .nexus-about .growth-animation { height: 150px; }
+}

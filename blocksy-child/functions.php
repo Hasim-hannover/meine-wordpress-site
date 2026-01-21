@@ -52,6 +52,19 @@ add_action( 'wp_enqueue_scripts', function () {
         wp_add_inline_style( 'blocksy-child-style', $custom_css );
     }
 
+    // D) NUR Template: Nexus Über Mich
+    if ( is_page_template( 'template-about.php' ) ) {
+        $about_css = get_stylesheet_directory() . '/assets/css/about-page.css';
+        if ( file_exists( $about_css ) ) {
+            wp_enqueue_style(
+                'nexus-about-css',
+                get_stylesheet_directory_uri() . '/assets/css/about-page.css',
+                [],
+                filemtime( $about_css )
+            );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
