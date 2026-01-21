@@ -1061,7 +1061,7 @@ button.nexus-share-btn {
     .ct-panel,
     .ct-panel-content,
     .ct-panel-inner {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 72px);
+        padding-top: calc(env(safe-area-inset-top, 0px) + 48px);
     }
 
     .ct-panel .ct-panel-close {
@@ -1070,5 +1070,14 @@ button.nexus-share-btn {
 
     .ct-panel .ct-menu {
         margin-top: 16px;
+    }
+
+    .ct-panel-content .ct-panel-close {
+        display: none;
+    }
+
+    .ct-panel .site-logo img {
+        max-width: 42px;
+        height: auto;
     }
 }
