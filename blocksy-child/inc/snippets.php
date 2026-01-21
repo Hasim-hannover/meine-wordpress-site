@@ -37,3 +37,32 @@ add_action( 'login_init', function() {
     wp_safe_redirect( get_permalink( $portal_page ) );
     exit;
 } );
+
+/* =========================================
+   NEXUS SECURITY: HIDE ADMIN FOR CLIENTS
+   ========================================= */
+
+// 1. Admin-Leiste (schwarzer Balken) fuer Kunden ausblenden
+add_action( 'after_setup_theme', function() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        show_admin_bar( false );
+    }
+} );
+
+// 2. Zugriff auf /wp-admin blockieren
+add_action( 'admin_init', function() {
+    if ( is_user_logged_in() && ! current_user_can( 'manage_options' ) && ! wp_doing_ajax() ) {
+        wp_safe_redirect( home_url( '/portal' ) );
+        exit;
+    }
+} );
+
+// 3. Login-Redirect korrigieren (Falls WP-Login genutzt wird)
+add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
+    if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+        if ( ! in_array( 'administrator', $user->roles, true ) ) {
+            return home_url( '/portal' );
+        }
+    }
+    return $redirect_to;
+}, 10, 3 );
