@@ -49,19 +49,32 @@ add_action( 'after_setup_theme', function() {
     }
 } );
 
+add_filter( 'show_admin_bar', function( $show ) {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        return false;
+    }
+    return $show;
+}, 999 );
+
 // 2. Zugriff auf /wp-admin blockieren
 add_action( 'admin_init', function() {
-    if ( is_user_logged_in() && ! current_user_can( 'manage_options' ) && ! wp_doing_ajax() ) {
-        wp_safe_redirect( home_url( '/portal' ) );
-        exit;
+    if ( ! is_user_logged_in() || current_user_can( 'manage_options' ) || wp_doing_ajax() ) {
+        return;
     }
+
+    $portal_page = get_page_by_path( 'portal' );
+    $target = $portal_page ? get_permalink( $portal_page ) : home_url( '/portal' );
+
+    wp_safe_redirect( $target );
+    exit;
 } );
 
 // 3. Login-Redirect korrigieren (Falls WP-Login genutzt wird)
 add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
     if ( isset( $user->roles ) && is_array( $user->roles ) ) {
         if ( ! in_array( 'administrator', $user->roles, true ) ) {
-            return home_url( '/portal' );
+            $portal_page = get_page_by_path( 'portal' );
+            return $portal_page ? get_permalink( $portal_page ) : home_url( '/portal' );
         }
     }
     return $redirect_to;
