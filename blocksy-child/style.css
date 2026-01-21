@@ -928,15 +928,7 @@ button.nexus-share-btn {
     }
 }
 
-/* --- NEXUS STICKY HEADER (GLASS EFFECT) --- */
-/* Wir greifen nur, wenn der Header "stuck" (fixiert) ist */
-header[data-sticky*="yes"] [data-row*="main"] {
-    background-color: rgba(10, 10, 10, 0.8) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease-in-out;
-}
+
 
 /* --- NEXUS HEADER BUTTON --- */
 .nexus-nav-btn {
