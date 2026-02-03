@@ -118,3 +118,31 @@
     padding: 16px 32px; border-radius: 4px; text-decoration: none; text-transform: uppercase;
     margin-top: 20px;
 }
+
+/* TITEL UMBRUCH FIX */
+.nexus-title {
+    font-family: 'Satoshi', sans-serif;
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 900;
+    margin-bottom: 40px;
+    color: #ffffff;
+    
+    /* NEU: Kontrollierter Umbruch */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    word-spacing: 0.05em;
+}
+
+/* Erzwingt Umbruch nach dem Punkt */
+.nexus-title br {
+    display: block;
+    content: "";
+    margin-top: 0.1em;
+}
+```
+
+**Dann im WordPress-Titel:**
+```
+Design ist kein Geschmack.<br>Es ist Architektur.
