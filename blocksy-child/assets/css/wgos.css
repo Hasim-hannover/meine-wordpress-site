@@ -1,465 +1,875 @@
 /* =========================================
    WGOS – WordPress Growth Operating System
-   Base: homepage.css + design-system.css
+   Light Theme: #B12A2A, #222, #F4F5F7, #FFF
+   Font: Merriweather + System Sans
    ========================================= */
 
 /* =========================================
-   1. Page Wrapper
+   1. DESIGN TOKENS (scoped)
    ========================================= */
 .wgos-wrapper {
-  background-color: var(--dark);
-  color: var(--text-main);
-  font-family: 'Satoshi', sans-serif;
-  overflow-x: hidden;
-  min-height: 100vh;
-}
-
-.wgos-wrapper section {
-  padding: 6rem 0;
+    --wgos-accent: #B12A2A;
+    --wgos-accent-dark: #8E2222;
+    --wgos-accent-light: rgba(177, 42, 42, 0.08);
+    --wgos-accent-glow: rgba(177, 42, 42, 0.25);
+    --wgos-text: #222222;
+    --wgos-text-muted: #696969;
+    --wgos-bg: #F4F5F7;
+    --wgos-surface: #FFFFFF;
+    --wgos-border: #E2E4E8;
+    --wgos-border-light: #EEEFF2;
+    --wgos-heading-font: 'Merriweather', Georgia, 'Times New Roman', serif;
+    --wgos-body-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* =========================================
-   2. Container & Typography
+   2. PAGE WRAPPER (Override Dark Theme)
    ========================================= */
+.wgos-wrapper {
+    background: var(--wgos-surface);
+    color: var(--wgos-text);
+    font-family: var(--wgos-body-font);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.wgos-wrapper *,
+.wgos-wrapper *::before,
+.wgos-wrapper *::after {
+    box-sizing: border-box;
+}
+
+.wgos-wrapper h1,
+.wgos-wrapper h2,
+.wgos-wrapper h3,
+.wgos-wrapper h4 {
+    font-family: var(--wgos-heading-font);
+    color: var(--wgos-text);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.wgos-wrapper a {
+    color: var(--wgos-accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.wgos-wrapper a:hover {
+    color: var(--wgos-accent-dark);
+}
+
 .wgos-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.wgos-badge {
-  display: inline-block;
-  padding: 6px 12px;
-  background: rgba(255, 176, 32, 0.1);
-  color: var(--gold);
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.wgos-title {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: #fff;
-}
-
-.wgos-subtitle {
-  font-size: 1.15rem;
-  color: var(--text-dim);
-  max-width: 700px;
-  margin: 0 auto 2rem;
-  line-height: 1.7;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 24px;
 }
 
 /* =========================================
-   3. Buttons
+   3. STICKY INPAGE NAV
    ========================================= */
-.btn-wgos {
-  display: inline-block;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1rem;
-  transition: all 0.3s;
-  cursor: pointer;
-  text-align: center;
-  border: none;
+.wgos-inpage-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--wgos-border);
+    transition: box-shadow 0.3s ease;
 }
 
-.btn-primary {
-  background: var(--gold);
-  color: #000;
-  box-shadow: 0 4px 15px rgba(255, 176, 32, 0.3);
+.wgos-inpage-nav.is-stuck {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
 }
 
-.btn-primary:hover {
-  background: #ffc14d;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 176, 32, 0.4);
+.wgos-inpage-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
-.btn-ghost {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+.wgos-inpage-nav ul::-webkit-scrollbar {
+    display: none;
 }
 
-.btn-ghost:hover {
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
+.wgos-inpage-nav li {
+    flex-shrink: 0;
 }
 
-.wgos-btn-row {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+.wgos-inpage-nav a {
+    display: block;
+    padding: 14px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--wgos-text-muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.wgos-inpage-nav a:hover,
+.wgos-inpage-nav a.active {
+    color: var(--wgos-accent);
+    border-bottom-color: var(--wgos-accent);
 }
 
 /* =========================================
-   4. Tech Stack Intro
+   4. SECTIONS BASE
    ========================================= */
-.wgos-tech-stack {
-  margin-top: 2.5rem;
-  color: var(--text-dim);
-  font-size: 0.95rem;
+.wgos-section {
+    padding: 80px 0;
+}
+
+.wgos-section--white {
+    background: var(--wgos-surface);
+}
+
+.wgos-section--gray {
+    background: var(--wgos-bg);
+}
+
+.wgos-h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 900;
+    margin: 0 0 24px;
+    color: var(--wgos-text);
+}
+
+.wgos-section-intro {
+    font-size: 1.1rem;
+    color: var(--wgos-text-muted);
+    max-width: 720px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.wgos-prose {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--wgos-text-muted);
+}
+
+.wgos-prose p {
+    margin-bottom: 1rem;
+}
+
+.wgos-prose strong {
+    color: var(--wgos-text);
 }
 
 /* =========================================
-   5. Module Grid
+   5. HERO
    ========================================= */
-.module-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
+.wgos-hero {
+    padding: 100px 0 80px;
+    background: var(--wgos-surface);
+    text-align: center;
 }
 
-.module-card {
-  background: var(--dark-glass);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.3s;
-  position: relative;
+.wgos-hero__inner {
+    max-width: 860px;
 }
 
-.module-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--gold);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+.wgos-kicker {
+    display: inline-block;
+    font-family: var(--wgos-body-font);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--wgos-accent);
+    margin-bottom: 16px;
 }
 
-.module-num {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: var(--gold);
-  background: rgba(255, 176, 32, 0.1);
-  padding: 4px 10px;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  letter-spacing: 0.05em;
+.wgos-hero__title {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin: 0 0 24px;
+    color: var(--wgos-text);
 }
 
-.module-card h3 {
-  color: #fff;
-  font-size: 1.2rem;
-  margin-bottom: 0.75rem;
-  font-weight: 700;
+.wgos-hero__subtitle {
+    font-family: var(--wgos-heading-font);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--wgos-text-muted);
+    max-width: 720px;
+    margin: 0 auto 32px;
+    line-height: 1.8;
 }
 
-.module-card p {
-  color: var(--text-dim);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin: 0;
+.wgos-hero__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
 }
 
 /* =========================================
-   6. Credit Menu
+   6. BUTTONS
    ========================================= */
-.credit-menu-box {
-  background: linear-gradient(145deg, rgba(30, 30, 30, 0.6), rgba(10, 10, 10, 0.8));
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 3rem;
-  margin-top: 3rem;
-  position: relative;
-  overflow: hidden;
+.wgos-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-family: var(--wgos-body-font);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-align: center;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    line-height: 1;
 }
 
-.credit-menu-box::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 20px;
-  padding: 1px;
-  background: linear-gradient(180deg, rgba(255, 176, 32, 0.3), transparent);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+.wgos-btn:hover {
+    transform: translateY(-2px);
 }
 
-.credit-menu-box h3 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: #fff;
+.wgos-btn--primary {
+    background: var(--wgos-accent);
+    color: #fff;
+    border-color: var(--wgos-accent);
+    box-shadow: 0 4px 14px var(--wgos-accent-glow);
 }
 
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin-top: 2.5rem;
+.wgos-btn--primary:hover {
+    background: var(--wgos-accent-dark);
+    border-color: var(--wgos-accent-dark);
+    box-shadow: 0 8px 24px var(--wgos-accent-glow);
+    color: #fff;
 }
 
-.menu-category {
-  padding: 0;
+.wgos-btn--outline {
+    background: transparent;
+    color: var(--wgos-accent);
+    border-color: var(--wgos-accent);
 }
 
-.menu-category h4 {
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border);
+.wgos-btn--outline:hover {
+    background: var(--wgos-accent);
+    color: #fff;
 }
 
-.menu-item {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 0;
-  font-size: 0.9rem;
-  color: var(--text-dim);
+.wgos-link--arrow {
+    font-family: var(--wgos-body-font);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--wgos-accent);
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
-.menu-item span:first-child {
-  flex-shrink: 0;
-}
-
-.menu-item span:last-child {
-  flex-shrink: 0;
-  color: #fff;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.dots {
-  flex: 1;
-  border-bottom: 1px dotted rgba(255, 255, 255, 0.15);
-  margin: 0 0.75rem;
-  min-width: 20px;
-  align-self: flex-end;
-  margin-bottom: 4px;
-}
-
-.wgos-calc-example {
-  text-align: center;
-  margin-top: 2.5rem;
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  border-radius: 12px;
+.wgos-link--arrow:hover {
+    color: var(--wgos-accent-dark);
 }
 
 /* =========================================
-   7. Pricing Grid
+   7. TRUST STACK
    ========================================= */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-  align-items: stretch;
+.wgos-trust-stack {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
 }
 
-.pricing-card {
-  background: var(--dark-glass);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2.5rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
+.wgos-trust-item {
+    text-align: center;
 }
 
-.pricing-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.2);
+.wgos-trust-value {
+    display: block;
+    font-family: var(--wgos-body-font);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--wgos-text);
+    line-height: 1;
+    margin-bottom: 6px;
 }
 
-.pricing-card.featured {
-  border-color: var(--gold);
-  box-shadow: 0 0 30px rgba(255, 176, 32, 0.1);
-}
-
-.pricing-card.featured:hover {
-  border-color: var(--gold);
-  box-shadow: 0 0 40px rgba(255, 176, 32, 0.15);
-}
-
-.pricing-featured-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: var(--gold);
-  color: #000;
-  font-weight: 700;
-  font-size: 0.8rem;
-  padding: 4px;
-  text-align: center;
-}
-
-.pricing-card h3 {
-  color: #fff;
-  font-size: 1.4rem;
-  margin-bottom: 0.75rem;
-}
-
-.price-tag {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
-
-.price-tag small {
-  font-size: 0.9rem;
-  font-weight: 400;
-  opacity: 0.7;
-}
-
-.points-badge {
-  display: inline-block;
-  background: rgba(255, 176, 32, 0.1);
-  color: var(--gold);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 0.9rem;
-  margin: 1rem 0;
-}
-
-.points-badge-neutral {
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
-}
-
-.pricing-features {
-  list-style: none;
-  padding: 0;
-  margin: 1.5rem 0;
-  text-align: left;
-  flex: 1;
-}
-
-.pricing-features li {
-  padding: 0.5rem 0;
-  color: var(--text-dim);
-  font-size: 0.95rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.pricing-features li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--gold);
-  font-weight: 700;
-}
-
-.pricing-features li:last-child {
-  border-bottom: none;
-}
-
-.pricing-card .btn-wgos {
-  width: 100%;
-  margin-top: auto;
-}
-
-.wgos-pricing-note {
-  margin-top: 2rem;
-  font-size: 0.85rem;
+.wgos-trust-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--wgos-text-muted);
 }
 
 /* =========================================
-   8. Guarantee Box
+   8. CHECKLIST
    ========================================= */
-.guarantee-box {
-  text-align: center;
-  background: linear-gradient(145deg, rgba(16, 185, 129, 0.08), rgba(10, 10, 10, 0.8));
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  border-radius: 20px;
-  padding: 3.5rem;
-  max-width: 900px;
-  margin: 0 auto;
+.wgos-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 32px;
+    max-width: 680px;
 }
 
-.guarantee-box h3 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  color: #fff;
+.wgos-checklist li {
+    position: relative;
+    padding: 10px 0 10px 32px;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--wgos-text-muted);
 }
 
-.guarantee-box p {
-  color: var(--text-dim);
-  max-width: 700px;
-  margin: 0 auto 2rem;
-  line-height: 1.7;
+.wgos-checklist li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    color: var(--wgos-accent);
+    font-weight: 700;
+    font-size: 1.1rem;
 }
 
-.guarantee-stamp {
-  color: var(--nx-success);
-  font-weight: 700;
+.wgos-checklist li strong {
+    color: var(--wgos-text);
+}
+
+.wgos-bold-statement {
+    font-family: var(--wgos-heading-font);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--wgos-text);
+    max-width: 680px;
+    line-height: 1.6;
+    margin: 32px 0 24px;
+}
+
+.wgos-inline-cta {
+    margin-top: 16px;
+}
+
+.wgos-inline-cta a {
+    font-weight: 600;
+    color: var(--wgos-accent);
+    font-size: 1rem;
+}
+
+.wgos-inline-cta a:hover {
+    text-decoration: underline;
 }
 
 /* =========================================
-   9. FAQ Wrapper (WGOS)
+   9. MODULE SECTIONS
    ========================================= */
-.wgos-faq-wrap {
-  max-width: 900px;
-  margin: 0 auto;
+.wgos-module {
+    padding: 48px 0;
+}
+
+.wgos-module--white {
+    background: var(--wgos-surface);
+}
+
+.wgos-module--gray {
+    background: var(--wgos-bg);
+}
+
+.wgos-module--cta {
+    padding: 40px 0 60px;
+    background: var(--wgos-bg);
+}
+
+.wgos-module__grid {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.wgos-module__num {
+    font-family: var(--wgos-body-font);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--wgos-accent);
+    line-height: 1;
+    padding-top: 4px;
+}
+
+.wgos-module__content h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+    color: var(--wgos-text);
+}
+
+.wgos-module__subline {
+    font-size: 0.95rem;
+    color: var(--wgos-text-muted);
+    margin: 0 0 12px;
+}
+
+.wgos-module__content > p {
+    font-size: 1rem;
+    color: var(--wgos-text-muted);
+    line-height: 1.7;
+    margin: 0 0 16px;
+    max-width: 650px;
+}
+
+.wgos-module__proof {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--wgos-accent);
+    background: var(--wgos-accent-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+}
+
+.wgos-tag--optional {
+    display: inline-block;
+    font-family: var(--wgos-body-font);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--wgos-text-muted);
+    background: var(--wgos-bg);
+    padding: 3px 8px;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 8px;
 }
 
 /* =========================================
-   10. CTA Section Adjustments
+   10. CREDITS TABLE
    ========================================= */
-.wgos-cta-note {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
+.wgos-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 32px;
+    border-radius: 12px;
+    border: 1px solid var(--wgos-border);
+}
+
+.wgos-credits-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 600px;
+}
+
+.wgos-credits-table thead th {
+    background: #1A1A1A;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 14px 20px;
+    text-align: left;
+    border: none;
+}
+
+.wgos-credits-table thead th:last-child {
+    text-align: center;
+    width: 90px;
+}
+
+.wgos-credits-table tbody td {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--wgos-border-light);
+    color: var(--wgos-text-muted);
+    vertical-align: middle;
+}
+
+.wgos-credits-table tbody td:first-child {
+    font-weight: 600;
+    color: var(--wgos-text);
+    white-space: nowrap;
+}
+
+.wgos-credits-table tbody td:last-child {
+    text-align: center;
+    font-weight: 700;
+    color: var(--wgos-text);
+}
+
+.wgos-credits-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Category rows */
+.wgos-table-category td {
+    background: var(--wgos-bg);
+    font-family: var(--wgos-body-font);
+    font-size: 0.78rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--wgos-accent) !important;
+    padding: 12px 20px !important;
+    border-bottom: 1px solid var(--wgos-border) !important;
+}
+
+/* Total row */
+.wgos-table-total td {
+    background: var(--wgos-bg);
+    border-top: 2px solid var(--wgos-border);
+    font-weight: 700 !important;
+    color: var(--wgos-text) !important;
+}
+
+/* Compact variant */
+.wgos-credits-table--compact {
+    min-width: 400px;
 }
 
 /* =========================================
-   11. Mobile Responsive
+   11. PRICING GRID
    ========================================= */
-@media (max-width: 900px) {
-  .smart-nav { display: none; }
+.wgos-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+    align-items: stretch;
+}
 
-  .wgos-wrapper section {
-    padding: 4rem 0;
-  }
+.wgos-pricing-card {
+    background: var(--wgos-surface);
+    border: 2px solid var(--wgos-border);
+    border-radius: 16px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .wgos-title {
-    font-size: clamp(2rem, 6vw, 3rem);
-  }
+.wgos-pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
 
-  .module-grid {
-    grid-template-columns: 1fr;
-  }
+/* Featured card */
+.wgos-pricing-card--featured {
+    border-color: var(--wgos-accent);
+    box-shadow: 0 8px 30px var(--wgos-accent-glow);
+}
 
-  .menu-grid {
-    grid-template-columns: 1fr;
-  }
+.wgos-pricing-card--featured:hover {
+    box-shadow: 0 16px 50px var(--wgos-accent-glow);
+}
 
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.wgos-pricing-badge {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    background: var(--wgos-accent);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    padding: 7px 0;
+    border-radius: 14px 14px 0 0;
+}
 
-  .credit-menu-box {
-    padding: 1.5rem;
-  }
+.wgos-pricing-card--featured .wgos-pricing-card__head {
+    padding-top: 20px;
+}
 
-  .guarantee-box {
-    padding: 2rem;
-  }
+.wgos-pricing-card__head h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0 0 4px;
+}
+
+.wgos-pricing-card__tagline {
+    font-size: 0.9rem;
+    color: var(--wgos-text-muted);
+    margin: 0 0 20px;
+}
+
+.wgos-pricing-card__price {
+    font-family: var(--wgos-body-font);
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--wgos-text);
+    margin-bottom: 4px;
+}
+
+.wgos-pricing-card__price small {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--wgos-text-muted);
+}
+
+.wgos-pricing-card__credits {
+    display: inline-block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--wgos-accent);
+    background: var(--wgos-accent-light);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.wgos-pricing-card__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    flex: 1;
+}
+
+.wgos-pricing-card__features li {
+    position: relative;
+    padding: 8px 0 8px 24px;
+    font-size: 0.92rem;
+    color: var(--wgos-text-muted);
+    border-bottom: 1px solid var(--wgos-border-light);
+}
+
+.wgos-pricing-card__features li:last-child {
+    border-bottom: none;
+}
+
+.wgos-pricing-card__features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--wgos-accent);
+    font-weight: 700;
+}
+
+.wgos-pricing-card__ideal {
+    font-size: 0.85rem;
+    color: var(--wgos-text-muted);
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.wgos-pricing-card .wgos-btn {
+    width: 100%;
+    margin-top: auto;
+    text-align: center;
+}
+
+/* =========================================
+   12. BEISPIEL-MONAT
+   ========================================= */
+.wgos-example-month {
+    margin-top: 60px;
+    background: var(--wgos-surface);
+    border-radius: 16px;
+    padding: 36px;
+    border: 1px solid var(--wgos-border);
+}
+
+.wgos-example-month h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0 0 16px;
+}
+
+.wgos-example-month__result {
+    font-size: 0.95rem;
+    color: var(--wgos-text-muted);
+    margin-top: 20px;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* =========================================
+   13. GARANTIE
+   ========================================= */
+.wgos-checklist--guarantee li {
+    padding: 12px 0 12px 32px;
+}
+
+.wgos-expectation {
+    font-size: 0.95rem;
+    color: var(--wgos-text-muted);
+    max-width: 680px;
+    line-height: 1.6;
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: var(--wgos-bg);
+    border-radius: 10px;
+    border-left: 3px solid var(--wgos-accent);
+}
+
+/* =========================================
+   14. FAQ
+   ========================================= */
+.wgos-faq {
+    max-width: 800px;
+    margin-top: 8px;
+}
+
+.wgos-faq .nx-faq__item {
+    border-bottom: 1px solid var(--wgos-border);
+    padding: 20px 0;
+}
+
+.wgos-faq .nx-faq__item summary {
+    cursor: pointer;
+    font-family: var(--wgos-heading-font);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--wgos-text);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+}
+
+.wgos-faq .nx-faq__item summary::-webkit-details-marker {
+    display: none;
+}
+
+.wgos-faq .nx-faq__item summary::after {
+    content: '+';
+    color: var(--wgos-accent);
+    font-size: 1.5rem;
+    font-weight: 400;
+    flex-shrink: 0;
+    font-family: var(--wgos-body-font);
+    transition: transform 0.3s ease;
+}
+
+.wgos-faq .nx-faq__item[open] summary::after {
+    content: '−';
+}
+
+.wgos-faq .nx-faq__item summary:hover {
+    color: var(--wgos-accent);
+}
+
+.wgos-faq .nx-faq__content {
+    margin-top: 12px;
+    color: var(--wgos-text-muted);
+    line-height: 1.7;
+    font-size: 1rem;
+    max-width: 680px;
+}
+
+/* =========================================
+   15. FINAL CTA
+   ========================================= */
+.wgos-final-cta {
+    border-top: 1px solid var(--wgos-border);
+}
+
+.wgos-final-cta .wgos-h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+/* =========================================
+   16. REVEAL ANIMATION (override for light)
+   ========================================= */
+.wgos-wrapper .nx-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.wgos-wrapper .nx-reveal.nx-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   17. RESPONSIVE
+   ========================================= */
+@media (max-width: 1023px) {
+    .wgos-pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Growth Partner first on mobile */
+    .wgos-pricing-card--featured {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .wgos-section {
+        padding: 56px 0;
+    }
+
+    .wgos-hero {
+        padding: 72px 0 56px;
+    }
+
+    .wgos-module__grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .wgos-module__num {
+        font-size: 2rem;
+    }
+
+    .wgos-trust-stack {
+        gap: 24px;
+    }
+
+    .wgos-trust-value {
+        font-size: 2rem;
+    }
+
+    .wgos-hero__actions {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .wgos-inpage-nav a {
+        padding: 12px 14px;
+        font-size: 0.72rem;
+    }
+
+    .wgos-example-month {
+        padding: 24px 16px;
+    }
+
+    .wgos-h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .wgos-trust-stack {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 16px;
+    }
+
+    .wgos-inpage-nav ul {
+        justify-content: flex-start;
+        padding: 0 8px;
+    }
 }

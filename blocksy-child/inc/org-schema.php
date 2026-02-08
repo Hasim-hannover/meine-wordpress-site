@@ -166,31 +166,31 @@ function hu_output_schema()
         ],
 
         'wordpress-growth-operating-system' => [
-            'name'        => 'WordPress Growth Operating System',
-            'description' => 'Wachstum als System: WGOS vereint High-Performance Tech, Tracking, CRO, SEO und Ads in einem transparenten Retainer.',
+            'name'        => 'WordPress Growth Operating System (WGOS)',
+            'description' => 'Monatlicher Retainer für B2B-Unternehmen: Performance, Privacy-first Tracking, SEO, CRO & Automation als Owned-Leads-System.',
             'serviceType' => 'Growth Operating System',
-            'serviceOutput' => 'Modulares Framework mit Credits für kontinuierliche Entwicklung, Ads und Reporting',
+            'serviceOutput' => 'Owned-Leads-System: Assets statt Kampagnen. Performance, Daten, Rankings, Content, Conversion.',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Maintenance & Sicherheit',
-                    'price'         => 490,
+                    'name'          => 'Maintenance',
+                    'price'         => 1500,
                     'priceCurrency' => 'EUR',
-                    'description'   => 'Tägliche Updates & Backups, Security-Monitoring, Uptime-Check und keine Entwicklungs-Credits'
+                    'description'   => '30 Credits/Monat. Fundament sichern: Performance, Security, Tracking.'
                 ],
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Growth Partner',
-                    'price'         => 1850,
+                    'price'         => 2800,
                     'priceCurrency' => 'EUR',
-                    'description'   => 'Maintenance plus 50 Credits pro Monat, Priority Support und Strategie-Report'
+                    'description'   => '60 Credits/Monat. Owned Full Stack: SEO + CRO + Content.'
                 ],
                 [
                     '@type'         => 'Offer',
                     'name'          => 'Dominance',
-                    'price'         => 3200,
+                    'price'         => 4500,
                     'priceCurrency' => 'EUR',
-                    'description'   => 'Maintenance plus 100 Credits, wöchentliche Fixes und direkter Slack-Zugang'
+                    'description'   => '100+ Credits/Monat. Full Stack inkl. Paid Booster & Automation.'
                 ]
             ]
         ],
