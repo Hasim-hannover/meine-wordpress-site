@@ -1,0 +1,921 @@
+/* =========================================
+   NEXUS DESIGN SYSTEM v1.0
+   Single Source of Truth für Corporate Design
+   =========================================
+   Basis: Homepage-Ästhetik (Dark, Gold, Satoshi)
+   ========================================= */
+
+/* =========================================
+   1. DESIGN TOKENS (Custom Properties)
+   ========================================= */
+:root {
+    /* --- Farben: Primär --- */
+    --nx-gold: #FFB020;
+    --nx-gold-hover: #FFC14D;
+    --nx-gold-subtle: rgba(255, 176, 32, 0.1);
+    --nx-gold-glow: rgba(255, 176, 32, 0.3);
+
+    /* --- Farben: Hintergründe --- */
+    --nx-bg-deep: #050505;
+    --nx-bg: #0a0a0a;
+    --nx-bg-elevated: #0f0f0f;
+    --nx-bg-card: #121212;
+    --nx-bg-glass: rgba(20, 20, 20, 0.9);
+    --nx-bg-glass-light: rgba(255, 255, 255, 0.03);
+    --nx-bg-glass-hover: rgba(255, 255, 255, 0.05);
+
+    /* --- Farben: Text --- */
+    --nx-text: #ffffff;
+    --nx-text-secondary: #d4d4d4;
+    --nx-text-muted: #a1a1aa;
+    --nx-text-dim: #71717a;
+
+    /* --- Farben: Borders --- */
+    --nx-border: rgba(255, 255, 255, 0.08);
+    --nx-border-hover: rgba(255, 255, 255, 0.15);
+    --nx-border-gold: rgba(255, 176, 32, 0.3);
+
+    /* --- Farben: Semantisch --- */
+    --nx-success: #10b981;
+    --nx-success-subtle: rgba(16, 185, 129, 0.1);
+    --nx-warning: #f59e0b;
+    --nx-error: #ef4444;
+    --nx-info: #0ea5e9;
+    --nx-info-subtle: rgba(14, 165, 233, 0.1);
+
+    /* --- Typografie --- */
+    --nx-font: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --nx-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* --- Schriftgrößen (fluid) --- */
+    --nx-text-xs: 0.75rem;     /* 12px */
+    --nx-text-sm: 0.875rem;    /* 14px */
+    --nx-text-base: 1rem;      /* 16px */
+    --nx-text-lg: 1.125rem;    /* 18px */
+    --nx-text-xl: 1.25rem;     /* 20px */
+    --nx-text-2xl: 1.5rem;     /* 24px */
+    --nx-text-3xl: 2rem;       /* 32px */
+    --nx-text-4xl: 2.5rem;     /* 40px */
+    --nx-text-hero: clamp(2.5rem, 5vw, 4.5rem);
+
+    /* --- Spacing Scale --- */
+    --nx-space-xs: 0.25rem;    /* 4px */
+    --nx-space-sm: 0.5rem;     /* 8px */
+    --nx-space-md: 1rem;       /* 16px */
+    --nx-space-lg: 1.5rem;     /* 24px */
+    --nx-space-xl: 2rem;       /* 32px */
+    --nx-space-2xl: 3rem;      /* 48px */
+    --nx-space-3xl: 4rem;      /* 64px */
+    --nx-space-section: 6rem;  /* 96px */
+
+    /* --- Radien --- */
+    --nx-radius-sm: 4px;
+    --nx-radius: 8px;
+    --nx-radius-md: 12px;
+    --nx-radius-lg: 16px;
+    --nx-radius-xl: 20px;
+    --nx-radius-pill: 999px;
+
+    /* --- Schatten --- */
+    --nx-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --nx-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --nx-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.5);
+    --nx-shadow-xl: 0 40px 80px rgba(0, 0, 0, 0.6);
+    --nx-shadow-gold: 0 4px 15px var(--nx-gold-glow);
+    --nx-shadow-glow: 0 0 15px var(--nx-gold-glow);
+
+    /* --- Übergänge --- */
+    --nx-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    --nx-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    --nx-duration: 0.3s;
+    --nx-duration-fast: 0.15s;
+
+    /* --- Layout --- */
+    --nx-max-width: 1200px;
+    --nx-content-width: 800px;
+    --nx-reading-width: 740px;
+    --nx-header-height: 85px;
+
+    /* --- Backward Compatibility (alte Variablen → neue) --- */
+    --gold: var(--nx-gold);
+    --dark: var(--nx-bg-deep);
+    --dark-glass: var(--nx-bg-glass);
+    --text-main: var(--nx-text);
+    --text-dim: var(--nx-text-muted);
+    --border: var(--nx-border);
+    --bg: var(--nx-bg);
+    --fg: var(--nx-text);
+    --line: var(--nx-border);
+    --cta: var(--nx-gold);
+}
+
+
+/* =========================================
+   2. CSS RESET & BASE
+   ========================================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--nx-font);
+    color: var(--nx-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+
+/* =========================================
+   3. TYPOGRAFIE
+   ========================================= */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--nx-font);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--nx-text);
+}
+
+.nx-headline-hero {
+    font-size: var(--nx-text-hero);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--nx-text);
+}
+
+.nx-headline-hero span,
+.nx-text-gold {
+    color: var(--nx-gold);
+}
+
+.nx-headline-section {
+    font-size: var(--nx-text-4xl);
+    margin-bottom: var(--nx-space-md);
+}
+
+.nx-subheadline {
+    font-size: var(--nx-text-xl);
+    color: var(--nx-text-muted);
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 60ch;
+}
+
+.nx-label {
+    font-size: var(--nx-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+}
+
+.nx-prose {
+    font-size: var(--nx-text-lg);
+    line-height: 1.8;
+    color: var(--nx-text-secondary);
+}
+
+.nx-prose h2 {
+    font-size: 1.8rem;
+    color: var(--nx-text);
+    margin: 3rem 0 1.5rem;
+    border-left: 3px solid var(--nx-gold);
+    padding-left: 1.5rem;
+}
+
+.nx-prose h3 {
+    font-size: 1.5rem;
+    color: var(--nx-text);
+    margin: 2rem 0 1rem;
+}
+
+.nx-prose p {
+    margin-bottom: 1.5rem;
+}
+
+.nx-prose strong {
+    color: var(--nx-text);
+    font-weight: 600;
+}
+
+.nx-prose a {
+    color: var(--nx-gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity var(--nx-duration-fast) var(--nx-ease);
+}
+
+.nx-prose a:hover {
+    opacity: 0.8;
+}
+
+
+/* =========================================
+   4. LAYOUT PRIMITIVES
+   ========================================= */
+.nx-container {
+    max-width: var(--nx-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nx-section {
+    padding: var(--nx-space-section) 0;
+}
+
+.nx-section-header {
+    text-align: center;
+    margin-bottom: var(--nx-space-2xl);
+}
+
+.nx-grid {
+    display: grid;
+    gap: var(--nx-space-xl);
+}
+
+.nx-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.nx-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.nx-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+.nx-grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+@media (max-width: 1023px) {
+    .nx-grid-2, .nx-grid-3, .nx-grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .nx-layout-sidebar {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--nx-space-3xl);
+    }
+}
+
+
+/* =========================================
+   5. KOMPONENTEN: Badge
+   ========================================= */
+.nx-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: var(--nx-radius-pill);
+    font-size: var(--nx-text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.nx-badge--gold,
+.wp-badge {
+    background: var(--nx-gold-subtle);
+    color: var(--nx-gold);
+    border: 1px solid var(--nx-border-gold);
+}
+
+.nx-badge--ghost {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--nx-text-muted);
+    border: 1px solid var(--nx-border);
+}
+
+.nx-badge--success {
+    background: var(--nx-success-subtle);
+    color: var(--nx-success);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.nx-badge--info {
+    background: var(--nx-info-subtle);
+    color: var(--nx-info);
+    border: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+
+/* =========================================
+   6. KOMPONENTEN: Buttons
+   ========================================= */
+.nx-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: var(--nx-radius);
+    font-family: var(--nx-font);
+    font-weight: 700;
+    font-size: var(--nx-text-base);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform var(--nx-duration) var(--nx-ease),
+                box-shadow var(--nx-duration) var(--nx-ease),
+                background var(--nx-duration) var(--nx-ease);
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.nx-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Primary: Gold */
+.nx-btn--primary,
+.wp-btn-primary {
+    background: var(--nx-gold);
+    color: #000;
+    box-shadow: var(--nx-shadow-gold);
+}
+
+.nx-btn--primary:hover,
+.wp-btn-primary:hover {
+    background: var(--nx-gold-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--nx-gold-glow);
+}
+
+/* Ghost: Transparent + Border */
+.nx-btn--ghost,
+.wp-btn-secondary {
+    background: transparent;
+    border: 1px solid var(--nx-border-hover);
+    color: var(--nx-text);
+}
+
+.nx-btn--ghost:hover,
+.wp-btn-secondary:hover {
+    border-color: var(--nx-text);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+/* Full Width Variant */
+.nx-btn--full {
+    width: 100%;
+    display: flex;
+}
+
+/* Small Variant */
+.nx-btn--sm {
+    padding: 0.6rem 1.2rem;
+    font-size: var(--nx-text-sm);
+}
+
+
+/* =========================================
+   7. KOMPONENTEN: Cards
+   ========================================= */
+.nx-card {
+    background: var(--nx-bg-glass);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    padding: var(--nx-space-xl);
+    transition: transform var(--nx-duration) var(--nx-ease),
+                border-color var(--nx-duration) var(--nx-ease),
+                box-shadow var(--nx-duration) var(--nx-ease);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.nx-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--nx-gold);
+    box-shadow: var(--nx-shadow);
+}
+
+.nx-card--flat {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.nx-card--subtle:hover {
+    transform: translateY(-2px);
+    border-color: var(--nx-border-hover);
+}
+
+.nx-card__title {
+    font-size: var(--nx-text-2xl);
+    font-weight: 700;
+    color: var(--nx-text);
+    margin-bottom: var(--nx-space-sm);
+}
+
+.nx-card__subtitle {
+    font-size: var(--nx-text-sm);
+    color: var(--nx-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--nx-space-lg);
+}
+
+.nx-card__text {
+    color: var(--nx-text-muted);
+    font-size: var(--nx-text-base);
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   8. KOMPONENTEN: Hero Section
+   ========================================= */
+.nx-hero {
+    padding: var(--nx-space-section) 0;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nx-hero--compact {
+    min-height: 50vh;
+}
+
+.nx-hero__title {
+    font-size: var(--nx-text-hero);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: var(--nx-space-lg);
+    color: var(--nx-text);
+}
+
+.nx-hero__title span {
+    color: var(--nx-gold);
+}
+
+.nx-hero__subtitle {
+    font-size: var(--nx-text-xl);
+    color: var(--nx-text-muted);
+    max-width: 700px;
+    margin: 0 auto var(--nx-space-xl);
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   9. KOMPONENTEN: Metriken / KPIs
+   ========================================= */
+.nx-metrics {
+    display: flex;
+    gap: var(--nx-space-xl);
+    flex-wrap: wrap;
+}
+
+.nx-metric {
+    display: flex;
+    flex-direction: column;
+    gap: var(--nx-space-xs);
+}
+
+.nx-metric__value {
+    font-size: var(--nx-text-3xl);
+    font-weight: 900;
+    color: var(--nx-text);
+    line-height: 1;
+}
+
+.nx-metric__label {
+    font-size: var(--nx-text-xs);
+    color: var(--nx-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+
+/* =========================================
+   10. KOMPONENTEN: Process Steps
+   ========================================= */
+.nx-step {
+    background: var(--nx-bg-glass);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    padding: var(--nx-space-xl);
+    position: relative;
+    transition: border-color var(--nx-duration) var(--nx-ease);
+}
+
+.nx-step:hover {
+    border-color: var(--nx-gold);
+}
+
+.nx-step__number {
+    background: var(--nx-gold);
+    color: #000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    margin-bottom: var(--nx-space-md);
+    font-size: var(--nx-text-sm);
+}
+
+.nx-step--highlight {
+    border-color: var(--nx-gold);
+    background: rgba(255, 176, 32, 0.05);
+}
+
+
+/* =========================================
+   11. KOMPONENTEN: FAQ Accordion
+   ========================================= */
+.nx-faq {
+    max-width: var(--nx-content-width);
+    margin: 0 auto;
+}
+
+.nx-faq__item {
+    border-bottom: 1px solid var(--nx-border);
+    padding: var(--nx-space-lg) 0;
+}
+
+.nx-faq__item summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--nx-text);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--nx-space-md);
+    transition: color var(--nx-duration-fast) var(--nx-ease);
+}
+
+.nx-faq__item summary::-webkit-details-marker {
+    display: none;
+}
+
+.nx-faq__item summary::after {
+    content: '+';
+    color: var(--nx-gold);
+    font-size: 1.5rem;
+    font-weight: 400;
+    flex-shrink: 0;
+    transition: transform var(--nx-duration) var(--nx-ease);
+}
+
+.nx-faq__item[open] summary::after {
+    content: '−';
+}
+
+.nx-faq__item summary:hover {
+    color: var(--nx-gold);
+}
+
+.nx-faq__content {
+    margin-top: var(--nx-space-md);
+    color: var(--nx-text-muted);
+    line-height: 1.7;
+    font-size: var(--nx-text-base);
+}
+
+
+/* =========================================
+   12. KOMPONENTEN: Share Buttons
+   ========================================= */
+.nx-share {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nx-share__label {
+    font-size: var(--nx-text-xs);
+    text-transform: uppercase;
+    color: var(--nx-text-dim);
+    letter-spacing: 0.08em;
+    font-weight: 700;
+}
+
+.nx-share__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--nx-border);
+    color: var(--nx-text);
+    transition: all var(--nx-duration) var(--nx-ease);
+    cursor: pointer;
+    padding: 0;
+    line-height: 0;
+}
+
+.nx-share__btn:hover {
+    transform: translateY(-3px);
+    background: var(--nx-gold);
+    color: #000;
+    border-color: var(--nx-gold);
+    box-shadow: var(--nx-shadow-glow);
+}
+
+.nx-share__btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* =========================================
+   13. KOMPONENTEN: Progress Bar
+   ========================================= */
+.nx-progress {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--nx-radius-pill);
+    overflow: hidden;
+}
+
+.nx-progress__bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--nx-gold), #ff8c00);
+    border-radius: var(--nx-radius-pill);
+    box-shadow: 0 0 15px var(--nx-gold-glow);
+    transition: width 1s var(--nx-ease);
+}
+
+
+/* =========================================
+   14. KOMPONENTEN: Smart Sticky Nav
+   ========================================= */
+.nx-sidenav {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(12px);
+    padding: 1.5rem 0.8rem;
+    border-radius: 50px;
+    border: 1px solid var(--nx-border);
+    box-shadow: var(--nx-shadow);
+    transition: all 0.4s var(--nx-ease-spring);
+    width: 60px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.nx-sidenav:hover {
+    width: 200px;
+    border-color: var(--nx-border-gold);
+    background: rgba(10, 10, 10, 0.95);
+    align-items: flex-start;
+    border-radius: var(--nx-radius-xl);
+    padding-left: 1.5rem;
+}
+
+.nx-sidenav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+.nx-sidenav li { display: block; width: 100%; }
+
+.nx-sidenav a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--nx-text-muted);
+    text-decoration: none;
+    font-size: var(--nx-text-sm);
+    font-weight: 600;
+    transition: color var(--nx-duration-fast) var(--nx-ease);
+}
+
+.nx-sidenav__dot {
+    width: 8px;
+    height: 8px;
+    background: #444;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all var(--nx-duration) var(--nx-ease);
+    box-shadow: 0 0 0 2px transparent;
+}
+
+.nx-sidenav a.active .nx-sidenav__dot,
+.nx-sidenav a:hover .nx-sidenav__dot {
+    background: var(--nx-gold);
+    box-shadow: 0 0 10px var(--nx-gold);
+    transform: scale(1.2);
+}
+
+.nx-sidenav a.active,
+.nx-sidenav a:hover {
+    color: var(--nx-text);
+}
+
+.nx-sidenav__text {
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all var(--nx-duration) var(--nx-ease);
+}
+
+.nx-sidenav:hover .nx-sidenav__text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 900px) {
+    .nx-sidenav { display: none; }
+}
+
+
+/* =========================================
+   15. KOMPONENTEN: CTA Box
+   ========================================= */
+.nx-cta-box {
+    background: rgba(255, 176, 32, 0.05);
+    border: 1px solid var(--nx-gold);
+    padding: var(--nx-space-2xl);
+    border-radius: var(--nx-radius-lg);
+    text-align: center;
+}
+
+.nx-cta-box h3 {
+    font-size: var(--nx-text-3xl);
+    margin-bottom: var(--nx-space-sm);
+}
+
+.nx-cta-box p {
+    color: var(--nx-text-muted);
+    margin-bottom: var(--nx-space-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =========================================
+   16. KOMPONENTEN: Author Row
+   ========================================= */
+.nx-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.nx-author img {
+    border-radius: 50%;
+    border: 2px solid var(--nx-border);
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+}
+
+.nx-author__info {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--nx-text-sm);
+}
+
+.nx-author__label {
+    color: var(--nx-text-dim);
+    font-size: var(--nx-text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.nx-author__name {
+    color: var(--nx-text);
+    font-weight: 700;
+}
+
+.nx-author__role {
+    color: var(--nx-gold);
+    font-size: var(--nx-text-xs);
+}
+
+
+/* =========================================
+   17. ANIMATIONS
+   ========================================= */
+@keyframes nx-fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nx-pulse {
+    0%   { opacity: 0.6; }
+    50%  { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+@keyframes nx-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+
+.nx-animate-in {
+    animation: nx-fadeInUp 0.6s var(--nx-ease) both;
+}
+
+.nx-animate-delay-1 { animation-delay: 0.1s; }
+.nx-animate-delay-2 { animation-delay: 0.2s; }
+.nx-animate-delay-3 { animation-delay: 0.3s; }
+.nx-animate-delay-4 { animation-delay: 0.4s; }
+
+
+/* =========================================
+   18. UTILITY CLASSES
+   ========================================= */
+
+/* --- Text --- */
+.text-gold { color: var(--nx-gold) !important; }
+.text-muted { color: var(--nx-text-muted) !important; }
+.text-white { color: var(--nx-text) !important; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+
+/* --- Spacing --- */
+.mt-sm { margin-top: var(--nx-space-sm); }
+.mt-md { margin-top: var(--nx-space-md); }
+.mt-lg { margin-top: var(--nx-space-lg); }
+.mt-xl { margin-top: var(--nx-space-xl); }
+.mt-2xl { margin-top: var(--nx-space-2xl); }
+.mt-section { margin-top: var(--nx-space-section); }
+
+.mb-sm { margin-bottom: var(--nx-space-sm); }
+.mb-md { margin-bottom: var(--nx-space-md); }
+.mb-lg { margin-bottom: var(--nx-space-lg); }
+.mb-xl { margin-bottom: var(--nx-space-xl); }
+
+/* --- Display --- */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-center { align-items: center; justify-content: center; }
+.flex-between { justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+.gap-sm { gap: var(--nx-space-sm); }
+.gap-md { gap: var(--nx-space-md); }
+.gap-lg { gap: var(--nx-space-lg); }
+.gap-xl { gap: var(--nx-space-xl); }
+
+/* --- Visibility --- */
+@media (max-width: 1023px) {
+    .nx-hide-mobile { display: none !important; }
+}
+@media (min-width: 1024px) {
+    .nx-hide-desktop { display: none !important; }
+}
+
+
+/* =========================================
+   19. READING PROGRESS BAR (Global)
+   ========================================= */
+#nx-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--nx-gold);
+    z-index: 9999;
+    width: 0;
+    transition: width 0.1s linear;
+    pointer-events: none;
+}
+
+
+/* =========================================
+   20. PAGE-LEVEL SCOPING
+   Für backward compatibility mit bestehenden
+   Klassen aus den Seitenspezifischen CSS-Dateien.
+   ========================================= */
+
+/* Sicherstellen, dass .cs-page (Homepage) die Tokens nutzt */
+.cs-page {
+    background-color: var(--nx-bg-deep);
+    color: var(--nx-text);
+    font-family: var(--nx-font);
+    overflow-x: hidden;
+}
+
+/* Nexus Single Post Container */
+.nexus-single-container {
+    background-color: var(--nx-bg);
+    color: var(--nx-text);
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Archive Container */
+.nexus-archive-container {
+    background-color: var(--nx-bg);
+    min-height: 100vh;
+    color: var(--nx-text);
+}

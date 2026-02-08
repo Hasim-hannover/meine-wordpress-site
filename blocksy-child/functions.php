@@ -19,30 +19,53 @@ foreach ( $files_to_load as $file ) {
 
 // --- 2. STYLES & SCRIPTS (Performance-Optimiert) ---
 add_action( 'wp_enqueue_scripts', function () {
-    
-    // Parent Theme Styles
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.4.1' );
+    $css_dir = get_stylesheet_directory() . '/assets/css/';
+    $css_uri = get_stylesheet_directory_uri() . '/assets/css/';
+    $js_dir  = get_stylesheet_directory() . '/assets/js/';
+    $js_uri  = get_stylesheet_directory_uri() . '/assets/js/';
 
-    // A) Startseite, Archiv & Home
-    if ( is_front_page() || is_home() || is_archive() ) {
-        wp_enqueue_style( 'nexus-home-css', get_stylesheet_directory_uri() . '/assets/css/homepage.css', [], time() );
-        wp_enqueue_script( 'nexus-home-js', get_stylesheet_directory_uri() . '/assets/js/homepage.js', [], time(), true );
+    // Parent Theme Styles
+    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.5.0' );
+
+    // GLOBAL: Design System (Single Source of Truth - alle Seiten)
+    wp_enqueue_style(
+        'nexus-design-system',
+        $css_uri . 'design-system.css',
+        [ 'blocksy-child-style' ],
+        filemtime( $css_dir . 'design-system.css' )
+    );
+
+    // GLOBAL: Core JS (Scroll-Spy, FAQ, Counter, Progress Bar)
+    wp_enqueue_script(
+        'nexus-core-js',
+        $js_uri . 'nexus-core.js',
+        [],
+        filemtime( $js_dir . 'nexus-core.js' ),
+        true
+    );
+
+    // A) Startseite & Blog-Home
+    if ( is_front_page() || is_home() ) {
+        wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
+        wp_enqueue_script( 'nexus-home-js', $js_uri . 'homepage.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'homepage.js' ), true );
     }
 
     // B) Blog-Archive Skripte
     if ( is_home() ) {
-         wp_enqueue_script( 'nexus-archive-js', get_stylesheet_directory_uri() . '/assets/js/blog-archive.js', [], '6.0.0', true );
+        wp_enqueue_script( 'nexus-archive-js', $js_uri . 'blog-archive.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'blog-archive.js' ), true );
     }
 
-    // C) NUR Einzelbeitrag (Blog Post) - Nexus Layout
-    // Hier nutzen wir is_singular('post') für absolute Präzision
-    if ( is_singular('post') ) {
-        // Falls du eine separate CSS Datei für Single Posts hast:
-        if ( file_exists( get_stylesheet_directory() . '/assets/css/single.css' ) ) {
-            wp_enqueue_style( 'nexus-single-css', get_stylesheet_directory_uri() . '/assets/css/single.css', [], time() );
+    // C) Archiv & Kategorie Seiten
+    if ( is_archive() && ! is_home() ) {
+        wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
+    }
+
+    // D) NUR Einzelbeitrag (Blog Post)
+    if ( is_singular( 'post' ) ) {
+        if ( file_exists( $css_dir . 'single.css' ) ) {
+            wp_enqueue_style( 'nexus-single-css', $css_uri . 'single.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'single.css' ) );
         }
-        
-        // CSS-Fix NUR für Blog-Beiträge
+
         $custom_css = "
             .single-post .entry-header .entry-title,
             .single-post .ct-page-title {
@@ -52,27 +75,18 @@ add_action( 'wp_enqueue_scripts', function () {
         wp_add_inline_style( 'blocksy-child-style', $custom_css );
     }
 
-    // D) NUR Template: Nexus Über Mich
+    // E) Template: Nexus Über Mich
     if ( is_page_template( 'template-about.php' ) ) {
-        $about_css = get_stylesheet_directory() . '/assets/css/about-page.css';
-        if ( file_exists( $about_css ) ) {
-            wp_enqueue_style(
-                'nexus-about-css',
-                get_stylesheet_directory_uri() . '/assets/css/about-page.css',
-                [],
-                filemtime( $about_css )
-            );
+        if ( file_exists( $css_dir . 'about-page.css' ) ) {
+            wp_enqueue_style( 'nexus-about-css', $css_uri . 'about-page.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'about-page.css' ) );
         }
+        // About-Page JS nicht mehr nötig → NexusCore.initScrollSpy übernimmt
+    }
 
-        $about_js = get_stylesheet_directory() . '/assets/js/about-page.js';
-        if ( file_exists( $about_js ) ) {
-            wp_enqueue_script(
-                'nexus-about-js',
-                get_stylesheet_directory_uri() . '/assets/js/about-page.js',
-                [],
-                filemtime( $about_js ),
-                true
-            );
+    // F) Template: Agentur Service  
+    if ( is_page_template( 'page-wordpress-agentur.php' ) || is_page( 'wordpress-agentur' ) ) {
+        if ( file_exists( $css_dir . 'agentur.css' ) ) {
+            wp_enqueue_style( 'nexus-agentur-css', $css_uri . 'agentur.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'agentur.css' ) );
         }
     }
 
@@ -103,52 +117,8 @@ function nexus_get_reading_time() {
     return $reading_time;
 }
 
-// --- 5. JS-INJEKTION (TOC / Inhaltsverzeichnis) ---
-add_action('wp_footer', function() {
-    
-    // ⚠️ DER GATEKEEPER:
-    // is_singular('post') = Nur auf echten Blog-Artikeln.
-    // !is_singular('post') = Wenn KEIN Blog-Artikel, dann sofort raus hier.
-    // Damit wird der Code auf "normalen" Seiten (Impressum, Startseite) NICHT geladen.
-    if ( ! is_singular( 'post' ) ) {
-        return; 
-    }
-
-    ?>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // 1. Inhaltsverzeichnis generieren
-        const tocList = document.getElementById('toc-list');
-        // Wir suchen nur innerhalb von article-content nach Headlines, um Sidebars etc. nicht zu erwischen
-        const headings = document.querySelectorAll('#article-content h2, #article-content h3');
-        
-        if (tocList && headings.length > 0) {
-            headings.forEach((heading, index) => {
-                // ID vergeben, falls keine da ist
-                if (!heading.id) {
-                    heading.id = 'toc-' + index;
-                }
-                
-                // Link erstellen
-                const li = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = '#' + heading.id;
-                link.textContent = heading.textContent;
-                
-                // Einrücken für H3
-                if (heading.tagName === 'H3') {
-                    li.style.marginLeft = '15px';
-                    li.style.fontSize = '0.9em';
-                }
-                
-                li.appendChild(link);
-                tocList.appendChild(li);
-            });
-        }
-    });
-    </script>
-    <?php
-});
+// --- 5. TOC & SCROLL-SPY ---
+// Wird jetzt zentral über nexus-core.js gesteuert (NexusCore.initToc)
 /**
  * NEXUS GLOBAL HELPER: Share Buttons (Definition)
  * Das hier ist nur der BAUPLAN. Es zeigt noch nichts an!

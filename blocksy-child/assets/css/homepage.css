@@ -1,15 +1,10 @@
 /* =========================================
-   NEXUS MASTER CSS (Stable Layout + New Features)
+   NEXUS HOMEPAGE CSS
+   Nutzt Design-System-Tokens aus design-system.css
    ========================================= */
 
-:root {
-  --gold: #FFB020;
-  --dark: #050505;
-  --dark-glass: rgba(20, 20, 20, 0.9);
-  --text-main: #ffffff;
-  --text-dim: #a1a1aa;
-  --border: rgba(255, 255, 255, 0.1);
-}
+/* Backward-Compat: Alte Klassen referenzieren --gold etc.
+   Diese werden jetzt via design-system.css bereitgestellt. */
 
 .cs-page {
   background-color: var(--dark);

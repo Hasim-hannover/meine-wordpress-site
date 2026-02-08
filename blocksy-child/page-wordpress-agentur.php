@@ -7,10 +7,7 @@
 get_header(); 
 ?>
 
-<!-- CSS laden: Exakt wie besprochen -->
-<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/css/agentur.css?v=<?php echo time(); ?>">
-
-<!-- Hier wird der Inhalt aus dem Gutenberg-Editor ausgegeben -->
+<!-- Inhalt aus dem Gutenberg-Editor -->
 <div class="wp-agentur-page-wrapper">
     <?php
     while ( have_posts() ) :

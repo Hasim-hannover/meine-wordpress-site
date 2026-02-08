@@ -1,10 +1,11 @@
 /* =========================================
    Nexus About Page (Scoped Styles)
+   Nutzt Design-System-Tokens aus design-system.css
    ========================================= */
 
 .nexus-about {
     --bg: #0d0d0d;
-    --page-bg: #0a0a0a;
+    --page-bg: var(--nx-bg);
     --glass-bg: rgba(15, 15, 15, 0.55);
     --glass-border: rgba(82, 82, 91, 0.28);
     --accent: #0ea5e9;
@@ -13,18 +14,18 @@
     --earth-hover: #059669;
     --growth: #84cc16;
     --theory: #a855f7;
-    --white: #fafafa;
-    --muted: #a1a1aa;
-    --success: #10b981;
-    --radius: 12px;
-    --radius-lg: 16px;
+    --white: var(--nx-text);
+    --muted: var(--nx-text-muted);
+    --success: var(--nx-success);
+    --radius: var(--nx-radius-md);
+    --radius-lg: var(--nx-radius-lg);
     --shadow-glow: 0 12px 40px rgba(14, 165, 233, 0.12);
     --shadow-earth: 0 12px 40px rgba(16, 185, 129, 0.15);
     --shadow-theory: 0 12px 40px rgba(168, 85, 247, 0.15);
-    --max-width: 1200px;
-    --gold: #ffb020;
+    --max-width: var(--nx-max-width);
+    --gold: var(--nx-gold);
     --text-dim: var(--muted);
-    --border: rgba(255, 255, 255, 0.1);
+    --border: var(--nx-border);
 
     background: var(--page-bg);
     color: var(--white);
