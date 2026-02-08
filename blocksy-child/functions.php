@@ -93,6 +93,14 @@ add_action( 'wp_enqueue_scripts', function () {
         }
     }
 
+    // G) Template: WGOS System
+    if ( is_page_template( 'page-wgos.php' ) || is_page( 'wgos' ) ) {
+        wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
+        if ( file_exists( $css_dir . 'wgos.css' ) ) {
+            wp_enqueue_style( 'nexus-wgos-css', $css_uri . 'wgos.css', [ 'nexus-home-css' ], filemtime( $css_dir . 'wgos.css' ) );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
