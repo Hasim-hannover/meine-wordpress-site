@@ -11,11 +11,6 @@ add_filter('pre_get_document_title', function () {
 
 add_action('wp_head', function () {
     echo '<meta name="description" content="Das WGOS verwandelt Ihre WordPress-Website in ein Owned-Leads-System: Performance, Privacy-first Tracking, SEO, CRO &amp; Automation. Assets statt Kampagnen.">';
-    echo "\n";
-    // Google Fonts: Merriweather
-    echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
-    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-    echo '<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">';
 }, 1);
 
 get_header();
