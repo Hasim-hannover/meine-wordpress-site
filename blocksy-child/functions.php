@@ -85,8 +85,11 @@ add_action( 'wp_enqueue_scripts', function () {
 
     // F) Template: Agentur Service  
     if ( is_page_template( 'page-wordpress-agentur.php' ) || is_page( 'wordpress-agentur' ) ) {
+        // Homepage CSS als Base laden (gleicher Look)
+        wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
+        // Agentur-spezifische Overrides darüber
         if ( file_exists( $css_dir . 'agentur.css' ) ) {
-            wp_enqueue_style( 'nexus-agentur-css', $css_uri . 'agentur.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'agentur.css' ) );
+            wp_enqueue_style( 'nexus-agentur-css', $css_uri . 'agentur.css', [ 'nexus-home-css' ], filemtime( $css_dir . 'agentur.css' ) );
         }
     }
 
