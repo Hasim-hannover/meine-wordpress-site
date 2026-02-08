@@ -245,32 +245,37 @@
     transform: translateY(-2px);
 }
 
-.wgos-btn--primary {
+.wgos-wrapper .wgos-btn--primary,
+.wgos-wrapper a.wgos-btn--primary {
     background: var(--nx-gold);
     color: #000;
     border-color: var(--nx-gold);
     box-shadow: var(--nx-shadow-gold);
 }
 
-.wgos-btn--primary:hover {
+.wgos-wrapper .wgos-btn--primary:hover,
+.wgos-wrapper a.wgos-btn--primary:hover {
     background: var(--nx-gold-hover);
     border-color: var(--nx-gold-hover);
     box-shadow: var(--nx-shadow-glow);
     color: #000;
 }
 
-.wgos-btn--outline {
+.wgos-wrapper .wgos-btn--outline,
+.wgos-wrapper a.wgos-btn--outline {
     background: transparent;
     color: var(--nx-gold);
     border-color: var(--nx-gold);
 }
 
-.wgos-btn--outline:hover {
+.wgos-wrapper .wgos-btn--outline:hover,
+.wgos-wrapper a.wgos-btn--outline:hover {
     background: var(--nx-gold);
     color: #000;
 }
 
-.wgos-link--arrow {
+.wgos-wrapper .wgos-link--arrow,
+.wgos-wrapper a.wgos-link--arrow {
     font-family: var(--nx-font);
     font-size: 0.95rem;
     font-weight: 600;
@@ -279,7 +284,8 @@
     transition: color var(--nx-duration) var(--nx-ease);
 }
 
-.wgos-link--arrow:hover {
+.wgos-wrapper .wgos-link--arrow:hover,
+.wgos-wrapper a.wgos-link--arrow:hover {
     color: var(--nx-gold-hover);
 }
 
