@@ -51,61 +51,134 @@
 }
 
 /* =========================================
-   2. STICKY INPAGE NAV
+   2. SMART NAV (links, vertikal, expandierend)
    ========================================= */
-.wgos-inpage-nav {
-    position: sticky;
-    top: 0;
+.wgos-smart-nav {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
     z-index: 200;
-    background: var(--nx-bg-glass);
+    display: flex;
+    flex-direction: column;
+    background: rgba(10, 10, 10, 0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--nx-border);
-    transition: box-shadow var(--nx-duration) var(--nx-ease);
-}
-
-.wgos-inpage-nav.is-stuck {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-}
-
-.wgos-inpage-nav ul {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-}
-
-.wgos-inpage-nav ul::-webkit-scrollbar {
-    display: none;
-}
-
-.wgos-inpage-nav li {
-    flex-shrink: 0;
-}
-
-.wgos-inpage-nav a {
-    display: block;
-    padding: 14px 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--nx-text-muted);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    transition: color var(--nx-duration) var(--nx-ease), border-color var(--nx-duration) var(--nx-ease);
+    padding: 1.5rem 0.8rem;
+    border-radius: 50px;
+    border: 1px solid var(--nx-border);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s var(--nx-ease-spring);
+    width: 56px;
+    overflow: hidden;
     white-space: nowrap;
 }
 
-.wgos-inpage-nav a:hover,
-.wgos-inpage-nav a.active {
-    color: var(--nx-gold);
-    border-bottom-color: var(--nx-gold);
+.wgos-smart-nav:hover {
+    width: 210px;
+    border-color: var(--nx-border-gold);
+    background: rgba(10, 10, 10, 0.95);
+    border-radius: var(--nx-radius-xl);
+    padding-left: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+                0 0 30px var(--nx-gold-subtle);
+}
+
+.wgos-smart-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+.wgos-smart-nav li {
+    display: block;
+    width: 100%;
+}
+
+.wgos-wrapper .wgos-smart-nav a,
+.wgos-wrapper .wgos-smart-nav a:hover {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--nx-text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: color 0.25s var(--nx-ease);
+    border: none;
+    padding: 0;
+    text-transform: none;
+}
+
+/* --- Dot --- */
+.wgos-nav-dot {
+    width: 10px;
+    height: 10px;
+    background: #444;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.35s var(--nx-ease-spring);
+    box-shadow: 0 0 0 2px transparent;
+    position: relative;
+}
+
+/* Active & Hover Dot */
+.wgos-wrapper .wgos-smart-nav a.active .wgos-nav-dot,
+.wgos-wrapper .wgos-smart-nav a:hover .wgos-nav-dot {
+    background: var(--nx-gold);
+    box-shadow: 0 0 12px var(--nx-gold-glow),
+                0 0 4px var(--nx-gold);
+    transform: scale(1.3);
+}
+
+/* Active & Hover Text */
+.wgos-wrapper .wgos-smart-nav a.active,
+.wgos-wrapper .wgos-smart-nav a:hover {
+    color: var(--nx-text);
+}
+
+/* Active Gold Line */
+.wgos-wrapper .wgos-smart-nav a.active .wgos-nav-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--nx-gold);
+    opacity: 0.4;
+    animation: wgos-pulse 2s ease-out infinite;
+}
+
+@keyframes wgos-pulse {
+    0%   { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+    100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+}
+
+/* --- Text (hidden by default, slides in on hover) --- */
+.wgos-nav-text {
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.wgos-smart-nav:hover .wgos-nav-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- Mobile: verstecken --- */
+@media (max-width: 900px) {
+    .wgos-smart-nav {
+        display: none;
+    }
 }
 
 /* =========================================
@@ -864,11 +937,6 @@
         gap: 16px;
     }
 
-    .wgos-inpage-nav a {
-        padding: 12px 14px;
-        font-size: 0.72rem;
-    }
-
     .wgos-example-month {
         padding: 24px 16px;
     }
@@ -883,10 +951,5 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 24px 16px;
-    }
-
-    .wgos-inpage-nav ul {
-        justify-content: flex-start;
-        padding: 0 8px;
     }
 }

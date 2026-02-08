@@ -8,10 +8,10 @@
     document.addEventListener('DOMContentLoaded', function () {
 
         // =============================================
-        // 1. SCROLL-SPY für Inpage-Nav
+        // 1. SCROLL-SPY für Smart-Nav (links)
         // =============================================
-        if (window.NexusCore && document.querySelector('.wgos-inpage-nav')) {
-            NexusCore.initScrollSpy('.wgos-inpage-nav', 'section[id]', 200);
+        if (window.NexusCore && document.querySelector('.wgos-smart-nav')) {
+            NexusCore.initScrollSpy('.wgos-smart-nav', 'section[id]', 200);
         }
 
         // =============================================

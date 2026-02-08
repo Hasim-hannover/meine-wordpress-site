@@ -19,19 +19,17 @@ get_header();
 <div class="wgos-wrapper">
 
 <!-- ========================================
-     STICKY INPAGE NAV
+     SMART NAV (links, vertikal, wie Homepage)
      ======================================== -->
-<nav class="wgos-inpage-nav" id="wgos-nav">
-    <div class="wgos-container">
-        <ul>
-            <li><a href="#prinzip">Prinzip</a></li>
-            <li><a href="#module">Module</a></li>
-            <li><a href="#credits">Credits</a></li>
-            <li><a href="#pakete">Pakete</a></li>
-            <li><a href="#garantie">Garantie</a></li>
-            <li><a href="#faq">FAQ</a></li>
-        </ul>
-    </div>
+<nav class="wgos-smart-nav" id="wgos-nav">
+    <ul>
+        <li><a href="#prinzip"><span class="wgos-nav-dot"></span><span class="wgos-nav-text">Prinzip</span></a></li>
+        <li><a href="#module"><span class="wgos-nav-dot"></span><span class="wgos-nav-text">Module</span></a></li>
+        <li><a href="#credits"><span class="wgos-nav-dot"></span><span class="wgos-nav-text">Credits</span></a></li>
+        <li><a href="#pakete"><span class="wgos-nav-dot"></span><span class="wgos-nav-text">Pakete</span></a></li>
+        <li><a href="#garantie"><span class="wgos-nav-dot"></span><span class="wgos-nav-text">Garantie</span></a></li>
+        <li><a href="#faq"><span class="wgos-nav-dot"></span><span class="wgos-nav-text">FAQ</span></a></li>
+    </ul>
 </nav>
 
 <!-- ========================================
