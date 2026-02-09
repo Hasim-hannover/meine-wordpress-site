@@ -134,6 +134,16 @@ add_action( 'wp_enqueue_scripts', function () {
         }
     }
 
+    // K) Template: Performance Marketing
+    if ( is_page_template( 'page-performance.php' ) || is_page( 'performance-marketing' ) ) {
+        if ( file_exists( $css_dir . 'performance.css' ) ) {
+            wp_enqueue_style( 'nexus-performance-css', $css_uri . 'performance.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'performance.css' ) );
+        }
+        if ( file_exists( $js_dir . 'performance.js' ) ) {
+            wp_enqueue_script( 'nexus-performance-js', $js_uri . 'performance.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'performance.js' ), true );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
