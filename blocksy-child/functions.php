@@ -121,6 +121,15 @@ add_action( 'wp_head', function () {
 // --- 4. TITEL-LOGIK ---
 add_filter('blocksy:post_types:post:has_page_title', '__return_false');
 
+// --- 4b. SITEMAP (Rank Math Pro) ---
+// WordPress-native Sitemap deaktivieren → Rank Math übernimmt /sitemap_index.xml
+add_filter( 'wp_sitemaps_enabled', '__return_false' );
+
+// Rewrite Rules flushen bei Theme-Aktivierung (nötig für Rank Math Sitemap-Routen)
+add_action( 'after_switch_theme', function() {
+    flush_rewrite_rules();
+} );
+
 /**
  * NEXUS FEATURE: Automatische Lesezeit
  */
