@@ -164,6 +164,16 @@ add_action( 'wp_enqueue_scripts', function () {
         }
     }
 
+    // N) Template: Meta Ads (Facebook & Instagram)
+    if ( is_page_template( 'page-meta-ads.php' ) || is_page( 'meta-ads' ) ) {
+        if ( file_exists( $css_dir . 'meta-ads.css' ) ) {
+            wp_enqueue_style( 'nexus-meta-ads-css', $css_uri . 'meta-ads.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'meta-ads.css' ) );
+        }
+        if ( file_exists( $js_dir . 'meta-ads.js' ) ) {
+            wp_enqueue_script( 'nexus-meta-ads-js', $js_uri . 'meta-ads.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'meta-ads.js' ), true );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
