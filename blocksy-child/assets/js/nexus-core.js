@@ -273,7 +273,7 @@
         init: function () {
             // Smart Nav (Homepage & About)
             if (document.querySelector('.smart-nav')) {
-                this.initScrollSpy('.smart-nav', 'section[id], div[id="audit"]');
+                this.initScrollSpy('.smart-nav', 'section[id], .audit-section[id]');
             }
             if (document.querySelector('.nx-sidenav')) {
                 this.initScrollSpy('.nx-sidenav', 'section[id]');

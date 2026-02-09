@@ -104,6 +104,16 @@ add_action( 'wp_enqueue_scripts', function () {
         }
     }
 
+    // H) Template: Customer Journey Audit
+    if ( is_page_template( 'page-audit.php' ) || is_page( 'audit' ) || is_page( 'customer-journey-audit' ) ) {
+        if ( file_exists( $css_dir . 'audit.css' ) ) {
+            wp_enqueue_style( 'nexus-audit-css', $css_uri . 'audit.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'audit.css' ) );
+        }
+        if ( file_exists( $js_dir . 'audit.js' ) ) {
+            wp_enqueue_script( 'nexus-audit-js', $js_uri . 'audit.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'audit.js' ), true );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
