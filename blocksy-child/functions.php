@@ -154,6 +154,16 @@ add_action( 'wp_enqueue_scripts', function () {
         }
     }
 
+    // M) Template: GA4 & Tracking Setup
+    if ( is_page_template( 'page-ga4.php' ) || is_page( 'ga4-tracking-setup' ) ) {
+        if ( file_exists( $css_dir . 'ga4.css' ) ) {
+            wp_enqueue_style( 'nexus-ga4-css', $css_uri . 'ga4.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'ga4.css' ) );
+        }
+        if ( file_exists( $js_dir . 'ga4.js' ) ) {
+            wp_enqueue_script( 'nexus-ga4-js', $js_uri . 'ga4.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'ga4.js' ), true );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
