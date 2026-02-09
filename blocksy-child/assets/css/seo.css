@@ -1,0 +1,639 @@
+/* =========================================
+   SEO LANDING PAGE — WordPress SEO Hannover
+   ========================================= */
+
+/* --- Scoped Variables --- */
+.cs-page-seo {
+  --gold: #ffb020;
+  --gold-hover: #f59e0b;
+  --silver-light: #e6e6e6;
+  --muted: #a1a1aa;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --radius-lg: 16px;
+  --transition: all 0.3s ease;
+  --success: #10b981;
+  color: #fff;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* --- Base Layout --- */
+.cs-page-seo .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.cs-page-seo section {
+  padding: 5rem 0;
+  position: relative;
+}
+
+/* --- Utilities --- */
+.cs-page-seo .muted { color: var(--muted); }
+.cs-page-seo .text-center { text-align: center; }
+.cs-page-seo .text-gold { color: var(--gold); }
+.cs-page-seo .mt-small { margin-top: 1rem; }
+
+/* --- Sticky Nav --- */
+.cs-page-seo .smart-nav {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 900;
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .cs-page-seo .smart-nav { display: block; }
+}
+
+.cs-page-seo .smart-nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cs-page-seo .smart-nav a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--muted);
+  opacity: 0.6;
+  transition: var(--transition);
+}
+
+.cs-page-seo .smart-nav a:hover,
+.cs-page-seo .smart-nav a.active {
+  opacity: 1;
+  color: var(--gold);
+}
+
+.cs-page-seo .nav-dot {
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.cs-page-seo .smart-nav a.active .nav-dot {
+  transform: scale(1.5);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+.cs-page-seo .nav-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: var(--transition);
+}
+
+.cs-page-seo .smart-nav a:hover .nav-text,
+.cs-page-seo .smart-nav a.active .nav-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- Hero Section --- */
+.cs-page-seo .hero-section {
+  padding: 6rem 0 4rem;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-kicker {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+  background: rgba(255, 176, 32, 0.1);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 176, 32, 0.2);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, var(--gold), #ff8a00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--silver-light);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.cs-page-seo .lead {
+  color: var(--muted);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Hero Stats */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: var(--glass-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+}
+
+.stat .num {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.stat .label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* Hero CTA */
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.limited-offer {
+  font-size: 0.85rem;
+  color: #f87171;
+  font-weight: 700;
+  padding: 0.3rem 0.8rem;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+}
+
+/* Hero Card (Portrait) */
+.hero-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+
+.hero-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-card-badge {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(5px);
+  text-align: left;
+}
+
+.hero-card-badge span {
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .hero-left { order: 2; }
+  .hero-right { order: 1; margin-bottom: 2rem; }
+  .hero-cta { align-items: center; }
+}
+
+@media (max-width: 768px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Section Titles --- */
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.cs-page-seo .badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.badge-green {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+/* --- Trust Bar --- */
+.trust-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  opacity: 0.7;
+}
+
+.cs-page-seo .trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+/* --- Grid Cards (General) --- */
+.cs-page-seo .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.cs-page-seo .card {
+  padding: 2rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: var(--transition);
+}
+
+.cs-page-seo .card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.card-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cs-page-seo .card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.highlight-card {
+  border-color: rgba(255, 176, 32, 0.3);
+  background: linear-gradient(135deg, rgba(255, 176, 32, 0.05), transparent);
+}
+
+/* WordPress Section Gradient BG */
+.seo-wp-section {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(14, 165, 233, 0.05) 100%);
+}
+
+.card-solution {
+  border-color: var(--success);
+}
+
+/* --- Case Study Cards --- */
+.success-grid {
+  align-items: stretch;
+}
+
+.success-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(16, 185, 129, 0.02) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.success-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.05);
+}
+
+.success-card-header {
+  margin-bottom: 2rem;
+}
+
+.case-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.case-industry {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.success-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.case-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.metric-item {
+  text-align: center;
+}
+
+.metric-val {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.3rem;
+  line-height: 1;
+}
+
+.metric-lbl {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .metrics-grid { gap: 0.5rem; }
+  .metric-val { font-size: 1.1rem; }
+}
+
+/* --- Pricing Cards --- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+.pricing-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pricing-card.popular {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, rgba(255, 176, 32, 0.05), transparent);
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.popular-tag {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--gold);
+  color: #000;
+  padding: 0.3rem 1rem;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.pricing-header {
+  margin-bottom: 1.5rem;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 1rem 0;
+  color: #fff;
+}
+
+.price-suffix {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+  vertical-align: middle;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.pricing-features li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+}
+
+.pricing-features li strong {
+  color: #fff;
+}
+
+.pricing-features .pricing-hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.pricing-disclaimer {
+  margin-top: 1rem;
+}
+
+/* --- FAQ --- */
+.seo-faq-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.wp-faq-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  padding: 1.2rem;
+}
+
+.wp-faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  padding-right: 2rem;
+  position: relative;
+}
+
+.wp-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.wp-faq-item summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  color: var(--gold);
+  font-size: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.wp-faq-item[open] summary::after {
+  content: '\2212';
+}
+
+.wp-faq-content {
+  margin-top: 1rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* --- Global Buttons --- */
+.cs-page-seo .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.cs-page-seo .btn-primary {
+  background: linear-gradient(135deg, var(--gold), #ff8a00);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(255, 176, 32, 0.3);
+}
+
+.cs-page-seo .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 176, 32, 0.4);
+}
+
+.cs-page-seo .btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cs-page-seo .btn-ghost:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.full-width { width: 100%; }
+
+/* --- CTA Premium Card --- */
+.audit-card-premium {
+  text-align: center;
+  padding: 3rem;
+  background: linear-gradient(135deg, rgba(255, 176, 32, 0.1), transparent);
+  border: 1px solid rgba(255, 176, 32, 0.2);
+  border-radius: var(--radius-lg);
+}
+
+.audit-card-premium p {
+  margin-bottom: 2rem;
+}
+
+.seo-final-cta {
+  padding-bottom: 6rem;
+}
+
+/* --- Reveal Animations (via NexusCore) --- */
+.cs-page-seo .nx-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cs-page-seo .nx-reveal.nx-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .cs-page-seo * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .cs-page-seo .nx-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

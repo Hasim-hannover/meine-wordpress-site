@@ -114,6 +114,16 @@ add_action( 'wp_enqueue_scripts', function () {
         }
     }
 
+    // I) Template: SEO Landing (Hannover)
+    if ( is_page_template( 'page-seo.php' ) || is_page( 'seo' ) || is_page( 'wordpress-seo-hannover' ) ) {
+        if ( file_exists( $css_dir . 'seo.css' ) ) {
+            wp_enqueue_style( 'nexus-seo-css', $css_uri . 'seo.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'seo.css' ) );
+        }
+        if ( file_exists( $js_dir . 'seo.js' ) ) {
+            wp_enqueue_script( 'nexus-seo-js', $js_uri . 'seo.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'seo.js' ), true );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
