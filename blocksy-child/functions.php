@@ -144,6 +144,16 @@ add_action( 'wp_enqueue_scripts', function () {
         }
     }
 
+    // L) Template: Conversion Rate Optimization (CRO)
+    if ( is_page_template( 'page-cro.php' ) || is_page( 'conversion-rate-optimization' ) ) {
+        if ( file_exists( $css_dir . 'cro.css' ) ) {
+            wp_enqueue_style( 'nexus-cro-css', $css_uri . 'cro.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'cro.css' ) );
+        }
+        if ( file_exists( $js_dir . 'cro.js' ) ) {
+            wp_enqueue_script( 'nexus-cro-js', $js_uri . 'cro.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'cro.js' ), true );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---

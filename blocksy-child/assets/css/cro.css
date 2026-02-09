@@ -1,0 +1,408 @@
+/* =========================================
+   CRO Landing Page – Conversion Rate Optimization
+   Scoped: .cro-page
+   Design-Tokens: design-system.css (--nx-*)
+   ========================================= */
+
+/* ---------- Hero ---------- */
+.cro-page .cro-hero {
+    padding: 120px 0;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cro-page .cro-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.3);
+}
+
+.cro-page .cro-hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.cro-page .cro-service-badge {
+    display: inline-block;
+    padding: var(--nx-space-sm) 1.2rem;
+    border-radius: var(--nx-radius-pill);
+    background: var(--nx-info-subtle);
+    color: var(--nx-info);
+    font-weight: 700;
+    font-size: var(--nx-text-base);
+    margin-bottom: var(--nx-space-xl);
+    letter-spacing: 0.05em;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+.cro-page .cro-headline {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin: 0 0 var(--nx-space-xl);
+    font-weight: 800;
+    color: var(--nx-text);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.cro-page .cro-headline .highlight {
+    background: linear-gradient(135deg, var(--nx-gold) 0%, var(--nx-gold-hover) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cro-page .cro-subheadline {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--nx-text-muted);
+    max-width: 750px;
+    margin: 0 auto 2.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- Sections ---------- */
+.cro-page .cro-section {
+    padding: 80px 0;
+}
+
+.cro-page .cro-section-header {
+    text-align: center;
+    margin-bottom: var(--nx-space-3xl);
+    max-width: var(--nx-content-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cro-page .cro-section-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: var(--nx-radius-pill);
+    background: var(--nx-info-subtle);
+    color: var(--nx-info);
+    font-weight: 700;
+    font-size: var(--nx-text-sm);
+    margin-bottom: var(--nx-space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.cro-page .cro-section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    margin: 0 0 var(--nx-space-lg);
+    background: linear-gradient(135deg, var(--nx-text), #cfcfcf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cro-page .cro-section-subtitle {
+    color: var(--nx-text-muted);
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+
+/* ---------- Problem / Leaky Bucket ---------- */
+.cro-page .cro-problem {
+    background: linear-gradient(180deg, transparent, rgba(255, 176, 32, 0.02), transparent);
+}
+
+.cro-page .cro-problem-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--nx-space-2xl);
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .cro-page .cro-problem-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.cro-page .cro-problem-visual {
+    font-size: 10rem;
+    text-align: center;
+    line-height: 1;
+    opacity: 0.5;
+}
+
+.cro-page .cro-problem-intro {
+    font-size: 1.2rem;
+    margin-bottom: var(--nx-space-lg);
+    color: var(--nx-text);
+}
+
+.cro-page .cro-problem-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cro-page .cro-problem-list li {
+    background: var(--nx-bg-glass);
+    border: 1px solid var(--nx-border);
+    padding: var(--nx-space-lg);
+    border-radius: var(--nx-radius-md);
+    margin-bottom: var(--nx-space-md);
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--nx-space-md);
+    transition: border-color var(--nx-duration) var(--nx-ease),
+                transform var(--nx-duration) var(--nx-ease);
+}
+
+.cro-page .cro-problem-list li::before {
+    content: "💧";
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.cro-page .cro-problem-list li:hover {
+    border-color: var(--nx-gold);
+    transform: translateX(5px);
+}
+
+/* ---------- Blueprint / Process ---------- */
+.cro-page .cro-blueprint {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--nx-space-xl);
+    max-width: 1100px;
+    margin: var(--nx-space-3xl) auto 0;
+}
+
+.cro-page .cro-step {
+    background: var(--nx-bg-glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    padding: 2.5rem var(--nx-space-xl);
+    text-align: center;
+    transition: transform var(--nx-duration) var(--nx-ease),
+                box-shadow var(--nx-duration) var(--nx-ease),
+                border-color var(--nx-duration) var(--nx-ease);
+    position: relative;
+    overflow: hidden;
+}
+
+.cro-page .cro-step:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(14, 165, 233, 0.12);
+    border-color: rgba(14, 165, 233, 0.3);
+}
+
+.cro-page .cro-step::before {
+    content: attr(data-step);
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: rgba(255, 176, 32, 0.3);
+}
+
+.cro-page .cro-step-icon {
+    font-size: 3rem;
+    margin-bottom: var(--nx-space-lg);
+    display: block;
+    line-height: 1;
+}
+
+.cro-page .cro-step-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: var(--nx-space-md);
+    color: var(--nx-text);
+}
+
+.cro-page .cro-step-desc {
+    color: var(--nx-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* ---------- Impact / Nutzen ---------- */
+.cro-page .cro-impact-bg {
+    background: linear-gradient(180deg, transparent, rgba(16, 185, 129, 0.02), transparent);
+}
+
+.cro-page .cro-impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--nx-space-lg);
+}
+
+.cro-page .cro-impact-card {
+    background: var(--nx-bg-glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    padding: var(--nx-space-xl);
+    text-align: center;
+    transition: transform var(--nx-duration) var(--nx-ease),
+                border-color var(--nx-duration) var(--nx-ease);
+}
+
+.cro-page .cro-impact-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--nx-border-hover);
+}
+
+.cro-page .cro-impact-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--nx-space-md);
+    color: var(--nx-success);
+}
+
+.cro-page .cro-impact-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: var(--nx-space-sm);
+    color: var(--nx-text);
+}
+
+.cro-page .cro-impact-text {
+    color: var(--nx-text-muted);
+    font-size: var(--nx-text-sm);
+    line-height: 1.6;
+}
+
+/* ---------- CTA ---------- */
+.cro-page .cro-cta-section {
+    padding: 100px 0;
+}
+
+.cro-page .cro-cta-box {
+    max-width: var(--nx-content-width);
+    margin: 0 auto;
+    padding: var(--nx-space-3xl) var(--nx-space-xl);
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.05), rgba(255, 176, 32, 0.03));
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.cro-page .cro-cta-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--nx-gold), var(--nx-info));
+}
+
+.cro-page .cro-cta-headline {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: var(--nx-space-lg);
+    background: linear-gradient(90deg, var(--nx-gold), var(--nx-gold-hover));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cro-page .cro-cta-text {
+    font-size: 1.15rem;
+    color: var(--nx-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--nx-space-xl);
+}
+
+/* ---------- Buttons ---------- */
+.cro-page .cro-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    transition: transform var(--nx-duration) var(--nx-ease),
+                box-shadow var(--nx-duration) var(--nx-ease);
+    font-size: 1.05rem;
+}
+
+.cro-page .cro-btn-primary {
+    background: linear-gradient(90deg, var(--nx-gold), var(--nx-gold-hover));
+    color: #111;
+    box-shadow: var(--nx-shadow-gold);
+}
+
+.cro-page .cro-btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 45px rgba(255, 176, 32, 0.25);
+}
+
+.cro-page .cro-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--nx-border);
+    color: var(--nx-text);
+}
+
+.cro-page .cro-btn-ghost:hover {
+    border-color: var(--nx-info);
+    background: var(--nx-info-subtle);
+    transform: translateY(-2px);
+}
+
+.cro-page .cro-btn-group {
+    display: flex;
+    gap: var(--nx-space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: var(--nx-space-xl);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .cro-page .cro-hero {
+        padding: 80px 0;
+        min-height: auto;
+    }
+
+    .cro-page .cro-btn-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cro-page .cro-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .cro-page .cro-problem-visual {
+        font-size: 6rem;
+    }
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .cro-page .cro-step,
+    .cro-page .cro-impact-card,
+    .cro-page .cro-problem-list li,
+    .cro-page .cro-btn-primary,
+    .cro-page .cro-btn-ghost {
+        transition: none;
+    }
+}
