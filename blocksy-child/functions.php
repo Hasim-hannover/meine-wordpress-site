@@ -124,6 +124,16 @@ add_action( 'wp_enqueue_scripts', function () {
         }
     }
 
+    // J) Template: Core Web Vitals
+    if ( is_page_template( 'page-cwv.php' ) || is_page( 'core-web-vitals' ) ) {
+        if ( file_exists( $css_dir . 'cwv.css' ) ) {
+            wp_enqueue_style( 'nexus-cwv-css', $css_uri . 'cwv.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'cwv.css' ) );
+        }
+        if ( file_exists( $js_dir . 'cwv.js' ) ) {
+            wp_enqueue_script( 'nexus-cwv-js', $js_uri . 'cwv.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'cwv.js' ), true );
+        }
+    }
+
 }, 20 );
 
 // --- 3. PERFORMANCE & FONTS ---
