@@ -1,202 +1,59 @@
 <?php
 /**
- * Blocksy Child - Nexus Ultimate Edition
- * STATUS: CLEAN & SAFE. Bereinigt & Präzise.
+ * Blocksy Child – Growth Architect Edition
+ *
+ * Schlank: nur require-Aufrufe nach inc/.
+ * Structure Layer im Repo → Content Layer im Editor.
+ *
+ * @package Blocksy_Child
  */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-// --- 1. EXTERNE DATEIEN LADEN ---
-$inc_dir = get_stylesheet_directory() . '/inc/';
-
-// Nur Dateien laden, die es wirklich gibt
-$files_to_load = ['shortcodes.php', 'org-schema.php', 'client-portal.php', 'admin-manager.php', 'snippets.php'];
-
-foreach ( $files_to_load as $file ) {
-    if ( file_exists( $inc_dir . $file ) ) {
-        require_once $inc_dir . $file;
-    }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-// --- 2. STYLES & SCRIPTS (Performance-Optimiert) ---
-add_action( 'wp_enqueue_scripts', function () {
-    $css_dir = get_stylesheet_directory() . '/assets/css/';
-    $css_uri = get_stylesheet_directory_uri() . '/assets/css/';
-    $js_dir  = get_stylesheet_directory() . '/assets/js/';
-    $js_uri  = get_stylesheet_directory_uri() . '/assets/js/';
+// ── 1. MODULE LADEN (inc/) ────────────────────────────────────────
+$inc_dir = get_stylesheet_directory() . '/inc/';
 
-    // Parent Theme Styles
-    wp_enqueue_style( 'blocksy-child-style', get_stylesheet_uri(), [], '9.5.0' );
+$modules = [
+	'helpers.php',        // Utility-Funktionen (muss zuerst geladen werden)
+	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
+	'enqueue.php',        // CSS/JS Asset-Management
+	'seo-meta.php',       // OG Tags, Canonical, Indexierungssteuerung
+	'org-schema.php',     // JSON-LD Structured Data
+	'shortcodes.php',     // Startseiten-Shortcodes
+	'client-portal.php',  // Client Portal Dashboard
+	'admin-manager.php',  // Backend-Felder für Portal
+	'snippets.php',       // Nav Button, Security, Login-Redirect
+];
 
-    // GLOBAL: Design System (Single Source of Truth - alle Seiten)
-    wp_enqueue_style(
-        'nexus-design-system',
-        $css_uri . 'design-system.css',
-        [ 'blocksy-child-style' ],
-        filemtime( $css_dir . 'design-system.css' )
-    );
+foreach ( $modules as $module ) {
+	$path = $inc_dir . $module;
+	if ( file_exists( $path ) ) {
+		require_once $path;
+	}
+}
 
-    // GLOBAL: Core JS (Scroll-Spy, FAQ, Counter, Progress Bar)
-    wp_enqueue_script(
-        'nexus-core-js',
-        $js_uri . 'nexus-core.js',
-        [],
-        filemtime( $js_dir . 'nexus-core.js' ),
-        true
-    );
-
-    // A) Startseite & Blog-Home
-    if ( is_front_page() || is_home() ) {
-        wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
-        wp_enqueue_script( 'nexus-home-js', $js_uri . 'homepage.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'homepage.js' ), true );
-    }
-
-    // B) Blog-Archive Skripte
-    if ( is_home() ) {
-        wp_enqueue_script( 'nexus-archive-js', $js_uri . 'blog-archive.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'blog-archive.js' ), true );
-    }
-
-    // C) Kategorie-Seiten (Pillar Hub)
-    if ( is_category() ) {
-        if ( file_exists( $css_dir . 'category-hub.css' ) ) {
-            wp_enqueue_style( 'nexus-category-hub-css', $css_uri . 'category-hub.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'category-hub.css' ) );
-        }
-    }
-
-    // C2) Sonstige Archiv-Seiten (Tag, Datum etc.)
-    if ( is_archive() && ! is_home() && ! is_category() ) {
-        wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
-    }
-
-    // D) NUR Einzelbeitrag (Blog Post)
-    if ( is_singular( 'post' ) ) {
-        if ( file_exists( $css_dir . 'single.css' ) ) {
-            wp_enqueue_style( 'nexus-single-css', $css_uri . 'single.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'single.css' ) );
-        }
-
-        $custom_css = "
-            .single-post .entry-header .entry-title,
-            .single-post .ct-page-title {
-                display: none !important;
-            }
-        ";
-        wp_add_inline_style( 'blocksy-child-style', $custom_css );
-    }
-
-    // E) Template: Nexus Über Mich
-    if ( is_page_template( 'template-about.php' ) ) {
-        if ( file_exists( $css_dir . 'about-page.css' ) ) {
-            wp_enqueue_style( 'nexus-about-css', $css_uri . 'about-page.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'about-page.css' ) );
-        }
-        // About-Page JS nicht mehr nötig → NexusCore.initScrollSpy übernimmt
-    }
-
-    // F) Template: Agentur Service  
-    if ( is_page_template( 'page-wordpress-agentur.php' ) || is_page( 'wordpress-agentur' ) ) {
-        // Homepage CSS als Base laden (gleicher Look)
-        wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
-        // Agentur-spezifische Overrides darüber
-        if ( file_exists( $css_dir . 'agentur.css' ) ) {
-            wp_enqueue_style( 'nexus-agentur-css', $css_uri . 'agentur.css', [ 'nexus-home-css' ], filemtime( $css_dir . 'agentur.css' ) );
-        }
-    }
-
-    // G) Template: WGOS System
-    if ( is_page_template( 'page-wgos.php' ) || is_page( 'wgos' ) || is_page( 'wordpress-growth-operating-system' ) ) {
-        wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
-        if ( file_exists( $css_dir . 'wgos.css' ) ) {
-            wp_enqueue_style( 'nexus-wgos-css', $css_uri . 'wgos.css', [ 'nexus-home-css' ], filemtime( $css_dir . 'wgos.css' ) );
-        }
-        if ( file_exists( $js_dir . 'wgos.js' ) ) {
-            wp_enqueue_script( 'nexus-wgos-js', $js_uri . 'wgos.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'wgos.js' ), true );
-        }
-    }
-
-    // H) Template: Customer Journey Audit
-    if ( is_page_template( 'page-audit.php' ) || is_page( 'audit' ) || is_page( 'customer-journey-audit' ) ) {
-        if ( file_exists( $css_dir . 'audit.css' ) ) {
-            wp_enqueue_style( 'nexus-audit-css', $css_uri . 'audit.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'audit.css' ) );
-        }
-        if ( file_exists( $js_dir . 'audit.js' ) ) {
-            wp_enqueue_script( 'nexus-audit-js', $js_uri . 'audit.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'audit.js' ), true );
-        }
-    }
-
-    // I) Template: SEO Landing (Hannover)
-    if ( is_page_template( 'page-seo.php' ) || is_page( 'seo' ) || is_page( 'wordpress-seo-hannover' ) ) {
-        if ( file_exists( $css_dir . 'seo.css' ) ) {
-            wp_enqueue_style( 'nexus-seo-css', $css_uri . 'seo.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'seo.css' ) );
-        }
-        if ( file_exists( $js_dir . 'seo.js' ) ) {
-            wp_enqueue_script( 'nexus-seo-js', $js_uri . 'seo.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'seo.js' ), true );
-        }
-    }
-
-    // J) Template: Core Web Vitals
-    if ( is_page_template( 'page-cwv.php' ) || is_page( 'core-web-vitals' ) ) {
-        if ( file_exists( $css_dir . 'cwv.css' ) ) {
-            wp_enqueue_style( 'nexus-cwv-css', $css_uri . 'cwv.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'cwv.css' ) );
-        }
-        if ( file_exists( $js_dir . 'cwv.js' ) ) {
-            wp_enqueue_script( 'nexus-cwv-js', $js_uri . 'cwv.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'cwv.js' ), true );
-        }
-    }
-
-    // K) Template: Performance Marketing
-    if ( is_page_template( 'page-performance.php' ) || is_page( 'performance-marketing' ) ) {
-        if ( file_exists( $css_dir . 'performance.css' ) ) {
-            wp_enqueue_style( 'nexus-performance-css', $css_uri . 'performance.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'performance.css' ) );
-        }
-        if ( file_exists( $js_dir . 'performance.js' ) ) {
-            wp_enqueue_script( 'nexus-performance-js', $js_uri . 'performance.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'performance.js' ), true );
-        }
-    }
-
-    // L) Template: Conversion Rate Optimization (CRO)
-    if ( is_page_template( 'page-cro.php' ) || is_page( 'conversion-rate-optimization' ) ) {
-        if ( file_exists( $css_dir . 'cro.css' ) ) {
-            wp_enqueue_style( 'nexus-cro-css', $css_uri . 'cro.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'cro.css' ) );
-        }
-        if ( file_exists( $js_dir . 'cro.js' ) ) {
-            wp_enqueue_script( 'nexus-cro-js', $js_uri . 'cro.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'cro.js' ), true );
-        }
-    }
-
-    // M) Template: GA4 & Tracking Setup
-    if ( is_page_template( 'page-ga4.php' ) || is_page( 'ga4-tracking-setup' ) ) {
-        if ( file_exists( $css_dir . 'ga4.css' ) ) {
-            wp_enqueue_style( 'nexus-ga4-css', $css_uri . 'ga4.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'ga4.css' ) );
-        }
-        if ( file_exists( $js_dir . 'ga4.js' ) ) {
-            wp_enqueue_script( 'nexus-ga4-js', $js_uri . 'ga4.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'ga4.js' ), true );
-        }
-    }
-
-    // N) Template: Meta Ads (Facebook & Instagram)
-    if ( is_page_template( 'page-meta-ads.php' ) || is_page( 'meta-ads' ) ) {
-        if ( file_exists( $css_dir . 'meta-ads.css' ) ) {
-            wp_enqueue_style( 'nexus-meta-ads-css', $css_uri . 'meta-ads.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'meta-ads.css' ) );
-        }
-        if ( file_exists( $js_dir . 'meta-ads.js' ) ) {
-            wp_enqueue_script( 'nexus-meta-ads-js', $js_uri . 'meta-ads.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'meta-ads.js' ), true );
-        }
-    }
-
-}, 20 );
-
-// --- 3. PERFORMANCE & FONTS ---
+// ── 2. PERFORMANCE: FONT PRELOADING ──────────────────────────────
 add_action( 'wp_head', function () {
-    $font = get_stylesheet_directory_uri() . '/fonts';
-    
-    // Preload Satoshi
-    echo '<link rel="preload" href="' . $font . '/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>';
-    echo "<style>@font-face { font-family: 'Satoshi'; src: url('$font/Satoshi-Variable.woff2') format('woff2-variations'); font-weight: 300 900; font-display: swap; font-style: normal; }</style>";
-    
-    // Footer Background Fix
-    echo '<style>.ft { background: #0a0a0a; }</style>';
+	$font_uri = get_stylesheet_directory_uri() . '/fonts';
+
+	printf(
+		'<link rel="preload" href="%s/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+		esc_url( $font_uri )
+	);
+
+	printf(
+		"<style>@font-face { font-family: 'Satoshi'; src: url('%s/Satoshi-Variable.woff2') format('woff2-variations'); font-weight: 300 900; font-display: swap; font-style: normal; }</style>\n",
+		esc_url( $font_uri )
+	);
+
+	// Footer Background Fix
+	echo '<style>.ft { background: #0a0a0a; }</style>' . "\n";
 }, 5 );
 
-// --- 4. TITEL-LOGIK ---
-add_filter('blocksy:post_types:post:has_page_title', '__return_false');
+// ── 3. BLOCKSY TITLE OVERRIDE ────────────────────────────────────
+add_filter( 'blocksy:post_types:post:has_page_title', '__return_false' );
 
 // --- 4b. SITEMAP (Rank Math Pro) ---
 // WordPress-native Sitemap deaktivieren → Rank Math übernimmt /sitemap_index.xml

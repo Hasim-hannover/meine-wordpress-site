@@ -2,16 +2,13 @@
 /**
  * Template Name: WGOS System
  * Description: WordPress Growth Operating System – Vollständige Landingpage
+ *
+ * ⚠️ LAYER VIOLATION NOTICE: Diese Seite enthält hardcoded Content (647 Zeilen).
+ * Langfristiges Ziel: Content in den Editor migrieren, nur Struktur im Template.
+ * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
+ *
+ * @package Blocksy_Child
  */
-
-// --- SEO Meta + Fonts (vor get_header, damit wp_head die Hooks hat) ---
-add_filter('pre_get_document_title', function () {
-    return 'WordPress Growth OS (WGOS) · Owned Leads System · Hasim Üner';
-});
-
-add_action('wp_head', function () {
-    echo '<meta name="description" content="Das WGOS verwandelt Ihre WordPress-Website in ein Owned-Leads-System: Performance, Privacy-first Tracking, SEO, CRO &amp; Automation. Assets statt Kampagnen.">';
-}, 1);
 
 get_header();
 ?>

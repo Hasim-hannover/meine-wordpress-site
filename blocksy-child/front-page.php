@@ -1,22 +1,23 @@
 <?php
 /**
- * The template for displaying the front page.
- * Diese Version lädt den reinen HTML-Inhalt aus dem WordPress-Editor.
+ * Front Page Template
  *
- * @package Blocksy Child
+ * Lädt den Content aus dem WordPress Block-Editor.
+ * SEO-Meta: zentral in inc/seo-meta.php
+ *
+ * @package Blocksy_Child
  */
 
 get_header();
 ?>
 
-<main id="main" class="site-main">
-    <?php
-    // Start the Loop, um den Inhalt der als Startseite festgelegten Seite zu laden.
-    while ( have_posts() ) :
-        the_post();
-        the_content();
-    endwhile; // End the loop.
-    ?>
+<main id="main" class="site-main" data-track-section="homepage">
+	<?php
+	while ( have_posts() ) :
+		the_post();
+		the_content();
+	endwhile;
+	?>
 </main>
 
 <?php
