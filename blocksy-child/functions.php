@@ -55,8 +55,15 @@ add_action( 'wp_enqueue_scripts', function () {
         wp_enqueue_script( 'nexus-archive-js', $js_uri . 'blog-archive.js', [ 'nexus-core-js' ], filemtime( $js_dir . 'blog-archive.js' ), true );
     }
 
-    // C) Archiv & Kategorie Seiten
-    if ( is_archive() && ! is_home() ) {
+    // C) Kategorie-Seiten (Pillar Hub)
+    if ( is_category() ) {
+        if ( file_exists( $css_dir . 'category-hub.css' ) ) {
+            wp_enqueue_style( 'nexus-category-hub-css', $css_uri . 'category-hub.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'category-hub.css' ) );
+        }
+    }
+
+    // C2) Sonstige Archiv-Seiten (Tag, Datum etc.)
+    if ( is_archive() && ! is_home() && ! is_category() ) {
         wp_enqueue_style( 'nexus-home-css', $css_uri . 'homepage.css', [ 'nexus-design-system' ], filemtime( $css_dir . 'homepage.css' ) );
     }
 
