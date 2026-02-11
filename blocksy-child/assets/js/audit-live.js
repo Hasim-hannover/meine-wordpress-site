@@ -13,8 +13,8 @@
   // ─── CONFIG ──────────────────────────────────────────────
   var CONFIG = {
     // WICHTIG: Ersetze mit deiner echten n8n-URL
-    webhookStart: 'https://DEINE-N8N-INSTANZ.app.n8n.cloud/webhook/audit',
-    webhookStatus: 'https://DEINE-N8N-INSTANZ.app.n8n.cloud/webhook/audit-status',
+    webhookStart: 'https://hasim.app.n8n.cloud/webhook/audit',
+webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     pollInterval: 5000,    // 5 Sekunden
     pollTimeout: 180000,   // 3 Minuten max
     animDelay: 120         // ms zwischen Step-Animationen
