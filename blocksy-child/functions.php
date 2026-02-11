@@ -67,12 +67,6 @@ add_action( 'after_switch_theme', function() {
 /**
  * NEXUS FEATURE: Automatische Lesezeit
  */
-function nexus_get_reading_time() {
-    $content = get_post_field( 'post_content', get_the_ID() );
-    $word_count = str_word_count( strip_tags( $content ) );
-    $reading_time = ceil( $word_count / 200 ); // Annahme: 200 Wörter pro Minute
-    return $reading_time;
-}
 
 // --- 5. TOC & SCROLL-SPY ---
 // Wird jetzt zentral über nexus-core.js gesteuert (NexusCore.initToc)
