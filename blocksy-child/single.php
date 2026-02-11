@@ -60,12 +60,14 @@ get_header();
 		</header>
 
 		   <div class="nexus-post-layout">
+			   <?php if ( is_singular('post') ) : ?>
 			   <aside class="nexus-sidebar">
 				   <div class="sticky-toc">
 					   <h3>Inhalt</h3>
 					   <ul id="toc-list"></ul>
 				   </div>
 			   </aside>
+			   <?php endif; ?>
 			   <article class="nexus-article-content" id="article-content" data-track-section="article_content">
 				   <?php the_content(); ?>
 			   </article>
