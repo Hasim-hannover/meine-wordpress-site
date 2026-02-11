@@ -67,7 +67,13 @@ get_header();
 				   </div>
 			   </aside>
 			   <article class="nexus-article-content" id="article-content" data-track-section="article_content">
-				   <?php the_content(); ?>
+				   <?php
+				   // Entferne TOC-Block aus dem Content, falls vorhanden
+				   $content = get_the_content();
+				   // Entferne TOC-DIV mit Regex
+				   $content = preg_replace('/<div[^>]*>(\s*<p[^>]*>.*Inhaltsverzeichnis.*<\/p>.*<ol[^>]*>.*<\/ol>.*<\/div>)/is', '', $content);
+				   echo apply_filters('the_content', $content);
+				   ?>
 			   </article>
 		   </div>
 
