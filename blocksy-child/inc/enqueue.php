@@ -31,6 +31,7 @@ function hu_enqueue_assets() {
 	// ── Parent Theme ──────────────────────────────────────────────
 	wp_enqueue_style(
 		'blocksy-child-style',
+		hu_enqueue_css( 'nexus-related-content-css', 'related-content.css', [ 'nexus-design-system' ] );
 		get_stylesheet_uri(),
 		[],
 		filemtime( get_stylesheet_directory() . '/style.css' )

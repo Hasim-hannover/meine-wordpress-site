@@ -1,0 +1,71 @@
+/* =========================================
+   RELATED CONTENT – Design für .related-content
+   ========================================= */
+
+.related-content {
+  background: var(--nx-bg-card, #121212);
+  color: var(--nx-text, #fff);
+  padding: 4rem 0;
+  margin: 3rem 0 0 0;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.related-content__heading {
+  font-size: var(--nx-text-2xl, 2rem);
+  font-weight: 800;
+  color: var(--nx-gold, #FFB020);
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.related-content__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.related-content__card {
+  background: var(--nx-bg-elevated, #0f0f0f);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 2rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow 0.2s;
+}
+
+.related-content__card:hover {
+  box-shadow: 0 8px 32px rgba(255,176,32,0.12);
+}
+
+.related-content__thumb {
+  display: block;
+  margin-bottom: 1.2rem;
+}
+
+.related-content__image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.related-content__category {
+  font-size: var(--nx-text-sm, 0.875rem);
+  color: var(--nx-text-dim, #71717a);
+  margin-bottom: 0.5rem;
+}
+
+.related-content__title {
+  font-size: var(--nx-text-lg, 1.125rem);
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+
+.related-content__excerpt {
+  font-size: var(--nx-text-base, 1rem);
+  color: var(--nx-text-secondary, #d4d4d4);
+  margin-bottom: 0;
+}
