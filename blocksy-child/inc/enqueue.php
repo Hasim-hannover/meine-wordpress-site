@@ -45,6 +45,7 @@ function hu_enqueue_assets() {
 	// ── A) Startseite & Blog-Home ─────────────────────────────────
 	if ( is_front_page() || is_home() ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-related-content-css', 'related-content.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-home-js', 'homepage.js', [ 'nexus-core-js' ] );
 	}
 
