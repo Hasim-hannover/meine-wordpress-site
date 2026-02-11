@@ -98,7 +98,7 @@ function nexus_render_share_buttons() {
     <?php
 }
 
-<?php
+
 /**
  * Audit Live — Asset Enqueue
  * ===========================
