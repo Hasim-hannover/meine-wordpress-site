@@ -43,6 +43,10 @@ function hu_enqueue_assets() {
 	// Damit das CSS auf ALLEN Seiten geladen wird (Startseite, Single Posts, Pages etc.)
 	hu_enqueue_css( 'nexus-related-content-css', 'related-content.css', [ 'nexus-design-system' ] );
 
+	// ── GLOBAL: Footer CTA (Pre-Footer) ───────────────────────────
+	// Damit der Footer CTA auf allen Seiten gestylt wird
+	hu_enqueue_css( 'nexus-footer-cta-css', 'footer-cta.css', [ 'nexus-design-system' ] );
+
 	// ── GLOBAL: Core JS (Scroll-Spy, FAQ, Counter, Progress Bar) ──
 	hu_enqueue_js( 'nexus-core-js', 'nexus-core.js' );
 

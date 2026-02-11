@@ -1,0 +1,53 @@
+/* =========================================
+   NEXUS FOOTER CTA – Global Styles
+   ========================================= */
+
+.nexus-footer-cta {
+  background: var(--nx-bg-card, #121212);
+  color: var(--nx-text, #fff);
+  padding: 3rem 0 3rem 0;
+  margin-top: 0;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -4px 32px rgba(0,0,0,0.10);
+}
+
+.nexus-footer-cta__inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nexus-footer-cta__heading {
+  font-size: var(--nx-text-2xl, 2rem);
+  font-weight: 800;
+  color: var(--nx-gold, #FFB020);
+  margin-bottom: 1.5rem;
+}
+
+.nexus-footer-cta__text {
+  font-size: var(--nx-text-base, 1.1rem);
+  color: var(--nx-text-secondary, #d4d4d4);
+  margin-bottom: 2rem;
+}
+
+.nexus-footer-cta__btn {
+  display: inline-block;
+  background: var(--nx-gold, #FFB020);
+  color: #000;
+  padding: 1rem 2.2rem;
+  border-radius: 8px;
+  font-weight: 800;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+.nexus-footer-cta__btn:hover {
+  background: var(--nx-gold-hover, #FFC14D);
+  color: #000;
+}
+
+@media (max-width: 600px) {
+  .nexus-footer-cta__inner { padding: 0 1rem; }
+  .nexus-footer-cta { padding: 2rem 0; }
+}
