@@ -119,3 +119,12 @@
     margin-top: 20px;
 }
 
+/* Layout-Anpassungen für TOC-Grid */
+.layout-nexus { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start; }
+.layout-nexus .prose-nexus { max-width: 100%; }
+.layout-nexus .nexus-article-content { margin: 0; padding: 0; }
+
+@media (min-width: 1024px) {
+    .layout-nexus { grid-template-columns: 2fr 1fr; }
+}
+

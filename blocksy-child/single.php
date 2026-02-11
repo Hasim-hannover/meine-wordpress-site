@@ -61,9 +61,20 @@ get_header();
 			</div>
 		</header>
 
-		<article class="nexus-article-content" id="article-content" data-track-section="article_content">
-			<?php the_content(); ?>
-		</article>
+		<div class="layout-nexus">
+			<div class="prose-nexus">
+				<article class="nexus-article-content" id="article-content" data-track-section="article_content">
+					<?php the_content(); ?>
+				</article>
+			</div>
+
+			<aside class="toc-sidebar" aria-labelledby="toc-heading">
+				<div class="toc-card-nexus toc-nexus" id="toc-container">
+					<h4 id="toc-heading">Inhalt</h4>
+					<ul id="toc-list"></ul>
+				</div>
+			</aside>
+		</div>
 
 		<div class="nexus-bottom-share" data-track-section="article_share">
 			<h3><?php esc_html_e( 'Diesen Artikel teilen', 'blocksy-child' ); ?></h3>
