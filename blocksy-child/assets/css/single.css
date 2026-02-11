@@ -94,8 +94,11 @@
 
 /* 5. TEXT CONTENT */
 .nexus-article-content, .prose {
-    max-width: 800px; margin: 80px auto; padding: 0 20px;
-    font-size: 1.15rem; line-height: 1.8; color: #d4d4d4; 
+    max-width: 800px;
+    padding: 0 20px;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #d4d4d4;
 }
 .nexus-article-content h2 { 
     font-size: 1.8rem; color: #fff; margin-top: 3rem; margin-bottom: 1rem; 
@@ -119,12 +122,33 @@
     margin-top: 20px;
 }
 
-/* Layout-Anpassungen für TOC-Grid */
-.layout-nexus { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start; }
-.layout-nexus .prose-nexus { max-width: 100%; }
-.layout-nexus .nexus-article-content { margin: 0; padding: 0; }
+/* Neues Grid-Layout für Single Post */
+.nexus-post-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
 
-@media (min-width: 1024px) {
-    .layout-nexus { grid-template-columns: 2fr 1fr; }
+.nexus-sidebar {
+    /* Sidebar links oder rechts, je nach HTML-Position */
+}
+.sticky-toc {
+    position: sticky;
+    top: 140px;
+}
+
+@media (max-width: 1023px) {
+    .nexus-post-layout {
+        display: block;
+        max-width: 100%;
+        margin: 40px 0;
+        padding: 0;
+    }
+    .nexus-sidebar {
+        display: none;
+    }
 }
 
