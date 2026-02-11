@@ -30,19 +30,17 @@ get_header();
 
 			<div class="nexus-hero-inner">
 
-				<div class="nexus-meta-top">
-					<?php get_template_part( 'template-parts/breadcrumb' ); ?>
-					<span class="separator">|</span>
-					<span class="nexus-date"><?php echo esc_html( get_the_date( 'd. M Y' ) ); ?></span>
-					<span class="separator">|</span>
-					<span class="nexus-reading-time"><?php
-						printf(
-							/* translators: %d: reading time in minutes */
-							esc_html__( '⏱ %d Min. Lesezeit', 'blocksy-child' ),
-							nexus_get_reading_time()
-						);
-					?></span>
-				</div>
+				   <div class="nexus-meta-top">
+					   <span class="nexus-date"><?php echo esc_html( get_the_date( 'd. M Y' ) ); ?></span>
+					   <span class="separator">|</span>
+					   <span class="nexus-reading-time"><?php
+						   printf(
+							   /* translators: %d: reading time in minutes */
+							   esc_html__( '⏱ %d Min. Lesezeit', 'blocksy-child' ),
+							   nexus_get_reading_time()
+						   );
+					   ?></span>
+				   </div>
 
 				<h1 class="nexus-title"><?php the_title(); ?></h1>
 
