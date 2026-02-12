@@ -25,6 +25,7 @@ $modules = [
 	'client-portal.php',  // Client Portal Dashboard
 	'admin-manager.php',  // Backend-Felder für Portal
 	'snippets.php',       // Nav Button, Security, Login-Redirect
+	'menu-setup.php',     // Hauptmenü-Struktur (einmalig)
 ];
 
 foreach ( $modules as $module ) {
