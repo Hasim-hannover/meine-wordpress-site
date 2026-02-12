@@ -1149,3 +1149,37 @@ button.nexus-share-btn {
 body.wp-customizer .ct-customizer-shortcut {
     display: none !important;
 }
+
+/* --- NEXUS HEADER: FLIGHT MODE --- */
+
+/* 1. Basis-Zustand (Im Stand) */
+.ct-header {
+    position: fixed !important;
+    top: 0; left: 0; width: 100%; z-index: 1000;
+    background: transparent;
+    transition: all 0.4s ease;
+    border-bottom: 1px solid transparent;
+}
+
+/* 2. Flug-Modus (Sobald man scrollt) */
+.ct-header.nexus-flight-mode {
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+/* 3. Das Logo atmet */
+.site-logo img {
+    transition: transform 0.4s ease;
+}
+.ct-header.nexus-flight-mode .site-logo img {
+    transform: scale(0.9);
+}
+
+/* 4. Buttons bleiben STABIL (Kein Wackeln!) */
+.ct-header .ct-button, .nexus-header-cta {
+    transform: none !important;
+    margin-top: 0 !important;
+}

@@ -267,6 +267,28 @@
 
 
         /**
+         * 8. HEADER FLIGHT MODE
+         * Kompakter Header mit Glaseffekt beim Scrollen.
+         * Fügt .nexus-flight-mode ab 50px Scroll hinzu.
+         */
+        initHeaderFlight: function () {
+            var header = document.querySelector('.ct-header');
+            if (!header) return;
+
+            function update() {
+                if (window.scrollY > 50) {
+                    header.classList.add('nexus-flight-mode');
+                } else {
+                    header.classList.remove('nexus-flight-mode');
+                }
+            }
+
+            update();
+            window.addEventListener('scroll', update, { passive: true });
+        },
+
+
+        /**
          * INIT: Wird auf DOMContentLoaded automatisch aufgerufen.
          * Prüft welche Elemente auf der Seite existieren und initialisiert nur relevante Module.
          */
@@ -278,6 +300,9 @@
             if (document.querySelector('.nx-sidenav')) {
                 this.initScrollSpy('.nx-sidenav', 'section[id]');
             }
+
+            // Header Flight Mode
+            this.initHeaderFlight();
 
             // FAQ Accordion (global)
             this.initFaqAccordion();
