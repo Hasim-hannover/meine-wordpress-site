@@ -68,46 +68,50 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     transition: opacity 0.15s ease-out, color 0.2s ease;
 }
 
-/* --- NEXUS BUTTON STABILISIERUNG (Champions League) --- */
+/* --- NEXUS BUTTON STABILISIERUNG (Champions League v2) --- */
+/* Das Problem: Der Header (Parent) bewegt sich. Die Kinder fahren mit. */
+/* Die Lösung: Wir nutzen die gleiche Variable (--phys-y), um gegenzusteuern. */
 
-/* 1. Genereller Reset: Buttons ignorieren die Physik-Engine */
 .ct-header .nexus-header-cta,
 .ct-header .nexus-nav-btn,
-.ct-header .header-button {
+.ct-header .header-button,
+.ct-header .ct-button {
+    /* 1. DIE GEGENKRAFT (Invertierte Physik) */
+    transform: translate3d(0, calc(var(--phys-y, 0px) * -1), 0) !important;
+
+    /* 2. Visuelle Stabilität */
     opacity: 1 !important;
-    transform: translate3d(0, 0, 0) !important;
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    will-change: transform;
+
+    /* 3. Hover-Animationen bleiben erhalten */
+    transition: transform 0.1s linear,
                 box-shadow 0.2s ease,
-                background 0.2s ease !important;
+                background 0.2s ease,
+                border-color 0.2s ease !important;
 }
 
-/* 2. Audit Button (Gold / Primary) — leuchtet, statt zu wackeln */
-.ct-header .nexus-header-cta {
-    box-shadow: 0 4px 15px rgba(255, 176, 32, 0.15);
-}
+/* --- HOVER EFFEKTE (berechnet ab der stabilisierten Position) --- */
+
+/* Audit Button (Gold) */
 .ct-header .nexus-header-cta:hover {
-    transform: translateY(-1px) !important;
+    transform: translate3d(0, calc((var(--phys-y, 0px) * -1) - 2px), 0) !important;
     box-shadow: 0 8px 25px rgba(255, 176, 32, 0.4);
     background: #ffc040;
 }
 
-/* 3. Kundenlogin Button (Ghost / Secondary) — glasartig, aber stabil */
-.ct-header .nexus-nav-btn {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-}
+/* Login Button (Glass) */
 .ct-header .nexus-nav-btn:hover {
-    transform: translateY(-1px) !important;
+    transform: translate3d(0, calc((var(--phys-y, 0px) * -1) - 2px), 0) !important;
     border-color: #fff;
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
-/* 4. Mobile: Keine Animationen auf Touch */
+/* Mobile: Physik komplett aus */
 @media (max-width: 1000px) {
     .ct-header .nexus-header-cta,
     .ct-header .nexus-nav-btn {
-        transition: none !important;
+        transform: none !important;
     }
 }
 
