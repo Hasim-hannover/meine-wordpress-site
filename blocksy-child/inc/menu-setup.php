@@ -121,7 +121,10 @@ function nexus_setup_main_menu() {
 	] );
 
 	// ── 6. Über mich (Top-Level) ──────────────────────────────────
-	$about_id = $get_page_id( 'ueber-mich' );
+	$about_id = $get_page_id( 'uber-mich' );
+	if ( ! $about_id ) {
+		$about_id = $get_page_id( 'ueber-mich' );
+	}
 	if ( ! $about_id ) {
 		$about_id = $get_page_id( 'about' );
 	}
@@ -130,7 +133,7 @@ function nexus_setup_main_menu() {
 		'menu-item-object'    => 'page',
 		'menu-item-object-id' => $about_id,
 		'menu-item-type'      => $about_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $about_id ? '' : home_url( '/ueber-mich/' ),
+		'menu-item-url'       => $about_id ? '' : home_url( '/uber-mich/' ),
 		'menu-item-status'    => 'publish',
 	] );
 
