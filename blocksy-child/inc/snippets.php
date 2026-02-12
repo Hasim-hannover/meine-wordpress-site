@@ -19,6 +19,17 @@ add_shortcode( 'nexus_header_btn', function() {
 } );
 
 /**
+ * NEXUS HEADER CTA
+ * Shortcode: [nexus_header_cta]
+ * Gold-Button für die Hauptnavigation.
+ */
+add_shortcode( 'nexus_header_cta', function() {
+    $audit_page = get_page_by_path( 'customer-journey-audit' );
+    $link = $audit_page ? get_permalink( $audit_page ) : home_url( '/customer-journey-audit/' );
+    return '<a href="' . esc_url( $link ) . '" class="nexus-header-cta">Kostenloser Audit</a>';
+} );
+
+/**
  * Redirect default wp-login.php view to the portal page.
  */
 add_action( 'login_init', function() {
