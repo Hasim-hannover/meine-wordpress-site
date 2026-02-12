@@ -50,7 +50,7 @@ get_header();
 						</div>
 					</div>
 
-					<?php if ( function_exists( 'nexus_render_share_buttons' ) ) { nexus_render_share_buttons(); } ?>
+					<?php if ( is_singular( 'post' ) && function_exists( 'nexus_render_share_buttons' ) ) { nexus_render_share_buttons(); } ?>
 				</div>
 
 			</div>
@@ -70,10 +70,12 @@ get_header();
 			   </article>
 		   </div>
 
+		<?php if ( is_singular( 'post' ) ) : ?>
 		<div class="nexus-bottom-share" data-track-section="article_share">
 			<h3><?php esc_html_e( 'Diesen Artikel teilen', 'blocksy-child' ); ?></h3>
 			<?php if ( function_exists( 'nexus_render_share_buttons' ) ) { nexus_render_share_buttons(); } ?>
 		</div>
+		<?php endif; ?>
 
 		<?php
 		// Related Content (gleiche Kategorie)
