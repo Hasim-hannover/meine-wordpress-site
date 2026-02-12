@@ -68,6 +68,12 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     transition: opacity 0.15s ease-out, color 0.2s ease;
 }
 
+.nexus-nav-btn,
+.nexus-header-cta {
+    opacity: var(--menu-opacity) !important;
+    transition: opacity 0.15s ease-out, transform 0.2s ease, background 0.2s ease;
+}
+
 /* Menü-Links: Clean & Spaced */
 .ct-header .ct-menu > li > a {
     font-size: 0.875rem;
