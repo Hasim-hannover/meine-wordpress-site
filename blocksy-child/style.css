@@ -22,15 +22,53 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     font-family: 'Satoshi', sans-serif;
 }
 
-/* --- NEXUS HEADER — Premium Sticky --- */
+/* --- NEXUS AERODYNAMIC HEADER (Engine v2) --- */
 .ct-header {
-    transition: background 0.3s ease, box-shadow 0.3s ease;
+    /* WICHTIG: Überschreibt Blocksy Standard */
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    /* Physik-Variablen (gesteuert via JS) */
+    --phys-y: 0px;
+    --phys-blur: 0px;
+    --phys-bg: 0;
+    --menu-opacity: 1;
+    --logo-scale: 1;
+
+    /* Die Hardware-Beschleunigung */
+    transform: translate3d(0, var(--phys-y), 0);
+    will-change: transform, backdrop-filter;
+
+    /* Das visuelle Finish */
+    background: rgba(10, 10, 10, var(--phys-bg));
+    backdrop-filter: blur(var(--phys-blur));
+    -webkit-backdrop-filter: blur(var(--phys-blur));
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+
+    /* Übergänge: Bewegung ist sofort (0s), Optik ist weich */
+    transition: background 0.4s ease,
+                backdrop-filter 0.4s ease,
+                border-color 0.4s ease;
 }
-.ct-header[data-sticky="yes"] {
-    background: rgba(10, 10, 10, 0.85) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.4);
+
+/* Aktiver Status (wird via JS gesetzt) */
+.ct-header.is-scrolled {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Mikro-Interaktionen der Inhalte */
+.site-logo {
+    transition: transform 0.1s linear;
+    transform: scale(var(--logo-scale));
+    transform-origin: left center;
+}
+
+.ct-menu-link {
+    opacity: var(--menu-opacity) !important;
+    transition: opacity 0.1s linear, color 0.2s ease;
 }
 
 /* Menü-Links: Clean & Spaced */
