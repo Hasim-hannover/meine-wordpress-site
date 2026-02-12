@@ -743,6 +743,72 @@
   transform: translateY(0);
 }
 
+/* --- NEUES HERO LAYOUT: Zentriert, Form im Vordergrund --- */
+
+/* Hero: nur Headline + 1 Satz, zentriert */
+.audit-hero-centered {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  padding-top: 1.25rem;
+}
+
+.audit-hero-centered h1 {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(2.2rem, 4.6vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0.6rem 0 1rem;
+}
+
+.hero-sub-short {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 52ch;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* Form: zentriert + breiter */
+.black-box--centered {
+  max-width: 600px !important;
+  margin: 0 auto !important;
+}
+
+/* Social Proof Zeile unter dem Formular */
+.audit-social-proof {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  margin-bottom: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.audit-social-proof .revenue-counter {
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.audit-social-proof .mini-preview {
+  margin: 0;
+  max-width: 440px;
+  flex: 1;
+  min-width: 260px;
+}
+
+@media (max-width: 600px) {
+  .audit-social-proof {
+    flex-direction: column;
+    align-items: center;
+  }
+  .audit-social-proof .mini-preview {
+    width: 100%;
+  }
+}
+
 /* --- REDUCED MOTION --- */
 @media (prefers-reduced-motion: reduce) {
   .audit-wrapper * {
