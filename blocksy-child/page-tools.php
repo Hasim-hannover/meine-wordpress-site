@@ -12,8 +12,6 @@ get_header();
 ?>
 
 <div class="tools-hub-page" data-track-section="tools_hub">
-	<?php get_template_part( 'template-parts/breadcrumb' ); ?>
-
 	<?php
 	while ( have_posts() ) :
 		the_post();
