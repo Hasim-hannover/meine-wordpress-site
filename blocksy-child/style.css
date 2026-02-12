@@ -75,7 +75,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(8px);
+    transform: translateX(-50%) translateY(8px);
     transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
     z-index: 99999;
 }
@@ -105,7 +105,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 /* FINALE LOGIK: Wir machen das sub-menu zum "Wrapper" und nutzen Grid darin */
