@@ -12,7 +12,6 @@ get_header();
 ?>
 
 <div class="audit-page-wrapper" data-track-section="audit_landing">
-	<?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
 	<?php
 	while ( have_posts() ) :

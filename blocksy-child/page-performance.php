@@ -12,7 +12,6 @@ get_header();
 ?>
 
 <div class="pm-page-wrapper" data-track-section="performance_landing">
-	<?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
 	<?php
 	while ( have_posts() ) :

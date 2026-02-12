@@ -12,7 +12,6 @@ get_header();
 ?>
 
 <div class="cro-page" data-track-section="cro_landing">
-	<?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
 	<?php
 	while ( have_posts() ) :

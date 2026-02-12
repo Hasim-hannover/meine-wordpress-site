@@ -12,7 +12,6 @@ get_header();
 ?>
 
 <div class="ma-page" data-track-section="meta_ads_landing">
-	<?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
 	<?php
 	while ( have_posts() ) :

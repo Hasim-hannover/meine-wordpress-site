@@ -12,7 +12,6 @@ get_header();
 ?>
 
 <div class="ga4-page" data-track-section="ga4_landing">
-	<?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
 	<?php
 	while ( have_posts() ) :
