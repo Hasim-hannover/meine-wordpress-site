@@ -28,37 +28,18 @@ function hu_register_acf_fields() {
 	}
 
 	// ── 1. SEO Meta Fields ────────────────────────────────────────
-	// Ersetzt Rank Math SEO-Felder für Title, Description, OG Image.
+	// Title & Description werden von Rank Math verwaltet.
+	// Verbleiben: OG-Bild (ACF-Override für Social) + noindex-Toggle.
 	acf_add_local_field_group( [
 		'key'      => 'group_nexus_seo',
 		'title'    => 'SEO Meta (Growth Architect)',
 		'fields'   => [
 			[
-				'key'          => 'field_seo_title',
-				'label'        => 'SEO Title',
-				'name'         => 'seo_title',
-				'type'         => 'text',
-				'instructions' => 'Max. 60 Zeichen. Fokus-Keyword vorne. Wird als &lt;title&gt; und og:title genutzt.',
-				'maxlength'    => 70,
-				'placeholder'  => 'z.B. WordPress SEO Hannover · Technical SEO & Growth · Hasim Üner',
-			],
-			[
-				'key'          => 'field_seo_description',
-				'label'        => 'Meta Description',
-				'name'         => 'seo_description',
-				'type'         => 'textarea',
-				'instructions' => 'Max. 155 Zeichen. CTA-orientiert. Wird als meta description und og:description genutzt.',
-				'maxlength'    => 160,
-				'rows'         => 2,
-				'new_lines'    => '',
-				'placeholder'  => 'z.B. WordPress SEO Hannover: Technical SEO, Core Web Vitals & Content-Strategie. Kostenloser Audit verfügbar.',
-			],
-			[
 				'key'          => 'field_og_image',
 				'label'        => 'Open Graph Bild',
 				'name'         => 'og_image',
 				'type'         => 'image',
-				'instructions' => '1200×630px. Fallback: Featured Image. Wird für Social Sharing genutzt.',
+				'instructions' => '1200×630px. Überschreibt das Rank Math OG-Bild für diese Seite.',
 				'return_format' => 'url',
 				'preview_size'  => 'medium',
 				'mime_types'    => 'jpg, jpeg, png, webp',
@@ -94,7 +75,7 @@ function hu_register_acf_fields() {
 		'position'   => 'side',
 		'style'      => 'default',
 		'menu_order'  => 0,
-		'description' => 'SEO-Felder für Meta Tags, Open Graph & Indexierungssteuerung. Ersetzt Rank Math.',
+		'description' => 'OG-Bild Override & noindex-Toggle. Title/Description via Rank Math.',
 	] );
 
 	// ── 2. KPI Block Fields ───────────────────────────────────────
@@ -251,28 +232,4 @@ function hu_register_acf_fields() {
 	] );
 }
 
-/**
- * Override document title with ACF seo_title if set.
- *
- * Replaces the per-template pre_get_document_title hooks that were removed.
- */
-add_filter( 'pre_get_document_title', 'hu_acf_document_title', 20 );
-
-/**
- * Set <title> from ACF seo_title field.
- *
- * @param  string $title Current title.
- * @return string Modified title or original.
- */
-function hu_acf_document_title( $title ) {
-	if ( ! is_singular() || ! function_exists( 'get_field' ) ) {
-		return $title;
-	}
-
-	$seo_title = get_field( 'seo_title', get_queried_object_id() );
-	if ( $seo_title ) {
-		return $seo_title;
-	}
-
-	return $title;
-}
+// <title> wird von Rank Math verwaltet — kein ACF-Override mehr nötig.

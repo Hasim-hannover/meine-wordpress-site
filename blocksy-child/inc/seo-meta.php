@@ -2,14 +2,12 @@
 /**
  * NEXUS SEO Meta & Indexierungssteuerung
  *
- * Zentrales Modul für:
- * - Open Graph + Twitter Card Meta Tags
- * - Canonical URLs (self-referencing)
- * - Indexierungssteuerung (noindex für Utility-Seiten)
- * - Fallback-Logik für SEO-Felder (ACF → Post-Daten → Auto-Generate)
- * - Eigenständig (kein Rank Math / Yoast nötig)
+ * Wenn Rank Math aktiv ist: Nur OG-Bild-Override (ACF) + noindex-Toggle.
+ * Rank Math übernimmt: Title, Description, OG Tags, Twitter Card, Canonical.
  *
- * [SEO] inc/seo-meta: OG Tags, Canonical, Indexierungs-Logik
+ * Ohne Rank Math: vollständige Eigenimplementierung als Fallback.
+ *
+ * [SEO] inc/seo-meta: OG-Bild Override, Indexierungs-Logik
  *
  * @package Blocksy_Child
  */
@@ -21,7 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'wp_head', 'hu_seo_meta_tags', 1 );
 
 /**
- * Output SEO meta tags: OG, Twitter Card, Canonical, Robots.
+ * Output SEO meta tags.
+ *
+ * Wenn Rank Math aktiv: Nur OG-Bild-Override (ACF) ausgeben — alles andere
+ * übernimmt Rank Math. Ohne Rank Math: vollständiger Fallback.
  *
  * @return void
  */
@@ -31,37 +32,48 @@ function hu_seo_meta_tags() {
 		return;
 	}
 
+	$rank_math_active = defined( 'RANK_MATH_VERSION' );
+
+	// ── Rank Math aktiv: nur ACF OG-Bild-Override ausgeben ────────
+	if ( $rank_math_active ) {
+		if ( is_singular() && function_exists( 'get_field' ) ) {
+			$og_image = get_field( 'og_image', get_queried_object_id() );
+			if ( $og_image ) {
+				$url = is_array( $og_image ) ? ( $og_image['url'] ?? '' ) : $og_image;
+				if ( $url ) {
+					printf( '<meta property="og:image" content="%s">' . "\n", esc_url( $url ) );
+					echo '<meta property="og:image:width" content="1200">' . "\n";
+					echo '<meta property="og:image:height" content="630">' . "\n";
+					printf( '<meta name="twitter:image" content="%s">' . "\n", esc_url( $url ) );
+				}
+			}
+		}
+		return; // Rank Math kümmert sich um den Rest
+	}
+
+	// ── Fallback: kein SEO-Plugin aktiv ───────────────────────────
 	$meta = hu_get_seo_meta();
 
 	if ( empty( $meta ) ) {
 		return;
 	}
 
-	// ── Meta Description ──────────────────────────────────────────
+	// Meta Description
 	if ( ! empty( $meta['description'] ) ) {
-		printf(
-			'<meta name="description" content="%s">' . "\n",
-			esc_attr( $meta['description'] )
-		);
+		printf( '<meta name="description" content="%s">' . "\n", esc_attr( $meta['description'] ) );
 	}
 
-	// ── Canonical URL ─────────────────────────────────────────────
+	// Canonical URL
 	if ( ! empty( $meta['canonical'] ) ) {
-		printf(
-			'<link rel="canonical" href="%s">' . "\n",
-			esc_url( $meta['canonical'] )
-		);
+		printf( '<link rel="canonical" href="%s">' . "\n", esc_url( $meta['canonical'] ) );
 	}
 
-	// ── Robots (noindex / nofollow) ───────────────────────────────
+	// Robots
 	if ( ! empty( $meta['robots'] ) ) {
-		printf(
-			'<meta name="robots" content="%s">' . "\n",
-			esc_attr( $meta['robots'] )
-		);
+		printf( '<meta name="robots" content="%s">' . "\n", esc_attr( $meta['robots'] ) );
 	}
 
-	// ── Open Graph ────────────────────────────────────────────────
+	// Open Graph
 	if ( ! empty( $meta['og_title'] ) ) {
 		printf( '<meta property="og:title" content="%s">' . "\n", esc_attr( $meta['og_title'] ) );
 	}
@@ -78,12 +90,9 @@ function hu_seo_meta_tags() {
 	}
 	printf( '<meta property="og:type" content="%s">' . "\n", esc_attr( $meta['og_type'] ) );
 	echo '<meta property="og:locale" content="de_DE">' . "\n";
-	printf(
-		'<meta property="og:site_name" content="%s">' . "\n",
-		esc_attr( get_bloginfo( 'name' ) )
-	);
+	printf( '<meta property="og:site_name" content="%s">' . "\n", esc_attr( get_bloginfo( 'name' ) ) );
 
-	// ── Twitter Card ──────────────────────────────────────────────
+	// Twitter Card
 	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
 	if ( ! empty( $meta['og_title'] ) ) {
 		printf( '<meta name="twitter:title" content="%s">' . "\n", esc_attr( $meta['og_title'] ) );
