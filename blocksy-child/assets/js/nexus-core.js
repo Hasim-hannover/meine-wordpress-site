@@ -316,7 +316,7 @@
 })();
 
 
-/* --- NEXUS HEADER PHYSICS ENGINE --- */
+/* --- NEXUS HEADER PHYSICS ENGINE (v2 — selective) --- */
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.ct-header');
     if (!header) return;
@@ -325,55 +325,49 @@ document.addEventListener('DOMContentLoaded', () => {
     let velocity = 0;
     let isTicking = false;
 
-    // Config: Wie "schwer" fühlt sich der Header an?
     const PHYSICS = {
-        friction: 0.9,      // Wie schnell beruhigt er sich (0.9 = sanft)
-        drag: 0.15,         // Wie stark reagiert er auf Ziehen
-        maxDuck: 15,        // Max Pixel, die er sich duckt
-        blurTrigger: 30     // Ab wann wird er milchig (px)
+        friction: 0.9,
+        drag: 0.15,
+        blurTrigger: 30
     };
 
     function updateHeaderPhysics() {
         const currentScrollY = window.scrollY;
         const delta = currentScrollY - lastScrollY;
 
-        // 1. Velocity Berechnung (Inertia)
+        // 1. Velocity (Inertia)
         velocity = velocity * PHYSICS.friction + delta * PHYSICS.drag;
 
-        // 2. Visuelle Zustände (Glassmorphism)
+        // 2. Glassmorphism (auf dem gesamten Header — das ist nur Hintergrund)
         if (currentScrollY > PHYSICS.blurTrigger) {
             header.classList.add('is-scrolled');
-            // Progressiver Blur: Je tiefer, desto stärker (max 20px)
             const blurAmt = Math.min((currentScrollY - 30) / 10, 20);
             header.style.setProperty('--phys-blur', `${blurAmt}px`);
-            header.style.setProperty('--phys-bg', '0.85'); // 85% Schwarz
+            header.style.setProperty('--phys-bg', '0.85');
         } else {
             header.classList.remove('is-scrolled');
             header.style.setProperty('--phys-blur', '0px');
             header.style.setProperty('--phys-bg', '0');
         }
 
-        // 3. Aerodynamische Verformung (Ducking)
-        const compression = Math.min(Math.abs(velocity), PHYSICS.maxDuck);
-        header.style.setProperty('--phys-y', `-${compression * 0.6}px`);
+        // 3. Nur Logo + Menü-Links reagieren auf Scroll-Speed
+        const speed = Math.abs(velocity);
 
-        // 4. Content Reaktion (Fokus-Tunnel)
-        const opacity = Math.max(0.4, 1 - (Math.abs(velocity) / 150));
+        // Menü-Links verblassen leicht bei schnellem Scroll
+        const opacity = Math.max(0.5, 1 - (speed / 120));
         header.style.setProperty('--menu-opacity', opacity);
 
-        // Logo wird kompakter
-        const scale = Math.max(0.92, 1 - (Math.abs(velocity) / 400));
+        // Logo wird bei Speed etwas kompakter
+        const scale = Math.max(0.94, 1 - (speed / 350));
         header.style.setProperty('--logo-scale', scale);
 
         lastScrollY = currentScrollY;
 
-        // Loop Logik: Nur rendern wenn Bewegung da ist (Performance!)
-        if (Math.abs(velocity) > 0.1 || Math.abs(currentScrollY - lastScrollY) > 1) {
+        // Loop: Weiter rendern solange Bewegung da ist
+        if (speed > 0.1) {
             requestAnimationFrame(updateHeaderPhysics);
         } else {
             isTicking = false;
-            // Reset auf saubere Null
-            header.style.setProperty('--phys-y', '0px');
             header.style.setProperty('--menu-opacity', '1');
             header.style.setProperty('--logo-scale', '1');
         }

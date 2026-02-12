@@ -32,15 +32,12 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     z-index: 1000;
 
     /* Physik-Variablen (gesteuert via JS) */
-    --phys-y: 0px;
     --phys-blur: 0px;
     --phys-bg: 0;
     --menu-opacity: 1;
     --logo-scale: 1;
 
-    /* Die Hardware-Beschleunigung */
-    transform: translate3d(0, var(--phys-y), 0);
-    will-change: transform, backdrop-filter;
+    will-change: backdrop-filter;
 
     /* Das visuelle Finish */
     background: rgba(10, 10, 10, var(--phys-bg));
@@ -48,7 +45,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     -webkit-backdrop-filter: blur(var(--phys-blur));
     border-bottom: 1px solid rgba(255, 255, 255, 0);
 
-    /* Übergänge: Bewegung ist sofort (0s), Optik ist weich */
+    /* Übergänge: Optik ist weich */
     transition: background 0.4s ease,
                 backdrop-filter 0.4s ease,
                 border-color 0.4s ease;
@@ -59,16 +56,16 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Mikro-Interaktionen der Inhalte */
+/* Mikro-Interaktionen: NUR Logo + Menü-Links reagieren */
 .site-logo {
-    transition: transform 0.1s linear;
+    transition: transform 0.15s ease-out;
     transform: scale(var(--logo-scale));
     transform-origin: left center;
 }
 
 .ct-menu-link {
     opacity: var(--menu-opacity) !important;
-    transition: opacity 0.1s linear, color 0.2s ease;
+    transition: opacity 0.15s ease-out, color 0.2s ease;
 }
 
 /* Menü-Links: Clean & Spaced */
