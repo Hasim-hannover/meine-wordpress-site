@@ -13,8 +13,6 @@ get_header();
 
 <main id="main" class="site-main">
 	<div class="nexus-about" data-track-section="about_page">
-		<?php get_template_part( 'template-parts/breadcrumb' ); ?>
-
 		<div class="nexus-container">
 			<?php
 			while ( have_posts() ) :
