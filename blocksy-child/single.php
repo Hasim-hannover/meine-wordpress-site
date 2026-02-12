@@ -17,30 +17,27 @@ get_header();
 
 	<?php while ( have_posts() ) : the_post(); ?>
 
-		<?php
-		$hero_bg  = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-		$bg_style = $hero_bg
-			? 'background-image: url(' . esc_url( $hero_bg ) . ');'
-			: 'background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);';
-		?>
+		<header class="nexus-article-hero" data-track-section="article_hero">
 
-		<header class="nexus-article-hero has-bg" style="<?php echo esc_attr( $bg_style ); ?>" data-track-section="article_hero">
+			<div class="nexus-hero-image">
+				<?php if ( has_post_thumbnail() ) : ?>
+					<?php the_post_thumbnail( 'full' ); ?>
+				<?php endif; ?>
+			</div>
 
-			<div class="nexus-hero-overlay"></div>
+			<div class="nexus-hero-content">
 
-			<div class="nexus-hero-inner">
-
-				   <div class="nexus-meta-top">
-					   <span class="nexus-date"><?php echo esc_html( get_the_date( 'd. M Y' ) ); ?></span>
-					   <span class="separator">|</span>
-					   <span class="nexus-reading-time"><?php
-						   printf(
-							   /* translators: %d: reading time in minutes */
-							   esc_html__( '⏱ %d Min. Lesezeit', 'blocksy-child' ),
-							   nexus_get_reading_time()
-						   );
-					   ?></span>
-				   </div>
+				<div class="nexus-meta-top">
+					<span class="nexus-date"><?php echo esc_html( get_the_date( 'd. M Y' ) ); ?></span>
+					<span class="separator">|</span>
+					<span class="nexus-reading-time"><?php
+						printf(
+							/* translators: %d: reading time in minutes */
+							esc_html__( '⏱ %d Min. Lesezeit', 'blocksy-child' ),
+							nexus_get_reading_time()
+						);
+					?></span>
+				</div>
 
 				<h1 class="nexus-title"><?php the_title(); ?></h1>
 

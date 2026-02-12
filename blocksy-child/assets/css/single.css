@@ -10,32 +10,40 @@
     min-height: 100vh;
 }
 
-/* 2. HERO SECTION */
-.nexus-article-hero { 
-    position: relative; 
-    padding: 160px 40px 80px 40px; 
-    margin-bottom: 4rem; 
-    color: #fff; 
-    background-color: #1a1a1a;  
-    background-size: cover; 
-    background-position: center; 
-    text-align: center;
+/* 2. HERO SECTION — Split-Layout (50/50) */
+.nexus-article-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+    margin-bottom: 4rem;
+    color: #fff;
+    background-color: #0a0a0a;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-} 
+}
 
-.nexus-hero-overlay { 
-    position: absolute; 
-    top: 0; left: 0; width: 100%; height: 100%; 
-    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4)); 
-    z-index: 1; 
-} 
+.nexus-hero-image {
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+}
+.nexus-hero-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-.nexus-hero-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; } 
+.nexus-hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 48px;
+    text-align: left;
+}
 
 .nexus-title {
     font-family: 'Satoshi', sans-serif;
-    font-size: 3.5rem; 
-    line-height: 1.1;
+    font-size: 2.8rem;
+    line-height: 1.15;
     font-weight: 900;
     margin-bottom: 40px;
     color: #ffffff;
@@ -174,6 +182,23 @@
 }
 .nexus-post-layout {
     align-items: start;
+}
+
+/* RESPONSIVE: Hero + Layout */
+@media (max-width: 768px) {
+    .nexus-article-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+    .nexus-hero-image {
+        max-height: 50vh;
+    }
+    .nexus-hero-content {
+        padding: 40px 20px;
+    }
+    .nexus-title {
+        font-size: 2rem;
+    }
 }
 
 @media (max-width: 1023px) {
