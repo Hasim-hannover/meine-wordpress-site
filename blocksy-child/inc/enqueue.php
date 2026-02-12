@@ -143,6 +143,11 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-meta-ads-css', 'meta-ads.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-meta-ads-js', 'meta-ads.js', [ 'nexus-core-js' ] );
 	}
+
+	// ── O) Template: Kostenlose Tools Hub ─────────────────────────
+	if ( is_page_template( 'page-tools.php' ) || is_page( 'tools' ) || is_page( 'kostenlose-tools' ) ) {
+		hu_enqueue_css( 'nexus-tools-css', 'tools.css', [ 'nexus-design-system' ] );
+	}
 }
 
 /**

@@ -1,0 +1,141 @@
+/**
+ * Tools Hub Page — tools.css
+ * Kostenlose Tools für dein Wachstum
+ *
+ * Nutzt ausschließlich NEXUS Design System Tokens.
+ * Scope: .tools-hub-page
+ *
+ * @package Blocksy_Child
+ */
+
+/* ── Layout ──────────────────────────────────────────────── */
+
+.tools-hub-page {
+	min-height: 80vh;
+	padding: var(--nx-space-section) var(--nx-space-xl);
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.tools-main {
+	width: 100%;
+	max-width: 800px;
+	text-align: center;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+
+.tools-header {
+	margin-bottom: var(--nx-space-2xl);
+	animation: nx-fadeInUp 0.6s var(--nx-ease) both;
+}
+
+.tools-header__title {
+	font-size: var(--nx-text-hero);
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+	margin-bottom: var(--nx-space-md);
+	background: linear-gradient(135deg, var(--nx-text) 60%, var(--nx-text-muted) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.tools-header__subtitle {
+	color: var(--nx-text-muted);
+	font-size: var(--nx-text-lg);
+	max-width: 600px;
+	margin: 0 auto;
+	line-height: 1.7;
+}
+
+/* ── Grid ─────────────────────────────────────────────────── */
+
+.tools-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--nx-space-lg);
+}
+
+@media (min-width: 768px) {
+	.tools-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	/* Letzte Karte zentrieren, wenn ungerade Anzahl */
+	.tools-card:last-child:nth-child(odd) {
+		grid-column: 1 / -1;
+		max-width: calc(50% - 0.75rem);
+		justify-self: center;
+	}
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+
+.tools-card {
+	display: block;
+	text-decoration: none;
+	color: var(--nx-text);
+	background: var(--nx-bg-glass);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border: 1px solid var(--nx-border);
+	border-radius: var(--nx-radius-lg);
+	padding: var(--nx-space-2xl) var(--nx-space-xl);
+	transition: all var(--nx-duration) var(--nx-ease);
+	position: relative;
+	overflow: hidden;
+	animation: nx-fadeInUp 0.6s var(--nx-ease) both;
+}
+
+.tools-card:nth-child(2) { animation-delay: 0.1s; }
+.tools-card:nth-child(3) { animation-delay: 0.2s; }
+.tools-card:nth-child(4) { animation-delay: 0.3s; }
+
+.tools-card:hover {
+	transform: translateY(-5px);
+	border-color: var(--nx-border-gold);
+	box-shadow: var(--nx-shadow-gold);
+}
+
+/* Gold Top-Accent Linie */
+.tools-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: var(--nx-gold);
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform var(--nx-duration) var(--nx-ease);
+}
+
+.tools-card:hover::before {
+	transform: scaleX(1);
+}
+
+/* ── Card Inhalt ──────────────────────────────────────────── */
+
+.tools-card__icon {
+	font-size: 2.5rem;
+	margin-bottom: var(--nx-space-md);
+	line-height: 1;
+}
+
+.tools-card__title {
+	font-size: var(--nx-text-xl);
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	margin-bottom: var(--nx-space-sm);
+	color: var(--nx-text);
+}
+
+.tools-card__desc {
+	font-size: var(--nx-text-sm);
+	color: var(--nx-text-muted);
+	line-height: 1.6;
+}
