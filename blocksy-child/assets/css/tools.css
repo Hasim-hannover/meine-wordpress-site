@@ -32,15 +32,11 @@
 }
 
 .tools-header__title {
-	font-size: var(--nx-text-hero);
-	font-weight: 800;
-	letter-spacing: -0.02em;
+	font-size: clamp(2.5rem, 5vw, 4.5rem);
+	font-weight: 900;
 	line-height: 1.1;
-	margin-bottom: var(--nx-space-md);
-	background: linear-gradient(135deg, var(--nx-text) 60%, var(--nx-text-muted) 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
+	margin-bottom: 1.5rem;
+	color: #fff;
 }
 
 .tools-header__subtitle {
