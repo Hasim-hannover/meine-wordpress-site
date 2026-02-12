@@ -1183,3 +1183,16 @@ body.wp-customizer .ct-customizer-shortcut {
     transform: none !important;
     margin-top: 0 !important;
 }
+
+/* 5. Flight Mode: Nur Logo + CTA sichtbar */
+.ct-header .ct-menu,
+.ct-header .nexus-nav-btn {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.ct-header.nexus-flight-mode .ct-menu,
+.ct-header.nexus-flight-mode .nexus-nav-btn {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
