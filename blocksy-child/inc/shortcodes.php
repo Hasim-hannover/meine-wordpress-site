@@ -205,44 +205,76 @@ function hu_wgos_block_shortcode() {
 }
 add_shortcode( 'hu_wgos_block', 'hu_wgos_block_shortcode' );
 
-// 3. Erfolge Section (NEUTRALISIERT: E-Commerce statt Shopify Plus)
+// 3. Erfolge Section
 function hu_erfolge_section_shortcode() {
     ob_start();
     ?>
-     <section id="erfolge" aria-labelledby="cases-heading" style="background:var(--glass-bg); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border);">
-        <div class="container">
-            <div class="section-title">
-                <span class="badge">Track Record</span>
-                <h2 id="cases-heading">Ergebnisse statt Versprechen.</h2>
-                <p>Echte Zahlen aus Projekten, bei denen Strategie und Technik perfekt ineinandergreifen.</p>
-            </div>
-            
-            <article class="success-card">
-                <h3>E3 New Energy — Lead-Maschine</h3>
-                <p class="muted">B2B Leadgen · High-Performance WordPress · 12 Monate</p>
-                <div class="metrics">
-                    <div class="metric"><div style="color:var(--success);font-weight:800;font-size:1.4rem;">1.750+</div><div class="muted">Qualifizierte Leads</div></div>
-                    <div class="metric"><div style="color:var(--success)">-83%</div><div class="muted">CPL Reduktion</div></div>
-                    <div class="metric"><div style="color:var(--gold);font-weight:800;font-size:1.4rem;">Top 3</div><div class="muted">SEO Rankings</div></div>
-                    <div class="metric"><div style="color:var(--success)">100%</div><div class="muted">DSGVO Tracking</div></div>
-                </div>
-            </article>
+    <section id="erfolge" aria-labelledby="cases-heading" style="padding:5rem 0; background:var(--nx-bg-glass); border-top:1px solid var(--nx-border); border-bottom:1px solid var(--nx-border);">
+        <div class="nx-container">
 
-            <article class="success-card">
-                <h3>DOMDAR — E-Commerce Scaling</h3>
-                <p class="muted">Performance Relaunch · CRO & UX Strategy · 6 Monate</p>
-                <div class="metrics">
-                    <div class="metric"><div style="color:var(--success)">+270%</div><div class="muted">Conversion Rate</div></div>
-                    <div class="metric"><div style="color:var(--gold)">+445%</div><div class="muted">Warenkorb-Wert</div></div>
-                    <div class="metric"><div style="color:var(--success)">-62%</div><div class="muted">Abbrüche</div></div>
-                    <div class="metric"><div style="color:var(--success)">0.4s</div><div class="muted">Ladezeit</div></div>
-                </div>
-            </article>
-
-            <div style="text-align:center; margin-top: 2rem; display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
-                <a href="/customer-journey-audit/" class="btn btn-primary" data-track-action="cta_erfolge_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
-                <a href="/case-studies/" class="btn btn-ghost">Case Studies ansehen</a>
+            <div style="text-align:center; margin-bottom:3rem;">
+                <span class="nx-badge nx-badge--gold">Track Record</span>
+                <h2 id="cases-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Ergebnisse statt Versprechen.</h2>
+                <p style="color:var(--nx-text-muted);">Echte Zahlen aus Projekten, bei denen Strategie und Technik ineinandergreifen.</p>
             </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-bottom:3rem;">
+
+                <article class="nx-card" style="border-top:3px solid var(--nx-success);">
+                    <p class="nx-card__subtitle">B2B Leadgen · High-Performance WordPress · 12 Monate</p>
+                    <h3 class="nx-card__title">E3 New Energy<br><span style="color:var(--nx-gold); font-size:0.85em;">Lead-Maschine</span></h3>
+                    <div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+                        <div class="nx-metric">
+                            <span class="nx-metric__value" style="color:var(--nx-success);">1.750+</span>
+                            <span class="nx-metric__label">Qualif. Leads</span>
+                        </div>
+                        <div class="nx-metric">
+                            <span class="nx-metric__value" style="color:var(--nx-success);">−83%</span>
+                            <span class="nx-metric__label">CPL Reduktion</span>
+                        </div>
+                        <div class="nx-metric">
+                            <span class="nx-metric__value" style="color:var(--nx-gold);">Top 3</span>
+                            <span class="nx-metric__label">SEO Rankings</span>
+                        </div>
+                        <div class="nx-metric">
+                            <span class="nx-metric__value" style="color:var(--nx-success);">100%</span>
+                            <span class="nx-metric__label">DSGVO Tracking</span>
+                        </div>
+                    </div>
+                    <a href="/case-studies/e3-new-energy/" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Case Study lesen →</a>
+                </article>
+
+                <article class="nx-card" style="border-top:3px solid var(--nx-gold);">
+                    <p class="nx-card__subtitle">Performance Relaunch · CRO &amp; UX Strategy · 6 Monate</p>
+                    <h3 class="nx-card__title">DOMDAR<br><span style="color:var(--nx-gold); font-size:0.85em;">E-Commerce Scaling</span></h3>
+                    <div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+                        <div class="nx-metric">
+                            <span class="nx-metric__value" style="color:var(--nx-success);">+270%</span>
+                            <span class="nx-metric__label">Conversion Rate</span>
+                        </div>
+                        <div class="nx-metric">
+                            <span class="nx-metric__value" style="color:var(--nx-gold);">+445%</span>
+                            <span class="nx-metric__label">Warenkorb-Wert</span>
+                        </div>
+                        <div class="nx-metric">
+                            <span class="nx-metric__value" style="color:var(--nx-success);">−62%</span>
+                            <span class="nx-metric__label">Abbrüche</span>
+                        </div>
+                        <div class="nx-metric">
+                            <span class="nx-metric__value" style="color:var(--nx-success);">0.4s</span>
+                            <span class="nx-metric__label">Ladezeit</span>
+                        </div>
+                    </div>
+                    <a href="/case-studies/" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Alle Cases ansehen →</a>
+                </article>
+
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
+                <a href="/customer-journey-audit/" class="nx-btn nx-btn--primary" data-track-action="cta_erfolge_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
+                <a href="/case-studies/" class="nx-btn nx-btn--ghost" data-track-action="cta_erfolge_cases" data-track-category="lead_gen">Case Studies ansehen</a>
+            </div>
+
         </div>
     </section>
     <?php
