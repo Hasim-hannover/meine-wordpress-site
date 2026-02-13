@@ -705,6 +705,74 @@
   color: #64748b;
 }
 
+/* ─── EMAIL CAPTURE (Step 2) ────────────────────────────── */
+.result-email-capture {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 176, 32, 0.2);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.email-capture-label {
+  font-weight: 800;
+  font-size: 1rem;
+  margin: 0 0 1rem;
+  color: #fff;
+}
+
+.email-capture-row {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 420px;
+  margin: 0 auto 0.75rem;
+}
+
+.email-capture-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.email-capture-input:focus {
+  border-color: rgba(255, 176, 32, 0.5);
+}
+
+.email-capture-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--gold-gradient);
+  color: #000;
+  font-weight: 900;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: transform 0.2s;
+  white-space: nowrap;
+}
+
+.email-capture-btn:hover { transform: scale(1.03); }
+
+.email-capture-note {
+  font-size: 0.75rem;
+  color: #666;
+  margin: 0;
+}
+
+.email-capture-success {
+  color: #4ade80;
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 768px) {
   .score-grid {

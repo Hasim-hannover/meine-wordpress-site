@@ -238,6 +238,9 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     // ── CTA
     html += renderCTA(data);
 
+    // ── Step 2: Email Capture (nach Ergebnis)
+    html += renderEmailCapture();
+
     results.innerHTML = html;
 
     // Trigger animations
@@ -248,6 +251,10 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
 
     // Scroll to results
     results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Bind email capture form
+    var emailForm = document.getElementById('audit-email-capture');
+    if (emailForm) emailForm.addEventListener('submit', handleEmailCapture);
 
     // Update nav
     updateNavForResults();
@@ -494,6 +501,60 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
         '<span class="result-cta-sub">' + (cta.sublabel || '30 Min · Ihre Daten, Ihr Plan, Ihre Entscheidung') + '</span>' +
       '</div>'
     );
+  }
+
+  // ── Email Capture (Step 2 — nach Live-Ergebnis)
+  function renderEmailCapture() {
+    return (
+      '<div class="result-email-capture result-animate" id="audit-email-capture-wrap">' +
+        '<form id="audit-email-capture" novalidate>' +
+          '<p class="email-capture-label">Report per E-Mail sichern <span style="opacity:0.5;font-weight:400;">(optional)</span></p>' +
+          '<div class="email-capture-row">' +
+            '<input type="email" name="email" placeholder="ihre@email.de" autocomplete="email" class="email-capture-input" />' +
+            '<button type="submit" class="email-capture-btn">Senden</button>' +
+          '</div>' +
+          '<p class="email-capture-note">Nur Report. Kein Spam. Öffentliche Daten + konservative Euro-Schätzung.</p>' +
+          '<div id="email-capture-feedback" style="display:none;"></div>' +
+        '</form>' +
+      '</div>'
+    );
+  }
+
+  function handleEmailCapture(e) {
+    e.preventDefault();
+    var form = e.target;
+    var email = form.querySelector('[name="email"]').value.trim();
+    var feedback = document.getElementById('email-capture-feedback');
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (feedback) {
+        feedback.textContent = 'Bitte eine gültige E-Mail-Adresse eingeben.';
+        feedback.style.display = 'block';
+        feedback.style.color = '#f87171';
+      }
+      return;
+    }
+
+    // Send email + jobId to webhook
+    fetch(CONFIG.webhookStart, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, jobId: state.jobId, url: state.auditUrl, step: 'email_capture' })
+    })
+    .then(function () {
+      var wrap = document.getElementById('audit-email-capture-wrap');
+      if (wrap) {
+        wrap.innerHTML =
+          '<p class="email-capture-success">Report wird zugestellt. Checke deinen Posteingang.</p>';
+      }
+    })
+    .catch(function () {
+      if (feedback) {
+        feedback.textContent = 'Fehler beim Senden. Bitte erneut versuchen.';
+        feedback.style.display = 'block';
+        feedback.style.color = '#f87171';
+      }
+    });
   }
 
   // ─── HELPERS ─────────────────────────────────────────────
