@@ -281,19 +281,34 @@ add_shortcode( 'hu_prozess', 'hu_prozess_section_shortcode' );
 function hu_faq_section_shortcode() {
     ob_start();
     ?>
-    <section id="faq" aria-labelledby="faq-heading">
-        <div class="container">
-            <div class="section-title">
-                <span class="badge">FAQ</span>
-                <h2 id="faq-heading">Häufige Fragen</h2>
-                <p>Klarheit vor dem ersten Schritt.</p>
+    <section id="faq" aria-labelledby="faq-heading" style="background:var(--glass-bg); border-top:1px solid var(--glass-border); padding:5rem 0;">
+        <div class="nx-container">
+            <div style="text-align:center; margin-bottom:3rem;">
+                <span class="nx-badge nx-badge--gold">FAQ</span>
+                <h2 id="faq-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Häufige Fragen</h2>
+                <p style="color:var(--nx-text-muted);">Klarheit vor dem ersten Schritt.</p>
             </div>
-            <div class="faq" style="max-width:800px; margin:0 auto;">
-                <details><summary>Was bedeutet "Privacy-first Tracking" konkret?</summary><div class="faq-content">Minimal notwendige Events statt Daten-Sammelwut: Consent Mode v2 sauber implementiert, Server-Side GTM wo sinnvoll, vollständig dokumentiert. Ziel: belastbare KPIs ohne Vertrauensverlust bei Ihren Nutzern.</div></details>
-                <details><summary>Brauchen wir dann überhaupt noch Ads?</summary><div class="faq-content">Das ist Ihre Entscheidung. Wenn das Owned-Fundament steht (Seiten, Proof, Messbarkeit), können Ads sehr effizient skalieren. Kein Dauereinsatz als Pflicht — Ads sind ein Verstärker, nicht das Betriebssystem.</div></details>
-                <details><summary>Was unterscheidet Credits von Stundensätzen?</summary><div class="faq-content">Planungssicherheit. Stunden können ausufern. Credits sind fix: Sie wissen vorher genau, was eine Landingpage oder ein Tracking-Setup kostet. Das Risiko für Mehraufwand liegt bei mir.</div></details>
-                <details><summary>Warum ist der Audit der erste Schritt?</summary><div class="faq-content">Weil Guesswork teuer ist. Im Free Journey Audit identifizieren wir, ob Ihre Bremsen in Speed, Code, UX, SEO oder Tracking liegen — bevor Zeit oder Budget investiert wird. 48h, kostenlos, kein Pitch.</div></details>
-                <details><summary>Für wen ist das nichts?</summary><div class="faq-content">Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen, die Baukasten-Preise erwarten. Das System ist für B2B-Unternehmen ab ~500.000 € Jahresumsatz, die planbar skalieren wollen.</div></details>
+            <div class="nx-faq">
+                <details class="nx-faq__item">
+                    <summary>Was bedeutet "Privacy-first Tracking" konkret?</summary>
+                    <div class="nx-faq__content">Minimal notwendige Events statt Daten-Sammelwut: Consent Mode v2 sauber implementiert, Server-Side GTM wo sinnvoll, vollständig dokumentiert. Ziel: belastbare KPIs ohne Vertrauensverlust bei Ihren Nutzern.</div>
+                </details>
+                <details class="nx-faq__item">
+                    <summary>Brauchen wir dann überhaupt noch Ads?</summary>
+                    <div class="nx-faq__content">Das ist Ihre Entscheidung. Wenn das Owned-Fundament steht (Seiten, Proof, Messbarkeit), können Ads sehr effizient skalieren. Kein Dauereinsatz als Pflicht&nbsp;— Ads sind ein Verstärker, nicht das Betriebssystem.</div>
+                </details>
+                <details class="nx-faq__item">
+                    <summary>Was unterscheidet Credits von Stundensätzen?</summary>
+                    <div class="nx-faq__content">Planungssicherheit. Stunden können ausufern. Credits sind fix: Sie wissen vorher genau, was eine Landingpage oder ein Tracking-Setup kostet. Das Risiko für Mehraufwand liegt bei mir.</div>
+                </details>
+                <details class="nx-faq__item">
+                    <summary>Warum ist der Audit der erste Schritt?</summary>
+                    <div class="nx-faq__content">Weil Guesswork teuer ist. Im Free Journey Audit identifizieren wir, ob Ihre Bremsen in Speed, Code, UX, SEO oder Tracking liegen&nbsp;— bevor Zeit oder Budget investiert wird. 48h, kostenlos, kein Pitch.</div>
+                </details>
+                <details class="nx-faq__item">
+                    <summary>Für wen ist das nichts?</summary>
+                    <div class="nx-faq__content">Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen, die Baukasten-Preise erwarten. Das System ist für B2B-Unternehmen ab ~500.000&nbsp;€ Jahresumsatz, die planbar skalieren wollen.</div>
+                </details>
             </div>
         </div>
     </section>
@@ -427,30 +442,30 @@ add_shortcode( 'hu_blog', 'hu_blog_section_shortcode' );
 function hu_cta_section_shortcode() {
     ob_start();
     ?>
-    <section id="cta" aria-labelledby="cta-heading" style="background:var(--glass-bg); border-top: 1px solid var(--glass-border);">
-        <div class="container">
-            <div class="section-title">
-                <span class="badge">Nächster Schritt</span>
-                <h2 id="cta-heading">Welche Hebel liegen bei Ihnen brach?</h2>
+    <section id="cta" aria-labelledby="cta-heading" style="padding:5rem 0;">
+        <div class="nx-container">
+            <div class="nx-cta-box">
+                <span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Nächster Schritt</span>
+                <h2 id="cta-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1rem; color:#fff;">Welche Hebel liegen bei Ihnen brach?</h2>
                 <p>Im Free Journey Audit analysieren wir Ihre WordPress-Präsenz auf die größten Wachstumspotenziale&nbsp;— kostenlos, in 48h, ohne Pitch.</p>
-            </div>
 
-            <!-- Proof direkt über CTA -->
-            <div class="hero-proof" role="group" aria-label="Beispiel-Ergebnisse" style="justify-content:center; margin-bottom:1.5rem;">
-                <span class="proof-item">1.750+ qualifizierte Leads</span>
-                <span class="proof-item">CPL &minus;83&nbsp;%</span>
-                <span class="proof-item">E3 New Energy</span>
-            </div>
+                <!-- Proof -->
+                <div role="group" aria-label="Beispiel-Ergebnisse" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem 1.5rem; margin-bottom:2rem;">
+                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ 1.750+ qualifizierte Leads</span>
+                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ CPL &minus;83&nbsp;%</span>
+                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ E3 New Energy</span>
+                </div>
 
-            <div style="text-align:center; display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
-                <a class="btn btn-primary" href="/customer-journey-audit/" data-track-action="cta_footer_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
-                <a class="btn btn-ghost" href="/case-studies/" data-track-action="cta_footer_cases" data-track-category="lead_gen">Case Studies ansehen</a>
-            </div>
+                <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
+                    <a class="nx-btn nx-btn--primary" href="/customer-journey-audit/" data-track-action="cta_footer_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
+                    <a class="nx-btn nx-btn--ghost" href="/case-studies/" data-track-action="cta_footer_cases" data-track-category="lead_gen">Case Studies ansehen</a>
+                </div>
 
-            <p style="text-align:center; font-size:0.8rem; color:#555; margin-top:1rem;">
-                Ergebnisse hängen von der Ausgangslage ab.
-                <a href="/wordpress-growth-operating-system/" style="color:var(--gold); text-decoration:underline; font-weight:600;">WGOS verstehen →</a>
-            </p>
+                <p style="font-size:0.8rem; color:var(--nx-text-muted); margin-top:1.5rem; margin-bottom:0;">
+                    Ergebnisse hängen von der Ausgangslage ab.
+                    <a href="/wordpress-growth-operating-system/" style="color:var(--nx-gold); text-decoration:underline; font-weight:600;">WGOS verstehen →</a>
+                </p>
+            </div>
         </div>
     </section>
 
