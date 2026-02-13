@@ -411,15 +411,6 @@ get_header();
 
         </div>
 
-        <!-- Quote -->
-        <blockquote class="cs-quote">
-            <p>
-                "Wir haben endlich eine Website, die wirklich arbeitet. Die Anfragen kommen
-                rein, während wir Projekte abwickeln&nbsp;— nicht weil wir gerade ein Budget
-                ausgeben."
-            </p>
-            <cite>Geschäftsführung E3 New Energy GmbH</cite>
-        </blockquote>
 
     </div>
 </section>
