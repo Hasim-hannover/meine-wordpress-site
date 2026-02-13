@@ -120,10 +120,8 @@
 }
 
 .nexus-about .story-headline .highlight {
-    background: linear-gradient(135deg, var(--earth) 0%, var(--growth) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--gold);
+    -webkit-text-fill-color: var(--gold);
 }
 
 .nexus-about .story-paragraph {
@@ -258,8 +256,9 @@
     display: inline-block;
     padding: 0.4rem 1rem;
     border-radius: 999px;
-    background: rgba(16, 185, 129, 0.07);
-    color: var(--earth);
+    background: rgba(255, 176, 32, 0.08);
+    color: var(--gold);
+    border: 1px solid rgba(255, 176, 32, 0.2);
     font-weight: 700;
     font-size: 0.9rem;
     margin-bottom: 1rem;
@@ -657,16 +656,15 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--earth), var(--growth));
+    background: linear-gradient(90deg, var(--gold), #ffc14d);
 }
 
 .nexus-about .cta-headline {
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 800;
     margin-bottom: 1.5rem;
-    background: linear-gradient(90deg, var(--earth), var(--growth));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #fff;
+    -webkit-text-fill-color: #fff;
 }
 
 .nexus-about .cta-story {
@@ -692,14 +690,15 @@
 }
 
 .nexus-about .btn-primary {
-    background: linear-gradient(90deg, var(--earth), var(--earth-hover));
-    color: #111;
-    box-shadow: var(--shadow-earth);
+    background: var(--gold);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(255, 176, 32, 0.3);
 }
 
 .nexus-about .btn-primary:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 45px rgba(16, 185, 129, 0.25);
+    background: #ffc14d;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 176, 32, 0.4);
 }
 
 .nexus-about .btn-ghost {
@@ -709,8 +708,8 @@
 }
 
 .nexus-about .btn-ghost:hover {
-    border-color: var(--earth);
-    background: rgba(16, 185, 129, 0.05);
+    border-color: var(--gold);
+    background: rgba(255, 176, 32, 0.05);
     transform: translateY(-2px);
 }
 
@@ -771,4 +770,248 @@
     .nexus-about .btn-group { flex-direction: column; align-items: center; }
     .nexus-about .btn { width: 100%; max-width: 300px; }
     .nexus-about .growth-animation { height: 150px; }
+}
+
+/* =========================================
+   ABOUT PAGE – NEUE KLASSEN (CRO-Patch)
+   ========================================= */
+
+/* Hero Bullets */
+.nexus-about .about-hero-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.nexus-about .about-hero-bullets li {
+    background: rgba(255, 176, 32, 0.07);
+    border: 1px solid rgba(255, 176, 32, 0.2);
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-weight: 700;
+}
+
+/* Hero CTA Block */
+.nexus-about .about-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Proof Snippet */
+.nexus-about .about-proof-snippet {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.82rem;
+}
+
+.nexus-about .about-proof-label {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.nexus-about .about-proof-kpi {
+    color: var(--gold);
+    font-weight: 800;
+}
+
+.nexus-about .about-proof-sep {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.nexus-about .about-proof-note {
+    color: var(--muted);
+    font-size: 0.78rem;
+    width: 100%;
+}
+
+/* CTA Section Proof */
+.nexus-about .about-cta-proof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 0.75rem;
+    flex-wrap: wrap;
+    margin: 0 0 1.5rem;
+    font-size: 0.85rem;
+}
+
+/* Principle Example text */
+.nexus-about .about-principle-example {
+    font-size: 0.9rem !important;
+    color: rgba(161, 161, 170, 0.7) !important;
+    font-style: italic;
+    margin-top: 0.75rem !important;
+}
+
+/* Phase lists */
+.nexus-about .about-phase-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.nexus-about .about-phase-list li {
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.nexus-about .about-phase-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.8rem;
+    top: 0.05em;
+}
+
+/* Inline links */
+.nexus-about .about-inline-link {
+    color: var(--gold);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.nexus-about .about-inline-link:hover { opacity: 0.75; }
+
+/* FAQ Wrap */
+.nexus-about .about-faq-wrap {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Filter Section */
+.nexus-about .about-filter-section {
+    padding: 80px 0;
+    background: rgba(255, 176, 32, 0.02);
+}
+
+.nexus-about .about-filter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.nexus-about .about-filter-col {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.nexus-about .about-filter-col--yes {
+    border-top: 3px solid var(--gold);
+}
+
+.nexus-about .about-filter-col--no {
+    border-top: 3px solid rgba(255, 255, 255, 0.15);
+}
+
+.nexus-about .about-filter-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--muted);
+}
+
+.nexus-about .about-filter-col--yes .about-filter-label {
+    color: var(--gold);
+}
+
+.nexus-about .about-filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.nexus-about .about-filter-list li {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding-left: 1.4rem;
+    position: relative;
+}
+
+.nexus-about .about-filter-col--yes .about-filter-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+}
+
+.nexus-about .about-filter-col--no .about-filter-list li::before {
+    content: '✕';
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.25);
+    font-weight: 700;
+}
+
+/* Tertiary CTA */
+.nexus-about .about-tertiary-cta {
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.nexus-about .about-tertiary-cta a {
+    color: var(--muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+}
+
+.nexus-about .about-tertiary-cta a:hover { color: #fff; }
+
+/* Milestone year badges → gold-tinted */
+.nexus-about .milestone-year {
+    background: rgba(255, 176, 32, 0.07);
+    border: 1px solid rgba(255, 176, 32, 0.2);
+    color: var(--gold);
+}
+
+/* h2 gradient → plain white (matches gold system) */
+.nexus-about h2 {
+    background: none;
+    -webkit-text-fill-color: #fff;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .nexus-about .about-filter-grid { grid-template-columns: 1fr; }
+    .nexus-about .about-hero-ctas { flex-direction: column; }
+    .nexus-about .about-hero-bullets { justify-content: center; }
+    .nexus-about .about-proof-snippet { justify-content: center; }
 }
