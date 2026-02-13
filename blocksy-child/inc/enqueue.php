@@ -148,6 +148,12 @@ function hu_enqueue_assets() {
 	if ( is_page_template( 'page-tools.php' ) || is_page( 'tools' ) || is_page( 'kostenlose-tools' ) ) {
 		hu_enqueue_css( 'nexus-tools-css', 'tools.css', [ 'nexus-design-system' ] );
 	}
+
+	// ── P) Template: Case Study – E3 New Energy ───────────────────
+	if ( is_page_template( 'page-case-e3.php' ) ) {
+		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-case-study-css', 'case-study.css', [ 'nexus-home-css' ] );
+	}
 }
 
 /**
