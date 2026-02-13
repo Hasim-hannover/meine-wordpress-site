@@ -412,11 +412,16 @@ function hu_output_schema()
 
                 // Output FAQPage schema if found
                 if (!empty($faq_entities)) {
+                    // Auf der Startseite kein Seiten-Slug in der ID verwenden
+                    $faq_base = is_front_page() ? home_url('/') : home_url('/' . ($slug ?: '') . '/');
                     $faq_schema = [
-                        '@context'   => 'https://schema.org',
-                        '@type'      => 'FAQPage',
-                        '@id'        => home_url('/' . ($slug ?: '') . '/#faq'),
-                        'mainEntity' => $faq_entities,
+                        '@context'    => 'https://schema.org',
+                        '@type'       => 'FAQPage',
+                        '@id'         => $faq_base . '#faq',
+                        'url'         => $faq_base,
+                        'inLanguage'  => 'de',
+                        'publisher'   => ['@id' => home_url('/#organization')],
+                        'mainEntity'  => $faq_entities,
                     ];
                     $schemas[] = $faq_schema;
                 }
