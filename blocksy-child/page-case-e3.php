@@ -39,13 +39,13 @@ get_header();
         <span class="nx-badge nx-badge--gold">Flagship Case Study</span>
 
         <h1 class="cs-case-hero__title">
-            Von 0 auf <span class="nx-text-gold">1.750+ Leads</span><br>
-            ohne ein Euro Werbebudget.
+            Von 150&nbsp;€ CPL auf <span class="nx-text-gold">~25&nbsp;€</span>&nbsp;—<br>
+            1.750+ Leads im System.
         </h1>
 
         <p class="cs-case-hero__subtitle">
             Wie E3 New Energy GmbH mit einer neuen WordPress-Architektur
-            qualifizierte B2B-Leads generiert&nbsp;— organisch, messbar, skalierbar.
+            qualifizierte B2B-Leads generiert&nbsp;— organisch &amp; paid, messbar, skalierbar.
         </p>
 
         <!-- KPI Snapshot (3 Tiles) -->
@@ -82,7 +82,7 @@ get_header();
         <div class="cs-hero-meta">
             <span class="cs-meta-item">Branche: Erneuerbare Energien (B2B)</span>
             <span class="cs-meta-sep">·</span>
-            <span class="cs-meta-item">Kanal: Organisch / SEO</span>
+            <span class="cs-meta-item">Kanal: SEO + Performance Ads</span>
             <span class="cs-meta-sep">·</span>
             <span class="cs-meta-item">Zeitraum: 12 Monate</span>
         </div>
@@ -111,14 +111,16 @@ get_header();
                     qualifizierte Anfragen generieren soll.
                 </p>
                 <p>
-                    Das Budget für Performance Ads war begrenzt, die organische Sichtbarkeit
-                    nahe null. Anfragen kamen über Empfehlungen&nbsp;— zuverlässig, aber nicht
-                    skalierbar. Die Aufgabe: Eine WordPress-Infrastruktur aufbauen, die
-                    B2B-Entscheider findet, überzeugt und zur Anfrage führt.
+                    Leads wurden zugekauft&nbsp;— im Schnitt 150&nbsp;€ pro Lead. Performance Ads
+                    liefen, aber die organische Sichtbarkeit war nahe null. Die Kosten
+                    stiegen, die Qualität der eingekauften Leads war inkonsistent.
+                    Die Aufgabe: Eine WordPress-Infrastruktur aufbauen, die qualifizierte
+                    B2B-Entscheider selbst anzieht&nbsp;— und den Cost per Lead strukturell senkt,
+                    statt ihn nur durch höheres Budget zu verwalten.
                 </p>
                 <p>
-                    Kein Agenturmodell mit Stundensätzen. Kein Ad-Budget. Nur Assets,
-                    die dem Unternehmen dauerhaft gehören.
+                    Kein Agenturmodell mit Stundensätzen. Assets, die dem Unternehmen
+                    gehören&nbsp;— kombiniert mit gezieltem Paid-Einsatz dort, wo er sich rechnet.
                 </p>
             </div>
 
@@ -195,11 +197,11 @@ get_header();
 
             <div class="nx-card nx-card--flat cs-constraint-card cs-constraint-card--highlight">
                 <div class="cs-constraint-num">03</div>
-                <h3 class="nx-card__title">Kein Lead-System</h3>
+                <h3 class="nx-card__title">Leads zugekauft — ø 150&nbsp;€/Stück</h3>
                 <p class="nx-card__text">
-                    Kontaktformulare ohne Qualifizierung. Keine Segmentierung nach
-                    Anlagengröße, Branche oder Entscheidungsphase. Leads und Neugierige
-                    landeten im selben E-Mail-Postfach.
+                    Externe Lead-Listen und Kauf-Leads zum Durchschnittspreis von 150&nbsp;€.
+                    Keine Qualifizierung nach Anlagengröße oder Entscheidungsphase&nbsp;—
+                    Vertrieb und Neugierige landeten im selben Postfach.
                 </p>
             </div>
 
@@ -329,8 +331,8 @@ get_header();
             <div class="cs-not-item">
                 <span class="cs-not-x">✕</span>
                 <div>
-                    <strong>Kein Ad-Budget</strong>
-                    <p>100% organischer Kanal. Alle Leads gehören dem Unternehmen — kein monatlicher Pflichteinsatz.</p>
+                    <strong>Kein Ads-only-Ansatz</strong>
+                    <p>Paid Ads ergänzen das System — ersetzen es nicht. Owned Assets reduzieren die Abhängigkeit von laufendem Budgeteinsatz.</p>
                 </div>
             </div>
 
@@ -374,13 +376,13 @@ get_header();
             <div class="cs-result-card cs-result-card--primary">
                 <span class="cs-result-value">1.750+</span>
                 <span class="cs-result-label">Qualifizierte B2B-Leads</span>
-                <span class="cs-result-note">organisch, ohne Ad-Budget</span>
+                <span class="cs-result-note">organisch &amp; paid kombiniert</span>
             </div>
 
             <div class="cs-result-card">
                 <span class="cs-result-value">-83%</span>
                 <span class="cs-result-label">Cost per Lead</span>
-                <span class="cs-result-note">vs. vorheriger Ads-Phase</span>
+                <span class="cs-result-note">von ø 150&nbsp;€ auf ~25&nbsp;€</span>
             </div>
 
             <div class="cs-result-card">
@@ -438,7 +440,7 @@ get_header();
                 <summary>Ist das auf unser Unternehmen übertragbar?</summary>
                 <div class="nx-faq__content">
                     Die Ergebnisse entstanden durch ein System, das auf B2B-Unternehmen
-                    ab ~500k€ Jahresumsatz ausgelegt ist. Ob ähnliche Hebel für dich
+                    ab ~500k€ Jahresumsatz ausgelegt ist. Ob ähnliche Hebel für Sie
                     existieren, zeigt der Free Journey Audit in 48h&nbsp;— ohne Verpflichtung.
                 </div>
             </details>
@@ -455,9 +457,9 @@ get_header();
             <details class="nx-faq__item">
                 <summary>Was kostet das WordPress Growth Operating System?</summary>
                 <div class="nx-faq__content">
-                    Das WGOS ist ein monatliches Credit-Modell: du buchst ein Kontingent,
+                    Das WGOS ist ein monatliches Credit-Modell: Sie buchen ein Kontingent,
                     wir setzen Module nach Priorität um. Kein Stundensatz, kein Lock-in.
-                    Details und Pakete findest du auf der
+                    Details und Pakete finden Sie auf der
                     <a href="/wordpress-growth-operating-system/">WGOS-Seite</a>.
                 </div>
             </details>
@@ -466,7 +468,7 @@ get_header();
                 <summary>Bleibt alles bei mir, wenn wir aufhören zusammenzuarbeiten?</summary>
                 <div class="nx-faq__content">
                     Ja, vollständig. Code, Content, Tracking-Setup, Zugänge&nbsp;— alles gehört
-                    dir. Das ist kein Versprechen, das ist die technische Realität
+                    Ihnen. Das ist kein Versprechen, das ist die technische Realität
                     von WordPress und Open Source.
                 </div>
             </details>
@@ -485,10 +487,10 @@ get_header();
         <div class="nx-cta-box">
             <span class="nx-badge nx-badge--gold" style="margin-bottom:1.5rem;display:inline-block;">Nächster Schritt</span>
             <h2 style="font-size:clamp(1.8rem,3.5vw,2.8rem);margin-bottom:1rem;">
-                Welche Hebel liegen bei dir brach?
+                Welche Hebel liegen bei Ihnen brach?
             </h2>
             <p style="color:var(--nx-text-muted);max-width:560px;margin:0 auto 2rem;line-height:1.6;">
-                Im Free Journey Audit analysieren wir deine WordPress-Präsenz
+                Im Free Journey Audit analysieren wir Ihre WordPress-Präsenz
                 auf die größten Wachstumspotenziale&nbsp;— kostenlos, in 48h, ohne Pitch.
             </p>
 
@@ -502,7 +504,7 @@ get_header();
             </div>
 
             <p style="font-size:0.75rem;color:#555;margin-top:1rem;">
-                Ergebnisse hängen von Ausgangslage ab&nbsp;— im Audit siehst du die größten Hebel.
+                Ergebnisse hängen von Ausgangslage ab&nbsp;— im Audit sehen Sie die größten Hebel.
             </p>
 
             <!-- 3 Internal Links -->
