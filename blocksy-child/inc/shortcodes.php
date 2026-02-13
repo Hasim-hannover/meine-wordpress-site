@@ -11,73 +11,81 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
-// 1. Hero Section (POSITIONIERUNG: WordPress Specialist)
+// 1. Hero Section
 function hu_hero_section_shortcode() {
     ob_start();
     ?>
-    <nav id="toc-nav" aria-label="Inhaltsverzeichnis">
-        <h4>Inhalt</h4>
+    <div class="cs-page">
+
+    <nav class="smart-nav" aria-label="Seitennavigation">
         <ul>
-            <li><a href="#start">Start</a></li>
-            <li><a href="#partner">Über mich</a></li>
-            <li><a href="#erfolge">Ergebnisse</a></li>
-            <li><a href="#prozess">Prozess</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#cta">Kontakt</a></li>
+            <li><a href="#hero" title="Start"><div class="nav-dot"></div><span class="nav-text">Start</span></a></li>
+            <li><a href="#owned" title="Prinzip"><div class="nav-dot"></div><span class="nav-text">Owned</span></a></li>
+            <li><a href="#audit" title="Analyse"><div class="nav-dot"></div><span class="nav-text">Diagnose</span></a></li>
+            <li><a href="#wgos" title="System"><div class="nav-dot"></div><span class="nav-text">System</span></a></li>
+            <li><a href="#erfolge" title="Ergebnisse"><div class="nav-dot"></div><span class="nav-text">Erfolge</span></a></li>
+            <li><a href="#blog" title="Wissen"><div class="nav-dot"></div><span class="nav-text">Insights</span></a></li>
+            <li><a href="#faq" title="FAQ"><div class="nav-dot"></div><span class="nav-text">FAQ</span></a></li>
         </ul>
     </nav>
 
-    <header class="hero-section" role="banner" id="start">
-        <div class="container">
-            <div class="section-title">
-                <span class="badge">Hasim Üner – WordPress & Growth Partner</span>
-                <h1>High-End WordPress.<br>Messbares Wachstum.</h1>
-                <p class="sub">Modulare WordPress-Architektur, die B2B-Leads generiert&nbsp;— ohne Dauertropf an Werbebudget.</p>
-                <p class="positioning">WordPress Growth Architect für B2B-Unternehmen ab 500k Jahresumsatz.</p>
-                <ul class="hero-bullets">
-                    <li>98+ PageSpeed (Mobile, garantiert)</li>
-                    <li>Tracking-Genauigkeit &gt;92% (sGTM)</li>
-                    <li>Owned Leads ohne Ad-Abhängigkeit</li>
+    <section class="wp-hero" id="hero" role="banner">
+        <div class="wp-container">
+            <span class="wp-badge">Privacy-first Growth: Owned Leads statt Ad-Miete</span>
+            <h1 class="wp-hero-title">
+                B2B-Leads ohne<br><span>Tracking-Lärm &amp; Blackbox.</span>
+            </h1>
+            <p class="wp-hero-subtitle">
+                Ich baue aus Ihrer WordPress-Instanz ein Owned-Leads-System: ultraschnelle UX, technische SEO, Content-Assets und
+                privacy-first Messbarkeit. Ads sind optional&nbsp;– als Verstärker, nicht als Dauer-Miete.
+            </p>
+            <div class="wp-trust-stack">
+                Stack: Advanced WordPress · Technical SEO · Privacy-by-Design Tracking (Server-Side + Consent Mode v2) · CRO · n8n Automation
+            </div>
+
+            <div class="audit-card-premium" id="audit">
+                <div style="text-align:center; margin-bottom:2rem;">
+                    <span style="background:rgba(255,176,32,0.15); color:#FFB020; padding:6px 12px; border-radius:20px; font-size:0.8rem; font-weight:700;">
+                        Free Journey Audit
+                    </span>
+                </div>
+                <h3 style="text-align:center;">Deep-Dive Tech &amp; Owned-Leads Audit</h3>
+                <p style="text-align:center; color:#aaa; margin-bottom:1.5rem;">
+                    Wir finden die echten Bremsen&nbsp;– und bauen eine Roadmap, die nicht vom Werbebudget abhängt.
+                </p>
+                <ul class="premium-list">
+                    <li><span class="check-icon">✓</span> <div><strong>Performance:</strong> Core Web Vitals &amp; UX-Reibung (Conversion-Hebel)</div></li>
+                    <li><span class="check-icon">✓</span> <div><strong>Privacy-Messbarkeit:</strong> Saubere Events &amp; Datenintegrität ohne Misstrauen</div></li>
+                    <li><span class="check-icon">✓</span> <div><strong>Owned Roadmap:</strong> 90-Tage-Plan für Rankings, Pages &amp; Lead-Qualität</div></li>
                 </ul>
-                <div class="hero-cta-block">
-                    <a href="/customer-journey-audit/" class="btn btn-primary" data-track-action="cta_hero_audit" data-track-category="lead_gen">Free Journey Audit starten (0 €)</a>
+                <div class="price-box text-center">
+                    Expertise-Session (30 Min) · Invest: <strong>0&nbsp;€</strong> <span style="font-size:0.8em; opacity:0.7">(statt 450&nbsp;€)</span>
                 </div>
-                <div class="hero-proof" role="group" aria-label="Ergebnisse">
-                    <span class="proof-item">1.750+ qualifizierte Leads</span>
-                    <span class="proof-item">-83% Cost per Lead</span>
-                    <span class="proof-item">+270% Conversion Rate</span>
-                </div>
-                <p class="hero-risk-note">Ergebnisse hängen von Ausgangslage ab&nbsp;— im Audit sehen Sie die größten Hebel.</p>
-            </div>
-
-            <div class="switch-grid" aria-label="Meine Kompetenzfelder">
-                
-                <div class="switch-card">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-                    <h2>Technische Exzellenz</h2>
-                    <p>Individuelle WordPress-Entwicklung ohne Bloatware. Fokus auf Core Web Vitals, Sicherheit und eine Architektur, die mit Ihrem Business wächst.</p>
-                    <a href="/wordpress-agentur-hannover/" class="btn btn-primary">WordPress Module ansehen</a>
-                </div>
-
-                <div class="switch-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                    <h2>Daten & Strategie</h2>
-                    <p>Wachstum ist kein Zufall. Mit Server-Side Tracking (GA4), Conversion-Optimierung und SEO-Automatisierung machen wir Ihren Erfolg planbar.</p>
-                    <a href="/wordpress-growth-operating-system/" class="btn btn-ghost">WGOS verstehen</a>
+                <div class="wp-btn-wrapper">
+                    <a href="/customer-journey-audit/" class="wp-btn wp-btn-primary full-width" data-track-action="cta_hero_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
                 </div>
             </div>
 
-            <div class="hero-stats" role="group" aria-label="Erfolgsstatistiken">
-                <div class="stat"><div class="num" data-target="98">0</div><div class="label">Google PageSpeed</div></div>
-                <div class="stat"><div class="num" data-target="2500">0</div><div class="label">Leads generiert</div></div>
-                <div class="stat"><div class="num" data-target="100">0</div><div class="label">% Datenhoheit</div></div>
-                <div class="stat"><div class="num" data-target="45">0</div><div class="label">Module deployed</div></div>
-            </div>
-            <div class="hero-links" style="text-align:center; margin-top: 1.5rem;">
-                <a href="/roi-rechner/" style="color:var(--gold); font-weight:700; font-size:0.9rem; text-decoration:underline;">ROI in 60 Sekunden</a>
+            <div class="vertical-metrics" role="group" aria-label="Erfolgsmetriken">
+                <div class="wp-metric">
+                    <span class="wp-metric-value" data-value="98">98</span>
+                    <span class="wp-metric-label">Mobile Performance</span>
+                </div>
+                <div class="wp-metric">
+                    <span class="wp-metric-value" data-value="-83">-83%</span>
+                    <span class="wp-metric-label">CPL (Kosten/Lead)</span>
+                </div>
+                <div class="wp-metric">
+                    <span class="wp-metric-value text-gold">&lt;&nbsp;0.8s</span>
+                    <span class="wp-metric-label">Load Time (LCP)</span>
+                </div>
+                <div class="wp-metric">
+                    <span class="wp-metric-value" data-value="100">100%</span>
+                    <span class="wp-metric-label">Data Ownership</span>
+                </div>
             </div>
         </div>
-    </header>
+    </section>
     <?php
     return ob_get_clean();
 }
@@ -143,8 +151,8 @@ function hu_owned_section_shortcode() {
 
             </div>
 
-            <div style="text-align:center; margin-top:2rem;">
-                <a href="/customer-journey-audit/" class="btn btn-primary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Audit starten: Welche Hebel sind bei Ihnen drin?</a>
+            <div class="text-center" style="margin-top:2rem;">
+                <a href="/customer-journey-audit/" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Audit starten: Welche Hebel sind bei Ihnen drin?</a>
             </div>
         </div>
     </section>
