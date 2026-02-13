@@ -47,7 +47,7 @@ function hu_hero_section_shortcode() {
                     <span class="proof-item">-83% Cost per Lead</span>
                     <span class="proof-item">+270% Conversion Rate</span>
                 </div>
-                <p class="hero-risk-note">Ergebnisse hängen von Ausgangslage ab&nbsp;— im Audit siehst du die größten Hebel.</p>
+                <p class="hero-risk-note">Ergebnisse hängen von Ausgangslage ab&nbsp;— im Audit sehen Sie die größten Hebel.</p>
             </div>
 
             <div class="switch-grid" aria-label="Meine Kompetenzfelder">
@@ -63,7 +63,7 @@ function hu_hero_section_shortcode() {
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
                     <h2>Daten & Strategie</h2>
                     <p>Wachstum ist kein Zufall. Mit Server-Side Tracking (GA4), Conversion-Optimierung und SEO-Automatisierung machen wir Ihren Erfolg planbar.</p>
-                    <a href="/growth-blueprint/" class="btn btn-ghost">Growth Strategie</a>
+                    <a href="/wordpress-growth-operating-system/" class="btn btn-ghost">WGOS verstehen</a>
                 </div>
             </div>
 
@@ -107,6 +107,52 @@ function hu_partner_section_shortcode() {
 }
 add_shortcode( 'hu_partner', 'hu_partner_section_shortcode' );
 
+// 2b. Owned vs Ad-Miete Section
+function hu_owned_section_shortcode() {
+    ob_start();
+    ?>
+    <section id="owned" class="wp-section" style="border-top: 1px solid rgba(255,255,255,0.05);" aria-labelledby="owned-heading">
+        <div class="container">
+            <div class="section-title text-center">
+                <span class="badge">Das Prinzip</span>
+                <h2 id="owned-heading">Owned Leads statt Ad-System auf Miete.</h2>
+                <p>In anspruchsvollen Märkten gewinnt nicht der Lauteste, sondern der Vertrauenswürdigste&nbsp;— eine Pipeline, die mit der Zeit günstiger wird.</p>
+            </div>
+
+            <div class="wp-cards" style="margin-top:2.5rem;">
+
+                <div class="wp-success-card" style="border-top:3px solid rgba(255,255,255,0.1);">
+                    <h3 class="wp-success-title">Modell A: Ad-Miete</h3>
+                    <p class="wp-success-subtitle">Paid-Only, Dauer-Druck</p>
+                    <ul class="premium-list">
+                        <li><span class="check-icon" style="color:#888;">→</span> <div>Schneller Push&nbsp;— solange Budget läuft</div></li>
+                        <li><span class="check-icon" style="color:#888;">→</span> <div>Steigende Medienkosten, sinkende Margen</div></li>
+                        <li><span class="check-icon" style="color:#888;">→</span> <div>Abhängigkeit von Plattform-Regeln &amp; Tracking-Restriktionen</div></li>
+                    </ul>
+                </div>
+
+                <div class="wp-success-card" style="border-top:3px solid var(--gold);">
+                    <h3 class="wp-success-title" style="color:var(--gold);">Modell B: Owned Leads</h3>
+                    <p class="wp-success-subtitle">Privacy-first · SEO · Content · Vertrauen</p>
+                    <ul class="premium-list">
+                        <li><span class="check-icon">✓</span> <div>Assets bauen: Rankings, Pages, Proof, Lead-Flows</div></li>
+                        <li><span class="check-icon">✓</span> <div>Messen, was nötig ist&nbsp;— sauber, DSGVO-konform</div></li>
+                        <li><span class="check-icon">✓</span> <div>Ads optional als Verstärker, wenn das Fundament steht</div></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div style="text-align:center; margin-top:2rem;">
+                <a href="/customer-journey-audit/" class="btn btn-primary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Audit starten: Welche Hebel sind bei Ihnen drin?</a>
+            </div>
+        </div>
+    </section>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'hu_owned', 'hu_owned_section_shortcode' );
+
 // 3. Erfolge Section (NEUTRALISIERT: E-Commerce statt Shopify Plus)
 function hu_erfolge_section_shortcode() {
     ob_start();
@@ -121,7 +167,7 @@ function hu_erfolge_section_shortcode() {
             
             <article class="success-card">
                 <h3>E3 New Energy — Lead-Maschine</h3>
-                <p class="muted">B2C Leadgen · High-Performance WordPress · 8 Monate</p>
+                <p class="muted">B2B Leadgen · High-Performance WordPress · 12 Monate</p>
                 <div class="metrics">
                     <div class="metric"><div style="color:var(--success);font-weight:800;font-size:1.4rem;">1.750+</div><div class="muted">Qualifizierte Leads</div></div>
                     <div class="metric"><div style="color:var(--success)">-83%</div><div class="muted">CPL Reduktion</div></div>
@@ -141,7 +187,8 @@ function hu_erfolge_section_shortcode() {
                 </div>
             </article>
 
-            <div style="text-align:center; margin-top: 2rem;">
+            <div style="text-align:center; margin-top: 2rem; display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
+                <a href="/customer-journey-audit/" class="btn btn-primary" data-track-action="cta_erfolge_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
                 <a href="/case-studies/" class="btn btn-ghost">Case Studies ansehen</a>
             </div>
         </div>
@@ -163,7 +210,7 @@ function hu_prozess_section_shortcode() {
                 <p>Kein unübersichtliches Stundenschreiben. Wir definieren Ziele und ich setze diese in klaren Sprints und Modulen um.</p>
             </div>
             <div class="process">
-                <article class="step"><div class="num">1</div><h3>Audit & Roadmap</h3><p class="muted">Wir analysieren den Ist-Zustand Ihrer WordPress-Installation und Ihrer Daten. Sie erhalten einen klaren Maßnahmen-Plan.</p></article>
+                <article class="step"><div class="num">1</div><h3>Free Journey Audit</h3><p class="muted">Wir analysieren Ihre WordPress-Präsenz auf Tracking, Performance, Conversion und SEO. Sie erhalten eine priorisierte Roadmap&nbsp;— kostenlos, in 48h. <a href="/customer-journey-audit/" style="color:var(--gold); font-weight:700;">Audit starten →</a></p></article>
                 <article class="step"><div class="num">2</div><h3>Modulare Umsetzung</h3><p class="muted">Ob Performance-Boost, Tracking-Setup oder Design-Refresh: Ich setze die definierten Pakete technisch sauber um.</p></article>
                 <article class="step"><div class="num">3</div><h3>Review & Deployment</h3><p class="muted">Jedes Modul wird getestet und abgenommen, bevor es live geht. Volle Transparenz über GitHub und Staging-Umgebungen.</p></article>
                 <article class="step"><div class="num">4</div><h3>Growth Retainer</h3><p class="muted">Nach dem Launch optimieren wir weiter. Im monatlichen Retainer überwache ich Core Web Vitals, Rankings und Conversions.</p></article>
@@ -178,7 +225,7 @@ function hu_prozess_section_shortcode() {
 }
 add_shortcode( 'hu_prozess', 'hu_prozess_section_shortcode' );
 
-// 5. FAQ Section (Angepasst auf WordPress Only)
+// 5. FAQ Section
 function hu_faq_section_shortcode() {
     ob_start();
     ?>
@@ -187,16 +234,66 @@ function hu_faq_section_shortcode() {
             <div class="section-title">
                 <span class="badge">FAQ</span>
                 <h2 id="faq-heading">Häufige Fragen</h2>
-                <p>Klarheit vor dem Start.</p>
+                <p>Klarheit vor dem ersten Schritt.</p>
             </div>
-            <div class="faq">
-                <details><summary>Übernehmen Sie auch bestehende Seiten?</summary><div class="faq-content">Ja. Mein Spezialgebiet ist es, bestehende WordPress-Seiten zu auditieren, zu reparieren und auf High-Performance-Niveau zu bringen.</div></details>
-                <details><summary>Was bedeutet "Arbeit in Modulen"?</summary><div class="faq-content">Statt "Ich brauche 5 Stunden", verkaufe ich Ihnen das Ergebnis "Performance-Optimierung" oder "Tracking-Setup" zum Festpreis. Das gibt Ihnen Planungssicherheit.</div></details>
-                <details><summary>Machen Sie auch Design?</summary><div class="faq-content">Ich fokussiere mich auf technische Umsetzung und CRO-Design. Für komplexes Branding arbeite ich mit spezialisierten Designern aus meinem Netzwerk zusammen.</div></details>
-                <details><summary>Wie schnell sind Ergebnisse sichtbar?</summary><div class="faq-content">Technische Optimierungen (Speed) greifen sofort. SEO- und Conversion-Maßnahmen zeigen in der Regel nach 4–8 Wochen messbare Wirkung in den Daten.</div></details>
+            <div class="faq" style="max-width:800px; margin:0 auto;">
+                <details><summary>Was bedeutet "Privacy-first Tracking" konkret?</summary><div class="faq-content">Minimal notwendige Events statt Daten-Sammelwut: Consent Mode v2 sauber implementiert, Server-Side GTM wo sinnvoll, vollständig dokumentiert. Ziel: belastbare KPIs ohne Vertrauensverlust bei Ihren Nutzern.</div></details>
+                <details><summary>Brauchen wir dann überhaupt noch Ads?</summary><div class="faq-content">Das ist Ihre Entscheidung. Wenn das Owned-Fundament steht (Seiten, Proof, Messbarkeit), können Ads sehr effizient skalieren. Kein Dauereinsatz als Pflicht — Ads sind ein Verstärker, nicht das Betriebssystem.</div></details>
+                <details><summary>Was unterscheidet Credits von Stundensätzen?</summary><div class="faq-content">Planungssicherheit. Stunden können ausufern. Credits sind fix: Sie wissen vorher genau, was eine Landingpage oder ein Tracking-Setup kostet. Das Risiko für Mehraufwand liegt bei mir.</div></details>
+                <details><summary>Warum ist der Audit der erste Schritt?</summary><div class="faq-content">Weil Guesswork teuer ist. Im Free Journey Audit identifizieren wir, ob Ihre Bremsen in Speed, Code, UX, SEO oder Tracking liegen — bevor Zeit oder Budget investiert wird. 48h, kostenlos, kein Pitch.</div></details>
+                <details><summary>Für wen ist das nichts?</summary><div class="faq-content">Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen, die Baukasten-Preise erwarten. Das System ist für B2B-Unternehmen ab ~500.000 € Jahresumsatz, die planbar skalieren wollen.</div></details>
             </div>
         </div>
     </section>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Was bedeutet \"Privacy-first Tracking\" konkret?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Minimal notwendige Events statt Daten-Sammelwut: Consent Mode v2 sauber implementiert, Server-Side GTM wo sinnvoll, vollständig dokumentiert. Ziel: belastbare KPIs ohne Vertrauensverlust."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Brauchen wir dann überhaupt noch Ads?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Das ist Ihre Entscheidung. Wenn das Owned-Fundament steht, können Ads sehr effizient skalieren. Ads sind ein Verstärker, nicht das Betriebssystem."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Was unterscheidet Credits von Stundensätzen?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Planungssicherheit. Credits sind fix: Sie wissen vorher genau, was eine Landingpage oder ein Tracking-Setup kostet. Das Risiko für Mehraufwand liegt beim Anbieter."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Warum ist der Audit der erste Schritt?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Im Free Journey Audit identifizieren wir, ob die Bremsen in Speed, Code, UX, SEO oder Tracking liegen — bevor Zeit oder Budget investiert wird. 48h, kostenlos, kein Pitch."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Für wen ist das nichts?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen, die Baukasten-Preise erwarten. Das System ist für B2B-Unternehmen ab ~500.000 € Jahresumsatz."
+                }
+            }
+        ]
+    }
+    </script>
     <?php
     return ob_get_clean();
 }
@@ -282,13 +379,26 @@ function hu_cta_section_shortcode() {
         <div class="container">
             <div class="section-title">
                 <span class="badge">Nächster Schritt</span>
-                <h2 id="cta-heading">Lassen Sie uns Ihr Potenzial heben.</h2>
-                <p>Sie suchen einen Partner, der WordPress technisch und strategisch meistert? Dann lassen Sie uns sprechen.</p>
+                <h2 id="cta-heading">Welche Hebel liegen bei Ihnen brach?</h2>
+                <p>Im Free Journey Audit analysieren wir Ihre WordPress-Präsenz auf die größten Wachstumspotenziale&nbsp;— kostenlos, in 48h, ohne Pitch.</p>
             </div>
-            <div style="text-align:center; display:flex; flex-wrap:wrap; justify-content:center; gap: 1rem;">
-                <a class="btn btn-primary" href="/customer-journey-audit/" data-track-action="cta_footer_audit" data-track-category="lead_gen">Free Journey Audit starten (0 €)</a>
-                <a class="btn btn-ghost" href="https://hasimuener.de/kontakt/" data-track-action="cta_footer_growth" data-track-category="lead_gen">360° Growth Audit anfragen</a>
+
+            <!-- Proof direkt über CTA -->
+            <div class="hero-proof" role="group" aria-label="Beispiel-Ergebnisse" style="justify-content:center; margin-bottom:1.5rem;">
+                <span class="proof-item">1.750+ qualifizierte Leads</span>
+                <span class="proof-item">CPL &minus;83&nbsp;%</span>
+                <span class="proof-item">E3 New Energy</span>
             </div>
+
+            <div style="text-align:center; display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
+                <a class="btn btn-primary" href="/customer-journey-audit/" data-track-action="cta_footer_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
+                <a class="btn btn-ghost" href="/case-studies/" data-track-action="cta_footer_cases" data-track-category="lead_gen">Case Studies ansehen</a>
+            </div>
+
+            <p style="text-align:center; font-size:0.8rem; color:#555; margin-top:1rem;">
+                Ergebnisse hängen von der Ausgangslage ab.
+                <a href="/wordpress-growth-operating-system/" style="color:var(--gold); text-decoration:underline; font-weight:600;">WGOS verstehen →</a>
+            </p>
         </div>
     </section>
     <?php
