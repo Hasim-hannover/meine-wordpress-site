@@ -1185,14 +1185,16 @@ body.wp-customizer .ct-customizer-shortcut {
 }
 
 /* 5. Flight Mode: Nur Logo + CTA sichtbar */
-.ct-header .ct-menu,
-.ct-header .nexus-nav-btn {
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+.nexus-flight-hide {
+    transition: opacity 0.3s ease, visibility 0.3s ease, max-width 0.3s ease;
+    overflow: hidden;
 }
 
-.ct-header.nexus-flight-mode .ct-menu,
-.ct-header.nexus-flight-mode .nexus-nav-btn {
+.ct-header.nexus-flight-mode .nexus-flight-hide {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    max-width: 0;
+    padding: 0 !important;
+    margin: 0 !important;
 }

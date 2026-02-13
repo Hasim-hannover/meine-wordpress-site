@@ -275,6 +275,25 @@
             var header = document.querySelector('.ct-header');
             if (!header) return;
 
+            // Blocksy-Wrapper der auszublendenden Elemente finden und markieren
+            var hideTargets = [];
+
+            // Menü-Wrapper (Blocksy: [data-id="menu"] oder nächstes [data-id])
+            var menu = header.querySelector('.ct-menu');
+            if (menu) {
+                var menuWrap = menu.closest('[data-id]') || menu;
+                menuWrap.classList.add('nexus-flight-hide');
+                hideTargets.push(menuWrap);
+            }
+
+            // Login-Button-Wrapper
+            var loginBtn = header.querySelector('.nexus-nav-btn');
+            if (loginBtn) {
+                var loginWrap = loginBtn.closest('[data-id]') || loginBtn;
+                loginWrap.classList.add('nexus-flight-hide');
+                hideTargets.push(loginWrap);
+            }
+
             function update() {
                 if (window.scrollY > 50) {
                     header.classList.add('nexus-flight-mode');
