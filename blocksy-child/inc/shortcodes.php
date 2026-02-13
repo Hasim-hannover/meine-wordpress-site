@@ -344,55 +344,6 @@ function hu_faq_section_shortcode() {
             </div>
         </div>
     </section>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Was bedeutet \"Privacy-first Tracking\" konkret?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Minimal notwendige Events statt Daten-Sammelwut: Consent Mode v2 sauber implementiert, Server-Side GTM wo sinnvoll, vollständig dokumentiert. Ziel: belastbare KPIs ohne Vertrauensverlust."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Brauchen wir dann überhaupt noch Ads?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Das ist Ihre Entscheidung. Wenn das Owned-Fundament steht, können Ads sehr effizient skalieren. Ads sind ein Verstärker, nicht das Betriebssystem."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Was unterscheidet Credits von Stundensätzen?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Planungssicherheit. Credits sind fix: Sie wissen vorher genau, was eine Landingpage oder ein Tracking-Setup kostet. Das Risiko für Mehraufwand liegt beim Anbieter."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Warum ist der Audit der erste Schritt?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Im Free Journey Audit identifizieren wir, ob die Bremsen in Speed, Code, UX, SEO oder Tracking liegen — bevor Zeit oder Budget investiert wird. 48h, kostenlos, kein Pitch."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Für wen ist das nichts?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen, die Baukasten-Preise erwarten. Das System ist für B2B-Unternehmen ab ~500.000 € Jahresumsatz."
-                }
-            }
-        ]
-    }
-    </script>
     <?php
     return ob_get_clean();
 }
