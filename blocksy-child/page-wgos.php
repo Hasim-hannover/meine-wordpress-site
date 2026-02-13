@@ -36,12 +36,18 @@ get_header();
     <div class="wgos-container wgos-hero__inner">
         <span class="wgos-kicker">Das System</span>
 
-        <h1 class="wgos-hero__title">WordPress Growth Operating System (WGOS): Assets bauen statt Kampagnen verbrennen.</h1>
+        <h1 class="wgos-hero__title">WGOS: Assets bauen statt Kampagnen verbrennen.</h1>
 
-        <p class="wgos-hero__subtitle">Ihr B2B-Wachstum hängt nicht vom Werbebudget ab&nbsp;— sondern von der Qualität Ihrer digitalen Infrastruktur. Das WGOS investiert monatlich in Assets, die bleiben: Geschwindigkeit, saubere Daten, Rankings, Content und Lead-Qualität. Ads sind optional&nbsp;— als Verstärker, wenn das Fundament steht.</p>
+        <p class="wgos-hero__subtitle">Monatliche Investition in WordPress-Assets, die Ihnen gehören&nbsp;— Performance, Daten, Rankings, Leads.</p>
+        <p class="wgos-hero__positioning">Das Betriebssystem für B2B-Wachstum ohne Ad-Abhängigkeit.</p>
+        <ul class="wgos-hero__bullets">
+            <li>7 Module, ein System</li>
+            <li>Credits statt Stundensätze</li>
+            <li>Kein Lock-in, 100% Ownership</li>
+        </ul>
 
         <div class="wgos-hero__actions">
-            <a href="/wordpress-tech-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Ownership-Check starten (0&nbsp;€)</a>
+            <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Free Journey Audit starten (0&nbsp;€)</a>
             <a href="/case-studies/" class="wgos-link--arrow">Case Studies ansehen →</a>
         </div>
 
@@ -63,6 +69,12 @@ get_header();
                 <span class="wgos-trust-value" data-value="100" data-suffix="%">0</span>
                 <span class="wgos-trust-label">Data Ownership</span>
             </div>
+        </div>
+
+        <p class="wgos-hero__risk-note">Ergebnisse hängen von Ausgangslage ab&nbsp;— im Audit siehst du die größten Hebel.</p>
+
+        <div class="wgos-hero__links">
+            <a href="/roi-rechner/" class="wgos-link--arrow">ROI in 60 Sekunden →</a>
         </div>
     </div>
 </section>
@@ -90,7 +102,7 @@ get_header();
         <p class="wgos-bold-statement">Ads sind nicht verboten&nbsp;— aber sie werden zum optionalen Turbo, wenn das Fundament steht. Nicht zum Dauertropf.</p>
 
         <p class="wgos-inline-cta">
-            <a href="/wordpress-tech-audit/" data-track="cta_click_audit">→ Wie stark ist Ihr Fundament? Kostenloser Ownership-Check</a>
+            <a href="/customer-journey-audit/" data-track="cta_click_audit">→ Wie stark ist Ihr Fundament? Free Journey Audit starten</a>
         </p>
     </div>
 </section>
@@ -218,7 +230,7 @@ get_header();
     <!-- Inline CTA nach Modul 7 -->
     <div class="wgos-module wgos-module--cta">
         <div class="wgos-container" style="text-align:center;">
-            <a href="/wordpress-tech-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Erst Diagnose, dann System. Ownership-Check starten (0&nbsp;€)</a>
+            <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Erst Diagnose, dann System. Free Journey Audit starten (0&nbsp;€)</a>
         </div>
     </div>
 </section>
@@ -410,7 +422,7 @@ get_header();
                     <li>Reporting: Monatlich</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für bestehende Sites, die technisch sauber laufen müssen. Wartung + punktuelle Optimierung.</p>
-                <a href="/wordpress-tech-audit/" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Ownership-Check starten</a>
+                <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Free Journey Audit starten</a>
             </div>
 
             <!-- Paket 2: Growth Partner (FEATURED) -->
@@ -429,7 +441,7 @@ get_header();
                     <li>Reporting: Bi-Weekly</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für B2B-Unternehmen, die ein Owned-Leads-System aufbauen wollen. SEO + CRO + Content.</p>
-                <a href="/wordpress-tech-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Ownership-Check starten</a>
+                <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Free Journey Audit starten (0&nbsp;€)</a>
             </div>
 
             <!-- Paket 3: Dominance -->
@@ -447,7 +459,7 @@ get_header();
                     <li>Reporting: Weekly + Dashboard</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für Marktführer-Anspruch. Full Stack + Paid Booster + Automation. Maximaler Output.</p>
-                <a href="/wordpress-tech-audit/" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Ownership-Check starten</a>
+                <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Free Journey Audit starten</a>
             </div>
         </div>
 
@@ -553,11 +565,14 @@ get_header();
 <section class="wgos-section wgos-section--white wgos-final-cta nx-reveal">
     <div class="wgos-container" style="text-align:center;">
         <h2 class="wgos-h2">Bereit für ein System, das über Zeit günstiger wird?</h2>
-        <p class="wgos-prose" style="max-width:680px;margin:0 auto 2rem;">Der erste Schritt ist ein kostenloser Ownership-Check: Wir analysieren Ihre Website auf Performance, Datenintegrität und Conversion-Potenzial&nbsp;— und zeigen Ihnen, wo die größten Hebel liegen.</p>
+        <p class="wgos-prose" style="max-width:680px;margin:0 auto 2rem;">Der erste Schritt ist ein Free Journey Audit: Wir analysieren Ihre Website auf Performance, Datenintegrität und Conversion-Potenzial&nbsp;— und zeigen Ihnen, wo die größten Hebel liegen.</p>
 
         <div class="wgos-hero__actions">
-            <a href="/wordpress-tech-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Kostenlosen Ownership-Check starten →</a>
-            <a href="https://cal.com/hasim/30min" class="wgos-link--arrow" target="_blank" rel="noopener" data-track="cta_click_calendar">Direkt Termin buchen →</a>
+            <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Free Journey Audit starten (0&nbsp;€) →</a>
+            <a href="https://hasimuener.de/kontakt/" class="wgos-link--arrow" data-track="cta_click_growth_audit">360° Growth Audit anfragen →</a>
+        </div>
+        <div class="wgos-final__links">
+            <a href="/wordpress-agentur-hannover/" class="wgos-link--arrow">WordPress Agentur Hannover →</a>
         </div>
     </div>
 </section>

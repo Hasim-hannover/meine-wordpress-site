@@ -64,21 +64,19 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
 
     var form = e.target;
     var url = form.querySelector('[name="url"]').value.trim();
-    var email = form.querySelector('[name="email"]').value.trim();
 
-    // Basic validation
-    if (!url || !email) {
-      showFormError('Bitte URL und E-Mail-Adresse eingeben.');
+    // Step 1: Only URL required — email comes after results
+    if (!url) {
+      showFormError('Bitte URL eingeben.');
       return;
     }
     if (!/^https?:\/\/.+\..+/.test(url)) {
       showFormError('Bitte eine gültige URL eingeben (z. B. https://example.de).');
       return;
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showFormError('Bitte eine gültige E-Mail-Adresse eingeben.');
-      return;
-    }
+
+    // Store URL for email capture later
+    state.auditUrl = url;
 
     clearFormError();
     setPhase('submitting');
@@ -87,7 +85,7 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     fetch(CONFIG.webhookStart, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: url, email: email })
+      body: JSON.stringify({ url: url })
     })
     .then(function (res) { return res.json(); })
     .then(function (data) {

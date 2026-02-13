@@ -32,9 +32,24 @@ function hu_hero_section_shortcode() {
             <div class="section-title">
                 <span class="badge">Hasim Üner – WordPress & Growth Partner</span>
                 <h1>High-End WordPress.<br>Messbares Wachstum.</h1>
-                <p class="sub">Schluss mit "Zeit gegen Geld". Ich biete Ihnen modulare Lösungen für technische Exzellenz und datengetriebenen Erfolg. Skalierbar, sicher und transparent.</p>
+                <p class="sub">Modulare WordPress-Architektur, die B2B-Leads generiert&nbsp;— ohne Dauertropf an Werbebudget.</p>
+                <p class="positioning">WordPress Growth Architect für B2B-Unternehmen ab 500k Jahresumsatz.</p>
+                <ul class="hero-bullets">
+                    <li>98+ PageSpeed (Mobile, garantiert)</li>
+                    <li>Tracking-Genauigkeit &gt;92% (sGTM)</li>
+                    <li>Owned Leads ohne Ad-Abhängigkeit</li>
+                </ul>
+                <div class="hero-cta-block">
+                    <a href="/customer-journey-audit/" class="btn btn-primary" data-track-action="cta_hero_audit" data-track-category="lead_gen">Free Journey Audit starten (0 €)</a>
+                </div>
+                <div class="hero-proof" role="group" aria-label="Ergebnisse">
+                    <span class="proof-item">1.750+ qualifizierte Leads</span>
+                    <span class="proof-item">-83% Cost per Lead</span>
+                    <span class="proof-item">+270% Conversion Rate</span>
+                </div>
+                <p class="hero-risk-note">Ergebnisse hängen von Ausgangslage ab&nbsp;— im Audit siehst du die größten Hebel.</p>
             </div>
-            
+
             <div class="switch-grid" aria-label="Meine Kompetenzfelder">
                 
                 <div class="switch-card">
@@ -57,6 +72,9 @@ function hu_hero_section_shortcode() {
                 <div class="stat"><div class="num" data-target="2500">0</div><div class="label">Leads generiert</div></div>
                 <div class="stat"><div class="num" data-target="100">0</div><div class="label">% Datenhoheit</div></div>
                 <div class="stat"><div class="num" data-target="45">0</div><div class="label">Module deployed</div></div>
+            </div>
+            <div class="hero-links" style="text-align:center; margin-top: 1.5rem;">
+                <a href="/roi-rechner/" style="color:var(--gold); font-weight:700; font-size:0.9rem; text-decoration:underline;">ROI in 60 Sekunden</a>
             </div>
         </div>
     </header>
@@ -124,7 +142,7 @@ function hu_erfolge_section_shortcode() {
             </article>
 
             <div style="text-align:center; margin-top: 2rem;">
-                <a href="/case-studies/" class="btn btn-ghost">Alle Case Studies ansehen</a>
+                <a href="/case-studies/" class="btn btn-ghost">Case Studies ansehen</a>
             </div>
         </div>
     </section>
@@ -149,6 +167,9 @@ function hu_prozess_section_shortcode() {
                 <article class="step"><div class="num">2</div><h3>Modulare Umsetzung</h3><p class="muted">Ob Performance-Boost, Tracking-Setup oder Design-Refresh: Ich setze die definierten Pakete technisch sauber um.</p></article>
                 <article class="step"><div class="num">3</div><h3>Review & Deployment</h3><p class="muted">Jedes Modul wird getestet und abgenommen, bevor es live geht. Volle Transparenz über GitHub und Staging-Umgebungen.</p></article>
                 <article class="step"><div class="num">4</div><h3>Growth Retainer</h3><p class="muted">Nach dem Launch optimieren wir weiter. Im monatlichen Retainer überwache ich Core Web Vitals, Rankings und Conversions.</p></article>
+            </div>
+            <div style="text-align:center; margin-top: 2rem;">
+                <a href="/wordpress-growth-operating-system/" class="btn btn-ghost">WGOS verstehen</a>
             </div>
         </div>
     </section>
@@ -265,8 +286,8 @@ function hu_cta_section_shortcode() {
                 <p>Sie suchen einen Partner, der WordPress technisch und strategisch meistert? Dann lassen Sie uns sprechen.</p>
             </div>
             <div style="text-align:center; display:flex; flex-wrap:wrap; justify-content:center; gap: 1rem;">
-                <a class="btn btn-primary" href="https://hasimuener.de/kontakt/">🚀 Projekt anfragen</a>
-                <a class="btn btn-ghost" href="https://cal.com/hasim/30min">📞 Kennenlerngespräch buchen</a>
+                <a class="btn btn-primary" href="/customer-journey-audit/" data-track-action="cta_footer_audit" data-track-category="lead_gen">Free Journey Audit starten (0 €)</a>
+                <a class="btn btn-ghost" href="https://hasimuener.de/kontakt/" data-track-action="cta_footer_growth" data-track-category="lead_gen">360° Growth Audit anfragen</a>
             </div>
         </div>
     </section>
