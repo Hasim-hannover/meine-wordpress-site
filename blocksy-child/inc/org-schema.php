@@ -339,7 +339,9 @@ function hu_output_schema()
          * - dedupliziert Fragen
          */
         global $post;
-        if (isset($post)) {
+        // Auf der Startseite übernimmt Rank Math das FAQPage-Schema —
+        // hier nicht zusätzlich generieren, sonst entsteht ein Duplikat.
+        if (isset($post) && !is_front_page()) {
 
             $raw = (string) $post->post_content;
 
