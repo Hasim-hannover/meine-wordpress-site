@@ -161,6 +161,50 @@ function hu_owned_section_shortcode() {
 }
 add_shortcode( 'hu_owned', 'hu_owned_section_shortcode' );
 
+// 2c. WGOS Block (Homepage Teaser)
+function hu_wgos_block_shortcode() {
+    ob_start();
+    ?>
+    <section class="wp-section" id="wgos" aria-labelledby="wgos-heading">
+        <div class="wp-container">
+            <div class="wp-section-title text-center">
+                <span class="wp-badge">Das System</span>
+                <h2 id="wgos-heading" class="wp-section-h2">WordPress Growth Operating System (WGOS)</h2>
+                <p class="wp-section-p">
+                    Weg von "Kampagnen-Gambling", hin zu Assets: Wir investieren monatlich in Dinge, die bleiben&nbsp;–
+                    Geschwindigkeit, Datenintegrität, Seiten, Content und Lead-Qualität.
+                </p>
+            </div>
+            <div class="wp-process">
+                <div class="wp-step">
+                    <div class="wp-step-num">1</div>
+                    <h3>Speed &amp; Conversion</h3>
+                    <p>Core Web Vitals, UX-Reibung, technische Hygiene. Ziel: weniger Absprünge, mehr Anfragen&nbsp;– messbar.</p>
+                </div>
+                <div class="wp-step">
+                    <div class="wp-step-num">2</div>
+                    <h3>Privacy-First Measurement</h3>
+                    <p>Server-Side Tracking, Consent Mode v2, Event-Blueprint. Saubere Daten ohne Vertrauen zu zerstören.</p>
+                </div>
+                <div class="wp-step highlight-step">
+                    <div class="wp-step-num highlight-num">3</div>
+                    <h3 class="text-gold">Owned Lead Flywheel (Retainer)</h3>
+                    <p>
+                        Pillar Pages, Content-Cluster, interne Verlinkung, Proof-Assets &amp; Nurture.
+                        <strong>Beispiel:</strong> Neue High-Conversion Landingpage fix 20 Punkte&nbsp;– planbar, ohne Nachverhandlung.
+                    </p>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top:2.5rem;">
+                <a href="/customer-journey-audit/" class="wp-btn wp-btn-secondary" data-track-action="cta_wgos_audit" data-track-category="lead_gen">Erst Diagnose, dann System</a>
+            </div>
+        </div>
+    </section>
+    <?php
+    return ob_get_clean();
+}
+add_shortcode( 'hu_wgos_block', 'hu_wgos_block_shortcode' );
+
 // 3. Erfolge Section (NEUTRALISIERT: E-Commerce statt Shopify Plus)
 function hu_erfolge_section_shortcode() {
     ob_start();
@@ -409,6 +453,8 @@ function hu_cta_section_shortcode() {
             </p>
         </div>
     </section>
+
+    </div><!-- /.cs-page -->
     <?php
     return ob_get_clean();
 }
