@@ -4,6 +4,8 @@
  * Ersetzt den FluentForm-Flow: Formular geht direkt an n8n,
  * Ergebnisse werden live auf der Seite gerendert.
  *
+ * v2: Bridge-CTA zum 360° Deep-Dive + Fluent Form Integration
+ *
  * Benötigt: audit-results.css für Styling
  * Kompatibel mit: NexusCore (ScrollSpy, Reveal)
  */
@@ -12,12 +14,11 @@
 
   // ─── CONFIG ──────────────────────────────────────────────
   var CONFIG = {
-    // WICHTIG: Ersetze mit deiner echten n8n-URL
     webhookStart: 'https://hasim.app.n8n.cloud/webhook/audit',
-webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
-    pollInterval: 5000,    // 5 Sekunden
-    pollTimeout: 180000,   // 3 Minuten max
-    animDelay: 120         // ms zwischen Step-Animationen
+    webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
+    pollInterval: 5000,
+    pollTimeout: 180000,
+    animDelay: 120
   };
 
   // ─── STATE ───────────────────────────────────────────────
@@ -25,10 +26,11 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     jobId: null,
     pollTimer: null,
     pollStart: null,
-    phase: 'idle' // idle | submitting | polling | rendering | done | error
+    auditUrl: null,
+    phase: 'idle'
   };
 
-  // ─── LOADER MESSAGES (rotieren während Polling) ──────────
+  // ─── LOADER MESSAGES ─────────────────────────────────────
   var loaderSteps = [
     { icon: '🔍', text: 'Google-Sichtbarkeit wird geprüft …', sub: 'Wir checken 6 kaufrelevante Keywords' },
     { icon: '⚡', text: 'Lighthouse analysiert Ihre Seite …', sub: 'Mobile Performance & Core Web Vitals' },
@@ -45,7 +47,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
 
     form.addEventListener('submit', handleSubmit);
 
-    // URL-Feld: auto-prefix https://
     var urlInput = form.querySelector('[name="url"]');
     if (urlInput) {
       urlInput.addEventListener('blur', function () {
@@ -65,7 +66,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     var form = e.target;
     var url = form.querySelector('[name="url"]').value.trim();
 
-    // Step 1: Only URL required — email comes after results
     if (!url) {
       showFormError('Bitte URL eingeben.');
       return;
@@ -75,7 +75,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
       return;
     }
 
-    // Store URL for email capture later
     state.auditUrl = url;
 
     clearFormError();
@@ -105,23 +104,19 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
 
   // ─── POLLING ─────────────────────────────────────────────
   function startPolling() {
-    // Rotate loader messages
     var msgIndex = 0;
     updateLoaderStep(loaderSteps[0]);
 
     state.pollTimer = setInterval(function () {
-      // Timeout check
       if (Date.now() - state.pollStart > CONFIG.pollTimeout) {
         clearInterval(state.pollTimer);
         showLoaderError('Die Analyse dauert länger als erwartet. Der Report wird per E-Mail zugestellt.');
         return;
       }
 
-      // Rotate message
       msgIndex = (msgIndex + 1) % loaderSteps.length;
       updateLoaderStep(loaderSteps[msgIndex]);
 
-      // Poll
       fetch(CONFIG.webhookStatus + '?jobId=' + encodeURIComponent(state.jobId))
         .then(function (res) { return res.json(); })
         .then(function (data) {
@@ -133,10 +128,9 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
             clearInterval(state.pollTimer);
             showLoaderError(data.error || 'Fehler bei der Analyse.');
           }
-          // status === 'processing' → keep polling
         })
         .catch(function () {
-          // Network error → keep trying (don't stop polling)
+          // Network error → keep trying
         });
     }, CONFIG.pollInterval);
   }
@@ -174,7 +168,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
       }, 300);
     }
 
-    // Progress bar
     if (progress && state.pollStart) {
       var elapsed = Date.now() - state.pollStart;
       var pct = Math.min(95, (elapsed / CONFIG.pollTimeout) * 100);
@@ -209,7 +202,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
 
   // ─── RENDER RESULTS ──────────────────────────────────────
   function renderResults(data) {
-    // Hide loader, show results
     var loader = document.getElementById('audit-loader');
     var results = document.getElementById('audit-results');
     if (loader) loader.style.display = 'none';
@@ -217,29 +209,31 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     if (!results) return;
     results.style.display = 'block';
 
-    // Build all result HTML
     var html = '';
 
     // ── Result Header
     html += renderResultHeader(data);
 
-    // ── Score Overview (big numbers)
+    // ── Score Overview
     html += renderScoreOverview(data);
 
-    // ── Journey Steps (Timeline)
+    // ── Journey Steps
     html += renderJourneySteps(data);
 
     // ── Revenue Gap
     html += renderRevenueGap(data);
 
-    // ── Strategische Einordnung (Story)
+    // ── Story
     html += renderStory(data);
 
-    // ── CTA
+    // ── Bridge CTA → Deep-Dive (NEU: ersetzt alten Strategiecall-CTA)
     html += renderCTA(data);
 
-    // ── Step 2: Email Capture (nach Ergebnis)
+    // ── Email Capture
     html += renderEmailCapture();
+
+    // ── 360° Deep-Dive Section (NEU)
+    html += renderDeepDiveSection();
 
     results.innerHTML = html;
 
@@ -252,9 +246,36 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     // Scroll to results
     results.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    // Bind email capture form
+    // Bind email capture
     var emailForm = document.getElementById('audit-email-capture');
     if (emailForm) emailForm.addEventListener('submit', handleEmailCapture);
+
+    // Bind Deep-Dive CTA smooth scroll
+    var deepDiveBtn = results.querySelector('.result-cta-deepdive');
+    if (deepDiveBtn) {
+      deepDiveBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.getElementById('deep-dive-section');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // Move pre-rendered Fluent Form into Deep-Dive placeholder
+    var formSource = document.getElementById('deepdive-fluent-form');
+    var formTarget = document.getElementById('deepdive-form-placeholder');
+    if (formSource && formTarget) {
+      formTarget.innerHTML = '';
+      formSource.style.display = 'block';
+      formTarget.appendChild(formSource);
+
+      // Inject jobId into hidden field
+      var hiddenJobId = formSource.querySelector('input[name="audit_job_id"]');
+      if (hiddenJobId && state.jobId) {
+        hiddenJobId.value = state.jobId;
+      }
+    }
 
     // Update nav
     updateNavForResults();
@@ -278,7 +299,7 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     );
   }
 
-  // ── Score Overview (3 big score cards)
+  // ── Score Overview
   function renderScoreOverview(data) {
     var perf = data.performance || {};
     var serp = data.serpResults || [];
@@ -354,7 +375,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
 
     var html = '<div class="result-step result-step-' + statusClass + ' result-animate" style="animation-delay:' + (index * CONFIG.animDelay) + 'ms">';
 
-    // Step header
     html += '<div class="result-step-head">';
     html += '<span class="result-step-nr">' + step.nr + '</span>';
     html += '<span class="result-step-icon">' + icon + '</span>';
@@ -362,10 +382,8 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     html += '<span class="result-step-badge result-badge-' + statusClass + '">' + statusLabel(statusClass) + '</span>';
     html += '</div>';
 
-    // Step body
     html += '<div class="result-step-body">';
 
-    // SERP results (Step 1)
     if (step.nr === 1 && step.results) {
       html += '<div class="serp-table">';
       for (var r = 0; r < step.results.length; r++) {
@@ -374,14 +392,12 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
       html += '</div>';
     }
 
-    // Detail items (Steps 2-4)
     if (step.details) {
       for (var d = 0; d < step.details.length; d++) {
         html += renderDetailRow(step.details[d]);
       }
     }
 
-    // Summary
     html += '<div class="result-step-summary result-summary-' + statusClass + '">';
     html += escapeHtml(step.summary);
     html += '</div>';
@@ -403,7 +419,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     html += '<div class="serp-pos serp-pos-' + statusClass + '">' + icon + ' ' + statusText + '</div>';
     html += '</div>';
 
-    // Competitors
     if (r.competitors && r.competitors.length > 0 && r.status === 'not_found') {
       html += '<div class="serp-competitors">Stattdessen gefunden: ' +
         r.competitors.map(function (c) { return escapeHtml(c.name); }).join(', ') +
@@ -474,15 +489,15 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
     return html;
   }
 
-  // ── CTA
+  // ── CTA: Bridge zum 360° Deep-Dive (v2 — ersetzt alten Strategiecall)
   function renderCTA(data) {
-    var cta = data.cta || {};
     var rev = data.revenue || {};
     var serp = data.serpResults || [];
 
     var notFound = serp.filter(function (r) { return r.status === 'not_found'; });
     var topKw = notFound.length > 0 ? notFound[0].keyword : '';
 
+    // Dynamische Headline
     var line1 = rev.lostRevenueYear > 50000
       ? '~' + formatEuro(rev.lostRevenueYear) + ' Jahrespotenzial liegen auf dem Tisch.'
       : 'Jeden Monat gehen Ihnen planbare Anfragen verloren.';
@@ -493,17 +508,26 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
 
     return (
       '<div class="result-cta result-animate">' +
-        '<h3>' + escapeHtml(line1) + '</h3>' +
-        '<p>' + escapeHtml(line2) + '</p>' +
-        '<a href="' + (cta.url || 'https://cal.com/hasim/30min') + '" class="cta-btn result-cta-btn" target="_blank" rel="noopener">' +
-          (cta.label || 'Kostenloser Strategiecall') +
+        '<h3>' + line1 + '</h3>' +
+        '<p>' + line2 + '</p>' +
+        '<p class="result-cta-bridge">' +
+          'Dieser Report zeigt, wo Ihre Customer Journey Lücken hat. ' +
+          'Was er nicht zeigen kann: ob Ihr Tracking saubere Daten liefert, ' +
+          'wie Ihre Lead-Qualität wirklich aussieht und welche Hebel den größten ROI bringen.' +
+        '</p>' +
+        '<a href="#deep-dive-section" class="cta-btn result-cta-btn result-cta-deepdive">' +
+          '360° Deep-Dive starten' +
         '</a>' +
-        '<span class="result-cta-sub">' + (cta.sublabel || '30 Min · Ihre Daten, Ihr Plan, Ihre Entscheidung') + '</span>' +
+        '<span class="result-cta-sub">5 gezielte Fragen · Kein Sales-Call · Persönliche Analyse in 48h</span>' +
+        '<div class="result-cta-alt">' +
+          '<span>Oder direkt:</span> ' +
+          '<a href="https://cal.com/hasim/30min" target="_blank" rel="noopener">Strategiecall buchen →</a>' +
+        '</div>' +
       '</div>'
     );
   }
 
-  // ── Email Capture (Step 2 — nach Live-Ergebnis)
+  // ── Email Capture (nach Live-Ergebnis)
   function renderEmailCapture() {
     return (
       '<div class="result-email-capture result-animate" id="audit-email-capture-wrap">' +
@@ -535,7 +559,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
       return;
     }
 
-    // Send email + jobId to webhook
     fetch(CONFIG.webhookStart, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -545,7 +568,7 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
       var wrap = document.getElementById('audit-email-capture-wrap');
       if (wrap) {
         wrap.innerHTML =
-          '<p class="email-capture-success">Report wird zugestellt. Checke deinen Posteingang.</p>';
+          '<p class="email-capture-success">Report wird zugestellt. Prüfen Sie Ihren Posteingang.</p>';
       }
     })
     .catch(function () {
@@ -555,6 +578,32 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
         feedback.style.color = '#f87171';
       }
     });
+  }
+
+  // ── 360° Deep-Dive Section (NEU — erscheint nach CJA-Ergebnis)
+  function renderDeepDiveSection() {
+    return (
+      '<div id="deep-dive-section" class="result-deepdive result-animate">' +
+        '<div class="deepdive-header">' +
+          '<span class="deepdive-pill">Nächster Schritt</span>' +
+          '<h3 class="deepdive-title">360° Deep-Dive: Ursachen statt Symptome</h3>' +
+          '<p class="deepdive-sub">' +
+            'Sie kennen jetzt die Schwachstellen. Mit 5 gezielten Fragen zu Ihrem Setup ' +
+            'erstelle ich eine persönliche Analyse mit konkreten Hebeln — priorisiert nach Impact.' +
+          '</p>' +
+        '</div>' +
+        '<div class="deepdive-form-wrap">' +
+          '<div class="deepdive-trust">' +
+            '<span>✓ Kein Sales-Pitch</span>' +
+            '<span>✓ Persönliche Analyse in 48h</span>' +
+            '<span>✓ Konkreter Maßnahmenplan</span>' +
+          '</div>' +
+          '<div id="deepdive-form-placeholder">' +
+            '<p style="text-align:center;color:#666;padding:2rem 0;">Formular wird geladen…</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
   }
 
   // ─── HELPERS ─────────────────────────────────────────────
@@ -591,7 +640,6 @@ webhookStatus: 'https://hasim.app.n8n.cloud/webhook/audit-status',
   }
 
   function updateNavForResults() {
-    // Update nav to highlight results section
     var nav = document.querySelector('.smart-nav');
     if (nav) nav.classList.add('is-visible');
   }
