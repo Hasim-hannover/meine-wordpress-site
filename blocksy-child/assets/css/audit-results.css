@@ -1,6 +1,573 @@
-/* ─── DEEP-DIVE SECTION (nach CJA-Ergebnis) ──────────────
-   Append this to the END of audit-results.css
-   ─────────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════
+   AUDIT RESULTS — Complete Component Styles
+   Enthält: Animations, Header, Score Grid, Journey Steps,
+   SERP Table, Revenue Gap, Story, CTA, Email Capture,
+   Loader Error, Deep-Dive Section
+   ══════════════════════════════════════════════════════════ */
+
+/* ─── ANIMATIONS ─────────────────────────────────────────── */
+.result-animate {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.result-animate.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESULT HEADER ──────────────────────────────────────── */
+.result-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.result-pill {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #ffb020;
+  background: rgba(255, 176, 32, 0.08);
+  border: 1px solid rgba(255, 176, 32, 0.2);
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 0.75rem;
+}
+
+.result-title {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 0.5rem;
+}
+
+.result-meta {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.result-domain {
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+/* ─── SCORE GRID ─────────────────────────────────────────── */
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .score-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.score-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.25rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.score-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+
+.score-good::before  { background: #22c55e; }
+.score-warning::before { background: #eab308; }
+.score-bad::before   { background: #ef4444; }
+
+.score-card-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.score-card-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #64748b;
+  margin-bottom: 0.35rem;
+}
+
+.score-card-value {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.score-ring-wrap {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* ─── SECTION TITLE ──────────────────────────────────────── */
+.result-section-title {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ─── JOURNEY STEPS ──────────────────────────────────────── */
+.result-journey {
+  margin-bottom: 2rem;
+}
+
+.result-step {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.result-step-good  { border-left: 3px solid #22c55e; }
+.result-step-warning { border-left: 3px solid #eab308; }
+.result-step-bad   { border-left: 3px solid #ef4444; }
+
+.result-step-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.1rem;
+  background: rgba(255, 255, 255, 0.02);
+  flex-wrap: wrap;
+}
+
+.result-step-nr {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.result-step-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.result-step-title {
+  font-weight: 800;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.result-step-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.result-badge-good    { background: rgba(34, 197, 94, 0.12);  color: #4ade80; }
+.result-badge-warning { background: rgba(234, 179, 8, 0.12);  color: #facc15; }
+.result-badge-bad     { background: rgba(239, 68, 68, 0.12);  color: #f87171; }
+
+.result-step-body {
+  padding: 0.75rem 1.1rem 1rem;
+}
+
+.result-step-summary {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+}
+
+.result-summary-good    { background: rgba(34, 197, 94, 0.06);  color: #86efac; }
+.result-summary-warning { background: rgba(234, 179, 8, 0.06);  color: #fde68a; }
+.result-summary-bad     { background: rgba(239, 68, 68, 0.06);  color: #fca5a5; }
+
+/* ─── SERP TABLE ─────────────────────────────────────────── */
+.serp-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.serp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.serp-kw {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.serp-kw-text {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.serp-vol {
+  font-size: 0.7rem;
+  color: #475569;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 7px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.serp-pos {
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.serp-pos-good    { color: #4ade80; }
+.serp-pos-warning { color: #facc15; }
+.serp-pos-bad     { color: #f87171; }
+
+.serp-competitors {
+  font-size: 0.75rem;
+  color: #475569;
+  padding: 0.25rem 0.75rem 0.4rem;
+  font-style: italic;
+}
+
+/* ─── DETAIL ROWS ────────────────────────────────────────── */
+.result-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.result-detail-label {
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.result-detail-value {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.result-val-good    { color: #4ade80; }
+.result-val-warning { color: #facc15; }
+.result-val-bad     { color: #f87171; }
+
+/* ─── REVENUE GAP ────────────────────────────────────────── */
+.result-revenue {
+  background: linear-gradient(145deg, #0e0e0e, #050505);
+  border: 1px solid rgba(255, 176, 32, 0.15);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.result-revenue-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #ffb020;
+  margin-bottom: 1rem;
+}
+
+.result-revenue-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.rev-stat {
+  flex: 1;
+  min-width: 120px;
+}
+
+.rev-stat-label {
+  display: block;
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-bottom: 0.2rem;
+}
+
+.rev-stat-value {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #e2e8f0;
+}
+
+.result-revenue-divider {
+  height: 1px;
+  background: rgba(255, 176, 32, 0.1);
+  margin: 1rem 0;
+}
+
+.result-revenue-totals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .result-revenue-totals { grid-template-columns: 1fr; }
+}
+
+.result-revenue-big {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.rev-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.rev-amount {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 900;
+  color: #ffb020;
+}
+
+.rev-amount-year {
+  color: #fff;
+}
+
+.result-revenue-disclaimer {
+  font-size: 0.72rem;
+  color: #475569;
+  margin-top: 1rem;
+  line-height: 1.5;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 0.75rem;
+}
+
+/* ─── STORY ──────────────────────────────────────────────── */
+.result-story {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.result-story p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.75;
+  margin: 0 0 0.75rem;
+}
+
+.result-story p:last-child { margin-bottom: 0; }
+
+/* ─── CTA ────────────────────────────────────────────────── */
+.result-cta {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 176, 32, 0.04);
+  border: 1px solid rgba(255, 176, 32, 0.12);
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+.result-cta h3 {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 0.75rem;
+}
+
+.result-cta p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.65;
+}
+
+.result-cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffb020, #ff8a00);
+  color: #000 !important;
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.result-cta-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(255, 176, 32, 0.25);
+}
+
+.result-cta-sub {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  color: #475569;
+}
+
+/* ─── EMAIL CAPTURE ──────────────────────────────────────── */
+.result-email-capture {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.email-capture-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 0.75rem;
+}
+
+.email-capture-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .email-capture-row { flex-direction: column; }
+}
+
+.email-capture-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.email-capture-input:focus {
+  border-color: rgba(255, 176, 32, 0.4);
+}
+
+.email-capture-input::placeholder { color: #475569; }
+
+.email-capture-btn {
+  background: linear-gradient(135deg, #ffb020, #ff8a00);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s;
+}
+
+.email-capture-btn:hover { transform: scale(1.02); }
+
+.email-capture-note {
+  font-size: 0.72rem;
+  color: #475569;
+  margin: 0.5rem 0 0;
+}
+
+.email-capture-success {
+  font-size: 0.88rem;
+  color: #4ade80;
+  text-align: center;
+  padding: 0.75rem;
+}
+
+/* ─── LOADER ERROR ───────────────────────────────────────── */
+.loader-error {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.loader-error-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.loader-error-text {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+.audit-retry-btn {
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.audit-retry-btn:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* ══════════════════════════════════════════════════════════
+   DEEP-DIVE SECTION (nach CJA-Ergebnis)
+   ══════════════════════════════════════════════════════════ */
 
 /* ─── BRIDGE CTA STYLES ──────────────────────────────────── */
 .result-cta-bridge {
