@@ -533,6 +533,61 @@
   padding: 0.75rem;
 }
 
+/* ─── LOADER (hidden by default, shown via JS) ──────────── */
+#audit-loader {
+  display: none;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+#audit-loader.is-active {
+  display: block;
+}
+
+.loader-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  animation: loaderPulse 2s ease-in-out infinite;
+}
+
+@keyframes loaderPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+}
+
+.loader-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 0.35rem;
+  transition: opacity 0.2s ease;
+}
+
+.loader-sub {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-bottom: 1.25rem;
+  transition: opacity 0.3s ease;
+}
+
+.loader-progress-track {
+  width: 100%;
+  max-width: 400px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 100px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.loader-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ffb020, #ff8a00);
+  border-radius: 100px;
+  transition: width 1s ease-out;
+}
+
 /* ─── LOADER ERROR ───────────────────────────────────────── */
 .loader-error {
   text-align: center;
