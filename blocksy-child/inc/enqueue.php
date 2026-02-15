@@ -105,7 +105,9 @@ function hu_enqueue_assets() {
 	// ── H) Template: Customer Journey Audit ───────────────────────
 	if ( is_page_template( 'page-audit.php' ) || is_page( 'audit' ) || is_page( 'customer-journey-audit' ) ) {
 		hu_enqueue_css( 'nexus-audit-css', 'audit.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-audit-results-css', 'audit-results.css', [ 'nexus-audit-css' ] );
 		hu_enqueue_js( 'nexus-audit-js', 'audit.js', [ 'nexus-core-js' ] );
+		hu_enqueue_js( 'nexus-audit-live-js', 'audit-live.js', [ 'nexus-audit-js' ] );
 	}
 
 	// ── I) Template: SEO Landing (Hannover) ───────────────────────
