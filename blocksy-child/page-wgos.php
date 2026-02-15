@@ -569,7 +569,6 @@ get_header();
 
         <div class="wgos-hero__actions">
             <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Free Journey Audit starten (0&nbsp;€) →</a>
-            <a href="https://hasimuener.de/kontakt/" class="wgos-link--arrow" data-track="cta_click_growth_audit">360° Growth Audit anfragen →</a>
         </div>
         <div class="wgos-final__links">
             <a href="/wordpress-agentur-hannover/" class="wgos-link--arrow">WordPress Agentur Hannover →</a>

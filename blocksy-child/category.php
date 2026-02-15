@@ -247,7 +247,7 @@ if ($featured_query->have_posts()) {
                     <!-- Newsletter / Audit CTA -->
                     <div class="pillar-sidebar__audit">
                         <h4>Wo verbrennt Ihre Website Geld?</h4>
-                        <p>Mein 360° Audit prüft Tech, SEO & Content im Zusammenspiel.</p>
+                        <p>Unser Free Journey Audit prüft Tech, SEO & Content im Zusammenspiel.</p>
                         <a href="/customer-journey-audit/" class="nx-btn nx-btn--ghost nx-btn--full nx-btn--sm">
                             Kostenlosen Audit starten →
                         </a>

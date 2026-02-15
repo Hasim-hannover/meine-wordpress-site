@@ -93,3 +93,14 @@ add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
     }
     return $redirect_to;
 }, 10, 3 );
+
+/**
+ * 301 Redirect: /360-audit/ → /customer-journey-audit/
+ * The 360° Audit is no longer a standalone page; redirect for SEO.
+ */
+add_action( 'template_redirect', function() {
+	if ( is_page( '360-audit' ) || is_page( 'growth-audit' ) ) {
+		wp_redirect( home_url( '/customer-journey-audit/' ), 301 );
+		exit;
+	}
+} );
