@@ -100,36 +100,4 @@ function nexus_render_share_buttons() {
 }
 
 
-/**
- * Audit Live — Asset Enqueue
- * ===========================
- * Füge diesen Code in deine functions.php ein (blocksy-child).
- * Lädt audit-live.js + audit-results.css NUR auf der Audit-Seite.
- */
-
-add_action( 'wp_enqueue_scripts', 'nexus_enqueue_audit_live_assets' );
-function nexus_enqueue_audit_live_assets() {
-    // Nur auf der Audit-Seite laden (passe den Slug an falls nötig)
-    if ( ! is_page_template( 'page-audit.php' ) && ! is_page( 'customer-journey-audit' ) ) {
-        return;
-    }
-
-    // CSS für Ergebnis-Darstellung
-    wp_enqueue_style(
-        'audit-results',
-        get_stylesheet_directory_uri() . '/assets/css/audit-results.css',
-        array(),
-        filemtime( get_stylesheet_directory() . '/assets/css/audit-results.css' )
-    );
-
-    // JS für Form-Handling, Polling & Rendering
-    wp_enqueue_script(
-        'audit-live',
-        get_stylesheet_directory_uri() . '/assets/js/audit-live.js',
-        array(), // keine Dependencies — vanilla JS
-        filemtime( get_stylesheet_directory() . '/assets/js/audit-live.js' ),
-        true // im Footer laden
-    );
-}
-
-?>
+// Audit Live Assets: zentral in inc/enqueue.php (Section H) verwaltet.
