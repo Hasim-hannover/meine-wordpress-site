@@ -1,0 +1,221 @@
+/* ══════════════════════════════════════════════════════════
+   360° Deep-Dive Landing Page
+   ══════════════════════════════════════════════════════════ */
+
+/* ─── PAGE WRAPPER ─────────────────────────────────────── */
+.deepdive-page {
+  background: #050505;
+  color: #fff;
+  font-family: 'Satoshi', sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ─── SHARED SECTION LAYOUT ───────────────────────────── */
+.deepdive-hero,
+.deepdive-form-section,
+.deepdive-steps-section,
+.deepdive-trust-section,
+.deepdive-alt-cta,
+.deepdive-cja-link {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+/* ─── 1. HERO SECTION ─────────────────────────────────── */
+.deepdive-hero {
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.deepdive-hero .deepdive-pill {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #ffb020;
+  background: rgba(255, 176, 32, 0.08);
+  border: 1px solid rgba(255, 176, 32, 0.2);
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 1.25rem;
+}
+
+.deepdive-hero-title {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 1rem;
+  line-height: 1.25;
+}
+
+.deepdive-hero-sub {
+  font-size: 1rem;
+  color: #94a3b8;
+  line-height: 1.7;
+  margin: 0 auto 2rem;
+  max-width: 600px;
+}
+
+/* ─── 2. FORMULAR SECTION ─────────────────────────────── */
+.deepdive-form-section {
+  padding-top: 0;
+  padding-bottom: 2rem;
+}
+
+.deepdive-form-section .deepdive-form-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ─── 3. ERWARTUNGSMANAGEMENT (3 Steps) ───────────────── */
+.deepdive-steps-section {
+  padding-top: 1rem;
+}
+
+.deepdive-steps {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.deepdive-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.deepdive-step-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 176, 32, 0.1);
+  border: 1px solid rgba(255, 176, 32, 0.25);
+  border-radius: 50%;
+  color: #ffb020;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
+.deepdive-step-text strong {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.15rem;
+}
+
+.deepdive-step-text span {
+  color: #94a3b8;
+  font-size: 0.88rem;
+}
+
+/* ─── 4. VERTRAUENS-SECTION ───────────────────────────── */
+.deepdive-trust-section {
+  text-align: center;
+}
+
+.deepdive-section-title {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 1rem;
+}
+
+.deepdive-trust-text {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ─── 5. ALTERNATIVE CTA ─────────────────────────────── */
+.deepdive-alt-cta {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.deepdive-alt-label {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+}
+
+.deepdive-alt-link {
+  color: #ffb020;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.deepdive-alt-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ─── 6. RÜCKLINK ZUM CJA ────────────────────────────── */
+.deepdive-cja-link {
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: 4rem;
+}
+
+.deepdive-cja-label {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem;
+}
+
+.deepdive-cja-btn {
+  color: #ffb020;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.deepdive-cja-btn:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 600px) {
+  .deepdive-hero,
+  .deepdive-form-section,
+  .deepdive-steps-section,
+  .deepdive-trust-section,
+  .deepdive-alt-cta,
+  .deepdive-cja-link {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .deepdive-hero {
+    padding-top: 2.5rem;
+  }
+
+  .deepdive-hero-sub br {
+    display: none;
+  }
+
+  .deepdive-steps {
+    padding: 1.5rem 1.25rem;
+  }
+}

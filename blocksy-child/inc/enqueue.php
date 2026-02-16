@@ -110,6 +110,12 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-audit-live-js', 'audit-live.js', [ 'nexus-audit-js' ] );
 	}
 
+	// ── H2) Template: 360° Deep-Dive ─────────────────────────────
+	if ( is_page_template( 'page-360-deep-dive.php' ) || is_page( '360-deep-dive' ) ) {
+		hu_enqueue_css( 'nexus-audit-results-css', 'audit-results.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-deepdive-css', 'deep-dive.css', [ 'nexus-audit-results-css' ] );
+	}
+
 	// ── I) Template: SEO Landing (Hannover) ───────────────────────
 	if ( is_page_template( 'page-seo.php' ) || is_page( 'seo' ) || is_page( 'wordpress-seo-hannover' ) ) {
 		hu_enqueue_css( 'nexus-seo-css', 'seo.css', [ 'nexus-design-system' ] );
