@@ -1,0 +1,26 @@
+name: Links prüfen
+
+# Wann soll der Check laufen?
+on:
+  push:
+    branches: ["main", "master"] # Bei jedem Push auf Main/Master
+  pull_request: # Bei jedem Pull Request
+  workflow_dispatch: # Erlaubt manuelles Starten per Klick
+  schedule:
+    - cron: "0 0 * * 1" # Optional: Jeden Montag um Mitternacht
+
+jobs:
+  link-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Links prüfen (Lychee)
+        uses: lycheeverse/lychee-action@v1.9.3
+        with:
+          # Hier sagst du, was geprüft werden soll (z.B. alle .md und .html Dateien)
+          args: --verbose --no-progress './**/*.md' './**/*.html'
+        env:
+          # Verhindert Fehler bei Rate-Limiting von GitHub-Links
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
