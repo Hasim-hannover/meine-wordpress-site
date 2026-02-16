@@ -22,6 +22,10 @@ add_action( 'wp_enqueue_scripts', 'hu_enqueue_assets', 20 );
  * @return void
  */
 function hu_enqueue_assets() {
+	// ── Q) Template: Alle Lösungen ───────────────────────────────
+	if ( is_page_template( 'page-loesungen.php' ) ) {
+		hu_enqueue_css( 'nexus-solutions-css', 'solutions.css', [ 'nexus-design-system' ] );
+	}
 
 	$css_dir = get_stylesheet_directory() . '/assets/css/';
 	$css_uri = get_stylesheet_directory_uri() . '/assets/css/';
