@@ -840,6 +840,217 @@
   text-align: center;
 }
 
+/* ─── FLUENT FORMS UX ENHANCEMENTS (Deep-Dive) ──────────── */
+
+/* Spacing between form fields */
+.deepdive-form-wrap .ff-el-group {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Labels — larger, better spacing */
+.deepdive-form-wrap .ff-el-input--label {
+  margin-bottom: 0.5rem !important;
+}
+
+.deepdive-form-wrap .ff-el-input--label label {
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 0.92rem !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* Inputs & Textareas — larger touch targets, smooth transitions */
+.deepdive-form-wrap .ff-el-form-control {
+  padding: 0.85rem 1rem !important;
+  font-size: 0.95rem !important;
+  font-family: 'Satoshi', sans-serif !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease !important;
+  min-height: 48px !important;
+}
+
+.deepdive-form-wrap .ff-el-form-control:hover {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Select dropdowns — dark theme */
+.deepdive-form-wrap select.ff-el-form-control {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 1rem center !important;
+  padding-right: 2.5rem !important;
+}
+
+.deepdive-form-wrap select.ff-el-form-control option {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+/* Custom Radio Buttons */
+.deepdive-form-wrap .ff-el-form-check {
+  margin-bottom: 0.6rem !important;
+  padding: 0.65rem 1rem !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer;
+}
+
+.deepdive-form-wrap .ff-el-form-check:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 176, 32, 0.25) !important;
+}
+
+.deepdive-form-wrap .ff-el-form-check input[type="radio"],
+.deepdive-form-wrap .ff-el-form-check input[type="checkbox"] {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  cursor: pointer;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 0.5rem !important;
+}
+
+.deepdive-form-wrap .ff-el-form-check input[type="radio"] {
+  border-radius: 50% !important;
+}
+
+.deepdive-form-wrap .ff-el-form-check input[type="checkbox"] {
+  border-radius: 5px !important;
+}
+
+.deepdive-form-wrap .ff-el-form-check input[type="radio"]:checked,
+.deepdive-form-wrap .ff-el-form-check input[type="checkbox"]:checked {
+  border-color: #ffb020 !important;
+  background: #ffb020 !important;
+}
+
+.deepdive-form-wrap .ff-el-form-check input[type="radio"]:checked::after {
+  content: '' !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.deepdive-form-wrap .ff-el-form-check input[type="checkbox"]:checked::after {
+  content: '' !important;
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 5px;
+  height: 9px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Selected radio/checkbox row highlight */
+.deepdive-form-wrap .ff-el-form-check:has(input:checked) {
+  background: rgba(255, 176, 32, 0.06) !important;
+  border-color: rgba(255, 176, 32, 0.3) !important;
+}
+
+.deepdive-form-wrap .ff-el-form-check-label {
+  font-size: 0.92rem !important;
+  line-height: 1.5 !important;
+  cursor: pointer;
+}
+
+/* Help text / descriptions */
+.deepdive-form-wrap .ff-el-help-message {
+  color: #64748b !important;
+  font-size: 0.8rem !important;
+  margin-top: 0.4rem !important;
+}
+
+/* Step Progress — refined look */
+.deepdive-form-wrap .ff-el-progress {
+  height: 4px !important;
+  border-radius: 4px !important;
+  overflow: hidden;
+}
+
+.deepdive-form-wrap .ff-step-titles {
+  margin-bottom: 1.5rem !important;
+}
+
+.deepdive-form-wrap .ff-step-titles li {
+  font-family: 'Satoshi', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Next button — matching hover effect */
+.deepdive-form-wrap .ff-btn-next,
+.deepdive-form-wrap .step-nav .ff-btn {
+  padding: 0.85rem 2rem !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.3px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  cursor: pointer;
+}
+
+.deepdive-form-wrap .ff-btn-next:hover,
+.deepdive-form-wrap .step-nav .ff-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 176, 32, 0.2);
+}
+
+/* Prev button — hover state */
+.deepdive-form-wrap .ff-btn-prev {
+  padding: 0.85rem 1.5rem !important;
+  font-size: 0.88rem !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer;
+}
+
+.deepdive-form-wrap .ff-btn-prev:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+/* Error states */
+.deepdive-form-wrap .ff-el-is-error .ff-el-form-control {
+  border-color: rgba(248, 113, 113, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.08) !important;
+}
+
+.deepdive-form-wrap .ff-el-is-error .error {
+  color: #f87171 !important;
+  font-size: 0.8rem !important;
+  margin-top: 0.35rem !important;
+}
+
+/* DSGVO checkbox — smaller, inline */
+.deepdive-form-wrap .ff_t_c {
+  font-size: 0.82rem !important;
+  color: #94a3b8 !important;
+  line-height: 1.5 !important;
+}
+
+.deepdive-form-wrap .ff_t_c a {
+  color: #ffb020 !important;
+  text-decoration: none !important;
+}
+
+.deepdive-form-wrap .ff_t_c a:hover {
+  text-decoration: underline !important;
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 600px) {
   .deepdive-trust {
