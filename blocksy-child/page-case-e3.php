@@ -45,7 +45,8 @@ get_header();
 
         <p class="cs-case-hero__subtitle">
             Wie E3 New Energy GmbH mit einer neuen WordPress-Architektur
-            qualifizierte B2B-Leads generiert&nbsp;— organisch &amp; paid, messbar, skalierbar.
+            qualifizierte B2B-Leads generiert&nbsp;— mit 12–15&nbsp;% Sales-Conversion,
+            Recruiting-Erfolg und sauberem CRM-Setup.
         </p>
 
         <!-- KPI Snapshot (3 Tiles) -->
@@ -59,8 +60,8 @@ get_header();
                 <span class="cs-kpi-label">Cost per Lead</span>
             </div>
             <div class="cs-kpi-tile">
-                <span class="cs-kpi-value nx-text-gold">+12%</span>
-                <span class="cs-kpi-label">Conversion Rate</span>
+                <span class="cs-kpi-value nx-text-gold">12–15%</span>
+                <span class="cs-kpi-label">Sales-Conversion</span>
             </div>
         </div>
 
@@ -85,6 +86,8 @@ get_header();
             <span class="cs-meta-item">Kanal: SEO + Performance Ads</span>
             <span class="cs-meta-sep">·</span>
             <span class="cs-meta-item">Zeitraum: 12 Monate</span>
+            <span class="cs-meta-sep">·</span>
+            <span class="cs-meta-item">Budget: 20.000&nbsp;€</span>
         </div>
     </div>
 </section>
@@ -286,13 +289,16 @@ get_header();
                 <div class="cs-phase-body">
                     <p class="nx-card__text">
                         Journey-Audit als Lead-Magnet aufgebaut. Qualifizierungs-Flows nach
-                        Anlagengröße und Branche. n8n-Automatisierung für Lead-Routing.
-                        CTA-System nach dem Free-Journey-Audit-Prinzip.
+                        Anlagengröße und Branche. n8n-Automatisierung für Lead-Routing,
+                        parallele Recruiting-Kampagnen und Einführung eines neuen CRM-Setups
+                        bei E3 New Energy.
                     </p>
                     <ul class="cs-phase-outcomes">
                         <li>✓ 1.750+ Leads in 5 Monaten</li>
-                        <li>✓ -83% Cost per Lead vs. Ads-Phase</li>
-                        <li>✓ +12% Conversion Rate gesamt</li>
+                        <li>✓ -83% Cost per Lead vs. Einkaufsleads</li>
+                        <li>✓ 12–15% Sales-Conversion-Rate</li>
+                        <li>✓ 20.000&nbsp;€ Budget auf Leadgen + Recruiting verteilt</li>
+                        <li>✓ CRM live für sauberes Follow-up</li>
                     </ul>
                 </div>
             </div>
@@ -366,7 +372,7 @@ get_header();
         <div class="nx-section-header">
             <span class="nx-badge nx-badge--gold">Die Zahlen</span>
             <h2 class="nx-headline-section" style="margin-top:1rem;">
-                Ergebnis nach 8 Monaten
+                Ergebnisse &amp; Budget-Effizienz nach 12 Monaten
             </h2>
         </div>
 
@@ -386,9 +392,27 @@ get_header();
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">+12%</span>
-                <span class="cs-result-label">Conversion Rate</span>
-                <span class="cs-result-note">Traffic → qualifizierte Anfrage</span>
+                <span class="cs-result-value">12–15%</span>
+                <span class="cs-result-label">Sales-Conversion-Rate</span>
+                <span class="cs-result-note">Lead → Abschluss</span>
+            </div>
+
+            <div class="cs-result-card">
+                <span class="cs-result-value">20.000&nbsp;€</span>
+                <span class="cs-result-label">Gesamtbudget</span>
+                <span class="cs-result-note">dynamisch über Kanäle verteilt</span>
+            </div>
+
+            <div class="cs-result-card">
+                <span class="cs-result-value">2 Ziele</span>
+                <span class="cs-result-label">Neukunden + Recruiting</span>
+                <span class="cs-result-note">Vertrieb gefüllt und Fachkräfte eingestellt</span>
+            </div>
+
+            <div class="cs-result-card">
+                <span class="cs-result-value">CRM live</span>
+                <span class="cs-result-label">E3 New Energy CRM</span>
+                <span class="cs-result-note">schnelleres Routing, bessere Datenqualität</span>
             </div>
 
             <div class="cs-result-card">
@@ -411,6 +435,34 @@ get_header();
 
         </div>
 
+        <article class="cs-budget-proof">
+            <p class="cs-budget-proof__eyebrow">Ergebnisse &amp; Budget-Effizienz</p>
+            <h3 class="cs-budget-proof__title">
+                Nicht nur mehr Leads. Bessere Sales-Qualität und bessere Prozesse.
+            </h3>
+            <p class="cs-budget-proof__intro">
+                Ein Gesamtbudget von 20.000&nbsp;€ wurde kanalübergreifend eingesetzt, um zwei
+                Unternehmensziele gleichzeitig zu erreichen: Neukundengewinnung und
+                Mitarbeiteraufbau.
+            </p>
+            <ul class="cs-budget-proof__list">
+                <li>
+                    <strong>Sales-Qualität:</strong> Die generierten Leads erreichten eine
+                    Sales-Conversion-Rate von 12–15&nbsp;% und bestätigten die präzise
+                    Vorqualifizierung.
+                </li>
+                <li>
+                    <strong>Ganzheitlicher Ansatz (Recruiting):</strong> Ein Teil des Budgets
+                    wurde parallel für Recruiting-Kampagnen genutzt, was zu neuen Einstellungen
+                    führte.
+                </li>
+                <li>
+                    <strong>Prozess-Optimierung:</strong> Einführung und Integration eines neuen
+                    CRM-Systems bei E3 New Energy zur effizienteren Verarbeitung eingehender
+                    Anfragen.
+                </li>
+            </ul>
+        </article>
 
     </div>
 </section>
@@ -442,6 +494,15 @@ get_header();
                     Phase 1 (Tracking + Performance) ist in 4–6 Wochen abgeschlossen.
                     Erste organische Leads kamen bei E3 nach Woche 14. Skalierung
                     ab Monat 6. Genaue Zeitlinie hängt von Ausgangslage und Branche ab.
+                </div>
+            </details>
+
+            <details class="nx-faq__item">
+                <summary>Warum wurde das Budget auch für Recruiting eingesetzt?</summary>
+                <div class="nx-faq__content">
+                    Weil Wachstum nicht nur aus mehr Anfragen besteht. Bei E3 wurde das Budget so
+                    allokiert, dass parallel Vertriebspipeline und Teamkapazität aufgebaut wurden.
+                    Das reduziert operative Engpässe und stabilisiert die Umsetzungsqualität.
                 </div>
             </details>
 
