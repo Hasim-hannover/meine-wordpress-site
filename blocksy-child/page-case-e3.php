@@ -137,7 +137,7 @@ get_header();
                     </li>
                     <li>
                         <span class="cs-fact-label">Zielgruppe</span>
-                        <span class="cs-fact-value">KMU & Gewerbe (>500k€ Umsatz)</span>
+                        <span class="cs-fact-value">KMU & Gewerbe (> 1 Mio. € Umsatz)</span>
                     </li>
                     <li>
                         <span class="cs-fact-label">Ausgangslage</span>
