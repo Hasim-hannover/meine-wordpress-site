@@ -86,7 +86,7 @@ get_header();
             <span class="cs-meta-sep">·</span>
             <span class="cs-meta-item">Zielmarkt: KMU + B2C</span>
             <span class="cs-meta-sep">·</span>
-            <span class="cs-meta-item">Kanal: Technical SEO &amp; Basis-Content + Performance Ads</span>
+            <span class="cs-meta-item">Kanal: Technical SEO &amp; CRO + Performance Ads</span>
             <span class="cs-meta-sep">·</span>
             <span class="cs-meta-item">Fokus: Segmentierung + Qualifizierung + Automatisierung</span>
             <span class="cs-meta-sep">·</span>
