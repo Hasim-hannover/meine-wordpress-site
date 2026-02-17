@@ -292,7 +292,7 @@ get_header();
                     <ul class="cs-phase-outcomes">
                         <li>✓ 1.750+ Leads in 5 Monaten</li>
                         <li>✓ -83% Cost per Lead vs. Ads-Phase</li>
-                        <li>✓ +270% Conversion Rate gesamt</li>
+                        <li>✓ +12% Conversion Rate gesamt</li>
                     </ul>
                 </div>
             </div>
@@ -366,7 +366,7 @@ get_header();
         <div class="nx-section-header">
             <span class="nx-badge nx-badge--gold">Die Zahlen</span>
             <h2 class="nx-headline-section" style="margin-top:1rem;">
-                Ergebnis nach 12 Monaten
+                Ergebnis nach 8 Monaten
             </h2>
         </div>
 
@@ -431,7 +431,7 @@ get_header();
                 <summary>Ist das auf unser Unternehmen übertragbar?</summary>
                 <div class="nx-faq__content">
                     Die Ergebnisse entstanden durch ein System, das auf B2B-Unternehmen
-                    ab ~500k€ Jahresumsatz ausgelegt ist. Ob ähnliche Hebel für Sie
+                    ab ~500.000.€ Jahresumsatz ausgelegt ist. Ob ähnliche Hebel für Sie
                     existieren, zeigt der Free Journey Audit in 48h&nbsp;— ohne Verpflichtung.
                 </div>
             </details>
