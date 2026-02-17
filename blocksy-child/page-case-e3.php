@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Case Study – E3 New Energy
- * Description: Flagship Case Study: E3 New Energy GmbH – von 0 auf 1.750+ Leads
+ * Description: Flagship Case Study: E3 New Energy GmbH – vom Lead-Einkauf zur Lead-Autonomie
  *
  * Design: Nutzt Nexus Design System (design-system.css + case-study.css)
  * SEO-Meta: inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
@@ -24,6 +24,7 @@ get_header();
     <ul>
         <li><a href="#kontext"><span class="nx-sidenav__dot"></span><span class="nx-sidenav__text">Kontext</span></a></li>
         <li><a href="#constraints"><span class="nx-sidenav__dot"></span><span class="nx-sidenav__text">Ausgangslage</span></a></li>
+        <li><a href="#warum"><span class="nx-sidenav__dot"></span><span class="nx-sidenav__text">Warum Setup</span></a></li>
         <li><a href="#vorgehen"><span class="nx-sidenav__dot"></span><span class="nx-sidenav__text">Vorgehen</span></a></li>
         <li><a href="#nicht"><span class="nx-sidenav__dot"></span><span class="nx-sidenav__text">Nicht gemacht</span></a></li>
         <li><a href="#ergebnis"><span class="nx-sidenav__dot"></span><span class="nx-sidenav__text">Ergebnis</span></a></li>
@@ -44,9 +45,9 @@ get_header();
         </h1>
 
         <p class="cs-case-hero__subtitle">
-            Wie E3 New Energy GmbH mit einer neuen WordPress-Architektur
-            qualifizierte B2B-Leads generiert&nbsp;— mit 12–15&nbsp;% Sales-Conversion,
-            Recruiting-Erfolg und sauberem CRM-Setup.
+            Wie E3 New Energy GmbH den externen Lead-Einkauf durch ein eigenes,
+            autarkes Lead-System ersetzte&nbsp;— mit Technical SEO, Basis-Content,
+            Performance Ads und automatisierter Vorqualifizierung.
         </p>
 
         <!-- KPI Snapshot (3 Tiles) -->
@@ -83,7 +84,9 @@ get_header();
         <div class="cs-hero-meta">
             <span class="cs-meta-item">Branche: Erneuerbare Energien (B2B)</span>
             <span class="cs-meta-sep">·</span>
-            <span class="cs-meta-item">Kanal: SEO + Performance Ads</span>
+            <span class="cs-meta-item">Kanal: Technical SEO &amp; Basis-Content + Performance Ads</span>
+            <span class="cs-meta-sep">·</span>
+            <span class="cs-meta-item">Fokus: Segmentierung + Qualifizierung + Automatisierung</span>
             <span class="cs-meta-sep">·</span>
             <span class="cs-meta-item">Zeitraum: 12 Monate</span>
             <span class="cs-meta-sep">·</span>
@@ -109,22 +112,26 @@ get_header();
             <div class="cs-kontext-text nx-prose">
                 <p>
                     E3 New Energy GmbH vermittelt Photovoltaik-Anlagen und Wärmepumpen an
-                    mittelständische Gewerbe- und Industriekunden. Das Unternehmen hatte eine
-                    WordPress-Seite&nbsp;— aber keine Strategie, wie diese Website kontinuierlich
-                    qualifizierte Anfragen generieren soll.
+                    mittelständische Gewerbe- und Industriekunden. Trotz fehlender digitaler
+                    Marketingkanäle war die Ausgangsbasis stark: eine solide Website, eine
+                    saubere interne Struktur und ein operativ starkes Team.
                 </p>
                 <p>
-                    Leads wurden zugekauft&nbsp;— im Schnitt 150&nbsp;€ pro Lead. Performance Ads
-                    liefen, aber die organische Sichtbarkeit war nahe null. Die Kosten
-                    stiegen, die Qualität der eingekauften Leads war inkonsistent.
-                    Die Aufgabe: Eine WordPress-Infrastruktur aufbauen, die qualifizierte
-                    B2B-Entscheider selbst anzieht&nbsp;— und den Cost per Lead strukturell senkt,
-                    statt ihn nur durch höheres Budget zu verwalten.
+                    Leads wurden überwiegend extern zugekauft&nbsp;— im Schnitt 150&nbsp;€ pro Lead.
+                    Das strategische Ziel war klar: Weg vom Lead-Käufer, hin zum Lead-Besitzer.
+                    Also eine eigene, autarke Lead-Generierung aufbauen, die hochwertige
+                    Anfragen kontinuierlich erzeugt und die Abhängigkeit von Drittanbietern senkt.
                 </p>
                 <p>
-                    Kein Agenturmodell mit Stundensätzen. Assets, die dem Unternehmen
-                    gehören&nbsp;— kombiniert mit gezieltem Paid-Einsatz dort, wo er sich rechnet.
+                    Die Qualität im Projekt war kein Zufall: ein hochqualifiziertes
+                    Handwerksteam, kompetente Mitarbeiter in der Umsetzung und die strategische
+                    Partnerschaft als Viessmann Premium-Partner bildeten das operative Rückgrat.
                 </p>
+                <ul class="cs-strength-list">
+                    <li><strong>Solide Basis:</strong> Website und interne Prozesse waren bereits belastbar.</li>
+                    <li><strong>Fachkompetenz:</strong> Starkes Handwerksteam plus erfahrene Mitarbeiter.</li>
+                    <li><strong>Premium-Netzwerk:</strong> Viessmann Premium-Partner als Qualitätsanker.</li>
+                </ul>
             </div>
 
             <div class="cs-kontext-card nx-card">
@@ -144,7 +151,15 @@ get_header();
                     </li>
                     <li>
                         <span class="cs-fact-label">Ausgangslage</span>
-                        <span class="cs-fact-value">WordPress ohne Lead-Strategie</span>
+                        <span class="cs-fact-value">Solide Website, aber ohne digitale Akquisekanäle</span>
+                    </li>
+                    <li>
+                        <span class="cs-fact-label">Team</span>
+                        <span class="cs-fact-value">Hochqualifiziertes Handwerksteam</span>
+                    </li>
+                    <li>
+                        <span class="cs-fact-label">Partner</span>
+                        <span class="cs-fact-value">Viessmann Premium-Partner</span>
                     </li>
                     <li>
                         <span class="cs-fact-label">Zeitraum</span>
@@ -190,11 +205,10 @@ get_header();
 
             <div class="nx-card nx-card--flat cs-constraint-card">
                 <div class="cs-constraint-num">02</div>
-                <h3 class="nx-card__title">0 organische Sichtbarkeit</h3>
+                <h3 class="nx-card__title">Kein digitaler Akquise-Funnel</h3>
                 <p class="nx-card__text">
-                    Für alle relevanten Suchbegriffe (PV Gewerbe, Wärmepumpe Industrie etc.)
-                    war die Domain nicht auf Seite 1&nbsp;— nicht einmal Seite 3.
-                    PageSpeed: 34 (Mobile).
+                    Es fehlte ein integriertes Setup aus Tracking, Landingpages, Content-Basis
+                    und Segmentierungslogik. Ergebnis: keine planbare Pipeline aus eigenen Leads.
                 </p>
             </div>
 
@@ -203,8 +217,8 @@ get_header();
                 <h3 class="nx-card__title">Leads zugekauft — ø 150&nbsp;€/Stück</h3>
                 <p class="nx-card__text">
                     Externe Lead-Listen und Kauf-Leads zum Durchschnittspreis von 150&nbsp;€.
-                    Keine Qualifizierung nach Anlagengröße oder Entscheidungsphase&nbsp;—
-                    Vertrieb und Neugierige landeten im selben Postfach.
+                    Keine belastbare Vorqualifizierung nach Anlagengröße, Bedarf und
+                    Entscheidungsphase&nbsp;— Vertrieb und Neugierige landeten im selben Postfach.
                 </p>
             </div>
 
@@ -214,7 +228,59 @@ get_header();
 </section>
 
 <!-- ========================================
-     SECTION 4: VORGEHEN (3 Phasen)
+     SECTION 4: METHODIK-WARUM
+     ======================================== -->
+<section class="nx-section" id="warum">
+    <div class="nx-container">
+
+        <div class="nx-section-header">
+            <span class="nx-badge nx-badge--gold">Methodik</span>
+            <h2 class="nx-headline-section" style="margin-top:1rem;">
+                Warum Technical SEO &amp; Basis-Content zuerst kamen
+            </h2>
+            <p class="nx-subheadline" style="margin:1rem auto 0;">
+                Performance Ads skalieren nur nachhaltig, wenn Tracking, Ladezeiten und
+                Landingpage-Struktur technisch stabil sind.
+            </p>
+        </div>
+
+        <div class="cs-method-grid" style="margin-top:3rem;">
+            <article class="cs-method-card">
+                <p class="cs-method-kicker">Performance-Hebel</p>
+                <h3 class="nx-card__title">Technisches Fundament für Ads</h3>
+                <p class="nx-card__text">
+                    Technical SEO wurde gezielt als Infrastruktur-Layer eingesetzt:
+                    Tracking-Integrität, Mobile-Performance und klare Landingpage-Struktur
+                    als Basis für belastbare Kampagnenentscheidungen.
+                </p>
+            </article>
+
+            <article class="cs-method-card cs-method-card--highlight">
+                <p class="cs-method-kicker">Effizienz</p>
+                <h3 class="nx-card__title">Höherer Quality Score, niedrigere CPCs</h3>
+                <p class="nx-card__text">
+                    Ein sauberer technischer Aufbau verbessert Relevanzsignale und reduziert
+                    Reibung. Das senkt Klickpreise und erhöht gleichzeitig die
+                    Conversion-Wahrscheinlichkeit auf den Zielseiten.
+                </p>
+            </article>
+
+            <article class="cs-method-card">
+                <p class="cs-method-kicker">Skalierung</p>
+                <h3 class="nx-card__title">Basis-Content für Vorqualifizierung</h3>
+                <p class="nx-card__text">
+                    Basis-Content beantwortet zentrale Entscheidungsfragen vor dem Kontakt,
+                    segmentiert Suchintentionen und liefert dem Vertrieb besser vorbereitete
+                    Erstgespräche.
+                </p>
+            </article>
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================================
+     SECTION 5: VORGEHEN (3 Phasen)
      ======================================== -->
 <section class="nx-section cs-section-alt" id="vorgehen">
     <div class="nx-container">
@@ -260,19 +326,21 @@ get_header();
                     <div class="nx-step__number">2</div>
                     <div>
                         <span class="cs-phase-label">Monat 4–7</span>
-                        <h3 class="cs-phase-title">Sichtbarkeit: SEO-Architektur + Content</h3>
+                        <h3 class="cs-phase-title">Technical SEO &amp; Basis-Content</h3>
                     </div>
                 </div>
                 <div class="cs-phase-body">
                     <p class="nx-card__text">
-                        Keyword-Cluster für Gewerbe-PV und Wärmepumpe Industrie aufgebaut.
-                        Pillar Pages + Supporting Content strukturiert. Interne Verlinkung
-                        nach Silo-Prinzip. Schema-Markup für alle kritischen Seiten.
+                        Funnel-Landingpages und Tracking-Setups technisch konsolidiert:
+                        Core Web Vitals stabilisiert, mobile Ladezeiten optimiert,
+                        Event-Qualität erhöht. Parallel wurde Basis-Content für
+                        PV/Wärmepumpe-Entscheidungsfragen aufgebaut, um Traffic früh zu
+                        segmentieren und Anfragen vorzuqualifizieren.
                     </p>
                     <ul class="cs-phase-outcomes">
-                        <li>✓ 12 Pillar Pages live</li>
-                        <li>✓ Seite-1-Rankings für 23 Keywords</li>
-                        <li>✓ +340% organischer Traffic in 90 Tagen</li>
+                        <li>✓ Technisches Ads-Fundament stabilisiert</li>
+                        <li>✓ Höhere Landingpage-Relevanz für Kampagnen</li>
+                        <li>✓ Basis-Content für Intent-Segmentierung live</li>
                     </ul>
                 </div>
             </div>
@@ -283,22 +351,23 @@ get_header();
                     <div class="nx-step__number">3</div>
                     <div>
                         <span class="cs-phase-label">Monat 8–12</span>
-                        <h3 class="cs-phase-title">Conversion: Lead-System + Qualifizierung</h3>
+                        <h3 class="cs-phase-title">Performance-Skalierung: Qualifizierung + Automation</h3>
                     </div>
                 </div>
                 <div class="cs-phase-body">
                     <p class="nx-card__text">
-                        Journey-Audit als Lead-Magnet aufgebaut. Qualifizierungs-Flows nach
-                        Anlagengröße und Branche. n8n-Automatisierung für Lead-Routing,
-                        parallele Recruiting-Kampagnen und Einführung eines neuen CRM-Setups
-                        bei E3 New Energy.
+                        Performance-Ads wurden auf das vorbereitete Fundament skaliert.
+                        Qualifizierungs-Flows nach Branche, Bedarf und Projektgröße
+                        segmentierten Anfragen. n8n-Automatisierung und CRM-Routing sorgten
+                        dafür, dass Leads vorqualifiziert beim Vertrieb ankamen.
                     </p>
                     <ul class="cs-phase-outcomes">
                         <li>✓ 1.750+ Leads in 5 Monaten</li>
+                        <li>✓ Vom Lead-Käufer zum Lead-Besitzer</li>
                         <li>✓ -83% Cost per Lead vs. Einkaufsleads</li>
                         <li>✓ 12–15% Sales-Conversion-Rate</li>
-                        <li>✓ 20.000&nbsp;€ Budget auf Leadgen + Recruiting verteilt</li>
-                        <li>✓ CRM live für sauberes Follow-up</li>
+                        <li>✓ Segmentierte, vorqualifizierte Übergabe an Vertrieb</li>
+                        <li>✓ CRM + n8n Automation für Follow-up und Datenqualität</li>
                     </ul>
                 </div>
             </div>
@@ -309,7 +378,7 @@ get_header();
 </section>
 
 <!-- ========================================
-     SECTION 5: WAS WIR NICHT GEMACHT HABEN
+     SECTION 6: WAS WIR NICHT GEMACHT HABEN
      ======================================== -->
 <section class="nx-section" id="nicht">
     <div class="nx-container">
@@ -364,7 +433,7 @@ get_header();
 </section>
 
 <!-- ========================================
-     SECTION 6: ERGEBNIS
+     SECTION 7: ERGEBNIS
      ======================================== -->
 <section class="nx-section cs-section-results" id="ergebnis">
     <div class="nx-container">
@@ -372,8 +441,12 @@ get_header();
         <div class="nx-section-header">
             <span class="nx-badge nx-badge--gold">Die Zahlen</span>
             <h2 class="nx-headline-section" style="margin-top:1rem;">
-                Ergebnisse &amp; Budget-Effizienz nach 12 Monaten
+                Vom Lead-Käufer zum Lead-Besitzer
             </h2>
+            <p class="nx-subheadline" style="margin:1rem auto 0;">
+                Synergie aus technischem Setup und Performance-Skalierung:
+                weniger Abhängigkeit, bessere Lead-Qualität, effizientere Vertriebsprozesse.
+            </p>
         </div>
 
         <!-- Big KPI Grid -->
@@ -382,7 +455,7 @@ get_header();
             <div class="cs-result-card cs-result-card--primary">
                 <span class="cs-result-value">1.750+</span>
                 <span class="cs-result-label">Qualifizierte B2B-Leads</span>
-                <span class="cs-result-note">organisch &amp; paid kombiniert</span>
+                <span class="cs-result-note">eigene Pipeline statt externer Zukauf</span>
             </div>
 
             <div class="cs-result-card">
@@ -400,19 +473,19 @@ get_header();
             <div class="cs-result-card">
                 <span class="cs-result-value">20.000&nbsp;€</span>
                 <span class="cs-result-label">Gesamtbudget</span>
-                <span class="cs-result-note">dynamisch über Kanäle verteilt</span>
+                <span class="cs-result-note">für Setup, Skalierung und Automationslogik</span>
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">2 Ziele</span>
-                <span class="cs-result-label">Neukunden + Recruiting</span>
-                <span class="cs-result-note">Vertrieb gefüllt und Fachkräfte eingestellt</span>
+                <span class="cs-result-value">Autark</span>
+                <span class="cs-result-label">Lead-Generierung</span>
+                <span class="cs-result-note">deutlich weniger Abhängigkeit von Drittanbietern</span>
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">CRM live</span>
-                <span class="cs-result-label">E3 New Energy CRM</span>
-                <span class="cs-result-note">schnelleres Routing, bessere Datenqualität</span>
+                <span class="cs-result-value">n8n + CRM</span>
+                <span class="cs-result-label">Automatisierte Lead-Übergabe</span>
+                <span class="cs-result-note">segmentiert und vorqualifiziert im Vertrieb</span>
             </div>
 
             <div class="cs-result-card">
@@ -422,44 +495,44 @@ get_header();
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">+340%</span>
-                <span class="cs-result-label">Organischer Traffic</span>
-                <span class="cs-result-note">in den ersten 90 Tagen</span>
+                <span class="cs-result-value">Stabil</span>
+                <span class="cs-result-label">Technical SEO Fundament</span>
+                <span class="cs-result-note">Tracking-Integrität + Mobile-Performance</span>
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">23</span>
-                <span class="cs-result-label">Seite-1-Keywords</span>
-                <span class="cs-result-note">Ausgangswert: 0</span>
+                <span class="cs-result-value">Qualität</span>
+                <span class="cs-result-label">Premium-Positionierung</span>
+                <span class="cs-result-note">Viessmann-Partner + starkes Ausführungsteam</span>
             </div>
 
         </div>
 
         <article class="cs-budget-proof">
-            <p class="cs-budget-proof__eyebrow">Ergebnisse &amp; Budget-Effizienz</p>
+            <p class="cs-budget-proof__eyebrow">Lead-Autonomie</p>
             <h3 class="cs-budget-proof__title">
-                Nicht nur mehr Leads. Bessere Sales-Qualität und bessere Prozesse.
+                Eigene Lead-Quelle statt dauerhafter Lead-Einkauf.
             </h3>
             <p class="cs-budget-proof__intro">
-                Ein Gesamtbudget von 20.000&nbsp;€ wurde kanalübergreifend eingesetzt, um zwei
-                Unternehmensziele gleichzeitig zu erreichen: Neukundengewinnung und
-                Mitarbeiteraufbau.
+                Das Setup wurde bewusst in der Reihenfolge Fundament → Skalierung aufgebaut:
+                erst technische Stabilität und Basis-Content, dann Performance-Marketing mit
+                sauberer Segmentierung und Automatisierung.
             </p>
             <ul class="cs-budget-proof__list">
                 <li>
-                    <strong>Sales-Qualität:</strong> Die generierten Leads erreichten eine
-                    Sales-Conversion-Rate von 12–15&nbsp;% und bestätigten die präzise
-                    Vorqualifizierung.
+                    <strong>Technik als Umsatzhebel:</strong> Technical SEO verbesserte
+                    Tracking-Integrität, Ladezeit und mobile Nutzbarkeit&nbsp;— die Grundlage
+                    für präzise Kampagnensteuerung.
                 </li>
                 <li>
-                    <strong>Ganzheitlicher Ansatz (Recruiting):</strong> Ein Teil des Budgets
-                    wurde parallel für Recruiting-Kampagnen genutzt, was zu neuen Einstellungen
-                    führte.
+                    <strong>Ads-Effizienz:</strong> Höhere Landingpage-Qualität und Relevanz
+                    stärkten den Quality Score, reduzierten CPC-Druck und erhöhten die
+                    Wahrscheinlichkeit qualifizierter Abschlüsse.
                 </li>
                 <li>
-                    <strong>Prozess-Optimierung:</strong> Einführung und Integration eines neuen
-                    CRM-Systems bei E3 New Energy zur effizienteren Verarbeitung eingehender
-                    Anfragen.
+                    <strong>Vertriebseffekt:</strong> Leads werden heute segmentiert,
+                    vorqualifiziert und automatisiert an den Vertrieb übergeben&nbsp;—
+                    mit 12–15&nbsp;% Sales-Conversion-Rate als Ergebnis.
                 </li>
             </ul>
         </article>
@@ -468,7 +541,7 @@ get_header();
 </section>
 
 <!-- ========================================
-     SECTION 7: FAQ
+     SECTION 8: FAQ
      ======================================== -->
 <section class="nx-section" id="faq">
     <div class="nx-container">
@@ -492,17 +565,17 @@ get_header();
                 <summary>Wie lange dauert es bis zu ersten Leads?</summary>
                 <div class="nx-faq__content">
                     Phase 1 (Tracking + Performance) ist in 4–6 Wochen abgeschlossen.
-                    Erste organische Leads kamen bei E3 nach Woche 14. Skalierung
+                    Erste qualifizierte Inbound-Leads kamen bei E3 nach Woche 14. Skalierung
                     ab Monat 6. Genaue Zeitlinie hängt von Ausgangslage und Branche ab.
                 </div>
             </details>
 
             <details class="nx-faq__item">
-                <summary>Warum wurde das Budget auch für Recruiting eingesetzt?</summary>
+                <summary>Warum zuerst Technical SEO, wenn der Fokus auf Ads lag?</summary>
                 <div class="nx-faq__content">
-                    Weil Wachstum nicht nur aus mehr Anfragen besteht. Bei E3 wurde das Budget so
-                    allokiert, dass parallel Vertriebspipeline und Teamkapazität aufgebaut wurden.
-                    Das reduziert operative Engpässe und stabilisiert die Umsetzungsqualität.
+                    Weil Ads ohne stabiles technisches Fundament teuer werden.
+                    Tracking-Integrität, Ladezeit und Mobile-UX verbessern den Quality Score,
+                    senken die Klickpreise und erhöhen die Conversion-Qualität der Landingpages.
                 </div>
             </details>
 
@@ -531,7 +604,7 @@ get_header();
 </section>
 
 <!-- ========================================
-     SECTION 8: NEXT STEP CTA
+     SECTION 9: NEXT STEP CTA
      ======================================== -->
 <section class="nx-section cs-section-cta" id="next-step">
     <div class="nx-container">
