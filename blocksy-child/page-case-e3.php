@@ -46,7 +46,7 @@ get_header();
 
         <p class="cs-case-hero__subtitle">
             Wie E3 New Energy GmbH den externen Lead-Einkauf durch ein eigenes,
-            autarkes Lead-System ersetzte&nbsp;— mit Technical SEO, Basis-Content,
+            skalierbares Lead-System ersetzte&nbsp;— mit Technical SEO, Basis-Content,
             Performance Ads und automatisierter Vorqualifizierung.
         </p>
 
@@ -82,7 +82,9 @@ get_header();
 
         <!-- Meta Row -->
         <div class="cs-hero-meta">
-            <span class="cs-meta-item">Branche: Erneuerbare Energien (B2B)</span>
+            <span class="cs-meta-item">Branche: Erneuerbare Energien</span>
+            <span class="cs-meta-sep">·</span>
+            <span class="cs-meta-item">Zielmarkt: KMU + B2C</span>
             <span class="cs-meta-sep">·</span>
             <span class="cs-meta-item">Kanal: Technical SEO &amp; Basis-Content + Performance Ads</span>
             <span class="cs-meta-sep">·</span>
@@ -111,25 +113,25 @@ get_header();
         <div class="cs-kontext-grid">
             <div class="cs-kontext-text nx-prose">
                 <p>
-                    E3 New Energy GmbH vermittelt Photovoltaik-Anlagen und Wärmepumpen an
-                    mittelständische Gewerbe- und Industriekunden. Trotz fehlender digitaler
-                    Marketingkanäle war die Ausgangsbasis stark: eine solide Website, eine
-                    saubere interne Struktur und ein operativ starkes Team.
+                    E3 New Energy GmbH plant und vermittelt Photovoltaik-Anlagen und
+                    Wärmepumpen für KMU- und B2C-Kunden. Trotz fehlender digitaler
+                    Akquisekanäle war die operative Basis stark: solide Website,
+                    klare interne Struktur und ein leistungsfähiges Team.
                 </p>
                 <p>
-                    Leads wurden überwiegend extern zugekauft&nbsp;— im Schnitt 150&nbsp;€ pro Lead.
-                    Das strategische Ziel war klar: Weg vom Lead-Käufer, hin zum Lead-Besitzer.
-                    Also eine eigene, autarke Lead-Generierung aufbauen, die hochwertige
-                    Anfragen kontinuierlich erzeugt und die Abhängigkeit von Drittanbietern senkt.
+                    Das Wachstum hing jedoch zu stark am externen Lead-Einkauf
+                    (ø 150&nbsp;€ pro Lead). Ziel war nicht mehr Reichweite um jeden Preis,
+                    sondern Lead-Ownership: eine eigene Pipeline, die kontinuierlich
+                    qualifizierte Anfragen liefert und die Abhängigkeit von Drittanbietern senkt.
                 </p>
                 <p>
                     Die Qualität im Projekt war kein Zufall: ein hochqualifiziertes
-                    Handwerksteam, kompetente Mitarbeiter in der Umsetzung und die strategische
-                    Partnerschaft als Viessmann Premium-Partner bildeten das operative Rückgrat.
+                    Handwerksteam, starke operative Umsetzung und die strategische
+                    Partnerschaft als Viessmann Premium-Partner bildeten das Fundament.
                 </p>
                 <ul class="cs-strength-list">
-                    <li><strong>Solide Basis:</strong> Website und interne Prozesse waren bereits belastbar.</li>
-                    <li><strong>Fachkompetenz:</strong> Starkes Handwerksteam plus erfahrene Mitarbeiter.</li>
+                    <li><strong>Solide Basis:</strong> Website und Prozesse waren bereits belastbar.</li>
+                    <li><strong>Fachkompetenz:</strong> Starkes Handwerksteam plus operative Exzellenz.</li>
                     <li><strong>Premium-Netzwerk:</strong> Viessmann Premium-Partner als Qualitätsanker.</li>
                 </ul>
             </div>
@@ -204,10 +206,10 @@ get_header();
 
             <div class="nx-card nx-card--flat cs-constraint-card">
                 <div class="cs-constraint-num">01</div>
-                <h3 class="nx-card__title">Kein Tracking</h3>
+                <h3 class="nx-card__title">Kein verwertbares Tracking</h3>
                 <p class="nx-card__text">
-                    GA4 war installiert, aber ohne Events, Conversions oder Attribution.
-                    Keine Datengrundlage für Entscheidungen&nbsp;— jede Optimierung war Raten.
+                    GA4 war vorhanden, aber ohne saubere Event-Logik, Conversion-Definitionen
+                    und Attribution. Entscheidungen basierten auf Annahmen statt Daten.
                 </p>
             </div>
 
@@ -215,8 +217,9 @@ get_header();
                 <div class="cs-constraint-num">02</div>
                 <h3 class="nx-card__title">Kein digitaler Akquise-Funnel</h3>
                 <p class="nx-card__text">
-                    Es fehlte ein integriertes Setup aus Tracking, Landingpages, Content-Basis
-                    und Segmentierungslogik. Ergebnis: keine planbare Pipeline aus eigenen Leads.
+                    Es fehlte ein integriertes Setup aus Tracking, Landingpages,
+                    Content-Basis und Segmentierungslogik. Ergebnis: keine planbare
+                    Pipeline aus eigenen Leads.
                 </p>
             </div>
 
@@ -224,9 +227,9 @@ get_header();
                 <div class="cs-constraint-num">03</div>
                 <h3 class="nx-card__title">Leads zugekauft — ø 150&nbsp;€/Stück</h3>
                 <p class="nx-card__text">
-                    Externe Lead-Listen und Kauf-Leads zum Durchschnittspreis von 150&nbsp;€.
+                    Externe Listen und Kauf-Leads waren teuer und heterogen.
                     Keine belastbare Vorqualifizierung nach Anlagengröße, Bedarf und
-                    Entscheidungsphase&nbsp;— Vertrieb und Neugierige landeten im selben Postfach.
+                    Entscheidungsphase&nbsp;— Vertrieb und Neugierige landeten im selben Prozess.
                 </p>
             </div>
 
@@ -247,8 +250,8 @@ get_header();
                 Warum Technical SEO &amp; Basis-Content zuerst kamen
             </h2>
             <p class="nx-subheadline" style="margin:1rem auto 0;">
-                Performance Ads skalieren nur nachhaltig, wenn Tracking, Ladezeiten und
-                Landingpage-Struktur technisch stabil sind.
+                Performance Ads skalieren nur dann effizient, wenn Tracking,
+                Ladezeiten und Landingpage-Struktur zuerst sauber stehen.
             </p>
         </div>
 
@@ -257,9 +260,9 @@ get_header();
                 <p class="cs-method-kicker">Performance-Hebel</p>
                 <h3 class="nx-card__title">Technisches Fundament für Ads</h3>
                 <p class="nx-card__text">
-                    Technical SEO wurde gezielt als Infrastruktur-Layer eingesetzt:
+                    Technical SEO wurde als Infrastruktur-Layer aufgebaut:
                     Tracking-Integrität, Mobile-Performance und klare Landingpage-Struktur
-                    als Basis für belastbare Kampagnenentscheidungen.
+                    als Grundlage für belastbare Kampagnenentscheidungen.
                 </p>
             </article>
 
@@ -268,7 +271,7 @@ get_header();
                 <h3 class="nx-card__title">Höherer Quality Score, niedrigere CPCs</h3>
                 <p class="nx-card__text">
                     Ein sauberer technischer Aufbau verbessert Relevanzsignale und reduziert
-                    Reibung. Das senkt Klickpreise und erhöht gleichzeitig die
+                    Reibung. Das reduziert Klickpreise und erhöht gleichzeitig die
                     Conversion-Wahrscheinlichkeit auf den Zielseiten.
                 </p>
             </article>
@@ -278,7 +281,7 @@ get_header();
                 <h3 class="nx-card__title">Basis-Content für Vorqualifizierung</h3>
                 <p class="nx-card__text">
                     Basis-Content beantwortet zentrale Entscheidungsfragen vor dem Kontakt,
-                    segmentiert Suchintentionen und liefert dem Vertrieb besser vorbereitete
+                    segmentiert Suchintentionen und liefert dem Vertrieb bereits vorbereitete
                     Erstgespräche.
                 </p>
             </article>
@@ -316,9 +319,9 @@ get_header();
                 </div>
                 <div class="cs-phase-body">
                     <p class="nx-card__text">
-                        Server-Side GTM aufsetzen, GA4 Conversions konfigurieren, Consent Mode v2
-                        implementieren. PageSpeed von 34 auf 98 (Mobile) gebracht.
-                        Core Web Vitals: alle grün. LCP unter 0,8s.
+                        Server-Side GTM aufgesetzt, GA4-Conversions sauber definiert,
+                        Consent Mode v2 implementiert. PageSpeed Mobile von 34 auf 98 erhöht.
+                        Core Web Vitals stabilisiert, LCP unter 0,8s.
                     </p>
                     <ul class="cs-phase-outcomes">
                         <li>✓ 98 PageSpeed Mobile</li>
@@ -341,8 +344,8 @@ get_header();
                     <p class="nx-card__text">
                         Funnel-Landingpages und Tracking-Setups technisch konsolidiert:
                         Core Web Vitals stabilisiert, mobile Ladezeiten optimiert,
-                        Event-Qualität erhöht. Parallel wurde Basis-Content für
-                        PV/Wärmepumpe-Entscheidungsfragen aufgebaut, um Traffic früh zu
+                        Event-Qualität erhöht. Parallel Basis-Content für
+                        PV-/Wärmepumpen-Entscheidungsfragen aufgebaut, um Traffic früh zu
                         segmentieren und Anfragen vorzuqualifizieren.
                     </p>
                     <ul class="cs-phase-outcomes">
@@ -367,10 +370,10 @@ get_header();
                         Performance-Ads wurden auf das vorbereitete Fundament skaliert.
                         Qualifizierungs-Flows nach Branche, Bedarf und Projektgröße
                         segmentierten Anfragen. n8n-Automatisierung und CRM-Routing sorgten
-                        dafür, dass Leads vorqualifiziert beim Vertrieb ankamen.
+                        dafür, dass Leads vorqualifiziert und priorisiert im Vertrieb ankamen.
                     </p>
                     <ul class="cs-phase-outcomes">
-                        <li>✓ 1.750+ Leads in 5 Monaten</li>
+                        <li>✓ 1.750+ Leads im 5-Monats-Skalierungsfenster</li>
                         <li>✓ Vom Lead-Käufer zum Lead-Besitzer</li>
                         <li>✓ -83% Cost per Lead vs. Einkaufsleads</li>
                         <li>✓ 12–15% Sales-Conversion-Rate</li>
@@ -449,7 +452,7 @@ get_header();
         <div class="nx-section-header">
             <span class="nx-badge nx-badge--gold">Die Zahlen</span>
             <h2 class="nx-headline-section" style="margin-top:1rem;">
-                Vom Lead-Käufer zum Lead-Besitzer
+                Ergebnis nach 12 Monaten: Lead-Ownership statt Lead-Einkauf
             </h2>
             <p class="nx-subheadline" style="margin:1rem auto 0;">
                 Synergie aus technischem Setup und Performance-Skalierung:
@@ -462,7 +465,7 @@ get_header();
 
             <div class="cs-result-card cs-result-card--primary">
                 <span class="cs-result-value">1.750+</span>
-                <span class="cs-result-label">Qualifizierte B2B-Leads</span>
+                <span class="cs-result-label">Qualifizierte Leads</span>
                 <span class="cs-result-note">eigene Pipeline statt externer Zukauf</span>
             </div>
 
@@ -485,8 +488,8 @@ get_header();
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">Autark</span>
-                <span class="cs-result-label">Lead-Generierung</span>
+                <span class="cs-result-value">Lead-Ownership</span>
+                <span class="cs-result-label">Eigene Pipeline</span>
                 <span class="cs-result-note">deutlich weniger Abhängigkeit von Drittanbietern</span>
             </div>
 
@@ -503,28 +506,28 @@ get_header();
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">Stabil</span>
-                <span class="cs-result-label">Technical SEO Fundament</span>
-                <span class="cs-result-note">Tracking-Integrität + Mobile-Performance</span>
+                <span class="cs-result-value">Quality Score ↑</span>
+                <span class="cs-result-label">Ads-Effizienz</span>
+                <span class="cs-result-note">höhere Relevanz, geringerer CPC-Druck</span>
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">Qualität</span>
-                <span class="cs-result-label">Premium-Positionierung</span>
-                <span class="cs-result-note">Viessmann-Partner + starkes Ausführungsteam</span>
+                <span class="cs-result-value">Premium-Fit</span>
+                <span class="cs-result-label">Marktpositionierung</span>
+                <span class="cs-result-note">Viessmann-Partnerschaft + starkes Ausführungsteam</span>
             </div>
 
         </div>
 
         <article class="cs-budget-proof">
-            <p class="cs-budget-proof__eyebrow">Lead-Autonomie</p>
+            <p class="cs-budget-proof__eyebrow">Strategischer Kern</p>
             <h3 class="cs-budget-proof__title">
-                Eigene Lead-Quelle statt dauerhafter Lead-Einkauf.
+                Technik zuerst. Skalierung danach.
             </h3>
             <p class="cs-budget-proof__intro">
-                Das Setup wurde bewusst in der Reihenfolge Fundament → Skalierung aufgebaut:
-                erst technische Stabilität und Basis-Content, dann Performance-Marketing mit
-                sauberer Segmentierung und Automatisierung.
+                Die Reihenfolge war entscheidend: erst technische Stabilität und
+                Basis-Content, dann Performance-Skalierung mit sauberer Segmentierung
+                und Automation.
             </p>
             <ul class="cs-budget-proof__list">
                 <li>
@@ -540,7 +543,7 @@ get_header();
                 <li>
                     <strong>Vertriebseffekt:</strong> Leads werden heute segmentiert,
                     vorqualifiziert und automatisiert an den Vertrieb übergeben&nbsp;—
-                    mit 12–15&nbsp;% Sales-Conversion-Rate als Ergebnis.
+                    mit 12–15&nbsp;% Sales-Conversion-Rate im Closing.
                 </li>
             </ul>
         </article>
@@ -563,18 +566,29 @@ get_header();
             <details class="nx-faq__item">
                 <summary>Ist das auf unser Unternehmen übertragbar?</summary>
                 <div class="nx-faq__content">
-                    Die Ergebnisse entstanden durch ein System, das auf B2B-Unternehmen
-                    ab ~500.000.€ Jahresumsatz ausgelegt ist. Ob ähnliche Hebel für Sie
-                    existieren, zeigt der Free Journey Audit in 48h&nbsp;— ohne Verpflichtung.
+                    Die Ergebnisse entstanden in einem Setup für KMU + B2C mit
+                    klarer Leistungsfähigkeit und belastbaren internen Prozessen.
+                    Besonders relevant wird das Modell ab etwa &gt;5 Mio.&nbsp;€ Jahresumsatz.
+                    Ob ähnliche Hebel bei Ihnen vorhanden sind, zeigt der Free Journey Audit
+                    in 48h&nbsp;— ohne Verpflichtung.
+                </div>
+            </details>
+
+            <details class="nx-faq__item">
+                <summary>Warum wirkt diese Case Study trotz starkem Ads-Fokus nicht wie "Ads-only"?</summary>
+                <div class="nx-faq__content">
+                    Weil Ads hier nicht isoliert eingesetzt wurden. Erst durch Technical SEO,
+                    Basis-Content und sauberes Tracking wurde Kampagnenbudget effizient und
+                    langfristig skalierbar. Das reduziert Abhängigkeit von kurzfristigem Spend.
                 </div>
             </details>
 
             <details class="nx-faq__item">
                 <summary>Wie lange dauert es bis zu ersten Leads?</summary>
                 <div class="nx-faq__content">
-                    Phase 1 (Tracking + Performance) ist in 4–6 Wochen abgeschlossen.
-                    Erste qualifizierte Inbound-Leads kamen bei E3 nach Woche 14. Skalierung
-                    ab Monat 6. Genaue Zeitlinie hängt von Ausgangslage und Branche ab.
+                    Das Fundament war in 4–6 Wochen stabil. Erste qualifizierte Inbound-Leads
+                    kamen bei E3 ab Woche 14. Das Hauptwachstum (1.750+ Leads) entstand im
+                    anschließenden 5-Monats-Skalierungsfenster.
                 </div>
             </details>
 
@@ -603,6 +617,15 @@ get_header();
                     Ja, vollständig. Code, Content, Tracking-Setup, Zugänge&nbsp;— alles gehört
                     Ihnen. Das ist kein Versprechen, das ist die technische Realität
                     von WordPress und Open Source.
+                </div>
+            </details>
+
+            <details class="nx-faq__item">
+                <summary>Warum wird Viessmann als Partner in der Case Study erwähnt?</summary>
+                <div class="nx-faq__content">
+                    Weil die Qualität der Ausführung direkt auf Lead- und Sales-Qualität wirkt.
+                    Die Viessmann-Partnerschaft war ein zentraler Vertrauens- und
+                    Positionierungsfaktor im gesamten Funnel.
                 </div>
             </details>
 
