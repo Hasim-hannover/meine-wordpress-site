@@ -158,6 +158,17 @@
     text-align: right;
 }
 
+.cs-fact-link {
+    color: var(--nx-text);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--nx-border-gold);
+    transition: color var(--nx-duration-fast) var(--nx-ease);
+}
+
+.cs-fact-link:hover {
+    color: var(--nx-gold);
+}
+
 /* Strength list in context copy */
 .cs-strength-list {
     list-style: none;

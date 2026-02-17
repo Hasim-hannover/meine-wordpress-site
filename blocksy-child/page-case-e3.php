@@ -142,6 +142,14 @@ get_header();
                         <span class="cs-fact-value">E3 New Energy GmbH</span>
                     </li>
                     <li>
+                        <span class="cs-fact-label">Website</span>
+                        <span class="cs-fact-value">
+                            <a class="cs-fact-link" href="https://e3-newenergy.de/" target="_blank" rel="noopener noreferrer">
+                                e3-newenergy.de
+                            </a>
+                        </span>
+                    </li>
+                    <li>
                         <span class="cs-fact-label">Branche</span>
                         <span class="cs-fact-value">Erneuerbare Energien</span>
                     </li>
