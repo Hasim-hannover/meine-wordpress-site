@@ -233,12 +233,12 @@ function hu_erfolge_section_shortcode() {
                             <span class="nx-metric__label">CPL Reduktion</span>
                         </div>
                         <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-gold);">Top 3</span>
-                            <span class="nx-metric__label">SEO Rankings</span>
+                            <span class="nx-metric__value" style="color:var(--nx-gold);">12–15%</span>
+                            <span class="nx-metric__label">Sales-Conversion</span>
                         </div>
                         <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-success);">100%</span>
-                            <span class="nx-metric__label">DSGVO Tracking</span>
+                            <span class="nx-metric__value" style="color:var(--nx-success);">20.000€</span>
+                            <span class="nx-metric__label">Budget: Leadgen + Recruiting</span>
                         </div>
                     </div>
                     <a href="/case-studies/e3-new-energy/" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Case Study lesen →</a>
@@ -435,8 +435,8 @@ function hu_cta_section_shortcode() {
                 <!-- Proof -->
                 <div role="group" aria-label="Beispiel-Ergebnisse" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem 1.5rem; margin-bottom:2rem;">
                     <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ 1.750+ qualifizierte Leads</span>
-                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ CPL &minus;83&nbsp;%</span>
-                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ E3 New Energy</span>
+                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ CPL &minus;83&nbsp;% + 12–15&nbsp;% Sales-Conversion</span>
+                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ 20.000&nbsp;€ Budget: Leadgen + Recruiting + CRM</span>
                 </div>
 
                 <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">

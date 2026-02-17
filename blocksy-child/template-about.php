@@ -79,7 +79,9 @@ get_header();
                 <span class="about-proof-kpi">1.750+ Leads</span>
                 <span class="about-proof-sep">·</span>
                 <span class="about-proof-kpi">CPL von 150&nbsp;€ → ~25&nbsp;€</span>
-                <span class="about-proof-note">Ausgangslage: 0 organische Sichtbarkeit</span>
+                <span class="about-proof-sep">·</span>
+                <span class="about-proof-kpi">12–15&nbsp;% Sales-Conversion</span>
+                <span class="about-proof-note">20.000&nbsp;€ Budget: Leadgen + Recruiting + CRM</span>
             </div>
 
             <!-- Location -->
@@ -231,8 +233,10 @@ get_header();
             <div class="milestone-content">
                 <h3 class="milestone-title">Belegbare Zahlen</h3>
                 <p class="milestone-story">
-                    E3 New Energy: CPL von 150&nbsp;€ auf ~25&nbsp;€, 1.750+ Leads&nbsp;—
-                    aus einem Setup mit 0 organischer Sichtbarkeit.
+                    E3 New Energy: CPL von 150&nbsp;€ auf ~25&nbsp;€, 1.750+ Leads und
+                    12–15&nbsp;% Sales-Conversion&nbsp;— aus einem Setup mit 0 organischer Sichtbarkeit.
+                    Das Budget von 20.000&nbsp;€ wurde auf Leadgen und Recruiting verteilt;
+                    parallel wurde das CRM für bessere Datenqualität aufgebaut.
                     Details in den <a href="/case-studies/" class="about-inline-link">Case Studies</a>.
                 </p>
             </div>
@@ -369,6 +373,8 @@ get_header();
             <span class="about-proof-kpi">1.750+ Leads</span>
             <span class="about-proof-sep">·</span>
             <span class="about-proof-kpi">CPL &minus;83&nbsp;%</span>
+            <span class="about-proof-sep">·</span>
+            <span class="about-proof-kpi">12–15&nbsp;% Sales-Conversion</span>
             <span class="about-proof-sep">·</span>
             <span class="about-proof-kpi">E3 New Energy</span>
         </div>

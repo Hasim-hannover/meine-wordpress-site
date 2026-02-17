@@ -320,7 +320,7 @@
 }
 
 .cs-result-value {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.7rem, 3.4vw, 2.55rem);
     font-weight: 900;
     color: var(--nx-gold);
     line-height: 1;
