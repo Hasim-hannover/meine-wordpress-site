@@ -386,7 +386,7 @@ get_header();
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">+270%</span>
+                <span class="cs-result-value">+12%</span>
                 <span class="cs-result-label">Conversion Rate</span>
                 <span class="cs-result-note">Traffic → qualifizierte Anfrage</span>
             </div>
