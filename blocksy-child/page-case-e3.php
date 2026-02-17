@@ -133,7 +133,7 @@ get_header();
                     </li>
                     <li>
                         <span class="cs-fact-label">Branche</span>
-                        <span class="cs-fact-value">Erneuerbare Energien / B2B</span>
+                        <span class="cs-fact-value">Erneuerbare Energien</span>
                     </li>
                     <li>
                         <span class="cs-fact-label">Zielgruppe</span>
