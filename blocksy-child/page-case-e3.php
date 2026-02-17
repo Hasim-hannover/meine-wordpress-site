@@ -59,7 +59,7 @@ get_header();
                 <span class="cs-kpi-label">Cost per Lead</span>
             </div>
             <div class="cs-kpi-tile">
-                <span class="cs-kpi-value nx-text-gold">+270%</span>
+                <span class="cs-kpi-value nx-text-gold">+12%</span>
                 <span class="cs-kpi-label">Conversion Rate</span>
             </div>
         </div>
