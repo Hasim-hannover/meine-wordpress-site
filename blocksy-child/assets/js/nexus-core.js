@@ -287,9 +287,7 @@
                 '.nexus-article-content .rank-math-toc-block',
                 '.nexus-article-content .aioseo-table-of-contents',
                 '.nexus-article-content .luckywp-table-of-contents',
-                '.nexus-article-content .lwptoc',
-                '.nexus-article-content [id^="ez-toc"]',
-                '.nexus-article-content [class*="ez-toc"]'
+                '.nexus-article-content .lwptoc'
             ];
 
             inlineTocSelectors.forEach(function (selector) {
@@ -297,68 +295,11 @@
                     node.remove();
                 });
             });
-
-            // Heuristik: TOC-ähnliche Boxen im Content mit vielen Anchor-Links entfernen.
-            var content = document.querySelector('.nexus-article-content, #article-content');
-            if (!content) return;
-
-            var candidates = content.querySelectorAll('nav, aside, section, div');
-            candidates.forEach(function (node) {
-                if (node.closest('.nexus-sidebar')) return;
-
-                var text = (node.textContent || '').trim().toLowerCase().slice(0, 220);
-                var anchorCount = node.querySelectorAll('a[href^="#"]').length;
-                if (anchorCount < 3) return;
-
-                var isTocLikeText =
-                    text.indexOf('inhaltsverzeichnis') !== -1 ||
-                    text.indexOf('table of contents') !== -1 ||
-                    text.indexOf('inhalt') === 0;
-
-                var classHint = Array.from(node.classList || []).join(' ').toLowerCase();
-                var idHint = (node.id || '').toLowerCase();
-                var isTocLikeClass =
-                    classHint.indexOf('toc') !== -1 ||
-                    classHint.indexOf('table-of-contents') !== -1 ||
-                    idHint.indexOf('toc') !== -1;
-
-                if (isTocLikeText || isTocLikeClass) {
-                    node.remove();
-                }
-            });
         },
 
 
         /**
-         * 9. TOC CLEANUP WATCHER
-         * Falls Plugins TOC-Boxen verzögert injizieren, werden sie nachträglich entfernt.
-         */
-        watchTocDuplicates: function () {
-            var self = this;
-            var content = document.querySelector('.nexus-article-content, #article-content');
-            if (!content) return;
-
-            self.cleanupDuplicateToc();
-            setTimeout(function () { self.cleanupDuplicateToc(); }, 500);
-            setTimeout(function () { self.cleanupDuplicateToc(); }, 1400);
-            setTimeout(function () { self.cleanupDuplicateToc(); }, 2800);
-
-            if (window.MutationObserver) {
-                var observer = new MutationObserver(function () {
-                    self.cleanupDuplicateToc();
-                });
-
-                observer.observe(content, { childList: true, subtree: true });
-
-                setTimeout(function () {
-                    observer.disconnect();
-                }, 6000);
-            }
-        },
-
-
-        /**
-         * 10. HEADER FLIGHT MODE
+         * 9. HEADER FLIGHT MODE
          * Kompakter Header mit Glaseffekt beim Scrollen.
          * Fügt .nexus-flight-mode ab 50px Scroll hinzu.
          */
@@ -415,7 +356,7 @@
             // TOC auf Single Posts
             if (document.querySelector('#article-content') && document.querySelector('#toc-list')) {
                 this.initToc('#article-content', '#toc-list');
-                this.watchTocDuplicates();
+                this.cleanupDuplicateToc();
             }
         }
     };

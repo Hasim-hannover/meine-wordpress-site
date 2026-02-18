@@ -31,9 +31,15 @@ get_header();
 			<div class="nexus-hero-content">
 
 				<div class="nexus-meta-top">
-					<span>Cornerstone Artikel</span>
+					<span class="nexus-date"><?php echo esc_html( get_the_date( 'd. M Y' ) ); ?></span>
 					<span class="separator">|</span>
-					<span>Pillar: SEO &amp; Sichtbarkeit</span>
+					<span class="nexus-reading-time"><?php
+						printf(
+							/* translators: %d: reading time in minutes */
+							esc_html__( '⏱ %d Min. Lesezeit', 'blocksy-child' ),
+							function_exists( 'nexus_get_reading_time' ) ? nexus_get_reading_time() : 10
+						);
+					?></span>
 				</div>
 
 				<h1 class="nexus-title"><?php the_title(); ?></h1>

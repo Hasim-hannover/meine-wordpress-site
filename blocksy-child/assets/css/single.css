@@ -150,9 +150,7 @@
 .nexus-article-content .rank-math-toc-block,
 .nexus-article-content .aioseo-table-of-contents,
 .nexus-article-content .luckywp-table-of-contents,
-.nexus-article-content .lwptoc,
-.nexus-article-content [id^="ez-toc"],
-.nexus-article-content [class*="ez-toc"] {
+.nexus-article-content .lwptoc {
     display: none !important;
 }
 

@@ -50,7 +50,12 @@
 .seo-cornerstone .nexus-article-content .wp-block-table-of-contents,
 .seo-cornerstone .nexus-article-content .ez-toc-container,
 .seo-cornerstone .nexus-article-content .rank-math-toc-block,
-.seo-cornerstone .nexus-article-content .sticky-toc {
+.seo-cornerstone .nexus-article-content .sticky-toc,
+.seo-cornerstone .nexus-article-content nav[id*="toc"],
+.seo-cornerstone .nexus-article-content nav[class*="toc"],
+.seo-cornerstone .nexus-article-content > div[id*="toc"],
+.seo-cornerstone .nexus-article-content > div[class*="toc-container"],
+.seo-cornerstone .nexus-article-content > div[class*="table-of-contents"] {
 	display: none !important;
 }
 
@@ -117,25 +122,5 @@
 
 	.seo-cornerstone__hero-placeholder {
 		min-height: 280px;
-	}
-}
-
-@media (min-width: 1024px) {
-	.seo-cornerstone .nexus-sidebar {
-		position: fixed !important;
-		top: 110px;
-		left: max(20px, calc((100vw - 1200px) / 2 + 20px));
-		width: min(280px, calc(100vw - 40px));
-		max-width: 280px;
-		z-index: 40;
-	}
-}
-
-@media (max-width: 1023px) {
-	.seo-cornerstone .nexus-sidebar {
-		position: sticky !important;
-		left: auto;
-		width: auto;
-		max-width: none;
 	}
 }
