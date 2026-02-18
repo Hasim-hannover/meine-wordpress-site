@@ -133,11 +133,11 @@ Ein sauberes Setup verbindet SEO, CRO und Tracking zu einem Qualifizierungs-Syst
 
 - Klare Einstiege nach Suchintention und Reifegrad.
 - Landingpages mit passendem Proof statt generischer Aussagen.
-- CTA-Logik fuer Erstkontakt, Beratung und konkrete Anfrage.
+- CTA-Logik für Erstkontakt, Beratung und konkrete Anfrage.
 - Tracking-Parameter, die dem Vertrieb verwertbaren Kontext liefern.
 
 So entsteht echte **Lead Qualifizierung** schon vor dem Erstgespraech.
-Und genau dort liegt der Hebel fuer hoehere Abschlussraten.
+Und genau dort liegt der Hebel für hoehere Abschlussraten.
 
 ## Eigentum statt Miete: Der strategische Wert organischer Lead-Quellen
 
