@@ -18,3 +18,9 @@
 - Seiten bleiben bestehen (SEO + interne Verlinkung)
 - Sie fliegen nur aus dem Hauptmenü raus
 - Intern verlinken via WGOS-Seite und Blog-Posts
+
+## Kunden-Cockpit Link (empfohlene Platzierung)
+- Nicht im primären Slim-Menü platzieren (fokussiert auf Neukunden-Narrativ).
+- Stattdessen als Utility-Link nutzen: Header-HTML-Element mit Shortcode `[nexus_header_btn]`.
+- Zusätzlich im Footer unter "Unternehmen" als Link "Kunden-Cockpit" auf `/portal/`.
+- Wenn CTA bereits im Menü ist, separaten Header-Button für denselben CTA entfernen (keine Doppelung).
