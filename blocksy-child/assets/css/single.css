@@ -144,6 +144,18 @@
     margin-bottom: 1.1rem;
 }
 
+/* Entfernt inline TOCs aus dem Content, da die Sidebar-TOC führend ist */
+.nexus-article-content .wp-block-table-of-contents,
+.nexus-article-content .ez-toc-container,
+.nexus-article-content .rank-math-toc-block,
+.nexus-article-content .aioseo-table-of-contents,
+.nexus-article-content .luckywp-table-of-contents,
+.nexus-article-content .lwptoc,
+.nexus-article-content [id^="ez-toc"],
+.nexus-article-content [class*="ez-toc"] {
+    display: none !important;
+}
+
 /* 6. BOTTOM BEREICH */
 .nexus-bottom-share { 
     max-width: 800px; margin: 4rem auto; padding-top: 2rem; 
