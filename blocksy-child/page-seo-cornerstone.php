@@ -442,10 +442,10 @@ get_header();
 			],
 		];
 
-		$faq_schema = [
-			'@context'   => 'https://schema.org',
-			'@type'      => 'FAQPage',
-			'mainEntity' => [
+			$faq_schema = [
+				'@context'   => 'https://schema.org',
+				'@type'      => 'FAQPage',
+				'mainEntity' => [
 				[
 					'@type'          => 'Question',
 					'name'           => 'Was kostet technisches SEO für den Mittelstand?',
@@ -470,16 +470,40 @@ get_header();
 						'text'  => 'Technisches SEO verbessert die Grundlage, auf der Ads konvertieren: schnellere Zielseiten, stabilere mobile Erfahrung, sauberes Tracking und klare Informationsarchitektur. Das senkt Reibung im Funnel und verbessert Cost per Lead.',
 					],
 				],
-				[
-					'@type'          => 'Question',
-					'name'           => 'Wie schnell sind erste Effekte sichtbar?',
-					'acceptedAnswer' => [
-						'@type' => 'Answer',
-						'text'  => 'Technik- und Tracking-Effekte sind oft in wenigen Wochen messbar. Organische Sichtbarkeit und stabile Inbound-Effekte bauen sich über Monate auf. Wichtig sind klare KPI-Signale und iterative Umsetzung.',
+					[
+						'@type'          => 'Question',
+						'name'           => 'Wie schnell sind erste Effekte sichtbar?',
+						'acceptedAnswer' => [
+							'@type' => 'Answer',
+							'text'  => 'Technik- und Tracking-Effekte sind oft in wenigen Wochen messbar. Organische Sichtbarkeit und stabile Inbound-Effekte bauen sich über Monate auf. Wichtig sind klare KPI-Signale und iterative Umsetzung.',
+						],
+					],
+					[
+						'@type'          => 'Question',
+						'name'           => 'Ist das nur für große Konzerne relevant?',
+						'acceptedAnswer' => [
+							'@type' => 'Answer',
+							'text'  => 'Nein. Gerade Unternehmen im Mittelstand profitieren stark, weil Budgeteffizienz und Vertriebszeit besonders eng getaktet sind. Je kleiner die Fehlertoleranz, desto wichtiger ist ein sauberes technisches Fundament vor jeder aggressiven Kampagnenskalierung.',
+						],
+					],
+					[
+						'@type'          => 'Question',
+						'name'           => 'Welche Rolle spielt CRO im SEO-und-SEA-System?',
+						'acceptedAnswer' => [
+							'@type' => 'Answer',
+							'text'  => 'CRO sorgt dafür, dass vorhandener Traffic besser in qualifizierte Anfragen übersetzt wird. Ohne CRO bleibt Reichweite teuer. Mit CRO sinkt Reibung im Formularprozess, Lead-Qualität steigt und die Wirkung von SEO wie SEA wird deutlich besser messbar.',
+						],
+					],
+					[
+						'@type'          => 'Question',
+						'name'           => 'Welche internen Teams sollten eingebunden werden?',
+						'acceptedAnswer' => [
+							'@type' => 'Answer',
+							'text'  => 'Marketing, Vertrieb und Technik sollten gemeinsam priorisieren. Marketing steuert Nachfrage, Vertrieb bewertet Qualität, Technik sichert Umsetzbarkeit und Datensauberkeit. Erst diese Verbindung macht aus Einzelmaßnahmen ein skalierbares Wachstumssystem mit klarer Verantwortung.',
+						],
 					],
 				],
-			],
-		];
+			];
 
 		$breadcrumb_schema = [
 			'@context'        => 'https://schema.org',
