@@ -12,7 +12,7 @@
 }
 
 .seo-cornerstone .nexus-hero-image {
-	min-height: 620px;
+	min-height: 500px;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
@@ -20,10 +20,10 @@
 }
 
 .seo-cornerstone .nexus-hero-image img {
-	width: auto;
+	width: 100%;
 	height: auto;
-	max-width: 70%;
-	max-height: 70%;
+	max-width: 100%;
+	max-height: 90%;
 	object-fit: contain;
 	object-position: center center;
 }
@@ -188,12 +188,12 @@
 	}
 
 	.seo-cornerstone .nexus-hero-image {
-		min-height: 360px;
+		min-height: 290px;
 	}
 
 	.seo-cornerstone .nexus-hero-image img {
-		max-width: 82%;
-		max-height: 82%;
+		max-width: 100%;
+		max-height: 92%;
 	}
 
 	.seo-cornerstone__hero-placeholder {
