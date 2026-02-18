@@ -26,11 +26,12 @@ $pillar_map = [
     ],
     'seo' => [
         'icon'        => '🔍',
+        'title'       => 'SEO & Sichtbarkeit',
         'badge'       => 'SEO & Sichtbarkeit',
-        'subtitle'    => 'Technisches SEO, CRO und Performance-Synergie — fuer planbare Sichtbarkeit, bessere Lead-Qualitaet und effizientere Akquisekosten.',
-        'cta_label'   => 'SEO-Fundament pruefen',
+        'subtitle'    => 'Technisches SEO, CRO und Performance-Synergie — für planbare Sichtbarkeit, bessere Lead-Qualität und effizientere Akquisekosten.',
+        'cta_label'   => 'SEO-Analyse starten',
         'cta_url'     => '/wordpress-seo-hannover/',
-        'cta_text'    => 'Pruefen Sie zuerst das Fundament: Technik, Seitenstruktur, Tracking und Conversion-Reibung vor der naechsten Budgeterhoehung.',
+        'cta_text'    => 'Prüfen Sie zuerst das Fundament: Technik, Seitenstruktur, Tracking und Conversion-Reibung vor der nächsten Budgeterhöhung.',
     ],
     'tracking' => [
         'icon'        => '📊',
@@ -67,6 +68,8 @@ $pillar = $pillar_map[$cat_slug] ?? [
     'cta_url'     => '/customer-journey-audit/',
     'cta_text'    => 'Finden Sie heraus, wo Ihre Website Potenzial liegen lässt.',
 ];
+
+$pillar_title = $pillar['title'] ?? $cat_name;
 
 // --- Featured Post: Sticky oder neuester ---
 $featured_args = [
@@ -105,7 +108,7 @@ if ($featured_query->have_posts()) {
         <div class="nx-container">
             <span class="nx-badge nx-badge--gold"><?php echo esc_html($pillar['icon'] . ' ' . $pillar['badge']); ?></span>
             
-            <h1 class="pillar-hero__title"><?php echo esc_html($cat_name); ?></h1>
+            <h1 class="pillar-hero__title"><?php echo esc_html($pillar_title); ?></h1>
             
             <p class="pillar-hero__subtitle">
                 <?php echo esc_html($pillar['subtitle']); ?>

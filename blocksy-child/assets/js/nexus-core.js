@@ -270,7 +270,33 @@
 
 
         /**
-         * 8. HEADER FLIGHT MODE
+         * 8. TOC DUPLICATE CLEANUP
+         * Entfernt doppelte oder inline-injizierte TOCs im Artikelbereich.
+         */
+        cleanupDuplicateToc: function () {
+            var sidebarTocs = document.querySelectorAll('.nexus-sidebar .sticky-toc');
+            if (sidebarTocs.length > 1) {
+                sidebarTocs.forEach(function (toc, index) {
+                    if (index > 0) toc.remove();
+                });
+            }
+
+            var inlineTocSelectors = [
+                '.nexus-article-content .wp-block-table-of-contents',
+                '.nexus-article-content .ez-toc-container',
+                '.nexus-article-content .rank-math-toc-block'
+            ];
+
+            inlineTocSelectors.forEach(function (selector) {
+                document.querySelectorAll(selector).forEach(function (node) {
+                    node.remove();
+                });
+            });
+        },
+
+
+        /**
+         * 9. HEADER FLIGHT MODE
          * Kompakter Header mit Glaseffekt beim Scrollen.
          * Fügt .nexus-flight-mode ab 50px Scroll hinzu.
          */
@@ -327,6 +353,7 @@
             // TOC auf Single Posts
             if (document.querySelector('#article-content') && document.querySelector('#toc-list')) {
                 this.initToc('#article-content', '#toc-list');
+                this.cleanupDuplicateToc();
             }
         }
     };
