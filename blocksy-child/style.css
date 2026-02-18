@@ -45,8 +45,13 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 
 /* Slim-Menü CTA (Desktop + Mobile Offcanvas) */
 .ct-header .ct-menu > li.nav-cta-button > a,
+.ct-header .ct-menu > li.nav-cta-button > a.ct-menu-link,
 .ct-header .ct-menu > li.btn-nav-cta > a,
-.ct-header .ct-menu > li > a[href*="customer-journey-audit"] {
+.ct-header .ct-menu > li.btn-nav-cta > a.ct-menu-link,
+.ct-header .ct-menu > li > a[href*="customer-journey-audit"],
+.ct-header .ct-menu > li > a.ct-menu-link[href*="customer-journey-audit"],
+.ct-header .ct-menu > li > a[href*="360-audit"],
+.ct-header .ct-menu > li > a[href*="growth-audit"] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -54,22 +59,29 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     height: auto !important;
     line-height: 1.1;
     white-space: nowrap;
-    margin-left: 8px;
+    margin-left: 8px !important;
     padding: 10px 18px !important;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #ffb020 0%, #ff9800 100%);
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #ffb020 0%, #ff9800 100%) !important;
     color: #111 !important;
-    font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    font-weight: 700 !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    text-shadow: none !important;
+    text-decoration: none !important;
     box-shadow:
         0 8px 20px rgba(255, 176, 32, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.32);
+        inset 0 1px 0 rgba(255, 255, 255, 0.32) !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .ct-header .ct-menu > li.nav-cta-button > a:hover,
+.ct-header .ct-menu > li.nav-cta-button > a.ct-menu-link:hover,
 .ct-header .ct-menu > li.btn-nav-cta > a:hover,
-.ct-header .ct-menu > li > a[href*="customer-journey-audit"]:hover {
+.ct-header .ct-menu > li.btn-nav-cta > a.ct-menu-link:hover,
+.ct-header .ct-menu > li > a[href*="customer-journey-audit"]:hover,
+.ct-header .ct-menu > li > a.ct-menu-link[href*="customer-journey-audit"]:hover,
+.ct-header .ct-menu > li > a[href*="360-audit"]:hover,
+.ct-header .ct-menu > li > a[href*="growth-audit"]:hover {
     color: #111 !important;
     transform: translateY(-1px);
     filter: saturate(1.05);
@@ -88,10 +100,20 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
         inset 0 1px 0 rgba(255, 255, 255, 0.32);
 }
 
+.ct-header .ct-menu > li.nav-cta-button > a::after,
+.ct-header .ct-menu > li.btn-nav-cta > a::after,
+.ct-header .ct-menu > li > a[href*="customer-journey-audit"]::after,
+.ct-header .ct-menu > li > a[href*="360-audit"]::after,
+.ct-header .ct-menu > li > a[href*="growth-audit"]::after {
+    display: none !important;
+}
+
 @media (max-width: 1023px) {
     .ct-panel .ct-menu .nav-cta-button > a,
     .ct-panel .ct-menu .btn-nav-cta > a,
-    .ct-panel .ct-menu a[href*="customer-journey-audit"] {
+    .ct-panel .ct-menu a[href*="customer-journey-audit"],
+    .ct-panel .ct-menu a[href*="360-audit"],
+    .ct-panel .ct-menu a[href*="growth-audit"] {
         width: 100%;
         margin-left: 0;
         justify-content: center;
