@@ -175,13 +175,16 @@
 }
 .sticky-toc {
     position: sticky;
-    top: 140px;
+    top: 110px;
     background: rgba(255,176,32,0.06);
     border: 1px solid rgba(255,176,32,0.15);
     border-radius: 8px;
     padding: 28px 32px;
     margin-bottom: 3rem;
     box-shadow: 0 2px 16px 0 rgba(255,176,32,0.07);
+    max-height: calc(100vh - 130px);
+    overflow: auto;
+    scrollbar-width: thin;
 }
 .sticky-toc h3 {
     font-size: 13px;
@@ -204,8 +207,10 @@
     text-decoration: underline;
     transition: color 0.2s;
 }
-.sticky-toc ul li a:hover {
+.sticky-toc ul li a:hover,
+.sticky-toc ul li a.active {
     color: #ffb020;
+    text-decoration: none;
 }
 .nexus-sidebar {
     min-width: 240px;
@@ -233,12 +238,58 @@
 
 @media (max-width: 1023px) {
     .nexus-post-layout {
-        display: block;
+        grid-template-columns: 1fr;
+        gap: 1rem;
         max-width: 100%;
-        margin: 40px 0;
-        padding: 0;
+        margin: 40px auto;
+        padding: 0 12px;
     }
     .nexus-sidebar {
-        display: none !important;
+        display: block !important;
+        position: sticky;
+        top: 78px;
+        z-index: 20;
+        margin-bottom: 0.75rem;
+    }
+    .sticky-toc {
+        top: 78px;
+        max-height: none;
+        margin-bottom: 0;
+        padding: 12px 14px;
+        border-radius: 10px;
+    }
+    .sticky-toc h3 {
+        display: none;
+    }
+    .sticky-toc ul {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        line-height: 1.2;
+        scrollbar-width: thin;
+    }
+    .sticky-toc ul li {
+        margin-bottom: 0;
+        flex: 0 0 auto;
+    }
+    .sticky-toc ul li a {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        padding: 0.45rem 0.7rem;
+        text-decoration: none;
+        font-size: 0.82rem;
+        color: #d4d4d4;
+    }
+    .sticky-toc ul li a.active {
+        color: #0b0e12;
+        background: #ffb020;
+        border-color: #ffb020;
     }
 }
