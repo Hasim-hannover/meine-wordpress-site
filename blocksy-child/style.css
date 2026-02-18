@@ -50,26 +50,42 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 40px;
-    height: auto;
+    min-height: 0 !important;
+    height: auto !important;
     line-height: 1.1;
     white-space: nowrap;
     margin-left: 8px;
     padding: 10px 18px !important;
-    border-radius: 10px;
-    background-color: var(--theme-palette-color-1, #ffb020);
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ffb020 0%, #ff9800 100%);
     color: #111 !important;
     font-weight: 700;
-    box-shadow: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 8px 20px rgba(255, 176, 32, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .ct-header .ct-menu > li.nav-cta-button > a:hover,
 .ct-header .ct-menu > li.btn-nav-cta > a:hover,
 .ct-header .ct-menu > li > a[href*="customer-journey-audit"]:hover {
-    opacity: 0.92;
     color: #111 !important;
     transform: translateY(-1px);
+    filter: saturate(1.05);
+    box-shadow:
+        0 12px 24px rgba(255, 176, 32, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.ct-header .ct-menu > li.nav-cta-button.current-menu-item > a,
+.ct-header .ct-menu > li.nav-cta-button.current-menu-ancestor > a,
+.ct-header .ct-menu > li.btn-nav-cta.current-menu-item > a,
+.ct-header .ct-menu > li.btn-nav-cta.current-menu-ancestor > a {
+    color: #111 !important;
+    box-shadow:
+        0 8px 20px rgba(255, 176, 32, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32);
 }
 
 @media (max-width: 1023px) {
