@@ -18,6 +18,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'wp_head', 'hu_seo_meta_tags', 1 );
 
+add_filter( 'rank_math/frontend/title', 'hu_rank_math_cornerstone_title' );
+add_filter( 'rank_math/frontend/description', 'hu_rank_math_cornerstone_description' );
+
+/**
+ * Check whether current query is the SEO cornerstone article.
+ *
+ * @return bool
+ */
+function hu_is_seo_cornerstone_article() {
+	if ( ! is_singular() ) {
+		return false;
+	}
+
+	$post_id = get_queried_object_id();
+	if ( ! $post_id ) {
+		return false;
+	}
+
+	$slug = get_post_field( 'post_name', $post_id );
+	return 'technisches-seo-performance-fundament' === $slug;
+}
+
+/**
+ * Override Rank Math title for cornerstone article.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_rank_math_cornerstone_title( $title ) {
+	if ( hu_is_seo_cornerstone_article() ) {
+		return 'Technisches SEO + Performance Marketing: Fundament fehlt';
+	}
+
+	return $title;
+}
+
+/**
+ * Override Rank Math description for cornerstone article.
+ *
+ * @param string $description Existing description.
+ * @return string
+ */
+function hu_rank_math_cornerstone_description( $description ) {
+	if ( hu_is_seo_cornerstone_article() ) {
+		return 'Performance Marketing ohne technisches SEO-Fundament verbrennt Budget. So wirken Technik, CRO und Tracking zusammen - inklusive Entscheider-Checkliste.';
+	}
+
+	return $description;
+}
+
 /**
  * Output SEO meta tags.
  *
@@ -162,6 +212,11 @@ function hu_get_seo_meta() {
 		// Fallbacks: auto-generate from post data
 		if ( empty( $meta['og_title'] ) ) {
 			$meta['og_title'] = get_the_title( $post_id ) . ' · ' . get_bloginfo( 'name' );
+		}
+
+		if ( 'technisches-seo-performance-fundament' === $slug ) {
+			$meta['og_title'] = 'Technisches SEO + Performance Marketing: Fundament fehlt';
+			$meta['description'] = 'Performance Marketing ohne technisches SEO-Fundament verbrennt Budget. So wirken Technik, CRO und Tracking zusammen - inklusive Entscheider-Checkliste.';
 		}
 
 		if ( empty( $meta['description'] ) ) {

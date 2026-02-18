@@ -212,6 +212,15 @@
     font-weight: 700;
     margin-bottom: 12px;
 }
+
+.sticky-toc__label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ffb020;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
 .sticky-toc ul {
     margin: 0;
     padding-left: 20px;
