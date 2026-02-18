@@ -43,6 +43,24 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     box-shadow: inset 0 -2px 0 #ffb020;
 }
 
+/* Slim-Menü CTA */
+.nav-cta-button a,
+.btn-nav-cta a,
+a[href*="customer-journey-audit"].nav-item {
+    background-color: var(--theme-palette-color-1, #ffb020);
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.nav-cta-button a:hover,
+.btn-nav-cta a:hover {
+    opacity: 0.85;
+    color: #fff !important;
+}
+
 @media (min-width: 1024px) {
 /* --- 2. NEXUS MEGA MENÜ (VIEWPORT FIX) --- */
 
@@ -1244,4 +1262,3 @@ body.wp-customizer .ct-customizer-shortcut {
     transform: none !important;
     margin-top: 0 !important;
 }
-

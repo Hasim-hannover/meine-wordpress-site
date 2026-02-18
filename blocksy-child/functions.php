@@ -35,6 +35,16 @@ foreach ( $modules as $module ) {
 	}
 }
 
+// ── 1b. MENÜ-SLOT: POSITIONIERTES HAUPTMENÜ ──────────────────────
+add_action( 'after_setup_theme', 'blocksy_child_register_slim_nav_menu', 20 );
+function blocksy_child_register_slim_nav_menu() {
+	register_nav_menus(
+		array(
+			'primary-slim' => __( 'Hauptmenü Slim (Positioniert)', 'blocksy-child' ),
+		)
+	);
+}
+
 // ── 2. PERFORMANCE: FONT PRELOADING ──────────────────────────────
 add_action( 'wp_head', function () {
 	$font_uri = get_stylesheet_directory_uri() . '/fonts';
