@@ -51,7 +51,12 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ct-header .ct-menu > li > a[href*="customer-journey-audit"],
 .ct-header .ct-menu > li > a.ct-menu-link[href*="customer-journey-audit"],
 .ct-header .ct-menu > li > a[href*="360-audit"],
-.ct-header .ct-menu > li > a[href*="growth-audit"] {
+.ct-header .ct-menu > li > a[href*="growth-audit"],
+.ct-header .menu > li.nav-cta-button > a,
+.ct-header .menu > li.btn-nav-cta > a,
+.ct-header .menu > li > a[href*="customer-journey-audit"],
+.ct-header .menu > li > a[href*="360-audit"],
+.ct-header .menu > li > a[href*="growth-audit"] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -81,7 +86,12 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ct-header .ct-menu > li > a[href*="customer-journey-audit"]:hover,
 .ct-header .ct-menu > li > a.ct-menu-link[href*="customer-journey-audit"]:hover,
 .ct-header .ct-menu > li > a[href*="360-audit"]:hover,
-.ct-header .ct-menu > li > a[href*="growth-audit"]:hover {
+.ct-header .ct-menu > li > a[href*="growth-audit"]:hover,
+.ct-header .menu > li.nav-cta-button > a:hover,
+.ct-header .menu > li.btn-nav-cta > a:hover,
+.ct-header .menu > li > a[href*="customer-journey-audit"]:hover,
+.ct-header .menu > li > a[href*="360-audit"]:hover,
+.ct-header .menu > li > a[href*="growth-audit"]:hover {
     color: #111 !important;
     transform: translateY(-1px);
     filter: saturate(1.05);
@@ -93,7 +103,11 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ct-header .ct-menu > li.nav-cta-button.current-menu-item > a,
 .ct-header .ct-menu > li.nav-cta-button.current-menu-ancestor > a,
 .ct-header .ct-menu > li.btn-nav-cta.current-menu-item > a,
-.ct-header .ct-menu > li.btn-nav-cta.current-menu-ancestor > a {
+.ct-header .ct-menu > li.btn-nav-cta.current-menu-ancestor > a,
+.ct-header .menu > li.nav-cta-button.current-menu-item > a,
+.ct-header .menu > li.nav-cta-button.current-menu-ancestor > a,
+.ct-header .menu > li.btn-nav-cta.current-menu-item > a,
+.ct-header .menu > li.btn-nav-cta.current-menu-ancestor > a {
     color: #111 !important;
     box-shadow:
         0 8px 20px rgba(255, 176, 32, 0.22),
@@ -104,7 +118,12 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ct-header .ct-menu > li.btn-nav-cta > a::after,
 .ct-header .ct-menu > li > a[href*="customer-journey-audit"]::after,
 .ct-header .ct-menu > li > a[href*="360-audit"]::after,
-.ct-header .ct-menu > li > a[href*="growth-audit"]::after {
+.ct-header .ct-menu > li > a[href*="growth-audit"]::after,
+.ct-header .menu > li.nav-cta-button > a::after,
+.ct-header .menu > li.btn-nav-cta > a::after,
+.ct-header .menu > li > a[href*="customer-journey-audit"]::after,
+.ct-header .menu > li > a[href*="360-audit"]::after,
+.ct-header .menu > li > a[href*="growth-audit"]::after {
     display: none !important;
 }
 
@@ -113,7 +132,12 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     .ct-panel .ct-menu .btn-nav-cta > a,
     .ct-panel .ct-menu a[href*="customer-journey-audit"],
     .ct-panel .ct-menu a[href*="360-audit"],
-    .ct-panel .ct-menu a[href*="growth-audit"] {
+    .ct-panel .ct-menu a[href*="growth-audit"],
+    .ct-panel .menu .nav-cta-button > a,
+    .ct-panel .menu .btn-nav-cta > a,
+    .ct-panel .menu a[href*="customer-journey-audit"],
+    .ct-panel .menu a[href*="360-audit"],
+    .ct-panel .menu a[href*="growth-audit"] {
         width: 100%;
         margin-left: 0;
         justify-content: center;
