@@ -113,6 +113,7 @@ get_header();
 <section id="module" class="wgos-section">
     <div class="wgos-container">
         <h2 class="wgos-h2">Die 7 Module des WGOS</h2>
+        <div id="wgos-mindmap-v2-root" class="wgos-mindmap-v2-root" aria-label="WGOS Mindmap v2"></div>
         <p class="wgos-section-intro">Jedes Modul ist ein Baustein Ihres Owned-Leads-Systems. Die Reihenfolge ist kein Zufall: Wir starten mit dem technischen Fundament und arbeiten uns zur Sichtbarkeit und Skalierung vor.</p>
     </div>
 

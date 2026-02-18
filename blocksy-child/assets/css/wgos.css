@@ -211,6 +211,11 @@
     margin-bottom: 2.5rem;
 }
 
+/* Mount point for WGOS Mindmap v2 (7 modules) */
+.wgos-mindmap-v2-root {
+    margin: 0 0 2rem;
+}
+
 .wgos-prose {
     font-size: 1.05rem;
     line-height: 1.75;

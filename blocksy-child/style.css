@@ -101,6 +101,34 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     }
 }
 
+/* --- Homepage Optimization: Hero Stack + Section Order --- */
+/* 1a) Hero Stack-Text visuell ausblenden (reversibel) */
+.hero-stack-text,
+.wp-block-paragraph.is-style-stack,
+p.hero-stack,
+.wp-trust-stack {
+    display: none !important;
+}
+
+/* 1b/1c) FAQ vor Blog + Blog ans Ende (nur visuelle Reihenfolge) */
+.cs-page {
+    display: flex;
+    flex-direction: column;
+}
+
+.homepage-faq-section,
+.cs-page #faq {
+    order: 98;
+}
+
+.homepage-blog-section {
+    order: 99;
+}
+
+.cs-page #blog {
+    order: 99;
+}
+
 @media (min-width: 1024px) {
 /* --- 2. NEXUS MEGA MENÜ (VIEWPORT FIX) --- */
 
