@@ -165,7 +165,7 @@ add_shortcode( 'hu_owned', 'hu_owned_section_shortcode' );
 function hu_wgos_block_shortcode() {
     ob_start();
     ?>
-    <section class="wp-section" id="wgos" aria-labelledby="wgos-heading">
+    <section class="wp-section homepage-wgos-section" id="wgos" aria-labelledby="wgos-heading">
         <div class="wp-container">
             <div class="wp-section-title text-center">
                 <span class="wp-badge">Das System</span>
@@ -195,6 +195,7 @@ function hu_wgos_block_shortcode() {
                     </p>
                 </div>
             </div>
+            <div id="homepage-mindmap-teaser-root" class="homepage-mindmap-section" aria-label="WGOS Mindmap Teaser"></div>
             <div class="text-center" style="margin-top:2.5rem;">
                 <a href="/customer-journey-audit/" class="wp-btn wp-btn-secondary" data-track-action="cta_wgos_audit" data-track-category="lead_gen">Erst Diagnose, dann System</a>
             </div>
@@ -313,7 +314,7 @@ add_shortcode( 'hu_prozess', 'hu_prozess_section_shortcode' );
 function hu_faq_section_shortcode() {
     ob_start();
     ?>
-    <section id="faq" aria-labelledby="faq-heading" style="background:var(--glass-bg); border-top:1px solid var(--glass-border); padding:5rem 0;">
+    <section id="faq" class="homepage-faq-section" aria-labelledby="faq-heading" style="background:var(--glass-bg); border-top:1px solid var(--glass-border); padding:5rem 0;">
         <div class="nx-container">
             <div style="text-align:center; margin-bottom:3rem;">
                 <span class="nx-badge nx-badge--gold">FAQ</span>
@@ -354,7 +355,7 @@ add_shortcode( 'hu_faq', 'hu_faq_section_shortcode' );
 function hu_blog_section_shortcode() {
     ob_start();
     ?>
-    <section id="blog" class="wp-section" style="border-top: 1px solid rgba(255,255,255,0.05);">
+    <section id="blog" class="wp-section homepage-blog-section" style="border-top: 1px solid rgba(255,255,255,0.05);">
         <div class="wp-container">
             <div class="wp-section-title text-center" style="margin-bottom: 4rem;">
                 <span class="wp-badge">Knowledge Base</span>

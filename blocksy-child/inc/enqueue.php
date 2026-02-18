@@ -60,6 +60,7 @@ function hu_enqueue_assets() {
 	if ( is_front_page() || is_home() ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-home-js', 'homepage.js', [ 'nexus-core-js' ] );
+		hu_enqueue_js( 'nexus-home-mindmap-teaser-js', 'homepage-mindmap-teaser.js', [ 'nexus-home-js' ] );
 	}
 
 	// ── B) Blog-Archive Scripts ───────────────────────────────────
