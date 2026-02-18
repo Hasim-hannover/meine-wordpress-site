@@ -182,9 +182,6 @@
     padding: 28px 32px;
     margin-bottom: 3rem;
     box-shadow: 0 2px 16px 0 rgba(255,176,32,0.07);
-    max-height: calc(100vh - 130px);
-    overflow: auto;
-    scrollbar-width: thin;
 }
 .sticky-toc h3 {
     font-size: 13px;
@@ -253,43 +250,13 @@
     }
     .sticky-toc {
         top: 78px;
-        max-height: none;
         margin-bottom: 0;
         padding: 12px 14px;
         border-radius: 10px;
     }
-    .sticky-toc h3 {
-        display: none;
-    }
-    .sticky-toc ul {
-        display: flex;
-        gap: 0.5rem;
-        overflow-x: auto;
-        overflow-y: hidden;
-        white-space: nowrap;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        line-height: 1.2;
-        scrollbar-width: thin;
-    }
-    .sticky-toc ul li {
-        margin-bottom: 0;
-        flex: 0 0 auto;
-    }
-    .sticky-toc ul li a {
-        display: inline-flex;
-        align-items: center;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 999px;
-        padding: 0.45rem 0.7rem;
-        text-decoration: none;
-        font-size: 0.82rem;
-        color: #d4d4d4;
-    }
     .sticky-toc ul li a.active {
-        color: #0b0e12;
-        background: #ffb020;
-        border-color: #ffb020;
+        color: #ffb020;
+        background: transparent;
+        border-color: transparent;
     }
 }
