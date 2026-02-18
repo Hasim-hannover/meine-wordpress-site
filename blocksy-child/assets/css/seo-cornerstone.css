@@ -112,3 +112,23 @@
 		min-height: 280px;
 	}
 }
+
+@media (min-width: 1024px) {
+	.seo-cornerstone .nexus-sidebar {
+		position: fixed !important;
+		top: 110px;
+		left: max(20px, calc((100vw - 1200px) / 2 + 20px));
+		width: min(280px, calc(100vw - 40px));
+		max-width: 280px;
+		z-index: 40;
+	}
+}
+
+@media (max-width: 1023px) {
+	.seo-cornerstone .nexus-sidebar {
+		position: sticky !important;
+		left: auto;
+		width: auto;
+		max-width: none;
+	}
+}
