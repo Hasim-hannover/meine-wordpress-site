@@ -31,6 +31,8 @@ function hu_enqueue_assets() {
 	$css_uri = get_stylesheet_directory_uri() . '/assets/css/';
 	$js_dir  = get_stylesheet_directory() . '/assets/js/';
 	$js_uri  = get_stylesheet_directory_uri() . '/assets/js/';
+	$queried_id = get_queried_object_id();
+	$is_seo_cornerstone_template = $queried_id && 'page-seo-cornerstone.php' === get_page_template_slug( $queried_id );
 
 	// ── Parent Theme ──────────────────────────────────────────────
 	wp_enqueue_style(
@@ -76,13 +78,17 @@ function hu_enqueue_assets() {
 	}
 
 	// ── D) Einzelbeitrag (Blog Post) ──────────────────────────────
-	if ( is_singular( 'post' ) ) {
+	if ( is_singular( 'post' ) || $is_seo_cornerstone_template ) {
 		hu_enqueue_css( 'nexus-single-css', 'single.css', [ 'nexus-design-system' ] );
 
-		// Hide duplicate post title from Blocksy
+		// Hide duplicate title from Blocksy (single posts + cornerstone template)
 		wp_add_inline_style( 'blocksy-child-style', '
 			.single-post .entry-header .entry-title,
-			.single-post .ct-page-title {
+			.single-post .ct-page-title,
+			.page-template-page-seo-cornerstone .entry-header .entry-title,
+			.page-template-page-seo-cornerstone .ct-page-title,
+			.single-template-page-seo-cornerstone .entry-header .entry-title,
+			.single-template-page-seo-cornerstone .ct-page-title {
 				display: none !important;
 			}
 		' );
@@ -127,9 +133,8 @@ function hu_enqueue_assets() {
 	}
 
 	// ── I2) Template: SEO Cornerstone Artikel (Post + Page) ────────
-	$queried_id = get_queried_object_id();
-	if ( $queried_id && 'page-seo-cornerstone.php' === get_page_template_slug( $queried_id ) ) {
-		hu_enqueue_css( 'nexus-seo-cornerstone-css', 'seo-cornerstone.css', [ 'nexus-design-system' ] );
+	if ( $is_seo_cornerstone_template ) {
+		hu_enqueue_css( 'nexus-seo-cornerstone-css', 'seo-cornerstone.css', [ 'nexus-single-css' ] );
 	}
 
 	// ── J) Template: Core Web Vitals ──────────────────────────────

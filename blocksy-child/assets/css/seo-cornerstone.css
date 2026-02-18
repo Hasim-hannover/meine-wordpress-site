@@ -1,34 +1,29 @@
 /* =========================================
-   SEO CORNERSTONE PAGE
+   SEO CORNERSTONE (Single-Layout Integration)
    ========================================= */
-
-body.page-template-page-seo-cornerstone .ct-page-title,
-body.single-template-page-seo-cornerstone .ct-page-title {
-	display: none !important;
-}
 
 .seo-cornerstone {
 	background: var(--nx-bg-deep);
 	color: var(--nx-text);
 }
 
-.seo-cornerstone__hero {
-	padding-top: 4.5rem;
-	padding-bottom: 2.5rem;
-	text-align: center;
+.seo-cornerstone .nexus-article-hero {
+	margin-bottom: 0;
 }
 
-.seo-cornerstone__title {
-	font-size: clamp(2rem, 4.5vw, 3.5rem);
-	line-height: 1.12;
-	letter-spacing: -0.02em;
-	margin: 1.25rem 0 1rem;
-	color: var(--nx-text);
+.seo-cornerstone__hero-placeholder {
+	width: 100%;
+	height: 100%;
+	min-height: 420px;
+	background:
+		radial-gradient(circle at 20% 25%, rgba(255, 176, 32, 0.2), transparent 52%),
+		radial-gradient(circle at 85% 80%, rgba(255, 176, 32, 0.08), transparent 46%),
+		linear-gradient(145deg, #15171b, #090a0d);
 }
 
 .seo-cornerstone__subtitle {
-	max-width: 780px;
-	margin: 0 auto;
+	max-width: 760px;
+	margin: 0;
 	color: var(--nx-text-muted);
 	line-height: 1.65;
 	font-size: 1.05rem;
@@ -38,9 +33,8 @@ body.single-template-page-seo-cornerstone .ct-page-title {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: center;
-	gap: 0.6rem;
-	margin-top: 1.4rem;
+	gap: 0.55rem;
+	margin-top: 1rem;
 	font-size: 0.82rem;
 	color: var(--nx-text-dim);
 }
@@ -49,45 +43,8 @@ body.single-template-page-seo-cornerstone .ct-page-title {
 	opacity: 0.4;
 }
 
-.seo-cornerstone__layout {
-	display: grid;
-	grid-template-columns: 1fr;
-	gap: 1.5rem;
-	align-items: start;
-}
-
-.seo-cornerstone__toc {
-	background: var(--nx-bg-glass);
-	border: 1px solid var(--nx-border);
-	border-radius: var(--nx-radius-lg);
-	padding: 1.2rem 1.1rem;
-}
-
-.seo-cornerstone__toc h2 {
-	margin: 0 0 0.8rem;
-	font-size: 0.9rem;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
-	color: var(--nx-gold);
-}
-
-.seo-cornerstone__toc ul {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: grid;
-	gap: 0.45rem;
-}
-
-.seo-cornerstone__toc a {
-	color: var(--nx-text-muted);
-	text-decoration: none;
-	font-size: 0.88rem;
-	line-height: 1.4;
-}
-
-.seo-cornerstone__toc a:hover {
-	color: var(--nx-gold);
+.seo-cornerstone .nexus-post-layout {
+	margin-top: 3.25rem;
 }
 
 .seo-cornerstone__content {
@@ -95,12 +52,15 @@ body.single-template-page-seo-cornerstone .ct-page-title {
 	border: 1px solid var(--nx-border);
 	border-radius: var(--nx-radius-lg);
 	padding: clamp(1.2rem, 2vw, 2rem);
+	max-width: none;
 }
 
 .seo-cornerstone__content h2 {
 	margin-top: 2rem;
 	margin-bottom: 0.8rem;
 	color: var(--nx-text);
+	border-left: 0;
+	padding-left: 0;
 }
 
 .seo-cornerstone__content h2:first-child {
@@ -173,14 +133,12 @@ body.single-template-page-seo-cornerstone .ct-page-title {
 	border-color: var(--nx-text) !important;
 }
 
-@media (min-width: 1024px) {
-	.seo-cornerstone__layout {
-		grid-template-columns: 260px minmax(0, 1fr);
-		gap: 1.4rem;
+@media (max-width: 768px) {
+	.seo-cornerstone__subtitle {
+		font-size: 1rem;
 	}
 
-	.seo-cornerstone__toc {
-		position: sticky;
-		top: 92px;
+	.seo-cornerstone__hero-placeholder {
+		min-height: 280px;
 	}
 }
