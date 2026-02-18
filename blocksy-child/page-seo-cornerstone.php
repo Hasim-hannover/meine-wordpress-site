@@ -39,14 +39,13 @@ get_header();
 				<h1 class="nexus-title">Warum Performance Marketing ohne technisches SEO Budget verbrennt</h1>
 
 				<p class="seo-cornerstone__subtitle">
-					Das wirtschaftliche Fundament fuer skalierbares Wachstum:
-					Technik, CRO, Tracking und Performance Marketing als ein System gedacht.
+					Das Fundament fuer skalierbares Wachstum: technisches SEO, CRO, Tracking und Performance Marketing als ein System.
 				</p>
 
 				<div class="seo-cornerstone__meta">
-					<span>Zielgruppe: Entscheider in Unternehmen &gt; 5 Mio. Umsatz</span>
+					<span>Zielgruppe: Entscheider in Wachstumsunternehmen</span>
 					<span class="seo-cornerstone__meta-sep">|</span>
-					<span>Technisches SEO + Conversion Rate Optimierung + Performance Ads</span>
+					<span>Technisches SEO, CRO und Performance Ads</span>
 				</div>
 
 				<div class="nexus-hero-footer">
