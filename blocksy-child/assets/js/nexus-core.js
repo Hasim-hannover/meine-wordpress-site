@@ -222,8 +222,11 @@
 
             var headings = content.querySelectorAll('h2, h3');
             if (!headings.length) {
-                var tocContainer = tocList.closest('.toc-card-nexus, .toc-sidebar, [class*="toc"]');
-                if (tocContainer) tocContainer.style.display = 'none';
+                if (!tocList.children.length) {
+                    var li = document.createElement('li');
+                    li.textContent = 'Inhaltsverzeichnis wird geladen...';
+                    tocList.appendChild(li);
+                }
                 return;
             }
 

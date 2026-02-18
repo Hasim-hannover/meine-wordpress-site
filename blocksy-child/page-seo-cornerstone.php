@@ -68,7 +68,16 @@ get_header();
 			<aside class="nexus-sidebar" aria-label="Inhaltsverzeichnis">
 				<div class="sticky-toc">
 					<h3>Inhalt</h3>
-					<ul id="toc-list"></ul>
+					<ul id="toc-list">
+						<li><a href="#problem">Das eigentliche Problem</a></li>
+						<li><a href="#hausmodell">Das Haus-Modell</a></li>
+						<li><a href="#mythos">Mythos vs. Realitaet</a></li>
+						<li><a href="#ads-hebel">Quality Score und CPC</a></li>
+						<li><a href="#qualifizierung">Lead-Qualifizierung</a></li>
+						<li><a href="#ownership">Eigentum statt Miete</a></li>
+						<li><a href="#checkliste">Entscheider-Checkliste</a></li>
+						<li><a href="#fazit">Fazit</a></li>
+					</ul>
 				</div>
 			</aside>
 

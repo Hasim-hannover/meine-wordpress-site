@@ -171,9 +171,11 @@
 }
 
 .nexus-sidebar {
-    /* Sidebar links oder rechts, je nach HTML-Position */
+    display: block !important;
+    align-self: start;
 }
 .sticky-toc {
+    display: block !important;
     position: sticky;
     top: 110px;
     background: rgba(255,176,32,0.06);
