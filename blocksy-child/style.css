@@ -43,104 +43,50 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     box-shadow: inset 0 -2px 0 #ffb020;
 }
 
-/* Slim-Menü CTA (Desktop + Mobile Offcanvas) */
-.ct-header .ct-menu > li.nav-cta-button > a,
-.ct-header .ct-menu > li.nav-cta-button > a.ct-menu-link,
-.ct-header .ct-menu > li.btn-nav-cta > a,
-.ct-header .ct-menu > li.btn-nav-cta > a.ct-menu-link,
-.ct-header .ct-menu > li > a[href*="customer-journey-audit"],
-.ct-header .ct-menu > li > a.ct-menu-link[href*="customer-journey-audit"],
-.ct-header .ct-menu > li > a[href*="360-audit"],
-.ct-header .ct-menu > li > a[href*="growth-audit"],
+/* ─── Header CTA Button ─── */
+.header-navigation .nav-cta-button > a,
+.ct-header .nav-cta-button > a,
+#ct-header .menu-item.nav-cta-button > a,
 .ct-header .menu > li.nav-cta-button > a,
-.ct-header .menu > li.btn-nav-cta > a,
-.ct-header .menu > li > a[href*="customer-journey-audit"],
-.ct-header .menu > li > a[href*="360-audit"],
-.ct-header .menu > li > a[href*="growth-audit"] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 0 !important;
-    height: auto !important;
-    line-height: 1.1;
-    white-space: nowrap;
-    margin-left: 8px !important;
-    padding: 10px 18px !important;
-    border-radius: 999px !important;
-    background: linear-gradient(135deg, #ffb020 0%, #ff9800 100%) !important;
-    color: #111 !important;
-    font-weight: 700 !important;
-    border: 1px solid rgba(255, 255, 255, 0.14) !important;
-    text-shadow: none !important;
+.ct-header .ct-menu > li.nav-cta-button > a {
+    display: inline-block;
+    padding: 9px 22px;
+    border: 1.5px solid rgba(212, 175, 55, 0.75);
+    border-radius: 6px;
+    color: #D4AF37 !important;
+    background: transparent;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    line-height: 1.2;
     text-decoration: none !important;
-    box-shadow:
-        0 8px 20px rgba(255, 176, 32, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.32) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
-.ct-header .ct-menu > li.nav-cta-button > a:hover,
-.ct-header .ct-menu > li.nav-cta-button > a.ct-menu-link:hover,
-.ct-header .ct-menu > li.btn-nav-cta > a:hover,
-.ct-header .ct-menu > li.btn-nav-cta > a.ct-menu-link:hover,
-.ct-header .ct-menu > li > a[href*="customer-journey-audit"]:hover,
-.ct-header .ct-menu > li > a.ct-menu-link[href*="customer-journey-audit"]:hover,
-.ct-header .ct-menu > li > a[href*="360-audit"]:hover,
-.ct-header .ct-menu > li > a[href*="growth-audit"]:hover,
+.header-navigation .nav-cta-button > a:hover,
+.ct-header .nav-cta-button > a:hover,
+#ct-header .menu-item.nav-cta-button > a:hover,
 .ct-header .menu > li.nav-cta-button > a:hover,
-.ct-header .menu > li.btn-nav-cta > a:hover,
-.ct-header .menu > li > a[href*="customer-journey-audit"]:hover,
-.ct-header .menu > li > a[href*="360-audit"]:hover,
-.ct-header .menu > li > a[href*="growth-audit"]:hover {
-    color: #111 !important;
-    transform: translateY(-1px);
-    filter: saturate(1.05);
-    box-shadow:
-        0 12px 24px rgba(255, 176, 32, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+.ct-header .ct-menu > li.nav-cta-button > a:hover {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: #D4AF37;
+    color: #D4AF37 !important;
 }
 
 .ct-header .ct-menu > li.nav-cta-button.current-menu-item > a,
 .ct-header .ct-menu > li.nav-cta-button.current-menu-ancestor > a,
-.ct-header .ct-menu > li.btn-nav-cta.current-menu-item > a,
-.ct-header .ct-menu > li.btn-nav-cta.current-menu-ancestor > a,
 .ct-header .menu > li.nav-cta-button.current-menu-item > a,
-.ct-header .menu > li.nav-cta-button.current-menu-ancestor > a,
-.ct-header .menu > li.btn-nav-cta.current-menu-item > a,
-.ct-header .menu > li.btn-nav-cta.current-menu-ancestor > a {
-    color: #111 !important;
-    box-shadow:
-        0 8px 20px rgba(255, 176, 32, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.32);
-}
-
-.ct-header .ct-menu > li.nav-cta-button > a::after,
-.ct-header .ct-menu > li.btn-nav-cta > a::after,
-.ct-header .ct-menu > li > a[href*="customer-journey-audit"]::after,
-.ct-header .ct-menu > li > a[href*="360-audit"]::after,
-.ct-header .ct-menu > li > a[href*="growth-audit"]::after,
-.ct-header .menu > li.nav-cta-button > a::after,
-.ct-header .menu > li.btn-nav-cta > a::after,
-.ct-header .menu > li > a[href*="customer-journey-audit"]::after,
-.ct-header .menu > li > a[href*="360-audit"]::after,
-.ct-header .menu > li > a[href*="growth-audit"]::after {
-    display: none !important;
+.ct-header .menu > li.nav-cta-button.current-menu-ancestor > a {
+    color: #D4AF37 !important;
+    box-shadow: none !important;
 }
 
 @media (max-width: 1023px) {
     .ct-panel .ct-menu .nav-cta-button > a,
-    .ct-panel .ct-menu .btn-nav-cta > a,
-    .ct-panel .ct-menu a[href*="customer-journey-audit"],
-    .ct-panel .ct-menu a[href*="360-audit"],
-    .ct-panel .ct-menu a[href*="growth-audit"],
-    .ct-panel .menu .nav-cta-button > a,
-    .ct-panel .menu .btn-nav-cta > a,
-    .ct-panel .menu a[href*="customer-journey-audit"],
-    .ct-panel .menu a[href*="360-audit"],
-    .ct-panel .menu a[href*="growth-audit"] {
+    .ct-panel .menu .nav-cta-button > a {
         width: 100%;
-        margin-left: 0;
-        justify-content: center;
+        text-align: center;
     }
 }
 
