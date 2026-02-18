@@ -126,6 +126,12 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-seo-js', 'seo.js', [ 'nexus-core-js' ] );
 	}
 
+	// ── I2) Template: SEO Cornerstone Artikel (Post + Page) ────────
+	$queried_id = get_queried_object_id();
+	if ( $queried_id && 'page-seo-cornerstone.php' === get_page_template_slug( $queried_id ) ) {
+		hu_enqueue_css( 'nexus-seo-cornerstone-css', 'seo-cornerstone.css', [ 'nexus-design-system' ] );
+	}
+
 	// ── J) Template: Core Web Vitals ──────────────────────────────
 	if ( is_page_template( 'page-cwv.php' ) || is_page( 'core-web-vitals' ) ) {
 		hu_enqueue_css( 'nexus-cwv-css', 'cwv.css', [ 'nexus-design-system' ] );

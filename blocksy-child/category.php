@@ -27,10 +27,10 @@ $pillar_map = [
     'seo' => [
         'icon'        => '🔍',
         'badge'       => 'SEO & Sichtbarkeit',
-        'subtitle'    => 'Technical SEO, Local SEO und Content-Strategie — damit Ihre Website gefunden wird, wenn es zählt.',
-        'cta_label'   => 'SEO-Audit starten',
+        'subtitle'    => 'Technisches SEO, CRO und Performance-Synergie — fuer planbare Sichtbarkeit, bessere Lead-Qualitaet und effizientere Akquisekosten.',
+        'cta_label'   => 'SEO-Fundament pruefen',
         'cta_url'     => '/wordpress-seo-hannover/',
-        'cta_text'    => 'Analyse Ihrer aktuellen Sichtbarkeit: Rankings, Indexierung, technische Fehler — kostenlos.',
+        'cta_text'    => 'Pruefen Sie zuerst das Fundament: Technik, Seitenstruktur, Tracking und Conversion-Reibung vor der naechsten Budgeterhoehung.',
     ],
     'tracking' => [
         'icon'        => '📊',
