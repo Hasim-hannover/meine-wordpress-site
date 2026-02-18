@@ -136,6 +136,43 @@ body.single-template-page-seo-cornerstone .ct-page-title {
 	gap: 0.8rem;
 }
 
+.seo-cornerstone__cta-buttons .nx-btn {
+	text-decoration: none !important;
+}
+
+.seo-cornerstone__cta-buttons .nx-btn--primary {
+	color: #0b0e12 !important;
+	background: var(--nx-gold) !important;
+	border: 1px solid transparent;
+}
+
+.seo-cornerstone__cta-buttons .nx-btn--primary:visited {
+	color: #0b0e12 !important;
+}
+
+.seo-cornerstone__cta-buttons .nx-btn--primary:hover,
+.seo-cornerstone__cta-buttons .nx-btn--primary:focus-visible {
+	color: #0b0e12 !important;
+	background: var(--nx-gold-hover) !important;
+}
+
+.seo-cornerstone__cta-buttons .nx-btn--ghost {
+	color: var(--nx-text) !important;
+	background: rgba(255, 255, 255, 0.04) !important;
+	border: 1px solid var(--nx-border-hover) !important;
+}
+
+.seo-cornerstone__cta-buttons .nx-btn--ghost:visited {
+	color: var(--nx-text) !important;
+}
+
+.seo-cornerstone__cta-buttons .nx-btn--ghost:hover,
+.seo-cornerstone__cta-buttons .nx-btn--ghost:focus-visible {
+	color: var(--nx-text) !important;
+	background: rgba(255, 255, 255, 0.08) !important;
+	border-color: var(--nx-text) !important;
+}
+
 @media (min-width: 1024px) {
 	.seo-cornerstone__layout {
 		grid-template-columns: 260px minmax(0, 1fr);
