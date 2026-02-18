@@ -47,36 +47,6 @@
 	margin-top: 3.25rem;
 }
 
-.seo-cornerstone__content {
-	background: var(--nx-bg-glass);
-	border: 1px solid var(--nx-border);
-	border-radius: var(--nx-radius-lg);
-	padding: clamp(1.2rem, 2vw, 2rem);
-	max-width: none;
-}
-
-.seo-cornerstone__content h2 {
-	margin-top: 2rem;
-	margin-bottom: 0.8rem;
-	color: var(--nx-text);
-	border-left: 0;
-	padding-left: 0;
-}
-
-.seo-cornerstone__content h2:first-child {
-	margin-top: 0;
-}
-
-.seo-cornerstone__content p,
-.seo-cornerstone__content li {
-	color: var(--nx-text-muted);
-	line-height: 1.75;
-}
-
-.seo-cornerstone__content strong {
-	color: var(--nx-text);
-}
-
 .seo-cornerstone__cta-box {
 	margin-top: 2rem;
 	padding: 1.35rem;

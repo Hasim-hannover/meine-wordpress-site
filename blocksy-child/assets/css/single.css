@@ -102,16 +102,46 @@
 
 /* 5. TEXT CONTENT */
 .nexus-article-content, .prose {
-    max-width: 800px;
-    padding: 0 20px;
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: #d4d4d4;
+    background: var(--nx-bg-glass);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    max-width: none;
+    margin: 0;
+    padding: clamp(1.2rem, 2vw, 2rem);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--nx-text-muted);
 }
 .nexus-article-content h2 { 
-    font-size: 1.8rem; color: #fff; margin-top: 3rem; margin-bottom: 1rem; 
-    border-left: 3px solid #ffb020; padding-left: 15px; font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--nx-text);
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    border-left: 0;
+    padding-left: 0;
+    font-weight: 800;
 } 
+.nexus-article-content h2:first-child {
+    margin-top: 0;
+}
+.nexus-article-content h3 {
+    font-size: 1.35rem;
+    margin-top: 1.6rem;
+    margin-bottom: 0.7rem;
+    color: var(--nx-text);
+    font-weight: 700;
+}
+.nexus-article-content p,
+.nexus-article-content li {
+    color: var(--nx-text-muted);
+    line-height: 1.75;
+}
+.nexus-article-content strong {
+    color: var(--nx-text);
+}
+.nexus-article-content p {
+    margin-bottom: 1.1rem;
+}
 
 /* 6. BOTTOM BEREICH */
 .nexus-bottom-share { 
@@ -212,4 +242,3 @@
         display: none !important;
     }
 }
-
