@@ -237,3 +237,74 @@ später auf Option B migrieren.
 - Social Proof Strip ist bereits serverseitig im Template `blocksy-child/page-wgos.php` nach dem Prinzip-Abschnitt eingebunden.
 - Mindmap-Script wird bereits über `blocksy-child/inc/enqueue.php` auf der WGOS-Seite geladen (`wgos-mindmap-v2.js`).
 - Runtime-Script unterstützt beide Mount-IDs: `#wgos-mindmap-v2-root` und `#wgos-mindmap-root`.
+
+---
+
+## Homepage: Manuelle Schritte im Editor
+
+### SEKTIONSREIHENFOLGE (Drag & Drop im Block-Editor)
+Ziel von oben nach unten:
+  1. Hero
+  2. Schmerz-Sektion (Modell A vs B)
+  3. WGOS-System-Sektion + Mindmap Teaser (bereits eingebaut)
+  4. Track Record / Cases
+  5. "Für wen ist das nichts?" (eigene Sektion – NEU)
+  6. Audit-CTA
+  7. FAQ (gekürzt auf 3 Fragen)
+  8. Blog (ganz ans Ende)
+
+### HERO
+[ ] Stack-Text Block identifizieren:
+    "Advanced WordPress · Technical SEO · Privacy-by-Design..."
+    → CSS-Klasse "hero-stack-text" zuweisen ODER Block löschen
+[ ] Subline kürzen auf:
+    "Ich baue Ihre WordPress-Instanz zum Owned-Leads-System um –
+     ohne Ad-Abhängigkeit, mit messbarem Ergebnis."
+[ ] Sekundärer CTA ("Case Studies ansehen"):
+    → CSS-Klasse "hero-cta-secondary" zuweisen
+
+### SCHMERZ-SEKTION (Modell A vs B)
+[ ] Modell A Spalte/Block: CSS-Klasse "modell-a" zuweisen
+[ ] Modell B Spalte/Block: CSS-Klasse "modell-b" zuweisen
+[ ] Am Ende der Sektion neuen Absatz-Block ergänzen:
+    Text:  "Noch nicht sicher? Erst das System verstehen →"
+    Link:  /wordpress-growth-operating-system/
+    Klasse: "micro-cta-link"
+
+### TRACK RECORD / CASES
+[ ] E3 New Energy – 1 Satz VOR den Zahlen einfügen:
+    "E3 startete mit 150€ CPL ohne messbare Leadqualität.
+     Nach WGOS-Aufbau:"
+[ ] DOMDAR – 1 Satz VOR den Zahlen einfügen:
+    "DOMDAR hatte 46€ Warenkorb-Schnitt und 4,2s Ladezeit.
+     Nach Performance Relaunch:"
+
+### "FÜR WEN IST DAS NICHTS?" – Neue eigene Sektion
+[ ] Aus FAQ-Block rausziehen
+[ ] Neuen Gruppe-Block anlegen, CSS-Klasse: "selection-card"
+[ ] Kleines Label oben (Absatz-Block, Klasse "selection-card-label"):
+    "FÜR WEN IST DAS NICHTS"
+[ ] Inhalt:
+    "Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht
+     oder Unternehmen die Baukasten-Preise erwarten.
+     Das System ist für B2B-Unternehmen ab ~500.000€ Jahresumsatz,
+     die planbar skalieren wollen."
+[ ] Platzierung: nach Track Record, vor Audit-CTA
+
+### FAQ – Kürzen auf 3 Fragen
+[ ] Diese 3 behalten:
+    1. "Was unterscheidet Credits von Stundensätzen?"
+    2. "Brauchen wir dann überhaupt noch Ads?"
+    3. "Was bedeutet Privacy-first Tracking konkret?"
+[ ] Rest entfernen (Antworten stehen vollständig auf WGOS-Seite)
+[ ] Unter dem FAQ Text-Link ergänzen:
+    "Weitere Fragen beantwortet → Das WGOS FAQ"
+    Link: /wordpress-growth-operating-system/#faq
+
+### KENNZAHLEN: ARIA-Labels
+[ ] Hero-Kennzahlen-Block öffnen (HTML-Ansicht)
+[ ] Ergänzen:
+    98 <span class="sr-only">Mobile Performance Score</span>
+    −83% <span class="sr-only">Reduktion Kosten pro Lead</span>
+    &lt; 0.8s <span class="sr-only">Ladezeit LCP</span>
+    100% <span class="sr-only">Data Ownership</span>
