@@ -19,6 +19,10 @@ Version: 7.1.1-FIXED
     --hasim-audit-orange: #FFB020;
     --hasim-audit-orange-hover: #FFC14D;
     --theme-palette-color-1: var(--hasim-audit-orange);
+    --nx-gold: var(--hasim-audit-orange);
+    --nx-gold-hover: var(--hasim-audit-orange-hover);
+    --gold: var(--hasim-audit-orange);
+    --cta: var(--hasim-audit-orange);
 }
 
 body, h1, h2, h3, h4, h5, h6, .ct-menu-link {

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-const GOLD = "#D4AF37";
-const GOLD_DIM = "rgba(212,175,55,0.12)";
-const GOLD_BORDER = "rgba(212,175,55,0.3)";
+const GOLD = "#FFB020";
+const GOLD_DIM = "rgba(255, 176, 32, 0.12)";
+const GOLD_BORDER = "rgba(255, 176, 32, 0.3)";
 
 const phases = [
   { label: "Fundament", color: "#60A5FA", range: [0, 1, 2] },
@@ -203,8 +203,8 @@ export default function WGOSMindmap() {
         >
           <defs>
             <radialGradient id="centerBg" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="rgba(212,175,55,0.18)" />
-              <stop offset="70%" stopColor="rgba(212,175,55,0.04)" />
+              <stop offset="0%" stopColor="rgba(255, 176, 32, 0.18)" />
+              <stop offset="70%" stopColor="rgba(255,176,32,0.04)" />
               <stop offset="100%" stopColor="transparent" />
             </radialGradient>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">

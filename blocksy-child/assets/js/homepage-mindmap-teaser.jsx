@@ -100,7 +100,7 @@ export default function HomepageMindmapTeaser() {
       <style>{`
         .hmt-root {
           background: #070709;
-          border: 1px solid rgba(212, 175, 55, 0.2);
+          border: 1px solid rgba(255, 176, 32, 0.2);
           border-radius: 14px;
           padding: 28px 20px;
           margin: 28px 0;
@@ -113,7 +113,7 @@ export default function HomepageMindmapTeaser() {
 
         .hmt-kicker {
           margin: 0 0 8px;
-          color: #d4af37;
+          color: #ffb020;
           text-transform: uppercase;
           letter-spacing: 0.08em;
           font-size: 12px;
@@ -167,13 +167,13 @@ export default function HomepageMindmapTeaser() {
         }
 
         .hmt-node:hover {
-          border-color: rgba(212, 175, 55, 0.45);
+          border-color: rgba(255, 176, 32, 0.45);
           transform: translateY(-2px);
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
         }
 
         .hmt-node.is-active {
-          border-color: rgba(212, 175, 55, 0.6);
+          border-color: rgba(255, 176, 32, 0.6);
         }
 
         .hmt-icon {
@@ -236,7 +236,7 @@ export default function HomepageMindmapTeaser() {
         }
 
         .hmt-stat strong {
-          color: #d4af37;
+          color: #ffb020;
           font-size: 1.35rem;
           line-height: 1;
           margin-top: 2px;
@@ -252,14 +252,14 @@ export default function HomepageMindmapTeaser() {
         .hmt-cta {
           display: inline-flex;
           margin-top: 18px;
-          color: #d4af37;
+          color: #ffb020;
           text-decoration: none;
           font-weight: 700;
           letter-spacing: 0.02em;
         }
 
         .hmt-cta:hover {
-          color: #f0cf67;
+          color: #ffc14d;
         }
 
         @keyframes hmtFadeUp {
