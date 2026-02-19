@@ -63,28 +63,6 @@ add_action( 'wp_head', function () {
 	echo '<style>.ft { background: #0a0a0a; }</style>' . "\n";
 }, 5 );
 
-// ── 2b. HOMEPAGE SCHEMA: PROFESSIONAL SERVICE ───────────────────
-add_action( 'wp_head', 'hasim_homepage_schema', 20 );
-function hasim_homepage_schema() {
-	if ( ! is_front_page() ) {
-		return;
-	}
-
-	$schema = array(
-		'@context'    => 'https://schema.org',
-		'@type'       => 'ProfessionalService',
-		'name'        => 'Hasim Üner – Growth Architect',
-		'description' => 'B2B-Leads mit WordPress ohne Ad-Abhängigkeit. Owned Leads System für Unternehmen ab 500k Jahresumsatz.',
-		'url'         => 'https://hasimuener.de',
-		'areaServed'  => 'DACH',
-		'priceRange'  => 'ab 1.500€/Monat',
-	);
-
-	echo '<script type="application/ld+json">' .
-		wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) .
-		'</script>' . "\n";
-}
-
 // ── 3. BLOCKSY TITLE OVERRIDE ────────────────────────────────────
 add_filter( 'blocksy:post_types:post:has_page_title', '__return_false' );
 
