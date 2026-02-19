@@ -14,7 +14,7 @@ function hu_output_schema()
         '@context' => 'https://schema.org',
         '@type'    => 'LocalBusiness',
         '@id'      => home_url('/#organization'),
-        'name'     => 'Hasim Üner',
+        'name'     => 'Hasim Üner – Growth Architect',
         'alternateName' => 'Hasim Üner Webentwicklung & CRO',
         'url'      => home_url(),
         'description' => 'Spezialist für High-Performance WordPress-Systeme, Tracking (GA4) und Conversion-Optimierung in Hannover & Pattensen.',
