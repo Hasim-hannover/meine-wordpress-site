@@ -111,6 +111,7 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
 		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );
 		hu_enqueue_js( 'nexus-wgos-js', 'wgos.js', [ 'nexus-core-js' ] );
+		hu_enqueue_js( 'nexus-wgos-mindmap-v2-js', 'wgos-mindmap-v2.js', [ 'nexus-wgos-js' ] );
 	}
 
 	// ── H) Template: Customer Journey Audit ───────────────────────
