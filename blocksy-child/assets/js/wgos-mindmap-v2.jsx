@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-const GOLD = "#FFB020";
-const GOLD_DIM = "rgba(255, 176, 32, 0.12)";
-const GOLD_BORDER = "rgba(255, 176, 32, 0.3)";
+const GOLD = "#D4AF37";
+const GOLD_DIM = "rgba(212,175,55,0.12)";
+const GOLD_BORDER = "rgba(212,175,55,0.3)";
 
 const phases = [
   { label: "Fundament", color: "#60A5FA", range: [0, 1, 2] },
@@ -152,8 +152,6 @@ export default function WGOSMindmap() {
       alignItems: "center",
       padding: "36px 16px 48px",
     }}>
-
-      {/* Header */}
       <div style={{ textAlign: "center", marginBottom: 4 }}>
         <div style={{
           display: "inline-block",
@@ -184,7 +182,6 @@ export default function WGOSMindmap() {
         </p>
       </div>
 
-      {/* Phase legend */}
       <div style={{ display: "flex", gap: 20, marginBottom: 16, marginTop: 16 }}>
         {phases.map(p => (
           <div key={p.label} style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -194,17 +191,12 @@ export default function WGOSMindmap() {
         ))}
       </div>
 
-      {/* SVG */}
       <div style={{ width: "100%", maxWidth: 780, position: "relative" }}>
-        <svg
-          viewBox="0 0 780 620"
-          width="100%"
-          style={{ display: "block", overflow: "visible" }}
-        >
+        <svg viewBox="0 0 780 620" width="100%" style={{ display: "block", overflow: "visible" }}>
           <defs>
             <radialGradient id="centerBg" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="rgba(255, 176, 32, 0.18)" />
-              <stop offset="70%" stopColor="rgba(255,176,32,0.04)" />
+              <stop offset="0%" stopColor="rgba(212,175,55,0.18)" />
+              <stop offset="70%" stopColor="rgba(212,175,55,0.04)" />
               <stop offset="100%" stopColor="transparent" />
             </radialGradient>
             <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -217,12 +209,10 @@ export default function WGOSMindmap() {
             </filter>
           </defs>
 
-          {/* Orbital rings */}
           <AnimatedCircle cx={cx} cy={cy} r={r - 10} color={GOLD} delay={0} />
           <AnimatedCircle cx={cx} cy={cy} r={r + 30} color={GOLD} delay={1} />
           <AnimatedCircle cx={cx} cy={cy} r={r + 55} color="rgba(255,255,255,0.3)" delay={2} />
 
-          {/* Connection lines */}
           {positions.map((pos, i) => {
             const mod = modules[i];
             const isActive = active === i;
@@ -238,28 +228,20 @@ export default function WGOSMindmap() {
             );
           })}
 
-          {/* Center glow */}
           <circle cx={cx} cy={cy} r={100} fill="url(#centerBg)" />
-
-          {/* Center node */}
           <circle cx={cx} cy={cy} r={72} fill="#0c0c0e" stroke={GOLD} strokeWidth={1.5} filter="url(#glow)" />
           <circle cx={cx} cy={cy} r={66} fill="none" stroke={GOLD_BORDER} strokeWidth={0.5} />
-
           <text x={cx} y={cy - 22} textAnchor="middle" fill={GOLD} fontSize={13} fontWeight={800} letterSpacing="0.15em">WGOS</text>
           <text x={cx} y={cy - 4} textAnchor="middle" fill="#777" fontSize={8.5} letterSpacing="0.06em">OWNED LEADS</text>
           <text x={cx} y={cy + 10} textAnchor="middle" fill="#555" fontSize={8} letterSpacing="0.06em">MIT WORDPRESS</text>
-
-          {/* Sequence flow arc label */}
           <text x={cx} y={cy + 28} textAnchor="middle" fill="#333" fontSize={7.5} letterSpacing="0.08em">1 → 2 → 3 → ... → 7</text>
 
-          {/* Module nodes */}
           {positions.map((pos, i) => {
             const mod = modules[i];
             const isActive = active === i;
             const isHov = hovered === i;
             const phaseColor = phases[mod.phase].color;
             const visible = mounted;
-
             return (
               <g key={`n${i}`}
                 onClick={() => setActive(active === i ? null : i)}
@@ -273,13 +255,9 @@ export default function WGOSMindmap() {
                   transformOrigin: `${pos.x}px ${pos.y}px`,
                 }}
               >
-                {/* Active outer pulse ring */}
                 {isActive && (
-                  <circle cx={pos.x} cy={pos.y} r={52}
-                    fill="none" stroke={mod.color} strokeWidth={1} opacity={0.25} />
+                  <circle cx={pos.x} cy={pos.y} r={52} fill="none" stroke={mod.color} strokeWidth={1} opacity={0.25} />
                 )}
-
-                {/* Phase color indicator dot */}
                 <circle cx={pos.x} cy={pos.y} r={44}
                   fill={isActive ? `${mod.color}18` : "#0f0f12"}
                   stroke={isActive ? mod.color : isHov ? phaseColor : "rgba(255,255,255,0.1)"}
@@ -287,31 +265,20 @@ export default function WGOSMindmap() {
                   filter={isActive ? "url(#softglow)" : "none"}
                   style={{ transition: "all 0.25s" }}
                 />
-
-                {/* Phase color top arc */}
                 <path
                   d={`M ${pos.x - 28} ${pos.y - 38} A 44 44 0 0 1 ${pos.x + 28} ${pos.y - 38}`}
-                  fill="none"
-                  stroke={phaseColor}
-                  strokeWidth={2.5}
-                  strokeLinecap="round"
+                  fill="none" stroke={phaseColor} strokeWidth={2.5} strokeLinecap="round"
                   opacity={isActive ? 1 : 0.4}
                   style={{ transition: "opacity 0.25s" }}
                 />
-
-                {/* Module number */}
                 <text x={pos.x} y={pos.y - 20} textAnchor="middle"
                   fill={isActive ? mod.color : "#444"} fontSize={8.5} fontWeight={700} letterSpacing="0.08em"
                   style={{ transition: "fill 0.25s" }}>
                   {`0${i + 1}`}
                 </text>
-
-                {/* Icon */}
                 <text x={pos.x} y={pos.y + 2} textAnchor="middle" fontSize={17} dominantBaseline="middle">
                   {mod.icon}
                 </text>
-
-                {/* Label */}
                 <text x={pos.x} y={pos.y + 22} textAnchor="middle"
                   fill={isActive ? "#fff" : "#999"} fontSize={8.5} fontWeight={isActive ? 600 : 400}
                   style={{ transition: "fill 0.25s" }}>
@@ -323,13 +290,7 @@ export default function WGOSMindmap() {
         </svg>
       </div>
 
-      {/* Detail Panel */}
-      <div style={{
-        width: "100%",
-        maxWidth: 700,
-        marginTop: 4,
-        minHeight: 220,
-      }}>
+      <div style={{ width: "100%", maxWidth: 700, marginTop: 4, minHeight: 220 }}>
         {activeModule ? (
           <div style={{
             background: "#0d0d10",
@@ -344,12 +305,8 @@ export default function WGOSMindmap() {
                 to { opacity: 1; transform: translateY(0); }
               }
             `}</style>
-
-            {/* Color bar */}
             <div style={{ height: 3, background: `linear-gradient(90deg, ${activeModule.color}, ${activeModule.color}44)` }} />
-
             <div style={{ padding: "20px 24px" }}>
-              {/* Top row */}
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
                 <div style={{ flex: 1, minWidth: 220 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
@@ -363,8 +320,6 @@ export default function WGOSMindmap() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Toggle: Claim vs Without */}
                   <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
                     <button onClick={() => setShowWithout(false)} style={{
                       fontSize: 10, padding: "4px 10px", borderRadius: 4, border: "none", cursor: "pointer",
@@ -381,7 +336,6 @@ export default function WGOSMindmap() {
                       transition: "all 0.2s",
                     }}>Ohne dieses Modul</button>
                   </div>
-
                   {!showWithout ? (
                     <>
                       <p style={{ color: "#aaa", fontSize: 13, margin: "0 0 12px", fontStyle: "italic", lineHeight: 1.55 }}>
@@ -409,10 +363,7 @@ export default function WGOSMindmap() {
                     </div>
                   )}
                 </div>
-
-                {/* Right: Result + Credits */}
                 <div style={{ display: "flex", flexDirection: "column", gap: 10, minWidth: 150 }}>
-                  {/* Track record */}
                   <div style={{
                     background: `${activeModule.color}0f`,
                     border: `1px solid ${activeModule.color}2a`,
@@ -424,8 +375,6 @@ export default function WGOSMindmap() {
                     <div style={{ fontSize: 20, fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>{activeModule.result}</div>
                     <div style={{ fontSize: 10, color: "#555", marginTop: 4 }}>{activeModule.resultSub}</div>
                   </div>
-
-                  {/* Credits */}
                   <div style={{
                     background: "#111115",
                     border: "1px solid rgba(255,255,255,0.07)",
@@ -434,46 +383,29 @@ export default function WGOSMindmap() {
                     textAlign: "center",
                   }}>
                     <div style={{ fontSize: 9, color: "#555", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4 }}>Investment</div>
-                    <div style={{ fontSize: 13, color: GOLD, fontWeight: 700 }}>{activeModule.credits}</div>
+                    <div style={{ fontSize: 13, color: "#D4AF37", fontWeight: 700 }}>{activeModule.credits}</div>
                   </div>
                 </div>
               </div>
-
-              {/* Bottom nav + CTA */}
               <div style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginTop: 16,
-                paddingTop: 14,
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                marginTop: 16, paddingTop: 14,
                 borderTop: "1px solid rgba(255,255,255,0.05)",
-                flexWrap: "wrap",
-                gap: 10,
+                flexWrap: "wrap", gap: 10,
               }}>
                 <div style={{ display: "flex", gap: 8 }}>
-                  <button onClick={() => { setActive((active - 1 + modules.length) % modules.length); }}
-                    style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#666", padding: "5px 12px", borderRadius: 5, cursor: "pointer", fontSize: 11 }}>
-                    ←
-                  </button>
+                  <button onClick={() => setActive((active - 1 + modules.length) % modules.length)}
+                    style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#666", padding: "5px 12px", borderRadius: 5, cursor: "pointer", fontSize: 11 }}>←</button>
                   <span style={{ color: "#333", fontSize: 11, alignSelf: "center" }}>{activeModule.id}/{modules.length}</span>
-                  <button onClick={() => { setActive((active + 1) % modules.length); }}
-                    style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#666", padding: "5px 12px", borderRadius: 5, cursor: "pointer", fontSize: 11 }}>
-                    →
-                  </button>
+                  <button onClick={() => setActive((active + 1) % modules.length)}
+                    style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#666", padding: "5px 12px", borderRadius: 5, cursor: "pointer", fontSize: 11 }}>→</button>
                 </div>
-
                 <a href="https://hasimuener.de/customer-journey-audit/"
                   target="_blank" rel="noreferrer"
                   style={{
-                    background: GOLD,
-                    color: "#000",
-                    padding: "8px 18px",
-                    borderRadius: 6,
-                    fontSize: 11,
-                    fontWeight: 700,
-                    textDecoration: "none",
-                    letterSpacing: "0.04em",
-                    display: "inline-block",
+                    background: "#D4AF37", color: "#000", padding: "8px 18px",
+                    borderRadius: 6, fontSize: 11, fontWeight: 700,
+                    textDecoration: "none", letterSpacing: "0.04em", display: "inline-block",
                   }}>
                   Diesen Hebel prüfen →
                 </a>
@@ -497,32 +429,21 @@ export default function WGOSMindmap() {
         )}
       </div>
 
-      {/* Sequence hint */}
       <div style={{
-        marginTop: 28,
-        display: "flex",
-        alignItems: "center",
-        gap: 0,
-        overflowX: "auto",
-        maxWidth: 680,
-        width: "100%",
-        justifyContent: "center",
-        flexWrap: "wrap",
-        rowGap: 8,
+        marginTop: 28, display: "flex", alignItems: "center", gap: 0,
+        overflowX: "auto", maxWidth: 680, width: "100%",
+        justifyContent: "center", flexWrap: "wrap", rowGap: 8,
       }}>
         {modules.map((m, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center" }}>
-            <div
-              onClick={() => setActive(active === i ? null : i)}
+            <div onClick={() => setActive(active === i ? null : i)}
               style={{
                 width: 30, height: 30, borderRadius: "50%",
                 background: active === i ? m.color : "#111",
                 border: `1px solid ${active === i ? m.color : "rgba(255,255,255,0.1)"}`,
                 display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: 13, cursor: "pointer",
-                transition: "all 0.2s",
-              }}
-            >
+                fontSize: 13, cursor: "pointer", transition: "all 0.2s",
+              }}>
               {m.icon}
             </div>
             {i < modules.length - 1 && (

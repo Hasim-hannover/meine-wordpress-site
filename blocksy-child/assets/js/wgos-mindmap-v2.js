@@ -1,17 +1,19 @@
 /*
  * WGOS Mindmap v2 runtime renderer (no build step required)
- * Mount target: #wgos-mindmap-v2-root
+ * Mount target: #wgos-mindmap-v2-root (Fallback: #wgos-mindmap-root)
  */
 (function () {
 	'use strict';
 
-	var root = document.getElementById('wgos-mindmap-v2-root');
+	// WGOS FIX: Option-B kompatibel für beide möglichen Root-IDs.
+	var root = document.getElementById('wgos-mindmap-v2-root') || document.getElementById('wgos-mindmap-root');
 	if (!root) {
 		return;
 	}
 
-	var GOLD = '#FFB020';
-	var GOLD_BORDER = 'rgba(255, 176, 32, 0.3)';
+	// WGOS FIX: Goldton auf Brandfarbe vereinheitlicht.
+	var GOLD = '#D4AF37';
+	var GOLD_BORDER = 'rgba(212, 175, 55, 0.3)';
 
 	var phases = [
 		{ label: 'Fundament', color: '#60A5FA', range: [0, 1, 2] },
@@ -155,11 +157,11 @@
 		var style = document.createElement('style');
 		style.id = 'wgos-mindmap-v2-runtime-styles';
 		style.textContent = '' +
-			'.wmm2{background:#070709;color:#fff;border:1px solid rgba(255,176,32,.18);border-radius:14px;padding:28px 14px 40px;margin:0 auto 10px;font-family:"DM Sans","Helvetica Neue",sans-serif;}' +
+			'.wmm2{background:#070709;color:#fff;border:1px solid rgba(212,175,55,.18);border-radius:14px;padding:28px 14px 40px;margin:0 auto 10px;font-family:"DM Sans","Helvetica Neue",sans-serif;}' +
 			'.wmm2-header{text-align:center;margin-bottom:4px;}' +
-			'.wmm2-pill{display:inline-block;border:1px solid rgba(255,176,32,.3);border-radius:100px;padding:4px 16px;font-size:10px;letter-spacing:.2em;color:#FFB020;text-transform:uppercase;margin-bottom:14px;font-weight:500;}' +
+			'.wmm2-pill{display:inline-block;border:1px solid rgba(212,175,55,.3);border-radius:100px;padding:4px 16px;font-size:10px;letter-spacing:.2em;color:#D4AF37;text-transform:uppercase;margin-bottom:14px;font-weight:500;}' +
 			'.wmm2-title{font-size:clamp(20px,3vw,28px);font-weight:800;margin:0 0 8px;letter-spacing:-.03em;line-height:1.2;}' +
-			'.wmm2-title span{color:#FFB020;}' +
+			'.wmm2-title span{color:#D4AF37;}' +
 			'.wmm2-sub{color:#555;font-size:13px;margin:0;}' +
 			'.wmm2-legend{display:flex;gap:20px;margin:16px 0;justify-content:center;flex-wrap:wrap;}' +
 			'.wmm2-legend-item{display:flex;align-items:center;gap:6px;}' +
@@ -197,12 +199,12 @@
 			'.wmm2-stat-s{font-size:10px;color:#555;margin-top:4px;}' +
 			'.wmm2-credits{background:#111115;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 14px;text-align:center;}' +
 			'.wmm2-credits-k{font-size:9px;color:#555;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}' +
-			'.wmm2-credits-v{font-size:13px;color:#FFB020;font-weight:700;}' +
+			'.wmm2-credits-v{font-size:13px;color:#D4AF37;font-weight:700;}' +
 			'.wmm2-foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.05);flex-wrap:wrap;gap:10px;}' +
 			'.wmm2-nav{display:flex;gap:8px;}' +
 			'.wmm2-nav button{background:none;border:1px solid rgba(255,255,255,.1);color:#666;padding:5px 12px;border-radius:5px;cursor:pointer;font-size:11px;}' +
 			'.wmm2-nav span{color:#333;font-size:11px;align-self:center;}' +
-			'.wmm2-cta{background:#FFB020;color:#000;padding:8px 18px;border-radius:6px;font-size:11px;font-weight:700;text-decoration:none;letter-spacing:.04em;display:inline-block;}' +
+			'.wmm2-cta{background:#D4AF37;color:#000;padding:8px 18px;border-radius:6px;font-size:11px;font-weight:700;text-decoration:none;letter-spacing:.04em;display:inline-block;}' +
 			'.wmm2-seq{margin-top:28px;display:flex;align-items:center;gap:0;overflow-x:auto;max-width:680px;width:100%;justify-content:center;flex-wrap:wrap;row-gap:8px;margin-left:auto;margin-right:auto;}' +
 			'.wmm2-seq-item{display:flex;align-items:center;}' +
 			'.wmm2-seq-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;transition:all .2s;}' +
@@ -267,8 +269,8 @@
 			'<svg viewBox="0 0 780 620" width="100%" style="display:block;overflow:visible;">' +
 			'<defs>' +
 			'<radialGradient id="wmm2-centerBg" cx="50%" cy="50%" r="50%">' +
-			'<stop offset="0%" stop-color="rgba(255, 176, 32, 0.18)" />' +
-			'<stop offset="70%" stop-color="rgba(255,176,32,0.04)" />' +
+			'<stop offset="0%" stop-color="rgba(212, 175, 55, 0.18)" />' +
+			'<stop offset="70%" stop-color="rgba(212,175,55,0.04)" />' +
 			'<stop offset="100%" stop-color="transparent" />' +
 			'</radialGradient>' +
 			'</defs>' +

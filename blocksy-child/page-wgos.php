@@ -110,6 +110,22 @@ get_header();
 </section>
 
 <!-- ========================================
+     WGOS FIX: SOCIAL PROOF STRIP (serverseitig)
+     Position: nach Prinzip, vor den 7 Modulen
+     ======================================== -->
+<section class="wgos-section wgos-section--white nx-reveal">
+    <div class="wgos-container">
+        <?php
+        // WGOS FIX: Proof-Block zentral aus assets/html laden, damit Content konsistent bleibt.
+        $wgos_social_proof_path = get_stylesheet_directory() . '/assets/html/wgos-social-proof.html';
+        if ( file_exists( $wgos_social_proof_path ) ) {
+            echo file_get_contents( $wgos_social_proof_path ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+        ?>
+    </div>
+</section>
+
+<!-- ========================================
      SECTION 3: DIE 7 MODULE
      ======================================== -->
 <section id="module" class="wgos-section">

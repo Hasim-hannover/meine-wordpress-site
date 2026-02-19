@@ -150,3 +150,90 @@ CSS für sr-only (in style.css ergänzen falls nicht vorhanden):
 ### Technische Hinweise aus Code-Umsetzung
 - Homepage-Schema in `functions.php` bewusst nicht ergänzt: bereits JSON-LD-Ausgabe über `blocksy-child/inc/org-schema.php` plus Rank-Math-Integration aktiv, um Konflikte/Duplikate zu vermeiden.
 - Sekundärer Hero-CTA wurde mit mehreren Fallback-Selektoren in CSS adressiert; bitte im Live-Frontend per DevTools gegen die echte Homepage-Struktur prüfen und bei Bedarf Zielselektor nachschärfen.
+
+---
+
+## WGOS-Seite: Vollständige Umbauanleitung (manuell im Editor)
+
+### ZIEL-REIHENFOLGE der Blöcke (von oben nach unten):
+  1. Hero (Headline + Bullets + CTAs)            ← bleibt
+  2. Prinzip-Sektion (Modell A vs B)             ← bleibt
+     └── Mini-CTA ergänzen (Text-Link):
+         "Direkt zum Audit – kostenlos, 48h, kein Pitch →"
+         Link: /customer-journey-audit/
+  3. Social Proof Strip                          ← NEU (HTML-Block einfügen)
+         Datei: wgos-social-proof.html kopieren und als
+         Custom HTML Block einfügen
+  4. Mindmap: 7 Module                           ← NEU (React-Block)
+         wgos-mindmap-v2.jsx einbinden
+         (Details: siehe Einbindungs-Anleitung unten)
+  5. Modul-Texte (01–07)                         ← KÜRZEN
+         Jeden Modul-Textblock auf max. 2 Sätze kürzen
+         Die Mindmap erklärt Details – der Text ist nur Backup
+  6. Pakete (Maintenance / Growth / Dominance)   ← bleibt, leicht anpassen
+  7. Credits-Tabelle                             ← bleibt
+         Neuer Block DAVOR einfügen:
+         "Wählen Sie was Sie brauchen. Jedes Asset hat einen
+          festen Punktwert – kein Verhandeln, kein Mehrkostenrisiko.
+          Das Risiko für Mehraufwand liegt bei mir."
+  8. Garantie-Sektion                            ← Reihenfolge ändern
+         JETZT: "Keine unrealistischen Versprechen..." (Disclaimer zuerst)
+         NEU:   "Was ich garantiere:" → Garantiepunkte → Disclaimer ans Ende
+         Neuer erster Satz: "Was ich garantiere, sind Dinge
+         die ich kontrollieren kann:"
+  9. FAQ                                         ← bleibt
+  10. Abschluss-CTA                              ← bleibt
+
+### PAKETE: Entscheidungshilfe ergänzen
+Unter jeden Paket-Titel einen Trigger-Satz ergänzen:
+
+Maintenance:
+  "Richtig für Sie wenn: Ihre Site läuft, aber Updates,
+   Backups und Monitoring kosten Sie wertvolle Zeit."
+
+Growth Partner:
+  "Richtig für Sie wenn: Sie ein Owned-Leads-System
+   aufbauen wollen – SEO, Content und Conversion systematisch."
+
+Dominance:
+  "Richtig für Sie wenn: Sie Marktführer-Anspruch haben
+   und Full Stack + Paid Booster gleichzeitig skalieren wollen."
+
+### WGOS Hero: "0"-Kennzahlen fixen
+[ ] Hero-Block bearbeiten
+[ ] Statische Werte direkt ins HTML eintragen:
+    Mobile Performance: 98
+    Data Ownership: 100%
+[ ] Speichern (JS überschreibt dynamisch, Fallback bleibt)
+
+### MINDMAP EINBINDEN (React-Komponente)
+Option A – Als iFrame (einfachste Methode):
+  [ ] Separate Seite erstellen: /wgos-mindmap-intern/
+  [ ] Dort die Komponente einbinden via wp_enqueue_script
+  [ ] Auf WGOS-Seite: Custom HTML Block mit iFrame:
+      <iframe src="/wgos-mindmap-intern/"
+              style="width:100%;height:700px;border:none;"
+              loading="lazy"
+              title="WGOS System Übersicht interaktiv">
+      </iframe>
+
+Option B – Via wp_enqueue_script (sauberere Methode):
+  [ ] In functions.php:
+      wp_enqueue_script(
+        'wgos-mindmap',
+        get_stylesheet_directory_uri() . '/assets/js/wgos-mindmap-v2.js',
+        array(),
+        '1.0',
+        true
+      );
+  [ ] JSX zu JS kompilieren via wp-scripts (npm run build)
+  [ ] Auf WGOS-Seite Custom HTML Block:
+      <div id="wgos-mindmap-root"></div>
+
+EMPFEHLUNG: Mit Option A starten – schneller live,
+später auf Option B migrieren.
+
+### Status (bereits im Code umgesetzt)
+- Social Proof Strip ist bereits serverseitig im Template `blocksy-child/page-wgos.php` nach dem Prinzip-Abschnitt eingebunden.
+- Mindmap-Script wird bereits über `blocksy-child/inc/enqueue.php` auf der WGOS-Seite geladen (`wgos-mindmap-v2.js`).
+- Runtime-Script unterstützt beide Mount-IDs: `#wgos-mindmap-v2-root` und `#wgos-mindmap-root`.

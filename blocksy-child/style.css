@@ -1503,3 +1503,78 @@ em[class*="disclaimer"],
 .wgos-trust-value[data-fallback]:empty::before {
     content: attr(data-fallback);
 }
+
+/* === WGOS: Social Proof Strip Mobile === */
+@media (max-width: 600px) {
+  .wgos-proof-strip {
+    gap: 20px !important;
+  }
+  .wgos-proof-strip .proof-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+    padding: 16px 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .wgos-proof-strip .proof-item:last-child {
+    border-bottom: none !important;
+  }
+}
+
+/* === WGOS: Credits-Tabelle Mobile scrollbar === */
+@media (max-width: 768px) {
+  .wp-block-table table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  .wp-block-table table td,
+  .wp-block-table table th {
+    min-width: 110px;
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  .wp-block-table::before {
+    content: "\2190 Tabelle scrollbar \2192";
+    display: block;
+    font-size: 11px;
+    color: #444;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* === WGOS: Modul-Text nach Mindmap kürzen === */
+/* Die langen Modul-Beschreibungen werden auf 2 Zeilen begrenzt
+   wenn die Mindmap aktiv ist – verhindert Redundanz */
+.wgos-module-text-block {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #888;
+}
+
+/* === ACCESSIBILITY: Focus States === */
+.wp-block-button__link:focus,
+.ct-button:focus,
+a[href*="customer-journey-audit"]:focus,
+a[href*="wordpress-growth-operating-system"]:focus,
+button:focus {
+  outline: 2px solid #D4AF37;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* === ACCESSIBILITY: Screenreader-only Klasse === */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
