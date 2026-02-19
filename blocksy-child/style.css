@@ -1357,3 +1357,149 @@ body.wp-customizer .ct-customizer-shortcut {
     transform: none !important;
     margin-top: 0 !important;
 }
+
+/* === ACCESSIBILITY FIX 1: Sichtbare Focus-States für CTAs und Navigation === */
+.wp-block-button__link:focus,
+.wp-block-button__link:focus-visible,
+.ct-button:focus,
+.ct-button:focus-visible,
+a[href*="customer-journey-audit"]:focus,
+a[href*="customer-journey-audit"]:focus-visible,
+a[href*="wordpress-growth-operating-system"]:focus,
+a[href*="wordpress-growth-operating-system"]:focus-visible,
+.nav-cta-button a:focus,
+.nav-cta-button a:focus-visible,
+button:focus,
+button:focus-visible {
+    outline: 2px solid #D4AF37;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ACCESSIBILITY FIX 1b: Focus-Styling für Header-/Menü-Links */
+.ct-header a:focus,
+.ct-header a:focus-visible,
+.header-navigation a:focus,
+.header-navigation a:focus-visible {
+    outline: 2px solid #D4AF37;
+    outline-offset: 2px;
+}
+
+/* ACCESSIBILITY FIX 1c: Focus-Styling für Anker-Navigation auf WGOS-Seite */
+.ct-scrollspy-nav a:focus,
+.ct-scrollspy-nav a:focus-visible,
+.wp-block-navigation a:focus,
+.wp-block-navigation a:focus-visible,
+.wgos-smart-nav a:focus,
+.wgos-smart-nav a:focus-visible {
+    outline: 2px solid #D4AF37;
+    outline-offset: 2px;
+}
+
+/* === ACCESSIBILITY FIX 2: Höherer Kontrast für kleine Gold-Labels === */
+.hero-label,
+.section-label,
+.module-number,
+.badge-text,
+.eyebrow-text,
+[class*="label"],
+[class*="badge"] {
+    color: #E8C84A;
+}
+
+/* === WGOS FIX 3: Credits-Tabellen mobil horizontal scrollbar machen === */
+@media (max-width: 768px) {
+    .wp-block-table table,
+    .credits-table table,
+    .wgos-table-wrap table,
+    .wgos-credits-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+
+    .wp-block-table table td,
+    .wp-block-table table th,
+    .wgos-credits-table td,
+    .wgos-credits-table th {
+        min-width: 120px;
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+
+    /* WGOS FIX 3b: Sichtbarer Scrollhinweis vor Tabellen auf Mobile */
+    .wp-block-table::before,
+    .wgos-table-wrap::before {
+        content: "\2190 Tabelle scrollbar \2192";
+        display: block;
+        font-size: 11px;
+        color: #555;
+        text-align: center;
+        margin-bottom: 8px;
+        letter-spacing: 0.06em;
+    }
+}
+
+/* === HOMEPAGE FIX 4: Sekundären Hero-CTA visuell abschwächen === */
+body.home .hero-cta-secondary,
+body.home .wp-block-buttons .wp-block-button:last-child .wp-block-button__link,
+body.home a[href*="case-studies"].wp-block-button__link,
+body.home .wp-hero .wp-btn[href*="case-studies"] {
+    background: transparent !important;
+    color: #666 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    font-weight: 400 !important;
+}
+
+/* HOMEPAGE FIX 4b: Dezenter Hover statt Konkurrenz zum Primär-CTA */
+body.home .hero-cta-secondary:hover,
+body.home .wp-block-buttons .wp-block-button:last-child .wp-block-button__link:hover,
+body.home .wp-hero .wp-btn[href*="case-studies"]:hover {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #999 !important;
+}
+
+/* === WGOS FIX 5: Garantie-Reihenfolge per CSS (Punkte vor Disclaimer) === */
+.wgos-guarantee-section,
+[class*="garantie"],
+[id*="garantie"],
+#garantie .wgos-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* WGOS FIX 5b: Garantie-Punkte priorisieren */
+#garantie .wgos-checklist--guarantee {
+    order: 2;
+}
+
+/* WGOS FIX 5c: Disclaimer-/Erwartungs-Text ans Ende stellen */
+.wgos-guarantee-disclaimer,
+.guarantee-note,
+em[class*="disclaimer"],
+#garantie .wgos-expectation,
+#garantie .wgos-prose {
+    order: 99;
+    margin-top: 16px;
+    color: #444;
+    font-size: 12px;
+}
+
+/* === ACCESSIBILITY HELPER: Screenreader-only Textklasse === */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* === WGOS FIX 3c: CSS-Fallback, falls Counter-Inhalt leer bleibt === */
+.wgos-trust-value[data-fallback]:empty::before {
+    content: attr(data-fallback);
+}

@@ -78,3 +78,75 @@ Text: (aus FAQ kopieren und als eigene Sektion platzieren)
 
 Styling: Dark-Card mit Rahmen, leicht abgesetzt – 
 signalisiert Selektivität = erhöht Vertrauen bei Zielgruppe
+
+---
+
+## Barrierefreiheit & Funnel-Fixes – Manuelle Schritte
+
+### SOFORT in WP-Admin / Editor erledigen:
+
+#### Alt-Texte Blog-Vorschaubilder
+[ ] Medien → Bibliothek → jedes Blog-Bild öffnen
+[ ] Alternativtext setzen (beschreibend, nicht "featured-image-xyz")
+    Beispiele:
+    - "Technisches SEO als Fundament für Performance Marketing"
+    - "150 Euro pro Lead Falle – B2B Owned Leads Strategie"
+    - "Meta Ads Kampagnenstruktur für B2B Lead Generation"
+    - "Core Web Vitals Optimierung WordPress Performance"
+
+#### WGOS-Seite: "0"-Kennzahlen fixen
+[ ] Seite bearbeiten → Hero-Bereich
+[ ] Statische Werte eintragen:
+    Mobile Performance: 98
+    Data Ownership: 100%
+[ ] Speichern – JS überschreibt diese Werte dynamisch
+
+#### WGOS-Seite: Text vor Credits-Tabelle
+[ ] Direkt über der Credits-Tabelle neuen Absatz-Block einfügen:
+    "Wählen Sie was Sie brauchen. Jedes Asset hat einen 
+     festen Punktwert – kein Verhandeln, kein Mehrkostenrisiko. 
+     Das Risiko für Mehraufwand liegt bei mir."
+
+#### WGOS-Seite: Garantie-Sektion umdrehen
+[ ] Ersten Absatz ("Keine unrealistischen Umsatzversprechen...") 
+    nach unten verschieben – NACH den Garantie-Punkten
+[ ] Neuer erster Satz der Sektion:
+    "Was ich garantiere, sind Dinge die ich kontrollieren kann:"
+[ ] Disclaimer-Satz ans Ende der Sektion
+
+#### Homepage: ARIA-Labels Kennzahlen
+[ ] Hero-Kennzahlen-Block öffnen
+[ ] Jeweils einen visually-hidden Span ergänzen:
+    98 <span class="sr-only">Mobile Performance Score</span>
+    -83% <span class="sr-only">Reduktion Kosten pro Lead</span>
+    < 0.8s <span class="sr-only">Ladezeit LCP</span>
+    100% <span class="sr-only">Data Ownership</span>
+
+CSS für sr-only (in style.css ergänzen falls nicht vorhanden):
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+#### Homepage: Micro-Conversion Zwischenschritt
+[ ] Nach WGOS-System-Sektion (vor Track Record) neuen Block:
+    Text: "Noch nicht sicher? Erst das System verstehen →"
+    Link: /wordpress-growth-operating-system/
+    Style: Kleiner Text-Link, kein Button, keine Ablenkung
+
+#### Homepage: Modell A (Ad-Miete) visuell abschwächen
+[ ] Modell A Spalte: Opacity auf 70%, Rahmen gestrichelt
+    oder Hintergrund leicht gedämpft
+[ ] Modell B Spalte: Goldener linker Rahmen (4px solid #D4AF37)
+    → Signalisiert visuell den Gewinner ohne Text
+
+### Technische Hinweise aus Code-Umsetzung
+- Homepage-Schema in `functions.php` bewusst nicht ergänzt: bereits JSON-LD-Ausgabe über `blocksy-child/inc/org-schema.php` plus Rank-Math-Integration aktiv, um Konflikte/Duplikate zu vermeiden.
+- Sekundärer Hero-CTA wurde mit mehreren Fallback-Selektoren in CSS adressiert; bitte im Live-Frontend per DevTools gegen die echte Homepage-Struktur prüfen und bei Bedarf Zielselektor nachschärfen.

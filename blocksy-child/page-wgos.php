@@ -54,7 +54,8 @@ get_header();
         <!-- Trust Stack -->
         <div class="wgos-trust-stack">
             <div class="wgos-trust-item">
-                <span class="wgos-trust-value nx-counter" data-value="98">0</span>
+                <!-- WGOS FIX 3: Serverseitiger Fallback-Wert gegen sichtbare "0" vor JS-Hydration -->
+                <span class="wgos-trust-value nx-counter" data-value="98" data-fallback="98">98</span>
                 <span class="wgos-trust-label">Mobile Performance</span>
             </div>
             <div class="wgos-trust-item">
@@ -66,7 +67,8 @@ get_header();
                 <span class="wgos-trust-label">Load Time (LCP)</span>
             </div>
             <div class="wgos-trust-item">
-                <span class="wgos-trust-value" data-value="100" data-suffix="%">0</span>
+                <!-- WGOS FIX 3: Serverseitiger Fallback-Wert gegen sichtbare "0" vor JS-Hydration -->
+                <span class="wgos-trust-value nx-counter" data-value="100" data-suffix="%" data-fallback="100%">100%</span>
                 <span class="wgos-trust-label">Data Ownership</span>
             </div>
         </div>
