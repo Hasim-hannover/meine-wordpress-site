@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function hu_hero_section_shortcode() {
     ob_start();
     ?>
-    <div class="cs-page">
+    <div class="cs-page" style="display:flex; flex-direction:column;">
 
     <nav class="smart-nav" aria-label="Seitennavigation">
         <ul>
@@ -39,10 +39,6 @@ function hu_hero_section_shortcode() {
                 Ich baue aus Ihrer WordPress-Instanz ein Owned-Leads-System: ultraschnelle UX, technische SEO, Content-Assets und
                 privacy-first Messbarkeit. Ads sind optional&nbsp;– als Verstärker, nicht als Dauer-Miete.
             </p>
-            <div class="wp-trust-stack">
-                Stack: Advanced WordPress · Technical SEO · Privacy-by-Design Tracking (Server-Side + Consent Mode v2) · CRO · n8n Automation
-            </div>
-
             <div class="audit-card-premium" id="audit">
                 <div style="text-align:center; margin-bottom:2rem;">
                     <span style="background:rgba(255,176,32,0.15); color:#FFB020; padding:6px 12px; border-radius:20px; font-size:0.8rem; font-weight:700;">
@@ -129,7 +125,7 @@ function hu_owned_section_shortcode() {
 
             <div class="wp-cards" style="margin-top:2.5rem;">
 
-                <div class="wp-success-card" style="border-top:3px solid rgba(255,255,255,0.1);">
+                <div class="wp-success-card modell-a" style="border-top:3px solid rgba(255,255,255,0.1);">
                     <h3 class="wp-success-title">Modell A: Ad-Miete</h3>
                     <p class="wp-success-subtitle">Paid-Only, Dauer-Druck</p>
                     <ul class="premium-list">
@@ -139,7 +135,7 @@ function hu_owned_section_shortcode() {
                     </ul>
                 </div>
 
-                <div class="wp-success-card" style="border-top:3px solid var(--gold);">
+                <div class="wp-success-card modell-b" style="border-top:3px solid var(--gold);">
                     <h3 class="wp-success-title" style="color:var(--gold);">Modell B: Owned Leads</h3>
                     <p class="wp-success-subtitle">Privacy-first · SEO · Content · Vertrauen</p>
                     <ul class="premium-list">
@@ -154,6 +150,7 @@ function hu_owned_section_shortcode() {
             <div class="text-center" style="margin-top:2rem;">
                 <a href="/customer-journey-audit/" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Audit starten: Welche Hebel sind bei Ihnen drin?</a>
             </div>
+            <a href="/wordpress-growth-operating-system/" class="micro-cta-link">Noch nicht sicher? Erst das System verstehen →</a>
         </div>
     </section>
     <?php
@@ -224,6 +221,7 @@ function hu_erfolge_section_shortcode() {
                 <article class="nx-card" style="border-top:3px solid var(--nx-success);">
                     <p class="nx-card__subtitle">B2B Leadgen · High-Performance WordPress · 12 Monate</p>
                     <h3 class="nx-card__title">E3 New Energy<br><span style="color:var(--nx-gold); font-size:0.85em;">Lead-Maschine</span></h3>
+                    <p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">E3 startete mit 150€ CPL ohne messbare Leadqualität. Nach WGOS-Aufbau:</p>
                     <div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
                         <div class="nx-metric">
                             <span class="nx-metric__value" style="color:var(--nx-success);">1.750+</span>
@@ -248,6 +246,7 @@ function hu_erfolge_section_shortcode() {
                 <article class="nx-card" style="border-top:3px solid var(--nx-gold);">
                     <p class="nx-card__subtitle">Performance Relaunch · CRO &amp; UX Strategy · 6 Monate</p>
                     <h3 class="nx-card__title">DOMDAR<br><span style="color:var(--nx-gold); font-size:0.85em;">E-Commerce Scaling</span></h3>
+                    <p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">DOMDAR hatte 46€ Warenkorb-Schnitt und 4,2s Ladezeit. Nach Performance Relaunch:</p>
                     <div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
                         <div class="nx-metric">
                             <span class="nx-metric__value" style="color:var(--nx-success);">+270%</span>
@@ -269,6 +268,11 @@ function hu_erfolge_section_shortcode() {
                     <a href="/case-studies/" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Alle Cases ansehen →</a>
                 </article>
 
+            </div>
+
+            <div class="selection-card" style="margin:0 auto 2.5rem;">
+                <span class="selection-card-label">FÜR WEN IST DAS NICHTS</span>
+                <p style="margin:0; color:var(--nx-text-muted);">Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen die Baukasten-Preise erwarten. Das System ist für B2B-Unternehmen ab ~500.000€ Jahresumsatz, die planbar skalieren wollen.</p>
             </div>
 
             <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
@@ -314,7 +318,7 @@ add_shortcode( 'hu_prozess', 'hu_prozess_section_shortcode' );
 function hu_faq_section_shortcode() {
     ob_start();
     ?>
-    <section id="faq" class="homepage-faq-section" aria-labelledby="faq-heading" style="background:var(--glass-bg); border-top:1px solid var(--glass-border); padding:5rem 0;">
+    <section id="faq" class="homepage-faq-section" aria-labelledby="faq-heading" style="background:var(--glass-bg); border-top:1px solid var(--glass-border); padding:5rem 0; order:95;">
         <div class="nx-container">
             <div style="text-align:center; margin-bottom:3rem;">
                 <span class="nx-badge nx-badge--gold">FAQ</span>
@@ -334,15 +338,8 @@ function hu_faq_section_shortcode() {
                     <summary>Was unterscheidet Credits von Stundensätzen?</summary>
                     <div class="nx-faq__content">Planungssicherheit. Stunden können ausufern. Credits sind fix: Sie wissen vorher genau, was eine Landingpage oder ein Tracking-Setup kostet. Das Risiko für Mehraufwand liegt bei mir.</div>
                 </details>
-                <details class="nx-faq__item">
-                    <summary>Warum ist der Audit der erste Schritt?</summary>
-                    <div class="nx-faq__content">Weil Guesswork teuer ist. Im Free Journey Audit identifizieren wir, ob Ihre Bremsen in Speed, Code, UX, SEO oder Tracking liegen&nbsp;— bevor Zeit oder Budget investiert wird. 48h, kostenlos, kein Pitch.</div>
-                </details>
-                <details class="nx-faq__item">
-                    <summary>Für wen ist das nichts?</summary>
-                    <div class="nx-faq__content">Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen, die Baukasten-Preise erwarten. Das System ist für B2B-Unternehmen ab ~500.000&nbsp;€ Jahresumsatz, die planbar skalieren wollen.</div>
-                </details>
             </div>
+            <p style="text-align:center; margin-top:1.5rem;"><a href="/wordpress-growth-operating-system/#faq" class="micro-cta-link">Weitere Fragen beantwortet → Das WGOS FAQ</a></p>
         </div>
     </section>
     <?php
@@ -355,7 +352,7 @@ add_shortcode( 'hu_faq', 'hu_faq_section_shortcode' );
 function hu_blog_section_shortcode() {
     ob_start();
     ?>
-    <section id="blog" class="wp-section homepage-blog-section" style="border-top: 1px solid rgba(255,255,255,0.05);">
+    <section id="blog" class="wp-section homepage-blog-section" style="border-top: 1px solid rgba(255,255,255,0.05); order:99;">
         <div class="wp-container">
             <div class="wp-section-title text-center" style="margin-bottom: 4rem;">
                 <span class="wp-badge">Knowledge Base</span>
@@ -426,7 +423,7 @@ add_shortcode( 'hu_blog', 'hu_blog_section_shortcode' );
 function hu_cta_section_shortcode() {
     ob_start();
     ?>
-    <section id="cta" aria-labelledby="cta-heading" style="padding:5rem 0;">
+    <section id="cta" aria-labelledby="cta-heading" style="padding:5rem 0; order:90;">
         <div class="nx-container">
             <div class="nx-cta-box">
                 <span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Nächster Schritt</span>
