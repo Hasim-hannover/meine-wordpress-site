@@ -351,6 +351,11 @@ function hu_output_schema()
                 (stripos($raw, 'hu_faq') !== false) ||
                 (stripos($raw, 'faq-item') !== false);
 
+            // page-wordpress-agentur.php rendert ein eigenes FAQPage JSON-LD direkt im Template.
+            if ($slug === 'wordpress-agentur-hannover') {
+                $maybe_has_faq = false;
+            }
+
             if ($maybe_has_faq) {
 
                 // do_shortcode statt apply_filters('the_content') um Rank Math

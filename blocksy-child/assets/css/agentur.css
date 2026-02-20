@@ -3,79 +3,158 @@
    Base: homepage.css + design-system.css
    ========================================= */
 
-/* =========================================
-   1. Partner-Section Layout
-   ========================================= */
-.wp-partner-layout {
+.wp-agentur-page-wrapper {
+  background: var(--nx-bg-deep);
+}
+
+.wp-agentur-hero .nx-hero__title {
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+.wp-agentur-hero .nx-hero__subtitle {
+  max-width: 74ch;
+}
+
+.wp-agentur-proof {
+  padding-top: 0;
+}
+
+.wp-agentur-proof-grid {
+  gap: 1rem;
+}
+
+.wp-agentur-proof-item {
+  text-align: center;
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 120px;
 }
 
-.wp-partner-col {
-  flex: 1 1 300px;
+.wp-agentur-proof-item:hover {
+  transform: none;
+  border-color: var(--nx-border);
+  box-shadow: none;
 }
 
-.wp-partner-img {
+.wp-agentur-proof-value {
+  font-size: clamp(1.5rem, 3.4vw, 2.25rem);
+  font-weight: 900;
+  color: var(--nx-gold);
+  line-height: 1;
+}
+
+.wp-agentur-proof-label {
+  color: var(--nx-text-muted);
+  font-size: var(--nx-text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.wp-agentur-prose {
+  max-width: var(--nx-reading-width);
+  margin-inline: auto;
+}
+
+.wp-agentur-prose ul {
+  margin: 0 0 1.5rem 1.2rem;
+}
+
+.wp-agentur-prose li {
+  color: var(--nx-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.wp-agentur-prose table {
+  margin-top: 0;
+}
+
+.wp-agentur-table-wrap {
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.wp-agentur-table {
   width: 100%;
-  border-radius: 12px;
-  border: 1px solid var(--border);
+  min-width: 680px;
+  border-collapse: collapse;
+  border: 1px solid var(--nx-border);
+  background: var(--nx-bg-glass);
+  border-radius: var(--nx-radius-md);
+  overflow: hidden;
 }
 
-.wp-partner-region {
-  margin-top: 2rem;
+.wp-agentur-table thead {
+  background: rgba(255, 176, 32, 0.08);
 }
 
-/* =========================================
-   2. Card-Icon & Highlight-Card
-   ========================================= */
-.wp-card-icon {
-  color: var(--gold);
-  margin-bottom: 1rem;
+.wp-agentur-table th,
+.wp-agentur-table td {
+  border-bottom: 1px solid var(--nx-border);
+  padding: 0.9rem 1rem;
+  text-align: left;
+  vertical-align: top;
 }
 
-.wp-card-highlight {
-  border-color: var(--gold);
+.wp-agentur-table tbody tr:last-child td {
+  border-bottom: 0;
 }
 
-/* =========================================
-   3. Button Wrapper
-   ========================================= */
+.wp-agentur-table th {
+  color: var(--nx-text);
+  font-weight: 700;
+}
+
+.wp-agentur-table td {
+  color: var(--nx-text-secondary);
+}
+
+.wp-agentur-table td:first-child {
+  color: var(--nx-text);
+  font-weight: 700;
+}
+
+.wp-agentur-process-grid .nx-step p {
+  color: var(--nx-text-muted);
+  margin-bottom: 0;
+}
+
 .wp-btn-wrapper {
   display: flex;
   justify-content: center;
 }
 
-/* =========================================
-   4. FAQ Wrapper (Agentur-spezifisch)
-   ========================================= */
 .wp-faq {
-  max-width: 800px;
-  margin: 2rem auto;
+  max-width: 900px;
+  margin: 1rem auto 0;
 }
 
-/* =========================================
-   5. CTA Description
-   ========================================= */
 .wp-cta-desc {
   text-align: center;
-  color: var(--text-dim);
+  color: var(--nx-text-dim);
   margin-bottom: 1.5rem;
 }
 
-/* =========================================
-   6. Utilities (zusätzlich zu design-system)
-   ========================================= */
 .mt-0 { margin-top: 0 !important; }
 .mt-1 { margin-top: 1rem; }
 .mt-2 { margin-top: 2rem; }
 .mb-0 { margin-bottom: 0 !important; }
 .mb-1-5 { margin-bottom: 1.5rem; }
 
-/* =========================================
-   7. Mobile Overrides
-   ========================================= */
 @media (max-width: 1024px) {
-  .wp-partner-layout { flex-direction: column; }
+  .wp-agentur-proof-item {
+    min-height: 96px;
+  }
+
+  .wp-agentur-table {
+    min-width: 620px;
+  }
+}
+
+@media (max-width: 767px) {
+  .wp-agentur-table {
+    min-width: 560px;
+  }
 }
