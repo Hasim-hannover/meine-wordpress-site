@@ -623,6 +623,32 @@
 /* =========================================
    9. CREDITS TABLE
    ========================================= */
+.wgos-credit-phases {
+    margin-top: 32px;
+}
+
+.wgos-credit-phase + .wgos-credit-phase {
+    margin-top: 36px;
+    padding-top: 36px;
+    border-top: 1px solid var(--nx-border);
+}
+
+.wgos-credit-phase__title {
+    margin: 0;
+    font-size: 1.18rem;
+    color: var(--nx-text);
+}
+
+.wgos-credit-phase__desc {
+    margin: 8px 0 0;
+    color: var(--nx-text-muted);
+    line-height: 1.65;
+}
+
+.wgos-credit-phase .wgos-table-wrap {
+    margin-top: 16px;
+}
+
 .wgos-table-wrap {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;

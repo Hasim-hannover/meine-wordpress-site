@@ -264,155 +264,194 @@ get_header();
         <div class="wgos-prose" style="max-width:760px;">
             <p>Keine Stundensätze. Keine Nachverhandlungen. Jedes Asset hat einen festen Punktwert&nbsp;— Sie wissen vorher, was es kostet. Das Risiko für Mehraufwand liegt bei mir.</p>
             <p>Ihr monatliches Paket enthält ein festes Credit-Budget. Sie entscheiden zusammen mit mir, in welche Assets investiert wird. Keine versteckten Kosten, volle Transparenz.</p>
+            <p><strong>Asset-Katalog in 3 Abschnitten:</strong> Fundament, Aufbau und Skalierung. So priorisieren wir zuerst die Basis und dann Wachstum.</p>
         </div>
 
-        <!-- Credits Tabelle -->
-        <div class="wgos-table-wrap">
-            <table class="wgos-credits-table">
-                <thead>
-                    <tr>
-                        <th>Asset</th>
-                        <th>Was Sie bekommen</th>
-                        <th>Credits</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Kategorie: Performance & Infrastruktur -->
-                    <tr class="wgos-table-category">
-                        <td colspan="3">Performance &amp; Infrastruktur</td>
-                    </tr>
-                    <tr>
-                        <td>CWV Speed Audit</td>
-                        <td>Analyse + Maßnahmenplan Core Web Vitals</td>
-                        <td>8</td>
-                    </tr>
-                    <tr>
-                        <td>CWV Optimierung</td>
-                        <td>Umsetzung: LCP, CLS, INP, Asset-Pipeline</td>
-                        <td>15</td>
-                    </tr>
-                    <tr>
-                        <td>Server-Tuning</td>
-                        <td>Caching, CDN, PHP-Tuning, DB-Optimierung</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>Security Hardening</td>
-                        <td>WordPress-Härtung, Headers, Backup-Setup</td>
-                        <td>10</td>
-                    </tr>
+        <div class="wgos-credit-phases">
+            <div class="wgos-credit-phase">
+                <div class="wgos-credit-phase__head">
+                    <h3 class="wgos-credit-phase__title">1. Fundament</h3>
+                    <p class="wgos-credit-phase__desc">Stabilität, Speed und Messbarkeit zuerst. Das ist die Basis für jedes weitere Asset.</p>
+                </div>
+                <div class="wgos-table-wrap">
+                    <table class="wgos-credits-table">
+                        <thead>
+                            <tr>
+                                <th>Asset</th>
+                                <th>Was Sie bekommen</th>
+                                <th>Credits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="wgos-table-category">
+                                <td colspan="3">Performance &amp; Infrastruktur</td>
+                            </tr>
+                            <tr>
+                                <td>CWV Speed Audit</td>
+                                <td>Analyse + Maßnahmenplan Core Web Vitals</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>CWV Optimierung</td>
+                                <td>Umsetzung: LCP, CLS, INP, Asset-Pipeline</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>Server-Tuning</td>
+                                <td>Caching, CDN, PHP-Tuning, DB-Optimierung</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Security Hardening</td>
+                                <td>WordPress-Härtung, Headers, Backup-Setup</td>
+                                <td>10</td>
+                            </tr>
+                            <tr class="wgos-table-category">
+                                <td colspan="3">Measurement &amp; Tracking</td>
+                            </tr>
+                            <tr>
+                                <td>sGTM Setup</td>
+                                <td>Server-Side GTM Container + Event-Routing</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>Consent Mode v2</td>
+                                <td>CMP Integration + Consent Signals an Google</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>GA4 Event Blueprint</td>
+                                <td>Custom Events, Conversions, Dashboards</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Tracking Audit</td>
+                                <td>Ist-Analyse Datenqualität + Gap-Report</td>
+                                <td>8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                    <!-- Kategorie: Measurement & Tracking -->
-                    <tr class="wgos-table-category">
-                        <td colspan="3">Measurement &amp; Tracking</td>
-                    </tr>
-                    <tr>
-                        <td>sGTM Setup</td>
-                        <td>Server-Side GTM Container + Event-Routing</td>
-                        <td>15</td>
-                    </tr>
-                    <tr>
-                        <td>Consent Mode v2</td>
-                        <td>CMP Integration + Consent Signals an Google</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>GA4 Event Blueprint</td>
-                        <td>Custom Events, Conversions, Dashboards</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>Tracking Audit</td>
-                        <td>Ist-Analyse Datenqualität + Gap-Report</td>
-                        <td>8</td>
-                    </tr>
+            <div class="wgos-credit-phase">
+                <div class="wgos-credit-phase__head">
+                    <h3 class="wgos-credit-phase__title">2. Aufbau</h3>
+                    <p class="wgos-credit-phase__desc">Sichtbarkeit und Conversion ausbauen, damit aus Traffic verlässlich Leads werden.</p>
+                </div>
+                <div class="wgos-table-wrap">
+                    <table class="wgos-credits-table">
+                        <thead>
+                            <tr>
+                                <th>Asset</th>
+                                <th>Was Sie bekommen</th>
+                                <th>Credits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="wgos-table-category">
+                                <td colspan="3">SEO &amp; Owned Content</td>
+                            </tr>
+                            <tr>
+                                <td>Technical SEO Audit</td>
+                                <td>Crawl, Indexierung, Schema, Site-Architektur</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>Pillar Page</td>
+                                <td>Langform-Seite (2.000+ Wörter, SEO-optimiert)</td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>Cluster-Artikel</td>
+                                <td>Blog/Supportcontent (800–1.200 Wörter)</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Case Study / Proof</td>
+                                <td>Kunden-Ergebnis mit KPIs, Vorher/Nachher</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>Interne Link-Architektur</td>
+                                <td>Mapping + Umsetzung interner Verlinkung</td>
+                                <td>8</td>
+                            </tr>
+                            <tr class="wgos-table-category">
+                                <td colspan="3">Conversion &amp; Offer Engineering</td>
+                            </tr>
+                            <tr>
+                                <td>Landing Page (Neu)</td>
+                                <td>High-Conversion LP: Copy, Design, Build</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>CRO Audit + Fixes</td>
+                                <td>Friction-Analyse, CTA-Optimierung, A/B</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Lead-Formular Engineering</td>
+                                <td>Multi-Step, Validation, Lead-Routing</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>Offer/Pricing Page</td>
+                                <td>Angebotsstruktur, Pakete, Social Proof</td>
+                                <td>15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-                    <!-- Kategorie: SEO & Owned Content -->
-                    <tr class="wgos-table-category">
-                        <td colspan="3">SEO &amp; Owned Content</td>
-                    </tr>
-                    <tr>
-                        <td>Technical SEO Audit</td>
-                        <td>Crawl, Indexierung, Schema, Site-Architektur</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>Pillar Page</td>
-                        <td>Langform-Seite (2.000+ Wörter, SEO-optimiert)</td>
-                        <td>25</td>
-                    </tr>
-                    <tr>
-                        <td>Cluster-Artikel</td>
-                        <td>Blog/Supportcontent (800–1.200 Wörter)</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>Case Study / Proof</td>
-                        <td>Kunden-Ergebnis mit KPIs, Vorher/Nachher</td>
-                        <td>15</td>
-                    </tr>
-                    <tr>
-                        <td>Interne Link-Architektur</td>
-                        <td>Mapping + Umsetzung interner Verlinkung</td>
-                        <td>8</td>
-                    </tr>
-
-                    <!-- Kategorie: Conversion & Offer Engineering -->
-                    <tr class="wgos-table-category">
-                        <td colspan="3">Conversion &amp; Offer Engineering</td>
-                    </tr>
-                    <tr>
-                        <td>Landing Page (Neu)</td>
-                        <td>High-Conversion LP: Copy, Design, Build</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>CRO Audit + Fixes</td>
-                        <td>Friction-Analyse, CTA-Optimierung, A/B</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>Lead-Formular Engineering</td>
-                        <td>Multi-Step, Validation, Lead-Routing</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>Offer/Pricing Page</td>
-                        <td>Angebotsstruktur, Pakete, Social Proof</td>
-                        <td>15</td>
-                    </tr>
-
-                    <!-- Kategorie: Paid Booster & Automation -->
-                    <tr class="wgos-table-category">
-                        <td colspan="3">Paid Booster &amp; Automation <span class="wgos-tag--optional">Optional</span></td>
-                    </tr>
-                    <tr>
-                        <td>Google Ads Setup</td>
-                        <td>Kampagnenstruktur, Keywords, Anzeigen</td>
-                        <td>15</td>
-                    </tr>
-                    <tr>
-                        <td>Meta Ads Setup</td>
-                        <td>Kampagnenarchitektur, Creatives, Audiences</td>
-                        <td>15</td>
-                    </tr>
-                    <tr>
-                        <td>Ads Management (mtl.)</td>
-                        <td>Optimierung, Reporting, Budget-Steuerung</td>
-                        <td>10/Mo</td>
-                    </tr>
-                    <tr>
-                        <td>n8n Automation Flow</td>
-                        <td>Lead-Routing, Notifications, CRM-Sync</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>Reporting Dashboard</td>
-                        <td>Automated KPI-Dashboard (Looker/Sheets)</td>
-                        <td>10</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="wgos-credit-phase">
+                <div class="wgos-credit-phase__head">
+                    <h3 class="wgos-credit-phase__title">3. Skalierung <span class="wgos-tag--optional">Optional</span></h3>
+                    <p class="wgos-credit-phase__desc">Paid und Automation als Verstärker, sobald Fundament und Aufbau stehen.</p>
+                </div>
+                <div class="wgos-table-wrap">
+                    <table class="wgos-credits-table">
+                        <thead>
+                            <tr>
+                                <th>Asset</th>
+                                <th>Was Sie bekommen</th>
+                                <th>Credits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="wgos-table-category">
+                                <td colspan="3">Paid Booster &amp; Automation</td>
+                            </tr>
+                            <tr>
+                                <td>Google Ads Setup</td>
+                                <td>Kampagnenstruktur, Keywords, Anzeigen</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>Meta Ads Setup</td>
+                                <td>Kampagnenarchitektur, Creatives, Audiences</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>Ads Management (mtl.)</td>
+                                <td>Optimierung, Reporting, Budget-Steuerung</td>
+                                <td>10/Mo</td>
+                            </tr>
+                            <tr>
+                                <td>n8n Automation Flow</td>
+                                <td>Lead-Routing, Notifications, CRM-Sync</td>
+                                <td>12</td>
+                            </tr>
+                            <tr>
+                                <td>Reporting Dashboard</td>
+                                <td>Automated KPI-Dashboard (Looker/Sheets)</td>
+                                <td>10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </section>
