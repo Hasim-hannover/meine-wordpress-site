@@ -481,7 +481,148 @@
 }
 
 /* =========================================
-   7. CHECKLIST
+   7. PRINCIPLE SECTION (SECTION 2)
+   ========================================= */
+.wgos-principle-shell {
+    position: relative;
+    padding: clamp(24px, 4vw, 36px);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-xl);
+    background:
+        radial-gradient(120% 100% at 0% 0%, rgba(255, 176, 32, 0.12) 0%, rgba(255, 176, 32, 0.02) 38%, transparent 72%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.wgos-principle-kicker {
+    display: inline-block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: var(--nx-gold);
+    border: 1px solid var(--nx-border-gold);
+    background: var(--nx-gold-subtle);
+    border-radius: var(--nx-radius-pill);
+    padding: 6px 12px;
+    margin-bottom: 14px;
+}
+
+.wgos-principle-shell .wgos-h2 {
+    margin-bottom: 18px;
+}
+
+.wgos-principle-contrast {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.wgos-principle-card {
+    padding: 16px 18px;
+    border-radius: var(--nx-radius-md);
+    border: 1px solid var(--nx-border);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.wgos-principle-card h3 {
+    margin: 0 0 8px;
+    font-size: 0.84rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--nx-text);
+}
+
+.wgos-principle-card p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--nx-text-muted);
+}
+
+.wgos-principle-card--campaign {
+    border-left: 3px solid rgba(255, 255, 255, 0.22);
+}
+
+.wgos-principle-card--asset {
+    border-left: 3px solid var(--nx-gold);
+    background: linear-gradient(180deg, rgba(255, 176, 32, 0.08) 0%, rgba(255, 176, 32, 0.03) 100%);
+}
+
+.wgos-checklist--principle {
+    max-width: none;
+    margin: 22px 0 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 14px;
+}
+
+.wgos-checklist--principle li {
+    margin: 0;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius);
+    background: rgba(255, 255, 255, 0.01);
+    padding: 14px 14px 14px 40px;
+}
+
+.wgos-checklist--principle li::before {
+    left: 14px;
+    top: 14px;
+}
+
+.wgos-checklist--principle li:last-child {
+    grid-column: 1 / -1;
+}
+
+.wgos-principle-bottom {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--nx-border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.wgos-bold-statement--principle {
+    margin: 0;
+    max-width: 740px;
+}
+
+.wgos-inline-cta--principle {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.wgos-inline-cta--principle a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: var(--nx-radius);
+    border: 1px solid var(--nx-border-gold);
+    color: var(--nx-text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    background: linear-gradient(180deg, rgba(255, 176, 32, 0.2) 0%, rgba(255, 176, 32, 0.1) 100%);
+    box-shadow: 0 10px 26px rgba(255, 176, 32, 0.13);
+    white-space: nowrap;
+    transition: transform var(--nx-duration) var(--nx-ease),
+                box-shadow var(--nx-duration) var(--nx-ease),
+                border-color var(--nx-duration) var(--nx-ease);
+}
+
+.wgos-inline-cta--principle a:hover {
+    text-decoration: none;
+    color: var(--nx-text);
+    border-color: var(--nx-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(255, 176, 32, 0.2);
+}
+
+/* =========================================
+   8. CHECKLIST
    ========================================= */
 .wgos-checklist {
     list-style: none;
@@ -537,7 +678,7 @@
 }
 
 /* =========================================
-   8. MODULE SECTIONS
+   9. MODULE SECTIONS
    ========================================= */
 .wgos-module {
     padding: 48px 0;
@@ -1004,6 +1145,27 @@
    16. RESPONSIVE
    ========================================= */
 @media (max-width: 1023px) {
+    .wgos-principle-contrast {
+        grid-template-columns: 1fr;
+    }
+
+    .wgos-checklist--principle {
+        grid-template-columns: 1fr;
+    }
+
+    .wgos-checklist--principle li:last-child {
+        grid-column: auto;
+    }
+
+    .wgos-principle-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wgos-inline-cta--principle a {
+        white-space: normal;
+    }
+
     .wgos-pricing-grid {
         grid-template-columns: 1fr;
         max-width: 440px;
@@ -1018,6 +1180,19 @@
 }
 
 @media (max-width: 768px) {
+    .wgos-principle-shell {
+        padding: 20px 16px;
+    }
+
+    .wgos-principle-card {
+        padding: 14px;
+    }
+
+    .wgos-inline-cta--principle a {
+        width: 100%;
+        justify-content: center;
+    }
+
     .wgos-section {
         padding: 56px 0;
     }

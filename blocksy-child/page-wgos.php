@@ -86,26 +86,36 @@ get_header();
      ======================================== -->
 <section id="prinzip" class="wgos-section wgos-section--gray nx-reveal">
     <div class="wgos-container">
-        <h2 class="wgos-h2">Assets statt Kampagnen&nbsp;— Das Prinzip</h2>
+        <div class="wgos-principle-shell">
+            <span class="wgos-principle-kicker">Paradigmenwechsel</span>
+            <h2 class="wgos-h2">Assets statt Kampagnen&nbsp;— Das Prinzip</h2>
 
-        <div class="wgos-prose">
-            <p>Die meisten Unternehmen mieten Sichtbarkeit. Jeden Monat: Ads-Budget rein, Leads raus. Budget stoppen&nbsp;— Leads stoppen. Das ist kein System, das ist Abhängigkeit.</p>
-            <p>Das WGOS dreht die Logik um: Statt Kampagnen zu verbrennen, investieren wir monatlich in digitale Assets, die Ihnen gehören und über Zeit wertvoller werden:</p>
+            <div class="wgos-principle-contrast" role="list" aria-label="Vergleich von Kampagnen- und Asset-Logik">
+                <article class="wgos-principle-card wgos-principle-card--campaign" role="listitem">
+                    <h3>Kampagnen-Logik</h3>
+                    <p>Die meisten Unternehmen mieten Sichtbarkeit. Jeden Monat: Ads-Budget rein, Leads raus. Budget stoppen&nbsp;— Leads stoppen. Das ist kein System, das ist Abhängigkeit.</p>
+                </article>
+                <article class="wgos-principle-card wgos-principle-card--asset" role="listitem">
+                    <h3>Asset-Logik (WGOS)</h3>
+                    <p>Das WGOS dreht die Logik um: Statt Kampagnen zu verbrennen, investieren wir monatlich in digitale Assets, die Ihnen gehören und über Zeit wertvoller werden:</p>
+                </article>
+            </div>
+
+            <ul class="wgos-checklist wgos-checklist--principle">
+                <li><strong>Seiten, die ranken</strong> (und morgen noch da sind)</li>
+                <li><strong>Geschwindigkeit, die konvertiert</strong> (nicht nur gut aussieht)</li>
+                <li><strong>Daten, die Ihnen gehören</strong> (statt Plattformen)</li>
+                <li><strong>Content, der Vertrauen aufbaut</strong> (statt Tracking-Misstrauen)</li>
+                <li><strong>Prozesse, die skalieren</strong> (ohne linearen Aufwandszuwachs)</li>
+            </ul>
+
+            <div class="wgos-principle-bottom">
+                <p class="wgos-bold-statement wgos-bold-statement--principle">Ads sind nicht verboten&nbsp;— aber sie werden zum optionalen Turbo, wenn das Fundament steht. Nicht zum Dauertropf.</p>
+                <p class="wgos-inline-cta wgos-inline-cta--principle">
+                    <a href="/customer-journey-audit/" data-track="cta_click_audit">Wie stark ist Ihr Fundament? Free Journey Audit starten&nbsp;→</a>
+                </p>
+            </div>
         </div>
-
-        <ul class="wgos-checklist">
-            <li><strong>Seiten, die ranken</strong> (und morgen noch da sind)</li>
-            <li><strong>Geschwindigkeit, die konvertiert</strong> (nicht nur gut aussieht)</li>
-            <li><strong>Daten, die Ihnen gehören</strong> (statt Plattformen)</li>
-            <li><strong>Content, der Vertrauen aufbaut</strong> (statt Tracking-Misstrauen)</li>
-            <li><strong>Prozesse, die skalieren</strong> (ohne linearen Aufwandszuwachs)</li>
-        </ul>
-
-        <p class="wgos-bold-statement">Ads sind nicht verboten&nbsp;— aber sie werden zum optionalen Turbo, wenn das Fundament steht. Nicht zum Dauertropf.</p>
-
-        <p class="wgos-inline-cta">
-            <a href="/customer-journey-audit/" data-track="cta_click_audit">→ Wie stark ist Ihr Fundament? Free Journey Audit starten</a>
-        </p>
     </div>
 </section>
 
