@@ -23,7 +23,7 @@ get_header();
      ======================================== -->
 <nav class="smart-nav" id="about-nav" aria-label="Seitennavigation">
     <ul>
-        <li><a href="#about-hero"><span class="nav-dot"></span><span class="nav-text">Einordnung</span></a></li>
+        <li><a href="#about-hero"><span class="nav-dot"></span><span class="nav-text">Haltung</span></a></li>
         <li><a href="#about-prinzipien"><span class="nav-dot"></span><span class="nav-text">Prinzipien</span></a></li>
         <li><a href="#about-methode"><span class="nav-dot"></span><span class="nav-text">Methode</span></a></li>
         <li><a href="#about-cred"><span class="nav-dot"></span><span class="nav-text">Warum ich</span></a></li>
@@ -41,23 +41,29 @@ get_header();
 
         <div class="story-opener">
 
-            <span class="method-badge">Growth Architect für B2B</span>
+            <span class="method-badge">Über mich</span>
 
             <h1 class="story-headline">
-                Qualifizierte B2B-Leads.
-                <span class="highlight">Planbar. Ohne Ad-Abhängigkeit.</span>
+                Ich baue keine Websites.
+                <span class="highlight">Ich baue Systeme für planbare B2B-Anfragen.</span>
             </h1>
 
             <p class="story-paragraph">
-                Ich baue WordPress-Systeme, die Strategie, Tracking und Conversion-Architektur
-                verbinden&nbsp;— damit B2B-Entscheider Sie finden, vertrauen und anfragen.
+                Die meisten Websites sehen gut aus, arbeiten aber nicht als Vertriebssystem.
+                Genau dort setze ich an: mit einer klaren Struktur aus Positionierung,
+                Messbarkeit und Conversion-Architektur.
+            </p>
+            <p class="story-paragraph no-animate">
+                Der Aha-Moment ist meist derselbe: Nicht mehr Reichweite ist zuerst das Problem,
+                sondern fehlende Systemlogik. Wenn Fundament, Aufbau und Skalierung sauber
+                zusammenspielen, werden Anfragen planbar&nbsp;— ohne Dauerdruck durch Ads.
             </p>
 
             <!-- 3 Bullets -->
             <ul class="about-hero-bullets">
-                <li>98 PageSpeed (Mobile) — garantiert</li>
-                <li>Tracking-Genauigkeit &gt;92&nbsp;% via sGTM</li>
-                <li>Owned Leads, keine Ad-Abhängigkeit</li>
+                <li>System vor Einzeltaktik</li>
+                <li>Klarer Prozess statt Aktionismus</li>
+                <li>Ownership statt Agentur-Abhängigkeit</li>
             </ul>
 
             <!-- CTA Block -->
@@ -75,13 +81,11 @@ get_header();
 
             <!-- Proof Snippet -->
             <div class="about-proof-snippet">
-                <span class="about-proof-label">Beispiel E3 New Energy:</span>
-                <span class="about-proof-kpi">1.750+ Leads</span>
+                <span class="about-proof-label">Nachweis:</span>
+                <span class="about-proof-kpi">Dokumentierte Case Studies statt Behauptungen</span>
                 <span class="about-proof-sep">·</span>
-                <span class="about-proof-kpi">CPL von 150&nbsp;€ → ~25&nbsp;€</span>
-                <span class="about-proof-sep">·</span>
-                <span class="about-proof-kpi">12–15&nbsp;% Sales-Conversion</span>
-                <span class="about-proof-note">20.000&nbsp;€ Budget: Leadgen + Recruiting + CRM</span>
+                <span class="about-proof-kpi">u. a. E3 New Energy</span>
+                <span class="about-proof-note"><a href="/case-studies/" class="about-inline-link">Ergebnisse ansehen →</a></span>
             </div>
 
             <!-- Location -->
@@ -112,41 +116,44 @@ get_header();
 <section id="about-prinzipien" class="values-story">
     <div class="method-header">
         <span class="method-badge">Wofür ich stehe</span>
-        <h2>Drei Prinzipien. Kein Agentur-Nebel.</h2>
+        <h2>Drei Prinzipien, die jede Entscheidung steuern.</h2>
     </div>
 
     <div class="values-narrative">
 
         <div class="value-story-card">
-            <h3 class="value-story-title">Klarheit vor Technik</h3>
+            <h3 class="value-story-title">Klarheit vor Output</h3>
             <p class="value-story-text">
-                Ein gutes System liefert keine Leads, wenn das Angebot unklar positioniert ist.
+                Ich starte nicht mit Tools, Plugins oder Seitenvorlagen&nbsp;— sondern mit
+                Angebotsklarheit und Customer-Journey-Logik.
             </p>
             <p class="value-story-text about-principle-example">
                 So zeigt sich das im Projekt: Jede Zusammenarbeit beginnt mit der
-                Positionierung&nbsp;— erst dann kommt die technische Umsetzung.
+                Positionierung, dann mit Prioritäten, erst danach mit Umsetzung.
             </p>
         </div>
 
         <div class="value-story-card">
-            <h3 class="value-story-title">Daten statt Bauchgefühl</h3>
+            <h3 class="value-story-title">System vor Kanal</h3>
             <p class="value-story-text">
-                Jede Optimierung basiert auf messbaren Signalen, nicht auf Annahmen.
+                SEO, Tracking, CRO und gegebenenfalls Ads dürfen nicht nebeneinander laufen.
+                Sie müssen als ein System arbeiten.
             </p>
             <p class="value-story-text about-principle-example">
-                So zeigt sich das im Projekt: Server-Side GTM und GA4 sind Standard&nbsp;—
-                weil Entscheidungen ohne saubere Daten Raten sind.
+                So zeigt sich das im Projekt: Wir priorisieren immer die Abhängigkeiten zuerst,
+                bevor der nächste Kanal oder die nächste Maßnahme dazukommt.
             </p>
         </div>
 
         <div class="value-story-card">
-            <h3 class="value-story-title">Ownership beim Kunden</h3>
+            <h3 class="value-story-title">Ownership statt Lock-in</h3>
             <p class="value-story-text">
-                Code, Content, Tracking-Setup, alle Zugänge&nbsp;— alles gehört Ihnen. Keine Ausnahmen.
+                Code, Content, Tracking-Setups und Zugänge gehören Ihnen.
+                Nicht der Agentur, nicht einem proprietären Tool.
             </p>
             <p class="value-story-text about-principle-example">
                 So zeigt sich das im Projekt: Kein Lock-in, kein proprietäres System,
-                kein künstlicher Wechseldruck.
+                kein künstlicher Wechseldruck. Sie bleiben jederzeit handlungsfähig.
             </p>
         </div>
 
@@ -158,39 +165,40 @@ get_header();
      ======================================== -->
 <section id="about-methode" class="method-section">
     <div class="method-header">
-        <span class="method-badge">So arbeite ich</span>
-        <h2>Drei Phasen. Ein System.</h2>
+        <span class="method-badge">Mein Ansatz</span>
+        <h2>Fundament. Aufbau. Skalierung.</h2>
         <p class="method-subtitle">
-            Kein Big-Bang-Relaunch. Strukturierter Aufbau in priorisierten Schritten.
+            Kein Big-Bang-Relaunch. Erst Stabilität und Messbarkeit, dann Sichtbarkeit
+            und Conversion, danach optional Skalierung.
         </p>
     </div>
 
     <div class="growth-visual">
 
         <div class="growth-step" data-step="01">
-            <h3 class="step-title">Diagnose</h3>
+            <h3 class="step-title">Fundament</h3>
             <ul class="about-phase-list">
-                <li>Customer Journey Audit: alle Touchpoints prüfen</li>
-                <li>Tracking-Audit: GA4, Consent Mode v2, Attribution</li>
-                <li>Prioritätenliste: konkrete Hebel, sortiert nach Impact</li>
+                <li>Technische Stabilität, Security und Performance als Grundlage</li>
+                <li>Saubere Messbarkeit über alle relevanten Touchpoints</li>
+                <li>Klare Prioritäten statt ungeordneter To-do-Listen</li>
             </ul>
         </div>
 
         <div class="growth-step" data-step="02">
-            <h3 class="step-title">Fix</h3>
+            <h3 class="step-title">Aufbau</h3>
             <ul class="about-phase-list">
-                <li>Performance: 98+ PageSpeed Mobile</li>
-                <li>Conversion-Architektur: CTAs, Flows, Lead-Magnets</li>
-                <li>sGTM: Tracking-Genauigkeit &gt;92&nbsp;%</li>
+                <li>SEO-Architektur: Themencluster, Seitenstruktur, interne Verlinkung</li>
+                <li>Conversion-Architektur: Seiten, CTAs, Formulare, Angebotslogik</li>
+                <li>Content mit klarem Zweck: Sichtbarkeit, Vertrauen, Anfrage</li>
             </ul>
         </div>
 
         <div class="growth-step" data-step="03">
-            <h3 class="step-title">Asset</h3>
+            <h3 class="step-title">Skalierung</h3>
             <ul class="about-phase-list">
-                <li>SEO-Architektur: Pillar Pages, Schema, Cluster</li>
-                <li>Lead-System: Qualifizierungsflows, n8n-Automation</li>
-                <li><a href="/wordpress-growth-operating-system/" class="about-inline-link">WGOS</a>: monatliche Credits, kein Lock-in</li>
+                <li>Paid Ads als Verstärker, nicht als Basis</li>
+                <li>Automation für Übergabe, Nurture und Reporting</li>
+                <li><a href="/wordpress-growth-operating-system/" class="about-inline-link">WGOS</a> als Betriebssystem: klare Credits, volle Ownership</li>
             </ul>
         </div>
 
@@ -203,52 +211,51 @@ get_header();
 <section id="about-cred" class="journey-section">
     <div class="method-header">
         <span class="method-badge">Warum ich das kann</span>
-        <h2>Kein Agentur-Hintergrund. Praxis aus drei Feldern.</h2>
+        <h2>Kein Agentur-Sprech. Praxis aus echter Verantwortung.</h2>
     </div>
 
     <div class="journey-intro">
         <p>
-            Vertriebserfahrung (2010–2018). Medienwissenschaft (Hannover).
-            Eigener E-Commerce-Shop mit echtem Risiko (2019–2023).
-            Seit 2023: B2B-WordPress-Setups.
+            Ich komme aus Vertrieb, Medien und eigenem Unternehmerrisiko.
+            Deshalb arbeite ich nicht in hübschen Einzelmaßnahmen, sondern in
+            Systemen, die geschäftlich tragen müssen.
         </p>
     </div>
 
     <div class="milestone-grid">
 
         <div class="milestone">
+            <span class="milestone-year">Herkunft</span>
+            <div class="milestone-content">
+                <h3 class="milestone-title">Praxis vor Theorie</h3>
+                <p class="milestone-story">
+                    Vertrieb schärft den Blick für Zielgruppen und Einwände.
+                    Eigene unternehmerische Projekte schärfen den Blick für Kosten,
+                    Risiko und Priorisierung. Diese Perspektive prägt jedes Projekt.
+                </p>
+            </div>
+        </div>
+
+        <div class="milestone">
             <span class="milestone-year">System</span>
             <div class="milestone-content">
-                <h3 class="milestone-title">Dokumentierte Methodik</h3>
+                <h3 class="milestone-title">Ein wiederholbarer Ablauf</h3>
                 <p class="milestone-story">
                     Das <a href="/wordpress-growth-operating-system/" class="about-inline-link">WGOS</a>
-                    ist modular, dokumentiert und wiederholbar&nbsp;— 7 Module, strukturiert,
-                    kein One-Man-Show-Flickwerk.
+                    ist kein Bauchgefühl-Framework, sondern ein modularer Ablauf aus
+                    Fundament, Aufbau und Skalierung.
                 </p>
             </div>
         </div>
 
         <div class="milestone">
-            <span class="milestone-year">Ergebnis</span>
+            <span class="milestone-year">Beweis</span>
             <div class="milestone-content">
-                <h3 class="milestone-title">Belegbare Zahlen</h3>
+                <h3 class="milestone-title">Transparente Ergebnisse statt Claims</h3>
                 <p class="milestone-story">
-                    E3 New Energy: CPL von 150&nbsp;€ auf ~25&nbsp;€, 1.750+ Leads und
-                    12–15&nbsp;% Sales-Conversion&nbsp;— aus einem Setup mit 0 organischer Sichtbarkeit.
-                    Das Budget von 20.000&nbsp;€ wurde auf Leadgen und Recruiting verteilt;
-                    parallel wurde das CRM für bessere Datenqualität aufgebaut.
-                    Details in den <a href="/case-studies/" class="about-inline-link">Case Studies</a>.
-                </p>
-            </div>
-        </div>
-
-        <div class="milestone">
-            <span class="milestone-year">Messbarkeit</span>
-            <div class="milestone-content">
-                <h3 class="milestone-title">Verifizierbare Ergebnisse</h3>
-                <p class="milestone-story">
-                    Kein Projekt ohne sauberes Tracking-Setup. Ergebnisse sind nicht gefühlt&nbsp;—
-                    Zugang zu GA4, sGTM-Container und n8n auf Anfrage nachvollziehbar.
+                    Ergebnisse werden dokumentiert, mit Ausgangslage, Maßnahmen und Wirkung.
+                    Kein Blackbox-Marketing. Keine vagen Versprechen.
+                    Details finden Sie in den <a href="/case-studies/" class="about-inline-link">Case Studies</a>.
                 </p>
             </div>
         </div>
@@ -271,18 +278,18 @@ get_header();
         <div class="about-filter-col about-filter-col--yes">
             <h3 class="about-filter-label">Passt</h3>
             <ul class="about-filter-list">
-                <li>B2B-Unternehmen ab ~500.000&nbsp;€ Jahresumsatz</li>
-                <li>WordPress ist Ihr CMS&nbsp;— oder Sie sind offen dafür</li>
-                <li>Sie wollen planbare Anfragen statt Empfehlungs-Roulette</li>
+                <li>B2B-Unternehmen mit klarem Leistungsversprechen</li>
+                <li>Teams, die strukturiert statt reaktiv wachsen wollen</li>
+                <li>Unternehmen, die Abhängigkeiten reduzieren möchten</li>
             </ul>
         </div>
 
         <div class="about-filter-col about-filter-col--no">
             <h3 class="about-filter-label">Passt nicht</h3>
             <ul class="about-filter-list">
-                <li>Sie suchen günstige Umsetzung ohne Strategie</li>
-                <li>Sie erwarten messbare Ergebnisse in 4 Wochen</li>
-                <li>Ihr Angebot ist noch nicht klar positioniert</li>
+                <li>Sie suchen nur schnelle Einzelmaßnahmen ohne System</li>
+                <li>Sie möchten Entscheidungen weiterhin aus dem Bauch treffen</li>
+                <li>Sie erwarten Wachstum ohne klare Positionierung</li>
             </ul>
         </div>
 
@@ -303,8 +310,9 @@ get_header();
         <details class="wp-faq-item">
             <summary>Was kostet die Zusammenarbeit?</summary>
             <div class="wp-faq-content">
-                Das WGOS startet ab einem monatlichen Credit-Kontingent&nbsp;— kein Stundensatz,
-                kein Projektvertrag. Der Einstieg ist kostenlos über den
+                Das <a href="/wordpress-growth-operating-system/" class="about-inline-link">WGOS</a>
+                läuft über ein monatliches Credit-Budget&nbsp;— kein Stundensatz, kein
+                unplanbarer Projektvertrag. Der Einstieg ist kostenlos über den
                 <a href="/customer-journey-audit/">Free Journey Audit</a>.
             </div>
         </details>
@@ -312,18 +320,18 @@ get_header();
         <details class="wp-faq-item">
             <summary>Wie läuft die Zusammenarbeit ab?</summary>
             <div class="wp-faq-content">
-                Zuerst der Free Journey Audit (48h, kostenlos, kein Pitch).
-                Dann eine konkrete Prioritätenliste. Danach entscheiden Sie,
-                ob und wie wir weiterarbeiten.
+                Wir starten mit dem Free Journey Audit. Danach erhalten Sie eine priorisierte
+                Roadmap mit klaren Empfehlungen. Auf dieser Basis entscheiden Sie,
+                ob wir gemeinsam ins System einsteigen.
             </div>
         </details>
 
         <details class="wp-faq-item">
             <summary>Wie lange bis zu ersten Ergebnissen?</summary>
             <div class="wp-faq-content">
-                Tracking und Performance sind in 4–6 Wochen sauber aufgesetzt.
-                Erste organische Leads kamen bei E3 New Energy nach Woche&nbsp;14.
-                Die genaue Zeitlinie hängt von Ausgangslage und Branche ab.
+                Technische Verbesserungen und saubere Messbarkeit wirken meist zuerst.
+                Sichtbarkeit und organische Anfragen folgen zeitversetzt.
+                Die genaue Geschwindigkeit hängt von Ausgangslage, Wettbewerb und Umsetzungstempo ab.
             </div>
         </details>
 
@@ -361,22 +369,22 @@ get_header();
         <p class="cta-story">
             Im <a href="/customer-journey-audit/" class="about-inline-link">Free Journey Audit</a>
             analysieren wir Ihre WordPress-Präsenz auf die größten
-            Wachstumspotenziale&nbsp;— kostenlos, in 48h, ohne Pitch.
+            Systemhebel&nbsp;— klar, priorisiert und ohne Pitch.
         </p>
         <p class="cta-story">
-            Sie bekommen eine konkrete Prioritätenliste:
-            was zuerst anpacken, was ignorieren.
+            Sie bekommen ein klares Bild: Was bremst Sie aktuell, was bringt am meisten
+            Wirkung und in welcher Reihenfolge sollten Sie vorgehen.
         </p>
 
         <!-- Proof -->
         <div class="about-cta-proof">
-            <span class="about-proof-kpi">1.750+ Leads</span>
+            <span class="about-proof-kpi">Klarer Fokus</span>
             <span class="about-proof-sep">·</span>
-            <span class="about-proof-kpi">CPL &minus;83&nbsp;%</span>
+            <span class="about-proof-kpi">Priorisierte Roadmap</span>
             <span class="about-proof-sep">·</span>
-            <span class="about-proof-kpi">12–15&nbsp;% Sales-Conversion</span>
+            <span class="about-proof-kpi">Messbare Umsetzung</span>
             <span class="about-proof-sep">·</span>
-            <span class="about-proof-kpi">E3 New Energy</span>
+            <span class="about-proof-kpi">Volle Ownership</span>
         </div>
 
         <div class="btn-group">
