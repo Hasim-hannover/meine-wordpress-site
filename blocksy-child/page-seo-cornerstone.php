@@ -118,11 +118,7 @@ get_header();
 					<li><strong>Dach:</strong> Performance Marketing und Kampagnenskalierung</li>
 				</ul>
 				<p>Fehlt das Fundament, wird das Dach teuer. Fehlen Wände, wird Nachfrage nicht in qualifizierte Anfragen überführt. Erst wenn alle Ebenen zusammenarbeiten, entsteht planbares Wachstum.</p>
-				<div class="seo-cornerstone__visual-note">
-					<strong>Visual-Idee für den Beitrag:</strong> Hausquerschnitt mit drei Ebenen.
-					Unterbau = "Technisches SEO & Tracking", Mittelteil = "CRO & Seitenstruktur", Oberbau = "Performance Ads".
-				</div>
-				<p>Dieses Modell hilft auch intern in der Priorisierung: Technik und UX sind keine "Vorarbeit", sondern direkte Voraussetzungen für profitable Kampagnen.</p>
+					<p>Dieses Modell hilft auch intern in der Priorisierung: Technik und UX sind keine "Vorarbeit", sondern direkte Voraussetzungen für profitable Kampagnen.</p>
 
 				<div class="seo-cornerstone__inline-cta">
 					<p>Wie tragfähig ist Ihr Fundament heute?</p>
