@@ -54,7 +54,7 @@ get_header();
                 Messbarkeit und Conversion-Architektur.
             </p>
             <p class="story-paragraph no-animate">
-                Der Aha-Moment ist meist derselbe: Nicht mehr Reichweite ist zuerst das Problem,
+            Nicht mehr Reichweite ist zuerst das Problem,
                 sondern fehlende Systemlogik. Wenn Fundament, Aufbau und Skalierung sauber
                 zusammenspielen, werden Anfragen planbar&nbsp;— ohne Dauerdruck durch Ads.
             </p>
