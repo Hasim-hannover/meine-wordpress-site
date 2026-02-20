@@ -358,6 +358,12 @@
 
 @media (max-width: 1023px) {
     .toc-sidebar {
-        display: none; /* Auf dem Handy das Inhaltsverzeichnis ausblenden für bessere Lesbarkeit */
+        display: block;
+    }
+
+    .toc-card-nexus {
+        position: static;
+        top: auto;
+        height: auto;
     }
 }
