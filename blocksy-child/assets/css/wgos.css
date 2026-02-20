@@ -401,6 +401,24 @@
     color: #000;
 }
 
+/* Enforce readable CTA contrast on yellow buttons in all states */
+.wgos-wrapper .wgos-btn.wgos-btn--primary,
+.wgos-wrapper a.wgos-btn.wgos-btn--primary,
+.wgos-wrapper .wgos-btn.wgos-btn--primary:visited,
+.wgos-wrapper a.wgos-btn.wgos-btn--primary:visited,
+.wgos-wrapper .wgos-btn.wgos-btn--primary:hover,
+.wgos-wrapper a.wgos-btn.wgos-btn--primary:hover,
+.wgos-wrapper .wgos-btn.wgos-btn--primary:focus,
+.wgos-wrapper a.wgos-btn.wgos-btn--primary:focus,
+.wgos-wrapper .wgos-btn.wgos-btn--primary:focus-visible,
+.wgos-wrapper a.wgos-btn.wgos-btn--primary:focus-visible,
+.wgos-wrapper .wgos-btn.wgos-btn--primary:active,
+.wgos-wrapper a.wgos-btn.wgos-btn--primary:active {
+    color: #111111 !important;
+    -webkit-text-fill-color: #111111 !important;
+    text-shadow: none !important;
+}
+
 .wgos-wrapper .wgos-btn--outline,
 .wgos-wrapper a.wgos-btn--outline {
     background: transparent;
