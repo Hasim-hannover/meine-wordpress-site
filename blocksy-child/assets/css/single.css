@@ -273,13 +273,13 @@
     }
     .nexus-sidebar {
         display: block !important;
-        position: sticky;
-        top: 78px;
-        z-index: 20;
+        position: static;
+        top: auto;
+        z-index: auto;
         margin-bottom: 0.75rem;
     }
     .sticky-toc {
-        top: 78px;
+        top: auto;
         margin-bottom: 0;
         padding: 12px 14px;
         border-radius: 10px;
@@ -288,5 +288,16 @@
         color: #ffb020;
         background: transparent;
         border-color: transparent;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .nexus-sidebar {
+        position: static;
+        top: auto;
+    }
+
+    .sticky-toc {
+        top: auto;
     }
 }
