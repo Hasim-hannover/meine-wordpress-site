@@ -73,7 +73,7 @@ get_header();
             </div>
         </div>
 
-        <p class="wgos-hero__risk-note">Ergebnisse hängen von Ausgangslage ab&nbsp;— im Audit siehst du die größten Hebel.</p>
+        <p class="wgos-hero__risk-note">Ergebnisse hängen von der Ausgangslage ab&nbsp;— im Audit sehen Sie die größten Hebel.</p>
 
         <div class="wgos-hero__links">
             <a href="/roi-rechner/" class="wgos-link--arrow">ROI in 60 Sekunden →</a>
@@ -206,7 +206,7 @@ get_header();
                 <div class="wgos-module__num">05</div>
                 <div class="wgos-module__content">
                     <h3>Owned Content Engine</h3>
-                    <p class="wgos-module__subline"><em>Content, der rankt, nurturt und konvertiert&nbsp;— ohne Ablaufdatum.</em></p>
+                    <p class="wgos-module__subline"><em>Content, der rankt, Vertrauen aufbaut und konvertiert&nbsp;— ohne Ablaufdatum.</em></p>
                     <p>Pillar Pages, Content-Cluster, Proof-Assets (Case Studies), Lead-Magneten, Nurture-Sequenzen. Jedes Stück Content ist ein Asset mit klarem Zweck: Sichtbarkeit, Vertrauen oder Conversion.</p>
                     <div class="wgos-module__proof">Organischer Traffic +180% in 6 Monaten (B2B SaaS Kunde)</div>
                 </div>
@@ -434,9 +434,9 @@ get_header();
                                 <td>15</td>
                             </tr>
                             <tr>
-                                <td>Ads Management (mtl.)</td>
+                                <td>Ads Management (monatlich)</td>
                                 <td>Optimierung, Reporting, Budget-Steuerung</td>
-                                <td>10/Mo</td>
+                                <td>10/Monat</td>
                             </tr>
                             <tr>
                                 <td>n8n Automation Flow</td>
@@ -476,7 +476,7 @@ get_header();
                 <ul class="wgos-pricing-card__features">
                     <li>Laufzeit: 3 Monate</li>
                     <li>1× Strategiecall / Monat</li>
-                    <li>Module 1–3 (Performance, Security, Tracking)</li>
+                    <li>Fundament (Module 1–3: Performance, Security, Tracking)</li>
                     <li>Reporting: Monatlich</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für bestehende Sites, die technisch sauber laufen müssen. Wartung + punktuelle Optimierung.</p>
@@ -495,7 +495,7 @@ get_header();
                 <ul class="wgos-pricing-card__features">
                     <li>Laufzeit: 6 Monate</li>
                     <li>2× Strategiecalls / Monat</li>
-                    <li>Module 1–6 (Owned Full Stack)</li>
+                    <li>Fundament + Aufbau (Module 1–6)</li>
                     <li>Reporting: Bi-Weekly</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für B2B-Unternehmen, die ein Owned-Leads-System aufbauen wollen. SEO + CRO + Content.</p>
@@ -513,7 +513,7 @@ get_header();
                 <ul class="wgos-pricing-card__features">
                     <li>Laufzeit: 12 Monate</li>
                     <li>Wöchentliche Strategiecalls</li>
-                    <li>Module 1–7 (inkl. Paid Booster)</li>
+                    <li>Fundament + Aufbau + Skalierung (Module 1–7)</li>
                     <li>Reporting: Weekly + Dashboard</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für Marktführer-Anspruch. Full Stack + Paid Booster + Automation. Maximaler Output.</p>
@@ -527,18 +527,18 @@ get_header();
             <div class="wgos-table-wrap">
                 <table class="wgos-credits-table wgos-credits-table--compact">
                     <thead>
-                        <tr><th>Asset</th><th>Credits</th><th>Modul</th></tr>
+                        <tr><th>Asset</th><th>Credits</th><th>Bereich</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>1× Pillar Page (SEO-optimiert, 2.500 Wörter)</td><td>25</td><td>05</td></tr>
-                        <tr><td>1× Landing Page Redesign (CRO)</td><td>20</td><td>06</td></tr>
-                        <tr><td>Internal Link Architecture Update</td><td>8</td><td>04</td></tr>
-                        <tr><td>GA4 Custom Event Setup (2 neue Conversions)</td><td>7</td><td>03</td></tr>
+                        <tr><td>1× Pillar Page (SEO-optimiert, 2.000+ Wörter)</td><td>25</td><td>Aufbau</td></tr>
+                        <tr><td>1× Landing Page (Neu)</td><td>20</td><td>Aufbau</td></tr>
+                        <tr><td>1× GA4 Event Blueprint</td><td>12</td><td>Fundament</td></tr>
+                        <tr><td>1× Tracking Audit</td><td>8</td><td>Fundament</td></tr>
                         <tr class="wgos-table-total"><td><strong>Gesamt</strong></td><td><strong>60</strong></td><td>—</td></tr>
                     </tbody>
                 </table>
             </div>
-            <p class="wgos-example-month__result">Ergebnis dieses Monats: 1 neues Ranking-Asset, 1 konvertierende Seite, bessere Datenbasis, stärkere Linkarchitektur. Alles bleibt. Alles arbeitet weiter.</p>
+            <p class="wgos-example-month__result">Ergebnis dieses Monats: 1 neues Ranking-Asset, 1 konvertierende Seite, saubere Datenbasis und klare Conversion-Messung. Alles bleibt. Alles arbeitet weiter.</p>
         </div>
     </div>
 </section>
