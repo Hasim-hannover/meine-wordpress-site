@@ -4,13 +4,17 @@ Dieser Bereich ist fuer versionierte n8n-Workflows und ihre menschlich lesbare D
 
 Aktueller Stand:
 
-- Im Repo liegen noch keine exportierten Workflows.
-- Sichtbar ist bisher nur die Frontend-Anbindung aus dem Audit-Funnel.
+- Der `Customer Journey Audit` liegt als bereinigter V2-Workflow im Repo.
+- Der Workflow ist dokumentiert und mit Flow-Map sowie Frontend-Contract ergaenzt.
 
 Bekannte Touchpoints:
 
 - `blocksy-child/assets/js/audit-live.js`
 - Webhooks `audit` und `audit-status`
+- `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`
+- `automations/n8n/docs/audit-funnel__customer-journey-audit__refactor.md`
+- `automations/n8n/flow-maps/audit-funnel__customer-journey-audit__refactor.md`
+- `automations/n8n/data-models/audit-frontend-payload.contract.json`
 
 ## Zielstruktur
 

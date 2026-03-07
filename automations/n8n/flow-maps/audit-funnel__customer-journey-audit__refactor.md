@@ -9,11 +9,14 @@
 
 1. Intake
    - Webhook nimmt Request an
-   - Validator prueft URL, E-Mail, SSRF und Rate Limit
-   - `jobId` wird erzeugt
+   - Validator erkennt `start` oder `email_capture`
+   - Start prueft URL, SSRF und Rate Limit
+   - `email_capture` prueft `jobId` und E-Mail
+   - nur im Start-Mode wird eine neue `jobId` erzeugt
 
 2. Sofortantwort
-   - Frontend bekommt frueh `processing` plus `jobId`
+   - nur im Start-Mode bekommt das Frontend frueh `processing` plus `jobId`
+   - parallel wird sofort ein `processing`-Status gespeichert
 
 3. Analyse-Beschaffung
    - Jina Reader fuer sauberen Seitentext
@@ -31,10 +34,14 @@
 5. Delivery
    - Frontend-Payload bauen
    - Ergebnis in static data speichern
-   - E-Mail-HTML generieren
-   - Report per SMTP versenden
+   - optionaler Auto-Mail-Versand nur wenn Start-Request bereits eine E-Mail mitgibt
 
-6. Statusabfrage
+6. Report-Versand nach Ergebnis
+   - `email_capture` liest das gespeicherte Audit per `jobId`
+   - wenn `done`: E-Mail-HTML generieren und Report per SMTP senden
+   - wenn `processing`: sauberen Status zurueckgeben statt Audit neu zu starten
+
+7. Statusabfrage
    - zweiter Webhook liest `jobId`
    - gibt `processing`, `done` oder `error` zurueck
 
@@ -42,15 +49,13 @@
 
 - Request ungueltig
 - PageSpeed liefert Fehler
-- Sitemap Index leer, Fallback nicht sauber genutzt
+- Analyse bricht nach `Respond OK` hart ab und Job bleibt auf `processing`
 - OpenAI liefert unbrauchbares JSON
 - Google CSE antwortet leer oder fehlerhaft
 - SMTP faellt aus
-- Analyse scheitert nach `Respond OK`, aber vor `Store Results`
 
 ## Aktuelle Sollbruchstellen
 
-- Frontend sendet initial keine E-Mail, Workflow erwartet eine
-- E-Mail-Capture brancht nicht separat
-- Polling kennt keinen sauberen Zwischen- oder Fehlerstatus aus der Analyse
+- Frontend nutzt fuer `email_capture` noch denselben Start-Webhook statt eines eigenen Report-Endpunkts
+- Polling kennt jetzt `processing`, aber spaete harte Fehler koennen weiterhin unsauber enden
 - Ergebnis-Storage basiert auf workflow static data statt auf einer stabilen Job-Queue oder Datenbank

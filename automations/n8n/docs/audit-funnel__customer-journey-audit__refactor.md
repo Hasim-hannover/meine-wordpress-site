@@ -1,113 +1,156 @@
-# Audit Funnel - Customer Journey Audit
+# Audit Funnel - Customer Journey Audit V2
 
 ## Workflow-Name
 
-Empfohlene Benennung:
+Empfohlene Benennung in n8n:
 
-- `Audit Funnel - Customer Journey Audit Runner`
+- `Audit Funnel - Customer Journey Audit Runner V2`
 
 Repo-Datei:
 
 - `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`
 
-## Rolle im Gesamtsystem
+## Zweck
 
-Dieser Workflow ist der technische Kern des primaeren Lead-Einstiegs.
+Dieser Workflow ist der technische Kern des `Customer Journey Audit`.
 
-Seine Rolle:
+Er nimmt eine Website-URL entgegen, analysiert Sichtbarkeit, Technik, Trust- und Lead-Signale, speichert das Ergebnis fuer das Frontend und verschickt den Report optional per E-Mail.
 
-- URL entgegennehmen
-- erste Missbrauchs- und SSRF-Pruefung durchfuehren
-- Website technisch und inhaltlich anreichern
-- kommerzielle Keywords und SERP-Sichtbarkeit ableiten
-- eine Journey-Auswertung fuer das Frontend bauen
-- das Ergebnis fuer Polling speichern
-- optional einen Report per E-Mail versenden
+## Was V2 konkret loest
 
-Damit verbindet er drei Systemschichten:
-
-- Trigger und Intake
-- Analyse- und Bewertungslogik
-- Delivery fuer Frontend und E-Mail
+- Der Erststart funktioniert jetzt mit `URL-only`, also passend zu `audit-live.js`.
+- `email_capture` startet keinen zweiten Audit mehr.
+- `processing` wird direkt gespeichert und sauber ueber `audit-status` ausgelesen.
+- `Sitemap Final` wird jetzt auch wirklich in der Analyse verwendet.
+- Cleanup fuer `job_*` und `rl:*` ist korrigiert.
 
 ## Trigger
 
 - `POST /webhook/audit`
 - `GET /webhook/audit-status?jobId=...`
 
-## Hauptschritte
+`POST /webhook/audit` hat in V2 zwei Modi:
 
-1. `Webhook`
-   - nimmt den Audit-Request an
-2. `URL Validator`
-   - validiert URL und E-Mail
-   - normalisiert die URL
-   - vergibt `jobId`
-   - fuehrt SSRF- und einfache Abuse-Pruefung durch
-3. `Respond OK`
-   - liefert frueh eine Polling-Antwort an das Frontend
-4. Datenbeschaffung
-   - `Jina Reader`
-   - `Raw HTML Fetch`
-   - `PageSpeed API`
-   - `PageSpeed API Retry`
-   - `Sitemap Fetch`
-   - `Sitemap Fetch Fallback`
-5. Website-Analyse
-   - `Analyze Site`
-   - `Keyword Generator`
-   - `Extract Keywords`
-   - `SERP Check`
-   - `Build Journey`
-   - `Write Story`
-6. Delivery
-   - `Build Frontend Data`
-   - `Store Results`
-   - `Build Email HTML`
-   - `Send email`
-7. Statusabfrage
-   - `Webhook Status`
-   - `Lookup Results`
-   - `Respond Status`
+- `start`
+  - Standardfall
+  - erwartet mindestens `url`
+- `email_capture`
+  - spaeterer Report-Versand
+  - erwartet `jobId`, `email`
 
-## Business-Logik
+## Import-Hinweise
 
-- Der Workflow verkauft nicht direkt, sondern produziert Diagnose.
-- Die Website wird entlang von vier Journey-Schritten bewertet:
-  - Sichtbarkeit
-  - Seitenerlebnis
-  - Vertrauen
-  - naechster Schritt / Lead Capture
-- Aus Keyword- und Sichtbarkeitsluecken wird ein Revenue Gap geschaetzt.
-- GPT schreibt eine kurze strategische Einordnung mit Handlungsdruck.
-- Das Frontend fuehrt danach in den `360° Deep-Dive`.
+Vor dem Aktivieren in n8n setzen:
 
-## Datenlogik
+- OpenAI-Credential mit Name `OPENAI_AUDIT`
+- SMTP-Credential mit Name `SMTP_BREVO_AUDIT`
+- Variable oder Env `GOOGLE_PAGESPEED_API_KEY`
+- Variable oder Env `GOOGLE_CSE_KEY`
+- optional `GOOGLE_CSE_CX`
 
-### Inputs
+Wichtig:
 
-- URL
-- E-Mail
-- technische Metadaten aus Webhook und Headern
+- Der Workflow ist als bereinigter Repo-Export gespeichert.
+- Credential-Namen sind Platzhalter fuer n8n.
+- Keine Roh-Exports mit echten Keys oder Pin-Daten committen.
 
-### Enrichment
+## Flow-Logik
 
-- Jina Reader Text
-- Raw HTML
-- Google PageSpeed
-- Sitemap
-- Google Custom Search
-- OpenAI fuer Keywords
-- OpenAI fuer Story
+### 1. Intake
 
-### Persistenz
+- `Webhook`
+- `URL Validator`
+- `IF Valid Request`
+- `IF Email Capture?`
 
-- Ergebnisse werden in `workflow static data` unter `job_<id>` abgelegt
-- TTL aktuell: 2 Stunden
+Der Validator erkennt jetzt selbst, ob es sich um einen normalen Audit-Start oder um einen spaeteren E-Mail-Request handelt.
 
-### Frontend-Output
+### 2. Start-Branch
 
-Der Workflow baut einen Frontend-Payload mit:
+- `Respond OK`
+- `Store Processing`
+- `Jina Reader`
+- `Raw HTML Fetch`
+- `PageSpeed API`
+- `Check PageSpeed`
+- `IF PageSpeed Retry?`
+- `Wait 12s`
+- `PageSpeed API Retry`
+- `PageSpeed Final`
+- `Sitemap Fetch`
+- `Sitemap Fetch Fallback`
+- `Sitemap Final`
+- `Analyze Site`
+- `Keyword Generator`
+- `Extract Keywords`
+- `SERP Check`
+- `Build Journey`
+- `Write Story`
+- `Build Frontend Data`
+- `Store Results`
+
+Danach optional:
+
+- `IF Auto Email Requested`
+- `Prepare Auto Email Request`
+- `Build Email HTML`
+- `Send email`
+
+## 3. E-Mail-Capture-Branch
+
+- `Load Stored Audit For Email`
+- `IF Stored Audit Ready?`
+- `Build Email HTML`
+- `Send email`
+- `IF Email Response Needed?`
+- `Respond Email Capture OK`
+
+Wenn das Audit noch nicht fertig ist, antwortet der Workflow mit `processing` statt still einen zweiten Lauf zu starten.
+
+## 4. Status-Branch
+
+- `Webhook Status`
+- `Lookup Results`
+- `Respond Status`
+
+## Inputs
+
+### Start
+
+- `url`
+- optional `email`
+
+### Email-Capture
+
+- `jobId`
+- `email`
+- optional `url`
+- `step: 'email_capture'`
+
+## Persistenz
+
+Speicherort:
+
+- `workflow static data`
+
+Job-Struktur:
+
+- `status`
+- `message`
+- `request`
+- `data`
+- `storedAt`
+- `updatedAt`
+- `finishedAt`
+- `expiresAt`
+
+TTL:
+
+- 2 Stunden
+
+## Outputs
+
+### Frontend
 
 - `meta`
 - `scores`
@@ -122,17 +165,10 @@ Siehe auch:
 
 - `automations/n8n/data-models/audit-frontend-payload.contract.json`
 
-## Delivery-Logik
+### E-Mail
 
-Es gibt aktuell zwei Delivery-Wege:
-
-- Polling fuer das Audit-Frontend
-- E-Mail-Versand eines HTML-Reports mit HTML-Anhang
-
-Wichtig:
-
-- Die E-Mail-Strecke ist kein eigener Workflow, sondern haengt direkt hinter der Analyse.
-- Analyse und Report-Versand sind dadurch zu eng gekoppelt.
+- HTML-Body
+- HTML-Anhang als speicherbare Report-Datei
 
 ## Abhaengigkeiten
 
@@ -144,122 +180,29 @@ Wichtig:
 - SMTP / Brevo
 - WordPress-Frontend in `blocksy-child/assets/js/audit-live.js`
 
-## Kritische Risiken
+## Rest-Risiken
 
-### 1. Frontend-Contract ist aktuell gebrochen
+### 1. Fehlerpfade nach `Respond OK` sind noch nicht voll robust
 
-Das Frontend sendet beim Erstaufruf nur die URL:
+Wenn spaete Nodes hart abbrechen, bleibt ein Job im Zweifel auf `processing`.
 
-- `blocksy-child/assets/js/audit-live.js`
+### 2. `workflow static data` ist fuer Produktivbetrieb nur bedingt stabil
 
-Der Workflow verlangt aber bereits im `URL Validator` zwingend eine E-Mail.
+Fuer MVP okay. Fuer saubere Nachvollziehbarkeit, Queueing und Ausfallsicherheit spaeter besser in externe Persistenz verschieben.
 
-Folge:
+### 3. Revenue-Gap bleibt heuristisch
 
-- Der aktuelle Frontend-Submit ist mit diesem Workflow nicht kompatibel.
+Die Zahl ist weiter eine konservative Storytelling-Schaetzung, keine belastbare Forecast-Logik.
 
-### 2. E-Mail-Capture startet denselben Audit erneut
+### 4. Report ist HTML, kein echtes PDF
 
-Das Frontend sendet beim optionalen Report-Capture:
+Der Anhang ist absichtlich importfreundlich und leichtgewichtig, aber technisch kein PDF.
 
-- `email`
-- `jobId`
-- `url`
-- `step: 'email_capture'`
+## Priorisierte Naechstschritte
 
-Der Workflow brancht darauf nicht. Er erzeugt stattdessen eine neue `jobId` und startet den kompletten Audit erneut.
-
-Folgen:
-
-- unnötige API-Kosten
-- unnoetige Laufzeit
-- irrefuehrende UX, weil das Frontend sofort Erfolg meldet
-- keine saubere Trennung zwischen Analyse und Report-Versand
-
-### 3. Kein sauberer Fehlerzustand fuer Polling
-
-Der Workflow speichert nur `done`, aber keinen expliziten `error`-Status fuer Analysefehler.
-
-Folge:
-
-- bei Fehlern bleibt das Frontend bis zum Timeout in `processing`
-- Fehler werden fuer Nutzer und Betrieb unsauber sichtbar
-
-### 4. Sitemap-Fallback wird fachlich gebaut, aber analytisch nicht konsistent genutzt
-
-`Sitemap Final` waehlte die bessere Sitemap-Quelle. `Analyze Site` liest aber weiter direkt `Sitemap Fetch`.
-
-Folge:
-
-- erfolgreicher Fallback kann fuer die eigentliche Analyse unberuecksichtigt bleiben
-
-### 5. Secrets und Betriebswerte waren im Roh-Export nicht sauber getrennt
-
-Im gelieferten Live-Export steckten mindestens:
-
-- harter Google PageSpeed API Key
-- konkrete n8n-Credential-IDs
-- Pin-Daten
-
-Die Repo-Version wurde deshalb bereinigt.
-
-### 6. Report-Output ist HTML, nicht PDF
-
-Der Workflow spricht intern mehrfach von PDF, erzeugt aber einen HTML-Anhang.
-
-Folge:
-
-- Erwartungsbruch, wenn intern oder extern von einem PDF-Report ausgegangen wird
-
-### 7. CTA-Ziele sind inkonsistent
-
-- Frontend-CTA zeigt auf `#deep-dive-section` innerhalb der Audit-Seite
-- E-Mail-CTA zeigt auf `/360-deep-dive/#deep-dive-section`
-- der PDF-HTML-Block verweist textlich auf `/customer-journey-audit/#deep-dive-section`
-
-Folge:
-
-- uneinheitliche Funnel-Fuehrung
-- vermeidbare Reibung im Deep-Dive-Uebergang
-
-### 8. Cleanup fuer Rate-Limit-Keys ist logisch fehlerhaft
-
-`Store Results` bereinigt nur Keys mit Prefix `job_`. Die Bereinigung fuer `rl:`-Keys liegt in einem Branch, der so nie erreicht wird.
-
-Folge:
-
-- Rate-Limit-Schluessel wachsen unkontrolliert an
-
-## CRO- und Analyse-Risiken
-
-- Revenue-Gap basiert auf fixer Conversion Rate von 2 Prozent und KI-geschaetztem Kundenwert.
-- SERP-Verlustlogik ist grob und nicht kanal- oder intent-spezifisch.
-- Trust- und Lead-Capture-Signale arbeiten stark heuristisch auf HTML- und Textmustern.
-- Der Workflow ist gut fuer Diagnose-Storytelling, aber nicht belastbar genug fuer harte Business-Entscheidungen ohne Kontext.
-
-## Einstufung
-
-- Operativer Zustand: offenbar im Einsatz
-- Architekturzustand: `refactor-beduerftig`
-
-Begruendung:
-
-- Der Workflow enthaelt sinnvolle Schutz- und Analysebausteine.
-- Gleichzeitig gibt es mehrere harte Integrationsbrueche zwischen Frontend, Polling und E-Mail-Strecke.
-- Als Source of Truth ist er jetzt dokumentiert.
-- Als belastbares Produktivsystem sollte er in Analyse und Delivery getrennt werden.
-
-## Verbesserungsvorschlaege
-
-1. Intake auf zwei klare Pfade trennen:
-   - `start_audit`
-   - `send_report`
-2. E-Mail im Initial-Submit optional machen, nicht Pflicht.
-3. `email_capture` als separaten leichten Workflow oder separaten Branch behandeln.
-4. Bei Start des Audits sofort `processing` in static data schreiben.
-5. Bei Fehlern aktiv `error` oder `partial` speichern.
-6. `Sitemap Final` wirklich als Datenquelle in `Analyze Site` verwenden.
-7. Secrets nur ueber n8n-Credentials, Vars oder Env-Variablen.
-8. Report-Strecke von Analyse-Strecke entkoppeln.
-9. CTA-Ziel fuer Deep-Dive auf genau einen Pfad standardisieren.
-10. Frontend-Contract als Datenmodell versionieren und gegen das Theme pruefen.
+1. Diesen V2-Workflow in n8n importieren und Credentials/Vars setzen.
+2. Testen:
+   - Start mit nur URL
+   - Polling bis `done`
+   - `email_capture` mit vorhandener `jobId`
+3. Danach `audit-live.js` auf den separaten Report-Pfad vorbereiten, damit `step: 'email_capture'` spaeter komplett aus dem Start-Webhook raus kann.

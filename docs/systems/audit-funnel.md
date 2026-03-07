@@ -4,7 +4,7 @@ Stand: 2026-03-07. Diese Doku beschreibt den aktuell im Repo sichtbaren Funnel i
 
 Update:
 
-- Der aktuelle n8n-Workflow liegt jetzt als bereinigter Export im Repo.
+- Der aktuelle n8n-Workflow liegt jetzt als bereinigter V2-Export im Repo.
 - Siehe `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`.
 - Die Betriebsdoku liegt unter `automations/n8n/docs/audit-funnel__customer-journey-audit__refactor.md`.
 - Der aktuelle WordPress-Editor-Layer ist jetzt separat dokumentiert.
@@ -143,8 +143,8 @@ Das ist fachlich richtig, weil:
 ## Risiken
 
 - Die kritische Backend-Logik ist jetzt versioniert, aber noch nicht sauber in Analyse-, Delivery- und Fehlerpfade getrennt.
-- Der aktuelle Workflow zeigt einen Contract-Bruch: Frontend sendet initial nur die URL, der Workflow verlangt aber bereits eine E-Mail.
-- Der E-Mail-Capture feuert denselben Audit-Workflow erneut, statt einen leichten Report-Versand-Branch zu nutzen.
+- Der V2-Workflow im Repo behebt den bisherigen Contract-Bruch zwischen URL-only-Start und n8n-Validierung, ist aber erst nach Import in die Live-n8n-Instanz wirksam.
+- Der V2-Workflow im Repo trennt `email_capture` logisch vom eigentlichen Audit-Lauf, aber der Frontend-Code nutzt noch denselben Start-Webhook statt eines eigenen Report-Endpunkts.
 - Die Webhook-URLs sind hart in `audit-live.js` hinterlegt.
 - Es gibt keinen im Repo dokumentierten Fallback fuer n8n-Ausfall ausser Timeout und Fehlermeldung.
 - Der Ergebnis-Contract ist nur implizit durch Frontend-Code beschrieben, nicht als Datenmodell fixiert.

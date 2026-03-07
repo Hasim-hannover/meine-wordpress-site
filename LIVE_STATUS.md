@@ -29,7 +29,7 @@ Nicht verifiziert:
 - Das Repo wird gerade von einem Theme-Repo zu einem Website Operating System erweitert.
 - `page-wgos.php` ist fachlich zentral, aber technisch noch zu stark hardcodiert.
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten.
-- Der Audit-Funnel ist jetzt als versionierter n8n-Bestand im Repo dokumentiert, aber architektonisch noch nicht sauber getrennt.
+- Der Audit-Funnel liegt jetzt als bereinigter n8n-V2-Workflow im Repo, ist aber erst nach Import in die Live-n8n-Instanz wirksam.
 - Das Zusammenspiel aus WordPress-Editor-Content und Repo-Doku ist noch nicht vollstaendig systematisiert.
 - Das Client Portal arbeitet aktuell mit Mock-Daten und ist noch kein voll dokumentiertes Produktivsystem.
 
