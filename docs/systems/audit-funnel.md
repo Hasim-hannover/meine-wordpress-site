@@ -1,6 +1,14 @@
 # Audit Funnel
 
-Stand: 2026-03-07. Diese Doku beschreibt den aktuell im Repo sichtbaren Funnel. Die exakte n8n-Implementierung liegt noch nicht versioniert vor.
+Stand: 2026-03-07. Diese Doku beschreibt den aktuell im Repo sichtbaren Funnel inklusive des jetzt versionierten Audit-Workflows.
+
+Update:
+
+- Der aktuelle n8n-Workflow liegt jetzt als bereinigter Export im Repo.
+- Siehe `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`.
+- Die Betriebsdoku liegt unter `automations/n8n/docs/audit-funnel__customer-journey-audit__refactor.md`.
+- Der aktuelle WordPress-Editor-Layer ist jetzt separat dokumentiert.
+- Siehe `docs/systems/audit-page-editor-layer.md`.
 
 ## Zweck des Audit-Funnels
 
@@ -121,6 +129,9 @@ Das ist fachlich richtig, weil:
 - `blocksy-child/assets/css/audit.css`
 - `blocksy-child/assets/css/audit-results.css`
 - `blocksy-child/page-360-deep-dive.php`
+- `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`
+- `docs/systems/audit-page-editor-layer.md`
+- `docs/references/audit-page-editor-snippet.html`
 
 ## Abhaengigkeiten
 
@@ -131,10 +142,13 @@ Das ist fachlich richtig, weil:
 
 ## Risiken
 
-- Die kritische Backend-Logik liegt aktuell nicht versioniert im Repo.
+- Die kritische Backend-Logik ist jetzt versioniert, aber noch nicht sauber in Analyse-, Delivery- und Fehlerpfade getrennt.
+- Der aktuelle Workflow zeigt einen Contract-Bruch: Frontend sendet initial nur die URL, der Workflow verlangt aber bereits eine E-Mail.
+- Der E-Mail-Capture feuert denselben Audit-Workflow erneut, statt einen leichten Report-Versand-Branch zu nutzen.
 - Die Webhook-URLs sind hart in `audit-live.js` hinterlegt.
 - Es gibt keinen im Repo dokumentierten Fallback fuer n8n-Ausfall ausser Timeout und Fehlermeldung.
 - Der Ergebnis-Contract ist nur implizit durch Frontend-Code beschrieben, nicht als Datenmodell fixiert.
+- Der funktionale Audit-Seitenrahmen lebt teilweise im WordPress-Editor und liegt damit ausserhalb des eigentlichen Deploy-Pfads.
 - CRM-, Mail- und Follow-up-Logik sind im Repo nicht nachvollziehbar.
 - Revenue-Gap-Berechnung arbeitet mit Annahmen, die transparent dokumentiert werden muessen.
 - Der Funnel haengt an mehreren externen Systemen, deren Live-Status hier nicht geprueft werden kann.
@@ -147,11 +161,11 @@ Das ist fachlich richtig, weil:
 Begruendung:
 
 - Der sichtbare Funnel ist klar und conversion-logisch sauber.
-- Ohne versionierte n8n-Workflows fehlt aber ein kritischer Teil des technischen Systems im Repo.
+- Der Workflow ist jetzt versioniert, aber noch nicht konsistent genug fuer ein sauberes Operating System.
 
 ## Verbesserungslogik
 
-- n8n-Workflows exportieren und unter `automations/n8n/workflows/` versionieren.
+- weitere n8n-Workflows exportieren und unter `automations/n8n/workflows/` versionieren.
 - Fuer jeden Workflow eine Doku mit Trigger, Business-Logik, Datenlogik, Delivery-Logik und Risiken anlegen.
 - Webhook-URLs konfigurierbar machen statt hart im Frontend zu halten.
 - Einen dokumentierten Payload-Contract als Datenmodell einfuehren.

@@ -21,6 +21,7 @@ Nicht verifiziert:
 - Service-Seiten, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Customer Journey Audit` ist als Primaer-CTA systemweit verankert.
 - Das Frontend fuer den Audit mit n8n-Polling liegt im Repo und ist produktionsnah integriert.
+- Der aktuelle WordPress-Editor-Shell-Code der Audit-Seite ist jetzt als Referenz dokumentiert, wird aber weiterhin manuell im Editor gepflegt.
 - Das Client Portal existiert technisch inklusive Login- und Upload-Logik.
 
 ## In Arbeit
@@ -28,14 +29,14 @@ Nicht verifiziert:
 - Das Repo wird gerade von einem Theme-Repo zu einem Website Operating System erweitert.
 - `page-wgos.php` ist fachlich zentral, aber technisch noch zu stark hardcodiert.
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten.
-- Der Audit-Funnel ist frontend-seitig klar, backend-seitig aber noch nicht als versionierter n8n-Bestand im Repo vorhanden.
+- Der Audit-Funnel ist jetzt als versionierter n8n-Bestand im Repo dokumentiert, aber architektonisch noch nicht sauber getrennt.
 - Das Zusammenspiel aus WordPress-Editor-Content und Repo-Doku ist noch nicht vollstaendig systematisiert.
 - Das Client Portal arbeitet aktuell mit Mock-Daten und ist noch kein voll dokumentiertes Produktivsystem.
 
 ## Geplant
 
-- versionierte n8n-Workflow-Exporte unter `automations/n8n/workflows/`
-- menschlich lesbare Workflow-Doku und Flow-Maps unter `automations/n8n/docs/` und `automations/n8n/flow-maps/`
+- weitere n8n-Workflow-Exporte unter `automations/n8n/workflows/`
+- weitere menschlich lesbare Workflow-Doku und Flow-Maps unter `automations/n8n/docs/` und `automations/n8n/flow-maps/`
 - sauberer Prompt- und Agenten-Layer fuer wiederverwendbare Arbeitskontexte
 - weitere Systemdoku fuer Tracking, CRM-Routing, Offer-Logik und CTA-Inventar
 - Ausbau des Decision Logs fuer strukturelle Repo- und Systementscheidungen

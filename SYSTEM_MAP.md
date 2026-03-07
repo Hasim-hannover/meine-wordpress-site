@@ -42,6 +42,12 @@ Im Repo liegen aktuell noch keine exportierten n8n-Workflows. Die Rolle von n8n 
 - kuenftiges Lead-Routing und Nurture
 - Reporting- oder CRM-Bridges, die in Texten und Angebotslogik bereits angedeutet werden
 
+Aktuell dokumentierter Workflow:
+
+- `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`
+- Doku: `automations/n8n/docs/audit-funnel__customer-journey-audit__refactor.md`
+- Flow-Map: `automations/n8n/flow-maps/audit-funnel__customer-journey-audit__refactor.md`
+
 Bekannte technische Touchpoints:
 
 - `blocksy-child/assets/js/audit-live.js`
@@ -51,6 +57,7 @@ Fachliche Regel:
 
 - n8n-JSONs gelten nie als selbsterklaerend.
 - Jeder Workflow braucht zusaetzlich Doku, Flow-Map, Status und Risiko-Abschnitt.
+- Der aktuelle Audit-Workflow ist fachlich wertvoll, aber architektonisch refactor-beduerftig.
 
 ## Audit-Funnel
 

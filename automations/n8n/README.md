@@ -17,6 +17,7 @@ Bekannte Touchpoints:
 ```text
 automations/n8n/
 ├── README.md
+├── data-models/
 ├── workflows/
 ├── docs/
 └── flow-maps/
@@ -27,6 +28,7 @@ automations/n8n/
 - Jeder Workflow braucht einen JSON-Export unter `workflows/`.
 - Jeder Workflow braucht zusaetzlich eine Doku unter `docs/`.
 - Jeder kritische Workflow braucht eine Flow-Map unter `flow-maps/`.
+- Jeder stabile Frontend- oder System-Contract gehoert unter `data-models/`.
 - Statusaenderungen muessen auch in `LIVE_STATUS.md` und bei Bedarf in `SYSTEM_MAP.md` auftauchen.
 
 ## Dokumentationspflicht pro Workflow

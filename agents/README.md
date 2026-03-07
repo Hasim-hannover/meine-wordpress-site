@@ -5,6 +5,7 @@ Dieser Bereich sammelt agentenbezogene Artefakte, die nicht direkt Live-Code sin
 Aktuell relevant:
 
 - `AGENT_CONTEXT.md` als Pflichtkontext fuer alle Agenten
+- `agents/roles/` fuer spezialisierte Rollenprofile
 - `agents/skills/` fuer wiederverwendbare Skill- oder Prompt-Systeme
 - `prompts/` fuer atomare, wiederverwendbare Briefings und Aufgabenmuster
 
