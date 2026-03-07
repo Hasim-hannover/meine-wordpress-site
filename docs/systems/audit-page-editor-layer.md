@@ -13,6 +13,10 @@ Referenz-Snapshot:
 
 - `docs/references/audit-page-editor-snippet.html`
 
+Empfohlene Editor-V2:
+
+- `docs/references/audit-page-editor-snippet-v2.html`
+
 ## Rolle des Editor-Layers
 
 Der Editor-Layer liefert nicht nur Content, sondern einen funktionalen DOM-Rahmen fuer die Audit-Logik.
@@ -25,7 +29,7 @@ Er stellt bereit:
 - Ergebnis-Container
 - Vertrauens- und Preview-Sektionen
 - versteckten Deep-Dive-Form-Container
-- einen kleinen View-Mode-Umschalter per `MutationObserver`
+- einen kleinen View-Mode-Fallback per `MutationObserver`
 
 ## DOM-Contract mit `audit-live.js`
 
@@ -129,16 +133,18 @@ Folge:
 
 - Die Navigation wird nach erfolgreicher Analyse teilweise inkonsistent.
 
-### 6. View-Mode-Umschaltung basiert auf `innerHTML` statt auf explizitem Status
+### 6. Der Observer bleibt ein fragiler Fallback
 
-Die Umschaltung in `view-mode-results` passiert ueber `MutationObserver` und die Bedingung:
+`audit-live.js` setzt `view-mode-results` inzwischen direkt beim Rendern der Ergebnisse.
+
+Im Editor existiert zusaetzlich weiter ein `MutationObserver` mit der Bedingung:
 
 - `resultsContainer.innerHTML.trim() !== ""`
 
 Folge:
 
-- Der Zustand wird aus DOM-Inhalt abgeleitet statt aus einem klaren Systemstatus.
-- Das ist fragiler als eine explizite Klassen- oder Statussteuerung aus `audit-live.js`.
+- Der Hauptpfad ist jetzt robuster, weil der JS-Layer den Status aktiv setzt.
+- Der Observer bleibt dennoch ein indirekter DOM-Fallback und damit potenziell stoeranfaellig.
 
 ## Risiken
 
@@ -152,6 +158,12 @@ Folge:
 1. Den DOM-Contract in der Doku als verbindlich behandeln.
 2. Das tote E-Mail-Feld entfernen oder in eine echte, dokumentierte Progressive-Disclosure-Logik ueberfuehren.
 3. Das fehlerhafte Markup im Formular bereinigen.
-4. Results-Mode direkt in `audit-live.js` setzen statt nur per `MutationObserver`.
+4. Den Editor-Observer nur noch als Fallback behandeln und langfristig entfernen.
 5. Entscheiden, ob die unteren Info-Sektionen nach Ergebniseinspielung sichtbar bleiben sollen.
 6. Langfristig den Editor-Shell-Code in einen versionierten Template- oder Block-Pattern-Layer ueberfuehren.
+
+## Status der V2-Empfehlung
+
+- Die empfohlene Editor-V2 ist im Repo vorbereitet.
+- Sie verbessert Fokus, DOM-Sauberkeit und Results-Mode.
+- Sie behebt nicht den JSON-Response-Fehler aus n8n. Dieser liegt weiterhin im Webhook- oder Polling-Pfad, nicht im Editor-Markup.

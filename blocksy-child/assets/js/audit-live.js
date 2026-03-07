@@ -86,7 +86,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url: url })
     })
-    .then(function (res) { return res.json(); })
+    .then(function (res) { return parseJsonResponse(res, 'Audit-Start'); })
     .then(function (data) {
       if (!data.ok) {
         throw new Error(data.error || 'Ungültige Anfrage.');
@@ -105,11 +105,14 @@
   // ─── POLLING ─────────────────────────────────────────────
   function startPolling() {
     var msgIndex = 0;
+    var pollFailures = 0;
     updateLoaderStep(loaderSteps[0]);
 
     state.pollTimer = setInterval(function () {
       if (Date.now() - state.pollStart > CONFIG.pollTimeout) {
         clearInterval(state.pollTimer);
+        state.pollTimer = null;
+        setPhase('error');
         showLoaderError('Die Analyse dauert länger als erwartet. Der Report wird per E-Mail zugestellt.');
         return;
       }
@@ -118,19 +121,36 @@
       updateLoaderStep(loaderSteps[msgIndex]);
 
       fetch(CONFIG.webhookStatus + '?jobId=' + encodeURIComponent(state.jobId))
-        .then(function (res) { return res.json(); })
+        .then(function (res) { return parseJsonResponse(res, 'Audit-Status'); })
         .then(function (data) {
+          pollFailures = 0;
           if (data.status === 'done' && data.data) {
             clearInterval(state.pollTimer);
+            state.pollTimer = null;
             setPhase('rendering');
             renderResults(data.data);
           } else if (data.status === 'error' || data.status === 'expired') {
             clearInterval(state.pollTimer);
+            state.pollTimer = null;
+            setPhase('error');
             showLoaderError(data.error || 'Fehler bei der Analyse.');
           }
         })
-        .catch(function () {
-          // Network error → keep trying
+        .catch(function (err) {
+          pollFailures += 1;
+
+          if (err && /keine JSON-Antwort|ungültiges JSON/i.test(err.message || '')) {
+            clearInterval(state.pollTimer);
+            state.pollTimer = null;
+            setPhase('error');
+            showLoaderError(err.message + ' Bitte n8n-Webhook prüfen.');
+            return;
+          }
+
+          if (pollFailures >= 3) {
+            var sub = document.getElementById('loader-sub');
+            if (sub) sub.textContent = 'Verbindung instabil. Wir versuchen es erneut …';
+          }
         });
     }, CONFIG.pollInterval);
   }
@@ -204,9 +224,13 @@
   function renderResults(data) {
     var loader = document.getElementById('audit-loader');
     var results = document.getElementById('audit-results');
+    var wrapper = document.getElementById('audit-main-wrapper');
+    var progress = document.getElementById('loader-progress');
     if (loader) loader.style.display = 'none';
+    if (progress) progress.style.width = '100%';
 
     if (!results) return;
+    if (wrapper) wrapper.classList.add('view-mode-results');
     results.style.display = 'block';
 
     var html = '';
@@ -564,16 +588,30 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email, jobId: state.jobId, url: state.auditUrl, step: 'email_capture' })
     })
-    .then(function () {
+    .then(function (res) { return parseJsonResponse(res, 'Report-Versand'); })
+    .then(function (data) {
+      if (!data.ok) {
+        throw new Error(data.error || 'Fehler beim Senden.');
+      }
+
+      if (data.status === 'processing') {
+        if (feedback) {
+          feedback.textContent = data.message || 'Audit läuft noch. Bitte gleich erneut versuchen.';
+          feedback.style.display = 'block';
+          feedback.style.color = '#f59e0b';
+        }
+        return;
+      }
+
       var wrap = document.getElementById('audit-email-capture-wrap');
       if (wrap) {
         wrap.innerHTML =
           '<p class="email-capture-success">Report wird zugestellt. Prüfen Sie Ihren Posteingang.</p>';
       }
     })
-    .catch(function () {
+    .catch(function (err) {
       if (feedback) {
-        feedback.textContent = 'Fehler beim Senden. Bitte erneut versuchen.';
+        feedback.textContent = err && err.message ? err.message : 'Fehler beim Senden. Bitte erneut versuchen.';
         feedback.style.display = 'block';
         feedback.style.color = '#f87171';
       }
@@ -610,6 +648,23 @@
   function formatEuro(n) {
     if (!n) return '0 €';
     return n.toLocaleString('de-DE') + ' €';
+  }
+
+  function parseJsonResponse(res, label) {
+    return res.text().then(function (text) {
+      var body = (text || '').trim();
+      var http = res && typeof res.status === 'number' ? ' (HTTP ' + res.status + ')' : '';
+
+      if (!body) {
+        throw new Error(label + ' liefert keine JSON-Antwort' + http + '.');
+      }
+
+      try {
+        return JSON.parse(body);
+      } catch (e) {
+        throw new Error(label + ' liefert ungültiges JSON' + http + '.');
+      }
+    });
   }
 
   function statusLabel(s) {
