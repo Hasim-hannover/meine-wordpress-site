@@ -47,7 +47,7 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 	<div class="ft__top">
 		<div class="ft__brand">
 			<a class="ft__logo" href="<?php echo esc_url( $home_url ); ?>" aria-label="Startseite - Hasim Üner">Hasim Üner</a>
-			<p class="ft__tag">WordPress als Nachfrage-System für B2B - aus Hannover</p>
+			<p class="ft__tag">WordPress als Nachfrage-System für B2B.</p>
 			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>">Audit starten (0 €)</a>
 		</div>
 
