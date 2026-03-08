@@ -18,6 +18,7 @@ $inc_dir = get_stylesheet_directory() . '/inc/';
 $modules = [
 	'helpers.php',        // Utility-Funktionen (muss zuerst geladen werden)
 	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
+	'audit-page.php',     // Audit-Shell-Fallback fuer die Audit-Landing-Page
 	'enqueue.php',        // CSS/JS Asset-Management
 	'seo-meta.php',       // OG Tags, Canonical, Indexierungssteuerung
 	'org-schema.php',     // JSON-LD Structured Data
