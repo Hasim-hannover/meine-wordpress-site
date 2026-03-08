@@ -2,7 +2,7 @@
 /**
  * Template Name: Nexus Über Mich
  *
- * About-Seite – hardcoded Content (CRO-optimiert, Free Journey Audit als Primary CTA).
+ * About-Seite – hardcoded Content (CRO-optimiert, Customer Journey Audit als Primary CTA).
  * Design: Nexus Design System (Gold/Dark) via about-page.css.
  * SEO-Meta: inc/seo-meta.php (ACF: seo_title, seo_description, og_image)
  *
@@ -10,6 +10,9 @@
  */
 
 get_header();
+
+$audit_url = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ], home_url( '/customer-journey-audit/' ) );
+$cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
 ?>
 
 <div class="nexus-about" data-track-section="about_page">
@@ -68,13 +71,13 @@ get_header();
 
             <!-- CTA Block -->
             <div class="about-hero-ctas">
-                <a href="/customer-journey-audit/"
+                <a href="<?php echo esc_url( $audit_url ); ?>"
                    class="btn btn-primary"
                    data-track-action="cta_about_hero_audit"
                    data-track-category="lead_gen">
-                    Free Journey Audit starten (0&nbsp;€)
+                    Customer Journey Audit starten
                 </a>
-                <a href="/case-studies/" class="btn btn-ghost">
+                <a href="<?php echo esc_url( $cases_url ); ?>" class="btn btn-ghost">
                     Case Studies ansehen
                 </a>
             </div>
@@ -85,7 +88,7 @@ get_header();
                 <span class="about-proof-kpi">Dokumentierte Case Studies statt Behauptungen</span>
                 <span class="about-proof-sep">·</span>
                 <span class="about-proof-kpi">u. a. E3 New Energy</span>
-                <span class="about-proof-note"><a href="/case-studies/" class="about-inline-link">Ergebnisse ansehen →</a></span>
+                <span class="about-proof-note"><a href="<?php echo esc_url( $cases_url ); ?>" class="about-inline-link">Ergebnisse ansehen →</a></span>
             </div>
 
             <!-- Location -->
@@ -255,7 +258,7 @@ get_header();
                 <p class="milestone-story">
                     Ergebnisse werden dokumentiert, mit Ausgangslage, Maßnahmen und Wirkung.
                     Kein Blackbox-Marketing. Keine vagen Versprechen.
-                    Details finden Sie in den <a href="/case-studies/" class="about-inline-link">Case Studies</a>.
+                    Details finden Sie in den <a href="<?php echo esc_url( $cases_url ); ?>" class="about-inline-link">Case Studies</a>.
                 </p>
             </div>
         </div>
@@ -313,14 +316,14 @@ get_header();
                 Das <a href="/wordpress-growth-operating-system/" class="about-inline-link">WGOS</a>
                 läuft über ein monatliches Credit-Budget&nbsp;— kein Stundensatz, kein
                 unplanbarer Projektvertrag. Der Einstieg ist kostenlos über den
-                <a href="/customer-journey-audit/">Free Journey Audit</a>.
+                <a href="<?php echo esc_url( $audit_url ); ?>">Customer Journey Audit</a>.
             </div>
         </details>
 
         <details class="wp-faq-item">
             <summary>Wie läuft die Zusammenarbeit ab?</summary>
             <div class="wp-faq-content">
-                Wir starten mit dem Free Journey Audit. Danach erhalten Sie eine priorisierte
+                Wir starten mit dem Customer Journey Audit. Danach erhalten Sie eine priorisierte
                 Roadmap mit klaren Empfehlungen. Auf dieser Basis entscheiden Sie,
                 ob wir gemeinsam ins System einsteigen.
             </div>
@@ -367,7 +370,7 @@ get_header();
         <h2 class="cta-headline">Welche Hebel liegen bei Ihnen brach?</h2>
 
         <p class="cta-story">
-            Im <a href="/customer-journey-audit/" class="about-inline-link">Free Journey Audit</a>
+            Im <a href="<?php echo esc_url( $audit_url ); ?>" class="about-inline-link">Customer Journey Audit</a>
             analysieren wir Ihre WordPress-Präsenz auf die größten
             Systemhebel&nbsp;— klar, priorisiert und ohne Pitch.
         </p>
@@ -388,13 +391,13 @@ get_header();
         </div>
 
         <div class="btn-group">
-            <a href="/customer-journey-audit/"
+            <a href="<?php echo esc_url( $audit_url ); ?>"
                class="btn btn-primary"
                data-track-action="cta_about_final_audit"
                data-track-category="lead_gen">
-                Free Journey Audit starten (0&nbsp;€)
+                Customer Journey Audit starten
             </a>
-            <a href="/case-studies/" class="btn btn-ghost">
+            <a href="<?php echo esc_url( $cases_url ); ?>" class="btn btn-ghost">
                 Case Studies ansehen
             </a>
         </div>

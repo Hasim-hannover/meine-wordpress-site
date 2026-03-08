@@ -15,9 +15,9 @@ function hu_output_schema()
         '@type'    => 'LocalBusiness',
         '@id'      => home_url('/#organization'),
         'name'     => 'Hasim Üner – Growth Architect',
-        'alternateName' => 'Hasim Üner Webentwicklung & CRO',
+        'alternateName' => 'Hasim Uener - WordPress Growth Architect',
         'url'      => home_url(),
-        'description' => 'Spezialist für High-Performance WordPress-Systeme, Tracking (GA4) und Conversion-Optimierung in Hannover & Pattensen.',
+        'description' => 'WordPress Growth Architect fuer B2B-Unternehmen: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als Nachfrage-System.',
         'telephone'   => '+49 176 81407134',
         'email'       => 'info@hasimuener.de',
         'logo'        => 'https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp',
@@ -54,10 +54,34 @@ function hu_output_schema()
     // Service definitions (slug => data)
     $service_definitions = [
         'wordpress-agentur-hannover' => [
-            'name'        => 'WordPress Agentur Hannover',
-            'description' => 'Individuelle WordPress-Entwicklung ohne Bloatware mit Fokus auf Core Web Vitals, Sicherheit und Skalierbarkeit.',
-            'serviceType' => 'WordPress Agentur',
-            'serviceOutput' => 'Modulare WordPress-Lösungen mit technischer Exzellenz'
+            'name'        => 'WordPress Growth Architect Hannover',
+            'description' => 'WordPress als Growth-Infrastruktur fuer B2B-Unternehmen in Hannover: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik.',
+            'serviceType' => 'WordPress Growth Architecture',
+            'serviceOutput' => 'Planbares Anfrage-System auf WordPress-Basis'
+        ],
+
+        'customer-journey-audit' => [
+            'name'        => 'Customer Journey Audit',
+            'description' => 'Diagnose-Einstieg fuer B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel pruefen.',
+            'serviceType' => 'Growth Audit',
+            'serviceOutput' => 'Priorisierte Einschaetzung der groessten Nachfrage-Bremsen',
+            'offers'      => [
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Customer Journey Audit',
+                    'price'         => 0,
+                    'priceCurrency' => 'EUR',
+                    'isAccessibleForFree' => true,
+                    'description'   => 'Erster Diagnose-Schritt fuer WordPress-Praesenzen mit unklarer Lead-Performance'
+                ]
+            ]
+        ],
+
+        '360-deep-dive' => [
+            'name'        => '360 Grad Growth Blueprint',
+            'description' => 'Persoenlicher Deep Dive nach dem Audit mit priorisierter Roadmap fuer Positionierung, IA, Measurement und Conversion.',
+            'serviceType' => 'Growth Blueprint',
+            'serviceOutput' => 'Blueprint fuer die naechsten sinnvollen Struktur- und Umsetzungsentscheidungen'
         ],
 
         'wordpress-wartung-hannover' => [
@@ -111,6 +135,13 @@ function hu_output_schema()
                     'description'   => 'Umfassendes Audit & Strategieplan, tiefgreifende technische Optimierung, Caching & CDN-Setup, Live-Performance-Dashboard und 3 Monate Support'
                 ]
             ]
+        ],
+
+        'core-web-vitals' => [
+            'name'        => 'Speed & Core Web Vitals Optimierung',
+            'description' => 'Performance-Optimierung mit Fokus auf Ladezeit, INP/LCP und Nutzererlebnis.',
+            'serviceType' => 'Performance Optimierung',
+            'serviceOutput' => 'Gruene Core Web Vitals und schnellere Ladezeiten'
         ],
 
         'tracking-data' => [
@@ -193,6 +224,13 @@ function hu_output_schema()
                     'description'   => '100+ Credits/Monat. Full Stack inkl. Paid Booster & Automation.'
                 ]
             ]
+        ],
+
+        'wgos' => [
+            'name'        => 'WordPress Growth Operating System (WGOS)',
+            'description' => 'Monatlicher Retainer fuer B2B-Unternehmen: WordPress als Growth-Infrastruktur mit Performance, Measurement, SEO, Content und Conversion.',
+            'serviceType' => 'Growth Operating System',
+            'serviceOutput' => 'Owned-Lead-System mit klarer Priorisierung und voller Ownership'
         ],
     ];
 

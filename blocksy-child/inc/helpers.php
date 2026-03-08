@@ -133,3 +133,48 @@ function nexus_asset_url( $path ) {
 function nexus_asset_path( $path ) {
 	return get_stylesheet_directory() . '/assets/' . ltrim( $path, '/' );
 }
+
+/**
+ * Resolve a page ID from one or more possible slugs.
+ *
+ * @param string|array $paths Candidate page paths, ordered by preference.
+ * @return int
+ */
+function nexus_get_page_id( $paths ) {
+	$paths = (array) $paths;
+
+	foreach ( $paths as $path ) {
+		$page = get_page_by_path( trim( (string) $path, '/' ) );
+		if ( $page instanceof WP_Post ) {
+			return (int) $page->ID;
+		}
+	}
+
+	return 0;
+}
+
+/**
+ * Resolve a permalink from one or more possible slugs with a sane fallback.
+ *
+ * @param string|array $paths    Candidate page paths, ordered by preference.
+ * @param string       $fallback Optional fallback URL.
+ * @return string
+ */
+function nexus_get_page_url( $paths, $fallback = '' ) {
+	$paths   = (array) $paths;
+	$page_id = nexus_get_page_id( $paths );
+
+	if ( $page_id ) {
+		return get_permalink( $page_id );
+	}
+
+	if ( $fallback ) {
+		return $fallback;
+	}
+
+	if ( ! empty( $paths ) ) {
+		return home_url( '/' . trim( (string) $paths[0], '/' ) . '/' );
+	}
+
+	return home_url( '/' );
+}

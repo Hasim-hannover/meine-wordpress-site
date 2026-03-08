@@ -1,97 +1,70 @@
 <?php
-/*
-Template Name: Alle Lösungen
-*/
+/**
+ * Template Name: Alle Lösungen
+ *
+ * Interne Angebotsuebersicht mit fokussierter 3-Stufen-Logik.
+ *
+ * @package Blocksy_Child
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$audit_url     = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] );
+$deep_dive_url = nexus_get_page_url( [ '360-deep-dive' ] );
+$wgos_url      = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
+$cases_url     = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+
 get_header();
 ?>
 <main class="solutions-overview">
-  <section class="container">
-    <h1>Unsere Lösungen für Ihren digitalen Erfolg</h1>
-    <p style="text-align:center;max-width:700px;margin:0 auto 36px auto;font-size:1.18rem;color:#475569;">
-      Wählen Sie die passende Lösung für Ihr Ziel: Mehr Sichtbarkeit, mehr Leads, mehr Umsatz. Jede Lösung ist auf die Bedürfnisse moderner Unternehmen zugeschnitten und basiert auf erprobten Strategien aus der Praxis.
-    </p>
-    <div class="solutions-list">
-      <?php
-      $solutions = [
-        [
-          'title' => '360° Deep Dive',
-          'link' => get_permalink(get_page_by_path('360-deep-dive')),
-          'desc' => 'Ganzheitliche Analyse: Wir decken alle Potenziale und Schwachstellen Ihrer Website auf. Ideal für Unternehmen, die wissen wollen, wo sie wirklich stehen.'
-        ],
-        [
-          'title' => 'Conversion-Optimierung (CRO)',
-          'link' => get_permalink(get_page_by_path('cro')),
-          'desc' => 'Mehr Anfragen, mehr Umsatz: Wir optimieren Ihre Website gezielt für maximale Conversion. Psychologische Trigger inklusive.'
-        ],
-        [
-          'title' => 'Wettbewerbsanalyse (WGOS)',
-          'link' => get_permalink(get_page_by_path('wgos')),
-          'desc' => 'Erkennen Sie Ihre echten Wettbewerber und nutzen Sie deren Schwächen für Ihren Vorsprung.'
-        ],
-        [
-          'title' => 'Core Web Vitals',
-          'link' => get_permalink(get_page_by_path('cwv')),
-          'desc' => 'Schnell, stabil, nutzerfreundlich: Wir machen Ihre Website fit für Google und Ihre Besucher.'
-        ],
-        [
-          'title' => 'Audit',
-          'link' => get_permalink(get_page_by_path('audit')),
-          'desc' => 'Technische und inhaltliche Analyse: Wir finden die Bremsen, die Ihr Wachstum verhindern.'
-        ],
-        [
-          'title' => 'GA4 & Tracking',
-          'link' => get_permalink(get_page_by_path('ga4')),
-          'desc' => 'Datenbasiert entscheiden: Wir richten Google Analytics 4 und Tracking DSGVO-konform ein.'
-        ],
-        [
-          'title' => 'Meta Ads',
-          'link' => get_permalink(get_page_by_path('meta-ads')),
-          'desc' => 'Mehr Reichweite, gezielte Leads: Wir schalten und optimieren Ihre Meta-Kampagnen.'
-        ],
-        [
-          'title' => 'SEO',
-          'link' => get_permalink(get_page_by_path('seo')),
-          'desc' => 'Nachhaltige Sichtbarkeit: Wir bringen Sie bei Google nach vorn – mit Strategie, Content und Technik.'
-        ],
-        [
-          'title' => 'Eigene Tools',
-          'link' => get_permalink(get_page_by_path('tools')),
-          'desc' => 'Exklusive Analyse- und Optimierungstools für Ihren Vorsprung.'
-        ],
-        [
-          'title' => 'Performance',
-          'link' => get_permalink(get_page_by_path('performance')),
-          'desc' => 'Blitzschnelle Ladezeiten: Für bessere Rankings und mehr Abschlüsse.'
-        ],
-        [
-          'title' => 'Case Study E3',
-          'link' => get_permalink(get_page_by_path('case-e3')),
-          'desc' => 'Erfolgsbeispiel: So haben wir E3 New Energy zum Wachstum verholfen.'
-        ],
-        [
-          'title' => 'WordPress Agentur',
-          'link' => get_permalink(get_page_by_path('wordpress-agentur')),
-          'desc' => 'Maßgeschneiderte WordPress-Lösungen für Ihr Business.'
-        ],
-      ];
-      ?>
-      <ul>
-        <?php foreach ($solutions as $solution): ?>
-          <li class="solution-item">
-            <a href="<?php echo esc_url($solution['link']); ?>">
-              <h2><?php echo esc_html($solution['title']); ?></h2>
-              <p><?php echo esc_html($solution['desc']); ?></p>
-              <span class="cta-btn">Mehr erfahren</span>
-            </a>
-          </li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-    <div style="text-align:center;margin-top:48px;">
-      <a href="/kontakt" class="cta-btn" style="font-size:1.15rem;padding:16px 38px;">Jetzt unverbindlich beraten lassen</a>
-      <p style="margin-top:12px;color:#64748b;font-size:1rem;">Gemeinsam finden wir die beste Lösung für Ihr Ziel!</p>
-    </div>
-  </section>
+	<section class="container" style="max-width:1120px; padding:5rem 20px 6rem;">
+		<div style="text-align:center; max-width:760px; margin:0 auto 3rem;">
+			<span class="nx-badge nx-badge--gold">Angebotsarchitektur</span>
+			<h1 style="margin:1rem 0 1rem;">Drei Stufen. Ein klares Ziel.</h1>
+			<p style="font-size:1.12rem; color:#64748b; line-height:1.7;">
+				Diese Seite ist keine Leistungsbibliothek. Sie zeigt den sinnvollen Weg,
+				mit dem aus einer WordPress-Praesenz ein planbares Anfrage- und Wachstumssystem wird.
+			</p>
+		</div>
+
+		<div class="solutions-list">
+			<ul style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; list-style:none; padding:0; margin:0;">
+				<li class="solution-item">
+					<a href="<?php echo esc_url( $audit_url ); ?>">
+						<h2>1. Customer Journey Audit</h2>
+						<p>Diagnose-Einstieg fuer B2B-Unternehmen mit bestehender WordPress-Seite. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen.</p>
+						<span class="cta-btn">Audit starten</span>
+					</a>
+				</li>
+				<li class="solution-item">
+					<a href="<?php echo esc_url( $deep_dive_url ); ?>">
+						<h2>2. 360 Grad Growth Blueprint</h2>
+						<p>Der Deep Dive nach dem Audit. Priorisierte Roadmap fuer Positionierung, Informationsarchitektur, Measurement und Angebotslogik.</p>
+						<span class="cta-btn">Blueprint ansehen</span>
+					</a>
+				</li>
+				<li class="solution-item">
+					<a href="<?php echo esc_url( $wgos_url ); ?>">
+						<h2>3. WGOS Umsetzung &amp; Retainer</h2>
+						<p>Umsetzung und laufende Optimierung in der richtigen Reihenfolge: Technik, SEO, Tracking, Content und Conversion auf WordPress-Basis.</p>
+						<span class="cta-btn">System ansehen</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div style="max-width:760px; margin:3rem auto 0; text-align:center;">
+			<p style="color:#64748b; font-size:1rem; line-height:1.7; margin-bottom:1.5rem;">
+				Wenn Sie erst sehen wollen, wie sich dieser Ansatz in der Praxis auswirkt, starten Sie nicht bei Einzelleistungen, sondern bei den dokumentierten Ergebnissen.
+			</p>
+			<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
+				<a href="<?php echo esc_url( $cases_url ); ?>" class="cta-btn" style="font-size:1rem; padding:14px 28px;">Case Studies ansehen</a>
+				<a href="<?php echo esc_url( $audit_url ); ?>" class="cta-btn" style="font-size:1rem; padding:14px 28px;">Direkt mit dem Audit starten</a>
+			</div>
+		</div>
+	</section>
 </main>
 <?php
 get_footer();

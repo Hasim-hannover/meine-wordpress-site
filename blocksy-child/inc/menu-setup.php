@@ -2,8 +2,8 @@
 /**
  * NEXUS MENU SETUP
  *
- * Erstellt das Hauptmenü mit der empfohlenen Struktur:
- * WordPress Agentur | Leistungen (Mega) | WGOS | Tools | Blog | Über mich
+ * Erstellt das fokussierte Hauptmenü fuer die Neukunden-Navigation:
+ * System | Case Studies | Insights | Über mich | Audit starten
  *
  * Einmal-Setup: Wird beim Theme-Switch oder manuell via ?nexus_rebuild_menu=1 ausgelöst.
  *
@@ -32,87 +32,32 @@ function nexus_setup_main_menu() {
 		return;
 	}
 
-	// Hilfsfunktion: Seite per Slug finden
-	$get_page_id = function ( $slug ) {
-		$page = get_page_by_path( $slug );
-		return $page ? $page->ID : 0;
-	};
-
-	// ── 1. WordPress Agentur (Top-Level, direkt verlinkt) ──────────
-	$agentur_id = $get_page_id( 'wordpress-agentur' );
-	$item_agentur = wp_update_nav_menu_item( $menu_id, 0, [
-		'menu-item-title'     => 'WordPress Agentur',
-		'menu-item-object'    => 'page',
-		'menu-item-object-id' => $agentur_id,
-		'menu-item-type'      => $agentur_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $agentur_id ? '' : home_url( '/wordpress-agentur/' ),
-		'menu-item-status'    => 'publish',
-	] );
-
-	// ── 2. Leistungen (Mega-Menü Parent) ───────────────────────────
-	$item_leistungen = wp_update_nav_menu_item( $menu_id, 0, [
-		'menu-item-title'   => 'Leistungen',
-		'menu-item-type'    => 'custom',
-		'menu-item-url'     => '#',
-		'menu-item-status'  => 'publish',
-		'menu-item-classes' => 'mega',
-	] );
-
-	// Leistungen Sub-Items
-	$services = [
-		[ 'slug' => 'wordpress-seo-hannover', 'title' => 'SEO Hannover' ],
-		[ 'slug' => 'conversion-rate-optimization', 'title' => 'CRO & UX' ],
-		[ 'slug' => 'core-web-vitals', 'title' => 'Core Web Vitals' ],
-		[ 'slug' => 'ga4-tracking-setup', 'title' => 'GA4 & Tracking' ],
-		[ 'slug' => 'meta-ads', 'title' => 'Meta Ads' ],
-		[ 'slug' => 'performance-marketing', 'title' => 'Performance Marketing' ],
-	];
-
-	foreach ( $services as $service ) {
-		$page_id = $get_page_id( $service['slug'] );
-		wp_update_nav_menu_item( $menu_id, 0, [
-			'menu-item-title'           => $service['title'],
-			'menu-item-object'          => 'page',
-			'menu-item-object-id'       => $page_id,
-			'menu-item-type'            => $page_id ? 'post_type' : 'custom',
-			'menu-item-url'             => $page_id ? '' : home_url( '/' . $service['slug'] . '/' ),
-			'menu-item-parent-id'       => $item_leistungen,
-			'menu-item-status'          => 'publish',
-		] );
-	}
-
-	// ── 3. WGOS (Top-Level, direkt verlinkt) ───────────────────────
-	$wgos_id = $get_page_id( 'wordpress-growth-operating-system' );
-	if ( ! $wgos_id ) {
-		$wgos_id = $get_page_id( 'wgos' );
-	}
+	// ── 1. System (Top-Level) ──────────────────────────────────────
+	$system_id = nexus_get_page_id( [ 'wordpress-growth-operating-system', 'wgos' ] );
 	wp_update_nav_menu_item( $menu_id, 0, [
-		'menu-item-title'     => 'WGOS',
+		'menu-item-title'     => 'System',
 		'menu-item-object'    => 'page',
-		'menu-item-object-id' => $wgos_id,
-		'menu-item-type'      => $wgos_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $wgos_id ? '' : home_url( '/wgos/' ),
+		'menu-item-object-id' => $system_id,
+		'menu-item-type'      => $system_id ? 'post_type' : 'custom',
+		'menu-item-url'       => $system_id ? '' : home_url( '/wordpress-growth-operating-system/' ),
 		'menu-item-status'    => 'publish',
 	] );
 
-	// ── 4. Tools (Top-Level) ───────────────────────────────────────
-	$tools_id = $get_page_id( 'kostenlose-tools' );
-	if ( ! $tools_id ) {
-		$tools_id = $get_page_id( 'tools' );
-	}
+	// ── 2. Case Studies (Top-Level) ────────────────────────────────
+	$cases_id = nexus_get_page_id( [ 'case-studies' ] );
 	wp_update_nav_menu_item( $menu_id, 0, [
-		'menu-item-title'     => 'Tools',
+		'menu-item-title'     => 'Case Studies',
 		'menu-item-object'    => 'page',
-		'menu-item-object-id' => $tools_id,
-		'menu-item-type'      => $tools_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $tools_id ? '' : home_url( '/kostenlose-tools/' ),
+		'menu-item-object-id' => $cases_id,
+		'menu-item-type'      => $cases_id ? 'post_type' : 'custom',
+		'menu-item-url'       => $cases_id ? '' : home_url( '/case-studies/' ),
 		'menu-item-status'    => 'publish',
 	] );
 
-	// ── 5. Blog (Top-Level) ────────────────────────────────────────
+	// ── 3. Insights (Top-Level) ────────────────────────────────────
 	$blog_page_id = get_option( 'page_for_posts' );
 	wp_update_nav_menu_item( $menu_id, 0, [
-		'menu-item-title'     => 'Blog',
+		'menu-item-title'     => 'Insights',
 		'menu-item-object'    => $blog_page_id ? 'page' : '',
 		'menu-item-object-id' => $blog_page_id ?: 0,
 		'menu-item-type'      => $blog_page_id ? 'post_type' : 'custom',
@@ -120,12 +65,27 @@ function nexus_setup_main_menu() {
 		'menu-item-status'    => 'publish',
 	] );
 
-	// ── 6. Über mich (Top-Level) ──────────────────────────────────
+	// ── 4. Über mich (Top-Level) ──────────────────────────────────
+	$about_id = nexus_get_page_id( [ 'uber-mich' ] );
 	wp_update_nav_menu_item( $menu_id, 0, [
 		'menu-item-title'     => 'Über mich',
-		'menu-item-type'      => 'custom',
-		'menu-item-url'       => 'https://hasimuener.de/uber-mich/',
+		'menu-item-object'    => 'page',
+		'menu-item-object-id' => $about_id,
+		'menu-item-type'      => $about_id ? 'post_type' : 'custom',
+		'menu-item-url'       => $about_id ? '' : home_url( '/uber-mich/' ),
 		'menu-item-status'    => 'publish',
+	] );
+
+	// ── 5. Audit CTA (Top-Level) ───────────────────────────────────
+	$audit_id = nexus_get_page_id( [ 'customer-journey-audit', 'audit' ] );
+	wp_update_nav_menu_item( $menu_id, 0, [
+		'menu-item-title'     => 'Audit starten',
+		'menu-item-object'    => 'page',
+		'menu-item-object-id' => $audit_id,
+		'menu-item-type'      => $audit_id ? 'post_type' : 'custom',
+		'menu-item-url'       => $audit_id ? '' : home_url( '/customer-journey-audit/' ),
+		'menu-item-status'    => 'publish',
+		'menu-item-classes'   => 'nav-cta-button',
 	] );
 
 	// ── Menü der primären Location zuweisen ────────────────────────

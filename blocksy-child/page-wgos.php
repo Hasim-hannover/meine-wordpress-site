@@ -11,6 +11,9 @@
  */
 
 get_header();
+
+$audit_url = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ], home_url( '/customer-journey-audit/' ) );
+$cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
 ?>
 
 <div class="wgos-wrapper">
@@ -36,19 +39,19 @@ get_header();
     <div class="wgos-container wgos-hero__inner">
         <span class="wgos-kicker">Das System</span>
 
-        <h1 class="wgos-hero__title">WGOS: Assets bauen statt Kampagnen verbrennen.</h1>
+        <h1 class="wgos-hero__title">WGOS: WordPress als Growth-Infrastruktur fuer B2B.</h1>
 
-        <p class="wgos-hero__subtitle">Monatliche Investition in WordPress-Assets, die Ihnen gehören&nbsp;— Performance, Daten, Rankings, Leads.</p>
-        <p class="wgos-hero__positioning">Das Betriebssystem für B2B-Wachstum ohne Ad-Abhängigkeit.</p>
+        <p class="wgos-hero__subtitle">Ein Retainer fuer Unternehmen, die aus ihrer WordPress-Praesenz ein Owned-Lead-System machen wollen.</p>
+        <p class="wgos-hero__positioning">Erst Fundament und Messbarkeit, dann Sichtbarkeit, Conversion und kontrollierte Aktivierung.</p>
         <ul class="wgos-hero__bullets">
-            <li>7 Module, ein System</li>
-            <li>Credits statt Stundensätze</li>
-            <li>Kein Lock-in, 100% Ownership</li>
+            <li>Fundament vor Skalierung</li>
+            <li>Credits mit klarer Priorisierung</li>
+            <li>Kein Lock-in, volle Ownership</li>
         </ul>
 
         <div class="wgos-hero__actions">
-            <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Free Journey Audit starten (0&nbsp;€)</a>
-            <a href="/case-studies/" class="wgos-link--arrow">Case Studies ansehen →</a>
+            <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Audit starten</a>
+            <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Case Studies ansehen →</a>
         </div>
 
         <!-- Trust Stack -->
@@ -75,9 +78,6 @@ get_header();
 
         <p class="wgos-hero__risk-note">Ergebnisse hängen von der Ausgangslage ab&nbsp;— im Audit sehen Sie die größten Hebel.</p>
 
-        <div class="wgos-hero__links">
-            <a href="/roi-rechner/" class="wgos-link--arrow">ROI in 60 Sekunden →</a>
-        </div>
     </div>
 </section>
 
@@ -112,7 +112,7 @@ get_header();
             <div class="wgos-principle-bottom">
                 <p class="wgos-bold-statement wgos-bold-statement--principle">Ads sind nicht verboten&nbsp;— aber sie werden zum optionalen Turbo, wenn das Fundament steht. Nicht zum Dauertropf.</p>
                 <p class="wgos-inline-cta wgos-inline-cta--principle">
-                    <a href="/customer-journey-audit/" data-track="cta_click_audit">Wie stark ist Ihr Fundament? Free Journey Audit starten&nbsp;→</a>
+                    <a href="<?php echo esc_url( $audit_url ); ?>" data-track="cta_click_audit">Wie stark ist Ihr Fundament? Mit dem Audit starten&nbsp;→</a>
                 </p>
             </div>
         </div>
@@ -246,8 +246,8 @@ get_header();
             <div class="wgos-module__grid">
                 <div class="wgos-module__num">07</div>
                 <div class="wgos-module__content">
-                    <h3>Paid Booster &amp; Automation <span class="wgos-tag--optional">Optional</span></h3>
-                    <p class="wgos-module__subline"><em>Ads als Verstärker, nicht als Betriebssystem. Automation für Skalierung ohne Mehraufwand.</em></p>
+                    <h3>Activation Layer &amp; Automation <span class="wgos-tag--optional">Optional</span></h3>
+                    <p class="wgos-module__subline"><em>Aktivierung erst dann, wenn Fundament und Conversion-Pfade tragen.</em></p>
                     <p>Google Ads, Meta Ads&nbsp;— aber nur auf Basis sauberer Daten und konvertierender Pages. Plus: n8n-Automation für Lead-Routing, Reporting, Nurture-Flows. Dieser Block ist optional und wird erst aktiviert, wenn Modul 1–6 stehen.</p>
                     <div class="wgos-module__proof">ROAS 6.2x bei 40% weniger Ad-Spend (nach Fundament-Optimierung)</div>
                     <a href="/performance-marketing/" class="wgos-link--arrow">Mehr erfahren →</a>
@@ -259,7 +259,7 @@ get_header();
     <!-- Inline CTA nach Modul 7 -->
     <div class="wgos-module wgos-module--cta">
         <div class="wgos-container" style="text-align:center;">
-            <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Erst Diagnose, dann System. Free Journey Audit starten (0&nbsp;€)</a>
+            <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Erst Diagnose, dann System. Mit dem Audit starten</a>
         </div>
     </div>
 </section>
@@ -431,7 +431,7 @@ get_header();
                         </thead>
                         <tbody>
                             <tr class="wgos-table-category">
-                                <td colspan="3">Paid Booster &amp; Automation</td>
+                                <td colspan="3">Activation Layer &amp; Automation</td>
                             </tr>
                             <tr>
                                 <td>Google Ads Setup</td>
@@ -472,7 +472,7 @@ get_header();
 <section id="pakete" class="wgos-section wgos-section--gray">
     <div class="wgos-container">
         <h2 class="wgos-h2">Pakete &amp; Investition</h2>
-        <p class="wgos-section-intro">Drei Stufen&nbsp;— je nach Wachstumsziel und Umsetzungstempo. Jedes Paket ist ein Retainer mit festem Credit-Budget pro Monat.</p>
+        <p class="wgos-section-intro">Der Retainer ist Stufe 3 des Systems. Diagnose und Blueprint klaeren vorher, welche Reihenfolge und welches Tempo wirtschaftlich sinnvoll sind.</p>
 
         <div class="wgos-pricing-grid">
             <!-- Paket 1: Maintenance -->
@@ -490,7 +490,7 @@ get_header();
                     <li>Reporting: Monatlich</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für bestehende Sites, die technisch sauber laufen müssen. Wartung + punktuelle Optimierung.</p>
-                <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Free Journey Audit starten</a>
+                <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Mit dem Audit starten</a>
             </div>
 
             <!-- Paket 2: Growth Partner (FEATURED) -->
@@ -509,7 +509,7 @@ get_header();
                     <li>Reporting: Bi-Weekly</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für B2B-Unternehmen, die ein Owned-Leads-System aufbauen wollen. SEO + CRO + Content.</p>
-                <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Free Journey Audit starten (0&nbsp;€)</a>
+                <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Audit starten</a>
             </div>
 
             <!-- Paket 3: Dominance -->
@@ -527,7 +527,7 @@ get_header();
                     <li>Reporting: Weekly + Dashboard</li>
                 </ul>
                 <p class="wgos-pricing-card__ideal">Ideal für Marktführer-Anspruch. Full Stack + Paid Booster + Automation. Maximaler Output.</p>
-                <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Free Journey Audit starten</a>
+                <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Mit dem Audit starten</a>
             </div>
         </div>
 
@@ -632,14 +632,14 @@ get_header();
      ======================================== -->
 <section class="wgos-section wgos-section--white wgos-final-cta nx-reveal">
     <div class="wgos-container" style="text-align:center;">
-        <h2 class="wgos-h2">Bereit für ein System, das über Zeit günstiger wird?</h2>
-        <p class="wgos-prose" style="max-width:680px;margin:0 auto 2rem;">Der erste Schritt ist ein Free Journey Audit: Wir analysieren Ihre Website auf Performance, Datenintegrität und Conversion-Potenzial&nbsp;— und zeigen Ihnen, wo die größten Hebel liegen.</p>
+        <h2 class="wgos-h2">Bereit fuer WordPress als echtes Nachfrage-System?</h2>
+        <p class="wgos-prose" style="max-width:680px;margin:0 auto 2rem;">Der erste Schritt bleibt bewusst klein: Audit zuerst, dann Blueprint, dann Retainer. So entsteht kein Leistungskatalog, sondern eine sinnvolle Entscheidungskette.</p>
 
         <div class="wgos-hero__actions">
-            <a href="/customer-journey-audit/" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Free Journey Audit starten (0&nbsp;€) →</a>
+            <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Audit starten →</a>
         </div>
         <div class="wgos-final__links">
-            <a href="/wordpress-agentur-hannover/" class="wgos-link--arrow">WordPress Agentur Hannover →</a>
+            <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Case Studies ansehen →</a>
         </div>
     </div>
 </section>

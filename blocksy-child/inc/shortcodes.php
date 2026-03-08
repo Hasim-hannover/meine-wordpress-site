@@ -1,457 +1,549 @@
 <?php
 /**
- * Shortcodes für die Startseite.
- * STRATEGIE-UPDATE: 100% WordPress & Growth Fokus.
- * Keine Shopify-Dienstleistung mehr testen.
+ * Startseiten-Shortcodes fuer den fokussierten Growth-Architect-Ansatz.
  *
- * @package Blocksy Child
+ * @package Blocksy_Child
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly.
+	exit;
 }
 
-// 1. Hero Section
+/**
+ * Resolve key URLs once for homepage shortcodes.
+ *
+ * @return array<string, string>
+ */
+function hu_home_urls() {
+	static $urls = null;
+
+	if ( null !== $urls ) {
+		return $urls;
+	}
+
+	$blog_page_id = (int) get_option( 'page_for_posts' );
+
+	$urls = [
+		'audit'     => nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] ),
+		'deep_dive' => nexus_get_page_url( [ '360-deep-dive' ] ),
+		'wgos'      => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
+		'cases'     => nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) ),
+		'about'     => nexus_get_page_url( [ 'uber-mich' ] ),
+		'blog'      => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
+		'e3'        => nexus_get_page_url( [ 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/case-studies/' ) ),
+	];
+
+	return $urls;
+}
+
+/**
+ * Homepage hero.
+ *
+ * @return string
+ */
 function hu_hero_section_shortcode() {
-    ob_start();
-    ?>
-    <div class="cs-page" style="display:flex; flex-direction:column;">
+	$urls = hu_home_urls();
 
-    <nav class="smart-nav" aria-label="Seitennavigation">
-        <ul>
-            <li><a href="#hero" title="Start"><div class="nav-dot"></div><span class="nav-text">Start</span></a></li>
-            <li><a href="#owned" title="Prinzip"><div class="nav-dot"></div><span class="nav-text">Owned</span></a></li>
-            <li><a href="#audit" title="Analyse"><div class="nav-dot"></div><span class="nav-text">Diagnose</span></a></li>
-            <li><a href="#wgos" title="System"><div class="nav-dot"></div><span class="nav-text">System</span></a></li>
-            <li><a href="#erfolge" title="Ergebnisse"><div class="nav-dot"></div><span class="nav-text">Erfolge</span></a></li>
-            <li><a href="#blog" title="Wissen"><div class="nav-dot"></div><span class="nav-text">Insights</span></a></li>
-            <li><a href="#faq" title="FAQ"><div class="nav-dot"></div><span class="nav-text">FAQ</span></a></li>
-        </ul>
-    </nav>
+	ob_start();
+	?>
+	<div class="cs-page" style="display:flex; flex-direction:column;">
+		<nav class="smart-nav" aria-label="Seitennavigation">
+			<ul>
+				<li><a href="#hero" title="Start"><div class="nav-dot"></div><span class="nav-text">Start</span></a></li>
+				<li><a href="#owned" title="Prinzip"><div class="nav-dot"></div><span class="nav-text">Prinzip</span></a></li>
+				<li><a href="#angebot" title="Angebot"><div class="nav-dot"></div><span class="nav-text">Angebot</span></a></li>
+				<li><a href="#erfolge" title="Ergebnisse"><div class="nav-dot"></div><span class="nav-text">Proof</span></a></li>
+				<li><a href="#faq" title="FAQ"><div class="nav-dot"></div><span class="nav-text">FAQ</span></a></li>
+			</ul>
+		</nav>
 
-    <section class="wp-hero" id="hero" role="banner">
-        <div class="wp-container">
-            <span class="wp-badge">Privacy-first Growth: Owned Leads statt Ad-Miete</span>
-            <h1 class="wp-hero-title">
-                B2B-Leads ohne<br><span>Tracking-Lärm &amp; Blackbox.</span>
-            </h1>
-            <p class="wp-hero-subtitle">
-                Ich baue aus Ihrer WordPress-Instanz ein Owned-Leads-System: ultraschnelle UX, technische SEO, Content-Assets und
-                privacy-first Messbarkeit. Ads sind optional&nbsp;– als Verstärker, nicht als Dauer-Miete.
-            </p>
-            <div class="audit-card-premium" id="audit">
-                <div style="text-align:center; margin-bottom:2rem;">
-                    <span style="background:rgba(255,176,32,0.15); color:#FFB020; padding:6px 12px; border-radius:20px; font-size:0.8rem; font-weight:700;">
-                        Free Journey Audit
-                    </span>
-                </div>
-                <h3 style="text-align:center;">Deep-Dive Tech &amp; Owned-Leads Audit</h3>
-                <p style="text-align:center; color:#aaa; margin-bottom:1.5rem;">
-                    Wir finden die echten Bremsen&nbsp;– und bauen eine Roadmap, die nicht vom Werbebudget abhängt.
-                </p>
-                <ul class="premium-list">
-                    <li><span class="check-icon">✓</span> <div><strong>Performance:</strong> Core Web Vitals &amp; UX-Reibung (Conversion-Hebel)</div></li>
-                    <li><span class="check-icon">✓</span> <div><strong>Privacy-Messbarkeit:</strong> Saubere Events &amp; Datenintegrität ohne Misstrauen</div></li>
-                    <li><span class="check-icon">✓</span> <div><strong>Owned Roadmap:</strong> 90-Tage-Plan für Rankings, Pages &amp; Lead-Qualität</div></li>
-                </ul>
-                <div class="price-box text-center">
-                    Expertise-Session (30 Min) · Invest: <strong>0&nbsp;€</strong> <span style="font-size:0.8em; opacity:0.7">(statt 450&nbsp;€)</span>
-                </div>
-                <div class="wp-btn-wrapper">
-                    <a href="/customer-journey-audit/" class="wp-btn wp-btn-primary full-width" data-track-action="cta_hero_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
-                </div>
-            </div>
+		<section class="wp-hero" id="hero" role="banner">
+			<div class="wp-container">
+				<span class="wp-badge">WordPress Growth Architect fuer B2B</span>
+				<h1 class="wp-hero-title">
+					Ich mache aus Ihrer<br><span>WordPress-Website ein planbares Anfragesystem.</span>
+				</h1>
+				<p class="wp-hero-subtitle">
+					Fuer B2B-Unternehmen, die aus WordPress mehr brauchen als einen Relaunch:
+					klare Positionierung, technische SEO, privacy-first Messbarkeit und Conversion-Logik,
+					damit aus Sichtbarkeit belastbare Anfragen werden.
+				</p>
 
-            <div class="vertical-metrics" role="group" aria-label="Erfolgsmetriken">
-                <div class="wp-metric">
-                    <span class="wp-metric-value" data-value="98">98</span>
-                    <span class="wp-metric-label">Mobile Performance</span>
-                </div>
-                <div class="wp-metric">
-                    <span class="wp-metric-value" data-value="-83">-83%</span>
-                    <span class="wp-metric-label">CPL (Kosten/Lead)</span>
-                </div>
-                <div class="wp-metric">
-                    <span class="wp-metric-value text-gold">&lt;&nbsp;0.8s</span>
-                    <span class="wp-metric-label">Load Time (LCP)</span>
-                </div>
-                <div class="wp-metric">
-                    <span class="wp-metric-value" data-value="100">100%</span>
-                    <span class="wp-metric-label">Data Ownership</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <?php
-    return ob_get_clean();
+				<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.85rem; margin:0 0 1.75rem;">
+					<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Case Studies ansehen</a>
+					<a href="<?php echo esc_url( $urls['about'] ); ?>" class="wp-btn wp-btn-secondary">Wie ich arbeite</a>
+				</div>
+
+				<div class="audit-card-premium" id="audit">
+					<div style="text-align:center; margin-bottom:1.5rem;">
+						<span style="background:rgba(255,176,32,0.15); color:#FFB020; padding:6px 12px; border-radius:20px; font-size:0.78rem; font-weight:700;">
+							Customer Journey Audit
+						</span>
+					</div>
+					<h3 style="text-align:center;">Erster Schritt: Diagnose statt Pitch</h3>
+					<p style="text-align:center; color:#b0b0b8; margin-bottom:1.5rem;">
+						Wir pruefen, wo Ihre WordPress-Praesenz Nachfrage verliert:
+						bei Sichtbarkeit, Vertrauen, Messbarkeit oder im naechsten Conversion-Schritt.
+					</p>
+					<ul class="premium-list">
+						<li><span class="check-icon">✓</span> <div><strong>Sichtbarkeit:</strong> Kaufnahe SEO- und Einstiegsseiten im Realitaetscheck</div></li>
+						<li><span class="check-icon">✓</span> <div><strong>Messbarkeit:</strong> Tracking- und Consent-Reibung erkennen, bevor Daten teuer werden</div></li>
+						<li><span class="check-icon">✓</span> <div><strong>Conversion:</strong> Proof, CTA-Fuehrung und Angebotslogik auf echte Anfragen ausrichten</div></li>
+					</ul>
+					<div class="price-box text-center">
+						Kein Verkaufsgespraech. Klare Einschaetzung. Sinnvolle naechste Entscheidung.
+					</div>
+					<div class="wp-btn-wrapper" style="margin-top:1.25rem;">
+						<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary full-width" data-track-action="cta_hero_audit" data-track-category="lead_gen">Audit starten</a>
+					</div>
+					<p style="margin:1rem 0 0; text-align:center;">
+						<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="micro-cta-link" style="margin:0;">Erst das System verstehen -></a>
+					</p>
+				</div>
+
+				<div class="vertical-metrics" role="group" aria-label="Erfolgsmetriken">
+					<div class="wp-metric">
+						<span class="wp-metric-value" data-value="98">98</span>
+						<span class="wp-metric-label">Mobile Performance</span>
+					</div>
+					<div class="wp-metric">
+						<span class="wp-metric-value" data-value="-83">-83%</span>
+						<span class="wp-metric-label">CPL-Reduktion</span>
+					</div>
+					<div class="wp-metric">
+						<span class="wp-metric-value text-gold">&lt;&nbsp;0.8s</span>
+						<span class="wp-metric-label">LCP auf Kernseiten</span>
+					</div>
+					<div class="wp-metric">
+						<span class="wp-metric-value" data-value="100">100%</span>
+						<span class="wp-metric-label">Ownership statt Lock-in</span>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php
+
+	return ob_get_clean();
 }
 add_shortcode( 'hu_hero', 'hu_hero_section_shortcode' );
 
-// 2. Partner Section (BEREINIGT: Kein Shopify mehr)
+/**
+ * Homepage fit section.
+ *
+ * @return string
+ */
 function hu_partner_section_shortcode() {
-    ob_start();
-    ?>
-    <section id="partner" class="architect-section" aria-labelledby="architect-heading">
-        <div class="container">
-            <div class="architect-grid">
-                <div class="hero-card">
-                    <img src="https://hasimuener.de/wp-content/uploads/2025/08/Shopify-WordPress-Growth-Architect-400-x-400-px.webp" alt="Hasim Üner – WordPress Experte Hannover" loading="lazy" width="400" height="400">
-                </div>
-                <div class="architect-content">
-                    <span class="badge">Ihr Strategischer Partner</span>
-                    <h2 id="architect-heading">Ich bin Hasim Üner – Ihr WordPress Specialist.</h2>
-                    <p class="lead">Ich verbinde tiefes technisches Verständnis mit strategischem Marketing. Mein Ansatz ist nicht "Stunden abarbeiten", sondern <strong>Ergebnisse liefern</strong>. Von der sauberen <a href="https://hasimuener.de/ga4-tracking-setup/" style="color:var(--gold); text-decoration: underline;">Daten-Infrastruktur</a> bis zur <a href="https://hasimuener.de/core-web-vitals-optimierung/" style="color:var(--gold); text-decoration: underline;">Performance-Optimierung</a> erhalten Sie fertige Module, die Ihr Business voranbringen.</p>
-                    <a href="/uber-mich/" class="btn btn-ghost">Meine Arbeitsweise kennenlernen</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <?php
-    return ob_get_clean();
+	$urls = hu_home_urls();
+
+	ob_start();
+	?>
+	<section id="fit" class="wp-section" aria-labelledby="fit-heading">
+		<div class="wp-container">
+			<div class="wp-section-title text-center">
+				<span class="wp-badge">Fokus</span>
+				<h2 id="fit-heading" class="wp-section-h2">Fuer wen das passt</h2>
+				<p class="wp-section-p">Nicht fuer jeden. Genau deshalb funktioniert die Seite besser fuer die Richtigen.</p>
+			</div>
+
+			<div class="wp-cards">
+				<article class="wp-success-card">
+					<h3 class="wp-success-title">WordPress ist Kernsystem</h3>
+					<p class="wp-success-subtitle">Keine CMS-Spielwiese</p>
+					<p>Ihre Website soll nicht nur gepflegt werden, sondern als Nachfrage- und Vertriebsinfrastruktur arbeiten.</p>
+				</article>
+
+				<article class="wp-success-card">
+					<h3 class="wp-success-title">B2B mit echtem Vertriebsziel</h3>
+					<p class="wp-success-subtitle">Anfragen statt Image-only</p>
+					<p>Es gibt ein klares Leistungsversprechen, kaufnahe Suchintentionen und den Anspruch, aus Besuchern qualifizierte Gespraeche zu machen.</p>
+				</article>
+
+				<article class="wp-success-card">
+					<h3 class="wp-success-title">Bereitschaft fuer Prioritaeten</h3>
+					<p class="wp-success-subtitle">Kein Aktionismus</p>
+					<p>Sie wollen keine zehn Einzelmassnahmen parallel, sondern die richtige Reihenfolge aus Diagnose, Architektur und Umsetzung.</p>
+				</article>
+			</div>
+
+			<div style="text-align:center; margin-top:2.5rem;">
+				<a href="<?php echo esc_url( $urls['about'] ); ?>" class="wp-btn wp-btn-secondary">Meine Arbeitsweise kennenlernen</a>
+			</div>
+		</div>
+	</section>
+	<?php
+
+	return ob_get_clean();
 }
 add_shortcode( 'hu_partner', 'hu_partner_section_shortcode' );
 
-// 2b. Owned vs Ad-Miete Section
+/**
+ * Homepage principle section.
+ *
+ * @return string
+ */
 function hu_owned_section_shortcode() {
-    ob_start();
-    ?>
-    <section id="owned" class="wp-section" style="border-top: 1px solid rgba(255,255,255,0.05);" aria-labelledby="owned-heading">
-        <div class="container">
-            <div class="section-title text-center">
-                <span class="badge">Das Prinzip</span>
-                <h2 id="owned-heading">Owned Leads statt Ad-System auf Miete.</h2>
-                <p>In anspruchsvollen Märkten gewinnt nicht der Lauteste, sondern der Vertrauenswürdigste&nbsp;— eine Pipeline, die mit der Zeit günstiger wird.</p>
-            </div>
+	$urls = hu_home_urls();
 
-            <div class="wp-cards" style="margin-top:2.5rem;">
+	ob_start();
+	?>
+	<section id="owned" class="wp-section" style="border-top:1px solid rgba(255,255,255,0.05);" aria-labelledby="owned-heading">
+		<div class="container">
+			<div class="section-title text-center">
+				<span class="badge">Das Prinzip</span>
+				<h2 id="owned-heading">Owned Leads statt Nachfrage auf Miete.</h2>
+				<p>Die bessere Website ist nicht die schoenere. Es ist die, die Nachfrage halten, messen und in den naechsten Schritt fuehren kann.</p>
+			</div>
 
-                <div class="wp-success-card modell-a" style="border-top:3px solid rgba(255,255,255,0.1);">
-                    <h3 class="wp-success-title">Modell A: Ad-Miete</h3>
-                    <p class="wp-success-subtitle">Paid-Only, Dauer-Druck</p>
-                    <ul class="premium-list">
-                        <li><span class="check-icon" style="color:#888;">→</span> <div>Schneller Push&nbsp;— solange Budget läuft</div></li>
-                        <li><span class="check-icon" style="color:#888;">→</span> <div>Steigende Medienkosten, sinkende Margen</div></li>
-                        <li><span class="check-icon" style="color:#888;">→</span> <div>Abhängigkeit von Plattform-Regeln &amp; Tracking-Restriktionen</div></li>
-                    </ul>
-                </div>
+			<div class="wp-cards" style="margin-top:2.5rem;">
+				<div class="wp-success-card modell-a" style="border-top:3px dashed rgba(255,255,255,0.14); opacity:0.82;">
+					<h3 class="wp-success-title">Modell A: Externe Nachfrage mieten</h3>
+					<p class="wp-success-subtitle">Teurer, sobald Reibung im System bleibt</p>
+					<ul class="premium-list">
+						<li><span class="check-icon" style="color:#888;">-></span> <div>Klicks einkaufen, waehrend die Seite intern Anfragen verliert</div></li>
+						<li><span class="check-icon" style="color:#888;">-></span> <div>Steigende Medienkosten kaschieren schwache Positionierung und schlechte Daten</div></li>
+						<li><span class="check-icon" style="color:#888;">-></span> <div>Budgetstop = Sichtbarkeitstop</div></li>
+					</ul>
+				</div>
 
-                <div class="wp-success-card modell-b" style="border-top:3px solid var(--gold);">
-                    <h3 class="wp-success-title" style="color:var(--gold);">Modell B: Owned Leads</h3>
-                    <p class="wp-success-subtitle">Privacy-first · SEO · Content · Vertrauen</p>
-                    <ul class="premium-list">
-                        <li><span class="check-icon">✓</span> <div>Assets bauen: Rankings, Pages, Proof, Lead-Flows</div></li>
-                        <li><span class="check-icon">✓</span> <div>Messen, was nötig ist&nbsp;— sauber, DSGVO-konform</div></li>
-                        <li><span class="check-icon">✓</span> <div>Ads optional als Verstärker, wenn das Fundament steht</div></li>
-                    </ul>
-                </div>
+				<div class="wp-success-card modell-b" style="border-top:4px solid var(--gold);">
+					<h3 class="wp-success-title" style="color:var(--gold);">Modell B: WordPress als Growth-Infrastruktur</h3>
+					<p class="wp-success-subtitle">Owned, messbar, priorisiert</p>
+					<ul class="premium-list">
+						<li><span class="check-icon">✓</span> <div>Money Pages, Proof und interne Verlinkung als bleibende Assets</div></li>
+						<li><span class="check-icon">✓</span> <div>Privacy-first Measurement fuer Entscheidungen statt Reporting-Rauschen</div></li>
+						<li><span class="check-icon">✓</span> <div>Ads nur als Booster, wenn Fundament und Conversion-Pfade stehen</div></li>
+					</ul>
+				</div>
+			</div>
 
-            </div>
+			<div class="text-center" style="margin-top:2rem;">
+				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Pruefen, wo Ihre Seite heute verliert</a>
+			</div>
+			<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="micro-cta-link">Noch nicht sicher? Erst das System verstehen -></a>
+		</div>
+	</section>
+	<?php
 
-            <div class="text-center" style="margin-top:2rem;">
-                <a href="/customer-journey-audit/" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Audit starten: Welche Hebel sind bei Ihnen drin?</a>
-            </div>
-            <a href="/wordpress-growth-operating-system/" class="micro-cta-link">Noch nicht sicher? Erst das System verstehen →</a>
-        </div>
-    </section>
-    <?php
-    return ob_get_clean();
+	return ob_get_clean();
 }
 add_shortcode( 'hu_owned', 'hu_owned_section_shortcode' );
 
-// 2c. WGOS Block (Homepage Teaser)
+/**
+ * Homepage offer architecture section.
+ *
+ * @return string
+ */
 function hu_wgos_block_shortcode() {
-    ob_start();
-    ?>
-    <section class="wp-section homepage-wgos-section" id="wgos" aria-labelledby="wgos-heading">
-        <div class="wp-container">
-            <div class="wp-section-title text-center">
-                <span class="wp-badge">Das System</span>
-                <h2 id="wgos-heading" class="wp-section-h2">WordPress Growth Operating System (WGOS)</h2>
-                <p class="wp-section-p">
-                    Weg von "Kampagnen-Gambling", hin zu Assets: Wir investieren monatlich in Dinge, die bleiben&nbsp;–
-                    Geschwindigkeit, Datenintegrität, Seiten, Content und Lead-Qualität.
-                </p>
-            </div>
-            <div class="wp-process">
-                <div class="wp-step">
-                    <div class="wp-step-num">1</div>
-                    <h3>Speed &amp; Conversion</h3>
-                    <p>Core Web Vitals, UX-Reibung, technische Hygiene. Ziel: weniger Absprünge, mehr Anfragen&nbsp;– messbar.</p>
-                </div>
-                <div class="wp-step">
-                    <div class="wp-step-num">2</div>
-                    <h3>Privacy-First Measurement</h3>
-                    <p>Server-Side Tracking, Consent Mode v2, Event-Blueprint. Saubere Daten ohne Vertrauen zu zerstören.</p>
-                </div>
-                <div class="wp-step highlight-step">
-                    <div class="wp-step-num highlight-num">3</div>
-                    <h3 class="text-gold">Owned Lead Flywheel (Retainer)</h3>
-                    <p>
-                        Pillar Pages, Content-Cluster, interne Verlinkung, Proof-Assets &amp; Nurture.
-                        <strong>Beispiel:</strong> Neue High-Conversion Landingpage fix 20 Punkte&nbsp;– planbar, ohne Nachverhandlung.
-                    </p>
-                </div>
-            </div>
-            <div id="homepage-mindmap-teaser-root" class="homepage-mindmap-section" aria-label="WGOS Mindmap Teaser"></div>
-            <div class="text-center" style="margin-top:2.5rem;">
-                <a href="/customer-journey-audit/" class="wp-btn wp-btn-secondary" data-track-action="cta_wgos_audit" data-track-category="lead_gen">Erst Diagnose, dann System</a>
-            </div>
-        </div>
-    </section>
-    <?php
-    return ob_get_clean();
+	$urls = hu_home_urls();
+
+	ob_start();
+	?>
+	<section class="wp-section homepage-wgos-section" id="angebot" aria-labelledby="angebot-heading">
+		<div class="wp-container">
+			<div class="wp-section-title text-center">
+				<span class="wp-badge">Angebotsarchitektur</span>
+				<h2 id="angebot-heading" class="wp-section-h2">Drei Stufen statt zehn Einzelleistungen.</h2>
+				<p class="wp-section-p">
+					Der Ablauf ist bewusst eng gefuehrt: erst Diagnose, dann Blueprint,
+					dann Umsetzung und laufende Optimierung auf WordPress-Basis.
+				</p>
+			</div>
+
+			<div class="wp-process">
+				<div class="wp-step">
+					<div class="wp-step-num">1</div>
+					<h3>Customer Journey Audit</h3>
+					<p>Der niedrigschwellige Einstieg. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen und ob sich ein tieferer Eingriff lohnt.</p>
+				</div>
+				<div class="wp-step highlight-step">
+					<div class="wp-step-num highlight-num">2</div>
+					<h3>360 Grad Growth Blueprint</h3>
+					<p>Der Deep Dive fuer Unternehmen mit echtem Potenzial. Ergebnis: priorisierte Roadmap fuer Positionierung, IA, Measurement und Conversion-Logik.</p>
+				</div>
+				<div class="wp-step">
+					<div class="wp-step-num">3</div>
+					<h3>WGOS Umsetzung und Retainer</h3>
+					<p>Technische Umsetzung, Content-Aufbau und fortlaufende Optimierung in einer Reihenfolge, die Kosten senkt und die Qualitaet von Anfragen steigert.</p>
+				</div>
+			</div>
+
+			<div id="homepage-mindmap-teaser-root" class="homepage-mindmap-section" aria-label="WGOS Mindmap Teaser"></div>
+
+			<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:2.5rem;">
+				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_wgos_audit" data-track-category="lead_gen">Mit dem Audit starten</a>
+				<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="wp-btn wp-btn-secondary">WGOS im Detail</a>
+			</div>
+		</div>
+	</section>
+	<?php
+
+	return ob_get_clean();
 }
 add_shortcode( 'hu_wgos_block', 'hu_wgos_block_shortcode' );
 
-// 3. Erfolge Section
+/**
+ * Homepage proof section.
+ *
+ * @return string
+ */
 function hu_erfolge_section_shortcode() {
-    ob_start();
-    ?>
-    <section id="erfolge" aria-labelledby="cases-heading" style="padding:5rem 0; background:var(--nx-bg-glass); border-top:1px solid var(--nx-border); border-bottom:1px solid var(--nx-border);">
-        <div class="nx-container">
+	$urls = hu_home_urls();
 
-            <div style="text-align:center; margin-bottom:3rem;">
-                <span class="nx-badge nx-badge--gold">Track Record</span>
-                <h2 id="cases-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Ergebnisse statt Versprechen.</h2>
-                <p style="color:var(--nx-text-muted);">Echte Zahlen aus Projekten, bei denen Strategie und Technik ineinandergreifen.</p>
-            </div>
+	ob_start();
+	?>
+	<section id="erfolge" aria-labelledby="cases-heading" style="padding:5rem 0; background:var(--nx-bg-glass); border-top:1px solid var(--nx-border); border-bottom:1px solid var(--nx-border);">
+		<div class="nx-container">
+			<div style="text-align:center; margin-bottom:3rem;">
+				<span class="nx-badge nx-badge--gold">Proof</span>
+				<h2 id="cases-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Ergebnisse statt Leistungslisten.</h2>
+				<p style="color:var(--nx-text-muted);">Der Hebel liegt selten in einer einzelnen Massnahme. Er liegt fast immer in besserer Reihenfolge.</p>
+			</div>
 
-            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-bottom:3rem;">
+			<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; margin-bottom:3rem;">
+				<article class="nx-card" style="border-top:3px solid var(--nx-success);">
+					<p class="nx-card__subtitle">B2B Leadgen · WordPress System · 12 Monate</p>
+					<h3 class="nx-card__title">E3 New Energy</h3>
+					<p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">Eingekaufte Leads, keine saubere Datenlage, hohe Reibung nach dem Klick. Nach Systemaufbau:</p>
+					<div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+						<div class="nx-metric">
+							<span class="nx-metric__value" style="color:var(--nx-success);">1.750+</span>
+							<span class="nx-metric__label">Qualifizierte Leads</span>
+						</div>
+						<div class="nx-metric">
+							<span class="nx-metric__value" style="color:var(--nx-success);">-83%</span>
+							<span class="nx-metric__label">CPL</span>
+						</div>
+						<div class="nx-metric">
+							<span class="nx-metric__value" style="color:var(--nx-gold);">12-15%</span>
+							<span class="nx-metric__label">Sales-Conversion</span>
+						</div>
+						<div class="nx-metric">
+							<span class="nx-metric__value" style="color:var(--nx-success);">34x</span>
+							<span class="nx-metric__label">ROAS-Spitze</span>
+						</div>
+					</div>
+					<a href="<?php echo esc_url( $urls['e3'] ); ?>" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Case Study lesen -></a>
+				</article>
 
-                <article class="nx-card" style="border-top:3px solid var(--nx-success);">
-                    <p class="nx-card__subtitle">B2B Leadgen · High-Performance WordPress · 12 Monate</p>
-                    <h3 class="nx-card__title">E3 New Energy<br><span style="color:var(--nx-gold); font-size:0.85em;">Lead-Maschine</span></h3>
-                    <p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">E3 startete mit 150€ CPL ohne messbare Leadqualität. Nach WGOS-Aufbau:</p>
-                    <div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
-                        <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-success);">1.750+</span>
-                            <span class="nx-metric__label">Qualif. Leads</span>
-                        </div>
-                        <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-success);">−83%</span>
-                            <span class="nx-metric__label">CPL Reduktion</span>
-                        </div>
-                        <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-gold);">12–15%</span>
-                            <span class="nx-metric__label">Sales-Conversion</span>
-                        </div>
-                        <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-success);">20.000€</span>
-                            <span class="nx-metric__label">Budget: Leadgen + Recruiting</span>
-                        </div>
-                    </div>
-                    <a href="/case-studies/e3-new-energy/" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Case Study lesen →</a>
-                </article>
+				<article class="nx-card" style="border-top:3px solid var(--nx-gold);">
+					<p class="nx-card__subtitle">Typische Wirkungen nach der ersten Priorisierungsrunde</p>
+					<h3 class="nx-card__title">Was sich zuerst verbessert</h3>
+					<ul class="premium-list" style="margin-top:1rem;">
+						<li><span class="check-icon">✓</span> <div>Money Pages werden klarer, schneller und argumentativ sauberer</div></li>
+						<li><span class="check-icon">✓</span> <div>Tracking und Consent liefern endlich belastbare Signale</div></li>
+						<li><span class="check-icon">✓</span> <div>SEO, Proof und CTA-Fuehrung ziehen in dieselbe Richtung</div></li>
+					</ul>
+					<p style="color:var(--nx-text-muted); margin:0;">Keine Hype-Metriken. Erst die Bremsen loesen, dann skalieren.</p>
+				</article>
+			</div>
 
-                <article class="nx-card" style="border-top:3px solid var(--nx-gold);">
-                    <p class="nx-card__subtitle">Performance Relaunch · CRO &amp; UX Strategy · 6 Monate</p>
-                    <h3 class="nx-card__title">DOMDAR<br><span style="color:var(--nx-gold); font-size:0.85em;">E-Commerce Scaling</span></h3>
-                    <p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">DOMDAR hatte 46€ Warenkorb-Schnitt und 4,2s Ladezeit. Nach Performance Relaunch:</p>
-                    <div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
-                        <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-success);">+270%</span>
-                            <span class="nx-metric__label">Conversion Rate</span>
-                        </div>
-                        <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-gold);">+445%</span>
-                            <span class="nx-metric__label">Warenkorb-Wert</span>
-                        </div>
-                        <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-success);">−62%</span>
-                            <span class="nx-metric__label">Abbrüche</span>
-                        </div>
-                        <div class="nx-metric">
-                            <span class="nx-metric__value" style="color:var(--nx-success);">0.4s</span>
-                            <span class="nx-metric__label">Ladezeit</span>
-                        </div>
-                    </div>
-                    <a href="/case-studies/" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Alle Cases ansehen →</a>
-                </article>
+			<div class="selection-card" style="margin:0 auto 2.5rem;">
+				<span class="selection-card-label">Passt nicht</span>
+				<p style="margin:0; color:var(--nx-text-muted);">Fuer reine Visitenkarten, Billig-Umsetzungen oder Teams, die zehn Taktiken parallel starten wollen. Das System ist fuer B2B-Unternehmen, die WordPress als echten Nachfragekanal ernst nehmen.</p>
+			</div>
 
-            </div>
+			<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
+				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_erfolge_audit" data-track-category="lead_gen">Audit starten</a>
+				<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_erfolge_cases" data-track-category="lead_gen">Weitere Case Studies</a>
+			</div>
+		</div>
+	</section>
+	<?php
 
-            <div class="selection-card" style="margin:0 auto 2.5rem;">
-                <span class="selection-card-label">FÜR WEN IST DAS NICHTS</span>
-                <p style="margin:0; color:var(--nx-text-muted);">Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen die Baukasten-Preise erwarten. Das System ist für B2B-Unternehmen ab ~500.000€ Jahresumsatz, die planbar skalieren wollen.</p>
-            </div>
-
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
-                <a href="/customer-journey-audit/" class="nx-btn nx-btn--primary" data-track-action="cta_erfolge_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
-                <a href="/case-studies/" class="nx-btn nx-btn--ghost" data-track-action="cta_erfolge_cases" data-track-category="lead_gen">Case Studies ansehen</a>
-            </div>
-
-        </div>
-    </section>
-    <?php
-    return ob_get_clean();
+	return ob_get_clean();
 }
 add_shortcode( 'hu_erfolge', 'hu_erfolge_section_shortcode' );
 
-// 4. Prozess Section (Bleibt fast gleich, passt super)
+/**
+ * Homepage working method section.
+ *
+ * @return string
+ */
 function hu_prozess_section_shortcode() {
-    ob_start();
-    ?>
-    <section id="prozess" aria-labelledby="process-heading">
-        <div class="container">
-            <div class="section-title">
-                <span class="badge">Retainer & Module</span>
-                <h2 id="process-heading">So arbeiten wir zusammen</h2>
-                <p>Kein unübersichtliches Stundenschreiben. Wir definieren Ziele und ich setze diese in klaren Sprints und Modulen um.</p>
-            </div>
-            <div class="process">
-                <article class="step"><div class="num">1</div><h3>Free Journey Audit</h3><p class="muted">Wir analysieren Ihre WordPress-Präsenz auf Tracking, Performance, Conversion und SEO. Sie erhalten eine priorisierte Roadmap&nbsp;— kostenlos, in 48h. <a href="/customer-journey-audit/" style="color:var(--gold); font-weight:700;">Audit starten →</a></p></article>
-                <article class="step"><div class="num">2</div><h3>Modulare Umsetzung</h3><p class="muted">Ob Performance-Boost, Tracking-Setup oder Design-Refresh: Ich setze die definierten Pakete technisch sauber um.</p></article>
-                <article class="step"><div class="num">3</div><h3>Review & Deployment</h3><p class="muted">Jedes Modul wird getestet und abgenommen, bevor es live geht. Volle Transparenz über GitHub und Staging-Umgebungen.</p></article>
-                <article class="step"><div class="num">4</div><h3>Growth Retainer</h3><p class="muted">Nach dem Launch optimieren wir weiter. Im monatlichen Retainer überwache ich Core Web Vitals, Rankings und Conversions.</p></article>
-            </div>
-            <div style="text-align:center; margin-top: 2rem;">
-                <a href="/wordpress-growth-operating-system/" class="btn btn-ghost">WGOS verstehen</a>
-            </div>
-        </div>
-    </section>
-    <?php
-    return ob_get_clean();
+	$urls = hu_home_urls();
+
+	ob_start();
+	?>
+	<section id="prozess" aria-labelledby="process-heading">
+		<div class="container">
+			<div class="section-title">
+				<span class="badge">Wie ich arbeite</span>
+				<h2 id="process-heading">Weniger Aktionismus. Mehr Reihenfolge.</h2>
+				<p>Die staerksten Hebel sitzen fast nie da, wo klassische Agentur-Scopes anfangen. Deshalb arbeite ich nach Abhaengigkeiten, nicht nach Popularitaet.</p>
+			</div>
+			<div class="process">
+				<article class="step"><div class="num">1</div><h3>Diagnose vor Pitch</h3><p class="muted">Erst pruefen wir, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen. Dann entscheiden wir, ob ein tieferer Eingriff wirtschaftlich Sinn ergibt.</p></article>
+				<article class="step"><div class="num">2</div><h3>WordPress als Infrastruktur</h3><p class="muted">Ich denke nicht in Einzelseiten, sondern in Seitenrollen, internen Verbindungen, Measurement und dem naechsten sinnvollen Schritt fuer den Nutzer.</p></article>
+				<article class="step"><div class="num">3</div><h3>Measurement mit Mass</h3><p class="muted">Privacy-first heisst nicht blind. Wir messen nur das, was Entscheidungen verbessert und Teams handlungsfaehig macht.</p></article>
+				<article class="step"><div class="num">4</div><h3>Ownership statt Lock-in</h3><p class="muted">Code, Content, Tracking-Logik und Priorisierung bleiben nachvollziehbar. Keine Blackbox, kein kuenstlicher Agenturbedarf.</p></article>
+			</div>
+			<div style="text-align:center; margin-top:2rem;">
+				<a href="<?php echo esc_url( $urls['about'] ); ?>" class="btn btn-ghost">Mehr ueber meine Arbeitsweise</a>
+			</div>
+		</div>
+	</section>
+	<?php
+
+	return ob_get_clean();
 }
 add_shortcode( 'hu_prozess', 'hu_prozess_section_shortcode' );
 
-// 5. FAQ Section
+/**
+ * Homepage FAQ section.
+ *
+ * @return string
+ */
 function hu_faq_section_shortcode() {
-    ob_start();
-    ?>
-    <section id="faq" class="homepage-faq-section" aria-labelledby="faq-heading" style="background:var(--glass-bg); border-top:1px solid var(--glass-border); padding:5rem 0; order:95;">
-        <div class="nx-container">
-            <div style="text-align:center; margin-bottom:3rem;">
-                <span class="nx-badge nx-badge--gold">FAQ</span>
-                <h2 id="faq-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Häufige Fragen</h2>
-                <p style="color:var(--nx-text-muted);">Klarheit vor dem ersten Schritt.</p>
-            </div>
-            <div class="nx-faq">
-                <details class="nx-faq__item">
-                    <summary>Was bedeutet "Privacy-first Tracking" konkret?</summary>
-                    <div class="nx-faq__content">Minimal notwendige Events statt Daten-Sammelwut: Consent Mode v2 sauber implementiert, Server-Side GTM wo sinnvoll, vollständig dokumentiert. Ziel: belastbare KPIs ohne Vertrauensverlust bei Ihren Nutzern.</div>
-                </details>
-                <details class="nx-faq__item">
-                    <summary>Brauchen wir dann überhaupt noch Ads?</summary>
-                    <div class="nx-faq__content">Das ist Ihre Entscheidung. Wenn das Owned-Fundament steht (Seiten, Proof, Messbarkeit), können Ads sehr effizient skalieren. Kein Dauereinsatz als Pflicht&nbsp;— Ads sind ein Verstärker, nicht das Betriebssystem.</div>
-                </details>
-                <details class="nx-faq__item">
-                    <summary>Was unterscheidet Credits von Stundensätzen?</summary>
-                    <div class="nx-faq__content">Planungssicherheit. Stunden können ausufern. Credits sind fix: Sie wissen vorher genau, was eine Landingpage oder ein Tracking-Setup kostet. Das Risiko für Mehraufwand liegt bei mir.</div>
-                </details>
-            </div>
-            <p style="text-align:center; margin-top:1.5rem;"><a href="/wordpress-growth-operating-system/#faq" class="micro-cta-link">Weitere Fragen beantwortet → Das WGOS FAQ</a></p>
-        </div>
-    </section>
-    <?php
-    return ob_get_clean();
+	ob_start();
+	?>
+	<section id="faq" class="homepage-faq-section" aria-labelledby="faq-heading" style="background:var(--glass-bg); border-top:1px solid var(--glass-border); padding:5rem 0; order:95;">
+		<div class="nx-container">
+			<div style="text-align:center; margin-bottom:3rem;">
+				<span class="nx-badge nx-badge--gold">FAQ</span>
+				<h2 id="faq-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Haeufige Fragen</h2>
+				<p style="color:var(--nx-text-muted);">Klarheit vor dem naechsten Schritt.</p>
+			</div>
+			<div class="nx-faq">
+				<details class="nx-faq__item">
+					<summary>Was unterscheidet Sie von einer klassischen WordPress-Agentur?</summary>
+					<div class="nx-faq__content">Ich verkaufe nicht zuerst Seiten oder Leistungslisten. Ich baue eine WordPress-Praesenz so um, dass Positionierung, Messbarkeit und Conversion als System arbeiten.</div>
+				</details>
+				<details class="nx-faq__item">
+					<summary>Ist das eher SEO, Tracking oder CRO?</summary>
+					<div class="nx-faq__content">Genau diese Trennung ist meist das Problem. In der Praxis greifen technische SEO, privacy-first Measurement und Conversion-Logik ineinander. Ich arbeite an der Schnittstelle.</div>
+				</details>
+				<details class="nx-faq__item">
+					<summary>Brauchen wir danach noch Ads?</summary>
+					<div class="nx-faq__content">Moeglicherweise. Aber erst dann, wenn die Seite Nachfrage halten und sauber messen kann. Ads sind bei mir ein Verstaerker, nicht das Betriebssystem.</div>
+				</details>
+				<details class="nx-faq__item">
+					<summary>Wie startet die Zusammenarbeit?</summary>
+					<div class="nx-faq__content">Mit dem Customer Journey Audit. Danach ist klar, ob ein 360 Grad Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genuegen.</div>
+				</details>
+			</div>
+		</div>
+	</section>
+	<?php
+
+	return ob_get_clean();
 }
 add_shortcode( 'hu_faq', 'hu_faq_section_shortcode' );
 
-
-// 6. Blog Section (CLEAN CODE: Valide Links statt Onclick-Events)
+/**
+ * Homepage blog section.
+ *
+ * @return string
+ */
 function hu_blog_section_shortcode() {
-    ob_start();
-    ?>
-    <section id="blog" class="wp-section homepage-blog-section" style="border-top: 1px solid rgba(255,255,255,0.05); order:99;">
-        <div class="wp-container">
-            <div class="wp-section-title text-center" style="margin-bottom: 4rem;">
-                <span class="wp-badge">Knowledge Base</span>
-                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; color: #fff;">Strategie & Technik</h2>
-                <p class="wp-hero-subtitle">Hebel für messbares B2B-Wachstum durch Engineering und Psychologie.</p>
-            </div>
-            
-            <div class="wp-cards">
-                <?php
-                $args = array(
-                    'post_type'      => 'post',
-                    'posts_per_page' => 3,
-                    'post_status'    => 'publish',
-                    'ignore_sticky_posts' => true
-                );
-                $blog_query = new WP_Query($args);
+	$urls = hu_home_urls();
 
-                if ($blog_query->have_posts()) :
-                    while ($blog_query->have_posts()) : $blog_query->the_post();
-                        $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'medium_large');
-                        $categories = get_the_category();
-                        $cat_name = !empty($categories) ? $categories[0]->name : 'Insights';
-                        ?>
-                        <article class="wp-success-card" style="position: relative; display: flex; flex-direction: column;">
-                            <a href="<?php the_permalink(); ?>" class="card-link-wrapper" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;">
-                                
-                                <?php if ($thumb_url) : ?>
-                                    <div class="card-image-wrapper" style="border-radius:12px; overflow:hidden; margin-bottom:1.5rem; border:1px solid var(--border);">
-                                        <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php the_title_attribute(); ?>" style="width:100%; height:200px; object-fit:cover; transition: transform 0.4s ease;" loading="lazy">
-                                    </div>
-                                <?php endif; ?>
-                                
-                                <div class="card-content" style="flex-grow: 1; display: flex; flex-direction: column;">
-                                    <span class="wp-metric-label" style="display:block; margin-bottom:0.5rem; text-transform:uppercase; font-size:0.75rem; color:var(--gold); font-weight:700;">
-                                        <?php echo esc_html($cat_name); ?>
-                                    </span>
-                                    
-                                    <h3 class="wp-success-title" style="min-height: 3.5rem; line-height:1.3; font-size: 1.4rem; color: #fff; margin: 0 0 1rem 0;"><?php the_title(); ?></h3>
-                                    
-                                    <p style="color:var(--text-dim); font-size:0.95rem; line-height:1.6; margin: 0 0 1.5rem 0;">
-                                        <?php echo wp_trim_words(get_the_excerpt(), 15); ?>
-                                    </p>
-                                    
-                                    <span class="text-gold" style="font-weight:700; font-size:0.9rem; margin-top:auto; display: inline-block;">Analyse lesen →</span>
-                                </div>
-                            </a>
-                        </article>
-                    <?php
-                    endwhile;
-                    wp_reset_postdata();
-                else :
-                    echo '<p style="text-align:center; width:100%; opacity:0.6;">Aktuell werden neue Analysen vorbereitet.</p>';
-                endif;
-                ?>
-            </div>
-            
-            <div style="text-align:center; margin-top: 4rem;">
-                <a href="/blog/" class="wp-btn wp-btn-secondary">Zum Experten-Blog</a>
-            </div>
-        </div>
-    </section>
-    <?php
-    return ob_get_clean();
+	ob_start();
+	?>
+	<section id="blog" class="wp-section homepage-blog-section" style="border-top:1px solid rgba(255,255,255,0.05); order:99;">
+		<div class="wp-container">
+			<div class="wp-section-title text-center" style="margin-bottom:4rem;">
+				<span class="wp-badge">Insights</span>
+				<h2 style="font-size:2.5rem; margin-bottom:1rem; color:#fff;">WordPress, Nachfrage, Infrastruktur</h2>
+				<p class="wp-hero-subtitle">Fuer Teams, die verstehen wollen, warum Websites trotz Traffic keine belastbaren Anfragen erzeugen.</p>
+			</div>
+
+			<div class="wp-cards">
+				<?php
+				$blog_query = new WP_Query(
+					[
+						'post_type'           => 'post',
+						'posts_per_page'      => 3,
+						'post_status'         => 'publish',
+						'ignore_sticky_posts' => true,
+					]
+				);
+
+				if ( $blog_query->have_posts() ) :
+					while ( $blog_query->have_posts() ) :
+						$blog_query->the_post();
+						$thumb_url  = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
+						$categories = get_the_category();
+						$cat_name   = ! empty( $categories ) ? $categories[0]->name : 'Insights';
+						?>
+						<article class="wp-success-card" style="position:relative; display:flex; flex-direction:column;">
+							<a href="<?php the_permalink(); ?>" class="card-link-wrapper" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%;">
+								<?php if ( $thumb_url ) : ?>
+									<div class="card-image-wrapper" style="border-radius:12px; overflow:hidden; margin-bottom:1.5rem; border:1px solid var(--border);">
+										<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php the_title_attribute(); ?>" style="width:100%; height:200px; object-fit:cover; transition:transform 0.4s ease;" loading="lazy">
+									</div>
+								<?php endif; ?>
+
+								<div class="card-content" style="flex-grow:1; display:flex; flex-direction:column;">
+									<span class="wp-metric-label" style="display:block; margin-bottom:0.5rem; text-transform:uppercase; font-size:0.75rem; color:var(--gold); font-weight:700;">
+										<?php echo esc_html( $cat_name ); ?>
+									</span>
+									<h3 class="wp-success-title" style="min-height:3.5rem; line-height:1.3; font-size:1.4rem; color:#fff; margin:0 0 1rem 0;"><?php the_title(); ?></h3>
+									<p style="color:var(--text-dim); font-size:0.95rem; line-height:1.6; margin:0 0 1.5rem 0;">
+										<?php echo esc_html( wp_trim_words( get_the_excerpt(), 16 ) ); ?>
+									</p>
+									<span class="text-gold" style="font-weight:700; font-size:0.9rem; margin-top:auto; display:inline-block;">Analyse lesen -></span>
+								</div>
+							</a>
+						</article>
+						<?php
+					endwhile;
+					wp_reset_postdata();
+				else :
+					echo '<p style="text-align:center; width:100%; opacity:0.6;">Aktuell werden neue Analysen vorbereitet.</p>';
+				endif;
+				?>
+			</div>
+
+			<div style="text-align:center; margin-top:4rem;">
+				<a href="<?php echo esc_url( $urls['blog'] ); ?>" class="wp-btn wp-btn-secondary">Zum Insights-Bereich</a>
+			</div>
+		</div>
+	</section>
+	<?php
+
+	return ob_get_clean();
 }
 add_shortcode( 'hu_blog', 'hu_blog_section_shortcode' );
 
-// 7. CTA Section
+/**
+ * Homepage final CTA.
+ *
+ * @return string
+ */
 function hu_cta_section_shortcode() {
-    ob_start();
-    ?>
-    <section id="cta" aria-labelledby="cta-heading" style="padding:5rem 0; order:90;">
-        <div class="nx-container">
-            <div class="nx-cta-box">
-                <span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Nächster Schritt</span>
-                <h2 id="cta-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1rem; color:#fff;">Welche Hebel liegen bei Ihnen brach?</h2>
-                <p>Im Free Journey Audit analysieren wir Ihre WordPress-Präsenz auf die größten Wachstumspotenziale&nbsp;— kostenlos, in 48h, ohne Pitch.</p>
+	$urls = hu_home_urls();
 
-                <!-- Proof -->
-                <div role="group" aria-label="Beispiel-Ergebnisse" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem 1.5rem; margin-bottom:2rem;">
-                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ 1.750+ qualifizierte Leads</span>
-                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ CPL &minus;83&nbsp;% + 12–15&nbsp;% Sales-Conversion</span>
-                    <span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ 20.000&nbsp;€ Budget: Leadgen + Recruiting + CRM</span>
-                </div>
+	ob_start();
+	?>
+	<section id="cta" aria-labelledby="cta-heading" style="padding:5rem 0; order:90;">
+		<div class="nx-container">
+			<div class="nx-cta-box">
+				<span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Naechster Schritt</span>
+				<h2 id="cta-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1rem; color:#fff;">Pruefen wir, wo Ihre WordPress-Seite Anfragen verliert.</h2>
+				<p>Im Customer Journey Audit sehen Sie, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen und ob sich ein tieferer Umbau wirtschaftlich lohnt.</p>
 
-                <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
-                    <a class="nx-btn nx-btn--primary" href="/customer-journey-audit/" data-track-action="cta_footer_audit" data-track-category="lead_gen">Free Journey Audit starten (0&nbsp;€)</a>
-                    <a class="nx-btn nx-btn--ghost" href="/case-studies/" data-track-action="cta_footer_cases" data-track-category="lead_gen">Case Studies ansehen</a>
-                </div>
+				<div role="group" aria-label="Audit-Merkmale" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem 1.5rem; margin-bottom:2rem;">
+					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ klare Einschaetzung statt Bauchgefuehl</span>
+					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ Positionierung, Measurement und Conversion gemeinsam betrachtet</span>
+					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ sinnvoller naechster Schritt statt Leistungsverkauf</span>
+				</div>
 
-                <p style="font-size:0.8rem; color:var(--nx-text-muted); margin-top:1.5rem; margin-bottom:0;">
-                    Ergebnisse hängen von der Ausgangslage ab.
-                    <a href="/wordpress-growth-operating-system/" style="color:var(--nx-gold); text-decoration:underline; font-weight:600;">WGOS verstehen →</a>
-                </p>
-            </div>
-        </div>
-    </section>
+				<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
+					<a class="nx-btn nx-btn--primary" href="<?php echo esc_url( $urls['audit'] ); ?>" data-track-action="cta_footer_audit" data-track-category="lead_gen">Audit starten</a>
+					<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( $urls['cases'] ); ?>" data-track-action="cta_footer_cases" data-track-category="lead_gen">Case Studies ansehen</a>
+				</div>
 
-    </div><!-- /.cs-page -->
-    <?php
-    return ob_get_clean();
+				<p style="font-size:0.8rem; color:var(--nx-text-muted); margin-top:1.5rem; margin-bottom:0;">
+					Wenn Sie erst das Modell verstehen wollen:
+					<a href="<?php echo esc_url( $urls['wgos'] ); ?>" style="color:var(--nx-gold); text-decoration:underline; font-weight:600;">WGOS ansehen -></a>
+				</p>
+			</div>
+		</div>
+	</section>
+
+	</div>
+	<?php
+
+	return ob_get_clean();
 }
 add_shortcode( 'hu_cta', 'hu_cta_section_shortcode' );

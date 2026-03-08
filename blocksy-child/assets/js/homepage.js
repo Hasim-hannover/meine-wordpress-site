@@ -1,5 +1,18 @@
 document.addEventListener("DOMContentLoaded", function() {
-    
+    function initHomepageNav() {
+        const smartNav = document.querySelector('.cs-page .smart-nav');
+        if (!smartNav) return;
+
+        const showAfter = 520;
+
+        function toggleNav() {
+            smartNav.classList.toggle('is-visible', window.scrollY > showAfter);
+        }
+
+        toggleNav();
+        window.addEventListener('scroll', toggleNav, { passive: true });
+    }
+
     // 1. ZOMBIE KILLER
     const zombieCode = document.getElementById('nexus-home-critical');
     if (zombieCode) zombieCode.remove();
@@ -30,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     setTimeout(forceBlogGrid, 100);
+
+    initHomepageNav();
 
     // Scroll-Spy, FAQ, KPI Counter → jetzt zentral in nexus-core.js
 });

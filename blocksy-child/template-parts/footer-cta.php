@@ -22,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$heading     = get_query_var( 'cta_heading', __( 'Wo verbrennt Ihre Website gerade Geld?', 'blocksy-child' ) );
-$text        = get_query_var( 'cta_text', __( 'Ein Speed-Test reicht nicht. Unser Free Journey Audit prüft Tech, SEO & Content im Zusammenspiel.', 'blocksy-child' ) );
-$url         = get_query_var( 'cta_url', home_url( '/customer-journey-audit/' ) );
-$button_text = get_query_var( 'cta_button_text', __( 'Kostenloser Journey Audit starten', 'blocksy-child' ) );
+$heading     = get_query_var( 'cta_heading', __( 'Wo verliert Ihre WordPress-Seite heute Anfragen?', 'blocksy-child' ) );
+$text        = get_query_var( 'cta_text', __( 'Der Customer Journey Audit zeigt, wo Sichtbarkeit, Vertrauen oder Conversion im Zusammenspiel wegbrechen.', 'blocksy-child' ) );
+$url         = get_query_var( 'cta_url', nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] ) );
+$button_text = get_query_var( 'cta_button_text', __( 'Customer Journey Audit starten', 'blocksy-child' ) );
 $action      = get_query_var( 'cta_action', 'cta_footer_audit' );
 ?>
 

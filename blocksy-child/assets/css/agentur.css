@@ -4,7 +4,9 @@
    ========================================= */
 
 .wp-agentur-page-wrapper {
-  background: var(--nx-bg-deep);
+  background:
+    radial-gradient(circle at top left, rgba(217, 162, 77, 0.1), transparent 26%),
+    linear-gradient(180deg, #151c24 0%, #11161d 42%, #131923 100%);
 }
 
 .wp-agentur-hero .nx-hero__title {
@@ -31,6 +33,9 @@
   justify-content: center;
   gap: 0.25rem;
   min-height: 120px;
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: var(--nx-radius-xl);
+  box-shadow: var(--nx-shadow-sm);
 }
 
 .wp-agentur-proof-item:hover {

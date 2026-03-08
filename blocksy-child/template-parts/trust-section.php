@@ -28,19 +28,19 @@ $variant = get_query_var( 'trust_variant', 'compact' );
 		<div class="trust-section__grid">
 			<div class="trust-section__item">
 				<span class="trust-section__icon" aria-hidden="true">🔒</span>
-				<span class="trust-section__text"><?php esc_html_e( 'DSGVO-konform', 'blocksy-child' ); ?></span>
+				<span class="trust-section__text"><?php esc_html_e( 'Privacy-first Measurement', 'blocksy-child' ); ?></span>
 			</div>
 			<div class="trust-section__item">
 				<span class="trust-section__icon" aria-hidden="true">⚡</span>
-				<span class="trust-section__text"><?php esc_html_e( 'Core Web Vitals: grün', 'blocksy-child' ); ?></span>
+				<span class="trust-section__text"><?php esc_html_e( 'WordPress als Growth-Infrastruktur', 'blocksy-child' ); ?></span>
 			</div>
 			<div class="trust-section__item">
 				<span class="trust-section__icon" aria-hidden="true">📊</span>
-				<span class="trust-section__text"><?php esc_html_e( '100% Data Ownership', 'blocksy-child' ); ?></span>
+				<span class="trust-section__text"><?php esc_html_e( 'Saubere Daten fuer Entscheidungen', 'blocksy-child' ); ?></span>
 			</div>
 			<div class="trust-section__item">
 				<span class="trust-section__icon" aria-hidden="true">🎯</span>
-				<span class="trust-section__text"><?php esc_html_e( 'Keine langen Verträge', 'blocksy-child' ); ?></span>
+				<span class="trust-section__text"><?php esc_html_e( 'Kein Agentur-Lock-in', 'blocksy-child' ); ?></span>
 			</div>
 		</div>
 
@@ -48,11 +48,11 @@ $variant = get_query_var( 'trust_variant', 'compact' );
 
 		<p class="trust-section__inline">
 			<?php
-			echo esc_html__( '✓ DSGVO-konform', 'blocksy-child' );
+			echo esc_html__( '✓ B2B-Fokus', 'blocksy-child' );
 			echo ' &nbsp;·&nbsp; ';
-			echo esc_html__( '✓ Keine Laufzeit', 'blocksy-child' );
+			echo esc_html__( '✓ Privacy-first Measurement', 'blocksy-child' );
 			echo ' &nbsp;·&nbsp; ';
-			echo esc_html__( '✓ 100% Owned Data', 'blocksy-child' );
+			echo esc_html__( '✓ Kein Agentur-Lock-in', 'blocksy-child' );
 			?>
 		</p>
 

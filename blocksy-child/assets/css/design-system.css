@@ -10,30 +10,30 @@
    ========================================= */
 :root {
     /* --- Farben: Primär --- */
-    --nx-gold: #FFB020;
-    --nx-gold-hover: #FFC14D;
-    --nx-gold-subtle: rgba(255, 176, 32, 0.1);
-    --nx-gold-glow: rgba(255, 176, 32, 0.3);
+    --nx-gold: #d9a24d;
+    --nx-gold-hover: #e4b56b;
+    --nx-gold-subtle: rgba(217, 162, 77, 0.12);
+    --nx-gold-glow: rgba(217, 162, 77, 0.22);
 
     /* --- Farben: Hintergründe --- */
-    --nx-bg-deep: #050505;
-    --nx-bg: #0a0a0a;
-    --nx-bg-elevated: #0f0f0f;
-    --nx-bg-card: #121212;
-    --nx-bg-glass: rgba(20, 20, 20, 0.9);
-    --nx-bg-glass-light: rgba(255, 255, 255, 0.03);
-    --nx-bg-glass-hover: rgba(255, 255, 255, 0.05);
+    --nx-bg-deep: #11161d;
+    --nx-bg: #151c24;
+    --nx-bg-elevated: #1a2531;
+    --nx-bg-card: #1e2b38;
+    --nx-bg-glass: rgba(28, 40, 54, 0.82);
+    --nx-bg-glass-light: rgba(255, 255, 255, 0.045);
+    --nx-bg-glass-hover: rgba(255, 255, 255, 0.08);
 
     /* --- Farben: Text --- */
     --nx-text: #ffffff;
-    --nx-text-secondary: #d4d4d4;
-    --nx-text-muted: #a1a1aa;
-    --nx-text-dim: #71717a;
+    --nx-text-secondary: #d9e0e8;
+    --nx-text-muted: #b1bcc8;
+    --nx-text-dim: #7f8c9c;
 
     /* --- Farben: Borders --- */
-    --nx-border: rgba(255, 255, 255, 0.08);
-    --nx-border-hover: rgba(255, 255, 255, 0.15);
-    --nx-border-gold: rgba(255, 176, 32, 0.3);
+    --nx-border: rgba(255, 255, 255, 0.1);
+    --nx-border-hover: rgba(255, 255, 255, 0.18);
+    --nx-border-gold: rgba(217, 162, 77, 0.28);
 
     /* --- Farben: Semantisch --- */
     --nx-success: #10b981;
@@ -77,12 +77,12 @@
     --nx-radius-pill: 999px;
 
     /* --- Schatten --- */
-    --nx-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --nx-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    --nx-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.5);
-    --nx-shadow-xl: 0 40px 80px rgba(0, 0, 0, 0.6);
-    --nx-shadow-gold: 0 4px 15px var(--nx-gold-glow);
-    --nx-shadow-glow: 0 0 15px var(--nx-gold-glow);
+    --nx-shadow-sm: 0 8px 20px rgba(9, 14, 24, 0.12);
+    --nx-shadow: 0 18px 40px rgba(9, 14, 24, 0.18);
+    --nx-shadow-lg: 0 24px 56px rgba(9, 14, 24, 0.24);
+    --nx-shadow-xl: 0 36px 80px rgba(9, 14, 24, 0.3);
+    --nx-shadow-gold: 0 12px 28px var(--nx-gold-glow);
+    --nx-shadow-glow: 0 0 24px var(--nx-gold-glow);
 
     /* --- Übergänge --- */
     --nx-ease: cubic-bezier(0.4, 0, 0.2, 1);

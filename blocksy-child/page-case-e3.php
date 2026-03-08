@@ -10,6 +10,10 @@
  */
 
 get_header();
+
+$audit_url   = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ], home_url( '/customer-journey-audit/' ) );
+$cases_url   = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+$local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) );
 ?>
 
 <div class="cs-case-wrapper">
@@ -68,13 +72,13 @@ get_header();
 
         <!-- Hero CTAs -->
         <div class="cs-hero-ctas">
-            <a href="/customer-journey-audit/"
+            <a href="<?php echo esc_url( $audit_url ); ?>"
                class="nx-btn nx-btn--primary"
                data-track-action="cta_case_hero_audit"
                data-track-category="lead_gen">
-                Free Journey Audit starten (0&nbsp;€)
+                Customer Journey Audit starten
             </a>
-            <a href="/case-studies/"
+            <a href="<?php echo esc_url( $cases_url ); ?>"
                class="nx-btn nx-btn--ghost">
                 Alle Case Studies →
             </a>
@@ -569,8 +573,8 @@ get_header();
                     Die Ergebnisse entstanden in einem Setup für KMU + B2C mit
                     klarer Leistungsfähigkeit und belastbaren internen Prozessen.
                     Besonders relevant wird das Modell ab etwa &gt;5 Mio.&nbsp;€ Jahresumsatz.
-                    Ob ähnliche Hebel bei Ihnen vorhanden sind, zeigt der Free Journey Audit
-                    in 48h&nbsp;— ohne Verpflichtung.
+                    Ob ähnliche Hebel bei Ihnen vorhanden sind, zeigt der Customer Journey Audit
+                    klar priorisiert und ohne Pitch.
                 </div>
             </details>
 
@@ -646,16 +650,16 @@ get_header();
                 Welche Hebel liegen bei Ihnen brach?
             </h2>
             <p style="color:var(--nx-text-muted);max-width:560px;margin:0 auto 2rem;line-height:1.6;">
-                Im Free Journey Audit analysieren wir Ihre WordPress-Präsenz
-                auf die größten Wachstumspotenziale&nbsp;— kostenlos, in 48h, ohne Pitch.
+                Im Customer Journey Audit analysieren wir Ihre WordPress-Präsenz
+                auf die größten Wachstumspotenziale&nbsp;— klar priorisiert und ohne Pitch.
             </p>
 
             <div class="cs-cta-buttons">
-                <a href="/customer-journey-audit/"
+                <a href="<?php echo esc_url( $audit_url ); ?>"
                    class="nx-btn nx-btn--primary"
                    data-track-action="cta_case_nextstep_audit"
                    data-track-category="lead_gen">
-                    Free Journey Audit starten (0&nbsp;€)
+                    Customer Journey Audit starten
                 </a>
             </div>
 
@@ -668,11 +672,11 @@ get_header();
                 <a href="/wordpress-growth-operating-system/" class="cs-internal-link">
                     WGOS: Das System dahinter →
                 </a>
-                <a href="/case-studies/" class="cs-internal-link">
+                <a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">
                     Weitere Case Studies →
                 </a>
-                <a href="/wordpress-agentur-hannover/" class="cs-internal-link">
-                    WordPress Agentur Hannover →
+                <a href="<?php echo esc_url( $local_wp_url ); ?>" class="cs-internal-link">
+                    WordPress Growth Architect in Hannover →
                 </a>
             </div>
 

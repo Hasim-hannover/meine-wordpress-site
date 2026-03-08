@@ -140,33 +140,28 @@ function hu_enqueue_assets() {
 	}
 
 	// ── J) Template: Core Web Vitals ──────────────────────────────
-	if ( is_page_template( 'page-cwv.php' ) || is_page( 'core-web-vitals' ) ) {
+	if ( is_page_template( 'page-cwv.php' ) || is_page( 'core-web-vitals' ) || is_page( 'core-web-vitals-optimierung' ) ) {
 		hu_enqueue_css( 'nexus-cwv-css', 'cwv.css', [ 'nexus-design-system' ] );
-		hu_enqueue_js( 'nexus-cwv-js', 'cwv.js', [ 'nexus-core-js' ] );
 	}
 
 	// ── K) Template: Performance Marketing ────────────────────────
 	if ( is_page_template( 'page-performance.php' ) || is_page( 'performance-marketing' ) ) {
 		hu_enqueue_css( 'nexus-performance-css', 'performance.css', [ 'nexus-design-system' ] );
-		hu_enqueue_js( 'nexus-performance-js', 'performance.js', [ 'nexus-core-js' ] );
 	}
 
 	// ── L) Template: Conversion Rate Optimization (CRO) ──────────
 	if ( is_page_template( 'page-cro.php' ) || is_page( 'conversion-rate-optimization' ) ) {
 		hu_enqueue_css( 'nexus-cro-css', 'cro.css', [ 'nexus-design-system' ] );
-		hu_enqueue_js( 'nexus-cro-js', 'cro.js', [ 'nexus-core-js' ] );
 	}
 
 	// ── M) Template: GA4 & Tracking Setup ─────────────────────────
 	if ( is_page_template( 'page-ga4.php' ) || is_page( 'ga4-tracking-setup' ) ) {
 		hu_enqueue_css( 'nexus-ga4-css', 'ga4.css', [ 'nexus-design-system' ] );
-		hu_enqueue_js( 'nexus-ga4-js', 'ga4.js', [ 'nexus-core-js' ] );
 	}
 
 	// ── N) Template: Meta Ads (Facebook & Instagram) ──────────────
 	if ( is_page_template( 'page-meta-ads.php' ) || is_page( 'meta-ads' ) ) {
 		hu_enqueue_css( 'nexus-meta-ads-css', 'meta-ads.css', [ 'nexus-design-system' ] );
-		hu_enqueue_js( 'nexus-meta-ads-js', 'meta-ads.js', [ 'nexus-core-js' ] );
 	}
 
 	// ── O) Template: Kostenlose Tools Hub ─────────────────────────
