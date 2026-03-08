@@ -4,45 +4,43 @@
   <div class="ft__top">
     <div class="ft__brand">
       <a class="ft__logo" href="/" aria-label="Startseite – Hasim Üner">Hasim Üner</a>
-      <p class="ft__tag">Owned Leads mit WordPress – Hannover</p>
-      <a class="ft__cta" href="/customer-journey-audit/">Free Journey Audit starten (0 €)</a>
+      <p class="ft__tag">WordPress als Nachfrage-System für B2B – aus Hannover</p>
+      <a class="ft__cta" href="/customer-journey-audit/">Audit starten (0 €)</a>
     </div>
 
     <nav class="ft__cols" aria-label="Footer Navigation">
-      <div class="ft__col">
-        <h3>System</h3>
+      <section class="ft__col" aria-labelledby="ft-einstieg">
+        <h3 id="ft-einstieg">Einstieg</h3>
         <ul class="ft__list">
+          <li><a class="ft__link-strong" href="/customer-journey-audit/">Customer Journey Audit</a></li>
           <li><a class="ft__link-strong" href="/wordpress-agentur-hannover/">WordPress Agentur Hannover</a></li>
-          <li><a class="ft__link-strong" href="/wordpress-growth-operating-system/">Das System (WGOS)</a></li>
-          <li><a href="/case-studies/">Ergebnisse / Case Studies</a></li>
-          <li><a href="/customer-journey-audit/">Free Journey Audit</a></li>
-          <li><a href="/alle-loesungen-im-detail/">Alle Lösungen im Überblick</a></li>
+          <li><a href="/wordpress-growth-operating-system/">WGOS</a></li>
         </ul>
-      </div>
+      </section>
 
-      <div class="ft__col">
-        <h3>Ressourcen</h3>
+      <section class="ft__col" aria-labelledby="ft-proof">
+        <h3 id="ft-proof">Proof & Wissen</h3>
         <ul class="ft__list">
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/kostenlose-tools/">Kostenlose Tools</a></li>
+          <li><a class="ft__link-strong" href="/case-studies/">Case Studies</a></li>
+          <li><a href="/blog/">Insights</a></li>
+          <li><a href="/wordpress-seo-hannover/">SEO</a></li>
+          <li><a href="/core-web-vitals/">Core Web Vitals</a></li>
         </ul>
-      </div>
+      </section>
 
-      <div class="ft__col">
-        <h3>Unternehmen</h3>
+      <section class="ft__col" aria-labelledby="ft-unternehmen">
+        <h3 id="ft-unternehmen">Unternehmen</h3>
         <ul class="ft__list">
-          <li><a class="ft__link-strong ft__portal" href="/portal/">Kunden-Cockpit</a></li>
-          <li><a class="ft__link-strong" href="https://cal.com/hasim/30min" target="_blank" rel="noopener noreferrer">Projekt starten</a></li>
+          <li><a class="ft__link-strong" href="https://cal.com/hasim/30min" target="_blank" rel="noopener noreferrer">Strategiegespräch</a></li>
           <li><a href="/uber-mich/">Über mich</a></li>
           <li><a href="/kontakt/">Kontakt</a></li>
         </ul>
-
         <nav class="ft__legal" aria-label="Rechtliches">
           <a href="/impressum/" rel="nofollow">Impressum</a>
           <span aria-hidden="true">·</span>
           <a href="/datenschutz/" rel="nofollow">Datenschutz</a>
         </nav>
-      </div>
+      </section>
     </nav>
   </div>
 
@@ -66,5 +64,11 @@
 </footer>
 
 <script>
-(function(){var y=document.querySelector('.ft .ft__year');if(!y)return;var yr=String(new Date().getFullYear());y.textContent=yr;y.setAttribute('datetime',yr)})();
+(function () {
+  var year = String(new Date().getFullYear());
+  document.querySelectorAll('.ft .ft__year').forEach(function (node) {
+    node.textContent = year;
+    node.setAttribute('datetime', year);
+  });
+})();
 </script>
