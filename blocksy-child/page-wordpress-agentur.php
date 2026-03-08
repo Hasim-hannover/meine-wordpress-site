@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Agentur Service (Hannover)
- * Description: Lokale SEO-Landingpage fuer WordPress Growth Architect Hannover
+ * Description: Lokale SEO-Landingpage für WordPress Growth Architect Hannover
  *
  * @package Blocksy_Child
  */
@@ -22,27 +22,27 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ] );
 $faq_items = [
 	[
 		'question' => 'Was ist der Unterschied zu einer klassischen WordPress-Agentur?',
-		'answer'   => 'Ich verkaufe nicht zuerst Seiten oder Paketlisten. Ich arbeite an WordPress als Growth-Infrastruktur fuer B2B: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als ein System.',
+		'answer'   => 'Ich verkaufe nicht zuerst Seiten oder Paketlisten. Ich arbeite an WordPress als Growth-Infrastruktur für B2B: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als ein System.',
 	],
 	[
 		'question' => 'Arbeiten Sie auch mit bestehenden WordPress-Websites?',
-		'answer'   => 'Ja. In vielen Faellen ist kein kompletter Relaunch noetig. Der Einstieg ist bewusst ueber Diagnose und Priorisierung aufgebaut, damit zuerst die groessten Reibungsverluste verschwinden.',
+		'answer'   => 'Ja. In vielen Fällen ist kein kompletter Relaunch nötig. Der Einstieg ist bewusst über Diagnose und Priorisierung aufgebaut, damit zuerst die größten Reibungsverluste verschwinden.',
 	],
 	[
 		'question' => 'Ist das eher SEO, Tracking oder CRO?',
-		'answer'   => 'In der Praxis immer alles zusammen. Ich greife dort ein, wo diese Ebenen sich gegenseitig blockieren. Genau daraus entsteht spaeter die bessere Lead-Qualitaet.',
+		'answer'   => 'In der Praxis immer alles zusammen. Ich greife dort ein, wo diese Ebenen sich gegenseitig blockieren. Genau daraus entsteht später die bessere Lead-Qualität.',
 	],
 	[
 		'question' => 'Brauchen wir danach noch Ads?',
-		'answer'   => 'Nicht als Grundmodell. Wenn Fundament, Messbarkeit und Conversion-Pfade stehen, koennen Ads sinnvoll als Verstaerker dienen. Vorher beschleunigen sie oft nur vorhandene Reibung.',
+		'answer'   => 'Nicht als Grundmodell. Wenn Fundament, Messbarkeit und Conversion-Pfade stehen, können Ads sinnvoll als Verstärker dienen. Vorher beschleunigen sie oft nur vorhandene Reibung.',
 	],
 	[
-		'question' => 'Sind persoenliche Termine in Hannover moeglich?',
-		'answer'   => 'Ja. Strategie-Workshops, Kick-offs und Reviews sind in Hannover und Umgebung persoenlich moeglich. Die Zusammenarbeit funktioniert aber genauso sauber remote im gesamten DACH-Raum.',
+		'question' => 'Sind persönliche Termine in Hannover möglich?',
+		'answer'   => 'Ja. Strategie-Workshops, Kick-offs und Reviews sind in Hannover und Umgebung persönlich möglich. Die Zusammenarbeit funktioniert aber genauso sauber remote im gesamten DACH-Raum.',
 	],
 	[
 		'question' => 'Wie startet die Zusammenarbeit?',
-		'answer'   => 'Mit dem Growth Audit. Danach ist klar, ob ein tieferer Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genuegen.',
+		'answer'   => 'Mit dem Growth Audit. Danach ist klar, ob ein tieferer Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genügen.',
 	],
 ];
 
@@ -55,16 +55,16 @@ get_header();
 		<section id="hero" class="nx-section nx-hero wp-agentur-hero">
 			<div class="nx-container">
 				<span class="nx-badge nx-badge--gold">WordPress Growth Architect in Hannover</span>
-				<h1 class="nx-hero__title">WordPress fuer B2B, das Anfragen nicht nur anzieht, sondern fuehrt.</h1>
+				<h1 class="nx-hero__title">WordPress für B2B, das Anfragen nicht nur anzieht, sondern führt.</h1>
 				<p class="nx-hero__subtitle">
-					Fuer Unternehmen aus Hannover und dem DACH-Raum, die aus ihrer WordPress-Praesenz
+					Für Unternehmen aus Hannover und dem DACH-Raum, die aus ihrer WordPress-Präsenz
 					ein planbares Anfrage- und Wachstumssystem machen wollen:
 					mit klarer Positionierung, technischer SEO, privacy-first Measurement und Conversion-Logik.
 				</p>
 				<ul class="hero-bullets">
 					<li>Diagnose vor Relaunch</li>
 					<li>WordPress als Growth-Infrastruktur</li>
-					<li>Owned Leads statt Kanal-Abhaengigkeit</li>
+					<li>Owned Leads statt Kanal-Abhängigkeit</li>
 				</ul>
 				<div class="hero-cta-block" style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Audit starten</a>
@@ -102,13 +102,13 @@ get_header();
 					<h2 class="nx-headline-section">Warum viele WordPress-Seiten trotz Traffic keine belastbaren Anfragen bringen</h2>
 				</div>
 				<div class="nx-prose wp-agentur-prose">
-					<p>Das Problem ist selten nur Design. Meist fehlen Struktur, Daten und klare Nutzerfuehrung im Zusammenspiel. Dann produziert WordPress zwar Seiten, aber kein System.</p>
+					<p>Das Problem ist selten nur Design. Meist fehlen Struktur, Daten und klare Nutzerführung im Zusammenspiel. Dann produziert WordPress zwar Seiten, aber kein System.</p>
 					<h3>1. Sichtbarkeit ohne Richtung</h3>
-					<p>Es gibt Inhalte, aber keine klare Informationsarchitektur, keine priorisierten Money Pages und keine saubere interne Verbindung zwischen Suchintention und naechstem Schritt. Genau dort greifen <a href="<?php echo esc_url( $seo_url ); ?>">technische SEO</a> und Angebotslogik ineinander.</p>
+					<p>Es gibt Inhalte, aber keine klare Informationsarchitektur, keine priorisierten Money Pages und keine saubere interne Verbindung zwischen Suchintention und nächstem Schritt. Genau dort greifen <a href="<?php echo esc_url( $seo_url ); ?>">technische SEO</a> und Angebotslogik ineinander.</p>
 					<h3>2. Daten ohne Entscheidungswert</h3>
 					<p>Tracking ist installiert, aber nicht belastbar. Consent, Events und Attribution erzeugen Rauschen statt Klarheit. Ohne funktionierende Messung ist jede Optimierung eine Vermutung. Deshalb ist <a href="<?php echo esc_url( $ga4_url ); ?>">privacy-first Measurement</a> kein Add-on, sondern Fundament.</p>
-					<h3>3. Seiten ohne Conversion-Fuehrung</h3>
-					<p>Kontaktformulare am Seitenende sind keine Funnel-Logik. Wenn Proof, CTA-Reihenfolge und Einwandabbau fehlen, verliert die Seite Nachfrage genau in dem Moment, in dem sie wertvoll werden koennte. Dort setzt <a href="<?php echo esc_url( $cro_url ); ?>">Conversion-Architektur</a> an.</p>
+					<h3>3. Seiten ohne Conversion-Führung</h3>
+					<p>Kontaktformulare am Seitenende sind keine Funnel-Logik. Wenn Proof, CTA-Reihenfolge und Einwandabbau fehlen, verliert die Seite Nachfrage genau in dem Moment, in dem sie wertvoll werden könnte. Dort setzt <a href="<?php echo esc_url( $cro_url ); ?>">Conversion-Architektur</a> an.</p>
 				</div>
 			</div>
 		</section>
@@ -137,7 +137,7 @@ get_header();
 								</tr>
 								<tr>
 									<td>Reihenfolge</td>
-									<td>Design, dann spaeter Optimierung</td>
+									<td>Design, dann später Optimierung</td>
 									<td>Diagnose, Priorisierung, dann Umsetzung</td>
 								</tr>
 								<tr>
@@ -147,23 +147,23 @@ get_header();
 								</tr>
 								<tr>
 									<td>Tracking</td>
-									<td>Einrichtung fuer Reports</td>
-									<td>Messbarkeit fuer echte Entscheidungen</td>
+									<td>Einrichtung für Reports</td>
+									<td>Messbarkeit für echte Entscheidungen</td>
 								</tr>
 								<tr>
 									<td>Conversion</td>
 									<td>CTA am Ende</td>
-									<td>Argumentationsstruktur ueber die ganze Seite</td>
+									<td>Argumentationsstruktur über die ganze Seite</td>
 								</tr>
 								<tr>
 									<td>Nach Go-Live</td>
 									<td>Projekt abgeschlossen</td>
-									<td>Gezielte Iteration auf die groessten Hebel</td>
+									<td>Gezielte Iteration auf die größten Hebel</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<p>Das Ergebnis ist nicht mehr Funktionalitaet, sondern weniger Reibung im kompletten Nachfrageweg.</p>
+					<p>Das Ergebnis ist nicht mehr Funktionalität, sondern weniger Reibung im kompletten Nachfrageweg.</p>
 				</div>
 			</div>
 		</section>
@@ -171,23 +171,23 @@ get_header();
 		<section id="angebot" class="nx-section">
 			<div class="nx-container">
 				<div class="nx-section-header">
-					<h2 class="nx-headline-section">Die sinnvolle Angebotslogik fuer B2B-WordPress</h2>
+					<h2 class="nx-headline-section">Die sinnvolle Angebotslogik für B2B-WordPress</h2>
 				</div>
 				<div class="nx-grid nx-grid-3 wp-agentur-process-grid">
 					<article class="nx-step">
 						<div class="nx-step__number">1</div>
 						<h3>Growth Audit</h3>
-						<p>Der Einstieg. Wir pruefen, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen und ob ein tieferer Eingriff wirtschaftlich Sinn ergibt.</p>
+						<p>Der Einstieg. Wir prüfen, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen und ob ein tieferer Eingriff wirtschaftlich Sinn ergibt.</p>
 					</article>
 					<article class="nx-step nx-step--highlight">
 						<div class="nx-step__number">2</div>
 						<h3>360 Grad Growth Blueprint</h3>
-						<p>Der Deep Dive. Ergebnis ist eine priorisierte Roadmap fuer Positionierung, Informationsarchitektur, Measurement und Conversion-Pfade.</p>
+						<p>Der Deep Dive. Ergebnis ist eine priorisierte Roadmap für Positionierung, Informationsarchitektur, Measurement und Conversion-Pfade.</p>
 					</article>
 					<article class="nx-step">
 						<div class="nx-step__number">3</div>
 						<h3>WGOS Umsetzung und Retainer</h3>
-						<p>Technische Umsetzung, Content-Aufbau und fortlaufende Optimierung in einer Reihenfolge, die Nachfrage robuster und guenstiger macht.</p>
+						<p>Technische Umsetzung, Content-Aufbau und fortlaufende Optimierung in einer Reihenfolge, die Nachfrage robuster und günstiger macht.</p>
 					</article>
 				</div>
 				<div class="wp-btn-wrapper mt-2" style="gap:1rem; flex-wrap:wrap;">
@@ -200,17 +200,17 @@ get_header();
 		<section id="fit" class="nx-section">
 			<div class="nx-container">
 				<div class="nx-section-header">
-					<h2 class="nx-headline-section">Fuer wen ich arbeite</h2>
+					<h2 class="nx-headline-section">Für wen ich arbeite</h2>
 				</div>
 				<div class="nx-prose wp-agentur-prose">
-					<p>Die Zusammenarbeit passt fuer B2B-Unternehmen, die WordPress bereits einsetzen oder bewusst als Kernsystem nutzen wollen und deren Website Anfragen liefern soll, nicht nur Praesenz.</p>
+					<p>Die Zusammenarbeit passt für B2B-Unternehmen, die WordPress bereits einsetzen oder bewusst als Kernsystem nutzen wollen und deren Website Anfragen liefern soll, nicht nur Präsenz.</p>
 					<ul>
-						<li>WordPress ist ein echter Geschaeftskanal, kein Nebenprojekt.</li>
+						<li>WordPress ist ein echter Geschäftskanal, kein Nebenprojekt.</li>
 						<li>Es gibt ein klares Leistungsversprechen und kaufnahe Nachfrage.</li>
-						<li>Das Team will Prioritaeten statt Aktionismus.</li>
+						<li>Das Team will Prioritäten statt Aktionismus.</li>
 						<li>Messbarkeit und Ownership sind wichtig, nicht nur Optik.</li>
 					</ul>
-					<p>Nicht passend ist es fuer Billig-Setups, reine Visitenkarten oder Organisationen, die zehn Einzelmassnahmen parallel starten wollen.</p>
+					<p>Nicht passend ist es für Billig-Setups, reine Visitenkarten oder Organisationen, die zehn Einzelmaßnahmen parallel starten wollen.</p>
 				</div>
 			</div>
 		</section>
@@ -222,7 +222,7 @@ get_header();
 				</div>
 				<div class="nx-prose wp-agentur-prose">
 					<h3>Case Study: E3 New Energy</h3>
-					<p>Ausgangslage: teuer eingekaufte Leads, unsaubere Datenlage, keine robuste Conversion-Fuehrung nach dem Klick.</p>
+					<p>Ausgangslage: teuer eingekaufte Leads, unsaubere Datenlage, keine robuste Conversion-Führung nach dem Klick.</p>
 					<p>Ansatz: Erst Fundament, dann Aktivierung. Speed, Tracking, Seitenstruktur und Conversion-Pfade wurden geordnet, bevor Skalierung auf dem neuen Setup stattfand.</p>
 					<div class="wp-agentur-table-wrap">
 						<table class="wp-agentur-table">
@@ -252,7 +252,7 @@ get_header();
 								<tr>
 									<td>Fazit</td>
 									<td>Reibung nach dem Klick</td>
-									<td>Mehr Wirkung aus denselben Kanaelen</td>
+									<td>Mehr Wirkung aus denselben Kanälen</td>
 								</tr>
 							</tbody>
 						</table>
@@ -268,7 +268,7 @@ get_header();
 					<h2 class="nx-headline-section">Warum Hannover hier relevant ist und warum es nicht die Hauptbotschaft ist</h2>
 				</div>
 				<div class="nx-prose wp-agentur-prose">
-					<p>Wenn Sie in Hannover oder der Region sitzen, sind persoenliche Termine, Workshops und Reviews unkompliziert moeglich. Das kann bei komplexeren B2B-Projekten sinnvoll sein.</p>
+					<p>Wenn Sie in Hannover oder der Region sitzen, sind persönliche Termine, Workshops und Reviews unkompliziert möglich. Das kann bei komplexeren B2B-Projekten sinnvoll sein.</p>
 					<p>Die eigentliche Entscheidung sollte aber nicht lokal, sondern strategisch sein: ob Sie WordPress als echten Nachfragekanal aufbauen wollen. Genau deshalb bleibt die Hauptbotschaft systemisch und nicht lokal-werblich.</p>
 					<p><strong>Standort:</strong> Pattensen bei Hannover. <strong>Arbeitsgebiet:</strong> Hannover, Niedersachsen und DACH remote.</p>
 				</div>
@@ -278,7 +278,7 @@ get_header();
 		<section id="faq" class="nx-section">
 			<div class="nx-container">
 				<div class="nx-section-header">
-					<h2 class="nx-headline-section">Haeufige Fragen</h2>
+					<h2 class="nx-headline-section">Häufige Fragen</h2>
 				</div>
 				<div class="nx-faq wp-faq">
 					<?php foreach ( $faq_items as $item ) : ?>
@@ -294,11 +294,11 @@ get_header();
 		<section id="cta-final" class="nx-section">
 			<div class="nx-container">
 				<div class="nx-cta-box">
-					<h2>Pruefen wir Ihren Status quo.</h2>
+					<h2>Prüfen wir Ihren Status quo.</h2>
 					<p>Der Growth Audit zeigt, wo Ihre WordPress-Seite Nachfrage verliert und ob ein tieferer Umbau sinnvoll ist.</p>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_final_audit" data-track-category="lead_gen">Audit starten</a>
-					<p class="wp-cta-desc mt-1">Kein Pitch. Klare Einschaetzung. Sinnvoller naechster Schritt.</p>
-					<p class="wp-cta-desc mb-0"><a href="<?php echo esc_url( $about_url ); ?>">Mehr ueber meine Arbeitsweise</a></p>
+					<p class="wp-cta-desc mt-1">Kein Pitch. Klare Einschätzung. Sinnvoller nächster Schritt.</p>
+					<p class="wp-cta-desc mb-0"><a href="<?php echo esc_url( $about_url ); ?>">Mehr über meine Arbeitsweise</a></p>
 				</div>
 			</div>
 		</section>

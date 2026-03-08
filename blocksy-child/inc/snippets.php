@@ -51,7 +51,7 @@ add_action( 'login_init', function() {
    NEXUS SECURITY: HIDE ADMIN FOR CLIENTS
    ========================================= */
 
-// 1. Admin-Leiste (schwarzer Balken) fuer Kunden ausblenden
+// 1. Admin-Leiste (schwarzer Balken) für Kunden ausblenden
 add_action( 'after_setup_theme', function() {
     if ( ! current_user_can( 'manage_options' ) ) {
         show_admin_bar( false );

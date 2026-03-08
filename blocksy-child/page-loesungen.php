@@ -2,7 +2,7 @@
 /**
  * Template Name: Alle Lösungen
  *
- * Interne Angebotsuebersicht mit fokussierter 3-Stufen-Logik.
+ * Interne Angebotsübersicht mit fokussierter 3-Stufen-Logik.
  *
  * @package Blocksy_Child
  */
@@ -25,7 +25,7 @@ get_header();
 			<h1 style="margin:1rem 0 1rem;">Drei Stufen. Ein klares Ziel.</h1>
 			<p style="font-size:1.12rem; color:#64748b; line-height:1.7;">
 				Diese Seite ist keine Leistungsbibliothek. Sie zeigt den sinnvollen Weg,
-				mit dem aus einer WordPress-Praesenz ein planbares Anfrage- und Wachstumssystem wird.
+				mit dem aus einer WordPress-Präsenz ein planbares Anfrage- und Wachstumssystem wird.
 			</p>
 		</div>
 
@@ -34,14 +34,14 @@ get_header();
 				<li class="solution-item">
 					<a href="<?php echo esc_url( $audit_url ); ?>">
 						<h2>1. Growth Audit</h2>
-						<p>Diagnose-Einstieg fuer B2B-Unternehmen mit bestehender WordPress-Seite. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen.</p>
+						<p>Diagnose-Einstieg für B2B-Unternehmen mit bestehender WordPress-Seite. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen.</p>
 						<span class="cta-btn">Audit starten</span>
 					</a>
 				</li>
 				<li class="solution-item">
 					<a href="<?php echo esc_url( $deep_dive_url ); ?>">
 						<h2>2. 360 Grad Growth Blueprint</h2>
-						<p>Der Deep Dive nach dem Audit. Priorisierte Roadmap fuer Positionierung, Informationsarchitektur, Measurement und Angebotslogik.</p>
+						<p>Der Deep Dive nach dem Audit. Priorisierte Roadmap für Positionierung, Informationsarchitektur, Measurement und Angebotslogik.</p>
 						<span class="cta-btn">Blueprint ansehen</span>
 					</a>
 				</li>

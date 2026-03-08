@@ -46,10 +46,10 @@ $pillar_map = [
     'cro' => [
         'icon'        => '🎯',
         'badge'       => 'Conversion (CRO) & UX',
-        'subtitle'    => 'A/B-Tests, UX-Optimierung und Conversion-Fuehrung — mehr qualifizierte Anfragen aus dem gleichen Traffic.',
+        'subtitle'    => 'A/B-Tests, UX-Optimierung und Conversion-Führung — mehr qualifizierte Anfragen aus dem gleichen Traffic.',
         'cta_label'   => 'Growth Audit',
         'cta_url'     => $audit_url,
-        'cta_text'    => 'Wir zeigen, wo Proof, Nutzerfuehrung und CTA-Reihenfolge Reibung erzeugen.',
+        'cta_text'    => 'Wir zeigen, wo Proof, Nutzerführung und CTA-Reihenfolge Reibung erzeugen.',
     ],
     'wordpress-performance' => [
         'icon'        => '⚡',

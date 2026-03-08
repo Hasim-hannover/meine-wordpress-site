@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Meta Ads Archiv (Optional)
- * Description: Optionaler Paid-Social-Layer ausserhalb des Kern-Funnels
+ * Description: Optionaler Paid-Social-Layer außerhalb des Kern-Funnels
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *

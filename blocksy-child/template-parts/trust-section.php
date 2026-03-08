@@ -36,7 +36,7 @@ $variant = get_query_var( 'trust_variant', 'compact' );
 			</div>
 			<div class="trust-section__item">
 				<span class="trust-section__icon" aria-hidden="true">📊</span>
-				<span class="trust-section__text"><?php esc_html_e( 'Saubere Daten fuer Entscheidungen', 'blocksy-child' ); ?></span>
+				<span class="trust-section__text"><?php esc_html_e( 'Saubere Daten für Entscheidungen', 'blocksy-child' ); ?></span>
 			</div>
 			<div class="trust-section__item">
 				<span class="trust-section__icon" aria-hidden="true">🎯</span>

@@ -20,13 +20,13 @@ $audit_url = nexus_get_audit_url();
 		<span class="deepdive-pill">Stufe 2 nach dem Audit</span>
 		<h1 class="deepdive-hero-title">360 Grad Growth Blueprint</h1>
 		<p class="deepdive-hero-sub">
-			Sie kennen die groben Engpaesse aus dem Growth Audit.<br>
-			Mit wenigen gezielten Angaben verdichte ich das Bild zu einer persoenlichen Analyse<br>
-			mit klarer Reihenfolge statt losem Massnahmenstapel.
+			Sie kennen die groben Engpässe aus dem Growth Audit.<br>
+			Mit wenigen gezielten Angaben verdichte ich das Bild zu einer persönlichen Analyse<br>
+			mit klarer Reihenfolge statt losem Maßnahmenstapel.
 		</p>
 		<div class="deepdive-trust">
 			<span>✓ Diagnose statt Pitch</span>
-			<span>✓ Persoenliche Analyse in 48h</span>
+			<span>✓ Persönliche Analyse in 48h</span>
 			<span>✓ Priorisierter Blueprint</span>
 		</div>
 	</section>
@@ -59,7 +59,7 @@ $audit_url = nexus_get_audit_url();
 				<span class="deepdive-step-num">3</span>
 				<div class="deepdive-step-text">
 					<strong>Sie erhalten einen priorisierten Blueprint</strong>
-					<span>mit Hebeln, Reihenfolge und naechster Entscheidung</span>
+					<span>mit Hebeln, Reihenfolge und nächster Entscheidung</span>
 				</div>
 			</div>
 		</div>
@@ -70,7 +70,7 @@ $audit_url = nexus_get_audit_url();
 			<h2 class="deepdive-section-title">Warum dieser Zwischenschritt?</h2>
 			<p class="deepdive-trust-text">
 			Weil die meisten Teams nicht an fehlenden Ideen scheitern, sondern an fehlender Reihenfolge.
-			Der Blueprint macht sichtbar, was zuerst geloest werden muss und ob eine Umsetzung wirtschaftlich Sinn ergibt.
+			Der Blueprint macht sichtbar, was zuerst gelöst werden muss und ob eine Umsetzung wirtschaftlich Sinn ergibt.
 			Kein Follow-up-Spam, kein Leistungsdumping, sondern eine belastbare Entscheidungsvorlage.
 			</p>
 		</section>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Startseiten-Shortcodes fuer den fokussierten Growth-Architect-Ansatz.
+ * Startseiten-Shortcodes für den fokussierten Growth-Architect-Ansatz.
  *
  * @package Blocksy_Child
  */
@@ -59,12 +59,12 @@ function hu_hero_section_shortcode() {
 
 		<section class="wp-hero" id="hero" role="banner">
 			<div class="wp-container">
-				<span class="wp-badge">WordPress Growth Architect fuer B2B</span>
+				<span class="wp-badge">WordPress Growth Architect für B2B</span>
 				<h1 class="wp-hero-title">
 					Ich mache aus Ihrer<br><span>WordPress-Website ein planbares Anfragesystem.</span>
 				</h1>
 				<p class="wp-hero-subtitle">
-					Fuer B2B-Unternehmen, die aus WordPress mehr brauchen als einen Relaunch:
+					Für B2B-Unternehmen, die aus WordPress mehr brauchen als einen Relaunch:
 					klare Positionierung, technische SEO, privacy-first Messbarkeit und Conversion-Logik,
 					damit aus Sichtbarkeit belastbare Anfragen werden.
 				</p>
@@ -82,16 +82,16 @@ function hu_hero_section_shortcode() {
 					</div>
 					<h3 style="text-align:center;">Erster Schritt: Diagnose statt Pitch</h3>
 					<p style="text-align:center; color:#b0b0b8; margin-bottom:1.5rem;">
-						Wir pruefen, wo Ihre WordPress-Praesenz Nachfrage verliert:
-						bei Sichtbarkeit, Vertrauen, Messbarkeit oder im naechsten Conversion-Schritt.
+						Wir prüfen, wo Ihre WordPress-Präsenz Nachfrage verliert:
+						bei Sichtbarkeit, Vertrauen, Messbarkeit oder im nächsten Conversion-Schritt.
 					</p>
 					<ul class="premium-list">
-						<li><span class="check-icon">✓</span> <div><strong>Sichtbarkeit:</strong> Kaufnahe SEO- und Einstiegsseiten im Realitaetscheck</div></li>
+						<li><span class="check-icon">✓</span> <div><strong>Sichtbarkeit:</strong> Kaufnahe SEO- und Einstiegsseiten im Realitätscheck</div></li>
 						<li><span class="check-icon">✓</span> <div><strong>Messbarkeit:</strong> Tracking- und Consent-Reibung erkennen, bevor Daten teuer werden</div></li>
-						<li><span class="check-icon">✓</span> <div><strong>Conversion:</strong> Proof, CTA-Fuehrung und Angebotslogik auf echte Anfragen ausrichten</div></li>
+						<li><span class="check-icon">✓</span> <div><strong>Conversion:</strong> Proof, CTA-Führung und Angebotslogik auf echte Anfragen ausrichten</div></li>
 					</ul>
 					<div class="price-box text-center">
-						Kein Verkaufsgespraech. Klare Einschaetzung. Sinnvolle naechste Entscheidung.
+						Kein Verkaufsgespräch. Klare Einschätzung. Sinnvolle nächste Entscheidung.
 					</div>
 					<div class="wp-btn-wrapper" style="margin-top:1.25rem;">
 						<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary full-width" data-track-action="cta_hero_audit" data-track-category="lead_gen">Audit starten</a>
@@ -141,8 +141,8 @@ function hu_partner_section_shortcode() {
 		<div class="wp-container">
 			<div class="wp-section-title text-center">
 				<span class="wp-badge">Fokus</span>
-				<h2 id="fit-heading" class="wp-section-h2">Fuer wen das passt</h2>
-				<p class="wp-section-p">Nicht fuer jeden. Genau deshalb funktioniert die Seite besser fuer die Richtigen.</p>
+				<h2 id="fit-heading" class="wp-section-h2">Für wen das passt</h2>
+				<p class="wp-section-p">Nicht für jeden. Genau deshalb funktioniert die Seite besser für die Richtigen.</p>
 			</div>
 
 			<div class="wp-cards">
@@ -155,13 +155,13 @@ function hu_partner_section_shortcode() {
 				<article class="wp-success-card">
 					<h3 class="wp-success-title">B2B mit echtem Vertriebsziel</h3>
 					<p class="wp-success-subtitle">Anfragen statt Image-only</p>
-					<p>Es gibt ein klares Leistungsversprechen, kaufnahe Suchintentionen und den Anspruch, aus Besuchern qualifizierte Gespraeche zu machen.</p>
+					<p>Es gibt ein klares Leistungsversprechen, kaufnahe Suchintentionen und den Anspruch, aus Besuchern qualifizierte Gespräche zu machen.</p>
 				</article>
 
 				<article class="wp-success-card">
-					<h3 class="wp-success-title">Bereitschaft fuer Prioritaeten</h3>
+					<h3 class="wp-success-title">Bereitschaft für Prioritäten</h3>
 					<p class="wp-success-subtitle">Kein Aktionismus</p>
-					<p>Sie wollen keine zehn Einzelmassnahmen parallel, sondern die richtige Reihenfolge aus Diagnose, Architektur und Umsetzung.</p>
+					<p>Sie wollen keine zehn Einzelmaßnahmen parallel, sondern die richtige Reihenfolge aus Diagnose, Architektur und Umsetzung.</p>
 				</article>
 			</div>
 
@@ -191,7 +191,7 @@ function hu_owned_section_shortcode() {
 			<div class="section-title text-center">
 				<span class="badge">Das Prinzip</span>
 				<h2 id="owned-heading">Owned Leads statt Nachfrage auf Miete.</h2>
-				<p>Die bessere Website ist nicht die schoenere. Es ist die, die Nachfrage halten, messen und in den naechsten Schritt fuehren kann.</p>
+				<p>Die bessere Website ist nicht die schönere. Es ist die, die Nachfrage halten, messen und in den nächsten Schritt führen kann.</p>
 			</div>
 
 			<div class="wp-cards" style="margin-top:2.5rem;">
@@ -199,7 +199,7 @@ function hu_owned_section_shortcode() {
 					<h3 class="wp-success-title">Modell A: Externe Nachfrage mieten</h3>
 					<p class="wp-success-subtitle">Teurer, sobald Reibung im System bleibt</p>
 					<ul class="premium-list">
-						<li><span class="check-icon" style="color:#888;">-></span> <div>Klicks einkaufen, waehrend die Seite intern Anfragen verliert</div></li>
+						<li><span class="check-icon" style="color:#888;">-></span> <div>Klicks einkaufen, während die Seite intern Anfragen verliert</div></li>
 						<li><span class="check-icon" style="color:#888;">-></span> <div>Steigende Medienkosten kaschieren schwache Positionierung und schlechte Daten</div></li>
 						<li><span class="check-icon" style="color:#888;">-></span> <div>Budgetstop = Sichtbarkeitstop</div></li>
 					</ul>
@@ -210,14 +210,14 @@ function hu_owned_section_shortcode() {
 					<p class="wp-success-subtitle">Owned, messbar, priorisiert</p>
 					<ul class="premium-list">
 						<li><span class="check-icon">✓</span> <div>Money Pages, Proof und interne Verlinkung als bleibende Assets</div></li>
-						<li><span class="check-icon">✓</span> <div>Privacy-first Measurement fuer Entscheidungen statt Reporting-Rauschen</div></li>
+						<li><span class="check-icon">✓</span> <div>Privacy-first Measurement für Entscheidungen statt Reporting-Rauschen</div></li>
 						<li><span class="check-icon">✓</span> <div>Ads nur als Booster, wenn Fundament und Conversion-Pfade stehen</div></li>
 					</ul>
 				</div>
 			</div>
 
 			<div class="text-center" style="margin-top:2rem;">
-				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Pruefen, wo Ihre Seite heute verliert</a>
+				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Prüfen, wo Ihre Seite heute verliert</a>
 			</div>
 			<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="micro-cta-link">Noch nicht sicher? Erst das System verstehen -></a>
 		</div>
@@ -244,7 +244,7 @@ function hu_wgos_block_shortcode() {
 				<span class="wp-badge">Angebotsarchitektur</span>
 				<h2 id="angebot-heading" class="wp-section-h2">Drei Stufen statt zehn Einzelleistungen.</h2>
 				<p class="wp-section-p">
-					Der Ablauf ist bewusst eng gefuehrt: erst Diagnose, dann Blueprint,
+					Der Ablauf ist bewusst eng geführt: erst Diagnose, dann Blueprint,
 					dann Umsetzung und laufende Optimierung auf WordPress-Basis.
 				</p>
 			</div>
@@ -258,12 +258,12 @@ function hu_wgos_block_shortcode() {
 				<div class="wp-step highlight-step">
 					<div class="wp-step-num highlight-num">2</div>
 					<h3>360 Grad Growth Blueprint</h3>
-					<p>Der Deep Dive fuer Unternehmen mit echtem Potenzial. Ergebnis: priorisierte Roadmap fuer Positionierung, IA, Measurement und Conversion-Logik.</p>
+					<p>Der Deep Dive für Unternehmen mit echtem Potenzial. Ergebnis: priorisierte Roadmap für Positionierung, IA, Measurement und Conversion-Logik.</p>
 				</div>
 				<div class="wp-step">
 					<div class="wp-step-num">3</div>
 					<h3>WGOS Umsetzung und Retainer</h3>
-					<p>Technische Umsetzung, Content-Aufbau und fortlaufende Optimierung in einer Reihenfolge, die Kosten senkt und die Qualitaet von Anfragen steigert.</p>
+					<p>Technische Umsetzung, Content-Aufbau und fortlaufende Optimierung in einer Reihenfolge, die Kosten senkt und die Qualität von Anfragen steigert.</p>
 				</div>
 			</div>
 
@@ -296,7 +296,7 @@ function hu_erfolge_section_shortcode() {
 			<div style="text-align:center; margin-bottom:3rem;">
 				<span class="nx-badge nx-badge--gold">Proof</span>
 				<h2 id="cases-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Ergebnisse statt Leistungslisten.</h2>
-				<p style="color:var(--nx-text-muted);">Der Hebel liegt selten in einer einzelnen Massnahme. Er liegt fast immer in besserer Reihenfolge.</p>
+				<p style="color:var(--nx-text-muted);">Der Hebel liegt selten in einer einzelnen Maßnahme. Er liegt fast immer in besserer Reihenfolge.</p>
 			</div>
 
 			<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; margin-bottom:3rem;">
@@ -331,15 +331,15 @@ function hu_erfolge_section_shortcode() {
 					<ul class="premium-list" style="margin-top:1rem;">
 						<li><span class="check-icon">✓</span> <div>Money Pages werden klarer, schneller und argumentativ sauberer</div></li>
 						<li><span class="check-icon">✓</span> <div>Tracking und Consent liefern endlich belastbare Signale</div></li>
-						<li><span class="check-icon">✓</span> <div>SEO, Proof und CTA-Fuehrung ziehen in dieselbe Richtung</div></li>
+						<li><span class="check-icon">✓</span> <div>SEO, Proof und CTA-Führung ziehen in dieselbe Richtung</div></li>
 					</ul>
-					<p style="color:var(--nx-text-muted); margin:0;">Keine Hype-Metriken. Erst die Bremsen loesen, dann skalieren.</p>
+					<p style="color:var(--nx-text-muted); margin:0;">Keine Hype-Metriken. Erst die Bremsen lösen, dann skalieren.</p>
 				</article>
 			</div>
 
 			<div class="selection-card" style="margin:0 auto 2.5rem;">
 				<span class="selection-card-label">Passt nicht</span>
-				<p style="margin:0; color:var(--nx-text-muted);">Fuer reine Visitenkarten, Billig-Umsetzungen oder Teams, die zehn Taktiken parallel starten wollen. Das System ist fuer B2B-Unternehmen, die WordPress als echten Nachfragekanal ernst nehmen.</p>
+				<p style="margin:0; color:var(--nx-text-muted);">Für reine Visitenkarten, Billig-Umsetzungen oder Teams, die zehn Taktiken parallel starten wollen. Das System ist für B2B-Unternehmen, die WordPress als echten Nachfragekanal ernst nehmen.</p>
 			</div>
 
 			<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
@@ -369,16 +369,16 @@ function hu_prozess_section_shortcode() {
 			<div class="section-title">
 				<span class="badge">Wie ich arbeite</span>
 				<h2 id="process-heading">Weniger Aktionismus. Mehr Reihenfolge.</h2>
-				<p>Die staerksten Hebel sitzen fast nie da, wo klassische Agentur-Scopes anfangen. Deshalb arbeite ich nach Abhaengigkeiten, nicht nach Popularitaet.</p>
+				<p>Die stärksten Hebel sitzen fast nie da, wo klassische Agentur-Scopes anfangen. Deshalb arbeite ich nach Abhängigkeiten, nicht nach Popularität.</p>
 			</div>
 			<div class="process">
-				<article class="step"><div class="num">1</div><h3>Diagnose vor Pitch</h3><p class="muted">Erst pruefen wir, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen. Dann entscheiden wir, ob ein tieferer Eingriff wirtschaftlich Sinn ergibt.</p></article>
-				<article class="step"><div class="num">2</div><h3>WordPress als Infrastruktur</h3><p class="muted">Ich denke nicht in Einzelseiten, sondern in Seitenrollen, internen Verbindungen, Measurement und dem naechsten sinnvollen Schritt fuer den Nutzer.</p></article>
-				<article class="step"><div class="num">3</div><h3>Measurement mit Mass</h3><p class="muted">Privacy-first heisst nicht blind. Wir messen nur das, was Entscheidungen verbessert und Teams handlungsfaehig macht.</p></article>
-				<article class="step"><div class="num">4</div><h3>Ownership statt Lock-in</h3><p class="muted">Code, Content, Tracking-Logik und Priorisierung bleiben nachvollziehbar. Keine Blackbox, kein kuenstlicher Agenturbedarf.</p></article>
+				<article class="step"><div class="num">1</div><h3>Diagnose vor Pitch</h3><p class="muted">Erst prüfen wir, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen. Dann entscheiden wir, ob ein tieferer Eingriff wirtschaftlich Sinn ergibt.</p></article>
+				<article class="step"><div class="num">2</div><h3>WordPress als Infrastruktur</h3><p class="muted">Ich denke nicht in Einzelseiten, sondern in Seitenrollen, internen Verbindungen, Measurement und dem nächsten sinnvollen Schritt für den Nutzer.</p></article>
+				<article class="step"><div class="num">3</div><h3>Measurement mit Maß</h3><p class="muted">Privacy-first heißt nicht blind. Wir messen nur das, was Entscheidungen verbessert und Teams handlungsfähig macht.</p></article>
+				<article class="step"><div class="num">4</div><h3>Ownership statt Lock-in</h3><p class="muted">Code, Content, Tracking-Logik und Priorisierung bleiben nachvollziehbar. Keine Blackbox, kein künstlicher Agenturbedarf.</p></article>
 			</div>
 			<div style="text-align:center; margin-top:2rem;">
-				<a href="<?php echo esc_url( $urls['about'] ); ?>" class="btn btn-ghost">Mehr ueber meine Arbeitsweise</a>
+				<a href="<?php echo esc_url( $urls['about'] ); ?>" class="btn btn-ghost">Mehr über meine Arbeitsweise</a>
 			</div>
 		</div>
 	</section>
@@ -400,13 +400,13 @@ function hu_faq_section_shortcode() {
 		<div class="nx-container">
 			<div style="text-align:center; margin-bottom:3rem;">
 				<span class="nx-badge nx-badge--gold">FAQ</span>
-				<h2 id="faq-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Haeufige Fragen</h2>
-				<p style="color:var(--nx-text-muted);">Klarheit vor dem naechsten Schritt.</p>
+				<h2 id="faq-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Häufige Fragen</h2>
+				<p style="color:var(--nx-text-muted);">Klarheit vor dem nächsten Schritt.</p>
 			</div>
 			<div class="nx-faq">
 				<details class="nx-faq__item">
 					<summary>Was unterscheidet Sie von einer klassischen WordPress-Agentur?</summary>
-					<div class="nx-faq__content">Ich verkaufe nicht zuerst Seiten oder Leistungslisten. Ich baue eine WordPress-Praesenz so um, dass Positionierung, Messbarkeit und Conversion als System arbeiten.</div>
+					<div class="nx-faq__content">Ich verkaufe nicht zuerst Seiten oder Leistungslisten. Ich baue eine WordPress-Präsenz so um, dass Positionierung, Messbarkeit und Conversion als System arbeiten.</div>
 				</details>
 				<details class="nx-faq__item">
 					<summary>Ist das eher SEO, Tracking oder CRO?</summary>
@@ -414,11 +414,11 @@ function hu_faq_section_shortcode() {
 				</details>
 				<details class="nx-faq__item">
 					<summary>Brauchen wir danach noch Ads?</summary>
-					<div class="nx-faq__content">Moeglicherweise. Aber erst dann, wenn die Seite Nachfrage halten und sauber messen kann. Ads sind bei mir ein Verstaerker, nicht das Betriebssystem.</div>
+					<div class="nx-faq__content">Möglicherweise. Aber erst dann, wenn die Seite Nachfrage halten und sauber messen kann. Ads sind bei mir ein Verstärker, nicht das Betriebssystem.</div>
 				</details>
 				<details class="nx-faq__item">
 					<summary>Wie startet die Zusammenarbeit?</summary>
-					<div class="nx-faq__content">Mit dem Growth Audit. Danach ist klar, ob ein 360 Grad Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genuegen.</div>
+					<div class="nx-faq__content">Mit dem Growth Audit. Danach ist klar, ob ein 360 Grad Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genügen.</div>
 				</details>
 			</div>
 		</div>
@@ -444,7 +444,7 @@ function hu_blog_section_shortcode() {
 			<div class="wp-section-title text-center" style="margin-bottom:4rem;">
 				<span class="wp-badge">Insights</span>
 				<h2 style="font-size:2.5rem; margin-bottom:1rem; color:#fff;">WordPress, Nachfrage, Infrastruktur</h2>
-				<p class="wp-hero-subtitle">Fuer Teams, die verstehen wollen, warum Websites trotz Traffic keine belastbaren Anfragen erzeugen.</p>
+				<p class="wp-hero-subtitle">Für Teams, die verstehen wollen, warum Websites trotz Traffic keine belastbaren Anfragen erzeugen.</p>
 			</div>
 
 			<div class="wp-cards">
@@ -518,14 +518,14 @@ function hu_cta_section_shortcode() {
 	<section id="cta" aria-labelledby="cta-heading" style="padding:5rem 0; order:90;">
 		<div class="nx-container">
 			<div class="nx-cta-box">
-				<span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Naechster Schritt</span>
-				<h2 id="cta-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1rem; color:#fff;">Pruefen wir, wo Ihre WordPress-Seite Anfragen verliert.</h2>
+				<span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Nächster Schritt</span>
+				<h2 id="cta-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1rem; color:#fff;">Prüfen wir, wo Ihre WordPress-Seite Anfragen verliert.</h2>
 				<p>Im Growth Audit sehen Sie, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen und ob sich ein tieferer Umbau wirtschaftlich lohnt.</p>
 
 				<div role="group" aria-label="Audit-Merkmale" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem 1.5rem; margin-bottom:2rem;">
-					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ klare Einschaetzung statt Bauchgefuehl</span>
+					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ klare Einschätzung statt Bauchgefühl</span>
 					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ Positionierung, Measurement und Conversion gemeinsam betrachtet</span>
-					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ sinnvoller naechster Schritt statt Leistungsverkauf</span>
+					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ sinnvoller nächster Schritt statt Leistungsverkauf</span>
 				</div>
 
 				<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">

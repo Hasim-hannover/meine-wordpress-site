@@ -2,7 +2,7 @@
 /**
  * NEXUS MENU SETUP
  *
- * Erstellt das fokussierte Hauptmenü fuer die Neukunden-Navigation:
+ * Erstellt das fokussierte Hauptmenü für die Neukunden-Navigation:
  * System | Case Studies | Insights | Über mich | Audit starten
  *
  * Einmal-Setup: Wird beim Theme-Switch oder manuell via ?nexus_rebuild_menu=1 ausgelöst.

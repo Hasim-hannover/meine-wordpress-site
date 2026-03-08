@@ -39,9 +39,9 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
     <div class="wgos-container wgos-hero__inner">
         <span class="wgos-kicker">Das System</span>
 
-        <h1 class="wgos-hero__title">WGOS: WordPress als Growth-Infrastruktur fuer B2B.</h1>
+        <h1 class="wgos-hero__title">WGOS: WordPress als Growth-Infrastruktur für B2B.</h1>
 
-        <p class="wgos-hero__subtitle">Ein Retainer fuer Unternehmen, die aus ihrer WordPress-Praesenz ein Owned-Lead-System machen wollen.</p>
+        <p class="wgos-hero__subtitle">Ein Retainer für Unternehmen, die aus ihrer WordPress-Präsenz ein Owned-Lead-System machen wollen.</p>
         <p class="wgos-hero__positioning">Erst Fundament und Messbarkeit, dann Sichtbarkeit, Conversion und kontrollierte Aktivierung.</p>
         <ul class="wgos-hero__bullets">
             <li>Fundament vor Skalierung</li>
@@ -472,7 +472,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
 <section id="pakete" class="wgos-section wgos-section--gray">
     <div class="wgos-container">
         <h2 class="wgos-h2">Pakete &amp; Investition</h2>
-        <p class="wgos-section-intro">Der Retainer ist Stufe 3 des Systems. Diagnose und Blueprint klaeren vorher, welche Reihenfolge und welches Tempo wirtschaftlich sinnvoll sind.</p>
+        <p class="wgos-section-intro">Der Retainer ist Stufe 3 des Systems. Diagnose und Blueprint klären vorher, welche Reihenfolge und welches Tempo wirtschaftlich sinnvoll sind.</p>
 
         <div class="wgos-pricing-grid">
             <!-- Paket 1: Maintenance -->
@@ -632,7 +632,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
      ======================================== -->
 <section class="wgos-section wgos-section--white wgos-final-cta nx-reveal">
     <div class="wgos-container" style="text-align:center;">
-        <h2 class="wgos-h2">Bereit fuer WordPress als echtes Nachfrage-System?</h2>
+        <h2 class="wgos-h2">Bereit für WordPress als echtes Nachfrage-System?</h2>
         <p class="wgos-prose" style="max-width:680px;margin:0 auto 2rem;">Der erste Schritt bleibt bewusst klein: Audit zuerst, dann Blueprint, dann Retainer. So entsteht kein Leistungskatalog, sondern eine sinnvolle Entscheidungskette.</p>
 
         <div class="wgos-hero__actions">

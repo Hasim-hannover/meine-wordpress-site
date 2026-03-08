@@ -15,7 +15,7 @@ function hu_render_performance_cockpit() {
 
     if ( 'POST' === $_SERVER['REQUEST_METHOD'] && isset( $_POST['nexus_upload_nonce'] ) ) {
         if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nexus_upload_nonce'] ) ), 'nexus_upload' ) ) {
-            $upload_notice = 'Upload fehlgeschlagen: Sicherheitspruefung.';
+            $upload_notice = 'Upload fehlgeschlagen: Sicherheitsprüfung.';
             $upload_notice_type = 'error';
         } elseif ( ! current_user_can( 'upload_files' ) ) {
             $upload_notice = 'Upload fehlgeschlagen: Keine Berechtigung.';
@@ -33,7 +33,7 @@ function hu_render_performance_cockpit() {
                 $upload_notice = 'Upload fehlgeschlagen: Fehler beim Hochladen.';
                 $upload_notice_type = 'error';
             } elseif ( $file['size'] > $max_size ) {
-                $upload_notice = 'Upload fehlgeschlagen: Datei groesser als 50 MB.';
+                $upload_notice = 'Upload fehlgeschlagen: Datei größer als 50 MB.';
                 $upload_notice_type = 'error';
             } elseif ( empty( $filetype['ext'] ) || ! in_array( strtolower( $filetype['ext'] ), $allowed_ext, true ) ) {
                 $upload_notice = 'Upload fehlgeschlagen: Dateityp nicht erlaubt.';

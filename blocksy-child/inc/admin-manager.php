@@ -1,7 +1,7 @@
 <?php
 /**
  * NEXUS Growth Manager (Backend UI)
- * Fuegt Felder zur Benutzer-Verwaltung hinzu, um das Portal zu steuern.
+ * Fügt Felder zur Benutzer-Verwaltung hinzu, um das Portal zu steuern.
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }

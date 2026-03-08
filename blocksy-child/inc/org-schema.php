@@ -17,7 +17,7 @@ function hu_output_schema()
         'name'     => 'Hasim Üner – Growth Architect',
         'alternateName' => 'Hasim Uener - WordPress Growth Architect',
         'url'      => home_url(),
-        'description' => 'WordPress Growth Architect fuer B2B-Unternehmen: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als Nachfrage-System.',
+        'description' => 'WordPress Growth Architect für B2B-Unternehmen: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als Nachfrage-System.',
         'telephone'   => '+49 176 81407134',
         'email'       => 'info@hasimuener.de',
         'logo'        => 'https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp',
@@ -55,16 +55,16 @@ function hu_output_schema()
     $service_definitions = [
         'wordpress-agentur-hannover' => [
             'name'        => 'WordPress Growth Architect Hannover',
-            'description' => 'WordPress als Growth-Infrastruktur fuer B2B-Unternehmen in Hannover: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik.',
+            'description' => 'WordPress als Growth-Infrastruktur für B2B-Unternehmen in Hannover: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik.',
             'serviceType' => 'WordPress Growth Architecture',
             'serviceOutput' => 'Planbares Anfrage-System auf WordPress-Basis'
         ],
 
         'customer-journey-audit' => [
             'name'        => 'Growth Audit',
-            'description' => 'Diagnose-Einstieg fuer B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel pruefen.',
+            'description' => 'Diagnose-Einstieg für B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel prüfen.',
             'serviceType' => 'Growth Audit',
-            'serviceOutput' => 'Priorisierte Einschaetzung der groessten Nachfrage-Bremsen',
+            'serviceOutput' => 'Priorisierte Einschätzung der größten Nachfrage-Bremsen',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
@@ -72,23 +72,23 @@ function hu_output_schema()
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Erster Diagnose-Schritt fuer WordPress-Praesenzen mit unklarer Lead-Performance'
+                    'description'   => 'Erster Diagnose-Schritt für WordPress-Präsenzen mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'audit' => [
             'name'        => 'Growth Audit',
-            'description' => 'Diagnose-Einstieg fuer B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel pruefen.',
+            'description' => 'Diagnose-Einstieg für B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel prüfen.',
             'serviceType' => 'Growth Audit',
-            'serviceOutput' => 'Priorisierte Einschaetzung der groessten Nachfrage-Bremsen'
+            'serviceOutput' => 'Priorisierte Einschätzung der größten Nachfrage-Bremsen'
         ],
 
         '360-deep-dive' => [
             'name'        => '360 Grad Growth Blueprint',
-            'description' => 'Persoenlicher Deep Dive nach dem Audit mit priorisierter Roadmap fuer Positionierung, IA, Measurement und Conversion.',
+            'description' => 'Persönlicher Deep Dive nach dem Audit mit priorisierter Roadmap für Positionierung, IA, Measurement und Conversion.',
             'serviceType' => 'Growth Blueprint',
-            'serviceOutput' => 'Blueprint fuer die naechsten sinnvollen Struktur- und Umsetzungsentscheidungen'
+            'serviceOutput' => 'Blueprint für die nächsten sinnvollen Struktur- und Umsetzungsentscheidungen'
         ],
 
         'wordpress-wartung-hannover' => [
@@ -228,7 +228,7 @@ function hu_output_schema()
 
         'wgos' => [
             'name'        => 'WordPress Growth Operating System (WGOS)',
-            'description' => 'Monatlicher Retainer fuer B2B-Unternehmen: WordPress als Growth-Infrastruktur mit Performance, Measurement, SEO, Content und Conversion.',
+            'description' => 'Monatlicher Retainer für B2B-Unternehmen: WordPress als Growth-Infrastruktur mit Performance, Measurement, SEO, Content und Conversion.',
             'serviceType' => 'Growth Operating System',
             'serviceOutput' => 'Owned-Lead-System mit klarer Priorisierung und voller Ownership'
         ],
