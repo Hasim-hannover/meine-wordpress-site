@@ -6,6 +6,7 @@ Aktueller Stand:
 
 - Der `Customer Journey Audit` liegt als bereinigter V2-Workflow im Repo.
 - Der Workflow ist dokumentiert und mit Flow-Map sowie Frontend-Contract ergaenzt.
+- Fuer den naechsten Refactor liegt zusaetzlich ein V3-Zielbild fuer `Instant Results` im Repo.
 
 Bekannte Touchpoints:
 
@@ -15,6 +16,10 @@ Bekannte Touchpoints:
 - `automations/n8n/docs/audit-funnel__customer-journey-audit__refactor.md`
 - `automations/n8n/flow-maps/audit-funnel__customer-journey-audit__refactor.md`
 - `automations/n8n/data-models/audit-frontend-payload.contract.json`
+- `automations/n8n/workflows/audit-funnel__instant-results__target.json`
+- `automations/n8n/docs/audit-funnel__instant-results__target.md`
+- `automations/n8n/flow-maps/audit-funnel__instant-results__target.md`
+- `automations/n8n/data-models/audit-frontend-payload.v3.contract.json`
 
 ## Zielstruktur
 

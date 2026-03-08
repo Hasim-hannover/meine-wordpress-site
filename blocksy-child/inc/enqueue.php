@@ -120,6 +120,16 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-audit-results-css', 'audit-results.css', [ 'nexus-audit-css' ] );
 		hu_enqueue_js( 'nexus-audit-js', 'audit.js', [ 'nexus-core-js' ] );
 		hu_enqueue_js( 'nexus-audit-live-js', 'audit-live.js', [ 'nexus-audit-js' ] );
+		wp_localize_script(
+			'nexus-audit-live-js',
+			'NexusAuditConfig',
+			[
+				'webhookStart'        => 'https://hasim.app.n8n.cloud/webhook/audit',
+				'webhookStatus'       => 'https://hasim.app.n8n.cloud/webhook/audit-status',
+				'webhookConsultation' => 'https://hasim.app.n8n.cloud/webhook/audit-consultation',
+				'consultationAltUrl'  => 'https://cal.com/hasim/30min',
+			]
+		);
 	}
 
 	// ── H2) Template: 360° Deep-Dive ─────────────────────────────

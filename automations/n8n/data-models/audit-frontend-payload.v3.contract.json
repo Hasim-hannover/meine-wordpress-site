@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "domain": "example.de",
+    "url": "https://example.de",
+    "branche": "B2B-Dienstleister",
+    "standort": "Hannover",
+    "generatedAt": "2026-03-08T12:00:00.000Z"
+  },
+  "verdict": {
+    "status": "bad",
+    "badge": "Kritisch",
+    "headline": "Bei example.de bremsen vor allem Sichtbarkeit und Vertrauen die Nachfrage.",
+    "subline": "Die Website ist erreichbar, aber sie gewinnt zu selten den ersten Klick und baut zu wenig Beweis auf."
+  },
+  "highlights": [
+    {
+      "label": "Kaufnahe Keywords",
+      "value": "2 / 6",
+      "help": "sichtbar auf Seite 1",
+      "tone": "bad"
+    },
+    {
+      "label": "Mobile Performance",
+      "value": "58/100",
+      "help": "LCP 3,8 s",
+      "tone": "warning"
+    },
+    {
+      "label": "Naechster Schritt",
+      "value": "zu viel Reibung",
+      "help": "nur Kontakt, kein klarer Capture-Pfad",
+      "tone": "bad"
+    }
+  ],
+  "findings": [
+    {
+      "title": "Sichtbarkeit",
+      "impact": "Hebel #1",
+      "status": "bad",
+      "toneLabel": "Kritisch",
+      "summary": "Ein relevanter Teil der Nachfrage landet zuerst bei Wettbewerbern und nicht bei Ihnen.",
+      "evidence": [
+        "2 von 6 geprueften Keywords landen auf Seite 1.",
+        "Fuer „wordpress agentur hannover“ fehlt die Seite-1-Sichtbarkeit."
+      ],
+      "action": "Angebotsseiten auf Suchintention, lokalen Proof und klaren Conversion-Fokus zuschneiden."
+    },
+    {
+      "title": "Vertrauen",
+      "impact": "Hebel #2",
+      "status": "bad",
+      "toneLabel": "Kritisch",
+      "summary": "Die Seite zeigt zu wenig Beweis dafuer, warum ein Besucher ausgerechnet Ihnen schreiben sollte.",
+      "evidence": [
+        "Cases: nicht gefunden",
+        "Testimonials: nicht gefunden"
+      ],
+      "action": "Proof nicht streuen, sondern direkt an kaufnahen Stellen verankern."
+    },
+    {
+      "title": "Naechster Schritt",
+      "impact": "Hebel #3",
+      "status": "warning",
+      "toneLabel": "Verbesserbar",
+      "summary": "Interesse kann entstehen, aber der Conversion-Pfad bleibt zu unscharf.",
+      "evidence": [
+        "Kontaktformular: vorhanden",
+        "Lead-Capture: nicht gefunden"
+      ],
+      "action": "Nur einen klaren Conversion-Pfad priorisieren und ihn in Copy, Proof und CTA durchziehen."
+    }
+  ],
+  "opportunity": {
+    "rangeMonth": {
+      "min": 3000,
+      "max": 8000
+    },
+    "rangeYear": {
+      "min": 36000,
+      "max": 96000
+    },
+    "basis": {
+      "visibleKeywords": "2 / 6",
+      "avgOrderValue": 4000,
+      "assumedConversionRange": "1-2%"
+    },
+    "note": "Konservative Spanne auf Basis oeffentlicher Daten, Suchvolumen und heuristischer Conversion-Annahmen."
+  },
+  "details": {
+    "sections": [
+      {
+        "title": "Google & Markt",
+        "rows": [
+          {
+            "label": "wordpress agentur hannover",
+            "value": "nicht auf Seite 1 · ~400/Mo",
+            "status": "bad"
+          },
+          {
+            "label": "website erstellen lassen hannover",
+            "value": "Position 7 · ~180/Mo",
+            "status": "warning"
+          }
+        ],
+        "note": "Der groesste Sichtbarkeitsverlust liegt aktuell bei lokal-kaufnahen Suchanfragen."
+      },
+      {
+        "title": "Technik & Performance",
+        "rows": [
+          {
+            "label": "Mobile Score",
+            "value": "58/100",
+            "status": "warning"
+          },
+          {
+            "label": "Largest Contentful Paint",
+            "value": "3,8 s",
+            "status": "bad"
+          },
+          {
+            "label": "Meta Description",
+            "value": "vorhanden",
+            "status": "good"
+          }
+        ],
+        "note": "Technik ist nicht der einzige Hebel, aber sie entscheidet ueber den ersten Eindruck."
+      },
+      {
+        "title": "Vertrauen & Conversion",
+        "rows": [
+          {
+            "label": "Referenzen / Cases",
+            "value": "nicht gefunden",
+            "status": "bad"
+          },
+          {
+            "label": "Testimonials",
+            "value": "nicht gefunden",
+            "status": "bad"
+          },
+          {
+            "label": "Kontaktformular",
+            "value": "vorhanden",
+            "status": "good"
+          },
+          {
+            "label": "Lead-Capture",
+            "value": "nicht gefunden",
+            "status": "warning"
+          }
+        ],
+        "note": "Hier entscheidet sich, ob aus Aufmerksamkeit Vertrauen und Anfrage wird."
+      }
+    ]
+  },
+  "story": "Ihre Website ist nicht unsichtbar, aber sie arbeitet noch nicht wie ein Nachfrage-System. Sichtbarkeit, Proof und der naechste Schritt greifen nicht sauber ineinander. Genau deshalb entsteht Reibung, bevor ueberhaupt ein qualifiziertes Gespraech entstehen kann.",
+  "cta": {
+    "headline": "Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt die Beratung.",
+    "subline": "Die Schnell-Analyse zeigt die Bremsen. In der Beratung priorisieren wir den sinnvollen Hebel fuer Ihr Setup.",
+    "primary": {
+      "label": "Beratung anfragen",
+      "sublabel": "20 Minuten · konkrete Priorisierung · kein Sales-Theater"
+    },
+    "secondary": {
+      "url": "https://cal.com/hasim/30min",
+      "label": "Direkt Strategiegespraech waehlen"
+    }
+  }
+}

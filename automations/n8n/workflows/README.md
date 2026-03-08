@@ -11,6 +11,7 @@ Beispiele:
 - `audit-funnel__start-analysis__live.json`
 - `audit-funnel__status-polling__mvp.json`
 - `lead-routing__crm-handoff__refactor.json`
+- `audit-funnel__instant-results__target.json`
 
 Wichtig:
 

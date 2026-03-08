@@ -5,6 +5,7 @@ Hier liegen implizite oder explizite Payload-Contracts zwischen n8n und anderen 
 Aktuell wichtig:
 
 - Frontend-Payload fuer den Customer Journey Audit
+- V3-Contract fuer den Instant-Results-Refactor
 
 Ziel:
 

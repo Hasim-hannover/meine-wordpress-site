@@ -17,6 +17,10 @@ Empfohlene Editor-V2:
 
 - `docs/references/audit-page-editor-snippet-v2.html`
 
+Empfohlene Editor-V3:
+
+- `docs/references/audit-page-editor-snippet-v3.html`
+
 ## Rolle des Editor-Layers
 
 Der Editor-Layer liefert nicht nur Content, sondern einen funktionalen DOM-Rahmen fuer die Audit-Logik.
@@ -28,7 +32,6 @@ Er stellt bereit:
 - Loader-Platzhalter
 - Ergebnis-Container
 - Vertrauens- und Preview-Sektionen
-- versteckten Deep-Dive-Form-Container
 - einen kleinen View-Mode-Fallback per `MutationObserver`
 
 ## DOM-Contract mit `audit-live.js`
@@ -46,7 +49,6 @@ Der folgende DOM ist fuer die Laufzeit relevant:
 - `#loader-sub`
 - `#loader-progress`
 - `#audit-results`
-- `#deepdive-fluent-form`
 
 Ohne diese IDs kann `blocksy-child/assets/js/audit-live.js` nicht korrekt arbeiten.
 
@@ -54,49 +56,36 @@ Ohne diese IDs kann `blocksy-child/assets/js/audit-live.js` nicht korrekt arbeit
 
 - Hero verspricht Live-Ergebnis in 60 Sekunden.
 - Primaeres Formular fragt aktuell nur die URL ab.
-- Ein E-Mail-Feld ist im DOM vorhanden, aber versteckt.
 - Nach Ergebniseinspielung wird `view-mode-results` auf den Wrapper gesetzt.
 - `#start`, `#form-wrap` und `.audit-social-proof` werden im Results-Mode ausgeblendet.
-- Das Deep-Dive-Formular wird aus dem versteckten Container in den Ergebnisbereich verschoben.
+- Der Beratungs-CTA wird direkt im Ergebnisbereich gerendert.
 
 ## Wichtige Befunde
 
-### 1. Der Editor-Code bestaetigt den Contract-Bruch im Audit-System
+### 1. Der Editor-Layer sollte nur den Start und die Verkaufsumgebung liefern
 
 Das Formular im Editor fragt initial nur die URL ab.
 
-Parallel dazu verlangt der aktuelle n8n-Workflow beim Start bereits eine E-Mail.
+Folge:
+
+- Der Editor sollte nicht versuchen, Post-Result-Logik ueber versteckte Felder oder Plugin-Container mitzutragen.
+- Alles nach dem Polling sollte aus `audit-live.js` kommen.
+
+### 2. Das Ergebnis braucht einen klaren Beratungs-CTA
+Wenn der Editor-Layer spaeter wieder auf E-Mail oder Plugin-Formulare umschwenkt, bricht die neue V3-Logik.
 
 Folge:
 
-- Das Problem liegt nicht im Editor-Markup allein, sondern im Zusammenspiel aus Editor, `audit-live.js` und n8n.
+- Der Editor sollte fuer den Audit nur URL-Start, Loader, Ergebnis-Container und statische Verkaufssektionen liefern.
+- Alles Post-Result-spezifische sollte aus `audit-live.js` kommen.
 
-### 2. Verstecktes E-Mail-Feld ist aktuell faktisch tot
+### 3. Das Formular-Markup bleibt ein sensibler DOM-Contract
 
-Im Editor existiert:
-
-- `#email-field-wrap`
-- `#audit-email`
-
-Aber:
-
-- das Feld ist dauerhaft versteckt
-- `audit-live.js` liest es beim Erstsubmit nicht aus
-- es gibt keine sichtbare Logik, die es spaeter einblendet
+Die JS-Logik haengt weiter an einigen festen IDs.
 
 Folge:
 
-- Es erzeugt Scheinkomplexitaet ohne echte Funktion.
-
-### 3. Das Formular-Markup wirkt strukturell fehlerhaft
-
-Im gelieferten Snippet steht nach dem versteckten E-Mail-Feld ein zusaetzliches schliessendes `</div>`.
-
-Folge:
-
-- Der Browser wird das Markup wahrscheinlich still korrigieren.
-- Der reale DOM kann aber von der beabsichtigten Struktur abweichen.
-- Das ist ein unnoetiger Unsicherheitsfaktor fuer spaetere Aenderungen.
+- Markup-Aenderungen im Editor koennen `audit-live.js` weiter still brechen.
 
 ### 4. Results-Mode blendet nur Teile der Einstiegsseite aus
 
@@ -156,14 +145,19 @@ Folge:
 ## Empfohlene Richtung
 
 1. Den DOM-Contract in der Doku als verbindlich behandeln.
-2. Das tote E-Mail-Feld entfernen oder in eine echte, dokumentierte Progressive-Disclosure-Logik ueberfuehren.
-3. Das fehlerhafte Markup im Formular bereinigen.
-4. Den Editor-Observer nur noch als Fallback behandeln und langfristig entfernen.
-5. Entscheiden, ob die unteren Info-Sektionen nach Ergebniseinspielung sichtbar bleiben sollen.
-6. Langfristig den Editor-Shell-Code in einen versionierten Template- oder Block-Pattern-Layer ueberfuehren.
+2. Den Editor nur fuer URL-Start, Loader und statische Vertrauenssektionen nutzen.
+3. Den Editor-Observer nur noch als Fallback behandeln und langfristig entfernen.
+4. Entscheiden, ob die unteren Info-Sektionen nach Ergebniseinspielung sichtbar bleiben sollen.
+5. Langfristig den Editor-Shell-Code in einen versionierten Template- oder Block-Pattern-Layer ueberfuehren.
 
 ## Status der V2-Empfehlung
 
 - Die empfohlene Editor-V2 ist im Repo vorbereitet.
 - Sie verbessert Fokus, DOM-Sauberkeit und Results-Mode.
 - Sie behebt nicht den JSON-Response-Fehler aus n8n. Dieser liegt weiterhin im Webhook- oder Polling-Pfad, nicht im Editor-Markup.
+
+## Status der V3-Empfehlung
+
+- Die empfohlene Editor-V3 liegt ebenfalls im Repo.
+- Sie ist auf `Instant Results` und einen nativen Beratungs-CTA ohne Fluent Forms ausgerichtet.
+- Sie setzt voraus, dass das Frontend `audit-live.js` und der n8n-Workflow auf den V3-Contract umgestellt werden.
