@@ -15,6 +15,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Detect audit CTA items even if the stored WordPress menu label is outdated.
+ *
+ * @param WP_Post $item Menu item object.
+ * @return bool
+ */
+function nexus_is_audit_cta_menu_item( $item ) {
+	$classes = isset( $item->classes ) && is_array( $item->classes ) ? $item->classes : [];
+	$title   = isset( $item->title ) ? wp_strip_all_tags( (string) $item->title ) : '';
+	$url     = isset( $item->url ) ? (string) $item->url : '';
+	$path    = $url ? wp_parse_url( $url, PHP_URL_PATH ) : '';
+
+	if ( in_array( 'nav-cta-button', $classes, true ) ) {
+		return true;
+	}
+
+	$audit_paths = [
+		'/audit/',
+		'/customer-journey-audit/',
+		'/growth-audit/',
+		'/360-audit/',
+	];
+
+	if ( $path && in_array( trailingslashit( $path ), $audit_paths, true ) ) {
+		return true;
+	}
+
+	$title = strtolower( $title );
+
+	return false !== strpos( $title, 'journey audit' )
+		|| false !== strpos( $title, 'growth audit' )
+		|| false !== strpos( $title, 'free journey audit' );
+}
+
+/**
  * Hauptmenü programmatisch erstellen.
  */
 function nexus_setup_main_menu() {
@@ -110,3 +144,43 @@ add_action( 'admin_init', function () {
 		} );
 	}
 } );
+
+/**
+ * Normalize the primary nav CTA at render time.
+ *
+ * This keeps the live header label stable even if the stored menu item in
+ * WordPress still carries an outdated title from an older setup.
+ */
+add_filter( 'wp_nav_menu_objects', function ( $items, $args ) {
+	if ( empty( $items ) || empty( $args ) ) {
+		return $items;
+	}
+
+	$theme_location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
+	$menu_name      = isset( $args->menu->name ) ? (string) $args->menu->name : '';
+
+	if ( 'primary' !== $theme_location && 'Nexus Hauptmenü' !== $menu_name ) {
+		return $items;
+	}
+
+	$audit_url = nexus_get_audit_url();
+
+	foreach ( $items as $item ) {
+		if ( ! nexus_is_audit_cta_menu_item( $item ) ) {
+			continue;
+		}
+
+		$item->title = 'Audit starten';
+		$item->url   = $audit_url;
+
+		if ( ! isset( $item->classes ) || ! is_array( $item->classes ) ) {
+			$item->classes = [];
+		}
+
+		if ( ! in_array( 'nav-cta-button', $item->classes, true ) ) {
+			$item->classes[] = 'nav-cta-button';
+		}
+	}
+
+	return $items;
+}, 20, 2 );
