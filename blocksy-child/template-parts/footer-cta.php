@@ -8,7 +8,7 @@
  * Usage:
  *   set_query_var( 'cta_heading', 'Wo verbrennt Ihre Website Geld?' );
  *   set_query_var( 'cta_text', 'Der Audit prüft Tech, SEO und Conversion im Zusammenspiel.' );
- *   set_query_var( 'cta_url', '/customer-journey-audit/' );
+ *   set_query_var( 'cta_url', '/growth-audit/' );
  *   set_query_var( 'cta_button_text', 'Audit starten' );
  *   set_query_var( 'cta_action', 'cta_footer_audit' );
  *   get_template_part( 'template-parts/footer-cta' );

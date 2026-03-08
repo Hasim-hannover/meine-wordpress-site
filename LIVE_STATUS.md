@@ -19,7 +19,7 @@ Nicht verifiziert:
 - Push auf `main` deployt das Theme per SSH-Rsync ueber `.github/workflows/deploy.yml`.
 - Zentrale Theme-Module fuer Assets, SEO-Meta, Schema, Shortcodes, Portal und Snippets sind versioniert.
 - Service-Seiten, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
-- Der `Customer Journey Audit` ist als Primaer-CTA systemweit verankert.
+- Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Das Frontend fuer den Audit mit n8n-Polling liegt im Repo und ist produktionsnah integriert.
 - Der aktuelle WordPress-Editor-Shell-Code der Audit-Seite ist jetzt als Referenz dokumentiert, wird aber weiterhin manuell im Editor gepflegt.
 - Das Client Portal existiert technisch inklusive Login- und Upload-Logik.
@@ -43,6 +43,6 @@ Nicht verifiziert:
 
 ## Deprecated
 
-- Legacy-Slugs `/360-audit/` und `/growth-audit/` werden auf `/customer-journey-audit/` umgeleitet.
-- Der `Customer Journey Audit` ist der aktuelle Primaer-Einstieg. Ein eigenstaendiger 360-Audit als Erstkontakt ist nicht mehr die fuehrende Funnel-Logik.
+- Legacy-Slugs `/audit/`, `/customer-journey-audit/` und `/360-audit/` werden auf `/growth-audit/` umgeleitet.
+- Der `Growth Audit` ist der aktuelle Primaer-Einstieg. Ein eigenstaendiger 360-Audit als Erstkontakt ist nicht mehr die fuehrende Funnel-Logik.
 - Lose Root-Ablage fuer Playbooks, Referenz-Snippets und Content-Drafts ist nicht mehr Zielstruktur.

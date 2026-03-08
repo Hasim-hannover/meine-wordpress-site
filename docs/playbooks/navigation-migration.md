@@ -9,7 +9,7 @@
    - Case Studies (/case-studies/)
    - Blog (/blog/)
    - Über mich (/uber-mich/)
-   - Customer Journey Audit (/customer-journey-audit/) → Klasse "nav-cta-button" vergeben
+   - Growth Audit (/growth-audit/) → Klasse "nav-cta-button" vergeben
    - Alle Punkte auf derselben Ebene lassen (keine Untermenüs/Dropdowns)
 4. Menü-Position: "Hauptmenü Slim (Positioniert)" auswählen → Speichern
 5. Altes Menü NICHT löschen – nur deaktivieren (Backup)
@@ -37,8 +37,8 @@
 [ ] Stack-Text-Block ("Advanced WordPress · Technical SEO...") 
     → CSS-Klasse "hero-stack-text" zuweisen ODER direkt löschen
     
-[ ] Primärer Hero CTA bleibt: "Free Journey Audit" 
-    → /customer-journey-audit/ ✓ (bereits korrekt)
+[ ] Primärer Hero CTA bleibt: "Audit starten"
+    → /growth-audit/ ✓ (bereits korrekt)
 
 ### WGOS-SEKTION auf Homepage
 [ ] Nach der bestehenden WGOS-Text-Sektion (Speed/Measurement/Flywheel):
@@ -160,7 +160,7 @@ CSS für sr-only (in style.css ergänzen falls nicht vorhanden):
   2. Prinzip-Sektion (Modell A vs B)             ← bleibt
      └── Mini-CTA ergänzen (Text-Link):
          "Direkt zum Audit – kostenlos, 48h, kein Pitch →"
-         Link: /customer-journey-audit/
+         Link: /growth-audit/
   3. Social Proof Strip                          ← NEU (HTML-Block einfügen)
          Datei: wgos-social-proof.html kopieren und als
          Custom HTML Block einfügen

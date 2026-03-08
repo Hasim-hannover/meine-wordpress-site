@@ -2,7 +2,7 @@
 
 Stand: 2026-03-07.
 
-Diese Datei dokumentiert den WordPress-Editor-Layer der Seite `Customer Journey Audit`.
+Diese Datei dokumentiert den WordPress-Editor-Layer der Seite `Growth Audit`.
 
 Der eigentliche Audit-Funnel besteht aktuell aus zwei Ebenen:
 

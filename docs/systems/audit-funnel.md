@@ -37,11 +37,11 @@ Wichtige Einstiegspunkte in den Funnel:
 
 Primaerer Zielpfad:
 
-- fast alle starken CTAs fuehren auf `/customer-journey-audit/`
+- fast alle starken CTAs fuehren auf `/growth-audit/`
 
 ## Flow-Schritte
 
-1. Besucher landet auf dem `Customer Journey Audit`.
+1. Besucher landet auf dem `Growth Audit`.
 2. Das Formular fragt mindestens eine URL ab.
 3. `blocksy-child/assets/js/audit-live.js` sendet die URL an den n8n-Webhook `audit`.
 4. Das Frontend pollt `audit-status` bis Ergebnis oder Timeout.

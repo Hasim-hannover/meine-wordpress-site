@@ -233,7 +233,7 @@ Er gewinnt bessere Lead-Qualität, stabilere Akquisekosten und mehr Kontrolle ü
 ## Interne Verlinkung (direkt einbauen)
 
 - [Technisches SEO Audit für WordPress](/wordpress-seo-hannover/)
-- [Customer Journey Audit für bessere Conversion-Pfade](/customer-journey-audit/)
+- [Growth Audit für bessere Conversion-Pfade](/growth-audit/)
 - [WGOS: Das System hinter nachhaltigem Wachstum](/wordpress-growth-operating-system/)
 - [Case Studies mit messbaren Ergebnissen](/case-studies/)
 

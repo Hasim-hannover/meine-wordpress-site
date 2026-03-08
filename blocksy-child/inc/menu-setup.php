@@ -30,6 +30,7 @@ function nexus_is_audit_cta_menu_item( $item ) {
 		return true;
 	}
 
+	// Legacy paths stay here so older menu items are still normalized at render time.
 	$audit_paths = [
 		'/audit/',
 		'/customer-journey-audit/',
