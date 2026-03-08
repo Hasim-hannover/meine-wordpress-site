@@ -61,20 +61,27 @@ function hu_output_schema()
         ],
 
         'customer-journey-audit' => [
-            'name'        => 'Customer Journey Audit',
+            'name'        => 'Growth Audit',
             'description' => 'Diagnose-Einstieg fuer B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel pruefen.',
             'serviceType' => 'Growth Audit',
             'serviceOutput' => 'Priorisierte Einschaetzung der groessten Nachfrage-Bremsen',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Customer Journey Audit',
+                    'name'          => 'Growth Audit',
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
                     'description'   => 'Erster Diagnose-Schritt fuer WordPress-Praesenzen mit unklarer Lead-Performance'
                 ]
             ]
+        ],
+
+        'audit' => [
+            'name'        => 'Growth Audit',
+            'description' => 'Diagnose-Einstieg fuer B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel pruefen.',
+            'serviceType' => 'Growth Audit',
+            'serviceOutput' => 'Priorisierte Einschaetzung der groessten Nachfrage-Bremsen'
         ],
 
         '360-deep-dive' => [
@@ -173,13 +180,6 @@ function hu_output_schema()
                     'description'   => 'Kostenlose 5-Minuten-Analyse, die Technik, Speed und Tracking-Lücken aufdeckt'
                 ]
             ]
-        ],
-
-        'performance-marketing' => [
-            'name'        => 'Performance Marketing',
-            'description' => 'Datengetriebenes Performance Marketing: Jeder investierte Euro bringt einen messbaren Ertrag – weg von Zufall, hin zu System.',
-            'serviceType' => 'Performance Marketing & Ads',
-            'serviceOutput' => 'Messbares Wachstum durch orchestrierte Ads, Daten-Analyse und Conversion-Optimierung'
         ],
 
         'conversion-rate-optimization' => [

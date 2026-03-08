@@ -24,9 +24,7 @@ add_shortcode( 'nexus_header_btn', function() {
  * Gold-Button für die Hauptnavigation.
  */
 add_shortcode( 'nexus_header_cta', function() {
-    $audit_page = get_page_by_path( 'customer-journey-audit' );
-    $link = $audit_page ? get_permalink( $audit_page ) : home_url( '/customer-journey-audit/' );
-    return '<a href="' . esc_url( $link ) . '" class="nexus-header-cta">Kostenloser Audit</a>';
+    return '<a href="' . esc_url( nexus_get_audit_url() ) . '" class="nexus-header-cta">Audit starten</a>';
 } );
 
 /**
@@ -95,12 +93,11 @@ add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
 }, 10, 3 );
 
 /**
- * 301 Redirect: /360-audit/ → /customer-journey-audit/
- * The 360° Audit is no longer a standalone page; redirect for SEO.
+ * 301 Redirect: /360-audit/ and /growth-audit/ → current audit page.
  */
 add_action( 'template_redirect', function() {
 	if ( is_page( '360-audit' ) || is_page( 'growth-audit' ) ) {
-		wp_redirect( home_url( '/customer-journey-audit/' ), 301 );
+		wp_redirect( nexus_get_audit_url(), 301 );
 		exit;
 	}
 } );

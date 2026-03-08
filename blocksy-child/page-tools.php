@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Kostenlose Tools
- * Description: Tool Hub — ROI-Rechner, Customer Journey Audit & weitere kostenlose Tools
+ * Description: Tool Hub — Audit, ROI-Rechner und weitere kostenlose Tools
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *

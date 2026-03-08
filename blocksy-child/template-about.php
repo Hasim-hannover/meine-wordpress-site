@@ -2,7 +2,7 @@
 /**
  * Template Name: Nexus Über Mich
  *
- * About-Seite – hardcoded Content (CRO-optimiert, Customer Journey Audit als Primary CTA).
+ * About-Seite – hardcoded Content (CRO-optimiert, Growth Audit als Primary CTA).
  * Design: Nexus Design System (Gold/Dark) via about-page.css.
  * SEO-Meta: inc/seo-meta.php (ACF: seo_title, seo_description, og_image)
  *
@@ -11,7 +11,7 @@
 
 get_header();
 
-$audit_url = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ], home_url( '/customer-journey-audit/' ) );
+$audit_url = nexus_get_audit_url();
 $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
 ?>
 
@@ -75,7 +75,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                    class="btn btn-primary"
                    data-track-action="cta_about_hero_audit"
                    data-track-category="lead_gen">
-                    Customer Journey Audit starten
+                    Growth Audit starten
                 </a>
                 <a href="<?php echo esc_url( $cases_url ); ?>" class="btn btn-ghost">
                     Case Studies ansehen
@@ -316,14 +316,14 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                 Das <a href="/wordpress-growth-operating-system/" class="about-inline-link">WGOS</a>
                 läuft über ein monatliches Credit-Budget&nbsp;— kein Stundensatz, kein
                 unplanbarer Projektvertrag. Der Einstieg ist kostenlos über den
-                <a href="<?php echo esc_url( $audit_url ); ?>">Customer Journey Audit</a>.
+                <a href="<?php echo esc_url( $audit_url ); ?>">Growth Audit</a>.
             </div>
         </details>
 
         <details class="wp-faq-item">
             <summary>Wie läuft die Zusammenarbeit ab?</summary>
             <div class="wp-faq-content">
-                Wir starten mit dem Customer Journey Audit. Danach erhalten Sie eine priorisierte
+                Wir starten mit dem Growth Audit. Danach erhalten Sie eine priorisierte
                 Roadmap mit klaren Empfehlungen. Auf dieser Basis entscheiden Sie,
                 ob wir gemeinsam ins System einsteigen.
             </div>
@@ -370,7 +370,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
         <h2 class="cta-headline">Welche Hebel liegen bei Ihnen brach?</h2>
 
         <p class="cta-story">
-            Im <a href="<?php echo esc_url( $audit_url ); ?>" class="about-inline-link">Customer Journey Audit</a>
+            Im <a href="<?php echo esc_url( $audit_url ); ?>" class="about-inline-link">Growth Audit</a>
             analysieren wir Ihre WordPress-Präsenz auf die größten
             Systemhebel&nbsp;— klar, priorisiert und ohne Pitch.
         </p>
@@ -395,7 +395,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                class="btn btn-primary"
                data-track-action="cta_about_final_audit"
                data-track-category="lead_gen">
-                Customer Journey Audit starten
+                Growth Audit starten
             </a>
             <a href="<?php echo esc_url( $cases_url ); ?>" class="btn btn-ghost">
                 Case Studies ansehen

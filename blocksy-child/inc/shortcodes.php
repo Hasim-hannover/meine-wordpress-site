@@ -24,7 +24,7 @@ function hu_home_urls() {
 	$blog_page_id = (int) get_option( 'page_for_posts' );
 
 	$urls = [
-		'audit'     => nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] ),
+		'audit'     => nexus_get_audit_url(),
 		'deep_dive' => nexus_get_page_url( [ '360-deep-dive' ] ),
 		'wgos'      => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
 		'cases'     => nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) ),
@@ -77,7 +77,7 @@ function hu_hero_section_shortcode() {
 				<div class="audit-card-premium" id="audit">
 					<div style="text-align:center; margin-bottom:1.5rem;">
 						<span style="background:rgba(255,176,32,0.15); color:#FFB020; padding:6px 12px; border-radius:20px; font-size:0.78rem; font-weight:700;">
-							Customer Journey Audit
+							Growth Audit
 						</span>
 					</div>
 					<h3 style="text-align:center;">Erster Schritt: Diagnose statt Pitch</h3>
@@ -252,7 +252,7 @@ function hu_wgos_block_shortcode() {
 			<div class="wp-process">
 				<div class="wp-step">
 					<div class="wp-step-num">1</div>
-					<h3>Customer Journey Audit</h3>
+					<h3>Growth Audit</h3>
 					<p>Der niedrigschwellige Einstieg. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen und ob sich ein tieferer Eingriff lohnt.</p>
 				</div>
 				<div class="wp-step highlight-step">
@@ -418,7 +418,7 @@ function hu_faq_section_shortcode() {
 				</details>
 				<details class="nx-faq__item">
 					<summary>Wie startet die Zusammenarbeit?</summary>
-					<div class="nx-faq__content">Mit dem Customer Journey Audit. Danach ist klar, ob ein 360 Grad Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genuegen.</div>
+					<div class="nx-faq__content">Mit dem Growth Audit. Danach ist klar, ob ein 360 Grad Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genuegen.</div>
 				</details>
 			</div>
 		</div>
@@ -520,7 +520,7 @@ function hu_cta_section_shortcode() {
 			<div class="nx-cta-box">
 				<span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Naechster Schritt</span>
 				<h2 id="cta-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1rem; color:#fff;">Pruefen wir, wo Ihre WordPress-Seite Anfragen verliert.</h2>
-				<p>Im Customer Journey Audit sehen Sie, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen und ob sich ein tieferer Umbau wirtschaftlich lohnt.</p>
+				<p>Im Growth Audit sehen Sie, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen und ob sich ein tieferer Umbau wirtschaftlich lohnt.</p>
 
 				<div role="group" aria-label="Audit-Merkmale" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem 1.5rem; margin-bottom:2rem;">
 					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ klare Einschaetzung statt Bauchgefuehl</span>

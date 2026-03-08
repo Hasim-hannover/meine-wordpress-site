@@ -11,7 +11,7 @@
 
 get_header();
 
-$audit_url   = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ], home_url( '/customer-journey-audit/' ) );
+$audit_url   = nexus_get_audit_url();
 $cases_url   = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
 $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) );
 ?>
@@ -76,7 +76,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                class="nx-btn nx-btn--primary"
                data-track-action="cta_case_hero_audit"
                data-track-category="lead_gen">
-                Customer Journey Audit starten
+                Growth Audit starten
             </a>
             <a href="<?php echo esc_url( $cases_url ); ?>"
                class="nx-btn nx-btn--ghost">
@@ -573,7 +573,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                     Die Ergebnisse entstanden in einem Setup für KMU + B2C mit
                     klarer Leistungsfähigkeit und belastbaren internen Prozessen.
                     Besonders relevant wird das Modell ab etwa &gt;5 Mio.&nbsp;€ Jahresumsatz.
-                    Ob ähnliche Hebel bei Ihnen vorhanden sind, zeigt der Customer Journey Audit
+                    Ob ähnliche Hebel bei Ihnen vorhanden sind, zeigt der Growth Audit
                     klar priorisiert und ohne Pitch.
                 </div>
             </details>
@@ -650,7 +650,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                 Welche Hebel liegen bei Ihnen brach?
             </h2>
             <p style="color:var(--nx-text-muted);max-width:560px;margin:0 auto 2rem;line-height:1.6;">
-                Im Customer Journey Audit analysieren wir Ihre WordPress-Präsenz
+                Im Growth Audit analysieren wir Ihre WordPress-Präsenz
                 auf die größten Wachstumspotenziale&nbsp;— klar priorisiert und ohne Pitch.
             </p>
 
@@ -659,7 +659,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                    class="nx-btn nx-btn--primary"
                    data-track-action="cta_case_nextstep_audit"
                    data-track-category="lead_gen">
-                    Customer Journey Audit starten
+                    Growth Audit starten
                 </a>
             </div>
 

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$audit_url = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] );
+$audit_url = nexus_get_audit_url();
 $wgos_url  = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
 $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
 $about_url = nexus_get_page_url( [ 'uber-mich' ] );
@@ -42,7 +42,7 @@ $faq_items = [
 	],
 	[
 		'question' => 'Wie startet die Zusammenarbeit?',
-		'answer'   => 'Mit dem Customer Journey Audit. Danach ist klar, ob ein tieferer Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genuegen.',
+		'answer'   => 'Mit dem Growth Audit. Danach ist klar, ob ein tieferer Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genuegen.',
 	],
 ];
 
@@ -176,7 +176,7 @@ get_header();
 				<div class="nx-grid nx-grid-3 wp-agentur-process-grid">
 					<article class="nx-step">
 						<div class="nx-step__number">1</div>
-						<h3>Customer Journey Audit</h3>
+						<h3>Growth Audit</h3>
 						<p>Der Einstieg. Wir pruefen, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen und ob ein tieferer Eingriff wirtschaftlich Sinn ergibt.</p>
 					</article>
 					<article class="nx-step nx-step--highlight">
@@ -295,7 +295,7 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-cta-box">
 					<h2>Pruefen wir Ihren Status quo.</h2>
-					<p>Der Customer Journey Audit zeigt, wo Ihre WordPress-Seite Nachfrage verliert und ob ein tieferer Umbau sinnvoll ist.</p>
+					<p>Der Growth Audit zeigt, wo Ihre WordPress-Seite Nachfrage verliert und ob ein tieferer Umbau sinnvoll ist.</p>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_final_audit" data-track-category="lead_gen">Audit starten</a>
 					<p class="wp-cta-desc mt-1">Kein Pitch. Klare Einschaetzung. Sinnvoller naechster Schritt.</p>
 					<p class="wp-cta-desc mb-0"><a href="<?php echo esc_url( $about_url ); ?>">Mehr ueber meine Arbeitsweise</a></p>

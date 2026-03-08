@@ -114,7 +114,7 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-wgos-mindmap-v2-js', 'wgos-mindmap-v2.js', [ 'nexus-wgos-js' ] );
 	}
 
-	// ── H) Template: Customer Journey Audit ───────────────────────
+	// ── H) Template: Growth Audit ─────────────────────────────────
 	if ( is_page_template( 'page-audit.php' ) || is_page( 'audit' ) || is_page( 'customer-journey-audit' ) ) {
 		hu_enqueue_css( 'nexus-audit-css', 'audit.css', [ 'nexus-design-system' ] );
 		hu_enqueue_css( 'nexus-audit-results-css', 'audit-results.css', [ 'nexus-audit-css' ] );

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$audit_url     = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] );
+$audit_url     = nexus_get_audit_url();
 $deep_dive_url = nexus_get_page_url( [ '360-deep-dive' ] );
 $wgos_url      = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
 $cases_url     = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
@@ -33,7 +33,7 @@ get_header();
 			<ul style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; list-style:none; padding:0; margin:0;">
 				<li class="solution-item">
 					<a href="<?php echo esc_url( $audit_url ); ?>">
-						<h2>1. Customer Journey Audit</h2>
+						<h2>1. Growth Audit</h2>
 						<p>Diagnose-Einstieg fuer B2B-Unternehmen mit bestehender WordPress-Seite. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen.</p>
 						<span class="cta-btn">Audit starten</span>
 					</a>

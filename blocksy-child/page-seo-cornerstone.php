@@ -122,8 +122,8 @@ get_header();
 
 				<div class="seo-cornerstone__inline-cta">
 					<p>Wie tragfähig ist Ihr Fundament heute?</p>
-					<a class="nx-btn nx-btn--ghost" href="/customer-journey-audit/" data-track-action="cta_inline_cornerstone_journey" data-track-category="lead_gen">
-						Kostenlosen Journey Audit starten
+					<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( nexus_get_audit_url() ); ?>" data-track-action="cta_inline_cornerstone_journey" data-track-category="lead_gen">
+						Growth Audit starten
 					</a>
 				</div>
 
@@ -161,7 +161,7 @@ get_header();
 					<li>gemeinsame Keyword- und Intent-Signale für Inhalte und Anzeigen</li>
 					<li>ein Tracking-Modell, das den Beitrag je Touchpoint sauber abbildet</li>
 				</ul>
-				<p>Wenn <a href="/performance-marketing/">Performance Marketing</a> und technisches SEO dieselben Zielseiten nutzen, steigen Relevanz, Conversion-Wahrscheinlichkeit und Datenqualität. Gleichzeitig bauen Sie mit organischer Sichtbarkeit B2B ein Asset auf, das auch bei schwankendem Ad-Budget weiter wirkt.</p>
+				<p>Wenn Paid Activation und technisches SEO dieselben Zielseiten nutzen, steigen Relevanz, Conversion-Wahrscheinlichkeit und Datenqualität. Gleichzeitig bauen Sie mit organischer Sichtbarkeit B2B ein Asset auf, das auch bei schwankendem Ad-Budget weiter wirkt.</p>
 
 				<h2 id="qualifizierung">Lead-Qualifizierung und CRM: Vom MQL zum SQL ohne Reibung</h2>
 				<p>Viele Teams sprechen über Lead-Volumen, aber zu selten über Übergabequalität. Genau dort entscheidet sich, ob Marketing und Vertrieb wirtschaftlich zusammenspielen.</p>
@@ -181,7 +181,7 @@ get_header();
 
 				<div class="seo-cornerstone__inline-cta">
 					<p>Sie wollen in 48 Stunden sehen, wo Ihre Lead-Reibung entsteht?</p>
-					<a class="nx-btn nx-btn--ghost" href="/customer-journey-audit/" data-track-action="cta_inline_cornerstone_reibung" data-track-category="lead_gen">
+					<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( nexus_get_audit_url() ); ?>" data-track-action="cta_inline_cornerstone_reibung" data-track-category="lead_gen">
 						Lead-Reibung analysieren
 					</a>
 				</div>
@@ -359,7 +359,7 @@ get_header();
 					<p>Wenn Sie wissen wollen, wie belastbar Ihr technisches Fundament heute ist, starten Sie mit einer strukturierten Analyse von Technik, Tracking, Conversion-Logik und Lead-Übergabe.</p>
 					<div class="seo-cornerstone__cta-buttons">
 						<a class="nx-btn nx-btn--primary" href="/wordpress-seo-hannover/" data-track-action="cta_seo_cornerstone_audit" data-track-category="lead_gen">Technisches SEO Audit anfragen</a>
-						<a class="nx-btn nx-btn--ghost" href="/customer-journey-audit/" data-track-action="cta_seo_cornerstone_journey" data-track-category="lead_gen">Customer Journey Audit</a>
+						<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( nexus_get_audit_url() ); ?>" data-track-action="cta_seo_cornerstone_journey" data-track-category="lead_gen">Growth Audit</a>
 					</div>
 				</div>
 

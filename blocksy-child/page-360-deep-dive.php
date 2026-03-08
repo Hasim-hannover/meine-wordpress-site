@@ -10,7 +10,7 @@
 
 get_header();
 
-$audit_url = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] );
+$audit_url = nexus_get_audit_url();
 ?>
 
 <div class="deepdive-page" data-track-section="deepdive_landing">
@@ -20,7 +20,7 @@ $audit_url = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] );
 		<span class="deepdive-pill">Stufe 2 nach dem Audit</span>
 		<h1 class="deepdive-hero-title">360 Grad Growth Blueprint</h1>
 		<p class="deepdive-hero-sub">
-			Sie kennen die groben Engpaesse aus dem Customer Journey Audit.<br>
+			Sie kennen die groben Engpaesse aus dem Growth Audit.<br>
 			Mit wenigen gezielten Angaben verdichte ich das Bild zu einer persoenlichen Analyse<br>
 			mit klarer Reihenfolge statt losem Massnahmenstapel.
 		</p>
@@ -85,7 +85,7 @@ $audit_url = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ] );
 
 	<!-- 6. RÜCKLINK ZUM CJA -->
 	<section class="deepdive-cja-link">
-			<p class="deepdive-cja-label">Noch keinen Customer Journey Audit gemacht?</p>
+			<p class="deepdive-cja-label">Noch keinen Growth Audit gemacht?</p>
 			<a href="<?php echo esc_url( $audit_url ); ?>" class="deepdive-cja-btn">
 			-> Erst mit dem Audit starten
 			</a>

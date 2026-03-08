@@ -312,8 +312,8 @@
     var m = data.meta || {};
     return (
       '<div class="result-header result-animate">' +
-        '<div class="result-pill">Customer Journey Audit</div>' +
-        '<h2 class="result-title">Die Reise Ihres nächsten Kunden</h2>' +
+        '<div class="result-pill">Growth Audit</div>' +
+        '<h2 class="result-title">Die wichtigsten Reibungspunkte Ihrer Website</h2>' +
         '<div class="result-meta">' +
           '<span class="result-domain">' + escapeHtml(m.domain || '') + '</span>' +
           (m.branche ? ' · ' + escapeHtml(m.branche) : '') +
@@ -376,13 +376,13 @@
     );
   }
 
-  // ── Journey Steps
+  // ── Funnel Steps
   function renderJourneySteps(data) {
     var steps = data.journeySteps || [];
     if (!steps.length) return '';
 
     var html = '<div class="result-journey result-animate">';
-    html += '<h3 class="result-section-title">Die 4 Schritte Ihrer Customer Journey</h3>';
+    html += '<h3 class="result-section-title">Die 4 Schritte Ihres Anfragewegs</h3>';
 
     for (var i = 0; i < steps.length; i++) {
       html += renderJourneyStep(steps[i], i);
@@ -535,7 +535,7 @@
         '<h3>' + line1 + '</h3>' +
         '<p>' + line2 + '</p>' +
         '<p class="result-cta-bridge">' +
-          'Dieser Report zeigt, wo Ihre Customer Journey Lücken hat. ' +
+          'Dieser Report zeigt, wo Ihr Anfrageweg Lücken hat. ' +
           'Was er nicht zeigen kann: ob Ihr Tracking saubere Daten liefert, ' +
           'wie Ihre Lead-Qualität wirklich aussieht und welche Hebel den größten ROI bringen.' +
         '</p>' +

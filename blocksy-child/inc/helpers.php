@@ -178,3 +178,23 @@ function nexus_get_page_url( $paths, $fallback = '' ) {
 
 	return home_url( '/' );
 }
+
+/**
+ * Resolve the primary audit page ID while supporting legacy slugs.
+ *
+ * @return int
+ */
+function nexus_get_audit_page_id() {
+	return nexus_get_page_id( [ 'audit', 'customer-journey-audit' ] );
+}
+
+/**
+ * Resolve the primary audit page URL while supporting legacy slugs.
+ *
+ * Keep the legacy slug as fallback until a permalink migration is done in WordPress.
+ *
+ * @return string
+ */
+function nexus_get_audit_url() {
+	return nexus_get_page_url( [ 'audit', 'customer-journey-audit' ], home_url( '/customer-journey-audit/' ) );
+}

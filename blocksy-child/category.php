@@ -7,6 +7,8 @@
  */
 get_header();
 
+$audit_url = nexus_get_audit_url();
+
 // --- Kategorie-Daten ---
 $current_category = get_queried_object();
 $cat_slug         = $current_category->slug;
@@ -44,10 +46,10 @@ $pillar_map = [
     'cro' => [
         'icon'        => '🎯',
         'badge'       => 'Conversion (CRO) & UX',
-        'subtitle'    => 'A/B-Tests, UX-Optimierung, Customer Journey — mehr Leads aus dem gleichen Traffic.',
-        'cta_label'   => 'Customer Journey Audit',
-        'cta_url'     => '/customer-journey-audit/',
-        'cta_text'    => 'Wir simulieren die Reise Ihres nächsten Kunden — und zeigen, wo er abspringt.',
+        'subtitle'    => 'A/B-Tests, UX-Optimierung und Conversion-Fuehrung — mehr qualifizierte Anfragen aus dem gleichen Traffic.',
+        'cta_label'   => 'Growth Audit',
+        'cta_url'     => $audit_url,
+        'cta_text'    => 'Wir zeigen, wo Proof, Nutzerfuehrung und CTA-Reihenfolge Reibung erzeugen.',
     ],
     'wordpress-performance' => [
         'icon'        => '⚡',
@@ -64,8 +66,8 @@ $pillar = $pillar_map[$cat_slug] ?? [
     'icon'        => '📄',
     'badge'       => $cat_name,
     'subtitle'    => wp_strip_all_tags($cat_description) ?: 'Analysen und Insights zu ' . esc_html($cat_name) . '.',
-    'cta_label'   => 'Kostenloser Audit',
-    'cta_url'     => '/customer-journey-audit/',
+    'cta_label'   => 'Growth Audit',
+    'cta_url'     => $audit_url,
     'cta_text'    => 'Finden Sie heraus, wo Ihre Website Potenzial liegen lässt.',
 ];
 
@@ -250,9 +252,9 @@ if ($featured_query->have_posts()) {
                     <!-- Newsletter / Audit CTA -->
                     <div class="pillar-sidebar__audit">
                         <h4>Wo verbrennt Ihre Website Geld?</h4>
-                        <p>Unser Free Journey Audit prüft Tech, SEO & Content im Zusammenspiel.</p>
-                        <a href="/customer-journey-audit/" class="nx-btn nx-btn--ghost nx-btn--full nx-btn--sm">
-                            Kostenlosen Audit starten →
+                        <p>Der Growth Audit zeigt, wo Technik, SEO und Conversion im Zusammenspiel Reibung erzeugen.</p>
+                        <a href="<?php echo esc_url($audit_url); ?>" class="nx-btn nx-btn--ghost nx-btn--full nx-btn--sm">
+                            Audit starten →
                         </a>
                     </div>
                 </aside>

@@ -12,7 +12,7 @@
 
 get_header();
 
-$audit_url = nexus_get_page_url( [ 'customer-journey-audit', 'audit' ], home_url( '/customer-journey-audit/' ) );
+$audit_url = nexus_get_audit_url();
 $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
 ?>
 
@@ -248,9 +248,9 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                 <div class="wgos-module__content">
                     <h3>Activation Layer &amp; Automation <span class="wgos-tag--optional">Optional</span></h3>
                     <p class="wgos-module__subline"><em>Aktivierung erst dann, wenn Fundament und Conversion-Pfade tragen.</em></p>
-                    <p>Google Ads, Meta Ads&nbsp;— aber nur auf Basis sauberer Daten und konvertierender Pages. Plus: n8n-Automation für Lead-Routing, Reporting, Nurture-Flows. Dieser Block ist optional und wird erst aktiviert, wenn Modul 1–6 stehen.</p>
+                    <p>Paid Activation und n8n-Automation&nbsp;— aber nur auf Basis sauberer Daten und konvertierender Pages. Dieser Block bleibt optional und wird erst aktiviert, wenn Modul 1–6 stehen.</p>
                     <div class="wgos-module__proof">ROAS 6.2x bei 40% weniger Ad-Spend (nach Fundament-Optimierung)</div>
-                    <a href="/performance-marketing/" class="wgos-link--arrow">Mehr erfahren →</a>
+                    <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Reihenfolge in der Praxis sehen →</a>
                 </div>
             </div>
         </div>
@@ -439,7 +439,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                                 <td>15</td>
                             </tr>
                             <tr>
-                                <td>Meta Ads Setup</td>
+                                <td>Paid Social Setup</td>
                                 <td>Kampagnenarchitektur, Creatives, Audiences</td>
                                 <td>15</td>
                             </tr>

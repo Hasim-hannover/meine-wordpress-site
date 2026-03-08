@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Customer Journey Audit
- * Description: Landing Page — Customer Journey Audit (Formular + Report)
+ * Template Name: Growth Audit
+ * Description: Landing Page — Growth Audit (Formular + Report)
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *

@@ -77,13 +77,13 @@ function nexus_setup_main_menu() {
 	] );
 
 	// ── 5. Audit CTA (Top-Level) ───────────────────────────────────
-	$audit_id = nexus_get_page_id( [ 'customer-journey-audit', 'audit' ] );
+	$audit_id = nexus_get_audit_page_id();
 	wp_update_nav_menu_item( $menu_id, 0, [
 		'menu-item-title'     => 'Audit starten',
 		'menu-item-object'    => 'page',
 		'menu-item-object-id' => $audit_id,
 		'menu-item-type'      => $audit_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $audit_id ? '' : home_url( '/customer-journey-audit/' ),
+		'menu-item-url'       => $audit_id ? '' : nexus_get_audit_url(),
 		'menu-item-status'    => 'publish',
 		'menu-item-classes'   => 'nav-cta-button',
 	] );

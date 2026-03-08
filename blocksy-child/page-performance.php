@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Performance Marketing
- * Description: Service Landing Page — Performance Marketing
+ * Template Name: Paid Activation (Optional)
+ * Description: Optionaler Aktivierungslayer nach stabilem Fundament
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *

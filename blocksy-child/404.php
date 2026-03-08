@@ -55,10 +55,10 @@ get_header();
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo esc_url( home_url( '/customer-journey-audit/' ) ); ?>"
+							<a href="<?php echo esc_url( nexus_get_audit_url() ); ?>"
 							   data-track-action="404_nav_audit"
 							   data-track-category="error_recovery">
-								<?php esc_html_e( 'Kostenloser Customer Journey Audit', 'blocksy-child' ); ?>
+								<?php esc_html_e( 'Growth Audit', 'blocksy-child' ); ?>
 							</a>
 						</li>
 						<li>
