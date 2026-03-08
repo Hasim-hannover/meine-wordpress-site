@@ -93,11 +93,40 @@ add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
 }, 10, 3 );
 
 /**
- * 301 Redirect: /360-audit/ and /growth-audit/ → current audit page.
+ * Redirect legacy audit aliases to the current audit permalink.
+ *
+ * Use a temporary redirect while the permalink setup is still settling, so
+ * browser and edge caches do not keep stale audit redirects pinned for days.
  */
 add_action( 'template_redirect', function() {
-	if ( is_page( '360-audit' ) || is_page( 'growth-audit' ) ) {
-		wp_redirect( nexus_get_audit_url(), 301 );
-		exit;
+	if ( is_admin() || wp_doing_ajax() ) {
+		return;
 	}
+
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
+	$request_path = wp_parse_url( $request_uri, PHP_URL_PATH );
+	$request_path = trailingslashit( '/' . ltrim( (string) $request_path, '/' ) );
+
+	$audit_url  = nexus_get_audit_url();
+	$audit_path = wp_parse_url( $audit_url, PHP_URL_PATH );
+	$audit_path = trailingslashit( '/' . ltrim( (string) $audit_path, '/' ) );
+
+	if ( $request_path === $audit_path ) {
+		return;
+	}
+
+	$legacy_paths = [
+		'/audit/',
+		'/growth-audit/',
+		'/customer-journey-audit/',
+		'/360-audit/',
+	];
+
+	if ( ! in_array( $request_path, $legacy_paths, true ) ) {
+		return;
+	}
+
+	nocache_headers();
+	wp_safe_redirect( $audit_url, 302 );
+	exit;
 } );

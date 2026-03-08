@@ -357,7 +357,7 @@
 			'<span>' + mod.id + '/' + modules.length + '</span>' +
 			'<button data-action="next-module">→</button>' +
 			'</div>' +
-			'<a class="wmm2-cta" href="https://hasimuener.de/customer-journey-audit/" target="_blank" rel="noreferrer">Diesen Hebel prüfen →</a>' +
+			'<a class="wmm2-cta" href="/growth-audit/" target="_blank" rel="noreferrer">Diesen Hebel prüfen →</a>' +
 			'</div>' +
 			'</div>' +
 			'</div>';

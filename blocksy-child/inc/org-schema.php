@@ -77,6 +77,23 @@ function hu_output_schema()
             ]
         ],
 
+        'growth-audit' => [
+            'name'        => 'Growth Audit',
+            'description' => 'Diagnose-Einstieg für B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel prüfen.',
+            'serviceType' => 'Growth Audit',
+            'serviceOutput' => 'Priorisierte Einschätzung der größten Nachfrage-Bremsen',
+            'offers'      => [
+                [
+                    '@type'         => 'Offer',
+                    'name'          => 'Growth Audit',
+                    'price'         => 0,
+                    'priceCurrency' => 'EUR',
+                    'isAccessibleForFree' => true,
+                    'description'   => 'Erster Diagnose-Schritt für WordPress-Präsenzen mit unklarer Lead-Performance'
+                ]
+            ]
+        ],
+
         'audit' => [
             'name'        => 'Growth Audit',
             'description' => 'Diagnose-Einstieg für B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel prüfen.',

@@ -154,6 +154,44 @@ function nexus_get_page_id( $paths ) {
 }
 
 /**
+ * Resolve a page ID by assigned page template.
+ *
+ * Cached per request so repeated CTA helpers stay cheap.
+ *
+ * @param string $template Page template filename.
+ * @return int
+ */
+function nexus_get_page_id_by_template( $template ) {
+	static $cache = [];
+
+	$template = (string) $template;
+
+	if ( isset( $cache[ $template ] ) ) {
+		return $cache[ $template ];
+	}
+
+	$page_ids = get_posts(
+		[
+			'post_type'              => 'page',
+			'post_status'            => 'publish',
+			'posts_per_page'         => 1,
+			'orderby'                => 'menu_order title',
+			'order'                  => 'ASC',
+			'fields'                 => 'ids',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+			'meta_key'               => '_wp_page_template',
+			'meta_value'             => $template,
+		]
+	);
+
+	$cache[ $template ] = ! empty( $page_ids ) ? (int) $page_ids[0] : 0;
+
+	return $cache[ $template ];
+}
+
+/**
  * Resolve a permalink from one or more possible slugs with a sane fallback.
  *
  * @param string|array $paths    Candidate page paths, ordered by preference.
@@ -185,7 +223,13 @@ function nexus_get_page_url( $paths, $fallback = '' ) {
  * @return int
  */
 function nexus_get_audit_page_id() {
-	return nexus_get_page_id( [ 'audit', 'customer-journey-audit' ] );
+	$template_page_id = nexus_get_page_id_by_template( 'page-audit.php' );
+
+	if ( $template_page_id ) {
+		return $template_page_id;
+	}
+
+	return nexus_get_page_id( [ 'growth-audit', 'audit', 'customer-journey-audit', '360-audit' ] );
 }
 
 /**
@@ -196,5 +240,29 @@ function nexus_get_audit_page_id() {
  * @return string
  */
 function nexus_get_audit_url() {
-	return nexus_get_page_url( [ 'audit', 'customer-journey-audit' ], home_url( '/customer-journey-audit/' ) );
+	$page_id = nexus_get_audit_page_id();
+
+	if ( $page_id ) {
+		return get_permalink( $page_id );
+	}
+
+	return home_url( '/growth-audit/' );
+}
+
+/**
+ * Determine whether the current request is the audit landing page.
+ *
+ * @return bool
+ */
+function nexus_is_audit_page() {
+	$audit_page_id = nexus_get_audit_page_id();
+
+	if ( $audit_page_id && is_page( $audit_page_id ) ) {
+		return true;
+	}
+
+	return is_page_template( 'page-audit.php' )
+		|| is_page( 'growth-audit' )
+		|| is_page( 'audit' )
+		|| is_page( 'customer-journey-audit' );
 }

@@ -1365,6 +1365,8 @@ body.wp-customizer .ct-customizer-shortcut {
 .ct-button:focus-visible,
 a[href*="customer-journey-audit"]:focus,
 a[href*="customer-journey-audit"]:focus-visible,
+a[href*="growth-audit"]:focus,
+a[href*="growth-audit"]:focus-visible,
 a[href*="wordpress-growth-operating-system"]:focus,
 a[href*="wordpress-growth-operating-system"]:focus-visible,
 .nav-cta-button a:focus,
@@ -1559,6 +1561,7 @@ em[class*="disclaimer"],
 .wp-block-button__link:focus,
 .ct-button:focus,
 a[href*="customer-journey-audit"]:focus,
+a[href*="growth-audit"]:focus,
 a[href*="wordpress-growth-operating-system"]:focus,
 button:focus {
   outline: 2px solid #D4AF37;

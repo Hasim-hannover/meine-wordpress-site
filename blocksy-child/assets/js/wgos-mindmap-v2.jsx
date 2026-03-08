@@ -400,7 +400,7 @@ export default function WGOSMindmap() {
                   <button onClick={() => setActive((active + 1) % modules.length)}
                     style={{ background: "none", border: "1px solid rgba(255,255,255,0.1)", color: "#666", padding: "5px 12px", borderRadius: 5, cursor: "pointer", fontSize: 11 }}>→</button>
                 </div>
-                <a href="https://hasimuener.de/customer-journey-audit/"
+                <a href="/growth-audit/"
                   target="_blank" rel="noreferrer"
                   style={{
                     background: "#D4AF37", color: "#000", padding: "8px 18px",
