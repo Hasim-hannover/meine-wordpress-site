@@ -764,12 +764,9 @@
     {
       "parameters": {
         "fromEmail": "performance@hasimuener.de",
-        "toEmail": "={{ $vars.AUDIT_LEADS_TO_EMAIL || $env.AUDIT_LEADS_TO_EMAIL || \"info@hasimuener.de\" }}",
+        "toEmail": "info@hasimuener.de",
         "subject": "={{ $json.subject }}",
-        "html": "={{ $json.html }}",
-        "options": {
-          "appendAttribution": false
-        }
+        "html": "={{ $json.html }}"
       },
       "type": "n8n-nodes-base.emailSend",
       "typeVersion": 2.1,
