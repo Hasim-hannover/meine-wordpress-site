@@ -32,11 +32,11 @@
   };
 
   var loaderSteps = [
-    { icon: '🔍', text: 'Kaufnahe Sichtbarkeit wird geprüft …', sub: 'Wir prüfen, ob Ihre Website bei relevanten Suchanfragen sichtbar ist.' },
-    { icon: '⚡', text: 'Mobile Performance wird gemessen …', sub: 'PageSpeed, Core Web Vitals und erster Eindruck.' },
-    { icon: '🤝', text: 'Vertrauenssignale werden bewertet …', sub: 'Cases, Testimonials, rechtliche Basis und Proof.' },
-    { icon: '🎯', text: 'Der nächste Schritt wird analysiert …', sub: 'Kontakt, Lead-Capture und Conversion-Reibung.' },
-    { icon: '🧭', text: 'Die Diagnose wird verdichtet …', sub: 'Wir priorisieren die Bremsen nach Impact.' }
+    { icon: '🧾', text: 'Das Seitenversprechen wird gelesen …', sub: 'Wir pruefen H1, Title, Copy und die Klarheit des ersten Eindrucks.' },
+    { icon: '🤝', text: 'Proof-Signale werden gesucht …', sub: 'Wir pruefen Cases, Testimonials und sichtbare Vertrauensanker.' },
+    { icon: '🎯', text: 'Der naechste Schritt wird geprueft …', sub: 'Wir schauen auf CTA, Kontaktpfad und Reibung vor der Anfrage.' },
+    { icon: '⚡', text: 'Der mobile Eindruck wird gemessen …', sub: 'PageSpeed, Ladezeit und Reibung auf Mobilgeraeten.' },
+    { icon: '🧭', text: 'Die drei wichtigsten Hebel werden priorisiert …', sub: 'Am Ende sehen Sie nicht alles, sondern zuerst das Wirksamste.' }
   ];
 
   function init() {
@@ -85,10 +85,10 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url: url })
     })
-      .then(function (res) { return parseJsonResponse(res, 'Audit-Start'); })
+      .then(function (res) { return parseJsonResponse(res, 'Check-Start'); })
       .then(function (data) {
         if (!data || !data.ok || !data.jobId) {
-          throw new Error((data && data.error) || 'Audit konnte nicht gestartet werden.');
+          throw new Error((data && data.error) || 'Der Check konnte nicht gestartet werden.');
         }
 
         state.jobId = data.jobId;
@@ -125,7 +125,7 @@
       updateLoaderStep(loaderSteps[stepIndex]);
 
       fetch(CONFIG.webhookStatus + '?jobId=' + encodeURIComponent(state.jobId))
-        .then(function (res) { return parseJsonResponse(res, 'Audit-Status'); })
+        .then(function (res) { return parseJsonResponse(res, 'Check-Status'); })
         .then(function (data) {
           consecutiveFailures = 0;
 
@@ -244,7 +244,7 @@
     if (!findings.length) return '';
 
     var html = '<section class="result-findings result-animate">';
-    html += '<h3 class="result-section-title">Die groessten Bremsen</h3>';
+    html += '<h3 class="result-section-title">Die wichtigsten Hebel</h3>';
     html += '<div class="finding-grid">';
 
     for (var i = 0; i < findings.length; i++) {
@@ -378,12 +378,12 @@
   function renderConsultation(data) {
     var cta = data.cta || {};
     var primaryFinding = data.findings && data.findings.length ? data.findings[0].title : 'die Priorisierung Ihrer Hebel';
-    var defaultMessage = 'Ich moechte die Ergebnisse zu ' + primaryFinding + ' gemeinsam priorisieren.';
+    var defaultMessage = 'Ich moechte die drei wichtigsten Hebel dieser Seite gemeinsam priorisieren.';
 
     return (
       '<section class="result-cta result-animate">' +
-        '<h3>' + escapeHtml(cta.headline || 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt die Beratung.') + '</h3>' +
-        '<p class="result-cta-bridge">' + escapeHtml(cta.subline || 'Sie haben jetzt Klarheit ueber die Bremsen. In der Beratung priorisieren wir, was zuerst angefasst werden sollte und was Ihnen nur Zeit kostet.') + '</p>' +
+        '<h3>' + escapeHtml(cta.headline || 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespraech.') + '</h3>' +
+        '<p class="result-cta-bridge">' + escapeHtml(cta.subline || 'Sie haben jetzt Klarheit ueber die Bremsen. Im Gespraech priorisieren wir, was auf dieser Seite zuerst Wirkung bringt.') + '</p>' +
         '<form id="audit-consultation-form" class="consultation-form" novalidate>' +
           '<div class="consultation-row">' +
             '<div class="consultation-field">' +
@@ -411,13 +411,13 @@
           '<input type="hidden" name="url" value="' + escapeHtml(data.meta.url || state.auditUrl || '') + '">' +
           '<input type="hidden" name="domain" value="' + escapeHtml(data.meta.domain || '') + '">' +
           '<input type="hidden" name="primaryFinding" value="' + escapeHtml(primaryFinding) + '">' +
-          '<button type="submit" class="result-cta-btn consultation-submit-btn">' + escapeHtml(cta.primaryLabel || 'Beratung anfragen') + '</button>' +
-          '<span class="result-cta-sub">' + escapeHtml(cta.primarySubLabel || '20 Minuten · konkrete Priorisierung · kein Sales-Theater') + '</span>' +
+          '<button type="submit" class="result-cta-btn consultation-submit-btn">' + escapeHtml(cta.primaryLabel || 'Analyse gemeinsam priorisieren') + '</button>' +
+          '<span class="result-cta-sub">' + escapeHtml(cta.primarySubLabel || '20 Minuten · klare Reihenfolge · kein Sales-Theater') + '</span>' +
           '<div id="audit-consultation-feedback" class="consultation-feedback" aria-live="polite"></div>' +
         '</form>' +
         '<div class="result-cta-alt">' +
           '<span>Oder direkt:</span> ' +
-          '<a href="' + escapeHtml(cta.altUrl || CONFIG.consultationAltUrl) + '" target="_blank" rel="noopener">' + escapeHtml(cta.altLabel || 'Strategiegespraech waehlen') + '</a>' +
+          '<a href="' + escapeHtml(cta.altUrl || CONFIG.consultationAltUrl) + '" target="_blank" rel="noopener">' + escapeHtml(cta.altLabel || 'Direkt Strategiegespraech buchen') + '</a>' +
         '</div>' +
       '</section>'
     );
@@ -488,7 +488,7 @@
       .catch(function (error) {
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = 'Beratung anfragen';
+          submitButton.textContent = 'Analyse gemeinsam priorisieren';
         }
         showConsultationFeedback(error.message || 'Senden fehlgeschlagen. Bitte erneut versuchen.', 'error');
       });
@@ -643,12 +643,12 @@
       },
       story: (data.story || '').toString().trim(),
       cta: {
-        headline: 'Das Audit zeigt die Bremsen. Die Beratung priorisiert den sinnvollsten Hebel fuer Ihr Setup.',
-        subline: 'Wenn Sie wissen wollen, was zuerst angefasst werden sollte und was warten kann, ist jetzt der richtige Zeitpunkt fuer die Beratung.',
-        primaryLabel: 'Beratung anfragen',
-        primarySubLabel: '20 Minuten · konkrete Priorisierung · kein Sales-Theater',
+        headline: 'Der Check zeigt die Bremsen. Im Gespraech priorisieren wir, was auf dieser Seite zuerst Wirkung bringt.',
+        subline: 'Wenn Sie wissen wollen, was zuerst geschaerft werden sollte und was warten kann, ist jetzt der richtige Schritt das Gespraech.',
+        primaryLabel: 'Analyse gemeinsam priorisieren',
+        primarySubLabel: '20 Minuten · klare Reihenfolge · kein Sales-Theater',
         altUrl: CONFIG.consultationAltUrl,
-        altLabel: 'Direkt Strategiegespraech waehlen'
+        altLabel: 'Direkt Strategiegespraech buchen'
       }
     };
   }
@@ -742,33 +742,33 @@
   function normalizeCta(cta) {
     if (!cta) {
       return {
-        headline: 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt die Beratung.',
-        subline: 'Wir priorisieren gemeinsam, was zuerst Wirkung bringt und was nur Aktivitaet erzeugt.',
-        primaryLabel: 'Beratung anfragen',
-        primarySubLabel: '20 Minuten · konkrete Priorisierung · kein Sales-Theater',
+        headline: 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespraech.',
+        subline: 'Wir priorisieren gemeinsam, was auf dieser Seite zuerst Wirkung bringt und was nur Aktivitaet erzeugt.',
+        primaryLabel: 'Analyse gemeinsam priorisieren',
+        primarySubLabel: '20 Minuten · klare Reihenfolge · kein Sales-Theater',
         altUrl: CONFIG.consultationAltUrl,
-        altLabel: 'Direkt Strategiegespraech waehlen'
+        altLabel: 'Direkt Strategiegespraech buchen'
       };
     }
 
     if (cta.primary || cta.secondary) {
       return {
-        headline: cta.headline || 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt die Beratung.',
-        subline: cta.subline || 'Die Schnell-Analyse zeigt die Bremsen. In der Beratung priorisieren wir den sinnvollen Hebel fuer Ihr Setup.',
-        primaryLabel: cta.primary && cta.primary.label ? cta.primary.label : 'Beratung anfragen',
-        primarySubLabel: cta.primary && cta.primary.sublabel ? cta.primary.sublabel : '20 Minuten · konkrete Priorisierung · kein Sales-Theater',
+        headline: cta.headline || 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespraech.',
+        subline: cta.subline || 'Der Schnell-Check zeigt die Bremsen. Im Gespraech priorisieren wir den sinnvollen Hebel fuer diese Seite.',
+        primaryLabel: cta.primary && cta.primary.label ? cta.primary.label : 'Analyse gemeinsam priorisieren',
+        primarySubLabel: cta.primary && cta.primary.sublabel ? cta.primary.sublabel : '20 Minuten · klare Reihenfolge · kein Sales-Theater',
         altUrl: cta.secondary && cta.secondary.url ? cta.secondary.url : CONFIG.consultationAltUrl,
-        altLabel: cta.secondary && cta.secondary.label ? cta.secondary.label : 'Direkt Strategiegespraech waehlen'
+        altLabel: cta.secondary && cta.secondary.label ? cta.secondary.label : 'Direkt Strategiegespraech buchen'
       };
     }
 
     return {
-      headline: 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt die Beratung.',
-      subline: 'Die Schnell-Analyse zeigt die Bremsen. In der Beratung priorisieren wir den sinnvollen Hebel fuer Ihr Setup.',
-      primaryLabel: cta.label || 'Beratung anfragen',
-      primarySubLabel: cta.sublabel || '20 Minuten · konkrete Priorisierung · kein Sales-Theater',
+      headline: 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespraech.',
+      subline: 'Der Schnell-Check zeigt die Bremsen. Im Gespraech priorisieren wir den sinnvollen Hebel fuer diese Seite.',
+      primaryLabel: cta.label || 'Analyse gemeinsam priorisieren',
+      primarySubLabel: cta.sublabel || '20 Minuten · klare Reihenfolge · kein Sales-Theater',
       altUrl: cta.altUrl || CONFIG.consultationAltUrl,
-      altLabel: cta.altLabel || 'Direkt Strategiegespraech waehlen'
+      altLabel: cta.altLabel || 'Direkt Strategiegespraech buchen'
     };
   }
 
@@ -1046,7 +1046,7 @@
         '<button class="audit-retry-btn" onclick="location.reload()">Erneut versuchen</button>' +
         '<div class="result-cta-alt">' +
           '<span>Wenn es dringend ist:</span> ' +
-          '<a href="' + escapeHtml(CONFIG.consultationAltUrl) + '" target="_blank" rel="noopener">Strategiegespraech waehlen</a>' +
+          '<a href="' + escapeHtml(CONFIG.consultationAltUrl) + '" target="_blank" rel="noopener">Direkt Strategiegespraech buchen</a>' +
         '</div>' +
       '</div>';
   }

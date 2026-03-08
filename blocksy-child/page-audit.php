@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Growth Audit
- * Description: Landing Page — Growth Audit (Formular + Report)
+ * Template Name: Startseiten-Anfragecheck
+ * Description: Landing Page — Ein-Seiten-Check fuer Botschaft, Proof, CTA und mobilen Eindruck
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *

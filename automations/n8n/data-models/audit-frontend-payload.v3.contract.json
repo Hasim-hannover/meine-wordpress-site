@@ -1,169 +1,198 @@
 {
   "meta": {
+    "mode": "startseiten_anfragecheck",
     "domain": "example.de",
     "url": "https://example.de",
-    "branche": "B2B-Dienstleister",
-    "standort": "Hannover",
-    "generatedAt": "2026-03-08T12:00:00.000Z"
+    "branche": "",
+    "standort": "",
+    "generatedAt": "2026-03-09T12:00:00.000Z"
   },
   "verdict": {
-    "status": "bad",
-    "badge": "Kritisch",
-    "headline": "Bei example.de bremsen vor allem Sichtbarkeit und Vertrauen die Nachfrage.",
-    "subline": "Die Website ist erreichbar, aber sie gewinnt zu selten den ersten Klick und baut zu wenig Beweis auf."
+    "status": "warning",
+    "badge": "Priorisierung noetig",
+    "headline": "Bei example.de bremsen vor allem das Seitenversprechen und der sichtbare Beweis.",
+    "subline": "Die Seite sagt schon etwas, aber noch nicht klar genug fuer wen sie gedacht ist und warum man hier bleiben sollte."
   },
   "highlights": [
     {
-      "label": "Kaufnahe Keywords",
-      "value": "2 / 6",
-      "help": "sichtbar auf Seite 1",
-      "tone": "bad"
+      "label": "Seitenversprechen",
+      "value": "verbesserbar",
+      "help": "Eine Richtung ist erkennbar, aber noch nicht spitz genug.",
+      "tone": "warning"
     },
     {
-      "label": "Mobile Performance",
-      "value": "58/100",
-      "help": "LCP 3,8 s",
+      "label": "Proof",
+      "value": "duenn",
+      "help": "Einzelne Proof-Signale sind da, aber noch nicht dicht genug.",
       "tone": "warning"
     },
     {
       "label": "Naechster Schritt",
-      "value": "zu viel Reibung",
-      "help": "nur Kontakt, kein klarer Capture-Pfad",
-      "tone": "bad"
+      "value": "vorhanden",
+      "help": "Kontakt ist moeglich, aber noch nicht stark genug gefuehrt.",
+      "tone": "warning"
     }
   ],
   "findings": [
     {
-      "title": "Sichtbarkeit",
+      "title": "Seitenversprechen",
       "impact": "Hebel #1",
-      "status": "bad",
-      "toneLabel": "Kritisch",
-      "summary": "Ein relevanter Teil der Nachfrage landet zuerst bei Wettbewerbern und nicht bei Ihnen.",
+      "status": "warning",
+      "toneLabel": "Verbesserbar",
+      "summary": "Die Seite sagt schon etwas, aber noch nicht klar genug fuer wen sie gedacht ist und warum man hier bleiben sollte.",
       "evidence": [
-        "2 von 6 geprueften Keywords landen auf Seite 1.",
-        "Fuer „wordpress agentur hannover“ fehlt die Seite-1-Sichtbarkeit."
+        "H1: WordPress als Nachfrage-System fuer B2B.",
+        "Title vorhanden.",
+        "Meta Description vorhanden."
       ],
-      "action": "Angebotsseiten auf Suchintention, lokalen Proof und klaren Conversion-Fokus zuschneiden."
+      "action": "Headline, Subline und CTA auf einen klaren Nutzen fuer einen klaren Besuchertyp zuspitzen."
     },
     {
-      "title": "Vertrauen",
+      "title": "Proof",
       "impact": "Hebel #2",
-      "status": "bad",
-      "toneLabel": "Kritisch",
-      "summary": "Die Seite zeigt zu wenig Beweis dafuer, warum ein Besucher ausgerechnet Ihnen schreiben sollte.",
+      "status": "warning",
+      "toneLabel": "Verbesserbar",
+      "summary": "Es gibt erste Vertrauenssignale, aber noch nicht genug Beweis genau dort, wo die Anfrage entschieden wird.",
       "evidence": [
-        "Cases: nicht gefunden",
-        "Testimonials: nicht gefunden"
+        "Cases: gefunden",
+        "Testimonials: nicht gefunden",
+        "Zahlen oder Resultate: gefunden"
       ],
-      "action": "Proof nicht streuen, sondern direkt an kaufnahen Stellen verankern."
+      "action": "Proof nicht verteilen, sondern direkt in den ersten sichtbaren Kaufkontext der Seite ziehen."
     },
     {
       "title": "Naechster Schritt",
       "impact": "Hebel #3",
       "status": "warning",
       "toneLabel": "Verbesserbar",
-      "summary": "Interesse kann entstehen, aber der Conversion-Pfad bleibt zu unscharf.",
+      "summary": "Interesse kann entstehen, aber der naechste Schritt ist noch nicht klar oder sichtbar genug priorisiert.",
       "evidence": [
-        "Kontaktformular: vorhanden",
-        "Lead-Capture: nicht gefunden"
+        "Formular: vorhanden",
+        "Terminbuchung: nicht gefunden",
+        "CTA im ersten Screen: erkennbar"
       ],
-      "action": "Nur einen klaren Conversion-Pfad priorisieren und ihn in Copy, Proof und CTA durchziehen."
+      "action": "Nur einen naechsten Schritt priorisieren und ihn oberhalb des Folds klar anschlussfaehig machen."
     }
   ],
-  "opportunity": {
-    "rangeMonth": {
-      "min": 3000,
-      "max": 8000
-    },
-    "rangeYear": {
-      "min": 36000,
-      "max": 96000
-    },
-    "basis": {
-      "visibleKeywords": "2 / 6",
-      "avgOrderValue": 4000,
-      "assumedConversionRange": "1-2%"
-    },
-    "note": "Konservative Spanne auf Basis oeffentlicher Daten, Suchvolumen und heuristischer Conversion-Annahmen."
-  },
   "details": {
     "sections": [
       {
-        "title": "Google & Markt",
+        "title": "Versprechen",
         "rows": [
           {
-            "label": "wordpress agentur hannover",
-            "value": "nicht auf Seite 1 · ~400/Mo",
-            "status": "bad"
+            "label": "H1",
+            "value": "WordPress als Nachfrage-System fuer B2B.",
+            "status": "good"
           },
           {
-            "label": "website erstellen lassen hannover",
-            "value": "Position 7 · ~180/Mo",
-            "status": "warning"
-          }
-        ],
-        "note": "Der groesste Sichtbarkeitsverlust liegt aktuell bei lokal-kaufnahen Suchanfragen."
-      },
-      {
-        "title": "Technik & Performance",
-        "rows": [
-          {
-            "label": "Mobile Score",
-            "value": "58/100",
-            "status": "warning"
-          },
-          {
-            "label": "Largest Contentful Paint",
-            "value": "3,8 s",
-            "status": "bad"
+            "label": "Title",
+            "value": "WordPress Agentur fuer B2B | Example",
+            "status": "good"
           },
           {
             "label": "Meta Description",
             "value": "vorhanden",
             "status": "good"
+          },
+          {
+            "label": "Klarheit im ersten Screen",
+            "value": "verbesserbar",
+            "status": "warning"
           }
         ],
-        "note": "Technik ist nicht der einzige Hebel, aber sie entscheidet ueber den ersten Eindruck."
+        "note": "Hier entscheidet sich, ob ein Besucher in wenigen Sekunden versteht, worum es geht und warum er bleiben sollte."
       },
       {
-        "title": "Vertrauen & Conversion",
+        "title": "Proof",
         "rows": [
           {
-            "label": "Referenzen / Cases",
+            "label": "Cases / Referenzen",
+            "value": "gefunden",
+            "status": "good"
+          },
+          {
+            "label": "Testimonials / Reviews",
             "value": "nicht gefunden",
             "status": "bad"
           },
           {
-            "label": "Testimonials",
-            "value": "nicht gefunden",
-            "status": "bad"
+            "label": "Zahlen oder Resultate",
+            "value": "gefunden",
+            "status": "warning"
           },
           {
-            "label": "Kontaktformular",
+            "label": "HTTPS",
+            "value": "aktiv",
+            "status": "good"
+          }
+        ],
+        "note": "Proof muss nicht laut sein, aber frueh genug sichtbar werden, damit aus Aufmerksamkeit Vertrauen wird."
+      },
+      {
+        "title": "Naechster Schritt",
+        "rows": [
+          {
+            "label": "Formular",
             "value": "vorhanden",
             "status": "good"
           },
           {
-            "label": "Lead-Capture",
+            "label": "Terminbuchung",
             "value": "nicht gefunden",
             "status": "warning"
+          },
+          {
+            "label": "E-Mail oder direkter Kontakt",
+            "value": "vorhanden",
+            "status": "good"
+          },
+          {
+            "label": "CTA im ersten Screen",
+            "value": "erkennbar",
+            "status": "good"
           }
         ],
-        "note": "Hier entscheidet sich, ob aus Aufmerksamkeit Vertrauen und Anfrage wird."
+        "note": "Interesse braucht einen klaren Anschluss. Sonst wird aus Besuch kein Gespraech."
+      },
+      {
+        "title": "Mobiler Eindruck",
+        "rows": [
+          {
+            "label": "Mobile Score",
+            "value": "72/100",
+            "status": "warning"
+          },
+          {
+            "label": "Largest Contentful Paint",
+            "value": "2,9 s",
+            "status": "warning"
+          },
+          {
+            "label": "Cumulative Layout Shift",
+            "value": "0,08",
+            "status": "good"
+          },
+          {
+            "label": "Total Blocking Time",
+            "value": "220 ms",
+            "status": "good"
+          }
+        ],
+        "note": "Technik verkauft nicht allein. Sie entscheidet aber, wie sauber die Seite ihren ersten Eindruck ueberhaupt ausspielen kann."
       }
     ]
   },
-  "story": "Ihre Website ist nicht unsichtbar, aber sie arbeitet noch nicht wie ein Nachfrage-System. Sichtbarkeit, Proof und der naechste Schritt greifen nicht sauber ineinander. Genau deshalb entsteht Reibung, bevor ueberhaupt ein qualifiziertes Gespraech entstehen kann.",
+  "story": "Die Seite hat Substanz, aber noch nicht genug Klarheit im ersten Eindruck und im Uebergang zur Anfrage.\n\nWenn die erste sichtbare Botschaft nicht schnell genug sagt, fuer wen die Seite gedacht ist und was sie konkret loest, wird selbst guter Traffic teurer als noetig.\n\nDer sinnvolle naechste Schritt ist jetzt kein weiterer Tool-Report, sondern eine kurze Priorisierung direkt an der Seite. Danach ist klar, was sofort Wirkung bringt, was warten kann und welche Aenderung zuerst Anfragen wahrscheinlicher macht.",
   "cta": {
-    "headline": "Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt die Beratung.",
-    "subline": "Die Schnell-Analyse zeigt die Bremsen. In der Beratung priorisieren wir den sinnvollen Hebel fuer Ihr Setup.",
+    "headline": "Wenn Sie aus dieser Diagnose eine klare Reihenfolge machen wollen, ist jetzt der richtige Schritt das Gespraech.",
+    "subline": "Wir priorisieren gemeinsam, was auf dieser Seite zuerst Wirkung bringt und was bewusst warten kann.",
     "primary": {
-      "label": "Beratung anfragen",
-      "sublabel": "20 Minuten · konkrete Priorisierung · kein Sales-Theater"
+      "label": "Analyse gemeinsam priorisieren",
+      "sublabel": "20 Minuten · klare Reihenfolge · keine Verkaufsshow"
     },
     "secondary": {
       "url": "https://cal.com/hasim/30min",
-      "label": "Direkt Strategiegespraech waehlen"
+      "label": "Direkt Strategiegespraech buchen"
     }
   }
 }
