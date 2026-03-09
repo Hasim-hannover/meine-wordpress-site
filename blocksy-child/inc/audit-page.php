@@ -13,24 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Check whether a content blob already contains the audit shell markup.
- *
- * @param string $content Raw post content.
- * @return bool
- */
-function nexus_content_has_audit_shell( $content ) {
-	$content = (string) $content;
-
-	return false !== strpos( $content, 'id="audit-main-wrapper"' )
-		|| false !== strpos( $content, "id='audit-main-wrapper'" )
-		|| false !== strpos( $content, 'id="audit-live-form"' )
-		|| false !== strpos( $content, "id='audit-live-form'" )
-		|| false !== strpos( $content, 'class="audit-wrapper"' )
-		|| false !== strpos( $content, "class='audit-wrapper'" );
-}
-
-/**
- * Render the versioned audit shell from the theme.
+ * Render the versioned review shell from the theme.
  *
  * @return string
  */
@@ -42,10 +25,10 @@ function nexus_get_audit_shell_markup() {
 }
 
 /**
- * Ensure the audit page always outputs a working shell.
+ * Ensure the review landing page always outputs the versioned theme shell.
  *
- * If the editor content already contains a valid audit DOM wrapper, we keep it.
- * Otherwise we replace the body with the versioned theme shell.
+ * The editor content is intentionally bypassed so the live funnel stays coupled
+ * to versioned theme code instead of fragile HTML snippets in the page editor.
  *
  * @param string $content Rendered page content.
  * @return string
@@ -54,10 +37,6 @@ add_filter(
 	'the_content',
 	function ( $content ) {
 		if ( is_admin() || ! nexus_is_audit_page() || ! is_singular( 'page' ) || ! in_the_loop() || ! is_main_query() ) {
-			return $content;
-		}
-
-		if ( nexus_content_has_audit_shell( $content ) ) {
 			return $content;
 		}
 

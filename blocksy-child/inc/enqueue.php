@@ -114,20 +114,19 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-wgos-mindmap-v2-js', 'wgos-mindmap-v2.js', [ 'nexus-wgos-js' ] );
 	}
 
-	// ── H) Template: Growth Audit ─────────────────────────────────
+	// ── H) Template: Startseiten-Review Funnel ────────────────────
 	if ( nexus_is_audit_page() ) {
 		hu_enqueue_css( 'nexus-audit-css', 'audit.css', [ 'nexus-design-system' ] );
-		hu_enqueue_css( 'nexus-audit-results-css', 'audit-results.css', [ 'nexus-audit-css' ] );
+		hu_enqueue_css( 'nexus-review-funnel-css', 'review-funnel.css', [ 'nexus-audit-css' ] );
 		hu_enqueue_js( 'nexus-audit-js', 'audit.js', [ 'nexus-core-js' ] );
-		hu_enqueue_js( 'nexus-audit-live-js', 'audit-live.js', [ 'nexus-audit-js' ] );
+		hu_enqueue_js( 'nexus-review-funnel-js', 'review-funnel.js', [ 'nexus-audit-js' ] );
 		wp_localize_script(
-			'nexus-audit-live-js',
-			'NexusAuditConfig',
+			'nexus-review-funnel-js',
+			'NexusReviewConfig',
 			[
-				'webhookStart'        => 'https://hasim.app.n8n.cloud/webhook/audit',
-				'webhookStatus'       => 'https://hasim.app.n8n.cloud/webhook/audit-status',
-				'webhookConsultation' => 'https://hasim.app.n8n.cloud/webhook/audit-consultation',
-				'consultationAltUrl'  => 'https://cal.com/hasim/30min',
+				'restEndpoint' => esc_url_raw( rest_url( 'nexus/v1/review-request' ) ),
+				'callUrl'      => esc_url_raw( apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' ) ),
+				'responseHours'=> 48,
 			]
 		);
 	}

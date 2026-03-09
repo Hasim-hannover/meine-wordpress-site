@@ -1,0 +1,175 @@
+.nexus-review-dashboard {
+  max-width: 1180px;
+}
+
+.nexus-review-dashboard-intro {
+  max-width: 720px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.nexus-review-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.nexus-review-stat-card {
+  display: block;
+  padding: 18px 20px;
+  border: 1px solid #dbe3ec;
+  border-radius: 16px;
+  background: #fff;
+  text-decoration: none;
+  color: #0f172a;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+}
+
+.nexus-review-stat-card:hover {
+  border-color: #cbd5e1;
+}
+
+.nexus-review-stat-card-warning {
+  border-color: #fecaca;
+  background: #fff7ed;
+}
+
+.nexus-review-stat-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.nexus-review-stat-value {
+  display: block;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.nexus-review-panel {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #dbe3ec;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.04);
+}
+
+.nexus-review-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.nexus-review-panel-head h2 {
+  margin: 0;
+}
+
+.nexus-review-table td {
+  vertical-align: top;
+}
+
+.nexus-review-meta-group {
+  margin-bottom: 18px;
+}
+
+.nexus-review-meta-group strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.nexus-review-meta-group p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.nexus-review-muted {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.nexus-review-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 110px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.nexus-review-badge-new {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.nexus-review-badge-in_review {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.nexus-review-badge-sent {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.nexus-review-badge-won {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.nexus-review-badge-archived {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.nexus-review-badge-priority-normal {
+  background: #f8fafc;
+  color: #475569;
+}
+
+.nexus-review-badge-priority-high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.nexus-review-overdue {
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.nexus-review-due {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.nexus-review-widget p {
+  margin: 0 0 12px;
+}
+
+.nexus-review-widget .button {
+  margin-top: 4px;
+}
+
+@media (max-width: 1100px) {
+  .nexus-review-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .nexus-review-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .nexus-review-panel-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

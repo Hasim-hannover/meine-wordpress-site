@@ -1,8 +1,6 @@
 <?php
 /**
- * Versioned audit landing page shell.
- *
- * Used as fallback when the editor content is missing or broken.
+ * Versioned review landing page shell.
  *
  * @package Blocksy_Child
  */
@@ -17,378 +15,341 @@ $wgos_url  = nexus_get_page_url(
 	home_url( '/wordpress-growth-operating-system/' )
 );
 $about_url = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
+$call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' );
 ?>
-<style>
-  #audit-results {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.45s ease, transform 0.45s ease;
-  }
-
-  .audit-kpi-strip {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    max-width: 780px;
-    margin: 1.5rem auto 0;
-  }
-
-  .audit-kpi {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 14px 16px;
-    text-align: left;
-  }
-
-  .audit-kpi strong {
-    display: block;
-    color: #fff;
-    font-size: 1rem;
-    line-height: 1.2;
-    margin-bottom: 0.2rem;
-  }
-
-  .audit-kpi span {
-    display: block;
-    color: #a1a1aa;
-    font-size: 0.78rem;
-    line-height: 1.45;
-  }
-
-  .audit-inline-note {
-    margin: 0 0 1rem;
-    padding: 0.75rem 0.95rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 176, 32, 0.18);
-    background: rgba(255, 176, 32, 0.06);
-    color: #f3f4f6;
-    font-size: 0.84rem;
-    line-height: 1.55;
-  }
-
-  #audit-form-error {
-    display: none;
-    margin: 0.85rem 0 0;
-    padding: 0.8rem 0.95rem;
-    border-radius: 12px;
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.2);
-    color: #fecaca;
-    font-size: 0.84rem;
-    line-height: 1.5;
-  }
-
-  .audit-form-meta {
-    text-align: center;
-    font-size: 0.74rem;
-    color: #71717a;
-    margin: 0.85rem 0 0;
-  }
-
-  .audit-link-cluster {
-    text-align: center;
-    padding: 2rem 0 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    justify-content: center;
-  }
-
-  .audit-link-cluster a {
-    color: var(--gold);
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
-
-  .view-mode-results .smart-nav,
-  .view-mode-results #start,
-  .view-mode-results #form-wrap,
-  .view-mode-results .audit-social-proof,
-  .view-mode-results .tech-stack-bar,
-  .view-mode-results #journey,
-  .view-mode-results #preview,
-  .view-mode-results #vorteile,
-  .view-mode-results #faq,
-  .view-mode-results .audit-link-cluster {
-    display: none !important;
-  }
-
-  .view-mode-results #audit-results {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    padding-top: 16px;
-    min-height: 80vh;
-  }
-
-  @media (max-width: 767px) {
-    .audit-kpi-strip {
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-  }
-</style>
 
 <div class="audit-wrapper" id="audit-main-wrapper">
+	<nav class="smart-nav" aria-label="Seiten-Navigation">
+		<ul>
+			<li><a href="#start" title="Start"><div class="nav-dot"></div><span class="nav-text">Start</span></a></li>
+			<li><a href="#form" title="Formular"><div class="nav-dot"></div><span class="nav-text">Formular</span></a></li>
+			<li><a href="#journey" title="Ablauf"><div class="nav-dot"></div><span class="nav-text">Ablauf</span></a></li>
+			<li><a href="#preview" title="Ergebnis"><div class="nav-dot"></div><span class="nav-text">Ergebnis</span></a></li>
+			<li><a href="#vorteile" title="Vorteile"><div class="nav-dot"></div><span class="nav-text">Vorteile</span></a></li>
+			<li><a href="#faq" title="FAQ"><div class="nav-dot"></div><span class="nav-text">FAQ</span></a></li>
+		</ul>
+	</nav>
 
-  <nav class="smart-nav" aria-label="Seiten-Navigation">
-    <ul>
-      <li><a href="#start" title="Start"><div class="nav-dot"></div><span class="nav-text">Start</span></a></li>
-      <li><a href="#form" title="Check"><div class="nav-dot"></div><span class="nav-text">Check starten</span></a></li>
-      <li><a href="#journey" title="Ablauf"><div class="nav-dot"></div><span class="nav-text">Ablauf</span></a></li>
-      <li><a href="#preview" title="Auswertung"><div class="nav-dot"></div><span class="nav-text">Auswertung</span></a></li>
-      <li><a href="#vorteile" title="Vorteile"><div class="nav-dot"></div><span class="nav-text">Vorteile</span></a></li>
-      <li><a href="#faq" title="FAQ"><div class="nav-dot"></div><span class="nav-text">FAQ</span></a></li>
-    </ul>
-  </nav>
+	<div class="audit-container">
+		<main class="audit-content">
+			<section id="start" class="audit-hero-centered audit-section nx-reveal">
+				<div class="hero-pill">Persoenlich - 48h - 5 kurze Fragen</div>
+				<h1>
+					Kein Tool-Audit.<br>
+					<span class="text-highlight">Ein persoenlicher Startseiten-Review.</span>
+				</h1>
+				<p class="hero-sub-short">
+					Sie beantworten fuenf kurze Fragen. Ich schaue mir die Seite persoenlich an
+					und sende Ihnen innerhalb von 48 Stunden die drei wichtigsten Anfragebremsen
+					plus die sinnvollste Prioritaet.
+				</p>
 
-  <div class="audit-container">
-    <main class="audit-content">
+				<div class="review-kpi-strip" aria-label="Review-Ueberblick">
+					<div class="review-kpi">
+						<strong>1 Seite</strong>
+						<span>Startseite oder kaufnahe Angebotsseite.</span>
+					</div>
+					<div class="review-kpi">
+						<strong>Persoenliche Rueckmeldung</strong>
+						<span>Kein automatischer Score. Kein PDF von der Stange.</span>
+					</div>
+					<div class="review-kpi">
+						<strong>48 Stunden</strong>
+						<span>Sie erhalten eine klare Priorisierung statt Tool-Rauschen.</span>
+					</div>
+				</div>
+			</section>
 
-      <div id="start" class="audit-hero-centered audit-section nx-reveal">
-        <div class="hero-pill">Kostenlos - 60 Sekunden - 1 Seite</div>
-        <h1>
-          Ihre Startseite wird besucht.<br>
-          <span class="text-highlight">Ueberzeugt sie auch?</span>
-        </h1>
-        <p class="hero-sub-short">
-          Wir pruefen eine Seite auf
-          <strong>Botschaft, Proof, naechsten Schritt und mobilen Eindruck</strong> -
-          und zeigen die drei Hebel, die Anfragen am ehesten bremsen.
-        </p>
+			<section id="form" class="audit-section nx-reveal">
+				<div class="black-box black-box--centered review-box">
+					<div class="review-form-layout">
+						<div class="review-form-main">
+							<div class="box-head">
+								<h3>Startseiten-Review anfordern</h3>
+								<p>Der Fokus liegt auf Botschaft, Proof, Anfragefuehrung und dem ersten Eindruck der Seite.</p>
+							</div>
 
-        <div class="audit-kpi-strip" aria-label="Audit-Ueberblick">
-          <div class="audit-kpi">
-            <strong>1 URL</strong>
-            <span>Eine Seite. Kein Konto. Keine Registrierung.</span>
-          </div>
-          <div class="audit-kpi">
-            <strong>4 Prueffelder</strong>
-            <span>Versprechen, Proof, CTA und mobiler Eindruck.</span>
-          </div>
-          <div class="audit-kpi">
-            <strong>Ergebnis direkt hier</strong>
-            <span>Danach direkter Beratungs-CTA statt PDF oder Report-Versand.</span>
-          </div>
-        </div>
-      </div>
+							<form id="review-request-form" class="review-funnel" novalidate>
+								<input type="hidden" name="company_website" value="">
+								<input type="hidden" name="started_at" value="">
 
-      <div id="form-wrap">
-        <div id="form" class="black-box black-box--centered audit-section nx-reveal">
-          <div class="box-head">
-            <h3>Startseiten-Anfragecheck starten</h3>
-            <p>URL eingeben. Das Ergebnis erscheint direkt auf dieser Seite.</p>
-          </div>
+								<div class="review-progress" aria-hidden="true">
+									<div class="review-progress-track">
+										<div class="review-progress-fill" id="review-progress-fill"></div>
+									</div>
+									<ol class="review-progress-steps">
+										<li class="is-active">Seite</li>
+										<li>Ziel</li>
+										<li>Zielgruppe</li>
+										<li>Problem</li>
+										<li>Kontakt</li>
+									</ol>
+								</div>
 
-          <div id="audit-form-inner">
-            <form id="audit-live-form" novalidate>
-              <div class="audit-inline-note">
-                Wir pruefen, ob die Seite ihr Versprechen klar macht, genug Beweis liefert, sauber in den naechsten Schritt fuehrt und mobil stark genug wirkt.
-              </div>
+								<div class="review-step is-active" data-step="0">
+									<span class="review-step-kicker">Schritt 1 von 5</span>
+									<h4>Welche Seite soll ich pruefen?</h4>
+									<p class="review-step-copy">Am staerksten wirkt das fuer Startseiten oder kaufnahe Angebotsseiten.</p>
+									<div class="review-field">
+										<label for="review-page-url">Seiten-URL</label>
+										<input id="review-page-url" name="page_url" type="url" placeholder="https://ihre-seite.de" required autocomplete="url">
+									</div>
+								</div>
 
-              <div class="audit-field">
-                <label for="audit-url">Seiten-URL</label>
-                <input type="url" id="audit-url" name="url" placeholder="https://ihre-startseite.de" required autocomplete="url">
-              </div>
+								<div class="review-step" data-step="1">
+									<span class="review-step-kicker">Schritt 2 von 5</span>
+									<h4>Was soll diese Seite konkret verkaufen oder ausloesen?</h4>
+									<p class="review-step-copy">Je klarer dieses Ziel ist, desto schaerfer wird die Rueckmeldung.</p>
+									<div class="review-field">
+										<label for="review-offer">Seitenziel</label>
+										<textarea id="review-offer" name="offer" rows="4" placeholder="Zum Beispiel: qualifizierte Erstgespraeche fuer unser B2B-Angebot." required></textarea>
+									</div>
+								</div>
 
-              <div id="audit-form-error" aria-live="polite"></div>
+								<div class="review-step" data-step="2">
+									<span class="review-step-kicker">Schritt 3 von 5</span>
+									<h4>Wen soll die Seite ueberzeugen?</h4>
+									<p class="review-step-copy">Ich bewerte die Seite immer gegen die konkrete Zielgruppe, nicht abstrakt.</p>
+									<div class="review-field">
+										<label for="review-audience">Zielgruppe</label>
+										<textarea id="review-audience" name="audience" rows="4" placeholder="Zum Beispiel: B2B-Marketing-Leiter in mittelstaendischen Industrieunternehmen." required></textarea>
+									</div>
+								</div>
 
-              <button type="submit" class="audit-submit-btn">Startseiten-Check starten</button>
+								<div class="review-step" data-step="3">
+									<span class="review-step-kicker">Schritt 4 von 5</span>
+									<h4>Wo vermuten Sie gerade den groessten Blocker?</h4>
+									<p class="review-step-copy">Das ersetzt keine Diagnose, hilft mir aber, die Rueckmeldung spitzer zu machen.</p>
+									<div class="review-option-group" role="radiogroup" aria-labelledby="review-issue-heading">
+										<span id="review-issue-heading" class="screen-reader-text">Groesster Blocker</span>
+										<label class="review-option">
+											<input type="radio" name="biggest_issue" value="too_few_inquiries" required>
+											<span>Zu wenig qualifizierte Anfragen</span>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="biggest_issue" value="weak_message" required>
+											<span>Das Seitenversprechen ist zu unscharf</span>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="biggest_issue" value="weak_conversion" required>
+											<span>Die Seite fuehrt nicht sauber zur Anfrage</span>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="biggest_issue" value="second_opinion" required>
+											<span>Ich will eine zweite strategische Meinung</span>
+										</label>
+									</div>
+								</div>
 
-              <p style="text-align:center; margin:0.85rem 0 0.3rem;">
-                <a href="#preview" style="color:var(--gold); font-size:0.88rem; font-weight:700;">Beispiel-Auswertung ansehen ↓</a>
-              </p>
-              <p class="audit-form-meta">
-                Oeffentliche Seitendaten, klare Hebel statt Punktesalat, keine Registrierung.
-              </p>
-            </form>
-          </div>
+								<div class="review-step" data-step="4">
+									<span class="review-step-kicker">Schritt 5 von 5</span>
+									<h4>Wohin soll die Rueckmeldung gehen?</h4>
+									<p class="review-step-copy">Sie erhalten die Einschaetzung innerhalb von 48 Stunden an diese Adresse.</p>
+									<div class="review-field-grid">
+										<div class="review-field">
+											<label for="review-name">Name</label>
+											<input id="review-name" name="name" type="text" required autocomplete="name">
+										</div>
+										<div class="review-field">
+											<label for="review-company">Unternehmen</label>
+											<input id="review-company" name="company" type="text" required autocomplete="organization">
+										</div>
+										<div class="review-field review-field-full">
+											<label for="review-email">Geschaeftliche E-Mail</label>
+											<input id="review-email" name="email" type="email" required autocomplete="email">
+										</div>
+										<div class="review-field review-field-full">
+											<label for="review-context">Optional: Was sollte ich im Review auf keinen Fall uebersehen?</label>
+											<textarea id="review-context" name="extra_context" rows="4" placeholder="Zum Beispiel: Die Seite soll bereits naechste Woche in eine Kampagne gehen."></textarea>
+										</div>
+									</div>
+								</div>
 
-          <div id="audit-loader" aria-live="polite">
-            <div class="loader-icon" id="loader-icon">🔍</div>
-            <div class="loader-text" id="loader-text">Analyse wird gestartet ...</div>
-            <div class="loader-sub" id="loader-sub">Bitte warten - dauert ca. 30-60 Sekunden</div>
-            <div class="loader-progress-track">
-              <div class="loader-progress-fill" id="loader-progress"></div>
-            </div>
-          </div>
+								<div id="review-form-feedback" class="review-form-feedback" aria-live="polite"></div>
 
-          <div class="trust-strip">
-            <div class="trust-item">
-              <div class="trust-ic">✓</div>
-              <div><strong>Nur eine URL noetig.</strong> Kein Konto, kein Call-Zwang.</div>
-            </div>
-            <div class="trust-item">
-              <div class="trust-ic">🔒</div>
-              <div>Analyse auf Basis oeffentlicher Seitendaten und technischer Messung.</div>
-            </div>
-          </div>
-        </div>
+								<div class="review-actions">
+									<button type="button" class="review-prev-btn" data-review-prev hidden>Zurueck</button>
+									<button type="button" class="audit-submit-btn" data-review-next>Weiter</button>
+									<button type="submit" class="audit-submit-btn" data-review-submit hidden>Review anfordern</button>
+								</div>
 
-        <div class="audit-social-proof nx-reveal">
-          <div class="revenue-counter">
-            <span class="label">Worum es geht:</span>
-            <span class="amount">Weniger Reibung. Mehr qualifizierte Anfragen.</span>
-          </div>
+								<p class="audit-form-meta">
+									Keine automatisierte Sofortdiagnose. Stattdessen eine persoenliche Einschaetzung mit klarer Priorisierung.
+								</p>
+							</form>
 
-          <div class="mini-preview" aria-label="Beispielauszug aus der Auswertung">
-            <div class="mp-title">Beispielauszug</div>
-            <div class="mp-row">
-              <span>Versprechen im ersten Screen</span>
-              <span class="mp-val">zu unscharf</span>
-            </div>
-            <div class="mp-row">
-              <span>Proof oberhalb des Folds</span>
-              <span class="mp-val">zu duenn</span>
-            </div>
-            <div class="mp-row">
-              <span>Naechster Schritt</span>
-              <span class="mp-val">zu weich</span>
-            </div>
-          </div>
-        </div>
-      </div>
+							<div id="review-request-success" class="review-success" hidden>
+								<div class="review-success-pill">Anfrage eingegangen</div>
+								<h3>Der Review ist jetzt im System.</h3>
+								<p class="review-success-copy">
+									Sie erhalten innerhalb von 48 Stunden eine persoenliche Rueckmeldung zu
+									<span id="review-success-url"></span>.
+								</p>
+								<div class="review-success-grid">
+									<div class="review-success-card">
+										<strong>3 wichtigste Bremsen</strong>
+										<span>Keine Vollanalyse, sondern die Punkte mit der groessten Hebelwirkung.</span>
+									</div>
+									<div class="review-success-card">
+										<strong>1 klare Prioritaet</strong>
+										<span>Was zuerst Wirkung bringt und was bewusst warten kann.</span>
+									</div>
+									<div class="review-success-card">
+										<strong>Persoenliche Einschaetzung</strong>
+										<span>Kein Tool-Score, sondern eine verstaendliche strategische Rueckmeldung.</span>
+									</div>
+								</div>
+								<div class="review-success-actions">
+									<a class="audit-submit-btn review-success-link" href="<?php echo esc_url( $call_url ); ?>" target="_blank" rel="noopener">Wenn es dringend ist: Direkt Termin buchen</a>
+								</div>
+							</div>
+						</div>
 
-      <div id="audit-results" class="audit-section" aria-live="polite"></div>
+						<aside class="review-form-aside">
+							<div class="review-aside-card">
+								<span class="review-aside-kicker">Sie erhalten</span>
+								<h4>Eine Rueckmeldung, die wie Beratung klingt. Nicht wie ein Tool.</h4>
+								<ul class="review-aside-list">
+									<li>Was auf der Seite am staerksten bremst</li>
+									<li>Warum genau diese Stelle Conversion kostet</li>
+									<li>Was zuerst angepasst werden sollte</li>
+								</ul>
+							</div>
+							<div class="review-aside-card review-aside-card-muted">
+								<span class="review-aside-kicker">Wichtig</span>
+								<p>Der Review ist bewusst eng gefasst: eine Seite, ein klares Ziel, eine priorisierte Einschaetzung.</p>
+							</div>
+						</aside>
+					</div>
 
-      <div class="tech-stack-bar nx-reveal" aria-label="Tech Stack">
-        <div class="tech-label">Was wir unter der Haube nutzen</div>
-        <div class="tech-item">🧾 HTML &amp; Copy <small>Versprechen, CTA, Kontaktpfad</small></div>
-        <div class="tech-item">⚡ Lighthouse <small>Mobile Eindruck &amp; Ladezeit</small></div>
-        <div class="tech-item">🔄 n8n <small>Automatisierung &amp; Auswertung</small></div>
-      </div>
+					<div class="trust-strip">
+						<div class="trust-item">
+							<div class="trust-ic">✓</div>
+							<div><strong>Persoenlich statt automatisch.</strong> Ich schaue mir die Seite selbst an.</div>
+						</div>
+						<div class="trust-item">
+							<div class="trust-ic">⏱</div>
+							<div><strong>Rueckmeldung in 48 Stunden.</strong> Kein Warten auf ein grosses Audit-Projekt.</div>
+						</div>
+						<div class="trust-item">
+							<div class="trust-ic">🧭</div>
+							<div><strong>Klare Priorisierung.</strong> Nicht alles. Sondern das, was zuerst Wirkung bringt.</div>
+						</div>
+					</div>
+				</div>
+			</section>
 
-      <section id="journey" class="journey-preview audit-section nx-reveal">
-        <h2 class="journey-headline">Was wird geprueft?</h2>
-        <p class="journey-subline">
-          Wir pruefen die vier Stellen, an denen sich entscheidet, ob aus Besuchern qualifizierte Anfragen werden.
-        </p>
-        <div class="journey-steps-preview">
-          <div class="journey-step-preview">
-            <div class="step-marker">🔍</div>
-            <div class="step-content">
-              <h4>Versprechen</h4>
-              <p>Ist im ersten Screen klar, fuer wen die Seite ist und was sie konkret loest?</p>
-              <span class="step-result gap">Oft: zu breit oder zu abstrakt</span>
-            </div>
-          </div>
-          <div class="journey-step-preview">
-            <div class="step-marker">🤝</div>
-            <div class="step-content">
-              <h4>Proof</h4>
-              <p>Gibt es genug Beweis, damit ein neuer Besucher Ihnen statt dem Wettbewerb vertraut?</p>
-              <span class="step-result gap">Oft: zu wenig Cases und zu wenig soziale Beweise</span>
-            </div>
-          </div>
-          <div class="journey-step-preview">
-            <div class="step-marker">🎯</div>
-            <div class="step-content">
-              <h4>Naechster Schritt</h4>
-              <p>Wird Interesse sauber in Kontakt oder Termin gefuehrt - oder bleibt der CTA zu weich?</p>
-              <span class="step-result gap">Oft: CTA vorhanden, aber nicht stark genug</span>
-            </div>
-          </div>
-          <div class="journey-step-preview">
-            <div class="step-marker">⚡</div>
-            <div class="step-content">
-              <h4>Mobiler Eindruck</h4>
-              <p>Laedt die Seite schnell genug, damit Botschaft und Proof ueberhaupt ankommen koennen?</p>
-              <span class="step-result found">Messbar in Score und Ladezeit</span>
-            </div>
-          </div>
-        </div>
-      </section>
+			<section id="journey" class="journey-preview audit-section nx-reveal">
+				<h2 class="journey-headline">So laeuft der Review ab</h2>
+				<p class="journey-subline">
+					Der Funnel qualifiziert die Anfrage. Die eigentliche Diagnose kommt bewusst als persoenliche Rueckmeldung.
+				</p>
+				<div class="journey-steps-preview">
+					<div class="journey-step-preview">
+						<div class="step-marker">1</div>
+						<div class="step-content">
+							<h4>Sie schicken die Seite und den Kontext</h4>
+							<p>Fuenf kurze Fragen reichen, damit die Analyse nicht im luftleeren Raum landet.</p>
+						</div>
+					</div>
+					<div class="journey-step-preview">
+						<div class="step-marker">2</div>
+						<div class="step-content">
+							<h4>Ich pruefe die Seite persoenlich</h4>
+							<p>Mit Fokus auf Botschaft, Proof, Anfragefuehrung und ersten Eindruck der Seite.</p>
+						</div>
+					</div>
+					<div class="journey-step-preview">
+						<div class="step-marker">3</div>
+						<div class="step-content">
+							<h4>Sie erhalten eine priorisierte Rueckmeldung</h4>
+							<p>Kein Punktesalat, sondern die Hebel, die jetzt am ehesten Anfragen wahrscheinlicher machen.</p>
+						</div>
+					</div>
+				</div>
+			</section>
 
-      <section id="preview" class="report-preview-section audit-section nx-reveal">
-        <div class="preview-text">
-          <span class="preview-kicker">Ihre Auswertung</span>
-          <h2>Kein Tool-Zirkus.<br>Sondern drei klare Hebel.</h2>
-          <p class="preview-desc">
-            Sie sehen die <strong>groessten Bremsen auf dieser einen Seite</strong>, die wichtigsten Belege dafuer und den sinnvollen naechsten Schritt.
-          </p>
-          <ul>
-            <li><strong>Seitenversprechen:</strong> Wie klar ist die Botschaft im ersten Screen?</li>
-            <li><strong>Proof:</strong> Reicht der sichtbare Beweis fuer Vertrauen?</li>
-            <li><strong>CTA:</strong> Ist der naechste Schritt klar und stark genug?</li>
-            <li><strong>Technik:</strong> Bremst der mobile Eindruck das Ganze schon vorher?</li>
-          </ul>
-        </div>
-        <div class="preview-visual">
-          <div class="preview-img-placeholder">
-            <img src="https://hasimuener.de/wp-content/uploads/2026/02/Bildschirmfoto-2026-02-09-um-22.38.07.png" alt="Vorschau der Audit-Auswertung" loading="lazy" width="400" height="533">
-          </div>
-        </div>
-      </section>
+			<section id="preview" class="report-preview-section audit-section nx-reveal">
+				<div class="preview-text">
+					<span class="preview-kicker">Was Sie bekommen</span>
+					<h2>Keine XXL-Analyse.<br>Eine klare Entscheidungsgrundlage.</h2>
+					<p class="preview-desc">
+						Der Review ist dafuer da, schneller bessere Entscheidungen an der Seite zu treffen.
+						Nicht dafuer, moeglichst viele Buzzwords in ein PDF zu packen.
+					</p>
+					<ul>
+						<li><strong>Die 3 groessten Bremsen:</strong> Wo die Seite gerade Nachfrage verliert.</li>
+						<li><strong>Die staerkste Prioritaet:</strong> Was zuerst bearbeitet werden sollte.</li>
+						<li><strong>Die Begruendung:</strong> Warum genau diese Stelle Conversion oder Vertrauen kostet.</li>
+						<li><strong>Der naechste Schritt:</strong> Ob eine kleine Korrektur reicht oder ein groesserer Umbau sinnvoll ist.</li>
+					</ul>
+				</div>
+				<div class="preview-visual">
+					<div class="review-output-card">
+						<span class="review-output-kicker">Beispielhafte Struktur</span>
+						<div class="review-output-row">
+							<strong>Hebel #1</strong>
+							<span>Seitenversprechen zu allgemein</span>
+						</div>
+						<div class="review-output-row">
+							<strong>Hebel #2</strong>
+							<span>Proof zu spaet oder zu duenn</span>
+						</div>
+						<div class="review-output-row">
+							<strong>Hebel #3</strong>
+							<span>CTA nicht klar genug priorisiert</span>
+						</div>
+						<div class="review-output-note">Dazu kommt die Einordnung, welcher Hebel zuerst Wirkung bringt.</div>
+					</div>
+				</div>
+			</section>
 
-      <section id="vorteile" class="audit-usp-section audit-section nx-reveal">
-        <h2 class="audit-usp-headline">Warum dieser Check?</h2>
-        <div class="usp-grid">
-          <div class="usp-card">
-            <span class="usp-icon">🔍</span>
-            <div class="usp-title">Klarer Fokus</div>
-            <div class="usp-text">Eine Seite. Ein sauberer Befund. Kein Mix aus zehn halben Disziplinen.</div>
-          </div>
-          <div class="usp-card">
-            <span class="usp-icon">🧠</span>
-            <div class="usp-title">Weniger Bullshit-Risiko</div>
-            <div class="usp-text">Wir bewerten nur das, was aus einer einzelnen URL wirklich sauber ableitbar ist.</div>
-          </div>
-          <div class="usp-card">
-            <span class="usp-icon">🧭</span>
-            <div class="usp-title">Priorisierung statt Info-Flut</div>
-            <div class="usp-text">Die Auswertung zeigt nicht alles, sondern zuerst die drei wirksamsten Hebel.</div>
-          </div>
-        </div>
-      </section>
+			<section id="vorteile" class="audit-usp-section audit-section nx-reveal">
+				<h2 class="audit-usp-headline">Warum dieser Funnel strategisch staerker ist</h2>
+				<div class="usp-grid">
+					<div class="usp-card">
+						<span class="usp-icon">🧠</span>
+						<div class="usp-title">Expertise statt Tool-Effekt</div>
+						<div class="usp-text">Sie verkaufen Beratung, nicht den naechsten kostenlosen Analyse-Bot.</div>
+					</div>
+					<div class="usp-card">
+						<span class="usp-icon">🎯</span>
+						<div class="usp-title">Bessere Qualifizierung</div>
+						<div class="usp-text">Das Formular sammelt bereits Ziel, Zielgruppe und wahrgenommenen Blocker.</div>
+					</div>
+					<div class="usp-card">
+						<span class="usp-icon">🤝</span>
+						<div class="usp-title">Natuerlicher Sales-Uebergang</div>
+						<div class="usp-text">Die Rueckmeldung fuehrt logisch in ein Gespraech, ohne nach Leadmagnet-Kette zu wirken.</div>
+					</div>
+				</div>
+			</section>
 
-      <section id="faq" class="audit-faq-section audit-section nx-reveal">
-        <h2 class="audit-faq-headline">Haeufige Fragen</h2>
-        <details>
-          <summary>Warum nur eine Seite statt ein kompletter Audit?</summary>
-          <div class="faq-ans">Weil aus einer einzelnen URL saubere Aussagen zu Botschaft, Proof, CTA und mobilem Eindruck moeglich sind. Alles andere wird schnell unpraezise.</div>
-        </details>
-        <details>
-          <summary>Warum braucht der Check keine E-Mail?</summary>
-          <div class="faq-ans">Weil die Ueberzeugung direkt auf der Seite passieren soll. Kontakt kommt erst nach der sichtbaren Diagnose.</div>
-        </details>
-        <details>
-          <summary>Ist das nur fuer die Startseite?</summary>
-          <div class="faq-ans">Am staerksten wirkt der Check auf Startseiten und kaufnahe Angebotsseiten. Dort entscheidet sich am schnellsten, ob aus Besuchern Anfragen werden.</div>
-        </details>
-      </section>
+			<section id="faq" class="audit-faq-section audit-section nx-reveal">
+				<h2 class="audit-faq-headline">Haeufige Fragen</h2>
+				<details>
+					<summary>Was genau bekomme ich innerhalb von 48 Stunden?</summary>
+					<div class="faq-ans">Eine persoenliche Einschaetzung mit den drei wichtigsten Anfragebremsen, einer klaren Prioritaet und einer Empfehlung fuer den naechsten Schritt.</div>
+				</details>
+				<details>
+					<summary>Ist das nur fuer Startseiten gedacht?</summary>
+					<div class="faq-ans">Am besten funktioniert es fuer Startseiten und kaufnahe Angebotsseiten. Also fuer Seiten, auf denen aus Aufmerksamkeit moeglichst schnell Vertrauen und Kontakt werden sollen.</div>
+				</details>
+				<details>
+					<summary>Muss ich danach einen Call buchen?</summary>
+					<div class="faq-ans">Nein. Wenn die Rueckmeldung fuer Sie schon genug Klarheit schafft, ist das in Ordnung. Ein Gespraech ist nur der logische naechste Schritt, wenn Sie die Prioritaet direkt gemeinsam besprechen wollen.</div>
+				</details>
+				<details>
+					<summary>Warum kein automatischer Sofort-Audit?</summary>
+					<div class="faq-ans">Weil ein Tool aus einer einzelnen URL schnell zu viel behauptet. Diese Variante ist enger, glaubwuerdiger und naeher an echter Beratung.</div>
+				</details>
+			</section>
 
-      <div class="audit-link-cluster">
-        <a href="<?php echo esc_url( $cases_url ); ?>">Case Studies -&gt;</a>
-        <a href="<?php echo esc_url( $wgos_url ); ?>">WGOS als System -&gt;</a>
-        <a href="<?php echo esc_url( $about_url ); ?>">Mehr ueber den Ansatz -&gt;</a>
-      </div>
-    </main>
-  </div>
+			<div class="audit-link-cluster">
+				<a href="<?php echo esc_url( $cases_url ); ?>">Case Studies -&gt;</a>
+				<a href="<?php echo esc_url( $wgos_url ); ?>">WGOS als System -&gt;</a>
+				<a href="<?php echo esc_url( $about_url ); ?>">Mehr ueber den Ansatz -&gt;</a>
+			</div>
+		</main>
+	</div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  var resultsContainer = document.getElementById('audit-results');
-  var wrapper = document.getElementById('audit-main-wrapper');
-  if (!resultsContainer || !wrapper) return;
-
-  function activateResultsMode() {
-    if (!resultsContainer.innerHTML.trim()) return;
-    wrapper.classList.add('view-mode-results');
-    window.requestAnimationFrame(function () {
-      window.scrollTo({ top: Math.max(wrapper.offsetTop - 40, 0), behavior: 'smooth' });
-    });
-  }
-
-  var observer = new MutationObserver(function () {
-    if (resultsContainer.innerHTML.trim()) {
-      activateResultsMode();
-      observer.disconnect();
-    }
-  });
-
-  observer.observe(resultsContainer, { childList: true, subtree: true });
-});
-</script>
