@@ -41,8 +41,11 @@
 
     form.addEventListener('click', handleClick);
     form.addEventListener('submit', handleSubmit);
+    form.addEventListener('input', handleFieldChange);
+    form.addEventListener('change', handleFieldChange);
 
     updateStepUi();
+    syncSummary(form);
   }
 
   function getStepLabel(index) {
@@ -121,6 +124,28 @@
       event.preventDefault();
       goToPrevStep();
     }
+  }
+
+  function handleFieldChange(event) {
+    var form = document.getElementById('review-request-form');
+    if (!form) return;
+
+    syncSummary(form);
+
+    var field = event.target;
+    if (!field || field.type !== 'radio' || field.name !== 'biggest_issue') {
+      return;
+    }
+
+    if (state.stepIndex === state.steps.length - 1) {
+      return;
+    }
+
+    window.setTimeout(function () {
+      if (state.stepIndex === 3) {
+        goToNextStep();
+      }
+    }, 160);
   }
 
   function goToNextStep() {
@@ -321,11 +346,16 @@
   function renderSuccess(payload, data) {
     var form = document.getElementById('review-request-form');
     var success = document.getElementById('review-request-success');
+    var successMessage = document.getElementById('review-success-message');
     var successUrl = document.getElementById('review-success-url');
     var focusTarget = success || form;
 
     if (successUrl) {
       successUrl.textContent = payload.page_url || 'der Seite';
+    }
+
+    if (successMessage && data && data.message) {
+      successMessage.textContent = data.message;
     }
 
     if (form) {
@@ -377,6 +407,53 @@
 
     feedback.textContent = '';
     feedback.className = 'review-form-feedback';
+  }
+
+  function syncSummary(form) {
+    var summaryFields = form.querySelectorAll('[data-review-summary]');
+
+    Array.prototype.forEach.call(summaryFields, function (node) {
+      var key = node.getAttribute('data-review-summary');
+      if (!key) return;
+
+      var value = readSummaryValue(form, key);
+      node.textContent = formatSummaryValue(key, value);
+    });
+  }
+
+  function readSummaryValue(form, key) {
+    if (key === 'biggest_issue') {
+      var selected = form.querySelector('input[name="biggest_issue"]:checked');
+      if (!selected) return '';
+
+      var option = selected.closest('.review-option');
+      var label = option ? option.querySelector('span') : null;
+
+      return label ? label.textContent.trim() : selected.value;
+    }
+
+    var field = form.querySelector('[name="' + key + '"]');
+    return field && typeof field.value === 'string' ? field.value.trim() : '';
+  }
+
+  function formatSummaryValue(key, value) {
+    if (!value) {
+      return 'Noch offen';
+    }
+
+    if (key === 'page_url') {
+      return getDomainFromUrl(value) || value;
+    }
+
+    return truncateValue(value, key === 'offer' ? 84 : 70);
+  }
+
+  function truncateValue(value, maxLength) {
+    if (!value || value.length <= maxLength) {
+      return value;
+    }
+
+    return value.slice(0, maxLength - 1).trim() + '…';
   }
 
   if (document.readyState === 'loading') {

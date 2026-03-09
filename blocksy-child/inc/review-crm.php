@@ -470,6 +470,97 @@ function nexus_get_review_request_ip() {
 }
 
 /**
+ * Send an HTML email for the audit funnel.
+ *
+ * @param string $recipient Recipient email.
+ * @param string $subject   Email subject.
+ * @param string $html      Email HTML body.
+ * @param array  $headers   Optional additional headers.
+ * @return void
+ */
+function nexus_send_audit_html_mail( $recipient, $subject, $html, $headers = [] ) {
+	if ( ! $recipient || ! is_email( $recipient ) || '' === trim( (string) $html ) ) {
+		return;
+	}
+
+	$headers   = (array) $headers;
+	$headers[] = 'Content-Type: text/html; charset=UTF-8';
+
+	wp_mail( $recipient, $subject, $html, $headers );
+}
+
+/**
+ * Wrap audit emails in a consistent branded shell.
+ *
+ * @param array $args Email arguments.
+ * @return string
+ */
+function nexus_get_audit_email_shell( $args = [] ) {
+	$args = wp_parse_args(
+		$args,
+		[
+			'preheader' => '',
+			'eyebrow'   => wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ),
+			'headline'  => '',
+			'intro'     => '',
+			'content'   => '',
+			'footer'    => 'Antworten Sie bei Rueckfragen einfach auf diese E-Mail.',
+		]
+	);
+
+	ob_start();
+	?>
+	<!doctype html>
+	<html lang="de">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title><?php echo esc_html( $args['headline'] ); ?></title>
+	</head>
+	<body style="margin:0; padding:0; background:#f3ede6; color:#15181d;">
+		<div style="display:none; max-height:0; overflow:hidden; opacity:0; mso-hide:all;">
+			<?php echo esc_html( $args['preheader'] ); ?>
+		</div>
+		<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f3ede6; padding:24px 12px;">
+			<tr>
+				<td align="center">
+					<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:640px;">
+						<tr>
+							<td style="padding:0 0 12px 0; text-align:left; font-family:Helvetica, Arial, sans-serif; font-size:12px; line-height:1.5; letter-spacing:0.12em; text-transform:uppercase; color:#7f756b;">
+								<?php echo esc_html( $args['eyebrow'] ); ?>
+							</td>
+						</tr>
+						<tr>
+							<td style="border:1px solid #ddd2c6; border-radius:24px; background:#14191f; padding:32px 28px; box-shadow:0 18px 50px rgba(20, 25, 31, 0.14);">
+								<div style="display:inline-block; margin:0 0 16px 0; padding:6px 12px; border-radius:999px; background:rgba(180,106,60,0.12); border:1px solid rgba(180,106,60,0.25); font-family:Helvetica, Arial, sans-serif; font-size:11px; line-height:1.4; letter-spacing:0.1em; text-transform:uppercase; color:#d3a98c;">
+									<?php echo esc_html( $args['eyebrow'] ); ?>
+								</div>
+								<h1 style="margin:0 0 12px 0; font-family:Helvetica, Arial, sans-serif; font-size:30px; line-height:1.12; font-weight:800; color:#f7f3ee;">
+									<?php echo esc_html( $args['headline'] ); ?>
+								</h1>
+								<p style="margin:0 0 24px 0; font-family:Helvetica, Arial, sans-serif; font-size:16px; line-height:1.7; color:#c5ced7;">
+									<?php echo esc_html( $args['intro'] ); ?>
+								</p>
+								<?php echo $args['content']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding:14px 6px 0; font-family:Helvetica, Arial, sans-serif; font-size:12px; line-height:1.7; color:#7f756b; text-align:left;">
+								<?php echo esc_html( $args['footer'] ); ?>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+	</html>
+	<?php
+
+	return trim( ob_get_clean() );
+}
+
+/**
  * Send the internal notification email for a new request.
  *
  * @param int   $post_id Request post ID.
@@ -487,29 +578,84 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		$payload['audit_type_label'],
 		$payload['company']
 	);
+	$edit_url = admin_url( 'post.php?post=' . $post_id . '&action=edit' );
+	$page_url = $payload['page_url'];
+	$headers  = [];
 
-	$lines = [
-		'Neue Anfrage fuer den ' . $payload['audit_type_label'] . '.',
-		'',
-		'Audit-Typ: ' . $payload['audit_type_label'],
-		'Unternehmen: ' . $payload['company'],
-		'Name: ' . $payload['name'],
-		'E-Mail: ' . $payload['email'],
-		'URL: ' . $payload['page_url'],
-		'Seitenziel: ' . $payload['offer'],
-		'Zielgruppe: ' . $payload['audience'],
-		'Groesster Blocker: ' . $payload['biggest_issue_label'],
-	];
-
-	if ( ! empty( $payload['extra_context'] ) ) {
-		$lines[] = 'Zusatzkontext: ' . $payload['extra_context'];
+	if ( ! empty( $payload['email'] ) && is_email( $payload['email'] ) ) {
+		$headers[] = 'Reply-To: ' . $payload['email'];
 	}
 
-	$lines[] = '';
-	$lines[] = 'Direkt in WordPress bearbeiten:';
-	$lines[] = admin_url( 'post.php?post=' . $post_id . '&action=edit' );
+	$content = sprintf(
+		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 20px 0;">
+			<tr>
+				<td style="padding:0 0 12px 0;">
+					<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="border-collapse:separate; border-spacing:0 10px;">
+						<tr>
+							<td style="width:50%%; padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
+								<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:6px;">Lead</div>
+								<div style="font-size:16px; line-height:1.5; color:#f7f3ee; font-weight:700;">%1$s</div>
+								<div style="font-size:14px; line-height:1.6; color:#c5ced7;">%2$s<br>%3$s</div>
+							</td>
+							<td style="width:50%%; padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
+								<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:6px;">Audit</div>
+								<div style="font-size:16px; line-height:1.5; color:#f7f3ee; font-weight:700;">%4$s</div>
+								<div style="font-size:14px; line-height:1.6; color:#c5ced7;">%5$s</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0; border-collapse:collapse;">
+			<tr>
+				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Seite und Kontext</div>
+					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
+						<strong style="color:#f7f3ee;">URL:</strong> %6$s<br>
+						<strong style="color:#f7f3ee;">Seitenziel:</strong> %7$s<br>
+						<strong style="color:#f7f3ee;">Zielgruppe:</strong> %8$s<br>
+						<strong style="color:#f7f3ee;">Groesster Hebel:</strong> %9$s%10$s
+					</div>
+				</td>
+			</tr>
+		</table>
+		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0">
+			<tr>
+				<td style="padding:0 12px 0 0;">
+					<a href="%11$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Im Audit CRM oeffnen</a>
+				</td>
+				<td>
+					<a href="%12$s" style="display:inline-block; padding:14px 18px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); color:#f7f3ee; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Seite ansehen</a>
+				</td>
+			</tr>
+		</table>',
+		esc_html( $payload['company'] ),
+		esc_html( $payload['name'] ),
+		esc_html( $payload['email'] ),
+		esc_html( $payload['audit_type_label'] ),
+		esc_html( 'Rueckmeldung spaetestens in 48h' ),
+		esc_html( $page_url ),
+		esc_html( $payload['offer'] ),
+		esc_html( $payload['audience'] ),
+		esc_html( $payload['biggest_issue_label'] ),
+		! empty( $payload['extra_context'] ) ? '<br><strong style="color:#f7f3ee;">Zusatzkontext:</strong> ' . esc_html( $payload['extra_context'] ) : '',
+		esc_url( $edit_url ),
+		esc_url( $page_url )
+	);
 
-	wp_mail( $recipient, $subject, implode( "\n", $lines ) );
+	$html = nexus_get_audit_email_shell(
+		[
+			'preheader' => 'Neue Audit-Anfrage von ' . $payload['company'],
+			'eyebrow'   => $payload['audit_type_label'],
+			'headline'  => 'Neue Audit-Anfrage',
+			'intro'     => 'Ein neuer Lead ist eingegangen. Alles Wichtige ist unten auf einen Blick zusammengefasst.',
+			'content'   => $content,
+			'footer'    => 'Sie koennen direkt auf diese E-Mail antworten. Reply-To zeigt bereits auf den Lead.',
+		]
+	);
+
+	nexus_send_audit_html_mail( $recipient, $subject, $html, $headers );
 }
 
 /**
@@ -524,27 +670,67 @@ function nexus_send_review_request_confirmation( $payload ) {
 	}
 
 	$calendar_url = nexus_get_audit_calendar_url();
+	$reply_to     = nexus_get_audit_notification_email();
 	$subject      = sprintf( '[%s] %s angefragt', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ), $payload['audit_type_label'] );
+	$content      = sprintf(
+		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 20px 0; border-collapse:separate; border-spacing:0 10px;">
+			<tr>
+				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:6px;">Was jetzt passiert</div>
+					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
+						<strong style="color:#f7f3ee;">1.</strong> Ihre Anfrage ist sauber im System.<br>
+						<strong style="color:#f7f3ee;">2.</strong> Innerhalb von 48 Stunden erhalten Sie eine persoenliche Priorisierung.<br>
+						<strong style="color:#f7f3ee;">3.</strong> Sie sehen, ob eine kleine Korrektur reicht oder ob ein tieferer Blueprint sinnvoll ist.
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Ihre Anfrage</div>
+					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
+						<strong style="color:#f7f3ee;">Seite:</strong> %1$s<br>
+						<strong style="color:#f7f3ee;">Seitenziel:</strong> %2$s<br>
+						<strong style="color:#f7f3ee;">Zielgruppe:</strong> %3$s<br>
+						<strong style="color:#f7f3ee;">Wahrscheinlichster Hebel:</strong> %4$s
+					</div>
+				</td>
+			</tr>
+		</table>
+		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0;">
+			<tr>
+				<td style="padding:0 12px 0 0;">
+					<a href="%5$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Wenn es dringend ist: Termin buchen</a>
+				</td>
+			</tr>
+		</table>
+		<p style="margin:0; font-family:Helvetica, Arial, sans-serif; font-size:14px; line-height:1.8; color:#c5ced7;">
+			Sie muessen jetzt nichts weiter vorbereiten. Wenn es eine Frist, Kampagne oder interne Deadline gibt,
+			antworten Sie einfach kurz auf diese E-Mail.
+		</p>',
+		esc_html( $payload['page_url'] ),
+		esc_html( $payload['offer'] ),
+		esc_html( $payload['audience'] ),
+		esc_html( $payload['biggest_issue_label'] ),
+		esc_url( $calendar_url )
+	);
 
-	$lines = [
-		'Hallo ' . $payload['name'] . ',',
-		'',
-		'Ihre Anfrage fuer den ' . $payload['audit_type_label'] . ' ist eingegangen.',
-		'Ich melde mich innerhalb von 48 Stunden mit einer persoenlichen Einschaetzung zu:',
-		'- den drei staerksten Anfragebremsen',
-		'- der sinnvollsten Prioritaet',
-		'- dem naechsten konkreten Schritt',
-		'',
-		'Gepruefte Seite: ' . $payload['page_url'],
-		'',
-		'Wenn es dringender ist, koennen Sie direkt hier einen Termin reservieren:',
-		$calendar_url,
-		'',
-		'Viele Gruesse',
-		'Hasim Uener',
-	];
+	$html = nexus_get_audit_email_shell(
+		[
+			'preheader' => 'Ihre Anfrage fuer den ' . $payload['audit_type_label'] . ' ist eingegangen.',
+			'eyebrow'   => $payload['audit_type_label'],
+			'headline'  => 'Ihr ' . $payload['audit_type_label'] . ' ist eingeplant.',
+			'intro'     => 'Danke, ' . $payload['name'] . '. Sie erhalten keine generische Checkliste, sondern eine persoenliche Priorisierung fuer Ihre Seite.',
+			'content'   => $content,
+			'footer'    => 'Viele Gruesse, Hasim Uener',
+		]
+	);
 
-	wp_mail( $payload['email'], $subject, implode( "\n", $lines ) );
+	$headers = [];
+	if ( $reply_to && is_email( $reply_to ) ) {
+		$headers[] = 'Reply-To: ' . $reply_to;
+	}
+
+	nexus_send_audit_html_mail( $payload['email'], $subject, $html, $headers );
 }
 
 /**
