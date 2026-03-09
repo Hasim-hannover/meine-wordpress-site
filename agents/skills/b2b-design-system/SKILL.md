@@ -7,6 +7,25 @@ description: Premium UX/UI design system and CRO framework for B2B WordPress web
 
 Use this skill to ship B2B interfaces that feel engineered and convert. Default to dark-mode-first, mobile-first, and a single primary CTA per page.
 
+## Design Direction
+
+Aim for engineered elegance: precision plus warmth, not cold minimalism and not loud ornament.
+
+Use these benchmark instincts without copying layouts:
+
+- `Linear` for density, clarity, and precision
+- `Vercel` for typography and negative space
+- `Stripe` for layered depth and premium texture
+- `Raycast` for refined dark UI and interaction polish
+
+Hard bans:
+
+- no purple-on-white gradient SaaS sludge
+- no Inter/Roboto/Arial as the primary typeface
+- no generic logo bars, stock-photo heroes, or testimonial carousels
+- no mixed radius systems or random shadow styles
+- no centered text blocks wider than roughly `680px`
+
 ## Preflight
 
 1. Define the conversion goal before choosing patterns.
@@ -41,6 +60,19 @@ Use this skill to ship B2B interfaces that feel engineered and convert. Default 
 - Keep first-contact forms at three fields or fewer unless the user explicitly needs more.
 - Respect `prefers-reduced-motion`.
 - Do not introduce purple-on-white gradients, generic stock-photo heroes, evenly weighted card grids, or mixed border-radius systems.
+
+## Quality Gate
+
+Before finishing, verify:
+
+- max two font families
+- one accent family
+- one radius personality
+- generous section spacing on the 8px grid
+- WCAG AA text contrast
+- visible above-fold CTA and trust signal
+- responsive mobile CTA access
+- no unnecessary JS or animation debt
 
 ## Delivery Format
 
