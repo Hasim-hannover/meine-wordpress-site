@@ -13,6 +13,22 @@ document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener('scroll', toggleNav, { passive: true });
     }
 
+    function initMobileStickyCta() {
+        const stickyCta = document.querySelector('[data-home-mobile-cta]');
+        const hero = document.getElementById('hero');
+        if (!stickyCta || !hero) return;
+
+        function toggleStickyCta() {
+            const isMobile = window.innerWidth <= 767;
+            const trigger = hero.offsetTop + hero.offsetHeight * 0.55;
+            stickyCta.classList.toggle('is-visible', isMobile && window.scrollY > trigger);
+        }
+
+        toggleStickyCta();
+        window.addEventListener('scroll', toggleStickyCta, { passive: true });
+        window.addEventListener('resize', toggleStickyCta);
+    }
+
     // 1. ZOMBIE KILLER
     const zombieCode = document.getElementById('nexus-home-critical');
     if (zombieCode) zombieCode.remove();
@@ -45,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(forceBlogGrid, 100);
 
     initHomepageNav();
+    initMobileStickyCta();
 
     // Scroll-Spy, FAQ, KPI Counter → jetzt zentral in nexus-core.js
 });

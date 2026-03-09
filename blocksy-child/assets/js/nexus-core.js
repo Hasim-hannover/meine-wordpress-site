@@ -328,7 +328,6 @@
             var root = document.documentElement;
             var buttons = document.querySelectorAll('[data-nx-theme-toggle] [data-theme-value]');
             var storageKey = 'nexus-theme-mode';
-            var mediaQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
 
             function resolveTheme() {
                 var storedTheme = null;
@@ -341,10 +340,6 @@
 
                 if (storedTheme === 'light' || storedTheme === 'dark') {
                     return storedTheme;
-                }
-
-                if (mediaQuery && mediaQuery.matches) {
-                    return 'light';
                 }
 
                 return 'dark';
@@ -377,30 +372,6 @@
                     applyTheme(button.getAttribute('data-theme-value'), true);
                 });
             });
-
-            if (mediaQuery) {
-                var handleSystemThemeChange = function () {
-                    var storedTheme = null;
-
-                    try {
-                        storedTheme = window.localStorage.getItem(storageKey);
-                    } catch (error) {
-                        storedTheme = null;
-                    }
-
-                    if (storedTheme === 'light' || storedTheme === 'dark') {
-                        return;
-                    }
-
-                    applyTheme(mediaQuery.matches ? 'light' : 'dark', false);
-                };
-
-                if (typeof mediaQuery.addEventListener === 'function') {
-                    mediaQuery.addEventListener('change', handleSystemThemeChange);
-                } else if (typeof mediaQuery.addListener === 'function') {
-                    mediaQuery.addListener(handleSystemThemeChange);
-                }
-            }
 
             applyTheme(resolveTheme(), false);
         },

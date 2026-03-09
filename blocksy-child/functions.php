@@ -83,8 +83,6 @@ add_action(
 				var storedTheme = window.localStorage.getItem(storageKey);
 				if (storedTheme === 'light' || storedTheme === 'dark') {
 					theme = storedTheme;
-				} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-					theme = 'light';
 				}
 			} catch (error) {
 				theme = 'dark';

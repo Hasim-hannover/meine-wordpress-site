@@ -1,0 +1,4 @@
+interface:
+  display_name: "B2B Design System"
+  short_description: "Premium B2B UX/UI and CRO system"
+  default_prompt: "Use $b2b-design-system to design or refine a B2B WordPress page, hero, section, or component for stronger conversion."
