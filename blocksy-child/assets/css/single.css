@@ -4,12 +4,43 @@
    ========================================= */
 
 .nexus-single-container {
+    position: relative;
+    isolation: isolate;
     background: var(--nx-body-gradient);
     color: var(--nx-text);
     width: 100%;
     min-height: 100vh;
     overflow-x: clip;
-    padding: clamp(1.5rem, 3vw, 2.5rem) 0 var(--space-24);
+    padding: calc(var(--nx-header-height) + clamp(1rem, 2vw, 1.75rem)) 0 var(--space-24);
+}
+
+.nexus-single-container::before,
+.nexus-single-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.nexus-single-container::before {
+    background:
+        radial-gradient(circle at 12% 0%, hsl(var(--accent-hsl) / 0.12), transparent 28%),
+        radial-gradient(circle at 88% 10%, hsl(var(--accent-hsl) / 0.08), transparent 24%);
+}
+
+.nexus-single-container::after {
+    background-image:
+        linear-gradient(var(--nx-grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--nx-grid-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.12;
+    mask-image: linear-gradient(180deg, var(--nx-grid-mask), transparent 82%);
+}
+
+.nexus-single-container > * {
+    position: relative;
+    z-index: 1;
 }
 
 .nexus-article-hero {
@@ -28,6 +59,16 @@
     box-shadow: var(--nx-shadow-lg);
     overflow: hidden;
     position: relative;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.nexus-article-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, hsl(30 10% 100% / 0.06), transparent 34%);
+    pointer-events: none;
 }
 
 .nexus-article-hero::after {
@@ -56,6 +97,14 @@
         linear-gradient(160deg, var(--bg-elevated), var(--bg-inset));
     border: 1px solid hsl(var(--accent-hsl) / 0.18);
     box-shadow: inset 0 1px 0 hsl(30 10% 100% / 0.04);
+}
+
+.nexus-hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, hsl(30 10% 0% / 0.12) 100%);
+    pointer-events: none;
 }
 
 .nexus-hero-image img {
@@ -102,6 +151,8 @@
     border-radius: var(--nx-radius-pill);
     border: 1px solid hsl(var(--accent-hsl) / 0.22);
     background: hsl(var(--accent-hsl) / 0.08);
+    color: var(--nx-accent-text);
+    box-shadow: inset 0 1px 0 hsl(30 10% 100% / 0.04);
 }
 
 .nexus-title {
@@ -193,6 +244,11 @@
         color var(--duration-fast) var(--ease-default);
     cursor: pointer;
     box-shadow: inset 0 1px 0 hsl(30 10% 100% / 0.03);
+}
+
+.nexus-share-btn svg {
+    width: 18px;
+    height: 18px;
 }
 
 .nexus-share-btn:hover,
@@ -287,13 +343,17 @@ button.nexus-share-btn {
     line-height: 1.8;
     color: var(--nx-text-secondary);
     box-shadow: var(--nx-shadow-sm);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .nexus-article-content h2,
 .nexus-article-content h3,
-.nexus-article-content h4 {
+.nexus-article-content h4,
+.nexus-article-content h5 {
     color: var(--nx-text);
     letter-spacing: -0.02em;
+    scroll-margin-top: calc(var(--nx-header-height) + 1.5rem);
 }
 
 .nexus-article-content h2 {
@@ -318,6 +378,20 @@ button.nexus-share-btn {
     line-height: 1.8;
 }
 
+.nexus-article-content > *:first-child {
+    margin-top: 0;
+}
+
+.nexus-article-content ul,
+.nexus-article-content ol {
+    margin: 0 0 1.5rem 1.3rem;
+    padding: 0;
+}
+
+.nexus-article-content li + li {
+    margin-top: 0.45rem;
+}
+
 .nexus-article-content strong {
     color: var(--nx-text);
 }
@@ -325,6 +399,97 @@ button.nexus-share-btn {
 .nexus-article-content a {
     color: var(--nx-accent-text);
     text-underline-offset: 0.18em;
+}
+
+.nexus-article-content a:hover {
+    color: var(--nx-accent-text-hover);
+}
+
+.nexus-article-content blockquote {
+    margin: 2rem 0;
+    padding: 1.3rem 1.5rem;
+    border-radius: 0 var(--nx-radius-md) var(--nx-radius-md) 0;
+    border: 1px solid hsl(var(--accent-hsl) / 0.16);
+    border-left: 3px solid var(--accent);
+    background: hsl(var(--accent-hsl) / 0.08);
+    color: var(--nx-text);
+}
+
+.nexus-article-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.nexus-article-content code {
+    display: inline-block;
+    padding: 0.12rem 0.42rem;
+    border-radius: 0.45rem;
+    background: hsl(30 10% 100% / 0.06);
+    border: 1px solid var(--nx-border);
+    font-family: var(--nx-font-mono);
+    font-size: 0.92em;
+    color: var(--nx-text);
+}
+
+.nexus-article-content pre {
+    margin: 1.75rem 0;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    border-radius: var(--nx-radius-md);
+    border: 1px solid hsl(30 3% 22%);
+    background: hsl(30 6% 6%);
+    color: hsl(35 12% 92%);
+    box-shadow: inset 0 1px 0 hsl(30 10% 100% / 0.03);
+}
+
+.nexus-article-content pre code {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+}
+
+.nexus-article-content figure {
+    margin: 2rem 0;
+}
+
+.nexus-article-content img {
+    border-radius: var(--nx-radius-md);
+}
+
+.nexus-article-content figcaption {
+    margin-top: 0.75rem;
+    color: var(--nx-text-dim);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.nexus-article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    overflow: hidden;
+    border-radius: var(--nx-radius-md);
+    border: 1px solid var(--nx-border);
+}
+
+.nexus-article-content th,
+.nexus-article-content td {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--nx-border);
+}
+
+.nexus-article-content th {
+    color: var(--nx-text);
+    font-weight: 700;
+    background: hsl(var(--accent-hsl) / 0.08);
+}
+
+.nexus-article-content hr {
+    margin: 2rem 0;
+    border: 0;
+    border-top: 1px solid var(--nx-border);
 }
 
 .nexus-article-content .wp-block-table-of-contents,
@@ -375,6 +540,157 @@ button.nexus-share-btn {
     letter-spacing: 0.06em;
     margin-top: 1.25rem;
     box-shadow: 0 18px 36px hsl(var(--accent-hsl) / 0.24);
+}
+
+:root[data-theme='dark'] .nexus-single-container,
+:root[data-nx-theme='dark'] .nexus-single-container {
+    background: linear-gradient(180deg, hsl(30 5% 8%) 0%, var(--bg-base) 44%, hsl(28 10% 7%) 100%);
+}
+
+:root[data-theme='dark'] .nexus-article-hero,
+:root[data-nx-theme='dark'] .nexus-article-hero {
+    background:
+        radial-gradient(circle at 14% 0%, hsl(var(--accent-hsl) / 0.16), transparent 32%),
+        linear-gradient(180deg, hsl(30 5% 10% / 0.98), hsl(28 10% 7% / 0.98));
+    border-color: hsl(var(--accent-hsl) / 0.18);
+    box-shadow: 0 30px 70px hsl(30 25% 2% / 0.52);
+}
+
+:root[data-theme='dark'] .sticky-toc,
+:root[data-nx-theme='dark'] .sticky-toc,
+:root[data-theme='dark'] .nexus-article-content,
+:root[data-nx-theme='dark'] .nexus-article-content {
+    box-shadow: 0 18px 40px hsl(30 25% 2% / 0.32);
+}
+
+:root[data-theme='light'] .nexus-single-container,
+:root[data-nx-theme='light'] .nexus-single-container {
+    background: linear-gradient(180deg, hsl(35 16% 98%) 0%, hsl(35 12% 95%) 46%, hsl(35 10% 91%) 100%);
+}
+
+:root[data-theme='light'] .nexus-single-container::before,
+:root[data-nx-theme='light'] .nexus-single-container::before {
+    background:
+        radial-gradient(circle at 12% 0%, hsl(var(--accent-hsl) / 0.1), transparent 28%),
+        radial-gradient(circle at 88% 10%, hsl(25 24% 72% / 0.18), transparent 24%);
+}
+
+:root[data-theme='light'] .nexus-single-container::after,
+:root[data-nx-theme='light'] .nexus-single-container::after {
+    opacity: 0.18;
+}
+
+:root[data-theme='light'] .nexus-article-hero,
+:root[data-nx-theme='light'] .nexus-article-hero {
+    background:
+        radial-gradient(circle at 14% 0%, hsl(var(--accent-hsl) / 0.12), transparent 32%),
+        linear-gradient(140deg, hsl(35 14% 100% / 0.99) 0%, hsl(35 14% 98% / 0.98) 34%, hsl(35 10% 93% / 0.99) 100%);
+    border-color: hsl(var(--accent-hsl) / 0.16);
+    box-shadow: 0 28px 62px hsl(30 18% 24% / 0.12);
+}
+
+:root[data-theme='light'] .nexus-article-hero::before,
+:root[data-nx-theme='light'] .nexus-article-hero::before {
+    background: linear-gradient(180deg, hsl(35 14% 100% / 0.54), transparent 38%);
+}
+
+:root[data-theme='light'] .nexus-hero-image,
+:root[data-nx-theme='light'] .nexus-hero-image {
+    background:
+        radial-gradient(circle at 18% 18%, hsl(var(--accent-hsl) / 0.12), transparent 30%),
+        linear-gradient(160deg, hsl(35 14% 100%), hsl(35 8% 90%));
+    border-color: hsl(var(--accent-hsl) / 0.18);
+    box-shadow:
+        inset 0 1px 0 hsl(35 14% 100% / 0.72),
+        0 20px 42px hsl(30 14% 20% / 0.08);
+}
+
+:root[data-theme='light'] .nexus-hero-image::after,
+:root[data-nx-theme='light'] .nexus-hero-image::after {
+    background: linear-gradient(180deg, transparent 0%, hsl(30 10% 12% / 0.05) 100%);
+}
+
+:root[data-theme='light'] .nexus-date,
+:root[data-theme='light'] .nexus-reading-time,
+:root[data-nx-theme='light'] .nexus-date,
+:root[data-nx-theme='light'] .nexus-reading-time {
+    background: hsl(var(--accent-hsl) / 0.09);
+    border-color: hsl(var(--accent-hsl) / 0.18);
+    color: var(--nx-accent-text);
+    box-shadow: inset 0 1px 0 hsl(35 14% 100% / 0.55);
+}
+
+:root[data-theme='light'] .sticky-toc,
+:root[data-nx-theme='light'] .sticky-toc {
+    background:
+        radial-gradient(circle at top left, hsl(var(--accent-hsl) / 0.08), transparent 30%),
+        linear-gradient(180deg, hsl(35 14% 100% / 0.98), hsl(35 10% 95% / 0.98));
+    border-color: hsl(var(--accent-hsl) / 0.16);
+    box-shadow: 0 18px 38px hsl(30 18% 24% / 0.1);
+}
+
+:root[data-theme='light'] .sticky-toc ul li a,
+:root[data-nx-theme='light'] .sticky-toc ul li a {
+    color: var(--nx-text-secondary);
+}
+
+:root[data-theme='light'] .sticky-toc ul li a:hover,
+:root[data-theme='light'] .sticky-toc ul li a.active,
+:root[data-nx-theme='light'] .sticky-toc ul li a:hover,
+:root[data-nx-theme='light'] .sticky-toc ul li a.active {
+    background: hsl(var(--accent-hsl) / 0.11);
+    color: var(--nx-text);
+}
+
+:root[data-theme='light'] .nexus-article-content,
+:root[data-nx-theme='light'] .nexus-article-content {
+    background: linear-gradient(180deg, hsl(35 14% 100% / 0.99), hsl(35 10% 95% / 0.99));
+    border-color: hsl(30 6% 82%);
+    box-shadow: 0 24px 56px hsl(30 18% 24% / 0.1);
+}
+
+:root[data-theme='light'] .nexus-article-content blockquote,
+:root[data-nx-theme='light'] .nexus-article-content blockquote {
+    background: hsl(var(--accent-hsl) / 0.08);
+    border-color: hsl(var(--accent-hsl) / 0.16);
+    color: var(--nx-text);
+}
+
+:root[data-theme='light'] .nexus-article-content code,
+:root[data-nx-theme='light'] .nexus-article-content code {
+    background: hsl(30 12% 92%);
+    border-color: hsl(30 6% 82%);
+    color: hsl(20 24% 22%);
+}
+
+:root[data-theme='light'] .nexus-article-content pre,
+:root[data-nx-theme='light'] .nexus-article-content pre {
+    border-color: hsl(22 12% 28%);
+    background: hsl(22 14% 18%);
+    color: hsl(35 14% 94%);
+}
+
+:root[data-theme='light'] .nexus-article-content th,
+:root[data-nx-theme='light'] .nexus-article-content th {
+    background: hsl(var(--accent-hsl) / 0.08);
+    color: var(--nx-text);
+}
+
+:root[data-theme='light'] .nexus-article-content td,
+:root[data-nx-theme='light'] .nexus-article-content td,
+:root[data-theme='light'] .nexus-article-content hr,
+:root[data-nx-theme='light'] .nexus-article-content hr,
+:root[data-theme='light'] .nexus-bottom-share,
+:root[data-nx-theme='light'] .nexus-bottom-share {
+    border-color: hsl(30 6% 82%);
+}
+
+:root[data-theme='light'] .nexus-share-btn,
+:root[data-nx-theme='light'] .nexus-share-btn {
+    background: linear-gradient(180deg, hsl(35 14% 100% / 0.98), hsl(35 12% 96% / 0.98));
+    border-color: hsl(30 6% 82%);
+    color: var(--nx-text);
+    box-shadow: 0 10px 20px hsl(30 10% 14% / 0.06);
 }
 
 :root[data-theme='light'] .nexus-article-hero,

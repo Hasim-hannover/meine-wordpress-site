@@ -125,6 +125,31 @@
   font-size: 0.92rem;
 }
 
+:root[data-theme='light'] .nexus-footer-cta__inner,
+:root[data-nx-theme='light'] .nexus-footer-cta__inner {
+  background:
+    radial-gradient(circle at top left, hsl(var(--accent-hsl) / 0.12), transparent 30%),
+    linear-gradient(140deg, hsl(35 14% 100% / 0.99) 0%, hsl(35 14% 98% / 0.98) 36%, hsl(35 10% 94% / 0.99) 100%);
+  border-color: hsl(var(--accent-hsl) / 0.18);
+  box-shadow: 0 24px 52px hsl(30 18% 24% / 0.1);
+}
+
+:root[data-theme='light'] .nexus-footer-cta__text,
+:root[data-nx-theme='light'] .nexus-footer-cta__text,
+:root[data-theme='light'] .nexus-footer-cta .trust-section__inline,
+:root[data-nx-theme='light'] .nexus-footer-cta .trust-section__inline,
+:root[data-theme='light'] .nexus-footer-cta .trust-section__text,
+:root[data-nx-theme='light'] .nexus-footer-cta .trust-section__text {
+  color: var(--nx-text-secondary);
+}
+
+:root[data-theme='light'] .nexus-footer-cta .trust-section__item,
+:root[data-nx-theme='light'] .nexus-footer-cta .trust-section__item {
+  background: hsl(35 14% 100% / 0.7);
+  border-color: hsl(30 6% 84%);
+  box-shadow: 0 10px 24px hsl(30 12% 18% / 0.05);
+}
+
 @media (max-width: 600px) {
   .nexus-footer-cta {
     padding: 3rem 0 2rem;
