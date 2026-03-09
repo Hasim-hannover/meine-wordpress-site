@@ -39,19 +39,18 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
     <div class="wgos-container wgos-hero__inner">
         <span class="wgos-kicker">Das System</span>
 
-        <h1 class="wgos-hero__title">WGOS: WordPress als Growth-Infrastruktur für B2B.</h1>
+        <h1 class="wgos-hero__title">WGOS: WordPress als planbares Anfragesystem für B2B</h1>
 
-        <p class="wgos-hero__subtitle">Ein Retainer für Unternehmen, die aus ihrer WordPress-Präsenz ein Owned-Lead-System machen wollen.</p>
-        <p class="wgos-hero__positioning">Erst Fundament und Messbarkeit, dann Sichtbarkeit, Conversion und kontrollierte Aktivierung.</p>
+        <p class="wgos-hero__subtitle">WGOS ist die laufende Zusammenarbeit für Unternehmen, die aus ihrer WordPress-Website mehr qualifizierte Anfragen machen wollen – mit sauberer Technik, klarer Messbarkeit, besseren Seiten und einer sinnvollen Reihenfolge statt Aktionismus.</p>
         <ul class="wgos-hero__bullets">
-            <li>Fundament vor Skalierung</li>
-            <li>Credits mit klarer Priorisierung</li>
-            <li>Kein Lock-in, volle Ownership</li>
+            <li>Erst Fundament, dann Sichtbarkeit</li>
+            <li>Klare Prioritäten statt Stundenchaos</li>
+            <li>Alles bleibt in Ihrem Besitz</li>
         </ul>
 
         <div class="wgos-hero__actions">
             <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Audit starten</a>
-            <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Case Studies ansehen →</a>
+            <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Case Studies ansehen</a>
         </div>
 
         <!-- Trust Stack -->
@@ -87,32 +86,15 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
 <section id="prinzip" class="wgos-section wgos-section--gray nx-reveal">
     <div class="wgos-container">
         <div class="wgos-principle-shell">
-            <span class="wgos-principle-kicker">Paradigmenwechsel</span>
-            <h2 class="wgos-h2">Assets statt Kampagnen&nbsp;— Das Prinzip</h2>
+            <span class="wgos-principle-kicker">System statt Stundenmodell</span>
+            <h2 class="wgos-h2">Kein Stundenmodell. Kein Maßnahmen-Chaos. Sondern ein System.</h2>
 
-            <div class="wgos-principle-contrast" role="list" aria-label="Vergleich von Kampagnen- und Asset-Logik">
-                <article class="wgos-principle-card wgos-principle-card--campaign" role="listitem">
-                    <h3>Kampagnen-Logik</h3>
-                    <p>Die meisten Unternehmen mieten Sichtbarkeit. Jeden Monat: Ads-Budget rein, Leads raus. Budget stoppen&nbsp;— Leads stoppen. Das ist kein System, das ist Abhängigkeit.</p>
-                </article>
-                <article class="wgos-principle-card wgos-principle-card--asset" role="listitem">
-                    <h3>Asset-Logik (WGOS)</h3>
-                    <p>Das WGOS dreht die Logik um: Statt Kampagnen zu verbrennen, investieren wir monatlich in digitale Assets, die Ihnen gehören und über Zeit wertvoller werden:</p>
-                </article>
-            </div>
-
-            <ul class="wgos-checklist wgos-checklist--principle">
-                <li><strong>Seiten, die ranken</strong> (und morgen noch da sind)</li>
-                <li><strong>Geschwindigkeit, die konvertiert</strong> (nicht nur gut aussieht)</li>
-                <li><strong>Daten, die Ihnen gehören</strong> (statt Plattformen)</li>
-                <li><strong>Content, der Vertrauen aufbaut</strong> (statt Tracking-Misstrauen)</li>
-                <li><strong>Prozesse, die skalieren</strong> (ohne linearen Aufwandszuwachs)</li>
-            </ul>
+            <p>WGOS bündelt die Bausteine, die für nachhaltige Nachfrage wirklich zusammenarbeiten müssen: Technik, Messbarkeit, Sichtbarkeit, Conversion und saubere Weiterentwicklung. Statt lose Einzelmaßnahmen umzusetzen, arbeiten wir entlang klarer Prioritäten – damit Ihre Website Schritt für Schritt zu einem verlässlichen Anfragesystem wird.</p>
 
             <div class="wgos-principle-bottom">
-                <p class="wgos-bold-statement wgos-bold-statement--principle">Ads sind nicht verboten&nbsp;— aber sie werden zum optionalen Turbo, wenn das Fundament steht. Nicht zum Dauertropf.</p>
+                <p class="wgos-bold-statement wgos-bold-statement--principle">Ads sind nicht verboten – aber sie werden zum optionalen Turbo, wenn das Fundament steht. Nicht zum Dauertropf.</p>
                 <p class="wgos-inline-cta wgos-inline-cta--principle">
-                    <a href="<?php echo esc_url( $audit_url ); ?>" data-track="cta_click_audit">Wie stark ist Ihr Fundament? Mit dem Audit starten&nbsp;→</a>
+                    <a href="<?php echo esc_url( $audit_url ); ?>" data-track="cta_click_audit">Wie stark ist Ihr Fundament? Mit dem Audit starten</a>
                 </p>
             </div>
         </div>
@@ -140,9 +122,9 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
      ======================================== -->
 <section id="module" class="wgos-section">
     <div class="wgos-container">
-        <h2 class="wgos-h2">Die 7 Module des WGOS</h2>
-        <div id="wgos-mindmap-v2-root" class="wgos-mindmap-v2-root" aria-label="WGOS Mindmap v2"></div>
-        <p class="wgos-section-intro">Jedes Modul ist ein Baustein Ihres Owned-Leads-Systems. Die Reihenfolge ist kein Zufall: Wir starten mit dem technischen Fundament und arbeiten uns zur Sichtbarkeit und Skalierung vor.</p>
+    <h2 class="wgos-h2">Die Arbeitsbereiche im System</h2>
+    <div id="wgos-mindmap-v2-root" class="wgos-mindmap-v2-root" aria-label="WGOS Mindmap v2"></div>
+    <p class="wgos-section-intro">Alle Maßnahmen ordnen sich denselben Zielen unter: bessere Grundlagen, bessere Sichtbarkeit, bessere Conversion.</p>
     </div>
 
     <!-- Modul 01 -->
@@ -151,11 +133,11 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
             <div class="wgos-module__grid">
                 <div class="wgos-module__num">01</div>
                 <div class="wgos-module__content">
-                    <h3>Performance Core</h3>
-                    <p class="wgos-module__subline"><em>Schnelle Websites konvertieren besser. Punkt.</em></p>
-                    <p>Core Web Vitals (LCP&nbsp;&lt;&nbsp;2.5s, CLS&nbsp;&lt;&nbsp;0.1), Server-Tuning, Asset-Optimierung, Critical CSS, Lazy Loading, CDN-Setup. Ergebnis: weniger Absprünge, bessere Rankings, höhere Conversion.</p>
+                    <h3>Technisches Fundament</h3>
+                    <p class="wgos-module__subline"><em>Performance, saubere Struktur, technische Stabilität und Core Web Vitals als Grundlage für Vertrauen, Sichtbarkeit und Conversion.</em></p>
+                    <p>Core Web Vitals, Server-Tuning, Asset-Optimierung, Critical CSS, Lazy Loading, CDN-Setup. Ergebnis: weniger Absprünge, bessere Rankings, höhere Conversion.</p>
                     <div class="wgos-module__proof">Core Web Vitals von 45 → 98 (Mobile) in 14 Tagen</div>
-                    <a href="/core-web-vitals-optimierung/" class="wgos-link--arrow">Mehr erfahren →</a>
+                    <a href="/core-web-vitals-optimierung/" class="wgos-link--arrow">Mehr erfahren</a>
                 </div>
             </div>
         </div>
@@ -167,11 +149,11 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
             <div class="wgos-module__grid">
                 <div class="wgos-module__num">02</div>
                 <div class="wgos-module__content">
-                    <h3>Security &amp; Reliability</h3>
-                    <p class="wgos-module__subline"><em>Vertrauen beginnt beim Schutz Ihrer Daten und Systeme.</em></p>
-                    <p>WordPress-Härtung, automatisierte Backups, Uptime-Monitoring, Update-Management, Malware-Scan, Disaster Recovery. Kein Sicherheitsrisiko, das Kunden abschreckt oder Google abstraft.</p>
+                    <h3>Sicherheit & Stabilität</h3>
+                    <p class="wgos-module__subline"><em>Updates, Backups, Monitoring und saubere technische Prozesse, damit die Website verlässlich arbeitet und Risiken reduziert werden.</em></p>
+                    <p>WordPress-Härtung, automatisierte Backups, Uptime-Monitoring, Update-Management, Malware-Scan, Disaster Recovery.</p>
                     <div class="wgos-module__proof">0 Ausfallstunden in 12 Monaten bei betreuten Projekten</div>
-                    <a href="/wordpress-wartung-hannover/" class="wgos-link--arrow">Mehr erfahren →</a>
+                    <a href="/wordpress-wartung-hannover/" class="wgos-link--arrow">Mehr erfahren</a>
                 </div>
             </div>
         </div>
@@ -183,11 +165,11 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
             <div class="wgos-module__grid">
                 <div class="wgos-module__num">03</div>
                 <div class="wgos-module__content">
-                    <h3>Privacy-first Measurement Layer</h3>
-                    <p class="wgos-module__subline"><em>Messen, was nötig ist&nbsp;— nicht mehr.</em></p>
-                    <p>Server-Side Tracking (sGTM), Consent Mode v2, Event-Blueprint, GA4-Setup ohne Cookie-Banner-Chaos. Saubere Datenintegrität + DSGVO-Konformität. Keine Sammelwut, sondern belastbare KPIs.</p>
+                    <h3>Messbarkeit & Datenschutz</h3>
+                    <p class="wgos-module__subline"><em>GA4, Consent Mode, saubere Ereignisse, klare KPIs und belastbare Daten als Basis für Entscheidungen statt Bauchgefühl.</em></p>
+                    <p>Server-Side Tracking (sGTM), Consent Mode v2, Event-Blueprint, GA4-Setup ohne Cookie-Banner-Chaos.</p>
                     <div class="wgos-module__proof">Tracking-Genauigkeit von ~55% auf &gt;92% (nach sGTM-Rollout)</div>
-                    <a href="/ga4-tracking-setup/" class="wgos-link--arrow">Mehr erfahren →</a>
+                    <a href="/ga4-tracking-setup/" class="wgos-link--arrow">Mehr erfahren</a>
                 </div>
             </div>
         </div>
@@ -199,11 +181,11 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
             <div class="wgos-module__grid">
                 <div class="wgos-module__num">04</div>
                 <div class="wgos-module__content">
-                    <h3>Technical SEO &amp; Informationsarchitektur</h3>
-                    <p class="wgos-module__subline"><em>Die Struktur bestimmt, ob Google Sie versteht&nbsp;— und Besucher finden, was sie suchen.</em></p>
-                    <p>Crawl-Optimierung, Sitemap-Strategie, Schema Markup (JSON-LD), interne Verlinkung, URL-Architektur, Pillar/Cluster-Planung. Das Fundament, auf dem Content-Sichtbarkeit steht.</p>
+                    <h3>Sichtbarkeit durch Inhalte</h3>
+                    <p class="wgos-module__subline"><em>Inhalte und Seiten, die nicht nur ranken sollen, sondern die richtigen Suchanfragen abdecken, Vertrauen aufbauen und Nachfrage vorbereiten.</em></p>
+                    <p>Crawl-Optimierung, Sitemap-Strategie, Schema Markup (JSON-LD), interne Verlinkung, URL-Architektur, Pillar/Cluster-Planung.</p>
                     <div class="wgos-module__proof">Indexierte Seiten +340% nach IA-Restrukturierung</div>
-                    <a href="/wordpress-seo-hannover/" class="wgos-link--arrow">Mehr erfahren →</a>
+                    <a href="/wordpress-seo-hannover/" class="wgos-link--arrow">Mehr erfahren</a>
                 </div>
             </div>
         </div>
@@ -215,9 +197,9 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
             <div class="wgos-module__grid">
                 <div class="wgos-module__num">05</div>
                 <div class="wgos-module__content">
-                    <h3>Owned Content Engine</h3>
-                    <p class="wgos-module__subline"><em>Content, der rankt, Vertrauen aufbaut und konvertiert&nbsp;— ohne Ablaufdatum.</em></p>
-                    <p>Pillar Pages, Content-Cluster, Proof-Assets (Case Studies), Lead-Magneten, Nurture-Sequenzen. Jedes Stück Content ist ein Asset mit klarem Zweck: Sichtbarkeit, Vertrauen oder Conversion.</p>
+                    <h3>Conversion & Angebotslogik</h3>
+                    <p class="wgos-module__subline"><em>Klarere Seiten, bessere Nutzerführung, stärkere Botschaften und sinnvollere Angebotsstruktur, damit aus Besuchern häufiger Anfragen werden.</em></p>
+                    <p>Pillar Pages, Content-Cluster, Proof-Assets (Case Studies), Lead-Magneten, Nurture-Sequenzen.</p>
                     <div class="wgos-module__proof">Organischer Traffic +180% in 6 Monaten (B2B SaaS Kunde)</div>
                 </div>
             </div>
@@ -230,11 +212,11 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
             <div class="wgos-module__grid">
                 <div class="wgos-module__num">06</div>
                 <div class="wgos-module__content">
-                    <h3>Conversion &amp; Offer Engineering</h3>
-                    <p class="wgos-module__subline"><em>Traffic ohne Conversion ist Vanity. Wir optimieren den Moment der Entscheidung.</em></p>
-                    <p>Landing Page Architektur, CTA-Hierarchie, Above-the-Fold-Optimierung, A/B-Testing, Lead-Formulare, Offer-Framing, Friction-Analyse. Ziel: aus Besuchern qualifizierte Anfragen machen.</p>
+                    <h3>Aktivierung & Automatisierung</h3>
+                    <p class="wgos-module__subline"><em>Formulare, interne Abläufe, Follow-up-Logik und gezielte Automatisierung, damit gute Nachfrage nicht im Prozess verloren geht.</em></p>
+                    <p>Landing Page Architektur, CTA-Hierarchie, Above-the-Fold-Optimierung, A/B-Testing, Lead-Formulare, Offer-Framing, Friction-Analyse.</p>
                     <div class="wgos-module__proof">Conversion Rate von 1.2% → 4.7% (B2B Dienstleister)</div>
-                    <a href="/conversion-rate-optimization/" class="wgos-link--arrow">Mehr erfahren →</a>
+                    <a href="/conversion-rate-optimization/" class="wgos-link--arrow">Mehr erfahren</a>
                 </div>
             </div>
         </div>
@@ -246,11 +228,11 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
             <div class="wgos-module__grid">
                 <div class="wgos-module__num">07</div>
                 <div class="wgos-module__content">
-                    <h3>Activation Layer &amp; Automation <span class="wgos-tag--optional">Optional</span></h3>
-                    <p class="wgos-module__subline"><em>Aktivierung erst dann, wenn Fundament und Conversion-Pfade tragen.</em></p>
-                    <p>Paid Activation und n8n-Automation&nbsp;— aber nur auf Basis sauberer Daten und konvertierender Pages. Dieser Block bleibt optional und wird erst aktiviert, wenn Modul 1–6 stehen.</p>
+                    <h3>Betrieb & Weiterentwicklung <span class="wgos-tag--optional">Optional</span></h3>
+                    <p class="wgos-module__subline"><em>Laufende Priorisierung, saubere Umsetzung und kontrollierte Weiterentwicklung statt losem Sammeln von To-dos.</em></p>
+                    <p>Paid Activation und n8n-Automation – aber nur auf Basis sauberer Daten und konvertierender Pages. Dieser Block bleibt optional und wird erst aktiviert, wenn Modul 1–6 stehen.</p>
                     <div class="wgos-module__proof">ROAS 6.2x bei 40% weniger Ad-Spend (nach Fundament-Optimierung)</div>
-                    <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Reihenfolge in der Praxis sehen →</a>
+                    <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Reihenfolge in der Praxis sehen</a>
                 </div>
             </div>
         </div>
@@ -269,12 +251,12 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
      ======================================== -->
 <section id="credits" class="wgos-section wgos-section--white">
     <div class="wgos-container">
-        <h2 class="wgos-h2">So funktioniert das Credits-System</h2>
+        <h2 class="wgos-h2">Warum feste Leistungspunkte statt Stunden?</h2>
 
         <div class="wgos-prose" style="max-width:760px;">
-            <p>Keine Stundensätze. Keine Nachverhandlungen. Jedes Asset hat einen festen Punktwert&nbsp;— Sie wissen vorher, was es kostet. Das Risiko für Mehraufwand liegt bei mir.</p>
-            <p>Ihr monatliches Paket enthält ein festes Credit-Budget. Sie entscheiden zusammen mit mir, in welche Assets investiert wird. Keine versteckten Kosten, volle Transparenz.</p>
-            <p><strong>Asset-Katalog in 3 Abschnitten:</strong> Fundament, Aufbau und Skalierung. So priorisieren wir zuerst die Basis und dann Wachstum.</p>
+            <p>Sie kaufen bei WGOS keine unklare Zeit, sondern klar priorisierte Ergebnisse. Leistungspunkte schaffen Transparenz, weil Aufwand und Nutzen besser planbar werden. So entsteht keine Diskussion über Minuten, sondern Klarheit darüber, welche Bausteine als Nächstes den größten Hebel haben.</p>
+            <p>Das Modell ist besonders sinnvoll für Unternehmen, die nicht jeden Monat bei null anfangen wollen, sondern ihre Website systematisch weiterentwickeln möchten.</p>
+            <p><strong>Baustein-Katalog in 3 Abschnitten:</strong> Fundament, Aufbau und Expansion. So priorisieren wir zuerst die Basis und dann Wachstum.</p>
         </div>
 
         <div class="wgos-credit-phases">
@@ -471,62 +453,62 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
      ======================================== -->
 <section id="pakete" class="wgos-section wgos-section--gray">
     <div class="wgos-container">
-        <h2 class="wgos-h2">Pakete &amp; Investition</h2>
-        <p class="wgos-section-intro">Der Retainer ist Stufe 3 des Systems. Diagnose und Blueprint klären vorher, welche Reihenfolge und welches Tempo wirtschaftlich sinnvoll sind.</p>
+    <h2 class="wgos-h2">Die passende Zusammenarbeit – je nach Ausgangslage</h2>
+    <p class="wgos-section-intro">Nicht jedes Unternehmen braucht sofort denselben Umfang. Entscheidend ist, wie stabil das Fundament bereits ist und wie schnell Sie vorankommen wollen.</p>
 
         <div class="wgos-pricing-grid">
-            <!-- Paket 1: Maintenance -->
+            <!-- Paket 1: Fundament -->
             <div class="wgos-pricing-card nx-reveal">
                 <div class="wgos-pricing-card__head">
-                    <h3>Maintenance</h3>
+                    <h3>Fundament</h3>
                     <p class="wgos-pricing-card__tagline">Fundament sichern</p>
                 </div>
                 <div class="wgos-pricing-card__price">ab 1.500&nbsp;€<small>/Monat</small></div>
-                <div class="wgos-pricing-card__credits">30 Credits / Monat</div>
+                <div class="wgos-pricing-card__credits">30 Leistungspunkte / Monat</div>
                 <ul class="wgos-pricing-card__features">
                     <li>Laufzeit: 3 Monate</li>
                     <li>1× Strategiecall / Monat</li>
-                    <li>Fundament (Module 1–3: Performance, Security, Tracking)</li>
+                    <li>Fundament (Bereiche 1–3: Technik, Sicherheit, Tracking)</li>
                     <li>Reporting: Monatlich</li>
                 </ul>
-                <p class="wgos-pricing-card__ideal">Ideal für bestehende Sites, die technisch sauber laufen müssen. Wartung + punktuelle Optimierung.</p>
+                <p class="wgos-pricing-card__ideal">Für Unternehmen, die ihre Website technisch sauber betreiben, messbar machen und schrittweise verbessern wollen.</p>
                 <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Mit dem Audit starten</a>
             </div>
 
-            <!-- Paket 2: Growth Partner (FEATURED) -->
+            <!-- Paket 2: Aufbau (FEATURED) -->
             <div class="wgos-pricing-card wgos-pricing-card--featured nx-reveal">
                 <span class="wgos-pricing-badge">Empfohlen</span>
                 <div class="wgos-pricing-card__head">
-                    <h3>Growth Partner</h3>
-                    <p class="wgos-pricing-card__tagline">Assets aufbauen</p>
+                    <h3>Aufbau</h3>
+                    <p class="wgos-pricing-card__tagline">Seiten und Conversion ausbauen</p>
                 </div>
                 <div class="wgos-pricing-card__price">ab 2.800&nbsp;€<small>/Monat</small></div>
-                <div class="wgos-pricing-card__credits">60 Credits / Monat</div>
+                <div class="wgos-pricing-card__credits">60 Leistungspunkte / Monat</div>
                 <ul class="wgos-pricing-card__features">
                     <li>Laufzeit: 6 Monate</li>
                     <li>2× Strategiecalls / Monat</li>
-                    <li>Fundament + Aufbau (Module 1–6)</li>
-                    <li>Reporting: Bi-Weekly</li>
+                    <li>Fundament + Aufbau (Bereiche 1–6)</li>
+                    <li>Reporting: alle zwei Wochen</li>
                 </ul>
-                <p class="wgos-pricing-card__ideal">Ideal für B2B-Unternehmen, die ein Owned-Leads-System aufbauen wollen. SEO + CRO + Content.</p>
+                <p class="wgos-pricing-card__ideal">Für Unternehmen, die Sichtbarkeit, Conversion und Angebotslogik systematisch ausbauen wollen.</p>
                 <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Audit starten</a>
             </div>
 
-            <!-- Paket 3: Dominance -->
+            <!-- Paket 3: Expansion -->
             <div class="wgos-pricing-card nx-reveal">
                 <div class="wgos-pricing-card__head">
-                    <h3>Dominance</h3>
-                    <p class="wgos-pricing-card__tagline">Markt dominieren</p>
+                    <h3>Expansion</h3>
+                    <p class="wgos-pricing-card__tagline">Reichweite und Prozesse ausbauen</p>
                 </div>
                 <div class="wgos-pricing-card__price">ab 4.500&nbsp;€<small>/Monat</small></div>
-                <div class="wgos-pricing-card__credits">100+ Credits / Monat</div>
+                <div class="wgos-pricing-card__credits">100+ Leistungspunkte / Monat</div>
                 <ul class="wgos-pricing-card__features">
                     <li>Laufzeit: 12 Monate</li>
                     <li>Wöchentliche Strategiecalls</li>
-                    <li>Fundament + Aufbau + Skalierung (Module 1–7)</li>
-                    <li>Reporting: Weekly + Dashboard</li>
+                    <li>Fundament + Aufbau + Expansion (Bereiche 1–7)</li>
+                    <li>Reporting: wöchentlich + Dashboard</li>
                 </ul>
-                <p class="wgos-pricing-card__ideal">Ideal für Marktführer-Anspruch. Full Stack + Paid Booster + Automation. Maximaler Output.</p>
+                <p class="wgos-pricing-card__ideal">Für Unternehmen, die ein belastbares Fundament haben und Inhalte, Nachfrage und Prozesse deutlich stärker entwickeln wollen.</p>
                 <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit">Mit dem Audit starten</a>
             </div>
         </div>
@@ -581,7 +563,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
      ======================================== -->
 <section id="faq" class="wgos-section wgos-section--gray">
     <div class="wgos-container">
-        <h2 class="wgos-h2">FAQ&nbsp;— Häufige Fragen zum WGOS</h2>
+    <h2 class="wgos-h2">FAQ – Häufige Fragen zum WGOS</h2>
 
         <div class="wgos-faq">
             <details class="nx-faq__item">
@@ -632,14 +614,14 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
      ======================================== -->
 <section class="wgos-section wgos-section--white wgos-final-cta nx-reveal">
     <div class="wgos-container" style="text-align:center;">
-        <h2 class="wgos-h2">Bereit für WordPress als echtes Nachfrage-System?</h2>
-        <p class="wgos-prose" style="max-width:680px;margin:0 auto 2rem;">Der erste Schritt bleibt bewusst klein: Audit zuerst, dann Blueprint, dann Retainer. So entsteht kein Leistungskatalog, sondern eine sinnvolle Entscheidungskette.</p>
+        <h2 class="wgos-h2">Erst Klarheit. Dann die richtige Reihenfolge.</h2>
+        <p class="wgos-prose" style="max-width:680px;margin:0 auto 2rem;">Wenn Sie Ihre WordPress-Website nicht länger mit Einzelmaßnahmen überladen wollen, sondern daraus ein verlässliches Anfragesystem machen möchten, ist der nächste Schritt ein gemeinsamer Blick auf Fundament, Engpässe und Prioritäten.</p>
 
         <div class="wgos-hero__actions">
-            <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Audit starten →</a>
+            <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Audit starten</a>
         </div>
         <div class="wgos-final__links">
-            <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Case Studies ansehen →</a>
+            <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Case Studies ansehen</a>
         </div>
     </div>
 </section>
