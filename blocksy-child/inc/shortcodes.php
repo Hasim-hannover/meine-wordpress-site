@@ -27,10 +27,10 @@ function hu_home_urls() {
 		'audit'     => nexus_get_audit_url(),
 		'deep_dive' => nexus_get_page_url( [ '360-deep-dive' ] ),
 		'wgos'      => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
-		'cases'     => nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) ),
+		'cases'     => nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) ),
 		'about'     => nexus_get_page_url( [ 'uber-mich' ] ),
 		'blog'      => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
-		'e3'        => nexus_get_page_url( [ 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/case-studies/' ) ),
+		'e3'        => nexus_get_page_url( [ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/e3-new-energy/' ) ),
 	];
 
 	return $urls;

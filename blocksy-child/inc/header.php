@@ -95,7 +95,7 @@ function nexus_get_site_header_menu_location() {
 function nexus_get_site_header_fallback_items() {
 	$blog_page_id = (int) get_option( 'page_for_posts' );
 	$wgos_page_id = nexus_get_page_id( [ 'wordpress-growth-operating-system', 'wgos' ] );
-	$cases_page_id = nexus_get_page_id( [ 'case-studies' ] );
+	$cases_page_id = nexus_get_page_id( [ 'case-studies-e-commerce', 'case-studies' ] );
 	$about_page_id = nexus_get_page_id( [ 'uber-mich' ] );
 
 	return [
@@ -110,7 +110,7 @@ function nexus_get_site_header_fallback_items() {
 		],
 		[
 			'label'  => __( 'Case Studies', 'blocksy-child' ),
-			'url'    => nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) ),
+			'url'    => nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) ),
 			'active' => $cases_page_id ? is_page( $cases_page_id ) : false,
 			'class'  => '',
 		],

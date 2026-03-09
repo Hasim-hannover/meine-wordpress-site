@@ -79,13 +79,13 @@ function nexus_setup_main_menu() {
 	] );
 
 	// ── 2. Case Studies (Top-Level) ────────────────────────────────
-	$cases_id = nexus_get_page_id( [ 'case-studies' ] );
+	$cases_id = nexus_get_page_id( [ 'case-studies-e-commerce', 'case-studies' ] );
 	wp_update_nav_menu_item( $menu_id, 0, [
 		'menu-item-title'     => 'Case Studies',
 		'menu-item-object'    => 'page',
 		'menu-item-object-id' => $cases_id,
 		'menu-item-type'      => $cases_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $cases_id ? '' : home_url( '/case-studies/' ),
+		'menu-item-url'       => $cases_id ? '' : home_url( '/case-studies-e-commerce/' ),
 		'menu-item-status'    => 'publish',
 	] );
 

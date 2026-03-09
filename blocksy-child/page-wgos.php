@@ -13,7 +13,12 @@
 get_header();
 
 $audit_url = nexus_get_audit_url();
-$cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+$cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cwv_url   = nexus_get_page_url( [ 'core-web-vitals', 'core-web-vitals-optimierung' ], home_url( '/core-web-vitals/' ) );
+$care_url  = nexus_get_page_url( [ 'wordpress-wartung-hannover' ], home_url( '/wordpress-wartung-hannover/' ) );
+$ga4_url   = nexus_get_page_url( [ 'ga4-tracking-setup' ], home_url( '/ga4-tracking-setup/' ) );
+$seo_url   = nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ], home_url( '/wordpress-seo-hannover/' ) );
+$cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '/conversion-rate-optimization/' ) );
 ?>
 
 <div class="wgos-wrapper">
@@ -137,7 +142,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                     <p class="wgos-module__subline"><em>Performance, saubere Struktur, technische Stabilität und Core Web Vitals als Grundlage für Vertrauen, Sichtbarkeit und Conversion.</em></p>
                     <p>Core Web Vitals, Server-Tuning, Asset-Optimierung, Critical CSS, Lazy Loading, CDN-Setup. Ergebnis: weniger Absprünge, bessere Rankings, höhere Conversion.</p>
                     <div class="wgos-module__proof">Core Web Vitals von 45 → 98 (Mobile) in 14 Tagen</div>
-                    <a href="/core-web-vitals-optimierung/" class="wgos-link--arrow">Mehr erfahren</a>
+                    <a href="<?php echo esc_url( $cwv_url ); ?>" class="wgos-link--arrow">Core Web Vitals ansehen</a>
                 </div>
             </div>
         </div>
@@ -153,7 +158,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                     <p class="wgos-module__subline"><em>Updates, Backups, Monitoring und saubere technische Prozesse, damit die Website verlässlich arbeitet und Risiken reduziert werden.</em></p>
                     <p>WordPress-Härtung, automatisierte Backups, Uptime-Monitoring, Update-Management, Malware-Scan, Disaster Recovery.</p>
                     <div class="wgos-module__proof">0 Ausfallstunden in 12 Monaten bei betreuten Projekten</div>
-                    <a href="/wordpress-wartung-hannover/" class="wgos-link--arrow">Mehr erfahren</a>
+                    <a href="<?php echo esc_url( $care_url ); ?>" class="wgos-link--arrow">WordPress Wartung ansehen</a>
                 </div>
             </div>
         </div>
@@ -169,7 +174,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                     <p class="wgos-module__subline"><em>GA4, Consent Mode, saubere Ereignisse, klare KPIs und belastbare Daten als Basis für Entscheidungen statt Bauchgefühl.</em></p>
                     <p>Server-Side Tracking (sGTM), Consent Mode v2, Event-Blueprint, GA4-Setup ohne Cookie-Banner-Chaos.</p>
                     <div class="wgos-module__proof">Tracking-Genauigkeit von ~55% auf &gt;92% (nach sGTM-Rollout)</div>
-                    <a href="/ga4-tracking-setup/" class="wgos-link--arrow">Mehr erfahren</a>
+                    <a href="<?php echo esc_url( $ga4_url ); ?>" class="wgos-link--arrow">GA4 &amp; Tracking Setup ansehen</a>
                 </div>
             </div>
         </div>
@@ -185,7 +190,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                     <p class="wgos-module__subline"><em>Inhalte und Seiten, die nicht nur ranken sollen, sondern die richtigen Suchanfragen abdecken, Vertrauen aufbauen und Nachfrage vorbereiten.</em></p>
                     <p>Crawl-Optimierung, Sitemap-Strategie, Schema Markup (JSON-LD), interne Verlinkung, URL-Architektur, Pillar/Cluster-Planung.</p>
                     <div class="wgos-module__proof">Indexierte Seiten +340% nach IA-Restrukturierung</div>
-                    <a href="/wordpress-seo-hannover/" class="wgos-link--arrow">Mehr erfahren</a>
+                    <a href="<?php echo esc_url( $seo_url ); ?>" class="wgos-link--arrow">WordPress SEO ansehen</a>
                 </div>
             </div>
         </div>
@@ -216,7 +221,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
                     <p class="wgos-module__subline"><em>Formulare, interne Abläufe, Follow-up-Logik und gezielte Automatisierung, damit gute Nachfrage nicht im Prozess verloren geht.</em></p>
                     <p>Landing Page Architektur, CTA-Hierarchie, Above-the-Fold-Optimierung, A/B-Testing, Lead-Formulare, Offer-Framing, Friction-Analyse.</p>
                     <div class="wgos-module__proof">Conversion Rate von 1.2% → 4.7% (B2B Dienstleister)</div>
-                    <a href="/conversion-rate-optimization/" class="wgos-link--arrow">Mehr erfahren</a>
+                    <a href="<?php echo esc_url( $cro_url ); ?>" class="wgos-link--arrow">CRO-Service ansehen</a>
                 </div>
             </div>
         </div>

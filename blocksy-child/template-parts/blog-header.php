@@ -19,7 +19,7 @@ $wgos_url     = nexus_get_page_url(
 	[ 'wordpress-growth-operating-system', 'wgos' ],
 	home_url( '/wordpress-growth-operating-system/' )
 );
-$cases_url    = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+$cases_url    = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 $about_url    = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
 $audit_url    = nexus_get_audit_url();
 
@@ -87,7 +87,7 @@ $primary_items = [
 	[
 		'label'  => __( 'Case Studies', 'blocksy-child' ),
 		'url'    => $cases_url,
-		'active' => is_page( nexus_get_page_id( [ 'case-studies' ] ) ),
+		'active' => is_page( nexus_get_page_id( [ 'case-studies-e-commerce', 'case-studies' ] ) ),
 	],
 	[
 		'label'  => __( 'Insights', 'blocksy-child' ),

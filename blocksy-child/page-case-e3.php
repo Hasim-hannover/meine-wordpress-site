@@ -12,7 +12,7 @@
 get_header();
 
 $audit_url   = nexus_get_audit_url();
-$cases_url   = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+$cases_url   = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) );
 ?>
 

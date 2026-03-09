@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $audit_url = nexus_get_audit_url();
 $wgos_url  = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
-$cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+$cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 $about_url = nexus_get_page_url( [ 'uber-mich' ] );
 $cwv_url   = nexus_get_page_url( [ 'core-web-vitals', 'core-web-vitals-optimierung' ] );
 $seo_url   = nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ] );

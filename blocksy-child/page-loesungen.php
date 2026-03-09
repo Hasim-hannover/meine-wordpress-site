@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $audit_url     = nexus_get_audit_url();
 $deep_dive_url = nexus_get_page_url( [ '360-deep-dive' ] );
 $wgos_url      = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
-$cases_url     = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+$cases_url     = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 
 get_header();
 ?>

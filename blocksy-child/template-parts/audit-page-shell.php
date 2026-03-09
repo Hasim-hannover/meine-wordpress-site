@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+$cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 $wgos_url  = nexus_get_page_url(
 	[ 'wordpress-growth-operating-system', 'wgos' ],
 	home_url( '/wordpress-growth-operating-system/' )

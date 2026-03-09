@@ -25,7 +25,7 @@ $wgos_url    = nexus_get_page_url(
 	[ 'wordpress-growth-operating-system' ],
 	home_url( '/wordpress-growth-operating-system/' )
 );
-$cases_url   = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' ) );
+$cases_url   = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 $blog_url    = $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' );
 $seo_url     = nexus_get_page_url(
 	[ 'wordpress-seo-hannover', 'seo' ],
@@ -36,7 +36,7 @@ $cwv_url     = nexus_get_page_url(
 	home_url( '/core-web-vitals/' )
 );
 $about_url   = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
-$contact_url = nexus_get_page_url( [ 'kontakt' ], home_url( '/kontakt/' ) );
+$contact_url = nexus_get_page_url( [ 'kontaktiere-mich', 'kontakt' ], home_url( '/kontaktiere-mich/' ) );
 $imprint_url = nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) );
 $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
 ?>
