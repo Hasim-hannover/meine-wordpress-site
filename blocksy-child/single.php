@@ -11,9 +11,10 @@
  */
 
 get_header();
+get_template_part( 'template-parts/blog-header' );
 ?>
 
-<main id="main" class="site-main nexus-single-container">
+<main id="main" class="site-main nexus-single-container nexus-single-container--with-blog-header">
 
 	<?php while ( have_posts() ) : the_post(); ?>
 

@@ -3,9 +3,10 @@
  * NEXUS Edition: Das Template für die Blog-Startseite
  */
 get_header();
+get_template_part( 'template-parts/blog-header' );
 ?>
 
-<main id="main" class="site-main">
+<main id="main" class="site-main blog-home blog-home--with-blog-header">
     <section class="nx-hero nx-hero--compact" style="background: linear-gradient(rgba(5,5,5,0.8), rgba(5,5,5,0.8)), url('https://hasimuener.de/wp-content/uploads/2025/09/Impulse_Hasim_uener_Blog.webp') center/cover;">
         <div class="nx-container">
             <span class="nx-badge nx-badge--gold">Strategische Impulse</span>

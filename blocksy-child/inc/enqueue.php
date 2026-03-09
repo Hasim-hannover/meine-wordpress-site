@@ -56,6 +56,11 @@ function hu_enqueue_assets() {
 	// ── GLOBAL: Core JS (Scroll-Spy, FAQ, Counter, Progress Bar) ──
 	hu_enqueue_js( 'nexus-core-js', 'nexus-core.js' );
 
+	// ── GLOBAL: Blog-Header Fallback ───────────────────────────────
+	if ( is_home() || is_archive() || is_singular( 'post' ) ) {
+		hu_enqueue_css( 'nexus-blog-header-css', 'blog-header.css', [ 'nexus-design-system' ] );
+	}
+
 	// ── A) Startseite & Blog-Home ─────────────────────────────────
 	if ( is_front_page() || is_home() ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );

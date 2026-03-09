@@ -6,6 +6,7 @@
  * @package Blocksy Child – Nexus Edition
  */
 get_header();
+get_template_part( 'template-parts/blog-header' );
 
 $audit_url = nexus_get_audit_url();
 
@@ -101,7 +102,7 @@ if ($featured_query->have_posts()) {
 }
 ?>
 
-<main id="main" class="site-main pillar-hub">
+<main id="main" class="site-main pillar-hub pillar-hub--with-blog-header">
 
     <!-- ══════════════════════════════════════
          SECTION 1: PILLAR HERO
