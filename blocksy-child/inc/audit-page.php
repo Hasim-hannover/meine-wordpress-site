@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Render the versioned review shell from the theme.
+ * Render the versioned audit shell from the theme.
  *
  * @return string
  */
@@ -25,7 +25,7 @@ function nexus_get_audit_shell_markup() {
 }
 
 /**
- * Ensure the review landing page always outputs the versioned theme shell.
+ * Ensure the audit landing page always outputs the versioned theme shell.
  *
  * The editor content is intentionally bypassed so the live funnel stays coupled
  * to versioned theme code instead of fragile HTML snippets in the page editor.

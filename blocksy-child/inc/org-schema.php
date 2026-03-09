@@ -61,44 +61,44 @@ function hu_output_schema()
         ],
 
         'customer-journey-audit' => [
-            'name'        => 'Kostenloser Startseiten-Review',
-            'description' => 'Kostenloser persönlicher Startseiten-Review für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
-            'serviceType' => 'Startseiten-Review',
-            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
+            'name'        => 'Growth Audit',
+            'description' => 'Persoenlicher Growth Audit fuer B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Prioritaet und der naechste sinnvolle Schritt.',
+            'serviceType' => 'Growth Audit',
+            'serviceOutput' => 'Persoenliche Einschaetzung der groessten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Kostenloser Startseiten-Review',
+                    'name'          => 'Growth Audit',
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Kostenloser Ersteinstieg für B2B-WordPress-Seiten mit unklarer Lead-Performance'
+                    'description'   => 'Kostenloser Ersteinstieg fuer B2B-WordPress-Seiten mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'growth-audit' => [
-            'name'        => 'Kostenloser Startseiten-Review',
-            'description' => 'Kostenloser persönlicher Startseiten-Review für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
-            'serviceType' => 'Startseiten-Review',
-            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
+            'name'        => 'Growth Audit',
+            'description' => 'Persoenlicher Growth Audit fuer B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Prioritaet und der naechste sinnvolle Schritt.',
+            'serviceType' => 'Growth Audit',
+            'serviceOutput' => 'Persoenliche Einschaetzung der groessten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Kostenloser Startseiten-Review',
+                    'name'          => 'Growth Audit',
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Kostenloser Ersteinstieg für B2B-WordPress-Seiten mit unklarer Lead-Performance'
+                    'description'   => 'Kostenloser Ersteinstieg fuer B2B-WordPress-Seiten mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'audit' => [
-            'name'        => 'Kostenloser Startseiten-Review',
-            'description' => 'Kostenloser persönlicher Startseiten-Review für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
-            'serviceType' => 'Startseiten-Review',
-            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite'
+            'name'        => 'Growth Audit',
+            'description' => 'Persoenlicher Growth Audit fuer B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Prioritaet und der naechste sinnvolle Schritt.',
+            'serviceType' => 'Growth Audit',
+            'serviceOutput' => 'Persoenliche Einschaetzung der groessten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite'
         ],
 
         '360-deep-dive' => [

@@ -1,5 +1,5 @@
 /**
- * Startseiten-Review Funnel
+ * Growth-Audit-Funnel
  *
  * Multi-step intake form that stores requests directly in WordPress.
  */
@@ -7,6 +7,7 @@
   'use strict';
 
   var config = window.NexusReviewConfig || {};
+  var auditLabel = config.auditLabel || 'Growth Audit';
   var state = {
     stepIndex: 0,
     steps: [],
@@ -189,7 +190,7 @@
       review_domain: getDomainFromUrl(payload.page_url)
     });
 
-    fetch(config.restEndpoint || '/wp-json/nexus/v1/review-request', {
+    fetch(config.restEndpoint || '/wp-json/nexus/v1/audit-request', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -232,7 +233,7 @@
         state.submitting = false;
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = 'Kostenlosen Review anfordern';
+          submitButton.textContent = auditLabel + ' anfordern';
         }
       });
   }

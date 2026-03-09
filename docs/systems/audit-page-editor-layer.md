@@ -1,163 +1,77 @@
-# Audit Page Editor Layer
+# Audit Page Layer
 
-Stand: 2026-03-07.
+Stand: 2026-03-09.
 
-Diese Datei dokumentiert den WordPress-Editor-Layer der Seite `Growth Audit`.
+Der Dateiname ist historisch. Fuer die aktive Audit-Seite ist der WordPress-Editor nicht mehr der funktionale Source-of-Truth-Layer.
 
-Der eigentliche Audit-Funnel besteht aktuell aus zwei Ebenen:
+## Aktueller Stand
 
-- versionierter Theme- und JS-Layer im Repo
-- manuell gepflegter Content- und DOM-Layer im WordPress-Editor
+Die aktive `Growth Audit`-Seite wird aus dem Theme gerendert:
 
-Referenz-Snapshot:
+- `blocksy-child/page-audit.php`
+- `blocksy-child/inc/audit-page.php`
+- `blocksy-child/template-parts/audit-page-shell.php`
 
-- `docs/references/audit-page-editor-snippet.html`
+`blocksy-child/inc/audit-page.php` ersetzt auf der Audit-Seite den normalen `the_content()`-Output durch den versionierten Shell aus dem Repo.
 
-Empfohlene Editor-V2:
+Folge:
 
-- `docs/references/audit-page-editor-snippet-v2.html`
+- Editor-HTML ist fuer die aktive Audit-Seite nicht mehr der operative DOM-Layer.
+- Markup-Aenderungen gehoeren fuer diese Seite in Git, nicht in den WordPress-Editor.
 
-Empfohlene Editor-V3:
+## Aktiver DOM-Contract
 
-- `docs/references/audit-page-editor-snippet-v3.html`
-
-## Rolle des Editor-Layers
-
-Der Editor-Layer liefert nicht nur Content, sondern einen funktionalen DOM-Rahmen fuer die Audit-Logik.
-
-Er stellt bereit:
-
-- Hero und Einstiegsnarrativ
-- Formular-Shell
-- Loader-Platzhalter
-- Ergebnis-Container
-- Vertrauens- und Preview-Sektionen
-- einen kleinen View-Mode-Fallback per `MutationObserver`
-
-## DOM-Contract mit `audit-live.js`
-
-Der folgende DOM ist fuer die Laufzeit relevant:
+Der aktuelle Funnel haengt an diesen Elementen:
 
 - `#audit-main-wrapper`
+- `#review-request-form`
+- `#review-progress-fill`
+- `[data-review-next]`
+- `[data-review-prev]`
+- `[data-review-submit]`
+- `#review-form-feedback`
+- `#review-request-success`
+- `#review-success-url`
+
+Ohne diese IDs und Data-Attribute arbeitet `blocksy-child/assets/js/review-funnel.js` nicht korrekt.
+
+## Historische Referenzen
+
+Die folgenden Dateien bleiben als Referenz fuer den frueheren oder moeglichen Instant-Results-Layer erhalten:
+
+- `docs/references/audit-page-editor-snippet.html`
+- `docs/references/audit-page-editor-snippet-v2.html`
+- `docs/references/audit-page-editor-snippet-v3.html`
+
+Diese Snippets dokumentieren den alten Editor-basierten Audit-Aufbau mit:
+
 - `#audit-live-form`
-- `#audit-url`
-- `#audit-form-inner`
-- `#audit-form-error`
 - `#audit-loader`
-- `#loader-icon`
-- `#loader-text`
-- `#loader-sub`
-- `#loader-progress`
 - `#audit-results`
+- `view-mode-results`
 
-Ohne diese IDs kann `blocksy-child/assets/js/audit-live.js` nicht korrekt arbeiten.
+Das ist aktuell kein aktiver Default-Flow.
 
-## Sichtbare Systemlogik
+## Beziehung zu `audit-live.js`
 
-- Hero verspricht Live-Ergebnis in 60 Sekunden.
-- Primaeres Formular fragt aktuell nur die URL ab.
-- Nach Ergebniseinspielung wird `view-mode-results` auf den Wrapper gesetzt.
-- `#start`, `#form-wrap` und `.audit-social-proof` werden im Results-Mode ausgeblendet.
-- Der Beratungs-CTA wird direkt im Ergebnisbereich gerendert.
+`blocksy-child/assets/js/audit-live.js` erwartet weiterhin den alten Instant-Results-DOM.
 
-## Wichtige Befunde
+Das bedeutet:
 
-### 1. Der Editor-Layer sollte nur den Start und die Verkaufsumgebung liefern
-
-Das Formular im Editor fragt initial nur die URL ab.
-
-Folge:
-
-- Der Editor sollte nicht versuchen, Post-Result-Logik ueber versteckte Felder oder Plugin-Container mitzutragen.
-- Alles nach dem Polling sollte aus `audit-live.js` kommen.
-
-### 2. Das Ergebnis braucht einen klaren Beratungs-CTA
-Wenn der Editor-Layer spaeter wieder auf E-Mail oder Plugin-Formulare umschwenkt, bricht die neue V3-Logik.
-
-Folge:
-
-- Der Editor sollte fuer den Audit nur URL-Start, Loader, Ergebnis-Container und statische Verkaufssektionen liefern.
-- Alles Post-Result-spezifische sollte aus `audit-live.js` kommen.
-
-### 3. Das Formular-Markup bleibt ein sensibler DOM-Contract
-
-Die JS-Logik haengt weiter an einigen festen IDs.
-
-Folge:
-
-- Markup-Aenderungen im Editor koennen `audit-live.js` weiter still brechen.
-
-### 4. Results-Mode blendet nur Teile der Einstiegsseite aus
-
-Im Results-Mode werden aktuell ausgeblendet:
-
-- Hero
-- Formularbereich
-- Social Proof unter dem Formular
-
-Sichtbar bleiben:
-
-- Tech-Stack-Bar
-- Journey-Preview
-- Report-Preview
-- Vorteile
-- FAQ
-- Footer-Links
-
-Folge:
-
-- Das kann nach erfolgreicher Analyse die Fokuslogik verwischen.
-- Der Ergebnisbereich ist nicht die einzige dominante Flaeche.
-
-### 5. Navigation bleibt auf versteckte Anker ausgerichtet
-
-Die Smart-Navigation verlinkt weiterhin auf:
-
-- `#start`
-- `#form`
-
-Diese Bereiche sind im Results-Mode ausgeblendet.
-
-Folge:
-
-- Die Navigation wird nach erfolgreicher Analyse teilweise inkonsistent.
-
-### 6. Der Observer bleibt ein fragiler Fallback
-
-`audit-live.js` setzt `view-mode-results` inzwischen direkt beim Rendern der Ergebnisse.
-
-Im Editor existiert zusaetzlich weiter ein `MutationObserver` mit der Bedingung:
-
-- `resultsContainer.innerHTML.trim() !== ""`
-
-Folge:
-
-- Der Hauptpfad ist jetzt robuster, weil der JS-Layer den Status aktiv setzt.
-- Der Observer bleibt dennoch ein indirekter DOM-Fallback und damit potenziell stoeranfaellig.
+- Der Code ist weiter versioniert und fachlich nutzbar.
+- Er ist aber nicht direkt mit der aktiven Landingpage gekoppelt.
+- Wer den Instant-Results-Flow reaktivieren will, braucht wieder einen passenden DOM-Shell.
 
 ## Risiken
 
-- Editor-Layer ist funktional wichtig, aber ausserhalb des deploybaren Theme-Codes gepflegt.
-- DOM-Contract ist nicht im WordPress-Admin abgesichert.
-- Markup-Aenderungen im Editor koennen `audit-live.js` still brechen.
-- Ergebnis-Modus und Inhalts-Modus sind nicht sauber als zwei klar getrennte Ansichten modelliert.
+- Der Dateiname der Doku suggeriert noch einen aktiven Editor-Layer, obwohl die Seite inzwischen versioniert ist.
+- `review-funnel.js` und `audit-live.js` repraesentieren zwei verschiedene Funnel-Modelle.
+- Wer auf der Audit-Seite wieder Editor-Markup erwartet, baut leicht gegen die aktuelle Theme-Realitaet.
 
-## Empfohlene Richtung
+## Operative Regel
 
-1. Den DOM-Contract in der Doku als verbindlich behandeln.
-2. Den Editor nur fuer URL-Start, Loader und statische Vertrauenssektionen nutzen.
-3. Den Editor-Observer nur noch als Fallback behandeln und langfristig entfernen.
-4. Entscheiden, ob die unteren Info-Sektionen nach Ergebniseinspielung sichtbar bleiben sollen.
-5. Langfristig den Editor-Shell-Code in einen versionierten Template- oder Block-Pattern-Layer ueberfuehren.
+Fuer die aktive `Growth Audit`-Seite gilt:
 
-## Status der V2-Empfehlung
-
-- Die empfohlene Editor-V2 ist im Repo vorbereitet.
-- Sie verbessert Fokus, DOM-Sauberkeit und Results-Mode.
-- Sie behebt nicht den JSON-Response-Fehler aus n8n. Dieser liegt weiterhin im Webhook- oder Polling-Pfad, nicht im Editor-Markup.
-
-## Status der V3-Empfehlung
-
-- Die empfohlene Editor-V3 liegt ebenfalls im Repo.
-- Sie ist auf `Instant Results` und einen nativen Beratungs-CTA ohne Fluent Forms ausgerichtet.
-- Sie setzt voraus, dass das Frontend `audit-live.js` und der n8n-Workflow auf den V3-Contract umgestellt werden.
+- Struktur, DOM und Copy-Shell in Git
+- keine funktionale Logik im Editor
+- Editor nur dann wieder als Layer einfuehren, wenn das bewusst neu entschieden und dokumentiert wird

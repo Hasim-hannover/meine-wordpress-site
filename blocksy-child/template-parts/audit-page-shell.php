@@ -1,6 +1,6 @@
 <?php
 /**
- * Versioned review landing page shell.
+ * Versioned growth audit landing page shell.
  *
  * @package Blocksy_Child
  */
@@ -15,7 +15,7 @@ $wgos_url  = nexus_get_page_url(
 	home_url( '/wordpress-growth-operating-system/' )
 );
 $about_url = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
-$call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' );
+$call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' ) );
 ?>
 
 <div class="audit-wrapper" id="audit-main-wrapper">
@@ -32,30 +32,30 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 	<div class="audit-container">
 			<main class="audit-content">
 				<section id="start" class="audit-hero-centered audit-section nx-reveal">
-					<div class="hero-pill">Kostenlos · persönlich · 48h</div>
+					<div class="hero-pill">Growth Audit · kostenlos · persönlich · 48h</div>
 					<div class="review-hero-kicker">Für B2B-Unternehmen mit WordPress und kaufnahen Seiten</div>
 					<h1>
-						Die 3 größten Anfragebremsen<br>
-						<span class="text-highlight">auf Ihrer Startseite.</span>
+						Growth Audit für die Seite,<br>
+						<span class="text-highlight">die Anfragen tragen soll.</span>
 					</h1>
 					<p class="hero-sub-short">
-						Kostenloser persönlicher Startseiten-Review für B2B-Unternehmen mit WordPress.
-						In 48 Stunden erhalten Sie drei priorisierte Hebel, eine klare Priorität
-						und den sinnvollen nächsten Schritt.
+						Kein Tool-Score und keine pauschale Designkritik.
+						Sie erhalten drei priorisierte Bremsen, die wirtschaftlich wichtigste Priorität
+						und den sinnvollen nächsten Schritt für Botschaft, Proof und Anfrageführung.
 					</p>
 
-					<div class="review-kpi-strip" aria-label="Review-Überblick">
+					<div class="review-kpi-strip" aria-label="Growth-Audit-Überblick">
 						<div class="review-kpi">
 							<strong>0 € Einstieg</strong>
-							<span>Kostenloser Review ohne Pflicht-Call.</span>
+							<span>Kostenloser Audit ohne Pflicht-Call.</span>
 						</div>
 						<div class="review-kpi">
-							<strong>1 Seite</strong>
-							<span>Startseite oder kaufnahe Angebotsseite.</span>
+							<strong>1 Seite, 1 Ziel</strong>
+							<span>Startseite oder kaufnahe Angebotsseite mit Anfragefokus.</span>
 						</div>
 						<div class="review-kpi">
 							<strong>Persönlich in 48h</strong>
-							<span>Kein Tool-Score, sondern eine klare Priorität.</span>
+							<span>Keine Score-Flut, sondern eine klare Reihenfolge.</span>
 						</div>
 					</div>
 				</section>
@@ -63,9 +63,9 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 				<section class="review-proof-band audit-section nx-reveal" aria-labelledby="review-proof-headline">
 					<div class="review-proof-head">
 						<span class="review-proof-kicker">Proof aus dokumentierten Projekten</span>
-						<h2 id="review-proof-headline">Hier geht es nicht um schöne Worte, sondern um Nachfragewirkung.</h2>
+						<h2 id="review-proof-headline">Hier geht es nicht um Audit-Theater, sondern um Nachfragewirkung.</h2>
 						<p class="review-proof-copy">
-							Der Review ist kostenlos. Die Substanz dahinter ist nicht theoretisch, sondern durch echte
+							Der Audit ist kostenlos. Die Substanz dahinter ist nicht theoretisch, sondern durch echte
 							Conversion-, Performance- und Demand-Gen-Arbeit belegt.
 						</p>
 					</div>
@@ -97,7 +97,7 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 					<div class="review-fit-grid">
 						<article class="review-fit-card">
 							<span class="review-fit-kicker">Passt besonders</span>
-							<h2 id="review-fit-headline">Für wen dieser Review gedacht ist</h2>
+							<h2 id="review-fit-headline">Für wen dieser Growth Audit gedacht ist</h2>
 							<ul class="review-fit-list">
 								<li>B2B-Unternehmen mit WordPress und klarem Anfrageziel.</li>
 								<li>Startseiten oder Angebotsseiten, die bereits Traffic oder Kampagnen bekommen.</li>
@@ -123,13 +123,14 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 						<div class="review-form-layout">
 							<div class="review-form-main">
 								<div class="box-head">
-									<h3>Kostenlosen Startseiten-Review anfordern</h3>
-									<p>Sie schicken die Seite und den Kontext. Ich prüfe Botschaft, Proof und Anfrageführung.</p>
+									<h3>Growth Audit anfordern</h3>
+									<p>Sie schicken die Seite und den Kontext. Ich prüfe Botschaft, Proof, CTA und Reibung.</p>
 								</div>
 
 							<form id="review-request-form" class="review-funnel" novalidate>
 								<input type="hidden" name="company_website" value="">
 								<input type="hidden" name="started_at" value="">
+								<input type="hidden" name="audit_type" value="growth_audit">
 
 								<div class="review-progress" aria-hidden="true">
 									<div class="review-progress-track">
@@ -147,7 +148,7 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 								<div class="review-step is-active" data-step="0">
 									<span class="review-step-kicker">Schritt 1 von 5</span>
 									<h4>Welche Seite soll ich prüfen?</h4>
-									<p class="review-step-copy">Am besten Startseite oder kaufnahe Angebotsseite.</p>
+									<p class="review-step-copy">Am besten die Seite, die heute Anfragen tragen soll.</p>
 									<div class="review-field">
 										<label for="review-page-url">Seiten-URL</label>
 										<input id="review-page-url" name="page_url" type="url" placeholder="https://ihre-seite.de" required autocomplete="url">
@@ -156,7 +157,7 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 
 								<div class="review-step" data-step="1">
 									<span class="review-step-kicker">Schritt 2 von 5</span>
-										<h4>Was soll diese Seite konkret verkaufen oder auslösen?</h4>
+										<h4>Was soll diese Seite konkret auslösen?</h4>
 									<p class="review-step-copy">Ein klarer Satz reicht.</p>
 									<div class="review-field">
 										<label for="review-offer">Seitenziel</label>
@@ -176,8 +177,8 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 
 								<div class="review-step" data-step="3">
 									<span class="review-step-kicker">Schritt 4 von 5</span>
-									<h4>Wo vermuten Sie gerade den größten Blocker?</h4>
-									<p class="review-step-copy">Ihr Eindruck hilft bei der Einordnung.</p>
+									<h4>Wo vermuten Sie gerade den größten Hebelverlust?</h4>
+									<p class="review-step-copy">Ihr Eindruck hilft bei der Einordnung des Audits.</p>
 									<div class="review-option-group" role="radiogroup" aria-labelledby="review-issue-heading">
 										<span id="review-issue-heading" class="screen-reader-text">Größter Blocker</span>
 										<label class="review-option">
@@ -189,12 +190,16 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 											<span>Das Seitenversprechen ist zu unscharf</span>
 										</label>
 										<label class="review-option">
+											<input type="radio" name="biggest_issue" value="weak_proof" required>
+											<span>Proof und Vertrauen greifen zu spät</span>
+										</label>
+										<label class="review-option">
 											<input type="radio" name="biggest_issue" value="weak_conversion" required>
 												<span>Die Seite führt nicht sauber zur Anfrage</span>
 										</label>
 										<label class="review-option">
 											<input type="radio" name="biggest_issue" value="second_opinion" required>
-											<span>Ich will eine zweite strategische Meinung</span>
+											<span>Ich brauche eine zweite strategische Einordnung</span>
 										</label>
 									</div>
 								</div>
@@ -202,7 +207,7 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 								<div class="review-step" data-step="4">
 									<span class="review-step-kicker">Schritt 5 von 5</span>
 									<h4>Wohin soll die Rückmeldung gehen?</h4>
-									<p class="review-step-copy">Dorthin geht die Rückmeldung innerhalb von 48 Stunden.</p>
+									<p class="review-step-copy">Dorthin geht die persönliche Rückmeldung innerhalb von 48 Stunden.</p>
 									<div class="review-field-grid">
 										<div class="review-field">
 											<label for="review-name">Name</label>
@@ -217,8 +222,8 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 											<input id="review-email" name="email" type="email" required autocomplete="email">
 										</div>
 										<div class="review-field review-field-full">
-											<label for="review-context">Optional: Was sollte ich im Review auf keinen Fall übersehen?</label>
-											<textarea id="review-context" name="extra_context" rows="4" placeholder="Zum Beispiel: Die Seite soll bereits nächste Woche in eine Kampagne gehen."></textarea>
+											<label for="review-context">Optional: Was darf ich im Audit auf keinen Fall übersehen?</label>
+											<textarea id="review-context" name="extra_context" rows="4" placeholder="Zum Beispiel: Die Seite geht nächste Woche in eine Kampagne oder ist bereits zentral für Sales."></textarea>
 										</div>
 									</div>
 								</div>
@@ -228,17 +233,17 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 								<div class="review-actions">
 										<button type="button" class="review-prev-btn" data-review-prev hidden>Zurück</button>
 									<button type="button" class="audit-submit-btn" data-review-next>Weiter</button>
-									<button type="submit" class="audit-submit-btn" data-review-submit hidden>Kostenlosen Review anfordern</button>
+									<button type="submit" class="audit-submit-btn" data-review-submit hidden>Growth Audit anfordern</button>
 								</div>
 
 								<p class="audit-form-meta">
-									0 € Einstieg. Kein Pflicht-Call. Persönliche Rückmeldung statt Tool-Score.
+									0 € Einstieg. Kein Pflicht-Call. Persönliche Priorisierung statt Tool-Score.
 								</p>
 							</form>
 
 							<div id="review-request-success" class="review-success" hidden>
 								<div class="review-success-pill">Anfrage eingegangen</div>
-								<h3>Der Review ist jetzt im System.</h3>
+								<h3>Der Growth Audit ist jetzt im System.</h3>
 								<p class="review-success-copy">
 									Sie erhalten innerhalb von 48 Stunden eine persönliche Rückmeldung zu Ihrer Seite.
 								</p>
@@ -253,33 +258,33 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 										<span>Was zuerst Wirkung bringt und was bewusst warten kann.</span>
 									</div>
 									<div class="review-success-card">
-										<strong>Persönliche Einschätzung</strong>
-										<span>Kein Tool-Score, sondern eine verständliche strategische Rückmeldung.</span>
+										<strong>Nächster sinnvoller Schritt</strong>
+										<span>Kleine Korrektur, Blueprint oder Umsetzung im passenden Umfang.</span>
 									</div>
 								</div>
 								<div class="review-success-actions">
-									<a class="audit-submit-btn review-success-link" href="<?php echo esc_url( $call_url ); ?>" target="_blank" rel="noopener">Wenn es dringend ist: Direkt Termin buchen</a>
+									<a class="audit-submit-btn review-success-link" href="<?php echo esc_url( $call_url ); ?>" target="_blank" rel="noopener">Wenn es dringend ist: Direkt Strategie-Termin buchen</a>
 								</div>
 							</div>
 						</div>
 
 							<aside class="review-form-aside">
 								<div class="review-aside-card">
-									<span class="review-aside-kicker">Sie erhalten</span>
+									<span class="review-aside-kicker">Im Growth Audit enthalten</span>
 									<h4>Kurz. Klar. Priorisiert.</h4>
 									<ul class="review-aside-list">
 										<li>Die 3 stärksten Anfragebremsen</li>
 										<li>Die wichtigste Priorität</li>
-										<li>Eine klare Begründung</li>
+										<li>Ein sinnvoller nächster Schritt</li>
 									</ul>
 								</div>
 								<div class="review-aside-card review-aside-card-muted">
 									<span class="review-aside-kicker">Wichtig</span>
-									<p>Bewusst eng gefasst: eine Seite, ein Ziel, eine Priorität. Kein kostenloser Komplett-Relaunch.</p>
+									<p>Bewusst eng gefasst: eine Seite, ein Ziel, eine Priorität. Kein kostenloser Komplett-Relaunch und kein Leistungskatalog.</p>
 								</div>
 								<div class="review-aside-card review-aside-card-muted">
-									<span class="review-aside-kicker">Kein Risiko</span>
-									<p>Kostenloser Einstieg. Kein Pflicht-Call. Wenn es dringend ist, können Sie danach direkt einen Termin ziehen.</p>
+									<span class="review-aside-kicker">Wenn mehr zusammenhängt</span>
+									<p>Wenn Positionierung, Proof, Tracking und Conversion gemeinsam bremsen, ist der nächste Schritt ein tieferer Blueprint statt Stückwerk.</p>
 								</div>
 							</aside>
 						</div>
@@ -287,7 +292,7 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 						<div class="trust-strip">
 							<div class="trust-item">
 								<div class="trust-ic">01</div>
-								<div><strong>0 € Einstieg.</strong> Kostenloser Review ohne Pflicht-Call.</div>
+								<div><strong>0 € Einstieg.</strong> Kostenloser Audit ohne Pflicht-Call.</div>
 							</div>
 							<div class="trust-item">
 								<div class="trust-ic">02</div>
@@ -303,7 +308,7 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 			</section>
 
 			<section id="journey" class="journey-preview audit-section nx-reveal">
-				<h2 class="journey-headline">So läuft der Review ab</h2>
+				<h2 class="journey-headline">So läuft der Growth Audit ab</h2>
 				<p class="journey-subline">
 					Drei Schritte. Keine Analyse-Show.
 				</p>
@@ -334,12 +339,12 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 
 			<section id="preview" class="report-preview-section audit-section nx-reveal">
 				<div class="preview-text">
-					<span class="preview-kicker">So sieht die Rückmeldung aus</span>
+					<span class="preview-kicker">So sieht das Ergebnis aus</span>
 					<h2>Keine Textwand.<br>Eine klare Entscheidungsgrundlage.</h2>
 					<p class="preview-desc">
 						Kompakt genug für schnelle Entscheidungen. Konkret genug, um Hero, Proof und nächsten Schritt gezielt zu schärfen.
 					</p>
-					<div class="preview-deliverables" aria-label="Review-Inhalte">
+					<div class="preview-deliverables" aria-label="Audit-Inhalte">
 						<div class="preview-deliverable">
 							<strong>3 stärkste Bremsen</strong>
 							<span>Wo die Seite gerade Vertrauen oder Anfragen verliert.</span>
@@ -354,7 +359,7 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 						</div>
 						<div class="preview-deliverable">
 							<strong>Nächster Schritt</strong>
-							<span>Kleine Korrektur oder tieferer Growth Audit.</span>
+							<span>Kleine Korrektur oder tieferer Growth Blueprint.</span>
 						</div>
 					</div>
 				</div>
@@ -373,7 +378,7 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 							<strong>Zuerst anpassen</strong>
 							<span>Hero, Subline und CTA vor dem restlichen Seitenumbau schärfen. Danach Proof konsequent höher ziehen.</span>
 						</div>
-						<div class="review-output-note">Wenn danach weiter strukturelle Brüche sichtbar bleiben, ist der nächste Schritt ein tieferer Growth Audit.</div>
+						<div class="review-output-note">Wenn danach weiter strukturelle Brüche sichtbar bleiben, ist der nächste Schritt ein tieferer Growth Blueprint.</div>
 					</div>
 				</div>
 			</section>
@@ -381,9 +386,9 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 			<section class="review-ladder-section audit-section nx-reveal" aria-labelledby="review-ladder-headline">
 				<div class="review-ladder-head">
 					<span class="preview-kicker">Danach</span>
-					<h2 id="review-ladder-headline">Was nach dem Review passiert</h2>
+					<h2 id="review-ladder-headline">Was nach dem Growth Audit passiert</h2>
 					<p class="review-ladder-copy">
-						Der Review ist kein Selbstzweck. Er entscheidet, ob eine kleine Korrektur reicht oder ob ein tieferer Audit wirtschaftlich sinnvoll ist.
+						Der Audit ist kein Selbstzweck. Er entscheidet, ob eine kleine Korrektur reicht oder ob ein tieferer Blueprint wirtschaftlich sinnvoll ist.
 					</p>
 				</div>
 				<div class="review-ladder-grid">
@@ -394,8 +399,8 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 					</article>
 					<article class="review-ladder-card">
 						<div class="review-ladder-step">02</div>
-						<h3>Growth Audit sinnvoll</h3>
-						<p>Wenn Positionierung, Struktur, Tracking oder Conversion zusammen bremsen, ist der nächste Schritt ein bezahlter tieferer Audit.</p>
+						<h3>Growth Blueprint sinnvoll</h3>
+						<p>Wenn Positionierung, Struktur, Tracking oder Conversion zusammen bremsen, ist der nächste Schritt ein tieferer Blueprint statt isolierter To-dos.</p>
 					</article>
 					<article class="review-ladder-card">
 						<div class="review-ladder-step">03</div>
@@ -412,8 +417,8 @@ $call_url  = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/
 					<div class="faq-ans">Drei wichtigste Bremsen, eine klare Priorität und ein sinnvoller nächster Schritt.</div>
 				</details>
 				<details>
-					<summary>Ist der Review kostenlos?</summary>
-					<div class="faq-ans">Ja. Der Einstieg ist bewusst kostenlos und ohne Pflicht-Call. Wenn ein tieferer Audit sinnvoll ist, sage ich das erst nach dem Review.</div>
+					<summary>Ist der Growth Audit kostenlos?</summary>
+					<div class="faq-ans">Ja. Der Einstieg ist bewusst kostenlos und ohne Pflicht-Call. Wenn ein tieferer Blueprint sinnvoll ist, sage ich das erst nach dem Audit.</div>
 				</details>
 				<details>
 					<summary>Ist das nur für Startseiten gedacht?</summary>

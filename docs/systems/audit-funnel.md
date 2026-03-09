@@ -1,167 +1,121 @@
 # Audit Funnel
 
-Stand: 2026-03-07. Diese Doku beschreibt den aktuell im Repo sichtbaren Funnel inklusive des jetzt versionierten Audit-Workflows.
+Stand: 2026-03-09.
 
-Update:
+Diese Doku beschreibt den aktuell aktiven Funnel rund um den `Growth Audit`.
 
-- Der aktuelle n8n-Workflow liegt jetzt als bereinigter V2-Export im Repo.
-- Siehe `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`.
-- Die Betriebsdoku liegt unter `automations/n8n/docs/audit-funnel__customer-journey-audit__refactor.md`.
-- Der aktuelle WordPress-Editor-Layer ist jetzt separat dokumentiert.
-- Siehe `docs/systems/audit-page-editor-layer.md`.
+Wichtig:
 
-## Zweck des Audit-Funnels
+- Der aktive Funnel ist kein Instant-Results-Flow.
+- Die aktuelle Landingpage arbeitet als persoenlicher Audit-Intake mit Rueckmeldung in 48 Stunden.
+- `audit-live.js` und die n8n-Strecke liegen weiter im Repo, sind aber aktuell nicht an den aktiven Landing-Shell gebunden.
 
-Der Audit-Funnel ist der wichtigste Einstieg in das System.
+## Zweck des Funnels
+
+Der `Growth Audit` ist der wichtigste Diagnose-Einstieg des Systems.
 
 Sein Job:
 
 - Reibung fuer Erstkontakt senken
-- eine schnelle, glaubwuerdige Diagnose liefern
-- Problemverstaendnis vor Sales-Gespraech erzeugen
-- qualifizierte Interessenten in eine Beratung ueberfuehren
+- die richtige Seite plus den richtigen Kontext einsammeln
+- Botschaft, Proof, CTA und Anfragefuehrung priorisieren
+- unqualifizierte Gratis-Relaunch-Anfragen filtern
+- passende Leads in Blueprint, Call oder Umsetzung ueberfuehren
 
-Der Funnel verkauft nicht sofort. Er beweist Kompetenz, macht Luecken sichtbar und baut die Bruecke zum naechsten qualifizierten Schritt.
+Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 
-## Einstieg
+## Aktiver Flow
 
-Wichtige Einstiegspunkte in den Funnel:
+1. Besucher landet auf `/growth-audit/`.
+2. `blocksy-child/page-audit.php` rendert ueber `blocksy-child/inc/audit-page.php` die versionierte Shell aus `blocksy-child/template-parts/audit-page-shell.php`.
+3. Das Frontend zeigt ein natives Multi-Step-Formular mit Seite, Ziel, Zielgruppe, groesstem Blocker und Kontakt.
+4. `blocksy-child/assets/js/review-funnel.js` validiert die Schritte und sendet die Daten an `POST /wp-json/nexus/v1/audit-request`.
+5. `blocksy-child/inc/review-crm.php` prueft Honeypot, Rate Limit und Payload und speichert die Anfrage als `nexus_review_request`.
+6. WordPress versendet eine interne Benachrichtigung und eine kurze Bestaetigung an den Anfragenden ueber `wp_mail`.
+7. Im Backend landet der Lead im `Audit CRM` mit Status, Prioritaet, Faelligkeit und internen Notizen.
+8. Danach folgt die persoenliche Rueckmeldung innerhalb von 48 Stunden.
+9. Je nach Lage geht der Lead weiter in:
+   - kleine Korrektur
+   - `Growth Blueprint`
+   - Umsetzung / Retainer
+   - direkten Strategiecall ueber Cal.com
 
-- Homepage
-- WGOS-Seite
-- Service-Landings
-- Blog-Artikel
-- Kategorie-Hubs
-- About-Seite
-- 404-Seite
+## Nutzerseitige Inputs
 
-Primaerer Zielpfad:
+Pflichtfelder:
 
-- fast alle starken CTAs fuehren auf `/growth-audit/`
+- `page_url`
+- `offer`
+- `audience`
+- `biggest_issue`
+- `name`
+- `email`
+- `company`
 
-## Flow-Schritte
+Implizite Felder:
 
-1. Besucher landet auf dem `Growth Audit`.
-2. Das Formular fragt mindestens eine URL ab.
-3. `blocksy-child/assets/js/audit-live.js` sendet die URL an den n8n-Webhook `audit`.
-4. Das Frontend pollt `audit-status` bis Ergebnis oder Timeout.
-5. Nach erfolgreicher Rueckgabe rendert das Frontend:
-   - Domain- und Meta-Header
-   - Kurzdiagnose
-   - Top-3-Bremsen
-   - Potenzial-Spanne
-   - Detail-Sektionen
-   - strategische Einordnung
-6. Danach erscheint direkt ein nativer CTA fuer eine Beratung.
-7. Die Beratungsanfrage geht ueber einen eigenen Webhook raus.
-8. Alternativ kann direkt ein Strategiecall ueber Cal.com gebucht werden.
+- `audit_type=growth_audit`
+- `company_website` als Honeypot
+- `started_at` fuer einfaches Frontend-Timing
 
-## Inputs
+## Nutzerseitige Outputs
 
-Pflicht-Input:
+- Erfolgszustand direkt auf der Seite
+- Bestaetigung per E-Mail
+- optionaler Direktpfad zu Cal.com
 
-- Website-URL
+## Systemseitige Outputs
 
-Implizite Inputs aus dem Backend-Contract:
-
-- `jobId` fuer Status-Polling
-- Ergebnis-Payload aus n8n
-
-## Erwartete Output-Struktur aus n8n
-
-Das V3-Zielbild im Repo nutzt diesen Payload-Contract:
-
-| Feld | Bedeutung |
-| --- | --- |
-| `meta.domain` | analysierte Domain |
-| `meta.branche` | erkannte oder gesetzte Branche |
-| `meta.standort` | erkannter oder gesetzter Standort |
-| `verdict` | unmittelbare Diagnose mit Headline und Subline |
-| `highlights[]` | drei schnelle Signal-Karten |
-| `findings[]` | priorisierte Hauptbremsen mit Belegen |
-| `opportunity.rangeMonth` | Potenzial-Spanne pro Monat |
-| `opportunity.rangeYear` | Potenzial-Spanne pro Jahr |
-| `details.sections[]` | Belege aus Markt, Technik, Vertrauen und Conversion |
-| `story` | strategische Einordnung in Textform |
-| `cta` | Beratungs-CTA mit Primary/Secondary-Option |
-
-## Outputs
-
-Nutzerseitige Outputs:
-
-- sichtbare Audit-Auswertung auf der Landingpage
-- CTA in die Beratung
-- optionaler Direkt-Call ueber Cal.com
-
-Systemseitige Outputs:
-
-- `jobId` kann in die Beratungsanfrage uebergeben werden
-- Beratungsdaten koennen spaeter an CRM oder Follow-up-Logik gehen
-
-## CTA-Bridge
-
-Die CTA-Bridge ist bewusst gestuft, aber schlanker als zuvor.
-
-Logik:
-
-- Stufe 1: Erst Diagnose zeigen
-- Stufe 2: dann auf die Grenzen der Schnell-Analyse hinweisen
-- Stufe 3: Beratung als persoenliche Priorisierung anbieten
-- Stufe 4: Direkt-Call nur als Alternative, nicht als erzwungener Standard
-
-Das ist fachlich richtig, weil:
-
-- die Diagnose Interesse und Vertrauen erzeugt
-- die Beratung echte Qualifizierung bringt
-- ein Call ohne Kontext zu frueh waere
+- WordPress-CPT-Eintrag `nexus_review_request`
+- Metadaten zu Seite, Kontakt, Audit-Typ und Status
+- interne Benachrichtigungs-Mail
+- Bestaetigungs-Mail an den Lead
 
 ## Repo-Touchpoints
 
 - `blocksy-child/page-audit.php`
-- `blocksy-child/assets/js/audit-live.js`
+- `blocksy-child/inc/audit-page.php`
+- `blocksy-child/template-parts/audit-page-shell.php`
+- `blocksy-child/assets/js/review-funnel.js`
+- `blocksy-child/assets/js/audit.js`
+- `blocksy-child/inc/review-crm.php`
+- `blocksy-child/inc/enqueue.php`
 - `blocksy-child/assets/css/audit.css`
+- `blocksy-child/assets/css/review-funnel.css`
+- `blocksy-child/inc/seo-meta.php`
+- `blocksy-child/inc/org-schema.php`
+
+## Externe Abhaengigkeiten
+
+- WordPress REST API
+- `wp_mail` / spaeter SMTP oder Mail-Bridge
+- Cal.com
+
+Optional, aber aktuell nicht aktiv im aktiven Landing-Flow:
+
+- n8n Cloud
+- `audit-live.js`
+- Webhooks `audit`, `audit-status`, `audit-consultation`
+
+## Nicht aktiver Repo-Layer
+
+Im Repo liegt weiterhin ein vorbereiteter Instant-Results-Pfad:
+
+- `blocksy-child/assets/js/audit-live.js`
 - `blocksy-child/assets/css/audit-results.css`
-- `automations/n8n/workflows/audit-funnel__instant-results__target.json`
-- `automations/n8n/data-models/audit-frontend-payload.v3.contract.json`
-- `docs/systems/audit-page-editor-layer.md`
-- `docs/references/audit-page-editor-snippet-v3.html`
+- `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`
 
-## Abhaengigkeiten
-
-- n8n Cloud Webhooks
-- nativer Beratungs-CTA im Frontend
-- Brevo SMTP oder CRM-Weiterleitung fuer Beratungsanfragen
-- Cal.com fuer direkte Termine
-- WordPress-Editor fuer den eigentlichen Audit-Page-Content
+Dieser Layer ist fachlich weiter relevant, aber derzeit nicht die aktive Landingpage-Logik.
 
 ## Risiken
 
-- Die kritische Backend-Logik ist jetzt versioniert, aber noch nicht sauber in Analyse-, Delivery- und Fehlerpfade getrennt.
-- Der V2-Workflow im Repo behebt den bisherigen Contract-Bruch zwischen URL-only-Start und n8n-Validierung, ist aber erst nach Import in die Live-n8n-Instanz wirksam.
-- Die Webhook-URLs sind trotz Localize-Config weiterhin externe Abhaengigkeiten.
-- Es gibt keinen im Repo dokumentierten Fallback fuer n8n-Ausfall ausser Timeout und Fehlermeldung.
-- Der Live-Workflow ist noch nicht auf den V3-Contract umgestellt.
-- Der funktionale Audit-Seitenrahmen lebt teilweise im WordPress-Editor und liegt damit ausserhalb des eigentlichen Deploy-Pfads.
-- CRM-, Mail- und Follow-up-Logik sind im Repo nicht nachvollziehbar.
-- Revenue-Gap-Berechnung arbeitet mit Annahmen, die transparent dokumentiert werden muessen.
-- Der Funnel haengt an mehreren externen Systemen, deren Live-Status hier nicht geprueft werden kann.
+- Mail-Versand haengt aktuell an `wp_mail`; SMTP/Brevo ist noch nicht hinterlegt.
+- Der Post-Type-Slug `nexus_review_request` ist historisch und fachlich inzwischen breiter als nur `Review`.
+- Der Instant-Results-Layer und der aktive 48h-Intake leben parallel im Repo und muessen bewusst getrennt bleiben.
+- CRM- und Follow-up-Logik endet aktuell im WordPress-Backend; externes Routing ist noch nicht versioniert.
 
-## Aktuelle Einstufung
+## Naechste sinnvolle Schritte
 
-- Frontend-Strecke: live-tauglich
-- Gesamtsystem als Repo-Source-of-Truth: refactor-beduerftig
-
-Begruendung:
-
-- Der sichtbare Funnel ist klar und conversion-logisch sauber.
-- Der Workflow ist jetzt versioniert, aber noch nicht konsistent genug fuer ein sauberes Operating System.
-
-## Verbesserungslogik
-
-- weitere n8n-Workflows exportieren und unter `automations/n8n/workflows/` versionieren.
-- Fuer jeden Workflow eine Doku mit Trigger, Business-Logik, Datenlogik, Delivery-Logik und Risiken anlegen.
-- Webhook-URLs ueber Theme-Konfiguration und nicht nur ueber Defaults steuern.
-- Den V3-Payload-Contract zum Live-Standard machen.
-- Fail-States definieren: n8n down, leere Ergebnisse, Teilfehler, langsame Analyse, doppelter Submit.
-- CRM- und Follow-up-Uebergabe dokumentieren.
-- Status- und Conversion-Events im Tracking-Layer sauber abbilden.
+1. SMTP/Brevo fuer zuverlaessigen Versand anschliessen.
+2. Audit-CRM um Follow-up-Felder und Delivery-Templates erweitern.
+3. Entscheiden, ob `audit-live.js` spaeter den aktiven Intake ersetzt oder ein separater Angebotszweig bleibt.

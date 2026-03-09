@@ -1,6 +1,6 @@
 /**
  * AUDIT PAGE JS
- * Seitenspezifische Logik für die Startseiten-Review Landing Page.
+ * Seitenspezifische Logik fuer die Growth-Audit-Landingpage.
  * NexusCore übernimmt: ScrollSpy, FAQ-Accordion, SmoothScroll, Reveal.
  * Dieses Skript ergänzt: Smart-Nav Sichtbarkeit, FAQ-Schema (SEO).
  */

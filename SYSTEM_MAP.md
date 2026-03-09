@@ -1,13 +1,13 @@
 # System Map
 
-Stand: 2026-03-07. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-03-09. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
 | System | Zweck | Repo-Orte | Externe Abhaengigkeiten | Status |
 | --- | --- | --- | --- | --- |
 | Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/deploy.yml` | WordPress, Blocksy Parent Theme, ACF, Rank Math | live |
-| Audit-Funnel | Diagnose-Einstieg, Live-Analyse, Deep-Dive-Qualifizierung | `blocksy-child/page-audit.php`, `blocksy-child/assets/js/audit-live.js`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | n8n Cloud, Fluent Forms, Cal.com | live-nah, aber backend-seitig unversioniert |
+| Audit-Funnel | Diagnose-Einstieg, Audit-Intake, Blueprint-Qualifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
 | Tracking | Tracking-ready Markup, CTA-Events, SEO-/Schema-Layer | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, Templates mit `data-track-*` | GTM, sGTM, GA4, Consent Mode v2, Meta CAPI | teils im Repo, teils extern |
 | CTA- und Leadflow | CTA-Hierarchie vom ersten Besuch bis zur Qualifizierung | `blocksy-child/inc/shortcodes.php`, `blocksy-child/template-parts/footer-cta.php`, `blocksy-child/template-parts/trust-section.php`, Service-Templates | WordPress-Editor, Audit-Funnel, Cal.com, CRM | live |
 | Content- und SEO-System | Blog, Pillar-Hubs, Cornerstone-Content, interne Verlinkung | `blocksy-child/category.php`, `blocksy-child/single.php`, `blocksy-child/page-seo-cornerstone.php`, `content/blog-drafts/` | WordPress-Editor, Rank Math | live plus Ausbau |
@@ -38,7 +38,7 @@ Kritische Dateien:
 
 Im Repo liegen aktuell noch keine exportierten n8n-Workflows. Die Rolle von n8n ist aber bereits sichtbar:
 
-- Audit-Analyse und Status-Polling fuer den Customer Journey Audit
+- versionierter Instant-Results-Layer fuer den Growth Audit
 - kuenftiges Lead-Routing und Nurture
 - Reporting- oder CRM-Bridges, die in Texten und Angebotslogik bereits angedeutet werden
 
@@ -66,12 +66,12 @@ Der Audit-Funnel ist der Primaer-CTA des Systems.
 Aktuelle Logik:
 
 1. Besucher kommen ueber Homepage, WGOS, Service-Seiten, Blog oder Kategorie-Hubs.
-2. Primaerer CTA fuehrt in den `Customer Journey Audit`.
-3. `audit-live.js` sendet die URL an n8n und pollt den Status.
-4. Das Frontend rendert Ergebnis, Revenue-Gap, Story und Bridge-CTA.
-5. Optionaler E-Mail-Capture.
-6. Danach folgt der `360° Deep-Dive` als zweiter Qualifizierungsschritt.
-7. Alternative direkte Eskalation: `Cal.com`-Call.
+2. Primaerer CTA fuehrt in den `Growth Audit`.
+3. Die aktive Landingpage sammelt Seite plus Kontext ueber ein natives Multi-Step-Formular.
+4. WordPress speichert die Anfrage direkt im internen Audit-CRM und versendet Benachrichtigungen ueber `wp_mail`.
+5. Danach folgt der `Growth Blueprint` als zweiter Qualifizierungsschritt.
+6. Alternative direkte Eskalation: `Cal.com`-Call.
+7. `audit-live.js` bleibt als vorbereiteter Instant-Results-Layer im Repo, ist aber nicht der aktive Default-Flow.
 
 ## Tracking
 
@@ -100,9 +100,9 @@ Systemische Grenze:
 
 Die CTA-Hierarchie ist klar und sollte nicht verwischt werden.
 
-- Primaerer CTA: `Customer Journey Audit`
+- Primaerer CTA: `Growth Audit`
 - Sekundaerer CTA: `WGOS verstehen`, `Case Studies ansehen`
-- Tertiaerer CTA: `360° Deep-Dive`
+- Tertiaerer CTA: `Growth Blueprint`
 - Eskalations-CTA: `Cal.com`-Strategiecall
 - Utility-CTA: Kunden-Portal fuer Bestandskunden
 
@@ -131,7 +131,7 @@ Risiko:
 
 ## Systemabhaengigkeiten
 
-- Website -> CTA-Layer -> Audit-Funnel -> Deep-Dive -> CRM / Sales
+- Website -> CTA-Layer -> Growth Audit -> Growth Blueprint -> CRM / Sales
 - Website -> Tracking-Layer -> GTM / GA4 / Consent -> Reporting / Optimierung
 - Blog / SEO -> interne Verlinkung -> Service-Seiten / Audit -> Leadflow
 - WordPress-Editor -> Theme-Struktur -> Live-Seiten
@@ -139,17 +139,17 @@ Risiko:
 
 ## Kritische Abhaengigkeiten
 
-- WordPress Block-Editor fuer nicht versionierten Live-Content
+- WordPress Block-Editor fuer editorgetriebene Seiten ausserhalb des Audit-Shells
 - ACF fuer SEO- und Content-Fallbacks
 - Rank Math fuer SEO-Meta und Sitemaps
 - Fluent Forms fuer den Deep-Dive
-- n8n Cloud fuer Audit-Analyse
+- n8n Cloud fuer den optionalen Instant-Results-Audit
 - Cal.com fuer direkte Gespraechsbuchung
 - SSH-Deploy auf Basis von `blocksy-child/`
 
 ## Groesste Risiken
 
 - `page-wgos.php` ist fachlich wichtig, aber technisch ein Layer-Verstoss durch stark hardcodierten Content.
-- `audit-live.js` haengt an harten Webhook-URLs und an einem impliziten n8n-Payload-Contract.
+- `audit-live.js` haengt an harten Webhook-URLs und an einem impliziten n8n-Payload-Contract, solange der Instant-Results-Flow nicht voll aktiviert ist.
 - Tracking-, Consent- und CRM-Logik sind operativ relevant, aber noch nicht als Repo-System dokumentiert.
 - Manuelle WordPress-Admin-Schritte existieren noch als Betriebswissen und muessen weiter systematisiert werden.

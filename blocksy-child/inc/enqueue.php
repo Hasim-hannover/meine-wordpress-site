@@ -119,7 +119,7 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-wgos-mindmap-v2-js', 'wgos-mindmap-v2.js', [ 'nexus-wgos-js' ] );
 	}
 
-	// ── H) Template: Startseiten-Review Funnel ────────────────────
+	// ── H) Template: Growth Audit Funnel ──────────────────────────
 	if ( nexus_is_audit_page() ) {
 		hu_enqueue_css( 'nexus-audit-css', 'audit.css', [ 'nexus-design-system' ] );
 		hu_enqueue_css( 'nexus-review-funnel-css', 'review-funnel.css', [ 'nexus-audit-css' ] );
@@ -129,9 +129,10 @@ function hu_enqueue_assets() {
 			'nexus-review-funnel-js',
 			'NexusReviewConfig',
 			[
-				'restEndpoint' => esc_url_raw( rest_url( 'nexus/v1/review-request' ) ),
-				'callUrl'      => esc_url_raw( apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' ) ),
-				'responseHours'=> 48,
+				'restEndpoint'  => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
+				'callUrl'       => esc_url_raw( apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' ) ) ),
+				'responseHours' => 48,
+				'auditLabel'    => 'Growth Audit',
 			]
 		);
 	}

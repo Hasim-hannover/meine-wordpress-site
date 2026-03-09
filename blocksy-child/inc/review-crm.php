@@ -1,6 +1,6 @@
 <?php
 /**
- * Review CRM and intake funnel for the Startseiten-Review.
+ * Audit CRM and intake funnel for the Growth Audit.
  *
  * @package Blocksy_Child
  */
@@ -45,9 +45,46 @@ function nexus_get_review_issue_options() {
 	return [
 		'too_few_inquiries' => 'Zu wenig qualifizierte Anfragen',
 		'weak_message'      => 'Das Seitenversprechen ist zu unscharf',
+		'weak_proof'        => 'Proof und Vertrauen greifen zu spaet',
 		'weak_conversion'   => 'Die Seite fuehrt nicht sauber zur Anfrage',
-		'second_opinion'    => 'Ich will eine zweite strategische Meinung',
+		'second_opinion'    => 'Ich brauche eine zweite strategische Einordnung',
 	];
+}
+
+/**
+ * Return the supported audit request types.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_audit_request_type_options() {
+	return [
+		'growth_audit'     => 'Growth Audit',
+		'growth_blueprint' => 'Growth Blueprint',
+		'implementation'   => 'Umsetzung / Retainer',
+	];
+}
+
+/**
+ * Resolve the public calendar URL for audit-related flows.
+ *
+ * @return string
+ */
+function nexus_get_audit_calendar_url() {
+	return (string) apply_filters(
+		'nexus_audit_calendar_url',
+		apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' )
+	);
+}
+
+/**
+ * Resolve the internal notification recipient for audit requests.
+ *
+ * @return string
+ */
+function nexus_get_audit_notification_email() {
+	$default = (string) apply_filters( 'nexus_review_notification_email', get_option( 'admin_email' ) );
+
+	return (string) apply_filters( 'nexus_audit_notification_email', $default );
 }
 
 /**
@@ -60,19 +97,19 @@ function nexus_register_review_request_post_type() {
 		'nexus_review_request',
 		[
 			'labels' => [
-				'name'               => 'Review-Anfragen',
-				'singular_name'      => 'Review-Anfrage',
-				'menu_name'          => 'Review-Anfragen',
-				'name_admin_bar'     => 'Review-Anfrage',
+				'name'               => 'Audit-Anfragen',
+				'singular_name'      => 'Audit-Anfrage',
+				'menu_name'          => 'Audit-Anfragen',
+				'name_admin_bar'     => 'Audit-Anfrage',
 				'add_new'            => 'Neu',
-				'add_new_item'       => 'Neue Review-Anfrage',
-				'edit_item'          => 'Review-Anfrage bearbeiten',
-				'new_item'           => 'Neue Review-Anfrage',
-				'view_item'          => 'Review-Anfrage ansehen',
-				'search_items'       => 'Review-Anfragen suchen',
-				'not_found'          => 'Keine Review-Anfragen gefunden.',
-				'not_found_in_trash' => 'Keine Review-Anfragen im Papierkorb.',
-				'all_items'          => 'Alle Review-Anfragen',
+				'add_new_item'       => 'Neue Audit-Anfrage',
+				'edit_item'          => 'Audit-Anfrage bearbeiten',
+				'new_item'           => 'Neue Audit-Anfrage',
+				'view_item'          => 'Audit-Anfrage ansehen',
+				'search_items'       => 'Audit-Anfragen suchen',
+				'not_found'          => 'Keine Audit-Anfragen gefunden.',
+				'not_found_in_trash' => 'Keine Audit-Anfragen im Papierkorb.',
+				'all_items'          => 'Alle Audit-Anfragen',
 			],
 			'public'              => false,
 			'publicly_queryable'  => false,
@@ -99,8 +136,8 @@ add_action( 'init', 'nexus_register_review_request_post_type' );
  */
 function nexus_register_review_crm_menu() {
 	add_menu_page(
-		'Review CRM',
-		'Review CRM',
+		'Audit CRM',
+		'Audit CRM',
 		'edit_pages',
 		'nexus-review-crm',
 		'nexus_render_review_crm_dashboard',
@@ -110,7 +147,7 @@ function nexus_register_review_crm_menu() {
 
 	add_submenu_page(
 		'nexus-review-crm',
-		'CRM Dashboard',
+		'Audit CRM',
 		'Dashboard',
 		'edit_pages',
 		'nexus-review-crm',
@@ -157,15 +194,22 @@ add_action( 'admin_enqueue_scripts', 'nexus_enqueue_review_crm_admin_assets' );
  * @return void
  */
 function nexus_register_review_crm_rest_routes() {
-	register_rest_route(
-		'nexus/v1',
+	$routes = [
+		'/audit-request',
 		'/review-request',
-		[
-			'methods'             => WP_REST_Server::CREATABLE,
-			'callback'            => 'nexus_handle_review_request_submission',
-			'permission_callback' => '__return_true',
-		]
-	);
+	];
+
+	foreach ( $routes as $route ) {
+		register_rest_route(
+			'nexus/v1',
+			$route,
+			[
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => 'nexus_handle_review_request_submission',
+				'permission_callback' => '__return_true',
+			]
+		);
+	}
 }
 add_action( 'rest_api_init', 'nexus_register_review_crm_rest_routes' );
 
@@ -230,12 +274,16 @@ function nexus_handle_review_request_submission( WP_REST_Request $request ) {
 
 	return new WP_REST_Response(
 		[
-			'ok'         => true,
-			'requestId'  => $post_id,
-			'message'    => 'Ihre Anfrage fuer den kostenlosen Startseiten-Review ist eingegangen. Sie erhalten innerhalb von 48 Stunden eine persoenliche Rueckmeldung.',
-			'editUrl'    => get_edit_post_link( $post_id, 'raw' ),
-			'status'     => 'received',
-			'statusLabel'=> 'Neu',
+			'ok'          => true,
+			'requestId'   => $post_id,
+			'message'     => sprintf(
+				'Ihre Anfrage fuer den %s ist eingegangen. Sie erhalten innerhalb von 48 Stunden eine persoenliche Rueckmeldung.',
+				$validated['audit_type_label']
+			),
+			'editUrl'     => get_edit_post_link( $post_id, 'raw' ),
+			'status'      => 'received',
+			'statusLabel' => 'Neu',
+			'auditType'   => $validated['audit_type'],
 		],
 		201
 	);
@@ -248,6 +296,8 @@ function nexus_handle_review_request_submission( WP_REST_Request $request ) {
  * @return array|WP_Error
  */
 function nexus_validate_review_request_payload( $payload ) {
+	$type_options  = nexus_get_audit_request_type_options();
+	$audit_type    = isset( $payload['audit_type'] ) ? sanitize_key( (string) $payload['audit_type'] ) : 'growth_audit';
 	$page_url      = isset( $payload['page_url'] ) ? trim( (string) $payload['page_url'] ) : '';
 	$offer         = isset( $payload['offer'] ) ? sanitize_textarea_field( (string) $payload['offer'] ) : '';
 	$audience      = isset( $payload['audience'] ) ? sanitize_textarea_field( (string) $payload['audience'] ) : '';
@@ -296,7 +346,13 @@ function nexus_validate_review_request_payload( $payload ) {
 		return new WP_Error( 'missing_company', 'Bitte den Unternehmensnamen angeben.' );
 	}
 
+	if ( empty( $audit_type ) || ! isset( $type_options[ $audit_type ] ) ) {
+		$audit_type = 'growth_audit';
+	}
+
 	return [
+		'audit_type'         => $audit_type,
+		'audit_type_label'   => $type_options[ $audit_type ],
 		'page_url'          => $page_url,
 		'domain'            => (string) wp_parse_url( $page_url, PHP_URL_HOST ),
 		'offer'             => $offer,
@@ -342,6 +398,8 @@ function nexus_create_review_request_post( $payload ) {
 	update_post_meta( $post_id, '_nexus_review_status', 'new' );
 	update_post_meta( $post_id, '_nexus_review_priority', 'normal' );
 	update_post_meta( $post_id, '_nexus_review_due_at', $now + ( 48 * HOUR_IN_SECONDS ) );
+	update_post_meta( $post_id, '_nexus_review_audit_type', $payload['audit_type'] );
+	update_post_meta( $post_id, '_nexus_review_audit_type_label', $payload['audit_type_label'] );
 	update_post_meta( $post_id, '_nexus_review_page_url', $payload['page_url'] );
 	update_post_meta( $post_id, '_nexus_review_domain', $payload['domain'] );
 	update_post_meta( $post_id, '_nexus_review_offer', $payload['offer'] );
@@ -352,7 +410,7 @@ function nexus_create_review_request_post( $payload ) {
 	update_post_meta( $post_id, '_nexus_review_name', $payload['name'] );
 	update_post_meta( $post_id, '_nexus_review_email', $payload['email'] );
 	update_post_meta( $post_id, '_nexus_review_company', $payload['company'] );
-	update_post_meta( $post_id, '_nexus_review_source', 'startseiten_review_funnel' );
+	update_post_meta( $post_id, '_nexus_review_source', 'growth_audit_funnel' );
 
 	return (int) $post_id;
 }
@@ -419,19 +477,21 @@ function nexus_get_review_request_ip() {
  * @return void
  */
 function nexus_send_review_request_admin_notification( $post_id, $payload ) {
-	$recipient = apply_filters( 'nexus_review_notification_email', get_option( 'admin_email' ) );
+	$recipient = nexus_get_audit_notification_email();
 	if ( ! $recipient || ! is_email( $recipient ) ) {
 		return;
 	}
 
 	$subject = sprintf(
-		'[Kostenloser Startseiten-Review] Neue Anfrage - %s',
+		'[%s] Neue Anfrage - %s',
+		$payload['audit_type_label'],
 		$payload['company']
 	);
 
 	$lines = [
-		'Neue Anfrage fuer den kostenlosen Startseiten-Review.',
+		'Neue Anfrage fuer den ' . $payload['audit_type_label'] . '.',
 		'',
+		'Audit-Typ: ' . $payload['audit_type_label'],
 		'Unternehmen: ' . $payload['company'],
 		'Name: ' . $payload['name'],
 		'E-Mail: ' . $payload['email'],
@@ -463,13 +523,13 @@ function nexus_send_review_request_confirmation( $payload ) {
 		return;
 	}
 
-	$calendar_url = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' );
-	$subject      = sprintf( '[%s] Kostenlosen Startseiten-Review erhalten', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
+	$calendar_url = nexus_get_audit_calendar_url();
+	$subject      = sprintf( '[%s] %s angefragt', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ), $payload['audit_type_label'] );
 
 	$lines = [
 		'Hallo ' . $payload['name'] . ',',
 		'',
-		'Ihre Anfrage fuer den kostenlosen Startseiten-Review ist eingegangen.',
+		'Ihre Anfrage fuer den ' . $payload['audit_type_label'] . ' ist eingegangen.',
 		'Ich melde mich innerhalb von 48 Stunden mit einer persoenlichen Einschaetzung zu:',
 		'- den drei staerksten Anfragebremsen',
 		'- der sinnvollsten Prioritaet',
@@ -520,6 +580,7 @@ add_action( 'add_meta_boxes_nexus_review_request', 'nexus_register_review_reques
  * @return void
  */
 function nexus_render_review_request_details_meta_box( $post ) {
+	$audit_type    = (string) get_post_meta( $post->ID, '_nexus_review_audit_type_label', true );
 	$page_url      = (string) get_post_meta( $post->ID, '_nexus_review_page_url', true );
 	$offer         = (string) get_post_meta( $post->ID, '_nexus_review_offer', true );
 	$audience      = (string) get_post_meta( $post->ID, '_nexus_review_audience', true );
@@ -530,6 +591,10 @@ function nexus_render_review_request_details_meta_box( $post ) {
 	$company       = (string) get_post_meta( $post->ID, '_nexus_review_company', true );
 	?>
 	<div class="nexus-review-meta">
+		<div class="nexus-review-meta-group">
+			<strong>Audit-Typ</strong>
+			<p><?php echo esc_html( $audit_type ?: 'Growth Audit' ); ?></p>
+		</div>
 		<div class="nexus-review-meta-group">
 			<strong>Unternehmen</strong>
 			<p><?php echo esc_html( $company ); ?></p>
@@ -607,7 +672,7 @@ function nexus_render_review_request_workflow_meta_box( $post ) {
 		<span><?php echo esc_html( $sent_at ? wp_date( 'd.m.Y H:i', $sent_at ) : 'Noch nicht markiert' ); ?></span>
 	</p>
 	<p>
-		<label for="nexus-review-delivery-url"><strong>Review-Link / Loom</strong></label><br>
+		<label for="nexus-review-delivery-url"><strong>Audit-Link / Loom</strong></label><br>
 		<input id="nexus-review-delivery-url" name="nexus_review_delivery_url" type="url" class="widefat" value="<?php echo esc_attr( $delivery_url ); ?>" placeholder="https://...">
 	</p>
 	<p>
@@ -675,6 +740,7 @@ function nexus_filter_review_request_columns( $columns ) {
 	$columns = [
 		'cb'              => $columns['cb'],
 		'title'           => 'Lead',
+		'audit_type'      => 'Audit',
 		'review_status'   => 'Status',
 		'review_priority' => 'Prioritaet',
 		'review_page'     => 'Seite',
@@ -700,6 +766,10 @@ function nexus_render_review_request_columns( $column, $post_id ) {
 	$priority_options = nexus_get_review_priority_options();
 
 	switch ( $column ) {
+		case 'audit_type':
+			echo esc_html( (string) get_post_meta( $post_id, '_nexus_review_audit_type_label', true ) ?: 'Growth Audit' );
+			break;
+
 		case 'review_status':
 			$status = (string) get_post_meta( $post_id, '_nexus_review_status', true );
 			printf(
@@ -861,8 +931,8 @@ function nexus_render_review_crm_dashboard() {
 	);
 	?>
 	<div class="wrap nexus-review-dashboard">
-		<h1>Review CRM</h1>
-		<p class="nexus-review-dashboard-intro">Hier laufen alle persoenlichen kostenlosen Startseiten-Reviews zusammen. Ziel: Rueckmeldung innerhalb von 48 Stunden.</p>
+		<h1>Audit CRM</h1>
+		<p class="nexus-review-dashboard-intro">Hier laufen alle persoenlichen Audit-Anfragen zusammen. Aktuell vor allem fuer den Growth Audit. Ziel: Rueckmeldung innerhalb von 48 Stunden.</p>
 
 		<div class="nexus-review-stats">
 			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request&nexus_review_status=new' ) ); ?>">
@@ -890,7 +960,7 @@ function nexus_render_review_crm_dashboard() {
 			</div>
 
 			<?php if ( empty( $recent_requests ) ) : ?>
-				<p>Noch keine Review-Anfragen vorhanden.</p>
+				<p>Noch keine Audit-Anfragen vorhanden.</p>
 			<?php else : ?>
 				<table class="widefat fixed striped nexus-review-table">
 					<thead>
@@ -952,7 +1022,7 @@ function nexus_register_review_crm_dashboard_widget() {
 
 	wp_add_dashboard_widget(
 		'nexus_review_crm_dashboard_widget',
-		'Review CRM Snapshot',
+		'Audit CRM Snapshot',
 		'nexus_render_review_crm_dashboard_widget'
 	);
 }
@@ -988,9 +1058,9 @@ function nexus_render_review_crm_dashboard_widget() {
 			$company = (string) get_post_meta( $latest->ID, '_nexus_review_company', true );
 			$page_url = (string) get_post_meta( $latest->ID, '_nexus_review_page_url', true );
 			?>
-			<p><strong>Letzte Anfrage:</strong> <?php echo esc_html( $company ); ?><br><a href="<?php echo esc_url( $page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $page_url ); ?></a></p>
+			<p><strong>Letzte Audit-Anfrage:</strong> <?php echo esc_html( $company ); ?><br><a href="<?php echo esc_url( $page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $page_url ); ?></a></p>
 		<?php endif; ?>
-		<p><a class="button button-secondary" href="<?php echo esc_url( admin_url( 'admin.php?page=nexus-review-crm' ) ); ?>">Zum CRM</a></p>
+		<p><a class="button button-secondary" href="<?php echo esc_url( admin_url( 'admin.php?page=nexus-review-crm' ) ); ?>">Zum Audit CRM</a></p>
 	</div>
 	<?php
 }

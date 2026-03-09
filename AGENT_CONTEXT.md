@@ -34,8 +34,8 @@ Typisches Idealprofil:
 
 ## Hauptangebote
 
-- `Customer Journey Audit` als niederschwelliger Diagnose-Einstieg
-- `360° Deep-Dive` als qualifizierter zweiter Schritt
+- `Growth Audit` als niederschwelliger Diagnose-Einstieg
+- `Growth Blueprint` als qualifizierter zweiter Schritt
 - `WGOS` als Retainer- und Systemangebot
 - Service-Landings fuer SEO, Core Web Vitals, GA4/Tracking, CRO, Performance Marketing, WordPress Agentur
 - Case Studies und Cornerstone-Content als Vertrauens- und Proof-Layer
@@ -43,9 +43,9 @@ Typisches Idealprofil:
 ## Funnel-Logik
 
 1. Aufmerksamkeit ueber SEO, Content, Service-Seiten, WGOS und Cases.
-2. Primaer-CTA fast immer in den `Customer Journey Audit`.
-3. Live-Diagnose oder Analyseversprechen erzeugen Relevanz statt Verkaufsdruck.
-4. `360° Deep-Dive` qualifiziert weiter und macht Ursachen sichtbar.
+2. Primaer-CTA fast immer in den `Growth Audit`.
+3. Der Audit sammelt Seite plus Kontext ein und liefert persoenliche Priorisierung statt Sales-Druck.
+4. `Growth Blueprint` qualifiziert weiter und macht Ursachen sichtbar.
 5. Erst danach folgen Call, Angebot oder Retainer.
 
 Wichtige Regel:
@@ -90,7 +90,9 @@ Wichtige Regel:
 | `blocksy-child/inc/seo-meta.php` | steuert Meta-, Canonical- und noindex-Logik |
 | `blocksy-child/inc/org-schema.php` | zentrale strukturierte Daten fuer Organisation und Services |
 | `blocksy-child/inc/shortcodes.php` | traegt grosse Teile der Homepage- und CTA-Logik |
-| `blocksy-child/assets/js/audit-live.js` | technischer Kern des Audit-Funnels und wichtigste n8n-Bruecke |
+| `blocksy-child/assets/js/review-funnel.js` | technischer Kern des aktiven Growth-Audit-Formularpfads |
+| `blocksy-child/inc/review-crm.php` | nativer Audit-Intake, internes CRM und Mail-Basis |
+| `blocksy-child/assets/js/audit-live.js` | versionierter Instant-Results-Layer, aktuell nicht am aktiven Audit-Shell gebunden |
 | `blocksy-child/page-wgos.php` | fachlich zentrales Offer-Template, technisch refactor-beduerftig |
 | `blocksy-child/page-seo-cornerstone.php` | strategischer Longform-Content mit direkter Funnel-Rolle |
 | `.github/workflows/deploy.yml` | deployt nur `blocksy-child/` live |
