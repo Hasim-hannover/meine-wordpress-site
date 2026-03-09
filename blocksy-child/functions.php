@@ -67,8 +67,37 @@ add_action( 'wp_head', function () {
 	);
 
 	// Footer Background Fix
-	echo '<style>.ft { background: #0a0a0a; }</style>' . "\n";
+	echo '<style>.ft { background: var(--bg, #0a0a0a); }</style>' . "\n";
 }, 5 );
+
+add_action(
+	'wp_head',
+	function () {
+		?>
+		<script>
+		(function () {
+			var storageKey = 'nexus-theme-mode';
+			var theme = 'dark';
+
+			try {
+				var storedTheme = window.localStorage.getItem(storageKey);
+				if (storedTheme === 'light' || storedTheme === 'dark') {
+					theme = storedTheme;
+				} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+					theme = 'light';
+				}
+			} catch (error) {
+				theme = 'dark';
+			}
+
+			document.documentElement.setAttribute('data-nx-theme', theme);
+			document.documentElement.style.colorScheme = theme;
+		})();
+		</script>
+		<?php
+	},
+	1
+);
 
 // ── 3. BLOCKSY TITLE OVERRIDE ────────────────────────────────────
 add_filter( 'blocksy:post_types:post:has_page_title', '__return_false' );
@@ -89,6 +118,25 @@ add_action( 'after_switch_theme', function() {
 add_action( 'wp_body_open', 'hasim_skip_to_content' );
 function hasim_skip_to_content() {
 	echo '<a href="#main" class="skip-to-content" style="position:absolute;top:-100px;left:16px;background:#D4AF37;color:#000;padding:8px 16px;border-radius:4px;font-weight:700;font-size:13px;z-index:99999;text-decoration:none;transition:top 0.2s;" onfocus="this.style.top=\'16px\'" onblur="this.style.top=\'-100px\'">Zum Hauptinhalt springen</a>';
+}
+
+add_action( 'wp_body_open', 'nexus_render_theme_toggle', 15 );
+function nexus_render_theme_toggle() {
+	?>
+	<div class="nx-theme-toggle" data-nx-theme-toggle>
+		<span class="nx-theme-toggle__label"><?php esc_html_e( 'Ansicht', 'blocksy-child' ); ?></span>
+		<div class="nx-theme-toggle__group" role="group" aria-label="<?php esc_attr_e( 'Farbschema waehlen', 'blocksy-child' ); ?>">
+			<button type="button" class="nx-theme-toggle__button" data-theme-value="dark" aria-pressed="false">
+				<span class="nx-theme-toggle__icon" aria-hidden="true">D</span>
+				<span><?php esc_html_e( 'Dunkel', 'blocksy-child' ); ?></span>
+			</button>
+			<button type="button" class="nx-theme-toggle__button" data-theme-value="light" aria-pressed="false">
+				<span class="nx-theme-toggle__icon" aria-hidden="true">H</span>
+				<span><?php esc_html_e( 'Hell', 'blocksy-child' ); ?></span>
+			</button>
+		</div>
+	</div>
+	<?php
 }
 
 /**

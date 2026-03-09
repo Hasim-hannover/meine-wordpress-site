@@ -114,18 +114,18 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     letter-spacing: 0.03em;
     text-transform: none;
-    color: rgba(255,255,255,0.7);
+    color: color-mix(in srgb, var(--nx-text) 70%, transparent);
     transition: color 0.2s ease;
 }
 .ct-header .ct-menu > li > a:hover,
 .ct-header .ct-menu > li.current-menu-item > a {
-    color: #fff;
+    color: var(--nx-text);
 }
 
 /* Aktiver Menüpunkt: Gold-Unterstrich */
 .ct-header .ct-menu > li.current-menu-item > a,
 .ct-header .ct-menu > li.current-menu-ancestor > a {
-    color: #fff;
+    color: var(--nx-text);
     box-shadow: inset 0 -2px 0 var(--hasim-audit-orange);
 }
 
@@ -150,7 +150,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 1.5px solid rgba(201, 154, 87, 0.55);
     border-radius: 999px;
     color: var(--hasim-audit-orange) !important;
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--nx-bg-glass-light);
     font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -282,9 +282,9 @@ p.hero-stack,
     position: fixed !important;
     top: 90px !important; 
     
-    background-color: #0a0a0a !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.8) !important;
+    background-color: var(--nx-bg-deep) !important;
+    border: 1px solid var(--nx-border) !important;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.32) !important;
     border-radius: 12px;
     padding: 40px;
     gap: 30px;
@@ -300,7 +300,7 @@ p.hero-stack,
     color: #ffb020;
     margin-bottom: 15px;
     display: block;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid var(--nx-border);
     padding-bottom: 8px;
     
     /* NEXUS FIX: Vorher stand hier 'none'. Jetzt 'auto', damit man klicken kann! */
@@ -320,7 +320,7 @@ p.hero-stack,
 }
 
 .ct-header .menu-item.mega .sub-menu .sub-menu li a {
-    color: #a0a0a0;
+    color: var(--nx-text-dim);
     font-size: 15px;
     font-weight: 500;
     padding-left: 0;
@@ -1662,6 +1662,9 @@ button:focus {
   border: 0;
 }
 
+
+
+
 /* ═══════════════════════════════════════════
    HOMEPAGE FIXES – Shortcode-Kompatibilität
    (Startseite rendert via inc/shortcodes.php)
@@ -1860,4 +1863,125 @@ section.blog-preview,
   clip: rect(0,0,0,0);
   white-space: nowrap;
   border: 0;
+}
+
+:root[data-nx-theme='light'] .ct-header.nexus-flight-mode {
+  background: rgba(255, 251, 245, 0.9);
+  border-bottom: 1px solid var(--nx-border);
+  box-shadow: var(--nx-shadow-sm);
+}
+
+:root[data-nx-theme='light'] .ct-header .menu-item.mega > .sub-menu {
+  box-shadow: 0 40px 80px rgba(92, 72, 40, 0.14) !important;
+}
+
+:root[data-nx-theme='light'] .ct-header .menu-item.mega .sub-menu .sub-menu li a:hover {
+  color: var(--nx-text);
+}
+
+:root[data-nx-theme='light'] .ft {
+  --bg: #f7f1e7;
+  --fg: #17202b;
+  --line: rgba(24, 32, 40, 0.1);
+  --muted: rgba(24, 32, 40, 0.58);
+  --cta: var(--nx-gold);
+}
+
+:root[data-nx-theme='light'] .ft__portal {
+  border-color: rgba(201, 154, 87, 0.32);
+  background: rgba(201, 154, 87, 0.12);
+}
+
+:root[data-nx-theme='light'] .nexus-single-container,
+:root[data-nx-theme='light'] .nexus-archive-container {
+  background: var(--nx-body-gradient);
+  color: var(--nx-text);
+}
+
+:root[data-nx-theme='light'] .nexus-article-hero,
+:root[data-nx-theme='light'] .nexus-archive-hero,
+:root[data-nx-theme='light'] .nexus-hero-footer {
+  border-bottom-color: var(--nx-border);
+  border-top-color: var(--nx-border);
+}
+
+:root[data-nx-theme='light'] .nexus-archive-hero {
+  background: linear-gradient(to bottom, #fbf7f1 0%, #f1e9dc 100%);
+}
+
+:root[data-nx-theme='light'] .nexus-meta-top,
+:root[data-nx-theme='light'] .nexus-author-info .by,
+:root[data-nx-theme='light'] .nexus-post-footer-cta p,
+:root[data-nx-theme='light'] .nexus-archive-desc,
+:root[data-nx-theme='light'] .nexus-card-date,
+:root[data-nx-theme='light'] .nexus-card-excerpt,
+:root[data-nx-theme='light'] .share-label,
+:root[data-nx-theme='light'] .nexus-reading-time,
+:root[data-nx-theme='light'] .micro-cta-link,
+:root[data-nx-theme='light'] .wp-block-table::before,
+:root[data-nx-theme='light'] .wgos-table-wrap::before {
+  color: var(--nx-text-dim) !important;
+}
+
+:root[data-nx-theme='light'] .nexus-title,
+:root[data-nx-theme='light'] .nexus-author-info .name,
+:root[data-nx-theme='light'] .nexus-article-content h2,
+:root[data-nx-theme='light'] .nexus-article-content h3,
+:root[data-nx-theme='light'] .nexus-post-footer-cta h3,
+:root[data-nx-theme='light'] .nexus-card-title,
+:root[data-nx-theme='light'] .nexus-pagination .page-numbers {
+  color: var(--nx-text) !important;
+}
+
+:root[data-nx-theme='light'] .nexus-author-row img {
+  border-color: var(--nx-border);
+}
+
+:root[data-nx-theme='light'] .nexus-article-content {
+  color: var(--nx-text-secondary);
+}
+
+:root[data-nx-theme='light'] .nexus-post-footer-cta,
+:root[data-nx-theme='light'] .nexus-card,
+:root[data-nx-theme='light'] .selection-card,
+:root[data-nx-theme='light'] .nexus-share-btn,
+:root[data-nx-theme='light'] .nexus-pagination .page-numbers {
+  background: var(--nx-card-gradient);
+  border-color: var(--nx-border) !important;
+  box-shadow: var(--nx-shadow-sm);
+}
+
+:root[data-nx-theme='light'] body.home .hero-cta-secondary,
+:root[data-nx-theme='light'] body.home .wp-block-buttons .wp-block-button:last-child .wp-block-button__link,
+:root[data-nx-theme='light'] body.home a[href*="case-studies"].wp-block-button__link,
+:root[data-nx-theme='light'] body.home .wp-hero .wp-btn[href*="case-studies"],
+:root[data-nx-theme='light'] body.home .cs-page #hero a.wp-btn.wp-btn-secondary,
+:root[data-nx-theme='light'] body.home .cs-page #hero a[href*="case-studies"],
+:root[data-nx-theme='light'] .wp-block-buttons .wp-block-button:nth-child(2) .wp-block-button__link,
+:root[data-nx-theme='light'] .hero-cta-secondary .wp-block-button__link,
+:root[data-nx-theme='light'] a.wp-block-button__link[href*="case-studies"] {
+  color: var(--nx-text-dim) !important;
+  border: 1px solid var(--nx-border) !important;
+}
+
+:root[data-nx-theme='light'] body.home .hero-cta-secondary:hover,
+:root[data-nx-theme='light'] body.home .wp-block-buttons .wp-block-button:last-child .wp-block-button__link:hover,
+:root[data-nx-theme='light'] body.home .wp-hero .wp-btn[href*="case-studies"]:hover,
+:root[data-nx-theme='light'] body.home .cs-page #hero a.wp-btn.wp-btn-secondary:hover,
+:root[data-nx-theme='light'] body.home .cs-page #hero a[href*="case-studies"]:hover,
+:root[data-nx-theme='light'] .wp-block-buttons .wp-block-button:nth-child(2) .wp-block-button__link:hover,
+:root[data-nx-theme='light'] a.wp-block-button__link[href*="case-studies"]:hover {
+  border-color: var(--nx-border-hover) !important;
+  color: var(--nx-text) !important;
+}
+
+:root[data-nx-theme='light'] body.home .cs-page #owned .wp-cards > .wp-success-card:first-child,
+:root[data-nx-theme='light'] .modell-a,
+:root[data-nx-theme='light'] [class*="modell-a"],
+:root[data-nx-theme='light'] .model-a {
+  border-color: var(--nx-border) !important;
+}
+
+:root[data-nx-theme='light'] .selection-card-label {
+  color: var(--nx-gold);
 }

@@ -321,6 +321,92 @@
 
 
         /**
+         * 10. THEME TOGGLE
+         * Persistiert Dark/Light-Auswahl und synchronisiert alle Toggle-Buttons.
+         */
+        initThemeToggle: function () {
+            var root = document.documentElement;
+            var buttons = document.querySelectorAll('[data-nx-theme-toggle] [data-theme-value]');
+            var storageKey = 'nexus-theme-mode';
+            var mediaQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
+
+            function resolveTheme() {
+                var storedTheme = null;
+
+                try {
+                    storedTheme = window.localStorage.getItem(storageKey);
+                } catch (error) {
+                    storedTheme = null;
+                }
+
+                if (storedTheme === 'light' || storedTheme === 'dark') {
+                    return storedTheme;
+                }
+
+                if (mediaQuery && mediaQuery.matches) {
+                    return 'light';
+                }
+
+                return 'dark';
+            }
+
+            function syncButtons(theme) {
+                buttons.forEach(function (button) {
+                    var isActive = button.getAttribute('data-theme-value') === theme;
+                    button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                    button.classList.toggle('is-active', isActive);
+                });
+            }
+
+            function applyTheme(theme, persist) {
+                root.setAttribute('data-nx-theme', theme);
+                root.style.colorScheme = theme;
+                syncButtons(theme);
+
+                if (persist) {
+                    try {
+                        window.localStorage.setItem(storageKey, theme);
+                    } catch (error) {
+                        // Storage kann im Privacy-Modus blockiert sein.
+                    }
+                }
+            }
+
+            buttons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    applyTheme(button.getAttribute('data-theme-value'), true);
+                });
+            });
+
+            if (mediaQuery) {
+                var handleSystemThemeChange = function () {
+                    var storedTheme = null;
+
+                    try {
+                        storedTheme = window.localStorage.getItem(storageKey);
+                    } catch (error) {
+                        storedTheme = null;
+                    }
+
+                    if (storedTheme === 'light' || storedTheme === 'dark') {
+                        return;
+                    }
+
+                    applyTheme(mediaQuery.matches ? 'light' : 'dark', false);
+                };
+
+                if (typeof mediaQuery.addEventListener === 'function') {
+                    mediaQuery.addEventListener('change', handleSystemThemeChange);
+                } else if (typeof mediaQuery.addListener === 'function') {
+                    mediaQuery.addListener(handleSystemThemeChange);
+                }
+            }
+
+            applyTheme(resolveTheme(), false);
+        },
+
+
+        /**
          * INIT: Wird auf DOMContentLoaded automatisch aufgerufen.
          * Prüft welche Elemente auf der Seite existieren und initialisiert nur relevante Module.
          */
@@ -332,6 +418,9 @@
             if (document.querySelector('.nx-sidenav')) {
                 this.initScrollSpy('.nx-sidenav', 'section[id]');
             }
+
+            // Theme Toggle
+            this.initThemeToggle();
 
             // Header Flight Mode
             this.initHeaderFlight();

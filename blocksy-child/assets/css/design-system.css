@@ -9,6 +9,8 @@
    1. DESIGN TOKENS (Custom Properties)
    ========================================= */
 :root {
+    color-scheme: dark;
+
     /* --- Farben: Primär --- */
     --nx-gold: #c99a57;
     --nx-gold-hover: #d9b27a;
@@ -23,6 +25,23 @@
     --nx-bg-glass: rgba(28, 38, 47, 0.76);
     --nx-bg-glass-light: rgba(255, 255, 255, 0.05);
     --nx-bg-glass-hover: rgba(255, 255, 255, 0.075);
+    --nx-body-gradient: linear-gradient(180deg, #182028 0%, #12181e 100%);
+    --nx-page-shell-gradient: linear-gradient(180deg, #182028 0%, #12181e 44%, #161d25 100%);
+    --nx-grid-line: rgba(255, 255, 255, 0.014);
+    --nx-grid-mask: rgba(255, 255, 255, 0.68);
+    --nx-floating-surface: rgba(27, 37, 47, 0.72);
+    --nx-floating-surface-hover: rgba(27, 37, 47, 0.92);
+    --nx-card-gradient: linear-gradient(180deg, rgba(33, 45, 56, 0.82), rgba(24, 34, 43, 0.88));
+    --nx-card-gradient-strong: linear-gradient(180deg, rgba(34, 46, 58, 0.84), rgba(24, 33, 43, 0.9));
+    --nx-panel-gradient: linear-gradient(180deg, rgba(30, 41, 52, 0.92), rgba(22, 30, 39, 0.9));
+    --nx-surface-soft: rgba(255, 255, 255, 0.024);
+    --nx-surface-muted: rgba(10, 16, 25, 0.1);
+    --nx-dot-neutral: rgba(255, 255, 255, 0.24);
+    --nx-dot-base: #444;
+    --nx-link-divider: rgba(255, 255, 255, 0.12);
+    --nx-toggle-surface: rgba(18, 24, 30, 0.82);
+    --nx-toggle-border: rgba(255, 255, 255, 0.12);
+    --nx-toggle-shadow: 0 18px 42px rgba(9, 14, 24, 0.22);
 
     /* --- Farben: Text --- */
     --nx-text: #ffffff;
@@ -112,6 +131,51 @@
     --glass-border: var(--nx-border);
 }
 
+:root[data-nx-theme='light'] {
+    color-scheme: light;
+
+    --nx-bg-deep: #efe6d9;
+    --nx-bg: #f7f1e7;
+    --nx-bg-elevated: #fcf7f0;
+    --nx-bg-card: #fffdf9;
+    --nx-bg-glass: rgba(255, 251, 245, 0.82);
+    --nx-bg-glass-light: rgba(24, 32, 40, 0.035);
+    --nx-bg-glass-hover: rgba(24, 32, 40, 0.07);
+    --nx-body-gradient: linear-gradient(180deg, #f7f1e7 0%, #efe6d9 100%);
+    --nx-page-shell-gradient: linear-gradient(180deg, #fbf7f1 0%, #f4ede2 44%, #ebe1d2 100%);
+    --nx-grid-line: rgba(24, 32, 40, 0.04);
+    --nx-grid-mask: rgba(24, 32, 40, 0.18);
+    --nx-floating-surface: rgba(255, 251, 245, 0.88);
+    --nx-floating-surface-hover: rgba(255, 253, 249, 0.96);
+    --nx-card-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 241, 231, 0.96));
+    --nx-card-gradient-strong: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 235, 223, 0.98));
+    --nx-panel-gradient: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(245, 237, 226, 0.96));
+    --nx-surface-soft: rgba(255, 255, 255, 0.46);
+    --nx-surface-muted: rgba(24, 32, 40, 0.045);
+    --nx-dot-neutral: rgba(24, 32, 40, 0.24);
+    --nx-dot-base: rgba(24, 32, 40, 0.34);
+    --nx-link-divider: rgba(24, 32, 40, 0.12);
+    --nx-toggle-surface: rgba(255, 250, 243, 0.9);
+    --nx-toggle-border: rgba(24, 32, 40, 0.1);
+    --nx-toggle-shadow: 0 18px 42px rgba(92, 72, 40, 0.12);
+
+    --nx-text: #17202b;
+    --nx-text-secondary: #324252;
+    --nx-text-muted: #5a6b7b;
+    --nx-text-dim: #7a8897;
+
+    --nx-border: rgba(24, 32, 40, 0.1);
+    --nx-border-hover: rgba(24, 32, 40, 0.18);
+    --nx-border-gold: rgba(201, 154, 87, 0.3);
+
+    --nx-shadow-sm: 0 12px 28px rgba(92, 72, 40, 0.08);
+    --nx-shadow: 0 18px 44px rgba(92, 72, 40, 0.12);
+    --nx-shadow-lg: 0 28px 64px rgba(92, 72, 40, 0.16);
+    --nx-shadow-xl: 0 40px 88px rgba(92, 72, 40, 0.2);
+    --nx-shadow-gold: 0 14px 34px rgba(201, 154, 87, 0.16);
+    --nx-shadow-glow: 0 0 24px rgba(201, 154, 87, 0.16);
+}
+
 
 /* =========================================
    2. CSS RESET & BASE
@@ -123,10 +187,12 @@
 body {
     font-family: var(--nx-font);
     color: var(--nx-text);
-    background: linear-gradient(180deg, var(--nx-bg) 0%, var(--nx-bg-deep) 100%);
+    background: var(--nx-body-gradient);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    transition: background var(--nx-duration) var(--nx-ease),
+                color var(--nx-duration) var(--nx-ease);
 }
 
 
@@ -858,6 +924,103 @@ h1, h2, h3, h4, h5, h6 {
 .mt-lg { margin-top: var(--nx-space-lg); }
 .mt-xl { margin-top: var(--nx-space-xl); }
 .mt-2xl { margin-top: var(--nx-space-2xl); }
+
+
+/* =========================================
+   19. GLOBAL: Theme Toggle
+   ========================================= */
+.nx-theme-toggle {
+    position: fixed;
+    top: 96px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    background: var(--nx-toggle-surface);
+    border: 1px solid var(--nx-toggle-border);
+    box-shadow: var(--nx-toggle-shadow);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+.nx-theme-toggle__label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--nx-text-dim);
+}
+
+.nx-theme-toggle__group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nx-theme-toggle__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--nx-text-dim);
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--nx-duration-fast) var(--nx-ease),
+                border-color var(--nx-duration-fast) var(--nx-ease),
+                color var(--nx-duration-fast) var(--nx-ease),
+                transform var(--nx-duration-fast) var(--nx-ease);
+}
+
+.nx-theme-toggle__button:hover {
+    color: var(--nx-text);
+    background: var(--nx-bg-glass-light);
+}
+
+.nx-theme-toggle__button.is-active {
+    color: var(--nx-text);
+    background: var(--nx-bg-glass-light);
+    border-color: var(--nx-border-gold);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.nx-theme-toggle__button:focus-visible {
+    outline: 2px solid var(--nx-gold);
+    outline-offset: 2px;
+}
+
+.nx-theme-toggle__icon {
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--nx-gold);
+}
+
+@media (max-width: 767px) {
+    .nx-theme-toggle {
+        top: auto;
+        right: 16px;
+        bottom: 16px;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .nx-theme-toggle__label {
+        display: none;
+    }
+
+    .nx-theme-toggle__button {
+        min-height: 40px;
+        padding: 0 12px;
+    }
+}
 .mt-section { margin-top: var(--nx-space-section); }
 
 .mb-sm { margin-bottom: var(--nx-space-sm); }
