@@ -73,6 +73,21 @@
   transform: translateY(-2px);
 }
 
+.nexus-footer-cta__legal {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 1.1rem;
+  color: var(--nx-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.nexus-footer-cta__legal a {
+  color: var(--nx-text, #fff);
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
 .nexus-footer-cta .trust-section {
   position: relative;
   z-index: 1;

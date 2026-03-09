@@ -27,6 +27,8 @@ $text        = get_query_var( 'cta_text', __( 'Der Audit zeigt, wo Sichtbarkeit,
 $url         = get_query_var( 'cta_url', nexus_get_audit_url() );
 $button_text = get_query_var( 'cta_button_text', __( 'Audit starten', 'blocksy-child' ) );
 $action      = get_query_var( 'cta_action', 'cta_footer_audit' );
+$imprint_url = nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) );
+$privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
 ?>
 
 <section class="nexus-footer-cta" data-track-section="footer_cta">
@@ -40,6 +42,13 @@ $action      = get_query_var( 'cta_action', 'cta_footer_audit' );
 		   data-track-category="lead_gen">
 			<?php echo esc_html( $button_text ); ?>
 		</a>
+
+		<p class="nexus-footer-cta__legal">
+			Keine Cookies bei oeffentlichen Seitenaufrufen.
+			<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz</a>
+			<span aria-hidden="true">·</span>
+			<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
+		</p>
 
 		<?php get_template_part( 'template-parts/trust-section' ); ?>
 	</div>

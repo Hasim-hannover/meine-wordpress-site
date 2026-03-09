@@ -429,6 +429,40 @@ p.hero-stack,
 .ft__cta:hover, .ft__cta:focus-visible {
     background: #ffc040; transform: translateY(-1px); opacity: 1;
 }
+.ft__privacy-note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: .82rem;
+    line-height: 1.55;
+}
+.ft__privacy-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,176,32,.28);
+    background: rgba(255,176,32,.1);
+    color: var(--fg);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+.ft__privacy-note a {
+    color: var(--fg);
+    opacity: .86;
+    text-decoration: underline;
+    text-underline-offset: .14em;
+}
+.ft__privacy-note a:hover,
+.ft__privacy-note a:focus-visible {
+    opacity: 1;
+}
 
 /* Nav columns */
 .ft__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
