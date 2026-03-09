@@ -47,8 +47,12 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 							</p>
 
 							<div class="audit-hero-actions">
-								<a class="audit-submit-btn" href="#form">Growth Audit starten</a>
+								<?php $cta_url = apply_filters( 'nexus_audit_calendar_url', 'https://cal.com/hasim/30min' ); ?>
+								<a class="audit-submit-btn audit-hero-cta-btn" href="<?php echo esc_url( $cta_url ); ?>" data-track-action="cta_hero_growth_audit" data-track-category="lead_gen">Growth Audit starten</a>
 								<a class="audit-ghost-btn" href="#preview">Beispiel ansehen</a>
+								<div class="audit-hero-microtext" style="margin-top:0.8rem; font-size:0.95rem; color:#666;">
+									⏱️ 30-minütiges Gespräch – klare Einschätzung, kein Verkaufsdruck.
+								</div>
 							</div>
 
 							<div class="audit-hero-proof" aria-label="Schnelle Orientierung">

@@ -247,6 +247,46 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* ─── Primary CTA Buttons: Header & Hero ─── */
+.nx-header-cta-btn,
+.audit-hero-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    min-width: 180px;
+    padding: 0 28px;
+    border-radius: 999px;
+    background: var(--hasim-audit-orange);
+    color: #fff !important;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    box-shadow: 0 4px 24px color-mix(in srgb, var(--hasim-audit-orange) 18%, transparent);
+    border: none;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-decoration: none !important;
+    margin-left: 1.2rem;
+}
+.nx-header-cta-btn:hover,
+.audit-hero-cta-btn:hover {
+    background: var(--hasim-audit-orange-hover);
+    color: #fff !important;
+    box-shadow: 0 8px 32px color-mix(in srgb, var(--hasim-audit-orange) 24%, transparent);
+}
+@media (max-width: 1023px) {
+    .nx-header-cta-btn,
+    .audit-hero-cta-btn {
+        min-width: 120px;
+        font-size: 0.95rem;
+        padding: 0 16px;
+        height: 38px;
+        margin-left: 0.5rem;
+    }
+}
+
 /* --- Homepage Optimization: Hero Stack + Section Order --- */
 /* 1a) Hero Stack-Text visuell ausblenden (reversibel) */
 .hero-stack-text,
