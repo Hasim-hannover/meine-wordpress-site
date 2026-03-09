@@ -1062,6 +1062,322 @@
   line-height: 1.6;
 }
 
+/* --- 2026 ALIGNMENT: Shared audit surfaces + theme support --- */
+.audit-wrapper .review-hero-kicker,
+.audit-wrapper .review-offer-kicker,
+.audit-wrapper .review-proof-kicker,
+.audit-wrapper .review-fit-kicker,
+.audit-wrapper .review-form-kicker,
+.audit-wrapper .review-aside-kicker,
+.audit-wrapper .review-output-kicker,
+.audit-wrapper .review-step-kicker {
+  color: var(--gold);
+}
+
+.audit-wrapper .audit-ghost-btn {
+  border-color: var(--border);
+  background: var(--audit-glass);
+  color: var(--text-main);
+  box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.03);
+}
+
+.audit-wrapper .audit-ghost-btn:hover {
+  border-color: var(--audit-border-accent);
+  background: var(--audit-glass-hover);
+}
+
+.audit-wrapper .review-hero-layout {
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.audit-wrapper .review-hero-main h1 {
+  font-size: clamp(2.75rem, 4.8vw, 4.55rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  max-width: 12.5ch;
+  color: var(--text-main);
+}
+
+.audit-wrapper .review-kpi-strip {
+  max-width: none;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--nx-radius-xl);
+  background: linear-gradient(180deg, hsl(0 0% 100% / 0.035), hsl(0 0% 100% / 0.015));
+  box-shadow: var(--audit-shadow-card);
+}
+
+.audit-wrapper :is(
+  .audit-hero-proof span,
+  .review-offer-item,
+  .review-kpi,
+  .review-proof-band,
+  .review-proof-card,
+  .review-fit-card,
+  .review-aside-card,
+  .review-output-card,
+  .review-ladder-card
+) {
+  border-color: var(--border);
+  background: var(--audit-glass);
+  box-shadow: var(--audit-shadow-card);
+}
+
+.audit-wrapper .review-offer-panel {
+  border-color: var(--audit-border-accent);
+  background:
+    radial-gradient(circle at top right, hsl(var(--accent-hsl) / 0.12), transparent 34%),
+    var(--audit-panel);
+  box-shadow: var(--audit-shadow-panel);
+}
+
+.audit-wrapper .review-proof-band,
+.audit-wrapper .review-output-card {
+  background:
+    radial-gradient(circle at top left, hsl(var(--accent-hsl) / 0.08), transparent 28%),
+    var(--audit-panel);
+}
+
+.audit-wrapper .review-fit-card-muted,
+.audit-wrapper .review-aside-card-muted {
+  background: var(--audit-glass);
+}
+
+.audit-wrapper .review-aside-card-brief {
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.1), transparent),
+    var(--audit-glass);
+  border-color: var(--audit-border-accent);
+}
+
+.audit-wrapper :is(
+  .review-offer-copy,
+  .review-offer-item span,
+  .review-proof-copy,
+  .review-proof-card span,
+  .review-proof-note,
+  .review-fit-note,
+  .review-fit-list li,
+  .review-form-eta span,
+  .review-aside-card p,
+  .review-aside-list li,
+  .review-step-copy,
+  .audit-form-meta,
+  .review-output-row span,
+  .review-output-note,
+  .review-ladder-copy,
+  .review-ladder-card p
+) {
+  color: var(--audit-text-soft);
+}
+
+.audit-wrapper :is(
+  .review-offer-item strong,
+  .review-offer-panel h2,
+  .review-offer-timeline-item strong,
+  .review-kpi strong,
+  .review-proof-head h2,
+  .review-proof-card strong,
+  .review-fit-card h2,
+  .review-aside-card h4,
+  .review-brief-row dd,
+  .review-step h4,
+  .review-field label,
+  .review-option span,
+  .review-success h3,
+  .review-success-url,
+  .review-success-timeline-item strong,
+  .review-success-card strong,
+  .review-output-row strong,
+  .review-ladder-head h2,
+  .review-ladder-card h3
+) {
+  color: var(--text-main);
+}
+
+.audit-wrapper .review-offer-timeline,
+.audit-wrapper .review-brief-row,
+.audit-wrapper .review-output-row,
+.audit-wrapper .review-output-note {
+  border-color: var(--border);
+}
+
+.audit-wrapper :is(
+  .review-offer-timeline-label,
+  .review-brief-row dt,
+  .review-progress-steps li
+) {
+  color: var(--audit-text-dim);
+}
+
+.audit-wrapper .review-progress-track {
+  background: var(--nx-bg-glass-hover);
+}
+
+.audit-wrapper .review-progress-fill {
+  background: var(--gold-gradient);
+}
+
+.audit-wrapper .review-progress-steps li.is-active {
+  color: var(--text-main);
+}
+
+.audit-wrapper :is(
+  .audit-hero-proof span,
+  .review-form-eta span,
+  .review-fit-pill,
+  .review-fit-pill-muted
+) {
+  border-color: var(--border);
+  background: var(--audit-glass);
+  color: var(--audit-text-soft);
+}
+
+.audit-wrapper .review-fit-pill {
+  border-color: var(--audit-border-accent);
+  background: var(--audit-accent-soft);
+  color: var(--text-main);
+}
+
+.audit-wrapper .review-fit-pill-muted {
+  background: var(--audit-glass);
+}
+
+.audit-wrapper .review-field input,
+.audit-wrapper .review-field textarea {
+  border-color: var(--border);
+  background: var(--audit-glass);
+  color: var(--text-main);
+}
+
+.audit-wrapper .review-field input::placeholder,
+.audit-wrapper .review-field textarea::placeholder {
+  color: var(--audit-text-dim);
+}
+
+.audit-wrapper .review-field input:focus,
+.audit-wrapper .review-field textarea:focus {
+  border-color: var(--audit-border-accent);
+  box-shadow: 0 0 0 3px hsl(var(--accent-hsl) / 0.12);
+  background: var(--audit-glass-hover);
+}
+
+.audit-wrapper .audit-submit-btn {
+  background: var(--gold-gradient);
+  color: var(--text-inverse);
+  box-shadow: var(--audit-shadow-accent);
+}
+
+.audit-wrapper .audit-submit-btn:hover {
+  box-shadow: 0 20px 40px hsl(var(--accent-hsl) / 0.28);
+}
+
+.audit-wrapper .review-option {
+  border-color: var(--border);
+  background: var(--audit-glass);
+}
+
+.audit-wrapper .review-option:hover {
+  border-color: var(--audit-border-accent);
+  background: var(--audit-glass-hover);
+}
+
+.audit-wrapper .review-option:has(input:checked) {
+  border-color: var(--audit-border-accent);
+  background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), transparent), var(--audit-glass);
+  box-shadow: inset 0 0 0 1px hsl(var(--accent-hsl) / 0.18);
+}
+
+.audit-wrapper .review-option input {
+  accent-color: var(--gold);
+}
+
+.audit-wrapper .review-prev-btn {
+  border-color: var(--border);
+  background: var(--audit-glass);
+  color: var(--text-main);
+}
+
+.audit-wrapper .review-prev-btn:hover {
+  border-color: var(--audit-border-strong);
+  background: var(--audit-glass-hover);
+}
+
+.audit-wrapper .review-form-feedback.is-error {
+  border-color: var(--audit-danger-border);
+  background: var(--audit-danger-bg);
+  color: var(--red);
+}
+
+.audit-wrapper .review-form-feedback.is-success {
+  border-color: var(--audit-success-border);
+  background: var(--audit-success-bg);
+  color: var(--audit-success);
+}
+
+.audit-wrapper .review-success {
+  border-color: var(--audit-success-border);
+  background:
+    linear-gradient(180deg, hsl(145 40% 45% / 0.12), hsl(145 40% 45% / 0.05)),
+    var(--audit-surface-strong);
+  box-shadow: var(--audit-shadow-card);
+}
+
+.audit-wrapper .review-success-pill {
+  background: hsl(145 40% 45% / 0.12);
+  color: var(--audit-success-text);
+}
+
+.audit-wrapper .review-success-copy,
+.audit-wrapper .review-success-meta span,
+.audit-wrapper .review-success-timeline-item span,
+.audit-wrapper .review-success-card span {
+  color: var(--audit-success-text);
+}
+
+.audit-wrapper :is(
+  .review-success-url,
+  .review-success-meta span,
+  .review-success-timeline-item,
+  .review-success-card
+) {
+  border-color: var(--audit-success-border);
+  background: hsl(145 40% 45% / 0.08);
+}
+
+.audit-wrapper .review-ladder-step {
+  background: var(--audit-accent-soft);
+  border-color: var(--audit-border-accent);
+  color: var(--gold);
+}
+
+:root[data-theme='light'] .audit-wrapper :is(
+  .review-offer-panel,
+  .review-proof-band,
+  .review-proof-card,
+  .review-kpi-strip,
+  .review-fit-card,
+  .review-aside-card,
+  .review-output-card,
+  .review-ladder-card,
+  .review-success
+),
+:root[data-nx-theme='light'] .audit-wrapper :is(
+  .review-offer-panel,
+  .review-proof-band,
+  .review-proof-card,
+  .review-kpi-strip,
+  .review-fit-card,
+  .review-aside-card,
+  .review-output-card,
+  .review-ladder-card,
+  .review-success
+) {
+  box-shadow: var(--nx-shadow-sm);
+}
+
 @media (max-width: 1024px) {
   .review-hero-layout,
   .review-proof-grid,

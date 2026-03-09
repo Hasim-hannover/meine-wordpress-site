@@ -34,16 +34,16 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 				<section id="start" class="audit-hero-centered audit-section nx-reveal review-hero-shell">
 					<div class="review-hero-layout">
 						<div class="review-hero-main">
-							<div class="hero-pill">Growth Audit · kostenlos · persoenlich · 48h</div>
-							<div class="review-hero-kicker">Fuer B2B-Unternehmen mit WordPress und kaufnahen Seiten</div>
+							<div class="hero-pill">Growth Audit · kostenlos · persönlich · 48h</div>
+							<div class="review-hero-kicker">Für B2B-Unternehmen mit WordPress und kaufnahen Seiten</div>
 							<h1>
-								Klarheit fuer die Seite,<br>
+								Klarheit für die Seite,<br>
 								<span class="text-highlight">die Anfragen tragen soll.</span>
 							</h1>
 							<p class="hero-sub-short">
-								Kein Punktesalat, kein Redesign-Geschwaetz, kein Call-Zwang.
-								Sie erfahren, wo Botschaft, Proof oder naechster Schritt Nachfrage verlieren
-								und was wirtschaftlich zuerst geschaerft werden sollte.
+								Kein Punktesalat, kein Redesign-Geschwätz, kein Call-Zwang.
+								Sie erfahren, wo Botschaft, Proof oder nächster Schritt Nachfrage verlieren
+								und was wirtschaftlich zuerst geschärft werden sollte.
 							</p>
 
 							<div class="audit-hero-actions">
@@ -54,10 +54,10 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 							<div class="audit-hero-proof" aria-label="Schnelle Orientierung">
 								<span>Antwort in 48h</span>
 								<span>1 Seite statt Komplett-Audit</span>
-								<span>Persoenliche Priorisierung</span>
+								<span>Persönliche Priorisierung</span>
 							</div>
 
-							<div class="review-kpi-strip" aria-label="Growth-Audit-Ueberblick">
+							<div class="review-kpi-strip" aria-label="Growth-Audit-Überblick">
 								<div class="review-kpi">
 									<strong>0 EUR Einstieg</strong>
 									<span>Audit ohne Pflicht-Call oder Tool-Score.</span>
@@ -68,7 +68,7 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 								</div>
 								<div class="review-kpi">
 									<strong>3 Outputs</strong>
-									<span>Bremsen, Prioritaet, naechster sinnvoller Schritt.</span>
+									<span>Bremsen, Priorität, nächster sinnvoller Schritt.</span>
 								</div>
 							</div>
 						</div>
@@ -84,14 +84,14 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 							<div class="review-offer-list">
 								<div class="review-offer-item">
 									<strong>Wo die Seite gerade Reibung erzeugt</strong>
-									<span>Hero, Proof, CTA oder Nachfragefuehrung.</span>
+									<span>Hero, Proof, CTA oder Nachfrageführung.</span>
 								</div>
 								<div class="review-offer-item">
 									<strong>Was zuerst Wirkung bringt</strong>
-									<span>Eine Prioritaet statt zehn lose Empfehlungen.</span>
+									<span>Eine Priorität statt zehn lose Empfehlungen.</span>
 								</div>
 								<div class="review-offer-item">
-									<strong>Wie tief der naechste Schritt sein sollte</strong>
+									<strong>Wie tief der nächste Schritt sein sollte</strong>
 									<span>Kleine Korrektur, Blueprint oder Umsetzung.</span>
 								</div>
 							</div>
@@ -103,7 +103,7 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 								</div>
 								<div class="review-offer-timeline-item">
 									<span class="review-offer-timeline-label">In 48h</span>
-									<strong>Sie erhalten die persoenliche Priorisierung</strong>
+									<strong>Sie erhalten die persönliche Priorisierung</strong>
 								</div>
 							</div>
 
@@ -155,18 +155,18 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 								<span class="review-fit-pill">Traffic oder Kampagnen laufen schon</span>
 								<span class="review-fit-pill">Team will erst priorisieren</span>
 							</div>
-							<p class="review-fit-note">Ideal fuer Startseiten und kaufnahe Angebotsseiten, die nicht laenger nur okay aussehen, sondern sauber verkaufen sollen.</p>
+							<p class="review-fit-note">Ideal für Startseiten und kaufnahe Angebotsseiten, die nicht länger nur okay aussehen, sondern sauber verkaufen sollen.</p>
 						</article>
 						<article class="review-fit-card review-fit-card-muted">
 							<span class="review-fit-kicker">Bewusst nicht</span>
-							<h2>Nicht fuer Gratis-Relaunches ohne Fokus</h2>
+							<h2>Nicht für Gratis-Relaunches ohne Fokus</h2>
 							<div class="review-fit-pills" aria-label="Unpassende Situationen">
 								<span class="review-fit-pill review-fit-pill-muted">Hobby-Projekte</span>
 								<span class="review-fit-pill review-fit-pill-muted">reine Visitenkarten-Seiten</span>
 								<span class="review-fit-pill review-fit-pill-muted">unklares Angebot</span>
 								<span class="review-fit-pill review-fit-pill-muted">Komplett-Relaunch im Gratis-Mantel</span>
 							</div>
-							<p class="review-fit-note">Der Audit ist absichtlich praezise. Sonst wird er zu allgemein und damit zu schwach.</p>
+							<p class="review-fit-note">Der Audit ist absichtlich präzise. Sonst wird er zu allgemein und damit zu schwach.</p>
 						</article>
 					</div>
 				</section>
@@ -239,7 +239,7 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 								<div class="review-step" data-step="3">
 									<span class="review-step-kicker">Schritt 4 von 5</span>
 									<h4>Wo vermuten Sie gerade den größten Hebelverlust?</h4>
-									<p class="review-step-copy">Waehlen Sie den wahrscheinlichsten Hebel. Das hilft bei der Einordnung.</p>
+									<p class="review-step-copy">Wählen Sie den wahrscheinlichsten Hebel. Das hilft bei der Einordnung.</p>
 									<div class="review-option-group" role="radiogroup" aria-labelledby="review-issue-heading">
 										<span id="review-issue-heading" class="screen-reader-text">Größter Blocker</span>
 										<label class="review-option">
@@ -268,7 +268,7 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 								<div class="review-step" data-step="4">
 									<span class="review-step-kicker">Schritt 5 von 5</span>
 									<h4>Wohin soll die Rückmeldung gehen?</h4>
-									<p class="review-step-copy">Hierhin gehen Bestaetigung und persoenliche Rueckmeldung.</p>
+									<p class="review-step-copy">Hierhin gehen Bestätigung und persönliche Rückmeldung.</p>
 									<div class="review-field-grid">
 										<div class="review-field">
 											<label for="review-name">Name</label>
@@ -310,12 +310,12 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 								</p>
 								<div id="review-success-url" class="review-success-url"></div>
 								<div class="review-success-meta">
-									<span>Die Bestaetigung geht jetzt per E-Mail raus.</span>
-									<span>Wenn es zeitkritisch ist, koennen Sie direkt einen Termin ziehen.</span>
+									<span>Die Bestätigung geht jetzt per E-Mail raus.</span>
+									<span>Wenn es zeitkritisch ist, können Sie direkt einen Termin ziehen.</span>
 								</div>
-								<div class="review-success-timeline" aria-label="Naechste Schritte">
+								<div class="review-success-timeline" aria-label="Nächste Schritte">
 									<div class="review-success-timeline-item">
-										<strong>1. Eingang bestaetigt</strong>
+										<strong>1. Eingang bestätigt</strong>
 										<span>Ihre Seite und Ihr Kontext sind sauber im System.</span>
 									</div>
 									<div class="review-success-timeline-item">
@@ -323,7 +323,7 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 										<span>Sie erhalten keine Checkliste, sondern eine Reihenfolge.</span>
 									</div>
 									<div class="review-success-timeline-item">
-										<strong>3. Naechster Schritt wird klar</strong>
+										<strong>3. Nächster Schritt wird klar</strong>
 										<span>Korrektur, Blueprint oder Umsetzung im passenden Umfang.</span>
 									</div>
 								</div>

@@ -88,7 +88,7 @@ function hu_is_audit_offer_page() {
  */
 function hu_rank_math_audit_title( $title ) {
 	if ( hu_is_audit_offer_page() ) {
-		return 'Growth Audit fuer B2B-WordPress-Seiten';
+		return 'Growth Audit für B2B-WordPress-Seiten';
 	}
 
 	return $title;
@@ -102,7 +102,7 @@ function hu_rank_math_audit_title( $title ) {
  */
 function hu_rank_math_audit_description( $description ) {
 	if ( hu_is_audit_offer_page() ) {
-		return 'Persoenlicher Growth Audit fuer Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Prioritaet und Rueckmeldung innerhalb von 48 Stunden.';
+		return 'Persönlicher Growth Audit für Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Priorität und Rückmeldung innerhalb von 48 Stunden.';
 	}
 
 	return $description;
@@ -116,7 +116,7 @@ function hu_rank_math_audit_description( $description ) {
  */
 function hu_document_title_overrides( $parts ) {
 	if ( hu_is_audit_offer_page() ) {
-		$parts['title'] = 'Growth Audit fuer B2B-WordPress-Seiten';
+		$parts['title'] = 'Growth Audit für B2B-WordPress-Seiten';
 	}
 
 	return $parts;
@@ -274,8 +274,8 @@ function hu_get_seo_meta() {
 		}
 
 		if ( hu_is_audit_offer_page() ) {
-			$meta['og_title']    = 'Growth Audit fuer B2B-WordPress-Seiten';
-			$meta['description'] = 'Persoenlicher Growth Audit fuer Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Prioritaet und Rueckmeldung innerhalb von 48 Stunden.';
+			$meta['og_title']    = 'Growth Audit für B2B-WordPress-Seiten';
+			$meta['description'] = 'Persönlicher Growth Audit für Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Priorität und Rückmeldung innerhalb von 48 Stunden.';
 		}
 
 		if ( empty( $meta['description'] ) ) {

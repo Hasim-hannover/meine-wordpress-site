@@ -852,6 +852,284 @@
   }
 }
 
+/* --- 2026 ALIGNMENT: Design System + Theme Support --- */
+.audit-wrapper {
+  --bg-core: var(--nx-bg-deep);
+  --bg-surface: var(--nx-bg);
+  --gold: var(--nx-gold);
+  --gold-gradient: linear-gradient(180deg, var(--nx-gold-hover), var(--nx-gold));
+  --text-main: var(--nx-text);
+  --text-dim: var(--nx-text-secondary);
+  --border: var(--nx-border);
+  --red: hsl(8 82% 64%);
+  --audit-panel: var(--nx-panel-gradient);
+  --audit-surface: var(--nx-card-gradient);
+  --audit-surface-strong: var(--nx-card-gradient-strong);
+  --audit-glass: linear-gradient(180deg, hsl(0 0% 100% / 0.045), var(--nx-bg-glass-light));
+  --audit-glass-hover: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.085), var(--nx-bg-glass-hover));
+  --audit-floating: var(--nx-floating-surface);
+  --audit-floating-hover: var(--nx-floating-surface-hover);
+  --audit-border-strong: var(--nx-border-hover);
+  --audit-border-accent: var(--nx-border-gold);
+  --audit-shadow-card: var(--nx-shadow-sm);
+  --audit-shadow-panel: var(--nx-shadow);
+  --audit-shadow-soft: 0 0 0 1px hsl(0 0% 100% / 0.03), var(--nx-shadow-lg);
+  --audit-shadow-accent: 0 16px 34px hsl(var(--accent-hsl) / 0.24);
+  --audit-text-soft: var(--nx-text-secondary);
+  --audit-text-dim: var(--nx-text-dim);
+  --audit-accent-soft: hsl(var(--accent-hsl) / 0.1);
+  --audit-accent-soft-strong: hsl(var(--accent-hsl) / 0.16);
+  --audit-accent-border: hsl(var(--accent-hsl) / 0.24);
+  --audit-success: var(--nx-success);
+  --audit-success-bg: hsl(145 40% 45% / 0.1);
+  --audit-success-border: hsl(145 40% 45% / 0.18);
+  --audit-success-text: hsl(145 48% 88%);
+  --audit-danger-bg: hsl(8 82% 64% / 0.1);
+  --audit-danger-border: hsl(8 82% 64% / 0.22);
+  --audit-preview-bg: var(--bg-elevated);
+  --audit-preview-border: var(--audit-border-strong);
+  --audit-preview-shadow: -18px 18px 36px hsl(30 25% 2% / 0.26);
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 8% 0%, hsl(var(--accent-hsl) / 0.16), transparent 30%),
+    radial-gradient(circle at 86% 10%, hsl(28 12% 20% / 0.18), transparent 24%),
+    var(--nx-page-shell-gradient);
+  color: var(--text-main);
+  font-family: var(--nx-font, 'Figtree', sans-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+:root[data-theme='light'] .audit-wrapper,
+:root[data-nx-theme='light'] .audit-wrapper {
+  --audit-glass: linear-gradient(180deg, hsl(35 14% 100% / 0.98), hsl(35 8% 94% / 0.98));
+  --audit-glass-hover: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.1), hsl(35 8% 93% / 0.98));
+  --audit-shadow-soft: 0 0 0 1px hsl(30 10% 10% / 0.04), var(--nx-shadow);
+  --audit-success-text: hsl(145 34% 28%);
+  --audit-danger-bg: hsl(8 72% 46% / 0.08);
+  --audit-danger-border: hsl(8 72% 46% / 0.18);
+  --audit-preview-bg: hsl(35 14% 100% / 0.98);
+  --audit-preview-border: hsl(30 5% 80%);
+  --audit-preview-shadow: -16px 16px 28px hsl(30 10% 10% / 0.14);
+}
+
+.audit-wrapper::before {
+  background-image:
+    linear-gradient(var(--nx-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--nx-grid-line) 1px, transparent 1px);
+  opacity: 0.16;
+  mask-image: linear-gradient(180deg, var(--nx-grid-mask), transparent 84%);
+}
+
+:root[data-theme='light'] .audit-wrapper::before,
+:root[data-nx-theme='light'] .audit-wrapper::before {
+  opacity: 0.26;
+}
+
+.audit-wrapper h1,
+.audit-wrapper h2,
+.audit-wrapper h3,
+.audit-wrapper h4,
+.audit-wrapper h5,
+.audit-wrapper h6 {
+  color: var(--text-main);
+}
+
+.audit-wrapper .audit-container {
+  max-width: var(--nx-max-width);
+  padding: 0 24px;
+}
+
+.audit-wrapper .smart-nav {
+  background: var(--audit-floating);
+  border-color: var(--border);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: var(--audit-shadow-panel);
+}
+
+.audit-wrapper .smart-nav:hover {
+  border-color: var(--audit-border-accent);
+  background: var(--audit-floating-hover);
+  box-shadow: var(--audit-shadow-panel), 0 0 24px var(--nx-gold-subtle);
+}
+
+.audit-wrapper .smart-nav a {
+  color: var(--audit-text-dim);
+}
+
+.audit-wrapper .smart-nav a.active,
+.audit-wrapper .smart-nav a:hover {
+  color: var(--text-main);
+}
+
+.audit-wrapper .nav-dot {
+  background: var(--nx-dot-neutral);
+}
+
+.audit-wrapper .smart-nav a.active .nav-dot,
+.audit-wrapper .smart-nav a:hover .nav-dot {
+  background: var(--gold);
+  box-shadow: 0 0 14px hsl(var(--accent-hsl) / 0.28);
+}
+
+.audit-wrapper .hero-pill {
+  background: var(--audit-accent-soft);
+  border-color: var(--audit-border-accent);
+  box-shadow: 0 10px 20px hsl(var(--accent-hsl) / 0.08);
+}
+
+.audit-wrapper .hero-sub,
+.audit-wrapper .hero-sub-short,
+.audit-wrapper .journey-subline,
+.audit-wrapper .preview-desc,
+.audit-wrapper .audit-usp-subline,
+.audit-wrapper .faq-ans,
+.audit-wrapper .final-cta-sub,
+.audit-wrapper .audit-disclaimer,
+.audit-wrapper .journey-step-preview p,
+.audit-wrapper .usp-text,
+.audit-wrapper .box-head p {
+  color: var(--audit-text-soft);
+}
+
+.audit-wrapper .revenue-counter {
+  background: var(--audit-danger-bg);
+  border-color: var(--audit-danger-border);
+}
+
+.audit-wrapper .revenue-counter .amount {
+  color: var(--red);
+}
+
+.audit-wrapper .revenue-counter .label {
+  color: color-mix(in srgb, var(--red) 78%, var(--text-main) 22%);
+}
+
+.audit-wrapper .mini-preview,
+.audit-wrapper .trust-item,
+.audit-wrapper .journey-step-preview,
+.audit-wrapper .report-preview-section,
+.audit-wrapper .preview-deliverable,
+.audit-wrapper .usp-card,
+.audit-wrapper .audit-faq-section details {
+  background: var(--audit-glass);
+  border-color: var(--border);
+  box-shadow: var(--audit-shadow-card);
+}
+
+.audit-wrapper .mini-preview .mp-row,
+.audit-wrapper .trust-strip {
+  border-color: var(--border);
+}
+
+.audit-wrapper .mini-preview .mp-val,
+.audit-wrapper .tech-item,
+.audit-wrapper .step-content h4,
+.audit-wrapper .preview-deliverable strong,
+.audit-wrapper .usp-title,
+.audit-wrapper .audit-faq-headline,
+.audit-wrapper .audit-faq-section summary {
+  color: var(--text-main);
+}
+
+.audit-wrapper .black-box {
+  background:
+    radial-gradient(circle at top left, hsl(var(--accent-hsl) / 0.14), transparent 28%),
+    var(--audit-panel);
+  border-color: var(--border);
+  box-shadow: var(--audit-shadow-soft);
+  backdrop-filter: blur(18px);
+}
+
+.audit-wrapper .black-box::before {
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 30px hsl(var(--accent-hsl) / 0.34);
+}
+
+.audit-wrapper .trust-item {
+  color: var(--audit-text-soft);
+}
+
+.audit-wrapper .trust-ic,
+.audit-wrapper .step-marker,
+.audit-wrapper .usp-icon {
+  background: var(--audit-accent-soft);
+  border-color: var(--audit-border-accent);
+  color: var(--gold);
+}
+
+.audit-wrapper .journey-step-preview:hover .step-marker {
+  background: var(--audit-accent-soft-strong);
+  border-color: var(--gold);
+  box-shadow: 0 0 18px hsl(var(--accent-hsl) / 0.16);
+}
+
+.audit-wrapper .step-result.found {
+  background: var(--audit-success-bg);
+  border-color: var(--audit-success-border);
+  color: var(--audit-success);
+}
+
+.audit-wrapper .step-result.gap {
+  background: var(--audit-danger-bg);
+  border-color: var(--audit-danger-border);
+  color: var(--red);
+}
+
+.audit-wrapper .preview-img-placeholder {
+  background: var(--audit-preview-bg);
+  border-color: var(--audit-preview-border);
+  box-shadow: var(--audit-preview-shadow);
+}
+
+.audit-wrapper .usp-card:hover {
+  border-color: var(--audit-border-accent);
+  background: var(--audit-glass-hover);
+}
+
+.audit-wrapper .final-cta {
+  background:
+    radial-gradient(circle at center, hsl(var(--accent-hsl) / 0.1) 0%, transparent 48%),
+    var(--audit-panel);
+  border-color: var(--border);
+  box-shadow: var(--audit-shadow-panel);
+}
+
+.audit-wrapper .cta-btn {
+  background: var(--gold-gradient);
+  color: var(--text-inverse);
+  box-shadow: var(--audit-shadow-accent);
+}
+
+.audit-wrapper .cta-btn:hover {
+  box-shadow: 0 18px 36px hsl(var(--accent-hsl) / 0.28);
+}
+
+:root[data-theme='light'] .audit-wrapper :is(
+  .mini-preview,
+  .trust-item,
+  .journey-step-preview,
+  .report-preview-section,
+  .preview-deliverable,
+  .usp-card,
+  .audit-faq-section details,
+  .black-box,
+  .final-cta
+),
+:root[data-nx-theme='light'] .audit-wrapper :is(
+  .mini-preview,
+  .trust-item,
+  .journey-step-preview,
+  .report-preview-section,
+  .preview-deliverable,
+  .usp-card,
+  .audit-faq-section details,
+  .black-box,
+  .final-cta
+) {
+  box-shadow: var(--nx-shadow-sm);
+}
+
 /* --- REDUCED MOTION --- */
 @media (prefers-reduced-motion: reduce) {
   .audit-wrapper * {

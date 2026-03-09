@@ -18,8 +18,8 @@ function nexus_get_review_status_options() {
 	return [
 		'new'       => 'Neu',
 		'in_review' => 'In Bearbeitung',
-		'sent'      => 'Rueckmeldung gesendet',
-		'won'       => 'Gespraech / Auftrag',
+		'sent'      => 'Rückmeldung gesendet',
+		'won'       => 'Gespräch / Auftrag',
 		'archived'  => 'Archiviert',
 	];
 }
@@ -45,8 +45,8 @@ function nexus_get_review_issue_options() {
 	return [
 		'too_few_inquiries' => 'Zu wenig qualifizierte Anfragen',
 		'weak_message'      => 'Das Seitenversprechen ist zu unscharf',
-		'weak_proof'        => 'Proof und Vertrauen greifen zu spaet',
-		'weak_conversion'   => 'Die Seite fuehrt nicht sauber zur Anfrage',
+		'weak_proof'        => 'Proof und Vertrauen greifen zu spät',
+		'weak_conversion'   => 'Die Seite führt nicht sauber zur Anfrage',
 		'second_opinion'    => 'Ich brauche eine zweite strategische Einordnung',
 	];
 }
@@ -263,7 +263,7 @@ function nexus_handle_review_request_submission( WP_REST_Request $request ) {
 		return new WP_REST_Response(
 			[
 				'ok'    => false,
-				'error' => 'Die Anfrage konnte gerade nicht gespeichert werden. Bitte spaeter erneut versuchen.',
+				'error' => 'Die Anfrage konnte gerade nicht gespeichert werden. Bitte später erneut versuchen.',
 			],
 			500
 		);
@@ -277,7 +277,7 @@ function nexus_handle_review_request_submission( WP_REST_Request $request ) {
 			'ok'          => true,
 			'requestId'   => $post_id,
 			'message'     => sprintf(
-				'Ihre Anfrage fuer den %s ist eingegangen. Sie erhalten innerhalb von 48 Stunden eine persoenliche Rueckmeldung.',
+				'Ihre Anfrage für den %s ist eingegangen. Sie erhalten innerhalb von 48 Stunden eine persönliche Rückmeldung.',
 				$validated['audit_type_label']
 			),
 			'editUrl'     => get_edit_post_link( $post_id, 'raw' ),
@@ -313,7 +313,7 @@ function nexus_validate_review_request_payload( $payload ) {
 
 	$page_url = esc_url_raw( $page_url );
 	if ( ! $page_url || ! wp_http_validate_url( $page_url ) ) {
-		return new WP_Error( 'invalid_page_url', 'Bitte eine gueltige URL angeben, z. B. https://example.de.' );
+		return new WP_Error( 'invalid_page_url', 'Bitte eine gültige URL angeben, z. B. https://example.de.' );
 	}
 
 	$scheme = wp_parse_url( $page_url, PHP_URL_SCHEME );
@@ -322,16 +322,16 @@ function nexus_validate_review_request_payload( $payload ) {
 	}
 
 	if ( empty( $offer ) ) {
-		return new WP_Error( 'missing_offer', 'Bitte kurz beschreiben, was diese Seite verkaufen oder ausloesen soll.' );
+		return new WP_Error( 'missing_offer', 'Bitte kurz beschreiben, was diese Seite verkaufen oder auslösen soll.' );
 	}
 
 	if ( empty( $audience ) ) {
-		return new WP_Error( 'missing_audience', 'Bitte angeben, wen diese Seite ueberzeugen soll.' );
+		return new WP_Error( 'missing_audience', 'Bitte angeben, wen diese Seite überzeugen soll.' );
 	}
 
 	$issue_options = nexus_get_review_issue_options();
 	if ( empty( $biggest_issue ) || ! isset( $issue_options[ $biggest_issue ] ) ) {
-		return new WP_Error( 'missing_issue', 'Bitte das groesste Problem auswaehlen.' );
+		return new WP_Error( 'missing_issue', 'Bitte das größte Problem auswählen.' );
 	}
 
 	if ( empty( $name ) ) {
@@ -339,7 +339,7 @@ function nexus_validate_review_request_payload( $payload ) {
 	}
 
 	if ( empty( $email ) || ! is_email( $email ) ) {
-		return new WP_Error( 'invalid_email', 'Bitte eine gueltige geschaeftliche E-Mail-Adresse angeben.' );
+		return new WP_Error( 'invalid_email', 'Bitte eine gültige geschäftliche E-Mail-Adresse angeben.' );
 	}
 
 	if ( empty( $company ) ) {
@@ -430,7 +430,7 @@ function nexus_validate_review_request_rate_limit() {
 	$count = (int) get_transient( $key );
 
 	if ( $count >= 10 ) {
-		return new WP_Error( 'rate_limited', 'Zu viele Anfragen in kurzer Zeit. Bitte spaeter erneut versuchen.' );
+		return new WP_Error( 'rate_limited', 'Zu viele Anfragen in kurzer Zeit. Bitte später erneut versuchen.' );
 	}
 
 	set_transient( $key, $count + 1, HOUR_IN_SECONDS );
@@ -504,7 +504,7 @@ function nexus_get_audit_email_shell( $args = [] ) {
 			'headline'  => '',
 			'intro'     => '',
 			'content'   => '',
-			'footer'    => 'Antworten Sie bei Rueckfragen einfach auf diese E-Mail.',
+			'footer'    => 'Antworten Sie bei Rückfragen einfach auf diese E-Mail.',
 		]
 	);
 
@@ -615,7 +615,7 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 						<strong style="color:#f7f3ee;">URL:</strong> %6$s<br>
 						<strong style="color:#f7f3ee;">Seitenziel:</strong> %7$s<br>
 						<strong style="color:#f7f3ee;">Zielgruppe:</strong> %8$s<br>
-						<strong style="color:#f7f3ee;">Groesster Hebel:</strong> %9$s%10$s
+						<strong style="color:#f7f3ee;">Größter Hebel:</strong> %9$s%10$s
 					</div>
 				</td>
 			</tr>
@@ -623,7 +623,7 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0">
 			<tr>
 				<td style="padding:0 12px 0 0;">
-					<a href="%11$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Im Audit CRM oeffnen</a>
+					<a href="%11$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Im Audit CRM öffnen</a>
 				</td>
 				<td>
 					<a href="%12$s" style="display:inline-block; padding:14px 18px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); color:#f7f3ee; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Seite ansehen</a>
@@ -634,7 +634,7 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		esc_html( $payload['name'] ),
 		esc_html( $payload['email'] ),
 		esc_html( $payload['audit_type_label'] ),
-		esc_html( 'Rueckmeldung spaetestens in 48h' ),
+		esc_html( 'Rückmeldung spätestens in 48h' ),
 		esc_html( $page_url ),
 		esc_html( $payload['offer'] ),
 		esc_html( $payload['audience'] ),
@@ -651,7 +651,7 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 			'headline'  => 'Neue Audit-Anfrage',
 			'intro'     => 'Ein neuer Lead ist eingegangen. Alles Wichtige ist unten auf einen Blick zusammengefasst.',
 			'content'   => $content,
-			'footer'    => 'Sie koennen direkt auf diese E-Mail antworten. Reply-To zeigt bereits auf den Lead.',
+			'footer'    => 'Sie können direkt auf diese E-Mail antworten. Reply-To zeigt bereits auf den Lead.',
 		]
 	);
 
@@ -679,7 +679,7 @@ function nexus_send_review_request_confirmation( $payload ) {
 					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:6px;">Was jetzt passiert</div>
 					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">1.</strong> Ihre Anfrage ist sauber im System.<br>
-						<strong style="color:#f7f3ee;">2.</strong> Innerhalb von 48 Stunden erhalten Sie eine persoenliche Priorisierung.<br>
+						<strong style="color:#f7f3ee;">2.</strong> Innerhalb von 48 Stunden erhalten Sie eine persönliche Priorisierung.<br>
 						<strong style="color:#f7f3ee;">3.</strong> Sie sehen, ob eine kleine Korrektur reicht oder ob ein tieferer Blueprint sinnvoll ist.
 					</div>
 				</td>
@@ -704,7 +704,7 @@ function nexus_send_review_request_confirmation( $payload ) {
 			</tr>
 		</table>
 		<p style="margin:0; font-family:Helvetica, Arial, sans-serif; font-size:14px; line-height:1.8; color:#c5ced7;">
-			Sie muessen jetzt nichts weiter vorbereiten. Wenn es eine Frist, Kampagne oder interne Deadline gibt,
+			Sie müssen jetzt nichts weiter vorbereiten. Wenn es eine Frist, Kampagne oder interne Deadline gibt,
 			antworten Sie einfach kurz auf diese E-Mail.
 		</p>',
 		esc_html( $payload['page_url'] ),
@@ -716,12 +716,12 @@ function nexus_send_review_request_confirmation( $payload ) {
 
 	$html = nexus_get_audit_email_shell(
 		[
-			'preheader' => 'Ihre Anfrage fuer den ' . $payload['audit_type_label'] . ' ist eingegangen.',
+			'preheader' => 'Ihre Anfrage für den ' . $payload['audit_type_label'] . ' ist eingegangen.',
 			'eyebrow'   => $payload['audit_type_label'],
 			'headline'  => 'Ihr ' . $payload['audit_type_label'] . ' ist eingeplant.',
-			'intro'     => 'Danke, ' . $payload['name'] . '. Sie erhalten keine generische Checkliste, sondern eine persoenliche Priorisierung fuer Ihre Seite.',
+			'intro'     => 'Danke, ' . $payload['name'] . '. Sie erhalten keine generische Checkliste, sondern eine persönliche Priorisierung für Ihre Seite.',
 			'content'   => $content,
-			'footer'    => 'Viele Gruesse, Hasim Uener',
+			'footer'    => 'Viele Grüße, Hasim Üner',
 		]
 	);
 
@@ -798,11 +798,11 @@ function nexus_render_review_request_details_meta_box( $post ) {
 			<p><?php echo nl2br( esc_html( $offer ) ); ?></p>
 		</div>
 		<div class="nexus-review-meta-group">
-			<strong>Wen soll die Seite ueberzeugen?</strong>
+			<strong>Wen soll die Seite überzeugen?</strong>
 			<p><?php echo nl2br( esc_html( $audience ) ); ?></p>
 		</div>
 		<div class="nexus-review-meta-group">
-			<strong>Groesster Blocker</strong>
+			<strong>Größter Blocker</strong>
 			<p><?php echo esc_html( $issue_label ); ?></p>
 		</div>
 		<?php if ( '' !== $extra_context ) : ?>
@@ -842,7 +842,7 @@ function nexus_render_review_request_workflow_meta_box( $post ) {
 		</select>
 	</p>
 	<p>
-		<label for="nexus-review-priority"><strong>Prioritaet</strong></label><br>
+		<label for="nexus-review-priority"><strong>Priorität</strong></label><br>
 		<select id="nexus-review-priority" name="nexus_review_priority" class="widefat">
 			<?php foreach ( $priority_options as $value => $label ) : ?>
 				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current_priority, $value ); ?>><?php echo esc_html( $label ); ?></option>
@@ -850,11 +850,11 @@ function nexus_render_review_request_workflow_meta_box( $post ) {
 		</select>
 	</p>
 	<p>
-		<strong>Faelligkeitsziel</strong><br>
+		<strong>Fälligkeitsziel</strong><br>
 		<span><?php echo esc_html( $due_at ? wp_date( 'd.m.Y H:i', $due_at ) : 'n/a' ); ?></span>
 	</p>
 	<p>
-		<strong>Rueckmeldung gesendet</strong><br>
+		<strong>Rückmeldung gesendet</strong><br>
 		<span><?php echo esc_html( $sent_at ? wp_date( 'd.m.Y H:i', $sent_at ) : 'Noch nicht markiert' ); ?></span>
 	</p>
 	<p>
@@ -928,11 +928,11 @@ function nexus_filter_review_request_columns( $columns ) {
 		'title'           => 'Lead',
 		'audit_type'      => 'Audit',
 		'review_status'   => 'Status',
-		'review_priority' => 'Prioritaet',
+		'review_priority' => 'Priorität',
 		'review_page'     => 'Seite',
 		'review_goal'     => 'Seitenziel',
 		'review_contact'  => 'Kontakt',
-		'review_due'      => 'Faellig',
+		'review_due'      => 'Fällig',
 		'date'            => $columns['date'],
 	];
 
@@ -1036,7 +1036,7 @@ function nexus_render_review_request_filters( $post_type ) {
 		<?php endforeach; ?>
 	</select>
 	<select name="nexus_review_priority">
-		<option value="">Alle Prioritaeten</option>
+		<option value="">Alle Prioritäten</option>
 		<?php foreach ( nexus_get_review_priority_options() as $value => $label ) : ?>
 			<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $current_priority, $value ); ?>><?php echo esc_html( $label ); ?></option>
 		<?php endforeach; ?>
@@ -1118,7 +1118,7 @@ function nexus_render_review_crm_dashboard() {
 	?>
 	<div class="wrap nexus-review-dashboard">
 		<h1>Audit CRM</h1>
-		<p class="nexus-review-dashboard-intro">Hier laufen alle persoenlichen Audit-Anfragen zusammen. Aktuell vor allem fuer den Growth Audit. Ziel: Rueckmeldung innerhalb von 48 Stunden.</p>
+		<p class="nexus-review-dashboard-intro">Hier laufen alle persönlichen Audit-Anfragen zusammen. Aktuell vor allem für den Growth Audit. Ziel: Rückmeldung innerhalb von 48 Stunden.</p>
 
 		<div class="nexus-review-stats">
 			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request&nexus_review_status=new' ) ); ?>">
@@ -1134,7 +1134,7 @@ function nexus_render_review_crm_dashboard() {
 				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['sent'] ); ?></strong>
 			</a>
 			<a class="nexus-review-stat-card nexus-review-stat-card-warning" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request' ) ); ?>">
-				<span class="nexus-review-stat-label">Ueberfaellig</span>
+				<span class="nexus-review-stat-label">Überfällig</span>
 				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['overdue'] ); ?></strong>
 			</a>
 		</div>
@@ -1154,7 +1154,7 @@ function nexus_render_review_crm_dashboard() {
 							<th>Lead</th>
 							<th>Status</th>
 							<th>Seite</th>
-							<th>Faellig</th>
+							<th>Fällig</th>
 							<th>Aktion</th>
 						</tr>
 					</thead>
@@ -1185,7 +1185,7 @@ function nexus_render_review_crm_dashboard() {
 										</span>
 									<?php endif; ?>
 								</td>
-								<td><a class="button button-small" href="<?php echo esc_url( get_edit_post_link( $request_post->ID ) ); ?>">Oeffnen</a></td>
+								<td><a class="button button-small" href="<?php echo esc_url( get_edit_post_link( $request_post->ID ) ); ?>">Öffnen</a></td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
@@ -1237,7 +1237,7 @@ function nexus_render_review_crm_dashboard_widget() {
 	);
 	?>
 	<div class="nexus-review-widget">
-		<p><strong>Neu:</strong> <?php echo esc_html( (string) $new_count ); ?> | <strong>In Bearbeitung:</strong> <?php echo esc_html( (string) $review_count ); ?> | <strong>Ueberfaellig:</strong> <?php echo esc_html( (string) $overdue_count ); ?></p>
+		<p><strong>Neu:</strong> <?php echo esc_html( (string) $new_count ); ?> | <strong>In Bearbeitung:</strong> <?php echo esc_html( (string) $review_count ); ?> | <strong>Überfällig:</strong> <?php echo esc_html( (string) $overdue_count ); ?></p>
 		<?php if ( ! empty( $latest_request ) ) : ?>
 			<?php
 			$latest = $latest_request[0];
