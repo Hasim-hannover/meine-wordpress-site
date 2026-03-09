@@ -44,9 +44,9 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 		</a>
 
 		<p class="nexus-footer-cta__legal">
-			Keine Cookies bei oeffentlichen Seitenaufrufen.
+			Keine Cookies bei öffentlichen Seitenaufrufen.
 			<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz</a>
-			<span aria-hidden="true">|</span>
+			<span aria-hidden="true">·</span>
 			<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
 		</p>
 

@@ -267,21 +267,21 @@ while ( have_posts() ) :
 				<span class="privacy-kicker">Datenschutz</span>
 				<h1 id="privacy-title" class="privacy-title">Datenschutz auf einen Blick</h1>
 				<p class="privacy-lead">
-					Diese oeffentlich zugaengliche Website setzt bei normalen Besuchen aktuell keine Cookies,
-					laedt keine Analyse- oder Marketing-Tracker und verwendet kein Google Tag Manager.
-					Wenn Sie nur lesen und navigieren, bleibt Ihr Browser fuer Tracking-Zwecke unberuehrt.
+					Diese öffentlich zugängliche Website setzt bei normalen Besuchen aktuell keine Cookies,
+					lädt keine Analyse- oder Marketing-Tracker und verwendet kein Google Tag Manager.
+					Wenn Sie nur lesen und navigieren, bleibt Ihr Browser für Tracking-Zwecke unberührt.
 				</p>
 
 				<div class="privacy-statement">
-					<strong>Kein Cookie-Banner auf oeffentlichen Seiten:</strong>
+					<strong>Kein Cookie-Banner auf öffentlichen Seiten:</strong>
 					Bei normalen Seitenaufrufen werden derzeit keine einwilligungspflichtigen
 					Tracking- oder Marketing-Technologien eingesetzt.
 				</div>
 
-				<div class="privacy-facts" aria-label="Datenschutz-Kurzueberblick">
+				<div class="privacy-facts" aria-label="Datenschutz-Kurzüberblick">
 					<div class="privacy-fact">
 						<span class="privacy-fact__value">Keine Cookies</span>
-						<span class="privacy-fact__label">bei normalen oeffentlichen Seitenaufrufen</span>
+						<span class="privacy-fact__label">bei normalen öffentlichen Seitenaufrufen</span>
 					</div>
 					<div class="privacy-fact">
 						<span class="privacy-fact__value">Kein GTM oder Analytics</span>
@@ -302,15 +302,15 @@ while ( have_posts() ) :
 
 			<div class="privacy-grid">
 				<aside class="privacy-card" aria-labelledby="privacy-overview">
-					<h2 id="privacy-overview">Kurzueberblick</h2>
+					<h2 id="privacy-overview">Kurzüberblick</h2>
 					<p>
-						Die Seite ist bewusst schlank aufgebaut. Es gibt aktuell keine oeffentlichen
+						Die Seite ist bewusst schlank aufgebaut. Es gibt aktuell keine öffentlichen
 						Tracking-Cookies, keine Consent-Plattform, kein GTM, kein Google Analytics
 						und keine Marketing-Pixel.
 					</p>
 
 					<ul>
-						<li>keine Cookies fuer normale Seitenaufrufe</li>
+						<li>keine Cookies für normale Seitenaufrufe</li>
 						<li>keine Reichweiten- oder Werbetracker beim Laden der Seite</li>
 						<li>keine automatischen Social-Media-Embeds</li>
 						<li>keine extern geladenen Webfonts von Google</li>
@@ -321,7 +321,7 @@ while ( have_posts() ) :
 						<div class="privacy-meta__item">
 							<span class="privacy-meta__label">Verantwortlicher</span>
 							<span class="privacy-meta__value">
-								Hasim Uener<br>
+								Hasim Üner<br>
 								Warschauer Str. 5<br>
 								30982 Pattensen<br>
 								Deutschland
@@ -336,7 +336,7 @@ while ( have_posts() ) :
 						</div>
 						<div class="privacy-meta__item">
 							<span class="privacy-meta__label">Stand</span>
-							<span class="privacy-meta__value"><time datetime="2026-03-09">9. Maerz 2026</time></span>
+							<span class="privacy-meta__value"><time datetime="2026-03-09">9. März 2026</time></span>
 						</div>
 					</div>
 				</aside>
@@ -345,9 +345,9 @@ while ( have_posts() ) :
 					<section class="privacy-section" aria-labelledby="privacy-controller">
 						<h2 id="privacy-controller">1. Verantwortlicher</h2>
 						<p>
-							Verantwortlich fuer die Datenverarbeitung auf dieser Website ist Hasim Uener,
+							Verantwortlich für die Datenverarbeitung auf dieser Website ist Hasim Üner,
 							Warschauer Str. 5, 30982 Pattensen, Deutschland.
-							Die vollstaendigen Anbieterangaben finden Sie im
+							Die vollständigen Anbieterangaben finden Sie im
 							<a href="<?php echo esc_url( $imprint_url ); ?>">Impressum</a>.
 						</p>
 					</section>
@@ -355,7 +355,7 @@ while ( have_posts() ) :
 					<section class="privacy-section" aria-labelledby="privacy-cookies">
 						<h2 id="privacy-cookies">2. Cookies, Tracking und Browser-Speicher</h2>
 						<p>
-							Bei der rein informatorischen Nutzung dieser oeffentlich zugaenglichen Website
+							Bei der rein informatorischen Nutzung dieser öffentlich zugänglichen Website
 							setzen wir aktuell keine Cookies. Ebenso werden beim normalen Seitenaufruf
 							keine Analyse-, Remarketing- oder Marketing-Skripte geladen.
 						</p>
@@ -364,13 +364,13 @@ while ( have_posts() ) :
 							<li>kein Google Analytics</li>
 							<li>kein Google Ads Conversion Tracking</li>
 							<li>keine Retargeting-Pixel</li>
-							<li>keine persistente Browser-Speicherung fuer Tracking- oder Komfortzwecke</li>
-							<li>kein Cookie-Banner fuer oeffentliche Besuche erforderlich</li>
+							<li>keine persistente Browser-Speicherung für Tracking- oder Komfortzwecke</li>
+							<li>kein Cookie-Banner für öffentliche Besuche erforderlich</li>
 						</ul>
 						<div class="privacy-note">
-							Diese Aussage bezieht sich auf die oeffentliche Nutzung der Website. Technisch
-							notwendige WordPress-Cookies koennen nur im geschuetzten Administrationsbereich
-							fuer eingeloggte Nutzer entstehen.
+							Diese Aussage bezieht sich auf die öffentliche Nutzung der Website. Technisch
+							notwendige WordPress-Cookies können nur im geschützten Administrationsbereich
+							für eingeloggte Nutzer entstehen.
 						</div>
 					</section>
 
@@ -379,8 +379,8 @@ while ( have_posts() ) :
 						<p>
 							Beim Aufruf der Website verarbeitet der Hosting-Dienstleister technisch
 							erforderliche Verbindungsdaten, damit die Seite ausgeliefert und vor Missbrauch
-							geschuetzt werden kann. Dazu koennen insbesondere IP-Adresse, Datum und Uhrzeit,
-							angeforderte URL, Referrer, Browsertyp und Betriebssystem gehoeren.
+							geschützt werden kann. Dazu können insbesondere IP-Adresse, Datum und Uhrzeit,
+							angeforderte URL, Referrer, Browsertyp und Betriebssystem gehören.
 						</p>
 						<p>
 							Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.
@@ -400,12 +400,12 @@ while ( have_posts() ) :
 
 						<h3>Growth-Audit-Anfrage</h3>
 						<p>
-							Auf der Seite zum Growth Audit koennen Sie eine Anfrage stellen. Dabei werden
-							insbesondere Name, geschaeftliche E-Mail-Adresse, Unternehmen, URL der zu
-							pruefenden Seite sowie Ihre inhaltlichen Angaben zur Anfrage verarbeitet.
+							Auf der Seite zum Growth Audit können Sie eine Anfrage stellen. Dabei werden
+							insbesondere Name, geschäftliche E-Mail-Adresse, Unternehmen, URL der zu
+							prüfenden Seite sowie Ihre inhaltlichen Angaben zur Anfrage verarbeitet.
 						</p>
 						<p>
-							Die Daten werden intern im WordPress-Backend gespeichert und fuer die
+							Die Daten werden intern im WordPress-Backend gespeichert und für die
 							Bearbeitung der Anfrage per E-Mail weiterverarbeitet. Rechtsgrundlage ist
 							Art. 6 Abs. 1 lit. b DSGVO, soweit es um vorvertragliche Kommunikation geht,
 							und im Uebrigen Art. 6 Abs. 1 lit. f DSGVO.
@@ -421,8 +421,8 @@ while ( have_posts() ) :
 
 						<h3>Speicherdauer</h3>
 						<p>
-							Anfragedaten speichern wir nur so lange, wie es fuer die Bearbeitung, fuer
-							Anschlusskommunikation oder zur Erfuellung gesetzlicher Pflichten erforderlich ist.
+							Anfragedaten speichern wir nur so lange, wie es für die Bearbeitung, für
+							Anschlusskommunikation oder zur Erfüllung gesetzlicher Pflichten erforderlich ist.
 						</p>
 					</section>
 
@@ -430,13 +430,13 @@ while ( have_posts() ) :
 						<h2 id="privacy-links">5. Externe Links und Drittseiten</h2>
 						<p>
 							Diese Website verlinkt an einzelnen Stellen auf externe Angebote, zum Beispiel
-							auf Cal.com fuer Terminbuchungen sowie auf Profile bei LinkedIn, Instagram oder
-							GitHub. Solche Inhalte werden nicht automatisch eingebettet. Eine Datenuebertragung
-							an den jeweiligen Anbieter findet daher regelmaessig erst statt, wenn Sie den
+							auf Cal.com für Terminbuchungen sowie auf Profile bei LinkedIn, Instagram oder
+							GitHub. Solche Inhalte werden nicht automatisch eingebettet. Eine Datenübertragung
+							an den jeweiligen Anbieter findet daher regelmäßig erst statt, wenn Sie den
 							Link aktiv anklicken.
 						</p>
 						<p>
-							Fuer die Datenverarbeitung auf den verlinkten Drittseiten sind ausschliesslich
+							Für die Datenverarbeitung auf den verlinkten Drittseiten sind ausschliesslich
 							deren Betreiber verantwortlich. Bitte beachten Sie die jeweiligen
 							Datenschutzhinweise der Anbieter.
 						</p>
@@ -445,8 +445,8 @@ while ( have_posts() ) :
 					<section class="privacy-section" aria-labelledby="privacy-security">
 						<h2 id="privacy-security">6. Sicherheit</h2>
 						<p>
-							Diese Website nutzt eine verschluesselte Verbindung per HTTPS, damit uebermittelte
-							Daten waehrend der Uebertragung geschuetzt sind. Vollstaendige Sicherheit kann
+							Diese Website nutzt eine verschlüsselte Verbindung per HTTPS, damit übermittelte
+							Daten während der Übertragung geschützt sind. Vollständige Sicherheit kann
 							bei Internetkommunikation dennoch nie garantiert werden.
 						</p>
 					</section>
@@ -454,20 +454,20 @@ while ( have_posts() ) :
 					<section class="privacy-section" id="rechte" aria-labelledby="privacy-rights">
 						<h2 id="privacy-rights">7. Ihre Rechte</h2>
 						<p>
-							Sie haben nach Massgabe der DSGVO insbesondere folgende Rechte:
+							Sie haben nach Maßgabe der DSGVO insbesondere folgende Rechte:
 						</p>
 						<ul>
-							<li>Auskunft ueber die verarbeiteten personenbezogenen Daten</li>
+							<li>Auskunft über die verarbeiteten personenbezogenen Daten</li>
 							<li>Berichtigung unrichtiger Daten</li>
 							<li>Loeschung, soweit keine gesetzlichen Pflichten entgegenstehen</li>
 							<li>Einschraenkung der Verarbeitung</li>
 							<li>Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO</li>
-							<li>Datenuebertragbarkeit, soweit anwendbar</li>
-							<li>Beschwerde bei einer Datenschutz-Aufsichtsbehoerde</li>
+							<li>Datenübertragbarkeit, soweit anwendbar</li>
+							<li>Beschwerde bei einer Datenschutz-Aufsichtsbehörde</li>
 						</ul>
 						<p>
-							Zustaendig ist insbesondere die Aufsichtsbehoerde Ihres ueblichen Aufenthaltsorts
-							oder die fuer Niedersachsen zustaendige Datenschutzaufsicht.
+							Zuständig ist insbesondere die Aufsichtsbehörde Ihres üblichen Aufenthaltsorts
+							oder die für Niedersachsen zuständige Datenschutzaufsicht.
 						</p>
 					</section>
 				</div>

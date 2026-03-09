@@ -46,12 +46,12 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 
 	<div class="ft__top">
 		<div class="ft__brand">
-			<a class="ft__logo site-logo site-logo--accent" href="<?php echo esc_url( $home_url ); ?>" aria-label="Startseite - HASIM UENER">HASIM UENER</a>
-			<p class="ft__tag">WordPress als Nachfrage-System fuer B2B.</p>
+			<a class="ft__logo site-logo site-logo--accent" href="<?php echo esc_url( $home_url ); ?>" aria-label="Startseite - HAŞIM ÜNER">HAŞIM ÜNER</a>
+			<p class="ft__tag">WordPress als Nachfrage-System für B2B.</p>
 			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit starten</a>
 			<p class="ft__privacy-note">
 				<span class="ft__privacy-badge">Privacy</span>
-				Keine Cookies bei oeffentlichen Seitenaufrufen.
+				Keine Cookies bei öffentlichen Seitenaufrufen.
 				<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz ansehen</a>
 			</p>
 		</div>
@@ -79,14 +79,14 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 			<section class="ft__col" aria-labelledby="ft-unternehmen">
 				<h3 id="ft-unternehmen">Unternehmen</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="https://cal.com/hasim/30min" target="_blank" rel="noopener noreferrer">Strategiegespraech</a></li>
-					<li><a href="<?php echo esc_url( $about_url ); ?>">Ueber mich</a></li>
+					<li><a class="ft__link-strong" href="https://cal.com/hasim/30min" target="_blank" rel="noopener noreferrer">Strategiegespräch</a></li>
+					<li><a href="<?php echo esc_url( $about_url ); ?>">Über mich</a></li>
 					<li><a href="<?php echo esc_url( $contact_url ); ?>">Kontakt</a></li>
 				</ul>
 
 				<nav class="ft__legal" aria-label="Rechtliches">
 					<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
-					<span aria-hidden="true">|</span>
+					<span aria-hidden="true">·</span>
 					<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz</a>
 				</nav>
 			</section>
@@ -94,7 +94,7 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 	</div>
 
 	<div class="ft__bottom">
-		<p>&copy; <time class="ft__year" datetime="<?php echo esc_attr( $current_year ); ?>"><?php echo esc_html( $current_year ); ?></time> Hasim Uener - Growth Architect</p>
+		<p>&copy; <time class="ft__year" datetime="<?php echo esc_attr( $current_year ); ?>"><?php echo esc_html( $current_year ); ?></time> Hasim Üner - Growth Architect</p>
 		<div class="ft__social" aria-label="Profile">
 			<a href="https://www.linkedin.com/in/hasim-%C3%BCner/" aria-label="LinkedIn-Profil" rel="me noopener noreferrer" target="_blank">
 				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.3 6.5a1.78 1.78 0 0 1-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0 0 13 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
