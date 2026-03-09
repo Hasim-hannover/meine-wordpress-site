@@ -1,150 +1,332 @@
 /* =========================================
-   NEXUS SINGLE POST CSS (Dein High-End Design)
+   NEXUS SINGLE POST CSS
+   Warm-neutral article shell with copper accent
    ========================================= */
 
-/* 1. CONTAINER & BASIS */
 .nexus-single-container {
-    background-color: #0a0a0a;
-    color: #fafafa;
+    background: var(--nx-body-gradient);
+    color: var(--nx-text);
     width: 100%;
     min-height: 100vh;
-    overflow: visible;
+    overflow-x: clip;
+    padding: clamp(1.5rem, 3vw, 2.5rem) 0 var(--space-24);
 }
 
-/* 2. HERO SECTION — Split-Layout (50/50) */
 .nexus-article-hero {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 4rem;
-    color: #fff;
-    background-color: #0a0a0a;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: stretch;
+    max-width: min(1320px, calc(100vw - 2rem));
+    margin: 0 auto clamp(2.5rem, 6vw, 4.5rem);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    background:
+        radial-gradient(circle at 14% 0%, hsl(var(--accent-hsl) / 0.14), transparent 32%),
+        var(--nx-card-gradient-strong);
+    border: 1px solid var(--nx-border);
+    border-radius: calc(var(--nx-radius-xl) + 4px);
+    box-shadow: var(--nx-shadow-lg);
+    overflow: hidden;
+    position: relative;
+}
+
+.nexus-article-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto -8% -18% auto;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(var(--accent-hsl) / 0.12), transparent 70%);
+    filter: blur(20px);
+    pointer-events: none;
+}
+
+.nexus-article-hero--text-only {
+    grid-template-columns: 1fr;
 }
 
 .nexus-hero-image {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+    position: relative;
+    min-height: clamp(320px, 44vw, 560px);
+    border-radius: calc(var(--nx-radius-xl) - 2px);
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 18% 18%, hsl(var(--accent-hsl) / 0.16), transparent 30%),
+        linear-gradient(160deg, var(--bg-elevated), var(--bg-inset));
+    border: 1px solid hsl(var(--accent-hsl) / 0.18);
+    box-shadow: inset 0 1px 0 hsl(30 10% 100% / 0.04);
 }
+
 .nexus-hero-image img {
     display: block;
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
 }
 
 .nexus-hero-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 60px 48px;
+    gap: var(--space-6);
+    padding: clamp(1.25rem, 3vw, 2.5rem);
     text-align: left;
-}
-
-.nexus-title {
-    font-family: var(--nx-font-heading, 'Outfit', 'Satoshi', sans-serif);
-    font-size: 2.8rem;
-    line-height: 1.15;
-    font-weight: 900;
-    margin-bottom: 40px;
-    color: #ffffff;
+    position: relative;
+    z-index: 1;
 }
 
 .nexus-meta-top {
-    font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;
-    color: #ffb020; margin-bottom: 24px; font-weight: 700;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--nx-accent-text);
+    font-weight: 700;
 }
-.nexus-meta-top a { color: inherit; text-decoration: none; }
 
-/* 3. HERO FOOTER (Autor & Share) */
+.nexus-meta-top .separator {
+    display: none;
+}
+
+.nexus-date,
+.nexus-reading-time {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--nx-radius-pill);
+    border: 1px solid hsl(var(--accent-hsl) / 0.22);
+    background: hsl(var(--accent-hsl) / 0.08);
+}
+
+.nexus-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: var(--tracking-tight);
+    font-weight: 700;
+    margin: 0;
+    color: var(--nx-text);
+    max-width: 12ch;
+}
+
 .nexus-hero-footer {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 1rem;
+    margin-top: var(--space-4);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--nx-border);
     flex-wrap: wrap;
-    gap: 20px;
 }
 
 .nexus-author-row {
-    display: flex; align-items: center; gap: 15px; text-align: left;
-}
-.nexus-author-row img { border-radius: 50%; border: 2px solid rgba(255,255,255,0.1); }
-.nexus-author-info .name { color: #fff; font-weight: 700; }
-.nexus-author-info .by { color: #666; font-size: 12px; text-transform: uppercase; }
-
-/* 4. SHARE BUTTONS (FIX: Damit sie nebeneinander stehen!) */
-.nexus-share-box {
-    display: flex;          /* Zwingt Elemente nebeneinander */
+    display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.9rem;
+    text-align: left;
 }
+
+.nexus-author-row img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid hsl(var(--accent-hsl) / 0.18);
+    box-shadow: 0 0 0 4px hsl(var(--accent-hsl) / 0.08);
+}
+
+.nexus-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.nexus-author-info .name {
+    color: var(--nx-text);
+    font-weight: 700;
+}
+
+.nexus-author-info .by {
+    color: var(--nx-text-dim);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.nexus-share-box {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.share-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--nx-text-dim);
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-right: 0.1rem;
+}
+
 .nexus-share-btn {
-    display: flex;          /* Zentriert Icon im Kreis */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
-    transition: all 0.3s ease;
+    background: var(--nx-bg-glass-light);
+    border: 1px solid var(--nx-border);
+    color: var(--nx-text);
+    transition:
+        transform var(--duration-normal) var(--ease-default),
+        border-color var(--duration-fast) var(--ease-default),
+        background-color var(--duration-fast) var(--ease-default),
+        box-shadow var(--duration-fast) var(--ease-default),
+        color var(--duration-fast) var(--ease-default);
     cursor: pointer;
-}
-.nexus-share-btn:hover {
-    transform: translateY(-3px);
-    background: #ffb020;
-    color: #000;
-    border-color: #ffb020;
+    box-shadow: inset 0 1px 0 hsl(30 10% 100% / 0.03);
 }
 
-/* 5. TEXT CONTENT */
-.nexus-article-content, .prose {
-    background: var(--nx-bg-glass);
+.nexus-share-btn:hover,
+.nexus-share-btn:focus-visible {
+    transform: translateY(-2px);
+    background: var(--accent);
+    color: var(--text-inverse);
+    border-color: var(--accent);
+    box-shadow: 0 12px 28px hsl(var(--accent-hsl) / 0.22);
+}
+
+button.nexus-share-btn {
+    padding: 0;
+    line-height: 0;
+}
+
+.nexus-post-layout {
+    display: grid;
+    grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    max-width: min(1320px, calc(100vw - 2rem));
+    margin: 0 auto;
+    padding: 0;
+    align-items: start;
+}
+
+.nexus-sidebar {
+    display: block !important;
+    position: sticky;
+    top: 110px;
+    align-self: start;
+    z-index: 25;
+}
+
+.sticky-toc {
+    display: block !important;
+    position: relative;
+    background:
+        radial-gradient(circle at top left, hsl(var(--accent-hsl) / 0.1), transparent 30%),
+        var(--nx-card-gradient);
+    border: 1px solid hsl(var(--accent-hsl) / 0.18);
+    border-radius: var(--nx-radius-lg);
+    padding: 1.4rem 1.5rem;
+    box-shadow: var(--nx-shadow-sm);
+}
+
+.sticky-toc h3,
+.sticky-toc__label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--nx-accent-text);
+    font-weight: 700;
+    margin: 0 0 0.85rem;
+}
+
+.sticky-toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sticky-toc ul li + li {
+    margin-top: 0.35rem;
+}
+
+.sticky-toc ul li a {
+    display: block;
+    color: var(--nx-text-secondary);
+    text-decoration: none;
+    padding: 0.45rem 0.55rem;
+    border-radius: var(--radius-md);
+    transition: var(--transition-colors), var(--transition-transform);
+}
+
+.sticky-toc ul li a:hover,
+.sticky-toc ul li a.active {
+    color: var(--nx-text);
+    background: hsl(var(--accent-hsl) / 0.1);
+    transform: translateX(3px);
+}
+
+.nexus-article-content,
+.prose {
+    background: var(--nx-card-gradient);
     border: 1px solid var(--nx-border);
     border-radius: var(--nx-radius-lg);
     max-width: none;
     margin: 0;
-    padding: clamp(1.2rem, 2vw, 2rem);
-    font-size: 1.1rem;
-    line-height: 1.75;
-    color: var(--nx-text-muted);
+    padding: clamp(1.4rem, 2.8vw, 2.4rem);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--nx-text-secondary);
+    box-shadow: var(--nx-shadow-sm);
 }
-.nexus-article-content h2 { 
-    font-size: 1.8rem;
+
+.nexus-article-content h2,
+.nexus-article-content h3,
+.nexus-article-content h4 {
     color: var(--nx-text);
-    margin-top: 2rem;
-    margin-bottom: 0.8rem;
-    border-left: 0;
-    padding-left: 0;
-    font-weight: 800;
-} 
+    letter-spacing: -0.02em;
+}
+
+.nexus-article-content h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    margin: 2.2rem 0 0.9rem;
+    font-weight: 700;
+}
+
 .nexus-article-content h2:first-child {
     margin-top: 0;
 }
+
 .nexus-article-content h3 {
-    font-size: 1.35rem;
-    margin-top: 1.6rem;
-    margin-bottom: 0.7rem;
-    color: var(--nx-text);
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+    margin: 1.75rem 0 0.75rem;
     font-weight: 700;
 }
+
 .nexus-article-content p,
 .nexus-article-content li {
-    color: var(--nx-text-muted);
-    line-height: 1.75;
+    color: var(--nx-text-secondary);
+    line-height: 1.8;
 }
+
 .nexus-article-content strong {
     color: var(--nx-text);
 }
-.nexus-article-content p {
-    margin-bottom: 1.1rem;
+
+.nexus-article-content a {
+    color: var(--nx-accent-text);
+    text-underline-offset: 0.18em;
 }
 
-/* Entfernt inline TOCs aus dem Content, da die Sidebar-TOC führend ist */
 .nexus-article-content .wp-block-table-of-contents,
 .nexus-article-content .ez-toc-container,
 .nexus-article-content .rank-math-toc-block,
@@ -154,150 +336,110 @@
     display: none !important;
 }
 
-/* 6. BOTTOM BEREICH */
-.nexus-bottom-share { 
-    max-width: 800px; margin: 4rem auto; padding-top: 2rem; 
-    border-top: 1px solid rgba(255,255,255,0.1); text-align: center; 
-} 
-.nexus-bottom-share .nexus-share-box { justify-content: center; }
+.nexus-bottom-share {
+    max-width: min(840px, calc(100vw - 2rem));
+    margin: clamp(3rem, 8vw, 5rem) auto 0;
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--nx-border);
+    text-align: center;
+}
+
+.nexus-bottom-share h3 {
+    margin-bottom: var(--space-4);
+    color: var(--nx-text);
+}
+
+.nexus-bottom-share .nexus-share-box {
+    justify-content: center;
+}
 
 .nexus-post-footer-cta {
-    background: rgba(255,255,255,0.03); padding: 80px 20px; text-align: center;
-    margin-top: 80px; border-top: 1px solid rgba(255,255,255,0.08);
+    background: var(--nx-card-gradient);
+    padding: clamp(3rem, 8vw, 5rem) 1.25rem;
+    text-align: center;
+    margin-top: clamp(3rem, 8vw, 5rem);
+    border-top: 1px solid var(--nx-border);
 }
+
 .nexus-btn {
-    display: inline-block; background: #ffb020; color: #000; font-weight: 800;
-    padding: 16px 32px; border-radius: 4px; text-decoration: none; text-transform: uppercase;
-    margin-top: 20px;
-}
-
-/* Neues Grid-Layout für Single Post */
-.nexus-post-layout {
-    display: grid;
-    grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
-    gap: 60px;
-    max-width: 1200px;
-    margin: 80px auto;
-    padding: 0 20px;
-    overflow: visible;
-}
-
-.nexus-sidebar {
-    display: block !important;
-    position: sticky;
-    top: 110px;
-    align-self: start;
-    height: fit-content;
-    z-index: 25;
-    overflow: visible;
-    width: 100%;
-    max-width: 280px;
-}
-.sticky-toc {
-    display: block !important;
-    position: relative;
-    top: auto;
-    background: rgba(255,176,32,0.06);
-    border: 1px solid rgba(255,176,32,0.15);
-    border-radius: 8px;
-    padding: 28px 32px;
-    margin-bottom: 3rem;
-    box-shadow: 0 2px 16px 0 rgba(255,176,32,0.07);
-}
-.sticky-toc h3 {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #ffb020;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.sticky-toc__label {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #ffb020;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-.sticky-toc ul {
-    margin: 0;
-    padding-left: 20px;
-    line-height: 2;
-}
-.sticky-toc ul li {
-    margin-bottom: 0.5em;
-}
-.sticky-toc ul li a {
-    color: #d4d4d4;
-    text-decoration: underline;
-    transition: color 0.2s;
-}
-.sticky-toc ul li a:hover,
-.sticky-toc ul li a.active {
-    color: #ffb020;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, var(--accent-hover), var(--accent));
+    color: var(--text-inverse);
+    font-weight: 800;
+    padding: 1rem 1.8rem;
+    border-radius: var(--radius-full);
     text-decoration: none;
-}
-.nexus-sidebar {
-    min-width: 240px;
-}
-.nexus-post-layout {
-    align-items: start;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 1.25rem;
+    box-shadow: 0 18px 36px hsl(var(--accent-hsl) / 0.24);
 }
 
-/* RESPONSIVE: Hero + Layout */
-@media (max-width: 768px) {
-    .nexus-article-hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-    }
-    .nexus-hero-image {
-        max-height: 50vh;
-    }
-    .nexus-hero-content {
-        padding: 40px 20px;
-    }
-    .nexus-title {
-        font-size: 2rem;
-    }
+:root[data-theme='light'] .nexus-article-hero,
+:root[data-nx-theme='light'] .nexus-article-hero,
+:root[data-theme='light'] .nexus-article-content,
+:root[data-nx-theme='light'] .nexus-article-content,
+:root[data-theme='light'] .sticky-toc,
+:root[data-nx-theme='light'] .sticky-toc,
+:root[data-theme='light'] .nexus-share-btn,
+:root[data-nx-theme='light'] .nexus-share-btn {
+    box-shadow: var(--shadow-sm);
 }
 
 @media (max-width: 1023px) {
+    .nexus-article-hero,
+    .nexus-article-hero--text-only {
+        grid-template-columns: 1fr;
+        max-width: calc(100vw - 1.5rem);
+    }
+
+    .nexus-hero-image {
+        min-height: clamp(240px, 58vw, 380px);
+    }
+
+    .nexus-title {
+        max-width: 100%;
+    }
+
     .nexus-post-layout {
         grid-template-columns: 1fr;
         gap: 1rem;
-        max-width: 100%;
-        margin: 40px auto;
-        padding: 0 12px;
+        max-width: calc(100vw - 1.5rem);
     }
+
     .nexus-sidebar {
-        display: block !important;
         position: static;
         top: auto;
-        z-index: auto;
-        margin-bottom: 0.75rem;
     }
+
     .sticky-toc {
-        top: auto;
-        margin-bottom: 0;
-        padding: 12px 14px;
-        border-radius: 10px;
-    }
-    .sticky-toc ul li a.active {
-        color: #ffb020;
-        background: transparent;
-        border-color: transparent;
+        padding: 1rem 1.1rem;
     }
 }
 
-@media (hover: none) and (pointer: coarse) {
-    .nexus-sidebar {
-        position: static;
-        top: auto;
+@media (max-width: 640px) {
+    .nexus-single-container {
+        padding-top: 1rem;
     }
 
-    .sticky-toc {
-        top: auto;
+    .nexus-article-hero {
+        max-width: calc(100vw - 1rem);
+        padding: 0.75rem;
+        border-radius: 20px;
+    }
+
+    .nexus-hero-content {
+        padding: 1rem 0.5rem 0.75rem;
+    }
+
+    .nexus-hero-footer {
+        align-items: flex-start;
+    }
+
+    .nexus-author-row,
+    .nexus-share-box {
+        width: 100%;
     }
 }

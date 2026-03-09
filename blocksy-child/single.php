@@ -17,13 +17,15 @@ get_header();
 
 	<?php while ( have_posts() ) : the_post(); ?>
 
-		<header class="nexus-article-hero" data-track-section="article_hero">
+		<?php $has_hero_image = has_post_thumbnail(); ?>
 
+		<header class="nexus-article-hero<?php echo $has_hero_image ? '' : ' nexus-article-hero--text-only'; ?>" data-track-section="article_hero">
+
+			<?php if ( $has_hero_image ) : ?>
 			<div class="nexus-hero-image">
-				<?php if ( has_post_thumbnail() ) : ?>
 					<?php the_post_thumbnail( 'full' ); ?>
-				<?php endif; ?>
 			</div>
+			<?php endif; ?>
 
 			<div class="nexus-hero-content">
 
