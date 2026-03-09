@@ -230,9 +230,43 @@ add_action(
 // ── 3. BLOCKSY TITLE OVERRIDE ────────────────────────────────────
 add_filter( 'blocksy:post_types:post:has_page_title', '__return_false' );
 
-// --- 4b. SITEMAP (Rank Math Pro) ---
-// WordPress-native Sitemap deaktivieren → Rank Math übernimmt /sitemap_index.xml
-add_filter( 'wp_sitemaps_enabled', '__return_false' );
+// --- 4b. SITEMAP ---
+// Solange Rank Math aktiv ist, bleibt die native WordPress-Sitemap aus.
+// Ohne Rank Math faellt die Site automatisch auf /wp-sitemap.xml zurueck.
+add_filter(
+	'wp_sitemaps_enabled',
+	function( $enabled ) {
+		if ( defined( 'RANK_MATH_VERSION' ) ) {
+			return false;
+		}
+
+		return $enabled;
+	}
+);
+
+// Leite die bisherige Rank-Math-Sitemap auf die native WordPress-Sitemap um,
+// falls Rank Math deaktiviert wird.
+add_action(
+	'template_redirect',
+	function() {
+		if ( defined( 'RANK_MATH_VERSION' ) || is_admin() || wp_doing_ajax() ) {
+			return;
+		}
+
+		$request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
+		$request_path = wp_parse_url( $request_uri, PHP_URL_PATH );
+		$request_path = '/' . ltrim( (string) $request_path, '/' );
+
+		if ( '/sitemap_index.xml' !== untrailingslashit( $request_path ) ) {
+			return;
+		}
+
+		nocache_headers();
+		wp_safe_redirect( home_url( '/wp-sitemap.xml' ), 302 );
+		exit;
+	},
+	1
+);
 
 // Rewrite Rules flushen bei Theme-Aktivierung (nötig für Rank Math Sitemap-Routen)
 add_action( 'after_switch_theme', function() {

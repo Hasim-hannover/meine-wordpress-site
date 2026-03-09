@@ -25,6 +25,58 @@ add_filter( 'rank_math/frontend/description', 'hu_rank_math_audit_description' )
 add_filter( 'document_title_parts', 'hu_document_title_overrides' );
 
 /**
+ * Determine whether a stored SEO string still contains unresolved token syntax.
+ *
+ * @param mixed $value Raw SEO value.
+ * @return bool
+ */
+function hu_seo_value_has_tokens( $value ) {
+	if ( ! is_string( $value ) || '' === trim( $value ) ) {
+		return false;
+	}
+
+	return (bool) preg_match( '/%[a-z0-9_-]+%/i', $value );
+}
+
+/**
+ * Read a pluginless SEO value from ACF first, then from stored Rank Math meta.
+ *
+ * @param int    $post_id       Post ID.
+ * @param string $acf_field     ACF field name.
+ * @param string $rank_math_key Rank Math post meta key.
+ * @return string
+ */
+function hu_get_stored_seo_value( $post_id, $acf_field, $rank_math_key ) {
+	$post_id = (int) $post_id;
+
+	if ( $post_id <= 0 ) {
+		return '';
+	}
+
+	if ( function_exists( 'get_field' ) && $acf_field ) {
+		$acf_value = get_field( $acf_field, $post_id );
+		if ( is_string( $acf_value ) && '' !== trim( $acf_value ) ) {
+			return trim( wp_strip_all_tags( $acf_value ) );
+		}
+	}
+
+	if ( ! $rank_math_key ) {
+		return '';
+	}
+
+	$rank_math_value = get_post_meta( $post_id, $rank_math_key, true );
+	if ( ! is_string( $rank_math_value ) || '' === trim( $rank_math_value ) ) {
+		return '';
+	}
+
+	if ( hu_seo_value_has_tokens( $rank_math_value ) ) {
+		return '';
+	}
+
+	return trim( wp_strip_all_tags( $rank_math_value ) );
+}
+
+/**
  * Check whether current query is the SEO cornerstone article.
  *
  * @return bool
@@ -115,8 +167,23 @@ function hu_rank_math_audit_description( $description ) {
  * @return array
  */
 function hu_document_title_overrides( $parts ) {
+	if ( hu_is_seo_cornerstone_article() ) {
+		$parts['title'] = 'Technisches SEO + Performance Marketing: Fundament fehlt';
+		return $parts;
+	}
+
 	if ( hu_is_audit_offer_page() ) {
 		$parts['title'] = 'Growth Audit für B2B-WordPress-Seiten';
+		return $parts;
+	}
+
+	if ( is_singular() ) {
+		$post_id    = get_queried_object_id();
+		$seo_title  = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+
+		if ( '' !== $seo_title ) {
+			$parts['title'] = $seo_title;
+		}
 	}
 
 	return $parts;
@@ -234,6 +301,8 @@ function hu_get_seo_meta() {
 
 	$noindex_slugs = [
 		'danke',
+		'danke-anfage-audit',
+		'danke-anfrage-audit',
 		'thank-you',
 		'portal',
 		'login',
@@ -246,15 +315,19 @@ function hu_get_seo_meta() {
 		$slug     = get_post_field( 'post_name', $post_id );
 
 		// noindex check: Template/Slug-basiert oder ACF-Feld
-		$acf_noindex = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
-		if ( in_array( $template, $noindex_templates, true ) || in_array( $slug, $noindex_slugs, true ) || $acf_noindex ) {
+		$acf_noindex      = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
+		$rank_math_robots = get_post_meta( $post_id, 'rank_math_robots', true );
+		$rank_math_noindex = is_array( $rank_math_robots ) ? in_array( 'noindex', $rank_math_robots, true ) : 'noindex' === $rank_math_robots;
+
+		if ( in_array( $template, $noindex_templates, true ) || in_array( $slug, $noindex_slugs, true ) || $acf_noindex || $rank_math_noindex ) {
 			$meta['robots'] = 'noindex, nofollow';
 		}
 
 		// ACF fields first (if ACF Pro is active)
+		$meta['description'] = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
+		$meta['og_title']    = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+
 		if ( function_exists( 'get_field' ) ) {
-			$meta['description'] = get_field( 'seo_description', $post_id ) ?: '';
-			$meta['og_title']    = get_field( 'seo_title', $post_id ) ?: '';
 			$og_image_arr        = get_field( 'og_image', $post_id );
 			if ( is_array( $og_image_arr ) && ! empty( $og_image_arr['url'] ) ) {
 				$meta['og_image'] = $og_image_arr['url'];
