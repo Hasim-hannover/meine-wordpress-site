@@ -7,8 +7,8 @@ Version: 7.1.1-FIXED
 :root {
     --theme-font-family: 'Figtree', 'Satoshi', sans-serif;
     --theme-font-heading: 'Outfit', 'Merriweather', sans-serif;
-    --hasim-audit-orange: #C99A57;
-    --hasim-audit-orange-hover: #D9B27A;
+    --hasim-audit-orange: hsl(4 75% 50%);
+    --hasim-audit-orange-hover: hsl(4 75% 58%);
     --theme-palette-color-1: var(--hasim-audit-orange);
     --nx-gold: var(--hasim-audit-orange);
     --nx-gold-hover: var(--hasim-audit-orange-hover);
@@ -16,13 +16,13 @@ Version: 7.1.1-FIXED
     --cta: var(--hasim-audit-orange);
     --font-body: var(--theme-font-family);
     --font-display: var(--theme-font-heading);
-    --brand-copper: hsl(22 70% 48%);
-    --text-primary: #E8E5E0;
+    --brand-copper: var(--hasim-audit-orange);
+    --text-primary: hsl(30 4% 90%);
     --nx-font-heading: var(--theme-font-heading);
 }
 
 :root[data-nx-theme='light'] {
-    --text-primary: #1F1C18;
+    --text-primary: hsl(30 10% 12%);
 }
 
 body,
@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     width: 100%;
     height: 1.5px;
-    background: var(--brand-copper);
+    background: var(--nx-accent-text);
     border-radius: 1px;
 }
 
@@ -204,7 +204,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 38px !important;
     min-height: 38px !important;
     padding: 0 16px !important;
-    border: 1.5px solid rgba(201, 154, 87, 0.55);
+    border: 1.5px solid color-mix(in srgb, var(--hasim-audit-orange) 55%, transparent);
     border-radius: 999px;
     color: var(--hasim-audit-orange) !important;
     background: var(--nx-bg-glass-light);
@@ -223,10 +223,10 @@ h1, h2, h3, h4, h5, h6 {
 #ct-header .menu-item.nav-cta-button > a:hover,
 .ct-header .menu > li.nav-cta-button > a:hover,
 .ct-header .ct-menu > li.nav-cta-button > a:hover {
-    background: rgba(201, 154, 87, 0.12);
+    background: color-mix(in srgb, var(--hasim-audit-orange) 12%, transparent);
     border-color: var(--hasim-audit-orange);
     color: var(--hasim-audit-orange) !important;
-    box-shadow: 0 10px 24px rgba(201, 154, 87, 0.12);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--hasim-audit-orange) 12%, transparent);
 }
 
 .ct-header .ct-menu > li.nav-cta-button.current-menu-item > a,
@@ -354,7 +354,7 @@ p.hero-stack,
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #ffb020;
+    color: var(--nx-accent-text);
     margin-bottom: 15px;
     display: block;
     border-bottom: 1px solid var(--nx-border);
@@ -397,7 +397,7 @@ p.hero-stack,
 /* --- 3. FOOTER --- */
 .ft {
     --bg: #0a0a0a; --fg: #fafafa; --line: rgba(255,255,255,.08);
-    --muted: rgba(255,255,255,.5); --cta: #ffb020;
+    --muted: rgba(255,255,255,.5); --cta: var(--nx-accent-text);
     background: var(--bg); color: var(--fg); width: 100%;
     border-top: 1px solid var(--line); font-size: .95rem;
 }
@@ -745,9 +745,9 @@ p.hero-stack,
 
 .nexus-pagination .page-numbers.current,
 .nexus-pagination .page-numbers:hover {
-    background: #ffb020;
+    background: var(--cta);
     color: #000;
-    border-color: #ffb020;
+    border-color: var(--cta);
     font-weight: 700;
 }
 
@@ -835,10 +835,10 @@ body:not(.single-post) .nexus-article-content {
 /* Hover Effekte */
 .nexus-share-btn:hover {
     transform: translateY(-3px);
-    background: #ffb020; /* Dein Gold */
+    background: var(--cta);
     color: #000;
-    border-color: #ffb020;
-    box-shadow: 0 5px 15px rgba(255, 176, 32, 0.2);
+    border-color: var(--cta);
+    box-shadow: 0 5px 15px color-mix(in srgb, var(--cta) 20%, transparent);
 }
 
 .nexus-share-btn svg {
@@ -1069,7 +1069,7 @@ button.nexus-share-btn {
 }
 
 .nd-card:hover {
-    border-color: rgba(255, 176, 32, 0.3);
+    border-color: color-mix(in srgb, var(--cta) 30%, transparent);
     transform: translateY(-2px);
 }
 
@@ -1093,9 +1093,9 @@ button.nexus-share-btn {
 
 .nd-badge {
     display: inline-block;
-    background: rgba(255, 176, 32, 0.1);
-    color: #ffb020;
-    border: 1px solid rgba(255, 176, 32, 0.2);
+    background: color-mix(in srgb, var(--cta) 10%, transparent);
+    color: var(--cta);
+    border: 1px solid color-mix(in srgb, var(--cta) 20%, transparent);
     font-size: 0.7rem;
     text-transform: uppercase;
     font-weight: 700;
@@ -1116,9 +1116,9 @@ button.nexus-share-btn {
 
 .nd-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #ffb020 0%, #ff8c00 100%);
+    background: linear-gradient(90deg, var(--cta) 0%, var(--hasim-audit-orange-hover) 100%);
     border-radius: 6px;
-    box-shadow: 0 0 15px rgba(255, 176, 32, 0.4);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--cta) 40%, transparent);
 }
 
 /* 6. Typography Helpers */
@@ -1161,7 +1161,7 @@ button.nexus-share-btn {
     border-radius: 50%;
     background: #333;
 }
-.status-active .dot { background: #ffb020; box-shadow: 0 0 8px #ffb020; }
+.status-active .dot { background: var(--cta); box-shadow: 0 0 8px var(--cta); }
 .status-done .dot { background: #10b981; box-shadow: 0 0 8px #10b981; }
 
 /* 8. Layout Helper */
@@ -1303,20 +1303,20 @@ button.nexus-share-btn {
 
 /* Zustand: Eingeloggt (Active / Gold) */
 .nexus-nav-btn.active {
-    background: rgba(255, 176, 32, 0.15);
-    border: 1px solid rgba(255, 176, 32, 0.3);
-    color: #ffb020 !important;
+    background: color-mix(in srgb, var(--cta) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cta) 30%, transparent);
+    color: var(--cta) !important;
 }
 .nexus-nav-btn.active:hover {
-    background: rgba(255, 176, 32, 0.25);
-    box-shadow: 0 0 15px rgba(255, 176, 32, 0.2);
+    background: color-mix(in srgb, var(--cta) 25%, transparent);
+    box-shadow: 0 0 15px color-mix(in srgb, var(--cta) 20%, transparent);
 }
 
 /* Der goldene Punkt */
 .indicator {
     font-size: 1.2em;
     line-height: 0;
-    color: #ffb020;
+    color: var(--cta);
     animation: pulse 2s infinite;
 }
 @keyframes pulse {
@@ -1336,16 +1336,16 @@ button.nexus-share-btn {
     font-weight: 700;
     letter-spacing: 0.03em;
     text-decoration: none !important;
-    background: #ffb020;
+    background: var(--cta);
     color: #000 !important;
     border: none;
     transition: all 0.2s ease;
     line-height: 1;
 }
 .nexus-header-cta:hover {
-    background: #ffc040;
+    background: var(--hasim-audit-orange-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(255,176,32,0.3);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--cta) 30%, transparent);
 }
 
 /* --- NEXUS PORTAL LAYOUT --- */
@@ -1950,8 +1950,8 @@ section.blog-preview,
 }
 
 :root[data-nx-theme='light'] .ft__portal {
-  border-color: rgba(201, 154, 87, 0.32);
-  background: rgba(201, 154, 87, 0.12);
+  border-color: hsl(var(--accent-hsl) / 0.32);
+  background: hsl(var(--accent-hsl) / 0.12);
 }
 
 :root[data-nx-theme='light'] .nexus-single-container,

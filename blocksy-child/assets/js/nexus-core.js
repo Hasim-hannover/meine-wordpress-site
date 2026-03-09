@@ -82,26 +82,63 @@
          * Falls kein data-value, wird innerText als Wert genommen.
          */
         initCounters: function (selector) {
-            selector = selector || '.nx-counter, .wp-metric-value';
+            selector = selector || '.nx-counter, .wp-metric-value, .counter';
             var elements = document.querySelectorAll(selector);
             if (!elements.length) return;
 
-            function animateValue(el, start, end, duration, prefix, suffix) {
+            function animateValue(el, end, duration, prefix, suffix, decimals) {
                 var startTime = null;
+
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    el.textContent = prefix + end.toFixed(decimals) + suffix;
+                    return;
+                }
+
                 function step(timestamp) {
                     if (!startTime) startTime = timestamp;
                     var progress = Math.min((timestamp - startTime) / duration, 1);
-                    // Ease-out cubic
-                    var ease = 1 - Math.pow(1 - progress, 3);
-                    var current = Math.floor(ease * (end - start) + start);
-                    el.textContent = prefix + current + suffix;
+                    var ease = 1 - Math.pow(1 - progress, 4);
+                    var current = end * ease;
+                    el.textContent = prefix + current.toFixed(decimals) + suffix;
                     if (progress < 1) {
                         window.requestAnimationFrame(step);
                     } else {
-                        el.textContent = prefix + end + suffix;
+                        el.textContent = prefix + end.toFixed(decimals) + suffix;
                     }
                 }
                 window.requestAnimationFrame(step);
+            }
+
+            function getCounterConfig(el) {
+                var explicitTarget = el.getAttribute('data-target');
+                var explicitValue = el.getAttribute('data-value');
+                var rawText = (el.textContent || '').trim();
+                var source = explicitTarget || explicitValue || rawText;
+                var normalized = source.replace(',', '.').replace(/[^0-9.+-]/g, '');
+                var target = parseFloat(normalized);
+
+                if (Number.isNaN(target)) {
+                    return null;
+                }
+
+                var prefix = el.getAttribute('data-prefix') || '';
+                var suffix = el.getAttribute('data-suffix') || '';
+                var decimals = 0;
+
+                if (normalized.indexOf('.') !== -1) {
+                    decimals = normalized.split('.')[1].length;
+                }
+
+                if (!prefix && rawText.charAt(0) === '+') {
+                    prefix = '+';
+                }
+
+                return {
+                    target: target,
+                    prefix: prefix,
+                    suffix: suffix,
+                    decimals: decimals
+                };
             }
 
             var observer = new IntersectionObserver(function (entries) {
@@ -109,25 +146,16 @@
                     if (!entry.isIntersecting) return;
 
                     var el = entry.target;
-                    var raw = el.getAttribute('data-value') || el.textContent.trim();
-
-                    // Nicht-numerische Werte: sofort anzeigen
-                    if (isNaN(parseInt(raw, 10))) {
+                    var config = getCounterConfig(el);
+                    if (!config) {
                         observer.unobserve(el);
                         return;
                     }
 
-                    var val = parseInt(raw, 10);
-                    var prefix = el.getAttribute('data-prefix') || '';
-                    var suffix = el.getAttribute('data-suffix') || '';
-
-                    // Auto-detect "+" Prefix
-                    if (raw.indexOf('+') !== -1 && !prefix) prefix = '+';
-
-                    animateValue(el, 0, val, 2000, prefix, suffix);
+                    animateValue(el, config.target, 1500, config.prefix, config.suffix, config.decimals);
                     observer.unobserve(el);
                 });
-            }, { threshold: 0.1 });
+            }, { threshold: 0.5 });
 
             elements.forEach(function (el) { observer.observe(el); });
         },
@@ -191,20 +219,29 @@
          *      .nx-reveal.nx-visible { opacity:1; transform:translateY(0); }
          */
         initReveal: function (selector) {
-            selector = selector || '.nx-reveal';
+            selector = selector || '.nx-reveal, .reveal, .reveal-stagger';
             var elements = document.querySelectorAll(selector);
             if (!elements.length) return;
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                elements.forEach(function (el) {
+                    el.classList.add('nx-visible');
+                    el.classList.add('is-visible');
+                });
+                return;
+            }
 
             var observer = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('nx-visible');
+                        entry.target.classList.add('is-visible');
                         observer.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.12,
+                rootMargin: '0px 0px -60px 0px'
             });
 
             elements.forEach(function (el) { observer.observe(el); });
@@ -212,7 +249,35 @@
 
 
         /**
-         * 7. TOC (Table of Contents) GENERATOR
+         * 7. CTA ATTENTION PULSE
+         * Einmaliger Impuls fuer die primaere Hero-CTA nach 5s Idle-Zeit.
+         */
+        initCtaPulse: function () {
+            var cta = document.querySelector('.hero .btn-primary, .hero .nx-btn--primary, .hero .wp-btn-primary, .nx-hero .nx-btn--primary, .wp-hero .wp-btn-primary');
+            if (!cta || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            var hasPulsed = false;
+            var pulseTimer = null;
+
+            function queuePulse() {
+                if (hasPulsed) return;
+                window.clearTimeout(pulseTimer);
+                pulseTimer = window.setTimeout(function () {
+                    cta.classList.add('btn-primary--pulse');
+                    hasPulsed = true;
+                }, 5000);
+            }
+
+            ['scroll', 'click', 'mousemove', 'touchstart'].forEach(function (eventName) {
+                document.addEventListener(eventName, queuePulse, { passive: true });
+            });
+
+            queuePulse();
+        },
+
+
+        /**
+         * 8. TOC (Table of Contents) GENERATOR
          * Scannt einen Container nach h2/h3 und befüllt eine TOC-Liste.
          */
         initToc: function (contentSelector, tocListSelector) {
@@ -270,7 +335,7 @@
 
 
         /**
-         * 8. TOC DUPLICATE CLEANUP
+         * 9. TOC DUPLICATE CLEANUP
          * Entfernt doppelte oder inline-injizierte TOCs im Artikelbereich.
          */
         cleanupDuplicateToc: function () {
@@ -299,7 +364,7 @@
 
 
         /**
-         * 9. HEADER FLIGHT MODE
+         * 10. HEADER FLIGHT MODE
          * Kompakter Header mit Glaseffekt beim Scrollen.
          * Fügt .nexus-flight-mode ab 50px Scroll hinzu.
          */
@@ -321,7 +386,7 @@
 
 
         /**
-         * 10. THEME TOGGLE
+         * 11. THEME TOGGLE
          * Persistiert Dark/Light-Auswahl und synchronisiert alle Toggle-Buttons.
          */
         initThemeToggle: function () {
@@ -354,7 +419,12 @@
             }
 
             function applyTheme(theme, persist) {
+                if (persist) {
+                    root.classList.add('theme-transitioning');
+                }
+
                 root.setAttribute('data-nx-theme', theme);
+                root.setAttribute('data-theme', theme);
                 root.style.colorScheme = theme;
                 syncButtons(theme);
 
@@ -364,6 +434,10 @@
                     } catch (error) {
                         // Storage kann im Privacy-Modus blockiert sein.
                     }
+
+                    window.setTimeout(function () {
+                        root.classList.remove('theme-transitioning');
+                    }, 350);
                 }
             }
 
@@ -407,6 +481,9 @@
 
             // Reveal Animations
             this.initReveal();
+
+            // Hero CTA pulse
+            this.initCtaPulse();
 
             // Progress Bar nur auf Single Posts
             if (document.querySelector('.nexus-single-container, .single-post')) {

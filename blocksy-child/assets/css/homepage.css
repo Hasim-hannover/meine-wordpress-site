@@ -10,8 +10,8 @@
   position: relative;
   isolation: isolate;
   background:
-    radial-gradient(circle at 8% 0%, rgba(201, 154, 87, 0.16), transparent 30%),
-    radial-gradient(circle at 86% 10%, rgba(135, 162, 188, 0.08), transparent 24%),
+    radial-gradient(circle at 8% 0%, hsl(var(--accent-hsl) / 0.16), transparent 30%),
+    radial-gradient(circle at 86% 10%, hsl(28 12% 20% / 0.18), transparent 24%),
     var(--nx-page-shell-gradient);
   color: var(--text-main);
   font-family: var(--nx-font, 'Figtree', sans-serif);
@@ -40,7 +40,7 @@
   width: 28rem;
   height: 28rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 154, 87, 0.12) 0%, rgba(201, 154, 87, 0.04) 38%, transparent 72%);
+  background: radial-gradient(circle, hsl(var(--accent-hsl) / 0.12) 0%, hsl(var(--accent-hsl) / 0.04) 38%, transparent 72%);
   filter: blur(18px);
   opacity: 0.85;
   pointer-events: none;
@@ -110,7 +110,7 @@
 .smart-nav a { display: flex; align-items: center; gap: 15px; color: var(--text-dim); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
 
 .nav-dot { width: 8px; height: 8px; background: var(--nx-dot-neutral); border-radius: 50%; flex-shrink: 0; transition: all 0.3s; box-shadow: 0 0 0 2px transparent; }
-.smart-nav a.active .nav-dot, .smart-nav a:hover .nav-dot { background: var(--gold); box-shadow: 0 0 14px rgba(217, 162, 77, 0.28); transform: scale(1.2); }
+.smart-nav a.active .nav-dot, .smart-nav a:hover .nav-dot { background: var(--gold); box-shadow: 0 0 14px hsl(var(--accent-hsl) / 0.28); transform: scale(1.2); }
 .smart-nav a.active, .smart-nav a:hover { color: var(--nx-text); }
 
 .nav-text { opacity: 0; transform: translateX(10px); transition: all 0.3s ease; }
@@ -144,7 +144,7 @@
 .wp-hero-title span { color: var(--nx-accent-text); }
 .wp-hero-subtitle { font-size: 1.1rem; color: var(--nx-text-secondary); max-width: 60ch; margin: 0 0 1.75rem; line-height: 1.74; }
 .wp-badge,
-.badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1rem; background: var(--nx-gold-subtle); border: 1px solid var(--nx-border-gold); color: var(--nx-accent-text); border-radius: 999px; font-size: 0.76rem; font-weight: 700; margin-bottom: 1.25rem; letter-spacing: 0.11em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(201, 154, 87, 0.08); }
+.badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1rem; background: var(--nx-gold-subtle); border: 1px solid var(--nx-border-gold); color: var(--nx-accent-text); border-radius: 999px; font-size: 0.76rem; font-weight: 700; margin-bottom: 1.25rem; letter-spacing: 0.11em; text-transform: uppercase; box-shadow: 0 10px 20px hsl(var(--accent-hsl) / 0.08); }
 .wp-trust-stack { color: var(--nx-text-dim); font-size: 0.9rem; margin-bottom: 2rem; }
 .wp-hero-proof {
   display: flex;
@@ -189,7 +189,7 @@
 
 .wp-hero-supporting-link a:hover {
   color: var(--nx-accent-text);
-  border-bottom-color: rgba(201, 154, 87, 0.32);
+  border-bottom-color: hsl(var(--accent-hsl) / 0.32);
 }
 
 /* Vertikale KPIs */
@@ -249,7 +249,7 @@
 /* --- 3. AUDIT CARD (Premium Look) --- */
 .audit-card-premium {
     background:
-      radial-gradient(circle at top left, rgba(201, 154, 87, 0.16), transparent 30%),
+      radial-gradient(circle at top left, hsl(var(--accent-hsl) / 0.16), transparent 30%),
       var(--nx-panel-gradient);
     border: 1px solid var(--nx-border); border-radius: var(--nx-radius-xl); padding: clamp(1.75rem, 4vw, 2.75rem);
     max-width: none; margin: 0; box-shadow: var(--nx-shadow-lg);
@@ -257,7 +257,7 @@
 }
 .audit-card-premium::before {
     content: ''; position: absolute; inset: 0; border-radius: var(--nx-radius-xl); padding: 1px;
-    background: linear-gradient(180deg, rgba(201, 154, 87, 0.62), rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.62), rgba(255, 255, 255, 0.1), transparent);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
 }
@@ -278,9 +278,9 @@
     align-items: center;
     min-height: 2rem;
     padding: 0.35rem 0.75rem;
-    background: rgba(201,154,87,0.15);
+    background: hsl(var(--accent-hsl) / 0.15);
     color: var(--gold);
-    border: 1px solid rgba(201, 154, 87, 0.24);
+    border: 1px solid hsl(var(--accent-hsl) / 0.24);
     border-radius: var(--nx-radius-pill);
     font-size: 0.76rem;
     font-weight: 700;
@@ -293,7 +293,7 @@
 .premium-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; color: var(--nx-text-secondary); }
 .premium-list strong { color: var(--nx-text); }
 .check-icon { color: var(--nx-accent-text); font-weight: bold; }
-.price-box { background: rgba(201, 154, 87, 0.12); border: 1px solid rgba(201, 154, 87, 0.16); color: var(--nx-accent-text); padding: 1rem; border-radius: var(--nx-radius-lg); margin-top: 1.5rem; font-weight: 600; }
+.price-box { background: hsl(var(--accent-hsl) / 0.12); border: 1px solid hsl(var(--accent-hsl) / 0.16); color: var(--nx-accent-text); padding: 1rem; border-radius: var(--nx-radius-lg); margin-top: 1.5rem; font-weight: 600; }
 .audit-card-premium__actions { margin-top: 1.25rem; }
 .audit-card-premium__microcopy { margin: 1rem 0 0; text-align: center; }
 .audit-card-premium__microcopy .micro-cta-link { margin: 0; }
@@ -316,7 +316,7 @@
     background: var(--nx-card-gradient-strong); border: 1px solid var(--nx-border); border-radius: var(--nx-radius-xl);
     padding: 2rem; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; box-shadow: var(--nx-shadow-sm); min-height: 100%;
 }
-.wp-success-card:hover { transform: translateY(-6px); border-color: rgba(201, 154, 87, 0.22); box-shadow: 0 24px 52px rgba(9, 14, 24, 0.18); }
+.wp-success-card:hover { transform: translateY(-6px); border-color: hsl(var(--accent-hsl) / 0.22); box-shadow: 0 24px 52px rgba(9, 14, 24, 0.18); }
 .wp-success-title { font-size: 1.4rem; color: var(--nx-text); margin-bottom: 0.5rem; letter-spacing: -0.015em; }
 .wp-success-subtitle { color: var(--nx-accent-text); font-size: 0.8rem; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.11em; }
 .wp-success-card p { color: var(--nx-text-secondary); line-height: 1.7; }
@@ -337,7 +337,7 @@
     background: var(--nx-card-gradient-strong); border: 1px solid var(--nx-border); border-radius: var(--nx-radius-xl);
     padding: 2rem; position: relative; transition: 0.3s; box-shadow: var(--nx-shadow-sm);
 }
-.wp-step:hover { border-color: rgba(201, 154, 87, 0.22); transform: translateY(-6px); }
+.wp-step:hover { border-color: hsl(var(--accent-hsl) / 0.22); transform: translateY(-6px); }
 .wp-step-num {
     background: var(--gold); color: #16110a; width: 46px; height: 46px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center; font-weight: 800;
@@ -347,12 +347,12 @@
 .wp-step p { color: var(--nx-text-secondary); font-size: 0.95rem; line-height: 1.7; }
 
 /* Highlight Step (Gold) */
-.highlight-step { border-color: rgba(201, 154, 87, 0.32); background: linear-gradient(180deg, rgba(201, 154, 87, 0.18), rgba(25, 33, 43, 0.94)); }
+.highlight-step { border-color: hsl(var(--accent-hsl) / 0.32); background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.18), rgba(25, 33, 43, 0.94)); }
 
 /* Buttons */
 .wp-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 1.5rem; border-radius: var(--nx-radius-pill); text-decoration: none; font-weight: 700; transition: 0.3s; cursor: pointer; text-align: center; }
-.wp-btn-primary { background: linear-gradient(180deg, var(--nx-gold-hover), var(--gold)); color: #16110a; box-shadow: 0 16px 34px rgba(217, 162, 77, 0.24); }
-.wp-btn-primary:hover { background: linear-gradient(180deg, #e4bf88, var(--nx-gold-hover)); transform: translateY(-2px); }
+.wp-btn-primary { background: linear-gradient(180deg, var(--nx-gold-hover), var(--gold)); color: var(--text-inverse); box-shadow: 0 16px 34px hsl(var(--accent-hsl) / 0.24); }
+.wp-btn-primary:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--nx-gold-hover) 78%, white), var(--nx-gold-hover)); transform: translateY(-2px); }
 .wp-btn-secondary { background: var(--nx-bg-glass-light); border: 1px solid var(--nx-border); color: var(--nx-text); box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
 .wp-btn-secondary:hover { border-color: var(--nx-border-hover); background: var(--nx-bg-glass-hover); }
 .full-width { width: 100%; display: block; }
@@ -464,7 +464,7 @@
 
 /* CTA & Share */
 .cta-box-nexus { 
-    background: rgba(255, 176, 32, 0.05); border: 1px solid var(--gold); 
+    background: hsl(var(--accent-hsl) / 0.05); border: 1px solid var(--gold); 
     padding: 3rem; border-radius: 16px; margin-top: 5rem; text-align: center; 
 }
 
@@ -528,8 +528,8 @@
 }
 
 .hero-bullets li {
-    background: rgba(255, 176, 32, 0.07);
-    border: 1px solid rgba(255, 176, 32, 0.2);
+    background: hsl(var(--accent-hsl) / 0.07);
+    border: 1px solid hsl(var(--accent-hsl) / 0.2);
     border-radius: 100px;
     padding: 5px 14px;
     font-size: 0.85rem;
@@ -580,11 +580,11 @@
 }
 
 :root[data-nx-theme='light'] .audit-card-premium::before {
-  background: linear-gradient(180deg, rgba(201, 154, 87, 0.52), rgba(24, 32, 40, 0.08), transparent);
+  background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.52), rgba(24, 32, 40, 0.08), transparent);
 }
 
 :root[data-nx-theme='light'] .audit-card-premium::after {
-  background: radial-gradient(circle, rgba(201, 154, 87, 0.12), transparent 68%);
+  background: radial-gradient(circle, hsl(var(--accent-hsl) / 0.12), transparent 68%);
 }
 
 :root[data-nx-theme='light'] .price-box {
@@ -592,7 +592,7 @@
 }
 
 :root[data-nx-theme='light'] .highlight-step {
-  background: linear-gradient(180deg, rgba(201, 154, 87, 0.16), rgba(255, 249, 241, 0.96));
+  background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.16), rgba(255, 249, 241, 0.96));
 }
 
 :root[data-nx-theme='light'] .hero-overlay-nexus {

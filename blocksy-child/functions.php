@@ -191,6 +191,7 @@ add_action(
 			}
 
 			document.documentElement.setAttribute('data-nx-theme', theme);
+			document.documentElement.setAttribute('data-theme', theme);
 			document.documentElement.style.colorScheme = theme;
 		})();
 		</script>

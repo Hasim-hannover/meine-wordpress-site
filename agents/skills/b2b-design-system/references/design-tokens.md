@@ -1,268 +1,355 @@
-# Design Tokens
+# Design Tokens Reference
 
-Use this file when the task is mainly visual: typography, spacing, color, surfaces, borders, or elevation.
+Complete token definitions for the B2B Premium Design System.
+Import these as CSS custom properties in your project root.
 
-## Typography Scale
+---
 
-Use a modular scale around `1.25`:
+## Color Philosophy: Monochrom-Warm mit Rot-Akzent
 
-```css
---font-size-xs: 0.75rem;
---font-size-sm: 0.875rem;
---font-size-base: 1rem;
---font-size-md: 1.125rem;
---font-size-lg: 1.25rem;
---font-size-xl: 1.5rem;
---font-size-2xl: 2rem;
---font-size-3xl: 2.5rem;
---font-size-4xl: 3.25rem;
---font-size-5xl: 4rem;
-```
+The palette is built on three neutral axes plus one accent:
+- **Black**: Deep, warm blacks with minimal brown undertone (not cold blue-black)
+- **Silver**: Cool metallic grays for structure, borders, secondary text
+- **Brown**: Warm mid-tones for surface elevation, hover warmth, subtle depth
+- **Red**: The ONLY chromatic color. Used exclusively for CTAs, active states, and emphasis. Sparingly.
 
-Use these pairings when new font assets are justified:
+The result feels like: polished concrete, brushed steel, dark leather, a single red thread.
 
-- Technical: `JetBrains Mono` + `Satoshi` or `Plus Jakarta Sans`
-- Editorial: `Instrument Serif` + `Satoshi`
-- Modern clean: `Plus Jakarta Sans`
-- Bold statement: `Clash Display` + `General Sans`
-- Refined: `Sora` + `DM Sans`
-- German B2B: `Bricolage Grotesque` + `Figtree`
-
-Never choose `Inter`, `Roboto`, `Open Sans`, `Lato`, `Montserrat`, `Poppins`, `Arial`, or `system-ui` as the primary family.
-
-If the repo already self-hosts a non-banned pair and performance matters more than a font migration, preserve the existing assets and improve hierarchy first.
-
-## Spacing System
-
-Stay on an 8px grid:
+## Complete Dark Mode Token Set
 
 ```css
---space-1: 0.25rem;
---space-2: 0.5rem;
---space-3: 0.75rem;
---space-4: 1rem;
---space-5: 1.25rem;
---space-6: 1.5rem;
---space-8: 2rem;
---space-10: 2.5rem;
---space-12: 3rem;
---space-16: 4rem;
---space-20: 5rem;
---space-24: 6rem;
---space-32: 8rem;
-```
+[data-theme="dark"],
+:root:not([data-theme="light"]) {
+  /* ─── Backgrounds (warm black base) ─── */
+  --bg-base:       hsl(30 6% 5%);        /* Deep warm black — not blue, not pure */
+  --bg-surface:    hsl(30 5% 8%);        /* Cards, panels — hint of warmth */
+  --bg-elevated:   hsl(30 4% 11%);       /* Hover states, active panels */
+  --bg-overlay:    hsl(30 4% 14%);       /* Modals, dropdowns, tooltips */
+  --bg-inset:      hsl(30 6% 3%);        /* Inset areas, code blocks — near black */
+  --bg-subtle:     hsl(30 5% 7%);        /* Alternating rows, subtle sections */
 
-Rules:
+  /* ─── Text (silver spectrum) ─── */
+  --text-primary:    hsl(30 4% 90%);      /* Warm white — headlines, body */
+  --text-secondary:  hsl(30 3% 58%);      /* Silver — descriptions, metadata */
+  --text-tertiary:   hsl(30 2% 38%);      /* Dark silver — placeholders, disabled */
+  --text-inverse:    hsl(30 6% 5%);       /* Text on accent/light backgrounds */
 
-- Section padding: `80px` to `128px`
-- Component gaps: `16px` to `32px`
-- Inline spacing: `8px` to `16px`
-- More space usually reads more premium if the hierarchy stays tight
+  /* ─── Borders (silver/steel) ─── */
+  --border-subtle:   hsl(30 4% 13%);      /* Faint — card borders, dividers */
+  --border-default:  hsl(30 3% 18%);      /* Medium — input borders, separators */
+  --border-emphasis: hsl(30 3% 25%);      /* Strong — focus rings, active */
+  --border-accent:   var(--accent);        /* Red — accent borders */
 
-## Color Philosophy
+  /* ─── Brown Layer (warmth & depth) ─── */
+  --brown-subtle:    hsl(28 12% 12%);     /* Subtle warm surface tint */
+  --brown-muted:     hsl(28 10% 18%);     /* Warm hover states */
+  --brown-medium:    hsl(25 14% 25%);     /* Active states, warm emphasis */
+  --brown-text:      hsl(28 12% 50%);     /* Brown as text accent (labels, tags) */
 
-Monochrom-Warm + Copper: warm graphite, cream vellum, and a single copper trace.
+  /* ─── Interactive States ─── */
+  --hover-overlay:   hsla(30 10% 100% / 0.04);  /* Warm hover on surfaces */
+  --active-overlay:  hsla(30 10% 100% / 0.08);  /* Active/pressed state */
+  --focus-ring:      hsla(var(--accent-hsl) / 0.5); /* Red focus ring */
 
-## Color Architecture
+  /* ─── Accent: Red (the only chromatic color) ─── */
+  --accent-hsl:     4 75% 50%;
+  --accent:         hsl(4 75% 50%);       /* Confident red — not fire-truck, not wine */
+  --accent-hover:   hsl(4 75% 58%);       /* Lighter on hover */
+  --accent-muted:   hsl(4 30% 18%);       /* Dark red tint for backgrounds */
+  --accent-subtle:  hsla(4 75% 50% / 0.1); /* Faint red wash */
 
-The system has only two axes:
+  /* ─── Silver Metallic (for special elements) ─── */
+  --silver-low:     hsl(30 3% 35%);       /* Dark silver — icons, dividers */
+  --silver-mid:     hsl(30 3% 55%);       /* Mid silver — secondary elements */
+  --silver-high:    hsl(30 2% 75%);       /* Bright silver — highlights, badges */
 
-- Warm neutrals on hue `30` to `35`, with saturation stepping down as lightness rises.
-- Copper on hue `22`, reserved for CTA fills, links, active states, and focus treatment.
+  /* ─── Semantic Colors (muted to match palette) ─── */
+  --success:       hsl(145 40% 45%);      /* Muted green — doesn't compete with red */
+  --warning:       hsl(38 70% 50%);       /* Warm amber */
+  --error:         var(--accent);          /* Red IS the error color */
+  --info:          hsl(210 40% 55%);      /* Muted steel-blue */
 
-Dark-mode backgrounds follow a measured progression of `1 / 3 / 5 / 8 / 11 / 14` lightness. Light-mode backgrounds follow `88 / 90 / 93 / 96 / 98 / 99` lightness. Keep the token names identical in both modes and do not introduce a third metallic or earthy track.
-
-### Dark Mode Tokens
-
-```css
-:root,
-[data-theme="dark"] {
-  /* Backgrounds */
-  --bg-inset: hsl(30 6% 1%); /* Deepest wells, media frames, and app gutters. */
-  --bg-base: hsl(30 6% 3%); /* Primary page background and full-bleed canvas. */
-  --bg-subtle: hsl(30 5% 5%); /* Slightly lifted bands behind grouped content. */
-  --bg-surface: hsl(30 4% 8%); /* Default card, section, and input surface. */
-  --bg-elevated: hsl(30 3% 11%); /* Hovered cards, drawers, and layered panels. */
-  --bg-overlay: hsl(30 2% 14%); /* Modal backplates and strong overlay surfaces. */
-
-  /* Text */
-  --text-primary: hsl(30 3% 94%); /* Main copy and headings on dark surfaces. */
-  --text-secondary: hsl(30 2% 56%); /* Supporting copy, labels, and metadata. */
-  --text-tertiary: hsl(30 2% 43%); /* Quiet captions, separators, and disabled text. */
-  --text-inverse: hsl(0 0% 100%); /* Highest-contrast label for copper-filled controls. */
-
-  /* Borders */
-  --border-subtle: hsl(30 5% 16%); /* Hairlines between adjacent dark surfaces. */
-  --border-default: hsl(30 5% 22%); /* Standard card, field, and divider stroke. */
-  --border-emphasis: hsl(30 5% 30%); /* Strong outline for selected or sticky UI. */
-  --border-accent: hsl(30 6% 38%); /* Premium neutral outline when accent-adjacent UI needs lift without extra chroma. */
-
-  /* Accent */
-  --accent-hsl: 22 70% 48%; /* Brand copper anchor for derived UI steps. */
-  --accent: hsl(22 67% 44%); /* Primary copper fill for CTA buttons and active controls. */
-  --accent-hover: hsl(22 69% 40%); /* Pressed and hover copper fill with stronger label contrast. */
-  --accent-muted: hsl(22 38% 26%); /* Low-energy copper for restrained badges and data markers. */
-  --accent-subtle: hsl(22 67% 44% / 0.14); /* Transparent copper wash for selected states, never full panels. */
-  --accent-text: hsl(22 70% 47%); /* Brighter inline copper for links and small text on near-black surfaces. */
-
-  /* Interactive */
-  --hover-overlay: hsl(30 10% 96% / 0.06); /* Neutral lift layered over cards and buttons on hover. */
-  --active-overlay: hsl(30 10% 96% / 0.1); /* Stronger neutral press state for dense UI. */
-  --focus-ring: hsl(22 67% 44% / 0.38); /* Copper halo reserved for keyboard focus visibility. */
-
-  /* Semantic */
-  --success: hsl(148 36% 42%); /* Restrained confirmation hue that stays secondary to copper. */
-  --warning: hsl(46 74% 55%); /* Amber caution hue, separated from copper on the hue axis. */
-  --error: hsl(6 58% 55%); /* Muted critical hue with clear distance from copper. */
-  --info: hsl(212 28% 58%); /* Steel-blue informational cue for neutral system messaging. */
-
-  /* Gradients */
-  --gradient-surface: linear-gradient(180deg, hsl(30 5% 10%) 0%, hsl(30 4% 7%) 100%); /* Neutral surface depth for panels and strips. */
-  --gradient-glow: radial-gradient(circle at top, hsl(30 6% 18% / 0.32) 0%, hsl(30 4% 8% / 0) 70%); /* Warm ambient glow without extra chroma. */
-  --gradient-hero: linear-gradient(135deg, hsl(30 6% 4%) 0%, hsl(30 4% 8%) 50%, hsl(30 3% 12%) 100%); /* Large-format hero backdrop with stacked neutral depth. */
-  --gradient-warm: linear-gradient(180deg, hsl(35 8% 13%) 0%, hsl(30 5% 6%) 100%); /* Warm atmospheric wash for premium sections. */
+  /* ─── Gradients ─── */
+  --gradient-surface:  linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-base) 100%);
+  --gradient-glow:     radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 30%),
+                         hsla(var(--accent-hsl) / 0.05) 0%, transparent 100%);
+  --gradient-hero:     radial-gradient(ellipse 80% 60% at 50% -10%,
+                         hsla(var(--accent-hsl) / 0.08) 0%, transparent 70%);
+  --gradient-warm:     radial-gradient(ellipse 60% 50% at 50% 50%,
+                         hsla(28 12% 12% / 0.5) 0%, transparent 70%);
+  --gradient-text:     linear-gradient(135deg, var(--text-primary) 0%, var(--silver-mid) 100%);
 }
 ```
 
-### Light Mode Tokens
+## Complete Light Mode Token Set
 
 ```css
 [data-theme="light"] {
-  /* Backgrounds */
-  --bg-inset: hsl(35 14% 88%); /* Recessed wells, app chrome, and muted table bands. */
-  --bg-base: hsl(35 12% 90%); /* Main cream canvas for light-mode pages. */
-  --bg-subtle: hsl(35 10% 93%); /* Quiet section split and low-pressure striping. */
-  --bg-surface: hsl(35 8% 96%); /* Standard cards, forms, and content panels. */
-  --bg-elevated: hsl(35 6% 98%); /* Raised panels that rely on shadow for lift. */
-  --bg-overlay: hsl(35 4% 99%); /* Modal sheets and overlay surfaces on light mode. */
+  /* ─── Backgrounds (warm stone/cream — NOT cold white) ─── */
+  --bg-base:       hsl(35 12% 96%);       /* Warm off-white — like aged paper */
+  --bg-surface:    hsl(35 10% 93%);       /* Stone surface — cards, panels */
+  --bg-elevated:   hsl(35 14% 98%);       /* Bright cream — elevated cards (with shadow) */
+  --bg-overlay:    hsl(35 14% 99%);       /* Near-white — modals, dropdowns */
+  --bg-inset:      hsl(35 8% 90%);        /* Warm gray — code blocks, inset areas */
+  --bg-subtle:     hsl(35 8% 92%);        /* Subtle warm gray — alternating rows */
 
-  /* Text */
-  --text-primary: hsl(30 10% 10%); /* Main copy and headings on cream surfaces. */
-  --text-secondary: hsl(30 8% 36%); /* Supporting copy, body metadata, and helper text. */
-  --text-tertiary: hsl(30 6% 46%); /* Quiet labels, dividers, and low-priority text. */
-  --text-inverse: hsl(0 0% 100%); /* White label used on copper-filled controls. */
+  /* ─── Text (warm blacks & browns) ─── */
+  --text-primary:    hsl(30 10% 12%);      /* Warm near-black — never pure black */
+  --text-secondary:  hsl(30 6% 38%);       /* Warm dark gray — descriptions */
+  --text-tertiary:   hsl(30 4% 52%);       /* Medium gray — placeholders */
+  --text-inverse:    hsl(35 12% 96%);      /* Light text on dark/accent backgrounds */
 
-  /* Borders */
-  --border-subtle: hsl(35 8% 82%); /* Hairline separation on the light canvas. */
-  --border-default: hsl(35 8% 74%); /* Standard card, field, and divider stroke. */
-  --border-emphasis: hsl(35 8% 64%); /* Strong neutral outline for selected surfaces. */
-  --border-accent: hsl(35 10% 54%); /* Warm neutral outline for premium emphasis without chroma bleed. */
+  /* ─── Borders (warm grays) ─── */
+  --border-subtle:   hsl(30 6% 86%);       /* Light warm border */
+  --border-default:  hsl(30 5% 80%);       /* Input borders */
+  --border-emphasis: hsl(30 4% 68%);       /* Focus, active */
 
-  /* Accent */
-  --accent-hsl: 22 70% 48%; /* Brand copper anchor for derived UI steps. */
-  --accent: hsl(22 70% 40%); /* Darker copper fill required for cream-background CTA contrast. */
-  --accent-hover: hsl(22 72% 36%); /* Hover and pressed copper fill for stronger button hierarchy. */
-  --accent-muted: hsl(22 42% 74%); /* Soft copper tint for restrained badges and indicators. */
-  --accent-subtle: hsl(22 70% 40% / 0.12); /* Transparent copper wash for selected states and chips. */
-  --accent-text: hsl(22 75% 36%); /* Inline copper for links and small text on cream backgrounds. */
+  /* ─── Brown Layer (light mode warmth) ─── */
+  --brown-subtle:    hsl(28 10% 88%);      /* Warm surface tint */
+  --brown-muted:     hsl(28 8% 82%);       /* Warm hover */
+  --brown-medium:    hsl(25 12% 70%);      /* Active states */
+  --brown-text:      hsl(25 18% 38%);      /* Brown text accent — tags, labels */
 
-  /* Interactive */
-  --hover-overlay: hsl(30 10% 10% / 0.04); /* Neutral hover wash layered over light surfaces. */
-  --active-overlay: hsl(30 10% 10% / 0.08); /* Stronger neutral press state. */
-  --focus-ring: hsl(22 75% 36% / 0.28); /* Copper focus halo tuned for the light canvas. */
+  /* ─── Interactive States ─── */
+  --hover-overlay:   hsla(30 10% 10% / 0.03);
+  --active-overlay:  hsla(30 10% 10% / 0.06);
+  --focus-ring:      hsla(var(--accent-hsl) / 0.3);
 
-  /* Semantic */
-  --success: hsl(148 42% 34%); /* Restrained confirmation hue that stays secondary to copper. */
-  --warning: hsl(46 78% 41%); /* Amber caution hue with clear separation from copper. */
-  --error: hsl(6 64% 42%); /* Muted critical hue with enough distance from copper. */
-  --info: hsl(212 32% 42%); /* Steel-blue informational cue for neutral system messaging. */
+  /* ─── Accent: Red (deeper/richer in light mode) ─── */
+  --accent-hsl:     4 72% 42%;
+  --accent:         hsl(4 72% 42%);        /* Darker red for light bg contrast */
+  --accent-hover:   hsl(4 72% 36%);        /* Even darker on hover */
+  --accent-muted:   hsl(4 25% 92%);        /* Very faint red wash */
+  --accent-subtle:  hsla(4 72% 42% / 0.06); /* Barely-there red tint */
 
-  /* Gradients */
-  --gradient-surface: linear-gradient(180deg, hsl(35 10% 97%) 0%, hsl(35 8% 94%) 100%); /* Soft neutral surface depth for panels and strips. */
-  --gradient-glow: radial-gradient(circle at top, hsl(35 18% 99% / 0.92) 0%, hsl(35 8% 96% / 0) 72%); /* Warm ambient glow without introducing chroma. */
-  --gradient-hero: linear-gradient(135deg, hsl(35 14% 92%) 0%, hsl(35 8% 97%) 55%, hsl(35 6% 99%) 100%); /* Large-format hero backdrop with layered cream depth. */
-  --gradient-warm: linear-gradient(180deg, hsl(35 18% 95%) 0%, hsl(30 12% 90%) 100%); /* Warm neutral wash for premium section breaks. */
+  /* ─── Silver Metallic (light mode variants) ─── */
+  --silver-low:     hsl(30 4% 65%);
+  --silver-mid:     hsl(30 3% 50%);
+  --silver-high:    hsl(30 2% 35%);        /* Inverted: darker = more prominent in light */
+
+  /* ─── Shadows (PRIMARY elevation in light mode — warm-tinted) ─── */
+  --shadow-xs:  0 1px 2px hsla(30 10% 10% / 0.04);
+  --shadow-sm:  0 1px 3px hsla(30 10% 10% / 0.05),
+                0 1px 2px hsla(30 10% 10% / 0.04);
+  --shadow-md:  0 4px 6px hsla(30 10% 10% / 0.05),
+                0 2px 4px hsla(30 10% 10% / 0.04);
+  --shadow-lg:  0 10px 25px hsla(30 10% 10% / 0.07),
+                0 4px 10px hsla(30 10% 10% / 0.04);
+  --shadow-xl:  0 20px 50px hsla(30 10% 10% / 0.09),
+                0 8px 20px hsla(30 10% 10% / 0.04);
+
+  /* ─── Gradients (warm, soft) ─── */
+  --gradient-surface:  linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-surface) 100%);
+  --gradient-hero:     radial-gradient(ellipse 80% 50% at 50% 0%,
+                         hsla(var(--accent-hsl) / 0.04) 0%, transparent 70%);
+  --gradient-warm:     radial-gradient(ellipse 60% 50% at 50% 50%,
+                         hsla(28 12% 80% / 0.3) 0%, transparent 70%);
 }
 ```
 
-## Contrast Validation
+---
 
-Dark mode note: with `--bg-base` held at `3%` lightness and copper constrained to a mid-value accent, no single copper swatch can exceed `4.5:1` against both `--bg-base` and pure white at the same time because the page-base-to-white ceiling is `20.06:1`. The chosen dark `--accent` is the closest balanced midpoint for fill use; use `--accent-text` for inline copper on dark surfaces.
-
-### Dark Mode Ratios
-
-| Combination | Ratio | Target | Result |
-| --- | ---: | ---: | --- |
-| `--text-primary` on `--bg-base` | `17.57:1` | `14:1` | Pass |
-| `--text-primary` on `--bg-surface` | `16.06:1` | `12:1` | Pass |
-| `--text-secondary` on `--bg-base` | `6.21:1` | `6:1` | Pass |
-| `--text-secondary` on `--bg-surface` | `5.68:1` | `5:1` | Pass |
-| `--text-tertiary` on `--bg-base` | `3.93:1` | `3.5:1` | Pass |
-| `--accent` on `--bg-base` | `4.48:1` | `4.5:1` | Closest feasible midpoint |
-| `--accent` on `--bg-surface` | `4.09:1` | `3.5:1` | Pass |
-| `--text-inverse` on `--accent` | `4.48:1` | `4.5:1` | Closest feasible midpoint |
-| `--accent-text` on `--bg-base` | `5.08:1` | `4.5:1` | Pass |
-| `--accent-text` on `--bg-surface` | `4.64:1` | `4.5:1` | Pass |
-
-### Light Mode Ratios
-
-| Combination | Ratio | Target | Result |
-| --- | ---: | ---: | --- |
-| `--text-primary` on `--bg-base` | `14.00:1` | `14:1` | Pass |
-| `--text-primary` on `--bg-surface` | `15.98:1` | `12:1` | Pass |
-| `--text-secondary` on `--bg-base` | `5.30:1` | `5:1` | Pass |
-| `--text-tertiary` on `--bg-base` | `3.63:1` | `3.5:1` | Pass |
-| `--accent` on `--bg-base` | `4.17:1` | `3.5:1` | Pass |
-| `--accent` on `--bg-surface` | `4.77:1` | `3.5:1` | Pass |
-| `--accent-text` on `--bg-base` | `4.84:1` | `4.5:1` | Pass |
-| `--accent-text` on `--bg-surface` | `5.53:1` | `4.5:1` | Pass |
-| `--text-inverse` on `--accent` | `5.20:1` | `4.5:1` | Pass |
-
-## Radius System
-
-Use one radius system per page or project:
+## Typography Token Set
 
 ```css
---radius-sm: 4px;
---radius-md: 8px;
---radius-lg: 12px;
---radius-xl: 16px;
---radius-full: 9999px;
-```
+:root {
+  /* ─── Font Families ─── */
+  /* Set these per project. Examples: */
+  --font-display: 'Bricolage Grotesque', sans-serif;  /* Headlines */
+  --font-body:    'Figtree', sans-serif;               /* Body text */
+  --font-mono:    'JetBrains Mono', monospace;         /* Code, data */
 
-Choose one personality:
+  /* ─── Font Sizes (Modular Scale 1.25) ─── */
+  --text-xs:    0.75rem;    /* 12px */
+  --text-sm:    0.875rem;   /* 14px */
+  --text-base:  1rem;       /* 16px */
+  --text-md:    1.125rem;   /* 18px */
+  --text-lg:    1.25rem;    /* 20px */
+  --text-xl:    1.5rem;     /* 24px */
+  --text-2xl:   2rem;       /* 32px */
+  --text-3xl:   2.5rem;     /* 40px */
+  --text-4xl:   3.25rem;    /* 52px */
+  --text-5xl:   4rem;       /* 64px */
 
-- Sharp: `2 / 4 / 6`
-- Soft: `6 / 10 / 16`
-- Round: `8 / 12 / 20`
+  /* ─── Font Weights ─── */
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
 
-Mixing sharp and soft component families is an amateur tell.
+  /* ─── Line Heights ─── */
+  --leading-tight:   1.15;   /* Headlines */
+  --leading-snug:    1.3;    /* Subheadlines */
+  --leading-normal:  1.55;   /* Body text */
+  --leading-relaxed: 1.7;    /* Long-form reading */
 
-## Shadows and Elevation
+  /* ─── Letter Spacing ─── */
+  --tracking-tight:  -0.02em;  /* Large headlines */
+  --tracking-normal: 0em;      /* Body */
+  --tracking-wide:   0.04em;   /* Overlines, labels */
+  --tracking-wider:  0.08em;   /* ALL-CAPS labels */
 
-Dark mode still relies on border plus background-lightness first. Shadows stay understated and warm-tinted with hue `30`.
-
-```css
-:root,
-[data-theme="dark"] {
-  --shadow-sm: 0 1px 2px hsl(30 25% 2% / 0.36); /* Tight shadow for menus, pills, and sticky edges. */
-  --shadow-md: 0 8px 24px hsl(30 25% 2% / 0.42); /* Standard shadow for drawers and raised cards. */
-  --shadow-lg: 0 18px 48px hsl(30 25% 2% / 0.52); /* Deep shadow for modals and large overlays. */
-  --shadow-xl: 0 28px 72px hsl(30 25% 2% / 0.58); /* Maximum shadow for hero modals and full-screen takeovers. */
+  /* ─── Paragraph Width ─── */
+  --measure-narrow: 45ch;   /* Narrow columns */
+  --measure-base:   60ch;   /* Default body */
+  --measure-wide:   75ch;   /* Wide content */
 }
 ```
 
-Light mode uses shadows as the primary elevation signal. Keep them warm, layered, and never blue-grey.
+### Heading Styles (Copy-Paste Ready)
 
 ```css
-[data-theme="light"] {
-  --shadow-sm: 0 1px 2px hsl(30 18% 24% / 0.06), 0 4px 10px hsl(30 14% 18% / 0.04); /* Baseline lift for cards and inputs. */
-  --shadow-md: 0 10px 30px hsl(30 18% 24% / 0.1), 0 4px 12px hsl(30 14% 18% / 0.06); /* Default panel elevation on the cream canvas. */
-  --shadow-lg: 0 22px 60px hsl(30 18% 24% / 0.14), 0 10px 24px hsl(30 14% 18% / 0.08); /* High-lift panels, flyouts, and proof blocks. */
-  --shadow-xl: 0 34px 84px hsl(30 18% 24% / 0.18), 0 14px 32px hsl(30 14% 18% / 0.1); /* Largest premium surfaces such as hero cards and modals. */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--text-primary);
+}
+
+.overline {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.body-large {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--text-secondary);
+  max-width: var(--measure-base);
 }
 ```
 
-## Practical Repo Guidance
+---
 
-- Prefer token edits in `blocksy-child/assets/css/design-system.css`
-- Keep page exceptions in the page stylesheet instead of hardcoding new one-off values everywhere
-- Web fonts should usually stay at two weights max
+## Spacing Token Set
 
-## Accessibility Check
+```css
+:root {
+  /* ─── Base Grid: 4px ─── */
+  --space-0:   0;
+  --space-1:   0.25rem;   /*  4px */
+  --space-2:   0.5rem;    /*  8px */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+  --space-32:  8rem;      /* 128px */
+  --space-40:  10rem;     /* 160px */
 
-- Body text must hit WCAG AA contrast
-- CTA should be the highest-contrast actionable element
-- Use `--accent-text`, not `--accent`, for small copper links on light surfaces
-- Avoid gradient text on light backgrounds
-- Do not hide structure behind ultra-soft borders
+  /* ─── Semantic Spacing ─── */
+  --section-y:     var(--space-24);     /* Vertical padding between sections */
+  --section-y-sm:  var(--space-16);     /* Compact sections */
+  --section-y-lg:  var(--space-32);     /* Hero, CTA — premium breathing room */
+  --container-x:   var(--space-6);      /* Horizontal page padding (mobile) */
+  --container-max:  1200px;             /* Max content width */
+  --container-narrow: 800px;            /* Text-heavy content */
+
+  /* ─── Component Spacing ─── */
+  --card-padding:    var(--space-8);
+  --card-gap:        var(--space-6);
+  --input-padding-x: var(--space-4);
+  --input-padding-y: var(--space-3);
+  --button-padding-x: var(--space-6);
+  --button-padding-y: var(--space-3);
+  --cta-isolation:    var(--space-12);  /* Min space around primary CTA */
+}
+
+/* ─── Container Utility ─── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-x);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+/* ─── Section Utility ─── */
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--compact {
+  padding-block: var(--section-y-sm);
+}
+
+.section--hero {
+  padding-block: var(--section-y-lg);
+}
+```
+
+---
+
+## Z-Index Scale
+
+```css
+:root {
+  --z-base:     0;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-toast:    500;
+  --z-tooltip:  600;
+}
+```
+
+---
+
+## Transition Tokens
+
+```css
+:root {
+  /* ─── Durations ─── */
+  --duration-fast:   120ms;
+  --duration-normal: 200ms;
+  --duration-slow:   350ms;
+  --duration-reveal: 600ms;
+
+  /* ─── Easings ─── */
+  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);   /* Smooth deceleration */
+  --ease-bounce:  cubic-bezier(0.34, 1.56, 0.64, 1); /* Slight overshoot */
+  --ease-spring:  cubic-bezier(0.175, 0.885, 0.32, 1.1); /* Springy */
+  --ease-linear:  linear;
+
+  /* ─── Common Transitions ─── */
+  --transition-colors: color var(--duration-fast) var(--ease-default),
+                        background-color var(--duration-fast) var(--ease-default),
+                        border-color var(--duration-fast) var(--ease-default);
+  --transition-transform: transform var(--duration-normal) var(--ease-default);
+  --transition-shadow:    box-shadow var(--duration-normal) var(--ease-default);
+  --transition-all:       all var(--duration-normal) var(--ease-default);
+}
+```
