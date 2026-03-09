@@ -19,13 +19,13 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
 
 <div class="nexus-container">
     <section id="about-hero" class="hero-story">
-        <div class="hero-content">
-            <div class="story-opener">
-                <h1 class="story-headline">Über mich</h1>
-                <h2>Eine Website sollte 2026 mehr sein als eine digitale Visitenkarte.</h2>
-                <p>Ich entwickle Websites nicht als dekorative Oberfläche, sondern als geschäftlich relevantes System.<br>Ein System, das Orientierung schafft, Vertrauen aufbaut und dazu beiträgt, dass aus Aufmerksamkeit qualifizierte Anfragen werden.</p>
-                <p>Viele Unternehmen sind online präsent. Aber ihre Website leistet zu wenig. Sie sieht ordentlich aus, sagt aber nicht präzise genug, worum es geht, wofür das Unternehmen steht und warum man gerade hier anfragen sollte.</p>
-                <div class="about-hero-ctas">
+        <div class="hero-content" style="display:flex; flex-wrap:wrap; align-items:center; gap:3rem;">
+            <div class="story-opener" style="flex:1; min-width:280px;">
+                <h1 class="story-headline" style="margin-bottom:2rem;">Über mich</h1>
+                <h2 style="margin-bottom:1.5rem;">Eine Website sollte 2026 mehr sein als eine digitale Visitenkarte.</h2>
+                <p style="margin-bottom:1.2rem;">Ich entwickle Websites nicht als dekorative Oberfläche, sondern als geschäftlich relevantes System.<br>Ein System, das Orientierung schafft, Vertrauen aufbaut und dazu beiträgt, dass aus Aufmerksamkeit qualifizierte Anfragen werden.</p>
+                <p style="margin-bottom:2rem;">Viele Unternehmen sind online präsent. Aber ihre Website leistet zu wenig. Sie sieht ordentlich aus, sagt aber nicht präzise genug, worum es geht, wofür das Unternehmen steht und warum man gerade hier anfragen sollte.</p>
+                <div class="about-hero-ctas" style="margin-bottom:2.5rem;">
                     <a href="<?php echo esc_url( $audit_url ); ?>"
                        class="btn btn-primary"
                        data-track-action="cta_about_hero_audit"
@@ -33,6 +33,14 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
                         Growth Audit starten
                     </a>
                 </div>
+            </div>
+            <div class="hero-image-wrapper" style="flex:0 0 340px; max-width:340px;">
+                <img src="https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp"
+                     alt="Hasim Üner – Growth Architect für B2B-WordPress-Websites, spezialisiert auf Lead-Generierung und Conversion-Optimierung in Hannover und DACH"
+                     loading="eager"
+                     width="340"
+                     height="420"
+                     style="border-radius:1.2rem; box-shadow:0 4px 24px rgba(0,0,0,0.08); margin-top:1rem;">
             </div>
         </div>
     </section>
