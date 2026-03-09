@@ -61,44 +61,44 @@ function hu_output_schema()
         ],
 
         'customer-journey-audit' => [
-            'name'        => 'Growth Audit',
-            'description' => 'Diagnose-Einstieg für B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel prüfen.',
-            'serviceType' => 'Growth Audit',
-            'serviceOutput' => 'Priorisierte Einschätzung der größten Nachfrage-Bremsen',
+            'name'        => 'Kostenloser Startseiten-Review',
+            'description' => 'Kostenloser persönlicher Startseiten-Review für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
+            'serviceType' => 'Startseiten-Review',
+            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Growth Audit',
+                    'name'          => 'Kostenloser Startseiten-Review',
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Erster Diagnose-Schritt für WordPress-Präsenzen mit unklarer Lead-Performance'
+                    'description'   => 'Kostenloser Ersteinstieg für B2B-WordPress-Seiten mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'growth-audit' => [
-            'name'        => 'Growth Audit',
-            'description' => 'Diagnose-Einstieg für B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel prüfen.',
-            'serviceType' => 'Growth Audit',
-            'serviceOutput' => 'Priorisierte Einschätzung der größten Nachfrage-Bremsen',
+            'name'        => 'Kostenloser Startseiten-Review',
+            'description' => 'Kostenloser persönlicher Startseiten-Review für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
+            'serviceType' => 'Startseiten-Review',
+            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Growth Audit',
+                    'name'          => 'Kostenloser Startseiten-Review',
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Erster Diagnose-Schritt für WordPress-Präsenzen mit unklarer Lead-Performance'
+                    'description'   => 'Kostenloser Ersteinstieg für B2B-WordPress-Seiten mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'audit' => [
-            'name'        => 'Growth Audit',
-            'description' => 'Diagnose-Einstieg für B2B-Unternehmen mit WordPress: Sichtbarkeit, Vertrauen, Messbarkeit und Conversion im Zusammenspiel prüfen.',
-            'serviceType' => 'Growth Audit',
-            'serviceOutput' => 'Priorisierte Einschätzung der größten Nachfrage-Bremsen'
+            'name'        => 'Kostenloser Startseiten-Review',
+            'description' => 'Kostenloser persönlicher Startseiten-Review für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
+            'serviceType' => 'Startseiten-Review',
+            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite'
         ],
 
         '360-deep-dive' => [

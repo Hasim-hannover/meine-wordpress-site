@@ -10,7 +10,8 @@
   var state = {
     stepIndex: 0,
     steps: [],
-    submitting: false
+    submitting: false,
+    lastTrackedStepIndex: null
   };
 
   function init() {
@@ -43,6 +44,68 @@
     updateStepUi();
   }
 
+  function getStepLabel(index) {
+    var form = document.getElementById('review-request-form');
+    if (!form) return String(index + 1);
+
+    var labels = form.querySelectorAll('.review-progress-steps li');
+    var label = labels[index];
+
+    return label ? label.textContent.trim() : String(index + 1);
+  }
+
+  function getDomainFromUrl(url) {
+    if (!url) return '';
+
+    try {
+      return new URL(url).hostname || '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function pushDataLayerEvent(payload) {
+    if (typeof window === 'undefined' || !window.dataLayer || typeof window.dataLayer.push !== 'function') {
+      return;
+    }
+
+    window.dataLayer.push(payload);
+  }
+
+  function trackStepView() {
+    if (state.lastTrackedStepIndex === state.stepIndex) {
+      return;
+    }
+
+    state.lastTrackedStepIndex = state.stepIndex;
+
+    pushDataLayerEvent({
+      event: 'review_step_view',
+      review_step_index: state.stepIndex + 1,
+      review_step_name: getStepLabel(state.stepIndex)
+    });
+  }
+
+  function trackStepNavigation(direction, fromIndex, toIndex) {
+    pushDataLayerEvent({
+      event: 'review_step_navigation',
+      review_step_direction: direction,
+      review_step_from: fromIndex + 1,
+      review_step_to: toIndex + 1,
+      review_step_name: getStepLabel(toIndex)
+    });
+  }
+
+  function trackValidationError(message, fieldName) {
+    pushDataLayerEvent({
+      event: 'review_validation_error',
+      review_step_index: state.stepIndex + 1,
+      review_step_name: getStepLabel(state.stepIndex),
+      review_field: fieldName || '',
+      review_message: message || ''
+    });
+  }
+
   function handleClick(event) {
     var nextButton = event.target.closest('[data-review-next]');
     var prevButton = event.target.closest('[data-review-prev]');
@@ -65,8 +128,10 @@
     }
 
     if (state.stepIndex < state.steps.length - 1) {
+      var previousIndex = state.stepIndex;
       state.stepIndex += 1;
       updateStepUi();
+      trackStepNavigation('next', previousIndex, state.stepIndex);
     }
   }
 
@@ -74,8 +139,10 @@
     clearFeedback();
 
     if (state.stepIndex > 0) {
+      var previousIndex = state.stepIndex;
       state.stepIndex -= 1;
       updateStepUi();
+      trackStepNavigation('prev', previousIndex, state.stepIndex);
     }
   }
 
@@ -98,7 +165,10 @@
     var payload = serializeForm(form);
 
     if (!payload.page_url) {
-      showFeedback('Bitte zuerst eine gültige URL angeben.', 'error');
+      var urlError = 'Bitte zuerst eine gültige URL angeben.';
+
+      showFeedback(urlError, 'error');
+      trackValidationError(urlError, 'page_url');
       state.stepIndex = 0;
       updateStepUi();
       return;
@@ -111,6 +181,13 @@
     }
 
     clearFeedback();
+
+    pushDataLayerEvent({
+      event: 'review_request_submit_started',
+      review_step_index: state.stepIndex + 1,
+      review_step_name: getStepLabel(state.stepIndex),
+      review_domain: getDomainFromUrl(payload.page_url)
+    });
 
     fetch(config.restEndpoint || '/wp-json/nexus/v1/review-request', {
       method: 'POST',
@@ -140,13 +217,22 @@
         renderSuccess(payload, data);
       })
       .catch(function (error) {
-        showFeedback(error.message || 'Die Anfrage konnte nicht gesendet werden.', 'error');
+        var message = error.message || 'Die Anfrage konnte nicht gesendet werden.';
+
+        showFeedback(message, 'error');
+        pushDataLayerEvent({
+          event: 'review_request_submit_failed',
+          review_step_index: state.stepIndex + 1,
+          review_step_name: getStepLabel(state.stepIndex),
+          review_domain: getDomainFromUrl(payload.page_url),
+          review_message: message
+        });
       })
       .finally(function () {
         state.submitting = false;
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = 'Review anfordern';
+          submitButton.textContent = 'Kostenlosen Review anfordern';
         }
       });
   }
@@ -166,7 +252,10 @@
       });
 
       if (!isRadioChecked) {
-        showFeedback('Bitte den größten Blocker auswählen.', 'error');
+        var radioMessage = 'Bitte den größten Blocker auswählen.';
+
+        showFeedback(radioMessage, 'error');
+        trackValidationError(radioMessage, 'biggest_issue');
         return false;
       }
     }
@@ -179,7 +268,10 @@
       }
 
       if (!field.checkValidity()) {
-        showFeedback(field.validationMessage || 'Bitte das Feld korrekt ausfüllen.', 'error');
+        var validationMessage = field.validationMessage || 'Bitte das Feld korrekt ausfüllen.';
+
+        showFeedback(validationMessage, 'error');
+        trackValidationError(validationMessage, field.name || field.id || 'unknown');
         field.focus();
         return false;
       }
@@ -221,6 +313,8 @@
     if (submitButton) {
       submitButton.hidden = state.stepIndex !== state.steps.length - 1;
     }
+
+    trackStepView();
   }
 
   function renderSuccess(payload, data) {
@@ -241,12 +335,15 @@
       success.hidden = false;
     }
 
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      window.dataLayer.push({
-        event: 'review_request_submitted',
-        review_request_id: data.requestId || null
-      });
-    }
+    pushDataLayerEvent({
+      event: 'review_request_submit_success',
+      review_request_id: data.requestId || null,
+      review_domain: getDomainFromUrl(payload.page_url)
+    });
+    pushDataLayerEvent({
+      event: 'review_request_submitted',
+      review_request_id: data.requestId || null
+    });
 
     if (focusTarget && typeof focusTarget.scrollIntoView === 'function') {
       focusTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
