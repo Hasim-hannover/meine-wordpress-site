@@ -213,16 +213,17 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--nx-font-heading);
     font-weight: 700;
-    line-height: 1.12;
-    letter-spacing: -0.015em;
+    line-height: 1.14;
+    letter-spacing: -0.01em;
     color: var(--nx-text);
 }
 
 .nx-headline-hero {
     font-family: var(--nx-font-heading);
     font-size: var(--nx-text-hero);
-    font-weight: 900;
-    line-height: 1.04;
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
     color: var(--nx-text);
 }
 
@@ -234,7 +235,9 @@ h1, h2, h3, h4, h5, h6 {
 .nx-headline-section {
     font-family: var(--nx-font-heading);
     font-size: var(--nx-text-4xl);
-    letter-spacing: -0.02em;
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.012em;
     margin-bottom: var(--nx-space-md);
 }
 

@@ -140,7 +140,7 @@
   position: relative;
 }
 
-.wp-hero-title { font-size: clamp(2.9rem, 5.15vw, 4.95rem); font-weight: 900; line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 1.35rem; color: var(--nx-text); max-width: 12ch; }
+.wp-hero-title { font-size: clamp(2.75rem, 4.8vw, 4.55rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.018em; margin: 0 0 1.35rem; color: var(--nx-text); max-width: 12.5ch; }
 .wp-hero-title span { color: var(--nx-accent-text); }
 .wp-hero-subtitle { font-size: 1.1rem; color: var(--nx-text-secondary); max-width: 60ch; margin: 0 0 1.75rem; line-height: 1.74; }
 .wp-badge,
@@ -302,10 +302,10 @@
 .wp-section { padding: clamp(5rem, 8vw, 7rem) 0; position: relative; }
 .wp-section-title,
 .section-title { max-width: 760px; margin: 0 auto 3rem; }
-.wp-section-h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; color: var(--nx-text); font-weight: 700; letter-spacing: -0.02em; }
+.wp-section-h2 { font-size: clamp(2rem, 4vw, 2.9rem); margin-bottom: 1rem; color: var(--nx-text); font-weight: 300; line-height: 1.12; letter-spacing: -0.012em; }
 .wp-section-p,
 .section-title p { color: var(--nx-text-secondary); max-width: 660px; margin: 0 auto 3rem; line-height: 1.75; }
-.section-title h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; color: var(--nx-text); font-weight: 700; letter-spacing: -0.02em; }
+.section-title h2 { font-size: clamp(2rem, 4vw, 2.9rem); margin-bottom: 1rem; color: var(--nx-text); font-weight: 300; line-height: 1.12; letter-spacing: -0.012em; }
 
 /* Das Grid Layout für Success Cards */
 .wp-cards {
