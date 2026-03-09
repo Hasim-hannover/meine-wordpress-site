@@ -35,11 +35,11 @@
     --brown-medium: hsl(25 14% 25%);
     --brown-text: hsl(28 12% 50%);
 
-    --accent-hsl: 4 75% 50%;
-    --accent: hsl(4 75% 50%);
-    --accent-hover: hsl(4 75% 58%);
-    --accent-muted: hsl(4 30% 18%);
-    --accent-subtle: hsl(4 75% 50% / 0.1);
+    --accent-hsl: 23 50% 47%;
+    --accent: #b46a3c;
+    --accent-hover: hsl(23 50% 54%);
+    --accent-muted: hsl(23 35% 18%);
+    --accent-subtle: hsl(23 50% 47% / 0.1);
     --border-accent: var(--accent);
     --focus-ring: hsl(var(--accent-hsl) / 0.5);
     --hover-overlay: hsl(30 10% 100% / 0.04);
@@ -286,11 +286,11 @@
     --brown-medium: hsl(25 12% 70%);
     --brown-text: hsl(25 18% 38%);
 
-    --accent-hsl: 4 72% 42%;
-    --accent: hsl(4 72% 42%);
-    --accent-hover: hsl(4 72% 36%);
-    --accent-muted: hsl(4 25% 92%);
-    --accent-subtle: hsl(4 72% 42% / 0.06);
+    --accent-hsl: 23 50% 47%;
+    --accent: #b46a3c;
+    --accent-hover: hsl(23 50% 40%);
+    --accent-muted: hsl(23 35% 92%);
+    --accent-subtle: hsl(23 50% 47% / 0.08);
     --focus-ring: hsl(var(--accent-hsl) / 0.3);
 
     --silver-low: hsl(30 4% 65%);

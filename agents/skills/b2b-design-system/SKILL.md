@@ -16,6 +16,15 @@ description: >
 
 This skill produces world-class B2B web interfaces that convert. Every design decision serves two masters: aesthetic excellence and measurable conversion. No compromise on either.
 
+## Project Brand Override
+
+For this project, use the logo copper instead of the generic red accent:
+
+- Primary brand accent: `#b46a3c`
+- HSL reference: `23 50% 47%`
+
+If the references below mention a red accent, treat that as this copper tone for this repo.
+
 ## Before You Code: Mandatory Pre-Flight
 
 1. **Read this SKILL.md completely** before writing any CSS, HTML, or component code.

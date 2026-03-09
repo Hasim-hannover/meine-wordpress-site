@@ -3,6 +3,8 @@
 Complete token definitions for the B2B Premium Design System.
 Import these as CSS custom properties in your project root.
 
+Project override for this repo: use the logo copper `#b46a3c` (`hsl(23 50% 47%)`) as the accent instead of the generic reference red.
+
 ---
 
 ## Color Philosophy: Monochrom-Warm mit Rot-Akzent
