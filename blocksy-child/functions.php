@@ -47,28 +47,130 @@ function blocksy_child_register_slim_nav_menu() {
 	);
 }
 
-// ── 2. PERFORMANCE: FONT PRELOADING ──────────────────────────────
-add_action( 'wp_head', function () {
+// ── 2. TYPOGRAFIE & BRANDING: SELF-HOSTED FONTS ──────────────────
+add_action( 'wp_enqueue_scripts', 'theme_self_hosted_fonts', 1 );
+function theme_self_hosted_fonts() {
+	$fonts_css_path = get_stylesheet_directory() . '/fonts.css';
+
+	if ( ! file_exists( $fonts_css_path ) ) {
+		return;
+	}
+
+	wp_enqueue_style(
+		'self-hosted-fonts',
+		get_stylesheet_directory_uri() . '/fonts.css',
+		array(),
+		filemtime( $fonts_css_path )
+	);
+}
+
+add_action( 'wp_head', 'hu_preload_self_hosted_fonts', 1 );
+function hu_preload_self_hosted_fonts() {
+	$font_dir = get_stylesheet_directory();
 	$font_uri = get_stylesheet_directory_uri() . '/fonts';
 
-	printf(
-		'<link rel="preload" href="%s/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
-		esc_url( $font_uri )
-	);
+	if ( file_exists( $font_dir . '/fonts/outfit-600.woff2' ) ) {
+		printf(
+			'<link rel="preload" href="%s/outfit-600.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( $font_uri )
+		);
+	}
 
-	printf(
-		'<link rel="preload" href="%s/Merriweather-Light.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
-		esc_url( $font_uri )
-	);
+	if ( file_exists( $font_dir . '/fonts/figtree-400.woff2' ) ) {
+		printf(
+			'<link rel="preload" href="%s/figtree-400.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( $font_uri )
+		);
+	}
+}
 
-	printf(
-		"<style>@font-face { font-family: 'Satoshi'; src: url('%s/Satoshi-Variable.woff2') format('woff2-variations'); font-weight: 300 900; font-display: swap; font-style: normal; }</style>\n",
-		esc_url( $font_uri )
-	);
+add_action( 'wp_enqueue_scripts', 'remove_google_fonts', 100 );
+function remove_google_fonts() {
+	global $wp_styles;
 
-	// Footer Background Fix
-	echo '<style>.ft { background: var(--bg, #0a0a0a); }</style>' . "\n";
-}, 5 );
+	wp_deregister_style( 'google-fonts' );
+	wp_dequeue_style( 'google-fonts' );
+	wp_deregister_style( 'blocksy-fonts' );
+	wp_dequeue_style( 'blocksy-fonts' );
+
+	if ( ! ( $wp_styles instanceof WP_Styles ) ) {
+		return;
+	}
+
+	foreach ( $wp_styles->registered as $handle => $style ) {
+		if ( empty( $style->src ) ) {
+			continue;
+		}
+
+		if ( false === strpos( $style->src, 'fonts.googleapis.com' ) && false === strpos( $style->src, 'fonts.gstatic.com' ) ) {
+			continue;
+		}
+
+		wp_dequeue_style( $handle );
+		wp_deregister_style( $handle );
+	}
+}
+
+add_filter( 'blocksy:typography:google:use-remote', '__return_false' );
+
+function hu_get_site_wordmark_html() {
+	return sprintf(
+		'<a href="%1$s" class="site-logo" rel="home" aria-label="%2$s">HAŞIM ÜNER</a>',
+		esc_url( home_url( '/' ) ),
+		esc_attr__( 'Startseite - HAŞIM ÜNER', 'blocksy-child' )
+	);
+}
+
+add_filter( 'get_custom_logo', 'hu_override_custom_logo_with_wordmark', 10, 2 );
+function hu_override_custom_logo_with_wordmark( $html, $blog_id ) {
+	if ( is_admin() ) {
+		return $html;
+	}
+
+	return hu_get_site_wordmark_html();
+}
+
+add_action( 'wp_head', 'hu_output_brand_head_support', 5 );
+function hu_output_brand_head_support() {
+	$favicon_path = get_stylesheet_directory() . '/assets/brand/favicon-copper.svg';
+	$favicon_uri  = get_stylesheet_directory_uri() . '/assets/brand/favicon-copper.svg';
+	?>
+	<style>.ft { background: var(--bg, #0a0a0a); }</style>
+	<?php if ( file_exists( $favicon_path ) ) : ?>
+	<link rel="icon" type="image/svg+xml" href="<?php echo esc_url( $favicon_uri ); ?>">
+	<link rel="apple-touch-icon" href="<?php echo esc_url( $favicon_uri ); ?>">
+	<?php endif; ?>
+	<script>
+	(function () {
+		function applyWordmark() {
+			var logoLinks = document.querySelectorAll('.site-branding[data-id="logo"] .site-logo-container');
+			if (!logoLinks.length) {
+				return;
+			}
+
+			logoLinks.forEach(function (link) {
+				if (!link) {
+					return;
+				}
+
+				link.classList.add('site-logo');
+				link.setAttribute('aria-label', 'Startseite - HAŞIM ÜNER');
+
+				if (!link.textContent || !link.textContent.trim()) {
+					link.textContent = 'HAŞIM ÜNER';
+				}
+			});
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', applyWordmark);
+		} else {
+			applyWordmark();
+		}
+	})();
+	</script>
+	<?php
+}
 
 add_action(
 	'wp_head',

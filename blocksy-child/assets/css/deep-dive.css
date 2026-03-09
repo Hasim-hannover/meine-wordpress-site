@@ -6,7 +6,7 @@
 .deepdive-page {
   background: #050505;
   color: #fff;
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--nx-font, 'Figtree', sans-serif);
   line-height: 1.7;
   min-height: 100vh;
 }

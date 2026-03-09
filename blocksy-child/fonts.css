@@ -1,0 +1,98 @@
+/* Self-hosted fonts for hasimuener.de. Includes latin + latin-ext subsets. */
+
+@font-face {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/outfit-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/outfit-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Figtree';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/figtree-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Figtree';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/figtree-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Figtree';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/figtree-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Figtree';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/figtree-700.woff2') format('woff2');
+}
+
+/* Compatibility aliases for existing child-theme CSS and Blocksy settings. */
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/figtree-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/figtree-500.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/figtree-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/figtree-700.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/outfit-600.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/wp-content/themes/blocksy-child/fonts/outfit-600.woff2') format('woff2');
+}

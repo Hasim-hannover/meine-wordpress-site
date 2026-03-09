@@ -4,45 +4,9 @@ Template: blocksy
 Version: 7.1.1-FIXED
 */
 
-/* --- 1. CORE: SATOSHI SCHRIFTEN --- */
-@font-face {
-    font-family: 'Satoshi';
-    src: url('fonts/Satoshi-Variable.woff2') format('woff2-variations'),
-         url('fonts/Satoshi-Variable.woff') format('woff');
-    font-weight: 300 900;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Outfit';
-    src: url('fonts/Outfit-Variable.woff2') format('woff2');
-    font-weight: 100 900;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Merriweather';
-    src: url('fonts/Merriweather-Light.woff2') format('woff2'),
-         url('fonts/Merriweather-Light.woff') format('woff');
-    font-weight: 300;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Merriweather';
-    src: url('fonts/Merriweather-Bold.woff2') format('woff2'),
-         url('fonts/Merriweather-Bold.woff') format('woff');
-    font-weight: 700;
-    font-display: swap;
-    font-style: normal;
-}
-
 :root {
-    --theme-font-family: 'Satoshi', sans-serif;
-    --theme-font-heading: 'Merriweather', Georgia, serif;
+    --theme-font-family: 'Figtree', 'Satoshi', sans-serif;
+    --theme-font-heading: 'Outfit', 'Merriweather', sans-serif;
     --hasim-audit-orange: #C99A57;
     --hasim-audit-orange-hover: #D9B27A;
     --theme-palette-color-1: var(--hasim-audit-orange);
@@ -50,17 +14,81 @@ Version: 7.1.1-FIXED
     --nx-gold-hover: var(--hasim-audit-orange-hover);
     --gold: var(--hasim-audit-orange);
     --cta: var(--hasim-audit-orange);
+    --font-body: var(--theme-font-family);
+    --font-display: var(--theme-font-heading);
+    --brand-copper: hsl(22 70% 48%);
+    --text-primary: #E8E5E0;
     --nx-font-heading: var(--theme-font-heading);
 }
 
 body,
 .ct-menu-link {
-    font-family: 'Satoshi', sans-serif;
+    font-family: var(--theme-font-family);
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--theme-font-heading);
     letter-spacing: -0.01em;
+}
+
+/* --- 1b. WORDMARK --- */
+.site-logo,
+.site-logo-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto !important;
+    max-width: none !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    background: none !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    text-indent: 0 !important;
+    overflow: visible !important;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-primary);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.site-logo-container:empty::before {
+    content: 'HAŞIM ÜNER';
+}
+
+.site-logo:hover,
+.site-logo-container:hover {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.site-logo--accent {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.site-logo--accent::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--brand-copper);
+    border-radius: 1px;
+}
+
+@media (max-width: 1023px) {
+    .site-logo,
+    .site-logo-container {
+        font-size: 12px;
+        letter-spacing: 0.18em;
+    }
 }
 
 .nexus-title,
@@ -375,7 +403,9 @@ p.hero-stack,
 
 /* Brand column */
 .ft__brand { display: flex; flex-direction: column; gap: 8px; }
-.ft__logo { font-size: 1.6rem; font-weight: 800; color: var(--fg); opacity: 1; }
+.ft__logo { font-size: 1.6rem; font-weight: 600; color: var(--fg); opacity: 1; }
+.ft .site-logo { font-size: 24px; color: var(--fg); }
+.ft .site-logo:hover { color: var(--fg); }
 .ft__tag { color: var(--muted); font-size: .85rem; margin: 0; }
 .ft__cta {
     display: inline-block; padding: .75rem 1.25rem; margin-top: 12px;
@@ -999,7 +1029,7 @@ button.nexus-share-btn {
 .nexus-dashboard {
     max-width: 1100px;
     margin: 60px auto;
-    font-family: 'Satoshi', sans-serif;
+    font-family: var(--theme-font-family);
     color: #ffffff;
     background: transparent;
 }
@@ -1412,9 +1442,10 @@ button.nexus-share-btn {
         display: none !important;
     }
 
-    .ct-panel .site-logo img {
-        max-width: 42px;
-        height: auto;
+    .ct-panel .site-logo,
+    .ct-panel .site-logo-container {
+        font-size: 12px;
+        letter-spacing: 0.16em;
     }
 }
 
@@ -1443,12 +1474,14 @@ body.wp-customizer .ct-customizer-shortcut {
     padding-bottom: 5px !important;
 }
 
-/* 3. Das Logo atmet */
-.site-logo img {
-    transition: transform 0.4s ease;
+/* 3. Die Wortmarke bleibt kompakt */
+.site-logo,
+.site-logo-container {
+    transition: color 0.3s ease, transform 0.3s ease;
 }
-.ct-header.nexus-flight-mode .site-logo img {
-    transform: scale(0.9);
+.ct-header.nexus-flight-mode .site-logo,
+.ct-header.nexus-flight-mode .site-logo-container {
+    transform: scale(0.97);
 }
 
 /* 4. Buttons bleiben STABIL (Kein Wackeln!) */
