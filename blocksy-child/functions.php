@@ -205,16 +205,10 @@ add_action(
 		?>
 		<script>
 		(function () {
-			var storageKey = 'nexus-theme-mode';
 			var theme = 'dark';
 
-			try {
-				var storedTheme = window.localStorage.getItem(storageKey);
-				if (storedTheme === 'light' || storedTheme === 'dark') {
-					theme = storedTheme;
-				}
-			} catch (error) {
-				theme = 'dark';
+			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+				theme = 'light';
 			}
 
 			document.documentElement.setAttribute('data-nx-theme', theme);

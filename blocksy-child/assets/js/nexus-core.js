@@ -507,24 +507,15 @@
 
         /**
          * 12. THEME TOGGLE
-         * Persistiert Dark/Light-Auswahl und synchronisiert alle Toggle-Buttons.
+         * Wechselt Dark/Light ohne Browser-Storage und synchronisiert alle Toggle-Buttons.
          */
         initThemeToggle: function () {
             var root = document.documentElement;
             var buttons = document.querySelectorAll('[data-nx-theme-toggle] [data-theme-value]');
-            var storageKey = 'nexus-theme-mode';
 
             function resolveTheme() {
-                var storedTheme = null;
-
-                try {
-                    storedTheme = window.localStorage.getItem(storageKey);
-                } catch (error) {
-                    storedTheme = null;
-                }
-
-                if (storedTheme === 'light' || storedTheme === 'dark') {
-                    return storedTheme;
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                    return 'light';
                 }
 
                 return 'dark';
@@ -538,8 +529,8 @@
                 });
             }
 
-            function applyTheme(theme, persist) {
-                if (persist) {
+            function applyTheme(theme, withTransition) {
+                if (withTransition) {
                     root.classList.add('theme-transitioning');
                 }
 
@@ -548,13 +539,7 @@
                 root.style.colorScheme = theme;
                 syncButtons(theme);
 
-                if (persist) {
-                    try {
-                        window.localStorage.setItem(storageKey, theme);
-                    } catch (error) {
-                        // Storage kann im Privacy-Modus blockiert sein.
-                    }
-
+                if (withTransition) {
                     window.setTimeout(function () {
                         root.classList.remove('theme-transitioning');
                     }, 350);
