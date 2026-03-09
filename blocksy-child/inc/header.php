@@ -13,6 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Detect the blog area that uses the dedicated blog header template.
+ *
+ * @return bool
+ */
+function nexus_is_blog_header_context() {
+	return is_home() || is_archive() || is_singular( 'post' );
+}
+
 add_filter( 'body_class', 'nexus_add_custom_header_body_class' );
 /**
  * Mark the frontend so the custom header CSS can disable the theme header.
@@ -21,9 +30,16 @@ add_filter( 'body_class', 'nexus_add_custom_header_body_class' );
  * @return array
  */
 function nexus_add_custom_header_body_class( $classes ) {
-	if ( ! is_admin() ) {
-		$classes[] = 'nx-custom-header-active';
+	if ( is_admin() ) {
+		return $classes;
 	}
+
+	if ( nexus_is_blog_header_context() ) {
+		$classes[] = 'nx-blog-header-active';
+		return $classes;
+	}
+
+	$classes[] = 'nx-custom-header-active';
 
 	return $classes;
 }
@@ -42,6 +58,10 @@ function nexus_render_site_header() {
 	}
 
 	if ( function_exists( 'wp_is_json_request' ) && wp_is_json_request() ) {
+		return;
+	}
+
+	if ( nexus_is_blog_header_context() ) {
 		return;
 	}
 

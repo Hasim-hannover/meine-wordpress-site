@@ -1,4 +1,5 @@
-body.nx-custom-header-active .ct-header {
+body.nx-custom-header-active .ct-header,
+body.nx-blog-header-active .ct-header {
     display: none !important;
 }
 
