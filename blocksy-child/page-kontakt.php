@@ -16,75 +16,40 @@ $focus_options = function_exists( 'nexus_get_contact_focus_options' ) ? nexus_ge
 $mail_link     = 'mailto:kontakt@hasimuener.de';
 $phone_link    = 'tel:+4917681407134';
 
-$direct_paths = [
+$quick_contacts = [
 	[
-		'eyebrow' => 'Direkt per E-Mail',
-		'title'   => 'Für konkrete Rückfragen oder einen ersten Kontext.',
-		'copy'    => 'Wenn bereits klar ist, welche Seite, welches Angebot oder welcher Funnel gerade blockiert, ist E-Mail oft der schnellste Weg.',
-		'url'     => $mail_link,
-		'label'   => 'kontakt@hasimuener.de',
+		'label' => 'E-Mail',
+		'value' => 'kontakt@hasimuener.de',
+		'copy'  => 'Für konkrete Rückfragen oder ersten Kontext.',
+		'url'   => $mail_link,
 	],
 	[
-		'eyebrow' => 'Strategiegespräch',
-		'title'   => 'Für Priorisierung, Einordnung oder eine schnelle zweite Meinung.',
-		'copy'    => 'Sinnvoll, wenn mehrere Themen zusammenhängen und Sie die Reihenfolge klären wollen.',
-		'url'     => $calendar_url,
-		'label'   => '30 Minuten buchen',
+		'label' => 'Strategiegespräch',
+		'value' => '30 Minuten buchen',
+		'copy'  => 'Für Einordnung, Priorisierung oder zweite Meinung.',
+		'url'   => $calendar_url,
 	],
 	[
-		'eyebrow' => 'Telefon',
-		'title'   => 'Für kurze Abstimmungen oder wenn es zeitkritisch ist.',
-		'copy'    => 'Kein Callcenter, kein Vertriebsloop. Direkter Kontakt.',
-		'url'     => $phone_link,
-		'label'   => '0176 81407134',
+		'label' => 'Telefon',
+		'value' => '0176 81407134',
+		'copy'  => 'Für kurze Abstimmungen oder wenn es eilt.',
+		'url'   => $phone_link,
 	],
 ];
 
 $social_profiles = [
 	[
-		'name'  => 'LinkedIn',
-		'copy'  => 'Der beste Kanal für fachliche Updates, Cases und direkten Erstkontakt.',
-		'url'   => 'https://www.linkedin.com/in/hasim-%C3%BCner/',
-		'label' => 'Profil öffnen',
+		'name' => 'LinkedIn',
+		'url'  => 'https://www.linkedin.com/in/hasim-%C3%BCner/',
 	],
 	[
-		'name'  => 'Instagram',
-		'copy'  => 'Einblicke in Projekte, Arbeitsweise und aktuelle Themen in kompakter Form.',
-		'url'   => 'https://www.instagram.com/hasimuener/',
-		'label' => 'Instagram ansehen',
+		'name' => 'Instagram',
+		'url'  => 'https://www.instagram.com/hasimuener/',
 	],
 	[
-		'name'  => 'GitHub',
-		'copy'  => 'Technischer Kontext, Theme-Arbeit und Umsetzungsnähe statt nur Oberfläche.',
-		'url'   => 'https://github.com/Hasim-hannover',
-		'label' => 'Repository ansehen',
+		'name' => 'GitHub',
+		'url'  => 'https://github.com/Hasim-hannover',
 	],
-];
-
-$contact_topics = [
-	[
-		'title' => 'WordPress als Anfragesystem',
-		'copy'  => 'Wenn Ihre Website gut aussieht, aber zu wenig qualifizierte Anfragen erzeugt oder keine klare Angebotslogik hat.',
-	],
-	[
-		'title' => 'SEO und kaufnahe Einstiegsseiten',
-		'copy'  => 'Wenn Sichtbarkeit da ist, aber Money Pages, interne Verlinkung oder Conversion-Führung zu weich bleiben.',
-	],
-	[
-		'title' => 'Tracking, CRO und Priorisierung',
-		'copy'  => 'Wenn Daten, CTAs, Proof oder Formulare nicht sauber zusammenspielen und dadurch Nachfrage verloren geht.',
-	],
-	[
-		'title' => 'Growth Audit als Einstieg',
-		'copy'  => 'Wenn Sie eine fokussierte Diagnose für eine konkrete Start-, Angebots- oder Kampagnenseite brauchen.',
-	],
-];
-
-$briefing_points = [
-	'welche Seite oder welcher Funnel betroffen ist',
-	'was die Seite aktuell auslösen soll',
-	'welche Hürde gerade am meisten stört',
-	'ob es eine Frist, Kampagne oder interne Deadline gibt',
 ];
 ?>
 
@@ -93,41 +58,18 @@ $briefing_points = [
 		<section class="contact-hero" aria-labelledby="contact-title">
 			<div class="contact-hero__copy nx-reveal">
 				<span class="contact-eyebrow">Kontakt</span>
-				<h1 id="contact-title" class="contact-title">Direkter Kontakt statt langem Anfrageprozess.</h1>
+				<h1 id="contact-title" class="contact-title">Kurze Nachricht. Klare Rückmeldung.</h1>
 				<p class="contact-lead">
 					Wenn klar ist, woran Ihre WordPress-Seite, Angebotsseite oder Growth-Logik gerade hängt,
-					reicht eine präzise Nachricht. Für alles andere gibt es hier den schnellsten Einstieg:
-					schlankes Formular, E-Mail, Telefon oder Strategiegespräch.
+					reicht hier ein kurzer Kontext. Kein langer Anfrageprozess, nur die nötigen Infos.
 				</p>
-
-				<div class="contact-badges" aria-label="Kontaktvorteile">
-					<span class="contact-badge">Antwort in der Regel innerhalb von 48 Stunden</span>
-					<span class="contact-badge">B2B, WordPress, SEO, CRO, Tracking</span>
-					<span class="contact-badge">Kein Sales-Theater, nur klare Einordnung</span>
-				</div>
+				<p class="contact-meta">Antwort in der Regel innerhalb von 48 Stunden. Fokus: WordPress, SEO, CRO und Tracking.</p>
 
 				<div class="contact-actions">
 					<a class="contact-button contact-button--primary" href="#kontakt-form">Nachricht senden</a>
 					<a class="contact-button" href="<?php echo esc_url( $calendar_url ); ?>" target="_blank" rel="noopener noreferrer">Strategiegespräch</a>
 				</div>
 			</div>
-
-			<aside class="contact-hero__rail nx-reveal" aria-label="Direkte Kontaktwege">
-				<div class="contact-hero-card">
-					<span class="contact-hero-card__eyebrow">Schnellster Weg</span>
-					<h2>Kurze Nachricht, klare Rückmeldung.</h2>
-					<p>
-						Je konkreter URL, Angebotsziel oder Engpass beschrieben sind, desto präziser fällt
-						die erste Rückmeldung aus.
-					</p>
-					<ul class="contact-hero-list">
-						<li>eine betroffene Seite oder Kampagne benennen</li>
-						<li>das gewünschte Ergebnis kurz beschreiben</li>
-						<li>optional: Deadline oder internen Druckpunkt nennen</li>
-					</ul>
-					<a class="contact-hero-card__link" href="<?php echo esc_url( $audit_url ); ?>">Wenn es seitenfokussiert ist: Growth Audit ansehen</a>
-				</div>
-			</aside>
 		</section>
 
 		<div class="contact-main-grid">
@@ -234,93 +176,51 @@ $briefing_points = [
 				<section class="contact-panel nx-reveal" aria-labelledby="contact-direct-title">
 					<div class="contact-section-head contact-section-head--tight">
 						<span class="contact-section-head__eyebrow">Direkte Wege</span>
-						<h2 id="contact-direct-title">Wenn das Formular nicht der beste Kanal ist.</h2>
+						<h2 id="contact-direct-title">Ohne Umwege</h2>
 					</div>
 
-					<div class="contact-stack">
-						<?php foreach ( $direct_paths as $path ) : ?>
-							<article class="contact-card">
-								<span class="contact-card__eyebrow"><?php echo esc_html( $path['eyebrow'] ); ?></span>
-								<h3><?php echo esc_html( $path['title'] ); ?></h3>
-								<p><?php echo esc_html( $path['copy'] ); ?></p>
-								<a href="<?php echo esc_url( $path['url'] ); ?>"<?php echo 0 === strpos( $path['url'], 'http' ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
-									<?php echo esc_html( $path['label'] ); ?>
-								</a>
-							</article>
+					<div class="contact-link-list">
+						<?php foreach ( $quick_contacts as $contact ) : ?>
+							<a class="contact-link-item" href="<?php echo esc_url( $contact['url'] ); ?>"<?php echo 0 === strpos( $contact['url'], 'http' ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
+								<span class="contact-link-item__label"><?php echo esc_html( $contact['label'] ); ?></span>
+								<strong><?php echo esc_html( $contact['value'] ); ?></strong>
+								<span><?php echo esc_html( $contact['copy'] ); ?></span>
+							</a>
 						<?php endforeach; ?>
 					</div>
 				</section>
 
 				<section class="contact-panel nx-reveal" aria-labelledby="contact-social-title">
 					<div class="contact-section-head contact-section-head--tight">
-						<span class="contact-section-head__eyebrow">Social Profiles</span>
-						<h2 id="contact-social-title">Fachlich folgen oder direkt schreiben.</h2>
+						<span class="contact-section-head__eyebrow">Social</span>
+						<h2 id="contact-social-title">Profile</h2>
 					</div>
 
-					<div class="contact-stack">
+					<div class="contact-social-list">
 						<?php foreach ( $social_profiles as $profile ) : ?>
-							<article class="contact-card contact-card--social">
-								<h3><?php echo esc_html( $profile['name'] ); ?></h3>
-								<p><?php echo esc_html( $profile['copy'] ); ?></p>
-								<a href="<?php echo esc_url( $profile['url'] ); ?>" target="_blank" rel="me noopener noreferrer">
-									<?php echo esc_html( $profile['label'] ); ?>
-								</a>
-							</article>
+							<a class="contact-social-link" href="<?php echo esc_url( $profile['url'] ); ?>" target="_blank" rel="me noopener noreferrer">
+								<?php echo esc_html( $profile['name'] ); ?>
+							</a>
 						<?php endforeach; ?>
 					</div>
 				</section>
-			</aside>
-		</div>
 
-		<section class="contact-topics nx-reveal" aria-labelledby="contact-topics-title">
-			<div class="contact-section-head">
-				<span class="contact-section-head__eyebrow">Wobei ich helfen kann</span>
-				<h2 id="contact-topics-title">Typische Anlässe für den Erstkontakt.</h2>
-				<p>
-					Nicht alles braucht direkt ein großes Projekt. Oft reicht zuerst eine saubere Einordnung,
-					was der nächste sinnvolle Schritt ist.
-				</p>
-			</div>
-
-			<div class="contact-topics__grid">
-				<?php foreach ( $contact_topics as $topic ) : ?>
-					<article class="contact-topic-card">
-						<h3><?php echo esc_html( $topic['title'] ); ?></h3>
-						<p><?php echo esc_html( $topic['copy'] ); ?></p>
-					</article>
-				<?php endforeach; ?>
-			</div>
-		</section>
-
-		<section class="contact-briefing nx-reveal" aria-labelledby="contact-briefing-title">
-			<div class="contact-briefing__intro">
-				<span class="contact-section-head__eyebrow">Was hilfreich ist</span>
-				<h2 id="contact-briefing-title">Was eine Rückmeldung schneller und besser macht.</h2>
-			</div>
-
-			<div class="contact-briefing__grid">
-				<div class="contact-briefing-card">
-					<ul class="contact-briefing-list">
-						<?php foreach ( $briefing_points as $point ) : ?>
-							<li><?php echo esc_html( $point ); ?></li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
-
-				<div class="contact-briefing-card contact-briefing-card--accent">
-					<h3>Wenn es sehr seitenfokussiert ist</h3>
-					<p>
-						Geht es konkret um eine Startseite, Angebotsseite oder Kampagnen-Landing,
-						ist der <a href="<?php echo esc_url( $audit_url ); ?>">Growth Audit</a> meist der schnellere und sauberere Einstieg.
+				<section class="contact-panel contact-panel--note nx-reveal" aria-labelledby="contact-note-title">
+					<div class="contact-section-head contact-section-head--tight">
+						<span class="contact-section-head__eyebrow">Hinweis</span>
+						<h2 id="contact-note-title">Wenn es um eine konkrete Seite geht</h2>
+					</div>
+					<p class="contact-note">
+						Dann ist der <a href="<?php echo esc_url( $audit_url ); ?>">Growth Audit</a> oft der bessere Einstieg als eine offene Anfrage.
 					</p>
-					<p class="contact-briefing-card__meta">
-						Rechtliches: <a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
+					<p class="contact-panel__meta">
+						<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
 						<span aria-hidden="true">·</span>
 						<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz</a>
 					</p>
-				</div>
-			</div>
-		</section>
+				</section>
+			</aside>
+		</div>
 	</div>
 </main>
 
