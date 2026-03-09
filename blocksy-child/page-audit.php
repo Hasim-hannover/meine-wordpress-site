@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Startseiten-Review anfordern
- * Description: Landing Page fuer einen persoenlichen Review mit Rueckmeldung innerhalb von 48 Stunden
+ * Description: Landing Page für einen persönlichen Review mit Rückmeldung innerhalb von 48 Stunden
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *

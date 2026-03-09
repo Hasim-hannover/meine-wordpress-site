@@ -98,7 +98,7 @@
     var payload = serializeForm(form);
 
     if (!payload.page_url) {
-      showFeedback('Bitte zuerst eine gueltige URL angeben.', 'error');
+      showFeedback('Bitte zuerst eine gültige URL angeben.', 'error');
       state.stepIndex = 0;
       updateStepUi();
       return;
@@ -126,7 +126,7 @@
           try {
             data = text ? JSON.parse(text) : {};
           } catch (error) {
-            throw new Error('Die Anfrage konnte nicht verarbeitet werden. Bitte spaeter erneut versuchen.');
+            throw new Error('Die Anfrage konnte nicht verarbeitet werden. Bitte später erneut versuchen.');
           }
 
           if (!response.ok || !data.ok) {
@@ -166,7 +166,7 @@
       });
 
       if (!isRadioChecked) {
-        showFeedback('Bitte den groessten Blocker auswaehlen.', 'error');
+        showFeedback('Bitte den größten Blocker auswählen.', 'error');
         return false;
       }
     }
@@ -179,7 +179,7 @@
       }
 
       if (!field.checkValidity()) {
-        showFeedback(field.validationMessage || 'Bitte das Feld korrekt ausfuellen.', 'error');
+        showFeedback(field.validationMessage || 'Bitte das Feld korrekt ausfüllen.', 'error');
         field.focus();
         return false;
       }
