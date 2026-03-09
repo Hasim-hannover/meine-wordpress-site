@@ -392,11 +392,22 @@
         mountThemeToggle: function () {
             var toggles = Array.prototype.slice.call(document.querySelectorAll('.nx-theme-toggle[data-nx-theme-toggle]'));
             var mountSelectors = [
+                '.nx-site-header__theme-toggle-slot',
+                '.nx-site-header__actions',
+                '.nx-site-header__shell',
+                '.nx-site-header',
                 '.ct-header [data-device="desktop"] .ct-container',
                 '.ct-header .ct-middle-row .ct-container',
                 '.ct-header .ct-container',
                 '.ct-header'
             ];
+            var selectorsWithoutMenuCheck = {
+                '.nx-site-header__theme-toggle-slot': true,
+                '.nx-site-header__actions': true,
+                '.nx-site-header__shell': true,
+                '.nx-site-header': true,
+                '.ct-header': true
+            };
 
             if (!toggles.length) return;
 
@@ -414,7 +425,7 @@
 
             function isHeaderToggle(node) {
                 return isVisible(node) &&
-                    !!node.closest('.ct-header') &&
+                    (!!node.closest('.ct-header') || !!node.closest('.nx-site-header')) &&
                     !node.closest('.ct-panel') &&
                     !node.closest('[aria-hidden="true"]');
             }
@@ -458,7 +469,7 @@
                             continue;
                         }
 
-                        if (!node.querySelector('.ct-menu, .header-navigation, [data-id="menu"]') && mountSelectors[i] !== '.ct-header') {
+                        if (!node.querySelector('.ct-menu, .header-navigation, [data-id="menu"], .nx-site-header__menu') && !selectorsWithoutMenuCheck[mountSelectors[i]]) {
                             continue;
                         }
 

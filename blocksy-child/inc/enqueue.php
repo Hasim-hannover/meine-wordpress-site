@@ -45,6 +45,9 @@ function hu_enqueue_assets() {
 	// ── GLOBAL: Design System (Single Source of Truth) ─────────────
 	hu_enqueue_css( 'nexus-design-system', 'design-system.css', [ 'blocksy-child-style' ] );
 
+	// ── GLOBAL: Custom Header ──────────────────────────────────────
+	hu_enqueue_css( 'nexus-site-header-css', 'site-header.css', [ 'nexus-design-system' ] );
+
 	// ── GLOBAL: Related Content (NEU POSITIONIERT) ────────────────
 	// Damit das CSS auf ALLEN Seiten geladen wird (Startseite, Single Posts, Pages etc.)
 	hu_enqueue_css( 'nexus-related-content-css', 'related-content.css', [ 'nexus-design-system' ] );
@@ -55,6 +58,8 @@ function hu_enqueue_assets() {
 
 	// ── GLOBAL: Core JS (Scroll-Spy, FAQ, Counter, Progress Bar) ──
 	hu_enqueue_js( 'nexus-core-js', 'nexus-core.js' );
+	hu_enqueue_js( 'nexus-site-header-js', 'site-header.js', [ 'nexus-core-js' ] );
+
 
 	// ── GLOBAL: Blog-Header Fallback ───────────────────────────────
 	if ( is_home() || is_archive() || is_singular( 'post' ) ) {
