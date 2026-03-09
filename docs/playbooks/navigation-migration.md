@@ -29,9 +29,9 @@
 
 ### HERO-SEKTION
 [ ] Hero Subline ändern zu:
-    ALT: "Ich baue aus Ihrer WordPress-Instanz ein Owned-Leads-System..."
+    ALT: "Ich baue aus Ihrer WordPress-Instanz ein eigenes Anfragesystem..."
     NEU: Subline KÜRZEN auf max. 1 Satz:
-    "Ich baue Ihre WordPress-Instanz zum Owned-Leads-System um –
+    "Ich baue Ihre WordPress-Instanz zu einem eigenen Anfragesystem um –
      ohne Ad-Abhängigkeit, mit messbarem Ergebnis."
     
 [ ] Stack-Text-Block ("Advanced WordPress · Technical SEO...") 
@@ -90,7 +90,7 @@ signalisiert Selektivität = erhöht Vertrauen bei Zielgruppe
 [ ] Alternativtext setzen (beschreibend, nicht "featured-image-xyz")
     Beispiele:
     - "Technisches SEO als Fundament für Performance Marketing"
-    - "150 Euro pro Lead Falle – B2B Owned Leads Strategie"
+    - "150 Euro pro Lead Falle – B2B-Strategie für eigene Anfragen"
     - "Meta Ads Kampagnenstruktur für B2B Lead Generation"
     - "Core Web Vitals Optimierung WordPress Performance"
 
@@ -192,7 +192,7 @@ Maintenance:
    Backups und Monitoring kosten Sie wertvolle Zeit."
 
 Growth Partner:
-  "Richtig für Sie wenn: Sie ein Owned-Leads-System
+  "Richtig für Sie wenn: Sie ein eigenes Anfragesystem
    aufbauen wollen – SEO, Content und Conversion systematisch."
 
 Dominance:
@@ -258,7 +258,7 @@ Ziel von oben nach unten:
     "Advanced WordPress · Technical SEO · Privacy-by-Design..."
     → CSS-Klasse "hero-stack-text" zuweisen ODER Block löschen
 [ ] Subline kürzen auf:
-    "Ich baue Ihre WordPress-Instanz zum Owned-Leads-System um –
+    "Ich baue Ihre WordPress-Instanz zu einem eigenen Anfragesystem um –
      ohne Ad-Abhängigkeit, mit messbarem Ergebnis."
 [ ] Sekundärer CTA ("Case Studies ansehen"):
     → CSS-Klasse "hero-cta-secondary" zuweisen

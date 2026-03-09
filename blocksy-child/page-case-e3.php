@@ -125,7 +125,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                 <p>
                     Das Wachstum hing jedoch zu stark am externen Lead-Einkauf
                     (ø 150&nbsp;€ pro Lead). Ziel war nicht mehr Reichweite um jeden Preis,
-                    sondern Lead-Ownership: eine eigene Pipeline, die kontinuierlich
+                    sondern eine eigene Pipeline: eine Nachfragebasis, die kontinuierlich
                     qualifizierte Anfragen liefert und die Abhängigkeit von Drittanbietern senkt.
                 </p>
                 <p>
@@ -378,7 +378,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                     </p>
                     <ul class="cs-phase-outcomes">
                         <li>✓ 1.750+ Leads im 5-Monats-Skalierungsfenster</li>
-                        <li>✓ Vom Lead-Käufer zum Lead-Besitzer</li>
+                        <li>✓ Vom Lead-Einkauf zur eigenen Pipeline</li>
                         <li>✓ -83% Cost per Lead vs. Einkaufsleads</li>
                         <li>✓ 12–15% Sales-Conversion-Rate</li>
                         <li>✓ Segmentierte, vorqualifizierte Übergabe an Vertrieb</li>
@@ -456,7 +456,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
         <div class="nx-section-header">
             <span class="nx-badge nx-badge--gold">Die Zahlen</span>
             <h2 class="nx-headline-section" style="margin-top:1rem;">
-                Ergebnis nach 12 Monaten: Lead-Ownership statt Lead-Einkauf
+                Ergebnis nach 12 Monaten: eigene Pipeline statt Lead-Einkauf
             </h2>
             <p class="nx-subheadline" style="margin:1rem auto 0;">
                 Synergie aus technischem Setup und Performance-Skalierung:
@@ -492,7 +492,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">Lead-Ownership</span>
+                <span class="cs-result-value">Eigene Pipeline</span>
                 <span class="cs-result-label">Eigene Pipeline</span>
                 <span class="cs-result-note">deutlich weniger Abhängigkeit von Drittanbietern</span>
             </div>

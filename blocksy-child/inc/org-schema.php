@@ -215,9 +215,9 @@ function hu_output_schema()
 
         'wordpress-growth-operating-system' => [
             'name'        => 'WordPress Growth Operating System (WGOS)',
-            'description' => 'Monatlicher Retainer für B2B-Unternehmen: Performance, Privacy-first Tracking, SEO, CRO & Automation als Owned-Leads-System.',
+            'description' => 'Monatlicher Retainer für B2B-Unternehmen: Performance, Privacy-first Tracking, SEO, CRO & Automation als eigenes Anfragesystem.',
             'serviceType' => 'Growth Operating System',
-            'serviceOutput' => 'Owned-Leads-System: Assets statt Kampagnen. Performance, Daten, Rankings, Content, Conversion.',
+            'serviceOutput' => 'Eigenes Anfragesystem: Assets statt Kampagnen. Performance, Daten, Rankings, Content, Conversion.',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
@@ -231,7 +231,7 @@ function hu_output_schema()
                     'name'          => 'Growth Partner',
                     'price'         => 2800,
                     'priceCurrency' => 'EUR',
-                    'description'   => '60 Credits/Monat. Owned Full Stack: SEO + CRO + Content.'
+                    'description'   => '60 Credits/Monat. Eigene Nachfrage mit SEO, CRO und Content.'
                 ],
                 [
                     '@type'         => 'Offer',
@@ -247,7 +247,7 @@ function hu_output_schema()
             'name'        => 'WordPress Growth Operating System (WGOS)',
             'description' => 'Monatlicher Retainer für B2B-Unternehmen: WordPress als Growth-Infrastruktur mit Performance, Measurement, SEO, Content und Conversion.',
             'serviceType' => 'Growth Operating System',
-            'serviceOutput' => 'Owned-Lead-System mit klarer Priorisierung und voller Ownership'
+            'serviceOutput' => 'Eigenes Anfragesystem mit klarer Priorisierung und voller Kontrolle'
         ],
     ];
 

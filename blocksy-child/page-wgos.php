@@ -568,7 +568,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
         <div class="wgos-faq">
             <details class="nx-faq__item">
                 <summary>Was genau ist das WGOS?</summary>
-                <div class="nx-faq__content">Ein monatlicher Retainer, bei dem wir Ihr WordPress in ein Owned-Leads-System verwandeln. Statt einzelner Projekte investieren wir kontinuierlich in digitale Assets: Performance, Messbarkeit, SEO-Content und Conversion-Optimierung. Sie zahlen nicht für Stunden, sondern für Output.</div>
+                <div class="nx-faq__content">Ein monatlicher Retainer, bei dem wir Ihr WordPress in ein eigenes Anfragesystem verwandeln. Statt einzelner Projekte investieren wir kontinuierlich in digitale Assets: Performance, Messbarkeit, SEO-Content und Conversion-Optimierung. Sie zahlen nicht für Stunden, sondern für Output.</div>
             </details>
 
             <details class="nx-faq__item">
@@ -603,7 +603,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
 
             <details class="nx-faq__item">
                 <summary>Was passiert, wenn ich kündige?</summary>
-                <div class="nx-faq__content">Alles bleibt bei Ihnen: Code, Content, Tracking-Setup, Accounts, Zugänge. Kein Lock-in, keine Exit-Gebühren. Die Assets, die wir gebaut haben, arbeiten weiter&nbsp;— das ist der Punkt von Owned.</div>
+                <div class="nx-faq__content">Alles bleibt bei Ihnen: Code, Content, Tracking-Setup, Accounts, Zugänge. Kein Lock-in, keine Exit-Gebühren. Die Assets, die wir gebaut haben, arbeiten weiter&nbsp;— genau das ist der Unterschied zwischen gemieteter und eigener Nachfrage.</div>
             </details>
         </div>
     </div>
@@ -641,7 +641,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
       "name": "Was genau ist das WGOS?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Ein monatlicher Retainer, bei dem wir Ihr WordPress in ein Owned-Leads-System verwandeln. Statt einzelner Projekte investieren wir kontinuierlich in digitale Assets: Performance, Messbarkeit, SEO-Content und Conversion-Optimierung. Sie zahlen nicht für Stunden, sondern für Output."
+        "text": "Ein monatlicher Retainer, bei dem wir Ihr WordPress in ein eigenes Anfragesystem verwandeln. Statt einzelner Projekte investieren wir kontinuierlich in digitale Assets: Performance, Messbarkeit, SEO-Content und Conversion-Optimierung. Sie zahlen nicht für Stunden, sondern für Output."
       }
     },
     {
@@ -697,7 +697,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies' ], home_url( '/case-studies/' 
       "name": "Was passiert, wenn ich kündige?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Alles bleibt bei Ihnen: Code, Content, Tracking-Setup, Accounts, Zugänge. Kein Lock-in, keine Exit-Gebühren. Die Assets, die wir gebaut haben, arbeiten weiter — das ist der Punkt von Owned."
+        "text": "Alles bleibt bei Ihnen: Code, Content, Tracking-Setup, Accounts, Zugänge. Kein Lock-in, keine Exit-Gebühren. Die Assets, die wir gebaut haben, arbeiten weiter — genau das ist der Unterschied zwischen gemieteter und eigener Nachfrage."
       }
     }
   ]

@@ -64,7 +64,7 @@ get_header();
 				<ul class="hero-bullets">
 					<li>Diagnose vor Relaunch</li>
 					<li>WordPress als Growth-Infrastruktur</li>
-					<li>Owned Leads statt Kanal-Abhängigkeit</li>
+					<li>Eigene Anfragen statt Kanalabhängigkeit</li>
 				</ul>
 				<div class="hero-cta-block" style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Audit starten</a>

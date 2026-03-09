@@ -204,7 +204,7 @@ function hu_owned_section_shortcode() {
 		<div class="container">
 			<div class="section-title text-center nx-reveal">
 				<span class="badge">Das Prinzip</span>
-				<h2 id="owned-heading">Owned Leads statt Nachfrage auf Miete.</h2>
+				<h2 id="owned-heading">Eigene Anfragen statt gemieteter Nachfrage.</h2>
 				<p>Die bessere Website ist nicht die schönere. Es ist die, die Nachfrage halten, messen und in den nächsten Schritt führen kann.</p>
 			</div>
 
@@ -221,7 +221,7 @@ function hu_owned_section_shortcode() {
 
 				<div class="wp-success-card modell-b nx-reveal" style="border-top:4px solid var(--gold);">
 					<h3 class="wp-success-title" style="color:var(--gold);">Modell B: WordPress als Growth-Infrastruktur</h3>
-					<p class="wp-success-subtitle">Owned, messbar, priorisiert</p>
+					<p class="wp-success-subtitle">Eigene Nachfrage, messbar, priorisiert</p>
 					<ul class="premium-list">
 						<li><span class="check-icon">✓</span> <div>Money Pages, Proof und interne Verlinkung als bleibende Assets</div></li>
 						<li><span class="check-icon">✓</span> <div>Privacy-first Measurement für Entscheidungen statt Reporting-Rauschen</div></li>

@@ -69,7 +69,7 @@ Server-Side GTM, Consent Mode v2, GA4 Event-Blueprint, Meta CAPI.
 → **Ziel:** 100% Data Ownership, belastbare KPIs
 → **Hinweis:** Tracking-Implementierung ist NICHT im Repo. Code ist tracking-ready (`data-track-*` Attribute).
 
-### Phase 3: Owned Lead Flywheel
+### Phase 3: Anfrage-Flywheel
 Pillar Pages, Content-Cluster, interne Verlinkung, Proof-Assets, Nurture-Flows.
 → **Ziel:** Pipeline, die mit der Zeit günstiger wird.
 

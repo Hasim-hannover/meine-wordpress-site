@@ -59,7 +59,7 @@ Wichtige Regel:
 - Conversion vor Kosmetik
 - Klarheit vor Hype
 - Diagnose vor Skalierung
-- Owned Leads vor Ad-Abhaengigkeit
+- Eigene Anfragen vor Ad-Abhaengigkeit
 - Privacy-first Measurement vor Daten-Sammelwut
 - wartbare Systeme vor schnellen Hacks
 

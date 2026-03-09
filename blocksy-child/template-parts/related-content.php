@@ -3,7 +3,7 @@
  * Template Part: Related Content
  *
  * Zeigt verwandte Inhalte (Blog-Posts, Service-Seiten) für
- * interne Verlinkung und das Owned-Lead-Flywheel.
+ * interne Verlinkung und das Anfrage-Flywheel.
  *
  * Kann per Parameter gesteuert werden:
  *   set_query_var( 'related_heading', 'Das könnte Sie auch interessieren' );
