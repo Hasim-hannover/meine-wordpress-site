@@ -14,8 +14,36 @@ Version: 7.1.1-FIXED
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Merriweather';
+    src: url('fonts/Merriweather-Light.woff2') format('woff2'),
+         url('fonts/Merriweather-Light.woff') format('woff');
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    src: url('fonts/Merriweather-Bold.woff2') format('woff2'),
+         url('fonts/Merriweather-Bold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    src: url('fonts/Merriweather-Black.woff2') format('woff2'),
+         url('fonts/Merriweather-Black.woff') format('woff');
+    font-weight: 900;
+    font-display: swap;
+    font-style: normal;
+}
+
 :root {
     --theme-font-family: 'Satoshi', sans-serif;
+    --theme-font-heading: 'Merriweather', Georgia, 'Times New Roman', serif;
     --hasim-audit-orange: #C99A57;
     --hasim-audit-orange-hover: #D9B27A;
     --theme-palette-color-1: var(--hasim-audit-orange);
@@ -23,10 +51,80 @@ Version: 7.1.1-FIXED
     --nx-gold-hover: var(--hasim-audit-orange-hover);
     --gold: var(--hasim-audit-orange);
     --cta: var(--hasim-audit-orange);
+    --nx-font-heading: var(--theme-font-heading);
 }
 
-body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
+body,
+.ct-menu-link {
     font-family: 'Satoshi', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--theme-font-heading);
+}
+
+.nexus-title,
+.nexus-card-title,
+.nx-headline-hero,
+.nx-headline-section,
+.nx-card__title,
+.nx-hero__title,
+.wp-hero-title,
+.wp-section-h2,
+.wp-success-title,
+.title-nexus,
+.wp-agentur-hero .nx-hero__title,
+.result-title,
+.result-section-title,
+.result-step-title,
+.finding-title,
+.detail-card-title,
+.deepdive-title,
+.deepdive-hero-title,
+.deepdive-section-title,
+.cs-case-hero__title,
+.cs-phase-title,
+.cs-budget-proof__title,
+.cro-page .cro-headline,
+.cro-page .cro-section-title,
+.cro-page .cro-step-title,
+.cro-page .cro-impact-title,
+.cro-page .cro-cta-headline,
+.ga4-page .ga4-headline,
+.ga4-page .ga4-section-title,
+.ga4-page .ga4-step-title,
+.ga4-page .ga4-cta-headline,
+.ma-page .ma-headline,
+.ma-page .ma-section-title,
+.ma-page .ma-step-title,
+.ma-page .ma-impact-title,
+.ma-page .ma-cta-headline,
+.pillar-hero__title,
+.pillar-featured__title,
+.pillar-section-title,
+.pillar-card__title,
+.pillar-sidebar__cta-title,
+.pillar-sidebar__nav-title,
+.tools-header__title,
+.tools-card__title,
+.hero-title,
+.related-content__title,
+.story-headline,
+.step-title,
+.milestone-title,
+.value-story-title,
+.cta-headline,
+.wgos-h2,
+.wgos-hero__title,
+.wgos-credit-phase__title,
+.journey-headline,
+.audit-usp-headline,
+.usp-title,
+.audit-faq-headline,
+.problem-title,
+.pm-step-title,
+.pm-cta-headline {
+    font-family: var(--theme-font-heading);
 }
 
 /* Menü-Links: Clean & Spaced */
@@ -392,7 +490,7 @@ p.hero-stack,
 }
 
 .nexus-title {
-    font-family: 'Satoshi', sans-serif;
+    font-family: var(--theme-font-heading);
     font-size: 3.5rem; /* Massive Headline */
     line-height: 1.1;
     font-weight: 900;
@@ -565,7 +663,7 @@ p.hero-stack,
 }
 
 .nexus-card-title {
-    font-family: 'Satoshi', sans-serif;
+    font-family: var(--theme-font-heading);
     font-size: 1.5rem;
     font-weight: 700;
     color: #fff;

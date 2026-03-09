@@ -57,6 +57,16 @@ add_action( 'wp_head', function () {
 	);
 
 	printf(
+		'<link rel="preload" href="%s/Merriweather-Bold.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+		esc_url( $font_uri )
+	);
+
+	printf(
+		'<link rel="preload" href="%s/Merriweather-Black.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+		esc_url( $font_uri )
+	);
+
+	printf(
 		"<style>@font-face { font-family: 'Satoshi'; src: url('%s/Satoshi-Variable.woff2') format('woff2-variations'); font-weight: 300 900; font-display: swap; font-style: normal; }</style>\n",
 		esc_url( $font_uri )
 	);

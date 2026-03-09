@@ -65,7 +65,7 @@
 .wgos-wrapper h2,
 .wgos-wrapper h3,
 .wgos-wrapper h4 {
-    font-family: var(--nx-font);
+    font-family: var(--nx-font-heading);
     color: var(--nx-text);
     line-height: 1.15;
     letter-spacing: -0.02em;

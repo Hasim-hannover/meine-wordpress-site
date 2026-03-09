@@ -45,7 +45,7 @@
 }
 
 .deepdive-hero-title {
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--nx-font-heading, 'Merriweather', Georgia, serif);
   font-size: clamp(1.5rem, 3vw, 2.2rem);
   font-weight: 900;
   color: #fff;
@@ -131,7 +131,7 @@
 }
 
 .deepdive-section-title {
-  font-family: 'Satoshi', sans-serif;
+  font-family: var(--nx-font-heading, 'Merriweather', Georgia, serif);
   font-size: clamp(1.2rem, 2.5vw, 1.5rem);
   font-weight: 900;
   color: #fff;

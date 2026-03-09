@@ -14,7 +14,7 @@
   font-size: var(--nx-text-3xl);
   margin-bottom: var(--nx-space-xl);
   color: var(--nx-gold);
-  font-family: var(--nx-font);
+  font-family: var(--nx-font-heading);
   font-weight: 700;
 }
 .solutions-list {
@@ -50,7 +50,7 @@
   margin-bottom: 12px;
   color: var(--nx-gold);
   font-weight: 700;
-  font-family: var(--nx-font);
+  font-family: var(--nx-font-heading);
 }
 .solution-item p {
   font-size: var(--nx-text-base);
