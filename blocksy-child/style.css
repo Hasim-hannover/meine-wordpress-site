@@ -22,9 +22,27 @@ Version: 7.1.1-FIXED
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Merriweather';
+    src: url('fonts/Merriweather-Bold.woff2') format('woff2'),
+         url('fonts/Merriweather-Bold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Merriweather';
+    src: url('fonts/Merriweather-Black.woff2') format('woff2'),
+         url('fonts/Merriweather-Black.woff') format('woff');
+    font-weight: 900;
+    font-display: swap;
+    font-style: normal;
+}
+
 :root {
     --theme-font-family: 'Satoshi', sans-serif;
-    --theme-font-heading: 'Outfit', 'Satoshi', sans-serif;
+    --theme-font-heading: 'Merriweather', Georgia, serif;
     --hasim-audit-orange: #C99A57;
     --hasim-audit-orange-hover: #D9B27A;
     --theme-palette-color-1: var(--hasim-audit-orange);
@@ -42,6 +60,7 @@ body,
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--theme-font-heading);
+    letter-spacing: -0.02em;
 }
 
 .nexus-title,

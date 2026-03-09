@@ -140,7 +140,7 @@
   position: relative;
 }
 
-.wp-hero-title { font-size: clamp(2.9rem, 5.4vw, 5.15rem); font-weight: 900; line-height: 0.98; letter-spacing: -0.05em; margin: 0 0 1.35rem; color: var(--nx-text); max-width: 11ch; }
+.wp-hero-title { font-size: clamp(2.9rem, 5.15vw, 4.95rem); font-weight: 900; line-height: 1.02; letter-spacing: -0.03em; margin: 0 0 1.35rem; color: var(--nx-text); max-width: 12ch; }
 .wp-hero-title span { color: var(--nx-accent-text); }
 .wp-hero-subtitle { font-size: 1.1rem; color: var(--nx-text-secondary); max-width: 60ch; margin: 0 0 1.75rem; line-height: 1.74; }
 .wp-badge,
@@ -302,10 +302,10 @@
 .wp-section { padding: clamp(5rem, 8vw, 7rem) 0; position: relative; }
 .wp-section-title,
 .section-title { max-width: 760px; margin: 0 auto 3rem; }
-.wp-section-h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; color: var(--nx-text); font-weight: 800; letter-spacing: -0.03em; }
+.wp-section-h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; color: var(--nx-text); font-weight: 700; letter-spacing: -0.02em; }
 .wp-section-p,
 .section-title p { color: var(--nx-text-secondary); max-width: 660px; margin: 0 auto 3rem; line-height: 1.75; }
-.section-title h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; color: var(--nx-text); font-weight: 800; letter-spacing: -0.03em; }
+.section-title h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; color: var(--nx-text); font-weight: 700; letter-spacing: -0.02em; }
 
 /* Das Grid Layout für Success Cards */
 .wp-cards {
@@ -317,7 +317,7 @@
     padding: 2rem; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; box-shadow: var(--nx-shadow-sm); min-height: 100%;
 }
 .wp-success-card:hover { transform: translateY(-6px); border-color: rgba(201, 154, 87, 0.22); box-shadow: 0 24px 52px rgba(9, 14, 24, 0.18); }
-.wp-success-title { font-size: 1.4rem; color: var(--nx-text); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+.wp-success-title { font-size: 1.4rem; color: var(--nx-text); margin-bottom: 0.5rem; letter-spacing: -0.015em; }
 .wp-success-subtitle { color: var(--nx-accent-text); font-size: 0.8rem; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.11em; }
 .wp-success-card p { color: var(--nx-text-secondary); line-height: 1.7; }
 
