@@ -114,11 +114,37 @@ function remove_google_fonts() {
 
 add_filter( 'blocksy:typography:google:use-remote', '__return_false' );
 
+function hu_get_site_wordmark_text() {
+	$site_name = trim( (string) get_bloginfo( 'name' ) );
+
+	if ( '' === $site_name ) {
+		return 'HAŞIM ÜNER';
+	}
+
+	return strtr(
+		$site_name,
+		[
+			'Hasim' => 'Haşim',
+			'HASIM' => 'HAŞIM',
+			'hasim' => 'haşim',
+		]
+	);
+}
+
 function hu_get_site_wordmark_html() {
+	$wordmark = hu_get_site_wordmark_text();
+
 	return sprintf(
-		'<a href="%1$s" class="site-logo" rel="home" aria-label="%2$s">HAŞIM ÜNER</a>',
+		'<a href="%1$s" class="site-logo" rel="home" aria-label="%2$s">%3$s</a>',
 		esc_url( home_url( '/' ) ),
-		esc_attr__( 'Startseite - HAŞIM ÜNER', 'blocksy-child' )
+		esc_attr(
+			sprintf(
+				/* translators: %s: site wordmark. */
+				__( 'Startseite - %s', 'blocksy-child' ),
+				$wordmark
+			)
+		),
+		esc_html( $wordmark )
 	);
 }
 

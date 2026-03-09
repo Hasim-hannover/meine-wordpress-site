@@ -9,8 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$brand_text   = trim( (string) get_bloginfo( 'name' ) );
-$brand_text   = '' !== $brand_text ? $brand_text : 'HAŞIM ÜNER';
+$brand_text   = function_exists( 'hu_get_site_wordmark_text' ) ? hu_get_site_wordmark_text() : 'HAŞIM ÜNER';
 $eyebrow_text = nexus_get_site_header_eyebrow();
 $panel_id     = 'nx-site-header-panel';
 $home_label   = sprintf(
