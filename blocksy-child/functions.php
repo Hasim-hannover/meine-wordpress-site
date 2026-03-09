@@ -57,12 +57,7 @@ add_action( 'wp_head', function () {
 	);
 
 	printf(
-		'<link rel="preload" href="%s/Merriweather-Bold.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
-		esc_url( $font_uri )
-	);
-
-	printf(
-		'<link rel="preload" href="%s/Merriweather-Black.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+		'<link rel="preload" href="%s/Outfit-Variable.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
 		esc_url( $font_uri )
 	);
 

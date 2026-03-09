@@ -42,7 +42,7 @@
 }
 
 .nexus-title {
-    font-family: var(--nx-font-heading, 'Merriweather', Georgia, serif);
+    font-family: var(--nx-font-heading, 'Outfit', 'Satoshi', sans-serif);
     font-size: 2.8rem;
     line-height: 1.15;
     font-weight: 900;
