@@ -131,9 +131,6 @@ $primary_items = [
 		</nav>
 
 		<div class="nexus-blog-header__actions">
-			<a class="nexus-blog-header__utility" href="<?php echo esc_url( $blog_url ); ?>">
-				<?php esc_html_e( 'Zur Übersicht', 'blocksy-child' ); ?>
-			</a>
 			<a class="nexus-blog-header__cta" href="<?php echo esc_url( $audit_url ); ?>">
 				<?php esc_html_e( 'Audit starten', 'blocksy-child' ); ?>
 			</a>
@@ -160,9 +157,6 @@ $primary_items = [
 				</nav>
 
 				<div class="nexus-blog-header__mobile-actions">
-					<a class="nexus-blog-header__utility" href="<?php echo esc_url( $blog_url ); ?>">
-						<?php esc_html_e( 'Zur Übersicht', 'blocksy-child' ); ?>
-					</a>
 					<a class="nexus-blog-header__cta" href="<?php echo esc_url( $audit_url ); ?>">
 						<?php esc_html_e( 'Audit starten', 'blocksy-child' ); ?>
 					</a>
