@@ -386,7 +386,25 @@
 
 
         /**
-         * 11. THEME TOGGLE
+         * 11. THEME TOGGLE MOUNT
+         * Verschiebt den Toggle in den sichtbaren Header fuer konsistente Platzierung.
+         */
+        mountThemeToggle: function () {
+            var header = document.querySelector('.ct-header');
+            var toggle = document.querySelector('.nx-theme-toggle[data-nx-theme-toggle]');
+
+            if (!header || !toggle) return;
+
+            if (toggle.parentElement !== header) {
+                header.appendChild(toggle);
+            }
+
+            toggle.classList.add('nx-theme-toggle--mounted');
+        },
+
+
+        /**
+         * 12. THEME TOGGLE
          * Persistiert Dark/Light-Auswahl und synchronisiert alle Toggle-Buttons.
          */
         initThemeToggle: function () {
@@ -465,6 +483,7 @@
             }
 
             // Theme Toggle
+            this.mountThemeToggle();
             this.initThemeToggle();
 
             // Header Flight Mode

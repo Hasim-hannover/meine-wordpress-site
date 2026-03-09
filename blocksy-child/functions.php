@@ -225,7 +225,6 @@ add_action( 'wp_body_open', 'nexus_render_theme_toggle', 15 );
 function nexus_render_theme_toggle() {
 	?>
 	<div class="nx-theme-toggle" data-nx-theme-toggle>
-		<span class="nx-theme-toggle__label"><?php esc_html_e( 'Ansicht', 'blocksy-child' ); ?></span>
 		<div class="nx-theme-toggle__group" role="group" aria-label="<?php esc_attr_e( 'Farbschema waehlen', 'blocksy-child' ); ?>">
 			<button type="button" class="nx-theme-toggle__button" data-theme-value="dark" aria-pressed="false">
 				<span class="nx-theme-toggle__icon" aria-hidden="true">D</span>

@@ -51,9 +51,9 @@ h1, h2, h3, h4, h5, h6 {
     text-indent: 0 !important;
     overflow: visible !important;
     font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.22em;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     text-decoration: none;
     color: var(--text-primary);
@@ -73,8 +73,8 @@ h1, h2, h3, h4, h5, h6 {
 
 :root[data-nx-theme='light'] .ct-header .site-logo,
 :root[data-nx-theme='light'] .ct-header .site-logo-container {
-    color: #1F1C18 !important;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    color: var(--nx-text) !important;
+    text-shadow: none;
 }
 
 .site-logo--accent {
@@ -1488,6 +1488,26 @@ body.wp-customizer .ct-customizer-shortcut {
 .site-logo,
 .site-logo-container {
     transition: color 0.3s ease, transform 0.3s ease;
+}
+
+:root[data-nx-theme='light'] .ct-header,
+:root[data-theme='light'] .ct-header {
+    background: rgba(255, 251, 245, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--nx-border);
+    box-shadow: var(--shadow-sm);
+}
+
+:root[data-nx-theme='light'] .ct-header .ct-menu > li > a,
+:root[data-theme='light'] .ct-header .ct-menu > li > a {
+    color: var(--nx-text-secondary);
+}
+
+:root[data-nx-theme='light'] .ct-header .ct-menu > li > a:hover,
+:root[data-nx-theme='light'] .ct-header .ct-menu > li.current-menu-item > a,
+:root[data-theme='light'] .ct-header .ct-menu > li > a:hover,
+:root[data-theme='light'] .ct-header .ct-menu > li.current-menu-item > a {
+    color: var(--nx-text);
 }
 .ct-header.nexus-flight-mode .site-logo,
 .ct-header.nexus-flight-mode .site-logo-container {
