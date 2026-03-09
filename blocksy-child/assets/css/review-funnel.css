@@ -1087,8 +1087,17 @@
 }
 
 .audit-wrapper .review-hero-layout {
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: clamp(1.6rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.audit-wrapper .review-hero-shell {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.audit-wrapper .review-hero-main {
+  max-width: 720px;
 }
 
 .audit-wrapper .review-hero-main h1 {
@@ -1096,17 +1105,48 @@
   font-weight: 300;
   line-height: 1.08;
   letter-spacing: -0.018em;
-  max-width: 12.5ch;
+  max-width: 11.8ch;
   color: var(--text-main);
+}
+
+.audit-wrapper .review-hero-kicker {
+  margin-bottom: 0.45rem;
+}
+
+.audit-wrapper .hero-sub-short {
+  max-width: 54ch;
+}
+
+.audit-wrapper .audit-hero-actions {
+  margin-top: 1.1rem;
+}
+
+.audit-wrapper .audit-hero-proof {
+  margin-top: 0.9rem;
 }
 
 .audit-wrapper .review-kpi-strip {
   max-width: none;
-  padding: 1rem;
+  margin-top: 1.1rem;
+  padding: 0.8rem;
   border: 1px solid var(--border);
   border-radius: var(--nx-radius-xl);
   background: linear-gradient(180deg, hsl(0 0% 100% / 0.035), hsl(0 0% 100% / 0.015));
   box-shadow: var(--audit-shadow-card);
+}
+
+.audit-wrapper .review-kpi {
+  padding: 0.9rem 1rem;
+}
+
+.audit-wrapper .review-kpi strong {
+  margin-bottom: 0.25rem;
+  font-size: 0.94rem;
+}
+
+.audit-wrapper .review-kpi span {
+  font-size: 0.78rem;
+  line-height: 1.4;
 }
 
 .audit-wrapper :is(
@@ -1126,11 +1166,30 @@
 }
 
 .audit-wrapper .review-offer-panel {
+  padding: 1.35rem;
   border-color: var(--audit-border-accent);
   background:
     radial-gradient(circle at top right, hsl(var(--accent-hsl) / 0.12), transparent 34%),
     var(--audit-panel);
   box-shadow: var(--audit-shadow-panel);
+}
+
+.audit-wrapper .review-offer-panel h2 {
+  margin-bottom: 0.65rem;
+}
+
+.audit-wrapper .review-offer-list {
+  gap: 0.75rem;
+  margin-top: 0.95rem;
+}
+
+.audit-wrapper .review-offer-item {
+  padding: 0.9rem 0.95rem;
+}
+
+.audit-wrapper .review-offer-timeline {
+  margin-top: 0.95rem;
+  padding-top: 0.9rem;
 }
 
 .audit-wrapper .review-proof-band,
@@ -1403,6 +1462,15 @@
 
   .review-success-timeline {
     grid-template-columns: 1fr;
+  }
+
+  .audit-wrapper .review-hero-main {
+    max-width: none;
+  }
+
+  .audit-wrapper .review-hero-main h1,
+  .audit-wrapper .hero-sub-short {
+    max-width: 100%;
   }
 }
 

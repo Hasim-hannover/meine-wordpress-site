@@ -790,10 +790,10 @@
 
 /* Hero: nur Headline + 1 Satz, zentriert */
 .audit-hero-centered {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto 2.5rem;
-  padding-top: 1.25rem;
+  width: 100%;
+  max-width: none;
+  margin: 0 auto clamp(1.75rem, 3vw, 2.75rem);
+  padding-top: calc(var(--nx-header-height, 85px) + clamp(1.75rem, 4vw, 3.25rem));
 }
 
 .audit-hero-centered h1 {
@@ -802,15 +802,15 @@
   font-weight: 900;
   line-height: 1.06;
   letter-spacing: -0.02em;
-  margin: 0.6rem 0 1rem;
+  margin: 0.45rem 0 0.85rem;
 }
 
 .hero-sub-short {
   font-size: 1.1rem;
   color: var(--text-dim);
-  max-width: 44ch;
-  margin: 0 auto;
-  line-height: 1.6;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.68;
 }
 
 /* Form: zentriert + breiter */
@@ -1157,6 +1157,14 @@
   .hero-sub {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .audit-hero-centered {
+    padding-top: calc(var(--nx-header-height, 85px) + clamp(1rem, 5vw, 1.6rem));
+  }
+
+  .hero-sub-short {
+    max-width: none;
   }
 
   .black-box {
