@@ -177,6 +177,11 @@ function hu_document_title_overrides( $parts ) {
 		return $parts;
 	}
 
+	if ( function_exists( 'nexus_is_contact_page' ) && nexus_is_contact_page() ) {
+		$parts['title'] = 'Kontakt für WordPress, SEO und Growth';
+		return $parts;
+	}
+
 	if ( is_singular() ) {
 		$post_id    = get_queried_object_id();
 		$seo_title  = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
@@ -204,9 +209,10 @@ function hu_seo_meta_tags() {
 	}
 
 	$rank_math_active = defined( 'RANK_MATH_VERSION' );
+	$virtual_contact  = function_exists( 'nexus_is_contact_request_path' ) && nexus_is_contact_request_path() && ! is_page( 'kontakt' );
 
 	// ── Rank Math aktiv: nur ACF OG-Bild-Override ausgeben ────────
-	if ( $rank_math_active ) {
+	if ( $rank_math_active && ! $virtual_contact ) {
 		if ( is_singular() && function_exists( 'get_field' ) ) {
 			$og_image = get_field( 'og_image', get_queried_object_id() );
 			if ( $og_image ) {
@@ -309,7 +315,12 @@ function hu_get_seo_meta() {
 		'kunden-login',
 	];
 
-	if ( is_singular() ) {
+	if ( function_exists( 'nexus_is_contact_page' ) && nexus_is_contact_page() ) {
+		$meta['og_title']    = 'Kontakt für WordPress, SEO und Growth · ' . get_bloginfo( 'name' );
+		$meta['description'] = 'Direkter Kontakt für WordPress-, SEO-, CRO- und Growth-Themen: schlanke Anfrage, schnelle Einordnung und alternative Wege über E-Mail, Telefon oder LinkedIn.';
+		$meta['canonical']   = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+
+	} elseif ( is_singular() ) {
 		$post_id  = get_queried_object_id();
 		$template = get_page_template_slug( $post_id );
 		$slug     = get_post_field( 'post_name', $post_id );

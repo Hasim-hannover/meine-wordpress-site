@@ -17,9 +17,9 @@ while ( have_posts() ) :
 	$privacy_url = function_exists( 'nexus_get_page_url' )
 		? nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) )
 		: home_url( '/datenschutz/' );
-	$contact_url = function_exists( 'nexus_get_page_url' )
-		? nexus_get_page_url( [ 'kontaktiere-mich', 'kontakt' ], home_url( '/kontaktiere-mich/' ) )
-		: home_url( '/kontaktiere-mich/' );
+	$contact_url = function_exists( 'nexus_get_contact_url' )
+		? nexus_get_contact_url()
+		: home_url( '/kontakt/' );
 	$mail_link   = 'mailto:kontakt@hasimuener.de';
 	$phone_link  = 'tel:+4917681407134';
 	?>

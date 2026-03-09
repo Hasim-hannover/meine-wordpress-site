@@ -266,3 +266,69 @@ function nexus_is_audit_page() {
 		|| is_page( 'audit' )
 		|| is_page( 'customer-journey-audit' );
 }
+
+/**
+ * Return the current request path with leading and trailing slash.
+ *
+ * @return string
+ */
+function nexus_get_current_request_path() {
+	$request_uri  = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
+	$request_path = wp_parse_url( $request_uri, PHP_URL_PATH );
+
+	return trailingslashit( '/' . ltrim( (string) $request_path, '/' ) );
+}
+
+/**
+ * Resolve the primary contact page ID while supporting the legacy slug.
+ *
+ * @return int
+ */
+function nexus_get_contact_page_id() {
+	$template_page_id = nexus_get_page_id_by_template( 'page-kontakt.php' );
+
+	if ( $template_page_id ) {
+		return $template_page_id;
+	}
+
+	return nexus_get_page_id( [ 'kontakt', 'kontaktiere-mich' ] );
+}
+
+/**
+ * Resolve the primary contact URL while enforcing the new /kontakt/ path.
+ *
+ * @return string
+ */
+function nexus_get_contact_url() {
+	$page_id = nexus_get_contact_page_id();
+
+	if ( $page_id ) {
+		$permalink = get_permalink( $page_id );
+		$path      = trailingslashit( '/' . ltrim( (string) wp_parse_url( $permalink, PHP_URL_PATH ), '/' ) );
+
+		if ( '/kontaktiere-mich/' !== $path ) {
+			return $permalink;
+		}
+	}
+
+	return home_url( '/kontakt/' );
+}
+
+/**
+ * Determine whether the current request is the public contact page.
+ *
+ * @return bool
+ */
+function nexus_is_contact_page() {
+	$contact_page_id = nexus_get_contact_page_id();
+	$contact_path    = trailingslashit( '/' . ltrim( (string) wp_parse_url( home_url( '/kontakt/' ), PHP_URL_PATH ), '/' ) );
+
+	if ( $contact_page_id && is_page( $contact_page_id ) ) {
+		return true;
+	}
+
+	return $contact_path === nexus_get_current_request_path()
+		|| is_page_template( 'page-kontakt.php' )
+		|| is_page( 'kontakt' )
+		|| is_page( 'kontaktiere-mich' );
+}

@@ -110,6 +110,21 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-about-css', 'about-page.css', [ 'nexus-design-system' ] );
 	}
 
+	// ── E2) Kontakt ───────────────────────────────────────────────
+	if ( function_exists( 'nexus_is_contact_page' ) && nexus_is_contact_page() ) {
+		hu_enqueue_css( 'nexus-contact-css', 'contact.css', [ 'nexus-design-system' ] );
+		hu_enqueue_js( 'nexus-contact-js', 'contact.js', [ 'nexus-core-js' ] );
+		wp_localize_script(
+			'nexus-contact-js',
+			'NexusContactConfig',
+			[
+				'restEndpoint'   => esc_url_raw( rest_url( 'nexus/v1/contact-request' ) ),
+				'successMessage' => 'Danke. Ihre Nachricht ist eingegangen. Sie erhalten in der Regel innerhalb von 48 Stunden eine persönliche Rückmeldung.',
+				'errorMessage'   => 'Die Nachricht konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie direkt an kontakt@hasimuener.de.',
+			]
+		);
+	}
+
 	// ── F) Template: Agentur Service ──────────────────────────────
 	if ( is_page_template( 'page-wordpress-agentur.php' ) || is_page_template( 'page-wordpress-agentur-hannover.php' ) || is_page( 'wordpress-agentur' ) || is_page( 'wordpress-agentur-hannover' ) ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );

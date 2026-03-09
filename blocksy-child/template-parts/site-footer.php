@@ -36,7 +36,7 @@ $cwv_url     = nexus_get_page_url(
 	home_url( '/core-web-vitals/' )
 );
 $about_url   = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
-$contact_url = nexus_get_page_url( [ 'kontaktiere-mich', 'kontakt' ], home_url( '/kontaktiere-mich/' ) );
+$contact_url = nexus_get_contact_url();
 $imprint_url = nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) );
 $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
 ?>

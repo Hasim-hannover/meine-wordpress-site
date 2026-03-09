@@ -16,9 +16,9 @@ while ( have_posts() ) :
 	$imprint_url = function_exists( 'nexus_get_page_url' )
 		? nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) )
 		: home_url( '/impressum/' );
-	$contact_url = function_exists( 'nexus_get_page_url' )
-		? nexus_get_page_url( [ 'kontaktiere-mich', 'kontakt' ], home_url( '/kontaktiere-mich/' ) )
-		: home_url( '/kontaktiere-mich/' );
+	$contact_url = function_exists( 'nexus_get_contact_url' )
+		? nexus_get_contact_url()
+		: home_url( '/kontakt/' );
 	$rights_url = '#rechte';
 	?>
 	<main id="main" class="site-main privacy-page" data-track-section="privacy_page">

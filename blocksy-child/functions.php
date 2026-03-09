@@ -21,6 +21,7 @@ $modules = [
 	'audit-page.php',     // Audit-Shell-Fallback fuer die Audit-Landing-Page
 	'header.php',         // Eigener globaler Header + Navigation
 	'review-crm.php',     // Growth-Audit-Intake + WordPress CRM
+	'contact-page.php',   // Kontakt-Route, schlanke Kontaktform und Mailversand
 	'enqueue.php',        // CSS/JS Asset-Management
 	'seo-meta.php',       // OG Tags, Canonical, Indexierungssteuerung
 	'org-schema.php',     // JSON-LD Structured Data
