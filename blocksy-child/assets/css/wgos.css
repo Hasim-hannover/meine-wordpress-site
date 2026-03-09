@@ -73,13 +73,13 @@
 }
 
 .wgos-wrapper a {
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     text-decoration: none;
     transition: color var(--nx-duration) var(--nx-ease);
 }
 
 .wgos-wrapper a:hover {
-    color: var(--nx-gold-hover);
+    color: var(--nx-accent-text-hover);
 }
 
 .wgos-container {
@@ -319,7 +319,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     margin-bottom: 16px;
 }
 
@@ -345,7 +345,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     margin: -16px auto 20px;
     max-width: 640px;
 }
@@ -367,7 +367,7 @@
     border-radius: 100px;
     padding: 5px 14px;
     font-size: 0.82rem;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     font-weight: 700;
 }
 
@@ -476,14 +476,14 @@
     font-family: var(--nx-font);
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     text-decoration: none;
     transition: color var(--nx-duration) var(--nx-ease);
 }
 
 .wgos-wrapper .wgos-link--arrow:hover,
 .wgos-wrapper a.wgos-link--arrow:hover {
-    color: var(--nx-gold-hover);
+    color: var(--nx-accent-text-hover);
 }
 
 /* =========================================
@@ -539,7 +539,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 700;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     border: 1px solid var(--nx-border-gold);
     background: var(--nx-gold-subtle);
     border-radius: var(--nx-radius-pill);
@@ -683,7 +683,7 @@
     position: absolute;
     left: 0;
     top: 10px;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     font-weight: 700;
     font-size: 1.1rem;
 }
@@ -707,13 +707,13 @@
 
 .wgos-inline-cta a {
     font-weight: 600;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     font-size: 1rem;
 }
 
 .wgos-inline-cta a:hover {
     text-decoration: underline;
-    color: var(--nx-gold-hover);
+    color: var(--nx-accent-text-hover);
 }
 
 /* =========================================
@@ -747,7 +747,7 @@
     font-family: var(--nx-font);
     font-size: 3rem;
     font-weight: 900;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     line-height: 1;
     padding-top: 4px;
 }
@@ -777,7 +777,7 @@
     display: inline-block;
     font-size: 0.82rem;
     font-weight: 700;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     background: var(--nx-gold-subtle);
     padding: 6px 14px;
     border-radius: var(--nx-radius-pill);
@@ -846,7 +846,7 @@
 
 .wgos-credits-table thead th {
     background: var(--nx-bg-card);
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -895,7 +895,7 @@
     font-weight: 800 !important;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    color: var(--nx-gold) !important;
+    color: var(--nx-accent-text) !important;
     padding: 12px 20px !important;
     border-bottom: 1px solid var(--nx-border) !important;
 }
@@ -1006,7 +1006,7 @@
     display: inline-block;
     font-size: 0.82rem;
     font-weight: 700;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     background: var(--nx-gold-subtle);
     padding: 6px 14px;
     border-radius: var(--nx-radius-pill);
@@ -1036,7 +1036,7 @@
     content: '✓';
     position: absolute;
     left: 0;
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     font-weight: 700;
 }
 
@@ -1132,7 +1132,7 @@
 
 .wgos-faq .nx-faq__item summary::after {
     content: '+';
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
     font-size: 1.5rem;
     font-weight: 400;
     flex-shrink: 0;
@@ -1144,7 +1144,7 @@
 }
 
 .wgos-faq .nx-faq__item summary:hover {
-    color: var(--nx-gold);
+    color: var(--nx-accent-text);
 }
 
 .wgos-faq .nx-faq__content {

@@ -115,10 +115,10 @@
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
 .wp-hero-title { font-size: clamp(2.8rem, 5vw, 4.8rem); font-weight: 900; line-height: 1.04; letter-spacing: -0.04em; margin: 0 auto 1.35rem; color: var(--nx-text); max-width: 12ch; }
-.wp-hero-title span { color: var(--gold); }
+.wp-hero-title span { color: var(--nx-accent-text); }
 .wp-hero-subtitle { font-size: 1.14rem; color: var(--nx-text-secondary); max-width: 720px; margin: 0 auto 1.6rem; line-height: 1.72; }
 .wp-badge,
-.badge { display: inline-block; padding: 0.6rem 1rem; background: rgba(201, 154, 87, 0.12); border: 1px solid rgba(201, 154, 87, 0.2); color: var(--gold); border-radius: 999px; font-size: 0.76rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 0.11em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(201, 154, 87, 0.08); }
+.badge { display: inline-block; padding: 0.6rem 1rem; background: var(--nx-gold-subtle); border: 1px solid var(--nx-border-gold); color: var(--nx-accent-text); border-radius: 999px; font-size: 0.76rem; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 0.11em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(201, 154, 87, 0.08); }
 .wp-trust-stack { color: var(--nx-text-dim); font-size: 0.9rem; margin-bottom: 2rem; }
 .wp-hero-actions {
   display: flex;
@@ -141,7 +141,7 @@
 }
 
 .wp-hero-supporting-link a:hover {
-  color: var(--gold);
+  color: var(--nx-accent-text);
   border-bottom-color: rgba(201, 154, 87, 0.32);
 }
 
@@ -156,7 +156,7 @@
 .wp-metric { display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 0.35rem; padding: 1rem 1.15rem; border-radius: 20px; border: 1px solid var(--nx-border); background: linear-gradient(180deg, rgba(255,255,255,0.042), var(--nx-bg-glass-light)); }
 .wp-metric-value { font-size: 1.8rem; font-weight: 800; color: var(--nx-text); order: 0; }
 .wp-metric-label { font-size: 0.9rem; color: var(--nx-text-muted); order: 0; text-align: left; }
-.text-gold { color: var(--gold) !important; }
+.text-gold { color: var(--nx-accent-text) !important; }
 
 @media (min-width: 1024px) {
     .switch-grid {
@@ -217,8 +217,8 @@
 .premium-list { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
 .premium-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; color: var(--nx-text-secondary); }
 .premium-list strong { color: var(--nx-text); }
-.check-icon { color: var(--gold); font-weight: bold; }
-.price-box { background: rgba(201, 154, 87, 0.12); border: 1px solid rgba(201, 154, 87, 0.16); color: #f1dcc0; padding: 1rem; border-radius: 16px; margin-top: 1.5rem; font-weight: 600; }
+.check-icon { color: var(--nx-accent-text); font-weight: bold; }
+.price-box { background: rgba(201, 154, 87, 0.12); border: 1px solid rgba(201, 154, 87, 0.16); color: var(--nx-accent-text); padding: 1rem; border-radius: 16px; margin-top: 1.5rem; font-weight: 600; }
 
 /* --- 4. SYSTEM & CARDS (Die "Alte Logik" wiederhergestellt) --- */
 .wp-section { padding: clamp(4.5rem, 7vw, 6.5rem) 0; position: relative; }
@@ -240,7 +240,7 @@
 }
 .wp-success-card:hover { transform: translateY(-5px); border-color: rgba(201, 154, 87, 0.22); box-shadow: 0 24px 52px rgba(9, 14, 24, 0.18); }
 .wp-success-title { font-size: 1.4rem; color: var(--nx-text); margin-bottom: 0.5rem; letter-spacing: -0.02em; }
-.wp-success-subtitle { color: var(--gold); font-size: 0.8rem; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.11em; }
+.wp-success-subtitle { color: var(--nx-accent-text); font-size: 0.8rem; margin-bottom: 1.25rem; text-transform: uppercase; letter-spacing: 0.11em; }
 .wp-success-card p { color: var(--nx-text-secondary); line-height: 1.7; }
 
 /* Metriken innerhalb der Karten */
@@ -281,13 +281,13 @@
 .mt-large { margin-top: 3rem; }
 .wp-btn-wrapper { display: flex; justify-content: center; }
 .text-center { text-align: center; }
-.micro-cta-link { display: inline-flex; align-items: center; gap: 0.35rem; margin: 1.15rem auto 0; color: var(--gold); text-decoration: none; font-weight: 700; }
-.micro-cta-link:hover { color: var(--nx-text); }
+.micro-cta-link { display: inline-flex; align-items: center; gap: 0.35rem; margin: 1.15rem auto 0; color: var(--nx-accent-text); text-decoration: none; font-weight: 700; }
+.micro-cta-link:hover { color: var(--nx-accent-text-hover); }
 
 /* FAQ */
 .wp-faq-item { border-bottom: 1px solid var(--border); padding: 1.5rem 0; }
 .wp-faq-item summary { cursor: pointer; font-weight: 600; color: var(--nx-text); list-style: none; display: flex; justify-content: space-between; }
-.wp-faq-item summary::after { content: '+'; color: var(--gold); font-size: 1.5rem; }
+.wp-faq-item summary::after { content: '+'; color: var(--nx-accent-text); font-size: 1.5rem; }
 .wp-faq-item[open] summary::after { content: '-'; }
 .wp-faq-content { margin-top: 1rem; color: var(--nx-text-secondary); line-height: 1.7; }
 
@@ -327,7 +327,7 @@
     position: absolute; bottom: 0; left: 0; padding: 3rem; width: 100%; 
 }
 
-.eyebrow-nexus { color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+.eyebrow-nexus { color: var(--nx-accent-text); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
 
 .title-nexus { font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.1; margin: 1rem 0; color: var(--nx-text); }
 
@@ -350,7 +350,7 @@
     background: var(--dark-glass); padding: 2rem; border-radius: 16px; border: 1px solid var(--border); 
 }
 
-.toc-nexus h4 { color: var(--gold); text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1.5rem; }
+.toc-nexus h4 { color: var(--nx-accent-text); text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1.5rem; }
 
 .toc-nexus ul { list-style: none; padding: 0; }
 
@@ -359,7 +359,7 @@
     font-size: 0.95rem; border-bottom: 1px solid transparent; 
 }
 
-.toc-nexus a.active { color: var(--gold); font-weight: 700; }
+.toc-nexus a.active { color: var(--nx-accent-text); font-weight: 700; }
 
 /* CTA & Share */
 .cta-box-nexus { 
@@ -385,7 +385,7 @@
 }
 
 .toc-nexus a:hover, .toc-nexus a.active {
-    color: var(--gold);
+    color: var(--nx-accent-text);
     font-weight: 700;
 }
 
@@ -409,7 +409,7 @@
    ========================================= */
 .positioning {
     font-size: 0.9rem;
-    color: var(--gold);
+    color: var(--nx-accent-text);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -432,7 +432,7 @@
     border-radius: 100px;
     padding: 5px 14px;
     font-size: 0.85rem;
-    color: var(--gold);
+    color: var(--nx-accent-text);
     font-weight: 700;
 }
 
