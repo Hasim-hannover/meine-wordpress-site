@@ -22,7 +22,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
         <div class="hero-content" style="display:flex; flex-wrap:wrap; align-items:center; gap:3rem;">
             <div class="story-opener" style="flex:1; min-width:280px;">
                 <h1 class="story-headline" style="margin-bottom:2rem;">Über mich</h1>
-                <h2 style="margin-bottom:1.5rem;">Eine Website sollte 2026 mehr sein als eine digitale Visitenkarte.</h2>
+                <h2 style="margin-bottom:2.5rem;">Eine Website sollte 2026 mehr sein als eine digitale Visitenkarte.</h2>
                 <p style="margin-bottom:1.2rem;">Ich entwickle Websites nicht als dekorative Oberfläche, sondern als geschäftlich relevantes System.<br>Ein System, das Orientierung schafft, Vertrauen aufbaut und dazu beiträgt, dass aus Aufmerksamkeit qualifizierte Anfragen werden.</p>
                 <p style="margin-bottom:2rem;">Viele Unternehmen sind online präsent. Aber ihre Website leistet zu wenig. Sie sieht ordentlich aus, sagt aber nicht präzise genug, worum es geht, wofür das Unternehmen steht und warum man gerade hier anfragen sollte.</p>
                 <div class="about-hero-ctas" style="margin-bottom:2.5rem;">
@@ -46,7 +46,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
     </section>
 
     <section id="about-why" class="about-section">
-        <h2>Warum viele Websites zu wenig leisten</h2>
+    <h2 style="margin-bottom:2.5rem;">Warum viele Websites zu wenig leisten</h2>
         <p>Die meisten Websites scheitern nicht daran, dass sie komplett schlecht sind. Sie scheitern daran, dass sie zu wenig leisten.</p>
         <p>Sie sind da, aber sie führen nicht.<br>Sie informieren, aber sie ordnen nicht.<br>Sie wirken professionell, aber erzeugen zu wenig Klarheit.</p>
         <p>Gerade im B2B-Bereich ist das entscheidend. Noch bevor ein Gespräch stattfindet, entsteht bereits ein Urteil: Wirkt das Unternehmen klar? Ist die Leistung verständlich? Hat dieser Auftritt Substanz? Kann man ihm vertrauen?</p>
@@ -54,7 +54,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
     </section>
 
     <section id="about-system" class="about-section">
-        <h2>Warum ich in Systemen denke</h2>
+    <h2 style="margin-bottom:2.5rem;">Warum ich in Systemen denke</h2>
         <p>Ich betrachte Websites nicht isoliert. Für mich sind sie Teil eines größeren Zusammenhangs.</p>
         <p>Wenn die Positionierung unscharf ist, werden Texte beliebig.<br>Wenn die Struktur nicht trägt, verlieren Inhalte an Kraft.<br>Wenn Nutzer nicht klar geführt werden, hilft auch Reichweite wenig.<br>Wenn Daten fehlen oder falsch gelesen werden, entstehen schlechte Entscheidungen.</p>
         <p>Deshalb beginne ich nicht mit Aktionismus, sondern mit Logik.</p>
@@ -63,7 +63,7 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
     </section>
 
     <section id="about-how" class="about-section">
-        <h2>Wie ich arbeite</h2>
+    <h2 style="margin-bottom:2.5rem;">Wie ich arbeite</h2>
         <p>Ich glaube an Klarheit vor Komplexität.</p>
         <p>Nicht jedes Unternehmen braucht mehr Tools, mehr Seiten oder mehr Features. Oft braucht es zuerst eine sauber gedachte Grundlage: eine klare Positionierung, eine tragfähige Struktur, verständliche Kommunikation und eine Nutzerführung, die nicht dem Zufall überlassen wird.</p>
         <p>Ich arbeite deshalb nicht auf der Ebene einzelner Schönheitskorrekturen. Ich versuche, die Logik hinter einer Website so zu schärfen, dass sie verständlicher, belastbarer und nützlicher wird.</p>
@@ -71,13 +71,13 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
     </section>
 
     <section id="about-forwhom" class="about-section">
-        <h2>Für wen ich arbeite</h2>
+    <h2 style="margin-bottom:2.5rem;">Für wen ich arbeite</h2>
         <p>Ich arbeite am liebsten mit Unternehmen, die mehr wollen als einen ansehnlichen Online-Auftritt.</p>
         <p>Mit Entscheidern, die verstanden haben, dass ihre Website nicht nur präsent sein, sondern geschäftlich etwas leisten muss.<br>Mit Unternehmen, die Klarheit höher bewerten als Lautstärke.<br>Mit Menschen, die keine digitale Fassade suchen, sondern eine tragfähige Grundlage.</p>
     </section>
 
     <section id="about-finalcta" class="about-section">
-        <h2>Schluss</h2>
+    <h2 style="margin-bottom:2.5rem;">Schluss</h2>
         <p>Ich helfe Unternehmen dabei, aus ihrer Website mehr zu machen als eine digitale Visitenkarte.</p>
         <p>Nicht lauter.<br>Nicht dekorativer.<br>Sondern klarer, tragfähiger und relevanter.</p>
         <p>Denn eine Website sollte heute nicht einfach nur da sein.<br>Sie sollte etwas leisten.</p>
