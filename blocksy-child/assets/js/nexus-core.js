@@ -390,16 +390,107 @@
          * Verschiebt den Toggle in den sichtbaren Header fuer konsistente Platzierung.
          */
         mountThemeToggle: function () {
-            var header = document.querySelector('.ct-header');
-            var toggle = document.querySelector('.nx-theme-toggle[data-nx-theme-toggle]');
+            var toggles = Array.prototype.slice.call(document.querySelectorAll('.nx-theme-toggle[data-nx-theme-toggle]'));
+            var mountSelectors = [
+                '.ct-header [data-device="desktop"] .ct-container',
+                '.ct-header .ct-middle-row .ct-container',
+                '.ct-header .ct-container',
+                '.ct-header'
+            ];
 
-            if (!header || !toggle) return;
+            if (!toggles.length) return;
 
-            if (toggle.parentElement !== header) {
-                header.appendChild(toggle);
+            function isVisible(node) {
+                if (!node) return false;
+
+                var style = window.getComputedStyle(node);
+                var rect = node.getBoundingClientRect();
+
+                return style.display !== 'none' &&
+                    style.visibility !== 'hidden' &&
+                    rect.width > 0 &&
+                    rect.height > 0;
             }
 
-            toggle.classList.add('nx-theme-toggle--mounted');
+            function isHeaderToggle(node) {
+                return isVisible(node) &&
+                    !!node.closest('.ct-header') &&
+                    !node.closest('.ct-panel') &&
+                    !node.closest('[aria-hidden="true"]');
+            }
+
+            function resolvePrimaryToggle() {
+                for (var i = 0; i < toggles.length; i += 1) {
+                    if (isHeaderToggle(toggles[i])) {
+                        return toggles[i];
+                    }
+                }
+
+                for (var j = 0; j < toggles.length; j += 1) {
+                    if (toggles[j].getAttribute('data-nx-theme-toggle-source') !== 'fallback') {
+                        return toggles[j];
+                    }
+                }
+
+                return toggles[0];
+            }
+
+            var toggle = resolvePrimaryToggle();
+
+            toggles.forEach(function (candidate) {
+                if (candidate !== toggle) {
+                    candidate.remove();
+                }
+            });
+
+            function resolveMountTarget() {
+                for (var i = 0; i < mountSelectors.length; i += 1) {
+                    var nodes = document.querySelectorAll(mountSelectors[i]);
+
+                    for (var j = 0; j < nodes.length; j += 1) {
+                        var node = nodes[j];
+
+                        if (!isVisible(node)) {
+                            continue;
+                        }
+
+                        if (node.closest('.ct-panel') || node.closest('[aria-hidden="true"]')) {
+                            continue;
+                        }
+
+                        if (!node.querySelector('.ct-menu, .header-navigation, [data-id="menu"]') && mountSelectors[i] !== '.ct-header') {
+                            continue;
+                        }
+
+                        return node;
+                    }
+                }
+
+                return null;
+            }
+
+            function applyMount() {
+                var mountTarget = resolveMountTarget();
+
+                toggle.classList.remove('nx-theme-toggle--mounted');
+
+                if (!mountTarget) {
+                    return;
+                }
+
+                mountTarget.classList.add('nx-theme-toggle-host');
+
+                if (toggle.parentElement !== mountTarget) {
+                    mountTarget.appendChild(toggle);
+                }
+
+                toggle.classList.add('nx-theme-toggle--mounted');
+            }
+
+            applyMount();
+            window.setTimeout(applyMount, 250);
+            window.setTimeout(applyMount, 1200);
+            window.addEventListener('resize', applyMount, { passive: true });
         },
 
 

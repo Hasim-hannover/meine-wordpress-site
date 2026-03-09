@@ -28,6 +28,23 @@ add_shortcode( 'nexus_header_cta', function() {
 } );
 
 /**
+ * NEXUS THEME TOGGLE
+ * Shortcode: [nexus_theme_toggle]
+ * Kompakter Hell/Dunkel-Schalter fuer Header oder freie HTML-Slots.
+ */
+add_shortcode( 'nexus_theme_toggle', function() {
+    if ( ! function_exists( 'nexus_get_theme_toggle_html' ) ) {
+        return '';
+    }
+
+    return nexus_get_theme_toggle_html(
+        [
+            'source' => 'shortcode',
+        ]
+    );
+} );
+
+/**
  * Redirect default wp-login.php view to the portal page.
  */
 add_action( 'login_init', function() {

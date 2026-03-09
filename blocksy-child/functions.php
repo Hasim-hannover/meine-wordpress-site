@@ -221,10 +221,18 @@ function hasim_skip_to_content() {
 	echo '<a href="#main" class="skip-to-content" style="position:absolute;top:-100px;left:16px;background:#D4AF37;color:#000;padding:8px 16px;border-radius:4px;font-weight:700;font-size:13px;z-index:99999;text-decoration:none;transition:top 0.2s;" onfocus="this.style.top=\'16px\'" onblur="this.style.top=\'-100px\'">Zum Hauptinhalt springen</a>';
 }
 
-add_action( 'wp_body_open', 'nexus_render_theme_toggle', 15 );
-function nexus_render_theme_toggle() {
+function nexus_get_theme_toggle_html( $args = [] ) {
+	$args   = wp_parse_args(
+		$args,
+		[
+			'source' => 'default',
+		]
+	);
+	$source = sanitize_key( $args['source'] );
+
+	ob_start();
 	?>
-	<div class="nx-theme-toggle" data-nx-theme-toggle>
+	<div class="nx-theme-toggle" data-nx-theme-toggle data-nx-theme-toggle-source="<?php echo esc_attr( $source ); ?>">
 		<div class="nx-theme-toggle__group" role="group" aria-label="<?php esc_attr_e( 'Farbschema waehlen', 'blocksy-child' ); ?>">
 			<button type="button" class="nx-theme-toggle__button" data-theme-value="dark" aria-pressed="false">
 				<span class="nx-theme-toggle__icon" aria-hidden="true">D</span>
@@ -237,6 +245,17 @@ function nexus_render_theme_toggle() {
 		</div>
 	</div>
 	<?php
+
+	return trim( ob_get_clean() );
+}
+
+add_action( 'wp_body_open', 'nexus_render_theme_toggle', 15 );
+function nexus_render_theme_toggle() {
+	echo nexus_get_theme_toggle_html(
+		[
+			'source' => 'fallback',
+		]
+	);
 }
 
 /**

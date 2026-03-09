@@ -660,7 +660,8 @@
         display: flex;
     }
 
-    .home .nx-theme-toggle {
+    .home .nx-theme-toggle:not(.nx-theme-toggle--mounted) {
+        top: auto;
         bottom: 96px;
     }
 }
