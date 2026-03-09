@@ -232,7 +232,7 @@ function nexus_handle_review_request_submission( WP_REST_Request $request ) {
 		[
 			'ok'         => true,
 			'requestId'  => $post_id,
-			'message'    => 'Ihre Anfrage ist eingegangen. Sie erhalten innerhalb von 48 Stunden eine persoenliche Rueckmeldung.',
+			'message'    => 'Ihre Anfrage fuer den kostenlosen Startseiten-Review ist eingegangen. Sie erhalten innerhalb von 48 Stunden eine persoenliche Rueckmeldung.',
 			'editUrl'    => get_edit_post_link( $post_id, 'raw' ),
 			'status'     => 'received',
 			'statusLabel'=> 'Neu',
@@ -425,12 +425,12 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 	}
 
 	$subject = sprintf(
-		'[Startseiten-Review] Neue Anfrage - %s',
+		'[Kostenloser Startseiten-Review] Neue Anfrage - %s',
 		$payload['company']
 	);
 
 	$lines = [
-		'Neue Anfrage fuer den Startseiten-Review.',
+		'Neue Anfrage fuer den kostenlosen Startseiten-Review.',
 		'',
 		'Unternehmen: ' . $payload['company'],
 		'Name: ' . $payload['name'],
@@ -464,14 +464,14 @@ function nexus_send_review_request_confirmation( $payload ) {
 	}
 
 	$calendar_url = apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' );
-	$subject      = sprintf( '[%s] Startseiten-Review erhalten', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
+	$subject      = sprintf( '[%s] Kostenlosen Startseiten-Review erhalten', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
 
 	$lines = [
 		'Hallo ' . $payload['name'] . ',',
 		'',
-		'Ihre Anfrage fuer den Startseiten-Review ist eingegangen.',
+		'Ihre Anfrage fuer den kostenlosen Startseiten-Review ist eingegangen.',
 		'Ich melde mich innerhalb von 48 Stunden mit einer persoenlichen Einschaetzung zu:',
-		'- den drei wichtigsten Anfragebremsen',
+		'- den drei staerksten Anfragebremsen',
 		'- der sinnvollsten Prioritaet',
 		'- dem naechsten konkreten Schritt',
 		'',
@@ -862,7 +862,7 @@ function nexus_render_review_crm_dashboard() {
 	?>
 	<div class="wrap nexus-review-dashboard">
 		<h1>Review CRM</h1>
-		<p class="nexus-review-dashboard-intro">Hier laufen alle persoenlichen Startseiten-Reviews zusammen. Ziel: Rueckmeldung innerhalb von 48 Stunden.</p>
+		<p class="nexus-review-dashboard-intro">Hier laufen alle persoenlichen kostenlosen Startseiten-Reviews zusammen. Ziel: Rueckmeldung innerhalb von 48 Stunden.</p>
 
 		<div class="nexus-review-stats">
 			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request&nexus_review_status=new' ) ); ?>">

@@ -770,6 +770,12 @@
   }
 }
 
+@media (max-width: 900px) {
+  .audit-wrapper .smart-nav {
+    display: none !important;
+  }
+}
+
 @media (max-width: 720px) {
   .review-proof-band,
   .review-fit-card,

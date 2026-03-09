@@ -20,6 +20,9 @@ add_action( 'wp_head', 'hu_seo_meta_tags', 1 );
 
 add_filter( 'rank_math/frontend/title', 'hu_rank_math_cornerstone_title' );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_cornerstone_description' );
+add_filter( 'rank_math/frontend/title', 'hu_rank_math_audit_title' );
+add_filter( 'rank_math/frontend/description', 'hu_rank_math_audit_description' );
+add_filter( 'document_title_parts', 'hu_document_title_overrides' );
 
 /**
  * Check whether current query is the SEO cornerstone article.
@@ -66,6 +69,57 @@ function hu_rank_math_cornerstone_description( $description ) {
 	}
 
 	return $description;
+}
+
+/**
+ * Check whether current query is the audit offer page.
+ *
+ * @return bool
+ */
+function hu_is_audit_offer_page() {
+	return function_exists( 'nexus_is_audit_page' ) && nexus_is_audit_page();
+}
+
+/**
+ * Override Rank Math title for the audit offer page.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_rank_math_audit_title( $title ) {
+	if ( hu_is_audit_offer_page() ) {
+		return 'Kostenloser Startseiten-Review fuer B2B-WordPress-Seiten';
+	}
+
+	return $title;
+}
+
+/**
+ * Override Rank Math description for the audit offer page.
+ *
+ * @param string $description Existing description.
+ * @return string
+ */
+function hu_rank_math_audit_description( $description ) {
+	if ( hu_is_audit_offer_page() ) {
+		return 'Persoenlicher kostenloser Review fuer Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Prioritaet und Rueckmeldung innerhalb von 48 Stunden.';
+	}
+
+	return $description;
+}
+
+/**
+ * Override document titles when no SEO plugin takes over.
+ *
+ * @param array $parts Current title parts.
+ * @return array
+ */
+function hu_document_title_overrides( $parts ) {
+	if ( hu_is_audit_offer_page() ) {
+		$parts['title'] = 'Kostenloser Startseiten-Review fuer B2B-WordPress-Seiten';
+	}
+
+	return $parts;
 }
 
 /**
@@ -217,6 +271,11 @@ function hu_get_seo_meta() {
 		if ( 'technisches-seo-performance-fundament' === $slug ) {
 			$meta['og_title'] = 'Technisches SEO + Performance Marketing: Fundament fehlt';
 			$meta['description'] = 'Performance Marketing ohne technisches SEO-Fundament verbrennt Budget. So wirken Technik, CRO und Tracking zusammen - inklusive Entscheider-Checkliste.';
+		}
+
+		if ( hu_is_audit_offer_page() ) {
+			$meta['og_title']    = 'Kostenloser Startseiten-Review fuer B2B-WordPress-Seiten';
+			$meta['description'] = 'Persoenlicher kostenloser Review fuer Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Prioritaet und Rueckmeldung innerhalb von 48 Stunden.';
 		}
 
 		if ( empty( $meta['description'] ) ) {
