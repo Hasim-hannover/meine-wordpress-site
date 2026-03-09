@@ -350,12 +350,12 @@
 .highlight-step { border-color: hsl(var(--accent-hsl) / 0.32); background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.18), rgba(25, 33, 43, 0.94)); }
 
 /* Buttons */
-.wp-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 1.5rem; border-radius: var(--nx-radius-pill); text-decoration: none; font-weight: 700; transition: 0.3s; cursor: pointer; text-align: center; }
+.wp-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 0 1.5rem; border-radius: var(--nx-radius-pill); text-decoration: none; font-weight: 700; line-height: 1.1; transition: 0.3s; cursor: pointer; text-align: center; }
 .wp-btn-primary { background: linear-gradient(180deg, var(--nx-gold-hover), var(--gold)); color: var(--text-inverse); box-shadow: 0 16px 34px hsl(var(--accent-hsl) / 0.24); }
 .wp-btn-primary:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--nx-gold-hover) 78%, white), var(--nx-gold-hover)); transform: translateY(-2px); }
 .wp-btn-secondary { background: var(--nx-bg-glass-light); border: 1px solid var(--nx-border); color: var(--nx-text); box-shadow: inset 0 1px 0 rgba(255,255,255,0.03); }
 .wp-btn-secondary:hover { border-color: var(--nx-border-hover); background: var(--nx-bg-glass-hover); }
-.full-width { width: 100%; display: block; }
+.full-width { width: 100%; display: flex; }
 .mt-large { margin-top: 3rem; }
 .wp-btn-wrapper { display: flex; justify-content: center; }
 .text-center { text-align: center; }
