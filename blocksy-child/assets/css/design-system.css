@@ -10,30 +10,30 @@
    ========================================= */
 :root {
     /* --- Farben: Primär --- */
-    --nx-gold: #d9a24d;
-    --nx-gold-hover: #e4b56b;
-    --nx-gold-subtle: rgba(217, 162, 77, 0.12);
-    --nx-gold-glow: rgba(217, 162, 77, 0.22);
+    --nx-gold: #c99a57;
+    --nx-gold-hover: #d9b27a;
+    --nx-gold-subtle: rgba(201, 154, 87, 0.14);
+    --nx-gold-glow: rgba(201, 154, 87, 0.18);
 
     /* --- Farben: Hintergründe --- */
-    --nx-bg-deep: #11161d;
-    --nx-bg: #151c24;
-    --nx-bg-elevated: #1a2531;
-    --nx-bg-card: #1e2b38;
-    --nx-bg-glass: rgba(28, 40, 54, 0.82);
-    --nx-bg-glass-light: rgba(255, 255, 255, 0.045);
-    --nx-bg-glass-hover: rgba(255, 255, 255, 0.08);
+    --nx-bg-deep: #12181e;
+    --nx-bg: #182028;
+    --nx-bg-elevated: #1d2730;
+    --nx-bg-card: #22303a;
+    --nx-bg-glass: rgba(28, 38, 47, 0.76);
+    --nx-bg-glass-light: rgba(255, 255, 255, 0.05);
+    --nx-bg-glass-hover: rgba(255, 255, 255, 0.075);
 
     /* --- Farben: Text --- */
     --nx-text: #ffffff;
-    --nx-text-secondary: #d9e0e8;
-    --nx-text-muted: #b1bcc8;
-    --nx-text-dim: #7f8c9c;
+    --nx-text-secondary: #d7dee6;
+    --nx-text-muted: #b7c1cc;
+    --nx-text-dim: #8a98a8;
 
     /* --- Farben: Borders --- */
-    --nx-border: rgba(255, 255, 255, 0.1);
-    --nx-border-hover: rgba(255, 255, 255, 0.18);
-    --nx-border-gold: rgba(217, 162, 77, 0.28);
+    --nx-border: rgba(255, 255, 255, 0.09);
+    --nx-border-hover: rgba(255, 255, 255, 0.16);
+    --nx-border-gold: rgba(201, 154, 87, 0.24);
 
     /* --- Farben: Semantisch --- */
     --nx-success: #10b981;
@@ -72,16 +72,16 @@
     --nx-radius-sm: 4px;
     --nx-radius: 8px;
     --nx-radius-md: 12px;
-    --nx-radius-lg: 16px;
-    --nx-radius-xl: 20px;
+    --nx-radius-lg: 18px;
+    --nx-radius-xl: 24px;
     --nx-radius-pill: 999px;
 
     /* --- Schatten --- */
-    --nx-shadow-sm: 0 8px 20px rgba(9, 14, 24, 0.12);
-    --nx-shadow: 0 18px 40px rgba(9, 14, 24, 0.18);
-    --nx-shadow-lg: 0 24px 56px rgba(9, 14, 24, 0.24);
-    --nx-shadow-xl: 0 36px 80px rgba(9, 14, 24, 0.3);
-    --nx-shadow-gold: 0 12px 28px var(--nx-gold-glow);
+    --nx-shadow-sm: 0 10px 24px rgba(9, 14, 24, 0.12);
+    --nx-shadow: 0 18px 44px rgba(9, 14, 24, 0.16);
+    --nx-shadow-lg: 0 28px 64px rgba(9, 14, 24, 0.22);
+    --nx-shadow-xl: 0 40px 88px rgba(9, 14, 24, 0.28);
+    --nx-shadow-gold: 0 14px 34px var(--nx-gold-glow);
     --nx-shadow-glow: 0 0 24px var(--nx-gold-glow);
 
     /* --- Übergänge --- */
@@ -107,6 +107,8 @@
     --fg: var(--nx-text);
     --line: var(--nx-border);
     --cta: var(--nx-gold);
+    --glass-bg: var(--nx-bg-glass);
+    --glass-border: var(--nx-border);
 }
 
 
@@ -120,6 +122,7 @@
 body {
     font-family: var(--nx-font);
     color: var(--nx-text);
+    background: linear-gradient(180deg, var(--nx-bg) 0%, var(--nx-bg-deep) 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -261,11 +264,11 @@ h1, h2, h3, h4, h5, h6 {
    ========================================= */
 .nx-badge {
     display: inline-block;
-    padding: 6px 14px;
+    padding: 7px 15px;
     border-radius: var(--nx-radius-pill);
     font-size: var(--nx-text-xs);
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
@@ -304,18 +307,21 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     gap: 0.5rem;
     padding: 1rem 2rem;
-    border-radius: var(--nx-radius);
+    min-height: 52px;
+    border-radius: var(--nx-radius-pill);
     font-family: var(--nx-font);
     font-weight: 700;
     font-size: var(--nx-text-base);
     text-decoration: none;
-    border: none;
+    border: 1px solid transparent;
     cursor: pointer;
     transition: transform var(--nx-duration) var(--nx-ease),
                 box-shadow var(--nx-duration) var(--nx-ease),
-                background var(--nx-duration) var(--nx-ease);
+                background var(--nx-duration) var(--nx-ease),
+                border-color var(--nx-duration) var(--nx-ease);
     white-space: nowrap;
     line-height: 1;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .nx-btn:hover {
@@ -325,30 +331,30 @@ h1, h2, h3, h4, h5, h6 {
 /* Primary: Gold */
 .nx-btn--primary,
 .wp-btn-primary {
-    background: var(--nx-gold);
-    color: #000;
+    background: linear-gradient(180deg, #d8b273 0%, var(--nx-gold) 100%);
+    color: #16110a;
     box-shadow: var(--nx-shadow-gold);
 }
 
 .nx-btn--primary:hover,
 .wp-btn-primary:hover {
-    background: var(--nx-gold-hover);
+    background: linear-gradient(180deg, #e0be88 0%, var(--nx-gold-hover) 100%);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px var(--nx-gold-glow);
+    box-shadow: 0 12px 30px var(--nx-gold-glow);
 }
 
 /* Ghost: Transparent + Border */
 .nx-btn--ghost,
 .wp-btn-secondary {
-    background: transparent;
-    border: 1px solid var(--nx-border-hover);
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--nx-text);
 }
 
 .nx-btn--ghost:hover,
 .wp-btn-secondary:hover {
-    border-color: var(--nx-text);
-    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.065);
     transform: translateY(-2px);
 }
 
@@ -369,20 +375,21 @@ h1, h2, h3, h4, h5, h6 {
    7. KOMPONENTEN: Cards
    ========================================= */
 .nx-card {
-    background: var(--nx-bg-glass);
+    background: linear-gradient(180deg, rgba(33, 45, 56, 0.82), rgba(24, 34, 43, 0.88));
     border: 1px solid var(--nx-border);
     border-radius: var(--nx-radius-lg);
     padding: var(--nx-space-xl);
     transition: transform var(--nx-duration) var(--nx-ease),
                 border-color var(--nx-duration) var(--nx-ease),
                 box-shadow var(--nx-duration) var(--nx-ease);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--nx-shadow-sm);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .nx-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--nx-gold);
+    transform: translateY(-4px);
+    border-color: var(--nx-border-gold);
     box-shadow: var(--nx-shadow);
 }
 

@@ -15,9 +15,10 @@
   text-align: center;
   padding: 2.75rem;
   background:
-    linear-gradient(160deg, rgba(30, 42, 57, 0.94), rgba(20, 28, 39, 0.94));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
+    radial-gradient(circle at top left, rgba(201, 154, 87, 0.14), transparent 30%),
+    linear-gradient(160deg, rgba(31, 42, 52, 0.94), rgba(22, 30, 39, 0.92));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
   box-shadow: var(--nx-shadow-lg);
   position: relative;
   overflow: hidden;
@@ -28,8 +29,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at top left, rgba(217, 162, 77, 0.14), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.05), transparent 24%);
+    radial-gradient(circle at top left, rgba(201, 154, 87, 0.14), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.045), transparent 24%);
   pointer-events: none;
 }
 
@@ -53,7 +54,7 @@
 
 .nexus-footer-cta__btn {
   display: inline-block;
-  background: var(--nx-gold, #FFB020);
+  background: linear-gradient(180deg, #d8b273 0%, var(--nx-gold, #c99a57) 100%);
   color: #16110a;
   padding: 0.95rem 1.8rem;
   border-radius: 999px;
@@ -67,7 +68,7 @@
   z-index: 1;
 }
 .nexus-footer-cta__btn:hover {
-  background: var(--nx-gold-hover, #FFC14D);
+  background: linear-gradient(180deg, #e0be88 0%, var(--nx-gold-hover, #d9b27a) 100%);
   color: #16110a;
   transform: translateY(-2px);
 }
@@ -82,6 +83,7 @@
   margin: 0;
   color: var(--nx-text-muted);
   font-size: 0.9rem;
+  letter-spacing: 0.03em;
 }
 
 .nexus-footer-cta .trust-section__grid {
@@ -95,16 +97,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.8rem 0.9rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 0.7rem;
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.042);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .nexus-footer-cta .trust-section__icon {
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: rgba(201, 154, 87, 0.12);
+  border: 1px solid rgba(201, 154, 87, 0.18);
+  color: var(--nx-gold);
+  font-size: 0.72rem;
+  font-weight: 800;
   line-height: 1;
+  letter-spacing: 0.08em;
 }
 
 .nexus-footer-cta .trust-section__text {

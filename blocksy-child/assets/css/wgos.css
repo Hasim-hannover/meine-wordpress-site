@@ -10,10 +10,11 @@
    ========================================= */
 .wgos-wrapper {
     position: relative;
+    isolation: isolate;
     background:
-        radial-gradient(circle at top left, rgba(217, 162, 77, 0.12), transparent 28%),
-        radial-gradient(circle at top right, rgba(255, 255, 255, 0.04), transparent 18%),
-        linear-gradient(180deg, #151c24 0%, #11161d 40%, #131923 100%);
+        radial-gradient(circle at 8% 0%, rgba(201, 154, 87, 0.16), transparent 28%),
+        radial-gradient(circle at 88% 10%, rgba(135, 162, 188, 0.08), transparent 18%),
+        linear-gradient(180deg, #182028 0%, #12181e 40%, #161d25 100%);
     color: var(--nx-text-secondary);
     font-family: var(--nx-font);
     -webkit-font-smoothing: antialiased;
@@ -27,11 +28,31 @@
     inset: 0;
     pointer-events: none;
     background-image:
-        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-    background-size: 44px 44px;
-    opacity: 0.18;
-    mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 84%);
+        linear-gradient(rgba(255, 255, 255, 0.014) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.14;
+    mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.64), transparent 84%);
+    z-index: 0;
+}
+
+.wgos-wrapper::after {
+    content: '';
+    position: absolute;
+    left: -8rem;
+    bottom: 12rem;
+    width: 24rem;
+    height: 24rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 154, 87, 0.11), transparent 72%);
+    filter: blur(18px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.wgos-wrapper > * {
+    position: relative;
+    z-index: 1;
 }
 
 .wgos-wrapper *,
@@ -78,13 +99,13 @@
     z-index: 200;
     display: flex;
     flex-direction: column;
-    background: rgba(24, 35, 49, 0.74);
+    background: rgba(27, 37, 47, 0.72);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     padding: 1.5rem 0.8rem;
-    border-radius: 50px;
+    border-radius: 32px;
     border: 1px solid var(--nx-border);
-    box-shadow: 0 16px 40px rgba(9, 14, 24, 0.22);
+    box-shadow: 0 18px 44px rgba(9, 14, 24, 0.18);
     transition: all 0.4s var(--nx-ease-spring);
     width: 56px;
     overflow: hidden;
@@ -94,11 +115,11 @@
 .wgos-smart-nav:hover {
     width: 210px;
     border-color: var(--nx-border-gold);
-    background: rgba(24, 35, 49, 0.94);
+    background: rgba(27, 37, 47, 0.9);
     border-radius: var(--nx-radius-xl);
     padding-left: 1.5rem;
-    box-shadow: 0 16px 40px rgba(9, 14, 24, 0.22),
-                0 0 30px var(--nx-gold-subtle);
+    box-shadow: 0 18px 44px rgba(9, 14, 24, 0.18),
+                0 0 24px var(--nx-gold-subtle);
 }
 
 .wgos-smart-nav ul {
@@ -206,11 +227,11 @@
 }
 
 .wgos-section--white {
-    background: rgba(255, 255, 255, 0.022);
+    background: rgba(255, 255, 255, 0.024);
 }
 
 .wgos-section--gray {
-    background: rgba(10, 16, 25, 0.12);
+    background: rgba(10, 16, 25, 0.1);
 }
 
 .wgos-h2 {
@@ -234,9 +255,9 @@
 }
 
 #module .wgos-mindmap-v2-root {
-    background: linear-gradient(180deg, rgba(22, 28, 40, 0.58) 0%, rgba(13, 18, 27, 0.62) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(25, 33, 43, 0.56) 0%, rgba(16, 22, 31, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
     padding: 8px;
 }
 

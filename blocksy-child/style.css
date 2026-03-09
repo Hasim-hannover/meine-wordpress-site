@@ -16,8 +16,8 @@ Version: 7.1.1-FIXED
 
 :root {
     --theme-font-family: 'Satoshi', sans-serif;
-    --hasim-audit-orange: #FFB020;
-    --hasim-audit-orange-hover: #FFC14D;
+    --hasim-audit-orange: #C99A57;
+    --hasim-audit-orange-hover: #D9B27A;
     --theme-palette-color-1: var(--hasim-audit-orange);
     --nx-gold: var(--hasim-audit-orange);
     --nx-gold-hover: var(--hasim-audit-orange-hover);
@@ -47,7 +47,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 .ct-header .ct-menu > li.current-menu-item > a,
 .ct-header .ct-menu > li.current-menu-ancestor > a {
     color: #fff;
-    box-shadow: inset 0 -2px 0 #ffb020;
+    box-shadow: inset 0 -2px 0 var(--hasim-audit-orange);
 }
 
 /* ─── Header CTA Button ─── */
@@ -68,10 +68,10 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     height: 38px !important;
     min-height: 38px !important;
     padding: 0 16px !important;
-    border: 1.5px solid rgba(255, 176, 32, 0.75);
-    border-radius: 8px;
+    border: 1.5px solid rgba(201, 154, 87, 0.55);
+    border-radius: 999px;
     color: var(--hasim-audit-orange) !important;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.03);
     font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 0.04em;
@@ -79,7 +79,7 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
     line-height: 1 !important;
     white-space: nowrap;
     text-decoration: none !important;
-    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .header-navigation .nav-cta-button > a:hover,
@@ -87,9 +87,10 @@ body, h1, h2, h3, h4, h5, h6, .ct-menu-link {
 #ct-header .menu-item.nav-cta-button > a:hover,
 .ct-header .menu > li.nav-cta-button > a:hover,
 .ct-header .ct-menu > li.nav-cta-button > a:hover {
-    background: rgba(255, 176, 32, 0.12);
+    background: rgba(201, 154, 87, 0.12);
     border-color: var(--hasim-audit-orange);
     color: var(--hasim-audit-orange) !important;
+    box-shadow: 0 10px 24px rgba(201, 154, 87, 0.12);
 }
 
 .ct-header .ct-menu > li.nav-cta-button.current-menu-item > a,

@@ -69,14 +69,15 @@ function hu_hero_section_shortcode() {
 					damit aus Sichtbarkeit belastbare Anfragen werden.
 				</p>
 
-				<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.85rem; margin:0 0 1.75rem;">
+				<div class="wp-hero-actions">
+					<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_hero_primary_audit" data-track-category="lead_gen">Audit starten</a>
 					<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Case Studies ansehen</a>
-					<a href="<?php echo esc_url( $urls['about'] ); ?>" class="wp-btn wp-btn-secondary">Wie ich arbeite</a>
 				</div>
+				<p class="wp-hero-supporting-link">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
 
 				<div class="audit-card-premium" id="audit">
 					<div style="text-align:center; margin-bottom:1.5rem;">
-						<span style="background:rgba(255,176,32,0.15); color:#FFB020; padding:6px 12px; border-radius:20px; font-size:0.78rem; font-weight:700;">
+						<span style="background:rgba(201,154,87,0.15); color:var(--gold); padding:6px 12px; border-radius:20px; font-size:0.78rem; font-weight:700;">
 							Growth Audit
 						</span>
 					</div>

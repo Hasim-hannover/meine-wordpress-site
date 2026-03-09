@@ -5,8 +5,9 @@
 
 .wp-agentur-page-wrapper {
   background:
-    radial-gradient(circle at top left, rgba(217, 162, 77, 0.1), transparent 26%),
-    linear-gradient(180deg, #151c24 0%, #11161d 42%, #131923 100%);
+    radial-gradient(circle at 8% 0%, rgba(201, 154, 87, 0.14), transparent 26%),
+    radial-gradient(circle at 86% 10%, rgba(135, 162, 188, 0.08), transparent 20%),
+    linear-gradient(180deg, #182028 0%, #12181e 42%, #161d25 100%);
 }
 
 .wp-agentur-hero .nx-hero__title {
@@ -33,7 +34,8 @@
   justify-content: center;
   gap: 0.25rem;
   min-height: 120px;
-  background: rgba(255, 255, 255, 0.035);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--nx-radius-xl);
   box-shadow: var(--nx-shadow-sm);
 }
@@ -86,13 +88,13 @@
   min-width: 680px;
   border-collapse: collapse;
   border: 1px solid var(--nx-border);
-  background: var(--nx-bg-glass);
+  background: linear-gradient(180deg, rgba(31, 42, 52, 0.78), rgba(24, 33, 43, 0.88));
   border-radius: var(--nx-radius-md);
   overflow: hidden;
 }
 
 .wp-agentur-table thead {
-  background: rgba(255, 176, 32, 0.08);
+  background: rgba(201, 154, 87, 0.08);
 }
 
 .wp-agentur-table th,
