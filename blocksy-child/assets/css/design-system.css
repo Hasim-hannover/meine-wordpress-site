@@ -1104,3 +1104,98 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 100vh;
     color: var(--nx-text);
 }
+
+
+/* =========================================
+   21. LIGHT MODE ACCESSIBILITY SAFETY NET
+   Force readable heading ink on legacy/page CSS
+   that still declares hard white text.
+   ========================================= */
+:root[data-nx-theme='light'] .cs-page-seo,
+:root[data-nx-theme='light'] .nexus-about,
+:root[data-nx-theme='light'] .nexus-dashboard {
+    color: var(--nx-text-secondary);
+}
+
+:root[data-nx-theme='light'] :is(
+    .cs-page,
+    .wgos-wrapper,
+    .wp-agentur-page-wrapper,
+    .nexus-single-container,
+    .nexus-archive-container,
+    .seo-page-wrapper,
+    .cs-page-seo,
+    .nexus-about,
+    .nexus-dashboard,
+    .tools-hub-page,
+    .pm-page-wrapper,
+    .pm-page,
+    .cwv-page-wrapper,
+    .cwv-page,
+    .cro-page,
+    .ga4-page,
+    .ma-page,
+    .pillar-hub,
+    .pillar-page
+) :is(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .nexus-title,
+    .nexus-card-title,
+    .nx-headline-hero,
+    .nx-headline-section,
+    .nx-card__title,
+    .nx-hero__title,
+    .wp-hero-title,
+    .wp-section-h2,
+    .wp-success-title,
+    .title-nexus,
+    .wp-agentur-hero .nx-hero__title,
+    .cs-case-hero__title,
+    .cs-phase-title,
+    .cs-budget-proof__title,
+    .cro-page .cro-headline,
+    .cro-page .cro-section-title,
+    .cro-page .cro-step-title,
+    .cro-page .cro-impact-title,
+    .cro-page .cro-cta-headline,
+    .ga4-page .ga4-headline,
+    .ga4-page .ga4-section-title,
+    .ga4-page .ga4-step-title,
+    .ga4-page .ga4-cta-headline,
+    .ma-page .ma-headline,
+    .ma-page .ma-section-title,
+    .ma-page .ma-step-title,
+    .ma-page .ma-impact-title,
+    .ma-page .ma-cta-headline,
+    .pillar-hero__title,
+    .pillar-featured__title,
+    .pillar-section-title,
+    .pillar-card__title,
+    .pillar-sidebar__cta-title,
+    .pillar-sidebar__nav-title,
+    .tools-header__title,
+    .tools-card__title,
+    .hero-title,
+    .section-title,
+    .related-content__title,
+    .story-headline,
+    .step-title,
+    .milestone-title,
+    .value-story-title,
+    .cta-headline,
+    .wgos-h2,
+    .wgos-hero__title,
+    .wgos-credit-phase__title,
+    .problem-title,
+    .pm-step-title,
+    .pm-cta-headline,
+    .theory-heading
+) {
+    color: var(--nx-text) !important;
+    -webkit-text-fill-color: currentColor !important;
+}
