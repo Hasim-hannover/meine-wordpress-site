@@ -235,52 +235,30 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
                     Vertrieb schärft den Blick für Zielgruppen und Einwände.
                     Eigene unternehmerische Projekte schärfen den Blick für Kosten,
                     Risiko und Priorisierung. Diese Perspektive prägt jedes Projekt.
-                <h2>Eine Website sollte 2026 mehr sein als eine digitale Visitenkarte.</h2>
-                <h2>Ich baue Systeme, die Vertrauen aufbauen, Orientierung geben und qualifizierte Anfragen erzeugen.</h2>
+                <p class="story-paragraph">
+                    Die meisten Websites sehen gut aus, arbeiten aber nicht als Vertriebssystem.<br>
+                    Genau dort setze ich an: mit klarer Positionierung, sauberer Messbarkeit und einer Struktur, die Vertrauen aufbaut und Anfragen wahrscheinlicher macht.
+                </p>
+                <p class="story-paragraph">
+                    Nicht mehr Reichweite ist zuerst das Problem, sondern fehlende Systemlogik.<br>
+                    Wenn Fundament, Aufbau und Skalierung sauber zusammenspielen, wird aus einer Website kein hübscher Kanal, sondern ein geschäftlich relevantes System.
+                </p>
 
-                <p>Viele Unternehmen haben eine Website.<br>Aber nur wenige haben eine digitale Infrastruktur, die ihrem Geschäft wirklich gerecht wird.</p>
-                <p>Das ist ein entscheidender Unterschied.</p>
-                <p>Denn eine Website ist längst nicht mehr nur ein Ort, an dem Informationen stehen. Sie ist oft der erste echte Berührungspunkt zwischen Unternehmen und Entscheidungsträger. Noch bevor ein Gespräch stattfindet, noch bevor ein Angebot angefragt wird, noch bevor jemand Kontakt aufnimmt, entsteht bereits ein Eindruck — und mit ihm eine Entscheidung.</p>
-                <p>Wirkt dieses Unternehmen klar?<br>Versteht es, was es tut?<br>Ist hier Substanz oder nur Oberfläche?<br>Kann man diesem Auftritt vertrauen?</p>
-                <p>Genau an diesem Punkt zeigt sich, was eine Website heute sein muss: nicht bloß präsent, sondern tragfähig. Nicht bloß schön, sondern wirksam. Nicht bloß online, sondern strategisch relevant.</p>
-                <p>Ich entwickle Websites deshalb nicht als digitale Hülle, sondern als System.</p>
-                <p>Ein System, das Positionierung schärft.<br>Ein System, das Vertrauen nicht behauptet, sondern aufbaut.<br>Ein System, das Orientierung schafft, Reibung reduziert und aus Aufmerksamkeit echte Bewegung macht.</p>
+                <div class="about-hero-ctas">
+                    <a href="<?php echo esc_url( $audit_url ); ?>"
+                       class="btn btn-primary"
+                       data-track-action="cta_about_hero_audit"
+                       data-track-category="lead_gen">
+                        Growth Audit starten
+                    </a>
+                    <span class="about-hero-link">
+                        <a href="<?php echo esc_url( $cases_url ); ?>" class="about-inline-link">Ergebnisse &amp; Case Studies ansehen →</a>
+                    </span>
+                </div>
 
-                <h2>Was eine Website heute wirklich leisten muss</h2>
-                <p>Eine gute Website soll nicht einfach nur etwas zeigen.<br>Sie soll etwas klären.</p>
-                <p>Sie soll nicht überfordern, sondern führen.<br>Sie soll nicht beeindrucken wollen, sondern verständlich machen, warum ein Unternehmen relevant ist.</p>
-                <p>Viele Websites scheitern nicht daran, dass sie völlig schlecht sind. Sie scheitern daran, dass sie zu wenig leisten. Sie sehen ordentlich aus, sagen aber nicht präzise genug, worum es eigentlich geht. Sie erzeugen Präsenz, aber keine Richtung. Sie liefern Informationen, aber keine Klarheit. Sie bringen Besucher auf eine Seite, aber führen sie nicht zu einer Entscheidung.</p>
-                <p>Dann bleibt die Website das, was viele Seiten heute noch sind: eine digitale Visitenkarte mit größerer Fläche.</p>
-                <p>Ich halte das für verschenktes Potenzial.</p>
-                <p>Denn im Jahr 2026 reicht es nicht mehr, sichtbar zu sein. Sichtbarkeit ohne Klarheit erzeugt nur Streuverlust. Design ohne Struktur erzeugt nur Oberfläche. Traffic ohne Vertrauen erzeugt keine Nachfrage, sondern Abbruch.</p>
-                <p>Eine Website muss heute mehr können.</p>
-                <p>Sie muss in kurzer Zeit verständlich machen, was ein Unternehmen tut.<br>Sie muss Komplexität ordnen, statt sie bloß abzubilden.<br>Sie muss Vertrauen aufbauen, bevor überhaupt jemand spricht.<br>Und sie muss die richtigen Menschen so führen, dass aus Interesse eine qualifizierte Anfrage werden kann.</p>
-
-                <h2>Warum ich in Systemen denke</h2>
-                <p>Digitale Probleme entstehen selten an nur einer Stelle.</p>
-                <p>Oft ist nicht der Text allein das Problem. Nicht das Design. Nicht die Technik. Nicht das SEO. Nicht die Conversion. Das eigentliche Problem liegt häufig darin, dass alles nur halb zusammenarbeitet.</p>
-                <p>Die Botschaft ist nicht scharf genug.<br>Die Seitenstruktur trägt nicht.<br>Das Angebot ist nicht klar genug gerahmt.<br>Vertrauen wird dem Zufall überlassen.<br>Messbarkeit fehlt oder wird falsch verstanden.<br>Und am Ende wundert man sich, warum trotz Aufwand zu wenig passiert.</p>
-                <p>Genau deshalb arbeite ich nicht in isolierten Einzelmaßnahmen.<br>Ich denke in Zusammenhängen.</p>
-                <p>Eine Website ist für mich kein Sammelort aus Seiten, Modulen und Tools. Sie ist ein Gefüge. Wenn ein Teil unklar ist, schwächt das oft das Ganze. Wenn die Positionierung unscharf ist, werden Texte beliebig. Wenn die Struktur nicht trägt, verlieren Inhalte ihre Kraft. Wenn die Nutzerführung schwach ist, hilft auch Reichweite nicht viel. Wenn Daten nicht sauber erhoben werden, beruhen Entscheidungen am Ende auf Vermutungen.</p>
-                <p>Deshalb beginne ich nicht mit Aktionismus.<br>Ich beginne mit Logik.</p>
-                <p>Was ist das Ziel der Seite?<br>Welche Rolle hat jede Unterseite?<br>Wo entsteht Vertrauen?<br>Wo entsteht Reibung?<br>Was muss ein Besucher verstehen, fühlen und tun?</p>
-                <p>Erst wenn diese Fragen sauber beantwortet sind, kann eine Website anfangen, geschäftlich wirklich zu arbeiten.</p>
-
-                <h2>Wie ich arbeite</h2>
-                <p>Ich glaube an Klarheit vor Komplexität.</p>
-                <p>Nicht jedes Unternehmen braucht mehr Tools, mehr Seiten, mehr Features oder mehr Content. Sehr oft braucht es zuerst etwas anderes: eine sauber gedachte Grundlage.</p>
-                <p>Das Fundament muss stimmen.<br>Die Struktur muss tragen.<br>Die Kommunikation muss präzise sein.<br>Die Nutzerführung muss bewusst gebaut sein.<br>Und die Website muss messbar machen, was funktioniert und was nicht.</p>
-                <p>Ich entwickle deshalb WordPress-basierte Systeme, die nicht bloß veröffentlicht werden, sondern langfristig funktionieren sollen. Systeme, die nicht auf kurzfristige Effekte angewiesen sind, sondern mit jeder Verbesserung an Stabilität gewinnen.</p>
-                <p>Mich interessiert nicht die Website als dekoratives Objekt.<br>Mich interessiert ihre Leistung.</p>
-                <p>Kann sie ein Angebot klar rahmen?<br>Kann sie Vertrauen beschleunigen?<br>Kann sie Menschen sinnvoll zum nächsten Schritt führen?<br>Kann sie geschäftliche Entscheidungen besser machen, weil sie saubere Signale liefert?</p>
-                <p>Wenn die Antwort darauf nein ist, dann fehlt nicht nur Feinschliff. Dann fehlt Struktur.</p>
-
-                <h2>Was meinen Ansatz prägt</h2>
-                <p>Ich betrachte Websites weder rein technisch noch rein gestalterisch.</p>
-                <p>Für mich liegt die eigentliche Qualität dort, wo Strategie, Sprache, Struktur, Technik und Wirkung zusammenkommen. Der Nutzer erlebt keine getrennten Disziplinen. Er erlebt einen Gesamteindruck. Er merkt innerhalb weniger Sekunden, ob etwas klar ist oder diffus, ob etwas Substanz hat oder bloß professionell aussieht.</p>
-                <p>Darum verbinde ich, was oft künstlich getrennt wird.</p>
-                <p>Ich denke Website, Inhalt, SEO, Nutzerführung, Vertrauen und Messbarkeit nicht als einzelne Gewerke, sondern als Teile eines Systems, das einem Unternehmen dienen muss. Nicht abstrakt, sondern konkret: in Form von besserer Orientierung, stärkerer Glaubwürdigkeit und qualifizierteren Anfragen.</p>
-                <p>Ein Punkt ist mir dabei besonders wichtig: Eigenständigkeit.</p>
+                <div class="about-proof-snippet" style="margin-top:1.5rem; font-size:1rem; color:#888;">
+                    Nachweis: dokumentierte Projekte mit klarer Ausgangslage, Maßnahmen und Wirkung.
+                </div>
                 <p>Ein Unternehmen sollte digital nicht abhängiger werden, sondern freier. Die eigene Website, die eigenen Inhalte, die eigenen Daten und die eigene Struktur sollten ein Vermögenswert sein — nicht eine Blackbox, die nur mit externer Hilfe irgendwie am Laufen bleibt.</p>
                 <p>Darum baue ich nicht einfach Seiten.<br>Ich baue digitale Grundlagen, die tragen.</p>
 
