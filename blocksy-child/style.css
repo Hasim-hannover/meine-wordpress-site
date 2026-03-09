@@ -72,7 +72,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 :root[data-nx-theme='light'] .ct-header .site-logo,
-:root[data-nx-theme='light'] .ct-header .site-logo-container {
+:root[data-nx-theme='light'] .ct-header .site-logo-container,
+:root[data-theme='light'] .ct-header .site-logo,
+:root[data-theme='light'] .ct-header .site-logo-container {
     color: var(--nx-text) !important;
     text-shadow: none;
 }
@@ -1491,23 +1493,58 @@ body.wp-customizer .ct-customizer-shortcut {
 }
 
 :root[data-nx-theme='light'] .ct-header,
-:root[data-theme='light'] .ct-header {
+:root[data-theme='light'] .ct-header,
+:root[data-nx-theme='light'] .ct-panel,
+:root[data-theme='light'] .ct-panel {
     background: rgba(255, 251, 245, 0.92);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--nx-border);
     box-shadow: var(--shadow-sm);
+    --theme-link-initial-color: var(--nx-text-secondary);
+    --theme-link-hover-color: var(--nx-text);
+    --theme-text-color: var(--nx-text);
+    --theme-heading-color: var(--nx-text);
 }
 
 :root[data-nx-theme='light'] .ct-header .ct-menu > li > a,
-:root[data-theme='light'] .ct-header .ct-menu > li > a {
-    color: var(--nx-text-secondary);
+:root[data-theme='light'] .ct-header .ct-menu > li > a,
+:root[data-nx-theme='light'] .ct-header .ct-menu-link,
+:root[data-theme='light'] .ct-header .ct-menu-link,
+:root[data-nx-theme='light'] .ct-header [data-id="menu"] a,
+:root[data-theme='light'] .ct-header [data-id="menu"] a,
+:root[data-nx-theme='light'] .ct-panel .ct-menu-link,
+:root[data-theme='light'] .ct-panel .ct-menu-link,
+:root[data-nx-theme='light'] .ct-panel [data-id="menu"] a,
+:root[data-theme='light'] .ct-panel [data-id="menu"] a {
+    color: var(--nx-text-secondary) !important;
 }
 
 :root[data-nx-theme='light'] .ct-header .ct-menu > li > a:hover,
 :root[data-nx-theme='light'] .ct-header .ct-menu > li.current-menu-item > a,
+:root[data-nx-theme='light'] .ct-header .ct-menu > li.current-menu-ancestor > a,
 :root[data-theme='light'] .ct-header .ct-menu > li > a:hover,
-:root[data-theme='light'] .ct-header .ct-menu > li.current-menu-item > a {
-    color: var(--nx-text);
+:root[data-theme='light'] .ct-header .ct-menu > li.current-menu-item > a,
+:root[data-theme='light'] .ct-header .ct-menu > li.current-menu-ancestor > a,
+:root[data-nx-theme='light'] .ct-header .ct-menu-link:hover,
+:root[data-theme='light'] .ct-header .ct-menu-link:hover,
+:root[data-nx-theme='light'] .ct-header [data-id="menu"] .current-menu-item > a,
+:root[data-theme='light'] .ct-header [data-id="menu"] .current-menu-item > a,
+:root[data-nx-theme='light'] .ct-header [data-id="menu"] .current-menu-ancestor > a,
+:root[data-theme='light'] .ct-header [data-id="menu"] .current-menu-ancestor > a,
+:root[data-nx-theme='light'] .ct-panel .ct-menu-link:hover,
+:root[data-theme='light'] .ct-panel .ct-menu-link:hover,
+:root[data-nx-theme='light'] .ct-panel [data-id="menu"] .current-menu-item > a,
+:root[data-theme='light'] .ct-panel [data-id="menu"] .current-menu-item > a,
+:root[data-nx-theme='light'] .ct-panel [data-id="menu"] .current-menu-ancestor > a,
+:root[data-theme='light'] .ct-panel [data-id="menu"] .current-menu-ancestor > a {
+    color: var(--nx-text) !important;
+}
+
+:root[data-nx-theme='light'] .ct-header [data-id="menu"] svg,
+:root[data-theme='light'] .ct-header [data-id="menu"] svg,
+:root[data-nx-theme='light'] .ct-panel [data-id="menu"] svg,
+:root[data-theme='light'] .ct-panel [data-id="menu"] svg {
+    fill: currentColor;
 }
 .ct-header.nexus-flight-mode .site-logo,
 .ct-header.nexus-flight-mode .site-logo-container {
