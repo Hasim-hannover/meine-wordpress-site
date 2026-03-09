@@ -25,71 +25,66 @@ while ( have_posts() ) :
 		<style>
 			.privacy-page {
 				--privacy-bg: rgba(255, 255, 255, 0.04);
-				--privacy-bg-strong: rgba(255, 255, 255, 0.07);
-				--privacy-border: rgba(255, 255, 255, 0.12);
+				--privacy-bg-strong: rgba(255, 255, 255, 0.06);
+				--privacy-border: rgba(255, 255, 255, 0.1);
 				--privacy-accent: var(--theme-palette-color-1, #ff8a00);
 				--privacy-accent-soft: rgba(255, 138, 0, 0.12);
 				--privacy-text: var(--theme-text-color, #f5f5f5);
 				--privacy-muted: rgba(255, 255, 255, 0.72);
 				padding: clamp(2rem, 4vw, 4rem) 1.25rem 5rem;
-				background:
-					radial-gradient(circle at top left, rgba(255, 138, 0, 0.18), transparent 32rem),
-					radial-gradient(circle at top right, rgba(6, 182, 212, 0.12), transparent 24rem),
-					var(--theme-palette-color-5, #0a0a0a);
+				background: var(--theme-palette-color-5, #0a0a0a);
 			}
 
 			.privacy-shell {
-				max-width: 1180px;
+				max-width: 1120px;
 				margin: 0 auto;
 			}
 
 			.privacy-hero {
-				padding: clamp(1.75rem, 4vw, 3rem);
+				padding: clamp(1.4rem, 3vw, 2rem);
 				border: 1px solid var(--privacy-border);
-				border-radius: 28px;
-				background:
-					linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
-					radial-gradient(circle at top right, rgba(255, 138, 0, 0.14), transparent 18rem);
-				box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+				border-radius: 22px;
+				background: rgba(255, 255, 255, 0.03);
+				box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
 			}
 
 			.privacy-kicker {
 				display: inline-flex;
 				align-items: center;
 				gap: 0.5rem;
-				padding: 0.42rem 0.8rem;
+				padding: 0.36rem 0.72rem;
 				border-radius: 999px;
-				border: 1px solid rgba(255, 138, 0, 0.28);
-				background: rgba(255, 138, 0, 0.08);
-				color: #ffd39e;
-				font-size: 0.82rem;
+				border: 1px solid rgba(255, 255, 255, 0.12);
+				background: rgba(255, 255, 255, 0.04);
+				color: #f1dcc0;
+				font-size: 0.78rem;
 				font-weight: 700;
 				letter-spacing: 0.04em;
 				text-transform: uppercase;
 			}
 
 			.privacy-title {
-				margin: 1rem 0 0.8rem;
-				font-size: clamp(2rem, 5vw, 4rem);
-				line-height: 1.05;
+				margin: 0.9rem 0 0.65rem;
+				font-size: clamp(1.85rem, 4vw, 2.8rem);
+				line-height: 1.15;
 				color: #fff;
 			}
 
 			.privacy-lead {
-				max-width: 52rem;
+				max-width: 48rem;
 				margin: 0;
-				font-size: clamp(1rem, 1.3vw, 1.18rem);
-				line-height: 1.7;
+				font-size: 1rem;
+				line-height: 1.65;
 				color: var(--privacy-muted);
 			}
 
 			.privacy-statement {
-				margin-top: 1.5rem;
-				padding: 1.15rem 1.2rem;
-				border-radius: 18px;
-				border: 1px solid rgba(16, 185, 129, 0.25);
-				background: rgba(16, 185, 129, 0.1);
-				color: #effef7;
+				margin-top: 1.2rem;
+				padding: 0.95rem 1rem;
+				border-radius: 16px;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				background: rgba(255, 255, 255, 0.03);
+				color: var(--privacy-muted);
 			}
 
 			.privacy-statement strong {
@@ -99,29 +94,29 @@ while ( have_posts() ) :
 			.privacy-facts {
 				display: grid;
 				grid-template-columns: repeat(3, minmax(0, 1fr));
-				gap: 1rem;
-				margin-top: 1.5rem;
+				gap: 0.85rem;
+				margin-top: 1.15rem;
 			}
 
 			.privacy-fact {
-				padding: 1rem 1.05rem;
-				border-radius: 20px;
+				padding: 0.9rem 1rem;
+				border-radius: 16px;
 				border: 1px solid var(--privacy-border);
 				background: var(--privacy-bg);
 			}
 
 			.privacy-fact__value {
 				display: block;
-				font-size: 1.7rem;
-				font-weight: 800;
-				line-height: 1;
-				color: #fff;
+				font-size: 0.98rem;
+				font-weight: 700;
+				line-height: 1.35;
+				color: #fff4e3;
 			}
 
 			.privacy-fact__label {
 				display: block;
-				margin-top: 0.45rem;
-				font-size: 0.92rem;
+				margin-top: 0.25rem;
+				font-size: 0.88rem;
 				line-height: 1.5;
 				color: var(--privacy-muted);
 			}
@@ -129,20 +124,20 @@ while ( have_posts() ) :
 			.privacy-actions {
 				display: flex;
 				flex-wrap: wrap;
-				gap: 0.85rem;
-				margin-top: 1.5rem;
+				gap: 0.7rem;
+				margin-top: 1.15rem;
 			}
 
 			.privacy-button {
 				display: inline-flex;
 				align-items: center;
 				justify-content: center;
-				padding: 0.9rem 1.15rem;
-				border-radius: 999px;
+				padding: 0.78rem 1rem;
+				border-radius: 14px;
 				border: 1px solid var(--privacy-border);
 				background: var(--privacy-bg);
 				color: #fff;
-				font-weight: 700;
+				font-weight: 600;
 				text-decoration: none;
 				transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 			}
@@ -155,31 +150,27 @@ while ( have_posts() ) :
 			}
 
 			.privacy-button--primary {
-				background: linear-gradient(135deg, rgba(255, 138, 0, 0.95), rgba(214, 112, 0, 0.95));
-				border-color: rgba(255, 138, 0, 0.45);
-				color: #0b0b0b;
+				background: rgba(255, 138, 0, 0.12);
+				border-color: rgba(255, 138, 0, 0.24);
+				color: #fff;
 			}
 
 			.privacy-grid {
 				display: grid;
 				grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.45fr);
-				gap: 1.4rem;
-				margin-top: 1.4rem;
+				gap: 1.1rem;
+				margin-top: 1.1rem;
 			}
 
 			.privacy-card,
 			.privacy-section {
 				border: 1px solid var(--privacy-border);
-				border-radius: 24px;
+				border-radius: 18px;
 				background: var(--privacy-bg);
-				backdrop-filter: blur(10px);
 			}
 
 			.privacy-card {
-				padding: 1.3rem;
-				position: sticky;
-				top: 1.5rem;
-				height: fit-content;
+				padding: 1.15rem;
 			}
 
 			.privacy-card h2,
@@ -210,7 +201,7 @@ while ( have_posts() ) :
 			}
 
 			.privacy-section {
-				padding: 1.35rem;
+				padding: 1.15rem;
 			}
 
 			.privacy-section h3 {
@@ -268,40 +259,37 @@ while ( have_posts() ) :
 					grid-template-columns: 1fr;
 				}
 
-				.privacy-card {
-					position: static;
-				}
 			}
 		</style>
 
 		<div class="privacy-shell">
 			<section class="privacy-hero" aria-labelledby="privacy-title">
 				<span class="privacy-kicker">Datenschutz</span>
-				<h1 id="privacy-title" class="privacy-title">Keine Cookies. Kein GTM. Kein Banner-Theater.</h1>
+				<h1 id="privacy-title" class="privacy-title">Datenschutz auf einen Blick</h1>
 				<p class="privacy-lead">
 					Diese oeffentlich zugaengliche Website setzt bei normalen Besuchen aktuell keine Cookies,
 					laedt keine Analyse- oder Marketing-Tracker und verwendet kein Google Tag Manager.
-					Wenn Sie nur lesen und navigieren, bleibt Ihr Browser fuer Tracking-Zwecke unangetastet.
+					Wenn Sie nur lesen und navigieren, bleibt Ihr Browser fuer Tracking-Zwecke unberuehrt.
 				</p>
 
 				<div class="privacy-statement">
-					<strong>Darum sehen Sie keinen Cookie-Banner:</strong>
-					Fuer oeffentliche Besuche werden derzeit keine einwilligungspflichtigen Tracking-
-					oder Marketing-Technologien eingesetzt.
+					<strong>Kein Cookie-Banner auf oeffentlichen Seiten:</strong>
+					Bei normalen Seitenaufrufen werden derzeit keine einwilligungspflichtigen
+					Tracking- oder Marketing-Technologien eingesetzt.
 				</div>
 
 				<div class="privacy-facts" aria-label="Datenschutz-Kurzueberblick">
 					<div class="privacy-fact">
-						<span class="privacy-fact__value">0</span>
-						<span class="privacy-fact__label">Cookies fuer oeffentliche Besuche</span>
+						<span class="privacy-fact__value">Keine Cookies</span>
+						<span class="privacy-fact__label">bei normalen oeffentlichen Seitenaufrufen</span>
 					</div>
 					<div class="privacy-fact">
-						<span class="privacy-fact__value">0</span>
-						<span class="privacy-fact__label">Analytics-, Ads- oder GTM-Skripte beim Seitenaufruf</span>
+						<span class="privacy-fact__value">Kein GTM oder Analytics</span>
+						<span class="privacy-fact__label">keine Tracking- oder Ads-Skripte beim Laden</span>
 					</div>
 					<div class="privacy-fact">
-						<span class="privacy-fact__value">Nur aktiv</span>
-						<span class="privacy-fact__label">Formulardaten, wenn Sie uns selbst etwas senden</span>
+						<span class="privacy-fact__value">Daten nur bei Kontakt</span>
+						<span class="privacy-fact__label">wenn Sie uns aktiv schreiben oder ein Formular senden</span>
 					</div>
 				</div>
 

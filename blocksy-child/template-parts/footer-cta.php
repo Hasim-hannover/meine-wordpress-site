@@ -2,12 +2,12 @@
 /**
  * Template Part: Footer CTA
  *
- * Wiederverwendbarer Bottom-CTA-Block für Service- und Blog-Seiten.
+ * Wiederverwendbarer Bottom-CTA-Block fuer Service- und Blog-Seiten.
  * Tracking-ready mit data-track-* Attributen.
  *
  * Usage:
  *   set_query_var( 'cta_heading', 'Wo verbrennt Ihre Website Geld?' );
- *   set_query_var( 'cta_text', 'Der Audit prüft Tech, SEO und Conversion im Zusammenspiel.' );
+ *   set_query_var( 'cta_text', 'Der Audit prueft Tech, SEO und Conversion im Zusammenspiel.' );
  *   set_query_var( 'cta_url', '/growth-audit/' );
  *   set_query_var( 'cta_button_text', 'Audit starten' );
  *   set_query_var( 'cta_action', 'cta_footer_audit' );
@@ -46,7 +46,7 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 		<p class="nexus-footer-cta__legal">
 			Keine Cookies bei oeffentlichen Seitenaufrufen.
 			<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz</a>
-			<span aria-hidden="true">·</span>
+			<span aria-hidden="true">|</span>
 			<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
 		</p>
 
