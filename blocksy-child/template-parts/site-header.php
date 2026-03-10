@@ -50,13 +50,6 @@ $home_label   = sprintf(
 					}
 					?>
 				</div>
-				<!-- Primary CTA Button -->
-				<?php
-				$cta_url = apply_filters( 'nexus_audit_calendar_url', 'https://cal.com/hasim/30min' );
-				?>
-				<a href="<?php echo esc_url( $cta_url ); ?>" class="nx-header-cta-btn" data-track-action="cta_header_growth_audit" data-track-category="lead_gen">
-					Growth Audit starten
-				</a>
 
 				<button
 					type="button"
