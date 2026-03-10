@@ -42,6 +42,9 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
      ======================================== -->
 <section class="wgos-hero">
     <div class="wgos-container wgos-hero__inner">
+        <div class="wgos-hero-featured-image" style="margin-bottom:2rem;">
+            <img src="https://hasimuener.de/wp-content/uploads/2026/03/wgos-featured.png" alt="WGOS Beitragsbild" style="max-width:420px; width:100%; border-radius:1.2rem; box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+        </div>
         <span class="wgos-kicker">Das System</span>
 
         <h1 class="wgos-hero__title">WGOS: WordPress als planbares Anfragesystem für B2B</h1>
