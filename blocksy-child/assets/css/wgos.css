@@ -82,6 +82,41 @@
     color: var(--nx-accent-text-hover);
 }
 
+.wgos-asset-link-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 0;
+}
+
+.wgos-credits-table tbody td:first-child .wgos-asset-link-wrap {
+    white-space: normal;
+}
+
+.wgos-asset-link {
+    font-weight: 700;
+}
+
+.wgos-asset-link__hint {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-4px);
+    color: var(--nx-text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    transition: max-height 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+.wgos-credits-table tbody tr:hover .wgos-asset-link__hint,
+.wgos-credits-table tbody tr:focus-within .wgos-asset-link__hint {
+    max-height: 4.5rem;
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .wgos-container {
     max-width: var(--nx-max-width);
     margin: 0 auto;

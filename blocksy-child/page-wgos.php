@@ -287,22 +287,22 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
                                 <td colspan="3">Performance &amp; Infrastruktur</td>
                             </tr>
                             <tr>
-                                <td>CWV Speed Audit</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'CWV Speed Audit' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Analyse + Maßnahmenplan Core Web Vitals</td>
                                 <td>8</td>
                             </tr>
                             <tr>
-                                <td>CWV Optimierung</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'CWV Optimierung' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Umsetzung: LCP, CLS, INP, Asset-Pipeline</td>
                                 <td>15</td>
                             </tr>
                             <tr>
-                                <td>Server-Tuning</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Server-Tuning' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Caching, CDN, PHP-Tuning, DB-Optimierung</td>
                                 <td>12</td>
                             </tr>
                             <tr>
-                                <td>Security Hardening</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Security Hardening' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>WordPress-Härtung, Headers, Backup-Setup</td>
                                 <td>10</td>
                             </tr>
@@ -310,22 +310,22 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
                                 <td colspan="3">Measurement &amp; Tracking</td>
                             </tr>
                             <tr>
-                                <td>sGTM Setup</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'sGTM Setup' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Server-Side GTM Container + Event-Routing</td>
                                 <td>15</td>
                             </tr>
                             <tr>
-                                <td>Consent Mode v2</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Consent Mode v2' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>CMP Integration + Consent Signals an Google</td>
                                 <td>10</td>
                             </tr>
                             <tr>
-                                <td>GA4 Event Blueprint</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'GA4 Event Blueprint' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Custom Events, Conversions, Dashboards</td>
                                 <td>12</td>
                             </tr>
                             <tr>
-                                <td>Tracking Audit</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Tracking Audit' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Ist-Analyse Datenqualität + Gap-Report</td>
                                 <td>8</td>
                             </tr>

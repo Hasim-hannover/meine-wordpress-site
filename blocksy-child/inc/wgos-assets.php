@@ -40,6 +40,126 @@ function nexus_get_wgos_asset_phase_label( $phase ) {
 }
 
 /**
+ * Normalize labels and slugs into one stable lookup key.
+ *
+ * @param string $value Raw lookup value.
+ * @return string
+ */
+function nexus_get_wgos_asset_lookup_key( $value ) {
+	return sanitize_title( wp_strip_all_tags( (string) $value ) );
+}
+
+/**
+ * Build a per-request lookup table for published WGOS assets.
+ *
+ * Supports both explicit slugs and labels from the WGOS hub tables.
+ *
+ * @return array<string, WP_Post>
+ */
+function nexus_get_wgos_asset_lookup_map() {
+	static $map = null;
+
+	if ( null !== $map ) {
+		return $map;
+	}
+
+	$map   = [];
+	$posts = get_posts(
+		[
+			'post_type'              => 'wgos_asset',
+			'post_status'            => 'publish',
+			'posts_per_page'         => -1,
+			'orderby'                => 'menu_order title',
+			'order'                  => 'ASC',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+		]
+	);
+
+	foreach ( $posts as $post ) {
+		$title_key = nexus_get_wgos_asset_lookup_key( $post->post_title );
+		$slug_key  = nexus_get_wgos_asset_lookup_key( $post->post_name );
+
+		if ( $title_key ) {
+			$map[ $title_key ] = $post;
+		}
+
+		if ( $slug_key ) {
+			$map[ $slug_key ] = $post;
+		}
+	}
+
+	return $map;
+}
+
+/**
+ * Resolve a published WGOS asset by its hub label or slug.
+ *
+ * @param string $value Asset label or slug.
+ * @return WP_Post|null
+ */
+function nexus_get_wgos_asset( $value ) {
+	$key = nexus_get_wgos_asset_lookup_key( $value );
+
+	if ( '' === $key ) {
+		return null;
+	}
+
+	$map = nexus_get_wgos_asset_lookup_map();
+
+	return $map[ $key ] ?? null;
+}
+
+/**
+ * Return short hover copy for a linked WGOS asset.
+ *
+ * @param WP_Post $asset Asset post object.
+ * @return string
+ */
+function nexus_get_wgos_asset_hover_text( $asset ) {
+	$excerpt = trim( (string) $asset->post_excerpt );
+
+	if ( '' !== $excerpt ) {
+		return $excerpt;
+	}
+
+	$deliverables = nexus_get_field( 'wgos_asset_deliverables', '', $asset->ID );
+
+	if ( is_string( $deliverables ) && '' !== trim( $deliverables ) ) {
+		return trim( $deliverables );
+	}
+
+	return '';
+}
+
+/**
+ * Render a hub table label that links to the WGOS asset when available.
+ *
+ * Falls back to plain text until a matching published asset exists.
+ *
+ * @param string $label Hub-visible asset label.
+ * @return string
+ */
+function nexus_render_wgos_asset_label( $label ) {
+	$label = (string) $label;
+	$asset = nexus_get_wgos_asset( $label );
+
+	if ( ! $asset instanceof WP_Post ) {
+		return esc_html( $label );
+	}
+
+	$hint = nexus_get_wgos_asset_hover_text( $asset );
+
+	return sprintf(
+		'<span class="wgos-asset-link-wrap"><a class="wgos-asset-link" href="%1$s" data-track-action="cta_wgos_asset_table" data-track-category="navigation">%2$s</a>%3$s</span>',
+		esc_url( get_permalink( $asset ) ),
+		esc_html( $label ),
+		$hint ? sprintf( '<span class="wgos-asset-link__hint">%s</span>', esc_html( $hint ) ) : ''
+	);
+}
+
+/**
  * Resolve the WGOS hub page ID.
  *
  * @return int
