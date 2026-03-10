@@ -151,11 +151,16 @@ function nexus_render_wgos_asset_label( $label ) {
 
 	$hint = nexus_get_wgos_asset_hover_text( $asset );
 
+	if ( '' === $hint ) {
+		$hint = __( 'Detailseite mit Kontext, Deliverables und Einsatz im WGOS.', 'blocksy-child' );
+	}
+
 	return sprintf(
-		'<span class="wgos-asset-link-wrap"><a class="wgos-asset-link" href="%1$s" data-track-action="cta_wgos_asset_table" data-track-category="navigation">%2$s</a>%3$s</span>',
-		esc_url( get_permalink( $asset ) ),
+		'<span class="wgos-asset-link-wrap"><span class="wgos-asset-link">%1$s</span><span class="wgos-asset-link__panel"><span class="wgos-asset-link__text">%2$s</span><a class="wgos-asset-link__cta" href="%3$s" data-track-action="cta_wgos_asset_table" data-track-category="navigation">%4$s</a></span></span>',
 		esc_html( $label ),
-		$hint ? sprintf( '<span class="wgos-asset-link__hint">%s</span>', esc_html( $hint ) ) : ''
+		esc_html( $hint ),
+		esc_url( get_permalink( $asset ) ),
+		esc_html__( 'Mehr Info', 'blocksy-child' )
 	);
 }
 
