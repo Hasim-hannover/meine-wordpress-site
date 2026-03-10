@@ -81,14 +81,6 @@ $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], 
         <p>Ich helfe Unternehmen dabei, aus ihrer Website mehr zu machen als eine digitale Visitenkarte.</p>
         <p>Nicht lauter.<br>Nicht dekorativer.<br>Sondern klarer, tragfähiger und relevanter.</p>
     <p style="margin-bottom:3.5rem;">Denn eine Website sollte heute nicht einfach nur da sein.<br>Sie sollte etwas leisten.</p>
-        <div class="about-hero-ctas">
-            <a href="<?php echo esc_url( $audit_url ); ?>"
-               class="btn btn-primary"
-               data-track-action="cta_about_final_audit"
-               data-track-category="lead_gen">
-                Growth Audit starten
-            </a>
-        </div>
     </section>
 </div><!-- .nexus-container -->
 </div><!-- .nexus-about -->
