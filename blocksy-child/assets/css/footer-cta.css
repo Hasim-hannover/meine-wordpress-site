@@ -52,10 +52,11 @@
   z-index: 1;
 }
 
-.nexus-footer-cta__btn {
+.nexus-footer-cta a.nexus-footer-cta__btn,
+.wgos-wrapper .nexus-footer-cta a.nexus-footer-cta__btn {
   display: inline-block;
   background: linear-gradient(180deg, var(--nx-gold-hover, var(--accent-hover)) 0%, var(--nx-gold, var(--accent)) 100%);
-  color: var(--text-inverse);
+  color: var(--text-inverse) !important;
   padding: 0.95rem 1.8rem;
   border-radius: 999px;
   font-weight: 800;
@@ -67,9 +68,12 @@
   position: relative;
   z-index: 1;
 }
-.nexus-footer-cta__btn:hover {
+.nexus-footer-cta a.nexus-footer-cta__btn:hover,
+.nexus-footer-cta a.nexus-footer-cta__btn:focus-visible,
+.wgos-wrapper .nexus-footer-cta a.nexus-footer-cta__btn:hover,
+.wgos-wrapper .nexus-footer-cta a.nexus-footer-cta__btn:focus-visible {
   background: linear-gradient(180deg, color-mix(in srgb, var(--nx-gold-hover, var(--accent-hover)) 78%, white) 0%, var(--nx-gold-hover, var(--accent-hover)) 100%);
-  color: var(--text-inverse);
+  color: var(--text-inverse) !important;
   transform: translateY(-2px);
 }
 
