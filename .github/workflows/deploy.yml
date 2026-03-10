@@ -2,10 +2,13 @@ name: Deploy Theme (SSH)
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - 'hotfix/**'
     paths:
       - 'blocksy-child/**'
       - '.github/workflows/deploy.yml'
+  workflow_dispatch:
 
 jobs:
   deploy:

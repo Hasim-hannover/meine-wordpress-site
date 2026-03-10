@@ -16,7 +16,7 @@ Nicht verifiziert:
 ## Live
 
 - `blocksy-child/` ist der deploybare Website-Code.
-- Push auf `main` deployt das Theme per SSH-Rsync ueber `.github/workflows/deploy.yml`.
+- Push auf `main` und `hotfix/*` deployt das Theme per SSH-Rsync ueber `.github/workflows/deploy.yml`; zusaetzlich ist ein manueller Start per GitHub Actions moeglich.
 - Zentrale Theme-Module fuer Assets, SEO-Meta, Schema, Shortcodes, Portal und Snippets sind versioniert.
 - Service-Seiten, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
