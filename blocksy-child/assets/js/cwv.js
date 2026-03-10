@@ -19,7 +19,7 @@
       '@context': 'https://schema.org',
       '@type': 'Service',
       name: 'Core Web Vitals Optimierung',
-      description: 'Professionelle Core Web Vitals Optimierung: LCP, INP & CLS Optimierung für WordPress & Shopify. Messbare Umsatzsteigerung durch PageSpeed.',
+    description: 'Professionelle Core Web Vitals Optimierung: LCP, INP & CLS Optimierung für WordPress. Messbare Umsatzsteigerung durch PageSpeed.',
       provider: {
         '@type': 'Person',
         name: 'Hasim Üner',
