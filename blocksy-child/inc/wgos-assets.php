@@ -186,7 +186,7 @@ function nexus_render_wgos_asset_label( $label ) {
 	$hint = nexus_get_wgos_asset_hover_text( $asset );
 
 	if ( '' === $hint ) {
-		$hint = __( 'Detailseite mit Kontext, Deliverables und Einsatz im WGOS.', 'blocksy-child' );
+		$hint = __( 'Detailseite mit Kontext, Leistungsumfang und Einsatz im WGOS.', 'blocksy-child' );
 	}
 
 	return sprintf(
@@ -194,7 +194,7 @@ function nexus_render_wgos_asset_label( $label ) {
 		esc_html( $label ),
 		esc_html( $hint ),
 		esc_url( get_permalink( $asset ) ),
-		esc_html__( 'Mehr Info', 'blocksy-child' )
+		esc_html__( 'Mehr erfahren', 'blocksy-child' )
 	);
 }
 

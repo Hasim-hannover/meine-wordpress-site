@@ -58,7 +58,7 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 					<?php endif; ?>
 
 					<div class="wgos-hero__actions">
-						<a href="<?php echo esc_url( $wgos_url . '#credits' ); ?>" class="wgos-btn wgos-btn--outline">Zur WGOS-Uebersicht</a>
+						<a href="<?php echo esc_url( $wgos_url . '#credits' ); ?>" class="wgos-btn wgos-btn--outline">Zur WGOS-Übersicht</a>
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
 					</div>
 				</div>
@@ -100,7 +100,7 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 
 			<section class="wgos-section wgos-section--white">
 				<div class="wgos-container">
-					<h2 class="wgos-h2">Problem, Diagnose und Loesung</h2>
+					<h2 class="wgos-h2">Problem, Diagnose und Lösung</h2>
 					<div class="wgos-prose">
 						<?php the_content(); ?>
 					</div>
@@ -112,9 +112,9 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 					<div class="wgos-principle-shell">
 						<span class="wgos-principle-kicker">Systemkontext</span>
 						<h2 class="wgos-h2">Ein Asset ist nur dann wirksam, wenn das Fundament stimmt.</h2>
-						<p>Performance, Measurement und Conversion sind keine isolierten Baustellen. Im WGOS werden sie in eine belastbare Reihenfolge gebracht, damit ein einzelner Hebel nicht am naechsten Engpass verpufft.</p>
+						<p>Performance, Measurement und Conversion sind keine isolierten Baustellen. Im WGOS werden sie in eine belastbare Reihenfolge gebracht, damit ein einzelner Hebel nicht am nächsten Engpass verpufft.</p>
 						<p class="wgos-inline-cta wgos-inline-cta--principle">
-							<a href="<?php echo esc_url( $wgos_url ); ?>">Zurueck ins WGOS und die Gesamtlogik ansehen</a>
+							<a href="<?php echo esc_url( $wgos_url ); ?>">Zurück ins WGOS und die Gesamtlogik ansehen</a>
 						</p>
 					</div>
 				</div>
@@ -122,7 +122,7 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 
 			<?php
 			set_query_var( 'cta_heading', 'Dieses Asset funktioniert nur im Kontext des gesamten WGOS.' );
-			set_query_var( 'cta_text', 'Der Growth Audit zeigt, ob jetzt genau dieses Asset priorisiert werden sollte oder ob erst Tracking, Performance oder Conversion sauber sortiert werden muessen.' );
+			set_query_var( 'cta_text', 'Der Growth Audit zeigt, ob jetzt genau dieses Asset priorisiert werden sollte oder ob erst Tracking, Performance oder Conversion sauber sortiert werden müssen.' );
 			set_query_var( 'cta_url', $audit_url );
 			set_query_var( 'cta_button_text', 'Growth Audit starten' );
 			set_query_var( 'cta_action', 'cta_wgos_asset_footer_audit' );
