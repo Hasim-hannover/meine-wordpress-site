@@ -34,6 +34,9 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 				<section id="start" class="audit-hero-centered audit-section nx-reveal review-hero-shell">
 					<div class="review-hero-layout">
 						<div class="review-hero-main">
+								<div class="audit-hero-featured-image" style="margin-bottom:2rem;">
+									<img src="https://hasimuener.de/wp-content/uploads/2026/03/growth-audit-featured-1.png" alt="Growth Audit Beitragsbild" style="max-width:420px; width:100%; border-radius:1.2rem; box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+								</div>
 							<div class="hero-pill">Growth Audit · kostenlos · persönlich · 48h</div>
 							<div class="review-hero-kicker">Für B2B-Unternehmen mit WordPress und kaufnahen Seiten</div>
 							<h1>
