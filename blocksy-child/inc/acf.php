@@ -91,11 +91,76 @@ function hu_register_acf_fields() {
 					'value'    => 'post',
 				],
 			],
+			// WGOS Assets
+			[
+				[
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'wgos_asset',
+				],
+			],
 		],
 		'position'   => 'side',
 		'style'      => 'default',
 		'menu_order'  => 0,
 		'description' => 'Pluginlose SEO-Felder fuer Title, Description, Social-Preview und noindex.',
+	] );
+
+	// ── 1b. WGOS Asset Fields ────────────────────────────────────
+	// Struktur-Layer fuer die Hub-and-Spoke-Detailseiten unterhalb von WGOS.
+	acf_add_local_field_group( [
+		'key'      => 'group_nexus_wgos_asset',
+		'title'    => 'WGOS Asset Daten',
+		'fields'   => [
+			[
+				'key'           => 'field_wgos_asset_phase',
+				'label'         => 'Phase',
+				'name'          => 'wgos_asset_phase',
+				'type'          => 'select',
+				'instructions'  => 'Ordnet das Asset in die WGOS-Roadmap ein.',
+				'choices'       => function_exists( 'nexus_get_wgos_asset_phase_options' ) ? nexus_get_wgos_asset_phase_options() : [],
+				'default_value' => 'fundament',
+				'return_format' => 'value',
+				'allow_null'    => 0,
+				'ui'            => 1,
+				'required'      => 1,
+				'wrapper'       => [ 'width' => '33' ],
+			],
+			[
+				'key'           => 'field_wgos_asset_credits',
+				'label'         => 'Credits',
+				'name'          => 'wgos_asset_credits',
+				'type'          => 'number',
+				'instructions'  => 'Fixer Leistungswert fuer den Asset-Katalog.',
+				'min'           => 0,
+				'step'          => 1,
+				'required'      => 1,
+				'wrapper'       => [ 'width' => '33' ],
+			],
+			[
+				'key'           => 'field_wgos_asset_deliverables',
+				'label'         => 'Deliverables',
+				'name'          => 'wgos_asset_deliverables',
+				'type'          => 'text',
+				'instructions'  => 'Kurze Zusammenfassung dessen, was der Kunde konkret bekommt.',
+				'placeholder'   => 'z.B. Analyse + Massnahmenplan Core Web Vitals',
+				'required'      => 1,
+				'wrapper'       => [ 'width' => '34' ],
+			],
+		],
+		'location' => [
+			[
+				[
+					'param'    => 'post_type',
+					'operator' => '==',
+					'value'    => 'wgos_asset',
+				],
+			],
+		],
+		'position'    => 'normal',
+		'style'       => 'default',
+		'menu_order'  => 5,
+		'description' => 'Credits-, Deliverable- und Phasenlogik fuer WGOS Asset-Detailseiten.',
 	] );
 
 	// ── 2. KPI Block Fields ───────────────────────────────────────

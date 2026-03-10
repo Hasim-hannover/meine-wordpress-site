@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-09.
+Stand: 2026-03-10.
 
 Basis dieses Status:
 
@@ -28,6 +28,7 @@ Nicht verifiziert:
 
 - Das Repo wird gerade von einem Theme-Repo zu einem Website Operating System erweitert.
 - `page-wgos.php` ist fachlich zentral, aber technisch noch zu stark hardcodiert.
+- WGOS Asset-Detailseiten laufen jetzt ueber den hierarchischen CPT `wgos_asset` mit ACF-Meta und Single-Template; die redaktionelle Befuellung der Spokes passiert weiter im WordPress-Admin.
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten.
 - `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.
 - CRM-, Mail- und Follow-up-Logik fuer den Audit sind jetzt im Theme sichtbar, aber SMTP/externes Routing bleiben noch offen.

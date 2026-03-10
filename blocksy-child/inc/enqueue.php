@@ -139,6 +139,22 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-wgos-mindmap-v2-js', 'wgos-mindmap-v2.js', [ 'nexus-wgos-js' ] );
 	}
 
+	// ── G2) Template: WGOS Asset Detail ───────────────────────────
+	if ( is_singular( 'wgos_asset' ) ) {
+		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );
+
+		wp_add_inline_style(
+			'blocksy-child-style',
+			'
+			.single-wgos_asset .entry-header .entry-title,
+			.single-wgos_asset .ct-page-title {
+				display: none !important;
+			}
+		'
+		);
+	}
+
 	// ── H) Template: Growth Audit Funnel ──────────────────────────
 	if ( nexus_is_audit_page() ) {
 		hu_enqueue_css( 'nexus-audit-css', 'audit.css', [ 'nexus-design-system' ] );
