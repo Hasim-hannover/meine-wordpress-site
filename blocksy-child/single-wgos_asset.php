@@ -22,9 +22,9 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 	<?php while ( have_posts() ) : the_post(); ?>
 		<?php
 		$post_id      = get_the_ID();
-		$credits      = nexus_get_field( 'wgos_asset_credits', '', $post_id );
-		$deliverables = nexus_get_field( 'wgos_asset_deliverables', '', $post_id );
-		$phase_key    = nexus_get_field( 'wgos_asset_phase', '', $post_id );
+		$credits      = function_exists( 'nexus_get_wgos_asset_field' ) ? nexus_get_wgos_asset_field( $post_id, 'wgos_credits', 'wgos_asset_credits', '' ) : nexus_get_field( 'wgos_credits', '', $post_id );
+		$deliverables = function_exists( 'nexus_get_wgos_asset_field' ) ? nexus_get_wgos_asset_field( $post_id, 'wgos_deliverables', 'wgos_asset_deliverables', '' ) : nexus_get_field( 'wgos_deliverables', '', $post_id );
+		$phase_key    = function_exists( 'nexus_get_wgos_asset_field' ) ? nexus_get_wgos_asset_field( $post_id, 'wgos_phase', 'wgos_asset_phase', '' ) : nexus_get_field( 'wgos_phase', '', $post_id );
 		$phase_label  = function_exists( 'nexus_get_wgos_asset_phase_label' )
 			? nexus_get_wgos_asset_phase_label( $phase_key )
 			: $phase_key;
