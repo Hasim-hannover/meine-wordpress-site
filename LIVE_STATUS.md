@@ -32,8 +32,9 @@ Nicht verifiziert:
 - Das Repo wird gerade von einem Theme-Repo zu einem Website Operating System erweitert.
 - `page-wgos.php` bleibt template-driven; eine spaetere Auslagerung des Content-Layers in Editor oder ACF ist weiter offen.
 - WGOS Asset-Detailseiten laufen jetzt über den hierarchischen CPT `wgos_asset` mit ACF-Meta und Single-Template; die redaktionelle Befüllung der Spokes passiert weiter im WordPress-Admin.
-- WGOS-Assets sind jetzt zusätzlich als versionierte Registry im Theme definiert: 35 Assets, davon 10 als `publish` und 25 als `draft`.
+- WGOS-Assets sind jetzt zusätzlich als versionierte Registry im Theme definiert: 35 Assets, alle auf `publish`.
 - Die neue WGOS-Asset-Struktur rendert 8 feste Abschnitte, versionierte SEO-Meta, Related-Links und `Service`-Schema aus derselben Registry.
+- Die WGOS Systemlandkarte wird jetzt bei Bedarf automatisch als Seite angelegt und listet alle Assets zusätzlich in einer festen, gruppierten Hub-Ansicht.
 - Die eigentliche Post-Erstellung und Aktualisierung für WGOS-Assets hängt aktuell noch am neuen Theme-Sync und damit am nächsten Deployment auf die Live-Umgebung.
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten.
 - Die Community-Signale auf der Homepage sind derzeit ueber GitHub und ein oeffentliches LinkedIn-Profil versioniert; ein kanonischer Facebook-Link inklusive belastbarer Kennzahl ist im Repo noch nicht hinterlegt.

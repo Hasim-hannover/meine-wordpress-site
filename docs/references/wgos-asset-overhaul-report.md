@@ -39,7 +39,7 @@ Kurzbeschreibung der inhaltlichen Änderung:
 
 ## 3. Neue Assets angelegt
 
-Diese Assets sind in der Registry definiert und werden durch den Theme-Sync als `draft` angelegt:
+Diese Assets sind in der Registry definiert und werden durch den Theme-Sync als `publish` angelegt:
 
 1. `Growth Audit`
 2. `Positionierungs-Check`
@@ -67,11 +67,12 @@ Diese Assets sind in der Registry definiert und werden durch den Theme-Sync als 
 24. `Reporting Dashboard`
 25. `Conversion-Hypothesen & Testing`
 
-## 4. Draft-Status
+## 4. Live-Status
 
-- Zielstatus laut Registry: `10 publish`, `25 draft`
+- Zielstatus laut Registry: `35 publish`, `0 draft`
 - Die eigentliche Post-Erstellung oder -Aktualisierung passiert erst nach Deployment durch den Theme-Sync
-- Solange der neue Theme-Code nicht auf WordPress läuft, sind die neuen Draft-Posts noch nicht in der Datenbank vorhanden
+- Solange der neue Theme-Code nicht auf WordPress läuft, sind neue oder aktualisierte Asset-Posts noch nicht in der Datenbank sichtbar
+- Die dedizierte Seite `wgos-systemlandkarte` wird jetzt ebenfalls automatisch angelegt und mit dem Hub-Template verknüpft
 
 ## 5. ACF-Felder gefunden und genutzt
 
@@ -111,41 +112,41 @@ Alle 35 WGOS-Assets sind im Zielzustand auf `Service` gesetzt.
 
 | Asset | Zielstatus | Schema |
 | --- | --- | --- |
-| Growth Audit | draft | Service |
-| Positionierungs-Check | draft | Service |
-| Seitenrollen-Mapping | draft | Service |
-| Wettbewerbs-Analyse (Digital) | draft | Service |
-| Roadmap & Priorisierung | draft | Service |
+| Growth Audit | publish | Service |
+| Positionierungs-Check | publish | Service |
+| Seitenrollen-Mapping | publish | Service |
+| Wettbewerbs-Analyse (Digital) | publish | Service |
+| Roadmap & Priorisierung | publish | Service |
 | CWV Speed Audit | publish | Service |
 | CWV Optimierung | publish | Service |
 | Server-Tuning | publish | Service |
 | Security Hardening | publish | Service |
-| Plugin Audit & Bereinigung | draft | Service |
-| WordPress Update-Management | draft | Service |
+| Plugin Audit & Bereinigung | publish | Service |
+| WordPress Update-Management | publish | Service |
 | Tracking Audit | publish | Service |
 | GA4 Event Blueprint | publish | Service |
 | Consent Mode v2 | publish | Service |
 | Server-Side Tracking (sGTM & Matomo) | publish | Service |
-| KPI-Dashboard Setup | draft | Service |
-| UTM-Framework & Attribution | draft | Service |
+| KPI-Dashboard Setup | publish | Service |
+| UTM-Framework & Attribution | publish | Service |
 | Technical SEO Audit | publish | Service |
-| Keyword-Strategie & Content-Map | draft | Service |
+| Keyword-Strategie & Content-Map | publish | Service |
 | Pillar Page | publish | Service |
-| Content Hub Aufbau | draft | Service |
-| On-Page SEO Optimierung | draft | Service |
-| Interne Verlinkung & Seitenarchitektur | draft | Service |
-| Schema Markup & Strukturierte Daten | draft | Service |
-| Local SEO Setup | draft | Service |
-| Landing Page (Neu) | draft | Service |
-| Landing Page Optimierung | draft | Service |
-| CTA & Formular-Optimierung | draft | Service |
-| Angebotsseiten-Architektur | draft | Service |
-| Social Proof & Trust-Elemente | draft | Service |
-| Lead-Magnet Konzeption | draft | Service |
-| Monthly Performance Review | draft | Service |
-| Quarterly Roadmap Update | draft | Service |
-| Reporting Dashboard | draft | Service |
-| Conversion-Hypothesen & Testing | draft | Service |
+| Content Hub Aufbau | publish | Service |
+| On-Page SEO Optimierung | publish | Service |
+| Interne Verlinkung & Seitenarchitektur | publish | Service |
+| Schema Markup & Strukturierte Daten | publish | Service |
+| Local SEO Setup | publish | Service |
+| Landing Page (Neu) | publish | Service |
+| Landing Page Optimierung | publish | Service |
+| CTA & Formular-Optimierung | publish | Service |
+| Angebotsseiten-Architektur | publish | Service |
+| Social Proof & Trust-Elemente | publish | Service |
+| Lead-Magnet Konzeption | publish | Service |
+| Monthly Performance Review | publish | Service |
+| Quarterly Roadmap Update | publish | Service |
+| Reporting Dashboard | publish | Service |
+| Conversion-Hypothesen & Testing | publish | Service |
 
 ## 8. Offene Punkte
 

@@ -4,7 +4,7 @@ return [
 	'growth-audit' => [
 		'title'           => 'Growth Audit',
 		'slug'            => 'growth-audit',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Strategie',
 		'credits'         => '10',
 		'keyword'         => 'Growth Audit',
@@ -55,7 +55,7 @@ return [
 	'positionierungs-check' => [
 		'title'           => 'Positionierungs-Check',
 		'slug'            => 'positionierungs-check',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Strategie',
 		'credits'         => '10',
 		'keyword'         => 'Positionierungs-Check',
@@ -106,7 +106,7 @@ return [
 	'seitenrollen-mapping' => [
 		'title'           => 'Seitenrollen-Mapping',
 		'slug'            => 'seitenrollen-mapping',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Strategie',
 		'credits'         => '10',
 		'keyword'         => 'Seitenrollen-Mapping',
@@ -157,7 +157,7 @@ return [
 	'wettbewerbs-analyse' => [
 		'title'           => 'Wettbewerbs-Analyse (Digital)',
 		'slug'            => 'wettbewerbs-analyse',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Strategie',
 		'credits'         => '15',
 		'keyword'         => 'Wettbewerbs-Analyse',
@@ -208,7 +208,7 @@ return [
 	'roadmap-priorisierung' => [
 		'title'           => 'Roadmap & Priorisierung',
 		'slug'            => 'roadmap-priorisierung',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Strategie',
 		'credits'         => '10',
 		'keyword'         => 'Roadmap Priorisierung',
@@ -463,7 +463,7 @@ return [
 	'plugin-audit' => [
 		'title'           => 'Plugin Audit & Bereinigung',
 		'slug'            => 'plugin-audit',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Technisches Fundament',
 		'credits'         => '10',
 		'keyword'         => 'Plugin Audit',
@@ -514,7 +514,7 @@ return [
 	'update-management' => [
 		'title'           => 'WordPress Update-Management',
 		'slug'            => 'update-management',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Technisches Fundament',
 		'credits'         => '5',
 		'keyword'         => 'WordPress Update Management',
@@ -770,7 +770,7 @@ return [
 	'kpi-dashboard' => [
 		'title'           => 'KPI-Dashboard Setup',
 		'slug'            => 'kpi-dashboard',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Messbarkeit',
 		'credits'         => '10',
 		'keyword'         => 'KPI Dashboard Setup',
@@ -821,7 +821,7 @@ return [
 	'utm-framework' => [
 		'title'           => 'UTM-Framework & Attribution',
 		'slug'            => 'utm-framework',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Messbarkeit',
 		'credits'         => '10',
 		'keyword'         => 'UTM Framework',
@@ -923,7 +923,7 @@ return [
 	'keyword-strategie' => [
 		'title'           => 'Keyword-Strategie & Content-Map',
 		'slug'            => 'keyword-strategie',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Sichtbarkeit',
 		'credits'         => '20',
 		'keyword'         => 'Keyword Strategie',
@@ -1025,7 +1025,7 @@ return [
 	'content-hub' => [
 		'title'           => 'Content Hub Aufbau',
 		'slug'            => 'content-hub',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Sichtbarkeit',
 		'credits'         => '20',
 		'keyword'         => 'Content Hub Aufbau',
@@ -1076,7 +1076,7 @@ return [
 	'on-page-seo' => [
 		'title'           => 'On-Page SEO Optimierung',
 		'slug'            => 'on-page-seo',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Sichtbarkeit',
 		'credits'         => '10',
 		'keyword'         => 'On-Page SEO',
@@ -1127,7 +1127,7 @@ return [
 	'interne-verlinkung' => [
 		'title'           => 'Interne Verlinkung & Seitenarchitektur',
 		'slug'            => 'interne-verlinkung',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Sichtbarkeit',
 		'credits'         => '15',
 		'keyword'         => 'Interne Verlinkung',
@@ -1178,7 +1178,7 @@ return [
 	'schema-markup' => [
 		'title'           => 'Schema Markup & Strukturierte Daten',
 		'slug'            => 'schema-markup',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Sichtbarkeit',
 		'credits'         => '10',
 		'keyword'         => 'Schema Markup',
@@ -1229,7 +1229,7 @@ return [
 	'local-seo' => [
 		'title'           => 'Local SEO Setup',
 		'slug'            => 'local-seo',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Sichtbarkeit',
 		'credits'         => '10',
 		'keyword'         => 'Local SEO Setup',
@@ -1280,7 +1280,7 @@ return [
 	'landing-page-neu' => [
 		'title'           => 'Landing Page (Neu)',
 		'slug'            => 'landing-page-neu',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Conversion',
 		'credits'         => '20',
 		'keyword'         => 'Landing Page Neu',
@@ -1331,7 +1331,7 @@ return [
 	'landing-page-optimierung' => [
 		'title'           => 'Landing Page Optimierung',
 		'slug'            => 'landing-page-optimierung',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Conversion',
 		'credits'         => '15',
 		'keyword'         => 'Landing Page Optimierung',
@@ -1382,7 +1382,7 @@ return [
 	'cta-formular-optimierung' => [
 		'title'           => 'CTA & Formular-Optimierung',
 		'slug'            => 'cta-formular-optimierung',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Conversion',
 		'credits'         => '10',
 		'keyword'         => 'CTA Formular Optimierung',
@@ -1433,7 +1433,7 @@ return [
 	'angebotsseiten-architektur' => [
 		'title'           => 'Angebotsseiten-Architektur',
 		'slug'            => 'angebotsseiten-architektur',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Conversion',
 		'credits'         => '15',
 		'keyword'         => 'Angebotsseiten Architektur',
@@ -1484,7 +1484,7 @@ return [
 	'social-proof' => [
 		'title'           => 'Social Proof & Trust-Elemente',
 		'slug'            => 'social-proof',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Conversion',
 		'credits'         => '10',
 		'keyword'         => 'Social Proof',
@@ -1535,7 +1535,7 @@ return [
 	'lead-magnet' => [
 		'title'           => 'Lead-Magnet Konzeption',
 		'slug'            => 'lead-magnet',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Conversion',
 		'credits'         => '15',
 		'keyword'         => 'Lead Magnet Konzeption',
@@ -1586,7 +1586,7 @@ return [
 	'monthly-review' => [
 		'title'           => 'Monthly Performance Review',
 		'slug'            => 'monthly-review',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Weiterentwicklung',
 		'credits'         => '10',
 		'keyword'         => 'Monthly Performance Review',
@@ -1637,7 +1637,7 @@ return [
 	'quarterly-roadmap' => [
 		'title'           => 'Quarterly Roadmap Update',
 		'slug'            => 'quarterly-roadmap',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Weiterentwicklung',
 		'credits'         => '10',
 		'keyword'         => 'Quarterly Roadmap Update',
@@ -1688,7 +1688,7 @@ return [
 	'reporting-dashboard' => [
 		'title'           => 'Reporting Dashboard',
 		'slug'            => 'reporting-dashboard',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Weiterentwicklung',
 		'credits'         => '15',
 		'keyword'         => 'Reporting Dashboard',
@@ -1739,7 +1739,7 @@ return [
 	'conversion-testing' => [
 		'title'           => 'Conversion-Hypothesen & Testing',
 		'slug'            => 'conversion-testing',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Weiterentwicklung',
 		'credits'         => '15',
 		'keyword'         => 'Conversion Testing',

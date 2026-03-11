@@ -215,6 +215,115 @@ function nexus_get_wgos_asset_hub_url() {
 }
 
 /**
+ * Ensure the dedicated WGOS asset hub page exists and uses the correct template.
+ *
+ * @return void
+ */
+function nexus_maybe_ensure_wgos_asset_hub_page() {
+	if ( wp_installing() || wp_doing_ajax() || wp_doing_cron() ) {
+		return;
+	}
+
+	$page_id = nexus_get_wgos_asset_hub_page_id();
+
+	if ( $page_id ) {
+		$current_template = (string) get_post_meta( $page_id, '_wp_page_template', true );
+
+		if ( 'page-wgos-assets.php' !== $current_template ) {
+			update_post_meta( $page_id, '_wp_page_template', 'page-wgos-assets.php' );
+		}
+
+		return;
+	}
+
+	$existing_page = get_page_by_path( 'wgos-systemlandkarte' );
+
+	if ( $existing_page instanceof WP_Post ) {
+		$page_id = (int) $existing_page->ID;
+	} else {
+		$page_id = wp_insert_post(
+			wp_slash(
+				[
+					'post_type'    => 'page',
+					'post_status'  => 'publish',
+					'post_title'   => 'WGOS Systemlandkarte',
+					'post_name'    => 'wgos-systemlandkarte',
+					'post_content' => '',
+					'post_excerpt' => 'Alle WGOS Assets auf einen Blick, nach Kernbereichen geordnet und direkt verlinkt.',
+				]
+			),
+			true
+		);
+
+		if ( is_wp_error( $page_id ) ) {
+			return;
+		}
+	}
+
+	update_post_meta( (int) $page_id, '_wp_page_template', 'page-wgos-assets.php' );
+}
+add_action( 'init', 'nexus_maybe_ensure_wgos_asset_hub_page', 25 );
+
+/**
+ * Build an ordered list payload for the server-rendered WGOS asset hub overview.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function nexus_get_wgos_asset_hub_sections() {
+	$phase_registry  = nexus_get_wgos_asset_phase_catalog();
+	$module_registry = nexus_get_wgos_asset_module_catalog();
+	$registry        = nexus_get_wgos_asset_registry();
+	$sections        = [];
+
+	foreach ( $module_registry as $module_key => $module ) {
+		$phase_key = (string) $module['phase_key'];
+
+		if ( ! isset( $phase_registry[ $phase_key ] ) ) {
+			continue;
+		}
+
+		$items = [];
+
+		foreach ( $registry as $asset ) {
+			if ( (string) $asset['module_key'] !== $module_key ) {
+				continue;
+			}
+
+			$detail_url = nexus_get_wgos_asset_detail_url( $asset );
+			$items[]    = [
+				'id'           => nexus_get_wgos_asset_anchor_id( (string) $asset['slug'] ),
+				'title'        => (string) $asset['title'],
+				'url'          => $detail_url ? $detail_url : nexus_get_wgos_asset_anchor_url( (string) $asset['slug'] ),
+				'credits'      => (string) $asset['credits'],
+				'goal'         => (string) $asset['goal'],
+				'result'       => (string) $asset['result'],
+				'status'       => (string) $asset['status'],
+				'core_area'    => (string) $asset['core_area'],
+				'keyword'      => (string) $asset['keyword'],
+				'prerequisite' => (string) $asset['prerequisite'],
+			];
+		}
+
+		if ( empty( $items ) ) {
+			continue;
+		}
+
+		$sections[] = [
+			'phase_label' => (string) $phase_registry[ $phase_key ]['label'],
+			'phase_step'  => (string) $phase_registry[ $phase_key ]['eyebrow'],
+			'module_id'   => (string) $module['id'],
+			'module_no'   => (string) $module['number'],
+			'module'      => (string) $module['label'],
+			'summary'     => (string) $module['summary'],
+			'accent'      => (string) $module['accent'],
+			'items'       => $items,
+		];
+	}
+
+	return $sections;
+}
+
+/**
  * Resolve the explorer anchor ID for a WGOS asset.
  *
  * @param string|WP_Post $value Asset label, slug or post object.

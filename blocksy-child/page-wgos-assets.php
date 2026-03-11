@@ -25,6 +25,7 @@ $summary      = isset( $payload['summary'] ) && is_array( $payload['summary'] ) 
 $asset_count  = isset( $summary['totalAssets'] ) ? (int) $summary['totalAssets'] : count( $payload['wgosAssets'] );
 $publish_count = isset( $summary['publishedAssets'] ) ? (int) $summary['publishedAssets'] : 0;
 $draft_count   = isset( $summary['draftAssets'] ) ? (int) $summary['draftAssets'] : 0;
+$hub_sections  = function_exists( 'nexus_get_wgos_asset_hub_sections' ) ? nexus_get_wgos_asset_hub_sections() : [];
 ?>
 
 <main id="main" class="site-main">
@@ -77,11 +78,11 @@ $draft_count   = isset( $summary['draftAssets'] ) ? (int) $summary['draftAssets'
 					</div>
 					<div class="wgos-trust-item">
 						<span class="wgos-trust-value"><?php echo esc_html( (string) $publish_count ); ?></span>
-						<span class="wgos-trust-label">publizierte Detailseiten</span>
+						<span class="wgos-trust-label">aktive Detailseiten</span>
 					</div>
 					<div class="wgos-trust-item">
 						<span class="wgos-trust-value"><?php echo esc_html( (string) $draft_count ); ?></span>
-						<span class="wgos-trust-label">Assets in Vorbereitung</span>
+						<span class="wgos-trust-label">noch nicht live</span>
 					</div>
 				</div>
 			</div>
@@ -99,6 +100,69 @@ $draft_count   = isset( $summary['draftAssets'] ) ? (int) $summary['draftAssets'
 				<noscript>
 					<p class="wgos-section-intro">Der Explorer benötigt JavaScript. Die einzelnen Assets sind weiterhin über die WGOS Asset-Detailseiten erreichbar.</p>
 				</noscript>
+			</div>
+		</section>
+
+		<section id="asset-liste" class="wgos-section wgos-section--gray nx-reveal">
+			<div class="wgos-container">
+				<div class="wgos-section-head">
+					<span class="wgos-principle-kicker">Strukturierte Asset-Liste</span>
+					<h2 class="wgos-h2">Alle WGOS Assets direkt lesbar und sofort erreichbar.</h2>
+					<p class="wgos-section-intro">Unter dem Explorer steht hier die feste Arbeitsansicht: nach Kernbereichen sortiert, mit Credits, Ergebnis, Voraussetzung und direktem Link zur Detailseite.</p>
+				</div>
+
+				<div class="wgos-hub-sections">
+					<?php foreach ( $hub_sections as $section ) : ?>
+						<section class="wgos-hub-section-card" aria-labelledby="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>" style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
+							<header class="wgos-hub-section-card__head">
+								<div>
+									<span class="wgos-hub-section-card__phase"><?php echo esc_html( (string) $section['phase_step'] ); ?> · <?php echo esc_html( (string) $section['phase_label'] ); ?></span>
+									<h3 id="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>">
+										<span class="wgos-hub-section-card__number"><?php echo esc_html( (string) $section['module_no'] ); ?></span>
+										<?php echo esc_html( (string) $section['module'] ); ?>
+									</h3>
+								</div>
+								<p><?php echo esc_html( (string) $section['summary'] ); ?></p>
+							</header>
+
+							<div class="wgos-hub-asset-grid">
+								<?php foreach ( (array) $section['items'] as $item ) : ?>
+									<article id="<?php echo esc_attr( (string) $item['id'] ); ?>" class="wgos-hub-asset-card">
+										<div class="wgos-hub-asset-card__top">
+											<div>
+												<h4><a href="<?php echo esc_url( (string) $item['url'] ); ?>"><?php echo esc_html( (string) $item['title'] ); ?></a></h4>
+												<p><?php echo esc_html( (string) $item['goal'] ); ?></p>
+											</div>
+											<div class="wgos-hub-asset-card__meta">
+												<span><?php echo esc_html( (string) $item['credits'] ); ?> Credits</span>
+												<span>Live</span>
+											</div>
+										</div>
+
+										<dl class="wgos-hub-asset-card__facts">
+											<div>
+												<dt>Ergebnis</dt>
+												<dd><?php echo esc_html( (string) $item['result'] ); ?></dd>
+											</div>
+											<div>
+												<dt>Voraussetzung</dt>
+												<dd><?php echo esc_html( (string) $item['prerequisite'] ); ?></dd>
+											</div>
+											<div>
+												<dt>Fokus</dt>
+												<dd><?php echo esc_html( (string) $item['keyword'] ); ?></dd>
+											</div>
+										</dl>
+
+										<div class="wgos-hub-asset-card__actions">
+											<a href="<?php echo esc_url( (string) $item['url'] ); ?>" class="wgos-btn wgos-btn--outline">Asset öffnen</a>
+										</div>
+									</article>
+								<?php endforeach; ?>
+							</div>
+						</section>
+					<?php endforeach; ?>
+				</div>
 			</div>
 		</section>
 

@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string
  */
 function nexus_get_wgos_asset_registry_version() {
-	return '2026-03-11-wgos-assets-v2';
+	return '2026-03-11-wgos-assets-v3';
 }
 
 /**
