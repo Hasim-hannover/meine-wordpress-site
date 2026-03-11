@@ -175,7 +175,7 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
                 <div class="wgos-module__content">
                     <h3>Messbarkeit & Datenschutz</h3>
                     <p class="wgos-module__subline"><em>GA4, Consent Mode, saubere Ereignisse, klare KPIs und belastbare Daten als Basis für Entscheidungen statt Bauchgefühl.</em></p>
-                    <p>Server-Side Tracking (sGTM), Consent Mode v2, Event-Blueprint, GA4-Setup ohne Cookie-Banner-Chaos.</p>
+                    <p>Server-Side Tracking (sGTM &amp; Matomo), Consent Mode v2, Event-Blueprint, GA4-Setup ohne Cookie-Banner-Chaos.</p>
                     <div class="wgos-module__proof">Tracking-Genauigkeit von ~55% auf &gt;92% (nach sGTM-Rollout)</div>
                     <a href="<?php echo esc_url( $ga4_url ); ?>" class="wgos-link--arrow">GA4 &amp; Tracking Setup ansehen</a>
                 </div>

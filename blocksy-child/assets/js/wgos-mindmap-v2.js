@@ -56,7 +56,7 @@
 			color: '#A78BFA',
 			claim: 'Entscheidungen brauchen verlässliche Daten.',
 			without: 'Ohne sauberes Tracking optimieren Sie auf Schätzungen – und skalieren das Falsche.',
-			bullets: ['Server-Side GTM (sGTM)', 'Consent Mode v2 ohne Cookie-Chaos', 'GA4 Event Blueprint + DSGVO-Dokumentation'],
+			bullets: ['Server-Side Tracking (sGTM & Matomo)', 'Consent Mode v2 ohne Cookie-Chaos', 'GA4 Event Blueprint + DSGVO-Dokumentation'],
 			result: '>92% Tracking',
 			resultSub: 'Genauigkeit (von ~55%)',
 			credits: '15 Credits',
