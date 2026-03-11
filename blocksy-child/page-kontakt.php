@@ -11,20 +11,34 @@ $privacy_url    = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( 
 $rest_endpoint  = rest_url( 'nexus/v1/contact-request' );
 $focus_options  = function_exists( 'nexus_get_contact_focus_options' ) ? nexus_get_contact_focus_options() : [];
 $budget_options = function_exists( 'nexus_get_contact_budget_options' ) ? nexus_get_contact_budget_options() : [];
+$requested_focus = isset( $_GET['focus'] ) ? sanitize_key( wp_unslash( $_GET['focus'] ) ) : '';
+$selected_focus  = isset( $focus_options[ $requested_focus ] ) ? $requested_focus : '';
+$is_pilot_request = 'pilot' === $selected_focus;
 ?>
 
 <main id="main" class="site-main contact-page" data-track-section="contact_page">
 	<div class="contact-page__shell">
 		<section class="contact-hero" aria-labelledby="contact-title">
 			<div class="contact-hero__copy nx-reveal">
-				<span class="contact-eyebrow">Projektanfrage</span>
-				<h1 id="contact-title" class="contact-title">Projekt anfragen</h1>
+				<span class="contact-eyebrow"><?php echo esc_html( $is_pilot_request ? 'Pilotprojekt' : 'Projektanfrage' ); ?></span>
+				<h1 id="contact-title" class="contact-title"><?php echo esc_html( $is_pilot_request ? 'Pilotprojekt anfragen' : 'Projekt anfragen' ); ?></h1>
 				<p class="contact-lead">
-					Wenn Sie Ihre WordPress-Website strategisch weiterentwickeln möchten,
-					lassen Sie uns kurz sprechen.
+					<?php
+					echo esc_html(
+						$is_pilot_request
+							? 'Wenn Sie zuerst einen gedeckelten Proof-of-Value fuer Ihre wichtigste Money Page wollen, senden Sie hier die Eckdaten.'
+							: 'Wenn Sie Ihre WordPress-Website strategisch weiterentwickeln moechten, lassen Sie uns kurz sprechen.'
+					);
+					?>
 				</p>
 				<p class="contact-lead">
-					In einem kurzen Gespräch klären wir, ob und wie ich Sie unterstützen kann.
+					<?php
+					echo esc_html(
+						$is_pilot_request
+							? 'Ich pruefe, ob sich aus dem Pilot in 5 Tagen ein belastbarer naechster Schritt oder eine groessere Zusammenarbeit ableiten laesst.'
+							: 'In einem kurzen Gespraech klaeren wir, ob und wie ich Sie unterstuetzen kann.'
+					);
+					?>
 				</p>
 			</div>
 		</section>
@@ -32,24 +46,41 @@ $budget_options = function_exists( 'nexus_get_contact_budget_options' ) ? nexus_
 		<div class="contact-flow">
 			<section class="contact-note-card nx-reveal" aria-labelledby="contact-strategy-title">
 				<div class="contact-section-head contact-section-head--tight">
-					<span class="contact-section-head__eyebrow">Strategiegespräch</span>
-					<h2 id="contact-strategy-title">Kostenloses 30-Minuten Strategiegespräch</h2>
+					<span class="contact-section-head__eyebrow"><?php echo esc_html( $is_pilot_request ? 'Pilotprojekt' : 'Strategiegespraech' ); ?></span>
+					<h2 id="contact-strategy-title"><?php echo esc_html( $is_pilot_request ? 'Gedeckelter Einstieg fuer den ersten Proof-of-Value' : 'Kostenloses 30-Minuten Strategiegespraech' ); ?></h2>
 				</div>
 				<p>
-					In einem kurzen Gespräch werfen wir gemeinsam einen Blick auf Ihre Website,
-					Ihre Ziele und mögliche Wachstumspotenziale.
+					<?php
+					echo esc_html(
+						$is_pilot_request
+							? 'Das Pilotprojekt fokussiert eine kritische Seite, priorisiert die drei groessten Hebel und schafft eine belastbare Entscheidungsgrundlage ohne offenen Scope.'
+							: 'In einem kurzen Gespraech werfen wir gemeinsam einen Blick auf Ihre Website, Ihre Ziele und moegliche Wachstumspotenziale.'
+					);
+					?>
 				</p>
 				<p>
-					Kein Verkaufsgespräch – sondern eine ehrliche Einschätzung.
+					<?php
+					echo esc_html(
+						$is_pilot_request
+							? 'Wenn Ergebnisse und Freigabe passen, kann daraus spaeter eine anonymisierte Referenz werden.'
+							: 'Kein Verkaufsgespraech - sondern eine ehrliche Einschaetzung.'
+					);
+					?>
 				</p>
 			</section>
 
 			<section class="contact-form-panel nx-reveal" id="kontakt-form" aria-labelledby="contact-form-title">
 				<div class="contact-section-head">
-					<span class="contact-section-head__eyebrow">Projektanfrage</span>
-					<h2 id="contact-form-title">Die wichtigsten Eckdaten in wenigen Feldern</h2>
+					<span class="contact-section-head__eyebrow"><?php echo esc_html( $is_pilot_request ? 'Pilotprojekt' : 'Projektanfrage' ); ?></span>
+					<h2 id="contact-form-title"><?php echo esc_html( $is_pilot_request ? 'Die wichtigsten Eckdaten fuer das Pilotprojekt' : 'Die wichtigsten Eckdaten in wenigen Feldern' ); ?></h2>
 					<p>
-						So lässt sich schnell einschätzen, ob das Projekt fachlich und strategisch passt.
+						<?php
+						echo esc_html(
+							$is_pilot_request
+								? 'So laesst sich schnell einschaetzen, ob die Seite fuer einen 5-Tage-Pilot fachlich und strategisch passt.'
+								: 'So laesst sich schnell einschaetzen, ob das Projekt fachlich und strategisch passt.'
+						);
+						?>
 					</p>
 				</div>
 
@@ -91,9 +122,9 @@ $budget_options = function_exists( 'nexus_get_contact_budget_options' ) ? nexus_
 					<div class="contact-field">
 						<label for="contact-focus">Wobei benötigen Sie Unterstützung?</label>
 						<select id="contact-focus" name="focus" required>
-							<option value="" selected disabled>Bitte auswählen</option>
+							<option value="" <?php selected( '', $selected_focus ); ?> disabled>Bitte auswählen</option>
 							<?php foreach ( $focus_options as $focus_key => $focus_label ) : ?>
-								<option value="<?php echo esc_attr( $focus_key ); ?>"><?php echo esc_html( $focus_label ); ?></option>
+								<option value="<?php echo esc_attr( $focus_key ); ?>" <?php selected( $selected_focus, $focus_key ); ?>><?php echo esc_html( $focus_label ); ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -108,7 +139,7 @@ $budget_options = function_exists( 'nexus_get_contact_budget_options' ) ? nexus_
 							required
 							minlength="24"
 							aria-describedby="contact-message-help"
-							placeholder="Beschreiben Sie kurz Ihr Ziel oder Ihr Projekt."
+							placeholder="<?php echo esc_attr( $is_pilot_request ? 'Welche Seite ist kritisch, woran scheitert sie aktuell und was soll sich nach dem Pilot veraendern?' : 'Beschreiben Sie kurz Ihr Ziel oder Ihr Projekt.' ); ?>"
 						></textarea>
 					</div>
 
@@ -131,7 +162,7 @@ $budget_options = function_exists( 'nexus_get_contact_budget_options' ) ? nexus_
 					</label>
 
 					<div class="contact-form__actions">
-						<button class="contact-submit" type="submit">Strategiegespräch anfragen</button>
+						<button class="contact-submit" type="submit"><?php echo esc_html( $is_pilot_request ? 'Pilotprojekt anfragen' : 'Strategiegespraech anfragen' ); ?></button>
 					</div>
 
 					<p class="contact-form__feedback" data-contact-feedback aria-live="polite"></p>
@@ -139,8 +170,13 @@ $budget_options = function_exists( 'nexus_get_contact_budget_options' ) ? nexus_
 
 				<div class="contact-form__postcopy">
 					<p class="contact-postcopy__lead">
-						Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.
-						Wenn es passt, vereinbaren wir ein kurzes Strategiegespräch.
+						<?php
+						echo esc_html(
+							$is_pilot_request
+								? 'Sie erhalten innerhalb von 24 Stunden eine Rueckmeldung. Wenn es passt, definieren wir die Zielseite und den Start des Pilotprojekts.'
+								: 'Sie erhalten innerhalb von 24 Stunden eine Rueckmeldung. Wenn es passt, vereinbaren wir ein kurzes Strategiegespraech.'
+						);
+						?>
 					</p>
 					<p class="contact-postcopy__note">
 						Ich arbeite hauptsächlich mit Unternehmen, Selbstständigen und Organisationen,

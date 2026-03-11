@@ -10,6 +10,7 @@ Stand: 2026-03-11. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 | Audit-Funnel | Diagnose-Einstieg, Audit-Intake, Blueprint-Qualifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
 | Tracking | Tracking-ready Markup, CTA-Events, SEO-/Schema-Layer | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, Templates mit `data-track-*` | GTM, sGTM, GA4, Consent Mode v2, Meta CAPI | teils im Repo, teils extern |
 | CTA- und Leadflow | CTA-Hierarchie vom ersten Besuch bis zur Qualifizierung | `blocksy-child/inc/shortcodes.php`, `blocksy-child/template-parts/footer-cta.php`, `blocksy-child/template-parts/trust-section.php`, Service-Templates | WordPress-Editor, Audit-Funnel, Cal.com, CRM | live |
+| Public Proof Layer | oeffentliche Vertrauenssignale ohne Testimonials, plus Pilot-zu-Case-Mechanik | `blocksy-child/inc/shortcodes.php`, `blocksy-child/assets/css/homepage.css`, `blocksy-child/page-kontakt.php`, `blocksy-child/inc/contact-page.php`, `docs/playbooks/homepage-cro-proof-monitoring-2026-03.md` | GitHub-Repo, oeffentliches LinkedIn-Profil, optional spaeter Facebook | live |
 | Content- und SEO-System | Blog, Pillar-Hubs, Cornerstone-Content, interne Verlinkung | `blocksy-child/category.php`, `blocksy-child/single.php`, `blocksy-child/page-seo-cornerstone.php`, `content/blog-drafts/` | WordPress-Editor, Rank Math | live plus Ausbau |
 | Client Portal | Kunden-Cockpit mit Login, Upload und Roadmap-Slots | `blocksy-child/template-portal.php`, `blocksy-child/inc/client-portal.php`, `blocksy-child/inc/snippets.php` | WordPress-User-System, Media Library | live, aber aktuell mit Mock-Daten |
 | n8n-Automationen | Workflow-Logik fuer Analyse, Routing, Reporting, Nurture | kuenftig `automations/n8n/` | n8n Cloud, CRM, Mail, evtl. Sheets | geplant als versionierter Layer |
@@ -26,6 +27,7 @@ Wichtige Merkmale:
 - Ein Teil der Seiten ist editor-getrieben und nutzt `the_content()`.
 - Ein anderer Teil ist hart codiert und traegt Business-Logik direkt im Template.
 - `page-wgos.php` ist als template-getriebene Sales-Page fuer das WGOS versioniert; Struktur und CTA-Hierarchie liegen im Repo, nicht im Editor.
+- Die Homepage-Shortcodes liefern jetzt auch einen versionierten Public-Proof-Layer aus GitHub-Transparenz, Community-Signalen und Pilotprojekt-CTA.
 
 Kritische Dateien:
 
@@ -83,6 +85,7 @@ Im Repo vorhanden:
 - `data-track-*` Attribute auf CTAs und Content-Bausteinen
 - noindex- und SEO-Meta-Logik
 - Schema-Ausgabe fuer Organisation, Services und Profile
+- neue Homepage-Actions fuer Trust und Einstiegsangebote: `cta_github_repo`, `cta_proof_linkedin`, `cta_proof_instagram`, `cta_pilot_contact`
 
 Ausserhalb des Repos:
 
@@ -103,6 +106,7 @@ Die CTA-Hierarchie ist klar und sollte nicht verwischt werden.
 
 - Primaerer CTA: `Growth Audit`
 - Sekundaerer CTA: `WGOS verstehen`, `Case Studies ansehen`
+- Risikoarmer Zusatz-Einstieg: `Pilotprojekt / Proof-of-Value`
 - Tertiaerer CTA: `Growth Blueprint`
 - Eskalations-CTA: `Cal.com`-Strategiecall
 - Utility-CTA: Kunden-Portal fuer Bestandskunden
@@ -112,6 +116,8 @@ Wichtige Repopunkte:
 - `blocksy-child/template-parts/footer-cta.php`
 - `blocksy-child/template-parts/trust-section.php`
 - `blocksy-child/inc/shortcodes.php`
+- `blocksy-child/page-kontakt.php`
+- `blocksy-child/inc/contact-page.php`
 - Service- und Hub-Templates mit Audit-CTA
 
 ## Content- und SEO-System

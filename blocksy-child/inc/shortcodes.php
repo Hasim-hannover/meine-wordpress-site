@@ -24,16 +24,44 @@ function hu_home_urls() {
 	$blog_page_id = (int) get_option( 'page_for_posts' );
 
 	$urls = [
-		'audit'     => nexus_get_audit_url(),
-		'deep_dive' => nexus_get_page_url( [ '360-deep-dive' ] ),
-		'wgos'      => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
-		'cases'     => nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) ),
-		'about'     => nexus_get_page_url( [ 'uber-mich' ] ),
-		'blog'      => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
-		'e3'        => nexus_get_page_url( [ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/e3-new-energy/' ) ),
+		'audit'       => nexus_get_audit_url(),
+		'deep_dive'   => nexus_get_page_url( [ '360-deep-dive' ] ),
+		'wgos'        => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
+		'cases'       => nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) ),
+		'about'       => nexus_get_page_url( [ 'uber-mich' ] ),
+		'blog'        => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
+		'e3'          => nexus_get_page_url( [ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/e3-new-energy/' ) ),
+		'contact'     => function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' ),
+		'github_repo' => 'https://github.com/Hasim-hannover/meine-wordpress-site',
+		'linkedin'    => 'https://www.linkedin.com/in/hasim-%C3%BCner/',
+		'instagram'   => 'https://www.instagram.com/hasimuener/',
 	];
 
 	return $urls;
+}
+
+/**
+ * Resolve public trust metrics used on the homepage.
+ *
+ * Numbers are intentionally versioned here so the trust layer remains stable
+ * even if the live theme is deployed without a Git checkout.
+ *
+ * @return array<string, int>
+ */
+function hu_home_public_proof_data() {
+	static $proof = null;
+
+	if ( null !== $proof ) {
+		return $proof;
+	}
+
+	$proof = [
+		'github_commits'    => (int) apply_filters( 'hu_home_github_commit_count', 701 ),
+		'linkedin_followers'=> (int) apply_filters( 'hu_home_linkedin_followers', 569 ),
+		'linkedin_posts'    => (int) apply_filters( 'hu_home_linkedin_post_count', 20 ),
+	];
+
+	return $proof;
 }
 
 /**
@@ -196,7 +224,8 @@ add_shortcode( 'hu_partner', 'hu_partner_section_shortcode' );
  * @return string
  */
 function hu_owned_section_shortcode() {
-	$urls = hu_home_urls();
+	$urls  = hu_home_urls();
+	$proof = hu_home_public_proof_data();
 
 	ob_start();
 	?>
@@ -234,6 +263,51 @@ function hu_owned_section_shortcode() {
 				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Prüfen, wo Ihre Seite heute verliert</a>
 			</div>
 			<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="micro-cta-link">Noch nicht sicher? Erst das System verstehen -></a>
+
+			<div class="homepage-github-proof nx-reveal" data-track-section="homepage_github_proof" aria-label="Öffentliches GitHub-Repo als Vertrauenssignal">
+				<div class="homepage-github-proof__copy">
+					<span class="wp-success-subtitle">Öffentliche Transparenz</span>
+					<h3 class="homepage-github-proof__title">Sehen Sie mir bei der Arbeit zu. Live und versioniert.</h3>
+					<p class="homepage-github-proof__text">
+						<?php
+						echo esc_html(
+							sprintf(
+								'Jeder Code, jedes System, jede Entscheidung für meine eigene Positionierung liegt offen auf GitHub. %s Commits, vollständige Historie. Kein Lock-in. Kein Bullshit. So arbeite ich auch für Sie.',
+								number_format_i18n( $proof['github_commits'] )
+							)
+						);
+						?>
+					</p>
+
+					<div class="homepage-github-proof__meta" role="list" aria-label="GitHub-Vertrauenssignale">
+						<span class="homepage-github-proof__pill" role="listitem"><?php echo esc_html( number_format_i18n( $proof['github_commits'] ) ); ?> Commits</span>
+						<span class="homepage-github-proof__pill" role="listitem">vollständige Historie</span>
+						<span class="homepage-github-proof__pill" role="listitem">Ownership statt Lock-in</span>
+					</div>
+				</div>
+
+				<div class="homepage-github-proof__actions">
+					<span class="homepage-github-proof__badge" aria-hidden="true">
+						<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+							<path d="M12 1.8a10.2 10.2 0 0 0-3.23 19.88c.51.1.69-.22.69-.49 0-.24-.01-1.04-.01-1.88-2.81.61-3.4-1.19-3.4-1.19-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.24-.25-4.59-1.12-4.59-4.97 0-1.1.39-2 1.03-2.71-.1-.26-.45-1.29.1-2.68 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.39.2 2.42.1 2.68.64.71 1.03 1.61 1.03 2.71 0 3.86-2.35 4.71-4.6 4.96.36.31.68.92.68 1.86 0 1.34-.01 2.42-.01 2.75 0 .27.18.6.69.49A10.2 10.2 0 0 0 12 1.8Z" fill="currentColor"/>
+						</svg>
+						<?php echo esc_html( number_format_i18n( $proof['github_commits'] ) ); ?> Commits
+					</span>
+					<a
+						href="<?php echo esc_url( $urls['github_repo'] ); ?>"
+						class="wp-btn wp-btn-primary homepage-github-proof__button"
+						target="_blank"
+						rel="noopener noreferrer"
+						data-track-action="cta_github_repo"
+						data-track-category="trust"
+					>
+						<svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+							<path d="M12 1.8a10.2 10.2 0 0 0-3.23 19.88c.51.1.69-.22.69-.49 0-.24-.01-1.04-.01-1.88-2.81.61-3.4-1.19-3.4-1.19-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.24-.25-4.59-1.12-4.59-4.97 0-1.1.39-2 1.03-2.71-.1-.26-.45-1.29.1-2.68 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.39.2 2.42.1 2.68.64.71 1.03 1.61 1.03 2.71 0 3.86-2.35 4.71-4.6 4.96.36.31.68.92.68 1.86 0 1.34-.01 2.42-.01 2.75 0 .27.18.6.69.49A10.2 10.2 0 0 0 12 1.8Z" fill="currentColor"/>
+						</svg>
+						Auf GitHub ansehen
+					</a>
+				</div>
+			</div>
 		</div>
 	</section>
 	<?php
@@ -301,7 +375,8 @@ add_shortcode( 'hu_wgos_block', 'hu_wgos_block_shortcode' );
  * @return string
  */
 function hu_erfolge_section_shortcode() {
-	$urls = hu_home_urls();
+	$urls  = hu_home_urls();
+	$proof = hu_home_public_proof_data();
 
 	ob_start();
 	?>
@@ -309,15 +384,15 @@ function hu_erfolge_section_shortcode() {
 		<div class="nx-container">
 			<div class="nx-reveal" style="text-align:center; margin-bottom:3rem;">
 				<span class="nx-badge nx-badge--gold">Proof</span>
-				<h2 id="cases-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Ergebnisse statt Leistungslisten.</h2>
-				<p style="color:var(--nx-text-muted);">Der Hebel liegt selten in einer einzelnen Maßnahme. Er liegt fast immer in besserer Reihenfolge.</p>
+				<h2 id="cases-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin:1rem 0 0.5rem; color:#fff;">Beispielhafte Wirkung des Systems.</h2>
+				<p style="color:var(--nx-text-muted);">E3 New Energy zeigt die Logik im sichtbaren Ausschnitt. Der Hebel liegt selten in einer einzelnen Maßnahme, sondern fast immer in besserer Reihenfolge.</p>
 			</div>
 
-			<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; margin-bottom:3rem;">
-				<article class="nx-card nx-reveal" style="border-top:3px solid var(--nx-success);">
-					<p class="nx-card__subtitle">B2B Leadgen · WordPress System · 12 Monate</p>
+			<div class="homepage-proof-grid">
+				<article class="nx-card nx-reveal homepage-proof-card" style="border-top:3px solid var(--nx-success);">
+					<p class="nx-card__subtitle">Beispielhafte Wirkung des Systems · B2B Leadgen · WordPress System · 12 Monate</p>
 					<h3 class="nx-card__title">E3 New Energy</h3>
-					<p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">Eingekaufte Leads, keine saubere Datenlage, hohe Reibung nach dem Klick. Nach Systemaufbau:</p>
+					<p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">Eingekaufte Leads, keine saubere Datenlage, hohe Reibung nach dem Klick. Nach systematischer Neuordnung von Positionierung, Tracking und Conversion-Pfad:</p>
 					<div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
 						<div class="nx-metric">
 							<span class="nx-metric__value" style="color:var(--nx-success);">1.750+</span>
@@ -336,10 +411,49 @@ function hu_erfolge_section_shortcode() {
 							<span class="nx-metric__label">ROAS-Spitze</span>
 						</div>
 					</div>
+					<p class="homepage-proof-note">Ähnliche Effekte erzielt in weiteren, nicht öffentlichen Projekten – fragen Sie mich danach.</p>
 					<a href="<?php echo esc_url( $urls['e3'] ); ?>" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Case Study lesen -></a>
 				</article>
 
-				<article class="nx-card nx-reveal" style="border-top:3px solid var(--nx-gold);">
+				<article class="nx-card nx-reveal homepage-proof-card" style="border-top:3px solid var(--nx-gold);">
+					<p class="nx-card__subtitle">Öffentliche Resonanz statt erfundener Testimonials</p>
+					<h3 class="nx-card__title">Bestätigt durch meine Community</h3>
+					<p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">Transparente Arbeit erzeugt Resonanz. Sichtbar im öffentlichen Profil, nicht nur in internen Sales-Folien.</p>
+					<div class="homepage-community-proof__metrics" role="list" aria-label="Community-Signale">
+						<div class="homepage-community-proof__metric" role="listitem">
+							<span class="homepage-community-proof__value"><?php echo esc_html( number_format_i18n( $proof['linkedin_followers'] ) ); ?></span>
+							<span class="homepage-community-proof__label">Follower auf LinkedIn, die meinen Ansatz verfolgen</span>
+						</div>
+						<div class="homepage-community-proof__metric" role="listitem">
+							<span class="homepage-community-proof__value"><?php echo esc_html( number_format_i18n( $proof['linkedin_posts'] ) ); ?></span>
+							<span class="homepage-community-proof__label">öffentliche LinkedIn-Beiträge, an denen die Community mitliest und diskutiert</span>
+						</div>
+					</div>
+					<div class="homepage-community-proof__actions">
+						<a
+							href="<?php echo esc_url( $urls['linkedin'] ); ?>"
+							class="wp-btn wp-btn-secondary"
+							target="_blank"
+							rel="noopener noreferrer"
+							data-track-action="cta_proof_linkedin"
+							data-track-category="trust"
+						>
+							LinkedIn ansehen
+						</a>
+						<a
+							href="<?php echo esc_url( $urls['instagram'] ); ?>"
+							class="wp-btn wp-btn-secondary"
+							target="_blank"
+							rel="noopener noreferrer"
+							data-track-action="cta_proof_instagram"
+							data-track-category="trust"
+						>
+							Mehr Social Proof
+						</a>
+					</div>
+				</article>
+
+				<article class="nx-card nx-reveal homepage-proof-card" style="border-top:3px solid var(--nx-gold);">
 					<p class="nx-card__subtitle">Typische Wirkungen nach der ersten Priorisierungsrunde</p>
 					<h3 class="nx-card__title">Was sich zuerst verbessert</h3>
 					<ul class="premium-list" style="margin-top:1rem;">
@@ -350,6 +464,8 @@ function hu_erfolge_section_shortcode() {
 					<p style="color:var(--nx-text-muted); margin:0;">Keine Hype-Metriken. Erst die Bremsen lösen, dann skalieren.</p>
 				</article>
 			</div>
+
+			<p class="homepage-proof-footnote nx-reveal">Viele Projekte laufen im Whitelabel oder ohne öffentliche Freigabe. Der sichtbare Case ist deshalb kein Zufallstreffer, sondern der offengelegte Ausschnitt einer wiederholbaren Arbeitsweise.</p>
 
 			<div class="selection-card nx-reveal" style="margin:0 auto 2.5rem;">
 				<span class="selection-card-label">Passt nicht</span>
@@ -526,6 +642,7 @@ add_shortcode( 'hu_blog', 'hu_blog_section_shortcode' );
  */
 function hu_cta_section_shortcode() {
 	$urls = hu_home_urls();
+	$pilot_url = add_query_arg( 'focus', 'pilot', $urls['contact'] ) . '#kontakt-form';
 
 	ob_start();
 	?>
@@ -551,6 +668,37 @@ function hu_cta_section_shortcode() {
 					Wenn Sie erst das Modell verstehen wollen:
 					<a href="<?php echo esc_url( $urls['wgos'] ); ?>" style="color:var(--nx-gold); text-decoration:underline; font-weight:600;">WGOS ansehen -></a>
 				</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="pilot" class="homepage-pilot-section" aria-labelledby="pilot-heading" data-track-section="homepage_pilot_offer">
+		<div class="nx-container">
+			<div class="homepage-pilot-card nx-reveal">
+				<div class="homepage-pilot-card__copy">
+					<span class="nx-badge nx-badge--gold">Proof-of-Value</span>
+					<h2 id="pilot-heading" class="homepage-pilot-card__title">Erste Ergebnisse in 5 Tagen – mit Risikobegrenzung</h2>
+					<p class="homepage-pilot-card__lead">Sie sind noch unsicher? Starten Sie mit einem gedeckelten Pilotprojekt. Für einen Festpreis von 1.500 € analysiere ich Ihre kritischste Unterseite, zum Beispiel Ihre wichtigste Money Page, und liefere Ihnen einen umsetzungsfertigen Report mit den drei größten Hebeln.</p>
+					<p class="homepage-pilot-card__lead">Wenn das Projekt passt, kann es mit Ihrer Einwilligung später als anonymisierte Referenz aufbereitet werden, damit andere Teams von den Learnings profitieren und Sie früh einen sichtbaren Proof-Baustein aus der Zusammenarbeit gewinnen.</p>
+				</div>
+
+				<div class="homepage-pilot-card__details">
+					<div class="homepage-pilot-card__price">1.500 € Festpreis</div>
+					<ul class="premium-list" style="margin:1.25rem 0 0;">
+						<li><span class="check-icon">✓</span> <div>kritischste Angebots- oder Money Page im Detail priorisiert</div></li>
+						<li><span class="check-icon">✓</span> <div>drei größte Hebel inkl. klarer Reihenfolge und Umsetzungslogik</div></li>
+						<li><span class="check-icon">✓</span> <div>anonymisierbare Referenz-Option, wenn Ergebnisse und Freigabe passen</div></li>
+					</ul>
+					<a
+						class="wp-btn wp-btn-primary full-width"
+						href="<?php echo esc_url( $pilot_url ); ?>"
+						data-track-action="cta_pilot_contact"
+						data-track-category="lead_gen"
+					>
+						Jetzt Pilotprojekt anfragen
+					</a>
+					<p class="homepage-pilot-card__note">Kein offener Scope, kein Endlos-Retainer als Erstschritt. Erst ein belastbarer Proof-of-Value, dann die größere Entscheidung.</p>
+				</div>
 			</div>
 		</div>
 	</section>

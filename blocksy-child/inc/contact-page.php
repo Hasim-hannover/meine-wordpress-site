@@ -163,6 +163,7 @@ function nexus_get_contact_focus_options() {
 		'tracking'    => 'Tracking & Analytics',
 		'conversion'  => 'Conversion Optimierung',
 		'growth'      => 'Growth Strategie',
+		'pilot'       => 'Pilotprojekt / Proof-of-Value',
 		'other'       => 'Sonstiges',
 	];
 }
