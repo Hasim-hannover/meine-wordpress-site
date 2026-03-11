@@ -8,6 +8,7 @@
 
   var config = window.NexusReviewConfig || {};
   var auditLabel = config.auditLabel || 'Growth Audit';
+  var submitLabel = config.submitLabel || (auditLabel + ' anfragen');
   var state = {
     stepIndex: 0,
     steps: [],
@@ -243,7 +244,7 @@
         state.submitting = false;
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = auditLabel + ' anfragen';
+          submitButton.textContent = submitLabel;
         }
       });
   }
@@ -326,13 +327,23 @@
 
     if (nextButton) {
       nextButton.hidden = state.stepIndex === state.steps.length - 1;
+      nextButton.textContent = getNextButtonLabel();
     }
 
     if (submitButton) {
       submitButton.hidden = state.stepIndex !== state.steps.length - 1;
+      submitButton.textContent = submitLabel;
     }
 
     trackStepView();
+  }
+
+  function getNextButtonLabel() {
+    if (state.stepIndex === state.steps.length - 2) {
+      return 'Weiter zu Kontakt';
+    }
+
+    return 'Weiter';
   }
 
   function renderSuccess(payload, data) {

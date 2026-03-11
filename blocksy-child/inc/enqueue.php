@@ -195,6 +195,7 @@ function hu_enqueue_assets() {
 				'callUrl'       => esc_url_raw( apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' ) ) ),
 				'responseHours' => 48,
 				'auditLabel'    => 'Growth Audit',
+				'submitLabel'   => 'Kostenlosen Growth Audit anfragen',
 			]
 		);
 	}

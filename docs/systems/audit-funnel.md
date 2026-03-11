@@ -1,6 +1,6 @@
 # Audit Funnel
 
-Stand: 2026-03-09.
+Stand: 2026-03-11.
 
 Diese Doku beschreibt den aktuell aktiven Funnel rund um den `Growth Audit`.
 
@@ -28,7 +28,11 @@ Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 
 1. Besucher landet auf `/growth-audit/`.
 2. `blocksy-child/page-audit.php` rendert ueber `blocksy-child/inc/audit-page.php` die versionierte Shell aus `blocksy-child/template-parts/audit-page-shell.php`.
-3. Das Frontend zeigt ein natives Multi-Step-Formular mit Seite, Ziel, Zielgruppe, groesstem Blocker und Kontakt.
+3. Das Frontend zeigt ein natives 4-Schritt-Formular mit:
+   - konkreter Seiten-URL
+   - Reibung plus primaerem Ziel
+   - kurzem Kontext
+   - Kontakt
 4. `blocksy-child/assets/js/review-funnel.js` validiert die Schritte und sendet die Daten an `POST /wp-json/nexus/v1/audit-request`.
 5. `blocksy-child/inc/review-crm.php` prueft Honeypot, Rate Limit und Payload und speichert die Anfrage als `nexus_review_request`.
 6. WordPress versendet eine interne Benachrichtigung und eine kurze Bestaetigung an den Anfragenden ueber `wp_mail`.
@@ -45,18 +49,23 @@ Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 Pflichtfelder:
 
 - `page_url`
-- `offer`
-- `audience`
-- `biggest_issue`
+- `focus_area`
+- `current_challenge`
+- `primary_goal`
 - `name`
 - `email`
-- `company`
 
 Implizite Felder:
 
 - `audit_type=growth_audit`
 - `company_website` als Honeypot
 - `started_at` fuer einfaches Frontend-Timing
+
+Optionale Felder:
+
+- `company`
+- `linkedin`
+- `extra_context`
 
 ## Nutzerseitige Outputs
 
