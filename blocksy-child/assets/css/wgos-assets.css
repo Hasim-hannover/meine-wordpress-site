@@ -242,6 +242,11 @@
 }
 
 .wgos-asset-explorer__panel {
+	display: none;
+}
+
+.wgos-asset-explorer__panel.is-open {
+	display: block;
 	min-height: 18rem;
 }
 
@@ -431,21 +436,6 @@
 	color: var(--text-inverse) !important;
 	outline: none;
 	transform: translateY(-1px);
-}
-
-.wgos-asset-explorer__empty {
-	display: grid;
-	gap: 0.6rem;
-	align-content: center;
-	min-height: 18rem;
-}
-
-.wgos-asset-explorer__empty-kicker {
-	font-size: 0.72rem;
-	font-weight: 800;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
-	color: var(--nx-accent-text);
 }
 
 .wgos-asset-explorer__noscript {

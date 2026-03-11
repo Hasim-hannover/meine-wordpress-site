@@ -456,17 +456,7 @@
 							)
 						);
 					})()
-					: h(
-						'div',
-						{ className: 'wgos-asset-explorer__empty' },
-						h('span', { className: 'wgos-asset-explorer__empty-kicker' }, 'Asset Explorer'),
-						h('h3', null, 'Tippen oder klicken Sie ein Asset an.'),
-						h(
-							'p',
-							null,
-							'Die Detailansicht bündelt Nutzen, Credits, Lieferumfang und den nächsten sinnvollen Schritt ohne zusätzliche Unterseiten-Navigation.'
-						)
-					)
+					: null
 			)
 		);
 	}

@@ -310,13 +310,7 @@ function WGOSAssetExplorer({ links = {} }) {
 							</article>
 						);
 					})()
-				) : (
-					<div className="wgos-asset-explorer__empty">
-						<span className="wgos-asset-explorer__empty-kicker">Asset Explorer</span>
-						<h3>Tippen oder klicken Sie ein Asset an.</h3>
-						<p>Die Detailansicht bündelt Nutzen, Credits, Lieferumfang und den nächsten sinnvollen Schritt ohne zusätzliche Unterseiten-Navigation.</p>
-					</div>
-				)}
+				) : null}
 			</div>
 		</div>
 	);
