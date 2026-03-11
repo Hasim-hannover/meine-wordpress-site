@@ -13,9 +13,11 @@
         var isVisible = null;
         var isPointerInside = false;
         var isFocusInside = false;
+        var isNearTopEdge = false;
         var hideTimer = 0;
         var revealAfter = 120;
         var desktopHideDelay = 260;
+        var topEdgeThreshold = 40;
 
         function syncHeaderHeight() {
             var height = Math.max(76, Math.ceil(header.getBoundingClientRect().height + 12));
@@ -41,7 +43,7 @@
         }
 
         function shouldPinHeader() {
-            return isPointerInside || isFocusInside || header.classList.contains('is-open');
+            return isPointerInside || isFocusInside || isNearTopEdge || header.classList.contains('is-open');
         }
 
         function scheduleHide() {
@@ -71,11 +73,12 @@
                 return;
             }
 
-            setHeaderVisibility(true);
-
             if (desktopMedia.matches) {
                 scheduleHide();
+                return;
             }
+
+            setHeaderVisibility(true);
         }
 
         function setPanelState(isOpen) {
@@ -171,6 +174,26 @@
                 isFocusInside = header.contains(document.activeElement);
                 updateVisibility(false);
             }, 0);
+        });
+
+        document.addEventListener('mousemove', function (event) {
+            var nextNearTopEdge = desktopMedia.matches && window.scrollY > revealAfter && event.clientY <= topEdgeThreshold;
+
+            if (isNearTopEdge === nextNearTopEdge) {
+                return;
+            }
+
+            isNearTopEdge = nextNearTopEdge;
+            updateVisibility(nextNearTopEdge);
+        });
+
+        document.addEventListener('mouseleave', function () {
+            if (!isNearTopEdge) {
+                return;
+            }
+
+            isNearTopEdge = false;
+            updateVisibility(false);
         });
 
         updateFlightMode();
