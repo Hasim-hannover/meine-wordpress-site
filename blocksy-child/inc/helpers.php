@@ -405,3 +405,34 @@ function nexus_is_contact_page() {
 		|| is_page( 'kontakt' )
 		|| is_page( 'kontaktiere-mich' );
 }
+
+add_action( 'template_redirect', 'nexus_redirect_legacy_results_path', 1 );
+/**
+ * Redirect legacy proof overview paths to the canonical results hub.
+ *
+ * @return void
+ */
+function nexus_redirect_legacy_results_path() {
+	if ( is_admin() || wp_doing_ajax() || is_feed() ) {
+		return;
+	}
+
+	$current_path = nexus_get_current_request_path();
+	$legacy_paths = [
+		'/case-studies/',
+	];
+
+	if ( ! in_array( $current_path, $legacy_paths, true ) ) {
+		return;
+	}
+
+	$target_url = nexus_get_results_url();
+	$target_path = trailingslashit( '/' . ltrim( (string) wp_parse_url( $target_url, PHP_URL_PATH ), '/' ) );
+
+	if ( $target_path === $current_path ) {
+		return;
+	}
+
+	wp_safe_redirect( $target_url, 301 );
+	exit;
+}

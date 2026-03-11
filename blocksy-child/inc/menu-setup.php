@@ -255,41 +255,38 @@ add_filter( 'wp_nav_menu_objects', function ( $items, $args ) {
 
 	$theme_location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
 	$menu_name      = isset( $args->menu->name ) ? (string) $args->menu->name : '';
-
-	if (
-		! in_array( $theme_location, [ 'primary', 'primary-slim' ], true ) &&
-		! in_array( $menu_name, [ 'Nexus Hauptmenü', 'Hauptmenü Slim' ], true )
-	) {
-		return $items;
-	}
+	$is_primary_like_menu = in_array( $theme_location, [ 'primary', 'primary-slim' ], true )
+		|| in_array( $menu_name, [ 'Nexus Hauptmenü', 'Hauptmenü Slim' ], true );
 
 	$audit_url = nexus_get_audit_url();
 	$results_url = nexus_get_results_url();
 	$is_results_context = nexus_is_results_context();
 
 	foreach ( $items as $item ) {
-		if ( ! nexus_is_audit_cta_menu_item( $item ) ) {
-			if ( nexus_is_results_menu_item( $item ) ) {
-				$item->title = 'Ergebnisse';
-				$item->url   = $results_url;
+		if ( nexus_is_results_menu_item( $item ) ) {
+			$item->title = 'Ergebnisse';
+			$item->url   = $results_url;
 
-				if ( ! isset( $item->classes ) || ! is_array( $item->classes ) ) {
-					$item->classes = [];
-				}
+			if ( ! isset( $item->classes ) || ! is_array( $item->classes ) ) {
+				$item->classes = [];
+			}
 
-				if ( ! in_array( 'nav-results-link', $item->classes, true ) ) {
-					$item->classes[] = 'nav-results-link';
-				}
+			if ( ! in_array( 'nav-results-link', $item->classes, true ) ) {
+				$item->classes[] = 'nav-results-link';
+			}
 
-				if ( $is_results_context ) {
-					foreach ( [ 'current-menu-item', 'current_page_item' ] as $class_name ) {
-						if ( ! in_array( $class_name, $item->classes, true ) ) {
-							$item->classes[] = $class_name;
-						}
+			if ( $is_primary_like_menu && $is_results_context ) {
+				foreach ( [ 'current-menu-item', 'current_page_item' ] as $class_name ) {
+					if ( ! in_array( $class_name, $item->classes, true ) ) {
+						$item->classes[] = $class_name;
 					}
 				}
 			}
 
+			continue;
+		}
+
+		if ( ! nexus_is_audit_cta_menu_item( $item ) ) {
 			continue;
 		}
 
