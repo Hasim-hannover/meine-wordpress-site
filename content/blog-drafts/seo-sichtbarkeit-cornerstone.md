@@ -235,7 +235,7 @@ Er gewinnt bessere Lead-Qualität, stabilere Akquisekosten und mehr Kontrolle ü
 - [Technisches SEO Audit für WordPress](/wordpress-seo-hannover/)
 - [Growth Audit für bessere Conversion-Pfade](/growth-audit/)
 - [WGOS: Das System hinter nachhaltigem Wachstum](/wordpress-growth-operating-system/)
-- [Case Studies mit messbaren Ergebnissen](/case-studies/)
+- [Ergebnisse mit messbaren Resultaten](/ergebnisse/)
 
 ## FAQ für den Artikel
 

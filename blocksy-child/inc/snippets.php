@@ -110,10 +110,7 @@ add_filter( 'login_redirect', function( $redirect_to, $request, $user ) {
 }, 10, 3 );
 
 /**
- * Redirect legacy audit aliases to the current audit permalink.
- *
- * Use a temporary redirect while the permalink setup is still settling, so
- * browser and edge caches do not keep stale audit redirects pinned for days.
+ * Redirect legacy routes to their current canonical targets.
  */
 add_action( 'template_redirect', function() {
 	if ( is_admin() || wp_doing_ajax() ) {
@@ -123,27 +120,30 @@ add_action( 'template_redirect', function() {
 	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
 	$request_path = wp_parse_url( $request_uri, PHP_URL_PATH );
 	$request_path = trailingslashit( '/' . ltrim( (string) $request_path, '/' ) );
+	$redirects = [
+		'/audit/'                    => nexus_get_audit_url(),
+		'/customer-journey-audit/'   => nexus_get_audit_url(),
+		'/360-audit/'                => nexus_get_audit_url(),
+		'/wordpress-tech-audit/'     => nexus_get_audit_url(),
+		'/meta-ads/'                 => function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : home_url( '/wordpress-growth-operating-system/' ),
+		'/wordpress-agentur/'        => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
+		'/wordpress-wartung-hannover/' => home_url( '/wgos-assets/security-hardening/' ),
+		'/roi-rechner/'              => nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ),
+	];
 
-	$audit_url  = nexus_get_audit_url();
-	$audit_path = wp_parse_url( $audit_url, PHP_URL_PATH );
-	$audit_path = trailingslashit( '/' . ltrim( (string) $audit_path, '/' ) );
-
-	if ( $request_path === $audit_path ) {
+	if ( empty( $redirects[ $request_path ] ) ) {
 		return;
 	}
 
-	$legacy_paths = [
-		'/audit/',
-		'/growth-audit/',
-		'/customer-journey-audit/',
-		'/360-audit/',
-	];
+	$target_url  = (string) $redirects[ $request_path ];
+	$target_path = wp_parse_url( $target_url, PHP_URL_PATH );
+	$target_path = trailingslashit( '/' . ltrim( (string) $target_path, '/' ) );
 
-	if ( ! in_array( $request_path, $legacy_paths, true ) ) {
+	if ( $target_path === $request_path ) {
 		return;
 	}
 
 	nocache_headers();
-	wp_safe_redirect( $audit_url, 302 );
+	wp_safe_redirect( $target_url, 301 );
 	exit;
 } );

@@ -1,151 +1,263 @@
 # WGOS Asset Discovery
 
-- Stand: 2026-03-11
-- Basis: Repo-Code, öffentliche WordPress-REST-API, Live-HTTP-Checks
-- Einschränkung: In dieser lokalen Umgebung ist `wp-cli` nicht installiert. Discovery für `wgos_asset` musste daher über Theme-Code und die öffentliche REST-API erfolgen.
+- Stand: 2026-03-12
+- Basis: Repo-Code, vorhandene Audit-Dokumente im Repo, lokale PHP-Pruefungen
+- Einschraenkung: In dieser Umgebung gibt es kein `wp`/`wp-cli` und keinen direkten Live- oder DB-Zugriff. Diese Discovery bildet deshalb den versionierten Theme-Stand ab und markiert Live-Risiken separat.
 
 ## 1. Gefundene ACF-Felder
 
-Die Datei `blocksy-child/inc/acf.php` registriert aktuell nur eine allgemeine SEO-Feldgruppe für `page`, `post` und `wgos_asset`.
+Quelle: `blocksy-child/inc/acf.php`
 
-| Name | Typ | Key | Gilt für | Beobachtung |
-| --- | --- | --- | --- | --- |
-| `seo_title` | Text | `field_seo_title` | `page`, `post`, `wgos_asset` | Optionaler Title-Override |
-| `seo_description` | Textarea | `field_seo_description` | `page`, `post`, `wgos_asset` | Optionaler Description-Override |
-| `og_image` | Image | `field_og_image` | `page`, `post`, `wgos_asset` | OG-Image-Override |
-| `seo_noindex` | True/False | `field_seo_noindex` | `page`, `post`, `wgos_asset` | noindex Toggle |
+### SEO-Feldgruppe `group_nexus_seo`
 
-Nicht gefunden:
+| Name | Typ | Key | Gilt fuer |
+| --- | --- | --- | --- |
+| `seo_title` | Text | `field_seo_title` | `page`, `post`, `wgos_asset` |
+| `seo_description` | Textarea | `field_seo_description` | `page`, `post`, `wgos_asset` |
+| `og_image` | Image | `field_og_image` | `page`, `post`, `wgos_asset` |
+| `seo_noindex` | True/False | `field_seo_noindex` | `page`, `post`, `wgos_asset` |
 
-- Keine eigene ACF-Feldgruppe für WGOS-Asset-Struktur
-- Keine ACF-Felder für Kernbereich, Credits, Ziel, Ergebnis, Voraussetzung
-- Keine ACF-Felder für Deliverables, Systemkontext, Priorisierung oder verwandte Assets
+### WGOS-Asset-Feldgruppe `group_nexus_wgos_asset`
+
+| Name | Typ | Key |
+| --- | --- | --- |
+| `asset_module` | Select | `field_wgos_asset_module` |
+| `asset_phase` | Select | `field_wgos_asset_phase` |
+| `asset_credits` | Number | `field_wgos_asset_credits` |
+| `asset_keyword` | Text | `field_wgos_asset_keyword` |
+| `asset_schema_type` | Select | `field_wgos_asset_schema_type` |
+| `asset_goal` | Text | `field_wgos_asset_goal` |
+| `asset_result` | Text | `field_wgos_asset_result` |
+| `asset_prerequisite` | Text | `field_wgos_asset_prerequisite` |
+| `asset_short` | Textarea | `field_wgos_asset_short` |
+| `asset_intro` | Textarea | `field_wgos_asset_intro` |
+| `asset_deliverable` | Text | `field_wgos_asset_deliverable` |
+| `asset_bullets` | Textarea | `field_wgos_asset_bullets` |
+| `asset_related_slugs` | Textarea | `field_wgos_asset_related_slugs` |
+
+### Weitere registrierte ACF-Gruppen
+
+- `group_nexus_kpi`
+- `group_nexus_comparison`
+- `group_nexus_related`
+
+Diese Felder sind fuer allgemeine Seiten-/Content-Bausteine relevant, nicht fuer die WGOS-Asset-Synchronisation.
 
 ## 2. SEO-Meta-Mechanismus
 
-Die aktuelle SEO-Ausgabe läuft über `blocksy-child/inc/seo-meta.php`.
+Primarlogik: `blocksy-child/inc/seo-meta.php`
 
-Wichtige Punkte:
+Wesentliche Mechanik:
 
-- `add_action( 'wp_head', 'hu_seo_meta_tags', 1 )`
-- `add_filter( 'pre_get_document_title', 'hu_pre_get_document_title_override' )`
-- `add_filter( 'document_title_parts', 'hu_document_title_overrides' )`
-- `hu_get_stored_seo_value()` liest zuerst ACF (`seo_title`, `seo_description`), danach gespeicherte Rank-Math-Meta als Fallback.
-- `hu_get_seo_meta()` baut bei fehlendem SEO-Plugin Description, Canonical, Robots und OG-Felder selbst.
+- `hu_get_stored_seo_value()` liest zuerst ACF (`seo_title`, `seo_description`), danach gespeicherte Rank-Math-Meta.
+- `hu_rank_math_generic_stored_title()` und `hu_rank_math_generic_stored_description()` halten gespeicherte Werte auch bei aktivem Rank Math stabil.
+- `hu_document_title_overrides()` und `hu_get_seo_meta()` liefern pluginlose Fallbacks fuer Title, Description, Canonical, Robots und OG-Daten.
+- WGOS-Assets werden ueber `nexus_sync_wgos_asset_posts()` aus der Registry synchronisiert; dabei schreibt das Theme `seo_title` und `seo_description` direkt in die Post-Meta.
+- Legacy-Clusterseiten erhalten zusaetzlich versionierte SEO-Fallbacks aus `blocksy-child/inc/wgos-cluster-pages.php`, falls im Editor keine sauberen Metas gepflegt sind.
 
-Live-Beobachtung per HTML-Head auf Asset-Seiten:
+Fazit:
 
-- `Technical SEO Audit`: Title = `Technical SEO Audit - Hasim Üner`, Description = automatisch gekürzte Excerpt/Fallback-Description
-- `CWV Speed Audit`: Title = `CWV Speed Audit - Hasim Üner`, Description = automatisch gekürzte Excerpt/Fallback-Description
+- Es gibt keine separate SEO-Plugin-Pflicht fuer `wgos_asset`.
+- WGOS-Assets und zentrale Legacy-Seiten koennen SEO-Meta komplett aus dem Theme beziehen.
 
-Schlussfolgerung:
+## 3. Template-Struktur
 
-- Für `wgos_asset` existiert bereits ein pluginloser SEO-Fallback im Theme.
-- Die aktuellen Asset-Posts nutzen ihn nicht sauber, weil `seo_title` und `seo_description` offensichtlich nicht systematisch gepflegt werden.
-- Die Kommentare in `inc/seo-meta.php` und `SYSTEM_MAP.md` erwähnen noch Rank Math, die Live-WGOS-Assets laufen aber faktisch auf Theme-Fallbacks plus generischen Postdaten.
+### `wgos_asset` Single
 
-## 3. Template-Struktur für `wgos_asset`
+Dateien:
 
-### CPT und Routing
-
-Definiert in `blocksy-child/inc/wgos-assets.php`.
-
-- Post Type: `wgos_asset`
-- Rewrite-Slug: `wgos-assets`
-- `hierarchical = true`
-- `show_in_rest = true`
-- `supports = title, editor, excerpt, thumbnail, page-attributes, revisions, custom-fields`
-
-### Single-Template
-
-Datei: `blocksy-child/single-wgos_asset.php`
+- `blocksy-child/single-wgos_asset.php`
+- `blocksy-child/inc/wgos-asset-registry.php`
 
 Aktueller Aufbau:
 
-1. Hero mit:
-   - Link auf WGOS Hub
-   - optionalen Ahnen-Links
-   - `H1`
-   - Excerpt als Subtitle
-   - Buttons `Zur Asset-Landkarte` und `Growth Audit starten`
-2. Eine generische Content-Sektion:
-   - H2 `Problem, Diagnose und Lösung`
-   - `the_content()`
-3. Ein generischer Systemkontext-Block:
-   - identisch für alle Assets
-4. Ein generischer Footer-CTA
+1. Hero mit Breadcrumbs, H1, Subtitle, CTA zu Landkarte und Growth Audit
+2. Fallback auf versionierten Registry-Content, wenn `post_content` leer oder durch den Sync ersetzt wurde
+3. Content-HTML aus `nexus_get_wgos_asset_content_html()`
 
-Gap zur Zielstruktur:
+Der Registry-Renderer bildet aktuell die geforderte 8-Abschnitte-Struktur ab:
 
-- Die geforderte 8-Abschnitte-Struktur ist nicht vorhanden.
-- Der Systemkontext ist aktuell generisch statt asset-spezifisch.
-- Kurzprofil, klare Deliverables, Priorisierungsfälle und verwandte Assets fehlen.
-- CTA-Logik ist nur teilweise vorhanden.
+1. Kurzprofil
+2. Warum dieses Asset existiert
+3. Was in diesem Asset passiert
+4. Dieses Asset im WGOS-System
+5. Wann dieses Asset priorisiert wird
+6. CTA-Block
+7. Verwandte WGOS-Bausteine
 
-## 4. Hub- und Explorer-Logik
+Hero, Breadcrumbs und obere CTA-Ebene werden im Single-Template selbst gerendert.
 
-### Asset-Hub
+### WGOS Asset Hub / Systemlandkarte
 
 Datei: `blocksy-child/page-wgos-assets.php`
 
-- Nutzt `nexus_get_wgos_asset_explorer_payload()`
-- Systemlandkarte ist bereits dynamisch
-- CTA-Struktur der Seite ist sauber, aber die Payload basiert nur auf publizierten `wgos_asset`-Posts
+- Die Seite ist dynamisch.
+- Die Daten kommen aus `nexus_get_wgos_asset_explorer_payload()`.
+- Explorer, Summary und Links bauen auf derselben Registry wie die Asset-Posts auf.
 
-### Explorer-Payload
+### Legacy-Clusterseiten
 
-Datei: `blocksy-child/inc/wgos-assets.php`
+Neue Versionierungslogik:
 
-Aktuelles Verhalten:
+- `blocksy-child/inc/wgos-cluster-pages.php`
+- `blocksy-child/page-wgos-pillar.php`
 
-- Lädt nur `post_status = publish`
-- Nutzt lose Meta-Kandidaten wie `asset_phase`, `asset_module`, `asset_credits`, `asset_deliverable`, `asset_short`, `asset_intro`, `asset_bullets`
-- Fällt bei fehlenden Daten auf Excerpt und `post_content` zurück
+Ergebnis:
 
-Schlussfolgerung:
+- `/wordpress-seo-hannover/`
+- `/core-web-vitals/`
+- `/conversion-rate-optimization/`
+- `/ga4-tracking-setup/`
+- `/performance-marketing/`
 
-- Die Payload ist für Migrationen vorbereitet, aber das zugrundeliegende strukturierte Datenmodell fehlt noch.
-- Neu Draft-Assets würden im aktuellen Explorer gar nicht erscheinen.
+werden jetzt ueber versionierte Cluster-/Pillar-Definitionen aus dem Theme gerendert oder dorthin route-forced, auch wenn die Seite im Admin auf `page-template-default` stehen sollte.
 
-## 5. Asset-Inventur
+## 4. Asset-Inventur
 
-### Publizierte `wgos_asset`-Posts laut öffentlicher REST-API
+Quelle: `blocksy-child/inc/wgos-asset-registry-data.php`
 
-| ID | Titel | Slug | Status | HTTP | Content-Status |
-| --- | --- | --- | --- | --- | --- |
-| 14842 | CWV Speed Audit | `cwv-speed-audit` | publish | 200 | alter pathoslastiger Text |
-| 14844 | CWV Optimierung | `cwv-optimierung` | publish | 200 | alter pathoslastiger Text |
-| 14846 | Server-Tuning | `server-tuning` | publish | 200 | alter pathoslastiger Text |
-| 14850 | Security Hardening | `security-hardening` | publish | 200 | alter pathoslastiger Text |
-| 14852 | Server-Side Tracking (sGTM & Matomo) | `server-side-tracking-sgtm-matomo` | publish | 200 | leerer Excerpt/Content über REST |
-| 14858 | Consent Mode v2 | `consent-mode-v2` | publish | 200 | alter pathoslastiger Text |
-| 14860 | GA4 Event Blueprint | `ga4-event-blueprint` | publish | 200 | alter pathoslastiger Text |
-| 14863 | Tracking Audit | `tracking-audit` | publish | 200 | alter pathoslastiger Text |
-| 14866 | Technical SEO Audit | `technical-seo-audit` | publish | 200 | alter pathoslastiger Text |
-| 14868 | Pillar Page | `pillar-page` | publish | 200 | alter pathoslastiger Text |
+- Gesamt: `35` Asset-Definitionen
+- `10` Zielstatus `publish`
+- `25` Zielstatus `draft`
 
-### Auffällige Abweichungen
+Die Aufgabenbeschreibung nennt zwar `32` Assets, die ausgeschriebene Matrix ergibt aber rechnerisch `35`. Der Repo-Stand folgt der ausgeschriebenen Matrix.
 
-- Der Live-Slug für Server-Side Tracking ist aktuell `server-side-tracking-sgtm-matomo`, nicht `server-side-tracking`.
-- Alle 10 bestehenden Asset-Seiten sind erreichbar.
-- Die Content-Qualität bestätigt die Nutzerbeschreibung: stark aufgeblasener Stil, wenig konkrete Deliverables, kein sauberes 8-Abschnitte-Template.
+### Publish-Zielzustand
 
-## 6. Matrix-Prüfung
+- `cwv-speed-audit`
+- `cwv-optimierung`
+- `server-tuning`
+- `security-hardening`
+- `tracking-audit`
+- `ga4-event-blueprint`
+- `consent-mode-v2`
+- `server-side-tracking`
+- `technical-seo-audit`
+- `pillar-page`
 
-Die Aufgabenbeschreibung nennt `32 Assets (10 überarbeiten, 22 neu)`.
+### Draft-Zielzustand
 
-Die tabellarisch aufgeführte Matrix enthält jedoch:
+Alle weiteren Registry-Eintraege bleiben `draft`, bis sie im Sync als Entwurf angelegt und redaktionell freigegeben werden.
 
-- 10 bestehende Assets
-- 25 neue Assets
-- Summe: 35 Assets
+### Sync-Mechanismus
 
-Für die Umsetzung wird deshalb die tabellarisch aufgeführte Matrix als Source of Truth behandelt. Die Summenzeile ist rechnerisch inkonsistent.
+Datei: `blocksy-child/inc/wgos-asset-registry.php`
 
-## 7. Technische Konsequenzen für die Umsetzung
+- `nexus_maybe_sync_wgos_asset_posts()` laeuft auf `init`
+- Posts werden bei neuer Registry-Version erstellt oder aktualisiert
+- relevante Meta-Felder werden automatisch gesetzt
+- Legacy-Asset-Slugs koennen per 301 auf den kanonischen WGOS-Asset-Slug umgeleitet werden
 
-1. Ein versioniertes WGOS-Asset-Registry-Modell wird im Theme benötigt.
-2. Es braucht ein sauberes ACF-/Meta-Schema für Asset-spezifische Daten.
-3. Das Single-Template muss auf die 8-Abschnitte-Struktur umgestellt werden.
-4. Explorer und interne Verlinkung müssen mit publizierten und noch nicht publizierten Asset-Definitionen umgehen können.
-5. Wegen fehlendem `wp-cli` in der lokalen Umgebung braucht die Repo-Lösung einen Theme-seitigen Sync-Mechanismus für Post-Erstellung und Post-Updates.
+## 5. Navigation-Inventur
+
+### Nav A: Custom Site Header
+
+Dateien:
+
+- `blocksy-child/inc/header.php`
+- `blocksy-child/template-parts/site-header.php`
+- `blocksy-child/inc/menu-setup.php`
+
+Verwendung:
+
+- Standard fuer Nicht-Blog-Seiten
+- nutzt WordPress-Menues `primary` / `primary-slim`, normalisiert aber Ergebnisse- und Audit-Links beim Rendern
+
+Stand:
+
+- Ergebnisse laufen jetzt kanonisch ueber `nexus_get_results_url()`
+- alte Menueintraege auf `/case-studies/` oder `/case-studies-e-commerce/` werden beim Rendern auf das kanonische Ziel gezogen
+
+### Nav B: Blog Header
+
+Datei: `blocksy-child/template-parts/blog-header.php`
+
+Verwendung:
+
+- Blog-Home
+- Archive
+- Single Posts
+
+Stand:
+
+- nutzt ebenfalls `nexus_get_results_url()`
+- bleibt eigenstaendig, ist aber jetzt auf denselben Ergebnisse-Kanon ausgerichtet
+
+### Nav C: Homepage-Shortcodes
+
+Datei: `blocksy-child/inc/shortcodes.php`
+
+Verwendung:
+
+- interne One-Page-Scroll-Navigation auf der Startseite
+- Hero-CTAs fuer Audit und Ergebnisse
+
+Stand:
+
+- Ergebnisse-CTA laeuft ueber `hu_home_urls()['cases']` und damit ebenfalls auf den kanonischen Ergebnisse-Hub
+
+### Nav D: Legacy-/Editor-Navigation ausserhalb des Repo-Kerns
+
+Bekannte Risiken aus `docs/audits/site-audit-hasimuener-2026-03-09.md`:
+
+- einzelne Default-/Editor-Seiten liefen mit zusaetzlichem Blog-Header
+- WordPress-Menues oder Editor-Links konnten bisher alte Ziele wie `/case-studies/` oder `/wordpress-tech-audit/` behalten
+
+Repo-Status:
+
+- wichtige Legacy-Routen werden jetzt per Theme weitergeleitet
+- ohne WordPress-Admin-Zugriff bleibt eine Restpruefung fuer manuelle Menues und Editor-Inhalte offen
+
+## 6. Legacy-Seiten-Inventur
+
+### Versioniert bzw. route-forced
+
+| URL | Repo-Status | WGOS-Ueberlappung |
+| --- | --- | --- |
+| `/wordpress-seo-hannover/` | versionierte Clusterseite | Sichtbarkeit |
+| `/core-web-vitals/` | versionierte Clusterseite | Technisches Fundament |
+| `/conversion-rate-optimization/` | versionierte Clusterseite | Conversion |
+| `/ga4-tracking-setup/` | versionierte Clusterseite | Messbarkeit |
+| `/performance-marketing/` | versionierte Clusterseite | Paid-Kontext ueber WGOS |
+| `/wordpress-agentur-hannover/` | bestehendes Repo-Template | lokaler WGOS-Einstieg |
+
+### Bekannte Editor-/Live-Risiken aus vorhandenem Audit
+
+| URL | Letzter bekannter Hinweis im Repo | Risiko |
+| --- | --- | --- |
+| `/wordpress-seo-hannover/` | `page-template-default` statt Repo-Template | durch Route-Forcing jetzt theme-seitig abgesichert |
+| `/core-web-vitals/` | `page-template-default` statt Repo-Template | durch Route-Forcing jetzt theme-seitig abgesichert |
+| `/case-studies-e-commerce/` | Editor-/Default-Seite | jetzt Legacy-Alias fuer `/ergebnisse/` |
+| `/kontaktiere-mich/` | Editor-/Default-Seite | kein Umbau in dieser Runde |
+| `/kostenlose-tools/` | Tools-Hub vorhanden | bewusst nicht redirectet |
+
+## 7. Redirect-Kandidaten und aktueller Repo-Stand
+
+### Jetzt im Theme als 301 hinterlegt
+
+| Legacy-URL | Ziel |
+| --- | --- |
+| `/case-studies/` | `/ergebnisse/` |
+| `/case-studies-e-commerce/` | `/ergebnisse/` |
+| `/audit/` | `/growth-audit/` |
+| `/customer-journey-audit/` | `/growth-audit/` |
+| `/360-audit/` | `/growth-audit/` |
+| `/wordpress-tech-audit/` | `/growth-audit/` |
+| `/meta-ads/` | `/wordpress-growth-operating-system/` |
+| `/wordpress-agentur/` | `/wordpress-agentur-hannover/` |
+| `/wordpress-wartung-hannover/` | `/wgos-assets/security-hardening/` |
+| `/roi-rechner/` | `/kostenlose-tools/` |
+
+### Bewusst nicht redirectet
+
+| URL | Grund |
+| --- | --- |
+| `/kostenlose-tools/` | Im Repo existiert weiter ein Tools-Hub, daher kein Zwangsredirect gesetzt |
+
+## 8. Technische Konsequenzen
+
+1. Die WGOS-Assets selbst sind repo-seitig versioniert und synchronisierbar.
+2. Wichtige Legacy-Clusterseiten sind nicht mehr auf Editor-Content oder manuelle Template-Zuordnung angewiesen.
+3. Ergebnisse laufen kanonisch auf `/ergebnisse/`; alte Proof-Slugs sind nur noch Legacy-Aliase.
+4. Single Posts koennen passende WGOS-Assets jetzt theme-seitig als Bridge anzeigen.
+5. Offene Live-Risiken bleiben dort, wo WordPress-Admin-Inhalte ausserhalb der route-forced Seiten weiter manuell gepflegt werden.

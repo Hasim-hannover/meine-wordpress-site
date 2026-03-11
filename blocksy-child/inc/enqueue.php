@@ -33,6 +33,7 @@ function hu_enqueue_assets() {
 	$js_uri  = get_stylesheet_directory_uri() . '/assets/js/';
 	$queried_id = get_queried_object_id();
 	$is_seo_cornerstone_template = $queried_id && 'page-seo-cornerstone.php' === get_page_template_slug( $queried_id );
+	$is_cluster_page = function_exists( 'nexus_is_wgos_cluster_page' ) && nexus_is_wgos_cluster_page();
 
 	// ── Parent Theme ──────────────────────────────────────────────
 	wp_enqueue_style(
@@ -91,6 +92,7 @@ function hu_enqueue_assets() {
 	// ── D) Einzelbeitrag (Blog Post) ──────────────────────────────
 	if ( is_singular( 'post' ) || $is_seo_cornerstone_template ) {
 		hu_enqueue_css( 'nexus-single-css', 'single.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-wgos-bridge-css', 'wgos-bridge.css', [ 'nexus-single-css' ] );
 
 		// Hide duplicate title from Blocksy (single posts + cornerstone template)
 		wp_add_inline_style( 'blocksy-child-style', '
@@ -208,9 +210,13 @@ function hu_enqueue_assets() {
 	}
 
 	// ── I) Template: SEO Landing (Hannover) ───────────────────────
-	if ( is_page_template( 'page-seo.php' ) || is_page( 'seo' ) || is_page( 'wordpress-seo-hannover' ) ) {
+	if ( ! $is_cluster_page && ( is_page_template( 'page-seo.php' ) || is_page( 'seo' ) || is_page( 'wordpress-seo-hannover' ) ) ) {
 		hu_enqueue_css( 'nexus-seo-css', 'seo.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-seo-js', 'seo.js', [ 'nexus-core-js' ] );
+	}
+
+	if ( $is_cluster_page ) {
+		hu_enqueue_css( 'nexus-cluster-pillar-css', 'cluster-pillar.css', [ 'nexus-design-system' ] );
 	}
 
 	// ── I2) Template: SEO Cornerstone Artikel (Post + Page) ────────
@@ -219,22 +225,22 @@ function hu_enqueue_assets() {
 	}
 
 	// ── J) Template: Core Web Vitals ──────────────────────────────
-	if ( is_page_template( 'page-cwv.php' ) || is_page( 'core-web-vitals' ) || is_page( 'core-web-vitals-optimierung' ) ) {
+	if ( ! $is_cluster_page && ( is_page_template( 'page-cwv.php' ) || is_page( 'core-web-vitals' ) || is_page( 'core-web-vitals-optimierung' ) ) ) {
 		hu_enqueue_css( 'nexus-cwv-css', 'cwv.css', [ 'nexus-design-system' ] );
 	}
 
 	// ── K) Template: Performance Marketing ────────────────────────
-	if ( is_page_template( 'page-performance.php' ) || is_page( 'performance-marketing' ) ) {
+	if ( ! $is_cluster_page && ( is_page_template( 'page-performance.php' ) || is_page( 'performance-marketing' ) ) ) {
 		hu_enqueue_css( 'nexus-performance-css', 'performance.css', [ 'nexus-design-system' ] );
 	}
 
 	// ── L) Template: Conversion Rate Optimization (CRO) ──────────
-	if ( is_page_template( 'page-cro.php' ) || is_page( 'conversion-rate-optimization' ) ) {
+	if ( ! $is_cluster_page && ( is_page_template( 'page-cro.php' ) || is_page( 'conversion-rate-optimization' ) ) ) {
 		hu_enqueue_css( 'nexus-cro-css', 'cro.css', [ 'nexus-design-system' ] );
 	}
 
 	// ── M) Template: GA4 & Tracking Setup ─────────────────────────
-	if ( is_page_template( 'page-ga4.php' ) || is_page( 'ga4-tracking-setup' ) ) {
+	if ( ! $is_cluster_page && ( is_page_template( 'page-ga4.php' ) || is_page( 'ga4-tracking-setup' ) ) ) {
 		hu_enqueue_css( 'nexus-ga4-css', 'ga4.css', [ 'nexus-design-system' ] );
 	}
 

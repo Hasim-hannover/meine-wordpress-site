@@ -1,24 +1,33 @@
 # WGOS Asset Overhaul Report
 
-- Stand: 2026-03-11
-- Basis: Repo-Implementierung, Discovery-Doku, Live-REST-Inventur
-- Wichtige Abweichung in der Aufgabenbeschreibung: Die gelistete Matrix umfasst 35 Assets, nicht 32. Umgesetzt wurde die tabellarisch aufgeführte Matrix.
+- Stand: 2026-03-12
+- Basis: Repo-Implementierung auf `main` nach Merge des Feature-Branches
+- Einschraenkung: Kein lokales `wp-cli`, kein direkter DB- oder Live-Admin-Zugriff in dieser Session
 
-## 1. Was umgesetzt wurde
+## 1. Zusammenfassung
 
-- Versionierte WGOS-Asset-Registry im Theme eingeführt
-- Auto-Sync für `wgos_asset`-Posts eingebaut
-- Single-Template auf die 8-Abschnitte-Struktur umgestellt
-- ACF-/Meta-Schema für WGOS-Assets ergänzt
-- Explorer- und Hub-Logik auf die Registry umgestellt
-- SEO-Titel und Descriptions für alle WGOS-Assets versioniert
-- `Service`-Schema für WGOS-Assets ergänzt
-- Legacy-Slug-Redirect für `server-side-tracking-sgtm-matomo` auf `server-side-tracking` eingebaut
-- Discovery-Doku und Entscheidungsdoku ergänzt
+Repo-seitig sind jetzt vier Ebenen sauberer verbunden:
 
-## 2. Bestehende Assets überarbeitet
+1. WGOS-Assets laufen ueber eine versionierte Registry mit `35` Definitionen.
+2. Die Registry bleibt mit SEO-Meta, Schema und Hub-/Explorer-Logik verbunden.
+3. Wichtige Legacy-Service-Seiten werden theme-seitig als WGOS-Clusterseiten gerendert statt dem Editor oder der Template-Zuordnung ueberlassen.
+4. Ergebnisse, Audit und weitere Legacy-Pfade haben harte kanonische Ziele statt historischer Alias-Links.
 
-Diese Assets bleiben im Zielzustand `publish` und werden durch den Theme-Sync mit neuer Struktur, neuer Copy, SEO-Meta, Related Links und Schema aktualisiert:
+## 2. WGOS-Assets
+
+### Source of Truth
+
+Die WGOS-Asset-Registry bleibt die zentrale Quelle fuer:
+
+- Struktur
+- Content
+- Status
+- SEO-Meta
+- Related Assets
+- Schema-Typ
+- Sync in den CPT `wgos_asset`
+
+### Bestehende Assets
 
 1. `CWV Speed Audit`
 2. `CWV Optimierung`
@@ -31,15 +40,7 @@ Diese Assets bleiben im Zielzustand `publish` und werden durch den Theme-Sync mi
 9. `Technical SEO Audit`
 10. `Pillar Page`
 
-Kurzbeschreibung der inhaltlichen Änderung:
-
-- Alle zehn Assets wurden von pathoslastigem Fließtext auf die feste WGOS-Asset-Struktur umgestellt.
-- Jedes Asset hat jetzt klares Kurzprofil, konkrete Deliverables, individuellen Systemkontext, Priorisierungssituationen, CTA-Block und verwandte Bausteine.
-- Alle zehn Assets bekommen versionierte SEO-Meta und `Service`-Schema.
-
-## 3. Neue Assets angelegt
-
-Diese Assets sind in der Registry definiert und werden durch den Theme-Sync als `publish` angelegt:
+### Weitere Registry-Assets
 
 1. `Growth Audit`
 2. `Positionierungs-Check`
@@ -67,24 +68,26 @@ Diese Assets sind in der Registry definiert und werden durch den Theme-Sync als 
 24. `Reporting Dashboard`
 25. `Conversion-Hypothesen & Testing`
 
-## 4. Live-Status
+### Aktueller Repo-Status
 
-- Zielstatus laut Registry: `35 publish`, `0 draft`
-- Die eigentliche Post-Erstellung oder -Aktualisierung passiert erst nach Deployment durch den Theme-Sync
-- Solange der neue Theme-Code nicht auf WordPress läuft, sind neue oder aktualisierte Asset-Posts noch nicht in der Datenbank sichtbar
-- Die dedizierte Seite `wgos-systemlandkarte` wird jetzt ebenfalls automatisch angelegt und mit dem Hub-Template verknüpft
+- Zielstatus laut aktuellem Code: `35 publish`, `0 draft`
+- Die eigentliche Post-Erstellung oder -Aktualisierung passiert weiter ueber den Theme-Sync
+- Die dedizierte Seite `wgos-systemlandkarte` wird jetzt bei Bedarf automatisch angelegt und mit dem Hub-Template verknuepft
 
-## 5. ACF-Felder gefunden und genutzt
+### Wichtige Abweichung im Briefing
 
-### Vorhanden vor der Überarbeitung
+Die ausgeschriebene Matrix ergibt `35` Assets, nicht `32`. Der Repo-Stand folgt der Matrix, nicht der fehlerhaften Summenzeile.
+
+## 3. ACF-Felder und SEO-Meta
+
+### ACF-Felder
+
+Gefundene und genutzte WGOS-relevante Felder:
 
 - `seo_title`
 - `seo_description`
 - `og_image`
 - `seo_noindex`
-
-### Neu für WGOS-Assets versioniert
-
 - `asset_module`
 - `asset_phase`
 - `asset_credits`
@@ -99,59 +102,117 @@ Diese Assets sind in der Registry definiert und werden durch den Theme-Sync als 
 - `asset_bullets`
 - `asset_related_slugs`
 
-## 6. SEO-Meta-Logik
+### SEO-Meta-Logik
 
-- Primärer Mechanismus: `blocksy-child/inc/seo-meta.php`
-- `seo_title` und `seo_description` werden für `wgos_asset` als Theme-Fallback genutzt
-- Zusätzlich wurde ein generischer Rank-Math-Bridge-Filter eingebaut, damit die gespeicherten Werte auch bei aktivem Plugin nicht verloren gehen
-- Alle WGOS-Assets bekommen versionierte SEO-Titel und Descriptions aus der Registry
+- Primarlogik bleibt `blocksy-child/inc/seo-meta.php`
+- WGOS-Assets beziehen ihre Meta-Werte aus der Registry-Synchronisation
+- Cluster-/Legacy-Seiten bekommen jetzt theme-seitige SEO-Fallbacks, falls im Editor keine sauberen Meta-Werte stehen
+- Rank-Math-Bridges bleiben erhalten, damit gespeicherte Werte nicht verloren gehen
 
-## 7. Schema-Markup-Status pro Asset
+## 4. Schema-Markup-Status
 
-Alle 35 WGOS-Assets sind im Zielzustand auf `Service` gesetzt.
+### WGOS-Assets
 
-| Asset | Zielstatus | Schema |
-| --- | --- | --- |
-| Growth Audit | publish | Service |
-| Positionierungs-Check | publish | Service |
-| Seitenrollen-Mapping | publish | Service |
-| Wettbewerbs-Analyse (Digital) | publish | Service |
-| Roadmap & Priorisierung | publish | Service |
-| CWV Speed Audit | publish | Service |
-| CWV Optimierung | publish | Service |
-| Server-Tuning | publish | Service |
-| Security Hardening | publish | Service |
-| Plugin Audit & Bereinigung | publish | Service |
-| WordPress Update-Management | publish | Service |
-| Tracking Audit | publish | Service |
-| GA4 Event Blueprint | publish | Service |
-| Consent Mode v2 | publish | Service |
-| Server-Side Tracking (sGTM & Matomo) | publish | Service |
-| KPI-Dashboard Setup | publish | Service |
-| UTM-Framework & Attribution | publish | Service |
-| Technical SEO Audit | publish | Service |
-| Keyword-Strategie & Content-Map | publish | Service |
-| Pillar Page | publish | Service |
-| Content Hub Aufbau | publish | Service |
-| On-Page SEO Optimierung | publish | Service |
-| Interne Verlinkung & Seitenarchitektur | publish | Service |
-| Schema Markup & Strukturierte Daten | publish | Service |
-| Local SEO Setup | publish | Service |
-| Landing Page (Neu) | publish | Service |
-| Landing Page Optimierung | publish | Service |
-| CTA & Formular-Optimierung | publish | Service |
-| Angebotsseiten-Architektur | publish | Service |
-| Social Proof & Trust-Elemente | publish | Service |
-| Lead-Magnet Konzeption | publish | Service |
-| Monthly Performance Review | publish | Service |
-| Quarterly Roadmap Update | publish | Service |
-| Reporting Dashboard | publish | Service |
-| Conversion-Hypothesen & Testing | publish | Service |
+- Zielstatus fuer alle `35` WGOS-Assets: `Service`
+- Ausgabe ueber `blocksy-child/inc/org-schema.php`
 
-## 8. Offene Punkte
+### Legacy-/Clusterseiten
 
-- Deployment wurde in dieser Umgebung nicht ausgefuehrt
-- Es gibt lokal kein `wp-cli`; die Live-Synchronisation haengt deshalb am neuen Theme-Sync nach Deployment
-- Die Live-Systemlandkarte zeigt die neue Vollmatrix erst, wenn der Theme-Code deployed und der Sync gelaufen ist
-- `SYSTEM_MAP.md` spiegelt die neue 35er-Matrix noch nicht wider und sollte im Review mitgeprueft werden
-- Die WGOS-Hauptseite nutzt weiterhin nur Beispiel-Assets in der Credit-Tabelle; die Tabelle wurde nur auf den korrekten Server-Side-Tracking-Namen gezogen
+Neu oder bestaetigt im Repo:
+
+- `wordpress-seo-hannover` -> `Service`
+- `core-web-vitals` -> `Service`
+- `conversion-rate-optimization` -> `Service`
+- `ga4-tracking-setup` -> `Service`
+- `performance-marketing` -> `Service`
+- `wordpress-agentur-hannover` -> bestehendes `Service`-Schema bleibt
+
+## 5. Legacy-Seiten migriert oder abgesichert
+
+### Versionierte Cluster-/Pillar-Seiten
+
+Diese Seiten werden jetzt nicht mehr nur ueber Editor-Inhalt oder manuelle Template-Zuordnung bestimmt:
+
+- `/wordpress-seo-hannover/`
+- `/core-web-vitals/`
+- `/conversion-rate-optimization/`
+- `/ga4-tracking-setup/`
+- `/performance-marketing/`
+
+Technik:
+
+- neue Cluster-Definitionen in `blocksy-child/inc/wgos-cluster-pages.php`
+- shared renderer in `blocksy-child/page-wgos-pillar.php`
+- Route-Forcing ueber `template_include`
+
+### Bereits versionierte lokale Einstiegsseite
+
+- `/wordpress-agentur-hannover/` bleibt die lokale Einstiegsseite und fuehrt weiter in WGOS, Audit, Cases und Systemlogik
+
+### Admin-Helfer fuer Legacy-Bereinigung
+
+- Im WordPress-Admin erscheint ein Legacy-Cleanup-Hinweis
+- der Ein-Klick-Flow kann gefundene Altseiten auf `draft` setzen und passende Menue-Eintraege entfernen
+
+## 6. Redirects und Navigation
+
+### Behobene Navigations-/URL-Inkonsistenzen
+
+- Ergebnisse sind repo-seitig jetzt kanonisch auf `/ergebnisse/`
+- `/case-studies/` und `/case-studies-e-commerce/` sind nur noch 301-Aliase
+- statische Proof-Assets und Referenz-Dokumente wurden auf `/ergebnisse/` umgestellt
+
+### 301-Redirects im Theme
+
+- `/case-studies/` -> `/ergebnisse/`
+- `/case-studies-e-commerce/` -> `/ergebnisse/`
+- `/audit/` -> `/growth-audit/`
+- `/customer-journey-audit/` -> `/growth-audit/`
+- `/360-audit/` -> `/growth-audit/`
+- `/wordpress-tech-audit/` -> `/growth-audit/`
+- `/meta-ads/` -> `/wordpress-growth-operating-system/`
+- `/wordpress-agentur/` -> `/wordpress-agentur-hannover/`
+- `/wordpress-wartung-hannover/` -> `/wgos-assets/security-hardening/`
+- `/roi-rechner/` -> `/kostenlose-tools/`
+
+### Bewusst offen gelassen
+
+- `/kostenlose-tools/` bleibt live, weil im Repo weiterhin ein Tools-Hub existiert
+
+## 7. Blog -> WGOS-Asset Verlinkung
+
+Single Posts koennen jetzt automatisch einen WGOS-Anschlussblock ausgeben.
+
+Aktuelle Mapping-Matrix im Repo:
+
+| Beitrag | Verlinkte WGOS-Assets |
+| --- | --- |
+| `/owned-leads-statt-ad-miete/` | `growth-audit`, `angebotsseiten-architektur`, `landing-page-neu` |
+| `/b2b-landingpage-optimieren/` | `landing-page-optimierung`, `cta-formular-optimierung`, `angebotsseiten-architektur` |
+| `/meta-ads-fuer-b2b/` | `landing-page-neu`, `landing-page-optimierung`, `tracking-audit` |
+| `/design-ist-mehr-als-aesthetik/` | `angebotsseiten-architektur`, `cta-formular-optimierung` |
+| `/server-side-tracking-gtm/` | `server-side-tracking`, `tracking-audit`, `consent-mode-v2` |
+| `/core-web-vitals-wachstum-seo-und-roas/` | `cwv-speed-audit`, `cwv-optimierung`, `server-tuning` |
+
+Hinweis:
+
+- Die Mapping-Logik ist theme-seitig versioniert.
+- Fuer weitere Posts kann dieselbe Struktur in `nexus_get_wgos_blog_asset_bridge_data()` erweitert werden.
+
+## 8. Dokumentation und Betriebsstatus
+
+Aktualisiert in dieser Runde:
+
+- `docs/references/wgos-asset-discovery.md`
+- `docs/references/wgos-asset-overhaul-report.md`
+- `docs/playbooks/navigation-migration.md`
+- `LIVE_STATUS.md`
+- `docs/decisions/0004-wgos-cluster-pages-and-results-canonical.md`
+
+## 9. Offene Punkte
+
+1. Deployment wurde in dieser Session erst durch den geplanten Push auf `main` ausgelost, nicht lokal simuliert.
+2. Ohne `wp-cli` bleibt offen, welche Menues oder Editor-Inhalte live noch von der Repo-Logik abweichen.
+3. Fuer `/kontaktiere-mich/` und weitere editorgetriebene Default-Seiten gab es in dieser Runde keinen Umbau.
+4. Die WGOS-Hauptseite und die Systemlandkarte sind repo-seitig konsistent, muessen nach dem Deploy aber gegen den Live-Inhalt verifiziert werden.
+5. Falls WordPress-Menues im Admin manuell gepflegt werden, sollten sie nach dem Deploy kurz gegen `/ergebnisse/` und `/growth-audit/` gegengeprueft werden.
