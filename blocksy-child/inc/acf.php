@@ -106,59 +106,6 @@ function hu_register_acf_fields() {
 		'description' => 'Pluginlose SEO-Felder fuer Title, Description, Social-Preview und noindex.',
 	] );
 
-	// ── 1b. WGOS Asset Fields ────────────────────────────────────
-	// Struktur-Layer fuer die Hub-and-Spoke-Detailseiten unterhalb von WGOS.
-	acf_add_local_field_group( [
-		'key'      => 'group_wgos_asset_data',
-		'title'    => 'WGOS Asset Details',
-		'fields'   => [
-			[
-				'key'           => 'field_wgos_credits',
-				'label'         => 'Credits',
-				'name'          => 'wgos_credits',
-				'type'          => 'text',
-				'instructions'  => 'Leistungspunkte fuer dieses Asset, auch mit Zusatz wie 10/Monat',
-				'placeholder'   => 'z.B. 12 oder 10/Monat',
-				'required'      => 1,
-				'wrapper'       => [ 'width' => '33' ],
-			],
-			[
-				'key'           => 'field_wgos_deliverables',
-				'label'         => 'Was Sie bekommen',
-				'name'          => 'wgos_deliverables',
-				'type'          => 'text',
-				'instructions'  => 'Kurze Zusammenfassung der Leistung',
-				'required'      => 1,
-				'wrapper'       => [ 'width' => '67' ],
-			],
-			[
-				'key'           => 'field_wgos_phase',
-				'label'         => 'System-Phase',
-				'name'          => 'wgos_phase',
-				'type'          => 'select',
-				'choices'       => function_exists( 'nexus_get_wgos_asset_phase_options' ) ? nexus_get_wgos_asset_phase_options() : [],
-				'default_value' => 'Fundament',
-				'return_format' => 'value',
-				'allow_null'    => 0,
-				'ui'            => 1,
-				'required'      => 1,
-			],
-		],
-		'location' => [
-			[
-				[
-					'param'    => 'post_type',
-					'operator' => '==',
-					'value'    => 'wgos_asset',
-				],
-			],
-		],
-		'position'    => 'acf_after_title',
-		'style'       => 'seamless',
-		'menu_order'  => 5,
-		'description' => 'Credits-, Deliverable- und Phasenlogik fuer WGOS Asset-Detailseiten.',
-	] );
-
 	// ── 2. KPI Block Fields ───────────────────────────────────────
 	// Für template-parts/kpi-block.php – wiederverwendbare Metriken.
 	acf_add_local_field_group( [

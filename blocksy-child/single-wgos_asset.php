@@ -2,9 +2,6 @@
 /**
  * Single template for WGOS assets.
  *
- * Structure first: asset metadata above, editor-maintained diagnosis/solution below,
- * then the global audit CTA to keep the page inside the primary funnel.
- *
  * @package Blocksy_Child
  */
 
@@ -21,15 +18,8 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 <main id="main" class="site-main">
 	<?php while ( have_posts() ) : the_post(); ?>
 		<?php
-		$post_id      = get_the_ID();
-		$credits      = function_exists( 'nexus_get_wgos_asset_field' ) ? nexus_get_wgos_asset_field( $post_id, 'wgos_credits', 'wgos_asset_credits', '' ) : nexus_get_field( 'wgos_credits', '', $post_id );
-		$deliverables = function_exists( 'nexus_get_wgos_asset_field' ) ? nexus_get_wgos_asset_field( $post_id, 'wgos_deliverables', 'wgos_asset_deliverables', '' ) : nexus_get_field( 'wgos_deliverables', '', $post_id );
-		$phase_key    = function_exists( 'nexus_get_wgos_asset_field' ) ? nexus_get_wgos_asset_field( $post_id, 'wgos_phase', 'wgos_asset_phase', '' ) : nexus_get_field( 'wgos_phase', '', $post_id );
-		$phase_label  = function_exists( 'nexus_get_wgos_asset_phase_label' )
-			? nexus_get_wgos_asset_phase_label( $phase_key )
-			: $phase_key;
-		$excerpt      = has_excerpt() ? get_the_excerpt() : '';
-		$ancestors    = array_reverse( get_post_ancestors( $post_id ) );
+		$excerpt          = has_excerpt() ? get_the_excerpt() : '';
+		$ancestors        = array_reverse( get_post_ancestors( get_the_ID() ) );
 		$asset_anchor_url = function_exists( 'nexus_get_wgos_asset_anchor_url' )
 			? nexus_get_wgos_asset_anchor_url( get_post() )
 			: $wgos_url . '#module';
@@ -48,55 +38,17 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 						<?php endforeach; ?>
 					</p>
 
-					<?php if ( $phase_label ) : ?>
-						<span class="wgos-kicker"><?php echo esc_html( sprintf( 'WGOS Asset / %s', $phase_label ) ); ?></span>
-					<?php endif; ?>
+					<span class="wgos-kicker">WGOS Asset</span>
 
 					<h1 class="wgos-hero__title"><?php the_title(); ?></h1>
 
 					<?php if ( $excerpt ) : ?>
 						<p class="wgos-hero__subtitle"><?php echo esc_html( $excerpt ); ?></p>
-					<?php elseif ( $deliverables ) : ?>
-						<p class="wgos-hero__subtitle"><?php echo esc_html( $deliverables ); ?></p>
 					<?php endif; ?>
 
 					<div class="wgos-hero__actions">
 						<a href="<?php echo esc_url( $asset_anchor_url ); ?>" class="wgos-btn wgos-btn--outline">Im Explorer öffnen</a>
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					</div>
-				</div>
-			</section>
-
-			<section class="wgos-section wgos-section--gray">
-				<div class="wgos-container">
-					<h2 class="wgos-h2">Asset-Kontext</h2>
-					<p class="wgos-section-intro">Dieses Asset ist ein einzelner Baustein im WGOS. Die Wirkung entsteht erst, wenn Reihenfolge, Engpass und Conversion-Pfad zusammenpassen.</p>
-
-					<div class="wgos-credit-phase">
-						<div class="wgos-table-wrap">
-							<table class="wgos-credits-table wgos-credits-table--compact">
-								<tbody>
-									<tr>
-										<td><?php esc_html_e( 'Phase', 'blocksy-child' ); ?></td>
-										<td><?php echo esc_html( $phase_label ? $phase_label : __( 'Nicht definiert', 'blocksy-child' ) ); ?></td>
-									</tr>
-									<tr>
-										<td><?php esc_html_e( 'Credits', 'blocksy-child' ); ?></td>
-										<td>
-											<?php
-											echo '' !== trim( (string) $credits )
-												? esc_html( $credits )
-												: esc_html__( 'Nicht definiert', 'blocksy-child' );
-											?>
-										</td>
-									</tr>
-									<tr>
-										<td><?php esc_html_e( 'Deliverables', 'blocksy-child' ); ?></td>
-										<td><?php echo $deliverables ? esc_html( $deliverables ) : esc_html__( 'Nicht definiert', 'blocksy-child' ); ?></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
 					</div>
 				</div>
 			</section>

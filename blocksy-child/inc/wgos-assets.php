@@ -12,68 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Return the allowed WGOS asset phases.
- *
- * Centralized so ACF, templates and future queries stay in sync.
- *
- * @return array<string, string>
- */
-function nexus_get_wgos_asset_phase_options() {
-	return [
-		'Fundament' => __( '1. Fundament', 'blocksy-child' ),
-		'Aufbau'    => __( '2. Aufbau', 'blocksy-child' ),
-		'Skalierung' => __( '3. Skalierung', 'blocksy-child' ),
-	];
-}
-
-/**
- * Convert a stored phase key into a readable label.
- *
- * @param string $phase Stored phase key.
- * @return string
- */
-function nexus_get_wgos_asset_phase_label( $phase ) {
-	$options = nexus_get_wgos_asset_phase_options();
-	$phase   = (string) $phase;
-
-	if ( isset( $options[ $phase ] ) ) {
-		return $options[ $phase ];
-	}
-
-	$legacy_map = [
-		'fundament' => 'Fundament',
-		'aufbau'    => 'Aufbau',
-		'skalierung' => 'Skalierung',
-	];
-
-	$legacy_key = strtolower( $phase );
-	if ( isset( $legacy_map[ $legacy_key ], $options[ $legacy_map[ $legacy_key ] ] ) ) {
-		return $options[ $legacy_map[ $legacy_key ] ];
-	}
-
-	return $options[ $phase ] ?? $phase;
-}
-
-/**
- * Read WGOS asset meta with support for the renamed ACF fields.
- *
- * @param int    $post_id      Asset post ID.
- * @param string $field_name   New field name.
- * @param string $legacy_name  Previous field name.
- * @param mixed  $default      Fallback value.
- * @return mixed
- */
-function nexus_get_wgos_asset_field( $post_id, $field_name, $legacy_name, $default = '' ) {
-	$value = nexus_get_field( $field_name, null, $post_id );
-
-	if ( null !== $value && '' !== $value && false !== $value ) {
-		return $value;
-	}
-
-	return nexus_get_field( $legacy_name, $default, $post_id );
-}
-
-/**
  * Normalize labels and slugs into one stable lookup key.
  *
  * @param string $value Raw lookup value.
@@ -178,12 +116,6 @@ function nexus_get_wgos_asset_hover_text( $asset ) {
 
 	if ( '' !== $excerpt ) {
 		return $excerpt;
-	}
-
-	$deliverables = nexus_get_wgos_asset_field( $asset->ID, 'wgos_deliverables', 'wgos_asset_deliverables', '' );
-
-	if ( is_string( $deliverables ) && '' !== trim( $deliverables ) ) {
-		return trim( $deliverables );
 	}
 
 	return '';
