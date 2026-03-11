@@ -355,25 +355,6 @@
     margin-bottom: 2.5rem;
 }
 
-/* Mount point for WGOS Mindmap v2 (7 modules) */
-.wgos-mindmap-v2-root {
-    margin: 0 0 2rem;
-}
-
-#module .wgos-mindmap-v2-root {
-    background: var(--nx-card-gradient);
-    border: 1px solid var(--nx-border);
-    border-radius: 18px;
-    padding: 8px;
-}
-
-@media (max-width: 900px) {
-    #module .wgos-mindmap-v2-root {
-        border-radius: 12px;
-        padding: 6px;
-    }
-}
-
 .wgos-prose {
     font-size: 1.05rem;
     line-height: 1.75;
@@ -820,75 +801,6 @@
 .wgos-inline-cta a:hover {
     text-decoration: underline;
     color: var(--nx-accent-text-hover);
-}
-
-/* =========================================
-   9. MODULE SECTIONS
-   ========================================= */
-.wgos-module {
-    padding: 48px 0;
-}
-
-.wgos-module--white {
-    background: var(--nx-bg);
-}
-
-.wgos-module--gray {
-    background: var(--nx-bg-deep);
-}
-
-.wgos-module--cta {
-    padding: 40px 0 60px;
-    background: var(--nx-bg-deep);
-}
-
-.wgos-module__grid {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 24px;
-    align-items: start;
-}
-
-.wgos-module__num {
-    font-family: var(--nx-font);
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--nx-accent-text);
-    line-height: 1;
-    padding-top: 4px;
-}
-
-.wgos-module__content h3 {
-    font-size: 1.4rem;
-    font-weight: 800;
-    margin: 0 0 8px;
-    color: var(--nx-text);
-}
-
-.wgos-module__subline {
-    font-size: 0.95rem;
-    color: var(--nx-text-muted);
-    margin: 0 0 12px;
-}
-
-.wgos-module__content > p {
-    font-size: 1rem;
-    color: var(--nx-text-muted);
-    line-height: 1.7;
-    margin: 0 0 16px;
-    max-width: 650px;
-}
-
-.wgos-module__proof {
-    display: inline-block;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--nx-accent-text);
-    background: var(--nx-gold-subtle);
-    padding: 6px 14px;
-    border-radius: var(--nx-radius-pill);
-    margin-bottom: 12px;
-    letter-spacing: 0.02em;
 }
 
 .wgos-tag--optional {
@@ -1344,15 +1256,6 @@
 
     .wgos-hero {
         padding: 72px 0 56px;
-    }
-
-    .wgos-module__grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .wgos-module__num {
-        font-size: 2rem;
     }
 
     .wgos-trust-stack {

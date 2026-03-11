@@ -84,6 +84,28 @@ function nexus_get_wgos_asset_lookup_key( $value ) {
 }
 
 /**
+ * Build the explorer slug for a WGOS asset label or post.
+ *
+ * @param string|WP_Post $value Asset label, slug or post object.
+ * @return string
+ */
+function nexus_get_wgos_asset_anchor_slug( $value ) {
+	if ( $value instanceof WP_Post ) {
+		$raw_value = $value->post_title ? $value->post_title : $value->post_name;
+		return sanitize_title( wp_strip_all_tags( (string) $raw_value ) );
+	}
+
+	$raw_value = (string) $value;
+	$asset     = nexus_get_wgos_asset( $raw_value );
+
+	if ( $asset instanceof WP_Post ) {
+		return nexus_get_wgos_asset_anchor_slug( $asset );
+	}
+
+	return sanitize_title( wp_strip_all_tags( $raw_value ) );
+}
+
+/**
  * Build a per-request lookup table for published WGOS assets.
  *
  * Supports both explicit slugs and labels from the WGOS hub tables.
@@ -178,23 +200,18 @@ function nexus_get_wgos_asset_hover_text( $asset ) {
 function nexus_render_wgos_asset_label( $label ) {
 	$label = (string) $label;
 	$asset = nexus_get_wgos_asset( $label );
-
-	if ( ! $asset instanceof WP_Post ) {
-		return esc_html( $label );
-	}
-
-	$hint = nexus_get_wgos_asset_hover_text( $asset );
+	$hint  = $asset instanceof WP_Post ? nexus_get_wgos_asset_hover_text( $asset ) : '';
 
 	if ( '' === $hint ) {
-		$hint = __( 'Detailseite mit Kontext, Leistungsumfang und Einsatz im WGOS.', 'blocksy-child' );
+		$hint = __( 'Im Explorer finden Sie Nutzen, Credits und den nächsten sinnvollen Schritt für dieses Asset.', 'blocksy-child' );
 	}
 
 	return sprintf(
 		'<span class="wgos-asset-link-wrap"><span class="wgos-asset-link">%1$s</span><span class="wgos-asset-link__panel"><span class="wgos-asset-link__text">%2$s</span><a class="wgos-asset-link__cta" href="%3$s" data-track-action="cta_wgos_asset_table" data-track-category="navigation">%4$s</a></span></span>',
 		esc_html( $label ),
 		esc_html( $hint ),
-		esc_url( get_permalink( $asset ) ),
-		esc_html__( 'Mehr erfahren', 'blocksy-child' )
+		esc_url( nexus_get_wgos_asset_anchor_url( $asset instanceof WP_Post ? $asset : $label ) ),
+		esc_html__( 'Im Explorer öffnen', 'blocksy-child' )
 	);
 }
 
@@ -226,6 +243,39 @@ function nexus_get_wgos_url() {
 	}
 
 	return home_url( '/wgos/' );
+}
+
+/**
+ * Resolve the explorer anchor ID for a WGOS asset.
+ *
+ * @param string|WP_Post $value Asset label, slug or post object.
+ * @return string
+ */
+function nexus_get_wgos_asset_anchor_id( $value ) {
+	$slug = nexus_get_wgos_asset_anchor_slug( $value );
+
+	if ( '' === $slug ) {
+		return '';
+	}
+
+	return 'asset-' . $slug;
+}
+
+/**
+ * Resolve the explorer anchor URL for a WGOS asset.
+ *
+ * @param string|WP_Post $value Asset label, slug or post object.
+ * @return string
+ */
+function nexus_get_wgos_asset_anchor_url( $value ) {
+	$anchor_id = nexus_get_wgos_asset_anchor_id( $value );
+	$wgos_url  = nexus_get_wgos_url();
+
+	if ( '' === $anchor_id ) {
+		return $wgos_url;
+	}
+
+	return $wgos_url . '#' . $anchor_id;
 }
 
 /**

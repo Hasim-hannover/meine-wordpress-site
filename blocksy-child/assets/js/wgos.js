@@ -68,7 +68,7 @@
         // 5. SECTION VISIBILITY TRACKING
         // =============================================
         var visTargets = {
-            'module': 'module_view',
+            'module': 'asset_explorer_view',
             'credits': 'credits_table_view',
             'pakete': 'package_view'
         };
@@ -90,20 +90,14 @@
         });
 
         // =============================================
-        // 6. MODULE VISIBILITY TRACKING (each module)
+        // 6. EXPLORER INTERACTION TRACKING
         // =============================================
-        document.querySelectorAll('.wgos-module[id^="modul-"]').forEach(function (mod) {
-            var modObserver = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        pushEvent('module_view', {
-                            module_id: entry.target.id
-                        });
-                        modObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            modObserver.observe(mod);
+        document.addEventListener('wgos:asset-open', function (event) {
+            pushEvent('wgos_asset_open', event.detail || {});
+        });
+
+        document.addEventListener('wgos:asset-cta', function (event) {
+            pushEvent('wgos_asset_cta_click', event.detail || {});
         });
 
     });

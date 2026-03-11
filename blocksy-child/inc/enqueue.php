@@ -133,10 +133,27 @@ function hu_enqueue_assets() {
 
 	// ── G) Template: WGOS System ──────────────────────────────────
 	if ( is_page_template( 'page-wgos.php' ) || is_page( 'wgos' ) || is_page( 'wordpress-growth-operating-system' ) ) {
+		$wgos_url = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : home_url( '/wgos/' );
+
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
 		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );
+		hu_enqueue_css( 'nexus-wgos-assets-css', 'wgos-assets.css', [ 'nexus-wgos-css' ] );
 		hu_enqueue_js( 'nexus-wgos-js', 'wgos.js', [ 'nexus-core-js' ] );
-		hu_enqueue_js( 'nexus-wgos-mindmap-v2-js', 'wgos-mindmap-v2.js', [ 'nexus-wgos-js' ] );
+		hu_enqueue_module_js( 'nexus-wgos-assets-js', 'wgos-assets.js' );
+		hu_enqueue_module_js( 'nexus-wgos-asset-explorer-js', 'wgos-asset-explorer.js', [ 'wp-element', 'nexus-wgos-js', 'nexus-wgos-assets-js' ] );
+
+		wp_localize_script(
+			'nexus-wgos-asset-explorer-js',
+			'NexusWgosExplorerConfig',
+			[
+				'links' => [
+					'audit'   => function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' ),
+					'credits' => $wgos_url . '#credits',
+					'pakete'  => $wgos_url . '#pakete',
+					'cases'   => nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) ),
+				],
+			]
+		);
 	}
 
 	// ── G2) Template: WGOS Asset Detail ───────────────────────────
@@ -269,3 +286,46 @@ function hu_enqueue_js( $handle, $file, $deps = [] ) {
 		true
 	);
 }
+
+/**
+ * Helper: Enqueue a JS module file with filemtime cache-busting.
+ *
+ * @param string $handle Script handle.
+ * @param string $file   Filename inside assets/js/.
+ * @param array  $deps   Dependencies.
+ * @return void
+ */
+function hu_enqueue_module_js( $handle, $file, $deps = [] ) {
+	global $hu_module_script_handles;
+
+	hu_enqueue_js( $handle, $file, $deps );
+
+	if ( ! is_array( $hu_module_script_handles ) ) {
+		$hu_module_script_handles = [];
+	}
+
+	$hu_module_script_handles[] = $handle;
+}
+
+/**
+ * Print selected script handles as ES modules.
+ *
+ * @param string $tag    Original script tag.
+ * @param string $handle Script handle.
+ * @param string $src    Script source URL.
+ * @return string
+ */
+function hu_filter_module_script_tag( $tag, $handle, $src ) {
+	global $hu_module_script_handles;
+
+	if ( empty( $hu_module_script_handles ) || ! in_array( $handle, $hu_module_script_handles, true ) ) {
+		return $tag;
+	}
+
+	return sprintf(
+		'<script type="module" src="%1$s" id="%2$s-js"></script>' . "\n",
+		esc_url( $src ),
+		esc_attr( $handle )
+	);
+}
+add_filter( 'script_loader_tag', 'hu_filter_module_script_tag', 10, 3 );

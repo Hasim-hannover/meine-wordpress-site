@@ -14,11 +14,6 @@ get_header();
 
 $audit_url = nexus_get_audit_url();
 $cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
-$cwv_url   = nexus_get_page_url( [ 'core-web-vitals', 'core-web-vitals-optimierung' ], home_url( '/core-web-vitals/' ) );
-$care_url  = nexus_get_page_url( [ 'wordpress-wartung-hannover' ], home_url( '/wordpress-wartung-hannover/' ) );
-$ga4_url   = nexus_get_page_url( [ 'ga4-tracking-setup' ], home_url( '/ga4-tracking-setup/' ) );
-$seo_url   = nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ], home_url( '/wordpress-seo-hannover/' ) );
-$cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '/conversion-rate-optimization/' ) );
 ?>
 
 <div class="wgos-wrapper">
@@ -111,7 +106,7 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
 
 <!-- ========================================
      WGOS FIX: SOCIAL PROOF STRIP (serverseitig)
-     Position: nach Prinzip, vor den 7 Modulen
+     Position: nach Prinzip, vor dem Asset Explorer
      ======================================== -->
 <section class="wgos-section wgos-section--white nx-reveal">
     <div class="wgos-container">
@@ -126,131 +121,17 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
 </section>
 
 <!-- ========================================
-     SECTION 3: DIE 7 MODULE
+     SECTION 3: ASSET EXPLORER
      ======================================== -->
 <section id="module" class="wgos-section">
     <div class="wgos-container">
-    <h2 class="wgos-h2">Die Arbeitsbereiche im System</h2>
-    <div id="wgos-mindmap-v2-root" class="wgos-mindmap-v2-root" aria-label="WGOS Mindmap v2"></div>
-    <p class="wgos-section-intro">Alle Maßnahmen ordnen sich denselben Zielen unter: bessere Grundlagen, bessere Sichtbarkeit, bessere Conversion.</p>
-    </div>
-
-    <!-- Modul 01 -->
-    <div class="wgos-module wgos-module--white nx-reveal" id="modul-01">
-        <div class="wgos-container">
-            <div class="wgos-module__grid">
-                <div class="wgos-module__num">01</div>
-                <div class="wgos-module__content">
-                    <h3>Technisches Fundament</h3>
-                    <p class="wgos-module__subline"><em>Performance, saubere Struktur, technische Stabilität und Core Web Vitals als Grundlage für Vertrauen, Sichtbarkeit und Conversion.</em></p>
-                    <p>Core Web Vitals, Server-Tuning, Asset-Optimierung, Critical CSS, Lazy Loading, CDN-Setup. Ergebnis: weniger Absprünge, bessere Rankings, höhere Conversion.</p>
-                    <div class="wgos-module__proof">Core Web Vitals von 45 → 98 (Mobile) in 14 Tagen</div>
-                    <a href="<?php echo esc_url( $cwv_url ); ?>" class="wgos-link--arrow">Core Web Vitals ansehen</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modul 02 -->
-    <div class="wgos-module wgos-module--gray nx-reveal" id="modul-02">
-        <div class="wgos-container">
-            <div class="wgos-module__grid">
-                <div class="wgos-module__num">02</div>
-                <div class="wgos-module__content">
-                    <h3>Sicherheit & Stabilität</h3>
-                    <p class="wgos-module__subline"><em>Updates, Backups, Monitoring und saubere technische Prozesse, damit die Website verlässlich arbeitet und Risiken reduziert werden.</em></p>
-                    <p>WordPress-Härtung, automatisierte Backups, Uptime-Monitoring, Update-Management, Malware-Scan, Disaster Recovery.</p>
-                    <div class="wgos-module__proof">0 Ausfallstunden in 12 Monaten bei betreuten Projekten</div>
-                    <a href="<?php echo esc_url( $care_url ); ?>" class="wgos-link--arrow">WordPress Wartung ansehen</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modul 03 -->
-    <div class="wgos-module wgos-module--white nx-reveal" id="modul-03">
-        <div class="wgos-container">
-            <div class="wgos-module__grid">
-                <div class="wgos-module__num">03</div>
-                <div class="wgos-module__content">
-                    <h3>Messbarkeit & Datenschutz</h3>
-                    <p class="wgos-module__subline"><em>GA4, Consent Mode, saubere Ereignisse, klare KPIs und belastbare Daten als Basis für Entscheidungen statt Bauchgefühl.</em></p>
-                    <p>Server-Side Tracking (sGTM &amp; Matomo), Consent Mode v2, Event-Blueprint, GA4-Setup ohne Cookie-Banner-Chaos.</p>
-                    <div class="wgos-module__proof">Tracking-Genauigkeit von ~55% auf &gt;92% (nach sGTM-Rollout)</div>
-                    <a href="<?php echo esc_url( $ga4_url ); ?>" class="wgos-link--arrow">GA4 &amp; Tracking Setup ansehen</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modul 04 -->
-    <div class="wgos-module wgos-module--gray nx-reveal" id="modul-04">
-        <div class="wgos-container">
-            <div class="wgos-module__grid">
-                <div class="wgos-module__num">04</div>
-                <div class="wgos-module__content">
-                    <h3>Sichtbarkeit durch Inhalte</h3>
-                    <p class="wgos-module__subline"><em>Inhalte und Seiten, die nicht nur ranken sollen, sondern die richtigen Suchanfragen abdecken, Vertrauen aufbauen und Nachfrage vorbereiten.</em></p>
-                    <p>Crawl-Optimierung, Sitemap-Strategie, Schema Markup (JSON-LD), interne Verlinkung, URL-Architektur, Pillar/Cluster-Planung.</p>
-                    <div class="wgos-module__proof">Indexierte Seiten +340% nach IA-Restrukturierung</div>
-                    <a href="<?php echo esc_url( $seo_url ); ?>" class="wgos-link--arrow">WordPress SEO ansehen</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modul 05 -->
-    <div class="wgos-module wgos-module--white nx-reveal" id="modul-05">
-        <div class="wgos-container">
-            <div class="wgos-module__grid">
-                <div class="wgos-module__num">05</div>
-                <div class="wgos-module__content">
-                    <h3>Conversion & Angebotslogik</h3>
-                    <p class="wgos-module__subline"><em>Klarere Seiten, bessere Nutzerführung, stärkere Botschaften und sinnvollere Angebotsstruktur, damit aus Besuchern häufiger Anfragen werden.</em></p>
-                    <p>Pillar Pages, Content-Cluster, Proof-Assets (Case Studies), Lead-Magneten, Nurture-Sequenzen.</p>
-                    <div class="wgos-module__proof">Organischer Traffic +180% in 6 Monaten (B2B SaaS Kunde)</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modul 06 -->
-    <div class="wgos-module wgos-module--gray nx-reveal" id="modul-06">
-        <div class="wgos-container">
-            <div class="wgos-module__grid">
-                <div class="wgos-module__num">06</div>
-                <div class="wgos-module__content">
-                    <h3>Aktivierung & Automatisierung</h3>
-                    <p class="wgos-module__subline"><em>Formulare, interne Abläufe, Follow-up-Logik und gezielte Automatisierung, damit gute Nachfrage nicht im Prozess verloren geht.</em></p>
-                    <p>Landing Page Architektur, CTA-Hierarchie, Above-the-Fold-Optimierung, A/B-Testing, Lead-Formulare, Offer-Framing, Friction-Analyse.</p>
-                    <div class="wgos-module__proof">Conversion Rate von 1.2% → 4.7% (B2B Dienstleister)</div>
-                    <a href="<?php echo esc_url( $cro_url ); ?>" class="wgos-link--arrow">CRO-Service ansehen</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modul 07 -->
-    <div class="wgos-module wgos-module--white nx-reveal" id="modul-07">
-        <div class="wgos-container">
-            <div class="wgos-module__grid">
-                <div class="wgos-module__num">07</div>
-                <div class="wgos-module__content">
-                    <h3>Betrieb & Weiterentwicklung <span class="wgos-tag--optional">Optional</span></h3>
-                    <p class="wgos-module__subline"><em>Laufende Priorisierung, saubere Umsetzung und kontrollierte Weiterentwicklung statt losem Sammeln von To-dos.</em></p>
-                    <p>Paid Activation und n8n-Automation – aber nur auf Basis sauberer Daten und konvertierender Pages. Dieser Block bleibt optional und wird erst aktiviert, wenn Modul 1–6 stehen.</p>
-                    <div class="wgos-module__proof">ROAS 6.2x bei 40% weniger Ad-Spend (nach Fundament-Optimierung)</div>
-                    <a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Reihenfolge in der Praxis sehen</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Inline CTA nach Modul 7 -->
-    <div class="wgos-module wgos-module--cta">
-        <div class="wgos-container" style="text-align:center;">
-            <a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Erst Diagnose, dann System. Mit dem Audit starten</a>
-        </div>
+        <h2 class="wgos-h2">Die Assets im System</h2>
+        <p class="wgos-section-intro">Fahren Sie über ein Asset oder fokussieren Sie es per Tastatur, um den Nutzen zu sehen. Mit Klick oder Tap öffnet sich die Detailansicht mit Credits, Lieferumfang und dem nächsten sinnvollen Schritt.</p>
+        <?php // TODO: Alte Leistungsseiten wie /wordpress-seo-hannover, /ga4-tracking-setup und /core-web-vitals per 301 auf passende /wgos/#asset-* Anker umleiten. ?>
+        <div id="wgos-asset-explorer-root" class="wgos-asset-explorer-root" aria-live="polite"></div>
+        <noscript>
+            <p class="wgos-asset-explorer__noscript">Bitte aktivieren Sie JavaScript, um den WGOS Asset Explorer zu nutzen. Die Credits- und Paketbereiche weiter unten bleiben weiterhin verfügbar.</p>
+        </noscript>
     </div>
 </section>
 
@@ -353,27 +234,27 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
                                 <td colspan="3">SEO &amp; Owned Content</td>
                             </tr>
                             <tr>
-                                <td>Technical SEO Audit</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Technical SEO Audit' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Crawl, Indexierung, Schema, Site-Architektur</td>
                                 <td>10</td>
                             </tr>
                             <tr>
-                                <td>Pillar Page</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Pillar Page' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Langform-Seite (2.000+ Wörter, SEO-optimiert)</td>
                                 <td>25</td>
                             </tr>
                             <tr>
-                                <td>Cluster-Artikel</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Cluster-Artikel' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Blog/Supportcontent (800–1.200 Wörter)</td>
                                 <td>12</td>
                             </tr>
                             <tr>
-                                <td>Case Study / Proof</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Case Study / Proof' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Kunden-Ergebnis mit KPIs, Vorher/Nachher</td>
                                 <td>15</td>
                             </tr>
                             <tr>
-                                <td>Interne Link-Architektur</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Interne Link-Architektur' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Mapping + Umsetzung interner Verlinkung</td>
                                 <td>8</td>
                             </tr>
@@ -381,22 +262,22 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
                                 <td colspan="3">Conversion &amp; Offer Engineering</td>
                             </tr>
                             <tr>
-                                <td>Landing Page (Neu)</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Landing Page (Neu)' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>High-Conversion LP: Copy, Design, Build</td>
                                 <td>20</td>
                             </tr>
                             <tr>
-                                <td>CRO Audit + Fixes</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'CRO Audit + Fixes' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Friction-Analyse, CTA-Optimierung, A/B</td>
                                 <td>12</td>
                             </tr>
                             <tr>
-                                <td>Lead-Formular Engineering</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Lead-Formular Engineering' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Multi-Step, Validation, Lead-Routing</td>
                                 <td>10</td>
                             </tr>
                             <tr>
-                                <td>Offer/Pricing Page</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Offer/Pricing Page' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Angebotsstruktur, Pakete, Social Proof</td>
                                 <td>15</td>
                             </tr>
@@ -424,27 +305,27 @@ $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ], home_url( '
                                 <td colspan="3">Activation Layer &amp; Automation</td>
                             </tr>
                             <tr>
-                                <td>Google Ads Setup</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Google Ads Setup' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Kampagnenstruktur, Keywords, Anzeigen</td>
                                 <td>15</td>
                             </tr>
                             <tr>
-                                <td>Paid Social Setup</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Paid Social Setup' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Kampagnenarchitektur, Creatives, Audiences</td>
                                 <td>15</td>
                             </tr>
                             <tr>
-                                <td>Ads Management (monatlich)</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Ads Management (monatlich)' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Optimierung, Reporting, Budget-Steuerung</td>
                                 <td>10/Monat</td>
                             </tr>
                             <tr>
-                                <td>n8n Automation Flow</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'n8n Automation Flow' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Lead-Routing, Notifications, CRM-Sync</td>
                                 <td>12</td>
                             </tr>
                             <tr>
-                                <td>Reporting Dashboard</td>
+                                <td><?php echo nexus_render_wgos_asset_label( 'Reporting Dashboard' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
                                 <td>Automated KPI-Dashboard (Looker/Sheets)</td>
                                 <td>10</td>
                             </tr>

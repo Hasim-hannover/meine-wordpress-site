@@ -30,6 +30,9 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 			: $phase_key;
 		$excerpt      = has_excerpt() ? get_the_excerpt() : '';
 		$ancestors    = array_reverse( get_post_ancestors( $post_id ) );
+		$asset_anchor_url = function_exists( 'nexus_get_wgos_asset_anchor_url' )
+			? nexus_get_wgos_asset_anchor_url( get_post() )
+			: $wgos_url . '#module';
 		?>
 
 		<div class="wgos-wrapper">
@@ -58,7 +61,7 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 					<?php endif; ?>
 
 					<div class="wgos-hero__actions">
-						<a href="<?php echo esc_url( $wgos_url . '#credits' ); ?>" class="wgos-btn wgos-btn--outline">Zur WGOS-Übersicht</a>
+						<a href="<?php echo esc_url( $asset_anchor_url ); ?>" class="wgos-btn wgos-btn--outline">Im Explorer öffnen</a>
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
 					</div>
 				</div>
@@ -81,8 +84,8 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 										<td><?php esc_html_e( 'Credits', 'blocksy-child' ); ?></td>
 										<td>
 											<?php
-											echo '' !== $credits
-												? esc_html( number_format_i18n( (float) $credits ) )
+											echo '' !== trim( (string) $credits )
+												? esc_html( $credits )
 												: esc_html__( 'Nicht definiert', 'blocksy-child' );
 											?>
 										</td>
@@ -114,7 +117,7 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 						<h2 class="wgos-h2">Ein Asset ist nur dann wirksam, wenn das Fundament stimmt.</h2>
 						<p>Performance, Measurement und Conversion sind keine isolierten Baustellen. Im WGOS werden sie in eine belastbare Reihenfolge gebracht, damit ein einzelner Hebel nicht am nächsten Engpass verpufft.</p>
 						<p class="wgos-inline-cta wgos-inline-cta--principle">
-							<a href="<?php echo esc_url( $wgos_url ); ?>">Zurück ins WGOS und die Gesamtlogik ansehen</a>
+							<a href="<?php echo esc_url( $asset_anchor_url ); ?>">Dieses Asset im Explorer öffnen</a>
 						</p>
 					</div>
 				</div>
