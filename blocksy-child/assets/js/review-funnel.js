@@ -29,15 +29,14 @@
       startedField.value = String(Date.now());
     }
 
-    var urlInput = form.querySelector('[name="page_url"]');
-    if (urlInput) {
-      urlInput.addEventListener('blur', function () {
+    Array.prototype.forEach.call(form.querySelectorAll('input[type="url"]'), function (input) {
+      input.addEventListener('blur', function () {
         var value = this.value.trim();
         if (value && !/^https?:\/\//i.test(value)) {
           this.value = 'https://' + value;
         }
       });
-    }
+    });
 
     form.addEventListener('click', handleClick);
     form.addEventListener('submit', handleSubmit);
@@ -131,21 +130,7 @@
     if (!form) return;
 
     syncSummary(form);
-
-    var field = event.target;
-    if (!field || field.type !== 'radio' || field.name !== 'biggest_issue') {
-      return;
-    }
-
-    if (state.stepIndex === state.steps.length - 1) {
-      return;
-    }
-
-    window.setTimeout(function () {
-      if (state.stepIndex === 3) {
-        goToNextStep();
-      }
-    }, 160);
+    clearFeedback();
   }
 
   function goToNextStep() {
@@ -258,7 +243,7 @@
         state.submitting = false;
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = auditLabel + ' anfordern';
+          submitButton.textContent = auditLabel + ' anfragen';
         }
       });
   }
@@ -271,17 +256,24 @@
 
     clearFeedback();
 
-    var radios = currentStep.querySelectorAll('input[type="radio"][name="biggest_issue"]');
-    if (radios.length) {
-      var isRadioChecked = Array.prototype.some.call(radios, function (radio) {
-        return radio.checked;
-      });
+    var requiredRadioNames = [];
+    Array.prototype.forEach.call(currentStep.querySelectorAll('input[type="radio"][required]'), function (radio) {
+      if (!radio.name || requiredRadioNames.indexOf(radio.name) !== -1) {
+        return;
+      }
 
-      if (!isRadioChecked) {
-        var radioMessage = 'Bitte den größten Blocker auswählen.';
+      requiredRadioNames.push(radio.name);
+    });
+
+    for (var radioIndex = 0; radioIndex < requiredRadioNames.length; radioIndex += 1) {
+      var radioName = requiredRadioNames[radioIndex];
+      var checkedRadio = currentStep.querySelector('input[name="' + radioName + '"]:checked');
+
+      if (!checkedRadio) {
+        var radioMessage = currentStep.getAttribute('data-review-radio-message') || 'Bitte eine Option auswählen.';
 
         showFeedback(radioMessage, 'error');
-        trackValidationError(radioMessage, 'biggest_issue');
+        trackValidationError(radioMessage, radioName);
         return false;
       }
     }
@@ -348,10 +340,11 @@
     var success = document.getElementById('review-request-success');
     var successMessage = document.getElementById('review-success-message');
     var successUrl = document.getElementById('review-success-url');
+    var reviewBox = form ? form.closest('.review-box') : null;
     var focusTarget = success || form;
 
     if (successUrl) {
-      successUrl.textContent = payload.page_url || 'der Seite';
+      successUrl.textContent = payload.page_url ? 'Seite im Audit: ' + payload.page_url : 'Seite im Audit';
     }
 
     if (successMessage && data && data.message) {
@@ -364,6 +357,10 @@
 
     if (success) {
       success.hidden = false;
+    }
+
+    if (reviewBox) {
+      reviewBox.classList.add('is-success');
     }
 
     pushDataLayerEvent({
@@ -422,12 +419,10 @@
   }
 
   function readSummaryValue(form, key) {
-    if (key === 'biggest_issue') {
-      var selected = form.querySelector('input[name="biggest_issue"]:checked');
-      if (!selected) return '';
-
+    var selected = form.querySelector('input[name="' + key + '"]:checked');
+    if (selected) {
       var option = selected.closest('.review-option');
-      var label = option ? option.querySelector('span') : null;
+      var label = option ? option.querySelector('[data-review-label]') : null;
 
       return label ? label.textContent.trim() : selected.value;
     }
@@ -445,7 +440,11 @@
       return getDomainFromUrl(value) || value;
     }
 
-    return truncateValue(value, key === 'offer' ? 84 : 70);
+    if (key === 'current_challenge') {
+      return truncateValue(value, 108);
+    }
+
+    return truncateValue(value, 78);
   }
 
   function truncateValue(value, maxLength) {

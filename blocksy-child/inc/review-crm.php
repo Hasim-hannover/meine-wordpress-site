@@ -37,17 +37,34 @@ function nexus_get_review_priority_options() {
 }
 
 /**
- * Return the predefined blocker options from the intake form.
+ * Return the selectable focus areas from the intake form.
  *
  * @return array<string, string>
  */
-function nexus_get_review_issue_options() {
+function nexus_get_review_focus_area_options() {
 	return [
-		'too_few_inquiries' => 'Zu wenig qualifizierte Anfragen',
-		'weak_message'      => 'Das Seitenversprechen ist zu unscharf',
-		'weak_proof'        => 'Proof und Vertrauen greifen zu spät',
-		'weak_conversion'   => 'Die Seite führt nicht sauber zur Anfrage',
-		'second_opinion'    => 'Ich brauche eine zweite strategische Einordnung',
+		'seo_visibility'            => 'SEO / Sichtbarkeit',
+		'performance_cwv'           => 'Performance / Core Web Vitals',
+		'conversion_inquiry_flow'   => 'Conversion / Anfrageführung',
+		'tracking_data_quality'     => 'Tracking / Datenqualität',
+		'positioning_page_message'  => 'Positionierung / Seitenbotschaft',
+		'not_sure_yet'              => 'Ich bin mir noch nicht sicher',
+	];
+}
+
+/**
+ * Return the selectable primary goals from the intake form.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_review_primary_goal_options() {
+	return [
+		'more_qualified_inquiries'         => 'mehr qualifizierte Anfragen',
+		'clearer_positioning'              => 'klarere Positionierung',
+		'better_google_visibility'         => 'bessere Sichtbarkeit bei Google',
+		'better_user_guidance_conversion'  => 'bessere Nutzerführung / Conversion',
+		'better_technical_quality'         => 'bessere technische Qualität',
+		'clearer_decision_data'            => 'klarere Datenbasis für Entscheidungen',
 	];
 }
 
@@ -85,6 +102,25 @@ function nexus_get_audit_notification_email() {
 	$default = (string) apply_filters( 'nexus_review_notification_email', get_option( 'admin_email' ) );
 
 	return (string) apply_filters( 'nexus_audit_notification_email', $default );
+}
+
+/**
+ * Return the first non-empty meta value from a list of keys.
+ *
+ * @param int          $post_id  Current post ID.
+ * @param array|string $keys     Meta key or fallback key list.
+ * @param string       $default  Default value.
+ * @return string
+ */
+function nexus_get_review_meta_value( $post_id, $keys, $default = '' ) {
+	foreach ( (array) $keys as $key ) {
+		$value = (string) get_post_meta( $post_id, $key, true );
+		if ( '' !== trim( $value ) ) {
+			return $value;
+		}
+	}
+
+	return $default;
 }
 
 /**
@@ -276,10 +312,7 @@ function nexus_handle_review_request_submission( WP_REST_Request $request ) {
 		[
 			'ok'          => true,
 			'requestId'   => $post_id,
-			'message'     => sprintf(
-				'Ihre Anfrage für den %s ist eingegangen. Sie erhalten innerhalb von 48 Stunden eine persönliche Rückmeldung.',
-				$validated['audit_type_label']
-			),
+			'message'     => 'Ich prüfe Ihre Seite manuell und ergänze die Einschätzung durch KI-gestützte Analyse. Sie erhalten innerhalb von 48 Stunden eine persönliche Rückmeldung.',
 			'editUrl'     => get_edit_post_link( $post_id, 'raw' ),
 			'status'      => 'received',
 			'statusLabel' => 'Neu',
@@ -296,16 +329,19 @@ function nexus_handle_review_request_submission( WP_REST_Request $request ) {
  * @return array|WP_Error
  */
 function nexus_validate_review_request_payload( $payload ) {
-	$type_options  = nexus_get_audit_request_type_options();
-	$audit_type    = isset( $payload['audit_type'] ) ? sanitize_key( (string) $payload['audit_type'] ) : 'growth_audit';
-	$page_url      = isset( $payload['page_url'] ) ? trim( (string) $payload['page_url'] ) : '';
-	$offer         = isset( $payload['offer'] ) ? sanitize_textarea_field( (string) $payload['offer'] ) : '';
-	$audience      = isset( $payload['audience'] ) ? sanitize_textarea_field( (string) $payload['audience'] ) : '';
-	$biggest_issue = isset( $payload['biggest_issue'] ) ? sanitize_key( (string) $payload['biggest_issue'] ) : '';
-	$extra_context = isset( $payload['extra_context'] ) ? sanitize_textarea_field( (string) $payload['extra_context'] ) : '';
-	$name          = isset( $payload['name'] ) ? sanitize_text_field( (string) $payload['name'] ) : '';
-	$email         = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
-	$company       = isset( $payload['company'] ) ? sanitize_text_field( (string) $payload['company'] ) : '';
+	$type_options      = nexus_get_audit_request_type_options();
+	$focus_area_map    = nexus_get_review_focus_area_options();
+	$primary_goal_map  = nexus_get_review_primary_goal_options();
+	$audit_type        = isset( $payload['audit_type'] ) ? sanitize_key( (string) $payload['audit_type'] ) : 'growth_audit';
+	$page_url          = isset( $payload['page_url'] ) ? trim( (string) $payload['page_url'] ) : '';
+	$company           = isset( $payload['company'] ) ? sanitize_text_field( (string) $payload['company'] ) : '';
+	$focus_area        = isset( $payload['focus_area'] ) ? sanitize_key( (string) $payload['focus_area'] ) : '';
+	$current_challenge = isset( $payload['current_challenge'] ) ? sanitize_textarea_field( (string) $payload['current_challenge'] ) : '';
+	$primary_goal      = isset( $payload['primary_goal'] ) ? sanitize_key( (string) $payload['primary_goal'] ) : '';
+	$extra_context     = isset( $payload['extra_context'] ) ? sanitize_textarea_field( (string) $payload['extra_context'] ) : '';
+	$name              = isset( $payload['name'] ) ? sanitize_text_field( (string) $payload['name'] ) : '';
+	$email             = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
+	$linkedin          = isset( $payload['linkedin'] ) ? trim( (string) $payload['linkedin'] ) : '';
 
 	if ( empty( $page_url ) ) {
 		return new WP_Error( 'missing_page_url', 'Bitte die URL der Seite angeben.' );
@@ -321,17 +357,16 @@ function nexus_validate_review_request_payload( $payload ) {
 		return new WP_Error( 'invalid_scheme', 'Nur http- oder https-URLs sind erlaubt.' );
 	}
 
-	if ( empty( $offer ) ) {
-		return new WP_Error( 'missing_offer', 'Bitte kurz beschreiben, was diese Seite verkaufen oder auslösen soll.' );
+	if ( empty( $focus_area ) || ! isset( $focus_area_map[ $focus_area ] ) ) {
+		return new WP_Error( 'missing_focus_area', 'Bitte den Bereich mit dem größten Klärungsbedarf auswählen.' );
 	}
 
-	if ( empty( $audience ) ) {
-		return new WP_Error( 'missing_audience', 'Bitte angeben, wen diese Seite überzeugen soll.' );
+	if ( empty( $current_challenge ) ) {
+		return new WP_Error( 'missing_current_challenge', 'Bitte die größte Herausforderung kurz beschreiben.' );
 	}
 
-	$issue_options = nexus_get_review_issue_options();
-	if ( empty( $biggest_issue ) || ! isset( $issue_options[ $biggest_issue ] ) ) {
-		return new WP_Error( 'missing_issue', 'Bitte das größte Problem auswählen.' );
+	if ( empty( $primary_goal ) || ! isset( $primary_goal_map[ $primary_goal ] ) ) {
+		return new WP_Error( 'missing_primary_goal', 'Bitte das wichtigste Ziel für diese Seite auswählen.' );
 	}
 
 	if ( empty( $name ) ) {
@@ -342,8 +377,17 @@ function nexus_validate_review_request_payload( $payload ) {
 		return new WP_Error( 'invalid_email', 'Bitte eine gültige geschäftliche E-Mail-Adresse angeben.' );
 	}
 
-	if ( empty( $company ) ) {
-		return new WP_Error( 'missing_company', 'Bitte den Unternehmensnamen angeben.' );
+	if ( '' !== $linkedin ) {
+		$linkedin = esc_url_raw( $linkedin );
+
+		if ( ! $linkedin || ! wp_http_validate_url( $linkedin ) ) {
+			return new WP_Error( 'invalid_linkedin', 'Bitte eine gültige LinkedIn-URL angeben oder das Feld leer lassen.' );
+		}
+
+		$linkedin_scheme = wp_parse_url( $linkedin, PHP_URL_SCHEME );
+		if ( ! in_array( $linkedin_scheme, [ 'http', 'https' ], true ) ) {
+			return new WP_Error( 'invalid_linkedin_scheme', 'Bitte eine gültige LinkedIn-URL mit http oder https angeben.' );
+		}
 	}
 
 	if ( empty( $audit_type ) || ! isset( $type_options[ $audit_type ] ) ) {
@@ -351,18 +395,20 @@ function nexus_validate_review_request_payload( $payload ) {
 	}
 
 	return [
-		'audit_type'         => $audit_type,
-		'audit_type_label'   => $type_options[ $audit_type ],
+		'audit_type'        => $audit_type,
+		'audit_type_label'  => $type_options[ $audit_type ],
 		'page_url'          => $page_url,
 		'domain'            => (string) wp_parse_url( $page_url, PHP_URL_HOST ),
-		'offer'             => $offer,
-		'audience'          => $audience,
-		'biggest_issue'     => $biggest_issue,
-		'biggest_issue_label'=> $issue_options[ $biggest_issue ],
+		'company'           => $company,
+		'focus_area'        => $focus_area,
+		'focus_area_label'  => $focus_area_map[ $focus_area ],
+		'current_challenge' => $current_challenge,
+		'primary_goal'      => $primary_goal,
+		'primary_goal_label' => $primary_goal_map[ $primary_goal ],
 		'extra_context'     => $extra_context,
 		'name'              => $name,
 		'email'             => $email,
-		'company'           => $company,
+		'linkedin'          => $linkedin,
 	];
 }
 
@@ -402,14 +448,16 @@ function nexus_create_review_request_post( $payload ) {
 	update_post_meta( $post_id, '_nexus_review_audit_type_label', $payload['audit_type_label'] );
 	update_post_meta( $post_id, '_nexus_review_page_url', $payload['page_url'] );
 	update_post_meta( $post_id, '_nexus_review_domain', $payload['domain'] );
-	update_post_meta( $post_id, '_nexus_review_offer', $payload['offer'] );
-	update_post_meta( $post_id, '_nexus_review_audience', $payload['audience'] );
-	update_post_meta( $post_id, '_nexus_review_biggest_issue', $payload['biggest_issue'] );
-	update_post_meta( $post_id, '_nexus_review_biggest_issue_label', $payload['biggest_issue_label'] );
+	update_post_meta( $post_id, '_nexus_review_focus_area', $payload['focus_area'] );
+	update_post_meta( $post_id, '_nexus_review_focus_area_label', $payload['focus_area_label'] );
+	update_post_meta( $post_id, '_nexus_review_current_challenge', $payload['current_challenge'] );
+	update_post_meta( $post_id, '_nexus_review_primary_goal', $payload['primary_goal'] );
+	update_post_meta( $post_id, '_nexus_review_primary_goal_label', $payload['primary_goal_label'] );
 	update_post_meta( $post_id, '_nexus_review_extra_context', $payload['extra_context'] );
 	update_post_meta( $post_id, '_nexus_review_name', $payload['name'] );
 	update_post_meta( $post_id, '_nexus_review_email', $payload['email'] );
 	update_post_meta( $post_id, '_nexus_review_company', $payload['company'] );
+	update_post_meta( $post_id, '_nexus_review_linkedin', $payload['linkedin'] );
 	update_post_meta( $post_id, '_nexus_review_source', 'growth_audit_funnel' );
 
 	return (int) $post_id;
@@ -573,10 +621,11 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		return;
 	}
 
-	$subject = sprintf(
+	$lead_label = $payload['company'] ? $payload['company'] : ( $payload['domain'] ? $payload['domain'] : $payload['name'] );
+	$subject    = sprintf(
 		'[%s] Neue Anfrage - %s',
 		$payload['audit_type_label'],
-		$payload['company']
+		$lead_label
 	);
 	$edit_url = admin_url( 'post.php?post=' . $post_id . '&action=edit' );
 	$page_url = $payload['page_url'];
@@ -595,12 +644,12 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 							<td style="width:50%%; padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
 								<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:6px;">Lead</div>
 								<div style="font-size:16px; line-height:1.5; color:#f7f3ee; font-weight:700;">%1$s</div>
-								<div style="font-size:14px; line-height:1.6; color:#c5ced7;">%2$s<br>%3$s</div>
+								<div style="font-size:14px; line-height:1.6; color:#c5ced7;">%2$s<br>%3$s%4$s</div>
 							</td>
 							<td style="width:50%%; padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
 								<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:6px;">Audit</div>
-								<div style="font-size:16px; line-height:1.5; color:#f7f3ee; font-weight:700;">%4$s</div>
-								<div style="font-size:14px; line-height:1.6; color:#c5ced7;">%5$s</div>
+								<div style="font-size:16px; line-height:1.5; color:#f7f3ee; font-weight:700;">%5$s</div>
+								<div style="font-size:14px; line-height:1.6; color:#c5ced7;">%6$s</div>
 							</td>
 						</tr>
 					</table>
@@ -610,12 +659,12 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0; border-collapse:collapse;">
 			<tr>
 				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
-					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Seite und Kontext</div>
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Intake</div>
 					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
-						<strong style="color:#f7f3ee;">URL:</strong> %6$s<br>
-						<strong style="color:#f7f3ee;">Seitenziel:</strong> %7$s<br>
-						<strong style="color:#f7f3ee;">Zielgruppe:</strong> %8$s<br>
-						<strong style="color:#f7f3ee;">Größter Hebel:</strong> %9$s%10$s
+						<strong style="color:#f7f3ee;">URL:</strong> %7$s<br>
+						<strong style="color:#f7f3ee;">Bereich:</strong> %8$s<br>
+						<strong style="color:#f7f3ee;">Herausforderung:</strong> %9$s<br>
+						<strong style="color:#f7f3ee;">Wichtigstes Ziel:</strong> %10$s%11$s
 					</div>
 				</td>
 			</tr>
@@ -623,33 +672,34 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0">
 			<tr>
 				<td style="padding:0 12px 0 0;">
-					<a href="%11$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Im Audit CRM öffnen</a>
+					<a href="%12$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Im Audit CRM öffnen</a>
 				</td>
 				<td>
-					<a href="%12$s" style="display:inline-block; padding:14px 18px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); color:#f7f3ee; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Seite ansehen</a>
+					<a href="%13$s" style="display:inline-block; padding:14px 18px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); color:#f7f3ee; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Seite ansehen</a>
 				</td>
 			</tr>
 		</table>',
-		esc_html( $payload['company'] ),
+		esc_html( $lead_label ),
 		esc_html( $payload['name'] ),
 		esc_html( $payload['email'] ),
+		! empty( $payload['linkedin'] ) ? '<br><a href="' . esc_url( $payload['linkedin'] ) . '" style="color:#d3a98c; text-decoration:none;">LinkedIn</a>' : '',
 		esc_html( $payload['audit_type_label'] ),
-		esc_html( 'Rückmeldung spätestens in 48h' ),
+		esc_html( 'Persönliche Rückmeldung spätestens in 48h' ),
 		esc_html( $page_url ),
-		esc_html( $payload['offer'] ),
-		esc_html( $payload['audience'] ),
-		esc_html( $payload['biggest_issue_label'] ),
-		! empty( $payload['extra_context'] ) ? '<br><strong style="color:#f7f3ee;">Zusatzkontext:</strong> ' . esc_html( $payload['extra_context'] ) : '',
+		esc_html( $payload['focus_area_label'] ),
+		esc_html( $payload['current_challenge'] ),
+		esc_html( $payload['primary_goal_label'] ),
+		! empty( $payload['extra_context'] ) ? '<br><strong style="color:#f7f3ee;">Nicht übersehen:</strong> ' . esc_html( $payload['extra_context'] ) : '',
 		esc_url( $edit_url ),
 		esc_url( $page_url )
 	);
 
 	$html = nexus_get_audit_email_shell(
 		[
-			'preheader' => 'Neue Audit-Anfrage von ' . $payload['company'],
+			'preheader' => 'Neue Audit-Anfrage von ' . $lead_label,
 			'eyebrow'   => $payload['audit_type_label'],
 			'headline'  => 'Neue Audit-Anfrage',
-			'intro'     => 'Ein neuer Lead ist eingegangen. Alles Wichtige ist unten auf einen Blick zusammengefasst.',
+			'intro'     => 'Ein neuer Lead ist eingegangen. Seite, Fokus und Ziel sind unten kompakt zusammengefasst.',
 			'content'   => $content,
 			'footer'    => 'Sie können direkt auf diese E-Mail antworten. Reply-To zeigt bereits auf den Lead.',
 		]
@@ -669,18 +719,17 @@ function nexus_send_review_request_confirmation( $payload ) {
 		return;
 	}
 
-	$calendar_url = nexus_get_audit_calendar_url();
-	$reply_to     = nexus_get_audit_notification_email();
-	$subject      = sprintf( '[%s] %s angefragt', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ), $payload['audit_type_label'] );
-	$content      = sprintf(
+	$reply_to = nexus_get_audit_notification_email();
+	$subject  = sprintf( '[%s] %s angefragt', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ), $payload['audit_type_label'] );
+	$content  = sprintf(
 		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 20px 0; border-collapse:separate; border-spacing:0 10px;">
 			<tr>
 				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
 					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:6px;">Was jetzt passiert</div>
 					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">1.</strong> Ihre Anfrage ist sauber im System.<br>
-						<strong style="color:#f7f3ee;">2.</strong> Innerhalb von 48 Stunden erhalten Sie eine persönliche Priorisierung.<br>
-						<strong style="color:#f7f3ee;">3.</strong> Sie sehen, ob eine kleine Korrektur reicht oder ob ein tieferer Blueprint sinnvoll ist.
+						<strong style="color:#f7f3ee;">2.</strong> Ihre Seite wird manuell geprüft und durch KI-gestützte Analyse ergänzt.<br>
+						<strong style="color:#f7f3ee;">3.</strong> Innerhalb von 48 Stunden erhalten Sie eine persönliche Rückmeldung mit Priorisierung.
 					</div>
 				</td>
 			</tr>
@@ -689,17 +738,10 @@ function nexus_send_review_request_confirmation( $payload ) {
 					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Ihre Anfrage</div>
 					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">Seite:</strong> %1$s<br>
-						<strong style="color:#f7f3ee;">Seitenziel:</strong> %2$s<br>
-						<strong style="color:#f7f3ee;">Zielgruppe:</strong> %3$s<br>
-						<strong style="color:#f7f3ee;">Wahrscheinlichster Hebel:</strong> %4$s
+						<strong style="color:#f7f3ee;">Bereich:</strong> %2$s<br>
+						<strong style="color:#f7f3ee;">Herausforderung:</strong> %3$s<br>
+						<strong style="color:#f7f3ee;">Wichtigstes Ziel:</strong> %4$s%5$s
 					</div>
-				</td>
-			</tr>
-		</table>
-		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0;">
-			<tr>
-				<td style="padding:0 12px 0 0;">
-					<a href="%5$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Wenn es dringend ist: Termin buchen</a>
 				</td>
 			</tr>
 		</table>
@@ -708,18 +750,18 @@ function nexus_send_review_request_confirmation( $payload ) {
 			antworten Sie einfach kurz auf diese E-Mail.
 		</p>',
 		esc_html( $payload['page_url'] ),
-		esc_html( $payload['offer'] ),
-		esc_html( $payload['audience'] ),
-		esc_html( $payload['biggest_issue_label'] ),
-		esc_url( $calendar_url )
+		esc_html( $payload['focus_area_label'] ),
+		esc_html( $payload['current_challenge'] ),
+		esc_html( $payload['primary_goal_label'] ),
+		! empty( $payload['extra_context'] ) ? '<br><strong style="color:#f7f3ee;">Nicht übersehen:</strong> ' . esc_html( $payload['extra_context'] ) : ''
 	);
 
 	$html = nexus_get_audit_email_shell(
 		[
 			'preheader' => 'Ihre Anfrage für den ' . $payload['audit_type_label'] . ' ist eingegangen.',
 			'eyebrow'   => $payload['audit_type_label'],
-			'headline'  => 'Ihr ' . $payload['audit_type_label'] . ' ist eingeplant.',
-			'intro'     => 'Danke, ' . $payload['name'] . '. Sie erhalten keine generische Checkliste, sondern eine persönliche Priorisierung für Ihre Seite.',
+			'headline'  => 'Ihr ' . $payload['audit_type_label'] . ' ist im System.',
+			'intro'     => 'Danke, ' . $payload['name'] . '. Sie erhalten keine generische Checkliste, sondern eine persönliche erste Priorisierung für Ihre Seite.',
 			'content'   => $content,
 			'footer'    => 'Viele Grüße, Hasim Üner',
 		]
@@ -766,15 +808,20 @@ add_action( 'add_meta_boxes_nexus_review_request', 'nexus_register_review_reques
  * @return void
  */
 function nexus_render_review_request_details_meta_box( $post ) {
-	$audit_type    = (string) get_post_meta( $post->ID, '_nexus_review_audit_type_label', true );
-	$page_url      = (string) get_post_meta( $post->ID, '_nexus_review_page_url', true );
-	$offer         = (string) get_post_meta( $post->ID, '_nexus_review_offer', true );
-	$audience      = (string) get_post_meta( $post->ID, '_nexus_review_audience', true );
-	$issue_label   = (string) get_post_meta( $post->ID, '_nexus_review_biggest_issue_label', true );
-	$extra_context = (string) get_post_meta( $post->ID, '_nexus_review_extra_context', true );
-	$name          = (string) get_post_meta( $post->ID, '_nexus_review_name', true );
-	$email         = (string) get_post_meta( $post->ID, '_nexus_review_email', true );
-	$company       = (string) get_post_meta( $post->ID, '_nexus_review_company', true );
+	$audit_type        = (string) get_post_meta( $post->ID, '_nexus_review_audit_type_label', true );
+	$page_url          = (string) get_post_meta( $post->ID, '_nexus_review_page_url', true );
+	$focus_area_label  = nexus_get_review_meta_value( $post->ID, '_nexus_review_focus_area_label' );
+	$current_challenge = nexus_get_review_meta_value( $post->ID, '_nexus_review_current_challenge' );
+	$primary_goal_label = nexus_get_review_meta_value( $post->ID, '_nexus_review_primary_goal_label' );
+	$linkedin          = nexus_get_review_meta_value( $post->ID, '_nexus_review_linkedin' );
+	$extra_context     = (string) get_post_meta( $post->ID, '_nexus_review_extra_context', true );
+	$name              = (string) get_post_meta( $post->ID, '_nexus_review_name', true );
+	$email             = (string) get_post_meta( $post->ID, '_nexus_review_email', true );
+	$company           = (string) get_post_meta( $post->ID, '_nexus_review_company', true );
+	$offer             = (string) get_post_meta( $post->ID, '_nexus_review_offer', true );
+	$audience          = (string) get_post_meta( $post->ID, '_nexus_review_audience', true );
+	$issue_label       = (string) get_post_meta( $post->ID, '_nexus_review_biggest_issue_label', true );
+	$has_new_intake    = '' !== trim( $focus_area_label . $current_challenge . $primary_goal_label . $linkedin );
 	?>
 	<div class="nexus-review-meta">
 		<div class="nexus-review-meta-group">
@@ -783,7 +830,7 @@ function nexus_render_review_request_details_meta_box( $post ) {
 		</div>
 		<div class="nexus-review-meta-group">
 			<strong>Unternehmen</strong>
-			<p><?php echo esc_html( $company ); ?></p>
+			<p><?php echo esc_html( $company ?: 'Nicht angegeben' ); ?></p>
 		</div>
 		<div class="nexus-review-meta-group">
 			<strong>Kontakt</strong>
@@ -793,21 +840,44 @@ function nexus_render_review_request_details_meta_box( $post ) {
 			<strong>Seite</strong>
 			<p><a href="<?php echo esc_url( $page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $page_url ); ?></a></p>
 		</div>
-		<div class="nexus-review-meta-group">
-			<strong>Was soll die Seite verkaufen?</strong>
-			<p><?php echo nl2br( esc_html( $offer ) ); ?></p>
-		</div>
-		<div class="nexus-review-meta-group">
-			<strong>Wen soll die Seite überzeugen?</strong>
-			<p><?php echo nl2br( esc_html( $audience ) ); ?></p>
-		</div>
-		<div class="nexus-review-meta-group">
-			<strong>Größter Blocker</strong>
-			<p><?php echo esc_html( $issue_label ); ?></p>
-		</div>
+
+		<?php if ( $has_new_intake ) : ?>
+			<div class="nexus-review-meta-group">
+				<strong>Bereich mit Klärungsbedarf</strong>
+				<p><?php echo esc_html( $focus_area_label ); ?></p>
+			</div>
+			<div class="nexus-review-meta-group">
+				<strong>Größte Herausforderung</strong>
+				<p><?php echo nl2br( esc_html( $current_challenge ) ); ?></p>
+			</div>
+			<div class="nexus-review-meta-group">
+				<strong>Wichtigstes Ziel</strong>
+				<p><?php echo esc_html( $primary_goal_label ); ?></p>
+			</div>
+			<?php if ( '' !== $linkedin ) : ?>
+				<div class="nexus-review-meta-group">
+					<strong>LinkedIn</strong>
+					<p><a href="<?php echo esc_url( $linkedin ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $linkedin ); ?></a></p>
+				</div>
+			<?php endif; ?>
+		<?php else : ?>
+			<div class="nexus-review-meta-group">
+				<strong>Was soll die Seite verkaufen?</strong>
+				<p><?php echo nl2br( esc_html( $offer ) ); ?></p>
+			</div>
+			<div class="nexus-review-meta-group">
+				<strong>Wen soll die Seite überzeugen?</strong>
+				<p><?php echo nl2br( esc_html( $audience ) ); ?></p>
+			</div>
+			<div class="nexus-review-meta-group">
+				<strong>Größter Blocker</strong>
+				<p><?php echo esc_html( $issue_label ); ?></p>
+			</div>
+		<?php endif; ?>
+
 		<?php if ( '' !== $extra_context ) : ?>
 			<div class="nexus-review-meta-group">
-				<strong>Zusatzkontext</strong>
+				<strong>Nicht übersehen</strong>
 				<p><?php echo nl2br( esc_html( $extra_context ) ); ?></p>
 			</div>
 		<?php endif; ?>
@@ -930,7 +1000,7 @@ function nexus_filter_review_request_columns( $columns ) {
 		'review_status'   => 'Status',
 		'review_priority' => 'Priorität',
 		'review_page'     => 'Seite',
-		'review_goal'     => 'Seitenziel',
+		'review_goal'     => 'Audit-Fokus',
 		'review_contact'  => 'Kontakt',
 		'review_due'      => 'Fällig',
 		'date'            => $columns['date'],
@@ -988,14 +1058,25 @@ function nexus_render_review_request_columns( $column, $post_id ) {
 			break;
 
 		case 'review_goal':
-			echo esc_html( wp_trim_words( (string) get_post_meta( $post_id, '_nexus_review_offer', true ), 12 ) );
+			$focus_area_label   = nexus_get_review_meta_value( $post_id, '_nexus_review_focus_area_label' );
+			$primary_goal_label = nexus_get_review_meta_value( $post_id, '_nexus_review_primary_goal_label' );
+
+			if ( $focus_area_label || $primary_goal_label ) {
+				echo esc_html( $focus_area_label ?: $primary_goal_label );
+				if ( $focus_area_label && $primary_goal_label ) {
+					echo '<div class="nexus-review-muted">' . esc_html( $primary_goal_label ) . '</div>';
+				}
+			} else {
+				echo esc_html( wp_trim_words( (string) get_post_meta( $post_id, '_nexus_review_offer', true ), 12 ) );
+			}
 			break;
 
 		case 'review_contact':
 			$company = (string) get_post_meta( $post_id, '_nexus_review_company', true );
+			$domain  = (string) get_post_meta( $post_id, '_nexus_review_domain', true );
 			$name    = (string) get_post_meta( $post_id, '_nexus_review_name', true );
 			$email   = (string) get_post_meta( $post_id, '_nexus_review_email', true );
-			echo '<strong>' . esc_html( $company ) . '</strong><br>';
+			echo '<strong>' . esc_html( $company ?: $domain ) . '</strong><br>';
 			echo esc_html( $name ) . '<br>';
 			echo '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>';
 			break;
@@ -1163,13 +1244,14 @@ function nexus_render_review_crm_dashboard() {
 							<?php
 							$status   = (string) get_post_meta( $request_post->ID, '_nexus_review_status', true );
 							$company  = (string) get_post_meta( $request_post->ID, '_nexus_review_company', true );
+							$domain   = (string) get_post_meta( $request_post->ID, '_nexus_review_domain', true );
 							$name     = (string) get_post_meta( $request_post->ID, '_nexus_review_name', true );
 							$page_url = (string) get_post_meta( $request_post->ID, '_nexus_review_page_url', true );
 							$due_at   = (int) get_post_meta( $request_post->ID, '_nexus_review_due_at', true );
 							?>
 							<tr>
 								<td>
-									<strong><?php echo esc_html( $company ); ?></strong><br>
+									<strong><?php echo esc_html( $company ?: $domain ); ?></strong><br>
 									<span class="nexus-review-muted"><?php echo esc_html( $name ); ?></span>
 								</td>
 								<td>
@@ -1240,11 +1322,12 @@ function nexus_render_review_crm_dashboard_widget() {
 		<p><strong>Neu:</strong> <?php echo esc_html( (string) $new_count ); ?> | <strong>In Bearbeitung:</strong> <?php echo esc_html( (string) $review_count ); ?> | <strong>Überfällig:</strong> <?php echo esc_html( (string) $overdue_count ); ?></p>
 		<?php if ( ! empty( $latest_request ) ) : ?>
 			<?php
-			$latest = $latest_request[0];
+			$latest  = $latest_request[0];
 			$company = (string) get_post_meta( $latest->ID, '_nexus_review_company', true );
+			$domain  = (string) get_post_meta( $latest->ID, '_nexus_review_domain', true );
 			$page_url = (string) get_post_meta( $latest->ID, '_nexus_review_page_url', true );
 			?>
-			<p><strong>Letzte Audit-Anfrage:</strong> <?php echo esc_html( $company ); ?><br><a href="<?php echo esc_url( $page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $page_url ); ?></a></p>
+			<p><strong>Letzte Audit-Anfrage:</strong> <?php echo esc_html( $company ?: $domain ); ?><br><a href="<?php echo esc_url( $page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $page_url ); ?></a></p>
 		<?php endif; ?>
 		<p><a class="button button-secondary" href="<?php echo esc_url( admin_url( 'admin.php?page=nexus-review-crm' ) ); ?>">Zum Audit CRM</a></p>
 	</div>

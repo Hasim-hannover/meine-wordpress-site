@@ -208,6 +208,93 @@
   text-transform: uppercase;
 }
 
+.review-hero-note {
+  margin: 0.75rem 0 0;
+  color: #dbe4ee;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.review-section-head {
+  max-width: 760px;
+  margin: 0 auto 1.2rem;
+  text-align: center;
+}
+
+.review-section-head--left {
+  max-width: none;
+  margin: 0 0 1.2rem;
+  text-align: left;
+}
+
+.review-section-kicker {
+  display: inline-block;
+  margin-bottom: 0.65rem;
+  color: var(--gold);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.review-section-head h2 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+  line-height: 1.14;
+}
+
+.review-section-head p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.68;
+}
+
+.review-value-section,
+.review-quality-section {
+  margin-bottom: 2.2rem;
+}
+
+.review-value-grid,
+.review-quality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.review-value-card,
+.review-quality-card {
+  padding: 1.2rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.review-quality-panel {
+  padding: 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.015)),
+    rgba(18, 24, 30, 0.78);
+}
+
+.review-value-card strong,
+.review-quality-card strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.review-value-card span,
+.review-quality-card span {
+  display: block;
+  color: #cbd5e1;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
 .review-proof-band {
   margin: 0 auto 2rem;
   padding: 1.35rem;
@@ -388,6 +475,14 @@
 
 .review-box {
   overflow: hidden;
+}
+
+.review-box.is-success .review-form-layout {
+  grid-template-columns: 1fr;
+}
+
+.review-box.is-success .review-form-aside {
+  display: none;
 }
 
 .black-box--centered.review-box {
@@ -749,10 +844,23 @@
   accent-color: #d4af37;
 }
 
-.review-option span {
+.review-option-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.review-option-copy strong {
+  display: block;
   color: #f8fafc;
   font-size: 0.92rem;
   line-height: 1.45;
+}
+
+.review-option-copy span {
+  display: block;
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  line-height: 1.55;
 }
 
 .review-actions {
@@ -1153,6 +1261,9 @@
   .audit-hero-proof span,
   .review-offer-item,
   .review-kpi,
+  .review-value-card,
+  .review-quality-panel,
+  .review-quality-card,
   .review-proof-band,
   .review-proof-card,
   .review-fit-card,
@@ -1213,6 +1324,10 @@
 
 .audit-wrapper :is(
   .review-offer-copy,
+  .review-hero-note,
+  .review-section-head p,
+  .review-value-card span,
+  .review-quality-card span,
   .review-offer-item span,
   .review-proof-copy,
   .review-proof-card span,
@@ -1223,6 +1338,7 @@
   .review-aside-card p,
   .review-aside-list li,
   .review-step-copy,
+  .review-option-copy span,
   .audit-form-meta,
   .review-output-row span,
   .review-output-note,
@@ -1236,6 +1352,9 @@
   .review-offer-item strong,
   .review-offer-panel h2,
   .review-offer-timeline-item strong,
+  .review-section-head h2,
+  .review-value-card strong,
+  .review-quality-card strong,
   .review-kpi strong,
   .review-proof-head h2,
   .review-proof-card strong,
@@ -1244,7 +1363,7 @@
   .review-brief-row dd,
   .review-step h4,
   .review-field label,
-  .review-option span,
+  .review-option-copy strong,
   .review-success h3,
   .review-success-url,
   .review-success-timeline-item strong,
@@ -1353,6 +1472,10 @@
   accent-color: var(--gold);
 }
 
+.audit-wrapper .review-option-copy span {
+  color: var(--audit-text-soft);
+}
+
 .audit-wrapper .review-prev-btn {
   border-color: var(--border);
   background: var(--audit-glass);
@@ -1414,6 +1537,9 @@
 
 :root[data-theme='light'] .audit-wrapper :is(
   .review-offer-panel,
+  .review-value-card,
+  .review-quality-panel,
+  .review-quality-card,
   .review-proof-band,
   .review-proof-card,
   .review-kpi-strip,
@@ -1425,6 +1551,9 @@
 ),
 :root[data-nx-theme='light'] .audit-wrapper :is(
   .review-offer-panel,
+  .review-value-card,
+  .review-quality-panel,
+  .review-quality-card,
   .review-proof-band,
   .review-proof-card,
   .review-kpi-strip,
@@ -1439,6 +1568,8 @@
 
 @media (max-width: 1024px) {
   .review-hero-layout,
+  .review-value-grid,
+  .review-quality-grid,
   .review-proof-grid,
   .review-ladder-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1475,6 +1606,8 @@
 }
 
 @media (max-width: 860px) {
+  .review-value-grid,
+  .review-quality-grid,
   .review-kpi-strip,
   .review-success-grid,
   .review-offer-timeline,
@@ -1509,6 +1642,9 @@
 }
 
 @media (max-width: 720px) {
+  .review-value-card,
+  .review-quality-panel,
+  .review-quality-card,
   .review-proof-band,
   .review-fit-card,
   .review-ladder-card,

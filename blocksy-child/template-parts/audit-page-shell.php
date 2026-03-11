@@ -15,185 +15,150 @@ $wgos_url  = nexus_get_page_url(
 	home_url( '/wordpress-growth-operating-system/' )
 );
 $about_url = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
-$call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' ) );
 ?>
 
 <div class="audit-wrapper" id="audit-main-wrapper">
 	<nav class="smart-nav" aria-label="Seiten-Navigation">
 		<ul>
 			<li><a href="#start" title="Start"><div class="nav-dot"></div><span class="nav-text">Start</span></a></li>
+			<li><a href="#result" title="Ergebnis"><div class="nav-dot"></div><span class="nav-text">Ergebnis</span></a></li>
+			<li><a href="#quality" title="Qualität"><div class="nav-dot"></div><span class="nav-text">Qualität</span></a></li>
 			<li><a href="#form" title="Formular"><div class="nav-dot"></div><span class="nav-text">Formular</span></a></li>
-			<li><a href="#journey" title="Ablauf"><div class="nav-dot"></div><span class="nav-text">Ablauf</span></a></li>
-			<li><a href="#preview" title="Ergebnis"><div class="nav-dot"></div><span class="nav-text">Ergebnis</span></a></li>
 			<li><a href="#faq" title="FAQ"><div class="nav-dot"></div><span class="nav-text">FAQ</span></a></li>
 		</ul>
 	</nav>
 
 	<div class="audit-container">
-			<main class="audit-content">
-				<section id="start" class="audit-hero-centered audit-section nx-reveal review-hero-shell">
-					<div class="review-hero-layout">
-						<div class="review-hero-main">
-								<div class="audit-hero-featured-image" style="margin-bottom:2rem;">
-									<img src="https://hasimuener.de/wp-content/uploads/2026/03/growth-audit-featured-1.png" alt="Growth Audit Beitragsbild" style="max-width:420px; width:100%; border-radius:1.2rem; box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-								</div>
-							<div class="hero-pill">Growth Audit · kostenlos · persönlich · 48h</div>
-							<div class="review-hero-kicker">Für B2B-Unternehmen mit WordPress und kaufnahen Seiten</div>
-							<h1>
-								Klarheit für die Seite,<br>
-								<span class="text-highlight">die Anfragen tragen soll.</span>
-							</h1>
-							<p class="hero-sub-short">
-								Kein Punktesalat, kein Redesign-Geschwätz, kein Call-Zwang.
-								Sie erfahren, wo Botschaft, Proof oder nächster Schritt Nachfrage verlieren
-								und was wirtschaftlich zuerst geschärft werden sollte.
-							</p>
-
-							<div class="audit-hero-actions">
-								<?php $cta_url = apply_filters( 'nexus_audit_calendar_url', 'https://cal.com/hasim/30min' ); ?>
-								<a class="audit-submit-btn audit-hero-cta-btn" href="<?php echo esc_url( $cta_url ); ?>" data-track-action="cta_hero_growth_audit" data-track-category="lead_gen">Growth Audit starten</a>
-								<a class="audit-ghost-btn" href="#preview">Beispiel ansehen</a>
-								<div class="audit-hero-microtext" style="margin-top:0.8rem; font-size:0.95rem; color:#666;">
-									⏱️ 30-minütiges Gespräch – klare Einschätzung, kein Verkaufsdruck.
-								</div>
-							</div>
-
-							<div class="audit-hero-proof" aria-label="Schnelle Orientierung">
-								<span>Antwort in 48h</span>
-								<span>1 Seite statt Komplett-Audit</span>
-								<span>Persönliche Priorisierung</span>
-							</div>
-
-							<div class="review-kpi-strip" aria-label="Growth-Audit-Überblick">
-								<div class="review-kpi">
-									<strong>0 EUR Einstieg</strong>
-									<span>Audit ohne Pflicht-Call oder Tool-Score.</span>
-								</div>
-								<div class="review-kpi">
-									<strong>1 Seite, 1 Ziel</strong>
-									<span>Startseite oder kaufnahe Angebotsseite mit echtem Anfragefokus.</span>
-								</div>
-								<div class="review-kpi">
-									<strong>3 Outputs</strong>
-									<span>Bremsen, Priorität, nächster sinnvoller Schritt.</span>
-								</div>
-							</div>
-						</div>
-
-						<aside class="review-offer-panel" aria-label="Offer Snapshot">
-							<span class="review-offer-kicker">Was Sie danach wirklich in der Hand haben</span>
-							<h2>Eine klare Entscheidung statt eines dicken Audit-Dokuments.</h2>
-							<p class="review-offer-copy">
-								Der Audit ist bewusst eng gefasst, damit das Ergebnis schnell lesbar und direkt
-								nutzbar bleibt.
-							</p>
-
-							<div class="review-offer-list">
-								<div class="review-offer-item">
-									<strong>Wo die Seite gerade Reibung erzeugt</strong>
-									<span>Hero, Proof, CTA oder Nachfrageführung.</span>
-								</div>
-								<div class="review-offer-item">
-									<strong>Was zuerst Wirkung bringt</strong>
-									<span>Eine Priorität statt zehn lose Empfehlungen.</span>
-								</div>
-								<div class="review-offer-item">
-									<strong>Wie tief der nächste Schritt sein sollte</strong>
-									<span>Kleine Korrektur, Blueprint oder Umsetzung.</span>
-								</div>
-							</div>
-
-							<div class="review-offer-timeline">
-								<div class="review-offer-timeline-item">
-									<span class="review-offer-timeline-label">Heute</span>
-									<strong>Sie schicken Seite und Kontext</strong>
-								</div>
-								<div class="review-offer-timeline-item">
-									<span class="review-offer-timeline-label">In 48h</span>
-									<strong>Sie erhalten die persönliche Priorisierung</strong>
-								</div>
-							</div>
-
-							<a class="review-inline-link" href="<?php echo esc_url( $cases_url ); ?>">Case Study ansehen -&gt;</a>
-						</aside>
-					</div>
-				</section>
-
-				<section class="review-proof-band audit-section nx-reveal" aria-labelledby="review-proof-headline">
-					<div class="review-proof-head">
-						<span class="review-proof-kicker">Proof aus dokumentierten Projekten</span>
-						<h2 id="review-proof-headline">Die Substanz kommt aus echter Nachfragewirkung.</h2>
-						<p class="review-proof-copy">
-							Nicht aus Audit-Behauptungen, sondern aus dokumentierter Conversion-, Performance- und Demand-Gen-Arbeit.
+		<main class="audit-content">
+			<section id="start" class="audit-hero-centered audit-section nx-reveal review-hero-shell">
+				<div class="review-hero-layout">
+					<div class="review-hero-main">
+						<div class="review-hero-kicker">Growth Audit</div>
+						<h1>
+							Klarheit für die Seite,<br>
+							<span class="text-highlight">die Anfragen tragen soll.</span>
+						</h1>
+						<p class="hero-sub-short">
+							Keine automatisierte Standardauswertung, kein Tool-Score, kein Pflicht-Call.
+							Sie erhalten eine manuell geprüfte, KI-unterstützte Ersteinschätzung dazu, wo Ihre Seite Reibung erzeugt
+							und was wirtschaftlich zuerst geschärft werden sollte.
 						</p>
-					</div>
-					<div class="review-proof-grid" aria-label="Ausgewählte Kennzahlen">
-						<div class="review-proof-card">
-							<strong>1.750+ Leads</strong>
-							<span>Dokumentierte Nachfragewirkung statt Traffic ohne Folge.</span>
-						</div>
-						<div class="review-proof-card">
-							<strong>-83 % CPL</strong>
-							<span>Weniger Reibung schlägt nicht selten mehr Budget.</span>
-						</div>
-						<div class="review-proof-card">
-							<strong>12-15 % Sales-Conversion</strong>
-							<span>Anfragen zählen erst, wenn daraus echte Gespräche werden.</span>
-						</div>
-						<div class="review-proof-card">
-							<strong>98 Mobile Performance</strong>
-							<span>Mobile Eindruck und Ladezeit werden nicht dem Zufall überlassen.</span>
-						</div>
-					</div>
-					<p class="review-proof-note">
-						Beispielhafte Kennzahlen aus dokumentierten Projekten auf dieser Seite.
-						<a class="review-inline-link" href="<?php echo esc_url( $cases_url ); ?>">Case Study ansehen -&gt;</a>
-					</p>
-				</section>
+						<p class="review-hero-note">Für Startseiten und kaufnahe Angebotsseiten mit WordPress.</p>
 
-				<section class="review-fit-section audit-section nx-reveal" aria-labelledby="review-fit-headline">
-					<div class="review-fit-grid">
-						<article class="review-fit-card">
-							<span class="review-fit-kicker">Passt gut</span>
-							<h2 id="review-fit-headline">Wenn diese Seite bereits Wirkung haben soll</h2>
-							<div class="review-fit-pills" aria-label="Passende Situationen">
-								<span class="review-fit-pill">B2B + WordPress</span>
-								<span class="review-fit-pill">klare Anfrageabsicht</span>
-								<span class="review-fit-pill">Traffic oder Kampagnen laufen schon</span>
-								<span class="review-fit-pill">Team will erst priorisieren</span>
+						<div class="audit-hero-proof" aria-label="Trust-Leiste">
+							<span>0 € Einstieg</span>
+							<span>persönliche Prüfung</span>
+							<span>Rückmeldung in 48h</span>
+						</div>
+
+						<div class="audit-hero-actions">
+							<a class="audit-submit-btn audit-hero-cta-btn" href="#form" data-track-action="cta_hero_growth_audit" data-track-category="lead_gen">Growth Audit starten</a>
+						</div>
+					</div>
+
+					<aside class="review-offer-panel" aria-label="Diagnose-Rahmen">
+						<span class="review-offer-kicker">Diagnose-Rahmen</span>
+						<h2>Eng gefasst, damit die erste Einordnung belastbar bleibt.</h2>
+						<p class="review-offer-copy">
+							Der Growth Audit ist kein vollautomatischer Funnel. Er sammelt nur den Kontext,
+							der für eine saubere erste Priorisierung wirklich nötig ist.
+						</p>
+
+						<div class="review-offer-list">
+							<div class="review-offer-item">
+								<strong>1 konkrete Seite</strong>
+								<span>Am besten eine Startseite oder eine kaufnahe Angebotsseite.</span>
 							</div>
-							<p class="review-fit-note">Ideal für Startseiten und kaufnahe Angebotsseiten, die nicht länger nur okay aussehen, sondern sauber verkaufen sollen.</p>
+							<div class="review-offer-item">
+								<strong>Persönlich geprüft</strong>
+								<span>Jede Anfrage wird manuell gelesen und im Kontext eingeordnet.</span>
+							</div>
+							<div class="review-offer-item">
+								<strong>KI-unterstützt ergänzt</strong>
+								<span>Muster, Schwachstellen und Potenziale werden schneller sichtbar.</span>
+							</div>
+						</div>
+
+						<div class="review-offer-timeline">
+							<div class="review-offer-timeline-item">
+								<span class="review-offer-timeline-label">Intake</span>
+								<strong>ca. 90 Sekunden mit Fokus auf Diagnosequalität</strong>
+							</div>
+							<div class="review-offer-timeline-item">
+								<span class="review-offer-timeline-label">Rückmeldung</span>
+								<strong>Persönliche Ersteinschätzung innerhalb von 48h</strong>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</section>
+
+			<section id="result" class="review-value-section audit-section nx-reveal" aria-labelledby="review-value-headline">
+				<div class="review-section-head">
+					<span class="review-section-kicker">Ergebnis</span>
+					<h2 id="review-value-headline">Kein PDF-Ballast. Eine klare erste Priorisierung.</h2>
+					<p>Der Audit ist bewusst eng gefasst, damit das Ergebnis schnell lesbar und direkt nutzbar bleibt.</p>
+				</div>
+				<div class="review-value-grid" aria-label="Audit-Inhalte">
+					<article class="review-value-card">
+						<strong>die 3 stärksten Anfragebremsen</strong>
+						<span>Wo Ihre Seite aktuell am meisten Reibung erzeugt.</span>
+					</article>
+					<article class="review-value-card">
+						<strong>die wichtigste Priorität</strong>
+						<span>Was wirtschaftlich zuerst geschärft werden sollte.</span>
+					</article>
+					<article class="review-value-card">
+						<strong>ein sinnvoller nächster Schritt</strong>
+						<span>Was direkt umsetzbar ist und was bewusst warten kann.</span>
+					</article>
+				</div>
+			</section>
+
+			<section id="quality" class="review-quality-section audit-section nx-reveal" aria-labelledby="review-quality-headline">
+				<div class="review-quality-panel">
+					<div class="review-section-head review-section-head--left">
+						<span class="review-section-kicker">Qualität</span>
+						<h2 id="review-quality-headline">Kein Massen-Audit</h2>
+						<p>
+							Jede Anfrage wird manuell geprüft und durch KI-gestützte Analyse ergänzt, um Muster,
+							Schwachstellen und Potenziale schneller sichtbar zu machen.
+						</p>
+						<p>Sie erhalten keine generische Checkliste, sondern eine fundierte erste Einordnung Ihrer Seite.</p>
+					</div>
+					<div class="review-quality-grid">
+						<article class="review-quality-card">
+							<strong>Manuelle Prüfung</strong>
+							<span>Ihre Seite wird nicht nur technisch, sondern auch entlang von Botschaft, Reibung und Anfrageführung gelesen.</span>
 						</article>
-						<article class="review-fit-card review-fit-card-muted">
-							<span class="review-fit-kicker">Bewusst nicht</span>
-							<h2>Nicht für Gratis-Relaunches ohne Fokus</h2>
-							<div class="review-fit-pills" aria-label="Unpassende Situationen">
-								<span class="review-fit-pill review-fit-pill-muted">Hobby-Projekte</span>
-								<span class="review-fit-pill review-fit-pill-muted">reine Visitenkarten-Seiten</span>
-								<span class="review-fit-pill review-fit-pill-muted">unklares Angebot</span>
-								<span class="review-fit-pill review-fit-pill-muted">Komplett-Relaunch im Gratis-Mantel</span>
-							</div>
-							<p class="review-fit-note">Der Audit ist absichtlich präzise. Sonst wird er zu allgemein und damit zu schwach.</p>
+						<article class="review-quality-card">
+							<strong>KI-gestützte Analyse</strong>
+							<span>Hilft, Muster und Prioritäten schneller sichtbar zu machen, ersetzt aber nicht die persönliche Einordnung.</span>
+						</article>
+						<article class="review-quality-card">
+							<strong>Präziser Intake</strong>
+							<span>Eine konkrete Seite, ein ehrlicher Kontext und ein Hauptziel sorgen für bessere Antworten und schnellere Prüfung.</span>
 						</article>
 					</div>
-				</section>
+				</div>
+			</section>
 
 			<section id="form" class="audit-section nx-reveal">
 				<div class="black-box black-box--centered review-box">
-						<div class="review-form-layout">
-							<div class="review-form-main">
-								<div class="box-head review-form-frame-head">
-									<div>
-										<span class="review-form-kicker">Growth Audit anfragen</span>
-										<h3>In unter zwei Minuten im System.</h3>
-										<p>Eine Seite. Ein Ziel. Ein Kontext. Mehr braucht ein guter Diagnose-Einstieg nicht.</p>
-									</div>
-									<div class="review-form-eta" aria-label="Audit-Rahmen">
-										<span>ca. 90 Sek.</span>
-										<span>Kein Call-Zwang</span>
-										<span>Antwort in 48h</span>
-									</div>
+					<div class="review-form-layout">
+						<div class="review-form-main">
+							<div class="box-head review-form-frame-head">
+								<div>
+									<span class="review-form-kicker">Growth Audit anfragen</span>
+									<h3>In unter zwei Minuten im System.</h3>
+									<p>Eine Seite. Ein Ziel. Ein Kontext. Mehr braucht ein guter Diagnose-Einstieg nicht.</p>
 								</div>
+								<div class="review-form-eta" aria-label="Formular-Microcopy">
+									<span>ca. 90 Sekunden</span>
+									<span>kein Pflicht-Call</span>
+									<span>persönliche Rückmeldung in 48h</span>
+								</div>
+							</div>
 
 							<form id="review-request-form" class="review-funnel" novalidate>
 								<input type="hidden" name="company_website" value="">
@@ -206,9 +171,9 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 									</div>
 									<ol class="review-progress-steps">
 										<li class="is-active">Seite</li>
+										<li>Fokus</li>
+										<li>Kontext</li>
 										<li>Ziel</li>
-										<li>Zielgruppe</li>
-										<li>Problem</li>
 										<li>Kontakt</li>
 									</ol>
 								</div>
@@ -216,58 +181,127 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 								<div class="review-step is-active" data-step="0">
 									<span class="review-step-kicker">Schritt 1 von 5</span>
 									<h4>Welche Seite soll ich prüfen?</h4>
-									<p class="review-step-copy">Startseite oder kaufnahe Angebotsseite.</p>
-									<div class="review-field">
-										<label for="review-page-url">Seiten-URL</label>
-										<input id="review-page-url" name="page_url" type="url" placeholder="https://ihre-seite.de" required autocomplete="url">
+									<p class="review-step-copy">Am besten eine Startseite oder eine kaufnahe Angebotsseite.</p>
+									<div class="review-field-grid">
+										<div class="review-field review-field-full">
+											<label for="review-page-url">Seiten-URL</label>
+											<input id="review-page-url" name="page_url" type="url" placeholder="https://www.beispiel.de" required autocomplete="url">
+										</div>
+										<div class="review-field">
+											<label for="review-company">Unternehmen (optional)</label>
+											<input id="review-company" name="company" type="text" placeholder="Firmenname" autocomplete="organization">
+										</div>
 									</div>
 								</div>
 
-								<div class="review-step" data-step="1">
+								<div class="review-step" data-step="1" data-review-radio-message="Bitte den Bereich mit dem größten Klärungsbedarf auswählen.">
 									<span class="review-step-kicker">Schritt 2 von 5</span>
-										<h4>Was soll diese Seite konkret auslösen?</h4>
-									<p class="review-step-copy">Ein klarer Satz reicht.</p>
-									<div class="review-field">
-										<label for="review-offer">Seitenziel</label>
-											<textarea id="review-offer" name="offer" rows="4" placeholder="Zum Beispiel: qualifizierte Erstgespräche für unser B2B-Angebot." required></textarea>
+									<h4>Wobei wünschen Sie eine Einschätzung?</h4>
+									<p class="review-step-copy">Wählen Sie den Bereich, bei dem Sie aktuell den größten Klärungsbedarf sehen.</p>
+									<div class="review-option-group" role="radiogroup" aria-labelledby="review-focus-heading">
+										<span id="review-focus-heading" class="screen-reader-text">Bereich mit Klärungsbedarf</span>
+										<label class="review-option">
+											<input type="radio" name="focus_area" value="seo_visibility" required>
+											<div class="review-option-copy">
+												<strong data-review-label>SEO / Sichtbarkeit</strong>
+												<span>Wenn die Seite zu wenig qualifizierte Besucher anzieht.</span>
+											</div>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="focus_area" value="performance_cwv" required>
+											<div class="review-option-copy">
+												<strong data-review-label>Performance / Core Web Vitals</strong>
+												<span>Wenn Ladezeit, mobile Nutzung oder technische Stabilität bremsen.</span>
+											</div>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="focus_area" value="conversion_inquiry_flow" required>
+											<div class="review-option-copy">
+												<strong data-review-label>Conversion / Anfrageführung</strong>
+												<span>Wenn Besuch nicht sauber zur Anfrage oder Kontaktaufnahme führt.</span>
+											</div>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="focus_area" value="tracking_data_quality" required>
+											<div class="review-option-copy">
+												<strong data-review-label>Tracking / Datenqualität</strong>
+												<span>Wenn Entscheidungen auf unsauberer oder lückenhafter Messung beruhen.</span>
+											</div>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="focus_area" value="positioning_page_message" required>
+											<div class="review-option-copy">
+												<strong data-review-label>Positionierung / Seitenbotschaft</strong>
+												<span>Wenn nicht klar wird, warum genau diese Seite die richtige Anfrage erzeugen soll.</span>
+											</div>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="focus_area" value="not_sure_yet" required>
+											<div class="review-option-copy">
+												<strong data-review-label>Ich bin mir noch nicht sicher</strong>
+												<span>Wenn zuerst sauber priorisiert werden soll, wo die größte Reibung liegt.</span>
+											</div>
+										</label>
 									</div>
 								</div>
 
 								<div class="review-step" data-step="2">
 									<span class="review-step-kicker">Schritt 3 von 5</span>
-									<h4>Wen soll die Seite überzeugen?</h4>
-									<p class="review-step-copy">Kurz und konkret reicht vollkommen.</p>
+									<h4>Was ist aktuell die größte Herausforderung?</h4>
+									<p class="review-step-copy">Ein kurzer, ehrlicher Satz reicht. Je klarer der Kontext, desto besser die Einordnung.</p>
 									<div class="review-field">
-										<label for="review-audience">Zielgruppe</label>
-										<textarea id="review-audience" name="audience" rows="4" placeholder="Zum Beispiel: B2B-Marketing-Leiter in mittelständischen Industrieunternehmen." required></textarea>
+										<label for="review-current-challenge">Ihre Einschätzung</label>
+										<textarea id="review-current-challenge" name="current_challenge" rows="5" placeholder="„Wir haben Traffic, aber zu wenig qualifizierte Anfragen.&#10;oder&#10;Die Seite wirkt ordentlich, trägt aber die Positionierung nicht klar genug.“" required></textarea>
 									</div>
 								</div>
 
-								<div class="review-step" data-step="3">
+								<div class="review-step" data-step="3" data-review-radio-message="Bitte das wichtigste Ziel für diese Seite auswählen.">
 									<span class="review-step-kicker">Schritt 4 von 5</span>
-									<h4>Wo vermuten Sie gerade den größten Hebelverlust?</h4>
-									<p class="review-step-copy">Wählen Sie den wahrscheinlichsten Hebel. Das hilft bei der Einordnung.</p>
-									<div class="review-option-group" role="radiogroup" aria-labelledby="review-issue-heading">
-										<span id="review-issue-heading" class="screen-reader-text">Größter Blocker</span>
+									<h4>Was soll die Seite konkret besser leisten?</h4>
+									<p class="review-step-copy">Wählen Sie das Ziel, das für Sie aktuell am wichtigsten ist.</p>
+									<div class="review-option-group" role="radiogroup" aria-labelledby="review-goal-heading">
+										<span id="review-goal-heading" class="screen-reader-text">Wichtigstes Ziel</span>
 										<label class="review-option">
-											<input type="radio" name="biggest_issue" value="too_few_inquiries" required>
-											<span>Zu wenig qualifizierte Anfragen</span>
+											<input type="radio" name="primary_goal" value="more_qualified_inquiries" required>
+											<div class="review-option-copy">
+												<strong data-review-label>mehr qualifizierte Anfragen</strong>
+												<span>Die Seite soll relevantere Kontakte und bessere Gespräche auslösen.</span>
+											</div>
 										</label>
 										<label class="review-option">
-											<input type="radio" name="biggest_issue" value="weak_message" required>
-											<span>Das Seitenversprechen ist zu unscharf</span>
+											<input type="radio" name="primary_goal" value="clearer_positioning" required>
+											<div class="review-option-copy">
+												<strong data-review-label>klarere Positionierung</strong>
+												<span>Das Angebot soll schneller verstanden und sauberer eingeordnet werden.</span>
+											</div>
 										</label>
 										<label class="review-option">
-											<input type="radio" name="biggest_issue" value="weak_proof" required>
-											<span>Proof und Vertrauen greifen zu spät</span>
+											<input type="radio" name="primary_goal" value="better_google_visibility" required>
+											<div class="review-option-copy">
+												<strong data-review-label>bessere Sichtbarkeit bei Google</strong>
+												<span>Die Seite soll organisch häufiger und relevanter gefunden werden.</span>
+											</div>
 										</label>
 										<label class="review-option">
-											<input type="radio" name="biggest_issue" value="weak_conversion" required>
-												<span>Die Seite führt nicht sauber zur Anfrage</span>
+											<input type="radio" name="primary_goal" value="better_user_guidance_conversion" required>
+											<div class="review-option-copy">
+												<strong data-review-label>bessere Nutzerführung / Conversion</strong>
+												<span>Der Weg vom ersten Eindruck bis zur Anfrage soll klarer werden.</span>
+											</div>
 										</label>
 										<label class="review-option">
-											<input type="radio" name="biggest_issue" value="second_opinion" required>
-											<span>Ich brauche eine zweite strategische Einordnung</span>
+											<input type="radio" name="primary_goal" value="better_technical_quality" required>
+											<div class="review-option-copy">
+												<strong data-review-label>bessere technische Qualität</strong>
+												<span>Performance, Stabilität und Seitenerlebnis sollen belastbarer werden.</span>
+											</div>
+										</label>
+										<label class="review-option">
+											<input type="radio" name="primary_goal" value="clearer_decision_data" required>
+											<div class="review-option-copy">
+												<strong data-review-label>klarere Datenbasis für Entscheidungen</strong>
+												<span>Tracking und Messpunkte sollen verlässlicher für Priorisierungen werden.</span>
+											</div>
 										</label>
 									</div>
 								</div>
@@ -282,16 +316,16 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 											<input id="review-name" name="name" type="text" required autocomplete="name">
 										</div>
 										<div class="review-field">
-											<label for="review-company">Unternehmen</label>
-											<input id="review-company" name="company" type="text" required autocomplete="organization">
-										</div>
-										<div class="review-field review-field-full">
 											<label for="review-email">Geschäftliche E-Mail</label>
 											<input id="review-email" name="email" type="email" required autocomplete="email">
 										</div>
 										<div class="review-field review-field-full">
-											<label for="review-context">Optional: Was darf ich im Audit auf keinen Fall übersehen?</label>
-											<textarea id="review-context" name="extra_context" rows="4" placeholder="Zum Beispiel: Die Seite geht nächste Woche in eine Kampagne oder ist bereits zentral für Sales."></textarea>
+											<label for="review-linkedin">LinkedIn (optional)</label>
+											<input id="review-linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/..." autocomplete="url">
+										</div>
+										<div class="review-field review-field-full">
+											<label for="review-context">Was darf ich im Audit auf keinen Fall übersehen? (optional)</label>
+											<textarea id="review-context" name="extra_context" rows="4"></textarea>
 										</div>
 									</div>
 								</div>
@@ -299,147 +333,101 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 								<div id="review-form-feedback" class="review-form-feedback" aria-live="polite"></div>
 
 								<div class="review-actions">
-										<button type="button" class="review-prev-btn" data-review-prev hidden>Zurück</button>
+									<button type="button" class="review-prev-btn" data-review-prev hidden>Zurück</button>
 									<button type="button" class="audit-submit-btn" data-review-next>Weiter</button>
-									<button type="submit" class="audit-submit-btn" data-review-submit hidden>Growth Audit anfordern</button>
+									<button type="submit" class="audit-submit-btn" data-review-submit hidden>Growth Audit anfragen</button>
 								</div>
 
-								<p class="audit-form-meta">
-									0 € Einstieg. Kein Pflicht-Call. Persönliche Priorisierung statt Tool-Score.
-								</p>
+								<p class="audit-form-meta">Kostenloser Einstieg. Persönliche Prüfung. Kein Tool-Score.</p>
 							</form>
 
 							<div id="review-request-success" class="review-success" hidden>
 								<div class="review-success-pill">Anfrage eingegangen</div>
 								<h3>Der Growth Audit ist jetzt im System.</h3>
 								<p id="review-success-message" class="review-success-copy">
-									Sie erhalten innerhalb von 48 Stunden eine persönliche Rückmeldung zu Ihrer Seite.
+									Ich prüfe Ihre Seite manuell und ergänze die Einschätzung durch KI-gestützte Analyse,
+									um die wichtigsten Hebel schneller sichtbar zu machen.
 								</p>
 								<div id="review-success-url" class="review-success-url"></div>
 								<div class="review-success-meta">
-									<span>Die Bestätigung geht jetzt per E-Mail raus.</span>
-									<span>Wenn es zeitkritisch ist, können Sie direkt einen Termin ziehen.</span>
-								</div>
-								<div class="review-success-timeline" aria-label="Nächste Schritte">
-									<div class="review-success-timeline-item">
-										<strong>1. Eingang bestätigt</strong>
-										<span>Ihre Seite und Ihr Kontext sind sauber im System.</span>
-									</div>
-									<div class="review-success-timeline-item">
-										<strong>2. Priorisierung in 48h</strong>
-										<span>Sie erhalten keine Checkliste, sondern eine Reihenfolge.</span>
-									</div>
-									<div class="review-success-timeline-item">
-										<strong>3. Nächster Schritt wird klar</strong>
-										<span>Korrektur, Blueprint oder Umsetzung im passenden Umfang.</span>
-									</div>
+									<span>Bestätigung per E-Mail</span>
+									<span>persönliche Rückmeldung in 48h</span>
 								</div>
 								<div class="review-success-grid">
 									<div class="review-success-card">
-										<strong>3 stärkste Anfragebremsen</strong>
-										<span>Keine Vollanalyse, sondern die Punkte mit der größten Hebelwirkung.</span>
+										<strong>die 3 stärksten Bremsen</strong>
+										<span>Wo Ihre Seite aktuell am meisten Anfragewirkung verliert.</span>
 									</div>
 									<div class="review-success-card">
-										<strong>1 klare Priorität</strong>
-										<span>Was zuerst Wirkung bringt und was bewusst warten kann.</span>
+										<strong>die wichtigste Priorität</strong>
+										<span>Was zuerst geschärft werden sollte und warum genau dort.</span>
 									</div>
 									<div class="review-success-card">
-										<strong>Nächster sinnvoller Schritt</strong>
-										<span>Kleine Korrektur, Blueprint oder Umsetzung im passenden Umfang.</span>
+										<strong>ein klarer nächster Schritt</strong>
+										<span>Was direkt sinnvoll ist, ohne in Aktionismus oder Audit-Ballast zu kippen.</span>
 									</div>
 								</div>
-								<div class="review-success-actions">
-									<a class="audit-submit-btn review-success-link" href="<?php echo esc_url( $call_url ); ?>" target="_blank" rel="noopener">Wenn es dringend ist: Direkt Strategie-Termin buchen</a>
-								</div>
 							</div>
 						</div>
 
-							<aside class="review-form-aside">
-								<div class="review-aside-card review-aside-card-brief">
-									<span class="review-aside-kicker">Live-Briefing</span>
-									<h4>So liest sich Ihre Anfrage gerade</h4>
-									<dl class="review-brief-list">
-										<div class="review-brief-row">
-											<dt>Seite</dt>
-											<dd data-review-summary="page_url">Noch offen</dd>
-										</div>
-										<div class="review-brief-row">
-											<dt>Ziel</dt>
-											<dd data-review-summary="offer">Noch offen</dd>
-										</div>
-										<div class="review-brief-row">
-											<dt>Zielgruppe</dt>
-											<dd data-review-summary="audience">Noch offen</dd>
-										</div>
-										<div class="review-brief-row">
-											<dt>Hebel</dt>
-											<dd data-review-summary="biggest_issue">Noch offen</dd>
-										</div>
-									</dl>
-								</div>
-								<div class="review-aside-card">
-									<span class="review-aside-kicker">Im Growth Audit enthalten</span>
-									<h4>Kurz. Klar. Nutzbar.</h4>
-									<ul class="review-aside-list">
-										<li>Die 3 stärksten Anfragebremsen</li>
-										<li>Die wichtigste Priorität</li>
-										<li>Ein sinnvoller nächster Schritt</li>
-									</ul>
-								</div>
-								<div class="review-aside-card review-aside-card-muted">
-									<span class="review-aside-kicker">Warum das funktioniert</span>
-									<p>Der Audit bleibt eng. Sonst entsteht mehr Dokumentation als Entscheidungsklarheit.</p>
-								</div>
-								<div class="review-aside-card review-aside-card-muted">
-									<span class="review-aside-kicker">Wenn mehr zusammenhängt</span>
-									<p>Wenn Positionierung, Proof, Tracking und Conversion gemeinsam bremsen, ist der nächste Schritt ein tieferer Blueprint statt Stückwerk.</p>
-								</div>
-							</aside>
-						</div>
+						<aside class="review-form-aside">
+							<div class="review-aside-card review-aside-card-brief">
+								<span class="review-aside-kicker">Diagnose-Überblick</span>
+								<h4>So liest sich Ihre Anfrage gerade</h4>
+								<dl class="review-brief-list">
+									<div class="review-brief-row">
+										<dt>Seite</dt>
+										<dd data-review-summary="page_url">Noch offen</dd>
+									</div>
+									<div class="review-brief-row">
+										<dt>Bereich</dt>
+										<dd data-review-summary="focus_area">Noch offen</dd>
+									</div>
+									<div class="review-brief-row">
+										<dt>Herausforderung</dt>
+										<dd data-review-summary="current_challenge">Noch offen</dd>
+									</div>
+									<div class="review-brief-row">
+										<dt>Ziel</dt>
+										<dd data-review-summary="primary_goal">Noch offen</dd>
+									</div>
+								</dl>
+							</div>
+							<div class="review-aside-card">
+								<span class="review-aside-kicker">Hilft für bessere Diagnose</span>
+								<ul class="review-aside-list">
+									<li>eine konkrete Seite statt einer ganzen Website</li>
+									<li>ein ehrlicher Engpass statt einer allgemeinen Wunschliste</li>
+									<li>das wichtigste Ziel zuerst</li>
+								</ul>
+							</div>
+							<div class="review-aside-card">
+								<span class="review-aside-kicker">Im Audit enthalten</span>
+								<ul class="review-aside-list">
+									<li>die 3 stärksten Anfragebremsen</li>
+									<li>die wichtigste Priorität</li>
+									<li>ein sinnvoller nächster Schritt</li>
+								</ul>
+							</div>
+							<div class="review-aside-card review-aside-card-muted">
+								<span class="review-aside-kicker">Bewusst eng gefasst</span>
+								<p>Der Audit soll Klarheit erzeugen, nicht Dokumente. Genau deshalb fragt das Formular nur ab, was die erste Einordnung wirklich verbessert.</p>
+							</div>
+						</aside>
+					</div>
 
-						<div class="trust-strip">
-							<div class="trust-item">
-								<div class="trust-ic">01</div>
-								<div><strong>0 € Einstieg.</strong> Kostenloser Audit ohne Pflicht-Call.</div>
-							</div>
-							<div class="trust-item">
-								<div class="trust-ic">02</div>
-								<div><strong>Persönlich in 48h.</strong> Keine Bot-Ausgabe von der Stange.</div>
-							</div>
-							<div class="trust-item">
-								<div class="trust-ic">03</div>
-								<div><strong>Klare Priorität.</strong> Erst der stärkste Hebel.</div>
-							</div>
+					<div class="trust-strip">
+						<div class="trust-item">
+							<div class="trust-ic">01</div>
+							<div><strong>Klarer Intake.</strong> Eine Seite statt zehn unsortierter Baustellen.</div>
 						</div>
-					</div>
-				</div>
-			</section>
-
-			<section id="journey" class="journey-preview audit-section nx-reveal">
-				<h2 class="journey-headline">So läuft der Growth Audit ab</h2>
-				<p class="journey-subline">
-					Drei Schritte. Keine Analyse-Show.
-				</p>
-				<div class="journey-steps-preview">
-					<div class="journey-step-preview">
-						<div class="step-marker">1</div>
-						<div class="step-content">
-							<h4>Sie schicken die Seite und den Kontext</h4>
-							<p>Fünf kurze Antworten reichen.</p>
+						<div class="trust-item">
+							<div class="trust-ic">02</div>
+							<div><strong>Persönlich geprüft.</strong> Manuell gelesen und KI-unterstützt ergänzt.</div>
 						</div>
-					</div>
-					<div class="journey-step-preview">
-						<div class="step-marker">2</div>
-						<div class="step-content">
-							<h4>Ich prüfe die Seite persönlich</h4>
-							<p>Mit Fokus auf Botschaft, Proof und Anfrageführung.</p>
-						</div>
-					</div>
-					<div class="journey-step-preview">
-						<div class="step-marker">3</div>
-						<div class="step-content">
-							<h4>Sie erhalten eine priorisierte Rückmeldung</h4>
-							<p>Drei Bremsen. Eine Priorität. Ein nächster Schritt.</p>
+						<div class="trust-item">
+							<div class="trust-ic">03</div>
+							<div><strong>Rückmeldung in 48h.</strong> Schnell genug für echte Priorisierung.</div>
 						</div>
 					</div>
 				</div>
@@ -447,27 +435,27 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 
 			<section id="preview" class="report-preview-section audit-section nx-reveal">
 				<div class="preview-text">
-					<span class="preview-kicker">So sieht das Ergebnis aus</span>
-					<h2>Keine Textwand.<br>Eine klare Entscheidungsgrundlage.</h2>
+					<span class="preview-kicker">Beispiel</span>
+					<h2>So liest sich eine erste Rückmeldung.</h2>
 					<p class="preview-desc">
-						Kompakt genug für schnelle Entscheidungen. Konkret genug, um Hero, Proof und nächsten Schritt gezielt zu schärfen.
+						Kompakt genug für schnelle Entscheidungen. Konkret genug, um Botschaft, Reibung und Anfrageführung gezielt zu schärfen.
 					</p>
-					<div class="preview-deliverables" aria-label="Audit-Inhalte">
+					<div class="preview-deliverables" aria-label="Beispielhafte Audit-Bausteine">
 						<div class="preview-deliverable">
 							<strong>3 stärkste Bremsen</strong>
-							<span>Wo die Seite gerade Vertrauen oder Anfragen verliert.</span>
+							<span>Wo die Seite aktuell Vertrauen, Klarheit oder Handlung verliert.</span>
 						</div>
 						<div class="preview-deliverable">
-							<strong>1 Priorität</strong>
-							<span>Was zuerst Wirkung bringt und was warten kann.</span>
+							<strong>1 klare Priorität</strong>
+							<span>Was zuerst Wirkung bringt und was bewusst warten kann.</span>
 						</div>
 						<div class="preview-deliverable">
-							<strong>Begründung</strong>
-							<span>Warum genau dieser Hebel wirtschaftlich relevant ist.</span>
+							<strong>Kurze Begründung</strong>
+							<span>Warum genau dieser Hebel wirtschaftlich zuerst zählt.</span>
 						</div>
 						<div class="preview-deliverable">
 							<strong>Nächster Schritt</strong>
-							<span>Kleine Korrektur oder tieferer Growth Blueprint.</span>
+							<span>Kleine Korrektur oder tieferer Blueprint, wenn es struktureller wird.</span>
 						</div>
 					</div>
 				</div>
@@ -476,45 +464,18 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 						<span class="review-output-kicker">Redigiertes Beispiel</span>
 						<div class="review-output-row">
 							<strong>Stärkste Anfragebremse</strong>
-							<span>Der erste Screen erklärt nicht klar, für wen die Seite ist und warum jetzt gehandelt werden sollte.</span>
+							<span>Der erste Screen erklärt nicht klar genug, für wen die Seite ist und warum genau jetzt eine Anfrage sinnvoll wäre.</span>
 						</div>
 						<div class="review-output-row">
 							<strong>Warum das bremst</strong>
-							<span>Traffic versteht das Angebot nur grob. Dadurch verliert die Seite Relevanz, bevor Proof überhaupt wirken kann.</span>
+							<span>Besucher verstehen das Angebot nur grob. Dadurch verliert die Seite Relevanz, bevor Proof oder nächste Schritte überhaupt greifen können.</span>
 						</div>
 						<div class="review-output-row">
-							<strong>Zuerst anpassen</strong>
-							<span>Hero, Subline und CTA vor dem restlichen Seitenumbau schärfen. Danach Proof konsequent höher ziehen.</span>
+							<strong>Wirtschaftlich zuerst schärfen</strong>
+							<span>Hero, Subline und CTA priorisieren, bevor weitere Detailoptimierungen oder ein größerer Seitenumbau angegangen werden.</span>
 						</div>
-						<div class="review-output-note">Wenn danach weiter strukturelle Brüche sichtbar bleiben, ist der nächste Schritt ein tieferer Growth Blueprint.</div>
+						<div class="review-output-note">Wenn danach weitere Brüche sichtbar bleiben, ist der nächste sinnvolle Schritt ein tieferer Growth Blueprint.</div>
 					</div>
-				</div>
-			</section>
-
-			<section class="review-ladder-section audit-section nx-reveal" aria-labelledby="review-ladder-headline">
-				<div class="review-ladder-head">
-					<span class="preview-kicker">Danach</span>
-					<h2 id="review-ladder-headline">Was nach dem Growth Audit passiert</h2>
-					<p class="review-ladder-copy">
-						Der Audit ist kein Selbstzweck. Er entscheidet, ob eine kleine Korrektur reicht oder ob ein tieferer Blueprint wirtschaftlich sinnvoll ist.
-					</p>
-				</div>
-				<div class="review-ladder-grid">
-					<article class="review-ladder-card">
-						<div class="review-ladder-step">01</div>
-						<h3>Kleine Korrektur reicht</h3>
-						<p>Dann sage ich es direkt. Sie gehen mit klarer Priorität und einer kurzen To-do-Liste zurück ins Team.</p>
-					</article>
-					<article class="review-ladder-card">
-						<div class="review-ladder-step">02</div>
-						<h3>Growth Blueprint sinnvoll</h3>
-						<p>Wenn Positionierung, Struktur, Tracking oder Conversion zusammen bremsen, ist der nächste Schritt ein tieferer Blueprint statt isolierter To-dos.</p>
-					</article>
-					<article class="review-ladder-card">
-						<div class="review-ladder-step">03</div>
-						<h3>Umsetzung im System</h3>
-						<p>Wenn Richtung und Priorität klar sind, kann daraus die Umsetzung im WordPress-System folgen.</p>
-					</article>
 				</div>
 			</section>
 
@@ -522,23 +483,23 @@ $call_url  = apply_filters( 'nexus_audit_calendar_url', apply_filters( 'nexus_re
 				<h2 class="audit-faq-headline">Häufige Fragen</h2>
 				<details>
 					<summary>Was genau bekomme ich innerhalb von 48 Stunden?</summary>
-					<div class="faq-ans">Drei wichtigste Bremsen, eine klare Priorität und ein sinnvoller nächster Schritt.</div>
+					<div class="faq-ans">Eine manuell geprüfte, KI-unterstützte Ersteinschätzung mit den 3 stärksten Bremsen, der wichtigsten Priorität und einem klaren nächsten Schritt.</div>
 				</details>
 				<details>
 					<summary>Ist der Growth Audit kostenlos?</summary>
-					<div class="faq-ans">Ja. Der Einstieg ist bewusst kostenlos und ohne Pflicht-Call. Wenn ein tieferer Blueprint sinnvoll ist, sage ich das erst nach dem Audit.</div>
-				</details>
-				<details>
-					<summary>Ist das nur für Startseiten gedacht?</summary>
-					<div class="faq-ans">Am besten für Startseiten und kaufnahe Angebotsseiten.</div>
-				</details>
-				<details>
-					<summary>Für wen ist das nicht gedacht?</summary>
-					<div class="faq-ans">Nicht für Hobby-Projekte, reine Visitenkarten-Seiten oder Briefings, die eigentlich schon einen kompletten Relaunch meinen.</div>
+					<div class="faq-ans">Ja. Der Einstieg ist kostenlos und bewusst eng gefasst, damit die Rückmeldung schnell lesbar und direkt nutzbar bleibt.</div>
 				</details>
 				<details>
 					<summary>Muss ich danach einen Call buchen?</summary>
-					<div class="faq-ans">Nein. Ein Call ist nur sinnvoll, wenn Sie den nächsten Schritt direkt besprechen wollen.</div>
+					<div class="faq-ans">Nein. Die Rückmeldung kommt ohne Pflicht-Call. Wenn danach Gesprächsbedarf entsteht, ist das ein separater nächster Schritt.</div>
+				</details>
+				<details>
+					<summary>Welche Seiten passen am besten?</summary>
+					<div class="faq-ans">Vor allem Startseiten und kaufnahe Angebotsseiten in WordPress, die bereits Anfragen tragen sollen.</div>
+				</details>
+				<details>
+					<summary>Wie präzise muss das Formular ausgefüllt sein?</summary>
+					<div class="faq-ans">Kurz reicht. Eine konkrete Seite, ein ehrlicher Engpass und das wichtigste Ziel verbessern die Diagnosequalität bereits deutlich.</div>
 				</details>
 			</section>
 
