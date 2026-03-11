@@ -28,7 +28,7 @@ blocksy-child/
 ├── archive.php                ← Archiv-Seiten
 ├── category.php               ← Pillar Hub (Kategorie als Content-Cluster)
 ├── 404.php                    ← Fehlerseite mit Suche + Top-Links
-├── page-*.php                 ← Service-Landingpages (Audit, SEO, CWV, CRO, GA4, …)
+├── page-*.php                 ← Service- und Proof-Landingpages (Audit, SEO, CWV, CRO, GA4, Case Studies, …)
 ├── template-about.php         ← Über-Mich-Seite
 ├── template-portal.php        ← Client Portal (noindex)
 ├── assets/

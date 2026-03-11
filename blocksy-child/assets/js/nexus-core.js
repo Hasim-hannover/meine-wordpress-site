@@ -591,8 +591,8 @@
             // Hero CTA pulse
             this.initCtaPulse();
 
-            // Progress Bar nur auf Single Posts
-            if (document.querySelector('.nexus-single-container, .single-post')) {
+            // Progress Bar auf Single Posts und seitenweiten Case-Study-Templates
+            if (document.querySelector('.nexus-single-container, .single-post, #nx-progress-bar')) {
                 this.initProgressBar();
             }
 

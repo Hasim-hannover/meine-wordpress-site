@@ -24,6 +24,8 @@ add_filter( 'rank_math/frontend/title', 'hu_rank_math_audit_title' );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_audit_description' );
 add_filter( 'rank_math/frontend/title', 'hu_rank_math_contact_title' );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_contact_description' );
+add_filter( 'rank_math/frontend/title', 'hu_rank_math_domdar_case_title' );
+add_filter( 'rank_math/frontend/description', 'hu_rank_math_domdar_case_description' );
 add_filter( 'pre_get_document_title', 'hu_pre_get_document_title_override' );
 add_filter( 'document_title_parts', 'hu_document_title_overrides' );
 
@@ -145,6 +147,44 @@ function hu_is_contact_offer_page() {
 }
 
 /**
+ * Check whether current query is the DOMDAR case-study page.
+ *
+ * @return bool
+ */
+function hu_is_domdar_case_study_page() {
+	if ( ! is_singular() ) {
+		return false;
+	}
+
+	$post_id = get_queried_object_id();
+	if ( ! $post_id ) {
+		return false;
+	}
+
+	$slug = get_post_field( 'post_name', $post_id );
+
+	return in_array( $slug, [ 'case-study-domdar', 'domdar' ], true );
+}
+
+/**
+ * Get the SEO title for the DOMDAR case study.
+ *
+ * @return string
+ */
+function hu_get_domdar_case_study_title() {
+	return 'Case Study: DOMDAR | Sustainable Commerce | Hasim Üner';
+}
+
+/**
+ * Get the SEO description for the DOMDAR case study.
+ *
+ * @return string
+ */
+function hu_get_domdar_case_study_description() {
+	return 'Vom 46€ Warenkorb zur 120€ Profit-Maschine in 9 Monaten. Wie wir ohne Budget-Erhöhung die Conversion verdoppelten.';
+}
+
+/**
  * Get the SEO title for the contact request page.
  *
  * @return string
@@ -219,6 +259,48 @@ function hu_rank_math_contact_description( $description ) {
 }
 
 /**
+ * Override Rank Math title for the DOMDAR case study when no custom SEO title exists.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_rank_math_domdar_case_title( $title ) {
+	if ( ! hu_is_domdar_case_study_page() ) {
+		return $title;
+	}
+
+	$post_id   = get_queried_object_id();
+	$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+
+	if ( '' !== $seo_title ) {
+		return $title;
+	}
+
+	return hu_get_domdar_case_study_title();
+}
+
+/**
+ * Override Rank Math description for the DOMDAR case study when no custom description exists.
+ *
+ * @param string $description Existing description.
+ * @return string
+ */
+function hu_rank_math_domdar_case_description( $description ) {
+	if ( ! hu_is_domdar_case_study_page() ) {
+		return $description;
+	}
+
+	$post_id         = get_queried_object_id();
+	$seo_description = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
+
+	if ( '' !== $seo_description ) {
+		return $description;
+	}
+
+	return hu_get_domdar_case_study_description();
+}
+
+/**
  * Override the document title where an exact title string is required.
  *
  * @param string $title Existing title.
@@ -227,6 +309,13 @@ function hu_rank_math_contact_description( $description ) {
 function hu_pre_get_document_title_override( $title ) {
 	if ( hu_is_contact_offer_page() ) {
 		return hu_get_contact_offer_title();
+	}
+
+	if ( hu_is_domdar_case_study_page() ) {
+		$post_id   = get_queried_object_id();
+		$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+
+		return '' !== $seo_title ? $seo_title : hu_get_domdar_case_study_title();
 	}
 
 	return $title;
@@ -251,6 +340,15 @@ function hu_document_title_overrides( $parts ) {
 
 	if ( hu_is_contact_offer_page() ) {
 		$parts['title'] = hu_get_contact_offer_title();
+		return $parts;
+	}
+
+	if ( hu_is_domdar_case_study_page() ) {
+		$post_id   = get_queried_object_id();
+		$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+
+		$parts['title'] = '' !== $seo_title ? $seo_title : hu_get_domdar_case_study_title();
+
 		return $parts;
 	}
 
@@ -435,6 +533,19 @@ function hu_get_seo_meta() {
 		if ( hu_is_audit_offer_page() ) {
 			$meta['og_title']    = 'Growth Audit für B2B-WordPress-Seiten';
 			$meta['description'] = 'Persönlicher Growth Audit für Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Priorität und Rückmeldung innerhalb von 48 Stunden.';
+		}
+
+		if ( hu_is_domdar_case_study_page() ) {
+			$seo_title       = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+			$seo_description = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
+
+			if ( '' === $seo_title ) {
+				$meta['og_title'] = hu_get_domdar_case_study_title();
+			}
+
+			if ( '' === $seo_description ) {
+				$meta['description'] = hu_get_domdar_case_study_description();
+			}
 		}
 
 		if ( in_array( $slug, [ 'wgos', 'wordpress-growth-operating-system' ], true ) ) {
