@@ -22,6 +22,13 @@ $wgos_url     = nexus_get_page_url(
 $cases_url    = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 $about_url    = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
 $audit_url    = nexus_get_audit_url();
+$brand_text   = function_exists( 'hu_get_site_wordmark_text' ) ? hu_get_site_wordmark_text() : 'HAŞIM ÜNER';
+$panel_id     = 'nx-blog-header-panel';
+$home_label   = sprintf(
+	/* translators: %s: site or brand name. */
+	__( 'Startseite - %s', 'blocksy-child' ),
+	$brand_text
+);
 
 $context_title = __( 'Insights Hub', 'blocksy-child' );
 $context_text  = __( 'Erst verstehen, dann priorisieren: Insights lesen, Proof sehen, Audit starten.', 'blocksy-child' );
@@ -90,11 +97,6 @@ $primary_items = [
 		'active' => is_page( nexus_get_page_id( [ 'case-studies-e-commerce', 'case-studies' ] ) ),
 	],
 	[
-		'label'  => __( 'Insights', 'blocksy-child' ),
-		'url'    => $blog_url,
-		'active' => is_home() || is_archive() || is_singular( 'post' ),
-	],
-	[
 		'label'  => __( 'Über mich', 'blocksy-child' ),
 		'url'    => $about_url,
 		'active' => is_page( nexus_get_page_id( [ 'uber-mich' ] ) ),
@@ -102,78 +104,99 @@ $primary_items = [
 ];
 ?>
 
-<header class="nexus-blog-header" role="banner">
-	<div class="nx-container nexus-blog-header__shell">
-		<div class="nexus-blog-header__brand-block">
-			<a class="nexus-blog-header__brand site-logo" href="<?php echo esc_url( $home_url ); ?>" aria-label="<?php esc_attr_e( 'Startseite - HAŞIM ÜNER', 'blocksy-child' ); ?>">HAŞIM ÜNER</a>
+<header class="nexus-blog-header" data-site-header role="banner">
+	<div class="nx-container nexus-blog-header__frame">
+		<div class="nexus-blog-header__shell">
+			<div class="nexus-blog-header__brand-block">
+				<a
+					class="nexus-blog-header__brand site-logo"
+					href="<?php echo esc_url( $home_url ); ?>"
+					rel="home"
+					aria-label="<?php echo esc_attr( $home_label ); ?>"
+				>
+					<?php echo esc_html( $brand_text ); ?>
+				</a>
 
-			<div class="nexus-blog-header__intro">
-				<span class="nexus-blog-header__eyebrow"><?php esc_html_e( 'Blog Navigation', 'blocksy-child' ); ?></span>
-				<p class="nexus-blog-header__title"><?php echo esc_html( $context_title ); ?></p>
-				<p class="nexus-blog-header__text"><?php echo esc_html( $context_text ); ?></p>
-			</div>
-		</div>
-
-		<nav class="nexus-blog-header__nav" aria-label="<?php esc_attr_e( 'Primäre Blog-Navigation', 'blocksy-child' ); ?>">
-			<ul class="nexus-blog-header__menu">
-				<?php foreach ( $primary_items as $item ) : ?>
-					<li class="nexus-blog-header__menu-item">
-						<a
-							class="nexus-blog-header__menu-link<?php echo $item['active'] ? ' is-active' : ''; ?>"
-							href="<?php echo esc_url( $item['url'] ); ?>"
-							<?php echo $item['active'] ? 'aria-current="page"' : ''; ?>
-						>
-							<?php echo esc_html( $item['label'] ); ?>
-						</a>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</nav>
-
-		<div class="nexus-blog-header__actions">
-			<a class="nexus-blog-header__cta" href="<?php echo esc_url( $audit_url ); ?>">
-				<?php esc_html_e( 'Audit starten', 'blocksy-child' ); ?>
-			</a>
-		</div>
-
-		<details class="nexus-blog-header__mobile">
-			<summary class="nexus-blog-header__mobile-toggle">
-				<span class="nexus-blog-header__mobile-toggle-label"><?php esc_html_e( 'Menü', 'blocksy-child' ); ?></span>
-			</summary>
-
-			<div class="nexus-blog-header__mobile-panel">
-				<p class="nexus-blog-header__mobile-context"><?php echo esc_html( $context_text ); ?></p>
-
-				<nav class="nexus-blog-header__mobile-nav" aria-label="<?php esc_attr_e( 'Mobiles Blog-Menü', 'blocksy-child' ); ?>">
-					<?php foreach ( $primary_items as $item ) : ?>
-						<a
-							class="nexus-blog-header__mobile-link<?php echo $item['active'] ? ' is-active' : ''; ?>"
-							href="<?php echo esc_url( $item['url'] ); ?>"
-							<?php echo $item['active'] ? 'aria-current="page"' : ''; ?>
-						>
-							<?php echo esc_html( $item['label'] ); ?>
-						</a>
-					<?php endforeach; ?>
-				</nav>
-
-				<div class="nexus-blog-header__mobile-actions">
-					<a class="nexus-blog-header__cta" href="<?php echo esc_url( $audit_url ); ?>">
-						<?php esc_html_e( 'Audit starten', 'blocksy-child' ); ?>
-					</a>
+				<div class="nexus-blog-header__intro">
+					<span class="nexus-blog-header__eyebrow"><?php esc_html_e( 'Blog Navigation', 'blocksy-child' ); ?></span>
+					<p class="nexus-blog-header__title"><?php echo esc_html( $context_title ); ?></p>
+					<p class="nexus-blog-header__text"><?php echo esc_html( $context_text ); ?></p>
 				</div>
 			</div>
-		</details>
+
+			<nav class="nexus-blog-header__nav" aria-label="<?php esc_attr_e( 'Primäre Blog-Navigation', 'blocksy-child' ); ?>">
+				<ul class="nexus-blog-header__menu">
+					<?php foreach ( $primary_items as $item ) : ?>
+						<li class="nexus-blog-header__menu-item">
+							<a
+								class="nexus-blog-header__menu-link<?php echo $item['active'] ? ' is-active' : ''; ?>"
+								href="<?php echo esc_url( $item['url'] ); ?>"
+								<?php echo $item['active'] ? 'aria-current="page"' : ''; ?>
+							>
+								<?php echo esc_html( $item['label'] ); ?>
+							</a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+
+			<div class="nexus-blog-header__actions">
+				<a class="nexus-blog-header__cta nexus-blog-header__desktop-cta" href="<?php echo esc_url( $audit_url ); ?>">
+					<?php esc_html_e( 'Audit starten', 'blocksy-child' ); ?>
+				</a>
+
+				<button
+					type="button"
+					class="nexus-blog-header__toggle"
+					data-site-header-toggle
+					aria-expanded="false"
+					aria-controls="<?php echo esc_attr( $panel_id ); ?>"
+					aria-label="<?php esc_attr_e( 'Navigation öffnen', 'blocksy-child' ); ?>"
+				>
+					<span class="nexus-blog-header__toggle-lines" aria-hidden="true">
+						<span class="nexus-blog-header__toggle-line"></span>
+						<span class="nexus-blog-header__toggle-line"></span>
+						<span class="nexus-blog-header__toggle-line"></span>
+					</span>
+					<span class="nexus-blog-header__toggle-label"><?php esc_html_e( 'Menü', 'blocksy-child' ); ?></span>
+				</button>
+			</div>
+		</div>
+
+		<div id="<?php echo esc_attr( $panel_id ); ?>" class="nexus-blog-header__mobile-panel" data-site-header-panel hidden>
+			<p class="nexus-blog-header__mobile-context"><?php echo esc_html( $context_text ); ?></p>
+
+			<nav class="nexus-blog-header__mobile-nav" aria-label="<?php esc_attr_e( 'Mobiles Blog-Menü', 'blocksy-child' ); ?>">
+				<?php foreach ( $primary_items as $item ) : ?>
+					<a
+						class="nexus-blog-header__mobile-link<?php echo $item['active'] ? ' is-active' : ''; ?>"
+						href="<?php echo esc_url( $item['url'] ); ?>"
+						<?php echo $item['active'] ? 'aria-current="page"' : ''; ?>
+					>
+						<?php echo esc_html( $item['label'] ); ?>
+					</a>
+				<?php endforeach; ?>
+			</nav>
+
+			<div class="nexus-blog-header__mobile-actions">
+				<a class="nexus-blog-header__cta" href="<?php echo esc_url( $audit_url ); ?>">
+					<?php esc_html_e( 'Audit starten', 'blocksy-child' ); ?>
+				</a>
+			</div>
+		</div>
 	</div>
 
-	<nav class="nx-container nexus-blog-header__context-links" aria-label="<?php esc_attr_e( 'Blog-Kontext', 'blocksy-child' ); ?>">
-		<?php foreach ( $context_links as $link ) : ?>
-			<a
-				class="nexus-blog-header__context-link<?php echo ! empty( $link['active'] ) ? ' is-active' : ''; ?>"
-				href="<?php echo esc_url( $link['url'] ); ?>"
-				<?php echo ! empty( $link['active'] ) ? 'aria-current="page"' : ''; ?>
-			>
-				<?php echo esc_html( $link['label'] ); ?>
-			</a>
-		<?php endforeach; ?>
-	</nav>
+	<?php if ( count( $context_links ) > 1 ) : ?>
+		<nav class="nx-container nexus-blog-header__context-links" aria-label="<?php esc_attr_e( 'Blog-Kontext', 'blocksy-child' ); ?>">
+			<?php foreach ( $context_links as $link ) : ?>
+				<a
+					class="nexus-blog-header__context-link<?php echo ! empty( $link['active'] ) ? ' is-active' : ''; ?>"
+					href="<?php echo esc_url( $link['url'] ); ?>"
+					<?php echo ! empty( $link['active'] ) ? 'aria-current="page"' : ''; ?>
+				>
+					<?php echo esc_html( $link['label'] ); ?>
+				</a>
+			<?php endforeach; ?>
+		</nav>
+	<?php endif; ?>
 </header>
