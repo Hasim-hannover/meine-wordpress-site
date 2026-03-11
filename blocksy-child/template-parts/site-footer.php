@@ -26,6 +26,15 @@ $wgos_url    = nexus_get_page_url(
 	home_url( '/wordpress-growth-operating-system/' )
 );
 $cases_url   = nexus_get_results_url();
+$e3_url      = nexus_get_page_url(
+	[ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ],
+	home_url( '/e3-new-energy/' )
+);
+$domdar_url  = nexus_get_page_url(
+	[ 'case-study-domdar', 'domdar' ],
+	home_url( '/case-study-domdar/' )
+);
+$whitelabel_url = nexus_get_whitelabel_page_url();
 $blog_url    = $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' );
 $seo_url     = nexus_get_page_url(
 	[ 'wordpress-seo-hannover', 'seo' ],
@@ -34,6 +43,10 @@ $seo_url     = nexus_get_page_url(
 $cwv_url     = nexus_get_page_url(
 	[ 'core-web-vitals', 'core-web-vitals-optimierung' ],
 	home_url( '/core-web-vitals/' )
+);
+$tools_url   = nexus_get_page_url(
+	[ 'kostenlose-tools', 'tools' ],
+	home_url( '/kostenlose-tools/' )
 );
 $about_url   = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
 $contact_url = nexus_get_contact_url();
@@ -66,19 +79,29 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 			<section class="ft__col" aria-labelledby="ft-einstieg">
 				<h3 id="ft-einstieg">Einstieg</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>">Audit</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit</a></li>
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>">WordPress Agentur Hannover</a></li>
 					<li><a href="<?php echo esc_url( $wgos_url ); ?>">WGOS</a></li>
 				</ul>
 			</section>
 
 			<section class="ft__col" aria-labelledby="ft-proof">
-				<h3 id="ft-proof">Proof &amp; Wissen</h3>
+				<h3 id="ft-proof">Proof</h3>
 				<ul class="ft__list">
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $cases_url ); ?>">Ergebnisse</a></li>
+					<li><a href="<?php echo esc_url( $e3_url ); ?>">E3 New Energy</a></li>
+					<li><a href="<?php echo esc_url( $domdar_url ); ?>">DOMDAR</a></li>
+					<li><a href="<?php echo esc_url( $whitelabel_url ); ?>">Whitelabel Proof</a></li>
+				</ul>
+			</section>
+
+			<section class="ft__col" aria-labelledby="ft-wissen">
+				<h3 id="ft-wissen">Wissen</h3>
+				<ul class="ft__list">
 					<li><a href="<?php echo esc_url( $blog_url ); ?>">Insights</a></li>
 					<li><a href="<?php echo esc_url( $seo_url ); ?>">SEO</a></li>
 					<li><a href="<?php echo esc_url( $cwv_url ); ?>">Core Web Vitals</a></li>
+					<li><a href="<?php echo esc_url( $tools_url ); ?>">Kostenlose Tools</a></li>
 				</ul>
 			</section>
 
