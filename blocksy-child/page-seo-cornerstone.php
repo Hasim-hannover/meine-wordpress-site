@@ -399,6 +399,16 @@ get_header();
 		</div>
 
 		<?php
+		if ( function_exists( 'nexus_get_wgos_blog_asset_bridge' ) && function_exists( 'nexus_render_wgos_blog_asset_bridge' ) ) {
+			$bridge = nexus_get_wgos_blog_asset_bridge();
+
+			if ( is_array( $bridge ) ) {
+				echo nexus_render_wgos_blog_asset_bridge( $bridge ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+		}
+		?>
+
+		<?php
 		$article_url         = get_permalink();
 		$article_title       = get_the_title();
 		$article_description = 'Performance Marketing ohne technisches SEO-Fundament verbrennt Budget. So wirken Technik, CRO und Tracking zusammen - inklusive Entscheider-Checkliste.';
