@@ -69,7 +69,7 @@
             }
 
             if (window.scrollY <= revealAfter) {
-                setHeaderVisibility(false);
+                setHeaderVisibility(true);
                 return;
             }
 
