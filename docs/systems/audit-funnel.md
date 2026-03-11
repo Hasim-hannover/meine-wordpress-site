@@ -20,7 +20,7 @@ Sein Job:
 - die richtige Seite plus den richtigen Kontext einsammeln
 - Botschaft, Proof, CTA und Anfragefuehrung priorisieren
 - unqualifizierte Gratis-Relaunch-Anfragen filtern
-- passende Leads in Blueprint, Call oder Umsetzung ueberfuehren
+- passende Leads in Rueckmeldung, Folgeprozess, Call oder Umsetzung ueberfuehren
 
 Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 
@@ -40,7 +40,7 @@ Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 8. Danach folgt die persoenliche Rueckmeldung innerhalb von 48 Stunden.
 9. Je nach Lage geht der Lead weiter in:
    - kleine Korrektur
-   - `Growth Blueprint`
+   - vertiefte Folgeanalyse nach dem Audit
    - Umsetzung / Retainer
    - direkten Strategiecall ueber Cal.com
 

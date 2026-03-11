@@ -25,7 +25,6 @@ function hu_home_urls() {
 
 	$urls = [
 		'audit'       => nexus_get_audit_url(),
-		'deep_dive'   => nexus_get_page_url( [ '360-deep-dive' ] ),
 		'wgos'        => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
 		'cases'       => nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) ),
 		'about'       => nexus_get_page_url( [ 'uber-mich' ] ),
@@ -332,7 +331,7 @@ function hu_wgos_block_shortcode() {
 				<span class="wp-badge">Angebotsarchitektur</span>
 				<h2 id="angebot-heading" class="wp-section-h2">Drei Stufen statt zehn Einzelleistungen.</h2>
 				<p class="wp-section-p">
-					Der Ablauf ist bewusst eng geführt: erst Diagnose, dann Blueprint,
+					Der Ablauf ist bewusst eng geführt: erst Diagnose, dann Priorisierung im direkten Austausch,
 					dann Umsetzung und laufende Optimierung auf WordPress-Basis.
 				</p>
 			</div>
@@ -345,8 +344,8 @@ function hu_wgos_block_shortcode() {
 				</div>
 				<div class="wp-step highlight-step nx-reveal">
 					<div class="wp-step-num highlight-num">2</div>
-					<h3>360 Grad Growth Blueprint</h3>
-					<p>Der Deep Dive für Unternehmen mit echtem Potenzial. Ergebnis: priorisierte Roadmap für Positionierung, IA, Measurement und Conversion-Logik.</p>
+					<h3>Priorisierung im direkten Austausch</h3>
+					<p>Der öffentliche Einstieg bleibt bewusst der Growth Audit. Wenn der Fall tiefer geht, entsteht der nächste vertiefte Schritt erst nach Rückmeldung und persönlichem Kontakt.</p>
 				</div>
 				<div class="wp-step nx-reveal">
 					<div class="wp-step-num">3</div>
@@ -548,7 +547,7 @@ function hu_faq_section_shortcode() {
 				</details>
 				<details class="nx-faq__item nx-reveal">
 					<summary>Wie startet die Zusammenarbeit?</summary>
-					<div class="nx-faq__content">Mit dem Growth Audit. Danach ist klar, ob ein 360 Grad Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genügen.</div>
+					<div class="nx-faq__content">Mit dem Growth Audit. Danach gibt es eine klare Priorität und den nächsten sinnvollen Schritt. Größere Folgeprojekte ergeben sich erst nach der Rückmeldung und persönlichem Kontakt.</div>
 				</details>
 			</div>
 		</div>

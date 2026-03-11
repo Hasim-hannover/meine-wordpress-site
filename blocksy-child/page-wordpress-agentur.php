@@ -42,7 +42,7 @@ $faq_items = [
 	],
 	[
 		'question' => 'Wie startet die Zusammenarbeit?',
-		'answer'   => 'Mit dem Growth Audit. Danach ist klar, ob ein tieferer Blueprint sinnvoll ist oder ob kleinere strukturelle Eingriffe bereits genügen.',
+		'answer'   => 'Mit dem Growth Audit. Danach ist klar, was zuerst zählt und ob ein größerer Folgeprozess überhaupt nötig ist. Alles Weitere ergibt sich erst nach Rückmeldung und persönlichem Kontakt.',
 	],
 ];
 
@@ -181,8 +181,8 @@ get_header();
 					</article>
 					<article class="nx-step nx-step--highlight">
 						<div class="nx-step__number">2</div>
-						<h3>360 Grad Growth Blueprint</h3>
-						<p>Der Deep Dive. Ergebnis ist eine priorisierte Roadmap für Positionierung, Informationsarchitektur, Measurement und Conversion-Pfade.</p>
+						<h3>Priorisierung im direkten Austausch</h3>
+						<p>Der öffentliche Einstieg bleibt bewusst der Growth Audit. Wenn der Fall tiefer geht, entsteht der nächste vertiefte Schritt erst nach Rückmeldung und persönlichem Kontakt.</p>
 					</article>
 					<article class="nx-step">
 						<div class="nx-step__number">3</div>

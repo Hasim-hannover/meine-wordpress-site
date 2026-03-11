@@ -7,7 +7,7 @@ Stand: 2026-03-11. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 | System | Zweck | Repo-Orte | Externe Abhaengigkeiten | Status |
 | --- | --- | --- | --- | --- |
 | Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/deploy.yml` | WordPress, Blocksy Parent Theme, ACF, Rank Math | live |
-| Audit-Funnel | Diagnose-Einstieg, Audit-Intake, Blueprint-Qualifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
+| Audit-Funnel | Diagnose-Einstieg, Audit-Intake und interne Folgequalifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
 | Tracking | Tracking-ready Markup, CTA-Events, SEO-/Schema-Layer | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, Templates mit `data-track-*` | GTM, sGTM, GA4, Consent Mode v2, Meta CAPI | teils im Repo, teils extern |
 | CTA- und Leadflow | CTA-Hierarchie vom ersten Besuch bis zur Qualifizierung | `blocksy-child/inc/shortcodes.php`, `blocksy-child/template-parts/footer-cta.php`, `blocksy-child/template-parts/trust-section.php`, Service-Templates | WordPress-Editor, Audit-Funnel, Cal.com, CRM | live |
 | Public Proof Layer | oeffentliche Vertrauenssignale ohne Testimonials, plus Pilot-zu-Case-Mechanik | `blocksy-child/inc/shortcodes.php`, `blocksy-child/assets/css/homepage.css`, `blocksy-child/page-kontakt.php`, `blocksy-child/inc/contact-page.php`, `docs/playbooks/homepage-cro-proof-monitoring-2026-03.md` | GitHub-Repo, oeffentliches LinkedIn-Profil, optional spaeter Facebook | live |
@@ -72,7 +72,7 @@ Aktuelle Logik:
 2. Primaerer CTA fuehrt in den `Growth Audit`.
 3. Die aktive Landingpage sammelt Seite plus Kontext ueber ein natives Multi-Step-Formular.
 4. WordPress speichert die Anfrage direkt im internen Audit-CRM und versendet Benachrichtigungen ueber `wp_mail`.
-5. Danach folgt der `Growth Blueprint` als zweiter Qualifizierungsschritt.
+5. Danach folgt bei Bedarf ein vertiefter Folgeschritt, aber erst nach der persoenlichen Rueckmeldung und direktem Kontakt.
 6. Alternative direkte Eskalation: `Cal.com`-Call.
 7. `audit-live.js` bleibt als vorbereiteter Instant-Results-Layer im Repo, ist aber nicht der aktive Default-Flow.
 
@@ -107,7 +107,7 @@ Die CTA-Hierarchie ist klar und sollte nicht verwischt werden.
 - Primaerer CTA: `Growth Audit`
 - Sekundaerer CTA: `WGOS verstehen`, `Case Studies ansehen`
 - Risikoarmer Zusatz-Einstieg: `Pilotprojekt / Proof-of-Value`
-- Tertiaerer CTA: `Growth Blueprint`
+- Kein oeffentlicher 360-/Blueprint-CTA mehr im Erstkontakt
 - Eskalations-CTA: `Cal.com`-Strategiecall
 - Utility-CTA: Kunden-Portal fuer Bestandskunden
 
@@ -138,7 +138,7 @@ Risiko:
 
 ## Systemabhaengigkeiten
 
-- Website -> CTA-Layer -> Growth Audit -> Growth Blueprint -> CRM / Sales
+- Website -> CTA-Layer -> Growth Audit -> persoenliche Rueckmeldung -> Folgeprozess / CRM / Sales
 - Website -> Tracking-Layer -> GTM / GA4 / Consent -> Reporting / Optimierung
 - Blog / SEO -> interne Verlinkung -> Service-Seiten / Audit -> Leadflow
 - WordPress-Editor -> Theme-Struktur -> Live-Seiten
@@ -149,7 +149,7 @@ Risiko:
 - WordPress Block-Editor fuer editorgetriebene Seiten ausserhalb des Audit-Shells
 - ACF fuer SEO- und Content-Fallbacks
 - Rank Math fuer SEO-Meta und Sitemaps
-- Fluent Forms fuer den Deep-Dive
+- Fluent Forms fuer die vertiefte Folgeanalyse
 - n8n Cloud fuer den optionalen Instant-Results-Audit
 - Cal.com fuer direkte Gespraechsbuchung
 - SSH-Deploy auf Basis von `blocksy-child/`

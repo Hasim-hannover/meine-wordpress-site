@@ -102,10 +102,10 @@ function hu_output_schema()
         ],
 
         '360-deep-dive' => [
-            'name'        => '360 Grad Growth Blueprint',
-            'description' => 'Persönlicher Deep Dive nach dem Audit mit priorisierter Roadmap für Positionierung, IA, Measurement und Conversion.',
-            'serviceType' => 'Growth Blueprint',
-            'serviceOutput' => 'Blueprint für die nächsten sinnvollen Struktur- und Umsetzungsentscheidungen'
+            'name'        => 'Vertiefte Folgeanalyse nach dem Growth Audit',
+            'description' => 'Persönliche Folgeanalyse nach dem Audit mit priorisierter Entscheidungsvorlage für Positionierung, IA, Measurement und Conversion.',
+            'serviceType' => 'Folgeanalyse nach dem Growth Audit',
+            'serviceOutput' => 'Priorisierte Entscheidungsvorlage für die nächsten sinnvollen Struktur- und Umsetzungsentscheidungen'
         ],
 
         'wordpress-wartung-hannover' => [

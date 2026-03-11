@@ -510,7 +510,7 @@ get_header();
 	<div class="nx-container">
 
 		<div class="nx-section-header">
-			<span class="nx-badge nx-badge--ghost">Deep Dive</span>
+			<span class="nx-badge nx-badge--ghost">FAQ</span>
 			<h2 class="nx-headline-section" style="margin-top:1rem;">
 				Häufige Fragen zur Umsetzung
 			</h2>

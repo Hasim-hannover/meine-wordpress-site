@@ -17,8 +17,8 @@ $audit_url = nexus_get_audit_url();
 
 	<!-- 1. HERO SECTION -->
 	<section class="deepdive-hero">
-		<span class="deepdive-pill">Stufe 2 nach dem Audit</span>
-		<h1 class="deepdive-hero-title">360 Grad Growth Blueprint</h1>
+		<span class="deepdive-pill">Nur nach Audit und Kontakt</span>
+		<h1 class="deepdive-hero-title">Vertiefte Folgeanalyse nach dem Growth Audit</h1>
 		<p class="deepdive-hero-sub">
 			Sie kennen die groben Engpässe aus dem Growth Audit.<br>
 			Mit wenigen gezielten Angaben verdichte ich das Bild zu einer persönlichen Analyse<br>
@@ -27,7 +27,7 @@ $audit_url = nexus_get_audit_url();
 		<div class="deepdive-trust">
 			<span>✓ Diagnose statt Pitch</span>
 			<span>✓ Persönliche Analyse in 48h</span>
-			<span>✓ Priorisierter Blueprint</span>
+			<span>✓ Priorisierte Entscheidungsvorlage</span>
 		</div>
 	</section>
 
@@ -58,7 +58,7 @@ $audit_url = nexus_get_audit_url();
 			<div class="deepdive-step">
 				<span class="deepdive-step-num">3</span>
 				<div class="deepdive-step-text">
-					<strong>Sie erhalten einen priorisierten Blueprint</strong>
+					<strong>Sie erhalten eine priorisierte Entscheidungsvorlage</strong>
 					<span>mit Hebeln, Reihenfolge und nächster Entscheidung</span>
 				</div>
 			</div>
@@ -67,10 +67,10 @@ $audit_url = nexus_get_audit_url();
 
 	<!-- 4. VERTRAUENS-SECTION -->
 		<section class="deepdive-trust-section">
-			<h2 class="deepdive-section-title">Warum dieser Zwischenschritt?</h2>
+			<h2 class="deepdive-section-title">Warum dieser Folgeschritt?</h2>
 			<p class="deepdive-trust-text">
 			Weil die meisten Teams nicht an fehlenden Ideen scheitern, sondern an fehlender Reihenfolge.
-			Der Blueprint macht sichtbar, was zuerst gelöst werden muss und ob eine Umsetzung wirtschaftlich Sinn ergibt.
+			Die vertiefte Analyse macht sichtbar, was zuerst gelöst werden muss und ob eine Umsetzung wirtschaftlich Sinn ergibt.
 			Kein Follow-up-Spam, kein Leistungsdumping, sondern eine belastbare Entscheidungsvorlage.
 			</p>
 		</section>

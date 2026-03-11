@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $audit_url     = nexus_get_audit_url();
-$deep_dive_url = nexus_get_page_url( [ '360-deep-dive' ] );
 $wgos_url      = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
 $cases_url     = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 
@@ -22,10 +21,10 @@ get_header();
 	<section class="container" style="max-width:1120px; padding:5rem 20px 6rem;">
 		<div style="text-align:center; max-width:760px; margin:0 auto 3rem;">
 			<span class="nx-badge nx-badge--gold">Angebotsarchitektur</span>
-			<h1 style="margin:1rem 0 1rem;">Drei Stufen. Ein klares Ziel.</h1>
+			<h1 style="margin:1rem 0 1rem;">Drei Schritte. Ein klarer Einstieg.</h1>
 			<p style="font-size:1.12rem; color:#64748b; line-height:1.7;">
 				Diese Seite ist keine Leistungsbibliothek. Sie zeigt den sinnvollen Weg,
-				mit dem aus einer WordPress-Präsenz ein planbares Anfrage- und Wachstumssystem wird.
+				mit dem aus einer WordPress-Präsenz ein planbares Anfrage- und Wachstumssystem wird. Der öffentliche Fokus bleibt bewusst auf dem Growth Audit.
 			</p>
 		</div>
 
@@ -39,10 +38,10 @@ get_header();
 					</a>
 				</li>
 				<li class="solution-item">
-					<a href="<?php echo esc_url( $deep_dive_url ); ?>">
-						<h2>2. 360 Grad Growth Blueprint</h2>
-						<p>Der Deep Dive nach dem Audit. Priorisierte Roadmap für Positionierung, Informationsarchitektur, Measurement und Angebotslogik.</p>
-						<span class="cta-btn">Blueprint ansehen</span>
+					<a href="<?php echo esc_url( $audit_url ); ?>">
+						<h2>2. Priorisierte Folgeentscheidung</h2>
+						<p>Kein öffentlicher Einstieg. Wenn der Fall tiefer geht, ergibt sich der nächste vertiefte Schritt erst nach Growth Audit, Rückmeldung und persönlichem Kontakt.</p>
+						<span class="cta-btn">Ergibt sich nach dem Audit</span>
 					</a>
 				</li>
 				<li class="solution-item">

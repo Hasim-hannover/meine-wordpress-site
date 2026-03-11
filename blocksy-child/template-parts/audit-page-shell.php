@@ -70,7 +70,7 @@ $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/
 							</div>
 							<div class="review-offer-item">
 								<strong>1 nächster Schritt</strong>
-								<span>Direkt umsetzbar oder, wenn nötig, sauber in einen tieferen Blueprint überführt.</span>
+								<span>Direkt umsetzbar oder, wenn nötig, sauber in einen vertieften Folgeprozess überführt.</span>
 							</div>
 						</div>
 
@@ -168,7 +168,7 @@ $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/
 						</div>
 						<div class="preview-deliverable">
 							<strong>nächster sinnvoller Schritt</strong>
-							<span>Kleine Korrektur oder tieferer Blueprint, wenn der Bruch struktureller ist.</span>
+							<span>Kleine Korrektur oder ein größerer Folgeprozess, wenn der Bruch struktureller ist.</span>
 						</div>
 					</div>
 				</div>
@@ -191,7 +191,7 @@ $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/
 							<strong>Nächster sinnvoller Schritt</strong>
 							<span>Den ersten Screen überarbeiten und danach Proof sowie Angebotsseite gegen denselben Fokus nachziehen.</span>
 						</div>
-						<div class="review-output-note">Wenn danach noch strukturelle Brüche sichtbar bleiben, ist der nächste sinnvolle Schritt ein tieferer Growth Blueprint.</div>
+						<div class="review-output-note">Wenn danach noch strukturelle Brüche sichtbar bleiben, klären wir den nächsten vertieften Schritt erst im persönlichen Kontakt.</div>
 					</div>
 				</div>
 			</section>

@@ -486,6 +486,7 @@ function hu_get_seo_meta() {
 		'portal',
 		'login',
 		'kunden-login',
+		'360-deep-dive',
 	];
 
 	if ( hu_is_contact_offer_page() ) {
