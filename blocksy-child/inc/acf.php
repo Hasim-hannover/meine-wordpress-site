@@ -29,7 +29,7 @@ function hu_register_acf_fields() {
 
 	// ── 1. SEO Meta Fields ────────────────────────────────────────
 	// Funktioniert pluginlos. Wenn Rank Math deaktiviert wird, greift das Theme
-	// auf diese Felder und auf bestehende Rank-Math-Post-Meta-Fallbacks zurueck.
+	// auf diese Felder und auf bestehende Rank-Math-Post-Meta-Fallbacks zurück.
 	acf_add_local_field_group( [
 		'key'      => 'group_nexus_seo',
 		'title'    => 'SEO Meta (Growth Architect)',
@@ -39,7 +39,7 @@ function hu_register_acf_fields() {
 				'label'         => 'SEO Title',
 				'name'          => 'seo_title',
 				'type'          => 'text',
-				'instructions'  => 'Optionaler Seitentitel fuer Title-Tag und Social Preview. Leer = Theme-Fallback nutzen.',
+				'instructions'  => 'Optionaler Seitentitel für Title-Tag und Social Preview. Leer = Theme-Fallback nutzen.',
 				'maxlength'     => 65,
 				'wrapper'       => [ 'width' => '100' ],
 			],
@@ -59,7 +59,7 @@ function hu_register_acf_fields() {
 				'label'        => 'Open Graph Bild',
 				'name'         => 'og_image',
 				'type'         => 'image',
-				'instructions' => '1200×630px. Überschreibt das Social-Preview-Bild fuer diese Seite.',
+				'instructions' => '1200×630px. Überschreibt das Social-Preview-Bild für diese Seite.',
 				'return_format' => 'url',
 				'preview_size'  => 'medium',
 				'mime_types'    => 'jpg, jpeg, png, webp',
@@ -103,7 +103,7 @@ function hu_register_acf_fields() {
 		'position'   => 'side',
 		'style'      => 'default',
 		'menu_order'  => 0,
-		'description' => 'Pluginlose SEO-Felder fuer Title, Description, Social-Preview und noindex.',
+		'description' => 'Pluginlose SEO-Felder für Title, Description, Social-Preview und noindex.',
 	] );
 
 	// ── 2. KPI Block Fields ───────────────────────────────────────

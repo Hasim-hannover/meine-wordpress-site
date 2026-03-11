@@ -394,7 +394,7 @@ while ( have_posts() ) :
 						<h2 id="privacy-contact">4. Kontaktaufnahme und Formulare</h2>
 						<p>
 							Wenn Sie uns per E-Mail kontaktieren oder ein Formular absenden, verarbeiten wir
-							die von Ihnen uebermittelten Daten ausschliesslich zur Bearbeitung Ihrer Anfrage.
+							die von Ihnen übermittelten Daten ausschließlich zur Bearbeitung Ihrer Anfrage.
 							Das betrifft insbesondere Kontakt- und Projektangaben, die Sie selbst eingeben.
 						</p>
 

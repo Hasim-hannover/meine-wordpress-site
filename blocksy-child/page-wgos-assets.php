@@ -39,7 +39,7 @@ $phase_count  = count( $payload['wgosAssetPhases'] );
 						<ul class="wgos-hero__bullets">
 							<li>Nach Phasen und Kernbereichen sortiert</li>
 							<li>Jedes Asset direkt klickbar</li>
-							<li>Saubere Bruecke zwischen System und Umsetzung</li>
+							<li>Saubere Brücke zwischen System und Umsetzung</li>
 						</ul>
 
 						<div class="wgos-hero__actions">
@@ -47,7 +47,7 @@ $phase_count  = count( $payload['wgosAssetPhases'] );
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Growth Audit starten</a>
 						</div>
 
-						<p class="wgos-hero__microcopy">Die Systemseite erklaert die Logik. Diese Seite zeigt die Bausteine, aus denen das System praktisch gebaut wird.</p>
+						<p class="wgos-hero__microcopy">Die Systemseite erklärt die Logik. Diese Seite zeigt die Bausteine, aus denen das System praktisch gebaut wird.</p>
 					</div>
 
 					<aside class="wgos-hero-card" aria-label="Nutzen der Systemlandkarte">
@@ -55,7 +55,7 @@ $phase_count  = count( $payload['wgosAssetPhases'] );
 						<dl class="wgos-hero-card__list">
 							<div class="wgos-hero-card__row">
 								<dt>Orientierung</dt>
-								<dd>Sie sehen sofort, welche Assets zu welchem Kernbereich gehoeren.</dd>
+								<dd>Sie sehen sofort, welche Assets zu welchem Kernbereich gehören.</dd>
 							</div>
 							<div class="wgos-hero-card__row">
 								<dt>Priorisierung</dt>
@@ -91,12 +91,12 @@ $phase_count  = count( $payload['wgosAssetPhases'] );
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Asset Explorer</span>
 					<h2 class="wgos-h2">Klickbare Bausteine statt versteckter Einzelleistungen.</h2>
-					<p class="wgos-section-intro">Jedes Asset ist einem klaren Abschnitt zugeordnet und laesst sich direkt oeffnen. So bleibt WGOS als System sichtbar, auch wenn man tiefer in einzelne Bausteine geht.</p>
+					<p class="wgos-section-intro">Jedes Asset ist einem klaren Abschnitt zugeordnet und lässt sich direkt öffnen. So bleibt WGOS als System sichtbar, auch wenn man tiefer in einzelne Bausteine geht.</p>
 				</div>
 
 				<div id="wgos-asset-explorer-root" class="wgos-asset-explorer-root"></div>
 				<noscript>
-					<p class="wgos-section-intro">Der Explorer benoetigt JavaScript. Die einzelnen Assets sind weiterhin ueber die WGOS Asset-Detailseiten erreichbar.</p>
+					<p class="wgos-section-intro">Der Explorer benötigt JavaScript. Die einzelnen Assets sind weiterhin über die WGOS Asset-Detailseiten erreichbar.</p>
 				</noscript>
 			</div>
 		</section>
@@ -107,7 +107,7 @@ $phase_count  = count( $payload['wgosAssetPhases'] );
 					<article class="wgos-contrast-card">
 						<h3>Wie diese Ebene genutzt wird</h3>
 						<ul class="wgos-checklist wgos-checklist--compact">
-							<li>Sie dient als Landkarte fuer alle vorhandenen WGOS-Bausteine.</li>
+							<li>Sie dient als Landkarte für alle vorhandenen WGOS-Bausteine.</li>
 							<li>Sie macht die Struktur hinter Credits, Modulen und Detailseiten sichtbar.</li>
 							<li>Sie hilft, einzelne Assets im Gesamtsystem einzuordnen.</li>
 						</ul>
@@ -118,7 +118,7 @@ $phase_count  = count( $payload['wgosAssetPhases'] );
 						<ul class="wgos-checklist wgos-checklist--compact">
 							<li>Die Hauptseite bleibt strategisch und klar.</li>
 							<li>Die operative Tiefe bekommt ihren eigenen, besseren Ort.</li>
-							<li>Neue Assets lassen sich spaeter sauber ergaenzen statt in statische Listen zu kippen.</li>
+							<li>Neue Assets lassen sich später sauber ergänzen statt in statische Listen zu kippen.</li>
 						</ul>
 					</article>
 				</div>
@@ -128,13 +128,13 @@ $phase_count  = count( $payload['wgosAssetPhases'] );
 		<section class="wgos-section wgos-section--white wgos-final-cta nx-reveal">
 			<div class="wgos-container">
 				<div class="wgos-final-cta__inner">
-					<span class="wgos-principle-kicker">Naechster Schritt</span>
+					<span class="wgos-principle-kicker">Nächster Schritt</span>
 					<h2 class="wgos-h2">Erst die Systemlogik verstehen. Dann den richtigen Baustein priorisieren.</h2>
 					<p class="wgos-prose">Wenn Sie nicht nur wissen wollen, welche Assets es gibt, sondern welche davon in Ihrer Lage zuerst sinnvoll sind, ist der Growth Audit der richtige Einstieg.</p>
 
 					<div class="wgos-hero__actions">
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Growth Audit starten</a>
-						<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespraech vereinbaren</a>
+						<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>
 					</div>
 				</div>
 			</div>

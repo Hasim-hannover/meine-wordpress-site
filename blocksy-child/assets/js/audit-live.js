@@ -5,7 +5,7 @@
  * - kein Audit-E-Mail-Branch
  * - kein PDF/HTML-Report-Versand
  * - kein Fluent-Forms-Deep-Dive
- * - Ergebnis muss sofort auf der Seite ueberzeugen
+ * - Ergebnis muss sofort auf der Seite überzeugen
  * - danach nativer Beratungs-CTA mit eigenem Webhook
  */
 (function () {
@@ -32,10 +32,10 @@
   };
 
   var loaderSteps = [
-    { icon: '🧾', text: 'Das Seitenversprechen wird gelesen …', sub: 'Wir pruefen H1, Title, Copy und die Klarheit des ersten Eindrucks.' },
-    { icon: '🤝', text: 'Proof-Signale werden gesucht …', sub: 'Wir pruefen Cases, Testimonials und sichtbare Vertrauensanker.' },
-    { icon: '🎯', text: 'Der naechste Schritt wird geprueft …', sub: 'Wir schauen auf CTA, Kontaktpfad und Reibung vor der Anfrage.' },
-    { icon: '⚡', text: 'Der mobile Eindruck wird gemessen …', sub: 'PageSpeed, Ladezeit und Reibung auf Mobilgeraeten.' },
+    { icon: '🧾', text: 'Das Seitenversprechen wird gelesen …', sub: 'Wir prüfen H1, Title, Copy und die Klarheit des ersten Eindrucks.' },
+    { icon: '🤝', text: 'Proof-Signale werden gesucht …', sub: 'Wir prüfen Cases, Testimonials und sichtbare Vertrauensanker.' },
+    { icon: '🎯', text: 'Der nächste Schritt wird geprüft …', sub: 'Wir schauen auf CTA, Kontaktpfad und Reibung vor der Anfrage.' },
+    { icon: '⚡', text: 'Der mobile Eindruck wird gemessen …', sub: 'PageSpeed, Ladezeit und Reibung auf Mobilgeräten.' },
     { icon: '🧭', text: 'Die drei wichtigsten Hebel werden priorisiert …', sub: 'Am Ende sehen Sie nicht alles, sondern zuerst das Wirksamste.' }
   ];
 
@@ -67,7 +67,7 @@
     var url = normalizeInputUrl(form.querySelector('[name="url"]').value);
 
     if (!url) {
-      showFormError('Bitte eine gueltige URL eingeben, z. B. https://example.de.');
+      showFormError('Bitte eine gültige URL eingeben, z. B. https://example.de.');
       return;
     }
 
@@ -117,7 +117,7 @@
       if (Date.now() - state.pollStart > CONFIG.pollTimeout) {
         clearPollTimer();
         setPhase('error');
-        showLoaderError('Die Analyse braucht heute laenger als erwartet. Bitte in ein bis zwei Minuten erneut versuchen.');
+        showLoaderError('Die Analyse braucht heute länger als erwartet. Bitte in ein bis zwei Minuten erneut versuchen.');
         return;
       }
 
@@ -148,7 +148,7 @@
           if (error && /keine JSON-Antwort|ungueltiges JSON/i.test(error.message || '')) {
             clearPollTimer();
             setPhase('error');
-            showLoaderError(error.message + ' Bitte n8n-Webhook pruefen.');
+            showLoaderError(error.message + ' Bitte n8n-Webhook prüfen.');
             return;
           }
 
@@ -268,7 +268,7 @@
       }
 
       if (item.action) {
-        html += '<p class="finding-action"><strong>Naechster Hebel:</strong> ' + escapeHtml(item.action) + '</p>';
+        html += '<p class="finding-action"><strong>Nächster Hebel:</strong> ' + escapeHtml(item.action) + '</p>';
       }
 
       html += '</article>';
@@ -300,7 +300,7 @@
           renderRevenueStat('Auftragswert', formatEuro(opportunity.basis.avgOrderValue || 0)) +
           renderRevenueStat('Annahme Conversion', escapeHtml(opportunity.basis.assumedConversionRange || '1-2%')) +
         '</div>' +
-        '<p class="opportunity-note">' + escapeHtml(opportunity.note || 'Konservative Spanne auf Basis oeffentlicher Daten und heuristischer Annahmen.') + '</p>' +
+        '<p class="opportunity-note">' + escapeHtml(opportunity.note || 'Konservative Spanne auf Basis öffentlicher Daten und heuristischer Annahmen.') + '</p>' +
       '</section>'
     );
   }
@@ -378,12 +378,12 @@
   function renderConsultation(data) {
     var cta = data.cta || {};
     var primaryFinding = data.findings && data.findings.length ? data.findings[0].title : 'die Priorisierung Ihrer Hebel';
-    var defaultMessage = 'Ich moechte die drei wichtigsten Hebel dieser Seite gemeinsam priorisieren.';
+    var defaultMessage = 'Ich möchte die drei wichtigsten Hebel dieser Seite gemeinsam priorisieren.';
 
     return (
       '<section class="result-cta result-animate">' +
-        '<h3>' + escapeHtml(cta.headline || 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespraech.') + '</h3>' +
-        '<p class="result-cta-bridge">' + escapeHtml(cta.subline || 'Sie haben jetzt Klarheit ueber die Bremsen. Im Gespraech priorisieren wir, was auf dieser Seite zuerst Wirkung bringt.') + '</p>' +
+        '<h3>' + escapeHtml(cta.headline || 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespräch.') + '</h3>' +
+        '<p class="result-cta-bridge">' + escapeHtml(cta.subline || 'Sie haben jetzt Klarheit über die Bremsen. Im Gespräch priorisieren wir, was auf dieser Seite zuerst Wirkung bringt.') + '</p>' +
         '<form id="audit-consultation-form" class="consultation-form" novalidate>' +
           '<div class="consultation-row">' +
             '<div class="consultation-field">' +
@@ -391,7 +391,7 @@
               '<input id="consult-name" name="name" type="text" autocomplete="name" required>' +
             '</div>' +
             '<div class="consultation-field">' +
-              '<label for="consult-email">Geschaeftliche E-Mail</label>' +
+              '<label for="consult-email">Geschäftliche E-Mail</label>' +
               '<input id="consult-email" name="email" type="email" autocomplete="email" required>' +
             '</div>' +
           '</div>' +
@@ -417,7 +417,7 @@
         '</form>' +
         '<div class="result-cta-alt">' +
           '<span>Oder direkt:</span> ' +
-          '<a href="' + escapeHtml(cta.altUrl || CONFIG.consultationAltUrl) + '" target="_blank" rel="noopener">' + escapeHtml(cta.altLabel || 'Direkt Strategiegespraech buchen') + '</a>' +
+          '<a href="' + escapeHtml(cta.altUrl || CONFIG.consultationAltUrl) + '" target="_blank" rel="noopener">' + escapeHtml(cta.altLabel || 'Direkt Strategiegespräch buchen') + '</a>' +
         '</div>' +
       '</section>'
     );
@@ -454,7 +454,7 @@
     }
 
     if (!payload.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
-      showConsultationFeedback('Bitte eine gueltige E-Mail-Adresse eingeben.', 'error');
+      showConsultationFeedback('Bitte eine gültige E-Mail-Adresse eingeben.', 'error');
       return;
     }
 
@@ -482,7 +482,7 @@
         form.innerHTML =
           '<div class="consultation-success">' +
             '<strong>Anfrage ist raus.</strong>' +
-            '<p>Ich melde mich mit einer konkreten Einschaetzung zum sinnvollsten naechsten Schritt.</p>' +
+            '<p>Ich melde mich mit einer konkreten Einschätzung zum sinnvollsten nächsten Schritt.</p>' +
           '</div>';
       })
       .catch(function (error) {
@@ -591,7 +591,7 @@
         {
           label: 'Kaufnahe Keywords',
           value: visibleKeywords + ' / ' + totalKeywords,
-          help: visibleKeywords < totalKeywords ? 'sichtbar auf Seite 1' : 'voll sichtbar im geprueften Set',
+          help: visibleKeywords < totalKeywords ? 'sichtbar auf Seite 1' : 'voll sichtbar im geprüften Set',
           tone: visibleKeywords >= totalKeywords ? 'good' : visibleKeywords >= Math.ceil(totalKeywords / 2) ? 'warning' : 'bad'
         },
         {
@@ -601,8 +601,8 @@
           tone: mobileScore >= 90 ? 'good' : mobileScore >= 65 ? 'warning' : 'bad'
         },
         {
-          label: 'Naechster Schritt',
-          value: hasLeadMagnet ? 'klar fuehrbar' : hasContactForm ? 'Kontakt moeglich' : 'unsauber',
+          label: 'Nächster Schritt',
+          value: hasLeadMagnet ? 'klar führbar' : hasContactForm ? 'Kontakt möglich' : 'unsauber',
           help: hasLeadMagnet ? 'Lead-Capture vorhanden' : hasContactForm ? 'nur Kontakt ohne Capture' : 'kein sauberer Conversion-Pfad',
           tone: hasLeadMagnet ? 'good' : hasContactForm ? 'warning' : 'bad'
         }
@@ -614,7 +614,7 @@
           {
             title: 'Google & Markt',
             rows: buildLegacySerpRows(serp),
-            note: topMissing ? 'Der groesste Sichtbarkeitsverlust liegt aktuell bei „' + topMissing.keyword + '“.' : 'Im geprueften Keyword-Set ist bereits Sichtbarkeit vorhanden.'
+            note: topMissing ? 'Der größte Sichtbarkeitsverlust liegt aktuell bei „' + topMissing.keyword + '“.' : 'Im geprüften Keyword-Set ist bereits Sichtbarkeit vorhanden.'
           },
           {
             title: 'Technik & Performance',
@@ -625,7 +625,7 @@
               { label: 'Canonical', value: seo.hasCanonical ? 'vorhanden' : 'fehlt', status: seo.hasCanonical ? 'good' : 'warning' },
               { label: 'Sitemap', value: seo.hasSitemap ? 'vorhanden' : 'fehlt', status: seo.hasSitemap ? 'good' : 'warning' }
             ],
-            note: 'Technik allein verkauft nicht, aber sie entscheidet, ob Sichtbarkeit und erster Eindruck ueberhaupt tragen.'
+            note: 'Technik allein verkauft nicht, aber sie entscheidet, ob Sichtbarkeit und erster Eindruck überhaupt tragen.'
           },
           {
             title: 'Vertrauen & Conversion',
@@ -637,18 +637,18 @@
               { label: 'Telefon / direkter Kontakt', value: hasPhone ? 'sichtbar' : 'nicht gefunden', status: hasPhone ? 'good' : 'warning' },
               { label: 'Consent / Tracking-Basis', value: tracking.hasConsent ? 'vorhanden' : 'nicht sauber erkennbar', status: tracking.hasConsent ? 'good' : 'warning' }
             ],
-            note: 'Hier entscheidet sich, ob aus Aufmerksamkeit tatsaechlich Vertrauen und Anfrage wird.'
+            note: 'Hier entscheidet sich, ob aus Aufmerksamkeit tatsächlich Vertrauen und Anfrage wird.'
           }
         ]
       },
       story: (data.story || '').toString().trim(),
       cta: {
-        headline: 'Der Check zeigt die Bremsen. Im Gespraech priorisieren wir, was auf dieser Seite zuerst Wirkung bringt.',
-        subline: 'Wenn Sie wissen wollen, was zuerst geschaerft werden sollte und was warten kann, ist jetzt der richtige Schritt das Gespraech.',
+        headline: 'Der Check zeigt die Bremsen. Im Gespräch priorisieren wir, was auf dieser Seite zuerst Wirkung bringt.',
+        subline: 'Wenn Sie wissen wollen, was zuerst geschärft werden sollte und was warten kann, ist jetzt der richtige Schritt das Gespräch.',
         primaryLabel: 'Analyse gemeinsam priorisieren',
         primarySubLabel: '20 Minuten · klare Reihenfolge · kein Sales-Theater',
         altUrl: CONFIG.consultationAltUrl,
-        altLabel: 'Direkt Strategiegespraech buchen'
+        altLabel: 'Direkt Strategiegespräch buchen'
       }
     };
   }
@@ -713,7 +713,7 @@
         avgOrderValue: Number(source && source.basis && source.basis.avgOrderValue || revenue && revenue.kundenwert || 0),
         assumedConversionRange: source && source.basis && source.basis.assumedConversionRange ? source.basis.assumedConversionRange : buildBasisConversionRange(revenue)
       },
-      note: source && source.note ? source.note : 'Konservative Spanne auf Basis oeffentlicher Daten, Suchvolumen und heuristischer Conversion-Annahmen.'
+      note: source && source.note ? source.note : 'Konservative Spanne auf Basis öffentlicher Daten, Suchvolumen und heuristischer Conversion-Annahmen.'
     };
   }
 
@@ -742,33 +742,33 @@
   function normalizeCta(cta) {
     if (!cta) {
       return {
-        headline: 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespraech.',
-        subline: 'Wir priorisieren gemeinsam, was auf dieser Seite zuerst Wirkung bringt und was nur Aktivitaet erzeugt.',
+        headline: 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespräch.',
+        subline: 'Wir priorisieren gemeinsam, was auf dieser Seite zuerst Wirkung bringt und was nur Aktivität erzeugt.',
         primaryLabel: 'Analyse gemeinsam priorisieren',
         primarySubLabel: '20 Minuten · klare Reihenfolge · kein Sales-Theater',
         altUrl: CONFIG.consultationAltUrl,
-        altLabel: 'Direkt Strategiegespraech buchen'
+        altLabel: 'Direkt Strategiegespräch buchen'
       };
     }
 
     if (cta.primary || cta.secondary) {
       return {
-        headline: cta.headline || 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespraech.',
-        subline: cta.subline || 'Der Schnell-Check zeigt die Bremsen. Im Gespraech priorisieren wir den sinnvollen Hebel fuer diese Seite.',
+        headline: cta.headline || 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespräch.',
+        subline: cta.subline || 'Der Schnell-Check zeigt die Bremsen. Im Gespräch priorisieren wir den sinnvollen Hebel für diese Seite.',
         primaryLabel: cta.primary && cta.primary.label ? cta.primary.label : 'Analyse gemeinsam priorisieren',
         primarySubLabel: cta.primary && cta.primary.sublabel ? cta.primary.sublabel : '20 Minuten · klare Reihenfolge · kein Sales-Theater',
         altUrl: cta.secondary && cta.secondary.url ? cta.secondary.url : CONFIG.consultationAltUrl,
-        altLabel: cta.secondary && cta.secondary.label ? cta.secondary.label : 'Direkt Strategiegespraech buchen'
+        altLabel: cta.secondary && cta.secondary.label ? cta.secondary.label : 'Direkt Strategiegespräch buchen'
       };
     }
 
     return {
-      headline: 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespraech.',
-      subline: 'Der Schnell-Check zeigt die Bremsen. Im Gespraech priorisieren wir den sinnvollen Hebel fuer diese Seite.',
+      headline: 'Wenn Sie aus der Diagnose einen klaren Plan machen wollen, ist jetzt der richtige Schritt das Gespräch.',
+      subline: 'Der Schnell-Check zeigt die Bremsen. Im Gespräch priorisieren wir den sinnvollen Hebel für diese Seite.',
       primaryLabel: cta.label || 'Analyse gemeinsam priorisieren',
       primarySubLabel: cta.sublabel || '20 Minuten · klare Reihenfolge · kein Sales-Theater',
       altUrl: cta.altUrl || CONFIG.consultationAltUrl,
-      altLabel: cta.altLabel || 'Direkt Strategiegespraech buchen'
+      altLabel: cta.altLabel || 'Direkt Strategiegespräch buchen'
     };
   }
 
@@ -776,11 +776,11 @@
     var status = visibleKeywords >= totalKeywords ? 'good' : visibleKeywords >= Math.ceil(totalKeywords / 2) ? 'warning' : 'bad';
     var severity = status === 'bad' ? 4 : status === 'warning' ? 3 : 1;
     var evidence = [
-      visibleKeywords + ' von ' + totalKeywords + ' geprueften Keywords landen auf Seite 1.'
+      visibleKeywords + ' von ' + totalKeywords + ' geprüften Keywords landen auf Seite 1.'
     ];
 
     if (topMissing && topMissing.keyword) {
-      evidence.push('Fuer „' + topMissing.keyword + '“ fehlt die Seite-1-Sichtbarkeit.');
+      evidence.push('Für „' + topMissing.keyword + '“ fehlt die Seite-1-Sichtbarkeit.');
     }
 
     if (competitors && competitors.length) {
@@ -794,8 +794,8 @@
       summary: status === 'bad'
         ? 'Ein relevanter Teil der Nachfrage landet aktuell zuerst bei Wettbewerbern und nicht bei Ihnen.'
         : status === 'warning'
-          ? 'Es gibt Sichtbarkeit, aber zu wenig Dominanz fuer kaufnahe Suchanfragen.'
-          : 'Die Website ist im geprueften Suchraum bereits sichtbar.',
+          ? 'Es gibt Sichtbarkeit, aber zu wenig Dominanz für kaufnahe Suchanfragen.'
+          : 'Die Website ist im geprüften Suchraum bereits sichtbar.',
       evidence: evidence,
       action: 'Angebotsseiten auf Suchintention, lokale Proof-Signale und klaren Conversion-Fokus zuschneiden.'
     };
@@ -812,8 +812,8 @@
       summary: status === 'bad'
         ? 'Der erste Besuch kostet zu viel Geduld. Das bremst noch vor Vertrauen und Conversion.'
         : status === 'warning'
-          ? 'Der erste Eindruck ist brauchbar, aber noch nicht stark genug fuer kalten Traffic.'
-          : 'Die Performance wirkt nicht wie der groesste Blocker.',
+          ? 'Der erste Eindruck ist brauchbar, aber noch nicht stark genug für kalten Traffic.'
+          : 'Die Performance wirkt nicht wie der größte Blocker.',
       evidence: [
         'Mobile Score: ' + mobileScore + '/100',
         'Largest Contentful Paint: ' + (performance.lcp || 'n/a'),
@@ -837,9 +837,9 @@
       status: status,
       severity: severity,
       summary: status === 'bad'
-        ? 'Die Seite zeigt zu wenig Beweis dafuer, warum ein Besucher ausgerechnet Ihnen schreiben sollte.'
+        ? 'Die Seite zeigt zu wenig Beweis dafür, warum ein Besucher ausgerechnet Ihnen schreiben sollte.'
         : status === 'warning'
-          ? 'Es gibt erste Vertrauenssignale, aber die Argumentation bleibt noch zu duenn.'
+          ? 'Es gibt erste Vertrauenssignale, aber die Argumentation bleibt noch zu dünn.'
           : 'Trust-Signale sind sichtbar und helfen dem Abschluss.',
       evidence: [
         'Cases: ' + (hasCases ? 'vorhanden' : 'nicht gefunden'),
@@ -866,14 +866,14 @@
     }
 
     return {
-      title: 'Naechster Schritt',
+      title: 'Nächster Schritt',
       status: status,
       severity: severity,
       summary: status === 'bad'
-        ? 'Selbst wenn Interesse entsteht, fuehrt die Seite zu unscharf oder gar nicht in eine Anfrage.'
+        ? 'Selbst wenn Interesse entsteht, führt die Seite zu unscharf oder gar nicht in eine Anfrage.'
         : status === 'warning'
-          ? 'Ein Kontaktweg ist da, aber der Conversion-Pfad bleibt zu schwach oder zu spaet.'
-          : 'Der naechste Schritt ist bereits klar fuehrbar.',
+          ? 'Ein Kontaktweg ist da, aber der Conversion-Pfad bleibt zu schwach oder zu spät.'
+          : 'Der nächste Schritt ist bereits klar führbar.',
       evidence: [
         'Kontaktformular: ' + (hasContactForm ? 'vorhanden' : 'nicht gefunden'),
         'Lead-Capture: ' + (hasLeadMagnet ? 'vorhanden' : 'nicht gefunden'),
@@ -890,8 +890,8 @@
       status: 'warning',
       severity: 2,
       summary: 'Die Analyse zeigt Reibung, aber keine einzelne dominante Bremse.',
-      evidence: ['Die Datenbasis reicht fuer eine erste Einschaetzung.'],
-      action: 'Im naechsten Schritt die Hebel gemeinsam priorisieren.'
+      evidence: ['Die Datenbasis reicht für eine erste Einschätzung.'],
+      action: 'Im nächsten Schritt die Hebel gemeinsam priorisieren.'
     };
   }
 
@@ -1046,7 +1046,7 @@
         '<button class="audit-retry-btn" onclick="location.reload()">Erneut versuchen</button>' +
         '<div class="result-cta-alt">' +
           '<span>Wenn es dringend ist:</span> ' +
-          '<a href="' + escapeHtml(CONFIG.consultationAltUrl) + '" target="_blank" rel="noopener">Direkt Strategiegespraech buchen</a>' +
+          '<a href="' + escapeHtml(CONFIG.consultationAltUrl) + '" target="_blank" rel="noopener">Direkt Strategiegespräch buchen</a>' +
         '</div>' +
       '</div>';
   }

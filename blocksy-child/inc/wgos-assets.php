@@ -139,7 +139,7 @@ function nexus_render_wgos_asset_label( $label ) {
 
 	if ( '' === $hint ) {
 		$hint = $asset instanceof WP_Post
-			? __( 'Oeffnet die passende WGOS-Asset-Seite mit Nutzen, Kontext und naechstem sinnvollen Schritt.', 'blocksy-child' )
+			? __( 'Öffnet die passende WGOS-Asset-Seite mit Nutzen, Kontext und nächstem sinnvollen Schritt.', 'blocksy-child' )
 			: __( 'Dieses Asset wird im WGOS-Kontext priorisiert und in der Asset-Landkarte sauber eingeordnet.', 'blocksy-child' );
 	}
 
@@ -278,14 +278,14 @@ function nexus_get_wgos_asset_phase_catalog() {
 			'id'          => 'weiterentwicklung',
 			'label'       => 'Weiterentwicklung',
 			'eyebrow'     => 'Phase 3',
-			'description' => 'Optimierung, Automatisierung und Betrieb erst dann erweitern, wenn das System traegt.',
+			'description' => 'Optimierung, Automatisierung und Betrieb erst dann erweitern, wenn das System trägt.',
 			'aliases'     => [ 'weiterentwicklung', 'skalierung', 'phase-3', 'phase3', 'optimierung', 'betrieb' ],
 		],
 		'weitere' => [
 			'id'          => 'weitere',
 			'label'       => 'Weitere',
-			'eyebrow'     => 'Ergaenzend',
-			'description' => 'Nicht sauber zuordenbare Assets werden hier gesammelt, bis die Struktur geschaerft ist.',
+			'eyebrow'     => 'Ergänzend',
+			'description' => 'Nicht sauber zuordenbare Assets werden hier gesammelt, bis die Struktur geschärft ist.',
 			'aliases'     => [ 'weitere', 'sonstige', 'uncategorized', 'andere' ],
 		],
 	];
@@ -304,7 +304,7 @@ function nexus_get_wgos_asset_module_catalog() {
 			'label'     => 'Strategie',
 			'phase_key' => 'fundament',
 			'accent'    => '#d4af37',
-			'summary'   => 'Positionierung, Angebotslogik und Prioritaeten als Richtungsgeber fuer das gesamte System.',
+			'summary'   => 'Positionierung, Angebotslogik und Prioritäten als Richtungsgeber für das gesamte System.',
 			'aliases'   => [ 'strategie', 'positionierung', 'angebot', 'angebotslogik', 'roadmap' ],
 		],
 		'foundation' => [
@@ -313,7 +313,7 @@ function nexus_get_wgos_asset_module_catalog() {
 			'label'     => 'Technisches Fundament',
 			'phase_key' => 'fundament',
 			'accent'    => '#6ea8ff',
-			'summary'   => 'Performance, Stabilitaet und technische Tragfaehigkeit als Basis fuer Sichtbarkeit und Nachfrage.',
+			'summary'   => 'Performance, Stabilität und technische Tragfähigkeit als Basis für Sichtbarkeit und Nachfrage.',
 			'aliases'   => [ 'technisches-fundament', 'performance', 'security', 'sicherheit', 'stabilitaet', 'core-web-vitals', 'module-01', 'module-02' ],
 		],
 		'measurement' => [
@@ -322,7 +322,7 @@ function nexus_get_wgos_asset_module_catalog() {
 			'label'     => 'Messbarkeit',
 			'phase_key' => 'fundament',
 			'accent'    => '#b084ff',
-			'summary'   => 'Tracking, Datenqualitaet und Entscheidungsgrundlagen fuer ein steuerbares Nachfrage-System.',
+			'summary'   => 'Tracking, Datenqualität und Entscheidungsgrundlagen für ein steuerbares Nachfrage-System.',
 			'aliases'   => [ 'messbarkeit', 'measurement', 'tracking', 'analytics', 'datenschutz', 'ga4', 'sgtm', 'module-03' ],
 		],
 		'visibility' => [
@@ -331,7 +331,7 @@ function nexus_get_wgos_asset_module_catalog() {
 			'label'     => 'Sichtbarkeit',
 			'phase_key' => 'aufbau',
 			'accent'    => '#52d39a',
-			'summary'   => 'SEO, Struktur und Inhalte, die echte Nachfrage auf die richtigen Seiten fuehren.',
+			'summary'   => 'SEO, Struktur und Inhalte, die echte Nachfrage auf die richtigen Seiten führen.',
 			'aliases'   => [ 'sichtbarkeit', 'seo', 'content', 'inhalte', 'technical-seo', 'pillar-page', 'module-04' ],
 		],
 		'conversion' => [
@@ -340,7 +340,7 @@ function nexus_get_wgos_asset_module_catalog() {
 			'label'     => 'Conversion',
 			'phase_key' => 'aufbau',
 			'accent'    => '#f2c15f',
-			'summary'   => 'Nutzerfuehrung, Proof und Angebotslogik fuer sauberere Anfragepfade.',
+			'summary'   => 'Nutzerführung, Proof und Angebotslogik für sauberere Anfragepfade.',
 			'aliases'   => [ 'conversion', 'cro', 'landing-page', 'landing-pages', 'formular', 'formulare', 'module-05' ],
 		],
 		'iteration' => [
@@ -642,7 +642,7 @@ function nexus_get_wgos_asset_explorer_payload() {
 		$raw_module      = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_module', 'module', 'module_id', 'wgos_module', 'core_area', 'system_area' ] );
 		$group           = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_group', 'group', 'asset_cluster', 'cluster' ] );
 		$credits         = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_credits', 'credits', 'credit_value' ], 'nach Scope' );
-		$deliverable     = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_deliverable', 'deliverable', 'lieferumfang', 'output' ], 'Individuell nach Audit und Prioritaet.' );
+		$deliverable     = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_deliverable', 'deliverable', 'lieferumfang', 'output' ], 'Individuell nach Audit und Priorität.' );
 		$short           = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_short', 'short_description', 'short', 'teaser' ] );
 		$intro           = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_intro', 'intro', 'long_intro' ] );
 		$cta_label       = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_cta_label', 'cta_label', 'cta_text' ] );

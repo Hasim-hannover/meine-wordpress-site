@@ -62,9 +62,9 @@ function hu_output_schema()
 
         'customer-journey-audit' => [
             'name'        => 'Growth Audit',
-            'description' => 'Persoenlicher Growth Audit fuer B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Prioritaet und der naechste sinnvolle Schritt.',
+            'description' => 'Persönlicher Growth Audit für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
             'serviceType' => 'Growth Audit',
-            'serviceOutput' => 'Persoenliche Einschaetzung der groessten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
+            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
@@ -72,16 +72,16 @@ function hu_output_schema()
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Kostenloser Ersteinstieg fuer B2B-WordPress-Seiten mit unklarer Lead-Performance'
+                    'description'   => 'Kostenloser Ersteinstieg für B2B-WordPress-Seiten mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'growth-audit' => [
             'name'        => 'Growth Audit',
-            'description' => 'Persoenlicher Growth Audit fuer B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Prioritaet und der naechste sinnvolle Schritt.',
+            'description' => 'Persönlicher Growth Audit für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
             'serviceType' => 'Growth Audit',
-            'serviceOutput' => 'Persoenliche Einschaetzung der groessten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
+            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
@@ -89,16 +89,16 @@ function hu_output_schema()
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Kostenloser Ersteinstieg fuer B2B-WordPress-Seiten mit unklarer Lead-Performance'
+                    'description'   => 'Kostenloser Ersteinstieg für B2B-WordPress-Seiten mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'audit' => [
             'name'        => 'Growth Audit',
-            'description' => 'Persoenlicher Growth Audit fuer B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Prioritaet und der naechste sinnvolle Schritt.',
+            'description' => 'Persönlicher Growth Audit für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
             'serviceType' => 'Growth Audit',
-            'serviceOutput' => 'Persoenliche Einschaetzung der groessten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite'
+            'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite'
         ],
 
         '360-deep-dive' => [
@@ -215,7 +215,7 @@ function hu_output_schema()
 
         'wordpress-growth-operating-system' => [
             'name'        => 'WordPress Growth Operating System (WGOS)',
-            'description' => 'Strukturiertes Nachfrage-System fuer Unternehmen: Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion in einer klaren WordPress-Logik.',
+            'description' => 'Strukturiertes Nachfrage-System für Unternehmen: Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion in einer klaren WordPress-Logik.',
             'serviceType' => 'Growth Operating System',
             'serviceOutput' => 'Strukturiertes Nachfrage-System auf WordPress-Basis mit klarer Reihenfolge, voller Ownership und planbarer Weiterentwicklung.',
             'offers'      => [
@@ -224,7 +224,7 @@ function hu_output_schema()
                     'name'          => 'Fundament',
                     'price'         => 1500,
                     'priceCurrency' => 'EUR',
-                    'description'   => '30 Credits/Monat. Fundament, Messbarkeit und technische Stabilitaet ordnen.'
+                    'description'   => '30 Credits/Monat. Fundament, Messbarkeit und technische Stabilität ordnen.'
                 ],
                 [
                     '@type'         => 'Offer',
@@ -238,14 +238,14 @@ function hu_output_schema()
                     'name'          => 'Weiterentwicklung',
                     'price'         => 4500,
                     'priceCurrency' => 'EUR',
-                    'description'   => '100+ Credits/Monat. Das System kontrolliert ausbauen und weiter nachschaerfen.'
+                    'description'   => '100+ Credits/Monat. Das System kontrolliert ausbauen und weiter nachschärfen.'
                 ]
             ]
         ],
 
         'wgos' => [
             'name'        => 'WordPress Growth Operating System (WGOS)',
-            'description' => 'Strukturiertes Nachfrage-System fuer Unternehmen: WordPress als verbindende Architektur fuer Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion.',
+            'description' => 'Strukturiertes Nachfrage-System für Unternehmen: WordPress als verbindende Architektur für Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion.',
             'serviceType' => 'Growth Operating System',
             'serviceOutput' => 'Strukturiertes Nachfrage-System mit klarer Priorisierung, messbarer Entwicklung und voller Kontrolle'
         ],

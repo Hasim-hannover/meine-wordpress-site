@@ -62,11 +62,11 @@ $nav_items = [
 $hero_summary = [
 	[
 		'term'        => 'Was ist WGOS?',
-		'description' => 'Ein strukturiertes Wachstumssystem fuer WordPress-Websites.',
+		'description' => 'Ein strukturiertes Wachstumssystem für WordPress-Websites.',
 	],
 	[
-		'term'        => 'Fuer wen?',
-		'description' => 'Fuer Unternehmen mit bestehender Website und ernsthaftem Nachfragepotenzial.',
+		'term'        => 'Für wen?',
+		'description' => 'Für Unternehmen mit bestehender Website und ernsthaftem Nachfragepotenzial.',
 	],
 	[
 		'term'        => 'Welches Problem?',
@@ -74,7 +74,7 @@ $hero_summary = [
 	],
 	[
 		'term'        => 'Was ist anders?',
-		'description' => 'Kein Leistungsbaukasten, sondern ein zusammenhaengendes Nachfrage-System.',
+		'description' => 'Kein Leistungsbaukasten, sondern ein zusammenhängendes Nachfrage-System.',
 	],
 ];
 
@@ -82,20 +82,20 @@ $problem_points = [
 	'Es kommt Traffic, aber kaum qualifizierte Anfragen.',
 	'SEO, Tracking und Inhalte laufen nebeneinander her.',
 	'Entscheidungen basieren auf unklaren oder falschen Daten.',
-	'Seiten sehen ordentlich aus, fuehren aber nicht konsequent zur Anfrage.',
-	'Massnahmen werden umgesetzt, ohne klare Reihenfolge und ohne gemeinsames Ziel.',
+	'Seiten sehen ordentlich aus, führen aber nicht konsequent zur Anfrage.',
+	'Maßnahmen werden umgesetzt, ohne klare Reihenfolge und ohne gemeinsames Ziel.',
 ];
 
 $system_nodes = [
 	[
 		'step'  => '01',
 		'title' => 'Strategie',
-		'text'  => 'Setzt Zielbild, Angebotslogik und Prioritaeten.',
+		'text'  => 'Setzt Zielbild, Angebotslogik und Prioritäten.',
 	],
 	[
 		'step'  => '02',
 		'title' => 'Fundament',
-		'text'  => 'Sichert Stabilitaet, Performance und technische Tragfaehigkeit.',
+		'text'  => 'Sichert Stabilität, Performance und technische Tragfähigkeit.',
 	],
 	[
 		'step'  => '03',
@@ -110,7 +110,7 @@ $system_nodes = [
 	[
 		'step'  => '05',
 		'title' => 'Conversion',
-		'text'  => 'Fuehrt Besucher klarer in Richtung Anfrage.',
+		'text'  => 'Führt Besucher klarer in Richtung Anfrage.',
 	],
 	[
 		'step'  => '06',
@@ -121,20 +121,20 @@ $system_nodes = [
 
 $sequence_steps = [
 	[
-		'title' => 'Stabilitaet zuerst',
-		'text'  => 'WordPress, Performance und Angebotsgrundlage muessen tragen, bevor Wachstum sinnvoll skaliert.',
+		'title' => 'Stabilität zuerst',
+		'text'  => 'WordPress, Performance und Angebotsgrundlage müssen tragen, bevor Wachstum sinnvoll skaliert.',
 	],
 	[
 		'title' => 'Messbarkeit sauber setzen',
-		'text'  => 'Nur mit klaren Daten lassen sich Prioritaeten, Engpaesse und Wirkung sauber beurteilen.',
+		'text'  => 'Nur mit klaren Daten lassen sich Prioritäten, Engpässe und Wirkung sauber beurteilen.',
 	],
 	[
-		'title' => 'Nutzerfuehrung ordnen',
+		'title' => 'Nutzerführung ordnen',
 		'text'  => 'Angebotslogik, Proof und CTA-Struktur werden vor weiteren Reichweitenhebeln sauber gebaut.',
 	],
 	[
 		'title' => 'Sichtbarkeit gezielt ausbauen',
-		'text'  => 'SEO und Inhalte werden dann ausgebaut, wenn das System sie auch in Nachfrage uebersetzen kann.',
+		'text'  => 'SEO und Inhalte werden dann ausgebaut, wenn das System sie auch in Nachfrage übersetzen kann.',
 	],
 	[
 		'title' => 'Weiterentwicklung steuern',
@@ -146,34 +146,34 @@ $core_areas = [
 	[
 		'number'  => '01',
 		'title'   => 'Strategie',
-		'intro'   => 'Sie definiert, wie die Website Nachfrage aufnehmen und weiterfuehren soll.',
+		'intro'   => 'Sie definiert, wie die Website Nachfrage aufnehmen und weiterführen soll.',
 		'bullets' => [
-			'Angebotslogik und Positionierung schaerfen',
-			'Engpaesse und Hebel sauber priorisieren',
+			'Angebotslogik und Positionierung schärfen',
+			'Engpässe und Hebel sauber priorisieren',
 			'Seitenrollen und Zielpfade definieren',
-			'Roadmap statt losem Massnahmenstapel',
+			'Roadmap statt losem Maßnahmenstapel',
 		],
 	],
 	[
 		'number'  => '02',
 		'title'   => 'Technisches Fundament',
-		'intro'   => 'Es sorgt dafuer, dass WordPress traegt, statt Wachstum auszubremsen.',
+		'intro'   => 'Es sorgt dafür, dass WordPress trägt, statt Wachstum auszubremsen.',
 		'bullets' => [
 			'Performance und Core Web Vitals stabilisieren',
 			'Sicherheits- und Update-Logik absichern',
-			'Technische Reibung fuer Nutzer und Pflege reduzieren',
-			'Eine tragfaehige Basis fuer Sichtbarkeit und Conversion schaffen',
+			'Technische Reibung für Nutzer und Pflege reduzieren',
+			'Eine tragfähige Basis für Sichtbarkeit und Conversion schaffen',
 		],
 	],
 	[
 		'number'  => '03',
 		'title'   => 'Messbarkeit',
-		'intro'   => 'Erst saubere Daten machen gute Entscheidungen moeglich.',
+		'intro'   => 'Erst saubere Daten machen gute Entscheidungen möglich.',
 		'bullets' => [
 			'Tracking entlang des Anfragepfads sauber aufsetzen',
-			'Consent, Signale und Datenqualitaet abstimmen',
+			'Consent, Signale und Datenqualität abstimmen',
 			'Relevante KPIs statt Reporting-Rauschen definieren',
-			'Grundlage fuer Priorisierung und Optimierung schaffen',
+			'Grundlage für Priorisierung und Optimierung schaffen',
 		],
 	],
 	[
@@ -182,7 +182,7 @@ $core_areas = [
 		'intro'   => 'Sichtbarkeit folgt auf Klarheit, Substanz und technische Ordnung.',
 		'bullets' => [
 			'Wichtige Suchintentionen und Angebotsseiten priorisieren',
-			'Technische SEO und Seitenstruktur zusammenfuehren',
+			'Technische SEO und Seitenstruktur zusammenführen',
 			'Inhalte entlang echter Nachfrage entwickeln',
 			'Sichtbarkeit auf kaufnahe Themen konzentrieren',
 		],
@@ -190,10 +190,10 @@ $core_areas = [
 	[
 		'number'  => '05',
 		'title'   => 'Conversion',
-		'intro'   => 'Besucher muessen verstehen, vertrauen und handeln koennen.',
+		'intro'   => 'Besucher müssen verstehen, vertrauen und handeln können.',
 		'bullets' => [
-			'Nutzerfuehrung und Seitenhierarchie klaeren',
-			'Proof frueher und sauberer platzieren',
+			'Nutzerführung und Seitenhierarchie klären',
+			'Proof früher und sauberer platzieren',
 			'CTA-Logik und Formulare entschlacken',
 			'Reibung zwischen Besuch und Anfrage senken',
 		],
@@ -203,10 +203,10 @@ $core_areas = [
 		'title'   => 'Weiterentwicklung',
 		'intro'   => 'Das System wird nicht fertig, sondern kontrolliert besser.',
 		'bullets' => [
-			'Wirkung regelmaessig auswerten',
-			'Prioritaeten auf Basis echter Signale anpassen',
+			'Wirkung regelmäßig auswerten',
+			'Prioritäten auf Basis echter Signale anpassen',
 			'Neue Hebel erst nach sauberer Diagnose anfassen',
-			'Das System Schritt fuer Schritt ausbauen',
+			'Das System Schritt für Schritt ausbauen',
 		],
 	],
 ];
@@ -215,17 +215,17 @@ $workflow_steps = [
 	[
 		'number' => '01',
 		'title'  => 'Analyse',
-		'text'   => 'Ausgangslage, Engpaesse und Potenziale der WordPress-Seite werden sichtbar gemacht.',
+		'text'   => 'Ausgangslage, Engpässe und Potenziale der WordPress-Seite werden sichtbar gemacht.',
 	],
 	[
 		'number' => '02',
 		'title'  => 'Priorisierung',
-		'text'   => 'Die naechsten Schritte werden nach Wirkung und Reihenfolge sortiert.',
+		'text'   => 'Die nächsten Schritte werden nach Wirkung und Reihenfolge sortiert.',
 	],
 	[
 		'number' => '03',
 		'title'  => 'Umsetzung',
-		'text'   => 'Es wird gebaut, was fuer das System gerade wirklich sinnvoll ist.',
+		'text'   => 'Es wird gebaut, was für das System gerade wirklich sinnvoll ist.',
 	],
 	[
 		'number' => '04',
@@ -235,7 +235,7 @@ $workflow_steps = [
 	[
 		'number' => '05',
 		'title'  => 'Optimierung',
-		'text'   => 'Das System wird fortlaufend nachgeschaerft statt immer neu gestartet.',
+		'text'   => 'Das System wird fortlaufend nachgeschärft statt immer neu gestartet.',
 	],
 ];
 
@@ -245,16 +245,16 @@ $difference_cards = [
 		'points' => [
 			'Leistungen werden einzeln beauftragt und nebeneinander umgesetzt.',
 			'SEO, Tracking und Conversion folgen oft verschiedenen Logiken.',
-			'Erfolg haengt stark von Einzelaktionen statt vom Gesamtsystem ab.',
-			'Die Website bleibt eher digitale Praesenz als Nachfrage-Struktur.',
+			'Erfolg hängt stark von Einzelaktionen statt vom Gesamtsystem ab.',
+			'Die Website bleibt eher digitale Präsenz als Nachfrage-Struktur.',
 		],
 	],
 	[
 		'title'  => 'WGOS',
 		'points' => [
-			'Alle Bausteine werden ueber ein gemeinsames Ziel geordnet.',
+			'Alle Bausteine werden über ein gemeinsames Ziel geordnet.',
 			'Die Reihenfolge ist Teil der Leistung, nicht nur die Umsetzung.',
-			'Messbarkeit und Nutzerfuehrung gehoeren zum Fundament.',
+			'Messbarkeit und Nutzerführung gehören zum Fundament.',
 			'Die Website entwickelt sich zu einem strukturierten Nachfrage-System.',
 		],
 	],
@@ -262,15 +262,15 @@ $difference_cards = [
 
 $fit_items = [
 	'Es gibt bereits eine Website, aber sie ist strategisch zu schwach aufgebaut.',
-	'Anfragen bleiben trotz solider Substanz hinter dem Potenzial zurueck.',
+	'Anfragen bleiben trotz solider Substanz hinter dem Potenzial zurück.',
 	'SEO, Tracking und Inhalte sind vorhanden, aber nicht sauber verbunden.',
-	'Es laufen zu viele Einzelmassnahmen und zu wenig klare Prioritaeten.',
+	'Es laufen zu viele Einzelmaßnahmen und zu wenig klare Prioritäten.',
 ];
 
 $not_fit_items = [
-	'Wenn nur eine schnelle Einzelmassnahme ohne strategischen Kontext gesucht wird.',
+	'Wenn nur eine schnelle Einzelmaßnahme ohne strategischen Kontext gesucht wird.',
 	'Wenn die Website ausschliesslich als digitale Visitenkarte gedacht ist.',
-	'Wenn keine Bereitschaft fuer Messung, Priorisierung und saubere Reihenfolge besteht.',
+	'Wenn keine Bereitschaft für Messung, Priorisierung und saubere Reihenfolge besteht.',
 ];
 
 $proof_metrics = [
@@ -287,7 +287,7 @@ $proof_metrics = [
 	[
 		'value'   => '98/100',
 		'label'   => 'Mobile Performance auf Kernseiten nach technischer Bereinigung',
-		'context' => 'als Grundlage fuer Nutzererlebnis, SEO und Conversion',
+		'context' => 'als Grundlage für Nutzererlebnis, SEO und Conversion',
 	],
 ];
 
@@ -296,30 +296,30 @@ $impact_items = [
 	'bessere technische Grundlage',
 	'sauberere Daten',
 	'bessere Sichtbarkeit',
-	'staerkere Seiten',
-	'hoehere Anfragewahrscheinlichkeit',
+	'stärkere Seiten',
+	'höhere Anfragewahrscheinlichkeit',
 ];
 
 $audit_outcomes = [
-	'Ein klares Bild von Fundament, Engpaessen und Systemluecken.',
-	'Eindeutige Prioritaeten statt weiterer digitaler Baustellen.',
-	'Eine belastbare Reihenfolge fuer die naechsten 90 Tage.',
+	'Ein klares Bild von Fundament, Engpässen und Systemlücken.',
+	'Eindeutige Prioritäten statt weiterer digitaler Baustellen.',
+	'Eine belastbare Reihenfolge für die nächsten 90 Tage.',
 ];
 
 $packages = [
 	[
 		'name'     => 'Fundament',
-		'tagline'  => 'Grundlage, Messbarkeit und Stabilitaet ordnen',
+		'tagline'  => 'Grundlage, Messbarkeit und Stabilität ordnen',
 		'price'    => 'ab 1.500 EUR',
 		'credits'  => '30 Credits / Monat',
 		'featured' => false,
 		'features' => [
 			'3 Monate Fokus auf Technik, Tracking und Priorisierung',
 			'1 Strategietermin pro Monat',
-			'Roadmap fuer Fundament, Messbarkeit und erste Conversion-Bremsen',
+			'Roadmap für Fundament, Messbarkeit und erste Conversion-Bremsen',
 			'Monatlicher Review mit klaren Entscheidungen',
 		],
-		'ideal'    => 'Sinnvoll, wenn die Website zuerst tragfaehig und messbar werden muss.',
+		'ideal'    => 'Sinnvoll, wenn die Website zuerst tragfähig und messbar werden muss.',
 	],
 	[
 		'name'     => 'Systemaufbau',
@@ -328,10 +328,10 @@ $packages = [
 		'credits'  => '60 Credits / Monat',
 		'featured' => true,
 		'features' => [
-			'6 Monate fuer Reihenfolge, Sichtbarkeit und Conversion',
+			'6 Monate für Reihenfolge, Sichtbarkeit und Conversion',
 			'2 Strategietermine pro Monat',
-			'Ausbau von Angebotsseiten, SEO-Struktur und Nutzerfuehrung',
-			'Regelmaessige Review- und Priorisierungsschleifen',
+			'Ausbau von Angebotsseiten, SEO-Struktur und Nutzerführung',
+			'Regelmäßige Review- und Priorisierungsschleifen',
 		],
 		'ideal'    => 'Sinnvoll, wenn aus einer Website ein belastbares Nachfrage-System werden soll.',
 	],
@@ -342,8 +342,8 @@ $packages = [
 		'credits'  => '100+ Credits / Monat',
 		'featured' => false,
 		'features' => [
-			'12 Monate fuer kontinuierliche Systempflege und Ausbau',
-			'Woechentlicher Strategie-Slot',
+			'12 Monate für kontinuierliche Systempflege und Ausbau',
+			'Wöchentlicher Strategie-Slot',
 			'Weiterentwicklung von Reporting, Automationen und Engpass-Themen',
 			'Laufende Priorisierung auf Basis echter Signale',
 		],
@@ -381,18 +381,18 @@ $credit_examples = [
 
 $guarantee_points = [
 	'Klare Priorisierung statt blinder Umsetzungslisten.',
-	'Volle Ownership von Code, Inhalten, Tracking und Zugaengen.',
+	'Volle Ownership von Code, Inhalten, Tracking und Zugängen.',
 	'Transparente Entscheidungen statt Black-Box-Retainer.',
 ];
 
 $faq_items = [
 	[
-		'question' => 'Fuer wen ist das WGOS gebaut?',
-		'answer'   => 'Fuer Unternehmen mit bestehender WordPress-Website, die aus ihrer Seite mehr als Praesenz machen wollen: naemlich ein strukturiertes System fuer Nachfrage, Sichtbarkeit und Anfragen.',
+		'question' => 'Für wen ist das WGOS gebaut?',
+		'answer'   => 'Für Unternehmen mit bestehender WordPress-Website, die aus ihrer Seite mehr als Präsenz machen wollen: nämlich ein strukturiertes System für Nachfrage, Sichtbarkeit und Anfragen.',
 	],
 	[
 		'question' => 'Brauche ich davor einen Relaunch?',
-		'answer'   => 'In vielen Faellen nein. Oft fehlt nicht zuerst ein neuer Look, sondern eine saubere Reihenfolge zwischen Fundament, Daten, Sichtbarkeit und Conversion.',
+		'answer'   => 'In vielen Fällen nein. Oft fehlt nicht zuerst ein neuer Look, sondern eine saubere Reihenfolge zwischen Fundament, Daten, Sichtbarkeit und Conversion.',
 	],
 	[
 		'question' => 'Ist das eher SEO, Tracking oder Conversion?',
@@ -400,15 +400,15 @@ $faq_items = [
 	],
 	[
 		'question' => 'Warum beginnt alles mit dem Growth Audit?',
-		'answer'   => 'Weil die richtige Reihenfolge nie pauschal ist. Der Audit zeigt, wo das System traegt, wo es bricht und was zuerst sinnvoll ist.',
+		'answer'   => 'Weil die richtige Reihenfolge nie pauschal ist. Der Audit zeigt, wo das System trägt, wo es bricht und was zuerst sinnvoll ist.',
 	],
 	[
 		'question' => 'Warum Credits statt Stunden?',
-		'answer'   => 'Credits machen Prioritaeten, Umfang und Systemlogik sichtbarer. Sie kaufen keine diffuse Zeit, sondern klar bewertete Bausteine innerhalb eines strukturierten Rahmens.',
+		'answer'   => 'Credits machen Prioritäten, Umfang und Systemlogik sichtbarer. Sie kaufen keine diffuse Zeit, sondern klar bewertete Bausteine innerhalb eines strukturierten Rahmens.',
 	],
 	[
 		'question' => 'Bleibt das System nach der Zusammenarbeit bei uns?',
-		'answer'   => 'Ja. Code, Inhalte, Setups und Zugaenge bleiben bei Ihnen. WGOS ist auf Ownership gebaut, nicht auf Abhaengigkeit.',
+		'answer'   => 'Ja. Code, Inhalte, Setups und Zugänge bleiben bei Ihnen. WGOS ist auf Ownership gebaut, nicht auf Abhängigkeit.',
 	],
 ];
 
@@ -458,20 +458,20 @@ foreach ( $faq_items as $faq_item ) {
 					<div class="wgos-hero-copy">
 						<span class="wgos-kicker">WordPress Wachstumssystem</span>
 						<h1 class="wgos-hero__title">Aus Websites werden Nachfrage-Systeme.</h1>
-						<p class="wgos-hero__subtitle">Das WordPress Growth Operating System verbindet Strategie, SEO, Tracking, Performance und Conversion zu einem klaren System - damit aus Ihrer WordPress-Website nicht nur eine schoene Praesenz, sondern ein verlaesslicher Anfragemotor wird.</p>
+						<p class="wgos-hero__subtitle">Das WordPress Growth Operating System verbindet Strategie, SEO, Tracking, Performance und Conversion zu einem klaren System - damit aus Ihrer WordPress-Website nicht nur eine schöne Präsenz, sondern ein verlässlicher Anfragemotor wird.</p>
 
 						<ul class="wgos-hero__bullets">
 							<li>Klare Reihenfolge statt digitalem Aktionismus</li>
 							<li>Messbare Entwicklung statt Vermutungen</li>
-							<li>Ein System, das Ihnen gehoert</li>
+							<li>Ein System, das Ihnen gehört</li>
 						</ul>
 
 						<div class="wgos-hero__actions">
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Growth Audit starten</a>
-							<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespraech vereinbaren</a>
+							<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>
 						</div>
 
-						<p class="wgos-hero__microcopy">Keine leeren Versprechen. Erst Diagnose, dann Prioritaeten, dann saubere Umsetzung.</p>
+						<p class="wgos-hero__microcopy">Keine leeren Versprechen. Erst Diagnose, dann Prioritäten, dann saubere Umsetzung.</p>
 					</div>
 
 					<aside class="wgos-hero-card" aria-label="WGOS in Kurzform">
@@ -513,8 +513,8 @@ foreach ( $faq_items as $faq_item ) {
 
 				<div class="wgos-problem-grid">
 					<div class="wgos-prose">
-						<p>Viele WordPress-Websites sind technisch in Ordnung, gestalterisch solide und trotzdem strategisch schwach. Nicht weil einzelne Bausteine grundsaetzlich fehlen, sondern weil sie nicht als System zusammenarbeiten.</p>
-						<p class="wgos-bold-statement">Das Problem ist in den meisten Faellen nicht der einzelne Kanal. Das Problem ist das fehlende System.</p>
+						<p>Viele WordPress-Websites sind technisch in Ordnung, gestalterisch solide und trotzdem strategisch schwach. Nicht weil einzelne Bausteine grundsätzlich fehlen, sondern weil sie nicht als System zusammenarbeiten.</p>
+						<p class="wgos-bold-statement">Das Problem ist in den meisten Fällen nicht der einzelne Kanal. Das Problem ist das fehlende System.</p>
 					</div>
 
 					<div class="wgos-issue-list" aria-label="Typische Probleme">
@@ -533,7 +533,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-definition-shell">
 					<span class="wgos-principle-kicker">WGOS-Definition</span>
 					<h2 class="wgos-h2">Was ist das WGOS?</h2>
-					<p class="wgos-section-intro">Das WordPress Growth Operating System ist ein strukturiertes Wachstumssystem fuer Unternehmen, die ihre WordPress-Website strategisch entwickeln wollen.</p>
+					<p class="wgos-section-intro">Das WordPress Growth Operating System ist ein strukturiertes Wachstumssystem für Unternehmen, die ihre WordPress-Website strategisch entwickeln wollen.</p>
 					<p class="wgos-definition__statement">Erst das Fundament. Dann Sichtbarkeit. Dann Conversion. Dann Skalierung.</p>
 				</div>
 			</div>
@@ -544,7 +544,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Systemstruktur</span>
 					<h2 class="wgos-h2">WGOS macht die Logik sichtbar.</h2>
-					<p class="wgos-section-intro">Nicht mehr SEO hier, Tracking dort und Conversion irgendwann spaeter. Sondern ein System, das aufeinander aufbaut.</p>
+					<p class="wgos-section-intro">Nicht mehr SEO hier, Tracking dort und Conversion irgendwann später. Sondern ein System, das aufeinander aufbaut.</p>
 				</div>
 
 				<div class="wgos-visual-grid">
@@ -563,10 +563,10 @@ foreach ( $faq_items as $faq_item ) {
 					</div>
 
 					<div class="wgos-note-card">
-						<h3>Warum diese Reihenfolge traegt</h3>
-						<p>Wenn Strategie, Fundament und Messbarkeit nicht stehen, produziert jede weitere Massnahme vor allem neues Rauschen. Sichtbarkeit und Conversion werden erst dann belastbar, wenn die Basis stimmt.</p>
+						<h3>Warum diese Reihenfolge trägt</h3>
+						<p>Wenn Strategie, Fundament und Messbarkeit nicht stehen, produziert jede weitere Maßnahme vor allem neues Rauschen. Sichtbarkeit und Conversion werden erst dann belastbar, wenn die Basis stimmt.</p>
 						<ul class="wgos-checklist wgos-checklist--compact">
-							<li>Das System erklaert, woran zuerst gearbeitet wird.</li>
+							<li>Das System erklärt, woran zuerst gearbeitet wird.</li>
 							<li>Es reduziert Reibung zwischen Technik, Inhalt und Anfragepfad.</li>
 							<li>Es macht Wachstum planbarer, weil Entscheidungen nachvollziehbar werden.</li>
 						</ul>
@@ -582,8 +582,8 @@ foreach ( $faq_items as $faq_item ) {
 						<span class="wgos-principle-kicker">Systemlogik</span>
 						<h2 class="wgos-h2">Nicht mehr machen. Sondern das Richtige in der richtigen Reihenfolge.</h2>
 						<div class="wgos-prose">
-							<p>Viele Unternehmen investieren in SEO, Inhalte, Ads oder Relaunches, bevor die Grundlage sauber steht. Genau dadurch werden Massnahmen teuer, schwer messbar und in ihrer Wirkung unscharf.</p>
-							<p>WGOS dreht diese Logik um: zuerst Stabilitaet, Messbarkeit, Nutzerfuehrung und Angebotslogik. Erst danach entsteht belastbares Wachstum.</p>
+							<p>Viele Unternehmen investieren in SEO, Inhalte, Ads oder Relaunches, bevor die Grundlage sauber steht. Genau dadurch werden Maßnahmen teuer, schwer messbar und in ihrer Wirkung unscharf.</p>
+							<p>WGOS dreht diese Logik um: zuerst Stabilität, Messbarkeit, Nutzerführung und Angebotslogik. Erst danach entsteht belastbares Wachstum.</p>
 						</div>
 					</div>
 
@@ -604,7 +604,7 @@ foreach ( $faq_items as $faq_item ) {
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Die 6 Kernbereiche</span>
-					<h2 class="wgos-h2">Sechs Bausteine. Ein zusammenhaengendes System.</h2>
+					<h2 class="wgos-h2">Sechs Bausteine. Ein zusammenhängendes System.</h2>
 					<p class="wgos-section-intro">Jeder Bereich hat eine klare Rolle. Entscheidend ist nicht, alles gleichzeitig zu machen, sondern die richtige Tiefe zur richtigen Zeit.</p>
 				</div>
 
@@ -628,7 +628,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-asset-hub-bridge">
 					<div class="wgos-note-card">
 						<h3>Alle Bausteine gesammelt sehen?</h3>
-						<p>Die WGOS-Seite erklaert das System. Die separate Systemlandkarte zeigt alle vorhandenen Assets klickbar, nach Abschnitten geordnet und direkt mit ihren Detailseiten verbunden.</p>
+						<p>Die WGOS-Seite erklärt das System. Die separate Systemlandkarte zeigt alle vorhandenen Assets klickbar, nach Abschnitten geordnet und direkt mit ihren Detailseiten verbunden.</p>
 						<div class="wgos-hero__actions">
 							<a href="<?php echo esc_url( $asset_hub_url ); ?>" class="wgos-btn wgos-btn--outline">Zur WGOS Asset-Landkarte</a>
 						</div>
@@ -642,7 +642,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Arbeitsweise</span>
 					<h2 class="wgos-h2">Kontrollierte Entwicklung statt loser To-dos.</h2>
-					<p class="wgos-section-intro">Die Zusammenarbeit folgt keinem Sammelbecken aus Aufgaben, sondern einem klar gefuehrten Ablauf.</p>
+					<p class="wgos-section-intro">Die Zusammenarbeit folgt keinem Sammelbecken aus Aufgaben, sondern einem klar geführten Ablauf.</p>
 				</div>
 
 				<ol class="wgos-workflow" aria-label="WGOS Workflow">
@@ -685,7 +685,7 @@ foreach ( $faq_items as $faq_item ) {
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Fit</span>
-					<h2 class="wgos-h2">Fuer wen das WGOS sinnvoll ist</h2>
+					<h2 class="wgos-h2">Für wen das WGOS sinnvoll ist</h2>
 				</div>
 
 				<div class="wgos-fit-grid">
@@ -714,8 +714,8 @@ foreach ( $faq_items as $faq_item ) {
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Proof / Wirkung</span>
-					<h2 class="wgos-h2">Ruhige Wirkung statt grosser Versprechen.</h2>
-					<p class="wgos-section-intro">WGOS ist kein Heilsversprechen. Es ist eine saubere Systemlogik, aus der haeufig diese Arten von Ergebnissen entstehen.</p>
+					<h2 class="wgos-h2">Ruhige Wirkung statt großer Versprechen.</h2>
+					<p class="wgos-section-intro">WGOS ist kein Heilsversprechen. Es ist eine saubere Systemlogik, aus der häufig diese Arten von Ergebnissen entstehen.</p>
 				</div>
 
 				<div class="wgos-proof-layout">
@@ -750,12 +750,12 @@ foreach ( $faq_items as $faq_item ) {
 						<span class="wgos-principle-kicker">Audit-Bridge</span>
 						<h2 class="wgos-h2">Der richtige Startpunkt: erst verstehen, dann umbauen</h2>
 						<div class="wgos-prose">
-							<p>Die Zusammenarbeit beginnt nicht mit blindem Umsetzen, sondern mit Audit, Klarheit und Priorisierung. Erst wenn Fundament, Engpaesse und Reihenfolge sauber sichtbar sind, ergibt die naechste Entscheidung wirklich Sinn.</p>
+							<p>Die Zusammenarbeit beginnt nicht mit blindem Umsetzen, sondern mit Audit, Klarheit und Priorisierung. Erst wenn Fundament, Engpässe und Reihenfolge sauber sichtbar sind, ergibt die nächste Entscheidung wirklich Sinn.</p>
 						</div>
 
 						<div class="wgos-hero__actions">
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Growth Audit starten</a>
-							<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespraech vereinbaren</a>
+							<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>
 						</div>
 					</div>
 
@@ -809,7 +809,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div id="credits" class="wgos-credit-summary nx-reveal">
 					<div class="wgos-credit-summary__copy">
 						<h3>Credits ordnen den Umfang, nicht die Strategie.</h3>
-						<p>Credits schaffen Planbarkeit: Ein Asset hat einen festen Wert, unabhaengig vom realen Zeitaufwand. So sprechen wir ueber Prioritaet und Wirkung, nicht ueber Minuten.</p>
+						<p>Credits schaffen Planbarkeit: Ein Asset hat einen festen Wert, unabhängig vom realen Zeitaufwand. So sprechen wir über Priorität und Wirkung, nicht über Minuten.</p>
 					</div>
 
 					<div class="wgos-table-wrap">
@@ -833,7 +833,7 @@ foreach ( $faq_items as $faq_item ) {
 						</table>
 					</div>
 
-					<p class="wgos-credit-summary__note">Die genaue Priorisierung entsteht im Audit und in der laufenden Systemarbeit, nicht ueber starre Tabellen.</p>
+					<p class="wgos-credit-summary__note">Die genaue Priorisierung entsteht im Audit und in der laufenden Systemarbeit, nicht über starre Tabellen.</p>
 				</div>
 			</div>
 		</section>
@@ -848,7 +848,7 @@ foreach ( $faq_items as $faq_item ) {
 							<li><?php echo esc_html( $guarantee_point ); ?></li>
 						<?php endforeach; ?>
 					</ul>
-					<p class="wgos-expectation">Keine Garantie auf fixe Lead-Zahlen. Die Zusage ist eine andere: saubere Diagnose, klare Reihenfolge, nachvollziehbare Umsetzung und ein System, das Ihnen gehoert.</p>
+					<p class="wgos-expectation">Keine Garantie auf fixe Lead-Zahlen. Die Zusage ist eine andere: saubere Diagnose, klare Reihenfolge, nachvollziehbare Umsetzung und ein System, das Ihnen gehört.</p>
 				</div>
 			</div>
 		</section>
@@ -874,16 +874,16 @@ foreach ( $faq_items as $faq_item ) {
 		<section class="wgos-section wgos-section--gray wgos-final-cta nx-reveal">
 			<div class="wgos-container">
 				<div class="wgos-final-cta__inner">
-					<span class="wgos-principle-kicker">Naechster Schritt</span>
+					<span class="wgos-principle-kicker">Nächster Schritt</span>
 					<h2 class="wgos-h2">Erst Klarheit. Dann die richtige Reihenfolge.</h2>
-					<p class="wgos-prose">Wenn Sie aus Ihrer WordPress-Website kein loses Sammelbecken digitaler Massnahmen mehr machen wollen, sondern ein strukturiertes Nachfrage-System, dann ist der naechste sinnvolle Schritt ein gemeinsamer Blick auf Fundament, Engpaesse und Prioritaeten.</p>
+					<p class="wgos-prose">Wenn Sie aus Ihrer WordPress-Website kein loses Sammelbecken digitaler Maßnahmen mehr machen wollen, sondern ein strukturiertes Nachfrage-System, dann ist der nächste sinnvolle Schritt ein gemeinsamer Blick auf Fundament, Engpässe und Prioritäten.</p>
 
 					<div class="wgos-hero__actions">
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Growth Audit starten</a>
-						<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespraech vereinbaren</a>
+						<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>
 					</div>
 
-					<p class="wgos-hero__microcopy">Kurz, klar, ohne Verkaufsdruck. Erst pruefen, ob es fachlich und strategisch wirklich passt.</p>
+					<p class="wgos-hero__microcopy">Kurz, klar, ohne Verkaufsdruck. Erst prüfen, ob es fachlich und strategisch wirklich passt.</p>
 				</div>
 			</div>
 		</section>

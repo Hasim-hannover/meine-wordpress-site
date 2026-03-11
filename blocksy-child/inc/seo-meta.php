@@ -262,7 +262,7 @@ function hu_document_title_overrides( $parts ) {
 		if ( '' !== $seo_title ) {
 			$parts['title'] = $seo_title;
 		} elseif ( in_array( $slug, [ 'wgos', 'wordpress-growth-operating-system' ], true ) ) {
-			$parts['title'] = 'WGOS - WordPress Wachstumssystem fuer messbare Nachfrage';
+			$parts['title'] = 'WGOS - WordPress Wachstumssystem für messbare Nachfrage';
 		}
 	}
 
@@ -439,11 +439,11 @@ function hu_get_seo_meta() {
 
 		if ( in_array( $slug, [ 'wgos', 'wordpress-growth-operating-system' ], true ) ) {
 			if ( empty( $meta['og_title'] ) ) {
-				$meta['og_title'] = 'WGOS - WordPress Wachstumssystem fuer messbare Nachfrage';
+				$meta['og_title'] = 'WGOS - WordPress Wachstumssystem für messbare Nachfrage';
 			}
 
 			if ( empty( $meta['description'] ) ) {
-				$meta['description'] = 'Das WordPress Growth Operating System verbindet Strategie, SEO, Tracking, Performance und Conversion zu einem strukturierten Nachfrage-System fuer Unternehmen.';
+				$meta['description'] = 'Das WordPress Growth Operating System verbindet Strategie, SEO, Tracking, Performance und Conversion zu einem strukturierten Nachfrage-System für Unternehmen.';
 			}
 		}
 
