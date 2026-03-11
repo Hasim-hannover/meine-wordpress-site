@@ -247,7 +247,7 @@ get_header();
 								<tr>
 									<td>Sales-Conversion</td>
 									<td>&lt; 2%</td>
-									<td>12-15%</td>
+									<td>12&nbsp;%</td>
 								</tr>
 								<tr>
 									<td>Fazit</td>

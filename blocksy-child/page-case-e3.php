@@ -65,7 +65,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                 <span class="cs-kpi-label">Cost per Lead</span>
             </div>
             <div class="cs-kpi-tile">
-                <span class="cs-kpi-value nx-text-gold">12–15%</span>
+                <span class="cs-kpi-value nx-text-gold">12&nbsp;%</span>
                 <span class="cs-kpi-label">Sales-Conversion</span>
             </div>
         </div>
@@ -380,7 +380,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                         <li>✓ 1.750+ Leads im 5-Monats-Skalierungsfenster</li>
                         <li>✓ Vom Lead-Einkauf zur eigenen Pipeline</li>
                         <li>✓ -83% Cost per Lead vs. Einkaufsleads</li>
-                        <li>✓ 12–15% Sales-Conversion-Rate</li>
+                        <li>✓ 12&nbsp;% Sales-Conversion-Rate</li>
                         <li>✓ Segmentierte, vorqualifizierte Übergabe an Vertrieb</li>
                         <li>✓ CRM + n8n Automation für Follow-up und Datenqualität</li>
                     </ul>
@@ -480,7 +480,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
             </div>
 
             <div class="cs-result-card">
-                <span class="cs-result-value">12–15%</span>
+                <span class="cs-result-value">12&nbsp;%</span>
                 <span class="cs-result-label">Sales-Conversion-Rate</span>
                 <span class="cs-result-note">Lead → Abschluss</span>
             </div>
@@ -547,7 +547,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                 <li>
                     <strong>Vertriebseffekt:</strong> Leads werden heute segmentiert,
                     vorqualifiziert und automatisiert an den Vertrieb übergeben&nbsp;—
-                    mit 12–15&nbsp;% Sales-Conversion-Rate im Closing.
+                    mit 12&nbsp;% Sales-Conversion-Rate im Closing.
                 </li>
             </ul>
         </article>

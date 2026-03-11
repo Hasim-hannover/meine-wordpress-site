@@ -402,7 +402,7 @@ function hu_erfolge_section_shortcode() {
 							<span class="nx-metric__label">CPL</span>
 						</div>
 						<div class="nx-metric">
-							<span class="nx-metric__value" style="color:var(--nx-gold);">12-15%</span>
+							<span class="nx-metric__value" style="color:var(--nx-gold);">12&nbsp;%</span>
 							<span class="nx-metric__label">Sales-Conversion</span>
 						</div>
 						<div class="nx-metric">
