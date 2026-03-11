@@ -17,7 +17,7 @@ $cat_name         = $current_category->name;
 $cat_description  = category_description();
 $cat_count        = $current_category->count;
 
-// --- Service-Mapping: Kategorie → passende Service-Seite + CTA ---
+// --- Kategorie-Mapping: Kategorie → passende Zielseite + CTA ---
 $pillar_map = [
     'strategie' => [
         'icon'        => '🧭',
@@ -40,9 +40,9 @@ $pillar_map = [
         'icon'        => '📊',
         'badge'       => 'Tracking & Analytics',
         'subtitle'    => 'GA4, Server-Side Tagging, Consent Management — Privacy-first Daten, die Entscheidungen ermöglichen.',
-        'cta_label'   => 'GA4-Setup anfragen',
-        'cta_url'     => '/ga4-tracking-setup/',
-        'cta_text'    => 'Sauberes Tracking ist die Basis für jede datengetriebene Entscheidung.',
+        'cta_label'   => 'Tracking Audit ansehen',
+        'cta_url'     => nexus_get_wgos_asset_anchor_url( 'tracking-audit' ),
+        'cta_text'    => 'Der Tracking Audit zeigt zuerst, wo Datenqualität, Consent und Conversion-Messung heute brechen.',
     ],
     'cro' => [
         'icon'        => '🎯',

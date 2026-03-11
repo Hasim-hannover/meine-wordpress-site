@@ -15,9 +15,9 @@
 5. Altes Menü NICHT löschen – nur deaktivieren (Backup)
 
 ## Was mit den alten Service-Seiten passiert
-- Seiten bleiben bestehen (SEO + interne Verlinkung)
-- Sie fliegen nur aus dem Hauptmenü raus
-- Intern verlinken via WGOS-Seite und Blog-Posts
+- Die nicht mehr benoetigten Legacy-Slugs `/ga4-tracking-setup/`, `/performance-marketing/`, `/meta-ads/` und `/wordpress-wartung-hannover/` werden per `301` auf passende WGOS-Ziele umgeleitet.
+- `/roi-rechner/` wird per `301` auf `/kostenlose-tools/` umgeleitet.
+- Interne Links sollen direkt auf WGOS-Assets, die Tools-Hub-Seite oder den Growth Audit zeigen, nicht mehr auf die Legacy-Slugs.
 
 ## Kunden-Cockpit Link (empfohlene Platzierung)
 - Nicht im primären Slim-Menü platzieren (fokussiert auf Neukunden-Narrativ).

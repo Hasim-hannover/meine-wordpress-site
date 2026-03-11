@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$tracking_audit_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
+
 get_header();
 ?>
 
@@ -99,7 +101,7 @@ get_header();
 					<li>niedrigere Conversion Rate trotz wachsendem Traffic</li>
 					<li>mehr manuelle Vorqualifizierung im Vertrieb</li>
 				</ul>
-				<p>Genau hier beginnt das Zusammenspiel aus <a href="/wordpress-seo-hannover/">technischem SEO Audit</a>, <a href="/core-web-vitals/">Core Web Vitals</a> und sauberem <a href="/ga4-tracking-setup/">Tracking</a>.</p>
+				<p>Genau hier beginnt das Zusammenspiel aus <a href="/wordpress-seo-hannover/">technischem SEO Audit</a>, <a href="/core-web-vitals/">Core Web Vitals</a> und sauberem <a href="<?php echo esc_url( $tracking_audit_url ); ?>">Tracking</a>.</p>
 
 				<h2 id="rechnung">Rechenbeispiel: Der stille Verlust hinter guten Kampagnen</h2>
 				<p>Ein einfaches Szenario zeigt, warum die Reihenfolge entscheidend ist. Angenommen, ein Unternehmen investiert monatlich 10.000 EUR in Performance Ads. Bei einem durchschnittlichen CPC von 2,50 EUR entstehen 4.000 Klicks.</p>
@@ -177,7 +179,7 @@ get_header();
 					<li>Zeitfenster: kurzfristig, dieses Quartal, später</li>
 					<li>Projektkontext: Branche, Teamgröße, Budgetkorridor</li>
 				</ul>
-				<p>Mit dieser Struktur wird aus "mehr Leads" ein steuerbarer Qualitätsprozess. Die operative Grundlage entsteht im Zusammenspiel aus <a href="/conversion-rate-optimization/">Conversion Rate Optimierung</a> und <a href="/ga4-tracking-setup/">Tracking-Setup</a>.</p>
+				<p>Mit dieser Struktur wird aus "mehr Leads" ein steuerbarer Qualitätsprozess. Die operative Grundlage entsteht im Zusammenspiel aus <a href="/conversion-rate-optimization/">Conversion Rate Optimierung</a> und <a href="<?php echo esc_url( $tracking_audit_url ); ?>">Tracking Audit</a>.</p>
 
 				<div class="seo-cornerstone__inline-cta">
 					<p>Sie wollen in 48 Stunden sehen, wo Ihre Lead-Reibung entsteht?</p>

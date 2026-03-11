@@ -367,6 +367,50 @@ function nexus_get_current_request_path() {
 }
 
 /**
+ * Map deprecated service and tool slugs to their canonical WGOS or hub targets.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_legacy_offer_redirect_map() {
+	return [
+		'/ga4-tracking-setup/'         => nexus_get_wgos_asset_anchor_url( 'tracking-audit' ),
+		'/performance-marketing/'      => nexus_get_wgos_url(),
+		'/meta-ads/'                   => nexus_get_wgos_url(),
+		'/wordpress-wartung-hannover/' => nexus_get_wgos_asset_anchor_url( 'security-hardening' ),
+		'/roi-rechner/'                => nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ),
+	];
+}
+
+add_action( 'template_redirect', 'nexus_redirect_legacy_offer_paths', 2 );
+/**
+ * Redirect deprecated service and tool slugs to their canonical WGOS destinations.
+ *
+ * @return void
+ */
+function nexus_redirect_legacy_offer_paths() {
+	if ( is_admin() || wp_doing_ajax() || is_feed() ) {
+		return;
+	}
+
+	$current_path = nexus_get_current_request_path();
+	$redirect_map = nexus_get_legacy_offer_redirect_map();
+
+	if ( empty( $redirect_map[ $current_path ] ) ) {
+		return;
+	}
+
+	$target_url  = $redirect_map[ $current_path ];
+	$target_path = trailingslashit( '/' . ltrim( (string) wp_parse_url( $target_url, PHP_URL_PATH ), '/' ) );
+
+	if ( $target_path === $current_path ) {
+		return;
+	}
+
+	wp_safe_redirect( $target_url, 301 );
+	exit;
+}
+
+/**
  * Resolve the primary contact page ID while supporting the legacy slug.
  *
  * @return int

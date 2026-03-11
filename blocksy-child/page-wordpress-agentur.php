@@ -16,7 +16,7 @@ $cases_url = nexus_get_results_url();
 $about_url = nexus_get_page_url( [ 'uber-mich' ] );
 $cwv_url   = nexus_get_page_url( [ 'core-web-vitals', 'core-web-vitals-optimierung' ] );
 $seo_url   = nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ] );
-$ga4_url   = nexus_get_page_url( [ 'ga4-tracking-setup' ] );
+$measurement_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
 $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ] );
 
 $faq_items = [
@@ -106,7 +106,7 @@ get_header();
 					<h3>1. Sichtbarkeit ohne Richtung</h3>
 					<p>Es gibt Inhalte, aber keine klare Informationsarchitektur, keine priorisierten Money Pages und keine saubere interne Verbindung zwischen Suchintention und nächstem Schritt. Genau dort greifen <a href="<?php echo esc_url( $seo_url ); ?>">technische SEO</a> und Angebotslogik ineinander.</p>
 					<h3>2. Daten ohne Entscheidungswert</h3>
-					<p>Tracking ist installiert, aber nicht belastbar. Consent, Events und Attribution erzeugen Rauschen statt Klarheit. Ohne funktionierende Messung ist jede Optimierung eine Vermutung. Deshalb ist <a href="<?php echo esc_url( $ga4_url ); ?>">privacy-first Measurement</a> kein Add-on, sondern Fundament.</p>
+					<p>Tracking ist installiert, aber nicht belastbar. Consent, Events und Attribution erzeugen Rauschen statt Klarheit. Ohne funktionierende Messung ist jede Optimierung eine Vermutung. Deshalb ist <a href="<?php echo esc_url( $measurement_url ); ?>">privacy-first Measurement</a> kein Add-on, sondern Fundament.</p>
 					<h3>3. Seiten ohne Conversion-Führung</h3>
 					<p>Kontaktformulare am Seitenende sind keine Funnel-Logik. Wenn Proof, CTA-Reihenfolge und Einwandabbau fehlen, verliert die Seite Nachfrage genau in dem Moment, in dem sie wertvoll werden könnte. Dort setzt <a href="<?php echo esc_url( $cro_url ); ?>">Conversion-Architektur</a> an.</p>
 				</div>
