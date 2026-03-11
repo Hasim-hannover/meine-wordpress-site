@@ -17,6 +17,7 @@ $audit_url    = nexus_get_audit_url();
 $cases_url    = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
 $wgos_url     = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ], home_url( '/wordpress-growth-operating-system/' ) );
 $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) );
+$instagram_url = 'https://www.instagram.com/domdar.de/';
 $portrait_url = home_url( '/wp-content/uploads/2025/09/Wordpress_Bild_Hero.webp' );
 
 $hero_kpis = [
@@ -37,7 +38,7 @@ $hero_kpis = [
 $fact_items = [
 	[
 		'label' => 'Branche',
-		'value' => 'Sustainable Commerce / E-Commerce',
+		'value' => 'Sustainable Commerce / D2C + B2B-Handel',
 	],
 	[
 		'label' => 'Startpunkt',
@@ -50,6 +51,10 @@ $fact_items = [
 	[
 		'label' => 'Hebel',
 		'value' => 'Bundles · Recovery-Flows · Retourenportal',
+	],
+	[
+		'label' => 'Vertrieb',
+		'value' => 'Endkunden, Händler, Shops und Großhändler',
 	],
 	[
 		'label' => 'Zeitraum',
@@ -259,6 +264,8 @@ get_header();
 		<div class="cs-hero-meta">
 			<span class="cs-meta-item">Sustainable Commerce</span>
 			<span class="cs-meta-sep">·</span>
+			<span class="cs-meta-item">B2C + B2B-Handel</span>
+			<span class="cs-meta-sep">·</span>
 			<span class="cs-meta-item">46 € AOV am Start</span>
 			<span class="cs-meta-sep">·</span>
 			<span class="cs-meta-item">4,2 s Ladezeit vor dem Relaunch</span>
@@ -293,10 +300,18 @@ get_header();
 					Marge trug und nachgelagerte Prozesse zu viel manuelle Energie banden.
 				</p>
 				<p>
+					DOMDAR war dabei nicht nur ein Endkunden-Shop. Neben dem D2C-Geschäft
+					kauften auch Händler, Shops und Großhändler ein, digital wie physisch.
+					Genau diese Mischform aus B2C und B2B machte das Setup anspruchsvoller
+					als einen reinen Consumer-Shop.
+				</p>
+				<p>
 					Das Ziel war deshalb kein kosmetischer Relaunch. Ziel war ein Setup,
 					das denselben Traffic profitabler macht: höherer Warenkorb, bessere
 					Conversion, weniger Support-Aufwand und ein Rückgabeprozess, der
-					Vertrauen stärkt statt Zweifel auszulösen.
+					Vertrauen stärkt statt Zweifel auszulösen. Sichtbar war die Marke auch
+					über <a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" rel="noopener noreferrer">Instagram</a>,
+					nicht nur über den Shop selbst.
 				</p>
 				<ul class="cs-strength-list">
 					<?php foreach ( $strengths as $strength ) : ?>
