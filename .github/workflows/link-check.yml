@@ -2,8 +2,6 @@ name: Links prüfen
 
 # Wann soll der Check laufen?
 on:
-  push:
-    branches: ["main", "master"] # Bei jedem Push auf Main/Master
   pull_request: # Bei jedem Pull Request
   workflow_dispatch: # Erlaubt manuelles Starten per Klick
   schedule:
