@@ -1,6 +1,7 @@
 <?php
 /**
- * Ergebnisse-Hub routed via /case-studies-e-commerce/.
+ * Template Name: Ergebnisse Hub
+ * Description: Hub fuer E3, DOMDAR und Whitelabel & Retainer.
  *
  * @package Blocksy_Child
  */

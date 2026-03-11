@@ -1,6 +1,7 @@
 <?php
 /**
- * Whitelabel proof page routed via /whitelabel-retainer/.
+ * Template Name: Whitelabel & Retainer
+ * Description: Anonymisierte Whitelabel-Arbeit, Retainer und Delivery im Hintergrund.
  *
  * @package Blocksy_Child
  */

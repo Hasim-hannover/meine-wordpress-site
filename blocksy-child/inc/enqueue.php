@@ -250,7 +250,9 @@ function hu_enqueue_assets() {
 
 	// ── P) Template: Ergebnisse Hub + Whitelabel Proof ─────────────
 	if (
-		is_page( 'case-studies-e-commerce' )
+		is_page_template( 'page-case-studies-e-commerce.php' )
+		|| is_page_template( 'page-whitelabel-retainer.php' )
+		|| is_page( 'case-studies-e-commerce' )
 		|| is_page( 'ergebnisse' )
 		|| is_page( 'whitelabel-retainer' )
 		|| is_page( 'whitelabel-retainer-proof' )

@@ -273,6 +273,12 @@ function nexus_is_audit_page() {
  * @return int
  */
 function nexus_get_results_page_id() {
+	$template_page_id = nexus_get_page_id_by_template( 'page-case-studies-e-commerce.php' );
+
+	if ( $template_page_id ) {
+		return $template_page_id;
+	}
+
 	return nexus_get_page_id( [ 'case-studies-e-commerce', 'ergebnisse', 'case-studies' ] );
 }
 
@@ -297,6 +303,12 @@ function nexus_get_results_url() {
  * @return int
  */
 function nexus_get_whitelabel_page_id() {
+	$template_page_id = nexus_get_page_id_by_template( 'page-whitelabel-retainer.php' );
+
+	if ( $template_page_id ) {
+		return $template_page_id;
+	}
+
 	return nexus_get_page_id( [ 'whitelabel-retainer', 'whitelabel-retainer-proof', 'whitelabel' ] );
 }
 
@@ -337,7 +349,9 @@ function nexus_is_results_context() {
 		|| is_page( 'whitelabel-retainer-proof' )
 		|| is_page( 'whitelabel' )
 		|| is_page_template( 'page-case-e3.php' )
-		|| is_page_template( 'page-case-study-domdar.php' );
+		|| is_page_template( 'page-case-study-domdar.php' )
+		|| is_page_template( 'page-case-studies-e-commerce.php' )
+		|| is_page_template( 'page-whitelabel-retainer.php' );
 }
 
 /**
@@ -450,11 +464,11 @@ function nexus_force_results_route_templates( $template ) {
 	}
 
 	$route_templates = [
-		'case-studies-e-commerce'  => get_stylesheet_directory() . '/page-case-studies-e-commerce.php',
-		'ergebnisse'               => get_stylesheet_directory() . '/page-ergebnisse.php',
-		'whitelabel-retainer'      => get_stylesheet_directory() . '/page-whitelabel-retainer.php',
-		'whitelabel-retainer-proof'=> get_stylesheet_directory() . '/page-whitelabel-retainer-proof.php',
-		'whitelabel'               => get_stylesheet_directory() . '/page-whitelabel.php',
+		'case-studies-e-commerce'   => get_stylesheet_directory() . '/page-case-studies-e-commerce.php',
+		'ergebnisse'                => get_stylesheet_directory() . '/page-case-studies-e-commerce.php',
+		'whitelabel-retainer'       => get_stylesheet_directory() . '/page-whitelabel-retainer.php',
+		'whitelabel-retainer-proof' => get_stylesheet_directory() . '/page-whitelabel-retainer.php',
+		'whitelabel'                => get_stylesheet_directory() . '/page-whitelabel-retainer.php',
 	];
 
 	foreach ( $route_templates as $slug => $forced_template ) {
