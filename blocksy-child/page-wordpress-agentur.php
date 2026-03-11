@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $audit_url = nexus_get_audit_url();
 $wgos_url  = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
-$cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url = nexus_get_results_url();
 $about_url = nexus_get_page_url( [ 'uber-mich' ] );
 $cwv_url   = nexus_get_page_url( [ 'core-web-vitals', 'core-web-vitals-optimierung' ] );
 $seo_url   = nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ] );
@@ -68,7 +68,7 @@ get_header();
 				</ul>
 				<div class="hero-cta-block" style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Audit starten</a>
-					<a href="<?php echo esc_url( $cases_url ); ?>" class="nx-btn nx-btn--ghost">Case Studies ansehen</a>
+					<a href="<?php echo esc_url( $cases_url ); ?>" class="nx-btn nx-btn--ghost">Ergebnisse ansehen</a>
 				</div>
 			</div>
 		</section>
@@ -257,7 +257,7 @@ get_header();
 							</tbody>
 						</table>
 					</div>
-					<p><a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">Weitere Case Studies ansehen</a></p>
+					<p><a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">Weitere Ergebnisse ansehen</a></p>
 				</div>
 			</div>
 		</section>

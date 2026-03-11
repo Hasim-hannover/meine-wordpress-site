@@ -26,7 +26,7 @@ function hu_home_urls() {
 	$urls = [
 		'audit'       => nexus_get_audit_url(),
 		'wgos'        => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
-		'cases'       => nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) ),
+		'cases'       => nexus_get_results_url(),
 		'about'       => nexus_get_page_url( [ 'uber-mich' ] ),
 		'blog'        => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
 		'e3'          => nexus_get_page_url( [ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/e3-new-energy/' ) ),
@@ -105,7 +105,7 @@ function hu_hero_section_shortcode() {
 
 						<div class="wp-hero-actions nx-reveal">
 							<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_hero_primary_audit" data-track-category="lead_gen">Audit starten</a>
-							<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Case Studies ansehen</a>
+							<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Ergebnisse ansehen</a>
 						</div>
 						<p class="wp-hero-supporting-link nx-reveal">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
 					</div>
@@ -160,7 +160,7 @@ function hu_hero_section_shortcode() {
 		</section>
 		<div class="wp-mobile-cta-bar" data-home-mobile-cta aria-label="Schneller Audit-Einstieg">
 			<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_mobile_sticky_audit" data-track-category="lead_gen">Audit starten</a>
-			<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-mobile-cta-bar__secondary">Cases</a>
+			<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-mobile-cta-bar__secondary">Ergebnisse</a>
 		</div>
 	<?php
 
@@ -473,7 +473,7 @@ function hu_erfolge_section_shortcode() {
 
 			<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
 				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_erfolge_audit" data-track-category="lead_gen">Audit starten</a>
-				<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_erfolge_cases" data-track-category="lead_gen">Weitere Case Studies</a>
+				<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_erfolge_cases" data-track-category="lead_gen">Weitere Ergebnisse</a>
 			</div>
 		</div>
 	</section>
@@ -660,7 +660,7 @@ function hu_cta_section_shortcode() {
 
 				<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
 					<a class="nx-btn nx-btn--primary" href="<?php echo esc_url( $urls['audit'] ); ?>" data-track-action="cta_footer_audit" data-track-category="lead_gen">Audit starten</a>
-					<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( $urls['cases'] ); ?>" data-track-action="cta_footer_cases" data-track-category="lead_gen">Case Studies ansehen</a>
+					<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( $urls['cases'] ); ?>" data-track-action="cta_footer_cases" data-track-category="lead_gen">Ergebnisse ansehen</a>
 				</div>
 
 				<p style="font-size:0.8rem; color:var(--nx-text-muted); margin-top:1.5rem; margin-bottom:0;">

@@ -248,7 +248,18 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-tools-css', 'tools.css', [ 'nexus-design-system' ] );
 	}
 
-	// ── P) Template: Case Studies ──────────────────────────────────
+	// ── P) Template: Ergebnisse Hub + Whitelabel Proof ─────────────
+	if (
+		is_page( 'case-studies-e-commerce' )
+		|| is_page( 'ergebnisse' )
+		|| is_page( 'whitelabel-retainer' )
+		|| is_page( 'whitelabel-retainer-proof' )
+		|| is_page( 'whitelabel' )
+	) {
+		hu_enqueue_css( 'nexus-results-css', 'results.css', [ 'nexus-design-system' ] );
+	}
+
+	// ── Q) Template: Öffentliche Case Studies ──────────────────────
 	if ( is_page_template( 'page-case-e3.php' ) || is_page_template( 'page-case-study-domdar.php' ) || is_page( 'case-study-domdar' ) ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
 		hu_enqueue_css( 'nexus-case-study-css', 'case-study.css', [ 'nexus-home-css' ] );

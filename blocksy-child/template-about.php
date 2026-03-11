@@ -12,7 +12,7 @@
 get_header();
 
 $audit_url = nexus_get_audit_url();
-$cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url = nexus_get_results_url();
 ?>
 
 <div class="nexus-about" data-track-section="about_page">

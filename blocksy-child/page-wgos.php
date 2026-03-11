@@ -16,7 +16,7 @@ get_header();
 
 $audit_url    = nexus_get_audit_url();
 $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : 'https://cal.com/hasim/30min';
-$cases_url    = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url    = nexus_get_results_url();
 $asset_hub_url = function_exists( 'nexus_get_wgos_asset_hub_url' ) ? nexus_get_wgos_asset_hub_url() : home_url( '/wgos-systemlandkarte/' );
 $page_url     = get_permalink( get_queried_object_id() );
 
@@ -737,7 +737,7 @@ foreach ( $faq_items as $faq_item ) {
 							<?php endforeach; ?>
 						</ul>
 						<p class="wgos-impact-card__footer">Wenn Sie sehen wollen, wie sich diese Logik in der Praxis auswirkt, schauen Sie auf Vorher-Nachher-Effekte statt auf Leistungslisten.</p>
-						<a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Case Studies ansehen</a>
+						<a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow">Ergebnisse ansehen</a>
 					</div>
 				</div>
 			</div>

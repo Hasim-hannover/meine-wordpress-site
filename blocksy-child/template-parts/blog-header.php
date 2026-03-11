@@ -19,7 +19,7 @@ $wgos_url     = nexus_get_page_url(
 	[ 'wordpress-growth-operating-system', 'wgos' ],
 	home_url( '/wordpress-growth-operating-system/' )
 );
-$cases_url    = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url    = nexus_get_results_url();
 $about_url    = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
 $audit_url    = nexus_get_audit_url();
 $brand_text   = function_exists( 'hu_get_site_wordmark_text' ) ? hu_get_site_wordmark_text() : 'HAŞIM ÜNER';
@@ -92,9 +92,9 @@ $primary_items = [
 		'active' => is_page( nexus_get_page_id( [ 'wordpress-growth-operating-system', 'wgos' ] ) ),
 	],
 	[
-		'label'  => __( 'Case Studies', 'blocksy-child' ),
+		'label'  => __( 'Ergebnisse', 'blocksy-child' ),
 		'url'    => $cases_url,
-		'active' => is_page( nexus_get_page_id( [ 'case-studies-e-commerce', 'case-studies' ] ) ),
+		'active' => nexus_is_results_context(),
 	],
 	[
 		'label'  => __( 'Über mich', 'blocksy-child' ),

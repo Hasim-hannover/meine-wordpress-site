@@ -268,6 +268,79 @@ function nexus_is_audit_page() {
 }
 
 /**
+ * Resolve the primary results hub page ID.
+ *
+ * @return int
+ */
+function nexus_get_results_page_id() {
+	return nexus_get_page_id( [ 'case-studies-e-commerce', 'ergebnisse', 'case-studies' ] );
+}
+
+/**
+ * Resolve the primary results hub URL.
+ *
+ * @return string
+ */
+function nexus_get_results_url() {
+	$page_id = nexus_get_results_page_id();
+
+	if ( $page_id ) {
+		return get_permalink( $page_id );
+	}
+
+	return home_url( '/case-studies-e-commerce/' );
+}
+
+/**
+ * Resolve the whitelabel proof page ID.
+ *
+ * @return int
+ */
+function nexus_get_whitelabel_page_id() {
+	return nexus_get_page_id( [ 'whitelabel-retainer', 'whitelabel-retainer-proof', 'whitelabel' ] );
+}
+
+/**
+ * Resolve the whitelabel proof page URL.
+ *
+ * @return string
+ */
+function nexus_get_whitelabel_page_url() {
+	$page_id = nexus_get_whitelabel_page_id();
+
+	if ( $page_id ) {
+		return get_permalink( $page_id );
+	}
+
+	return home_url( '/whitelabel-retainer/' );
+}
+
+/**
+ * Determine whether the current request is inside the public results area.
+ *
+ * @return bool
+ */
+function nexus_is_results_context() {
+	$results_page_id = nexus_get_results_page_id();
+
+	if ( $results_page_id && is_page( $results_page_id ) ) {
+		return true;
+	}
+
+	return is_page( 'case-studies-e-commerce' )
+		|| is_page( 'case-studies' )
+		|| is_page( 'ergebnisse' )
+		|| is_page( 'e3-new-energy' )
+		|| is_page( 'case-study-domdar' )
+		|| is_page( 'domdar' )
+		|| is_page( 'whitelabel-retainer' )
+		|| is_page( 'whitelabel-retainer-proof' )
+		|| is_page( 'whitelabel' )
+		|| is_page_template( 'page-case-e3.php' )
+		|| is_page_template( 'page-case-study-domdar.php' );
+}
+
+/**
  * Return the current request path with leading and trailing slash.
  *
  * @return string

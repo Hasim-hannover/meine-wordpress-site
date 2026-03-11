@@ -12,7 +12,7 @@
 get_header();
 
 $audit_url   = nexus_get_audit_url();
-$cases_url   = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url   = nexus_get_results_url();
 $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) );
 ?>
 
@@ -80,7 +80,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
             </a>
             <a href="<?php echo esc_url( $cases_url ); ?>"
                class="nx-btn nx-btn--ghost">
-                Alle Case Studies →
+                Alle Ergebnisse →
             </a>
         </div>
 
@@ -673,7 +673,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                     WGOS: Das System dahinter →
                 </a>
                 <a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">
-                    Weitere Case Studies →
+                    Weitere Ergebnisse →
                 </a>
                 <a href="<?php echo esc_url( $local_wp_url ); ?>" class="cs-internal-link">
                     WordPress Growth Architect in Hannover →

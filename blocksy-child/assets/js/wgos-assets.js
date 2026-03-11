@@ -350,7 +350,7 @@ export const wgosAssets = [
 		deliverable: 'Kunden-Ergebnis mit KPIs, Vorher/Nachher',
 		credits: '15',
 		cta: {
-			label: 'Case Studies ansehen',
+			label: 'Ergebnisse ansehen',
 			hrefKey: 'cases',
 		},
 		legacyPaths: [ '/case-studies-e-commerce/', '/case-studies/' ],

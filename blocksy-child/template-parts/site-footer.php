@@ -25,7 +25,7 @@ $wgos_url    = nexus_get_page_url(
 	[ 'wordpress-growth-operating-system' ],
 	home_url( '/wordpress-growth-operating-system/' )
 );
-$cases_url   = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url   = nexus_get_results_url();
 $blog_url    = $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' );
 $seo_url     = nexus_get_page_url(
 	[ 'wordpress-seo-hannover', 'seo' ],
@@ -75,7 +75,7 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 			<section class="ft__col" aria-labelledby="ft-proof">
 				<h3 id="ft-proof">Proof &amp; Wissen</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $cases_url ); ?>">Case Studies</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $cases_url ); ?>">Ergebnisse</a></li>
 					<li><a href="<?php echo esc_url( $blog_url ); ?>">Insights</a></li>
 					<li><a href="<?php echo esc_url( $seo_url ); ?>">SEO</a></li>
 					<li><a href="<?php echo esc_url( $cwv_url ); ?>">Core Web Vitals</a></li>

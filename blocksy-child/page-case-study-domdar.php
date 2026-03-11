@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $audit_url    = nexus_get_audit_url();
-$cases_url    = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url    = nexus_get_results_url();
 $wgos_url     = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ], home_url( '/wordpress-growth-operating-system/' ) );
 $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) );
 $instagram_url = 'https://www.instagram.com/domdar.de/';
@@ -556,7 +556,7 @@ get_header();
 			</div>
 
 			<div class="cs-internal-links">
-				<a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">Weitere Case Studies</a>
+				<a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">Weitere Ergebnisse</a>
 				<a href="<?php echo esc_url( $wgos_url ); ?>" class="cs-internal-link">WGOS: Das System dahinter</a>
 				<a href="<?php echo esc_url( $local_wp_url ); ?>" class="cs-internal-link">WordPress Growth Architect</a>
 			</div>

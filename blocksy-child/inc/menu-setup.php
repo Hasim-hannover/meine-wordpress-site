@@ -3,7 +3,7 @@
  * NEXUS MENU SETUP
  *
  * Erstellt das fokussierte Hauptmenü für die Neukunden-Navigation:
- * System | Case Studies | Insights | Über mich | Audit starten
+ * System | Ergebnisse | Insights | Über mich | Audit starten
  *
  * Einmal-Setup: Wird beim Theme-Switch oder manuell via ?nexus_rebuild_menu=1 ausgelöst.
  *
@@ -50,6 +50,39 @@ function nexus_is_audit_cta_menu_item( $item ) {
 }
 
 /**
+ * Detect results/proof menu items even if the stored WordPress label is outdated.
+ *
+ * @param WP_Post $item Menu item object.
+ * @return bool
+ */
+function nexus_is_results_menu_item( $item ) {
+	$classes = isset( $item->classes ) && is_array( $item->classes ) ? $item->classes : [];
+	$title   = isset( $item->title ) ? wp_strip_all_tags( (string) $item->title ) : '';
+	$url     = isset( $item->url ) ? (string) $item->url : '';
+	$path    = $url ? wp_parse_url( $url, PHP_URL_PATH ) : '';
+
+	if ( in_array( 'nav-results-link', $classes, true ) ) {
+		return true;
+	}
+
+	$results_paths = [
+		'/case-studies/',
+		'/case-studies-e-commerce/',
+		'/ergebnisse/',
+	];
+
+	if ( $path && in_array( trailingslashit( $path ), $results_paths, true ) ) {
+		return true;
+	}
+
+	$title = strtolower( $title );
+
+	return false !== strpos( $title, 'case stud' )
+		|| false !== strpos( $title, 'ergebnisse' )
+		|| false !== strpos( $title, 'proof' );
+}
+
+/**
  * Hauptmenü programmatisch erstellen.
  */
 function nexus_setup_main_menu() {
@@ -78,15 +111,16 @@ function nexus_setup_main_menu() {
 		'menu-item-status'    => 'publish',
 	] );
 
-	// ── 2. Case Studies (Top-Level) ────────────────────────────────
-	$cases_id = nexus_get_page_id( [ 'case-studies-e-commerce', 'case-studies' ] );
+	// ── 2. Ergebnisse (Top-Level) ──────────────────────────────────
+	$cases_id = nexus_get_results_page_id();
 	wp_update_nav_menu_item( $menu_id, 0, [
-		'menu-item-title'     => 'Case Studies',
+		'menu-item-title'     => 'Ergebnisse',
 		'menu-item-object'    => 'page',
 		'menu-item-object-id' => $cases_id,
 		'menu-item-type'      => $cases_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $cases_id ? '' : home_url( '/case-studies-e-commerce/' ),
+		'menu-item-url'       => $cases_id ? '' : nexus_get_results_url(),
 		'menu-item-status'    => 'publish',
+		'menu-item-classes'   => 'nav-results-link',
 	] );
 
 	// ── 3. Insights (Top-Level) ────────────────────────────────────
@@ -123,14 +157,64 @@ function nexus_setup_main_menu() {
 		'menu-item-classes'   => 'nav-cta-button',
 	] );
 
-	// ── Menü der primären Location zuweisen ────────────────────────
+	// ── Menü den Header-Locations zuweisen ─────────────────────────
 	$locations = get_theme_mod( 'nav_menu_locations', [] );
-	$locations['primary'] = $menu_id;
+	$locations['primary']      = $menu_id;
+	$locations['primary-slim'] = $menu_id;
 	set_theme_mod( 'nav_menu_locations', $locations );
 }
 
 // Bei Theme-Aktivierung ausführen
 add_action( 'after_switch_theme', 'nexus_setup_main_menu' );
+
+/**
+ * Create the proof hub pages that are routed via page-slug templates.
+ *
+ * Triggered manually for admins so production content does not change unexpectedly.
+ *
+ * @return void
+ */
+function nexus_seed_results_pages() {
+	$pages = [
+		[
+			'slug'   => 'case-studies-e-commerce',
+			'title'  => 'Ergebnisse',
+			'update' => [ 'Case Studies', 'Case Studies E-Commerce', 'Results' ],
+		],
+		[
+			'slug'   => 'whitelabel-retainer',
+			'title'  => 'Whitelabel & Retainer',
+			'update' => [],
+		],
+	];
+
+	foreach ( $pages as $page ) {
+		$existing = get_page_by_path( $page['slug'] );
+
+		if ( $existing instanceof WP_Post ) {
+			if ( in_array( $existing->post_title, $page['update'], true ) ) {
+				wp_update_post(
+					[
+						'ID'         => $existing->ID,
+						'post_title' => $page['title'],
+					]
+				);
+			}
+
+			continue;
+		}
+
+		wp_insert_post(
+			[
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_title'   => $page['title'],
+				'post_name'    => $page['slug'],
+				'post_content' => '',
+			]
+		);
+	}
+}
 
 // Manuell auslösen: ?nexus_rebuild_menu=1 (nur für Admins)
 add_action( 'admin_init', function () {
@@ -142,6 +226,18 @@ add_action( 'admin_init', function () {
 		nexus_setup_main_menu();
 		add_action( 'admin_notices', function () {
 			echo '<div class="notice notice-success is-dismissible"><p>Nexus Hauptmenü wurde erstellt.</p></div>';
+		} );
+	}
+
+	if (
+		isset( $_GET['nexus_seed_results_pages'] ) &&
+		'1' === $_GET['nexus_seed_results_pages'] &&
+		current_user_can( 'manage_options' )
+	) {
+		nexus_seed_results_pages();
+		nexus_setup_main_menu();
+		add_action( 'admin_notices', function () {
+			echo '<div class="notice notice-success is-dismissible"><p>Ergebnisse- und Whitelabel-Seiten wurden angelegt bzw. aktualisiert.</p></div>';
 		} );
 	}
 } );
@@ -160,14 +256,40 @@ add_filter( 'wp_nav_menu_objects', function ( $items, $args ) {
 	$theme_location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
 	$menu_name      = isset( $args->menu->name ) ? (string) $args->menu->name : '';
 
-	if ( 'primary' !== $theme_location && 'Nexus Hauptmenü' !== $menu_name ) {
+	if (
+		! in_array( $theme_location, [ 'primary', 'primary-slim' ], true ) &&
+		! in_array( $menu_name, [ 'Nexus Hauptmenü', 'Hauptmenü Slim' ], true )
+	) {
 		return $items;
 	}
 
 	$audit_url = nexus_get_audit_url();
+	$results_url = nexus_get_results_url();
+	$is_results_context = nexus_is_results_context();
 
 	foreach ( $items as $item ) {
 		if ( ! nexus_is_audit_cta_menu_item( $item ) ) {
+			if ( nexus_is_results_menu_item( $item ) ) {
+				$item->title = 'Ergebnisse';
+				$item->url   = $results_url;
+
+				if ( ! isset( $item->classes ) || ! is_array( $item->classes ) ) {
+					$item->classes = [];
+				}
+
+				if ( ! in_array( 'nav-results-link', $item->classes, true ) ) {
+					$item->classes[] = 'nav-results-link';
+				}
+
+				if ( $is_results_context ) {
+					foreach ( [ 'current-menu-item', 'current_page_item' ] as $class_name ) {
+						if ( ! in_array( $class_name, $item->classes, true ) ) {
+							$item->classes[] = $class_name;
+						}
+					}
+				}
+			}
+
 			continue;
 		}
 

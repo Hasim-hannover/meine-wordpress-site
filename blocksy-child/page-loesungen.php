@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $audit_url     = nexus_get_audit_url();
 $wgos_url      = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
-$cases_url     = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url     = nexus_get_results_url();
 
 get_header();
 ?>
@@ -59,7 +59,7 @@ get_header();
 				Wenn Sie erst sehen wollen, wie sich dieser Ansatz in der Praxis auswirkt, starten Sie nicht bei Einzelleistungen, sondern bei den dokumentierten Ergebnissen.
 			</p>
 			<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
-				<a href="<?php echo esc_url( $cases_url ); ?>" class="cta-btn" style="font-size:1rem; padding:14px 28px;">Case Studies ansehen</a>
+				<a href="<?php echo esc_url( $cases_url ); ?>" class="cta-btn" style="font-size:1rem; padding:14px 28px;">Ergebnisse ansehen</a>
 				<a href="<?php echo esc_url( $audit_url ); ?>" class="cta-btn" style="font-size:1rem; padding:14px 28px;">Direkt mit dem Audit starten</a>
 			</div>
 		</div>

@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$cases_url = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$cases_url = nexus_get_results_url();
 $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/' ) );
 ?>
 

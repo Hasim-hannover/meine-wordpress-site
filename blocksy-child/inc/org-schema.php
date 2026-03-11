@@ -318,37 +318,61 @@ function hu_output_schema()
             $schemas[0]['founder'] = ['@id' => home_url('/uber-mich/#person')];
         }
 
-        // Case study pages: Article schema
-        if ($slug === 'case-studies' || $slug === 'case-studies-e-commerce') {
-            if ($slug === 'case-studies') {
-                $headline = 'Vom Kostenfaktor zur Profit-Maschine mit 34× ROAS';
-                $description = 'Eine zweiphasige Growth-Strategie revolutionierte die Lead-Generierung, senkte Kosten um 83 % und optimierte zwei Conversion-Raten.';
-                $datePublished = '2025-08-08';
-            } else {
-                $headline = 'Nachhaltigkeit skaliert nicht mit Ideologie, sondern mit System';
-                $description = 'Vom 46 € Warenkorb zur 120 € Profit-Maschine in neun Monaten: Transformiert durch psychologisches Pricing und Prozess-Optimierung.';
-                $datePublished = '2026-01-06';
-            }
-
-            $article = [
+        // Ergebnisse hub: CollectionPage schema
+        if ($slug === 'case-studies' || $slug === 'case-studies-e-commerce' || $slug === 'ergebnisse') {
+            $collection = [
                 '@context' => 'https://schema.org',
-                '@type'    => 'Article',
-                '@id'      => home_url('/' . $slug . '/#article'),
-                'headline' => $headline,
-                'description' => $description,
+                '@type'    => 'CollectionPage',
+                '@id'      => home_url('/' . $slug . '/#collection'),
                 'url'      => home_url('/' . $slug . '/'),
+                'name'     => 'Ergebnisse',
+                'headline' => 'Ergebnisse, Case Studies und Whitelabel-Proof von Hasim Üner',
+                'description' => 'Öffentliche Case Studies, anonymisierte Whitelabel-Arbeit und laufende Retainer als gemeinsamer Proof-Layer für WordPress-Systemarbeit.',
                 'inLanguage' => 'de',
-                'author'   => [
+                'isPartOf' => ['@id' => home_url('/#website')],
+                'about' => ['@id' => home_url('/#organization')],
+                'hasPart' => array_values(array_filter([
+                    [
+                        '@type' => 'Article',
+                        'name'  => 'E3 New Energy',
+                        'url'   => home_url('/e3-new-energy/')
+                    ],
+                    nexus_get_page_id([ 'case-study-domdar', 'domdar' ]) ? [
+                        '@type' => 'Article',
+                        'name'  => 'DOMDAR',
+                        'url'   => nexus_get_page_url([ 'case-study-domdar', 'domdar' ], home_url('/case-study-domdar/'))
+                    ] : null,
+                    nexus_get_whitelabel_page_id() ? [
+                        '@type' => 'WebPage',
+                        'name'  => 'Whitelabel & Retainer',
+                        'url'   => nexus_get_whitelabel_page_url()
+                    ] : null,
+                ])),
+            ];
+
+            $schemas[] = $collection;
+        }
+
+        if ($slug === 'whitelabel-retainer' || $slug === 'whitelabel-retainer-proof' || $slug === 'whitelabel') {
+            $whitelabelPage = [
+                '@context' => 'https://schema.org',
+                '@type'    => 'AboutPage',
+                '@id'      => home_url('/' . $slug . '/#about'),
+                'url'      => home_url('/' . $slug . '/'),
+                'name'     => 'Whitelabel & Retainer',
+                'headline' => 'Whitelabel-Arbeit und laufende Retainer von Hasim Üner',
+                'description' => 'Anonymisierte Einblicke in Whitelabel-Projekte, laufende Retainer und typische Eingriffstiefen für WordPress, SEO, Tracking und CRO.',
+                'inLanguage' => 'de',
+                'about'    => ['@id' => home_url('/#organization')],
+                'mainEntity' => [
                     '@type' => 'Person',
                     'name'  => 'Hasim Üner',
                     'url'   => home_url('/uber-mich/')
                 ],
-                'publisher' => ['@id' => home_url('/#organization')],
-                'datePublished' => $datePublished,
-                'image' => $org['logo']
+                'image' => 'https://hasimuener.de/wp-content/uploads/2026/01/Hasim-Uener-Prtraeit_Startseite.webp',
             ];
 
-            $schemas[] = $article;
+            $schemas[] = $whitelabelPage;
         }
 
         // Kostenlose Tools: CollectionPage
