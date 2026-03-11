@@ -445,7 +445,19 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 		return $bridges;
 	}
 
+	$seo_foundation_bridge = [
+		'title' => 'Passende WGOS-Bausteine zu diesem Thema',
+		'intro' => 'Wenn Performance Marketing an technischer Reibung und einer instabilen SEO-Basis scheitert, sind diese Bausteine meist der naechste sinnvolle Schritt:',
+		'assets' => [
+			'technical-seo-audit' => 'Macht technische Indexierungs-, Redirect- und Strukturprobleme sichtbar, die Rankings und Kampagnenwirkung ausbremsen.',
+			'cwv-speed-audit'      => 'Zeigt, ob Ladezeit, Layout Shifts oder Render-Blocking die Nachfrage schon vor dem Angebot ausbremsen.',
+			'cwv-optimierung'      => 'Setzt die groessten Performance-Fixes dort um, wo sie Rankings und Conversion direkt entlasten.',
+		],
+	];
+
 	$bridges = [
+		'technisches-seo-performance-fundament' => $seo_foundation_bridge,
+		'warum-performance-marketing-ohne-technisches-seo-geld-verbrennt' => $seo_foundation_bridge,
 		'owned-leads-statt-ad-miete' => [
 			'title' => 'Passende WGOS-Bausteine zu diesem Thema',
 			'intro' => 'Wenn das Problem nicht nur mehr Traffic, sondern die falsche Nachfrage-Logik ist, sind das die naechsten sinnvollen Bausteine:',
