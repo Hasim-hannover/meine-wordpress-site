@@ -12,10 +12,23 @@ body.nx-blog-header-active .ct-header {
     z-index: 1004;
     padding: 18px 0 0;
     pointer-events: none;
+    opacity: 0;
+    transform: translateY(calc(-100% - 24px));
+    transition:
+        opacity var(--nx-duration-fast) var(--nx-ease),
+        transform var(--nx-duration-fast) var(--nx-ease);
+    will-change: opacity, transform;
 }
 
 .admin-bar .nx-site-header {
     top: 32px;
+}
+
+.nx-site-header.is-visible,
+.nx-site-header.is-open,
+.nx-site-header:focus-within {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .nx-site-header > .nx-container {
