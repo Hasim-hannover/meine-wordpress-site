@@ -45,10 +45,6 @@
                 payload[key] = typeof value === 'string' ? value.trim() : value;
             });
 
-            if (!payload.focus) {
-                payload.focus = 'other';
-            }
-
             return payload;
         }
 
@@ -79,7 +75,7 @@
                     if (!result.ok || !result.data || result.data.ok === false) {
                         var errorMessage = result.data && result.data.error
                             ? result.data.error
-                            : (window.NexusContactConfig && window.NexusContactConfig.errorMessage) || 'Die Nachricht konnte gerade nicht gesendet werden.';
+                            : (window.NexusContactConfig && window.NexusContactConfig.errorMessage) || 'Die Anfrage konnte gerade nicht gesendet werden.';
 
                         throw new Error(errorMessage);
                     }
@@ -87,12 +83,12 @@
                     form.reset();
                     var successMessage = result.data.message
                         || (window.NexusContactConfig && window.NexusContactConfig.successMessage)
-                        || 'Danke. Ihre Nachricht ist eingegangen.';
+                        || 'Danke. Ihre Projektanfrage ist eingegangen.';
 
                     setFeedback(successMessage, 'success');
                 })
                 .catch(function (error) {
-                    setFeedback(error && error.message ? error.message : 'Die Nachricht konnte gerade nicht gesendet werden.', 'error');
+                    setFeedback(error && error.message ? error.message : 'Die Anfrage konnte gerade nicht gesendet werden.', 'error');
                 })
                 .finally(function () {
                     setPending(false);

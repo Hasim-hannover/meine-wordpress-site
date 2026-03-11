@@ -158,11 +158,26 @@ add_filter( 'body_class', 'nexus_add_virtual_contact_body_class', 20 );
  */
 function nexus_get_contact_focus_options() {
 	return [
-		'wordpress' => 'WordPress-System und Angebotsseiten',
-		'seo'       => 'SEO, Sichtbarkeit und Money Pages',
-		'cro'       => 'CRO, CTA-Führung und Proof',
-		'audit'     => 'Growth Audit oder Priorisierung',
-		'other'     => 'Sonstiges Anliegen',
+		'seo'         => 'SEO',
+		'performance' => 'Website Performance',
+		'tracking'    => 'Tracking & Analytics',
+		'conversion'  => 'Conversion Optimierung',
+		'growth'      => 'Growth Strategie',
+		'other'       => 'Sonstiges',
+	];
+}
+
+/**
+ * Return the available budget options for contact requests.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_contact_budget_options() {
+	return [
+		'under_2000'      => 'unter 2.000€',
+		'2000_5000'       => '2.000 – 5.000€',
+		'5000_10000'      => '5.000 – 10.000€',
+		'10000_plus'      => '10.000€+',
 	];
 }
 
@@ -248,7 +263,7 @@ function nexus_handle_contact_request_submission( WP_REST_Request $request ) {
 	return new WP_REST_Response(
 		[
 			'ok'      => true,
-			'message' => 'Danke. Ihre Nachricht ist eingegangen. Sie erhalten in der Regel innerhalb von 48 Stunden eine persönliche Rückmeldung.',
+			'message' => 'Danke. Ihre Projektanfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
 		],
 		201
 	);
@@ -261,13 +276,16 @@ function nexus_handle_contact_request_submission( WP_REST_Request $request ) {
  * @return array|WP_Error
  */
 function nexus_validate_contact_request_payload( $payload ) {
-	$focus_options       = nexus_get_contact_focus_options();
-	$name                = isset( $payload['name'] ) ? sanitize_text_field( (string) $payload['name'] ) : '';
-	$email               = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
-	$company_or_website  = isset( $payload['company_or_website'] ) ? sanitize_text_field( (string) $payload['company_or_website'] ) : '';
-	$focus               = isset( $payload['focus'] ) ? sanitize_key( (string) $payload['focus'] ) : 'other';
-	$message             = isset( $payload['message'] ) ? sanitize_textarea_field( (string) $payload['message'] ) : '';
-	$consent             = ! empty( $payload['consent'] );
+	$focus_options     = nexus_get_contact_focus_options();
+	$budget_options    = nexus_get_contact_budget_options();
+	$name              = isset( $payload['name'] ) ? sanitize_text_field( (string) $payload['name'] ) : '';
+	$email             = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
+	$website_url_raw   = isset( $payload['website_url'] ) ? trim( (string) $payload['website_url'] ) : '';
+	$focus             = isset( $payload['focus'] ) ? sanitize_key( (string) $payload['focus'] ) : '';
+	$message           = isset( $payload['message'] ) ? sanitize_textarea_field( (string) $payload['message'] ) : '';
+	$budget            = isset( $payload['budget'] ) ? sanitize_key( (string) $payload['budget'] ) : '';
+	$consent           = ! empty( $payload['consent'] );
+	$website_url       = '';
 
 	if ( '' === $name ) {
 		return new WP_Error( 'missing_name', 'Bitte Ihren Namen angeben.' );
@@ -277,12 +295,28 @@ function nexus_validate_contact_request_payload( $payload ) {
 		return new WP_Error( 'invalid_email', 'Bitte eine gültige E-Mail-Adresse angeben.' );
 	}
 
+	if ( '' !== $website_url_raw ) {
+		if ( ! preg_match( '#^https?://#i', $website_url_raw ) ) {
+			$website_url_raw = 'https://' . ltrim( $website_url_raw, '/' );
+		}
+
+		$website_url = esc_url_raw( $website_url_raw );
+
+		if ( '' === $website_url || ! wp_http_validate_url( $website_url ) ) {
+			return new WP_Error( 'invalid_website', 'Bitte eine gültige Website-URL angeben.' );
+		}
+	}
+
 	if ( ! isset( $focus_options[ $focus ] ) ) {
-		$focus = 'other';
+		return new WP_Error( 'missing_focus', 'Bitte auswählen, wobei Sie Unterstützung benötigen.' );
 	}
 
 	if ( '' === trim( $message ) || mb_strlen( trim( $message ) ) < 24 ) {
-		return new WP_Error( 'message_too_short', 'Bitte kurz beschreiben, worum es geht.' );
+		return new WP_Error( 'message_too_short', 'Bitte Ihr Ziel oder Projekt kurz beschreiben.' );
+	}
+
+	if ( '' !== $budget && ! isset( $budget_options[ $budget ] ) ) {
+		return new WP_Error( 'invalid_budget', 'Bitte ein gültiges Budget auswählen.' );
 	}
 
 	if ( ! $consent ) {
@@ -290,12 +324,14 @@ function nexus_validate_contact_request_payload( $payload ) {
 	}
 
 	return [
-		'name'               => $name,
-		'email'              => $email,
-		'company_or_website' => $company_or_website,
-		'focus'              => $focus,
-		'focus_label'        => $focus_options[ $focus ],
-		'message'            => $message,
+		'name'         => $name,
+		'email'        => $email,
+		'website_url'  => $website_url,
+		'focus'        => $focus,
+		'focus_label'  => $focus_options[ $focus ],
+		'message'      => $message,
+		'budget'       => $budget,
+		'budget_label' => '' !== $budget ? $budget_options[ $budget ] : '',
 	];
 }
 
@@ -369,7 +405,7 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 	}
 
 	$subject = sprintf(
-		'[%s] Neue Kontaktanfrage - %s',
+		'[%s] Neue Projektanfrage - %s',
 		wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ),
 		$payload['name']
 	);
@@ -379,11 +415,19 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 		$headers[] = 'Reply-To: ' . $payload['email'];
 	}
 
-	$meta_line = '';
-	if ( '' !== $payload['company_or_website'] ) {
-		$meta_line = sprintf(
-			'<br><strong style="color:#f7f3ee;">Unternehmen / Website:</strong> %s',
-			esc_html( $payload['company_or_website'] )
+	$meta_rows = '';
+	if ( '' !== $payload['website_url'] ) {
+		$meta_rows .= sprintf(
+			'<br><strong style="color:#f7f3ee;">Website:</strong> <a href="%1$s" style="color:#f7f3ee;">%2$s</a>',
+			esc_url( $payload['website_url'] ),
+			esc_html( $payload['website_url'] )
+		);
+	}
+
+	if ( '' !== $payload['budget_label'] ) {
+		$meta_rows .= sprintf(
+			'<br><strong style="color:#f7f3ee;">Budget:</strong> %s',
+			esc_html( $payload['budget_label'] )
 		);
 	}
 
@@ -391,17 +435,17 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0; border-collapse:separate; border-spacing:0 10px;">
 			<tr>
 				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
-					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Kontakt</div>
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Projektanfrage</div>
 					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">Name:</strong> %1$s<br>
 						<strong style="color:#f7f3ee;">E-Mail:</strong> %2$s<br>
-						<strong style="color:#f7f3ee;">Anliegen:</strong> %3$s%4$s
+						<strong style="color:#f7f3ee;">Unterstützung:</strong> %3$s%4$s
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td style="padding:16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
-					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Nachricht</div>
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Projektbeschreibung</div>
 					<div style="font-size:14px; line-height:1.85; color:#c5ced7;">%5$s</div>
 				</td>
 			</tr>
@@ -409,16 +453,16 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 		esc_html( $payload['name'] ),
 		esc_html( $payload['email'] ),
 		esc_html( $payload['focus_label'] ),
-		$meta_line,
+		$meta_rows,
 		nl2br( esc_html( $payload['message'] ) )
 	);
 
 	$html = nexus_get_contact_email_shell(
 		[
-			'preheader' => 'Neue Kontaktanfrage von ' . $payload['name'],
-			'eyebrow'   => 'Kontakt',
-			'headline'  => 'Neue Kontaktanfrage',
-			'intro'     => 'Ein neuer Direktkontakt ist über die Kontaktseite eingegangen.',
+			'preheader' => 'Neue Projektanfrage von ' . $payload['name'],
+			'eyebrow'   => 'Projektanfrage',
+			'headline'  => 'Neue Projektanfrage',
+			'intro'     => 'Eine neue qualifizierte Projektanfrage ist über die Kontaktseite eingegangen.',
 			'content'   => $content,
 			'footer'    => 'Sie können direkt auf diese E-Mail antworten. Reply-To zeigt bereits auf die anfragende Person.',
 		]
@@ -438,60 +482,60 @@ function nexus_send_contact_request_confirmation( $payload ) {
 		return;
 	}
 
-	$reply_to     = nexus_get_contact_notification_email();
-	$calendar_url = function_exists( 'nexus_get_audit_calendar_url' )
-		? nexus_get_audit_calendar_url()
-		: 'https://cal.com/hasim/30min';
-	$audit_url    = function_exists( 'nexus_get_audit_url' )
-		? nexus_get_audit_url()
-		: home_url( '/growth-audit/' );
-	$subject      = sprintf( '[%s] Nachricht eingegangen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
-	$content      = sprintf(
+	$reply_to = nexus_get_contact_notification_email();
+	$subject  = sprintf( '[%s] Projektanfrage eingegangen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
+	$meta_rows = sprintf(
+		'<strong style="color:#f7f3ee;">Bereich:</strong> %s',
+		esc_html( $payload['focus_label'] )
+	);
+
+	if ( '' !== $payload['website_url'] ) {
+		$meta_rows .= sprintf(
+			'<br><strong style="color:#f7f3ee;">Website:</strong> <a href="%1$s" style="color:#f7f3ee;">%2$s</a>',
+			esc_url( $payload['website_url'] ),
+			esc_html( $payload['website_url'] )
+		);
+	}
+
+	if ( '' !== $payload['budget_label'] ) {
+		$meta_rows .= sprintf(
+			'<br><strong style="color:#f7f3ee;">Budget:</strong> %s',
+			esc_html( $payload['budget_label'] )
+		);
+	}
+
+	$content = sprintf(
 		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0; border-collapse:separate; border-spacing:0 10px;">
 			<tr>
 				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
 					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Was jetzt passiert</div>
 					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">1.</strong> Ihre Nachricht ist sauber eingegangen.<br>
-						<strong style="color:#f7f3ee;">2.</strong> Sie erhalten in der Regel innerhalb von 48 Stunden eine persönliche Rückmeldung.<br>
-						<strong style="color:#f7f3ee;">3.</strong> Falls ein Growth Audit der schnellere Weg ist, bekommen Sie dazu eine klare Empfehlung.
+						<strong style="color:#f7f3ee;">2.</strong> Sie erhalten innerhalb von 24 Stunden eine persönliche Rückmeldung.<br>
+						<strong style="color:#f7f3ee;">3.</strong> Wenn es passt, vereinbaren wir ein kurzes Strategiegespräch.
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
-					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Ihr Anliegen</div>
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Ihre Angaben</div>
 					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
-						<strong style="color:#f7f3ee;">Fokus:</strong> %1$s<br>
-						<strong style="color:#f7f3ee;">Kurzkontext:</strong> %2$s
+						%1$s<br>
+						<strong style="color:#f7f3ee;">Projektbeschreibung:</strong> %2$s
 					</div>
 				</td>
 			</tr>
-		</table>
-		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0;">
-			<tr>
-				<td style="padding:0 12px 0 0;">
-					<a href="%3$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Wenn es dringend ist: Termin buchen</a>
-				</td>
-			</tr>
-			<tr>
-				<td style="padding-top:12px;">
-					<a href="%4$s" style="display:inline-block; padding:14px 18px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); color:#f7f3ee; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Alternativ: Growth Audit ansehen</a>
-				</td>
-			</tr>
 		</table>',
-		esc_html( $payload['focus_label'] ),
-		esc_html( wp_trim_words( $payload['message'], 18, '…' ) ),
-		esc_url( $calendar_url ),
-		esc_url( $audit_url )
+		$meta_rows,
+		esc_html( wp_trim_words( $payload['message'], 18, '…' ) )
 	);
 
 	$html = nexus_get_contact_email_shell(
 		[
-			'preheader' => 'Ihre Nachricht ist eingegangen.',
-			'eyebrow'   => 'Kontakt',
-			'headline'  => 'Ihre Nachricht ist eingegangen.',
-			'intro'     => 'Danke, ' . $payload['name'] . '. Sie erhalten keine automatische Standardantwort, sondern eine persönliche Rückmeldung.',
+			'preheader' => 'Ihre Projektanfrage ist eingegangen.',
+			'eyebrow'   => 'Projektanfrage',
+			'headline'  => 'Ihre Projektanfrage ist eingegangen.',
+			'intro'     => 'Danke, ' . $payload['name'] . '. Ich prüfe Ihre Angaben persönlich und melde mich zeitnah zurück.',
 			'content'   => $content,
 			'footer'    => 'Viele Grüße, Hasim Üner',
 		]

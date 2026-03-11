@@ -22,6 +22,9 @@ add_filter( 'rank_math/frontend/title', 'hu_rank_math_cornerstone_title' );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_cornerstone_description' );
 add_filter( 'rank_math/frontend/title', 'hu_rank_math_audit_title' );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_audit_description' );
+add_filter( 'rank_math/frontend/title', 'hu_rank_math_contact_title' );
+add_filter( 'rank_math/frontend/description', 'hu_rank_math_contact_description' );
+add_filter( 'pre_get_document_title', 'hu_pre_get_document_title_override' );
 add_filter( 'document_title_parts', 'hu_document_title_overrides' );
 
 /**
@@ -133,6 +136,33 @@ function hu_is_audit_offer_page() {
 }
 
 /**
+ * Check whether current query is the contact request page.
+ *
+ * @return bool
+ */
+function hu_is_contact_offer_page() {
+	return function_exists( 'nexus_is_contact_page' ) && nexus_is_contact_page();
+}
+
+/**
+ * Get the SEO title for the contact request page.
+ *
+ * @return string
+ */
+function hu_get_contact_offer_title() {
+	return 'Projekt anfragen | WordPress Growth Architect – Hasim Üner';
+}
+
+/**
+ * Get the SEO description for the contact request page.
+ *
+ * @return string
+ */
+function hu_get_contact_offer_description() {
+	return 'Projektanfrage für WordPress-SEO, Performance, Tracking und Conversion-Optimierung. Vereinbaren Sie ein Strategiegespräch.';
+}
+
+/**
  * Override Rank Math title for the audit offer page.
  *
  * @param string $title Existing title.
@@ -161,6 +191,48 @@ function hu_rank_math_audit_description( $description ) {
 }
 
 /**
+ * Override Rank Math title for the contact request page.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_rank_math_contact_title( $title ) {
+	if ( hu_is_contact_offer_page() ) {
+		return hu_get_contact_offer_title();
+	}
+
+	return $title;
+}
+
+/**
+ * Override Rank Math description for the contact request page.
+ *
+ * @param string $description Existing description.
+ * @return string
+ */
+function hu_rank_math_contact_description( $description ) {
+	if ( hu_is_contact_offer_page() ) {
+		return hu_get_contact_offer_description();
+	}
+
+	return $description;
+}
+
+/**
+ * Override the document title where an exact title string is required.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_pre_get_document_title_override( $title ) {
+	if ( hu_is_contact_offer_page() ) {
+		return hu_get_contact_offer_title();
+	}
+
+	return $title;
+}
+
+/**
  * Override document titles when no SEO plugin takes over.
  *
  * @param array $parts Current title parts.
@@ -177,8 +249,8 @@ function hu_document_title_overrides( $parts ) {
 		return $parts;
 	}
 
-	if ( function_exists( 'nexus_is_contact_page' ) && nexus_is_contact_page() ) {
-		$parts['title'] = 'Kontakt für WordPress, SEO und Growth';
+	if ( hu_is_contact_offer_page() ) {
+		$parts['title'] = hu_get_contact_offer_title();
 		return $parts;
 	}
 
@@ -315,9 +387,9 @@ function hu_get_seo_meta() {
 		'kunden-login',
 	];
 
-	if ( function_exists( 'nexus_is_contact_page' ) && nexus_is_contact_page() ) {
-		$meta['og_title']    = 'Kontakt für WordPress, SEO und Growth · ' . get_bloginfo( 'name' );
-		$meta['description'] = 'Direkter Kontakt für WordPress-, SEO-, CRO- und Growth-Themen: schlanke Anfrage, schnelle Einordnung und alternative Wege über E-Mail, Telefon oder LinkedIn.';
+	if ( hu_is_contact_offer_page() ) {
+		$meta['og_title']    = hu_get_contact_offer_title();
+		$meta['description'] = hu_get_contact_offer_description();
 		$meta['canonical']   = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
 
 	} elseif ( is_singular() ) {

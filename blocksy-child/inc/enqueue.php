@@ -119,8 +119,8 @@ function hu_enqueue_assets() {
 			'NexusContactConfig',
 			[
 				'restEndpoint'   => esc_url_raw( rest_url( 'nexus/v1/contact-request' ) ),
-				'successMessage' => 'Danke. Ihre Nachricht ist eingegangen. Sie erhalten in der Regel innerhalb von 48 Stunden eine persönliche Rückmeldung.',
-				'errorMessage'   => 'Die Nachricht konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie direkt an kontakt@hasimuener.de.',
+				'successMessage' => 'Danke. Ihre Projektanfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
+				'errorMessage'   => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
 			]
 		);
 	}
