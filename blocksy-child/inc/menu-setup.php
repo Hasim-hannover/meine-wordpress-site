@@ -216,6 +216,192 @@ function nexus_seed_results_pages() {
 	}
 }
 
+/**
+ * Return legacy offer pages that can be cleaned up in WordPress admin.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function nexus_get_legacy_offer_cleanup_candidates() {
+	$candidates = [];
+
+	foreach ( nexus_get_legacy_offer_redirect_map() as $legacy_path => $target_url ) {
+		$page_path = trim( (string) $legacy_path, '/' );
+		$page      = '' !== $page_path ? get_page_by_path( $page_path, OBJECT, 'page' ) : null;
+
+		if ( ! $page instanceof WP_Post ) {
+			continue;
+		}
+
+		$candidates[] = [
+			'id'          => (int) $page->ID,
+			'title'       => (string) $page->post_title,
+			'status'      => (string) $page->post_status,
+			'legacy_path' => $legacy_path,
+			'target_url'  => (string) $target_url,
+		];
+	}
+
+	return $candidates;
+}
+
+/**
+ * Find menu items that still point to legacy offer pages.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function nexus_get_legacy_offer_menu_items() {
+	$matches      = [];
+	$legacy_paths = array_keys( nexus_get_legacy_offer_redirect_map() );
+
+	foreach ( wp_get_nav_menus() as $menu ) {
+		$items = wp_get_nav_menu_items(
+			$menu->term_id,
+			[
+				'post_status' => 'any',
+			]
+		);
+
+		if ( empty( $items ) ) {
+			continue;
+		}
+
+		foreach ( $items as $item ) {
+			$item_path = trailingslashit( '/' . ltrim( (string) wp_parse_url( (string) $item->url, PHP_URL_PATH ), '/' ) );
+
+			if ( ! in_array( $item_path, $legacy_paths, true ) ) {
+				continue;
+			}
+
+			$matches[] = [
+				'id'         => (int) $item->ID,
+				'title'      => wp_strip_all_tags( (string) $item->title ),
+				'menu_name'  => (string) $menu->name,
+				'legacy_path'=> $item_path,
+			];
+		}
+	}
+
+	return $matches;
+}
+
+/**
+ * Return the admin URL that runs the legacy page cleanup.
+ *
+ * @return string
+ */
+function nexus_get_legacy_offer_cleanup_url() {
+	return wp_nonce_url(
+		add_query_arg(
+			[
+				'nexus_cleanup_legacy_pages' => '1',
+			],
+			admin_url()
+		),
+		'nexus_cleanup_legacy_pages'
+	);
+}
+
+/**
+ * Draft legacy offer pages and remove remaining nav menu items that point to them.
+ *
+ * @return array<string, array<int, string>>
+ */
+function nexus_cleanup_legacy_offer_pages() {
+	$results = [
+		'drafted'       => [],
+		'already_draft' => [],
+		'menus_removed' => [],
+		'not_found'     => [],
+		'errors'        => [],
+	];
+
+	$candidates     = nexus_get_legacy_offer_cleanup_candidates();
+	$legacy_map     = nexus_get_legacy_offer_redirect_map();
+	$found_paths    = [];
+	$candidate_ids  = [];
+
+	foreach ( $candidates as $candidate ) {
+		$page_id     = (int) $candidate['id'];
+		$page_status = (string) $candidate['status'];
+		$legacy_path = (string) $candidate['legacy_path'];
+		$label       = sprintf( '%1$s (%2$s)', (string) $candidate['title'], $legacy_path );
+
+		$found_paths[]   = $legacy_path;
+		$candidate_ids[] = $page_id;
+
+		update_post_meta( $page_id, 'seo_noindex', 1 );
+
+		if ( 'draft' === $page_status ) {
+			$results['already_draft'][] = $label;
+			continue;
+		}
+
+		$update = wp_update_post(
+			[
+				'ID'          => $page_id,
+				'post_status' => 'draft',
+			],
+			true
+		);
+
+		if ( is_wp_error( $update ) ) {
+			$results['errors'][] = sprintf( '%1$s: %2$s', $label, $update->get_error_message() );
+			continue;
+		}
+
+		$results['drafted'][] = $label;
+	}
+
+	foreach ( array_keys( $legacy_map ) as $legacy_path ) {
+		if ( ! in_array( $legacy_path, $found_paths, true ) ) {
+			$results['not_found'][] = $legacy_path;
+		}
+	}
+
+	foreach ( wp_get_nav_menus() as $menu ) {
+		$items = wp_get_nav_menu_items(
+			$menu->term_id,
+			[
+				'post_status' => 'any',
+			]
+		);
+
+		if ( empty( $items ) ) {
+			continue;
+		}
+
+		foreach ( $items as $item ) {
+			$item_path  = trailingslashit( '/' . ltrim( (string) wp_parse_url( (string) $item->url, PHP_URL_PATH ), '/' ) );
+			$object_id  = isset( $item->object_id ) ? (int) $item->object_id : 0;
+			$path_match = in_array( $item_path, array_keys( $legacy_map ), true );
+			$id_match   = in_array( $object_id, $candidate_ids, true );
+
+			if ( ! $path_match && ! $id_match ) {
+				continue;
+			}
+
+			$deleted = wp_delete_post( (int) $item->ID, true );
+
+			if ( ! $deleted ) {
+				$results['errors'][] = sprintf(
+					'Nav-Item "%1$s" im Menü "%2$s" konnte nicht entfernt werden.',
+					wp_strip_all_tags( (string) $item->title ),
+					(string) $menu->name
+				);
+				continue;
+			}
+
+			$results['menus_removed'][] = sprintf(
+				'%1$s -> %2$s',
+				wp_strip_all_tags( (string) $item->title ),
+				(string) $menu->name
+			);
+		}
+	}
+
+	return $results;
+}
+
 // Manuell auslösen: ?nexus_rebuild_menu=1 (nur für Admins)
 add_action( 'admin_init', function () {
 	if (
@@ -240,6 +426,88 @@ add_action( 'admin_init', function () {
 			echo '<div class="notice notice-success is-dismissible"><p>Ergebnisse- und Whitelabel-Seiten wurden angelegt bzw. aktualisiert.</p></div>';
 		} );
 	}
+
+	if (
+		isset( $_GET['nexus_cleanup_legacy_pages'] ) &&
+		'1' === $_GET['nexus_cleanup_legacy_pages'] &&
+		current_user_can( 'manage_options' )
+	) {
+		check_admin_referer( 'nexus_cleanup_legacy_pages' );
+
+		$results = nexus_cleanup_legacy_offer_pages();
+		set_transient( 'nexus_cleanup_legacy_pages_notice', $results, MINUTE_IN_SECONDS );
+
+		wp_safe_redirect(
+			remove_query_arg(
+				[
+					'nexus_cleanup_legacy_pages',
+					'_wpnonce',
+				]
+			)
+		);
+		exit;
+	}
+} );
+
+add_action( 'admin_notices', function () {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$results = get_transient( 'nexus_cleanup_legacy_pages_notice' );
+
+	if ( is_array( $results ) ) {
+		delete_transient( 'nexus_cleanup_legacy_pages_notice' );
+
+		$parts = [];
+
+		if ( ! empty( $results['drafted'] ) ) {
+			$parts[] = sprintf( '%d Seite(n) auf Draft gesetzt', count( $results['drafted'] ) );
+		}
+
+		if ( ! empty( $results['already_draft'] ) ) {
+			$parts[] = sprintf( '%d Seite(n) waren bereits Draft', count( $results['already_draft'] ) );
+		}
+
+		if ( ! empty( $results['menus_removed'] ) ) {
+			$parts[] = sprintf( '%d Menüeintrag/-träge entfernt', count( $results['menus_removed'] ) );
+		}
+
+		if ( ! empty( $results['not_found'] ) ) {
+			$parts[] = sprintf( '%d Slug(s) nicht im Admin gefunden', count( $results['not_found'] ) );
+		}
+
+		$class = empty( $results['errors'] ) ? 'notice-success' : 'notice-warning';
+		echo '<div class="notice ' . esc_attr( $class ) . ' is-dismissible"><p><strong>Legacy-Cleanup abgeschlossen.</strong> ' . esc_html( implode( ' · ', $parts ) ) . '</p>';
+
+		if ( ! empty( $results['errors'] ) ) {
+			echo '<p>' . esc_html( implode( ' | ', $results['errors'] ) ) . '</p>';
+		}
+
+		echo '</div>';
+		return;
+	}
+
+	$candidates = nexus_get_legacy_offer_cleanup_candidates();
+	$menu_items = nexus_get_legacy_offer_menu_items();
+
+	if ( empty( $candidates ) && empty( $menu_items ) ) {
+		return;
+	}
+
+	$cleanup_url = nexus_get_legacy_offer_cleanup_url();
+	$page_count  = count( $candidates );
+	$menu_count  = count( $menu_items );
+
+	echo '<div class="notice notice-warning"><p><strong>Legacy-Angebotsseiten gefunden.</strong> ';
+	echo esc_html(
+		sprintf(
+			'%1$d Seite(n) und %2$d Menüeintrag/-träge verweisen noch auf auslaufende Slugs.',
+			$page_count,
+			$menu_count
+		)
+	);
+	echo ' <a class="button button-secondary" href="' . esc_url( $cleanup_url ) . '">Legacy-Seiten bereinigen</a></p></div>';
 } );
 
 /**

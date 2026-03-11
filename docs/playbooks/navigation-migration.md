@@ -18,6 +18,7 @@
 - Die nicht mehr benoetigten Legacy-Slugs `/ga4-tracking-setup/`, `/performance-marketing/`, `/meta-ads/` und `/wordpress-wartung-hannover/` werden per `301` auf passende WGOS-Ziele umgeleitet.
 - `/roi-rechner/` wird per `301` auf `/kostenlose-tools/` umgeleitet.
 - Interne Links sollen direkt auf WGOS-Assets, die Tools-Hub-Seite oder den Growth Audit zeigen, nicht mehr auf die Legacy-Slugs.
+- Nach dem Deploy erscheint im WordPress-Admin fuer Administratoren ein Hinweis mit Button `Legacy-Seiten bereinigen`. Der Flow setzt gefundene Altseiten auf `draft` und entfernt verbliebene Menue-Eintraege auf diese Slugs.
 
 ## Kunden-Cockpit Link (empfohlene Platzierung)
 - Nicht im primären Slim-Menü platzieren (fokussiert auf Neukunden-Narrativ).
