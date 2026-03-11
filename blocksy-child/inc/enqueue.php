@@ -133,27 +133,9 @@ function hu_enqueue_assets() {
 
 	// ── G) Template: WGOS System ──────────────────────────────────
 	if ( is_page_template( 'page-wgos.php' ) || is_page( 'wgos' ) || is_page( 'wordpress-growth-operating-system' ) ) {
-		$wgos_url = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : home_url( '/wgos/' );
-
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
 		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );
-		hu_enqueue_css( 'nexus-wgos-assets-css', 'wgos-assets.css', [ 'nexus-wgos-css' ] );
 		hu_enqueue_js( 'nexus-wgos-js', 'wgos.js', [ 'nexus-core-js' ] );
-		hu_enqueue_module_js( 'nexus-wgos-assets-js', 'wgos-assets.js' );
-		hu_enqueue_module_js( 'nexus-wgos-asset-explorer-js', 'wgos-asset-explorer.js', [ 'wp-element', 'nexus-wgos-js', 'nexus-wgos-assets-js' ] );
-
-		wp_localize_script(
-			'nexus-wgos-asset-explorer-js',
-			'NexusWgosExplorerConfig',
-			[
-				'links' => [
-					'audit'   => function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' ),
-					'credits' => $wgos_url . '#credits',
-					'pakete'  => $wgos_url . '#pakete',
-					'cases'   => nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) ),
-				],
-			]
-		);
 	}
 
 	// ── G2) Template: WGOS Asset Detail ───────────────────────────

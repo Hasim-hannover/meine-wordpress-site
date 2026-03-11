@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-10.
+Stand: 2026-03-11.
 
 Basis dieses Status:
 
@@ -21,13 +21,14 @@ Nicht verifiziert:
 - Service-Seiten, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Die aktive `Growth Audit`-Landingpage ist als versionierter Template-Shell im Repo hinterlegt.
+- `page-wgos.php` ist als kompaktere WGOS-Sales-Page versioniert: Hero mit Audit-CTA, System-Diagramm, frueher platzierte Pakete, modulare Cards und reduzierte FAQ.
 - Der aktive Audit-Pfad nutzt ein natives Multi-Step-Formular, WordPress-REST und ein internes Audit-CRM.
 - Das Client Portal existiert technisch inklusive Login- und Upload-Logik.
 
 ## In Arbeit
 
 - Das Repo wird gerade von einem Theme-Repo zu einem Website Operating System erweitert.
-- `page-wgos.php` ist fachlich zentral, aber technisch noch zu stark hardcodiert.
+- `page-wgos.php` bleibt template-driven; eine spaetere Auslagerung des Content-Layers in Editor oder ACF ist weiter offen.
 - WGOS Asset-Detailseiten laufen jetzt ueber den hierarchischen CPT `wgos_asset` mit ACF-Meta und Single-Template; die redaktionelle Befuellung der Spokes passiert weiter im WordPress-Admin.
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten.
 - `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.

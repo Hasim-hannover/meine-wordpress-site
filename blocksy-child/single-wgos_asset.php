@@ -18,11 +18,9 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 <main id="main" class="site-main">
 	<?php while ( have_posts() ) : the_post(); ?>
 		<?php
-		$excerpt          = has_excerpt() ? get_the_excerpt() : '';
-		$ancestors        = array_reverse( get_post_ancestors( get_the_ID() ) );
-		$asset_anchor_url = function_exists( 'nexus_get_wgos_asset_anchor_url' )
-			? nexus_get_wgos_asset_anchor_url( get_post() )
-			: $wgos_url . '#module';
+		$excerpt       = has_excerpt() ? get_the_excerpt() : '';
+		$ancestors     = array_reverse( get_post_ancestors( get_the_ID() ) );
+		$hub_focus_url = $wgos_url . '#module';
 		?>
 
 		<div class="wgos-wrapper">
@@ -47,7 +45,7 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 					<?php endif; ?>
 
 					<div class="wgos-hero__actions">
-						<a href="<?php echo esc_url( $asset_anchor_url ); ?>" class="wgos-btn wgos-btn--outline">Im Explorer öffnen</a>
+						<a href="<?php echo esc_url( $hub_focus_url ); ?>" class="wgos-btn wgos-btn--outline">Zu den WGOS-Modulen</a>
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
 					</div>
 				</div>
@@ -69,7 +67,7 @@ $wgos_url  = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : ho
 						<h2 class="wgos-h2">Ein Asset ist nur dann wirksam, wenn das Fundament stimmt.</h2>
 						<p>Performance, Measurement und Conversion sind keine isolierten Baustellen. Im WGOS werden sie in eine belastbare Reihenfolge gebracht, damit ein einzelner Hebel nicht am nächsten Engpass verpufft.</p>
 						<p class="wgos-inline-cta wgos-inline-cta--principle">
-							<a href="<?php echo esc_url( $asset_anchor_url ); ?>">Dieses Asset im Explorer öffnen</a>
+							<a href="<?php echo esc_url( $hub_focus_url ); ?>">Dieses Asset im WGOS Hub einordnen</a>
 						</p>
 					</div>
 				</div>

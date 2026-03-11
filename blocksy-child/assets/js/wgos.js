@@ -68,9 +68,12 @@
         // 5. SECTION VISIBILITY TRACKING
         // =============================================
         var visTargets = {
-            'module': 'asset_explorer_view',
-            'credits': 'credits_table_view',
-            'pakete': 'package_view'
+            'system': 'wgos_system_view',
+            'proof': 'wgos_proof_view',
+            'pakete': 'wgos_package_view',
+            'module': 'wgos_module_view',
+            'ablauf': 'wgos_process_view',
+            'faq': 'wgos_faq_view'
         };
 
         var visObserver = new IntersectionObserver(function (entries) {
@@ -87,17 +90,6 @@
         Object.keys(visTargets).forEach(function (id) {
             var el = document.getElementById(id);
             if (el) visObserver.observe(el);
-        });
-
-        // =============================================
-        // 6. EXPLORER INTERACTION TRACKING
-        // =============================================
-        document.addEventListener('wgos:asset-open', function (event) {
-            pushEvent('wgos_asset_open', event.detail || {});
-        });
-
-        document.addEventListener('wgos:asset-cta', function (event) {
-            pushEvent('wgos_asset_cta_click', event.detail || {});
         });
 
     });

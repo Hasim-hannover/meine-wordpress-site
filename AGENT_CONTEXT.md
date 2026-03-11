@@ -93,7 +93,7 @@ Wichtige Regel:
 | `blocksy-child/assets/js/review-funnel.js` | technischer Kern des aktiven Growth-Audit-Formularpfads |
 | `blocksy-child/inc/review-crm.php` | nativer Audit-Intake, internes CRM und Mail-Basis |
 | `blocksy-child/assets/js/audit-live.js` | versionierter Instant-Results-Layer, aktuell nicht am aktiven Audit-Shell gebunden |
-| `blocksy-child/page-wgos.php` | fachlich zentrales Offer-Template, technisch refactor-beduerftig |
+| `blocksy-child/page-wgos.php` | fachlich zentrales Offer-Template; Sales-Page-Struktur versioniert, Content-Layer weiter template-driven |
 | `blocksy-child/page-seo-cornerstone.php` | strategischer Longform-Content mit direkter Funnel-Rolle |
 | `.github/workflows/deploy.yml` | deployt nur `blocksy-child/` live |
 | WordPress-Editor | enthaelt Live-Content, der nicht automatisch im Repo liegt |

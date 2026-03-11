@@ -406,8 +406,8 @@ function hu_output_schema()
                 (stripos($raw, 'hu_faq') !== false) ||
                 (stripos($raw, 'faq-item') !== false);
 
-            // page-wordpress-agentur.php rendert ein eigenes FAQPage JSON-LD direkt im Template.
-            if ($slug === 'wordpress-agentur-hannover') {
+            // Einige Templates rendern ihr FAQPage JSON-LD bewusst direkt im Template.
+            if (in_array($slug, ['wordpress-agentur-hannover', 'wgos', 'wordpress-growth-operating-system'], true)) {
                 $maybe_has_faq = false;
             }
 

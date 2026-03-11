@@ -1,6 +1,6 @@
 # System Map
 
-Stand: 2026-03-09. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-03-11. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
@@ -25,6 +25,7 @@ Wichtige Merkmale:
 - `inc/enqueue.php` ist der Asset-Hub fuer CSS und JS pro Seitentyp.
 - Ein Teil der Seiten ist editor-getrieben und nutzt `the_content()`.
 - Ein anderer Teil ist hart codiert und traegt Business-Logik direkt im Template.
+- `page-wgos.php` ist als template-getriebene Sales-Page fuer das WGOS versioniert; Struktur und CTA-Hierarchie liegen im Repo, nicht im Editor.
 
 Kritische Dateien:
 
@@ -149,7 +150,7 @@ Risiko:
 
 ## Groesste Risiken
 
-- `page-wgos.php` ist fachlich wichtig, aber technisch ein Layer-Verstoss durch stark hardcodierten Content.
+- `page-wgos.php` ist fachlich wichtig und inzwischen deutlich verschlankt, bleibt aber technisch template-driven statt editor- oder ACF-getrieben.
 - `audit-live.js` haengt an harten Webhook-URLs und an einem impliziten n8n-Payload-Contract, solange der Instant-Results-Flow nicht voll aktiviert ist.
 - Tracking-, Consent- und CRM-Logik sind operativ relevant, aber noch nicht als Repo-System dokumentiert.
 - Manuelle WordPress-Admin-Schritte existieren noch als Betriebswissen und muessen weiter systematisiert werden.

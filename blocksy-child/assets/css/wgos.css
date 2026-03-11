@@ -465,6 +465,14 @@
     text-align: center;
 }
 
+.wgos-hero__support {
+    max-width: 620px;
+    margin: 0 auto 2rem;
+    font-size: 0.98rem;
+    color: var(--nx-text-muted);
+    line-height: 1.7;
+}
+
 .wgos-hero__links {
     margin-top: 0.75rem;
     text-align: center;
@@ -636,6 +644,119 @@
 
 .wgos-principle-shell .wgos-h2 {
     margin-bottom: 18px;
+}
+
+.wgos-system-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 28px;
+    align-items: start;
+}
+
+.wgos-checklist--system {
+    max-width: none;
+    margin: 28px 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.wgos-checklist--system li {
+    margin: 0;
+    padding: 16px 16px 16px 40px;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius);
+    background: var(--nx-bg-glass-light);
+    font-size: 0.96rem;
+}
+
+.wgos-checklist--system li::before {
+    left: 14px;
+    top: 16px;
+}
+
+.wgos-diagram-shell {
+    position: relative;
+    padding: 22px 22px 18px;
+    border-radius: var(--nx-radius-lg);
+    border: 1px solid var(--nx-border);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(7, 9, 14, 0.58) 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.wgos-diagram-shell__kicker {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--nx-accent-text);
+}
+
+.wgos-diagram-shell h3 {
+    margin: 0 0 18px;
+    font-size: 1.15rem;
+}
+
+.wgos-diagram {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.wgos-diagram__step {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    padding: 14px;
+    border-radius: var(--nx-radius);
+    border: 1px solid var(--nx-border);
+    background: color-mix(in srgb, var(--nx-bg-card) 92%, transparent);
+}
+
+.wgos-diagram__step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 27px;
+    top: calc(100% + 4px);
+    width: 1px;
+    height: 10px;
+    background: linear-gradient(180deg, var(--nx-gold) 0%, transparent 100%);
+    opacity: 0.75;
+}
+
+.wgos-diagram__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    background: var(--nx-gold-subtle);
+    border: 1px solid var(--nx-border-gold);
+    color: var(--nx-accent-text);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.wgos-diagram__content strong {
+    display: block;
+    color: var(--nx-text);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.wgos-diagram__content p {
+    margin: 0;
+    color: var(--nx-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
 }
 
 .wgos-principle-contrast {
@@ -816,6 +937,61 @@
     border-radius: var(--nx-radius-sm);
     vertical-align: middle;
     margin-left: 8px;
+}
+
+.wgos-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.wgos-proof-card {
+    padding: 24px;
+    border-radius: var(--nx-radius-lg);
+    border: 1px solid var(--nx-border);
+    background: var(--nx-bg-card);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.wgos-proof-card__value {
+    display: block;
+    margin-bottom: 10px;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1;
+    color: var(--nx-accent-text);
+}
+
+.wgos-proof-card__label {
+    margin: 0;
+    color: var(--nx-text-muted);
+    line-height: 1.65;
+}
+
+.wgos-proof-card--quote {
+    background:
+        radial-gradient(circle at top right, rgba(255, 176, 32, 0.12), transparent 38%),
+        var(--nx-bg-card);
+}
+
+.wgos-proof-card__eyebrow {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--nx-accent-text);
+}
+
+.wgos-proof-card--quote h3 {
+    margin: 0 0 10px;
+    font-size: 1.08rem;
+}
+
+.wgos-proof-card--quote p {
+    margin: 0 0 14px;
+    color: var(--nx-text-muted);
+    line-height: 1.7;
 }
 
 /* =========================================
@@ -1098,6 +1274,148 @@
     font-style: italic;
 }
 
+.wgos-credit-summary {
+    margin-top: 44px;
+    padding: 30px;
+    border-radius: var(--nx-radius-lg);
+    border: 1px solid var(--nx-border);
+    background: var(--nx-bg-card);
+}
+
+.wgos-credit-summary__copy {
+    max-width: 720px;
+}
+
+.wgos-credit-summary__copy h3 {
+    margin: 0 0 10px;
+    font-size: 1.15rem;
+}
+
+.wgos-credit-summary__copy p,
+.wgos-credit-summary__note {
+    color: var(--nx-text-muted);
+    line-height: 1.7;
+}
+
+.wgos-credit-summary__note {
+    margin: 18px 0 0;
+    font-size: 0.92rem;
+}
+
+.wgos-module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.wgos-module-card {
+    padding: 22px;
+    border-radius: var(--nx-radius-lg);
+    border: 1px solid var(--nx-border);
+    background:
+        linear-gradient(180deg, rgba(255, 176, 32, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%),
+        var(--nx-bg-card);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.wgos-module-card__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.wgos-module-card__top h3 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.wgos-module-card__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--nx-gold-subtle);
+    border: 1px solid var(--nx-border-gold);
+    color: var(--nx-accent-text);
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.wgos-module-card__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.wgos-module-card__bullets li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--nx-text-muted);
+    line-height: 1.65;
+    font-size: 0.95rem;
+}
+
+.wgos-module-card__bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.68em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--nx-gold);
+}
+
+.wgos-inline-cta--center {
+    text-align: center;
+    margin-top: 28px;
+}
+
+.wgos-process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.wgos-process-step {
+    padding: 24px;
+    border-radius: var(--nx-radius-lg);
+    border: 1px solid var(--nx-border);
+    background: var(--nx-bg-card);
+}
+
+.wgos-process-step__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    border: 1px solid var(--nx-border-gold);
+    background: var(--nx-gold-subtle);
+    color: var(--nx-accent-text);
+    font-size: 0.86rem;
+    font-weight: 800;
+}
+
+.wgos-process-step h3 {
+    margin: 0 0 10px;
+    font-size: 1.05rem;
+}
+
+.wgos-process-step p {
+    margin: 0;
+    color: var(--nx-text-muted);
+    line-height: 1.7;
+}
+
 /* =========================================
    12. GARANTIE
    ========================================= */
@@ -1184,6 +1502,15 @@
     font-size: clamp(1.6rem, 3vw, 2.2rem);
 }
 
+.wgos-final-cta__inner {
+    text-align: center;
+}
+
+.wgos-final-cta__inner .wgos-prose {
+    max-width: 680px;
+    margin: 0 auto 2rem;
+}
+
 /* =========================================
    15. REVEAL ANIMATION
    ========================================= */
@@ -1202,6 +1529,16 @@
    16. RESPONSIVE
    ========================================= */
 @media (max-width: 1023px) {
+    .wgos-system-grid,
+    .wgos-proof-grid,
+    .wgos-process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wgos-checklist--system {
+        grid-template-columns: 1fr;
+    }
+
     .wgos-principle-contrast {
         grid-template-columns: 1fr;
     }
@@ -1241,6 +1578,14 @@
         padding: 20px 16px;
     }
 
+    .wgos-diagram-shell,
+    .wgos-proof-card,
+    .wgos-module-card,
+    .wgos-process-step,
+    .wgos-credit-summary {
+        padding: 18px 16px;
+    }
+
     .wgos-principle-card {
         padding: 14px;
     }
@@ -1277,6 +1622,10 @@
 
     .wgos-h2 {
         font-size: 1.6rem;
+    }
+
+    .wgos-hero__support {
+        font-size: 0.94rem;
     }
 }
 
