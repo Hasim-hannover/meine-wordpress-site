@@ -133,17 +133,21 @@ function nexus_render_wgos_asset_label( $label ) {
 	$label = (string) $label;
 	$asset = nexus_get_wgos_asset( $label );
 	$hint  = $asset instanceof WP_Post ? nexus_get_wgos_asset_hover_text( $asset ) : '';
+	$url   = nexus_get_wgos_asset_anchor_url( $asset instanceof WP_Post ? $asset : $label );
+	$cta   = $asset instanceof WP_Post ? __( 'Asset ansehen', 'blocksy-child' ) : __( 'Zu den Modulen', 'blocksy-child' );
 
 	if ( '' === $hint ) {
-		$hint = __( 'Im Explorer finden Sie Nutzen, Credits und den nächsten sinnvollen Schritt für dieses Asset.', 'blocksy-child' );
+		$hint = $asset instanceof WP_Post
+			? __( 'Oeffnet die passende WGOS-Asset-Seite mit Nutzen, Kontext und naechstem sinnvollen Schritt.', 'blocksy-child' )
+			: __( 'Dieses Asset wird im WGOS-Kontext priorisiert und im Audit sauber eingeordnet.', 'blocksy-child' );
 	}
 
 	return sprintf(
 		'<span class="wgos-asset-link-wrap"><span class="wgos-asset-link">%1$s</span><span class="wgos-asset-link__panel"><span class="wgos-asset-link__text">%2$s</span><a class="wgos-asset-link__cta" href="%3$s" data-track-action="cta_wgos_asset_table" data-track-category="navigation">%4$s</a></span></span>',
 		esc_html( $label ),
 		esc_html( $hint ),
-		esc_url( nexus_get_wgos_asset_anchor_url( $asset instanceof WP_Post ? $asset : $label ) ),
-		esc_html__( 'Im Explorer öffnen', 'blocksy-child' )
+		esc_url( $url ),
+		esc_html( $cta )
 	);
 }
 
@@ -194,20 +198,26 @@ function nexus_get_wgos_asset_anchor_id( $value ) {
 }
 
 /**
- * Resolve the explorer anchor URL for a WGOS asset.
+ * Resolve the preferred WGOS destination for an asset.
+ *
+ * Asset detail pages take precedence. If no published asset page exists yet,
+ * fall back to the module section in the WGOS hub.
  *
  * @param string|WP_Post $value Asset label, slug or post object.
  * @return string
  */
 function nexus_get_wgos_asset_anchor_url( $value ) {
-	$anchor_id = nexus_get_wgos_asset_anchor_id( $value );
-	$wgos_url  = nexus_get_wgos_url();
+	$asset = $value instanceof WP_Post ? $value : nexus_get_wgos_asset( $value );
 
-	if ( '' === $anchor_id ) {
-		return $wgos_url;
+	if ( $asset instanceof WP_Post ) {
+		$asset_url = get_permalink( $asset );
+
+		if ( $asset_url ) {
+			return $asset_url;
+		}
 	}
 
-	return $wgos_url . '#' . $anchor_id;
+	return trailingslashit( nexus_get_wgos_url() ) . '#module';
 }
 
 /**
