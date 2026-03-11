@@ -261,6 +261,37 @@ function hu_output_schema()
         $post_id = get_queried_object_id();
         $slug = $post_id ? get_post_field('post_name', $post_id) : '';
 
+        if (is_singular('wgos_asset') && function_exists('nexus_get_wgos_asset_definition')) {
+            $asset = nexus_get_wgos_asset_definition(get_post($post_id));
+            $schema_type = $asset['schema_type'] ?? 'Service';
+
+            if ($asset && $schema_type !== 'none') {
+                $description = '';
+
+                if (!empty($asset['result'])) {
+                    $description = (string) $asset['result'];
+                } elseif (!empty($asset['excerpt'])) {
+                    $description = (string) $asset['excerpt'];
+                }
+
+                $service = [
+                    '@context'      => 'https://schema.org',
+                    '@type'         => $schema_type,
+                    '@id'           => trailingslashit(get_permalink($post_id)) . '#service',
+                    'name'          => (string) $asset['title'],
+                    'description'   => $description,
+                    'url'           => get_permalink($post_id),
+                    'provider'      => ['@id' => home_url('/#organization')],
+                    'serviceType'   => 'WGOS Asset',
+                    'serviceOutput' => (string) ($asset['result'] ?? ''),
+                    'areaServed'    => ['@type' => 'AdministrativeArea', 'name' => 'DACH'],
+                    'isPartOf'      => ['@id' => home_url('/wordpress-growth-operating-system/#service')],
+                ];
+
+                $schemas[] = $service;
+            }
+        }
+
         // Service schema, falls slug matcht
         if ($slug && array_key_exists($slug, $service_definitions)) {
             $def = $service_definitions[$slug];

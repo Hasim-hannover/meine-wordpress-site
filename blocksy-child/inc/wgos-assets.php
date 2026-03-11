@@ -250,6 +250,12 @@ function nexus_get_wgos_asset_anchor_url( $value ) {
 		}
 	}
 
+	$anchor_id = nexus_get_wgos_asset_anchor_id( $value );
+
+	if ( '' !== $anchor_id ) {
+		return trailingslashit( nexus_get_wgos_asset_hub_url() ) . '#' . $anchor_id;
+	}
+
 	return nexus_get_wgos_asset_hub_url();
 }
 
@@ -602,12 +608,9 @@ function nexus_get_wgos_asset_explorer_links() {
 }
 
 /**
- * Build the dynamic explorer payload from published WGOS assets.
+ * Build the dynamic explorer payload from the versioned asset registry.
  *
- * Uses ACF/meta values when available and falls back to post data plus a
- * predictable catalog so the hub remains usable during migration.
- *
- * @return array<string, array<int, array<string, mixed>>>
+ * @return array<string, mixed>
  */
 function nexus_get_wgos_asset_explorer_payload() {
 	static $payload = null;
@@ -616,163 +619,59 @@ function nexus_get_wgos_asset_explorer_payload() {
 		return $payload;
 	}
 
-	$phase_registry  = nexus_get_wgos_asset_phase_catalog();
-	$module_registry = nexus_get_wgos_asset_module_catalog();
-	$assets          = [];
-	$used_modules    = [];
-	$used_phases     = [];
-	$custom_counter  = count( $module_registry );
-	$posts           = get_posts(
-		[
-			'post_type'              => 'wgos_asset',
-			'post_status'            => 'publish',
-			'posts_per_page'         => -1,
-			'orderby'                => 'menu_order title',
-			'order'                  => 'ASC',
-			'no_found_rows'          => true,
-			'update_post_meta_cache' => true,
-			'update_post_term_cache' => false,
-		]
-	);
+	$phase_registry   = nexus_get_wgos_asset_phase_catalog();
+	$module_registry  = nexus_get_wgos_asset_module_catalog();
+	$assets           = [];
+	$used_modules     = [];
+	$used_phases      = [];
+	$published_count  = 0;
+	$draft_count      = 0;
 
-	foreach ( $posts as $asset_post ) {
-		$post_id         = (int) $asset_post->ID;
-		$asset_url       = get_permalink( $post_id );
-		$raw_phase       = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_phase', 'phase', 'wgos_phase', 'category' ] );
-		$raw_module      = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_module', 'module', 'module_id', 'wgos_module', 'core_area', 'system_area' ] );
-		$group           = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_group', 'group', 'asset_cluster', 'cluster' ] );
-		$credits         = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_credits', 'credits', 'credit_value' ], 'nach Scope' );
-		$deliverable     = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_deliverable', 'deliverable', 'lieferumfang', 'output' ], 'Individuell nach Audit und Priorität.' );
-		$short           = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_short', 'short_description', 'short', 'teaser' ] );
-		$intro           = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_intro', 'intro', 'long_intro' ] );
-		$cta_label       = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_cta_label', 'cta_label', 'cta_text' ] );
-		$cta_target      = nexus_get_wgos_asset_text_value( $post_id, [ 'asset_cta_target', 'cta_target', 'cta_url', 'asset_cta_url' ] );
-		$bullet_source   = nexus_get_wgos_asset_value( $post_id, [ 'asset_bullets', 'bullets', 'key_points', 'asset_points', 'long_bullets' ] );
-		$parent_post     = $asset_post->post_parent ? get_post( (int) $asset_post->post_parent ) : null;
-		$module_key      = '';
-		$phase_key       = '';
-		$cta             = [];
+	foreach ( nexus_get_wgos_asset_registry() as $asset ) {
+		$module_key = (string) $asset['module_key'];
+		$phase_key  = (string) $asset['phase_key'];
 
-		if ( '' === $raw_module && $parent_post instanceof WP_Post ) {
-			$raw_module = $parent_post->post_title ? $parent_post->post_title : $parent_post->post_name;
-		}
-
-		if ( '' === $raw_phase && $parent_post instanceof WP_Post && $parent_post->post_parent ) {
-			$phase_parent = get_post( (int) $parent_post->post_parent );
-
-			if ( $phase_parent instanceof WP_Post ) {
-				$raw_phase = $phase_parent->post_title ? $phase_parent->post_title : $phase_parent->post_name;
-			}
-		}
-
-		$module_key = nexus_match_wgos_asset_module_key( $raw_module );
-		$phase_key  = nexus_match_wgos_asset_phase_key( $raw_phase );
-
-		if ( '' === $phase_key && '' !== $module_key && isset( $module_registry[ $module_key ]['phase_key'] ) ) {
-			$phase_key = (string) $module_registry[ $module_key ]['phase_key'];
-		}
-
-		if ( '' === $phase_key ) {
-			$phase_key = 'weitere';
-		}
-
-		if ( '' === $module_key ) {
-			$custom_label = '' !== $raw_module ? $raw_module : __( 'Weitere Assets', 'blocksy-child' );
-			$module_key   = 'custom-' . nexus_get_wgos_asset_lookup_key( $custom_label );
-
-			if ( ! isset( $module_registry[ $module_key ] ) ) {
-				$custom_counter++;
-
-				$module_registry[ $module_key ] = [
-					'id'        => 'module-' . str_pad( (string) $custom_counter, 2, '0', STR_PAD_LEFT ),
-					'number'    => str_pad( (string) $custom_counter, 2, '0', STR_PAD_LEFT ),
-					'label'     => $custom_label,
-					'phase_key' => $phase_key,
-					'accent'    => '#9aa5b1',
-					'summary'   => 'Dieses Asset wurde noch keiner sauberen Kernbereichs-Logik zugeordnet.',
-					'aliases'   => [],
-				];
-			}
-		}
-
-		if ( ! isset( $module_registry[ $module_key ] ) ) {
+		if ( ! isset( $module_registry[ $module_key ], $phase_registry[ $phase_key ] ) ) {
 			continue;
 		}
 
-		if ( '' === $short ) {
-			$short = trim( (string) $asset_post->post_excerpt );
-		}
+		$detail_url  = nexus_get_wgos_asset_detail_url( $asset );
+		$is_publish  = '' !== $detail_url && 'publish' === $asset['status'];
+		$phase_label = (string) $phase_registry[ $phase_key ]['label'];
+		$module      = $module_registry[ $module_key ];
 
-		if ( '' === $short ) {
-			$short = nexus_truncate( wp_strip_all_tags( (string) $asset_post->post_content ), 160 );
-		}
-
-		if ( '' === $intro ) {
-			$intro = nexus_truncate( wp_strip_all_tags( (string) $asset_post->post_content ), 260 );
-		}
-
-		if ( '' === $intro ) {
-			$intro = $short;
-		}
-
-		$bullets = nexus_get_wgos_asset_bullets_from_value( $bullet_source );
-
-		if ( empty( $bullets ) && '' !== $deliverable ) {
-			$bullets[] = sprintf( 'Typischer Output: %s', $deliverable );
-		}
-
-		if ( empty( $bullets ) ) {
-			$bullets[] = 'Wird im WGOS nach Engpass, Reihenfolge und Systemwirkung priorisiert.';
-		}
-
-		if ( empty( $group ) ) {
-			$group = $module_registry[ $module_key ]['label'];
-		}
-
-		if ( '' === $cta_label ) {
-			$cta_label = __( 'Asset im Detail ansehen', 'blocksy-child' );
-		}
-
-		if ( $cta_target && wp_http_validate_url( $cta_target ) ) {
-			$cta = [
-				'label' => $cta_label,
-				'href'  => $cta_target,
-			];
-		} elseif ( in_array( $cta_target, [ 'audit', 'growth-audit', 'calendar', 'cases', 'hub', 'wgos', 'pakete' ], true ) ) {
-			$cta = [
-				'label'   => $cta_label,
-				'hrefKey' => 'growth-audit' === $cta_target ? 'audit' : $cta_target,
-			];
-		} elseif ( $asset_url ) {
-			$cta = [
-				'label' => $cta_label,
-				'href'  => $asset_url,
-			];
-		} else {
-			$cta = [
-				'label'   => __( 'Growth Audit starten', 'blocksy-child' ),
-				'hrefKey' => 'audit',
-			];
-		}
-
-		$phase_label                = (string) $phase_registry[ $phase_key ]['label'];
-		$module_registry[ $module_key ]['category'] = $phase_label;
 		$used_modules[ $module_key ] = true;
 		$used_phases[ $phase_key ]   = true;
-		$assets[]                    = [
-			'id'          => nexus_get_wgos_asset_anchor_slug( $asset_post ),
-			'label'       => $asset_post->post_title ? $asset_post->post_title : ucfirst( (string) $asset_post->post_name ),
-			'moduleId'    => (string) $module_registry[ $module_key ]['id'],
-			'group'       => $group,
+
+		if ( $is_publish ) {
+			$published_count++;
+		} else {
+			$draft_count++;
+		}
+
+		$assets[] = [
+			'id'          => nexus_get_wgos_asset_anchor_slug( (string) $asset['slug'] ),
+			'label'       => (string) $asset['title'],
+			'moduleId'    => (string) $module['id'],
+			'group'       => (string) $asset['core_area'],
 			'category'    => $phase_label,
-			'short'       => $short,
+			'short'       => (string) $asset['excerpt'],
 			'long'        => [
-				'intro'   => $intro,
-				'bullets' => $bullets,
+				'intro'   => isset( $asset['problem'][0] ) ? (string) $asset['problem'][0] : (string) $asset['excerpt'],
+				'bullets' => nexus_get_wgos_asset_explorer_bullets( $asset ),
 			],
-			'deliverable' => $deliverable,
-			'credits'     => $credits,
-			'cta'         => $cta,
+			'deliverable' => (string) $asset['result'],
+			'credits'     => (string) $asset['credits'],
+			'status'      => $asset['status'],
+			'cta'         => $is_publish
+				? [
+					'label' => __( 'Asset im Detail ansehen', 'blocksy-child' ),
+					'href'  => $detail_url,
+				]
+				: [
+					'label'   => __( 'Growth Audit starten', 'blocksy-child' ),
+					'hrefKey' => 'audit',
+				],
 		];
 	}
 
@@ -801,7 +700,7 @@ function nexus_get_wgos_asset_explorer_payload() {
 			'id'       => (string) $module['id'],
 			'number'   => (string) $module['number'],
 			'label'    => (string) $module['label'],
-			'category' => (string) $module['category'],
+			'category' => (string) $phase_registry[ (string) $module['phase_key'] ]['label'],
 			'accent'   => (string) $module['accent'],
 			'summary'  => (string) $module['summary'],
 		];
@@ -811,6 +710,11 @@ function nexus_get_wgos_asset_explorer_payload() {
 		'wgosAssetPhases'  => $phases,
 		'wgosAssetModules' => $modules,
 		'wgosAssets'       => $assets,
+		'summary'          => [
+			'totalAssets'     => count( $assets ),
+			'publishedAssets' => $published_count,
+			'draftAssets'     => $draft_count,
+		],
 	];
 
 	return $payload;

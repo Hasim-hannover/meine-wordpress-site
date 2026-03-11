@@ -358,7 +358,7 @@ $credit_examples = [
 		'credits' => '15',
 	],
 	[
-		'asset'   => 'sGTM Setup',
+		'asset'   => 'Server-Side Tracking (sGTM & Matomo)',
 		'focus'   => 'Messbarkeit',
 		'credits' => '15',
 	],

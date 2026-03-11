@@ -18,6 +18,7 @@ $inc_dir = get_stylesheet_directory() . '/inc/';
 $modules = [
 	'helpers.php',        // Utility-Funktionen (muss zuerst geladen werden)
 	'wgos-assets.php',    // CPT + Helper fuer WGOS Asset-Spokes
+	'wgos-asset-registry.php', // Versionierte WGOS Asset-Registry + Sync
 	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
 	'audit-page.php',     // Audit-Shell-Fallback fuer die Audit-Landing-Page
 	'header.php',         // Eigener globaler Header + Navigation

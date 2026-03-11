@@ -26,6 +26,8 @@ add_filter( 'rank_math/frontend/title', 'hu_rank_math_contact_title' );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_contact_description' );
 add_filter( 'rank_math/frontend/title', 'hu_rank_math_domdar_case_title' );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_domdar_case_description' );
+add_filter( 'rank_math/frontend/title', 'hu_rank_math_generic_stored_title', 99 );
+add_filter( 'rank_math/frontend/description', 'hu_rank_math_generic_stored_description', 99 );
 add_filter( 'pre_get_document_title', 'hu_pre_get_document_title_override' );
 add_filter( 'document_title_parts', 'hu_document_title_overrides' );
 
@@ -79,6 +81,40 @@ function hu_get_stored_seo_value( $post_id, $acf_field, $rank_math_key ) {
 	}
 
 	return trim( wp_strip_all_tags( $rank_math_value ) );
+}
+
+/**
+ * Reuse stored SEO titles even if a plugin takes over frontend output.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_rank_math_generic_stored_title( $title ) {
+	if ( ! is_singular() ) {
+		return $title;
+	}
+
+	$post_id   = get_queried_object_id();
+	$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+
+	return '' !== $seo_title ? $seo_title : $title;
+}
+
+/**
+ * Reuse stored SEO descriptions even if a plugin takes over frontend output.
+ *
+ * @param string $description Existing description.
+ * @return string
+ */
+function hu_rank_math_generic_stored_description( $description ) {
+	if ( ! is_singular() ) {
+		return $description;
+	}
+
+	$post_id         = get_queried_object_id();
+	$seo_description = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
+
+	return '' !== $seo_description ? $seo_description : $description;
 }
 
 /**

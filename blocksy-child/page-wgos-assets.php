@@ -19,11 +19,12 @@ $payload      = function_exists( 'nexus_get_wgos_asset_explorer_payload' ) ? nex
 	'wgosAssetPhases'  => [],
 	'wgosAssetModules' => [],
 	'wgosAssets'       => [],
+	'summary'          => [],
 ];
-
-$asset_count  = count( $payload['wgosAssets'] );
-$module_count = count( $payload['wgosAssetModules'] );
-$phase_count  = count( $payload['wgosAssetPhases'] );
+$summary      = isset( $payload['summary'] ) && is_array( $payload['summary'] ) ? $payload['summary'] : [];
+$asset_count  = isset( $summary['totalAssets'] ) ? (int) $summary['totalAssets'] : count( $payload['wgosAssets'] );
+$publish_count = isset( $summary['publishedAssets'] ) ? (int) $summary['publishedAssets'] : 0;
+$draft_count   = isset( $summary['draftAssets'] ) ? (int) $summary['draftAssets'] : 0;
 ?>
 
 <main id="main" class="site-main">
@@ -72,15 +73,15 @@ $phase_count  = count( $payload['wgosAssetPhases'] );
 				<div class="wgos-trust-strip" aria-label="Systemlandkarte Kennzahlen">
 					<div class="wgos-trust-item">
 						<span class="wgos-trust-value"><?php echo esc_html( (string) $asset_count ); ?></span>
-						<span class="wgos-trust-label">publizierte Assets</span>
+						<span class="wgos-trust-label">definierte Assets</span>
 					</div>
 					<div class="wgos-trust-item">
-						<span class="wgos-trust-value"><?php echo esc_html( (string) $module_count ); ?></span>
-						<span class="wgos-trust-label">aktive Kernbereiche im Explorer</span>
+						<span class="wgos-trust-value"><?php echo esc_html( (string) $publish_count ); ?></span>
+						<span class="wgos-trust-label">publizierte Detailseiten</span>
 					</div>
 					<div class="wgos-trust-item">
-						<span class="wgos-trust-value"><?php echo esc_html( (string) $phase_count ); ?></span>
-						<span class="wgos-trust-label">Abschnitte in der Systemlogik</span>
+						<span class="wgos-trust-value"><?php echo esc_html( (string) $draft_count ); ?></span>
+						<span class="wgos-trust-label">Assets in Vorbereitung</span>
 					</div>
 				</div>
 			</div>
