@@ -93,14 +93,14 @@ function nexus_preempt_contact_404( $preempt, $wp_query ) {
 		return $preempt;
 	}
 
-	$wp_query->is_404       = false;
-	$wp_query->is_page      = true;
-	$wp_query->is_singular  = true;
-	$wp_query->is_home      = false;
-	$wp_query->is_archive   = false;
-	$wp_query->is_posts_page = false;
-	$wp_query->queried_object = null;
-	$wp_query->queried_object_id = 0;
+	$wp_query->is_404             = false;
+	$wp_query->is_page            = true;
+	$wp_query->is_singular        = true;
+	$wp_query->is_home            = false;
+	$wp_query->is_archive         = false;
+	$wp_query->is_posts_page      = false;
+	$wp_query->queried_object     = null;
+	$wp_query->queried_object_id  = 0;
 	$wp_query->query_vars['pagename'] = 'kontakt';
 	unset( $wp_query->query['error'], $wp_query->query_vars['error'] );
 
@@ -152,33 +152,136 @@ function nexus_add_virtual_contact_body_class( $classes ) {
 add_filter( 'body_class', 'nexus_add_virtual_contact_body_class', 20 );
 
 /**
- * Return the available contact focus options.
+ * Return the available contact request type options.
  *
- * @return array<string, string>
+ * @return array<string, array<string, string>>
  */
-function nexus_get_contact_focus_options() {
+function nexus_get_contact_request_type_options() {
 	return [
-		'seo'         => 'SEO',
-		'performance' => 'Website Performance',
-		'tracking'    => 'Tracking & Analytics',
-		'conversion'  => 'Conversion Optimierung',
-		'growth'      => 'Growth Strategie',
-		'pilot'       => 'Pilotprojekt / Proof-of-Value',
-		'other'       => 'Sonstiges',
+		'project' => [
+			'label'       => 'Projektanfrage',
+			'description' => 'Neue Vorhaben, Relaunches oder Wachstumshebel rund um Ihre Website.',
+		],
+		'general' => [
+			'label'       => 'Allgemeine Anfrage',
+			'description' => 'Fragen, Kooperationen oder kurze Abstimmungen ohne Projektrahmen.',
+		],
+		'client'  => [
+			'label'       => 'Bestehender Kunde',
+			'description' => 'Laufende Themen, Priorisierung oder nächste Schritte im aktuellen Setup.',
+		],
 	];
 }
 
 /**
- * Return the available budget options for contact requests.
+ * Return the selectable contact request type labels.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_contact_request_type_labels() {
+	$labels = [];
+
+	foreach ( nexus_get_contact_request_type_options() as $type_key => $definition ) {
+		$labels[ $type_key ] = isset( $definition['label'] ) ? (string) $definition['label'] : (string) $type_key;
+	}
+
+	return $labels;
+}
+
+/**
+ * Return the available contact focus options.
+ *
+ * @return array<string, array<string, mixed>>
+ */
+function nexus_get_contact_focus_options() {
+	return [
+		'website_strategy' => [
+			'label' => 'Website Strategie',
+			'types' => [ 'project', 'general', 'client' ],
+		],
+		'seo'              => [
+			'label' => 'SEO',
+			'types' => [ 'project', 'client' ],
+		],
+		'performance'      => [
+			'label' => 'Performance',
+			'types' => [ 'project', 'client' ],
+		],
+		'tracking'         => [
+			'label' => 'Tracking & Analytics',
+			'types' => [ 'project', 'client' ],
+		],
+		'conversion'       => [
+			'label' => 'Conversion & CRO',
+			'types' => [ 'project', 'client' ],
+		],
+		'relaunch'         => [
+			'label' => 'Relaunch / Neue Seite',
+			'types' => [ 'project' ],
+		],
+		'pilot'            => [
+			'label' => 'Pilotprojekt / Proof-of-Value',
+			'types' => [ 'project' ],
+		],
+		'support'          => [
+			'label' => 'Support / Weiterentwicklung',
+			'types' => [ 'project', 'client' ],
+		],
+		'existing_client'  => [
+			'label' => 'Laufendes Projekt / Kundenanliegen',
+			'types' => [ 'client' ],
+		],
+		'question'         => [
+			'label' => 'Allgemeine Frage',
+			'types' => [ 'general' ],
+		],
+		'cooperation'      => [
+			'label' => 'Kooperation / Netzwerk / Sonstiges',
+			'types' => [ 'general' ],
+		],
+	];
+}
+
+/**
+ * Return the selectable contact focus labels.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_contact_focus_labels() {
+	$labels = [];
+
+	foreach ( nexus_get_contact_focus_options() as $focus_key => $definition ) {
+		$labels[ $focus_key ] = isset( $definition['label'] ) ? (string) $definition['label'] : (string) $focus_key;
+	}
+
+	return $labels;
+}
+
+/**
+ * Return the available budget options for project requests.
  *
  * @return array<string, string>
  */
 function nexus_get_contact_budget_options() {
 	return [
-		'under_2000'      => 'unter 2.000€',
-		'2000_5000'       => '2.000 – 5.000€',
-		'5000_10000'      => '5.000 – 10.000€',
-		'10000_plus'      => '10.000€+',
+		'under_2000' => 'unter 2.000 EUR',
+		'2000_5000'  => '2.000 - 5.000 EUR',
+		'5000_10000' => '5.000 - 10.000 EUR',
+		'10000_plus' => '10.000 EUR+',
+	];
+}
+
+/**
+ * Return the available timing options for project and client requests.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_contact_timeline_options() {
+	return [
+		'this_week'         => 'Heute / diese Woche',
+		'two_to_four_weeks' => 'In 2-4 Wochen',
+		'this_quarter'      => 'In diesem Quartal',
+		'flexible'          => 'Noch offen',
 	];
 }
 
@@ -193,6 +296,68 @@ function nexus_get_contact_notification_email() {
 		: (string) get_option( 'admin_email' );
 
 	return (string) apply_filters( 'nexus_contact_notification_email', $default );
+}
+
+/**
+ * Resolve a label for response and email copy based on request type.
+ *
+ * @param string $request_type Current request type.
+ * @return string
+ */
+function nexus_get_contact_request_response_label( $request_type ) {
+	$labels = [
+		'project' => 'Projektanfrage',
+		'general' => 'Anfrage',
+		'client'  => 'Kundenanliegen',
+	];
+
+	return isset( $labels[ $request_type ] ) ? $labels[ $request_type ] : 'Anfrage';
+}
+
+/**
+ * Return the third step copy for the confirmation mail.
+ *
+ * @param string $request_type Current request type.
+ * @return string
+ */
+function nexus_get_contact_confirmation_step_three( $request_type ) {
+	if ( 'client' === $request_type ) {
+		return 'Wenn es schneller geht, ziehen wir das Thema direkt in eine kurze Abstimmung.';
+	}
+
+	if ( 'general' === $request_type ) {
+		return 'Wenn ein Termin sinnvoller ist als E-Mail-Pingpong, schlage ich direkt den passenden nächsten Schritt vor.';
+	}
+
+	return 'Wenn es fachlich passt, erhalten Sie direkt einen Terminvorschlag oder den sinnvollsten nächsten Schritt.';
+}
+
+/**
+ * Validate and normalize an optional URL field.
+ *
+ * @param string $value         Raw user value.
+ * @param string $error_code    Error code.
+ * @param string $error_message Error message.
+ * @return string|WP_Error
+ */
+function nexus_validate_contact_optional_url( $value, $error_code, $error_message ) {
+	$value = trim( (string) $value );
+
+	if ( '' === $value ) {
+		return '';
+	}
+
+	if ( ! preg_match( '#^https?://#i', $value ) ) {
+		$value = 'https://' . ltrim( $value, '/' );
+	}
+
+	$normalized = esc_url_raw( $value );
+
+	if ( '' === $normalized || ! wp_http_validate_url( $normalized ) ) {
+		return new WP_Error( $error_code, $error_message );
+	}
+
+	return $normalized;
 }
 
 /**
@@ -264,7 +429,10 @@ function nexus_handle_contact_request_submission( WP_REST_Request $request ) {
 	return new WP_REST_Response(
 		[
 			'ok'      => true,
-			'message' => 'Danke. Ihre Projektanfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
+			'message' => sprintf(
+				'Danke. Ihre %s ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
+				nexus_get_contact_request_response_label( $validated['request_type'] )
+			),
 		],
 		201
 	);
@@ -277,16 +445,23 @@ function nexus_handle_contact_request_submission( WP_REST_Request $request ) {
  * @return array|WP_Error
  */
 function nexus_validate_contact_request_payload( $payload ) {
-	$focus_options     = nexus_get_contact_focus_options();
-	$budget_options    = nexus_get_contact_budget_options();
-	$name              = isset( $payload['name'] ) ? sanitize_text_field( (string) $payload['name'] ) : '';
-	$email             = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
-	$website_url_raw   = isset( $payload['website_url'] ) ? trim( (string) $payload['website_url'] ) : '';
-	$focus             = isset( $payload['focus'] ) ? sanitize_key( (string) $payload['focus'] ) : '';
-	$message           = isset( $payload['message'] ) ? sanitize_textarea_field( (string) $payload['message'] ) : '';
-	$budget            = isset( $payload['budget'] ) ? sanitize_key( (string) $payload['budget'] ) : '';
-	$consent           = ! empty( $payload['consent'] );
-	$website_url       = '';
+	$request_type_options = nexus_get_contact_request_type_options();
+	$request_type_labels  = nexus_get_contact_request_type_labels();
+	$focus_options        = nexus_get_contact_focus_options();
+	$focus_labels         = nexus_get_contact_focus_labels();
+	$budget_options       = nexus_get_contact_budget_options();
+	$timeline_options     = nexus_get_contact_timeline_options();
+	$name                 = isset( $payload['name'] ) ? sanitize_text_field( (string) $payload['name'] ) : '';
+	$email                = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
+	$request_type         = isset( $payload['request_type'] ) ? sanitize_key( (string) $payload['request_type'] ) : '';
+	$website_url_raw      = isset( $payload['website_url'] ) ? (string) $payload['website_url'] : '';
+	$linkedin_url_raw     = isset( $payload['linkedin_url'] ) ? (string) $payload['linkedin_url'] : '';
+	$focus                = isset( $payload['focus'] ) ? sanitize_key( (string) $payload['focus'] ) : '';
+	$timeline             = isset( $payload['timeline'] ) ? sanitize_key( (string) $payload['timeline'] ) : '';
+	$message              = isset( $payload['message'] ) ? sanitize_textarea_field( (string) $payload['message'] ) : '';
+	$budget               = isset( $payload['budget'] ) ? sanitize_key( (string) $payload['budget'] ) : '';
+	$consent              = ! empty( $payload['consent'] );
+	$minimum_message_len  = 'general' === $request_type ? 18 : 24;
 
 	if ( '' === $name ) {
 		return new WP_Error( 'missing_name', 'Bitte Ihren Namen angeben.' );
@@ -296,28 +471,55 @@ function nexus_validate_contact_request_payload( $payload ) {
 		return new WP_Error( 'invalid_email', 'Bitte eine gültige E-Mail-Adresse angeben.' );
 	}
 
-	if ( '' !== $website_url_raw ) {
-		if ( ! preg_match( '#^https?://#i', $website_url_raw ) ) {
-			$website_url_raw = 'https://' . ltrim( $website_url_raw, '/' );
-		}
+	if ( ! isset( $request_type_options[ $request_type ] ) ) {
+		return new WP_Error( 'missing_request_type', 'Bitte auswählen, worum es geht.' );
+	}
 
-		$website_url = esc_url_raw( $website_url_raw );
+	$website_url = nexus_validate_contact_optional_url(
+		$website_url_raw,
+		'invalid_website',
+		'Bitte eine gültige Website-URL angeben.'
+	);
+	if ( is_wp_error( $website_url ) ) {
+		return $website_url;
+	}
 
-		if ( '' === $website_url || ! wp_http_validate_url( $website_url ) ) {
-			return new WP_Error( 'invalid_website', 'Bitte eine gültige Website-URL angeben.' );
-		}
+	$linkedin_url = nexus_validate_contact_optional_url(
+		$linkedin_url_raw,
+		'invalid_linkedin',
+		'Bitte einen gültigen LinkedIn-Link angeben.'
+	);
+	if ( is_wp_error( $linkedin_url ) ) {
+		return $linkedin_url;
 	}
 
 	if ( ! isset( $focus_options[ $focus ] ) ) {
-		return new WP_Error( 'missing_focus', 'Bitte auswählen, wobei Sie Unterstützung benötigen.' );
+		return new WP_Error( 'missing_focus', 'Bitte ein passendes Thema auswählen.' );
 	}
 
-	if ( '' === trim( $message ) || mb_strlen( trim( $message ) ) < 24 ) {
-		return new WP_Error( 'message_too_short', 'Bitte Ihr Ziel oder Projekt kurz beschreiben.' );
+	$focus_types = isset( $focus_options[ $focus ]['types'] ) ? (array) $focus_options[ $focus ]['types'] : [];
+	if ( empty( $focus_types ) || ! in_array( $request_type, $focus_types, true ) ) {
+		return new WP_Error( 'invalid_focus_type', 'Bitte ein Thema wählen, das zu Ihrer Anfrage passt.' );
 	}
 
-	if ( '' !== $budget && ! isset( $budget_options[ $budget ] ) ) {
-		return new WP_Error( 'invalid_budget', 'Bitte ein gültiges Budget auswählen.' );
+	if ( in_array( $request_type, [ 'project', 'client' ], true ) ) {
+		if ( ! isset( $timeline_options[ $timeline ] ) ) {
+			return new WP_Error( 'missing_timeline', 'Bitte das gewünschte Zeitfenster angeben.' );
+		}
+	} else {
+		$timeline = '';
+	}
+
+	if ( 'project' === $request_type ) {
+		if ( '' !== $budget && ! isset( $budget_options[ $budget ] ) ) {
+			return new WP_Error( 'invalid_budget', 'Bitte ein gültiges Budget auswählen.' );
+		}
+	} else {
+		$budget = '';
+	}
+
+	if ( '' === trim( $message ) || mb_strlen( trim( $message ) ) < $minimum_message_len ) {
+		return new WP_Error( 'message_too_short', 'Bitte Ihr Anliegen kurz und konkret beschreiben.' );
 	}
 
 	if ( ! $consent ) {
@@ -325,14 +527,19 @@ function nexus_validate_contact_request_payload( $payload ) {
 	}
 
 	return [
-		'name'         => $name,
-		'email'        => $email,
-		'website_url'  => $website_url,
-		'focus'        => $focus,
-		'focus_label'  => $focus_options[ $focus ],
-		'message'      => $message,
-		'budget'       => $budget,
-		'budget_label' => '' !== $budget ? $budget_options[ $budget ] : '',
+		'name'               => $name,
+		'email'              => $email,
+		'request_type'       => $request_type,
+		'request_type_label' => $request_type_labels[ $request_type ],
+		'website_url'        => $website_url,
+		'linkedin_url'       => $linkedin_url,
+		'focus'              => $focus,
+		'focus_label'        => $focus_labels[ $focus ],
+		'timeline'           => $timeline,
+		'timeline_label'     => '' !== $timeline ? $timeline_options[ $timeline ] : '',
+		'message'            => $message,
+		'budget'             => $budget,
+		'budget_label'       => '' !== $budget ? $budget_options[ $budget ] : '',
 	];
 }
 
@@ -406,8 +613,9 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 	}
 
 	$subject = sprintf(
-		'[%s] Neue Projektanfrage - %s',
+		'[%s] Neue %s - %s',
 		wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ),
+		$payload['request_type_label'],
 		$payload['name']
 	);
 	$headers = [];
@@ -416,12 +624,16 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 		$headers[] = 'Reply-To: ' . $payload['email'];
 	}
 
-	$meta_rows = '';
-	if ( '' !== $payload['website_url'] ) {
+	$meta_rows = sprintf(
+		'<strong style="color:#f7f3ee;">Anfragetyp:</strong> %1$s<br><strong style="color:#f7f3ee;">Thema:</strong> %2$s',
+		esc_html( $payload['request_type_label'] ),
+		esc_html( $payload['focus_label'] )
+	);
+
+	if ( '' !== $payload['timeline_label'] ) {
 		$meta_rows .= sprintf(
-			'<br><strong style="color:#f7f3ee;">Website:</strong> <a href="%1$s" style="color:#f7f3ee;">%2$s</a>',
-			esc_url( $payload['website_url'] ),
-			esc_html( $payload['website_url'] )
+			'<br><strong style="color:#f7f3ee;">Zeitfenster:</strong> %s',
+			esc_html( $payload['timeline_label'] )
 		);
 	}
 
@@ -432,38 +644,53 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 		);
 	}
 
+	if ( '' !== $payload['website_url'] ) {
+		$meta_rows .= sprintf(
+			'<br><strong style="color:#f7f3ee;">Website:</strong> <a href="%1$s" style="color:#f7f3ee;">%2$s</a>',
+			esc_url( $payload['website_url'] ),
+			esc_html( $payload['website_url'] )
+		);
+	}
+
+	if ( '' !== $payload['linkedin_url'] ) {
+		$meta_rows .= sprintf(
+			'<br><strong style="color:#f7f3ee;">LinkedIn:</strong> <a href="%1$s" style="color:#f7f3ee;">%2$s</a>',
+			esc_url( $payload['linkedin_url'] ),
+			esc_html( $payload['linkedin_url'] )
+		);
+	}
+
 	$content = sprintf(
 		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0; border-collapse:separate; border-spacing:0 10px;">
 			<tr>
 				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
-					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Projektanfrage</div>
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Kontaktanfrage</div>
 					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">Name:</strong> %1$s<br>
 						<strong style="color:#f7f3ee;">E-Mail:</strong> %2$s<br>
-						<strong style="color:#f7f3ee;">Unterstützung:</strong> %3$s%4$s
+						%3$s
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td style="padding:16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
-					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Projektbeschreibung</div>
-					<div style="font-size:14px; line-height:1.85; color:#c5ced7;">%5$s</div>
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Nachricht</div>
+					<div style="font-size:14px; line-height:1.85; color:#c5ced7;">%4$s</div>
 				</td>
 			</tr>
 		</table>',
 		esc_html( $payload['name'] ),
 		esc_html( $payload['email'] ),
-		esc_html( $payload['focus_label'] ),
 		$meta_rows,
 		nl2br( esc_html( $payload['message'] ) )
 	);
 
 	$html = nexus_get_contact_email_shell(
 		[
-			'preheader' => 'Neue Projektanfrage von ' . $payload['name'],
-			'eyebrow'   => 'Projektanfrage',
-			'headline'  => 'Neue Projektanfrage',
-			'intro'     => 'Eine neue qualifizierte Projektanfrage ist über die Kontaktseite eingegangen.',
+			'preheader' => 'Neue ' . strtolower( $payload['request_type_label'] ) . ' von ' . $payload['name'],
+			'eyebrow'   => $payload['request_type_label'],
+			'headline'  => 'Neue Anfrage eingegangen',
+			'intro'     => 'Eine neue qualifizierte Anfrage ist über die Kontaktseite eingegangen.',
 			'content'   => $content,
 			'footer'    => 'Sie können direkt auf diese E-Mail antworten. Reply-To zeigt bereits auf die anfragende Person.',
 		]
@@ -483,12 +710,27 @@ function nexus_send_contact_request_confirmation( $payload ) {
 		return;
 	}
 
-	$reply_to = nexus_get_contact_notification_email();
-	$subject  = sprintf( '[%s] Projektanfrage eingegangen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
+	$reply_to  = nexus_get_contact_notification_email();
+	$subject   = sprintf( '[%s] Anfrage eingegangen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
 	$meta_rows = sprintf(
-		'<strong style="color:#f7f3ee;">Bereich:</strong> %s',
+		'<strong style="color:#f7f3ee;">Anfragetyp:</strong> %1$s<br><strong style="color:#f7f3ee;">Thema:</strong> %2$s',
+		esc_html( $payload['request_type_label'] ),
 		esc_html( $payload['focus_label'] )
 	);
+
+	if ( '' !== $payload['timeline_label'] ) {
+		$meta_rows .= sprintf(
+			'<br><strong style="color:#f7f3ee;">Zeitfenster:</strong> %s',
+			esc_html( $payload['timeline_label'] )
+		);
+	}
+
+	if ( '' !== $payload['budget_label'] ) {
+		$meta_rows .= sprintf(
+			'<br><strong style="color:#f7f3ee;">Budget:</strong> %s',
+			esc_html( $payload['budget_label'] )
+		);
+	}
 
 	if ( '' !== $payload['website_url'] ) {
 		$meta_rows .= sprintf(
@@ -498,10 +740,11 @@ function nexus_send_contact_request_confirmation( $payload ) {
 		);
 	}
 
-	if ( '' !== $payload['budget_label'] ) {
+	if ( '' !== $payload['linkedin_url'] ) {
 		$meta_rows .= sprintf(
-			'<br><strong style="color:#f7f3ee;">Budget:</strong> %s',
-			esc_html( $payload['budget_label'] )
+			'<br><strong style="color:#f7f3ee;">LinkedIn:</strong> <a href="%1$s" style="color:#f7f3ee;">%2$s</a>',
+			esc_url( $payload['linkedin_url'] ),
+			esc_html( $payload['linkedin_url'] )
 		);
 	}
 
@@ -513,7 +756,7 @@ function nexus_send_contact_request_confirmation( $payload ) {
 					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">1.</strong> Ihre Nachricht ist sauber eingegangen.<br>
 						<strong style="color:#f7f3ee;">2.</strong> Sie erhalten innerhalb von 24 Stunden eine persönliche Rückmeldung.<br>
-						<strong style="color:#f7f3ee;">3.</strong> Wenn es passt, vereinbaren wir ein kurzes Strategiegespräch.
+						<strong style="color:#f7f3ee;">3.</strong> %1$s
 					</div>
 				</td>
 			</tr>
@@ -521,21 +764,22 @@ function nexus_send_contact_request_confirmation( $payload ) {
 				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
 					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Ihre Angaben</div>
 					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
-						%1$s<br>
-						<strong style="color:#f7f3ee;">Projektbeschreibung:</strong> %2$s
+						%2$s<br>
+						<strong style="color:#f7f3ee;">Nachricht:</strong> %3$s
 					</div>
 				</td>
 			</tr>
 		</table>',
+		esc_html( nexus_get_contact_confirmation_step_three( $payload['request_type'] ) ),
 		$meta_rows,
-		esc_html( wp_trim_words( $payload['message'], 18, '…' ) )
+		esc_html( wp_trim_words( $payload['message'], 18, '...' ) )
 	);
 
 	$html = nexus_get_contact_email_shell(
 		[
-			'preheader' => 'Ihre Projektanfrage ist eingegangen.',
-			'eyebrow'   => 'Projektanfrage',
-			'headline'  => 'Ihre Projektanfrage ist eingegangen.',
+			'preheader' => 'Ihre Anfrage ist eingegangen.',
+			'eyebrow'   => $payload['request_type_label'],
+			'headline'  => 'Ihre Anfrage ist eingegangen.',
 			'intro'     => 'Danke, ' . $payload['name'] . '. Ich prüfe Ihre Angaben persönlich und melde mich zeitnah zurück.',
 			'content'   => $content,
 			'footer'    => 'Viele Grüße, Hasim Üner',

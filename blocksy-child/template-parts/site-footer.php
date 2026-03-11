@@ -37,6 +37,12 @@ $cwv_url     = nexus_get_page_url(
 );
 $about_url   = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
 $contact_url = nexus_get_contact_url();
+$project_request_url = add_query_arg(
+	[
+		'type' => 'project',
+	],
+	$contact_url
+);
 $imprint_url = nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) );
 $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
 ?>
@@ -79,7 +85,7 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 			<section class="ft__col" aria-labelledby="ft-unternehmen">
 				<h3 id="ft-unternehmen">Unternehmen</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="https://cal.com/hasim/30min" target="_blank" rel="noopener noreferrer">Strategiegespräch</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $project_request_url ); ?>">Projektanfrage</a></li>
 					<li><a href="<?php echo esc_url( $about_url ); ?>">Über mich</a></li>
 					<li><a href="<?php echo esc_url( $contact_url ); ?>">Kontakt</a></li>
 				</ul>

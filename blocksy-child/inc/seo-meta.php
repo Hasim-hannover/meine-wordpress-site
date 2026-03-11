@@ -190,7 +190,7 @@ function hu_get_domdar_case_study_description() {
  * @return string
  */
 function hu_get_contact_offer_title() {
-	return 'Projekt anfragen | WordPress Growth Architect – Hasim Üner';
+	return 'Kontakt & Projektanfrage | WordPress Growth Architect – Hasim Üner';
 }
 
 /**
@@ -199,7 +199,7 @@ function hu_get_contact_offer_title() {
  * @return string
  */
 function hu_get_contact_offer_description() {
-	return 'Projektanfrage für WordPress-SEO, Performance, Tracking und Conversion-Optimierung. Vereinbaren Sie ein Strategiegespräch.';
+	return 'Kontakt für Projektanfragen, allgemeine Fragen und bestehende Kunden. Klarer Einstieg für WordPress, SEO, Performance, Tracking und CRO.';
 }
 
 /**

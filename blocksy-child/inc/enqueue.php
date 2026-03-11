@@ -119,8 +119,9 @@ function hu_enqueue_assets() {
 			'NexusContactConfig',
 			[
 				'restEndpoint'   => esc_url_raw( rest_url( 'nexus/v1/contact-request' ) ),
-				'successMessage' => 'Danke. Ihre Projektanfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
+				'successMessage' => 'Danke. Ihre Anfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
 				'errorMessage'   => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
+				'callUrl'        => esc_url_raw( function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : 'https://cal.com/hasim/30min' ),
 			]
 		);
 	}
