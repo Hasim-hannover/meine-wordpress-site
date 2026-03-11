@@ -188,13 +188,19 @@ function nexus_get_wgos_url() {
  * @return int
  */
 function nexus_get_wgos_asset_hub_page_id() {
+	$slug_page_id = nexus_get_page_id( [ 'wgos-systemlandkarte', 'wgos-asset-hub', 'systemlandkarte' ] );
+
+	if ( $slug_page_id ) {
+		return $slug_page_id;
+	}
+
 	$template_page_id = nexus_get_page_id_by_template( 'page-wgos-assets.php' );
 
 	if ( $template_page_id ) {
 		return $template_page_id;
 	}
 
-	return nexus_get_page_id( [ 'wgos-systemlandkarte', 'wgos-asset-hub', 'systemlandkarte' ] );
+	return 0;
 }
 
 /**
