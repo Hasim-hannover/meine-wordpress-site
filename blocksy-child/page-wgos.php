@@ -17,6 +17,7 @@ get_header();
 $audit_url    = nexus_get_audit_url();
 $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : 'https://cal.com/hasim/30min';
 $cases_url    = nexus_get_page_url( [ 'case-studies-e-commerce', 'case-studies' ], home_url( '/case-studies-e-commerce/' ) );
+$asset_hub_url = function_exists( 'nexus_get_wgos_asset_hub_url' ) ? nexus_get_wgos_asset_hub_url() : home_url( '/wgos-systemlandkarte/' );
 $page_url     = get_permalink( get_queried_object_id() );
 
 if ( ! $page_url ) {
@@ -622,6 +623,16 @@ foreach ( $faq_items as $faq_item ) {
 							</ul>
 						</article>
 					<?php endforeach; ?>
+				</div>
+
+				<div class="wgos-asset-hub-bridge">
+					<div class="wgos-note-card">
+						<h3>Alle Bausteine gesammelt sehen?</h3>
+						<p>Die WGOS-Seite erklaert das System. Die separate Systemlandkarte zeigt alle vorhandenen Assets klickbar, nach Abschnitten geordnet und direkt mit ihren Detailseiten verbunden.</p>
+						<div class="wgos-hero__actions">
+							<a href="<?php echo esc_url( $asset_hub_url ); ?>" class="wgos-btn wgos-btn--outline">Zur WGOS Asset-Landkarte</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

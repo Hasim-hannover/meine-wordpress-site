@@ -72,6 +72,7 @@
             'system': 'wgos_system_view',
             'module': 'wgos_core_areas_view',
             'workflow': 'wgos_workflow_view',
+            'explorer': 'wgos_asset_explorer_view',
             'proof': 'wgos_proof_view',
             'audit': 'wgos_audit_view',
             'pakete': 'wgos_package_view',

@@ -374,6 +374,10 @@
 	align-items: start;
 }
 
+.wgos-hero__inner {
+	max-width: 860px;
+}
+
 .wgos-hero-copy {
 	max-width: 760px;
 }
@@ -732,6 +736,20 @@
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: 18px;
+}
+
+.wgos-asset-hub-bridge {
+	margin-top: 24px;
+}
+
+.wgos-asset-hub-bridge .wgos-note-card {
+	background:
+		radial-gradient(circle at top right, rgba(255, 176, 32, 0.12), transparent 38%),
+		var(--nx-bg-card);
+}
+
+.wgos-asset-hub-bridge .wgos-hero__actions {
+	margin-top: 18px;
 }
 
 .wgos-core-card {

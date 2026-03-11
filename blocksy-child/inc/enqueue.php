@@ -138,7 +138,34 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-wgos-js', 'wgos.js', [ 'nexus-core-js' ] );
 	}
 
-	// ── G2) Template: WGOS Asset Detail ───────────────────────────
+	// ── G2) Template: WGOS Asset Hub ──────────────────────────────
+	if ( is_page_template( 'page-wgos-assets.php' ) || is_page( 'wgos-systemlandkarte' ) || is_page( 'wgos-asset-hub' ) || is_page( 'systemlandkarte' ) ) {
+		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );
+		hu_enqueue_css( 'nexus-wgos-assets-css', 'wgos-assets.css', [ 'nexus-wgos-css' ] );
+		hu_enqueue_js( 'nexus-wgos-js', 'wgos.js', [ 'nexus-core-js' ] );
+
+		$explorer_path = get_stylesheet_directory() . '/assets/js/wgos-asset-explorer.js';
+
+		if ( file_exists( $explorer_path ) ) {
+			wp_enqueue_script(
+				'nexus-wgos-asset-explorer-js',
+				get_stylesheet_directory_uri() . '/assets/js/wgos-asset-explorer.js',
+				[ 'wp-element' ],
+				filemtime( $explorer_path ),
+				true
+			);
+
+			wp_add_inline_script(
+				'nexus-wgos-asset-explorer-js',
+				'window.WGOSAssetData = ' . wp_json_encode( nexus_get_wgos_asset_explorer_payload(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ';' .
+				'window.NexusWgosExplorerConfig = ' . wp_json_encode( [ 'links' => nexus_get_wgos_asset_explorer_links() ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ';',
+				'before'
+			);
+		}
+	}
+
+	// ── G3) Template: WGOS Asset Detail ───────────────────────────
 	if ( is_singular( 'wgos_asset' ) ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
 		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );

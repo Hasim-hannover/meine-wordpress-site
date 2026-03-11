@@ -3,9 +3,6 @@
    ========================================= */
 .wgos-asset-explorer-root {
 	margin: 0;
-}
-
-#module .wgos-asset-explorer-root {
 	background:
 		linear-gradient(180deg, rgba(19, 17, 23, 0.96), rgba(10, 11, 15, 0.98)),
 		var(--nx-card-gradient);
@@ -13,6 +10,10 @@
 	border-radius: 24px;
 	padding: 1rem;
 	box-shadow: 0 24px 60px hsl(30 22% 4% / 0.26);
+}
+
+#module .wgos-asset-explorer-root {
+	margin-top: 0;
 }
 
 .wgos-asset-explorer {
