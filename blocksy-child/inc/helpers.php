@@ -436,3 +436,36 @@ function nexus_redirect_legacy_results_path() {
 	wp_safe_redirect( $target_url, 301 );
 	exit;
 }
+
+add_filter( 'template_include', 'nexus_force_results_route_templates', 98 );
+/**
+ * Force route-specific proof templates even if WordPress pages use another template in admin.
+ *
+ * @param string $template Resolved template path.
+ * @return string
+ */
+function nexus_force_results_route_templates( $template ) {
+	if ( is_admin() || ! is_page() ) {
+		return $template;
+	}
+
+	$route_templates = [
+		'case-studies-e-commerce'  => get_stylesheet_directory() . '/page-case-studies-e-commerce.php',
+		'ergebnisse'               => get_stylesheet_directory() . '/page-ergebnisse.php',
+		'whitelabel-retainer'      => get_stylesheet_directory() . '/page-whitelabel-retainer.php',
+		'whitelabel-retainer-proof'=> get_stylesheet_directory() . '/page-whitelabel-retainer-proof.php',
+		'whitelabel'               => get_stylesheet_directory() . '/page-whitelabel.php',
+	];
+
+	foreach ( $route_templates as $slug => $forced_template ) {
+		if ( ! is_page( $slug ) ) {
+			continue;
+		}
+
+		if ( file_exists( $forced_template ) ) {
+			return $forced_template;
+		}
+	}
+
+	return $template;
+}

@@ -194,6 +194,87 @@
     padding-top: 1.5rem;
 }
 
+.results-detail-sections .nx-container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.results-detail-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    gap: 1.75rem;
+    align-items: start;
+    padding: 2rem;
+    border: 1px solid var(--nx-border);
+    border-radius: calc(var(--nx-radius-xl) + 2px);
+    background: var(--nx-card-gradient-strong);
+    box-shadow: var(--nx-shadow-lg);
+    scroll-margin-top: calc(var(--nx-header-height, 96px) + 24px);
+}
+
+.results-detail-card--success {
+    border-color: color-mix(in srgb, var(--nx-success) 38%, var(--nx-border));
+}
+
+.results-detail-card--gold {
+    border-color: color-mix(in srgb, var(--nx-gold) 28%, var(--nx-border));
+}
+
+.results-detail-card--highlight {
+    border-color: color-mix(in srgb, var(--nx-gold) 42%, var(--nx-border));
+    background:
+        linear-gradient(180deg, hsl(var(--accent-hsl) / 0.1), transparent 24%),
+        var(--nx-card-gradient-strong);
+}
+
+.results-detail-card__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 0.9rem;
+    color: var(--nx-gold);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.results-detail-card__title {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    line-height: 1.08;
+}
+
+.results-detail-card__intro {
+    margin: 0 0 1rem;
+    color: var(--nx-text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.results-detail-card__sidebar {
+    display: grid;
+    gap: 1rem;
+}
+
+.results-detail-card__statbox {
+    display: grid;
+    gap: 0.8rem;
+    padding: 1.1rem;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    background: var(--nx-bg-glass);
+}
+
+.results-detail-card__statbox span {
+    color: var(--nx-text);
+    font-size: 0.96rem;
+    font-weight: 700;
+}
+
+.results-detail-card__actions {
+    display: flex;
+}
+
 .results-framework__card {
     min-height: 100%;
     border-top: 3px solid color-mix(in srgb, var(--nx-gold) 28%, var(--nx-border));
@@ -318,7 +399,8 @@
 
     .wl-hero__grid,
     .results-cro-card,
-    .results-cta__shell {
+    .results-cta__shell,
+    .results-detail-card {
         grid-template-columns: 1fr;
     }
 }
@@ -337,20 +419,23 @@
     }
 
     .results-cro-card,
-    .results-cta__shell {
+    .results-cta__shell,
+    .results-detail-card {
         padding: 1.4rem;
     }
 
     .results-hero__actions,
     .wl-hero__actions,
-    .results-cta__actions {
+    .results-cta__actions,
+    .results-detail-card__actions {
         flex-direction: column;
         align-items: stretch;
     }
 
     .results-hero__actions .nx-btn,
     .wl-hero__actions .nx-btn,
-    .results-cta__actions .nx-btn {
+    .results-cta__actions .nx-btn,
+    .results-detail-card__actions .nx-btn {
         width: 100%;
         justify-content: center;
     }

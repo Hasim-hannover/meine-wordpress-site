@@ -32,8 +32,9 @@ $proof_cards = [
 		'title'   => 'E3 New Energy',
 		'copy'    => 'B2B-Leadgen mit harter Zahlenlage: vom externen Lead-Einkauf zum eigenen Nachfrage-System mit klarer Conversion-Architektur.',
 		'stats'   => [ '1.750+ Leads', '-83 % CPL', '12 % Sales-Conversion' ],
-		'cta'     => 'Case öffnen',
+		'cta'     => 'Zum Bereich',
 		'url'     => $e3_url,
+		'jump'    => '#bereich-e3',
 		'accent'  => 'success',
 	],
 	[
@@ -41,8 +42,9 @@ $proof_cards = [
 		'title'   => 'DOMDAR',
 		'copy'    => 'Sustainable Commerce ohne Mehrbudget: Profitabilität aus Bundle-Logik, Recovery-Loops und operativer Entlastung.',
 		'stats'   => [ '120 € AOV', '4,6 % Conversion Rate', '0 € mehr Ad-Spend' ],
-		'cta'     => 'Case öffnen',
+		'cta'     => 'Zum Bereich',
 		'url'     => $domdar_url,
+		'jump'    => '#bereich-domdar',
 		'accent'  => 'gold',
 	],
 	[
@@ -50,8 +52,57 @@ $proof_cards = [
 		'title'   => 'Whitelabel & Retainer',
 		'copy'    => '12 Whitelabel-Projekte und 4 laufende Retainer zeigen, wie die Arbeit aussieht, wenn Vertrauen da ist, aber Logos nicht öffentlich werden.',
 		'stats'   => [ '12 Projekte', '4 laufende Retainer', 'SEO + CRO + Tracking + Delivery' ],
-		'cta'     => 'Seite ansehen',
+		'cta'     => 'Zum Bereich',
 		'url'     => $whitelabel_url,
+		'jump'    => '#bereich-whitelabel',
+		'accent'  => 'highlight',
+	],
+];
+
+$detail_sections = [
+	[
+		'id'      => 'bereich-e3',
+		'eyebrow' => 'Bereich 01',
+		'title'   => 'E3 New Energy',
+		'intro'   => 'Der öffentlich stärkste B2B-Leadgen-Case auf der Seite. Gut für Besucher, die harte Kennzahlen, Reihenfolge und Systemlogik nachvollziehen wollen.',
+		'bullets' => [
+			'extern eingekaufte Leads wurden durch ein eigenes Nachfrage-System ersetzt',
+			'Tracking, Landingpages, Qualifizierung und Aktivierung wurden in der richtigen Reihenfolge verbunden',
+			'die Seite zeigt Wirkung, Vorgehen und Grenzen des Setups offen',
+		],
+		'stats'   => [ '1.750+ Leads', '-83 % CPL', '12 % Sales-Conversion' ],
+		'url'     => $e3_url,
+		'link'    => 'E3-Case lesen',
+		'accent'  => 'success',
+	],
+	[
+		'id'      => 'bereich-domdar',
+		'eyebrow' => 'Bereich 02',
+		'title'   => 'DOMDAR',
+		'intro'   => 'Der Commerce-Case im Hub. Er zeigt, dass die Logik nicht nur in Leadgen gilt, sondern auch bei Profitabilität, Funnel-Recovery und operativer Reibung.',
+		'bullets' => [
+			'mehr Deckungsbeitrag ohne zusätzliches Mediabudget',
+			'Bundles, Recovery-Loops und Operations als gemeinsamer Hebel statt Einzelmaßnahmen',
+			'ideal für Besucher, die eher auf E-Commerce-Mechanik als auf klassische Leads schauen',
+		],
+		'stats'   => [ '120 € AOV', '4,6 % Conversion Rate', '0 € mehr Ad-Spend' ],
+		'url'     => $domdar_url,
+		'link'    => 'DOMDAR-Case lesen',
+		'accent'  => 'gold',
+	],
+	[
+		'id'      => 'bereich-whitelabel',
+		'eyebrow' => 'Bereich 03',
+		'title'   => 'Whitelabel & Retainer',
+		'intro'   => 'Der dritte Bereich macht sichtbar, was sonst unsichtbar bleibt: laufende Systempflege, Delivery im Hintergrund und anonymisierte Projektmuster.',
+		'bullets' => [
+			'12 Whitelabel-Projekte und 4 laufende Retainer als Vertrauenssignal',
+			'geeignet für Besucher, die nicht nur Cases, sondern wiederholbare Zusammenarbeit prüfen wollen',
+			'inklusive Portrait, Arbeitsfeldern, anonymisierten Mustern und Systemkontext',
+		],
+		'stats'   => [ '12 Projekte', '4 Retainer', 'Whitelabel + Sparring + Delivery' ],
+		'url'     => $whitelabel_url,
+		'link'    => 'Whitelabel-Seite öffnen',
 		'accent'  => 'highlight',
 	],
 ];
@@ -121,8 +172,8 @@ $cro_points = [
 		<div class="nx-container">
 			<div class="nx-section-header">
 				<span class="nx-badge nx-badge--ghost">Proof-Formate</span>
-				<h2 class="nx-headline-section">Drei Wege, dieselbe Arbeitsweise zu prüfen.</h2>
-				<p class="nx-subheadline">Nicht jede Seite erfüllt dieselbe Aufgabe. Zusammen zeigen sie Reichweite, Tiefe und Wiederholbarkeit.</p>
+				<h2 class="nx-headline-section">Drei Bereiche. Ein gemeinsamer Ergebnisse-Hub.</h2>
+				<p class="nx-subheadline">Oben springen Sie in den passenden Bereich. Innerhalb jedes Bereichs geht es dann weiter auf die jeweilige Detailseite.</p>
 			</div>
 
 			<div class="results-card-grid">
@@ -137,11 +188,41 @@ $cro_points = [
 							<?php endforeach; ?>
 						</ul>
 						<div class="results-card__actions">
-							<a href="<?php echo esc_url( $card['url'] ); ?>" class="nx-btn nx-btn--ghost"><?php echo esc_html( $card['cta'] ); ?></a>
+							<a href="<?php echo esc_url( $card['jump'] ); ?>" class="nx-btn nx-btn--ghost"><?php echo esc_html( $card['cta'] ); ?></a>
 						</div>
 					</article>
 				<?php endforeach; ?>
 			</div>
+		</div>
+	</section>
+
+	<section class="nx-section results-detail-sections">
+		<div class="nx-container">
+			<?php foreach ( $detail_sections as $section ) : ?>
+				<article id="<?php echo esc_attr( $section['id'] ); ?>" class="results-detail-card results-detail-card--<?php echo esc_attr( $section['accent'] ); ?>">
+					<div class="results-detail-card__content">
+						<span class="results-detail-card__eyebrow"><?php echo esc_html( $section['eyebrow'] ); ?></span>
+						<h2 class="results-detail-card__title"><?php echo esc_html( $section['title'] ); ?></h2>
+						<p class="results-detail-card__intro"><?php echo esc_html( $section['intro'] ); ?></p>
+						<ul class="results-bullet-list">
+							<?php foreach ( $section['bullets'] as $bullet ) : ?>
+								<li><?php echo esc_html( $bullet ); ?></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+
+					<div class="results-detail-card__sidebar">
+						<div class="results-detail-card__statbox">
+							<?php foreach ( $section['stats'] as $stat ) : ?>
+								<span><?php echo esc_html( $stat ); ?></span>
+							<?php endforeach; ?>
+						</div>
+						<div class="results-detail-card__actions">
+							<a href="<?php echo esc_url( $section['url'] ); ?>" class="nx-btn nx-btn--primary"><?php echo esc_html( $section['link'] ); ?></a>
+						</div>
+					</div>
+				</article>
+			<?php endforeach; ?>
 		</div>
 	</section>
 
