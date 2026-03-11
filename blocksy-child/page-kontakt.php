@@ -137,7 +137,6 @@ $message_minlength     = $is_general_type ? 18 : 24;
 				<div class="contact-section-head">
 					<span class="contact-section-head__eyebrow">Anfrage</span>
 					<h2 id="contact-form-title">In wenigen Angaben zum passenden nächsten Schritt.</h2>
-					<p>Die Anfrage führt neue Projekte sauber vor, bleibt für Fragen kurz und gibt bestehenden Kunden einen direkten Weg zur nächsten Abstimmung.</p>
 				</div>
 
 				<form
