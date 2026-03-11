@@ -25,7 +25,7 @@ $hero_kpis = [
 		'label' => 'AOV nach 9 Monaten',
 	],
 	[
-		'value' => '3,2 %',
+		'value' => '4,6 %',
 		'label' => 'Conversion Rate',
 	],
 	[
@@ -105,7 +105,7 @@ $results = [
 		'primary' => true,
 	],
 	[
-		'value'   => '3,2 %',
+		'value'   => '4,6 %',
 		'label'   => 'Conversion Rate',
 		'note'    => 'vorher 1,5 %',
 		'primary' => false,
@@ -387,7 +387,7 @@ get_header();
 				<li>
 					<strong>Performance reduzierte Kauf-Reibung:</strong> Weniger Wartezeit
 					und klarere Produktpfade halfen, die Conversion von 1,5 Prozent auf
-					3,2 Prozent zu heben.
+					4,6 Prozent zu heben.
 				</li>
 				<li>
 					<strong>Bundles verschoben den Deckungsbeitrag:</strong> Lösungspakete,

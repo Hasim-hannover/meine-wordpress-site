@@ -181,7 +181,7 @@ function hu_get_domdar_case_study_title() {
  * @return string
  */
 function hu_get_domdar_case_study_description() {
-	return 'Vom 46€ Warenkorb zur 120€ Profit-Maschine in 9 Monaten. Wie wir ohne Budget-Erhöhung die Conversion verdoppelten.';
+	return 'Vom 46€ Warenkorb zur 120€ Profit-Maschine in 9 Monaten. Wie wir ohne Budget-Erhöhung die Conversion auf 4,6% steigerten.';
 }
 
 /**
