@@ -99,7 +99,7 @@ function hu_hero_section_shortcode() {
 							damit aus Sichtbarkeit belastbare Anfragen werden.
 						</p>
 						<div class="wp-hero-proof nx-reveal" role="list" aria-label="Vertrauenssignale">
-							<span class="wp-hero-proof-item" role="listitem">1.750+ qualifizierte Leads aus einem aufgebauten System</span>
+							<span class="wp-hero-proof-item" role="listitem">3.000+ qualifizierte Leads aus einem aufgebauten System</span>
 							<span class="wp-hero-proof-item" role="listitem">98/100 Mobile Performance auf Kernseiten</span>
 							<span class="wp-hero-proof-item" role="listitem">Privacy-first Measurement statt Daten-Blackbox</span>
 						</div>
