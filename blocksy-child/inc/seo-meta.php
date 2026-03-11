@@ -256,10 +256,13 @@ function hu_document_title_overrides( $parts ) {
 
 	if ( is_singular() ) {
 		$post_id    = get_queried_object_id();
+		$slug       = $post_id ? get_post_field( 'post_name', $post_id ) : '';
 		$seo_title  = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
 
 		if ( '' !== $seo_title ) {
 			$parts['title'] = $seo_title;
+		} elseif ( in_array( $slug, [ 'wgos', 'wordpress-growth-operating-system' ], true ) ) {
+			$parts['title'] = 'WGOS - WordPress Wachstumssystem fuer messbare Nachfrage';
 		}
 	}
 
@@ -432,6 +435,16 @@ function hu_get_seo_meta() {
 		if ( hu_is_audit_offer_page() ) {
 			$meta['og_title']    = 'Growth Audit für B2B-WordPress-Seiten';
 			$meta['description'] = 'Persönlicher Growth Audit für Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Priorität und Rückmeldung innerhalb von 48 Stunden.';
+		}
+
+		if ( in_array( $slug, [ 'wgos', 'wordpress-growth-operating-system' ], true ) ) {
+			if ( empty( $meta['og_title'] ) ) {
+				$meta['og_title'] = 'WGOS - WordPress Wachstumssystem fuer messbare Nachfrage';
+			}
+
+			if ( empty( $meta['description'] ) ) {
+				$meta['description'] = 'Das WordPress Growth Operating System verbindet Strategie, SEO, Tracking, Performance und Conversion zu einem strukturierten Nachfrage-System fuer Unternehmen.';
+			}
 		}
 
 		if ( empty( $meta['description'] ) ) {

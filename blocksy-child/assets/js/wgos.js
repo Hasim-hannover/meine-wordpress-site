@@ -68,11 +68,13 @@
         // 5. SECTION VISIBILITY TRACKING
         // =============================================
         var visTargets = {
+            'problem': 'wgos_problem_view',
             'system': 'wgos_system_view',
+            'module': 'wgos_core_areas_view',
+            'workflow': 'wgos_workflow_view',
             'proof': 'wgos_proof_view',
+            'audit': 'wgos_audit_view',
             'pakete': 'wgos_package_view',
-            'module': 'wgos_module_view',
-            'ablauf': 'wgos_process_view',
             'faq': 'wgos_faq_view'
         };
 

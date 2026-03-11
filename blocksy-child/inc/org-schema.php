@@ -215,39 +215,39 @@ function hu_output_schema()
 
         'wordpress-growth-operating-system' => [
             'name'        => 'WordPress Growth Operating System (WGOS)',
-            'description' => 'Monatlicher Retainer für B2B-Unternehmen: Performance, Privacy-first Tracking, SEO, CRO & Automation als eigenes Anfragesystem.',
+            'description' => 'Strukturiertes Nachfrage-System fuer Unternehmen: Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion in einer klaren WordPress-Logik.',
             'serviceType' => 'Growth Operating System',
-            'serviceOutput' => 'Eigenes Anfragesystem: Assets statt Kampagnen. Performance, Daten, Rankings, Content, Conversion.',
+            'serviceOutput' => 'Strukturiertes Nachfrage-System auf WordPress-Basis mit klarer Reihenfolge, voller Ownership und planbarer Weiterentwicklung.',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Maintenance',
+                    'name'          => 'Fundament',
                     'price'         => 1500,
                     'priceCurrency' => 'EUR',
-                    'description'   => '30 Credits/Monat. Fundament sichern: Performance, Security, Tracking.'
+                    'description'   => '30 Credits/Monat. Fundament, Messbarkeit und technische Stabilitaet ordnen.'
                 ],
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Growth Partner',
+                    'name'          => 'Systemaufbau',
                     'price'         => 2800,
                     'priceCurrency' => 'EUR',
-                    'description'   => '60 Credits/Monat. Eigene Nachfrage mit SEO, CRO und Content.'
+                    'description'   => '60 Credits/Monat. Sichtbarkeit und Conversion auf saubere Basis setzen.'
                 ],
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Dominance',
+                    'name'          => 'Weiterentwicklung',
                     'price'         => 4500,
                     'priceCurrency' => 'EUR',
-                    'description'   => '100+ Credits/Monat. Full Stack inkl. Paid Booster & Automation.'
+                    'description'   => '100+ Credits/Monat. Das System kontrolliert ausbauen und weiter nachschaerfen.'
                 ]
             ]
         ],
 
         'wgos' => [
             'name'        => 'WordPress Growth Operating System (WGOS)',
-            'description' => 'Monatlicher Retainer für B2B-Unternehmen: WordPress als Growth-Infrastruktur mit Performance, Measurement, SEO, Content und Conversion.',
+            'description' => 'Strukturiertes Nachfrage-System fuer Unternehmen: WordPress als verbindende Architektur fuer Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion.',
             'serviceType' => 'Growth Operating System',
-            'serviceOutput' => 'Eigenes Anfragesystem mit klarer Priorisierung und voller Kontrolle'
+            'serviceOutput' => 'Strukturiertes Nachfrage-System mit klarer Priorisierung, messbarer Entwicklung und voller Kontrolle'
         ],
     ];
 
