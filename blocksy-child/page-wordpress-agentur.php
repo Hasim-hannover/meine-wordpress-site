@@ -77,8 +77,8 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-grid nx-grid-4 wp-agentur-proof-grid">
 					<div class="nx-card nx-card--flat wp-agentur-proof-item">
-						<span class="wp-agentur-proof-value">1.750+</span>
-						<span class="wp-agentur-proof-label">qualifizierte Leads</span>
+						<span class="wp-agentur-proof-value">3.000+</span>
+						<span class="wp-agentur-proof-label">qualifizierte Leads in 18 Monaten</span>
 					</div>
 					<div class="nx-card nx-card--flat wp-agentur-proof-item">
 						<span class="wp-agentur-proof-value">-83%</span>

@@ -275,9 +275,9 @@ $not_fit_items = [
 
 $proof_metrics = [
 	[
-		'value'   => '1.750+',
-		'label'   => 'qualifizierte B2B-Leads in einem aufgebauten System',
-		'context' => 'als Ergebnis sauber verbundener Seiten, Daten und Nachfragepfade',
+		'value'   => '3.000+',
+		'label'   => 'qualifizierte B2B-Leads in 18 Monaten',
+		'context' => 'aus einem aufgebauten System mit sauber verbundenen Seiten, Daten und Nachfragepfaden',
 	],
 	[
 		'value'   => '-83%',
@@ -489,8 +489,8 @@ foreach ( $faq_items as $faq_item ) {
 
 				<div class="wgos-trust-strip" aria-label="Wirkungsbeispiele">
 					<div class="wgos-trust-item">
-						<span class="wgos-trust-value">1.750+</span>
-						<span class="wgos-trust-label">qualifizierte Leads in einem aufgebauten System</span>
+						<span class="wgos-trust-value">3.000+</span>
+						<span class="wgos-trust-label">qualifizierte Leads in 18 Monaten</span>
 					</div>
 					<div class="wgos-trust-item">
 						<span class="wgos-trust-value">-83%</span>
