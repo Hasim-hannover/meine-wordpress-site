@@ -177,9 +177,9 @@ add_action( 'after_switch_theme', 'nexus_setup_main_menu' );
 function nexus_seed_results_pages() {
 	$pages = [
 		[
-			'slug'   => 'case-studies-e-commerce',
+			'slug'   => 'ergebnisse',
 			'title'  => 'Ergebnisse',
-			'update' => [ 'Case Studies', 'Case Studies E-Commerce', 'Results' ],
+			'update' => [ 'Case Studies', 'Case Studies E-Commerce', 'Results', 'Ergebnisse' ],
 		],
 		[
 			'slug'   => 'whitelabel-retainer',

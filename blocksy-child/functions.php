@@ -19,6 +19,7 @@ $modules = [
 	'helpers.php',        // Utility-Funktionen (muss zuerst geladen werden)
 	'wgos-assets.php',    // CPT + Helper fuer WGOS Asset-Spokes
 	'wgos-asset-registry.php', // Versionierte WGOS Asset-Registry + Sync
+	'wgos-cluster-pages.php', // Versionierte Cluster-/Pillar-Pages und Blog-Asset-Bridges
 	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
 	'audit-page.php',     // Audit-Shell-Fallback fuer die Audit-Landing-Page
 	'header.php',         // Eigener globaler Header + Navigation

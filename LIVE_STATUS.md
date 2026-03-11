@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-11.
+Stand: 2026-03-12.
 
 Basis dieses Status:
 
@@ -23,6 +23,8 @@ Nicht verifiziert:
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Die aktive `Growth Audit`-Landingpage ist als versionierter Template-Shell im Repo hinterlegt.
 - `page-wgos.php` ist als kompaktere WGOS-Sales-Page versioniert: Hero mit Audit-CTA, System-Diagramm, frueher platzierte Pakete, modulare Cards und reduzierte FAQ.
+- Die wichtigsten Legacy-Clusterseiten fuer SEO, Core Web Vitals, CRO, GA4 und Performance Marketing sind jetzt als versionierte WGOS-Clusterseiten im Theme hinterlegt.
+- Ergebnisse laufen repo-seitig kanonisch ueber `/ergebnisse/`; alte Proof-Slugs bleiben nur als Legacy-Redirects bestehen.
 - Der aktive Audit-Pfad nutzt ein natives Multi-Step-Formular, WordPress-REST und ein internes Audit-CRM.
 - Die Kontaktseite kann Pilotprojekt-Anfragen jetzt ueber `?focus=pilot` vorqualifiziert aufnehmen.
 - Das Client Portal existiert technisch inklusive Login- und Upload-Logik.
@@ -35,7 +37,8 @@ Nicht verifiziert:
 - WGOS-Assets sind jetzt zusätzlich als versionierte Registry im Theme definiert: 35 Assets, davon 10 als `publish` und 25 als `draft`.
 - Die neue WGOS-Asset-Struktur rendert 8 feste Abschnitte, versionierte SEO-Meta, Related-Links und `Service`-Schema aus derselben Registry.
 - Die eigentliche Post-Erstellung und Aktualisierung für WGOS-Assets hängt aktuell noch am neuen Theme-Sync und damit am nächsten Deployment auf die Live-Umgebung.
-- Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten.
+- Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten oder editorgetriebenen Default-Seiten ausserhalb der route-forced Clusterpages.
+- Blog-Artikel koennen jetzt theme-seitig passende WGOS-Assets als Anschlussblock ausgeben; weitere Post-Mappings bleiben ausbaubar.
 - Die Community-Signale auf der Homepage sind derzeit ueber GitHub und ein oeffentliches LinkedIn-Profil versioniert; ein kanonischer Facebook-Link inklusive belastbarer Kennzahl ist im Repo noch nicht hinterlegt.
 - `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.
 - CRM-, Mail- und Follow-up-Logik fuer den Audit sind jetzt im Theme sichtbar, aber SMTP/externes Routing bleiben noch offen.
@@ -53,6 +56,8 @@ Nicht verifiziert:
 ## Deprecated
 
 - Legacy-Slugs `/audit/`, `/customer-journey-audit/` und `/360-audit/` werden auf `/growth-audit/` umgeleitet.
+- Legacy-Slugs `/case-studies/` und `/case-studies-e-commerce/` werden auf `/ergebnisse/` umgeleitet.
+- `/wordpress-tech-audit/` ist als oeffentlicher Funnel-Einstieg deprecated und wird auf `/growth-audit/` umgeleitet.
 - Der `Growth Audit` ist der aktuelle und oeffentliche Primaer-Einstieg. Vertiefte Folgeanalysen sind kein eigenstaendiger Erstkontakt mehr, sondern ergeben sich erst nach Audit und persoenlichem Kontakt.
 - Ein WordPress-Editor-Shell als Source of Truth fuer den Audit ist nicht mehr Zielbild.
 - Lose Root-Ablage fuer Playbooks, Referenz-Snippets und Content-Drafts ist nicht mehr Zielstruktur.

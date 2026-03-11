@@ -6,7 +6,7 @@
 2. Neues Menü erstellen: "Hauptmenü Slim"
 3. Diese Seiten hinzufügen:
    - WordPress Growth Operating System (/wordpress-growth-operating-system/)
-   - Case Studies (/case-studies/)
+   - Ergebnisse (/ergebnisse/)
    - Blog (/blog/)
    - Über mich (/uber-mich/)
    - Growth Audit (/growth-audit/) → Klasse "nav-cta-button" vergeben

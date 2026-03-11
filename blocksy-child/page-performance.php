@@ -8,17 +8,4 @@
  * @package Blocksy_Child
  */
 
-get_header();
-?>
-
-<div class="pm-page-wrapper" data-track-section="performance_landing">
-
-	<?php
-	while ( have_posts() ) :
-		the_post();
-		the_content();
-	endwhile;
-	?>
-</div>
-
-<?php get_footer(); ?>
+require __DIR__ . '/page-wgos-pillar.php';

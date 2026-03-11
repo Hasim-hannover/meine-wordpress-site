@@ -145,6 +145,13 @@ function hu_output_schema()
             'serviceOutput' => 'Verbesserte Rankings & Conversion Rates'
         ],
 
+        'wordpress-seo-hannover' => [
+            'name'        => 'WordPress SEO Hannover',
+            'description' => 'WGOS-Cluster fuer WordPress SEO in Hannover: technische Basis, Themenarchitektur und conversion-nahe Sichtbarkeit fuer B2B-Websites.',
+            'serviceType' => 'WordPress SEO',
+            'serviceOutput' => 'Priorisierte SEO-Bausteine aus Technical SEO, Keyword-Strategie, Pillar Pages und interner Verlinkung'
+        ],
+
         'core-web-vitals-optimierung' => [
             'name'        => 'Speed & Core Web Vitals Optimierung',
             'description' => 'Performance-Optimierung mit Fokus auf Ladezeit, INP/LCP und Nutzererlebnis.',
@@ -211,6 +218,13 @@ function hu_output_schema()
             'description' => 'Vom Daten-Nebel zur Klarheit: DSGVO-konformes GA4 und Server-Side Tracking.',
             'serviceType' => 'Tracking & Analytics',
             'serviceOutput' => 'Lückenloses Tracking-Fundament mit GA4/GTM, Consent-Management und individuellen Dashboards'
+        ],
+
+        'performance-marketing' => [
+            'name'        => 'Performance Marketing fuer B2B-WordPress-Websites',
+            'description' => 'WGOS-Aktivierungslayer fuer bezahlte Nachfrage: erst Tracking, Technik und Zielseite, dann skalierbare Kampagnen.',
+            'serviceType' => 'Performance Marketing',
+            'serviceOutput' => 'Kampagnenfaehige Zielseiten und belastbare Tracking-Signale fuer effiziente Paid-Aktivierung'
         ],
 
         'wordpress-growth-operating-system' => [

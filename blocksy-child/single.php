@@ -70,6 +70,15 @@ get_template_part( 'template-parts/blog-header' );
 			   <?php endif; ?>
 			   <article class="nexus-article-content" id="article-content" data-track-section="article_content">
 				   <?php the_content(); ?>
+				   <?php
+					if ( function_exists( 'nexus_get_wgos_blog_asset_bridge' ) && function_exists( 'nexus_render_wgos_blog_asset_bridge' ) ) {
+						$bridge = nexus_get_wgos_blog_asset_bridge();
+
+						if ( is_array( $bridge ) ) {
+							echo nexus_render_wgos_blog_asset_bridge( $bridge ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+					}
+				   ?>
 			   </article>
 		   </div>
 

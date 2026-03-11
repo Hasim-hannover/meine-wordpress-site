@@ -8,17 +8,4 @@
  * @package Blocksy_Child
  */
 
-get_header();
-?>
-
-<div class="seo-page-wrapper" data-track-section="seo_landing">
-
-	<?php
-	while ( have_posts() ) :
-		the_post();
-		the_content();
-	endwhile;
-	?>
-</div>
-
-<?php get_footer(); ?>
+require __DIR__ . '/page-wgos-pillar.php';

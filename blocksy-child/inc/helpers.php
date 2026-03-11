@@ -273,13 +273,19 @@ function nexus_is_audit_page() {
  * @return int
  */
 function nexus_get_results_page_id() {
+	$canonical_page_id = nexus_get_page_id( [ 'ergebnisse' ] );
+
+	if ( $canonical_page_id ) {
+		return $canonical_page_id;
+	}
+
 	$template_page_id = nexus_get_page_id_by_template( 'page-case-studies-e-commerce.php' );
 
 	if ( $template_page_id ) {
 		return $template_page_id;
 	}
 
-	return nexus_get_page_id( [ 'case-studies-e-commerce', 'ergebnisse', 'case-studies' ] );
+	return nexus_get_page_id( [ 'case-studies-e-commerce', 'case-studies' ] );
 }
 
 /**
@@ -294,7 +300,7 @@ function nexus_get_results_url() {
 		return get_permalink( $page_id );
 	}
 
-	return home_url( '/case-studies-e-commerce/' );
+	return home_url( '/ergebnisse/' );
 }
 
 /**
@@ -434,6 +440,7 @@ function nexus_redirect_legacy_results_path() {
 	$current_path = nexus_get_current_request_path();
 	$legacy_paths = [
 		'/case-studies/',
+		'/case-studies-e-commerce/',
 	];
 
 	if ( ! in_array( $current_path, $legacy_paths, true ) ) {

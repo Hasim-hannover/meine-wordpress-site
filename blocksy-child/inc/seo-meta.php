@@ -97,7 +97,19 @@ function hu_rank_math_generic_stored_title( $title ) {
 	$post_id   = get_queried_object_id();
 	$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
 
-	return '' !== $seo_title ? $seo_title : $title;
+	if ( '' !== $seo_title ) {
+		return $seo_title;
+	}
+
+	if ( function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ) {
+		$defaults = nexus_get_wgos_cluster_page_seo_defaults( get_post( $post_id ) );
+
+		if ( ! empty( $defaults['title'] ) ) {
+			return (string) $defaults['title'];
+		}
+	}
+
+	return $title;
 }
 
 /**
@@ -114,7 +126,19 @@ function hu_rank_math_generic_stored_description( $description ) {
 	$post_id         = get_queried_object_id();
 	$seo_description = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
 
-	return '' !== $seo_description ? $seo_description : $description;
+	if ( '' !== $seo_description ) {
+		return $seo_description;
+	}
+
+	if ( function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ) {
+		$defaults = nexus_get_wgos_cluster_page_seo_defaults( get_post( $post_id ) );
+
+		if ( ! empty( $defaults['description'] ) ) {
+			return (string) $defaults['description'];
+		}
+	}
+
+	return $description;
 }
 
 /**
@@ -392,9 +416,12 @@ function hu_document_title_overrides( $parts ) {
 		$post_id    = get_queried_object_id();
 		$slug       = $post_id ? get_post_field( 'post_name', $post_id ) : '';
 		$seo_title  = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+		$defaults   = function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ? nexus_get_wgos_cluster_page_seo_defaults( get_post( $post_id ) ) : null;
 
 		if ( '' !== $seo_title ) {
 			$parts['title'] = $seo_title;
+		} elseif ( ! empty( $defaults['title'] ) ) {
+			$parts['title'] = (string) $defaults['title'];
 		} elseif ( in_array( $slug, [ 'wgos', 'wordpress-growth-operating-system' ], true ) ) {
 			$parts['title'] = 'WGOS - WordPress Wachstumssystem für messbare Nachfrage';
 		}
@@ -547,6 +574,7 @@ function hu_get_seo_meta() {
 		// ACF fields first (if ACF Pro is active)
 		$meta['description'] = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
 		$meta['og_title']    = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+		$cluster_defaults    = function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ? nexus_get_wgos_cluster_page_seo_defaults( get_post( $post_id ) ) : null;
 
 		if ( function_exists( 'get_field' ) ) {
 			$og_image_arr        = get_field( 'og_image', $post_id );
@@ -559,7 +587,11 @@ function hu_get_seo_meta() {
 
 		// Fallbacks: auto-generate from post data
 		if ( empty( $meta['og_title'] ) ) {
-			$meta['og_title'] = get_the_title( $post_id ) . ' · ' . get_bloginfo( 'name' );
+			if ( ! empty( $cluster_defaults['title'] ) ) {
+				$meta['og_title'] = (string) $cluster_defaults['title'];
+			} else {
+				$meta['og_title'] = get_the_title( $post_id ) . ' · ' . get_bloginfo( 'name' );
+			}
 		}
 
 		if ( 'technisches-seo-performance-fundament' === $slug ) {
@@ -592,6 +624,12 @@ function hu_get_seo_meta() {
 
 			if ( empty( $meta['description'] ) ) {
 				$meta['description'] = 'Das WordPress Growth Operating System verbindet Strategie, SEO, Tracking, Performance und Conversion zu einem strukturierten Nachfrage-System für Unternehmen.';
+			}
+		}
+
+		if ( empty( $meta['description'] ) ) {
+			if ( ! empty( $cluster_defaults['description'] ) ) {
+				$meta['description'] = (string) $cluster_defaults['description'];
 			}
 		}
 
