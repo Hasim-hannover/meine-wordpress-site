@@ -27,6 +27,7 @@ function hu_home_urls() {
 		'audit'       => nexus_get_audit_url(),
 		'wgos'        => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
 		'cases'       => nexus_get_results_url(),
+		'agentur'     => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
 		'about'       => nexus_get_page_url( [ 'uber-mich' ] ),
 		'blog'        => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
 		'e3'          => nexus_get_page_url( [ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/e3-new-energy/' ) ),
@@ -108,6 +109,7 @@ function hu_hero_section_shortcode() {
 							<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Ergebnisse ansehen</a>
 						</div>
 						<p class="wp-hero-supporting-link nx-reveal">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
+						<p class="wp-hero-supporting-link nx-reveal">Lokaler Einstieg fuer Hannover: <a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress Agentur Hannover</a></p>
 					</div>
 
 					<div class="wp-hero-panel nx-reveal">
@@ -509,6 +511,10 @@ function hu_prozess_section_shortcode() {
 			<div style="text-align:center; margin-top:2rem;">
 				<a href="<?php echo esc_url( $urls['about'] ); ?>" class="btn btn-ghost">Mehr über meine Arbeitsweise</a>
 			</div>
+			<p style="margin:1rem auto 0; max-width:44rem; text-align:center; color:var(--muted);">
+				Wenn Sie einen lokalen Einstieg suchen, finden Sie hier die passende Seite zur
+				<a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress Agentur Hannover</a>.
+			</p>
 		</div>
 	</section>
 	<?php

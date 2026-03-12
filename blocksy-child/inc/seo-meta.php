@@ -28,8 +28,110 @@ add_filter( 'rank_math/frontend/title', 'hu_rank_math_domdar_case_title' );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_domdar_case_description' );
 add_filter( 'rank_math/frontend/title', 'hu_rank_math_generic_stored_title', 99 );
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_generic_stored_description', 99 );
+add_filter( 'rank_math/frontend/title', 'hu_rank_math_front_page_title', 120 );
+add_filter( 'rank_math/frontend/description', 'hu_rank_math_front_page_description', 120 );
+add_filter( 'rank_math/frontend/title', 'hu_rank_math_blog_archive_title', 120 );
+add_filter( 'rank_math/frontend/description', 'hu_rank_math_blog_archive_description', 120 );
+add_filter( 'rank_math/frontend/title', 'hu_rank_math_post_title_pattern', 120 );
 add_filter( 'pre_get_document_title', 'hu_pre_get_document_title_override' );
 add_filter( 'document_title_parts', 'hu_document_title_overrides' );
+
+/**
+ * Return the enforced homepage SEO title.
+ *
+ * @return string
+ */
+function hu_get_homepage_title() {
+	return (string) apply_filters(
+		'hu_homepage_seo_title',
+		'WordPress als Nachfrage-System fuer B2B | Hasim Uener'
+	);
+}
+
+/**
+ * Return the enforced homepage SEO description.
+ *
+ * @return string
+ */
+function hu_get_homepage_description() {
+	return (string) apply_filters(
+		'hu_homepage_seo_description',
+		'Ich mache aus Ihrer WordPress-Website ein planbares Anfragesystem: klare Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik fuer B2B.'
+	);
+}
+
+/**
+ * Return the enforced blog index SEO title.
+ *
+ * @return string
+ */
+function hu_get_blog_archive_title() {
+	return (string) apply_filters(
+		'hu_blog_archive_seo_title',
+		'Insights zu WordPress und SEO | Hasim Uener'
+	);
+}
+
+/**
+ * Return the enforced blog index SEO description.
+ *
+ * @return string
+ */
+function hu_get_blog_archive_description() {
+	return (string) apply_filters(
+		'hu_blog_archive_seo_description',
+		'Analysen zu WordPress, technischer SEO, Tracking und Conversion-Logik fuer B2B-Websites.'
+	);
+}
+
+/**
+ * Build a compact branded title that stays within SERP-safe bounds.
+ *
+ * @param string $title      Raw title value.
+ * @param string $brand      Brand suffix.
+ * @param int    $max_length Target maximum length.
+ * @return string
+ */
+function hu_build_compact_branded_title( $title, $brand = 'Hasim Uener', $max_length = 60 ) {
+	$title = trim( wp_strip_all_tags( (string) $title ) );
+	$brand = trim( wp_strip_all_tags( (string) $brand ) );
+
+	if ( '' === $title ) {
+		return $brand;
+	}
+
+	$separator       = ' | ';
+	$available_title = max( 15, (int) $max_length - mb_strlen( $separator . $brand ) );
+
+	if ( mb_strlen( $title ) > $available_title ) {
+		$title = mb_substr( $title, 0, $available_title );
+		$space = mb_strrpos( $title, ' ' );
+
+		if ( false !== $space ) {
+			$title = mb_substr( $title, 0, $space );
+		}
+
+		$title = rtrim( $title, " \t\n\r\0\x0B|:-" );
+	}
+
+	return trim( $title ) . $separator . $brand;
+}
+
+/**
+ * Return the enforced SEO title for single blog posts.
+ *
+ * @param int $post_id Current post ID.
+ * @return string
+ */
+function hu_get_post_title_pattern( $post_id ) {
+	$post_id = (int) $post_id;
+
+	if ( $post_id <= 0 ) {
+		return 'Hasim Uener';
+	}
+
+	return hu_build_compact_branded_title( get_the_title( $post_id ) );
+}
 
 /**
  * Determine whether a stored SEO string still contains unresolved token syntax.
@@ -139,6 +241,76 @@ function hu_rank_math_generic_stored_description( $description ) {
 	}
 
 	return $description;
+}
+
+/**
+ * Override Rank Math title for the homepage.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_rank_math_front_page_title( $title ) {
+	if ( is_front_page() ) {
+		return hu_get_homepage_title();
+	}
+
+	return $title;
+}
+
+/**
+ * Override Rank Math description for the homepage.
+ *
+ * @param string $description Existing description.
+ * @return string
+ */
+function hu_rank_math_front_page_description( $description ) {
+	if ( is_front_page() ) {
+		return hu_get_homepage_description();
+	}
+
+	return $description;
+}
+
+/**
+ * Override Rank Math title for the blog index and archives.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_rank_math_blog_archive_title( $title ) {
+	if ( is_home() ) {
+		return hu_get_blog_archive_title();
+	}
+
+	return $title;
+}
+
+/**
+ * Override Rank Math description for the blog index and archives.
+ *
+ * @param string $description Existing description.
+ * @return string
+ */
+function hu_rank_math_blog_archive_description( $description ) {
+	if ( is_home() ) {
+		return hu_get_blog_archive_description();
+	}
+
+	return $description;
+}
+
+/**
+ * Standardize single post titles to a compact branded pattern.
+ *
+ * @param string $title Existing title.
+ * @return string
+ */
+function hu_rank_math_post_title_pattern( $title ) {
+	if ( ! is_singular( 'post' ) || hu_is_seo_cornerstone_article() ) {
+		return $title;
+	}
+
+	return hu_get_post_title_pattern( get_queried_object_id() );
 }
 
 /**
@@ -367,6 +539,14 @@ function hu_rank_math_domdar_case_description( $description ) {
  * @return string
  */
 function hu_pre_get_document_title_override( $title ) {
+	if ( is_front_page() ) {
+		return hu_get_homepage_title();
+	}
+
+	if ( is_home() ) {
+		return hu_get_blog_archive_title();
+	}
+
 	if ( hu_is_contact_offer_page() ) {
 		return hu_get_contact_offer_title();
 	}
@@ -376,6 +556,14 @@ function hu_pre_get_document_title_override( $title ) {
 		$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
 
 		return '' !== $seo_title ? $seo_title : hu_get_domdar_case_study_title();
+	}
+
+	if ( hu_is_seo_cornerstone_article() ) {
+		return 'Technisches SEO + Performance Marketing: Fundament fehlt';
+	}
+
+	if ( is_singular( 'post' ) ) {
+		return hu_get_post_title_pattern( get_queried_object_id() );
 	}
 
 	return $title;
@@ -388,8 +576,23 @@ function hu_pre_get_document_title_override( $title ) {
  * @return array
  */
 function hu_document_title_overrides( $parts ) {
+	if ( is_front_page() ) {
+		$parts['title'] = hu_get_homepage_title();
+		return $parts;
+	}
+
+	if ( is_home() ) {
+		$parts['title'] = hu_get_blog_archive_title();
+		return $parts;
+	}
+
 	if ( hu_is_seo_cornerstone_article() ) {
 		$parts['title'] = 'Technisches SEO + Performance Marketing: Fundament fehlt';
+		return $parts;
+	}
+
+	if ( is_singular( 'post' ) ) {
+		$parts['title'] = hu_get_post_title_pattern( get_queried_object_id() );
 		return $parts;
 	}
 
@@ -552,7 +755,17 @@ function hu_get_seo_meta() {
 		'360-deep-dive',
 	];
 
-	if ( hu_is_contact_offer_page() ) {
+	if ( is_front_page() ) {
+		$meta['og_title']    = hu_get_homepage_title();
+		$meta['description'] = hu_get_homepage_description();
+		$meta['canonical']   = home_url( '/' );
+
+	} elseif ( is_home() ) {
+		$meta['og_title']    = hu_get_blog_archive_title();
+		$meta['description'] = hu_get_blog_archive_description();
+		$meta['canonical']   = get_permalink( get_option( 'page_for_posts' ) );
+
+	} elseif ( hu_is_contact_offer_page() ) {
 		$meta['og_title']    = hu_get_contact_offer_title();
 		$meta['description'] = hu_get_contact_offer_description();
 		$meta['canonical']   = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
@@ -654,18 +867,6 @@ function hu_get_seo_meta() {
 		if ( is_singular( 'post' ) ) {
 			$meta['og_type'] = 'article';
 		}
-
-	} elseif ( is_front_page() ) {
-
-		$meta['og_title']    = get_bloginfo( 'name' ) . ' · ' . get_bloginfo( 'description' );
-		$meta['description'] = get_bloginfo( 'description' );
-		$meta['canonical']   = home_url( '/' );
-
-	} elseif ( is_home() ) {
-
-		$meta['og_title']    = __( 'Blog', 'blocksy-child' ) . ' · ' . get_bloginfo( 'name' );
-		$meta['description'] = __( 'Strategische Impulse für WordPress, SEO, Tracking und Conversion-Optimierung.', 'blocksy-child' );
-		$meta['canonical']   = get_permalink( get_option( 'page_for_posts' ) );
 
 	} elseif ( is_category() || is_tag() || is_tax() ) {
 

@@ -77,9 +77,9 @@ $audit_url = nexus_get_audit_url();
 
 	<!-- 5. ALTERNATIVE CTA -->
 	<section class="deepdive-alt-cta">
-			<p class="deepdive-alt-label">Wenn der Kontext schon klar ist:</p>
-			<a href="https://cal.com/hasim/30min" class="deepdive-alt-link" target="_blank" rel="noopener">
-			-> Strategiecall buchen (30 Min, kostenlos)
+			<p class="deepdive-alt-label">Wenn der Kontext doch noch sortiert werden soll:</p>
+			<a href="<?php echo esc_url( $audit_url ); ?>" class="deepdive-alt-link">
+			-> Erst den Growth Audit starten
 			</a>
 		</section>
 

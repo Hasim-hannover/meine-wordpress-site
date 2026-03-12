@@ -87,9 +87,11 @@ function nexus_get_audit_request_type_options() {
  * @return string
  */
 function nexus_get_audit_calendar_url() {
+	$default_url = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
+
 	return (string) apply_filters(
 		'nexus_audit_calendar_url',
-		apply_filters( 'nexus_review_calendar_url', 'https://cal.com/hasim/30min' )
+		apply_filters( 'nexus_review_calendar_url', $default_url )
 	);
 }
 

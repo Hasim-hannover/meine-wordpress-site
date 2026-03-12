@@ -344,7 +344,7 @@ function nexus_get_wgos_asset_content_html( $asset ) {
 	$wgos_url     = nexus_get_wgos_url();
 	$hub_url      = nexus_get_wgos_asset_hub_url();
 	$audit_url    = nexus_get_audit_url();
-	$calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : 'https://cal.com/hasim/30min';
+	$calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' );
 	$related      = nexus_get_wgos_asset_related_items( $asset );
 
 	ob_start();

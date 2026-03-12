@@ -363,6 +363,54 @@ function hu_output_schema()
             $schemas[0]['founder'] = ['@id' => home_url('/uber-mich/#person')];
         }
 
+        if ( is_singular( 'post' ) && $post_id ) {
+            $author_id         = (int) get_post_field( 'post_author', $post_id );
+            $author_name       = $author_id ? get_the_author_meta( 'display_name', $author_id ) : 'Hasim Uener';
+            $author_profile    = home_url( '/uber-mich/' );
+            $post_permalink    = get_permalink( $post_id );
+            $post_description  = get_the_excerpt( $post_id );
+            $post_description  = $post_description ? wp_strip_all_tags( $post_description ) : wp_strip_all_tags( get_the_title( $post_id ) );
+            $post_image        = get_the_post_thumbnail_url( $post_id, 'full' );
+            $published_date    = get_post_time( DATE_W3C, true, $post_id );
+            $modified_date     = get_post_modified_time( DATE_W3C, true, $post_id );
+
+            $blog_posting = [
+                '@context'         => 'https://schema.org',
+                '@type'            => 'BlogPosting',
+                '@id'              => trailingslashit( $post_permalink ) . '#blogposting',
+                'mainEntityOfPage' => $post_permalink,
+                'headline'         => get_the_title( $post_id ),
+                'description'      => $post_description,
+                'datePublished'    => $published_date,
+                'dateModified'     => $modified_date,
+                'inLanguage'       => 'de',
+                'author'           => [
+                    '@type'  => 'Person',
+                    'name'   => $author_name,
+                    'url'    => $author_profile,
+                    'sameAs' => [
+                        'https://www.linkedin.com/in/hasim-%C3%BCner/',
+                    ],
+                ],
+                'publisher'        => ['@id' => home_url('/#organization')],
+                'isPartOf'         => [
+                    '@type' => 'Blog',
+                    '@id'   => home_url('/blog/#blog'),
+                    'url'   => home_url('/blog/'),
+                    'name'  => 'Insights',
+                ],
+            ];
+
+            if ( $post_image ) {
+                $blog_posting['image'] = [
+                    '@type' => 'ImageObject',
+                    'url'   => $post_image,
+                ];
+            }
+
+            $schemas[] = $blog_posting;
+        }
+
         // Ergebnisse hub: CollectionPage schema
         if ($slug === 'case-studies' || $slug === 'case-studies-e-commerce' || $slug === 'ergebnisse') {
             $collection = [

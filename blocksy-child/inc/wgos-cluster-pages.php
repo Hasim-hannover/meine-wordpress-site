@@ -453,6 +453,11 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 			'cwv-speed-audit'      => 'Zeigt, ob Ladezeit, Layout Shifts oder Render-Blocking die Nachfrage schon vor dem Angebot ausbremsen.',
 			'cwv-optimierung'      => 'Setzt die groessten Performance-Fixes dort um, wo sie Rankings und Conversion direkt entlasten.',
 		],
+		'supporting_link' => [
+			'label' => 'WordPress Agentur Hannover',
+			'url'   => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
+			'text'  => 'Wenn Sie fuer dieses Thema einen lokalen Einstieg suchen, ist die Agentur-Seite der direkte Anschluss zwischen SEO, Technik und Conversion.',
+		],
 	];
 
 	$bridges = [
@@ -474,6 +479,11 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 				'landing-page-optimierung' => 'Hebt bestehende Landing Pages an Headline, Struktur und Reibung an.',
 				'cta-formular-optimierung' => 'Prueft Formulare und CTA-Huerden dort, wo qualifizierte Besucher heute aussteigen.',
 				'angebotsseiten-architektur' => 'Sichert, dass einzelne Landing Pages in eine konsistente Angebotslogik eingebettet sind.',
+			],
+			'supporting_link' => [
+				'label' => 'WordPress Agentur Hannover',
+				'url'   => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
+				'text'  => 'Wenn Landing Pages Teil eines groesseren WordPress-Systems werden sollen, fuehrt die lokale Agentur-Seite direkt in den passenden Kontext.',
 			],
 		],
 		'meta-ads-fuer-b2b' => [
@@ -549,6 +559,7 @@ function nexus_get_wgos_blog_asset_bridge( $value = null ) {
  */
 function nexus_render_wgos_blog_asset_bridge( $bridge ) {
 	$cards = nexus_get_wgos_cluster_page_asset_cards( $bridge );
+	$supporting_link = isset( $bridge['supporting_link'] ) && is_array( $bridge['supporting_link'] ) ? $bridge['supporting_link'] : [];
 
 	ob_start();
 	?>
@@ -566,6 +577,16 @@ function nexus_render_wgos_blog_asset_bridge( $bridge ) {
 					</article>
 				<?php endforeach; ?>
 			</div>
+
+			<?php if ( ! empty( $supporting_link['url'] ) && ! empty( $supporting_link['label'] ) ) : ?>
+				<p class="nx-asset-bridge__supporting-link">
+					<?php if ( ! empty( $supporting_link['text'] ) ) : ?>
+						<?php echo esc_html( (string) $supporting_link['text'] ); ?>
+						<?php echo ' '; ?>
+					<?php endif; ?>
+					<a href="<?php echo esc_url( (string) $supporting_link['url'] ); ?>"><?php echo esc_html( (string) $supporting_link['label'] ); ?></a>
+				</p>
+			<?php endif; ?>
 		</div>
 	</section>
 	<?php
