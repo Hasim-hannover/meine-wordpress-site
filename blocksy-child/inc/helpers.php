@@ -373,18 +373,33 @@ function nexus_get_current_request_path() {
 }
 
 /**
- * Map deprecated service and tool slugs to their canonical WGOS or hub targets.
+ * Map deprecated service, audit and tool slugs to their canonical targets.
  *
  * @return array<string, string>
  */
 function nexus_get_legacy_offer_redirect_map() {
-	return [
+	$redirect_map = [
+		'/audit/'                     => nexus_get_audit_url(),
+		'/customer-journey-audit/'    => nexus_get_audit_url(),
+		'/360-audit/'                 => nexus_get_audit_url(),
+		'/wordpress-tech-audit/'      => nexus_get_audit_url(),
+		'/wordpress-agentur/'         => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
 		'/ga4-tracking-setup/'         => nexus_get_wgos_asset_anchor_url( 'tracking-audit' ),
 		'/performance-marketing/'      => nexus_get_wgos_url(),
 		'/meta-ads/'                   => nexus_get_wgos_url(),
 		'/wordpress-wartung-hannover/' => nexus_get_wgos_asset_anchor_url( 'security-hardening' ),
 		'/roi-rechner/'                => nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ),
 	];
+
+	foreach ( $redirect_map as $legacy_path => $target_url ) {
+		$target_path = trailingslashit( '/' . ltrim( (string) wp_parse_url( $target_url, PHP_URL_PATH ), '/' ) );
+
+		if ( $target_path === $legacy_path ) {
+			unset( $redirect_map[ $legacy_path ] );
+		}
+	}
+
+	return $redirect_map;
 }
 
 add_action( 'template_redirect', 'nexus_redirect_legacy_offer_paths', 2 );

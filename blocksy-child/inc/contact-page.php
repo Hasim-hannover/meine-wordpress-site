@@ -41,7 +41,7 @@ function nexus_is_contact_request_path() {
 /**
  * Redirect the previous contact slug to the canonical /kontakt/ URL.
  *
- * Use a temporary redirect while editor and menu references are still being cleaned up.
+ * Redirect the retired contact slug permanently to the canonical /kontakt/ route.
  *
  * @return void
  */
@@ -57,7 +57,7 @@ function nexus_redirect_legacy_contact_path() {
 	}
 
 	nocache_headers();
-	wp_safe_redirect( nexus_get_contact_url(), 302 );
+	wp_safe_redirect( nexus_get_contact_url(), 301 );
 	exit;
 }
 add_action( 'template_redirect', 'nexus_redirect_legacy_contact_path', 6 );

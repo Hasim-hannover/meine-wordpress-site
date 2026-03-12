@@ -30,6 +30,149 @@ add_filter( 'rank_math/frontend/title', 'hu_rank_math_generic_stored_title', 99 
 add_filter( 'rank_math/frontend/description', 'hu_rank_math_generic_stored_description', 99 );
 add_filter( 'pre_get_document_title', 'hu_pre_get_document_title_override' );
 add_filter( 'document_title_parts', 'hu_document_title_overrides' );
+add_filter( 'wp_sitemaps_posts_query_args', 'hu_exclude_utility_pages_from_core_sitemaps', 10, 2 );
+
+/**
+ * Return page templates that should stay out of the index and sitemap.
+ *
+ * @return array<int, string>
+ */
+function hu_get_noindex_templates() {
+	return [
+		'template-portal.php',
+	];
+}
+
+/**
+ * Return slugs that should stay out of the index and sitemap.
+ *
+ * @return array<int, string>
+ */
+function hu_get_noindex_slugs() {
+	return [
+		'danke',
+		'danke-anfage-audit',
+		'danke-anfrage-audit',
+		'thank-you',
+		'newsletter_bestaetigungseite',
+		'portal',
+		'login',
+		'kunden-login',
+		'impressum',
+		'datenschutz',
+		'360-deep-dive',
+	];
+}
+
+/**
+ * Return legacy page slugs that should not appear in the native sitemap.
+ *
+ * @return array<int, string>
+ */
+function hu_get_legacy_sitemap_excluded_page_slugs() {
+	$paths = [
+		'/case-studies/',
+		'/case-studies-e-commerce/',
+	];
+
+	if ( function_exists( 'nexus_get_legacy_offer_redirect_map' ) ) {
+		$paths = array_merge( $paths, array_keys( nexus_get_legacy_offer_redirect_map() ) );
+	}
+
+	if ( function_exists( 'nexus_get_contact_legacy_paths' ) ) {
+		$paths = array_merge( $paths, nexus_get_contact_legacy_paths() );
+	}
+
+	$slugs = [];
+
+	foreach ( $paths as $path ) {
+		$slug = sanitize_title( trim( (string) $path, '/' ) );
+
+		if ( '' !== $slug ) {
+			$slugs[] = $slug;
+		}
+	}
+
+	return array_values( array_unique( $slugs ) );
+}
+
+/**
+ * Collect published page IDs that should be excluded from the native sitemap.
+ *
+ * @return array<int, int>
+ */
+function hu_get_sitemap_excluded_page_ids() {
+	static $excluded_ids = null;
+
+	if ( null !== $excluded_ids ) {
+		return $excluded_ids;
+	}
+
+	$excluded_ids   = [];
+	$excluded_slugs = array_flip(
+		array_merge(
+			hu_get_noindex_slugs(),
+			hu_get_legacy_sitemap_excluded_page_slugs()
+		)
+	);
+	$pages          = get_posts(
+		[
+			'post_type'              => 'page',
+			'post_status'            => 'publish',
+			'posts_per_page'         => -1,
+			'orderby'                => 'ID',
+			'order'                  => 'ASC',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+		]
+	);
+
+	foreach ( $pages as $page ) {
+		$page_id          = (int) $page->ID;
+		$slug             = isset( $page->post_name ) ? (string) $page->post_name : '';
+		$template         = get_page_template_slug( $page_id );
+		$acf_noindex      = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $page_id ) : false;
+		$rank_math_robots = get_post_meta( $page_id, 'rank_math_robots', true );
+		$rank_math_noindex = is_array( $rank_math_robots ) ? in_array( 'noindex', $rank_math_robots, true ) : 'noindex' === $rank_math_robots;
+
+		if ( in_array( $template, hu_get_noindex_templates(), true ) || isset( $excluded_slugs[ $slug ] ) || $acf_noindex || $rank_math_noindex ) {
+			$excluded_ids[] = $page_id;
+		}
+	}
+
+	return array_values( array_unique( $excluded_ids ) );
+}
+
+/**
+ * Keep utility, noindex and redirect-only pages out of the native WordPress sitemap.
+ *
+ * @param array<string, mixed> $args      Query arguments.
+ * @param string               $post_type Current post type.
+ * @return array<string, mixed>
+ */
+function hu_exclude_utility_pages_from_core_sitemaps( $args, $post_type ) {
+	if ( 'page' !== $post_type ) {
+		return $args;
+	}
+
+	$excluded_ids = hu_get_sitemap_excluded_page_ids();
+
+	if ( empty( $excluded_ids ) ) {
+		return $args;
+	}
+
+	$args['post__not_in'] = array_values(
+		array_unique(
+			array_merge(
+				isset( $args['post__not_in'] ) ? (array) $args['post__not_in'] : [],
+				$excluded_ids
+			)
+		)
+	);
+
+	return $args;
+}
 
 /**
  * Determine whether a stored SEO string still contains unresolved token syntax.
@@ -537,23 +680,8 @@ function hu_get_seo_meta() {
 	];
 
 	// ── Utility-Seiten → noindex ──────────────────────────────────
-	$noindex_templates = [
-		'template-portal.php',
-	];
-
-	$noindex_slugs = [
-		'danke',
-		'danke-anfage-audit',
-		'danke-anfrage-audit',
-		'thank-you',
-		'newsletter_bestaetigungseite',
-		'portal',
-		'login',
-		'kunden-login',
-		'impressum',
-		'datenschutz',
-		'360-deep-dive',
-	];
+	$noindex_templates = hu_get_noindex_templates();
+	$noindex_slugs     = hu_get_noindex_slugs();
 
 	if ( hu_is_contact_offer_page() ) {
 		$meta['og_title']    = hu_get_contact_offer_title();
