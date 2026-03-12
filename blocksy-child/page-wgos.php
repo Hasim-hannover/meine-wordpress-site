@@ -400,7 +400,7 @@ $faq_items = [
 	],
 	[
 		'question' => 'Warum beginnt alles mit dem Growth Audit?',
-		'answer'   => 'Weil die richtige Reihenfolge nie pauschal ist. Der Audit zeigt, wo das System trägt, wo es bricht und was zuerst sinnvoll ist.',
+		'answer'   => 'Weil die richtige Reihenfolge nie pauschal ist. Der Audit zeigt ehrlich, wo das System trägt, wo es bricht und ob zuerst ein begrenzter Asset-Sprint oder erst Fundamentarbeit sinnvoll ist.',
 	],
 	[
 		'question' => 'Warum Credits statt Stunden?',

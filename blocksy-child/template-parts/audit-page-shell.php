@@ -56,7 +56,7 @@ $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/
 						<h2>Eine erste Priorisierung, die sofort brauchbar ist.</h2>
 						<p class="review-offer-copy">
 							Kein Tool-Score, kein PDF-Ballast, keine künstlich große Analyse.
-							Der Einstieg bleibt bewusst eng, damit die Einordnung konkret bleibt.
+							Der Einstieg bleibt bewusst eng, damit die Einordnung konkret bleibt, auch wenn das Urteil gegen direkte Umsetzung spricht.
 						</p>
 
 						<div class="review-offer-list">
@@ -70,7 +70,7 @@ $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/
 							</div>
 							<div class="review-offer-item">
 								<strong>1 nächster Schritt</strong>
-								<span>Direkt umsetzbar oder, wenn nötig, sauber in einen vertieften Folgeprozess überführt.</span>
+								<span>Direkt umsetzbar oder klar benannt, wenn vor jeder Umsetzung zuerst Fundament fehlt.</span>
 							</div>
 						</div>
 
@@ -127,7 +127,7 @@ $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/
 				<div class="review-section-head">
 					<span class="review-section-kicker">Was Sie bekommen</span>
 					<h2 id="review-value-headline">Kurz. Priorisiert. Direkt lesbar.</h2>
-					<p>Der Audit ist keine Sammlung von Beobachtungen, sondern eine erste wirtschaftliche Einordnung Ihrer Seite.</p>
+					<p>Der Audit ist keine Sammlung von Beobachtungen, sondern eine erste wirtschaftliche Einordnung Ihrer Seite, auch wenn die erste Empfehlung lautet: noch nicht direkt umsetzen.</p>
 				</div>
 				<div class="review-value-grid" aria-label="Audit-Inhalte">
 					<article class="review-value-card">
@@ -523,8 +523,12 @@ $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/
 					<div class="faq-ans">Nein. Die Rückmeldung kommt zuerst schriftlich. Wenn danach ein Gespräch sinnvoll ist, ergibt sich das aus der Lage und nicht aus einer Pflicht im Funnel.</div>
 				</details>
 				<details>
+					<summary>Was passiert, wenn die Bewertung schlecht ausfällt?</summary>
+					<div class="faq-ans">Dann benenne ich genau das. Das Versprechen ist kein positives Urteil, sondern eine ehrliche, brauchbare Bewertung Ihrer Seite und ein sinnvoller nächster Schritt.</div>
+				</details>
+				<details>
 					<summary>Ist der Einstieg wirklich kostenlos?</summary>
-					<div class="faq-ans">Ja. Der Growth Audit ist der kostenlose Einstieg in die Diagnose. Er bleibt bewusst eng gefasst, damit die Rückmeldung schnell und brauchbar bleibt.</div>
+					<div class="faq-ans">Ja. Der Growth Audit ist der kostenlose Einstieg in die Diagnose. Er bleibt bewusst eng gefasst, damit die Rückmeldung schnell und brauchbar bleibt, auch wenn das Urteil klar gegen direkte Umsetzung ausfällt.</div>
 				</details>
 			</section>
 

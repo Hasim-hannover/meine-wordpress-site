@@ -220,7 +220,7 @@ function nexus_get_contact_focus_options() {
 			'types' => [ 'project' ],
 		],
 		'pilot'            => [
-			'label' => 'Pilotprojekt / Proof-of-Value',
+			'label' => 'Pilotprojekt / Asset Sprint',
 			'types' => [ 'project' ],
 		],
 		'support'          => [

@@ -42,7 +42,7 @@ $faq_items = [
 	],
 	[
 		'question' => 'Wie startet die Zusammenarbeit?',
-		'answer'   => 'Mit dem Growth Audit. Danach ist klar, was zuerst zählt und ob ein größerer Folgeprozess überhaupt nötig ist. Alles Weitere ergibt sich erst nach Rückmeldung und persönlichem Kontakt.',
+		'answer'   => 'Mit dem Growth Audit. Sie bekommen zuerst eine ehrliche Bewertung der wichtigsten Seite. Wenn das Fundament trägt, folgt optional ein begrenzter Asset-Sprint. Wenn nicht, ist trotzdem klar, was vor jeder Umsetzung zuerst gelöst werden muss.',
 	],
 ];
 
@@ -177,12 +177,12 @@ get_header();
 					<article class="nx-step">
 						<div class="nx-step__number">1</div>
 						<h3>Growth Audit</h3>
-						<p>Der Einstieg. Wir prüfen, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen und ob ein tieferer Eingriff wirtschaftlich Sinn ergibt.</p>
+						<p>Der Einstieg. Wir bewerten ehrlich, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen, was zuerst zählt und was besser noch nicht umgesetzt wird.</p>
 					</article>
 					<article class="nx-step nx-step--highlight">
 						<div class="nx-step__number">2</div>
-						<h3>Priorisierung im direkten Austausch</h3>
-						<p>Der öffentliche Einstieg bleibt bewusst der Growth Audit. Wenn der Fall tiefer geht, entsteht der nächste vertiefte Schritt erst nach Rückmeldung und persönlichem Kontakt.</p>
+						<h3>Pilot Asset Sprint</h3>
+						<p>Wenn eine bestehende Money Page oder Landingpage tragfähig genug ist, setzen wir dort den ersten Hebel direkt um. Wenn nicht, wird klar, was vor jeder Umsetzung zuerst gelöst werden muss.</p>
 					</article>
 					<article class="nx-step">
 						<div class="nx-step__number">3</div>

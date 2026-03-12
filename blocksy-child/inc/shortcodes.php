@@ -331,8 +331,8 @@ function hu_wgos_block_shortcode() {
 				<span class="wp-badge">Angebotsarchitektur</span>
 				<h2 id="angebot-heading" class="wp-section-h2">Drei Stufen statt zehn Einzelleistungen.</h2>
 				<p class="wp-section-p">
-					Der Ablauf ist bewusst eng geführt: erst Diagnose, dann Priorisierung im direkten Austausch,
-					dann Umsetzung und laufende Optimierung auf WordPress-Basis.
+					Der Ablauf ist bewusst eng geführt: erst ehrliche Bewertung, dann ein begrenzter Asset-Sprint,
+					dann systemische Umsetzung und laufende Optimierung auf WordPress-Basis.
 				</p>
 			</div>
 
@@ -340,12 +340,12 @@ function hu_wgos_block_shortcode() {
 				<div class="wp-step nx-reveal">
 					<div class="wp-step-num">1</div>
 					<h3>Growth Audit</h3>
-					<p>Der niedrigschwellige Einstieg. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen und ob sich ein tieferer Eingriff lohnt.</p>
+					<p>Der Einstieg. Wir bewerten eine konkrete Seite ehrlich: wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen, was zuerst zählt und was besser noch nicht umgesetzt wird.</p>
 				</div>
 				<div class="wp-step highlight-step nx-reveal">
 					<div class="wp-step-num highlight-num">2</div>
-					<h3>Priorisierung im direkten Austausch</h3>
-					<p>Der öffentliche Einstieg bleibt bewusst der Growth Audit. Wenn der Fall tiefer geht, entsteht der nächste vertiefte Schritt erst nach Rückmeldung und persönlichem Kontakt.</p>
+					<h3>Pilot Asset Sprint</h3>
+					<p>Wenn die Seite tragfähig genug ist, wird auf einer bestehenden Money Page oder Landingpage der erste Hebel direkt umgesetzt. Wenn das Urteil kritisch ausfällt, wird klar benannt, was vor jeder Umsetzung zuerst gelöst werden muss.</p>
 				</div>
 				<div class="wp-step nx-reveal">
 					<div class="wp-step-num">3</div>
@@ -547,7 +547,7 @@ function hu_faq_section_shortcode() {
 				</details>
 				<details class="nx-faq__item nx-reveal">
 					<summary>Wie startet die Zusammenarbeit?</summary>
-					<div class="nx-faq__content">Mit dem Growth Audit. Danach gibt es eine klare Priorität und den nächsten sinnvollen Schritt. Größere Folgeprojekte ergeben sich erst nach der Rückmeldung und persönlichem Kontakt.</div>
+					<div class="nx-faq__content">Mit dem Growth Audit. Sie bekommen zuerst eine ehrliche Bewertung der wichtigsten Seite. Wenn das Fundament trägt, folgt optional ein begrenzter Asset-Sprint. Wenn nicht, ist trotzdem klar, was vor jeder Umsetzung zuerst gelöst werden muss.</div>
 				</details>
 			</div>
 		</div>
@@ -675,18 +675,18 @@ function hu_cta_section_shortcode() {
 		<div class="nx-container">
 			<div class="homepage-pilot-card nx-reveal">
 				<div class="homepage-pilot-card__copy">
-					<span class="nx-badge nx-badge--gold">Proof-of-Value</span>
-					<h2 id="pilot-heading" class="homepage-pilot-card__title">Erste Ergebnisse in 5 Tagen – mit Risikobegrenzung</h2>
-					<p class="homepage-pilot-card__lead">Sie sind noch unsicher? Starten Sie mit einem gedeckelten Pilotprojekt. Für einen Festpreis von 1.500 € analysiere ich Ihre kritischste Unterseite, zum Beispiel Ihre wichtigste Money Page, und liefere Ihnen einen umsetzungsfertigen Report mit den drei größten Hebeln.</p>
-					<p class="homepage-pilot-card__lead">Wenn das Projekt passt, kann es mit Ihrer Einwilligung später als anonymisierte Referenz aufbereitet werden, damit andere Teams von den Learnings profitieren und Sie früh einen sichtbaren Proof-Baustein aus der Zusammenarbeit gewinnen.</p>
+					<span class="nx-badge nx-badge--gold">Pilot Asset Sprint</span>
+					<h2 id="pilot-heading" class="homepage-pilot-card__title">Klare Bewertung und erster Hebel in 5 Tagen</h2>
+					<p class="homepage-pilot-card__lead">Für einen Festpreis von 1.500 € prüfen wir eine bestehende Money Page oder Landingpage, bewerten sie ehrlich und setzen den ersten sinnvollen Hebel direkt im bestehenden WordPress-Setup um.</p>
+					<p class="homepage-pilot-card__lead">Wenn die Seite dafür noch nicht tragfähig ist, wird genau das klar benannt. Das Versprechen ist nicht ein schönes Urteil, sondern eine brauchbare Bewertung und ein nächster Schritt, der wirtschaftlich Sinn ergibt.</p>
 				</div>
 
 				<div class="homepage-pilot-card__details">
 					<div class="homepage-pilot-card__price">1.500 € Festpreis</div>
 					<ul class="premium-list" style="margin:1.25rem 0 0;">
-						<li><span class="check-icon">✓</span> <div>kritischste Angebots- oder Money Page im Detail priorisiert</div></li>
-						<li><span class="check-icon">✓</span> <div>drei größte Hebel inkl. klarer Reihenfolge und Umsetzungslogik</div></li>
-						<li><span class="check-icon">✓</span> <div>anonymisierbare Referenz-Option, wenn Ergebnisse und Freigabe passen</div></li>
+						<li><span class="check-icon">✓</span> <div>ehrliche Bewertung der gewählten Seite, auch wenn sie kritisch ausfällt</div></li>
+						<li><span class="check-icon">✓</span> <div>ein priorisierter Hebel direkt im bestehenden WordPress-Setup umgesetzt</div></li>
+						<li><span class="check-icon">✓</span> <div>kurze Übergabe mit den nächsten sinnvollen Schritten nach dem Sprint</div></li>
 					</ul>
 					<a
 						class="wp-btn wp-btn-primary full-width"
@@ -696,7 +696,7 @@ function hu_cta_section_shortcode() {
 					>
 						Jetzt Pilotprojekt anfragen
 					</a>
-					<p class="homepage-pilot-card__note">Kein offener Scope, kein Endlos-Retainer als Erstschritt. Erst ein belastbarer Proof-of-Value, dann die größere Entscheidung.</p>
+					<p class="homepage-pilot-card__note">Kein offener Scope, kein Endlos-Retainer als Erstschritt. Erst ehrliche Bewertung, dann ein klar begrenzter Eingriff auf einem Asset.</p>
 				</div>
 			</div>
 		</div>
