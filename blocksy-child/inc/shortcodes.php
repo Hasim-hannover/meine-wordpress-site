@@ -69,13 +69,20 @@ function hu_home_public_proof_data() {
  * @return string
  */
 function hu_home_system_section_markup() {
-	$urls   = hu_home_urls();
-	$layers = [
+	$urls                  = hu_home_urls();
+	$platform_capabilities = [
+		'Leistungen sichtbar machen',
+		'Anfragen führen',
+		'Signale sammeln',
+		'Prioritäten steuern',
+		'kontrolliert weiterentwickeln',
+	];
+	$layers                = [
 		[
 			'label'  => 'Sichtbarkeit und Conversion',
 			'title'  => 'Öffentliche Website',
-			'text'   => 'Startseite, Angebotsseiten, SEO-/Money-Pages und Proof-Seiten bilden die sichtbare Oberfläche. Die Website ist nicht Broschüre, sondern die Oberfläche eines Nachfrage-Systems.',
-			'result' => 'Die sichtbare Oberfläche Ihres Nachfrage-Systems.',
+			'text'   => 'Startseite, Angebotsseiten, SEO-/Money-Pages und Proof-Seiten bilden die sichtbare Oberfläche. Hier werden Leistungen verständlich, Vertrauen aufgebaut und Anfragen in klare nächste Schritte geführt.',
+			'result' => 'Die sichtbare Angebots- und Vertriebsoberfläche Ihres Systems.',
 			'items'  => [
 				'Startseite',
 				'Angebotsseiten',
@@ -88,7 +95,7 @@ function hu_home_system_section_markup() {
 		[
 			'label'  => 'Signale und Messbarkeit',
 			'title'  => 'Mess- und Datenebene',
-			'text'   => 'Consent, Events, Conversion-Signale sowie SEO- und Performance-Daten liefern eine belastbare Basis. Entscheidungen beruhen auf brauchbaren Signalen statt auf Bauchgefühl oder Reporting-Rauschen.',
+			'text'   => 'Consent, Events, Conversion-Signale sowie SEO- und Performance-Daten schaffen eine belastbare Datenlage. So entstehen verwertbare Signale statt Reporting-Rauschen oder Bauchgefühl.',
 			'result' => 'Belastbare Signale statt Reporting-Rauschen.',
 			'items'  => [
 				'Tracking',
@@ -116,8 +123,8 @@ function hu_home_system_section_markup() {
 		[
 			'label'  => 'Betrieb und Ownership',
 			'title'  => 'Kontrollierte Weiterentwicklung',
-			'text'   => 'Saubere Codebasis, GitHub-Versionierung, kontrollierte Deployments und ein schlanker Stack halten das System wartbar. Keine Blackbox, keine unnötigen Abhängigkeiten, kein zufälliges WordPress-Chaos.',
-			'result' => 'Saubere Weiterentwicklung ohne Blackbox oder Lock-in.',
+			'text'   => 'Saubere Codebasis, GitHub-Versionierung, kontrollierte Deployments und ein schlanker Stack halten das System wartbar. So bleiben Daten, Abläufe und Weiterentwicklung nachvollziehbar, ausbaufähig und nicht an eine Blackbox gebunden.',
+			'result' => 'Mehr Ownership und weniger unnötige Abhängigkeiten.',
 			'items'  => [
 				'saubere Codebasis',
 				'GitHub und Versionierung',
@@ -131,7 +138,7 @@ function hu_home_system_section_markup() {
 	$benefits = [
 		'Klarere Daten statt Reporting-Rauschen',
 		'Weniger Reibung im Anfrageprozess',
-		'Mehr Ownership statt Lock-in',
+		'Mehr Ownership und weniger unnötige Abhängigkeiten',
 		'Priorisierte Weiterentwicklung statt WordPress-Chaos',
 	];
 	$layer_count = count( $layers );
@@ -144,14 +151,20 @@ function hu_home_system_section_markup() {
 				<span class="wp-badge">System in der Praxis</span>
 				<h2 id="systembild-heading" class="wp-section-h2">Ihre WordPress-Website sollte nicht nur gut aussehen. Sie sollte steuerbar sein.</h2>
 				<p class="wp-section-p homepage-system-section__intro">
-					Eine professionelle WordPress-Seite ist keine isolierte Online-Präsenz. Sie verbindet sichtbare Seiten, saubere Messbarkeit,
-					ein Kundencockpit für Prioritäten und kontrollierte Weiterentwicklung zu einer Infrastruktur, die Nachfrage, Conversion und Entscheidungen verbessert.
+					Eine professionelle WordPress-Seite ist keine isolierte Online-Präsenz. Sie ist Business-Plattform:
+					sichtbar für den Markt, nützlich für Vertrieb und Marketing, verwertbar für Entscheidungen und technisch so gebaut,
+					dass sie kontrolliert weiterentwickelt werden kann.
 				</p>
 			</div>
 
 			<div class="homepage-system-layout">
 				<div class="homepage-system-visual">
 					<p class="homepage-system-visual__lead nx-reveal">Nicht nur eine Website. Sondern ein steuerbares System aus Seiten, Daten, Leads, SEO und sauberer Weiterentwicklung.</p>
+					<div class="homepage-platform-strip nx-reveal" role="list" aria-label="Was die Website operativ leisten muss">
+						<?php foreach ( $platform_capabilities as $capability ) : ?>
+							<span class="homepage-platform-strip__item" role="listitem"><?php echo esc_html( $capability ); ?></span>
+						<?php endforeach; ?>
+					</div>
 					<ol class="homepage-system-flow" aria-label="Architektur eines professionellen WordPress-Systems">
 						<?php foreach ( $layers as $index => $layer ) : ?>
 							<li class="homepage-system-card nx-reveal">
@@ -199,8 +212,8 @@ function hu_home_system_section_markup() {
 					</div>
 
 					<p class="homepage-system-economics__note">
-						Sie sehen nicht nur, dass Anfragen kommen. Sie sehen auch, woher sie kommen, welche Seiten tragen
-						und welche Maßnahme wirtschaftlich als Nächstes Sinn ergibt.
+						Sie sehen nicht nur, ob etwas online ist. Sie sehen, ob die Plattform trägt, wo sie bremst
+						und welcher nächste Schritt wirtschaftlich Sinn ergibt.
 					</p>
 				</aside>
 			</div>
@@ -242,10 +255,10 @@ function hu_hero_section_shortcode() {
 							Ich mache aus Ihrer<br><span>WordPress-Website ein planbares Anfragesystem.</span>
 						</h1>
 						<p class="wp-hero-subtitle nx-reveal">
-							Für B2B-Unternehmen, die aus WordPress mehr brauchen als einen Relaunch:
-							klare Positionierung, technische SEO, privacy-first Messbarkeit und Conversion-Logik,
-							damit aus Sichtbarkeit belastbare Anfragen werden.
+							Für B2B-Unternehmen, die aus WordPress mehr brauchen als eine digitale Visitenkarte:
+							klare Positionierung, technische SEO, privacy-first Messbarkeit und Conversion-Logik.
 						</p>
+						<p class="wp-hero-platform-note nx-reveal">So wird aus einer Website eine steuerbare Business-Plattform für Sichtbarkeit, Lead-Führung, Datensignale und kontrollierte Weiterentwicklung.</p>
 						<div class="wp-hero-proof nx-reveal" role="list" aria-label="Vertrauenssignale">
 							<span class="wp-hero-proof-item" role="listitem">3.000+ qualifizierte Leads in 18 Monaten aus einem aufgebauten System</span>
 							<span class="wp-hero-proof-item" role="listitem">98/100 Mobile Performance auf Kernseiten</span>
@@ -267,8 +280,8 @@ function hu_hero_section_shortcode() {
 							</div>
 							<h3 class="audit-card-premium__title">Erster Schritt: Diagnose statt Pitch</h3>
 							<p class="audit-card-premium__copy">
-								Wir prüfen, wo Ihre WordPress-Präsenz Nachfrage verliert:
-								bei Sichtbarkeit, Vertrauen, Messbarkeit oder im nächsten Conversion-Schritt.
+								Wir prüfen, wo Ihre WordPress-Website Nachfrage verliert:
+								bei Sichtbarkeit, Vertrauen, Datensignalen oder im nächsten Conversion-Schritt.
 							</p>
 							<ul class="premium-list">
 								<li><span class="check-icon">✓</span> <div><strong>Sichtbarkeit:</strong> Kaufnahe SEO- und Einstiegsseiten im Realitätscheck</div></li>
@@ -383,7 +396,7 @@ function hu_owned_section_shortcode() {
 			<div class="section-title text-center nx-reveal">
 				<span class="badge">Das Prinzip</span>
 				<h2 id="owned-heading">Eigene Anfragen statt gemieteter Nachfrage.</h2>
-				<p>Die bessere Website ist nicht die schönere. Es ist die, die Nachfrage halten, messen und in den nächsten Schritt führen kann.</p>
+				<p>Die bessere Website ist nicht die schönere. Sondern die, die Nachfrage halten, Signale erzeugen und im Unternehmen nutzbar machen kann.</p>
 			</div>
 
 			<div class="wp-cards" style="margin-top:2.5rem;">
@@ -609,7 +622,7 @@ function hu_erfolge_section_shortcode() {
 
 			<div class="selection-card nx-reveal" style="margin:0 auto 2.5rem;">
 				<span class="selection-card-label">Passt nicht</span>
-				<p style="margin:0; color:var(--nx-text-muted);">Für reine Visitenkarten, Billig-Umsetzungen oder Teams, die zehn Taktiken parallel starten wollen. Das System ist für B2B-Unternehmen, die WordPress als echten Nachfragekanal ernst nehmen.</p>
+				<p style="margin:0; color:var(--nx-text-muted);">Für reine Visitenkarten, Billig-Umsetzungen oder Teams, die zehn Taktiken parallel starten wollen. Das System ist für B2B-Unternehmen, die WordPress als operativ nützliche Business-Plattform ernst nehmen.</p>
 			</div>
 
 			<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
@@ -680,7 +693,7 @@ function hu_faq_section_shortcode() {
 			<div class="nx-faq">
 				<details class="nx-faq__item nx-reveal">
 					<summary>Was unterscheidet Sie von einer klassischen WordPress-Agentur?</summary>
-					<div class="nx-faq__content">Ich verkaufe nicht zuerst Seiten oder Leistungslisten. Ich baue eine WordPress-Präsenz so um, dass Positionierung, Messbarkeit und Conversion als System arbeiten.</div>
+					<div class="nx-faq__content">Ich verkaufe nicht zuerst Seiten oder Leistungslisten. Ich baue WordPress als steuerbare Business-Plattform für Sichtbarkeit, Anfrageführung, Messbarkeit und kontrollierte Weiterentwicklung.</div>
 				</details>
 				<details class="nx-faq__item nx-reveal">
 					<summary>Ist das eher SEO, Tracking oder CRO?</summary>
@@ -795,11 +808,11 @@ function hu_cta_section_shortcode() {
 			<div class="nx-cta-box nx-reveal">
 				<span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Nächster Schritt</span>
 				<h2 id="cta-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1rem; color:#fff;">Prüfen wir, wo Ihre WordPress-Seite Anfragen verliert.</h2>
-				<p>Im Growth Audit sehen Sie, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen und ob sich ein tieferer Umbau wirtschaftlich lohnt.</p>
+				<p>Im Growth Audit sehen Sie, wo Sichtbarkeit, Vertrauen, Datensignale oder Conversion wegbrechen und ob Ihre Website heute schon als Plattform trägt.</p>
 
 				<div role="group" aria-label="Audit-Merkmale" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem 1.5rem; margin-bottom:2rem;">
 					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ klare Einschätzung statt Bauchgefühl</span>
-					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ Positionierung, Measurement und Conversion gemeinsam betrachtet</span>
+					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ Sichtbarkeit, Datensignale, Anfragepfade und Ownership gemeinsam betrachtet</span>
 					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ sinnvoller nächster Schritt statt Leistungsverkauf</span>
 				</div>
 

@@ -143,6 +143,17 @@
 .wp-hero-title { font-size: clamp(2.75rem, 4.8vw, 4.55rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.018em; margin: 0 0 1.35rem; color: var(--nx-text); max-width: 12.5ch; }
 .wp-hero-title span { color: var(--nx-accent-text); }
 .wp-hero-subtitle { font-size: 1.1rem; color: var(--nx-text-secondary); max-width: 60ch; margin: 0 0 1.75rem; line-height: 1.74; }
+.wp-hero-platform-note {
+  margin: 0 0 1.5rem;
+  padding: 0.95rem 1rem 1rem 1.1rem;
+  border-left: 3px solid hsl(var(--accent-hsl) / 0.7);
+  border-radius: 0 var(--nx-radius-lg) var(--nx-radius-lg) 0;
+  background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), rgba(255,255,255,0.02));
+  color: var(--nx-text);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  max-width: 60ch;
+}
 .wp-badge,
 .badge { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1rem; background: var(--nx-gold-subtle); border: 1px solid var(--nx-border-gold); color: var(--nx-accent-text); border-radius: 999px; font-size: 0.76rem; font-weight: 700; margin-bottom: 1.25rem; letter-spacing: 0.11em; text-transform: uppercase; box-shadow: 0 10px 20px hsl(var(--accent-hsl) / 0.08); }
 .wp-trust-stack { color: var(--nx-text-dim); font-size: 0.9rem; margin-bottom: 2rem; }
@@ -434,6 +445,27 @@
     line-height: 1.65;
 }
 
+.homepage-platform-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0 0 1.35rem;
+}
+
+.homepage-platform-strip__item {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.2rem;
+    padding: 0.48rem 0.82rem;
+    border-radius: var(--nx-radius-pill);
+    border: 1px solid hsl(var(--accent-hsl) / 0.18);
+    background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), rgba(255,255,255,0.02));
+    color: var(--nx-text);
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
 .homepage-system-flow {
     list-style: none;
     margin: 0;
@@ -658,7 +690,8 @@
 }
 
 :root[data-nx-theme='light'] .homepage-system-card__items li,
-:root[data-nx-theme='light'] .homepage-system-benefits li {
+:root[data-nx-theme='light'] .homepage-system-benefits li,
+:root[data-nx-theme='light'] .homepage-platform-strip__item {
     background: rgba(255, 255, 255, 0.72);
 }
 
@@ -846,6 +879,10 @@
         max-width: none;
     }
 
+    .wp-hero-platform-note {
+        max-width: none;
+    }
+
     .wp-hero-actions {
         flex-direction: column;
         align-items: stretch;
@@ -876,6 +913,11 @@
     }
 
     .homepage-system-card__items li {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .homepage-platform-strip__item {
         width: 100%;
         justify-content: flex-start;
     }
