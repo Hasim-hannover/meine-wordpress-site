@@ -49,48 +49,51 @@ export default function HomepageMindmapTeaser() {
           hochfahren.
         </p>
 
-        <div className="hmt-map" role="list" aria-label="WGOS Teaser Mindmap">
+        <ul className="hmt-map" aria-label="WGOS Teaser Mindmap">
           {phases.map((phase, index) => (
-            <button
-              key={phase.id}
-              type="button"
-              role="listitem"
-              className={[
-                "hmt-node",
-                mounted ? "is-mounted" : "",
-                activeId === phase.id ? "is-active" : "",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-              style={{
-                "--node-color": phase.color,
-                animationDelay: `${index * 140}ms`,
-              }}
-              aria-expanded={activeId === phase.id}
-              onClick={() =>
-                setActiveId((current) => (current === phase.id ? null : phase.id))
-              }
-            >
-              <span className="hmt-icon" aria-hidden="true">
-                {phase.icon}
-              </span>
-              <span className="hmt-label">{phase.label}</span>
+            <li key={phase.id} className="hmt-map__item">
+              <button
+                type="button"
+                className={[
+                  "hmt-node",
+                  mounted ? "is-mounted" : "",
+                  activeId === phase.id ? "is-active" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                style={{
+                  "--node-color": phase.color,
+                  animationDelay: `${index * 140}ms`,
+                }}
+                aria-expanded={activeId === phase.id}
+                aria-label={`${phase.label}: ${phase.modules.join(", ")}. ${phase.stat} ${phase.statLabel}.`}
+                onClick={() =>
+                  setActiveId((current) =>
+                    current === phase.id ? null : phase.id,
+                  )
+                }
+              >
+                <span className="hmt-icon" aria-hidden="true">
+                  {phase.icon}
+                </span>
+                <span className="hmt-label">{phase.label}</span>
 
-              <span className="hmt-tooltip" role="tooltip">
-                {phase.modules.map((module) => (
-                  <span key={module} className="hmt-tip-item">
-                    {module}
-                  </span>
-                ))}
-              </span>
+                <span className="hmt-tooltip">
+                  {phase.modules.map((module) => (
+                    <span key={module} className="hmt-tip-item">
+                      {module}
+                    </span>
+                  ))}
+                </span>
 
-              <span className="hmt-stat">
-                <strong>{phase.stat}</strong>
-                <em>{phase.statLabel}</em>
-              </span>
-            </button>
+                <span className="hmt-stat">
+                  <strong>{phase.stat}</strong>
+                  <em>{phase.statLabel}</em>
+                </span>
+              </button>
+            </li>
           ))}
-        </div>
+        </ul>
 
         <a className="hmt-cta" href="/wordpress-growth-operating-system/">
           Das vollständige System →
@@ -138,6 +141,8 @@ export default function HomepageMindmapTeaser() {
           grid-template-columns: repeat(3, minmax(0, 1fr));
           gap: 14px;
           margin-top: 22px;
+          list-style: none;
+          padding: 0;
         }
 
         .hmt-node {
@@ -158,8 +163,7 @@ export default function HomepageMindmapTeaser() {
           position: relative;
           opacity: 0;
           transform: translateY(12px);
-          transition: border-color 0.25s ease, transform 0.25s ease,
-            box-shadow 0.25s ease;
+          transition: border-color 0.25s ease, transform 0.25s ease;
         }
 
         .hmt-node.is-mounted {
@@ -170,6 +174,13 @@ export default function HomepageMindmapTeaser() {
           border-color: rgba(255, 176, 32, 0.45);
           transform: translateY(-2px);
           box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+        }
+
+        .hmt-node:focus-visible {
+          border-color: rgba(255, 176, 32, 0.6);
+          transform: translateY(-2px);
+          box-shadow: 0 0 0 3px rgba(255, 176, 32, 0.22);
+          outline: none;
         }
 
         .hmt-node.is-active {
@@ -206,6 +217,7 @@ export default function HomepageMindmapTeaser() {
         }
 
         .hmt-node:hover .hmt-tooltip,
+        .hmt-node:focus-visible .hmt-tooltip,
         .hmt-node.is-active .hmt-tooltip {
           opacity: 1;
           max-height: 90px;
@@ -229,6 +241,7 @@ export default function HomepageMindmapTeaser() {
             transform 0.22s ease;
         }
 
+        .hmt-node:focus-visible .hmt-stat,
         .hmt-node.is-active .hmt-stat {
           opacity: 1;
           max-height: 72px;
@@ -276,6 +289,18 @@ export default function HomepageMindmapTeaser() {
 
           .hmt-node {
             min-height: 0;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hmt-node {
+            opacity: 1;
+            transform: none;
+            transition: none;
+          }
+
+          .hmt-node.is-mounted {
+            animation: none;
           }
         }
       `}</style>

@@ -88,34 +88,34 @@ function hu_hero_section_shortcode() {
 			<div class="wp-container">
 				<div class="wp-hero-grid">
 					<div class="wp-hero-copy">
-						<span class="wp-badge nx-reveal">WordPress Growth Architect für B2B</span>
-						<h1 class="wp-hero-title nx-reveal">
+						<span class="wp-badge nx-reveal nx-visible is-visible">WordPress Growth Architect für B2B</span>
+						<h1 class="wp-hero-title nx-reveal nx-visible is-visible">
 							Ich mache aus Ihrer<br><span>WordPress-Website ein planbares Anfragesystem.</span>
 						</h1>
-						<p class="wp-hero-subtitle nx-reveal">
+						<p class="wp-hero-subtitle nx-reveal nx-visible is-visible">
 							Für B2B-Unternehmen, die aus WordPress mehr brauchen als einen Relaunch:
 							klare Positionierung, technische SEO, privacy-first Messbarkeit und Conversion-Logik,
 							damit aus Sichtbarkeit belastbare Anfragen werden.
 						</p>
-						<div class="wp-hero-proof nx-reveal" role="list" aria-label="Vertrauenssignale">
+						<div class="wp-hero-proof nx-reveal nx-visible is-visible" role="list" aria-label="Vertrauenssignale">
 							<span class="wp-hero-proof-item" role="listitem">3.000+ qualifizierte Leads in 18 Monaten aus einem aufgebauten System</span>
 							<span class="wp-hero-proof-item" role="listitem">98/100 Mobile Performance auf Kernseiten</span>
 							<span class="wp-hero-proof-item" role="listitem">Privacy-first Measurement statt Daten-Blackbox</span>
 						</div>
 
-						<div class="wp-hero-actions nx-reveal">
+						<div class="wp-hero-actions nx-reveal nx-visible is-visible">
 							<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_hero_primary_audit" data-track-category="lead_gen">Audit starten</a>
 							<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Ergebnisse ansehen</a>
 						</div>
-						<p class="wp-hero-supporting-link nx-reveal">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
+						<p class="wp-hero-supporting-link nx-reveal nx-visible is-visible">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
 					</div>
 
-					<div class="wp-hero-panel nx-reveal">
+					<div class="wp-hero-panel nx-reveal nx-visible is-visible">
 						<div class="audit-card-premium" id="audit">
 							<div class="audit-card-premium__intro">
 								<span class="audit-card-premium__eyebrow">Growth Audit</span>
 							</div>
-							<h3 class="audit-card-premium__title">Erster Schritt: Diagnose statt Pitch</h3>
+							<h2 class="audit-card-premium__title">Erster Schritt: Diagnose statt Pitch</h2>
 							<p class="audit-card-premium__copy">
 								Wir prüfen, wo Ihre WordPress-Präsenz Nachfrage verliert:
 								bei Sichtbarkeit, Vertrauen, Messbarkeit oder im nächsten Conversion-Schritt.

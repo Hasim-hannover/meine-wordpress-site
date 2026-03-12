@@ -293,11 +293,11 @@ function nexus_get_theme_toggle_html( $args = [] ) {
 	?>
 	<div class="nx-theme-toggle" data-nx-theme-toggle data-nx-theme-toggle-source="<?php echo esc_attr( $source ); ?>">
 		<div class="nx-theme-toggle__group" role="group" aria-label="<?php esc_attr_e( 'Farbschema waehlen', 'blocksy-child' ); ?>">
-			<button type="button" class="nx-theme-toggle__button" data-theme-value="dark" aria-pressed="false">
+			<button type="button" class="nx-theme-toggle__button" data-theme-value="dark" aria-pressed="false" aria-label="<?php esc_attr_e( 'Dunkles Farbschema aktivieren', 'blocksy-child' ); ?>">
 				<span class="nx-theme-toggle__icon" aria-hidden="true">D</span>
 				<span><?php esc_html_e( 'Dunkel', 'blocksy-child' ); ?></span>
 			</button>
-			<button type="button" class="nx-theme-toggle__button" data-theme-value="light" aria-pressed="false">
+			<button type="button" class="nx-theme-toggle__button" data-theme-value="light" aria-pressed="false" aria-label="<?php esc_attr_e( 'Helles Farbschema aktivieren', 'blocksy-child' ); ?>">
 				<span class="nx-theme-toggle__icon" aria-hidden="true">H</span>
 				<span><?php esc_html_e( 'Hell', 'blocksy-child' ); ?></span>
 			</button>
