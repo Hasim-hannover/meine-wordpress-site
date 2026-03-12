@@ -14,7 +14,7 @@
             'Strategische Meta Ads auf Facebook und Instagram – von der Zielgruppenanalyse über Creative-Entwicklung bis zur laufenden Kampagnenoptimierung für messbares Wachstum.',
         provider: {
             '@type': 'ProfessionalService',
-            name: 'Hasim Üner – Webdesign & Digitale Strategie',
+            name: 'Haşim Üner – Webdesign & Digitale Strategie',
             url: 'https://hasimuener.de',
             address: {
                 '@type': 'PostalAddress',

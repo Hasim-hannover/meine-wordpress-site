@@ -129,7 +129,7 @@ get_header();
 				<div class="about-hero__grid">
 					<div class="about-hero__copy">
 						<span class="nx-badge nx-badge--gold">Über mich</span>
-						<h1 class="about-hero__title">Ich bin Hasim Üner. Ich arbeite an WordPress-Systemen, nicht an dekorativen Oberflächen.</h1>
+						<h1 class="about-hero__title">Ich bin Haşim Üner. Ich arbeite an WordPress-Systemen, nicht an dekorativen Oberflächen.</h1>
 						<p class="about-hero__lead">
 							Als Growth Architect verbinde ich Positionierung, Struktur, WordPress, technische SEO,
 							privacy-first Messbarkeit und kontrollierte Weiterentwicklung. Mich interessiert nicht nur,
@@ -162,7 +162,7 @@ get_header();
 						<figure class="about-profile-card__media">
 							<img
 								src="https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp"
-								alt="Hasim Üner, Growth Architect"
+								alt="Haşim Üner, Growth Architect"
 								loading="eager"
 								width="340"
 								height="420"

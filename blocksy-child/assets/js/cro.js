@@ -14,7 +14,7 @@
             'Daten-getriebene Conversion Rate Optimization – wir analysieren Nutzerverhalten und optimieren Ihre Website systematisch für mehr Leads, Anfragen und Umsatz.',
         provider: {
             '@type': 'ProfessionalService',
-            name: 'Hasim Üner – Webdesign & Digitale Strategie',
+            name: 'Haşim Üner – Webdesign & Digitale Strategie',
             url: 'https://hasimuener.de',
             address: {
                 '@type': 'PostalAddress',

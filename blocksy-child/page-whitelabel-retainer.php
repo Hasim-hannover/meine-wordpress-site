@@ -125,14 +125,14 @@ $skill_items = [
 					<div class="wl-portrait-card__media">
 						<img
 							src="<?php echo esc_url( $portrait_url ); ?>"
-							alt="Hasim Üner Portrait für die Whitelabel- und Retainer-Seite"
+							alt="Haşim Üner Portrait für die Whitelabel- und Retainer-Seite"
 							loading="eager"
 							width="960"
 							height="1200"
 						>
 					</div>
 					<div class="wl-portrait-card__body">
-						<span class="wl-portrait-card__eyebrow">Hasim Üner</span>
+						<span class="wl-portrait-card__eyebrow">Haşim Üner</span>
 						<h2 class="wl-portrait-card__title">Proof ohne Logos funktioniert nur mit klarer Haltung.</h2>
 						<p class="wl-portrait-card__copy">
 							Wenn Arbeit nicht öffentlich werden darf, muss die Seite etwas anderes leisten:

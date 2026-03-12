@@ -44,7 +44,7 @@ add_filter( 'document_title_parts', 'hu_document_title_overrides' );
 function hu_get_homepage_title() {
 	return (string) apply_filters(
 		'hu_homepage_seo_title',
-		'WordPress als Nachfrage-System für B2B | Hasim Üner'
+		'WordPress als Nachfrage-System für B2B | Haşim Üner'
 	);
 }
 
@@ -68,7 +68,7 @@ function hu_get_homepage_description() {
 function hu_get_blog_archive_title() {
 	return (string) apply_filters(
 		'hu_blog_archive_seo_title',
-		'Insights zu WordPress und SEO | Hasim Üner'
+		'Insights zu WordPress und SEO | Haşim Üner'
 	);
 }
 
@@ -139,9 +139,9 @@ function hu_get_forced_singular_seo( $post_id = 0 ) {
  * @param int    $max_length Target maximum length.
  * @return string
  */
-function hu_build_compact_branded_title( $title, $brand = 'Hasim Üner', $max_length = 60 ) {
+function hu_build_compact_branded_title( $title, $brand = 'Haşim Üner', $max_length = 60 ) {
 	$title = trim( wp_strip_all_tags( (string) $title ) );
-	$brand = trim( wp_strip_all_tags( (string) $brand ) );
+	$brand = trim( wp_strip_all_tags( hu_normalize_brand_text( (string) $brand ) ) );
 
 	if ( '' === $title ) {
 		return $brand;
@@ -174,7 +174,7 @@ function hu_get_post_title_pattern( $post_id ) {
 	$post_id = (int) $post_id;
 
 	if ( $post_id <= 0 ) {
-		return 'Hasim Üner';
+		return 'Haşim Üner';
 	}
 
 	return hu_build_compact_branded_title( get_the_title( $post_id ) );
@@ -463,7 +463,7 @@ function hu_is_domdar_case_study_page() {
  * @return string
  */
 function hu_get_domdar_case_study_title() {
-	return 'Case Study: DOMDAR | Sustainable Commerce | Hasim Üner';
+	return 'Case Study: DOMDAR | Sustainable Commerce | Haşim Üner';
 }
 
 /**
@@ -481,7 +481,7 @@ function hu_get_domdar_case_study_description() {
  * @return string
  */
 function hu_get_contact_offer_title() {
-	return 'Kontakt & Projektanfrage | WordPress Growth Architect – Hasim Üner';
+	return 'Kontakt & Projektanfrage | WordPress Growth Architect – Haşim Üner';
 }
 
 /**

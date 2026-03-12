@@ -465,17 +465,17 @@ get_header();
 		<div class="cs-domdar-partner-grid">
 			<div class="cs-domdar-portrait-card">
 				<div class="cs-domdar-portrait-shell">
-					<img src="<?php echo esc_url( $portrait_url ); ?>" alt="Hasim Üner" loading="lazy">
+					<img src="<?php echo esc_url( $portrait_url ); ?>" alt="Haşim Üner" loading="lazy">
 				</div>
 				<div class="cs-domdar-portrait-meta">
-					<span class="cs-domdar-portrait-label">Hasim Üner</span>
+					<span class="cs-domdar-portrait-label">Haşim Üner</span>
 					<span class="cs-domdar-portrait-text">Growth Architect für WordPress, CRO, Performance und systemische Nachfrage-Logik</span>
 				</div>
 			</div>
 
 			<div class="cs-domdar-partner-copy">
 				<span class="nx-badge nx-badge--gold">Der Stratege</span>
-				<h2 class="nx-headline-section">Hasim Üner</h2>
+				<h2 class="nx-headline-section">Haşim Üner</h2>
 				<p class="nx-subheadline cs-domdar-partner-intro">
 					Ich baue keine hübschen Websites. Ich baue Systeme, die mehr Wert aus
 					bestehender Nachfrage holen. Bei DOMDAR zeigte sich genau das:

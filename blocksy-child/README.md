@@ -1,6 +1,6 @@
 # Blocksy Child – Growth Architect Edition
 
-**Child Theme für WordPress** · Hasim Üner – WordPress Growth Architect
+**Child Theme für WordPress** · Haşim Üner – WordPress Growth Architect
 
 ---
 

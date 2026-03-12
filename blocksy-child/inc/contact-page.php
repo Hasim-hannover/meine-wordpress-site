@@ -782,7 +782,7 @@ function nexus_send_contact_request_confirmation( $payload ) {
 			'headline'  => 'Ihre Anfrage ist eingegangen.',
 			'intro'     => 'Danke, ' . $payload['name'] . '. Ich prüfe Ihre Angaben persönlich und melde mich zeitnah zurück.',
 			'content'   => $content,
-			'footer'    => 'Viele Grüße, Hasim Üner',
+			'footer'    => 'Viele Grüße, Haşim Üner',
 		]
 	);
 

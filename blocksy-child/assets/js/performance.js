@@ -21,7 +21,7 @@
       description: 'Daten-getriebenes Performance Marketing: Google Ads, Meta Ads & CRO. Jeder Werbe-Euro wird in messbaren Umsatz verwandelt.',
       provider: {
         '@type': 'Person',
-        name: 'Hasim Üner',
+        name: 'Haşim Üner',
         url: 'https://hasimuener.de',
         jobTitle: 'Growth Architect',
         address: {

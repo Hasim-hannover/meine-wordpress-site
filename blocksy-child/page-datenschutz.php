@@ -321,7 +321,7 @@ while ( have_posts() ) :
 						<div class="privacy-meta__item">
 							<span class="privacy-meta__label">Verantwortlicher</span>
 							<span class="privacy-meta__value">
-								Hasim Üner<br>
+								Haşim Üner<br>
 								Warschauer Str. 5<br>
 								30982 Pattensen<br>
 								Deutschland
@@ -345,7 +345,7 @@ while ( have_posts() ) :
 					<section class="privacy-section" aria-labelledby="privacy-controller">
 						<h2 id="privacy-controller">1. Verantwortlicher</h2>
 						<p>
-							Verantwortlich für die Datenverarbeitung auf dieser Website ist Hasim Üner,
+							Verantwortlich für die Datenverarbeitung auf dieser Website ist Haşim Üner,
 							Warschauer Str. 5, 30982 Pattensen, Deutschland.
 							Die vollständigen Anbieterangaben finden Sie im
 							<a href="<?php echo esc_url( $imprint_url ); ?>">Impressum</a>.

@@ -765,7 +765,7 @@ function nexus_send_review_request_confirmation( $payload ) {
 			'headline'  => 'Ihr ' . $payload['audit_type_label'] . ' ist im System.',
 			'intro'     => 'Danke, ' . $payload['name'] . '. Sie erhalten keine generische Checkliste, sondern eine persönliche erste Priorisierung für Ihre Seite.',
 			'content'   => $content,
-			'footer'    => 'Viele Grüße, Hasim Üner',
+			'footer'    => 'Viele Grüße, Haşim Üner',
 		]
 	);
 

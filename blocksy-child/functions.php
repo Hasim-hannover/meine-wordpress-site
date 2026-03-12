@@ -118,6 +118,21 @@ function remove_google_fonts() {
 
 add_filter( 'blocksy:typography:google:use-remote', '__return_false' );
 
+function hu_normalize_brand_text( $text ) {
+	if ( ! is_string( $text ) || '' === $text ) {
+		return $text;
+	}
+
+	return strtr(
+		$text,
+		[
+			'Hasim' => 'Haşim',
+			'HASIM' => 'HAŞIM',
+			'hasim' => 'haşim',
+		]
+	);
+}
+
 function hu_get_site_wordmark_text() {
 	$site_name = trim( (string) get_bloginfo( 'name' ) );
 
@@ -125,14 +140,7 @@ function hu_get_site_wordmark_text() {
 		return 'HAŞIM ÜNER';
 	}
 
-	return strtr(
-		$site_name,
-		[
-			'Hasim' => 'Haşim',
-			'HASIM' => 'HAŞIM',
-			'hasim' => 'haşim',
-		]
-	);
+	return hu_normalize_brand_text( $site_name );
 }
 
 function hu_get_site_wordmark_html() {

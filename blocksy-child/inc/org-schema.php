@@ -14,8 +14,8 @@ function hu_output_schema()
         '@context' => 'https://schema.org',
         '@type'    => 'LocalBusiness',
         '@id'      => home_url('/#organization'),
-        'name'     => 'Hasim Üner – Growth Architect',
-        'alternateName' => 'Hasim Üner - WordPress Growth Architect',
+        'name'     => 'Haşim Üner – Growth Architect',
+        'alternateName' => 'Haşim Üner - WordPress Growth Architect',
         'url'      => home_url(),
         'description' => 'WordPress Growth Architect für B2B-Unternehmen: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als Nachfrage-System.',
         'telephone'   => '+49 176 81407134',
@@ -335,7 +335,7 @@ function hu_output_schema()
                 '@context' => 'https://schema.org',
                 '@type'    => 'Person',
                 '@id'      => home_url('/uber-mich/#person'),
-                'name'     => 'Hasim Üner',
+                'name'     => 'Haşim Üner',
                 'jobTitle' => 'Growth Architect & Medienwissenschaftler',
                 'url'      => home_url('/uber-mich/'),
                 'image'    => 'https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp',
@@ -352,7 +352,7 @@ function hu_output_schema()
                 '@type'    => 'ProfilePage',
                 '@id'      => home_url('/uber-mich/#profile'),
                 'url'      => home_url('/uber-mich/'),
-                'name'     => 'Über mich – Hasim Üner',
+                'name'     => 'Über mich – Haşim Üner',
                 'mainEntity' => ['@id' => home_url('/uber-mich/#person')],
                 'inLanguage' => 'de',
                 'about'    => ['@id' => home_url('/uber-mich/#person')]
@@ -365,7 +365,8 @@ function hu_output_schema()
 
         if ( is_singular( 'post' ) && $post_id ) {
             $author_id         = (int) get_post_field( 'post_author', $post_id );
-            $author_name       = $author_id ? get_the_author_meta( 'display_name', $author_id ) : 'Hasim Üner';
+            $author_name       = $author_id ? get_the_author_meta( 'display_name', $author_id ) : 'Haşim Üner';
+            $author_name       = hu_normalize_brand_text( $author_name );
             $author_profile    = home_url( '/uber-mich/' );
             $post_permalink    = get_permalink( $post_id );
             $post_description  = get_the_excerpt( $post_id );
@@ -419,7 +420,7 @@ function hu_output_schema()
                 '@id'      => home_url('/' . $slug . '/#collection'),
                 'url'      => home_url('/' . $slug . '/'),
                 'name'     => 'Ergebnisse',
-                'headline' => 'Ergebnisse, Case Studies und Whitelabel-Proof von Hasim Üner',
+                'headline' => 'Ergebnisse, Case Studies und Whitelabel-Proof von Haşim Üner',
                 'description' => 'Öffentliche Case Studies, anonymisierte Whitelabel-Arbeit und laufende Retainer als gemeinsamer Proof-Layer für WordPress-Systemarbeit.',
                 'inLanguage' => 'de',
                 'isPartOf' => ['@id' => home_url('/#website')],
@@ -453,13 +454,13 @@ function hu_output_schema()
                 '@id'      => home_url('/' . $slug . '/#about'),
                 'url'      => home_url('/' . $slug . '/'),
                 'name'     => 'Whitelabel & Retainer',
-                'headline' => 'Whitelabel-Arbeit und laufende Retainer von Hasim Üner',
+                'headline' => 'Whitelabel-Arbeit und laufende Retainer von Haşim Üner',
                 'description' => 'Anonymisierte Einblicke in Whitelabel-Projekte, laufende Retainer und typische Eingriffstiefen für WordPress, SEO, Tracking und CRO.',
                 'inLanguage' => 'de',
                 'about'    => ['@id' => home_url('/#organization')],
                 'mainEntity' => [
                     '@type' => 'Person',
-                    'name'  => 'Hasim Üner',
+                    'name'  => 'Haşim Üner',
                     'url'   => home_url('/uber-mich/')
                 ],
                 'image' => 'https://hasimuener.de/wp-content/uploads/2026/01/Hasim-Uener-Prtraeit_Startseite.webp',

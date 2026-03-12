@@ -92,7 +92,7 @@ function nexus_get_wgos_asset_registry() {
 		$definition['prerequisite']    = isset( $definition['prerequisite'] ) ? (string) $definition['prerequisite'] : '';
 		$definition['keyword']         = isset( $definition['keyword'] ) ? (string) $definition['keyword'] : $definition['title'];
 		$definition['excerpt']         = isset( $definition['excerpt'] ) ? (string) $definition['excerpt'] : '';
-		$definition['seo_title']       = isset( $definition['seo_title'] ) ? (string) $definition['seo_title'] : $definition['title'] . ' - WGOS Asset | Hasim Üner';
+		$definition['seo_title']       = hu_normalize_brand_text( isset( $definition['seo_title'] ) ? (string) $definition['seo_title'] : $definition['title'] . ' - WGOS Asset | Haşim Üner' );
 		$definition['seo_description'] = isset( $definition['seo_description'] ) ? (string) $definition['seo_description'] : $definition['excerpt'];
 		$definition['schema_type']     = isset( $definition['schema_type'] ) ? (string) $definition['schema_type'] : 'Service';
 		$definition['legacy_slugs']    = array_values(

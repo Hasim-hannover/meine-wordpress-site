@@ -14,7 +14,7 @@
             'Professionelles Google Analytics 4 Setup, serverseitiges Tracking und DSGVO-konforme Implementierung für verlässliche Daten und messbares Wachstum.',
         provider: {
             '@type': 'ProfessionalService',
-            name: 'Hasim Üner – Webdesign & Digitale Strategie',
+            name: 'Haşim Üner – Webdesign & Digitale Strategie',
             url: 'https://hasimuener.de',
             address: {
                 '@type': 'PostalAddress',

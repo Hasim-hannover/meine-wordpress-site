@@ -22,7 +22,7 @@
     description: 'Professionelle Core Web Vitals Optimierung: LCP, INP & CLS Optimierung für WordPress. Messbare Umsatzsteigerung durch PageSpeed.',
       provider: {
         '@type': 'Person',
-        name: 'Hasim Üner',
+        name: 'Haşim Üner',
         url: 'https://hasimuener.de',
         jobTitle: 'Growth Architect',
         address: {

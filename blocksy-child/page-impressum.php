@@ -355,7 +355,7 @@ while ( have_posts() ) :
 				<p class="imprint-lead">
 					Diese Seite bündelt die Anbieterangaben gemäß § 5 DDG sowie die
 					Verantwortlichkeit nach § 18 Abs. 2 MStV. Für Rückfragen zu diesen Angaben
-					oder zu den angebotenen Leistungen erreichen Sie Hasim Üner direkt per
+					oder zu den angebotenen Leistungen erreichen Sie Haşim Üner direkt per
 					E-Mail oder Telefon.
 				</p>
 
@@ -376,7 +376,7 @@ while ( have_posts() ) :
 				<aside class="imprint-card" aria-labelledby="imprint-overview">
 					<h2 id="imprint-overview">Schnellüberblick</h2>
 					<p>
-						Hasim Üner betreibt diese Website als geschäftliches Informations- und
+						Haşim Üner betreibt diese Website als geschäftliches Informations- und
 						Angebotsmedium für WordPress-, SEO- und Growth-Themen im B2B-Kontext.
 					</p>
 
@@ -390,7 +390,7 @@ while ( have_posts() ) :
 					<div class="imprint-quickfacts" aria-label="Anbieter und Kontakt">
 						<div class="imprint-quickfact">
 							<span class="imprint-quickfact__label">Anbieter</span>
-							<span class="imprint-quickfact__value">Hasim Üner</span>
+							<span class="imprint-quickfact__value">Haşim Üner</span>
 						</div>
 
 						<div class="imprint-quickfact">
@@ -417,7 +417,7 @@ while ( have_posts() ) :
 						<span class="imprint-copy-chip">Angaben gemäß § 5 DDG</span>
 						<h2 id="imprint-ddg">1. Diensteanbieter</h2>
 						<p>
-							Hasim Üner<br>
+							Haşim Üner<br>
 							Warschauer Str. 5<br>
 							30982 Pattensen<br>
 							Deutschland
@@ -446,7 +446,7 @@ while ( have_posts() ) :
 						<span class="imprint-copy-chip">Redaktionelle Verantwortung</span>
 						<h2 id="imprint-editorial">3. Verantwortlich i.S.d. § 18 Abs. 2 MStV</h2>
 						<p>
-							Hasim Üner<br>
+							Haşim Üner<br>
 							Warschauer Str. 5<br>
 							30982 Pattensen<br>
 							Deutschland
