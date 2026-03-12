@@ -402,6 +402,270 @@
     flex-shrink: 0;
 }
 
+.homepage-system-section {
+    border-top: 1px solid var(--nx-border);
+}
+
+.homepage-system-section__intro {
+    max-width: 72ch;
+}
+
+.homepage-system-layout {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.homepage-system-visual {
+    padding: clamp(1.5rem, 4vw, 2.25rem);
+    border-radius: var(--nx-radius-xl);
+    border: 1px solid hsl(var(--accent-hsl) / 0.22);
+    background:
+      radial-gradient(circle at 100% 0%, hsl(var(--accent-hsl) / 0.16), transparent 30%),
+      var(--nx-panel-gradient);
+    box-shadow: var(--nx-shadow-lg);
+}
+
+.homepage-system-visual__lead {
+    margin: 0 0 1.35rem;
+    color: var(--nx-text);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.65;
+}
+
+.homepage-system-flow {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+.homepage-system-card {
+    display: grid;
+    gap: 1rem;
+    padding: 1.15rem;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-xl);
+    background: var(--nx-card-gradient-strong);
+    box-shadow: var(--nx-shadow-sm);
+}
+
+.homepage-system-card__rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.homepage-system-card__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    border: 1px solid hsl(var(--accent-hsl) / 0.28);
+    background: hsl(var(--accent-hsl) / 0.14);
+    color: var(--nx-accent-text);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.homepage-system-card__line {
+    flex: 1 1 auto;
+    width: 1px;
+    min-height: 3rem;
+    background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.46), hsl(var(--accent-hsl) / 0.06));
+}
+
+.homepage-system-card__body {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.homepage-system-card__header {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.homepage-system-card__eyebrow,
+.homepage-system-economics__eyebrow {
+    color: var(--nx-accent-text);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.homepage-system-card__header h3,
+.homepage-system-economics h3 {
+    margin: 0;
+    color: var(--nx-text);
+    font-size: clamp(1.25rem, 2vw, 1.45rem);
+    line-height: 1.18;
+}
+
+.homepage-system-card__text,
+.homepage-system-economics p {
+    margin: 0;
+    color: var(--nx-text-secondary);
+    line-height: 1.72;
+}
+
+.homepage-system-card__items,
+.homepage-system-benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.homepage-system-card__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+}
+
+.homepage-system-card__items li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.15rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: var(--nx-radius-pill);
+    border: 1px solid var(--nx-border);
+    background: hsl(var(--accent-hsl) / 0.08);
+    color: var(--nx-text);
+    font-size: 0.82rem;
+    line-height: 1.35;
+}
+
+.homepage-system-card__result {
+    margin: 0;
+    padding: 1rem 1.05rem;
+    border-radius: var(--nx-radius-lg);
+    border: 1px solid hsl(var(--accent-hsl) / 0.18);
+    background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), rgba(255,255,255,0.02));
+    color: var(--nx-text);
+    font-size: 0.94rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.homepage-system-card__result::before {
+    content: "Ergebnis";
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--nx-accent-text);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.homepage-system-economics {
+    padding: clamp(1.5rem, 4vw, 2rem);
+    border-radius: var(--nx-radius-xl);
+    border: 1px solid var(--nx-border);
+    background:
+      radial-gradient(circle at 100% 0%, hsl(var(--accent-hsl) / 0.14), transparent 32%),
+      var(--nx-card-gradient);
+    box-shadow: var(--nx-shadow-sm);
+}
+
+.homepage-system-economics__eyebrow {
+    display: inline-block;
+    margin-bottom: 0.85rem;
+}
+
+.homepage-system-benefits {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.35rem;
+}
+
+.homepage-system-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-height: 2.85rem;
+    padding: 0.85rem 0.95rem;
+    border-radius: var(--nx-radius-lg);
+    border: 1px solid var(--nx-border);
+    background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+    color: var(--nx-text);
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.homepage-system-benefits li::before {
+    content: "✓";
+    color: var(--nx-accent-text);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.homepage-system-economics__actions {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.homepage-system-economics__actions .wp-btn {
+    width: 100%;
+}
+
+.homepage-system-economics__note {
+    margin-top: 1.1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--nx-border);
+    color: var(--nx-text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.68;
+}
+
+@media (min-width: 1040px) {
+    .homepage-system-layout {
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    }
+
+    .homepage-system-card {
+        grid-template-columns: 60px minmax(0, 1.2fr) minmax(220px, 0.78fr);
+        align-items: start;
+    }
+
+    .homepage-system-economics {
+        position: sticky;
+        top: calc(var(--nx-header-height) + 1.5rem);
+    }
+}
+
+@media (max-width: 1039px) {
+    .homepage-system-card {
+        grid-template-columns: 56px minmax(0, 1fr);
+    }
+
+    .homepage-system-card__result {
+        grid-column: 2;
+    }
+}
+
+:root[data-nx-theme='light'] .homepage-system-visual,
+:root[data-nx-theme='light'] .homepage-system-card,
+:root[data-nx-theme='light'] .homepage-system-economics {
+    box-shadow: var(--nx-shadow-sm);
+}
+
+:root[data-nx-theme='light'] .homepage-system-card__items li,
+:root[data-nx-theme='light'] .homepage-system-benefits li {
+    background: rgba(255, 255, 255, 0.72);
+}
+
+:root[data-nx-theme='light'] .homepage-system-card__result {
+    background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.16), rgba(255, 250, 244, 0.92));
+}
+
 .homepage-proof-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -604,6 +868,21 @@
     .homepage-github-proof__badge {
         width: 100%;
         justify-content: center;
+    }
+
+    .homepage-system-card {
+        grid-template-columns: 52px minmax(0, 1fr);
+        padding: 1rem;
+    }
+
+    .homepage-system-card__items li {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .homepage-system-card__result {
+        grid-column: 2;
+        font-size: 0.9rem;
     }
 
     .homepage-proof-grid {

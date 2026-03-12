@@ -65,6 +65,154 @@ function hu_home_public_proof_data() {
 }
 
 /**
+ * Homepage system architecture section.
+ *
+ * @return string
+ */
+function hu_home_system_section_markup() {
+	$urls   = hu_home_urls();
+	$layers = [
+		[
+			'label'  => 'Sichtbarkeit und Conversion',
+			'title'  => 'Öffentliche Website',
+			'text'   => 'Startseite, Angebotsseiten, SEO-/Money-Pages und Proof-Seiten bilden die sichtbare Oberfläche. Die Website ist nicht Broschüre, sondern die Oberfläche eines Nachfrage-Systems.',
+			'result' => 'Die sichtbare Oberfläche Ihres Nachfrage-Systems.',
+			'items'  => [
+				'Startseite',
+				'Angebotsseiten',
+				'SEO-/Money-Pages',
+				'Case-/Proof-Seiten',
+				'klare Nutzerführung',
+				'Formulare und Conversion-Pfade',
+			],
+		],
+		[
+			'label'  => 'Signale und Messbarkeit',
+			'title'  => 'Mess- und Datenebene',
+			'text'   => 'Consent, Events, Conversion-Signale sowie SEO- und Performance-Daten liefern eine belastbare Basis. Entscheidungen beruhen auf brauchbaren Signalen statt auf Bauchgefühl oder Reporting-Rauschen.',
+			'result' => 'Belastbare Signale statt Reporting-Rauschen.',
+			'items'  => [
+				'Tracking',
+				'Consent',
+				'Events',
+				'Conversion-Signale',
+				'SEO-/Performance-Daten',
+				'privacy-first Measurement',
+			],
+		],
+		[
+			'label'  => 'Steuerung und Prioritäten',
+			'title'  => 'Kundencockpit',
+			'text'   => 'Leads, Conversion-Entwicklung, SEO-/Performance-Indikatoren, Engpässe und nächste Prioritäten laufen in einer lesbaren Steueransicht zusammen. So sehen Sie nicht nur Zahlen, sondern was sie bedeuten.',
+			'result' => 'Klarheit über Leads, KPIs, Engpässe und nächste Schritte.',
+			'items'  => [
+				'Leads und Anfragen',
+				'SEO-/Performance-Indikatoren',
+				'Conversion-Entwicklung',
+				'Engpässe',
+				'Prioritäten',
+				'nächste sinnvolle Maßnahmen',
+			],
+		],
+		[
+			'label'  => 'Betrieb und Ownership',
+			'title'  => 'Kontrollierte Weiterentwicklung',
+			'text'   => 'Saubere Codebasis, GitHub-Versionierung, kontrollierte Deployments und ein schlanker Stack halten das System wartbar. Keine Blackbox, keine unnötigen Abhängigkeiten, kein zufälliges WordPress-Chaos.',
+			'result' => 'Saubere Weiterentwicklung ohne Blackbox oder Lock-in.',
+			'items'  => [
+				'saubere Codebasis',
+				'GitHub und Versionierung',
+				'kontrollierte Deployments',
+				'Ownership statt Lock-in',
+				'keine unnötigen Plugin-Abhängigkeiten',
+				'wartbare Umgebung',
+			],
+		],
+	];
+	$benefits = [
+		'Klarere Daten statt Reporting-Rauschen',
+		'Weniger Reibung im Anfrageprozess',
+		'Mehr Ownership statt Lock-in',
+		'Priorisierte Weiterentwicklung statt WordPress-Chaos',
+	];
+	$layer_count = count( $layers );
+
+	ob_start();
+	?>
+	<section id="systembild" class="wp-section homepage-system-section" data-track-section="homepage_system_map" aria-labelledby="systembild-heading">
+		<div class="wp-container">
+			<div class="wp-section-title text-center nx-reveal">
+				<span class="wp-badge">System in der Praxis</span>
+				<h2 id="systembild-heading" class="wp-section-h2">Ihre WordPress-Website sollte nicht nur gut aussehen. Sie sollte steuerbar sein.</h2>
+				<p class="wp-section-p homepage-system-section__intro">
+					Eine professionelle WordPress-Seite ist keine isolierte Online-Präsenz. Sie verbindet sichtbare Seiten, saubere Messbarkeit,
+					ein Kundencockpit für Prioritäten und kontrollierte Weiterentwicklung zu einer Infrastruktur, die Nachfrage, Conversion und Entscheidungen verbessert.
+				</p>
+			</div>
+
+			<div class="homepage-system-layout">
+				<div class="homepage-system-visual">
+					<p class="homepage-system-visual__lead nx-reveal">Nicht nur eine Website. Sondern ein steuerbares System aus Seiten, Daten, Leads, SEO und sauberer Weiterentwicklung.</p>
+					<ol class="homepage-system-flow" aria-label="Architektur eines professionellen WordPress-Systems">
+						<?php foreach ( $layers as $index => $layer ) : ?>
+							<li class="homepage-system-card nx-reveal">
+								<div class="homepage-system-card__rail" aria-hidden="true">
+									<span class="homepage-system-card__number"><?php echo esc_html( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></span>
+									<?php if ( $index < $layer_count - 1 ) : ?>
+										<span class="homepage-system-card__line"></span>
+									<?php endif; ?>
+								</div>
+
+								<div class="homepage-system-card__body">
+									<div class="homepage-system-card__header">
+										<span class="homepage-system-card__eyebrow"><?php echo esc_html( $layer['label'] ); ?></span>
+										<h3><?php echo esc_html( $layer['title'] ); ?></h3>
+									</div>
+									<p class="homepage-system-card__text"><?php echo esc_html( $layer['text'] ); ?></p>
+
+									<ul class="homepage-system-card__items" aria-label="<?php echo esc_attr( $layer['title'] . ' Inhalte' ); ?>">
+										<?php foreach ( $layer['items'] as $item ) : ?>
+											<li><?php echo esc_html( $item ); ?></li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
+
+								<p class="homepage-system-card__result"><?php echo esc_html( $layer['result'] ); ?></p>
+							</li>
+						<?php endforeach; ?>
+					</ol>
+				</div>
+
+				<aside class="homepage-system-economics nx-reveal" aria-labelledby="system-benefits-heading">
+					<span class="homepage-system-economics__eyebrow">Wirtschaftlicher Nutzen</span>
+					<h3 id="system-benefits-heading">Vier Ebenen, ein klarerer Hebel für Nachfrage und Entscheidungen.</h3>
+					<p>Wenn Website, Datenebene, Kundencockpit und Weiterentwicklung sauber zusammenspielen, sehen Sie früher, welche Seiten tragen, wo Reibung entsteht und was als Nächstes priorisiert werden sollte.</p>
+
+					<ul class="homepage-system-benefits" aria-label="Nutzen eines professionellen WordPress-Systems">
+						<?php foreach ( $benefits as $benefit ) : ?>
+							<li><?php echo esc_html( $benefit ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+
+					<div class="homepage-system-economics__actions">
+						<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_system_map_audit" data-track-category="lead_gen">Audit starten</a>
+						<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_system_map_system" data-track-category="lead_gen">Erst das System verstehen</a>
+					</div>
+
+					<p class="homepage-system-economics__note">
+						Sie sehen nicht nur, dass Anfragen kommen. Sie sehen auch, woher sie kommen, welche Seiten tragen
+						und welche Maßnahme wirtschaftlich als Nächstes Sinn ergibt.
+					</p>
+				</aside>
+			</div>
+		</div>
+	</section>
+	<?php
+
+	return ob_get_clean();
+}
+
+/**
  * Homepage hero.
  *
  * @return string
@@ -79,6 +227,7 @@ function hu_hero_section_shortcode() {
 			<ul>
 				<li><a href="#hero" title="Start"><div class="nav-dot"></div><span class="nav-text">Start</span></a></li>
 				<li><a href="#owned" title="Prinzip"><div class="nav-dot"></div><span class="nav-text">Prinzip</span></a></li>
+				<li><a href="#systembild" title="System"><div class="nav-dot"></div><span class="nav-text">System</span></a></li>
 				<li><a href="#angebot" title="Angebot"><div class="nav-dot"></div><span class="nav-text">Angebot</span></a></li>
 				<li><a href="#erfolge" title="Ergebnisse"><div class="nav-dot"></div><span class="nav-text">Proof</span></a></li>
 				<li><a href="#faq" title="FAQ"><div class="nav-dot"></div><span class="nav-text">FAQ</span></a></li>
@@ -261,7 +410,7 @@ function hu_owned_section_shortcode() {
 			</div>
 
 			<div class="text-center" style="margin-top:2rem;">
-				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Prüfen, wo Ihre Seite heute verliert</a>
+				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Prüfen, wo Ihre Seite heute Reibung erzeugt</a>
 			</div>
 			<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="micro-cta-link">Noch nicht sicher? Erst das System verstehen -></a>
 
@@ -273,7 +422,7 @@ function hu_owned_section_shortcode() {
 						<?php
 						echo esc_html(
 							sprintf(
-								'Jeder Code, jedes System, jede Entscheidung für meine eigene Positionierung liegt offen auf GitHub. %s Commits, vollständige Historie. Kein Lock-in. Kein Bullshit. So arbeite ich auch für Sie.',
+								'Jeder Code, jedes System, jede Entscheidung für meine eigene Positionierung liegt offen auf GitHub. %s Commits, vollständige Historie. Ownership statt Lock-in. Nachvollziehbar statt Blackbox. So arbeite ich auch für Sie.',
 								number_format_i18n( $proof['github_commits'] )
 							)
 						);
@@ -311,6 +460,7 @@ function hu_owned_section_shortcode() {
 			</div>
 		</div>
 	</section>
+	<?php echo hu_home_system_section_markup(); ?>
 	<?php
 
 	return ob_get_clean();
@@ -333,8 +483,8 @@ function hu_wgos_block_shortcode() {
 				<span class="wp-badge">Angebotsarchitektur</span>
 				<h2 id="angebot-heading" class="wp-section-h2">Drei Stufen statt zehn Einzelleistungen.</h2>
 				<p class="wp-section-p">
-					Der Ablauf ist bewusst eng geführt: erst Diagnose, dann Priorisierung im direkten Austausch,
-					dann Umsetzung und laufende Optimierung auf WordPress-Basis.
+					Der Ablauf ist bewusst eng geführt: erst Diagnose, dann klare Priorisierung,
+					dann kontrollierte Umsetzung und Weiterentwicklung auf WordPress-Basis.
 				</p>
 			</div>
 
@@ -342,17 +492,17 @@ function hu_wgos_block_shortcode() {
 				<div class="wp-step nx-reveal">
 					<div class="wp-step-num">1</div>
 					<h3>Growth Audit</h3>
-					<p>Der niedrigschwellige Einstieg. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen oder Lead-Capture wegbrechen und ob sich ein tieferer Eingriff lohnt.</p>
+					<p>Der niedrigschwellige Einstieg. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen, Datenqualität oder Lead-Capture wegbrechen und ob sich ein tieferer Eingriff lohnt.</p>
 				</div>
 				<div class="wp-step highlight-step nx-reveal">
 					<div class="wp-step-num highlight-num">2</div>
 					<h3>Priorisierung im direkten Austausch</h3>
-					<p>Der öffentliche Einstieg bleibt bewusst der Growth Audit. Wenn der Fall tiefer geht, entsteht der nächste vertiefte Schritt erst nach Rückmeldung und persönlichem Kontakt.</p>
+					<p>Aus Audit, Signalen und Geschäftslogik entsteht eine belastbare Reihenfolge: welche Seiten, welche Datenlücken und welche Conversion-Bremsen zuerst angefasst werden.</p>
 				</div>
 				<div class="wp-step nx-reveal">
 					<div class="wp-step-num">3</div>
 					<h3>WGOS Umsetzung und Retainer</h3>
-					<p>Technische Umsetzung, Content-Aufbau und fortlaufende Optimierung in einer Reihenfolge, die Kosten senkt und die Qualität von Anfragen steigert.</p>
+					<p>Dann folgt die kontrollierte Umsetzung: Seiten, Datenlogik, Tracking, SEO und Weiterentwicklung in einer Reihenfolge, die Reibung senkt und bessere Anfragen erzeugt.</p>
 				</div>
 			</div>
 
