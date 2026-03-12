@@ -483,15 +483,19 @@ p.hero-stack,
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 4px 9px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,176,32,.28);
-    background: rgba(255,176,32,.1);
-    color: var(--fg);
-    font-size: .72rem;
-    font-weight: 700;
-    letter-spacing: .05em;
-    text-transform: uppercase;
+    width: 2.2rem;
+    height: 2.2rem;
+    flex: 0 0 2.2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 209, 92, .48);
+    background: linear-gradient(180deg, rgba(255, 209, 92, .18), rgba(255, 209, 92, .08));
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06);
+    color: #ffe08a;
+}
+.ft__privacy-badge svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    display: block;
 }
 .ft__privacy-note a {
     color: var(--fg);
