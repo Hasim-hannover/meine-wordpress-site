@@ -546,9 +546,12 @@ function hu_get_seo_meta() {
 		'danke-anfage-audit',
 		'danke-anfrage-audit',
 		'thank-you',
+		'newsletter_bestaetigungseite',
 		'portal',
 		'login',
 		'kunden-login',
+		'impressum',
+		'datenschutz',
 		'360-deep-dive',
 	];
 
