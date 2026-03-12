@@ -34,7 +34,6 @@ function hu_home_urls() {
 		'contact'     => function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' ),
 		'github_repo' => 'https://github.com/Hasim-hannover/meine-wordpress-site',
 		'linkedin'    => 'https://www.linkedin.com/in/hasim-%C3%BCner/',
-		'instagram'   => 'https://www.instagram.com/hasimuener/',
 	];
 
 	return $urls;
@@ -569,7 +568,7 @@ function hu_erfolge_section_shortcode() {
 				<article class="nx-card nx-reveal homepage-proof-card" style="border-top:3px solid var(--nx-gold);">
 					<p class="nx-card__subtitle">Öffentliche Resonanz statt erfundener Testimonials</p>
 					<h3 class="nx-card__title">Bestätigt durch meine Community</h3>
-					<p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">Transparente Arbeit erzeugt Resonanz. Sichtbar im öffentlichen Profil, nicht nur in internen Sales-Folien.</p>
+					<p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">Transparente Arbeit erzeugt Resonanz. Sichtbar auf LinkedIn und im öffentlichen Repo, nicht nur in internen Sales-Folien.</p>
 					<div class="homepage-community-proof__metrics" role="list" aria-label="Community-Signale">
 						<div class="homepage-community-proof__metric" role="listitem">
 							<span class="homepage-community-proof__value"><?php echo esc_html( number_format_i18n( $proof['linkedin_followers'] ) ); ?></span>
@@ -590,16 +589,6 @@ function hu_erfolge_section_shortcode() {
 							data-track-category="trust"
 						>
 							LinkedIn ansehen
-						</a>
-						<a
-							href="<?php echo esc_url( $urls['instagram'] ); ?>"
-							class="wp-btn wp-btn-secondary"
-							target="_blank"
-							rel="noopener noreferrer"
-							data-track-action="cta_proof_instagram"
-							data-track-category="trust"
-						>
-							Mehr Social Proof
 						</a>
 					</div>
 				</article>

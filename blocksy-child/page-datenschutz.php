@@ -430,7 +430,7 @@ while ( have_posts() ) :
 						<h2 id="privacy-links">5. Externe Links und Drittseiten</h2>
 						<p>
 							Diese Website verlinkt an einzelnen Stellen auf externe Angebote, zum Beispiel
-							auf Cal.com für Terminbuchungen sowie auf Profile bei LinkedIn, Instagram oder
+							auf Cal.com für Terminbuchungen sowie auf Profile bei LinkedIn oder
 							GitHub. Solche Inhalte werden nicht automatisch eingebettet. Eine Datenübertragung
 							an den jeweiligen Anbieter findet daher regelmäßig erst statt, wenn Sie den
 							Link aktiv anklicken.

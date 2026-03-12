@@ -29,11 +29,6 @@ $social_links         = [
 		'url'   => 'https://github.com/Hasim-hannover',
 		'note'  => 'Öffentliche Systemarbeit, Code und technische Tiefe.',
 	],
-	[
-		'label' => 'Instagram',
-		'url'   => 'https://www.instagram.com/hasimuener/',
-		'note'  => 'Persönlichere Einblicke, Visuals und laufende Themen.',
-	],
 ];
 
 if ( '' === $selected_type && 'pilot' === $selected_focus ) {
@@ -121,7 +116,7 @@ $message_minlength     = $is_general_type ? 18 : 24;
 						<span class="contact-section-head__eyebrow">Social</span>
 						<h2 id="contact-social-title">Vorab ein Eindruck?</h2>
 					</div>
-					<p>LinkedIn, GitHub und Instagram geben schnellen Kontext zu Arbeitsweise, Systemdenken und aktuellen Themen.</p>
+					<p>LinkedIn und GitHub geben schnellen Kontext zu Arbeitsweise, Systemdenken und aktuellen Themen.</p>
 					<div class="contact-social" aria-label="Social Links">
 						<?php foreach ( $social_links as $social_link ) : ?>
 							<a class="contact-social__link" href="<?php echo esc_url( $social_link['url'] ); ?>" target="_blank" rel="noopener noreferrer">

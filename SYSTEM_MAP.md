@@ -85,7 +85,7 @@ Im Repo vorhanden:
 - `data-track-*` Attribute auf CTAs und Content-Bausteinen
 - noindex- und SEO-Meta-Logik
 - Schema-Ausgabe fuer Organisation, Services und Profile
-- neue Homepage-Actions fuer Trust und Einstiegsangebote: `cta_github_repo`, `cta_proof_linkedin`, `cta_proof_instagram`, `cta_pilot_contact`
+- neue Homepage-Actions fuer Trust und Einstiegsangebote: `cta_github_repo`, `cta_proof_linkedin`, `cta_pilot_contact`
 
 Ausserhalb des Repos:
 

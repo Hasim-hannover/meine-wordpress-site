@@ -19,7 +19,6 @@ Pruefen, ob der neue Public-Proof-Layer auf der Homepage mehr qualifizierte Erst
 
 - `cta_github_repo`
 - `cta_proof_linkedin`
-- `cta_proof_instagram`
 - `cta_pilot_contact`
 - `cta_erfolge_audit`
 - `cta_footer_audit`
