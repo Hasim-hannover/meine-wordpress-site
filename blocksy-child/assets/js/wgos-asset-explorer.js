@@ -101,6 +101,13 @@
 			var nextHash;
 
 			if (!asset) {
+				setActiveId('');
+				setHoveredId('');
+
+				if (typeof window !== 'undefined' && window.location.hash.indexOf(HASH_PREFIX) === 0) {
+					window.history.replaceState(null, '', '#module');
+				}
+
 				return;
 			}
 
@@ -139,11 +146,20 @@
 
 		useEffect(function () {
 			function handleHash() {
+				var nextId;
+
 				if (typeof window === 'undefined' || window.location.hash.indexOf(HASH_PREFIX) !== 0) {
 					return;
 				}
 
-				openAsset(window.location.hash.replace(HASH_PREFIX, ''));
+				nextId = window.location.hash.replace(HASH_PREFIX, '');
+
+				if (!getAssetById(nextId)) {
+					closeAsset();
+					return;
+				}
+
+				openAsset(nextId);
 			}
 
 			handleHash();

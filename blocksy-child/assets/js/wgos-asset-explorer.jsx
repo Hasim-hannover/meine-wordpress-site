@@ -58,6 +58,13 @@ function WGOSAssetExplorer({ links = {} }) {
 	function openAsset(assetId) {
 		const asset = getAssetById(assetId);
 		if (!asset) {
+			setActiveId('');
+			setHoveredId('');
+
+			if (typeof window !== 'undefined' && window.location.hash.startsWith(HASH_PREFIX)) {
+				window.history.replaceState(null, '', '#module');
+			}
+
 			return;
 		}
 
@@ -98,7 +105,14 @@ function WGOSAssetExplorer({ links = {} }) {
 				return;
 			}
 
-			openAsset(window.location.hash.replace(HASH_PREFIX, ''));
+			const nextId = window.location.hash.replace(HASH_PREFIX, '');
+
+			if (!getAssetById(nextId)) {
+				closeAsset();
+				return;
+			}
+
+			openAsset(nextId);
 		}
 
 		handleHash();
