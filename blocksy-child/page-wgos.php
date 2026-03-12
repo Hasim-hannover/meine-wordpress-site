@@ -269,7 +269,7 @@ $fit_items = [
 
 $not_fit_items = [
 	'Wenn nur eine schnelle Einzelmaßnahme ohne strategischen Kontext gesucht wird.',
-	'Wenn die Website ausschliesslich als digitale Visitenkarte gedacht ist.',
+	'Wenn die Website ausschließlich als digitale Visitenkarte gedacht ist.',
 	'Wenn keine Bereitschaft für Messung, Priorisierung und saubere Reihenfolge besteht.',
 ];
 
@@ -337,7 +337,7 @@ $packages = [
 	],
 	[
 		'name'     => 'Weiterentwicklung',
-		'tagline'  => 'System kontrolliert ausbauen und weiter nachschaerfen',
+		'tagline'  => 'System kontrolliert ausbauen und weiter nachschärfen',
 		'price'    => 'ab 4.500 EUR',
 		'credits'  => '100+ Credits / Monat',
 		'featured' => false,

@@ -436,7 +436,7 @@ while ( have_posts() ) :
 							Link aktiv anklicken.
 						</p>
 						<p>
-							Für die Datenverarbeitung auf den verlinkten Drittseiten sind ausschliesslich
+							Für die Datenverarbeitung auf den verlinkten Drittseiten sind ausschließlich
 							deren Betreiber verantwortlich. Bitte beachten Sie die jeweiligen
 							Datenschutzhinweise der Anbieter.
 						</p>

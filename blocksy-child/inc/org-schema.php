@@ -15,7 +15,7 @@ function hu_output_schema()
         '@type'    => 'LocalBusiness',
         '@id'      => home_url('/#organization'),
         'name'     => 'Hasim Üner – Growth Architect',
-        'alternateName' => 'Hasim Uener - WordPress Growth Architect',
+        'alternateName' => 'Hasim Üner - WordPress Growth Architect',
         'url'      => home_url(),
         'description' => 'WordPress Growth Architect für B2B-Unternehmen: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als Nachfrage-System.',
         'telephone'   => '+49 176 81407134',
@@ -147,7 +147,7 @@ function hu_output_schema()
 
         'wordpress-seo-hannover' => [
             'name'        => 'WordPress SEO Hannover',
-            'description' => 'WGOS-Cluster fuer WordPress SEO in Hannover: technische Basis, Themenarchitektur und conversion-nahe Sichtbarkeit fuer B2B-Websites.',
+            'description' => 'WGOS-Cluster für WordPress SEO in Hannover: technische Basis, Themenarchitektur und conversion-nahe Sichtbarkeit für B2B-Websites.',
             'serviceType' => 'WordPress SEO',
             'serviceOutput' => 'Priorisierte SEO-Bausteine aus Technical SEO, Keyword-Strategie, Pillar Pages und interner Verlinkung'
         ],
@@ -221,10 +221,10 @@ function hu_output_schema()
         ],
 
         'performance-marketing' => [
-            'name'        => 'Performance Marketing fuer B2B-WordPress-Websites',
-            'description' => 'WGOS-Aktivierungslayer fuer bezahlte Nachfrage: erst Tracking, Technik und Zielseite, dann skalierbare Kampagnen.',
+            'name'        => 'Performance Marketing für B2B-WordPress-Websites',
+            'description' => 'WGOS-Aktivierungslayer für bezahlte Nachfrage: erst Tracking, Technik und Zielseite, dann skalierbare Kampagnen.',
             'serviceType' => 'Performance Marketing',
-            'serviceOutput' => 'Kampagnenfaehige Zielseiten und belastbare Tracking-Signale fuer effiziente Paid-Aktivierung'
+            'serviceOutput' => 'Kampagnenfähige Zielseiten und belastbare Tracking-Signale für effiziente Paid-Aktivierung'
         ],
 
         'wordpress-growth-operating-system' => [
@@ -365,7 +365,7 @@ function hu_output_schema()
 
         if ( is_singular( 'post' ) && $post_id ) {
             $author_id         = (int) get_post_field( 'post_author', $post_id );
-            $author_name       = $author_id ? get_the_author_meta( 'display_name', $author_id ) : 'Hasim Uener';
+            $author_name       = $author_id ? get_the_author_meta( 'display_name', $author_id ) : 'Hasim Üner';
             $author_profile    = home_url( '/uber-mich/' );
             $post_permalink    = get_permalink( $post_id );
             $post_description  = get_the_excerpt( $post_id );

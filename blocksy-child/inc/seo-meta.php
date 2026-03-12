@@ -44,7 +44,7 @@ add_filter( 'document_title_parts', 'hu_document_title_overrides' );
 function hu_get_homepage_title() {
 	return (string) apply_filters(
 		'hu_homepage_seo_title',
-		'WordPress als Nachfrage-System fuer B2B | Hasim Uener'
+		'WordPress als Nachfrage-System für B2B | Hasim Üner'
 	);
 }
 
@@ -56,7 +56,7 @@ function hu_get_homepage_title() {
 function hu_get_homepage_description() {
 	return (string) apply_filters(
 		'hu_homepage_seo_description',
-		'Ich mache aus Ihrer WordPress-Website ein planbares Anfragesystem: klare Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik fuer B2B.'
+		'Ich mache aus Ihrer WordPress-Website ein planbares Anfragesystem: klare Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik für B2B.'
 	);
 }
 
@@ -68,7 +68,7 @@ function hu_get_homepage_description() {
 function hu_get_blog_archive_title() {
 	return (string) apply_filters(
 		'hu_blog_archive_seo_title',
-		'Insights zu WordPress und SEO | Hasim Uener'
+		'Insights zu WordPress und SEO | Hasim Üner'
 	);
 }
 
@@ -80,7 +80,7 @@ function hu_get_blog_archive_title() {
 function hu_get_blog_archive_description() {
 	return (string) apply_filters(
 		'hu_blog_archive_seo_description',
-		'Analysen zu WordPress, technischer SEO, Tracking und Conversion-Logik fuer B2B-Websites.'
+		'Analysen zu WordPress, technischer SEO, Tracking und Conversion-Logik für B2B-Websites.'
 	);
 }
 
@@ -94,8 +94,8 @@ function hu_get_forced_singular_seo_map() {
 		'hu_forced_singular_seo_map',
 		[
 			'wordpress-seo-hannover' => [
-				'title'       => 'WordPress SEO Hannover | Technisches SEO fuer B2B',
-				'description' => 'Technisches SEO fuer WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und klare Priorisierung fuer B2B-Websites.',
+				'title'       => 'WordPress SEO Hannover | Technisches SEO für B2B',
+				'description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und klare Priorisierung für B2B-Websites.',
 			],
 		]
 	);
@@ -139,7 +139,7 @@ function hu_get_forced_singular_seo( $post_id = 0 ) {
  * @param int    $max_length Target maximum length.
  * @return string
  */
-function hu_build_compact_branded_title( $title, $brand = 'Hasim Uener', $max_length = 60 ) {
+function hu_build_compact_branded_title( $title, $brand = 'Hasim Üner', $max_length = 60 ) {
 	$title = trim( wp_strip_all_tags( (string) $title ) );
 	$brand = trim( wp_strip_all_tags( (string) $brand ) );
 
@@ -174,7 +174,7 @@ function hu_get_post_title_pattern( $post_id ) {
 	$post_id = (int) $post_id;
 
 	if ( $post_id <= 0 ) {
-		return 'Hasim Uener';
+		return 'Hasim Üner';
 	}
 
 	return hu_build_compact_branded_title( get_the_title( $post_id ) );

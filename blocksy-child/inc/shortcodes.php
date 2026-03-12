@@ -109,7 +109,7 @@ function hu_hero_section_shortcode() {
 							<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Ergebnisse ansehen</a>
 						</div>
 						<p class="wp-hero-supporting-link nx-reveal">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
-						<p class="wp-hero-supporting-link nx-reveal">Lokaler Einstieg fuer Hannover: <a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress Agentur Hannover</a></p>
+						<p class="wp-hero-supporting-link nx-reveal">Lokaler Einstieg für Hannover: <a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress Agentur Hannover</a></p>
 					</div>
 
 					<div class="wp-hero-panel nx-reveal">
