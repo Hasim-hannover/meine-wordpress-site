@@ -1,5 +1,5 @@
 /* =========================================
-   AGENTUR SERVICE PAGE – Overrides & Extras
+   AGENTUR SERVICE PAGE - Overrides & Extras
    Base: homepage.css + design-system.css
    ========================================= */
 
@@ -17,6 +17,37 @@
 
 .wp-agentur-hero .nx-hero__subtitle {
   max-width: 74ch;
+}
+
+.wp-agentur-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.wp-agentur-actions--center {
+  justify-content: center;
+}
+
+.wp-agentur-hero-support {
+  max-width: 56rem;
+  margin: 0 auto;
+  color: var(--nx-text-dim);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.wp-agentur-hero-support a {
+  color: var(--nx-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--nx-link-divider);
+}
+
+.wp-agentur-hero-support a:hover,
+.wp-agentur-hero-support a:focus-visible {
+  color: var(--nx-accent-text);
+  border-bottom-color: hsl(var(--accent-hsl) / 0.32);
 }
 
 .wp-agentur-proof {
@@ -128,14 +159,312 @@
   margin-bottom: 0;
 }
 
-.wp-btn-wrapper {
+.wp-agentur-system {
+  padding-top: 0;
+}
+
+.wp-agentur-system__header .nx-badge {
+  margin-bottom: 1rem;
+}
+
+.wp-agentur-system__intro {
+  max-width: 64ch;
+  margin: 1rem auto 0;
+  color: var(--nx-text-secondary);
+  line-height: 1.75;
+}
+
+.wp-agentur-system__summary {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 0.75rem;
+  margin: 0 auto 2rem;
+  max-width: 980px;
+}
+
+.wp-agentur-system__summary-item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.625rem 0.95rem;
+  border-radius: var(--nx-radius-pill);
+  border: 1px solid var(--nx-border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  color: var(--nx-text);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.wp-agentur-system__layout {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.wp-agentur-system__flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.wp-agentur-system-card {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.2rem, 3vw, 1.5rem);
+  border-radius: var(--nx-radius-xl);
+  border: 1px solid var(--nx-border);
+  background:
+    radial-gradient(circle at 100% 0%, hsl(var(--accent-hsl) / 0.14), transparent 28%),
+    var(--nx-card-gradient);
+  box-shadow: var(--nx-shadow-sm);
+}
+
+.wp-agentur-system-card__rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wp-agentur-system-card__number {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: hsl(var(--accent-hsl) / 0.16);
+  border: 1px solid hsl(var(--accent-hsl) / 0.24);
+  color: var(--nx-accent-text);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.wp-agentur-system-card__line {
+  flex: 1;
+  width: 1px;
+  min-height: 72px;
+  background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.36), transparent);
+}
+
+.wp-agentur-system-card__header {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.wp-agentur-system-card__eyebrow,
+.wp-agentur-system__aside-eyebrow {
+  color: var(--nx-accent-text);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wp-agentur-system-card__header h3,
+.wp-agentur-system__aside h3 {
+  margin: 0;
+  color: var(--nx-text);
+  font-size: clamp(1.25rem, 2vw, 1.45rem);
+  line-height: 1.18;
+}
+
+.wp-agentur-system-card__text,
+.wp-agentur-system__aside p {
+  margin: 0;
+  color: var(--nx-text-secondary);
+  line-height: 1.72;
+}
+
+.wp-agentur-system-card__items,
+.wp-agentur-system__benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wp-agentur-system-card__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.wp-agentur-system-card__items li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.15rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--nx-radius-pill);
+  border: 1px solid var(--nx-border);
+  background: hsl(var(--accent-hsl) / 0.08);
+  color: var(--nx-text);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.wp-agentur-system-card__body {
+  display: grid;
+  gap: 1rem;
+}
+
+.wp-agentur-system-card__result {
+  margin: 0;
+  padding: 1rem 1.05rem;
+  border-radius: var(--nx-radius-lg);
+  border: 1px solid hsl(var(--accent-hsl) / 0.18);
+  background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), rgba(255, 255, 255, 0.02));
+  color: var(--nx-text);
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.wp-agentur-system-card__result::before {
+  content: "Ergebnis";
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--nx-accent-text);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.wp-agentur-system__aside {
+  padding: clamp(1.5rem, 4vw, 2rem);
+  border-radius: var(--nx-radius-xl);
+  border: 1px solid var(--nx-border);
+  background:
+    radial-gradient(circle at 100% 0%, hsl(var(--accent-hsl) / 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  box-shadow: var(--nx-shadow-sm);
+}
+
+.wp-agentur-system__aside-eyebrow {
+  display: inline-block;
+  margin-bottom: 0.85rem;
+}
+
+.wp-agentur-system__benefits {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+}
+
+.wp-agentur-system__benefits li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 2.85rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: var(--nx-radius-lg);
+  border: 1px solid var(--nx-border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
+  color: var(--nx-text);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.wp-agentur-system__benefits li::before {
+  content: "✓";
+  color: var(--nx-accent-text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.wp-agentur-system__actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.wp-agentur-system__actions .nx-btn {
+  width: 100%;
+}
+
+.wp-agentur-system__note {
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--nx-border);
+  color: var(--nx-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.68;
+}
+
+.wp-agentur-local-grid {
+  align-items: stretch;
+}
+
+.wp-agentur-local-card {
+  height: 100%;
+}
+
+.wp-agentur-local-card h3 {
+  margin: 0 0 0.85rem;
+  color: var(--nx-text);
+  font-size: clamp(1.25rem, 2vw, 1.45rem);
+  line-height: 1.2;
+}
+
+.wp-agentur-local-card p {
+  margin: 0;
+  color: var(--nx-text-secondary);
+  line-height: 1.75;
+}
+
+.wp-agentur-local-card ul {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.wp-agentur-local-card li {
+  display: flex;
+  gap: 0.7rem;
+  color: var(--nx-text);
+  line-height: 1.55;
+}
+
+.wp-agentur-local-card li::before {
+  content: "•";
+  color: var(--nx-accent-text);
+  font-weight: 700;
+}
+
+.wp-agentur-location-note {
+  max-width: 840px;
+  margin: 1.5rem auto 0;
+  text-align: center;
+  color: var(--nx-text);
+  line-height: 1.7;
+}
+
+.wp-agentur-location-note--muted {
+  margin-top: 0.65rem;
+  color: var(--nx-text-secondary);
 }
 
 .wp-faq {
   max-width: 900px;
   margin: 1rem auto 0;
+}
+
+.wp-agentur-cta-box h2 {
+  margin: 0 0 1rem;
+  color: var(--nx-text);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.wp-agentur-cta-box p {
+  max-width: 46rem;
+  margin-inline: auto;
 }
 
 .wp-cta-desc {
@@ -158,10 +487,50 @@
   .wp-agentur-table {
     min-width: 620px;
   }
+
+  .wp-agentur-system-card {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .wp-agentur-system-card__result {
+    grid-column: 2;
+  }
 }
 
 @media (max-width: 767px) {
   .wp-agentur-table {
     min-width: 560px;
+  }
+
+  .wp-agentur-hero-support {
+    font-size: 0.9rem;
+  }
+
+  .wp-agentur-system__summary {
+    justify-content: flex-start;
+  }
+
+  .wp-agentur-system-card__items li {
+    width: 100%;
+  }
+
+  .wp-agentur-system__actions .nx-btn {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1040px) {
+  .wp-agentur-system__layout {
+    grid-template-columns: minmax(0, 1.16fr) minmax(320px, 0.84fr);
+  }
+
+  .wp-agentur-system-card {
+    grid-template-columns: 60px minmax(0, 1.18fr) minmax(220px, 0.82fr);
+    align-items: start;
+  }
+
+  .wp-agentur-system__aside {
+    position: sticky;
+    top: calc(var(--nx-header-height) + 1.5rem);
   }
 }

@@ -55,9 +55,9 @@ function hu_output_schema()
     $service_definitions = [
         'wordpress-agentur-hannover' => [
             'name'        => 'WordPress Growth Architect Hannover',
-            'description' => 'WordPress als Growth-Infrastruktur für B2B-Unternehmen in Hannover: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik.',
+            'description' => 'WordPress-Systeme für B2B-Unternehmen in Hannover: Angebotsseiten, technische SEO, privacy-first Measurement, Conversion-Logik und kontrollierte Weiterentwicklung als Nachfrage-System.',
             'serviceType' => 'WordPress Growth Architecture',
-            'serviceOutput' => 'Planbares Anfrage-System auf WordPress-Basis'
+            'serviceOutput' => 'Steuerbares WordPress-System mit Angebotsseiten, Datenebene, KPI-Klarheit und Ownership statt Lock-in'
         ],
 
         'customer-journey-audit' => [

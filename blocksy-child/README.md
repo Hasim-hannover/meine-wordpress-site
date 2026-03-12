@@ -39,6 +39,7 @@ blocksy-child/
 │   ├── kpi-block.php          ← KPI-Metrik als visueller Anker
 │   ├── breadcrumb.php         ← Breadcrumb + BreadcrumbList Schema
 │   ├── comparison-table.php   ← Vorher/Nachher Grid
+│   ├── service-system-map.php ← Wiederverwendbare 4-Ebenen-Systemsektion für Service-Landings
 │   ├── trust-section.php      ← Trust-Badges in CTA-Nähe
 │   ├── related-content.php    ← Verwandte Inhalte (Flywheel)
 │   └── footer-cta.php         ← Conversion-optimierter Bottom-CTA
