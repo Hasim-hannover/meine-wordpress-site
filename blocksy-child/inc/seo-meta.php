@@ -85,6 +85,53 @@ function hu_get_blog_archive_description() {
 }
 
 /**
+ * Return forced SEO overrides for singular pages that must ignore legacy DB meta.
+ *
+ * @return array<string, array<string, string>>
+ */
+function hu_get_forced_singular_seo_map() {
+	return (array) apply_filters(
+		'hu_forced_singular_seo_map',
+		[
+			'wordpress-seo-hannover' => [
+				'title'       => 'WordPress SEO Hannover | Technisches SEO fuer B2B',
+				'description' => 'Technisches SEO fuer WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und klare Priorisierung fuer B2B-Websites.',
+			],
+		]
+	);
+}
+
+/**
+ * Resolve forced SEO overrides for the current singular object.
+ *
+ * @param int $post_id Post ID.
+ * @return array<string, string>
+ */
+function hu_get_forced_singular_seo( $post_id = 0 ) {
+	$post_id = (int) $post_id;
+
+	if ( $post_id <= 0 ) {
+		$post_id = (int) get_queried_object_id();
+	}
+
+	if ( $post_id <= 0 ) {
+		return [];
+	}
+
+	$slug = (string) get_post_field( 'post_name', $post_id );
+	$map  = hu_get_forced_singular_seo_map();
+
+	if ( empty( $map[ $slug ] ) || ! is_array( $map[ $slug ] ) ) {
+		return [];
+	}
+
+	return [
+		'title'       => isset( $map[ $slug ]['title'] ) ? trim( wp_strip_all_tags( (string) $map[ $slug ]['title'] ) ) : '',
+		'description' => isset( $map[ $slug ]['description'] ) ? trim( wp_strip_all_tags( (string) $map[ $slug ]['description'] ) ) : '',
+	];
+}
+
+/**
  * Build a compact branded title that stays within SERP-safe bounds.
  *
  * @param string $title      Raw title value.
@@ -197,6 +244,12 @@ function hu_rank_math_generic_stored_title( $title ) {
 	}
 
 	$post_id   = get_queried_object_id();
+	$forced_seo = hu_get_forced_singular_seo( $post_id );
+
+	if ( ! empty( $forced_seo['title'] ) ) {
+		return (string) $forced_seo['title'];
+	}
+
 	$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
 
 	if ( '' !== $seo_title ) {
@@ -226,6 +279,12 @@ function hu_rank_math_generic_stored_description( $description ) {
 	}
 
 	$post_id         = get_queried_object_id();
+	$forced_seo      = hu_get_forced_singular_seo( $post_id );
+
+	if ( ! empty( $forced_seo['description'] ) ) {
+		return (string) $forced_seo['description'];
+	}
+
 	$seo_description = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
 
 	if ( '' !== $seo_description ) {
@@ -547,6 +606,11 @@ function hu_pre_get_document_title_override( $title ) {
 		return hu_get_blog_archive_title();
 	}
 
+	$forced_seo = hu_get_forced_singular_seo();
+	if ( ! empty( $forced_seo['title'] ) ) {
+		return (string) $forced_seo['title'];
+	}
+
 	if ( hu_is_contact_offer_page() ) {
 		return hu_get_contact_offer_title();
 	}
@@ -583,6 +647,13 @@ function hu_document_title_overrides( $parts ) {
 
 	if ( is_home() ) {
 		$parts['title'] = hu_get_blog_archive_title();
+		return $parts;
+	}
+
+	$forced_seo = hu_get_forced_singular_seo();
+	if ( ! empty( $forced_seo['title'] ) ) {
+		$parts['title'] = (string) $forced_seo['title'];
+		unset( $parts['page'] );
 		return $parts;
 	}
 
@@ -774,6 +845,7 @@ function hu_get_seo_meta() {
 		$post_id  = get_queried_object_id();
 		$template = get_page_template_slug( $post_id );
 		$slug     = get_post_field( 'post_name', $post_id );
+		$forced_seo = hu_get_forced_singular_seo( $post_id );
 
 		// noindex check: Template/Slug-basiert oder ACF-Feld
 		$acf_noindex      = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
@@ -788,6 +860,14 @@ function hu_get_seo_meta() {
 		$meta['description'] = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
 		$meta['og_title']    = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
 		$cluster_defaults    = function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ? nexus_get_wgos_cluster_page_seo_defaults( get_post( $post_id ) ) : null;
+
+		if ( ! empty( $forced_seo['description'] ) ) {
+			$meta['description'] = (string) $forced_seo['description'];
+		}
+
+		if ( ! empty( $forced_seo['title'] ) ) {
+			$meta['og_title'] = (string) $forced_seo['title'];
+		}
 
 		if ( function_exists( 'get_field' ) ) {
 			$og_image_arr        = get_field( 'og_image', $post_id );
