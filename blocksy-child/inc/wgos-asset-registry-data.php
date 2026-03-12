@@ -514,6 +514,7 @@ return [
 	'update-management' => [
 		'title'           => 'WordPress Update-Management',
 		'slug'            => 'update-management',
+		'legacy_slugs'    => [ 'wordpress-update-management' ],
 		'status'          => 'publish',
 		'core_area'       => 'Technisches Fundament',
 		'credits'         => '5',

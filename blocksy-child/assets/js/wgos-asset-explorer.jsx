@@ -4,7 +4,11 @@ import { wgosAssetModules, wgosAssetPhases, wgosAssets } from './wgos-assets';
 const HASH_PREFIX = '#asset-';
 
 function getAssetById(assetId) {
-	return wgosAssets.find((asset) => asset.id === assetId) || null;
+	return (
+		wgosAssets.find(
+			(asset) => asset.id === assetId || (Array.isArray(asset.aliases) && asset.aliases.includes(assetId)),
+		) || null
+	);
 }
 
 function getModuleById(moduleId) {

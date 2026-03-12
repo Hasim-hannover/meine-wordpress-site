@@ -29,12 +29,24 @@ function nexus_get_wgos_asset_lookup_key( $value ) {
  */
 function nexus_get_wgos_asset_anchor_slug( $value ) {
 	if ( $value instanceof WP_Post ) {
+		$definition = function_exists( 'nexus_get_wgos_asset_definition' ) ? nexus_get_wgos_asset_definition( $value ) : null;
+
+		if ( is_array( $definition ) && ! empty( $definition['slug'] ) ) {
+			return sanitize_title( wp_strip_all_tags( (string) $definition['slug'] ) );
+		}
+
 		$raw_value = $value->post_title ? $value->post_title : $value->post_name;
 
 		return sanitize_title( wp_strip_all_tags( (string) $raw_value ) );
 	}
 
 	$raw_value = (string) $value;
+	$definition = function_exists( 'nexus_get_wgos_asset_definition' ) ? nexus_get_wgos_asset_definition( $raw_value ) : null;
+
+	if ( is_array( $definition ) && ! empty( $definition['slug'] ) ) {
+		return sanitize_title( wp_strip_all_tags( (string) $definition['slug'] ) );
+	}
+
 	$asset     = nexus_get_wgos_asset( $raw_value );
 
 	if ( $asset instanceof WP_Post ) {
@@ -766,6 +778,19 @@ function nexus_get_wgos_asset_explorer_payload() {
 
 		$assets[] = [
 			'id'          => nexus_get_wgos_asset_anchor_slug( (string) $asset['slug'] ),
+			'aliases'     => array_values(
+				array_filter(
+					array_unique(
+						array_map(
+							'nexus_get_wgos_asset_lookup_key',
+							array_merge(
+								[ (string) $asset['slug'] ],
+								(array) ( $asset['legacy_slugs'] ?? [] )
+							)
+						)
+					)
+				)
+			),
 			'label'       => (string) $asset['title'],
 			'moduleId'    => (string) $module['id'],
 			'group'       => (string) $asset['core_area'],

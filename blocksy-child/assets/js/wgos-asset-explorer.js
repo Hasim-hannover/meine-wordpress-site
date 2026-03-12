@@ -28,6 +28,10 @@
 			if (wgosAssets[index].id === assetId) {
 				return wgosAssets[index];
 			}
+
+			if (Array.isArray(wgosAssets[index].aliases) && wgosAssets[index].aliases.indexOf(assetId) !== -1) {
+				return wgosAssets[index];
+			}
 		}
 
 		return null;
