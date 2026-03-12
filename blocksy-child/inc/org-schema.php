@@ -344,7 +344,7 @@ function hu_output_schema()
                     'https://www.linkedin.com/in/hasim-%C3%BCner/',
                     'https://github.com/Hasim-hannover/'
                 ],
-                'description' => 'Growth Architect & Medienwissenschaftler, spezialisiert auf High-Performance WordPress-Systeme, Tracking und Conversion-Optimierung.'
+                'description' => 'Growth Architect & Medienwissenschaftler mit Fokus auf WordPress-Systeme, technische SEO, privacy-first Measurement, Conversion-Logik und kontrollierte Weiterentwicklung für B2B-Unternehmen.'
             ];
 
             $profilePage = [
