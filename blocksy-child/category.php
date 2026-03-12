@@ -9,6 +9,28 @@ get_header();
 get_template_part( 'template-parts/blog-header' );
 
 $audit_url = nexus_get_audit_url();
+$wgos_url  = function_exists( 'nexus_get_wgos_url' )
+	? nexus_get_wgos_url()
+	: (
+		function_exists( 'nexus_get_page_url' )
+			? nexus_get_page_url(
+				[ 'wordpress-growth-operating-system', 'wgos' ],
+				home_url( '/wordpress-growth-operating-system/' )
+			)
+			: home_url( '/wordpress-growth-operating-system/' )
+	);
+$seo_url   = function_exists( 'nexus_get_page_url' )
+	? nexus_get_page_url(
+		[ 'wordpress-seo-hannover', 'seo' ],
+		home_url( '/wordpress-seo-hannover/' )
+	)
+	: home_url( '/wordpress-seo-hannover/' );
+$cwv_url   = function_exists( 'nexus_get_page_url' )
+	? nexus_get_page_url(
+		[ 'core-web-vitals', 'core-web-vitals-optimierung' ],
+		home_url( '/core-web-vitals/' )
+	)
+	: home_url( '/core-web-vitals/' );
 
 // --- Kategorie-Daten ---
 $current_category = get_queried_object();
@@ -24,7 +46,7 @@ $pillar_map = [
         'badge'       => 'Strategie & Growth',
         'subtitle'    => 'Assets bauen statt Kampagnen verbrennen. Frameworks, Systeme und Denkmodelle für nachhaltiges B2B-Wachstum.',
         'cta_label'   => 'WGOS kennenlernen',
-        'cta_url'     => '/wordpress-growth-operating-system/',
+        'cta_url'     => $wgos_url,
         'cta_text'    => 'Das WordPress Growth Operating System (WGOS) ist der Rahmen, in dem Strategie operativ wird.',
     ],
     'seo' => [
@@ -33,7 +55,7 @@ $pillar_map = [
         'badge'       => 'SEO & Sichtbarkeit',
         'subtitle'    => 'Technisches SEO, CRO und Performance-Synergie — für planbare Sichtbarkeit, bessere Lead-Qualität und effizientere Akquisekosten.',
         'cta_label'   => 'SEO-Analyse starten',
-        'cta_url'     => '/wordpress-seo-hannover/',
+        'cta_url'     => $seo_url,
         'cta_text'    => 'Prüfen Sie zuerst das Fundament: Technik, Seitenstruktur, Tracking und Conversion-Reibung vor der nächsten Budgeterhöhung.',
     ],
     'tracking' => [
@@ -57,7 +79,7 @@ $pillar_map = [
         'badge'       => 'WordPress Performance',
         'subtitle'    => 'Core Web Vitals, Caching, Hosting, Theme-/Plugin-Optimierung — Geschwindigkeit als Wettbewerbsvorteil.',
         'cta_label'   => 'Performance-Check starten',
-        'cta_url'     => '/core-web-vitals/',
+        'cta_url'     => $cwv_url,
         'cta_text'    => 'Ihre Core Web Vitals entscheiden über Rankings und Conversions.',
     ],
 ];

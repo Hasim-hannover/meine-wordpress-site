@@ -12,6 +12,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $tracking_audit_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
+$seo_url            = function_exists( 'nexus_get_page_url' )
+	? nexus_get_page_url(
+		[ 'wordpress-seo-hannover', 'seo' ],
+		home_url( '/wordpress-seo-hannover/' )
+	)
+	: home_url( '/wordpress-seo-hannover/' );
+$cwv_url            = function_exists( 'nexus_get_page_url' )
+	? nexus_get_page_url(
+		[ 'core-web-vitals', 'core-web-vitals-optimierung' ],
+		home_url( '/core-web-vitals/' )
+	)
+	: home_url( '/core-web-vitals/' );
+$cro_url            = function_exists( 'nexus_get_page_url' )
+	? nexus_get_page_url(
+		[ 'conversion-rate-optimization' ],
+		home_url( '/conversion-rate-optimization/' )
+	)
+	: home_url( '/conversion-rate-optimization/' );
 
 get_header();
 ?>
@@ -101,7 +119,7 @@ get_header();
 					<li>niedrigere Conversion Rate trotz wachsendem Traffic</li>
 					<li>mehr manuelle Vorqualifizierung im Vertrieb</li>
 				</ul>
-				<p>Genau hier beginnt das Zusammenspiel aus <a href="/wordpress-seo-hannover/">technischem SEO Audit</a>, <a href="/core-web-vitals/">Core Web Vitals</a> und sauberem <a href="<?php echo esc_url( $tracking_audit_url ); ?>">Tracking</a>.</p>
+				<p>Genau hier beginnt das Zusammenspiel aus <a href="<?php echo esc_url( $seo_url ); ?>">technischem SEO Audit</a>, <a href="<?php echo esc_url( $cwv_url ); ?>">Core Web Vitals</a> und sauberem <a href="<?php echo esc_url( $tracking_audit_url ); ?>">Tracking</a>.</p>
 
 				<h2 id="rechnung">Rechenbeispiel: Der stille Verlust hinter guten Kampagnen</h2>
 				<p>Ein einfaches Szenario zeigt, warum die Reihenfolge entscheidend ist. Angenommen, ein Unternehmen investiert monatlich 10.000 EUR in Performance Ads. Bei einem durchschnittlichen CPC von 2,50 EUR entstehen 4.000 Klicks.</p>
@@ -152,7 +170,7 @@ get_header();
 					<li><strong>INP</strong> zeigt, wie reaktionsfähig die Seite auf Interaktionen ist</li>
 					<li><strong>CLS</strong> zeigt visuelle Stabilität während des Ladens</li>
 				</ul>
-				<p>Wenn LCP, INP und CLS stabil im grünen Bereich liegen, sinken Reibung und Absprünge. Benchmarks zeigen zudem, dass ein besserer Quality Score den CPC spürbar entlasten kann. Die größte Hebelwirkung entsteht dort, wo <a href="/core-web-vitals/">Core Web Vitals</a> und Anzeigenerlebnis gemeinsam optimiert werden.</p>
+				<p>Wenn LCP, INP und CLS stabil im grünen Bereich liegen, sinken Reibung und Absprünge. Benchmarks zeigen zudem, dass ein besserer Quality Score den CPC spürbar entlasten kann. Die größte Hebelwirkung entsteht dort, wo <a href="<?php echo esc_url( $cwv_url ); ?>">Core Web Vitals</a> und Anzeigenerlebnis gemeinsam optimiert werden.</p>
 				<p>Wenn Ihr Ziel "CPC senken" lautet, ist die Antwort selten "nur anderes Targeting". In vielen Konten ist die schnellste Rendite ein technischer Landingpage-Fix.</p>
 
 				<h2 id="seo-sea">SEO und SEA Zusammenspiel: Zwei Kanäle, ein System</h2>
@@ -179,7 +197,7 @@ get_header();
 					<li>Zeitfenster: kurzfristig, dieses Quartal, später</li>
 					<li>Projektkontext: Branche, Teamgröße, Budgetkorridor</li>
 				</ul>
-				<p>Mit dieser Struktur wird aus "mehr Leads" ein steuerbarer Qualitätsprozess. Die operative Grundlage entsteht im Zusammenspiel aus <a href="/conversion-rate-optimization/">Conversion Rate Optimierung</a> und <a href="<?php echo esc_url( $tracking_audit_url ); ?>">Tracking Audit</a>.</p>
+				<p>Mit dieser Struktur wird aus "mehr Leads" ein steuerbarer Qualitätsprozess. Die operative Grundlage entsteht im Zusammenspiel aus <a href="<?php echo esc_url( $cro_url ); ?>">Conversion Rate Optimierung</a> und <a href="<?php echo esc_url( $tracking_audit_url ); ?>">Tracking Audit</a>.</p>
 
 				<div class="seo-cornerstone__inline-cta">
 					<p>Sie wollen in 48 Stunden sehen, wo Ihre Lead-Reibung entsteht?</p>
@@ -360,7 +378,7 @@ get_header();
 					<h2>Nächster Schritt</h2>
 					<p>Wenn Sie wissen wollen, wie belastbar Ihr technisches Fundament heute ist, starten Sie mit einer strukturierten Analyse von Technik, Tracking, Conversion-Logik und Lead-Übergabe.</p>
 					<div class="seo-cornerstone__cta-buttons">
-						<a class="nx-btn nx-btn--primary" href="/wordpress-seo-hannover/" data-track-action="cta_seo_cornerstone_audit" data-track-category="lead_gen">Technisches SEO Audit anfragen</a>
+						<a class="nx-btn nx-btn--primary" href="<?php echo esc_url( $seo_url ); ?>" data-track-action="cta_seo_cornerstone_audit" data-track-category="lead_gen">Technisches SEO Audit anfragen</a>
 						<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( nexus_get_audit_url() ); ?>" data-track-action="cta_seo_cornerstone_journey" data-track-category="lead_gen">Growth Audit</a>
 					</div>
 				</div>
