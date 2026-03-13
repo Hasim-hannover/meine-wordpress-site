@@ -289,7 +289,9 @@ function nexus_preempt_blog_notify_404( $preempt, $wp_query ) {
 		return $preempt;
 	}
 
-	if ( ! $wp_query->is_404() || ! nexus_is_blog_notify_request_path() ) {
+	// `pre_handle_404` fires before WordPress marks the request as 404.
+	// The virtual route therefore has to rely on the request path itself.
+	if ( ! nexus_is_blog_notify_request_path() ) {
 		return $preempt;
 	}
 

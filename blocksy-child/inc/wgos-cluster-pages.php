@@ -526,7 +526,9 @@ function nexus_preempt_cluster_404( $preempt, $wp_query ) {
 
 	$slug = nexus_get_current_wgos_cluster_route_slug();
 
-	if ( '' === $slug || ! $wp_query->is_404() ) {
+	// `pre_handle_404` fires before WordPress marks the request as 404.
+	// Virtual cluster routes must therefore key off the route slug alone.
+	if ( '' === $slug ) {
 		return $preempt;
 	}
 
