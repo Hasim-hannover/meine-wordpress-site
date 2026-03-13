@@ -87,7 +87,9 @@ function nexus_preempt_contact_404( $preempt, $wp_query ) {
 		return $preempt;
 	}
 
-	if ( ! $wp_query->is_404() || ! nexus_is_contact_request_path() ) {
+	// `pre_handle_404` runs before WordPress flips the main query to 404.
+	// The route must therefore key off the request path, not `is_404()`.
+	if ( ! nexus_is_contact_request_path() ) {
 		return $preempt;
 	}
 
