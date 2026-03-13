@@ -120,6 +120,9 @@ add_action( 'template_redirect', function() {
 	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '/';
 	$request_path = wp_parse_url( $request_uri, PHP_URL_PATH );
 	$request_path = trailingslashit( '/' . ltrim( (string) $request_path, '/' ) );
+	$gone_paths   = [
+		'/shopify-wartungsvertrag/',
+	];
 	$redirects = [
 		'/audit/'                    => nexus_get_audit_url(),
 		'/customer-journey-audit/'   => nexus_get_audit_url(),
@@ -131,6 +134,20 @@ add_action( 'template_redirect', function() {
 		'/wordpress-wartung-hannover/' => home_url( '/wgos-assets/security-hardening/' ),
 		'/roi-rechner/'              => nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ),
 	];
+
+	if ( in_array( $request_path, $gone_paths, true ) ) {
+		global $wp_query;
+
+		if ( $wp_query instanceof WP_Query ) {
+			$wp_query->set_404();
+		}
+
+		nocache_headers();
+		header( 'X-Robots-Tag: noindex, nofollow', true );
+		status_header( 410 );
+		include get_query_template( '404' );
+		exit;
+	}
 
 	if ( empty( $redirects[ $request_path ] ) ) {
 		return;

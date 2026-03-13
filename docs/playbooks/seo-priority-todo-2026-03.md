@@ -1,0 +1,229 @@
+# SEO Priority Todo - March 2026
+
+## Ziel
+
+Diese Liste priorisiert die naechsten SEO-Arbeiten nach:
+
+1. Impact auf Sichtbarkeit und Klicks
+2. Geschwindigkeit der Umsetzung
+3. Risiko, falsche Signale weiterlaufen zu lassen
+
+Der Fokus liegt bewusst auf:
+
+- Seiten mit bereits vorhandenen Impressionen
+- Seiten mit Snippet-/Indexierungsfehlern
+- Legacy-URLs und Kannibalisierung
+
+Nicht zuerst bearbeiten:
+
+- sehr kleine Long-Tail-Queries
+- Content-Ausbau ohne vorherige Bereinigung
+- tiefe Rewrites auf Seiten mit unklarer Suchintention
+
+## P0 - Sofort
+
+### 1. `/shopify-wartungsvertrag/` sauber aus dem Index nehmen
+
+Status:
+
+- Die URL erscheint noch in Search Console.
+- Im Repo gibt es aktuell keinen klaren Theme-Pfad oder Redirect fuer diese URL.
+- Das spricht dafuer, dass die URL im WordPress-Inhalt oder in Alt-Daten lebt.
+
+Empfohlene Loesung:
+
+- Falls es **keine echte Nachfolgeseite** fuer diese Leistung gibt:
+  - URL auf **410 Gone** setzen
+  - aus Sitemap entfernen
+  - interne Links entfernen
+  - Search-Console-Entfernung nur als Beschleuniger nutzen, nicht als Hauptloesung
+- Falls es **eine fachlich saubere Ersatzseite** gibt:
+  - 301 auf die beste Ersatzseite
+  - nur dann, wenn Suchintention und Angebot wirklich passen
+
+Warum nicht nur Search Console:
+
+- Das Search-Console-Removal-Tool ist nur temporaer.
+- Dauerhaft verschwindet die URL nur ueber 410, 404 + Deindexierung oder 301.
+
+Konkrete Schritte:
+
+1. Im WP-Admin pruefen, ob die Seite als Page/Post noch existiert.
+2. Wenn ja:
+   - in den Papierkorb oder dauerhaft loeschen
+   - sicherstellen, dass sie nicht mehr in Menues, Widgets oder internen Links vorkommt
+3. Wenn nein oder wenn sie aus Alt-Routing kommt:
+   - technischen 410-Fallback im Theme setzen
+4. Danach in Search Console:
+   - URL-Pruefung
+   - optional Entfernen-Tool
+5. Danach pruefen:
+   - `curl -I https://hasimuener.de/shopify-wartungsvertrag/`
+   - Ziel sollte **410** oder ein fachlich sauberer **301** sein
+
+Praeferenz:
+
+- **410 ist hier wahrscheinlich die bessere Loesung als 301**, solange es keine echte Shopify-Wartungsseite mehr gibt.
+
+### 2. `/wordpress-wartung-hannover/` entscheiden
+
+Status:
+
+- sehr hohe Impressionen
+- `draft`
+- `noindex: yes`
+- trotzdem relevante Suchsignale
+
+Das ist derzeit der groesste operative Widerspruch.
+
+Entscheidung noetig:
+
+- **Variante A**: Angebot bleibt wichtig
+  - Seite publishen
+  - noindex entfernen
+  - Snippet auf Query `wordpress wartungsvertrag hannover` ausrichten
+- **Variante B**: Angebot wird nicht mehr aktiv gespielt
+  - 301 auf die beste Live-Zielseite
+  - interne Links und Sitemap bereinigen
+
+Ohne diese Entscheidung laeuft weiter Sichtbarkeit in einen unklaren Zielzustand.
+
+### 3. Snippet-Quick-Wins auf bereits gut rankenden Seiten
+
+Diese Seiten haben schon Sichtbarkeit oder gute Positionen. Hier bringen kleine Eingriffe oft sofort mehr CTR:
+
+- `/kontaktiere-mich/`
+- `/wordpress-growth-operating-system/`
+- `/kostenlose-tools/`
+- `/shopify-wartungsvertrag/` nur falls die URL doch behalten wird
+
+Pro Seite:
+
+- SEO-Title gegen Suchintention schaerfen
+- Description ergaenzen oder verdichten
+- klarer Nutzen + Proof + naechster Schritt
+- keine generischen Claim-Phrasen
+
+### 4. Legacy-URLs final bereinigen
+
+Betroffen:
+
+- `/case-studies/`
+- `/alle-loesungen-im-detail/`
+
+Status:
+
+- beide URLs tauchen noch in Search Console auf
+- Redirects sind bereits im Theme vorhanden
+
+Jetzt noch noetig:
+
+- interne Links auf Ziel-URLs umstellen
+- nur noch Ziel-URLs in der Sitemap haben
+- Ziel-URLs in Search Console neu anstossen
+
+## P1 - Diese Woche
+
+### 5. Kannibalisierung fuer lokale Kernqueries aufloesen
+
+Betroffen:
+
+- `wordpress agentur hannover`
+- `woocommerce agentur hannover`
+- `wordpress hannover`
+
+Vorgehen:
+
+1. Pro Query eine Primaer-URL festlegen
+2. Title/Description der Primaer-URL auf diese Query schaerfen
+3. interne Links mit passendem Anchor auf die Primaer-URL lenken
+4. konkurrierende Seiten nicht weiter auf dieselbe Suchintention optimieren
+
+Primaere Vermutung:
+
+- fuer `wordpress agentur hannover` sollte `/wordpress-agentur-hannover/` die Fuehrungsseite sein
+
+### 6. `/wordpress-seo-hannover/` nicht blind umschreiben
+
+Status:
+
+- viele Impressionen
+- schwache Position
+- relevanter Cluster-Kandidat
+
+Vorgehen:
+
+- erst Query-Mix und interne Linkstruktur pruefen
+- dann Snippet, Intro, Haupt-H1, Suchintention und interne Cluster-Links schaerfen
+- keine grosse Rewrite-Runde, bevor Primaerseiten sauber definiert sind
+
+### 7. Draft-/noindex-Seiten mit Rest-Sichtbarkeit aufraeumen
+
+Betroffen:
+
+- `/ga4-tracking-setup/`
+- `/performance-marketing/`
+- `/roi-rechner/`
+
+Fuer jede URL Entscheidung:
+
+- soll ranken -> publish + index + sauberer Snippet-Status
+- soll nicht ranken -> noindex lassen, intern entkoppeln, nicht verlinken, nicht in Sitemap
+
+## P2 - Danach
+
+### 8. Themencluster weiter ausbauen
+
+Erst nach Bereinigung der Fehlersignale:
+
+- WordPress Agentur Hannover
+- Technisches SEO / WordPress SEO
+- Wartung / Betrieb / Security
+
+### 9. Koko und Search Console spaeter tiefer verzahnen
+
+Der Cockpit-Unterbau ist vorhanden, aber kein akuter SEO-Hebel gegenueber den obigen Punkten.
+
+## Intelligente Umsetzungslogik
+
+Die effizienteste Reihenfolge ist:
+
+1. **Aus dem Index nehmen oder sauber weiterleiten, was fachlich nicht mehr lebt**
+2. **sichtbare Seiten mit Snippet-Schwachstellen korrigieren**
+3. **lokale Kernqueries auf eine Fuehrungsseite konzentrieren**
+4. **erst danach Content- und Cluster-Ausbau**
+
+Damit vermeidest du drei typische Fehler:
+
+- Traffic in tote oder falsche URLs weiterlaufen zu lassen
+- Snippet-Arbeit auf Seiten ohne klares Ziel zu verschwenden
+- mehrere Seiten gleichzeitig fuer dieselbe Query gegeneinander arbeiten zu lassen
+
+## Konkrete naechste Admin-Tasks
+
+### Heute
+
+- `/shopify-wartungsvertrag/` pruefen und auf 410 oder 301 festlegen
+- `/wordpress-wartung-hannover/` auf publish/index oder Redirect festlegen
+- Snippets fuer `/kontaktiere-mich/`, `/wordpress-growth-operating-system/`, `/kostenlose-tools/` ueberarbeiten
+- Search Console Requests fuer Ziel-URLs anstossen
+
+### Danach
+
+- Primaer-URL-Mapping fuer lokale Queries festhalten
+- interne Links auf `/wordpress-agentur-hannover/` weiter staerken
+- alte URLs und nicht gewollte Draft-Signale konsequent aufraeumen
+
+## Repo-Hinweise
+
+Bereits vorhandene technische Redirect-Stelle:
+
+- `blocksy-child/inc/snippets.php`
+
+Bereits relevante Cluster-/SEO-Stellen:
+
+- `blocksy-child/inc/seo-meta.php`
+- `blocksy-child/inc/wgos-cluster-pages.php`
+- `blocksy-child/inc/helpers.php`
+
+Falls `/shopify-wartungsvertrag/` technisch im Theme abgefangen werden soll, ist `inc/snippets.php` der wahrscheinlich beste Einstiegspunkt.
