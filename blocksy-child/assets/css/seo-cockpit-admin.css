@@ -24,6 +24,11 @@
     box-shadow: 0 14px 34px rgba(18, 25, 35, 0.05);
 }
 
+.nexus-seo-cockpit__panel--setup {
+    border-color: #eadacc;
+    background: linear-gradient(180deg, #fffaf5 0%, #fffefe 100%);
+}
+
 .nexus-seo-cockpit__panel-head {
     display: flex;
     align-items: flex-start;
@@ -57,6 +62,16 @@
 .nexus-seo-cockpit__hint {
     margin: 0;
     color: #5e6977;
+}
+
+.nexus-seo-cockpit__steps {
+    margin: 14px 0 0;
+    padding-left: 18px;
+    color: #24303c;
+}
+
+.nexus-seo-cockpit__steps li + li {
+    margin-top: 8px;
 }
 
 .nexus-seo-cockpit__status {

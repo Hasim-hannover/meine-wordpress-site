@@ -149,6 +149,40 @@ function nexus_has_seo_cockpit_search_console_credentials() {
 }
 
 /**
+ * Return a compact setup-state summary for the cockpit.
+ *
+ * @return array<string, mixed>
+ */
+function nexus_get_seo_cockpit_setup_state() {
+	$config       = nexus_get_seo_cockpit_search_console_config();
+	$tokens       = nexus_get_seo_cockpit_tokens();
+	$is_connected = '' !== (string) ( $tokens['access_token'] ?? '' );
+	$missing      = [];
+
+	if ( '' === $config['property'] ) {
+		$missing[] = 'Property';
+	}
+
+	if ( '' === $config['client_id'] ) {
+		$missing[] = 'Client ID';
+	}
+
+	if ( '' === $config['client_secret'] ) {
+		$missing[] = 'Client Secret';
+	}
+
+	return [
+		'config'         => $config,
+		'is_connected'   => $is_connected,
+		'has_property'   => '' !== $config['property'],
+		'has_client_id'  => '' !== $config['client_id'],
+		'has_secret'     => '' !== $config['client_secret'],
+		'is_ready'       => empty( $missing ) && $is_connected,
+		'missing'        => $missing,
+	];
+}
+
+/**
  * Return the stored token payload.
  *
  * @return array<string, mixed>
@@ -1161,17 +1195,41 @@ function nexus_render_seo_cockpit_dashboard() {
 		return;
 	}
 
-	$config      = nexus_get_seo_cockpit_search_console_config();
-	$tokens      = nexus_get_seo_cockpit_tokens();
-	$runtime     = nexus_get_seo_cockpit_runtime();
-	$koko        = nexus_get_koko_analytics_status();
-	$snapshot    = nexus_get_seo_cockpit_snapshot();
-	$site_list   = nexus_get_seo_cockpit_sites();
-	$is_connected = '' !== (string) ( $tokens['access_token'] ?? '' );
+	$setup        = nexus_get_seo_cockpit_setup_state();
+	$config       = $setup['config'];
+	$tokens       = nexus_get_seo_cockpit_tokens();
+	$runtime      = nexus_get_seo_cockpit_runtime();
+	$koko         = nexus_get_koko_analytics_status();
+	$snapshot     = nexus_get_seo_cockpit_snapshot();
+	$site_list    = nexus_get_seo_cockpit_sites();
+	$is_connected = $setup['is_connected'];
 	?>
 	<div class="wrap nexus-seo-cockpit">
 		<h1>SEO Cockpit</h1>
 		<?php nexus_render_seo_cockpit_notice(); ?>
+
+		<?php if ( ! $setup['is_ready'] ) : ?>
+			<section class="nexus-seo-cockpit__panel nexus-seo-cockpit__panel--setup">
+				<div class="nexus-seo-cockpit__panel-head">
+					<h2>Noch nicht komplett eingerichtet</h2>
+					<a class="button button-primary" href="<?php echo esc_url( admin_url( 'admin.php?page=nexus-seo-cockpit-settings' ) ); ?>">Zu den Einstellungen</a>
+				</div>
+				<?php if ( ! empty( $setup['missing'] ) ) : ?>
+					<p class="nexus-seo-cockpit__hint">
+						Es fehlen aktuell: <strong><?php echo esc_html( implode( ', ', $setup['missing'] ) ); ?></strong>.
+					</p>
+				<?php elseif ( ! $is_connected ) : ?>
+					<p class="nexus-seo-cockpit__hint">
+						Die Werte sind hinterlegt. Als naechsten Schritt musst du nur noch Google verbinden.
+					</p>
+				<?php endif; ?>
+				<ol class="nexus-seo-cockpit__steps">
+					<li>In <strong>Einstellungen</strong> die Search-Console-Property hinterlegen: <code>sc-domain:hasimuener.de</code> oder exakt deine URL-Property.</li>
+					<li>Google OAuth Client ID und Client Secret eintragen.</li>
+					<li>Mit Google verbinden und den Zugriff mit dem Search-Console-Konto bestaetigen.</li>
+				</ol>
+			</section>
+		<?php endif; ?>
 
 		<div class="nexus-seo-cockpit__grid nexus-seo-cockpit__grid--top">
 			<section class="nexus-seo-cockpit__panel">
@@ -1384,6 +1442,19 @@ function nexus_render_seo_cockpit_settings_page() {
 	?>
 	<div class="wrap nexus-seo-cockpit">
 		<h1>SEO Cockpit Einstellungen</h1>
+
+		<section class="nexus-seo-cockpit__panel nexus-seo-cockpit__panel--setup">
+			<h2>So aktivierst du Search Console</h2>
+			<ol class="nexus-seo-cockpit__steps">
+				<li>In Google Cloud einen OAuth Client vom Typ <strong>Web application</strong> anlegen.</li>
+				<li>Als autorisierte Redirect URI exakt diese URL hinterlegen: <code><?php echo esc_html( $config['redirect_uri'] ); ?></code></li>
+				<li>Hier Property, Client ID und Client Secret speichern und danach zur Uebersicht wechseln.</li>
+			</ol>
+			<p class="nexus-seo-cockpit__hint">
+				Wichtig: Die Property muss exakt so geschrieben sein, wie sie in Google Search Console existiert, zum Beispiel <code>sc-domain:hasimuener.de</code> oder <code>https://hasimuener.de/</code>.
+			</p>
+		</section>
+
 		<form method="post" action="options.php" class="nexus-seo-cockpit__settings-form">
 			<?php settings_fields( 'nexus_seo_cockpit_settings' ); ?>
 
