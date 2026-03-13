@@ -173,10 +173,49 @@ function hu_override_custom_logo_with_wordmark( $html, $blog_id ) {
 	return hu_get_site_wordmark_html();
 }
 
+function hu_get_brand_logo_url() {
+	$default_logo_url = home_url( '/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp' );
+
+	return (string) apply_filters( 'hu_brand_logo_url', $default_logo_url );
+}
+
+function hu_get_brand_image_type( $url ) {
+	$path_info = wp_parse_url( (string) $url, PHP_URL_PATH );
+	$extension = is_string( $path_info ) ? strtolower( pathinfo( $path_info, PATHINFO_EXTENSION ) ) : '';
+	$mime_map  = [
+		'svg'  => 'image/svg+xml',
+		'png'  => 'image/png',
+		'webp' => 'image/webp',
+		'ico'  => 'image/x-icon',
+		'jpg'  => 'image/jpeg',
+		'jpeg' => 'image/jpeg',
+		'gif'  => 'image/gif',
+	];
+
+	return isset( $mime_map[ $extension ] ) ? $mime_map[ $extension ] : 'image/svg+xml';
+}
+
 function hu_get_brand_favicon_assets() {
 	$base_dir = get_stylesheet_directory() . '/assets/brand/';
 	$base_uri = get_stylesheet_directory_uri() . '/assets/brand/';
 	$assets   = [];
+	$logo_url = hu_get_brand_logo_url();
+
+	if ( '' !== $logo_url ) {
+		$logo_url = add_query_arg( 'v', 'brand-logo-2025-08', $logo_url );
+		$type     = hu_get_brand_image_type( $logo_url );
+
+		return [
+			'light' => [
+				'url'  => $logo_url,
+				'type' => $type,
+			],
+			'dark'  => [
+				'url'  => $logo_url,
+				'type' => $type,
+			],
+		];
+	}
 
 	$variants = [
 		'light' => 'favicon-copper.svg',
@@ -193,7 +232,7 @@ function hu_get_brand_favicon_assets() {
 		$assets[ $variant ] = [
 			'path'    => $path,
 			'url'     => add_query_arg( 'v', (string) filemtime( $path ), $base_uri . $file_name ),
-			'version' => (int) filemtime( $path ),
+			'type'    => hu_get_brand_image_type( $file_name ),
 		];
 	}
 
@@ -220,14 +259,15 @@ function hu_output_brand_favicon_meta() {
 
 	if ( ! empty( $favicons['light']['url'] ) ) :
 		?>
-	<link rel="icon" type="image/svg+xml" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
+	<link rel="icon" type="<?php echo esc_attr( $favicons['light']['type'] ?? 'image/svg+xml' ); ?>" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
 	<link rel="shortcut icon" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
+	<link rel="apple-touch-icon" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
 		<?php
 	endif;
 
 	if ( ! empty( $favicons['dark']['url'] ) ) :
 		?>
-	<link rel="icon" type="image/svg+xml" media="(prefers-color-scheme: dark)" href="<?php echo esc_url( $favicons['dark']['url'] ); ?>">
+	<link rel="icon" type="<?php echo esc_attr( $favicons['dark']['type'] ?? 'image/svg+xml' ); ?>" media="(prefers-color-scheme: dark)" href="<?php echo esc_url( $favicons['dark']['url'] ); ?>">
 		<?php
 	endif;
 }

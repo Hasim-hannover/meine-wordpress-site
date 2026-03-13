@@ -20,7 +20,7 @@ function hu_output_schema()
         'description' => 'WordPress Growth Architect für B2B-Unternehmen: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als Nachfrage-System.',
         'telephone'   => '+49 176 81407134',
         'email'       => 'info@hasimuener.de',
-        'logo'        => 'https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp',
+        'logo'        => function_exists( 'hu_get_brand_logo_url' ) ? hu_get_brand_logo_url() : 'https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp',
         'image'       => 'https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp',
         'address'     => [
             '@type' => 'PostalAddress',
