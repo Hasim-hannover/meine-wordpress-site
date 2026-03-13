@@ -75,28 +75,16 @@ function nexus_normalize_seo_cockpit_internal_link_target( $url ) {
 }
 
 /**
- * Extract internal links from one post content blob.
+ * Normalize and filter one list of raw link targets to internal frontend URLs.
  *
- * @param string $content Post content.
+ * @param array<int, string> $links Raw URLs.
  * @return array<int, string>
  */
-function nexus_get_seo_cockpit_internal_links_from_content( $content ) {
-	$content = (string) $content;
-
-	if ( '' === trim( $content ) ) {
-		return [];
-	}
-
-	preg_match_all( '/<a\s[^>]*href=(["\'])(.*?)\1/i', $content, $matches );
-
-	if ( empty( $matches[2] ) || ! is_array( $matches[2] ) ) {
-		return [];
-	}
-
+function nexus_normalize_seo_cockpit_internal_link_list( $links ) {
 	$home_host = strtolower( (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST ) );
-	$links     = [];
+	$normalized = [];
 
-	foreach ( $matches[2] as $href ) {
+	foreach ( (array) $links as $href ) {
 		$href = trim( html_entity_decode( (string) $href, ENT_QUOTES, 'UTF-8' ) );
 
 		if ( '' === $href || '#' === $href || 0 === strpos( $href, '#' ) ) {
@@ -117,22 +105,377 @@ function nexus_get_seo_cockpit_internal_links_from_content( $content ) {
 			continue;
 		}
 
-		$links[] = $target;
+		$normalized[] = $target;
 	}
 
-	return $links;
+	return $normalized;
+}
+
+/**
+ * Extract internal links from one post content blob.
+ *
+ * @param string $content Post content.
+ * @return array<int, string>
+ */
+function nexus_get_seo_cockpit_internal_links_from_content( $content ) {
+	$content = (string) $content;
+
+	if ( '' === trim( $content ) ) {
+		return [];
+	}
+
+	preg_match_all( '/<a\s[^>]*href=(["\'])(.*?)\1/i', $content, $matches );
+
+	if ( empty( $matches[2] ) || ! is_array( $matches[2] ) ) {
+		return [];
+	}
+
+	return nexus_normalize_seo_cockpit_internal_link_list( array_map( 'strval', $matches[2] ) );
+}
+
+/**
+ * Return a target-count map from one link list.
+ *
+ * @param array<int, string> $links Normalized link list.
+ * @return array<string, int>
+ */
+function nexus_get_seo_cockpit_internal_target_counts( $links ) {
+	$counts = [];
+
+	foreach ( (array) $links as $target_url ) {
+		if ( '' === $target_url ) {
+			continue;
+		}
+
+		$counts[ $target_url ] = isset( $counts[ $target_url ] )
+			? (int) $counts[ $target_url ] + 1
+			: 1;
+	}
+
+	return $counts;
+}
+
+/**
+ * Convert one count map to a sorted list payload.
+ *
+ * @param array<string, int> $counts Count map.
+ * @param int                $limit  Max rows.
+ * @param string             $type   Source type label.
+ * @param array<string, string> $labels Optional item labels keyed by URL or key.
+ * @return array<int, array<string, mixed>>
+ */
+function nexus_get_seo_cockpit_ranked_link_list( $counts, $limit = 5, $type = 'context', $labels = [] ) {
+	$counts = array_filter(
+		(array) $counts,
+		static function ( $count ) {
+			return absint( $count ) > 0;
+		}
+	);
+
+	if ( empty( $counts ) ) {
+		return [];
+	}
+
+	arsort( $counts );
+	$rows = [];
+
+	foreach ( array_slice( $counts, 0, $limit, true ) as $key => $count ) {
+		$rows[] = [
+			'url'   => (string) $key,
+			'label' => isset( $labels[ $key ] ) ? (string) $labels[ $key ] : (string) $key,
+			'count' => (int) $count,
+			'type'  => sanitize_key( $type ),
+		];
+	}
+
+	return $rows;
+}
+
+/**
+ * Return the primary site-header menu links.
+ *
+ * @return array<int, string>
+ */
+function nexus_get_seo_cockpit_primary_menu_links() {
+	$links    = [];
+	$location = function_exists( 'nexus_get_site_header_menu_location' ) ? nexus_get_site_header_menu_location() : '';
+
+	if ( '' !== $location ) {
+		$locations = get_nav_menu_locations();
+		$menu_id   = isset( $locations[ $location ] ) ? absint( $locations[ $location ] ) : 0;
+		$items     = $menu_id ? wp_get_nav_menu_items( $menu_id ) : [];
+
+		foreach ( (array) $items as $item ) {
+			if ( ! ( $item instanceof WP_Post ) && ! is_object( $item ) ) {
+				continue;
+			}
+
+			$url = isset( $item->url ) ? (string) $item->url : '';
+
+			if ( function_exists( 'nexus_is_results_menu_item' ) && nexus_is_results_menu_item( $item ) && function_exists( 'nexus_get_results_url' ) ) {
+				$url = nexus_get_results_url();
+			} elseif ( function_exists( 'nexus_is_audit_cta_menu_item' ) && nexus_is_audit_cta_menu_item( $item ) && function_exists( 'nexus_get_audit_url' ) ) {
+				$url = nexus_get_audit_url();
+			}
+
+			if ( '' !== $url ) {
+				$links[] = $url;
+			}
+		}
+	}
+
+	if ( empty( $links ) && function_exists( 'nexus_get_site_header_fallback_items' ) ) {
+		foreach ( (array) nexus_get_site_header_fallback_items() as $item ) {
+			if ( empty( $item['url'] ) ) {
+				continue;
+			}
+
+			$links[] = (string) $item['url'];
+		}
+	}
+
+	return nexus_normalize_seo_cockpit_internal_link_list( $links );
+}
+
+/**
+ * Return the static global source definitions that the theme injects sitewide.
+ *
+ * @return array<string, array<string, mixed>>
+ */
+function nexus_get_seo_cockpit_sitewide_source_definitions() {
+	static $sources = null;
+
+	if ( is_array( $sources ) ) {
+		return $sources;
+	}
+
+	$home_url        = home_url( '/' );
+	$blog_page_id    = (int) get_option( 'page_for_posts' );
+	$blog_url        = $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' );
+	$audit_url       = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
+	$cases_url       = function_exists( 'nexus_get_results_url' ) ? nexus_get_results_url() : home_url( '/ergebnisse/' );
+	$agentur_url     = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ) : home_url( '/wordpress-agentur-hannover/' );
+	$wgos_url        = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'wordpress-growth-operating-system' ], home_url( '/wordpress-growth-operating-system/' ) ) : home_url( '/wordpress-growth-operating-system/' );
+	$e3_url          = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/e3-new-energy/' ) ) : home_url( '/e3-new-energy/' );
+	$domdar_url      = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'case-study-domdar', 'domdar' ], home_url( '/case-study-domdar/' ) ) : home_url( '/case-study-domdar/' );
+	$whitelabel_url  = function_exists( 'nexus_get_whitelabel_page_url' ) ? nexus_get_whitelabel_page_url() : home_url( '/whitelabel-retainer/' );
+	$seo_url         = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ], home_url( '/wordpress-seo-hannover/' ) ) : home_url( '/wordpress-seo-hannover/' );
+	$cwv_url         = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'core-web-vitals', 'core-web-vitals-optimierung' ], home_url( '/core-web-vitals/' ) ) : home_url( '/core-web-vitals/' );
+	$tools_url       = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ) : home_url( '/kostenlose-tools/' );
+	$about_url       = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) ) : home_url( '/uber-mich/' );
+	$contact_url     = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+	$project_url     = add_query_arg(
+		[
+			'type' => 'project',
+		],
+		$contact_url
+	);
+	$imprint_url     = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) ) : home_url( '/impressum/' );
+	$privacy_url     = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) ) : home_url( '/datenschutz/' );
+	$primary_links   = nexus_get_seo_cockpit_primary_menu_links();
+
+	$sources = [
+		'site_header' => [
+			'key'   => 'site_header',
+			'label' => 'Header-Navigation',
+			'links' => array_merge(
+				[ $home_url ],
+				$primary_links
+			),
+		],
+		'blog_header' => [
+			'key'   => 'blog_header',
+			'label' => 'Blog-Header',
+			'links' => [
+				$home_url,
+				$wgos_url,
+				$cases_url,
+				$about_url,
+				$audit_url,
+			],
+		],
+		'audit_header' => [
+			'key'   => 'audit_header',
+			'label' => 'Audit-Header',
+			'links' => [
+				$home_url,
+				$cases_url,
+			],
+		],
+		'site_footer' => [
+			'key'   => 'site_footer',
+			'label' => 'Footer',
+			'links' => [
+				$home_url,
+				$audit_url,
+				$privacy_url,
+				$audit_url,
+				$agentur_url,
+				$wgos_url,
+				$cases_url,
+				$e3_url,
+				$domdar_url,
+				$whitelabel_url,
+				$blog_url,
+				$seo_url,
+				$cwv_url,
+				$tools_url,
+				$project_url,
+				$about_url,
+				$contact_url,
+				$imprint_url,
+				$privacy_url,
+			],
+		],
+		'audit_footer' => [
+			'key'   => 'audit_footer',
+			'label' => 'Audit-Footer',
+			'links' => [
+				$cases_url,
+				$imprint_url,
+				$privacy_url,
+			],
+		],
+	];
+
+	foreach ( $sources as $key => $source ) {
+		$normalized               = nexus_normalize_seo_cockpit_internal_link_list( (array) ( $source['links'] ?? [] ) );
+		$target_counts            = nexus_get_seo_cockpit_internal_target_counts( $normalized );
+		$sources[ $key ]['links'] = $normalized;
+		$sources[ $key ]['link_count'] = count( $normalized );
+		$sources[ $key ]['unique_targets'] = count( $target_counts );
+		$sources[ $key ]['target_counts'] = $target_counts;
+		$sources[ $key ]['top_targets'] = nexus_get_seo_cockpit_ranked_link_list( $target_counts, 5, 'sitewide' );
+	}
+
+	return $sources;
+}
+
+/**
+ * Return sitewide shell definitions used by the theme.
+ *
+ * @return array<string, array<string, mixed>>
+ */
+function nexus_get_seo_cockpit_sitewide_shell_definitions() {
+	return [
+		'default' => [
+			'key'         => 'default',
+			'label'       => 'Standard-Shell',
+			'source_keys' => [ 'site_header', 'site_footer' ],
+		],
+		'blog'    => [
+			'key'         => 'blog',
+			'label'       => 'Blog-Shell',
+			'source_keys' => [ 'blog_header', 'site_footer' ],
+		],
+		'audit'   => [
+			'key'         => 'audit',
+			'label'       => 'Audit-Shell',
+			'source_keys' => [ 'audit_header', 'audit_footer' ],
+		],
+	];
+}
+
+/**
+ * Detect the shell type for one frontend URL.
+ *
+ * @param string               $url     Frontend URL.
+ * @param array<string, mixed> $context Optional WordPress context.
+ * @return string
+ */
+function nexus_get_seo_cockpit_sitewide_shell_key_for_url( $url, $context = [] ) {
+	$url     = nexus_normalize_seo_cockpit_internal_link_target( $url );
+	$context = is_array( $context ) ? $context : [];
+	$path    = '/' . ltrim( (string) wp_parse_url( $url, PHP_URL_PATH ), '/' );
+	$path    = trailingslashit( $path );
+	$audit   = nexus_normalize_seo_cockpit_internal_link_target( function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' ) );
+	$audit_path = '/' . ltrim( (string) wp_parse_url( $audit, PHP_URL_PATH ), '/' );
+	$audit_path = trailingslashit( $audit_path );
+
+	if ( $audit && $audit === $url ) {
+		return 'audit';
+	}
+
+	if ( $audit_path === $path ) {
+		return 'audit';
+	}
+
+	if (
+		'post' === (string) ( $context['post_type'] ?? '' )
+		|| 'blog_index' === (string) ( $context['page_type'] ?? '' )
+		|| 0 === strpos( $path, '/category/' )
+		|| 0 === strpos( $path, '/tag/' )
+		|| 0 === strpos( $path, '/author/' )
+		|| '/blog/' === $path
+	) {
+		return 'blog';
+	}
+
+	return 'default';
+}
+
+/**
+ * Return one sitewide outgoing payload for a concrete URL shell.
+ *
+ * @param string               $url     Frontend URL.
+ * @param array<string, mixed> $context Optional context.
+ * @return array<string, mixed>
+ */
+function nexus_get_seo_cockpit_sitewide_outgoing_context( $url, $context = [] ) {
+	$url        = nexus_normalize_seo_cockpit_internal_link_target( $url );
+	$sources    = nexus_get_seo_cockpit_sitewide_source_definitions();
+	$shells     = nexus_get_seo_cockpit_sitewide_shell_definitions();
+	$shell_key  = nexus_get_seo_cockpit_sitewide_shell_key_for_url( $url, $context );
+	$shell      = isset( $shells[ $shell_key ] ) ? $shells[ $shell_key ] : $shells['default'];
+	$target_map = [];
+	$areas      = [];
+
+	foreach ( (array) ( $shell['source_keys'] ?? [] ) as $source_key ) {
+		if ( empty( $sources[ $source_key ] ) || ! is_array( $sources[ $source_key ] ) ) {
+			continue;
+		}
+
+		$source = $sources[ $source_key ];
+		$counts = isset( $source['target_counts'] ) && is_array( $source['target_counts'] ) ? $source['target_counts'] : [];
+
+		foreach ( $counts as $target_url => $count ) {
+			if ( $target_url === $url ) {
+				continue;
+			}
+
+			$target_map[ $target_url ] = isset( $target_map[ $target_url ] )
+				? (int) $target_map[ $target_url ] + (int) $count
+				: (int) $count;
+		}
+
+		$areas[] = [
+			'key'            => (string) ( $source['key'] ?? $source_key ),
+			'label'          => (string) ( $source['label'] ?? $source_key ),
+			'link_count'     => max( 0, (int) ( $source['link_count'] ?? 0 ) ),
+			'unique_targets' => max( 0, (int) ( $source['unique_targets'] ?? 0 ) ),
+		];
+	}
+
+	return [
+		'shell'               => (string) ( $shell['key'] ?? 'default' ),
+		'shell_label'         => (string) ( $shell['label'] ?? 'Standard-Shell' ),
+		'outgoing_links'      => array_sum( array_map( 'intval', $target_map ) ),
+		'outgoing_unique_urls' => count( $target_map ),
+		'top_targets'         => nexus_get_seo_cockpit_ranked_link_list( $target_map, 5, 'sitewide' ),
+		'sources'             => $areas,
+	];
 }
 
 /**
  * Return the cached internal link graph.
  *
- * Counts are based on published public post content only. Global navigation,
- * widgets and theme-injected links are intentionally excluded for now.
+ * Context links are based on published public post content. Sitewide links are
+ * counted separately from theme-injected header, blog-header and footer shells.
  *
  * @return array<string, mixed>
  */
 function nexus_get_seo_cockpit_internal_link_graph() {
-	$cache_key = nexus_get_seo_cockpit_cache_key( 'link_graph', [ home_url( '/' ) ] );
+	$cache_key = nexus_get_seo_cockpit_cache_key( 'link_graph', [ home_url( '/' ), 'sitewide_v2' ] );
 	$cached    = get_transient( $cache_key );
 
 	if ( is_array( $cached ) ) {
@@ -165,11 +508,13 @@ function nexus_get_seo_cockpit_internal_link_graph() {
 
 		if ( ! isset( $nodes[ $source_url ] ) ) {
 			$nodes[ $source_url ] = [
-				'url'              => $source_url,
-				'incoming_links'   => 0,
-				'incoming_sources' => [],
-				'outgoing_links'   => 0,
-				'outgoing_targets' => [],
+				'url'                     => $source_url,
+				'context_incoming_links'  => 0,
+				'context_incoming_sources' => [],
+				'context_outgoing_links'  => 0,
+				'context_outgoing_targets' => [],
+				'sitewide_incoming_links' => 0,
+				'sitewide_sources'        => [],
 			];
 		}
 
@@ -182,67 +527,119 @@ function nexus_get_seo_cockpit_internal_link_graph() {
 
 			if ( ! isset( $nodes[ $target_url ] ) ) {
 				$nodes[ $target_url ] = [
-					'url'              => $target_url,
-					'incoming_links'   => 0,
-					'incoming_sources' => [],
-					'outgoing_links'   => 0,
-					'outgoing_targets' => [],
+					'url'                     => $target_url,
+					'context_incoming_links'  => 0,
+					'context_incoming_sources' => [],
+					'context_outgoing_links'  => 0,
+					'context_outgoing_targets' => [],
+					'sitewide_incoming_links' => 0,
+					'sitewide_sources'        => [],
 				];
 			}
 
-			$nodes[ $source_url ]['outgoing_links']++;
-			$nodes[ $source_url ]['outgoing_targets'][ $target_url ] = isset( $nodes[ $source_url ]['outgoing_targets'][ $target_url ] )
-				? $nodes[ $source_url ]['outgoing_targets'][ $target_url ] + 1
+			$nodes[ $source_url ]['context_outgoing_links']++;
+			$nodes[ $source_url ]['context_outgoing_targets'][ $target_url ] = isset( $nodes[ $source_url ]['context_outgoing_targets'][ $target_url ] )
+				? $nodes[ $source_url ]['context_outgoing_targets'][ $target_url ] + 1
 				: 1;
 
-			$nodes[ $target_url ]['incoming_links']++;
-			$nodes[ $target_url ]['incoming_sources'][ $source_url ] = isset( $nodes[ $target_url ]['incoming_sources'][ $source_url ] )
-				? $nodes[ $target_url ]['incoming_sources'][ $source_url ] + 1
+			$nodes[ $target_url ]['context_incoming_links']++;
+			$nodes[ $target_url ]['context_incoming_sources'][ $source_url ] = isset( $nodes[ $target_url ]['context_incoming_sources'][ $source_url ] )
+				? $nodes[ $target_url ]['context_incoming_sources'][ $source_url ] + 1
 				: 1;
 		}
 	}
 
-	foreach ( $nodes as $url => $node ) {
-		$incoming_sources = (array) $node['incoming_sources'];
-		$outgoing_targets = (array) $node['outgoing_targets'];
+	$sitewide_sources = nexus_get_seo_cockpit_sitewide_source_definitions();
 
-		arsort( $incoming_sources );
-		arsort( $outgoing_targets );
+	foreach ( $sitewide_sources as $source_key => $source ) {
+		$target_counts = isset( $source['target_counts'] ) && is_array( $source['target_counts'] ) ? $source['target_counts'] : [];
+
+		foreach ( $target_counts as $target_url => $count ) {
+			if ( ! isset( $nodes[ $target_url ] ) ) {
+				$nodes[ $target_url ] = [
+					'url'                     => $target_url,
+					'context_incoming_links'  => 0,
+					'context_incoming_sources' => [],
+					'context_outgoing_links'  => 0,
+					'context_outgoing_targets' => [],
+					'sitewide_incoming_links' => 0,
+					'sitewide_sources'        => [],
+				];
+			}
+
+			$nodes[ $target_url ]['sitewide_incoming_links'] += (int) $count;
+			$nodes[ $target_url ]['sitewide_sources'][ $source_key ] = [
+				'label' => (string) ( $source['label'] ?? $source_key ),
+				'count' => (int) $count,
+			];
+		}
+	}
+
+	foreach ( $nodes as $url => $node ) {
+		$context_sources = (array) $node['context_incoming_sources'];
+		$context_targets = (array) $node['context_outgoing_targets'];
+		$sitewide_incoming_sources = [];
+
+		foreach ( (array) $node['sitewide_sources'] as $source_key => $source ) {
+			$sitewide_incoming_sources[ 'sitewide:' . $source_key ] = (int) ( $source['count'] ?? 0 );
+		}
+
+		arsort( $context_sources );
+		arsort( $context_targets );
+		arsort( $sitewide_incoming_sources );
+
+		$sitewide_labels = [];
+		foreach ( (array) $node['sitewide_sources'] as $source_key => $source ) {
+			$sitewide_labels[ 'sitewide:' . $source_key ] = (string) ( $source['label'] ?? $source_key );
+		}
 
 		$nodes[ $url ] = [
 			'url'                   => $url,
-			'incoming_links'        => (int) $node['incoming_links'],
-			'incoming_documents'    => count( $incoming_sources ),
-			'outgoing_links'        => (int) $node['outgoing_links'],
-			'outgoing_unique_urls'  => count( $outgoing_targets ),
-			'top_sources'           => array_map(
-				static function ( $source_url, $count ) {
-					return [
-						'url'   => (string) $source_url,
-						'count' => (int) $count,
-					];
-				},
-				array_keys( array_slice( $incoming_sources, 0, 5, true ) ),
-				array_values( array_slice( $incoming_sources, 0, 5, true ) )
-			),
-			'top_targets'           => array_map(
-				static function ( $target_url, $count ) {
-					return [
-						'url'   => (string) $target_url,
-						'count' => (int) $count,
-					];
-				},
-				array_keys( array_slice( $outgoing_targets, 0, 5, true ) ),
-				array_values( array_slice( $outgoing_targets, 0, 5, true ) )
-			),
+			'incoming_links'        => (int) $node['context_incoming_links'],
+			'incoming_documents'    => count( $context_sources ),
+			'outgoing_links'        => (int) $node['context_outgoing_links'],
+			'outgoing_unique_urls'  => count( $context_targets ),
+			'top_sources'           => nexus_get_seo_cockpit_ranked_link_list( $context_sources, 5, 'context' ),
+			'top_targets'           => nexus_get_seo_cockpit_ranked_link_list( $context_targets, 5, 'context' ),
+			'context'               => [
+				'incoming_links'       => (int) $node['context_incoming_links'],
+				'incoming_documents'   => count( $context_sources ),
+				'outgoing_links'       => (int) $node['context_outgoing_links'],
+				'outgoing_unique_urls' => count( $context_targets ),
+				'top_sources'          => nexus_get_seo_cockpit_ranked_link_list( $context_sources, 5, 'context' ),
+				'top_targets'          => nexus_get_seo_cockpit_ranked_link_list( $context_targets, 5, 'context' ),
+			],
+			'sitewide'              => [
+				'incoming_links'     => (int) $node['sitewide_incoming_links'],
+				'incoming_sources'   => count( $sitewide_incoming_sources ),
+				'top_sources'        => nexus_get_seo_cockpit_ranked_link_list( $sitewide_incoming_sources, 5, 'sitewide', $sitewide_labels ),
+			],
+			'totals'                => [
+				'incoming_links'     => (int) $node['context_incoming_links'] + (int) $node['sitewide_incoming_links'],
+				'incoming_sources'   => count( $context_sources ) + count( $sitewide_incoming_sources ),
+				'outgoing_links'     => (int) $node['context_outgoing_links'],
+				'outgoing_unique_urls' => count( $context_targets ),
+			],
 		];
 	}
 
 	$graph = [
-		'built_at'   => current_time( 'timestamp' ),
-		'post_count' => count( (array) $post_ids ),
-		'nodes'      => $nodes,
-		'note'       => 'Gezählt aus veröffentlichten öffentlichen Inhalten. Menüs, Footer und theme-injizierte Links sind noch nicht enthalten.',
+		'built_at'             => current_time( 'timestamp' ),
+		'post_count'           => count( (array) $post_ids ),
+		'sitewide_source_count' => count( $sitewide_sources ),
+		'sitewide_sources'     => array_map(
+			static function ( $source ) {
+				return [
+					'key'            => (string) ( $source['key'] ?? '' ),
+					'label'          => (string) ( $source['label'] ?? '' ),
+					'link_count'     => (int) ( $source['link_count'] ?? 0 ),
+					'unique_targets' => (int) ( $source['unique_targets'] ?? 0 ),
+				];
+			},
+			array_values( $sitewide_sources )
+		),
+		'nodes'                => $nodes,
+		'note'                 => 'Kontextlinks stammen aus veroeffentlichten oeffentlichen Inhalten. Sitewide-Links aus Header, Blog-Header und Footer werden getrennt ausgewiesen.',
 	];
 
 	set_transient( $cache_key, $graph, nexus_get_seo_cockpit_refresh_interval_seconds() );
@@ -253,35 +650,155 @@ function nexus_get_seo_cockpit_internal_link_graph() {
 /**
  * Return one internal-link context payload for a URL.
  *
- * @param string $url Frontend URL.
+ * @param string               $url     Frontend URL.
+ * @param array<string, mixed> $context Optional WordPress context.
  * @return array<string, mixed>
  */
-function nexus_get_seo_cockpit_internal_link_context( $url ) {
-	$url   = nexus_normalize_seo_cockpit_internal_link_target( $url );
-	$graph = nexus_get_seo_cockpit_internal_link_graph();
-	$node  = isset( $graph['nodes'][ $url ] ) && is_array( $graph['nodes'][ $url ] ) ? $graph['nodes'][ $url ] : null;
+function nexus_get_seo_cockpit_internal_link_context( $url, $context = [] ) {
+	$url              = nexus_normalize_seo_cockpit_internal_link_target( $url );
+	$graph            = nexus_get_seo_cockpit_internal_link_graph();
+	$node             = isset( $graph['nodes'][ $url ] ) && is_array( $graph['nodes'][ $url ] ) ? $graph['nodes'][ $url ] : [];
+	$sitewide_outgoing = nexus_get_seo_cockpit_sitewide_outgoing_context( $url, $context );
+	$context_payload  = isset( $node['context'] ) && is_array( $node['context'] ) ? $node['context'] : [];
+	$sitewide_payload = isset( $node['sitewide'] ) && is_array( $node['sitewide'] ) ? $node['sitewide'] : [];
+	$totals_payload   = isset( $node['totals'] ) && is_array( $node['totals'] ) ? $node['totals'] : [];
 
-	if ( ! is_array( $node ) ) {
-		return [
-			'status'              => 'measured',
-			'incoming_links'      => 0,
-			'incoming_documents'  => 0,
-			'outgoing_links'      => 0,
-			'outgoing_unique_urls' => 0,
-			'top_sources'         => [],
-			'top_targets'         => [],
-			'note'                => (string) ( $graph['note'] ?? '' ),
-		];
-	}
+	$merged_sources = array_merge(
+		(array) ( $context_payload['top_sources'] ?? [] ),
+		(array) ( $sitewide_payload['top_sources'] ?? [] )
+	);
+
+	usort(
+		$merged_sources,
+		static function ( $left, $right ) {
+			return (int) ( $right['count'] ?? 0 ) <=> (int) ( $left['count'] ?? 0 );
+		}
+	);
+
+	$merged_targets = array_merge(
+		(array) ( $context_payload['top_targets'] ?? [] ),
+		(array) ( $sitewide_outgoing['top_targets'] ?? [] )
+	);
+
+	usort(
+		$merged_targets,
+		static function ( $left, $right ) {
+			return (int) ( $right['count'] ?? 0 ) <=> (int) ( $left['count'] ?? 0 );
+		}
+	);
 
 	return [
 		'status'               => 'measured',
-		'incoming_links'       => (int) ( $node['incoming_links'] ?? 0 ),
-		'incoming_documents'   => (int) ( $node['incoming_documents'] ?? 0 ),
-		'outgoing_links'       => (int) ( $node['outgoing_links'] ?? 0 ),
-		'outgoing_unique_urls' => (int) ( $node['outgoing_unique_urls'] ?? 0 ),
-		'top_sources'          => isset( $node['top_sources'] ) && is_array( $node['top_sources'] ) ? $node['top_sources'] : [],
-		'top_targets'          => isset( $node['top_targets'] ) && is_array( $node['top_targets'] ) ? $node['top_targets'] : [],
+		'incoming_links'       => (int) ( $totals_payload['incoming_links'] ?? 0 ),
+		'incoming_documents'   => (int) ( $totals_payload['incoming_sources'] ?? 0 ),
+		'outgoing_links'       => (int) ( $context_payload['outgoing_links'] ?? 0 ),
+		'outgoing_unique_urls' => (int) ( $context_payload['outgoing_unique_urls'] ?? 0 ),
+		'top_sources'          => array_slice( $merged_sources, 0, 5 ),
+		'top_targets'          => array_slice( $merged_targets, 0, 5 ),
+		'context'              => [
+			'incoming_links'       => (int) ( $context_payload['incoming_links'] ?? 0 ),
+			'incoming_documents'   => (int) ( $context_payload['incoming_documents'] ?? 0 ),
+			'outgoing_links'       => (int) ( $context_payload['outgoing_links'] ?? 0 ),
+			'outgoing_unique_urls' => (int) ( $context_payload['outgoing_unique_urls'] ?? 0 ),
+			'top_sources'          => isset( $context_payload['top_sources'] ) && is_array( $context_payload['top_sources'] ) ? $context_payload['top_sources'] : [],
+			'top_targets'          => isset( $context_payload['top_targets'] ) && is_array( $context_payload['top_targets'] ) ? $context_payload['top_targets'] : [],
+		],
+		'sitewide'             => [
+			'incoming_links'       => (int) ( $sitewide_payload['incoming_links'] ?? 0 ),
+			'incoming_sources'     => (int) ( $sitewide_payload['incoming_sources'] ?? 0 ),
+			'top_sources'          => isset( $sitewide_payload['top_sources'] ) && is_array( $sitewide_payload['top_sources'] ) ? $sitewide_payload['top_sources'] : [],
+			'outgoing_links'       => (int) ( $sitewide_outgoing['outgoing_links'] ?? 0 ),
+			'outgoing_unique_urls' => (int) ( $sitewide_outgoing['outgoing_unique_urls'] ?? 0 ),
+			'top_targets'          => isset( $sitewide_outgoing['top_targets'] ) && is_array( $sitewide_outgoing['top_targets'] ) ? $sitewide_outgoing['top_targets'] : [],
+			'shell'                => (string) ( $sitewide_outgoing['shell'] ?? '' ),
+			'shell_label'          => (string) ( $sitewide_outgoing['shell_label'] ?? '' ),
+			'sources'              => isset( $sitewide_outgoing['sources'] ) && is_array( $sitewide_outgoing['sources'] ) ? $sitewide_outgoing['sources'] : [],
+		],
+		'totals'               => [
+			'incoming_links'       => (int) ( $totals_payload['incoming_links'] ?? 0 ),
+			'incoming_sources'     => (int) ( $totals_payload['incoming_sources'] ?? 0 ),
+			'outgoing_links'       => (int) ( $context_payload['outgoing_links'] ?? 0 ) + (int) ( $sitewide_outgoing['outgoing_links'] ?? 0 ),
+			'outgoing_unique_urls' => (int) ( $context_payload['outgoing_unique_urls'] ?? 0 ) + (int) ( $sitewide_outgoing['outgoing_unique_urls'] ?? 0 ),
+		],
 		'note'                 => (string) ( $graph['note'] ?? '' ),
 	];
 }
+
+/**
+ * Invalidate SEO cockpit caches when relevant content changes.
+ *
+ * @return void
+ */
+function nexus_invalidate_seo_cockpit_link_caches() {
+	if ( function_exists( 'nexus_delete_seo_cockpit_snapshot_cache' ) ) {
+		nexus_delete_seo_cockpit_snapshot_cache();
+		return;
+	}
+
+	if ( function_exists( 'nexus_bump_seo_cockpit_cache_version' ) ) {
+		nexus_bump_seo_cockpit_cache_version();
+	}
+}
+
+/**
+ * Invalidate the link graph when public content changes.
+ *
+ * @param int     $post_id Post ID.
+ * @param WP_Post $post    Post object.
+ * @return void
+ */
+function nexus_maybe_invalidate_seo_cockpit_link_caches_on_post_change( $post_id, $post ) {
+	$post_id = absint( $post_id );
+
+	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		return;
+	}
+
+	if ( ! ( $post instanceof WP_Post ) ) {
+		return;
+	}
+
+	if ( ! in_array( (string) $post->post_type, nexus_get_seo_cockpit_linkable_post_types(), true ) ) {
+		return;
+	}
+
+	nexus_invalidate_seo_cockpit_link_caches();
+}
+add_action( 'save_post', 'nexus_maybe_invalidate_seo_cockpit_link_caches_on_post_change', 20, 2 );
+
+/**
+ * Invalidate the link graph when a public post is deleted or trashed.
+ *
+ * @param int $post_id Post ID.
+ * @return void
+ */
+function nexus_maybe_invalidate_seo_cockpit_link_caches_on_post_delete( $post_id ) {
+	$post_id = absint( $post_id );
+	$post    = get_post( $post_id );
+
+	if ( ! ( $post instanceof WP_Post ) ) {
+		return;
+	}
+
+	if ( ! in_array( (string) $post->post_type, nexus_get_seo_cockpit_linkable_post_types(), true ) ) {
+		return;
+	}
+
+	nexus_invalidate_seo_cockpit_link_caches();
+}
+add_action( 'trashed_post', 'nexus_maybe_invalidate_seo_cockpit_link_caches_on_post_delete' );
+add_action( 'untrashed_post', 'nexus_maybe_invalidate_seo_cockpit_link_caches_on_post_delete' );
+add_action( 'before_delete_post', 'nexus_maybe_invalidate_seo_cockpit_link_caches_on_post_delete' );
+
+/**
+ * Invalidate link caches when a navigation menu changes.
+ *
+ * @return void
+ */
+function nexus_invalidate_seo_cockpit_link_caches_on_menu_change() {
+	nexus_invalidate_seo_cockpit_link_caches();
+}
+add_action( 'wp_update_nav_menu', 'nexus_invalidate_seo_cockpit_link_caches_on_menu_change' );
+add_action( 'customize_save_after', 'nexus_invalidate_seo_cockpit_link_caches_on_menu_change' );
+add_action( 'update_option_page_on_front', 'nexus_invalidate_seo_cockpit_link_caches_on_menu_change' );
+add_action( 'update_option_page_for_posts', 'nexus_invalidate_seo_cockpit_link_caches_on_menu_change' );

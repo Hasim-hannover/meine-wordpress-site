@@ -473,6 +473,21 @@ function nexus_render_seo_cockpit_detail_view( $detail ) {
 
 		<section class="nexus-seo-cockpit__panel">
 			<h2>WordPress-Kontext</h2>
+			<?php
+			$link_context   = isset( $context['internal_links'] ) && is_array( $context['internal_links'] ) ? $context['internal_links'] : [];
+			$context_links  = isset( $link_context['context'] ) && is_array( $link_context['context'] ) ? $link_context['context'] : [];
+			$sitewide_links = isset( $link_context['sitewide'] ) && is_array( $link_context['sitewide'] ) ? $link_context['sitewide'] : [];
+			$total_links    = isset( $link_context['totals'] ) && is_array( $link_context['totals'] ) ? $link_context['totals'] : [];
+			$sitewide_labels = [];
+
+			foreach ( (array) ( $sitewide_links['sources'] ?? [] ) as $source ) {
+				if ( empty( $source['label'] ) ) {
+					continue;
+				}
+
+				$sitewide_labels[] = (string) $source['label'];
+			}
+			?>
 			<ul class="nexus-seo-cockpit__meta-list">
 				<li><strong>Post ID:</strong> <?php echo esc_html( (string) ( $context['post_id'] ?? '—' ) ); ?></li>
 				<li><strong>Typ:</strong> <?php echo esc_html( (string) ( $context['post_type'] ?? '—' ) ); ?></li>
@@ -486,11 +501,19 @@ function nexus_render_seo_cockpit_detail_view( $detail ) {
 				<li><strong>noindex:</strong> <?php echo esc_html( ! empty( $context['noindex'] ) ? 'Ja' : 'Nein' ); ?></li>
 				<li><strong>In Sitemap:</strong> <?php echo esc_html( ! empty( $context['in_sitemap'] ) ? 'Ja' : 'Nein' ); ?></li>
 				<li><strong>Wortanzahl:</strong> <?php echo esc_html( (string) ( $context['word_count'] ?? 0 ) ); ?></li>
-				<li><strong>Interne Links eingehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context['internal_links']['incoming_links'] ?? 0 ) ) ); ?></li>
-				<li><strong>Verlinkende Dokumente:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context['internal_links']['incoming_documents'] ?? 0 ) ) ); ?></li>
-				<li><strong>Interne Links ausgehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context['internal_links']['outgoing_links'] ?? 0 ) ) ); ?></li>
-				<li><strong>Verlinkte interne Ziele:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context['internal_links']['outgoing_unique_urls'] ?? 0 ) ) ); ?></li>
-				<li><strong>Linkgraph-Notiz:</strong> <?php echo esc_html( (string) ( $context['internal_links']['note'] ?? 'Noch nicht gemessen' ) ); ?></li>
+				<li><strong>Kontextlinks eingehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context_links['incoming_links'] ?? 0 ) ) ); ?></li>
+				<li><strong>Verlinkende Inhaltsdokumente:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context_links['incoming_documents'] ?? 0 ) ) ); ?></li>
+				<li><strong>Sitewide-Links eingehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $sitewide_links['incoming_links'] ?? 0 ) ) ); ?></li>
+				<li><strong>Verlinkende Sitewide-Quellen:</strong> <?php echo esc_html( number_format_i18n( (float) ( $sitewide_links['incoming_sources'] ?? 0 ) ) ); ?></li>
+				<li><strong>Gesamt eingehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $total_links['incoming_links'] ?? 0 ) ) ); ?></li>
+				<li><strong>Gesamtquellen eingehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $total_links['incoming_sources'] ?? 0 ) ) ); ?></li>
+				<li><strong>Kontextlinks ausgehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context_links['outgoing_links'] ?? 0 ) ) ); ?></li>
+				<li><strong>Kontextziele:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context_links['outgoing_unique_urls'] ?? 0 ) ) ); ?></li>
+				<li><strong>Globale Shell:</strong> <?php echo esc_html( (string) ( $sitewide_links['shell_label'] ?? '—' ) ); ?></li>
+				<li><strong>Globale Linkziele:</strong> <?php echo esc_html( number_format_i18n( (float) ( $sitewide_links['outgoing_unique_urls'] ?? 0 ) ) ); ?></li>
+				<li><strong>Globale Linkplatzierungen:</strong> <?php echo esc_html( number_format_i18n( (float) ( $sitewide_links['outgoing_links'] ?? 0 ) ) ); ?></li>
+				<li><strong>Sitewide-Bereiche:</strong> <?php echo esc_html( ! empty( $sitewide_labels ) ? implode( ', ', $sitewide_labels ) : '—' ); ?></li>
+				<li><strong>Linkgraph-Notiz:</strong> <?php echo esc_html( (string) ( $link_context['note'] ?? 'Noch nicht gemessen' ) ); ?></li>
 			</ul>
 		</section>
 	</div>

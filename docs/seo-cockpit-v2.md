@@ -133,23 +133,28 @@ Dadurch kollidieren manuelle und Cron-Syncs nicht mehr so leicht.
 
 ## Interne Linkzaehlung
 
-V2.1 misst interne Links jetzt als einfachen WordPress-internen Linkgraph:
+V2.1 misst interne Links jetzt in zwei Ebenen:
 
-- Quelle sind veroeffentlichte oeffentliche Inhalte
-- Grundlage ist `post_content`
-- gezaehlt werden:
-  - eingehende interne Links
-  - verlinkende Dokumente
-  - ausgehende interne Links
-  - verlinkte interne Ziele
-- Query-Parameter werden entfernt, damit Tracking-Dubletten keine eigenen Knoten bilden
+- `context`
+  Redaktionelle Links aus veroeffentlichten oeffentlichen Inhalten auf Basis von `post_content`
+- `sitewide`
+  Theme-injizierte globale Links aus Header, Blog-Header und Footer-Shells
+
+Dadurch zeigt der Drilldown jetzt getrennt:
+
+- Kontextlinks eingehend
+- verlinkende Inhaltsdokumente
+- Sitewide-Links eingehend
+- verlinkende Sitewide-Quellen
+- globale Shell-Ziele fuer die aktuelle URL
+
+Query-Parameter werden weiterhin entfernt, damit Tracking-Dubletten keine eigenen Knoten bilden.
 
 Bewusst noch nicht enthalten:
 
-- Menues
-- Footer-/Header-Navigation
 - Widgets
-- theme-injizierte Links
+- block-/shortcode-gerenderte Links ausserhalb von `post_content`
+- exakte Footer/Header-Ausgaben aus fremden Plugins oder Buildern
 
 ## Row-Limits und Paging
 
@@ -209,7 +214,7 @@ Jede Insight enthaelt:
 - URL-Inspection ist bewusst manuell im Drilldown, nicht massenhaft automatisiert.
 - Sitemap-Mitgliedschaft pro URL ist derzeit ein WordPress-internes Signal, keine Search-Console-URL-Membership.
 - Koko basiert auf defensivem REST-Mapping und nicht auf einer harten Plugin-internen API-Vertragsgarantie.
-- Die interne Linkzaehlung bezieht Menues, Widgets und theme-injizierte Navigationspfade noch nicht ein.
+- Die interne Linkzaehlung trennt jetzt Kontext- und Sitewide-Signale, bleibt aber bei Widgets und dynamisch von Plugins injizierten Navigationspfaden noch konservativ.
 
 ## Grenzen / Risiken
 

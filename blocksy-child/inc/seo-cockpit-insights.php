@@ -85,6 +85,31 @@ function nexus_get_seo_cockpit_default_internal_links( $status = 'pending', $not
 		'outgoing_unique_urls' => 0,
 		'top_sources'          => [],
 		'top_targets'          => [],
+		'context'              => [
+			'incoming_links'       => 0,
+			'incoming_documents'   => 0,
+			'outgoing_links'       => 0,
+			'outgoing_unique_urls' => 0,
+			'top_sources'          => [],
+			'top_targets'          => [],
+		],
+		'sitewide'             => [
+			'incoming_links'       => 0,
+			'incoming_sources'     => 0,
+			'top_sources'          => [],
+			'outgoing_links'       => 0,
+			'outgoing_unique_urls' => 0,
+			'top_targets'          => [],
+			'shell'                => '',
+			'shell_label'          => '',
+			'sources'              => [],
+		],
+		'totals'               => [
+			'incoming_links'       => 0,
+			'incoming_sources'     => 0,
+			'outgoing_links'       => 0,
+			'outgoing_unique_urls' => 0,
+		],
 		'note'                 => '' !== $note ? $note : 'Interne Link-Zaehlung ist noch nicht verfuegbar.',
 	];
 }
@@ -139,9 +164,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 		'noindex'                => false,
 		'in_sitemap'             => false,
 		'word_count'             => 0,
-		'internal_links'         => function_exists( 'nexus_get_seo_cockpit_internal_link_context' )
-			? nexus_get_seo_cockpit_internal_link_context( $url )
-			: nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
+		'internal_links'         => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
 		'edit_link'              => '',
 		'frontend_link'          => $url,
 		'snippet_issues'         => [],
@@ -207,9 +230,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 					'noindex'                 => false,
 					'in_sitemap'              => false,
 					'word_count'              => nexus_get_seo_cockpit_post_word_count( $resolved_id ),
-					'internal_links'          => function_exists( 'nexus_get_seo_cockpit_internal_link_context' )
-						? nexus_get_seo_cockpit_internal_link_context( home_url( '/' . $cluster_slug . '/' ) )
-						: nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
+					'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
 					'edit_link'               => (string) get_edit_post_link( $resolved_id, 'raw' ),
 					'frontend_link'           => home_url( '/' . $cluster_slug . '/' ),
 					'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues(
@@ -256,9 +277,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 				'noindex'                 => ! empty( $seo_context['noindex'] ),
 				'in_sitemap'              => nexus_is_seo_cockpit_post_in_sitemap( $post, ! empty( $seo_context['noindex'] ) ),
 				'word_count'              => nexus_get_seo_cockpit_post_word_count( $resolved_id ),
-				'internal_links'          => function_exists( 'nexus_get_seo_cockpit_internal_link_context' )
-					? nexus_get_seo_cockpit_internal_link_context( (string) get_permalink( $resolved_id ) )
-					: nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
+				'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
 				'edit_link'               => (string) get_edit_post_link( $resolved_id, 'raw' ),
 				'frontend_link'           => (string) get_permalink( $resolved_id ),
 				'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues( $seo_context ),
@@ -289,9 +308,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 			'noindex'                 => false,
 			'in_sitemap'              => false,
 			'word_count'              => 0,
-			'internal_links'          => function_exists( 'nexus_get_seo_cockpit_internal_link_context' )
-				? nexus_get_seo_cockpit_internal_link_context( home_url( '/' . $cluster_slug . '/' ) )
-				: nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
+			'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
 			'edit_link'               => '',
 			'frontend_link'           => home_url( '/' . $cluster_slug . '/' ),
 			'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues(
@@ -301,6 +318,13 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 				]
 			),
 		];
+	}
+
+	if ( function_exists( 'nexus_get_seo_cockpit_internal_link_context' ) ) {
+		$context['internal_links'] = nexus_get_seo_cockpit_internal_link_context(
+			(string) ( $context['frontend_link'] ?: $url ),
+			$context
+		);
 	}
 
 	$cache[ $url ] = $context;
