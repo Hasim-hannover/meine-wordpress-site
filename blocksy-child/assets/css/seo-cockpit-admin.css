@@ -1,5 +1,49 @@
 .nexus-seo-cockpit {
-    max-width: 1280px;
+    max-width: 1380px;
+}
+
+.nexus-seo-cockpit__eyebrow {
+    margin: 0 0 10px;
+    color: #5e6977;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.nexus-seo-cockpit__header {
+    padding-bottom: 18px;
+}
+
+.nexus-seo-cockpit__header-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.nexus-seo-cockpit__header-grid div {
+    padding: 14px 16px;
+    border: 1px solid #e3e7ed;
+    border-radius: 16px;
+    background: #f7f8fb;
+}
+
+.nexus-seo-cockpit__header-grid strong,
+.nexus-seo-cockpit__header-grid span {
+    display: block;
+}
+
+.nexus-seo-cockpit__header-grid strong {
+    margin-bottom: 8px;
+    color: #55616f;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.nexus-seo-cockpit__header-grid span {
+    color: #121920;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .nexus-seo-cockpit__grid {
@@ -9,10 +53,11 @@
 }
 
 .nexus-seo-cockpit__grid--top {
-    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
 }
 
-.nexus-seo-cockpit__grid--reports {
+.nexus-seo-cockpit__grid--reports,
+.nexus-seo-cockpit__grid--detail {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -27,6 +72,10 @@
 .nexus-seo-cockpit__panel--setup {
     border-color: #eadacc;
     background: linear-gradient(180deg, #fffaf5 0%, #fffefe 100%);
+}
+
+.nexus-seo-cockpit__panel--detail {
+    margin-top: 18px;
 }
 
 .nexus-seo-cockpit__panel-head {
@@ -45,6 +94,31 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+.nexus-seo-cockpit__range-switcher {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.nexus-seo-cockpit__range-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 34px;
+    padding: 0 14px;
+    border: 1px solid #d7dde4;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #24303c;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.nexus-seo-cockpit__range-pill.is-active {
+    border-color: #121920;
+    background: #121920;
+    color: #ffffff;
 }
 
 .nexus-seo-cockpit__meta-list {
@@ -133,7 +207,8 @@
     line-height: 1.15;
 }
 
-.nexus-seo-cockpit__metric-delta {
+.nexus-seo-cockpit__metric-delta,
+.nexus-seo-cockpit__delta-inline {
     display: inline-flex;
     margin-top: 10px;
     padding: 4px 10px;
@@ -143,16 +218,138 @@
     font-weight: 700;
 }
 
-.nexus-seo-cockpit__metric-delta.is-positive {
+.nexus-seo-cockpit__delta-inline {
+    margin-top: 0;
+    background: #eef2f6;
+    color: #24303c;
+}
+
+.nexus-seo-cockpit__metric-delta.is-positive,
+.nexus-seo-cockpit__delta-inline.is-positive {
     color: #8be0a2;
 }
 
-.nexus-seo-cockpit__metric-delta.is-negative {
+.nexus-seo-cockpit__metric-delta.is-negative,
+.nexus-seo-cockpit__delta-inline.is-negative {
     color: #ffb5b5;
 }
 
-.nexus-seo-cockpit__metric-delta.is-neutral {
+.nexus-seo-cockpit__metric-delta.is-neutral,
+.nexus-seo-cockpit__delta-inline.is-neutral {
     color: #e0d6cb;
+}
+
+.nexus-seo-cockpit__trend-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.nexus-seo-cockpit__trend-card {
+    padding: 16px;
+    border: 1px solid #dfe4ea;
+    border-radius: 18px;
+    background: #f9fafc;
+}
+
+.nexus-seo-cockpit__trend-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.nexus-seo-cockpit__trend-head span {
+    color: #55616f;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.nexus-seo-cockpit__trend-head strong {
+    color: #121920;
+    font-size: 18px;
+}
+
+.nexus-seo-cockpit__trend-card svg {
+    width: 100%;
+    height: 88px;
+    overflow: visible;
+}
+
+.nexus-seo-cockpit__trend-card polyline {
+    fill: none;
+    stroke: #9f6c39;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+}
+
+.nexus-seo-cockpit__insights {
+    display: grid;
+    gap: 12px;
+}
+
+.nexus-seo-cockpit__insight-card {
+    padding: 16px;
+    border: 1px solid #e1e6ec;
+    border-radius: 18px;
+    background: #fafbfd;
+}
+
+.nexus-seo-cockpit__insight-card p {
+    margin: 0 0 8px;
+}
+
+.nexus-seo-cockpit__insight-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.nexus-seo-cockpit__insight-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    color: #55616f;
+    font-size: 13px;
+}
+
+.nexus-seo-cockpit__badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #eef2f6;
+    color: #24303c;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.nexus-seo-cockpit__badge.is-critical {
+    background: #fde8e8;
+    color: #8f1d1d;
+}
+
+.nexus-seo-cockpit__badge.is-high {
+    background: #fff1d8;
+    color: #915500;
+}
+
+.nexus-seo-cockpit__badge.is-medium {
+    background: #eef2f6;
+    color: #24303c;
+}
+
+.nexus-seo-cockpit__badge.is-low {
+    background: #eef6ef;
+    color: #0f7a3c;
 }
 
 .nexus-seo-cockpit__table code {
@@ -204,10 +401,18 @@
     line-height: 1.15;
 }
 
-@media (max-width: 1100px) {
+.nexus-seo-widget__insights {
+    margin: 0 0 12px;
+    padding-left: 18px;
+}
+
+@media (max-width: 1180px) {
     .nexus-seo-cockpit__grid--top,
     .nexus-seo-cockpit__grid--reports,
-    .nexus-seo-cockpit__metrics {
+    .nexus-seo-cockpit__grid--detail,
+    .nexus-seo-cockpit__metrics,
+    .nexus-seo-cockpit__trend-grid,
+    .nexus-seo-cockpit__header-grid {
         grid-template-columns: 1fr;
     }
 }

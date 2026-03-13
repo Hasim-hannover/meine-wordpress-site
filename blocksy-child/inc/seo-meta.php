@@ -705,6 +705,72 @@ function hu_document_title_overrides( $parts ) {
 }
 
 /**
+ * Return the effective singular SEO context for one post ID.
+ *
+ * This helper is reused by admin tooling like the SEO cockpit so the
+ * backend can evaluate SEO state on the same basis as frontend output.
+ *
+ * @param int $post_id Post ID.
+ * @return array<string, mixed>
+ */
+function hu_get_singular_post_seo_context( $post_id ) {
+	$post_id = absint( $post_id );
+	$post    = get_post( $post_id );
+
+	if ( ! ( $post instanceof WP_Post ) ) {
+		return [];
+	}
+
+	$forced           = hu_get_forced_singular_seo( $post_id );
+	$cluster_defaults = function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ? nexus_get_wgos_cluster_page_seo_defaults( $post ) : null;
+	$stored_title     = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
+	$stored_desc      = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
+	$title            = $stored_title;
+	$description      = $stored_desc;
+	$title_source     = '' !== $stored_title ? 'stored' : 'fallback';
+	$desc_source      = '' !== $stored_desc ? 'stored' : 'fallback';
+
+	if ( ! empty( $forced['title'] ) ) {
+		$title        = (string) $forced['title'];
+		$title_source = 'forced';
+	} elseif ( '' === $title && 'post' === $post->post_type ) {
+		$title        = hu_get_post_title_pattern( $post_id );
+		$title_source = 'post_pattern';
+	} elseif ( '' === $title && is_array( $cluster_defaults ) && ! empty( $cluster_defaults['title'] ) ) {
+		$title        = (string) $cluster_defaults['title'];
+		$title_source = 'cluster_default';
+	} elseif ( '' === $title ) {
+		$title = get_the_title( $post_id );
+	}
+
+	if ( ! empty( $forced['description'] ) ) {
+		$description = (string) $forced['description'];
+		$desc_source = 'forced';
+	} elseif ( '' === $description && is_array( $cluster_defaults ) && ! empty( $cluster_defaults['description'] ) ) {
+		$description = (string) $cluster_defaults['description'];
+		$desc_source = 'cluster_default';
+	} elseif ( '' === $description ) {
+		$excerpt     = get_post_field( 'post_excerpt', $post_id );
+		$description = '' !== trim( $excerpt ) ? wp_trim_words( wp_strip_all_tags( $excerpt ), 25, '…' ) : '';
+	}
+
+	$acf_noindex       = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
+	$rank_math_robots  = get_post_meta( $post_id, 'rank_math_robots', true );
+	$rank_math_noindex = is_array( $rank_math_robots ) ? in_array( 'noindex', $rank_math_robots, true ) : 'noindex' === $rank_math_robots;
+	$noindex           = (bool) ( $acf_noindex || $rank_math_noindex );
+
+	return [
+		'title'              => trim( wp_strip_all_tags( (string) $title ) ),
+		'description'        => trim( wp_strip_all_tags( (string) $description ) ),
+		'canonical'          => (string) get_permalink( $post_id ),
+		'robots'             => $noindex ? 'noindex, nofollow' : 'index, follow',
+		'noindex'            => $noindex,
+		'title_source'       => $title_source,
+		'description_source' => $desc_source,
+	];
+}
+
+/**
  * Output SEO meta tags.
  *
  * Wenn Rank Math aktiv: Nur OG-Bild-Override (ACF) ausgeben — alles andere
