@@ -93,6 +93,34 @@ function hu_get_forced_singular_seo_map() {
 	return (array) apply_filters(
 		'hu_forced_singular_seo_map',
 		[
+			'kontakt' => [
+				'title'       => 'Kontakt für WordPress, SEO und CRO | Haşim Üner',
+				'description' => 'Projektanfrage für WordPress, SEO, Tracking und CRO: kurzer Einstieg, klare nächste Schritte und Rückmeldung für neue Projekte und bestehende Kunden.',
+			],
+			'kontaktiere-mich' => [
+				'title'       => 'Kontakt für WordPress, SEO und CRO | Haşim Üner',
+				'description' => 'Projektanfrage für WordPress, SEO, Tracking und CRO: kurzer Einstieg, klare nächste Schritte und Rückmeldung für neue Projekte und bestehende Kunden.',
+			],
+			'wgos' => [
+				'title'       => 'WordPress Growth Operating System | Haşim Üner',
+				'description' => 'Das WordPress Growth Operating System verbindet SEO, Tracking, Conversion und Angebotslogik zu einem strukturierten Nachfrage-System für B2B-Websites.',
+			],
+			'wordpress-growth-operating-system' => [
+				'title'       => 'WordPress Growth Operating System | Haşim Üner',
+				'description' => 'Das WordPress Growth Operating System verbindet SEO, Tracking, Conversion und Angebotslogik zu einem strukturierten Nachfrage-System für B2B-Websites.',
+			],
+			'tools' => [
+				'title'       => 'Kostenlose Website- und ROI-Tools | Haşim Üner',
+				'description' => 'Kostenlose Tools für ROI, Website-Analyse und Performance: schnelle Checks für Marketing-, Website- und WordPress-Entscheidungen.',
+			],
+			'kostenlose-tools' => [
+				'title'       => 'Kostenlose Website- und ROI-Tools | Haşim Üner',
+				'description' => 'Kostenlose Tools für ROI, Website-Analyse und Performance: schnelle Checks für Marketing-, Website- und WordPress-Entscheidungen.',
+			],
+			'wordpress-wartung-hannover' => [
+				'title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',
+				'description' => 'WordPress Wartung in Hannover als Teil des WGOS-Fundaments: Updates, Sicherheit, Backups, Performance und stabile Betriebsroutinen für B2B-Websites.',
+			],
 			'wordpress-seo-hannover' => [
 				'title'       => 'WordPress SEO Hannover | Technisches SEO für B2B',
 				'description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und klare Priorisierung für B2B-Websites.',
@@ -481,7 +509,7 @@ function hu_get_domdar_case_study_description() {
  * @return string
  */
 function hu_get_contact_offer_title() {
-	return 'Kontakt & Projektanfrage | WordPress Growth Architect – Haşim Üner';
+	return 'Kontakt für WordPress, SEO und CRO | Haşim Üner';
 }
 
 /**
@@ -490,7 +518,7 @@ function hu_get_contact_offer_title() {
  * @return string
  */
 function hu_get_contact_offer_description() {
-	return 'Kontakt für Projektanfragen, allgemeine Fragen und bestehende Kunden. Klarer Einstieg für WordPress, SEO, Performance, Tracking und CRO.';
+	return 'Projektanfrage für WordPress, SEO, Tracking und CRO: kurzer Einstieg, klare nächste Schritte und Rückmeldung für neue Projekte und bestehende Kunden.';
 }
 
 /**
@@ -611,6 +639,14 @@ function hu_pre_get_document_title_override( $title ) {
 		return (string) $forced_seo['title'];
 	}
 
+	if ( function_exists( 'nexus_get_current_wgos_cluster_route_slug' ) ) {
+		$cluster_defaults = nexus_get_wgos_cluster_page_seo_defaults( nexus_get_current_wgos_cluster_route_slug() );
+
+		if ( ! empty( $cluster_defaults['title'] ) ) {
+			return (string) $cluster_defaults['title'];
+		}
+	}
+
 	if ( hu_is_contact_offer_page() ) {
 		return hu_get_contact_offer_title();
 	}
@@ -655,6 +691,16 @@ function hu_document_title_overrides( $parts ) {
 		$parts['title'] = (string) $forced_seo['title'];
 		unset( $parts['page'] );
 		return $parts;
+	}
+
+	if ( function_exists( 'nexus_get_current_wgos_cluster_route_slug' ) ) {
+		$cluster_defaults = nexus_get_wgos_cluster_page_seo_defaults( nexus_get_current_wgos_cluster_route_slug() );
+
+		if ( ! empty( $cluster_defaults['title'] ) ) {
+			$parts['title'] = (string) $cluster_defaults['title'];
+			unset( $parts['page'] );
+			return $parts;
+		}
 	}
 
 	if ( hu_is_seo_cornerstone_article() ) {
@@ -906,6 +952,18 @@ function hu_get_seo_meta() {
 		$meta['og_title']    = hu_get_contact_offer_title();
 		$meta['description'] = hu_get_contact_offer_description();
 		$meta['canonical']   = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+
+	} elseif ( function_exists( 'nexus_get_current_wgos_cluster_route_slug' ) && '' !== nexus_get_current_wgos_cluster_route_slug() ) {
+		$cluster_slug        = nexus_get_current_wgos_cluster_route_slug();
+		$cluster_defaults    = function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ? nexus_get_wgos_cluster_page_seo_defaults( $cluster_slug ) : null;
+		$cluster_page        = function_exists( 'nexus_get_wgos_cluster_page' ) ? nexus_get_wgos_cluster_page( $cluster_slug ) : null;
+		$meta['og_title']    = ! empty( $cluster_defaults['title'] ) ? (string) $cluster_defaults['title'] : '';
+		$meta['description'] = ! empty( $cluster_defaults['description'] ) ? (string) $cluster_defaults['description'] : '';
+		$meta['canonical']   = home_url( '/' . $cluster_slug . '/' );
+
+		if ( empty( $meta['og_title'] ) && is_array( $cluster_page ) && ! empty( $cluster_page['title'] ) ) {
+			$meta['og_title'] = (string) $cluster_page['title'];
+		}
 
 	} elseif ( is_singular() ) {
 		$post_id  = get_queried_object_id();

@@ -382,7 +382,6 @@ function nexus_get_legacy_offer_redirect_map() {
 		'/ga4-tracking-setup/'         => nexus_get_wgos_asset_anchor_url( 'tracking-audit' ),
 		'/performance-marketing/'      => nexus_get_wgos_url(),
 		'/meta-ads/'                   => nexus_get_wgos_url(),
-		'/wordpress-wartung-hannover/' => nexus_get_wgos_asset_anchor_url( 'security-hardening' ),
 		'/roi-rechner/'                => nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ),
 	];
 }

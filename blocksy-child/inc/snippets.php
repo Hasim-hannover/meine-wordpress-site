@@ -131,7 +131,6 @@ add_action( 'template_redirect', function() {
 		'/alle-loesungen-im-detail/' => nexus_get_page_url( [ 'alle-loesungen' ], home_url( '/alle-loesungen/' ) ),
 		'/meta-ads/'                 => function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : home_url( '/wordpress-growth-operating-system/' ),
 		'/wordpress-agentur/'        => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
-		'/wordpress-wartung-hannover/' => home_url( '/wgos-assets/security-hardening/' ),
 		'/roi-rechner/'              => nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ),
 	];
 

@@ -24,6 +24,11 @@ Nicht zuerst bearbeiten:
 
 ### 1. `/shopify-wartungsvertrag/` sauber aus dem Index nehmen
 
+Stand:
+
+- Erledigt im Theme: die URL liefert jetzt gezielt **410 Gone** statt weiter als unklare Alt-URL zu leben.
+- Offen bleibt nur noch der Search-Console-Recrawl bzw. optional das Entfernen-Tool zur Beschleunigung.
+
 Status:
 
 - Die URL erscheint noch in Search Console.
@@ -67,6 +72,13 @@ Praeferenz:
 
 ### 2. `/wordpress-wartung-hannover/` entscheiden
 
+Stand:
+
+- Entscheidung getroffen: die URL bleibt **drin** und wird nicht entfernt.
+- Sie wird aus dem Legacy-Redirect auf das Security-Hardening-Asset herausgezogen.
+- Die Route wird als eigene WGOS-Clusterseite für Betrieb, Updates, Sicherheit und technische Stabilität weitergefuehrt.
+- Alte Wartungsvertrag-/Preissignale werden dabei nicht fortgeschrieben.
+
 Status:
 
 - sehr hohe Impressionen
@@ -76,19 +88,23 @@ Status:
 
 Das ist derzeit der groesste operative Widerspruch.
 
-Entscheidung noetig:
+Entschiedene Richtung:
 
-- **Variante A**: Angebot bleibt wichtig
-  - Seite publishen
-  - noindex entfernen
-  - Snippet auf Query `wordpress wartungsvertrag hannover` ausrichten
-- **Variante B**: Angebot wird nicht mehr aktiv gespielt
-  - 301 auf die beste Live-Zielseite
-  - interne Links und Sitemap bereinigen
-
-Ohne diese Entscheidung laeuft weiter Sichtbarkeit in einen unklaren Zielzustand.
+- URL behalten
+- unter WGOS neu rahmen
+- Snippet auf Betrieb, Updates, Sicherheit und Stabilitaet ausrichten
+- CTA auf Audit/WGOS statt auf alte Wartungsvertrag-Logik
+- Query-Signal nicht wegwerfen, sondern in den Fundament-Layer uebernehmen
 
 ### 3. Snippet-Quick-Wins auf bereits gut rankenden Seiten
+
+Stand:
+
+- In Arbeit im Meta-Layer:
+  - `/kontaktiere-mich/`
+  - `/wordpress-growth-operating-system/`
+  - `/kostenlose-tools/`
+- Ziel: feste, belastbare Default-Metas statt zu kurzer oder fehlender Snippets.
 
 Diese Seiten haben schon Sichtbarkeit oder gute Positionen. Hier bringen kleine Eingriffe oft sofort mehr CTR:
 
@@ -105,6 +121,13 @@ Pro Seite:
 - keine generischen Claim-Phrasen
 
 ### 4. Legacy-URLs final bereinigen
+
+Stand:
+
+- Technische Redirects fuer Legacy-Routen sind bereits aktiv.
+- Die Legacy-Kontakt-URL `/kontaktiere-mich/` wurde auf einen dauerhaften 301 zur kanonischen `/kontakt/`-Route umgestellt.
+- Im Child-Theme wurden aktuell keine direkten Frontend-Hrefs auf `/alle-loesungen-im-detail/` gefunden.
+- `case-studies` lebt vor allem noch als historisches Signal und Redirect-Thema, nicht mehr als klarer aktiver Navigationspfad im Theme.
 
 Betroffen:
 

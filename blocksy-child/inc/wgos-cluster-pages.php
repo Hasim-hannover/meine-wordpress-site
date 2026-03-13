@@ -60,6 +60,41 @@ function nexus_get_wgos_cluster_page_data() {
 			'schema_name'      => 'WordPress SEO Hannover',
 			'schema_description' => 'WGOS-Cluster für WordPress SEO in Hannover: technische Basis, Themenarchitektur und conversion-nahe Sichtbarkeit für B2B-Websites.',
 		],
+		'wordpress-wartung-hannover' => [
+			'eyebrow'          => 'Betrieb im WGOS',
+			'title'            => 'WordPress Wartung Hannover',
+			'lead'             => 'WordPress-Wartung ist hier kein isolierter Wartungsvertrag, sondern der laufende Betriebsblock aus Updates, Sicherheit, Stabilität und klaren Rollback-Prozessen.',
+			'intro'            => [
+				'Viele Wartungsangebote versprechen Ruhe, meinen aber nur Plugin-Updates. Für Unternehmen mit relevanter Website reicht das nicht. Entscheidend ist, ob Updates, Sicherheit, Backups, Performance und Wiederherstellung zusammen als belastbarer Betriebszustand funktionieren.',
+				'Genau dort kippen viele WordPress-Setups: zu viele Plugins, unklare Zuständigkeiten, fehlende Rollback-Routinen und eine Website, die unter Last, nach Updates oder bei Vorfällen nicht kontrollierbar bleibt.',
+				'Im WGOS wird Wartung deshalb nicht als Nebenvertrag behandelt, sondern als Fundament. Erst wenn der Betrieb stabil ist, lohnen sich Investitionen in SEO, Conversion und bezahlte Nachfrage wirklich.',
+			],
+			'system'           => [
+				'Das Thema gehört im WGOS in den Betriebs- und Fundament-Layer. Statt nur Tickets abzuarbeiten, ordnen wir WordPress-Wartung in eine klare Reihenfolge aus Härtung, Update-Management, Plugin-Reduktion, Performance-Diagnose und verlässlicher Wiederherstellung ein.',
+				'So entsteht kein Billig-Wartungsvertrag, sondern ein kontrollierbarer Betriebszustand. Genau das ist für kaufnahe Seiten, Lead-Gen-Setups und B2B-Websites relevanter als reine Checklistenpflege.',
+			],
+			'assets'           => [
+				'security-hardening' => 'Härtet WordPress, Zugriffe und Wiederherstellungswege so ab, dass der laufende Betrieb nicht an vermeidbaren Risiken scheitert.',
+				'update-management'  => 'Macht Updates planbar, testbar und rollback-fähig statt zu einem Risiko im Tagesgeschäft.',
+				'plugin-audit'       => 'Reduziert Wartungslast und Konflikte, indem unnötige oder problematische Plugins aus dem Stack verschwinden.',
+				'cwv-speed-audit'    => 'Prüft, ob technische Langsamkeit bereits Vertrauen, Rankings oder Conversion mit belastet.',
+				'server-tuning'      => 'Greift tiefer ein, wenn Hosting, TTFB, Cache oder Infrastruktur der eigentliche Engpass im Betrieb sind.',
+			],
+			'blogs'            => [
+				[
+					'title' => 'Performance ist Profit: Core Web Vitals',
+					'url'   => home_url( '/core-web-vitals-wachstum-seo-und-roas/' ),
+				],
+				[
+					'title' => 'Warum Performance Marketing ohne technisches SEO Geld verbrennt',
+					'url'   => home_url( '/technisches-seo-performance-fundament/' ),
+				],
+			],
+			'meta_title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',
+			'meta_description' => 'WordPress Wartung in Hannover als Teil des WGOS-Fundaments: Updates, Sicherheit, Backups, Performance und stabile Betriebsroutinen für B2B-Websites.',
+			'schema_name'      => 'WordPress Wartung Hannover',
+			'schema_description' => 'WGOS-Cluster für WordPress-Wartung in Hannover: Betrieb, Updates, Sicherheit und technische Stabilität für B2B-Websites.',
+		],
 		'core-web-vitals' => [
 			'eyebrow'          => 'Technisches Fundament im WGOS',
 			'title'            => 'Core Web Vitals',
@@ -218,6 +253,10 @@ function nexus_get_wgos_cluster_page_data() {
 function nexus_get_wgos_cluster_page( $value = null ) {
 	if ( null === $value ) {
 		$value = get_post();
+
+		if ( ! ( $value instanceof WP_Post ) && function_exists( 'nexus_get_current_wgos_cluster_route_slug' ) ) {
+			$value = nexus_get_current_wgos_cluster_route_slug();
+		}
 	}
 
 	if ( $value instanceof WP_Post ) {
@@ -405,26 +444,108 @@ function nexus_render_wgos_cluster_page( $page ) {
 }
 
 /**
+ * Return the slug-to-template mapping for versioned cluster routes.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_wgos_cluster_route_templates() {
+	return [
+		'wordpress-seo-hannover'       => get_stylesheet_directory() . '/page-seo.php',
+		'wordpress-wartung-hannover'   => get_stylesheet_directory() . '/page-wordpress-wartung-hannover.php',
+		'core-web-vitals'              => get_stylesheet_directory() . '/page-cwv.php',
+		'conversion-rate-optimization' => get_stylesheet_directory() . '/page-cro.php',
+		'ga4-tracking-setup'           => get_stylesheet_directory() . '/page-ga4.php',
+		'performance-marketing'        => get_stylesheet_directory() . '/page-performance.php',
+	];
+}
+
+/**
+ * Return the active cluster slug for the current request path if available.
+ *
+ * @return string
+ */
+function nexus_get_current_wgos_cluster_route_slug() {
+	if ( ! function_exists( 'nexus_get_current_request_path' ) ) {
+		return '';
+	}
+
+	$request_path = nexus_get_current_request_path();
+
+	foreach ( array_keys( nexus_get_wgos_cluster_route_templates() ) as $slug ) {
+		if ( trailingslashit( '/' . $slug ) === $request_path ) {
+			return $slug;
+		}
+	}
+
+	return '';
+}
+
+/**
+ * Prevent canonical redirects from fighting virtual cluster routes.
+ *
+ * @param string|false $redirect_url Redirect target.
+ * @return string|false
+ */
+function nexus_disable_canonical_redirect_for_cluster_routes( $redirect_url ) {
+	if ( '' !== nexus_get_current_wgos_cluster_route_slug() ) {
+		return false;
+	}
+
+	return $redirect_url;
+}
+add_filter( 'redirect_canonical', 'nexus_disable_canonical_redirect_for_cluster_routes' );
+
+/**
+ * Turn cluster routes into virtual pages when no published page owns the slug.
+ *
+ * @param bool     $preempt  Existing preempt flag.
+ * @param WP_Query $wp_query Current query.
+ * @return bool
+ */
+function nexus_preempt_cluster_404( $preempt, $wp_query ) {
+	if ( is_admin() || wp_doing_ajax() || ! ( $wp_query instanceof WP_Query ) ) {
+		return $preempt;
+	}
+
+	$slug = nexus_get_current_wgos_cluster_route_slug();
+
+	if ( '' === $slug || ! $wp_query->is_404() ) {
+		return $preempt;
+	}
+
+	$wp_query->is_404                = false;
+	$wp_query->is_page               = true;
+	$wp_query->is_singular           = true;
+	$wp_query->is_home               = false;
+	$wp_query->is_archive            = false;
+	$wp_query->is_posts_page         = false;
+	$wp_query->queried_object        = null;
+	$wp_query->queried_object_id     = 0;
+	$wp_query->query_vars['pagename'] = $slug;
+	unset( $wp_query->query['error'], $wp_query->query_vars['error'] );
+
+	status_header( 200 );
+
+	return true;
+}
+add_filter( 'pre_handle_404', 'nexus_preempt_cluster_404', 10, 2 );
+
+/**
  * Force key legacy routes onto versioned cluster templates.
  *
  * @param string $template Resolved template path.
  * @return string
  */
 function nexus_force_cluster_route_templates( $template ) {
-	if ( is_admin() || ! is_page() ) {
+	if ( is_admin() ) {
 		return $template;
 	}
 
-	$route_templates = [
-		'wordpress-seo-hannover'      => get_stylesheet_directory() . '/page-seo.php',
-		'core-web-vitals'             => get_stylesheet_directory() . '/page-cwv.php',
-		'conversion-rate-optimization' => get_stylesheet_directory() . '/page-cro.php',
-		'ga4-tracking-setup'          => get_stylesheet_directory() . '/page-ga4.php',
-		'performance-marketing'       => get_stylesheet_directory() . '/page-performance.php',
-	];
+	$current_slug     = nexus_get_current_wgos_cluster_route_slug();
+	$route_templates  = nexus_get_wgos_cluster_route_templates();
 
 	foreach ( $route_templates as $slug => $forced_template ) {
-		if ( is_page( $slug ) && file_exists( $forced_template ) ) {
+		if ( ( is_page( $slug ) || $current_slug === $slug ) && file_exists( $forced_template ) ) {
 			return $forced_template;
 		}
 	}
@@ -432,6 +553,28 @@ function nexus_force_cluster_route_templates( $template ) {
 	return $template;
 }
 add_filter( 'template_include', 'nexus_force_cluster_route_templates', 97 );
+
+/**
+ * Remove 404 body classes for virtual cluster routes.
+ *
+ * @param array<int, string> $classes Existing body classes.
+ * @return array<int, string>
+ */
+function nexus_add_virtual_cluster_body_class( $classes ) {
+	$slug = nexus_get_current_wgos_cluster_route_slug();
+
+	if ( '' === $slug ) {
+		return $classes;
+	}
+
+	$classes   = array_diff( $classes, [ 'error404' ] );
+	$classes[] = 'page';
+	$classes[] = 'page-' . sanitize_html_class( $slug );
+	$classes[] = 'page-template-default';
+
+	return array_values( array_unique( $classes ) );
+}
+add_filter( 'body_class', 'nexus_add_virtual_cluster_body_class', 20 );
 
 /**
  * Return the versioned mapping from blog articles to WGOS asset recommendations.

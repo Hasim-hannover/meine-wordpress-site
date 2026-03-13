@@ -169,7 +169,7 @@ export const wgosAssets = [
 			label: 'Credits ansehen',
 			hrefKey: 'credits',
 		},
-		legacyPaths: [ '/wordpress-wartung-hannover/' ],
+		legacyPaths: [],
 	},
 	{
 		id: 'tracking-audit',

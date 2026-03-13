@@ -109,33 +109,10 @@ function hu_output_schema()
         ],
 
         'wordpress-wartung-hannover' => [
-            'name'        => 'WordPress Wartung & Betreuung',
-            'description' => 'Der Schutzschild für Ihren digitalen Umsatz: Regelmässige Updates, präventive Abwehr, Performance-Monitoring und Express-Hilfe.',
-            'serviceType' => 'Wartungsvertrag & Support',
-            'serviceOutput' => 'Maximale Performance, gehärtete Sicherheit und schnelle Notfall-Unterstützung',
-            'offers'      => [
-                [
-                    '@type'         => 'Offer',
-                    'name'          => 'Basis – kleine Infoseiten & Blogs',
-                    'price'         => 49,
-                    'priceCurrency' => 'EUR',
-                    'description'   => 'Wöchentliche Updates, monatliches Cloud-Backup, Basis Uptime-Monitoring und Support per E-Mail (48h)'
-                ],
-                [
-                    '@type'         => 'Offer',
-                    'name'          => 'Performance-Wächter – Firmen & Dienstleister',
-                    'price'         => 79,
-                    'priceCurrency' => 'EUR',
-                    'description'   => 'Tägliche Sicherheits-Backups, proaktiver Malware-Scan, monatlicher Performance-Report, Wiederherstellung inkl. (Hack-Schutz) und Support per Mail (24h)'
-                ],
-                [
-                    '@type'         => 'Offer',
-                    'name'          => 'VIP & E-Commerce – Shops & kritische Seiten',
-                    'price'         => 139,
-                    'priceCurrency' => 'EUR',
-                    'description'   => 'Echtzeit-Backups, WooCommerce Datenbank-Optimierung, Telefon & WhatsApp Support, bevorzugte Behandlung bei Ausfall und 1h Content-Pflege'
-                ]
-            ]
+            'name'        => 'WordPress Wartung Hannover',
+            'description' => 'WGOS-Cluster für WordPress-Wartung in Hannover: Updates, Sicherheit, Backups, Performance und kontrollierbare Betriebsroutinen für B2B-Websites.',
+            'serviceType' => 'WordPress Betrieb & Wartung',
+            'serviceOutput' => 'Stabiler, abgesicherter und kontrollierbarer WordPress-Betrieb als Fundament für Sichtbarkeit und Conversion'
         ],
 
         'wordpress-seo' => [
@@ -274,6 +251,10 @@ function hu_output_schema()
 
         $post_id = get_queried_object_id();
         $slug = $post_id ? get_post_field('post_name', $post_id) : '';
+
+        if (!$slug && function_exists('nexus_get_current_wgos_cluster_route_slug')) {
+            $slug = nexus_get_current_wgos_cluster_route_slug();
+        }
 
         if (is_singular('wgos_asset') && function_exists('nexus_get_wgos_asset_definition')) {
             $asset = nexus_get_wgos_asset_definition(get_post($post_id));

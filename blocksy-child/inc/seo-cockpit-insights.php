@@ -31,6 +31,23 @@ function nexus_get_seo_cockpit_row_label( $row ) {
 }
 
 /**
+ * Resolve a cluster slug from one frontend URL if the path matches a cluster route.
+ *
+ * @param string $url Frontend URL.
+ * @return string
+ */
+function nexus_get_seo_cockpit_cluster_slug_from_url( $url ) {
+	$path = wp_parse_url( $url, PHP_URL_PATH );
+	$slug = sanitize_title( basename( trim( (string) $path, '/' ) ) );
+
+	if ( '' === $slug || ! function_exists( 'nexus_get_wgos_cluster_page' ) ) {
+		return '';
+	}
+
+	return nexus_get_wgos_cluster_page( $slug ) ? $slug : '';
+}
+
+/**
  * Resolve one frontend URL to a local WordPress object where possible.
  *
  * @param string $url Frontend URL.
@@ -48,6 +65,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 	$front_page_id = absint( get_option( 'page_on_front' ) );
 	$posts_page_id = absint( get_option( 'page_for_posts' ) );
 	$resolved_id   = url_to_postid( $url );
+	$cluster_slug  = nexus_get_seo_cockpit_cluster_slug_from_url( $url );
 
 	if ( 0 === $resolved_id && home_url( '/' ) === $url ) {
 		$resolved_id = $front_page_id;
@@ -92,6 +110,49 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 		$post = get_post( $resolved_id );
 
 		if ( $post instanceof WP_Post ) {
+			if ( '' !== $cluster_slug && 'publish' !== (string) $post->post_status ) {
+				$cluster_defaults = function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ? nexus_get_wgos_cluster_page_seo_defaults( $cluster_slug ) : null;
+				$context          = [
+					'resolved'                => true,
+					'url'                     => $url,
+					'post_id'                 => $resolved_id,
+					'post_title'              => get_the_title( $resolved_id ),
+					'post_type'               => (string) $post->post_type,
+					'post_status'             => (string) $post->post_status,
+					'page_type'               => 'virtual_cluster',
+					'template'                => 'page-wgos-pillar.php',
+					'modified_at'             => (int) get_post_modified_time( 'U', true, $resolved_id ),
+					'seo_title'               => (string) ( $cluster_defaults['title'] ?? '' ),
+					'seo_description'         => (string) ( $cluster_defaults['description'] ?? '' ),
+					'seo_title_present'       => '' !== (string) ( $cluster_defaults['title'] ?? '' ),
+					'seo_description_present' => '' !== (string) ( $cluster_defaults['description'] ?? '' ),
+					'title_source'            => 'virtual_cluster',
+					'description_source'      => 'virtual_cluster',
+					'canonical'               => home_url( '/' . $cluster_slug . '/' ),
+					'canonical_present'       => true,
+					'noindex'                 => false,
+					'in_sitemap'              => false,
+					'word_count'              => nexus_get_seo_cockpit_post_word_count( $resolved_id ),
+					'internal_links'          => [
+						'status' => 'pending',
+						'value'  => null,
+						'note'   => 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.',
+					],
+					'edit_link'               => (string) get_edit_post_link( $resolved_id, 'raw' ),
+					'frontend_link'           => home_url( '/' . $cluster_slug . '/' ),
+					'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues(
+						[
+							'title'       => (string) ( $cluster_defaults['title'] ?? '' ),
+							'description' => (string) ( $cluster_defaults['description'] ?? '' ),
+						]
+					),
+				];
+
+				$cache[ $url ] = $context;
+
+				return $context;
+			}
+
 			$seo_context = nexus_get_seo_cockpit_post_seo_context( $resolved_id );
 			$template    = 'page' === $post->post_type ? ( get_page_template_slug( $resolved_id ) ?: 'default' ) : $post->post_type;
 			$page_type   = $post->post_type;
@@ -133,6 +194,45 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 				'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues( $seo_context ),
 			];
 		}
+	}
+
+	if ( 0 === $resolved_id && '' !== $cluster_slug ) {
+		$cluster_defaults = function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ? nexus_get_wgos_cluster_page_seo_defaults( $cluster_slug ) : null;
+		$context          = [
+			'resolved'                => true,
+			'url'                     => $url,
+			'post_id'                 => 0,
+			'post_title'              => function_exists( 'nexus_get_wgos_cluster_page' ) && is_array( nexus_get_wgos_cluster_page( $cluster_slug ) ) ? (string) nexus_get_wgos_cluster_page( $cluster_slug )['title'] : '',
+			'post_type'               => '',
+			'post_status'             => 'virtual',
+			'page_type'               => 'virtual_cluster',
+			'template'                => 'page-wgos-pillar.php',
+			'modified_at'             => 0,
+			'seo_title'               => (string) ( $cluster_defaults['title'] ?? '' ),
+			'seo_description'         => (string) ( $cluster_defaults['description'] ?? '' ),
+			'seo_title_present'       => '' !== (string) ( $cluster_defaults['title'] ?? '' ),
+			'seo_description_present' => '' !== (string) ( $cluster_defaults['description'] ?? '' ),
+			'title_source'            => 'virtual_cluster',
+			'description_source'      => 'virtual_cluster',
+			'canonical'               => home_url( '/' . $cluster_slug . '/' ),
+			'canonical_present'       => true,
+			'noindex'                 => false,
+			'in_sitemap'              => false,
+			'word_count'              => 0,
+			'internal_links'          => [
+				'status' => 'pending',
+				'value'  => null,
+				'note'   => 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.',
+			],
+			'edit_link'               => '',
+			'frontend_link'           => home_url( '/' . $cluster_slug . '/' ),
+			'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues(
+				[
+					'title'       => (string) ( $cluster_defaults['title'] ?? '' ),
+					'description' => (string) ( $cluster_defaults['description'] ?? '' ),
+				]
+			),
+		];
 	}
 
 	$cache[ $url ] = $context;
