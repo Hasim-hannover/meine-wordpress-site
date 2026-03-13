@@ -154,7 +154,7 @@ get_header();
 							<a href="<?php echo esc_url( $wgos_url ); ?>">WGOS</a>,
 							<a href="<?php echo esc_url( $cases_url ); ?>">Ergebnisse</a>
 							und
-							<a href="<?php echo esc_url( $agentur_url ); ?>">WordPress Agentur Hannover</a>.
+							<a href="<?php echo esc_url( $agentur_url ); ?>">WordPress für B2B in Hannover</a>.
 						</p>
 					</div>
 
@@ -327,7 +327,7 @@ get_header();
 						<a href="<?php echo esc_url( $wgos_url ); ?>">WGOS</a>,
 						<a href="<?php echo esc_url( $cases_url ); ?>">Ergebnisse</a>
 						und
-						<a href="<?php echo esc_url( $agentur_url ); ?>">WordPress Agentur Hannover</a>.
+						<a href="<?php echo esc_url( $agentur_url ); ?>">WordPress für B2B in Hannover</a>.
 					</p>
 				</div>
 			</div>

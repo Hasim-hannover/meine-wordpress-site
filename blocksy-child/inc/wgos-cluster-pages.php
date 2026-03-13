@@ -58,7 +58,7 @@ function nexus_get_wgos_cluster_page_data() {
 			],
 			'supporting_link'  => [
 				'kicker' => 'Breiterer Einstieg',
-				'label'  => 'WordPress Agentur Hannover',
+				'label'  => 'WordPress für B2B in Hannover',
 				'url'    => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
 				'text'   => 'Wenn der Bedarf über technisches SEO hinausgeht und auch Angebotsseiten, Tracking, Conversion und Betrieb umfasst, ist die Agentur-Seite der klarere Startpunkt.',
 			],
@@ -616,7 +616,7 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 			'cwv-optimierung'      => 'Setzt die größten Performance-Fixes dort um, wo sie Rankings und Conversion direkt entlasten.',
 		],
 		'supporting_link' => [
-			'label' => 'WordPress Agentur Hannover',
+			'label' => 'WordPress für B2B in Hannover',
 			'url'   => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
 			'text'  => 'Wenn Sie für dieses Thema einen lokalen Einstieg suchen, ist die Agentur-Seite der direkte Anschluss zwischen SEO, Technik und Conversion.',
 		],
@@ -643,7 +643,7 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 				'angebotsseiten-architektur' => 'Sichert, dass einzelne Landing Pages in eine konsistente Angebotslogik eingebettet sind.',
 			],
 			'supporting_link' => [
-				'label' => 'WordPress Agentur Hannover',
+				'label' => 'WordPress für B2B in Hannover',
 				'url'   => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
 				'text'  => 'Wenn Landing Pages Teil eines größeren WordPress-Systems werden sollen, führt die lokale Agentur-Seite direkt in den passenden Kontext.',
 			],

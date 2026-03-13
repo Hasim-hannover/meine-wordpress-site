@@ -100,7 +100,7 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 				<h3 id="ft-einstieg">Einstieg</h3>
 				<ul class="ft__list">
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit</a></li>
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>">WordPress Agentur Hannover</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>">WordPress für B2B in Hannover</a></li>
 					<li><a href="<?php echo esc_url( $wgos_url ); ?>">WGOS</a></li>
 				</ul>
 			</section>
