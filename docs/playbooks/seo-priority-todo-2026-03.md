@@ -20,6 +20,30 @@ Nicht zuerst bearbeiten:
 - Content-Ausbau ohne vorherige Bereinigung
 - tiefe Rewrites auf Seiten mit unklarer Suchintention
 
+## Gesamtstatus
+
+### Technisch erledigt
+
+- `/shopify-wartungsvertrag/` liefert `410 Gone`
+- `/wordpress-wartung-hannover/` lebt als eigene WGOS-Clusterseite weiter
+- Snippet-Basis fuer `/kontakt/`, `/wordpress-growth-operating-system/` und `/kostenlose-tools/` ist im Theme nachgeschaerft
+- `/kontaktiere-mich/` geht per `301` auf `/kontakt/`
+- `/ga4-tracking-setup/` und `/performance-marketing/` laufen nicht mehr ueber die Legacy-Redirect-Map
+- `/wordpress-agentur-hannover/` ist als Fuehrungsseite fuer `wordpress agentur hannover` im Snippet/Schema/Hook staerker ausgerichtet
+- `/wordpress-seo-hannover/` ist klarer auf technischen SEO-Intent statt auf breiten Agentur-Intent zugespitzt
+
+### Teilweise erledigt
+
+- Legacy-URLs sind technisch bereinigt, aber Search-Console-Nachlauf fehlt noch
+- Kannibalisierung ist technisch besser vorbereitet, aber noch nicht final durch Search-Console-Signale bestaetigt
+- Draft-/noindex-Themen sind im Theme weitgehend bereinigt, aber Live-Validierung und Recrawl stehen noch aus
+
+### Noch offen
+
+- Search-Console-Requests fuer die wichtigsten Ziel-URLs
+- Live-Pruefung, ob Google die neuen Snippets, Redirects und Cluster-Seiten bereits uebernimmt
+- weitere interne Linkverstaerkung fuer die Fuehrungsseiten, wenn Search Console noch Kannibalisierung zeigt
+
 ## P0 - Sofort
 
 ### 1. `/shopify-wartungsvertrag/` sauber aus dem Index nehmen
@@ -28,12 +52,6 @@ Stand:
 
 - Erledigt im Theme: die URL liefert jetzt gezielt **410 Gone** statt weiter als unklare Alt-URL zu leben.
 - Offen bleibt nur noch der Search-Console-Recrawl bzw. optional das Entfernen-Tool zur Beschleunigung.
-
-Status:
-
-- Die URL erscheint noch in Search Console.
-- Im Repo gibt es aktuell keinen klaren Theme-Pfad oder Redirect fuer diese URL.
-- Das spricht dafuer, dass die URL im WordPress-Inhalt oder in Alt-Daten lebt.
 
 Empfohlene Loesung:
 
@@ -78,15 +96,7 @@ Stand:
 - Sie wird aus dem Legacy-Redirect auf das Security-Hardening-Asset herausgezogen.
 - Die Route wird als eigene WGOS-Clusterseite für Betrieb, Updates, Sicherheit und technische Stabilität weitergefuehrt.
 - Alte Wartungsvertrag-/Preissignale werden dabei nicht fortgeschrieben.
-
-Status:
-
-- sehr hohe Impressionen
-- `draft`
-- `noindex: yes`
-- trotzdem relevante Suchsignale
-
-Das ist derzeit der groesste operative Widerspruch.
+- Offen bleibt nur noch der Search-Console-Recrawl und die Live-Beobachtung, ob Google die neue Einordnung sauber uebernimmt.
 
 Entschiedene Richtung:
 
@@ -100,11 +110,11 @@ Entschiedene Richtung:
 
 Stand:
 
-- In Arbeit im Meta-Layer:
-  - `/kontaktiere-mich/`
+- Erledigt im Theme fuer:
+  - `/kontaktiere-mich/` bzw. `/kontakt/`
   - `/wordpress-growth-operating-system/`
   - `/kostenlose-tools/`
-- Ziel: feste, belastbare Default-Metas statt zu kurzer oder fehlender Snippets.
+- Die Default-Metas sind jetzt belastbarer und konsistenter als vorher.
 
 Diese Seiten haben schon Sichtbarkeit oder gute Positionen. Hier bringen kleine Eingriffe oft sofort mehr CTR:
 
@@ -128,6 +138,7 @@ Stand:
 - Die Legacy-Kontakt-URL `/kontaktiere-mich/` wurde auf einen dauerhaften 301 zur kanonischen `/kontakt/`-Route umgestellt.
 - Im Child-Theme wurden aktuell keine direkten Frontend-Hrefs auf `/alle-loesungen-im-detail/` gefunden.
 - `case-studies` lebt vor allem noch als historisches Signal und Redirect-Thema, nicht mehr als klarer aktiver Navigationspfad im Theme.
+- Offen bleibt hier primär Search Console, nicht mehr das Theme-Routing.
 
 Betroffen:
 
@@ -181,6 +192,7 @@ Stand:
   - technischer SEO-Seite
   - breiterer Agentur-Seite `/wordpress-agentur-hannover/`
 - Zusaetzlich gibt es jetzt auf der SEO-Seite eine klare Bruecke zur Agentur-Seite fuer den breiteren Intent.
+- Erster Schärfungsdurchlauf ist damit erledigt; offen bleibt nur noch die Beobachtung, ob die Kannibalisierung in Search Console sinkt.
 
 Status:
 
@@ -201,6 +213,7 @@ Stand:
 - `/ga4-tracking-setup/` und `/performance-marketing/` laufen nicht mehr ueber die Legacy-Redirect-Map, sondern koennen als echte WGOS-Cluster-Routen arbeiten.
 - Das SEO-Cockpit liest Legacy-Redirects wie `/roi-rechner/` jetzt sinnvoller als Redirect statt als irrefuehrende Draft-/noindex-Seite.
 - Fuer `/roi-rechner/` bleibt die Redirect-Strategie zur Tools-Uebersicht bewusst bestehen.
+- Offen bleibt hier vor allem der Search-Console-Recrawl fuer `/ga4-tracking-setup/` und `/performance-marketing/`.
 
 Betroffen:
 
@@ -244,12 +257,17 @@ Damit vermeidest du drei typische Fehler:
 
 ## Konkrete naechste Admin-Tasks
 
-### Heute
+### Jetzt sinnvoll
 
-- `/shopify-wartungsvertrag/` pruefen und auf 410 oder 301 festlegen
-- `/wordpress-wartung-hannover/` auf publish/index oder Redirect festlegen
-- Snippets fuer `/kontaktiere-mich/`, `/wordpress-growth-operating-system/`, `/kostenlose-tools/` ueberarbeiten
-- Search Console Requests fuer Ziel-URLs anstossen
+- Search Console Requests fuer Ziel-URLs anstossen:
+  - `/shopify-wartungsvertrag/`
+  - `/wordpress-wartung-hannover/`
+  - `/wordpress-agentur-hannover/`
+  - `/wordpress-seo-hannover/`
+  - `/ga4-tracking-setup/`
+  - `/performance-marketing/`
+- Live pruefen, ob die neuen Title/Descriptions und Redirects ungecacht korrekt ausgegeben werden
+- In Search Console beobachten, ob `wordpress agentur hannover` und `wordpress seo hannover` klarer auf getrennte Zielseiten laufen
 
 ### Danach
 
