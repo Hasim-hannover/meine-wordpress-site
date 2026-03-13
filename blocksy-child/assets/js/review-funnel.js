@@ -13,7 +13,8 @@
     stepIndex: 0,
     steps: [],
     submitting: false,
-    lastTrackedStepIndex: null
+    lastTrackedStepIndex: null,
+    furthestStepIndex: 0
   };
 
   function init() {
@@ -23,6 +24,7 @@
     state.steps = Array.prototype.slice.call(form.querySelectorAll('.review-step'));
     if (!state.steps.length) return;
 
+    state.furthestStepIndex = 0;
     form.classList.add('review-funnel--js');
 
     var startedField = form.querySelector('[name="started_at"]');
@@ -32,10 +34,7 @@
 
     Array.prototype.forEach.call(form.querySelectorAll('input[type="url"]'), function (input) {
       input.addEventListener('blur', function () {
-        var value = this.value.trim();
-        if (value && !/^https?:\/\//i.test(value)) {
-          this.value = 'https://' + value;
-        }
+        normalizeUrlField(this);
       });
     });
 
@@ -48,11 +47,15 @@
     syncSummary(form);
   }
 
+  function getForm() {
+    return document.getElementById('review-request-form');
+  }
+
   function getStepLabel(index) {
-    var form = document.getElementById('review-request-form');
+    var form = getForm();
     if (!form) return String(index + 1);
 
-    var labels = form.querySelectorAll('.review-progress-steps li');
+    var labels = form.querySelectorAll('.review-progress-step-label');
     var label = labels[index];
 
     return label ? label.textContent.trim() : String(index + 1);
@@ -65,6 +68,17 @@
       return new URL(url).hostname || '';
     } catch (error) {
       return '';
+    }
+  }
+
+  function normalizeUrlField(field) {
+    if (!field || field.type !== 'url') {
+      return;
+    }
+
+    var value = field.value.trim();
+    if (value && !/^https?:\/\//i.test(value)) {
+      field.value = 'https://' + value;
     }
   }
 
@@ -113,6 +127,7 @@
   function handleClick(event) {
     var nextButton = event.target.closest('[data-review-next]');
     var prevButton = event.target.closest('[data-review-prev]');
+    var stepButton = event.target.closest('[data-review-step-target]');
 
     if (nextButton) {
       event.preventDefault();
@@ -123,15 +138,34 @@
     if (prevButton) {
       event.preventDefault();
       goToPrevStep();
+      return;
+    }
+
+    if (stepButton) {
+      event.preventDefault();
+
+      if (stepButton.disabled) {
+        return;
+      }
+
+      var stepTarget = parseInt(stepButton.getAttribute('data-review-step-target') || '', 10);
+      if (isNaN(stepTarget) || stepTarget === state.stepIndex) {
+        return;
+      }
+
+      if (stepTarget < state.stepIndex) {
+        goToStep(stepTarget, 'jump_back');
+      }
     }
   }
 
   function handleFieldChange(event) {
-    var form = document.getElementById('review-request-form');
+    var form = getForm();
     if (!form) return;
 
     syncSummary(form);
     clearFeedback();
+    clearFieldInvalidState(event.target);
   }
 
   function goToNextStep() {
@@ -141,8 +175,11 @@
 
     if (state.stepIndex < state.steps.length - 1) {
       var previousIndex = state.stepIndex;
+
       state.stepIndex += 1;
-      updateStepUi();
+      state.furthestStepIndex = Math.max(state.furthestStepIndex, state.stepIndex);
+
+      updateStepUi({ focus: true });
       trackStepNavigation('next', previousIndex, state.stepIndex);
     }
   }
@@ -152,16 +189,37 @@
 
     if (state.stepIndex > 0) {
       var previousIndex = state.stepIndex;
+
       state.stepIndex -= 1;
-      updateStepUi();
+
+      updateStepUi({ focus: true });
       trackStepNavigation('prev', previousIndex, state.stepIndex);
     }
+  }
+
+  function goToStep(index, direction) {
+    if (index < 0 || index >= state.steps.length || index === state.stepIndex) {
+      return;
+    }
+
+    clearFeedback();
+
+    var previousIndex = state.stepIndex;
+    state.stepIndex = index;
+
+    updateStepUi({ focus: true });
+    trackStepNavigation(direction || 'jump', previousIndex, state.stepIndex);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
     if (state.submitting) {
+      return;
+    }
+
+    if (state.stepIndex !== state.steps.length - 1) {
+      goToNextStep();
       return;
     }
 
@@ -182,14 +240,15 @@
       showFeedback(urlError, 'error');
       trackValidationError(urlError, 'page_url');
       state.stepIndex = 0;
-      updateStepUi();
+      updateStepUi({ focus: true });
       return;
     }
 
     state.submitting = true;
+
     if (submitButton) {
       submitButton.disabled = true;
-      submitButton.textContent = 'Wird gesendet ...';
+      submitButton.textContent = 'Anfrage wird gesendet ...';
     }
 
     clearFeedback();
@@ -242,6 +301,7 @@
       })
       .finally(function () {
         state.submitting = false;
+
         if (submitButton) {
           submitButton.disabled = false;
           submitButton.textContent = submitLabel;
@@ -256,6 +316,7 @@
     }
 
     clearFeedback();
+    clearStepInvalidState(currentStep);
 
     var requiredRadioNames = [];
     Array.prototype.forEach.call(currentStep.querySelectorAll('input[type="radio"][required]'), function (radio) {
@@ -272,9 +333,16 @@
 
       if (!checkedRadio) {
         var radioMessage = currentStep.getAttribute('data-review-radio-message') || 'Bitte eine Option auswählen.';
+        var firstRadio = currentStep.querySelector('input[name="' + radioName + '"]');
 
         showFeedback(radioMessage, 'error');
         trackValidationError(radioMessage, radioName);
+        markRadioGroupInvalid(firstRadio);
+
+        if (firstRadio) {
+          firstRadio.focus();
+        }
+
         return false;
       }
     }
@@ -282,8 +350,13 @@
     var fields = currentStep.querySelectorAll('input, textarea, select');
     for (var i = 0; i < fields.length; i += 1) {
       var field = fields[i];
+
       if (field.type === 'radio' || field.type === 'hidden') {
         continue;
+      }
+
+      if (field.type === 'url') {
+        normalizeUrlField(field);
       }
 
       if (!field.checkValidity()) {
@@ -291,7 +364,9 @@
 
         showFeedback(validationMessage, 'error');
         trackValidationError(validationMessage, field.name || field.id || 'unknown');
+        markFieldInvalid(field);
         field.focus();
+
         return false;
       }
     }
@@ -299,14 +374,17 @@
     return true;
   }
 
-  function updateStepUi() {
-    var form = document.getElementById('review-request-form');
+  function updateStepUi(options) {
+    options = options || {};
+
+    var form = getForm();
     if (!form) return;
 
     var prevButton = form.querySelector('[data-review-prev]');
     var nextButton = form.querySelector('[data-review-next]');
     var submitButton = form.querySelector('[data-review-submit]');
     var progressFill = document.getElementById('review-progress-fill');
+    var progressCurrent = document.getElementById('review-progress-current');
     var progressSteps = form.querySelectorAll('.review-progress-steps li');
 
     state.steps.forEach(function (step, index) {
@@ -314,11 +392,32 @@
     });
 
     Array.prototype.forEach.call(progressSteps, function (step, index) {
-      step.classList.toggle('is-active', index <= state.stepIndex);
+      var button = step.querySelector('button');
+      var isCurrent = index === state.stepIndex;
+      var isReached = index <= state.furthestStepIndex;
+      var isComplete = index < state.stepIndex;
+
+      step.classList.toggle('is-current', isCurrent);
+      step.classList.toggle('is-reached', isReached);
+      step.classList.toggle('is-complete', isComplete);
+
+      if (button) {
+        button.disabled = index > state.furthestStepIndex || isCurrent;
+
+        if (isCurrent) {
+          button.setAttribute('aria-current', 'step');
+        } else {
+          button.removeAttribute('aria-current');
+        }
+      }
     });
 
     if (progressFill) {
       progressFill.style.width = (((state.stepIndex + 1) / state.steps.length) * 100) + '%';
+    }
+
+    if (progressCurrent) {
+      progressCurrent.textContent = 'Schritt ' + (state.stepIndex + 1) + ' von ' + state.steps.length + ': ' + getStepLabel(state.stepIndex);
     }
 
     if (prevButton) {
@@ -335,19 +434,40 @@
       submitButton.textContent = submitLabel;
     }
 
+    if (options.focus) {
+      focusCurrentStep();
+    }
+
     trackStepView();
   }
 
   function getNextButtonLabel() {
-    if (state.stepIndex === state.steps.length - 2) {
-      return 'Weiter zu Kontakt';
+    var nextIndex = state.stepIndex + 1;
+
+    if (nextIndex >= state.steps.length) {
+      return 'Weiter';
     }
 
-    return 'Weiter';
+    return 'Weiter zu ' + getStepLabel(nextIndex);
+  }
+
+  function focusCurrentStep() {
+    var currentStep = state.steps[state.stepIndex];
+    if (!currentStep) return;
+
+    currentStep.setAttribute('tabindex', '-1');
+
+    if (typeof currentStep.scrollIntoView === 'function') {
+      currentStep.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    if (typeof currentStep.focus === 'function') {
+      currentStep.focus({ preventScroll: true });
+    }
   }
 
   function renderSuccess(payload, data) {
-    var form = document.getElementById('review-request-form');
+    var form = getForm();
     var success = document.getElementById('review-request-success');
     var successMessage = document.getElementById('review-success-message');
     var successUrl = document.getElementById('review-success-url');
@@ -368,6 +488,7 @@
 
     if (success) {
       success.hidden = false;
+      success.setAttribute('tabindex', '-1');
     }
 
     if (reviewBox) {
@@ -386,6 +507,10 @@
 
     if (focusTarget && typeof focusTarget.scrollIntoView === 'function') {
       focusTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    if (success && typeof success.focus === 'function') {
+      success.focus({ preventScroll: true });
     }
   }
 
@@ -417,6 +542,80 @@
     feedback.className = 'review-form-feedback';
   }
 
+  function markFieldInvalid(field) {
+    if (!field) return;
+
+    field.setAttribute('aria-invalid', 'true');
+    field.classList.add('is-invalid');
+
+    var parentField = field.closest('.review-field');
+    if (parentField) {
+      parentField.classList.add('is-invalid');
+    }
+  }
+
+  function clearFieldInvalidState(field) {
+    if (!field) return;
+
+    field.removeAttribute('aria-invalid');
+    field.classList.remove('is-invalid');
+
+    var parentField = field.closest('.review-field');
+    if (parentField) {
+      parentField.classList.remove('is-invalid');
+    }
+
+    if (field.type === 'radio' && field.name) {
+      var form = getForm();
+      if (!form) return;
+
+      Array.prototype.forEach.call(form.querySelectorAll('input[name="' + field.name + '"]'), function (radio) {
+        var option = radio.closest('.review-option');
+        if (option) {
+          option.classList.remove('is-invalid');
+        }
+      });
+
+      var block = field.closest('.review-choice-block');
+      if (block) {
+        block.classList.remove('is-invalid');
+      }
+    }
+  }
+
+  function clearStepInvalidState(step) {
+    if (!step) return;
+
+    Array.prototype.forEach.call(step.querySelectorAll('.review-field.is-invalid, .review-choice-block.is-invalid, .review-option.is-invalid'), function (node) {
+      node.classList.remove('is-invalid');
+    });
+
+    Array.prototype.forEach.call(step.querySelectorAll('[aria-invalid="true"], .is-invalid'), function (field) {
+      if (field.hasAttribute && field.hasAttribute('aria-invalid')) {
+        field.removeAttribute('aria-invalid');
+      }
+
+      if (field.classList) {
+        field.classList.remove('is-invalid');
+      }
+    });
+  }
+
+  function markRadioGroupInvalid(radio) {
+    if (!radio) return;
+
+    var option = radio.closest('.review-option');
+    var block = radio.closest('.review-choice-block');
+
+    if (option) {
+      option.classList.add('is-invalid');
+    }
+
+    if (block) {
+      block.classList.add('is-invalid');
+    }
+  }
+
   function syncSummary(form) {
     var summaryFields = form.querySelectorAll('[data-review-summary]');
 
@@ -444,6 +643,10 @@
 
   function formatSummaryValue(key, value) {
     if (!value) {
+      if (key === 'current_challenge') {
+        return 'Nicht ergänzt';
+      }
+
       return 'Noch offen';
     }
 
@@ -452,7 +655,7 @@
     }
 
     if (key === 'current_challenge') {
-      return truncateValue(value, 108);
+      return truncateValue(value, 96);
     }
 
     return truncateValue(value, 78);

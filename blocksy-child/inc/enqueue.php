@@ -190,6 +190,17 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-review-funnel-css', 'review-funnel.css', [ 'nexus-audit-css' ] );
 		hu_enqueue_js( 'nexus-audit-js', 'audit.js', [ 'nexus-core-js' ] );
 		hu_enqueue_js( 'nexus-review-funnel-js', 'review-funnel.js', [ 'nexus-audit-js' ] );
+		wp_add_inline_style(
+			'blocksy-child-style',
+			'
+			.page-template-page-audit .entry-header .entry-title,
+			.page-template-page-audit .ct-page-title,
+			.page-template-page-audit-php .entry-header .entry-title,
+			.page-template-page-audit-php .ct-page-title {
+				display: none !important;
+			}
+		'
+		);
 		wp_localize_script(
 			'nexus-review-funnel-js',
 			'NexusReviewConfig',

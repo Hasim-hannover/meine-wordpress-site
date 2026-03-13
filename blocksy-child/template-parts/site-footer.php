@@ -60,6 +60,20 @@ $imprint_url = nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) );
 $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
 ?>
 
+<?php if ( function_exists( 'nexus_is_audit_page' ) && nexus_is_audit_page() ) : ?>
+<footer id="footer" class="ft ft--audit-minimal" aria-labelledby="ft-heading" role="contentinfo">
+	<h2 id="ft-heading" class="ft__sr">Footer-Navigation</h2>
+	<div class="ft__audit-shell">
+		<p class="ft__audit-note">Growth Audit: persönliche Ersteinschätzung, schriftliche Rückmeldung in 48 Stunden, kein Pflicht-Call.</p>
+		<nav class="ft__audit-links" aria-label="Audit-Footer-Navigation">
+			<a href="<?php echo esc_url( $cases_url ); ?>">Einblicke</a>
+			<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
+			<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz</a>
+		</nav>
+	</div>
+</footer>
+<?php return; endif; ?>
+
 <footer id="footer" class="ft" aria-labelledby="ft-heading" role="contentinfo">
 	<h2 id="ft-heading" class="ft__sr">Footer-Navigation</h2>
 

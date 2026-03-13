@@ -363,10 +363,6 @@ function nexus_validate_review_request_payload( $payload ) {
 		return new WP_Error( 'missing_focus_area', 'Bitte den Bereich mit dem größten Klärungsbedarf auswählen.' );
 	}
 
-	if ( empty( $current_challenge ) ) {
-		return new WP_Error( 'missing_current_challenge', 'Bitte die größte Herausforderung kurz beschreiben.' );
-	}
-
 	if ( empty( $primary_goal ) || ! isset( $primary_goal_map[ $primary_goal ] ) ) {
 		return new WP_Error( 'missing_primary_goal', 'Bitte das wichtigste Ziel für diese Seite auswählen.' );
 	}
@@ -637,6 +633,14 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		$headers[] = 'Reply-To: ' . $payload['email'];
 	}
 
+	$context_line = ! empty( $payload['current_challenge'] )
+		? '<strong style="color:#f7f3ee;">Kurzkontext:</strong> ' . esc_html( $payload['current_challenge'] ) . '<br>'
+		: '';
+
+	$extra_context_line = ! empty( $payload['extra_context'] )
+		? '<br><strong style="color:#f7f3ee;">Nicht übersehen:</strong> ' . esc_html( $payload['extra_context'] )
+		: '';
+
 	$content = sprintf(
 		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 20px 0;">
 			<tr>
@@ -665,8 +669,7 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">URL:</strong> %7$s<br>
 						<strong style="color:#f7f3ee;">Bereich:</strong> %8$s<br>
-						<strong style="color:#f7f3ee;">Herausforderung:</strong> %9$s<br>
-						<strong style="color:#f7f3ee;">Wichtigstes Ziel:</strong> %10$s%11$s
+						%9$s<strong style="color:#f7f3ee;">Wichtigstes Ziel:</strong> %10$s%11$s
 					</div>
 				</td>
 			</tr>
@@ -689,9 +692,9 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		esc_html( 'Persönliche Rückmeldung spätestens in 48h' ),
 		esc_html( $page_url ),
 		esc_html( $payload['focus_area_label'] ),
-		esc_html( $payload['current_challenge'] ),
+		$context_line,
 		esc_html( $payload['primary_goal_label'] ),
-		! empty( $payload['extra_context'] ) ? '<br><strong style="color:#f7f3ee;">Nicht übersehen:</strong> ' . esc_html( $payload['extra_context'] ) : '',
+		$extra_context_line,
 		esc_url( $edit_url ),
 		esc_url( $page_url )
 	);
@@ -723,6 +726,15 @@ function nexus_send_review_request_confirmation( $payload ) {
 
 	$reply_to = nexus_get_audit_notification_email();
 	$subject  = sprintf( '[%s] %s angefragt', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ), $payload['audit_type_label'] );
+
+	$context_line = ! empty( $payload['current_challenge'] )
+		? '<strong style="color:#f7f3ee;">Kurzkontext:</strong> ' . esc_html( $payload['current_challenge'] ) . '<br>'
+		: '';
+
+	$extra_context_line = ! empty( $payload['extra_context'] )
+		? '<br><strong style="color:#f7f3ee;">Nicht übersehen:</strong> ' . esc_html( $payload['extra_context'] )
+		: '';
+
 	$content  = sprintf(
 		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 20px 0; border-collapse:separate; border-spacing:0 10px;">
 			<tr>
@@ -741,8 +753,7 @@ function nexus_send_review_request_confirmation( $payload ) {
 					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">Seite:</strong> %1$s<br>
 						<strong style="color:#f7f3ee;">Bereich:</strong> %2$s<br>
-						<strong style="color:#f7f3ee;">Herausforderung:</strong> %3$s<br>
-						<strong style="color:#f7f3ee;">Wichtigstes Ziel:</strong> %4$s%5$s
+						%3$s<strong style="color:#f7f3ee;">Wichtigstes Ziel:</strong> %4$s%5$s
 					</div>
 				</td>
 			</tr>
@@ -753,9 +764,9 @@ function nexus_send_review_request_confirmation( $payload ) {
 		</p>',
 		esc_html( $payload['page_url'] ),
 		esc_html( $payload['focus_area_label'] ),
-		esc_html( $payload['current_challenge'] ),
+		$context_line,
 		esc_html( $payload['primary_goal_label'] ),
-		! empty( $payload['extra_context'] ) ? '<br><strong style="color:#f7f3ee;">Nicht übersehen:</strong> ' . esc_html( $payload['extra_context'] ) : ''
+		$extra_context_line
 	);
 
 	$html = nexus_get_audit_email_shell(
@@ -848,10 +859,12 @@ function nexus_render_review_request_details_meta_box( $post ) {
 				<strong>Bereich mit Klärungsbedarf</strong>
 				<p><?php echo esc_html( $focus_area_label ); ?></p>
 			</div>
-			<div class="nexus-review-meta-group">
-				<strong>Größte Herausforderung</strong>
-				<p><?php echo nl2br( esc_html( $current_challenge ) ); ?></p>
-			</div>
+			<?php if ( '' !== $current_challenge ) : ?>
+				<div class="nexus-review-meta-group">
+					<strong>Kurzkontext</strong>
+					<p><?php echo nl2br( esc_html( $current_challenge ) ); ?></p>
+				</div>
+			<?php endif; ?>
 			<div class="nexus-review-meta-group">
 				<strong>Wichtigstes Ziel</strong>
 				<p><?php echo esc_html( $primary_goal_label ); ?></p>

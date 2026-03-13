@@ -60,6 +60,71 @@ body.nx-blog-header-active .ct-header {
                 box-shadow var(--nx-duration) var(--nx-ease);
 }
 
+.nx-site-header--audit {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.nx-site-header__shell--audit {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    min-height: 74px;
+}
+
+.nx-site-header__audit-meta,
+.nx-site-header__audit-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.nx-site-header__audit-meta {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nx-site-header__audit-meta span,
+.nx-site-header__audit-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid var(--nx-border);
+    border-radius: 999px;
+    background: var(--nx-bg-glass-light);
+    color: var(--nx-text-dim);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color var(--nx-duration-fast) var(--nx-ease),
+                background var(--nx-duration-fast) var(--nx-ease),
+                color var(--nx-duration-fast) var(--nx-ease),
+                transform var(--nx-duration-fast) var(--nx-ease);
+}
+
+.nx-site-header__audit-link:hover,
+.nx-site-header__audit-link:focus-visible {
+    color: var(--nx-text);
+    border-color: var(--nx-border-hover);
+    background: var(--nx-bg-glass-hover);
+    transform: translateY(-1px);
+}
+
+.nx-site-header__audit-link--primary {
+    color: var(--text-inverse);
+    border-color: transparent;
+    background: linear-gradient(180deg, var(--accent-hover) 0%, var(--accent) 100%);
+    box-shadow: 0 16px 34px hsl(var(--accent-hsl) / 0.2);
+}
+
+.nx-site-header__audit-link--primary:hover,
+.nx-site-header__audit-link--primary:focus-visible {
+    color: var(--text-inverse);
+    border-color: transparent;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent-hover) 82%, white) 0%, var(--accent-hover) 100%);
+}
+
 .nx-site-header.nexus-flight-mode .nx-site-header__shell {
     min-height: 74px;
     transform: translateY(-4px);
@@ -282,6 +347,10 @@ body.nx-blog-header-active .ct-header {
         padding: 16px 18px;
     }
 
+    .nx-site-header__shell--audit {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
     .nx-site-header__nav {
         display: none;
     }
@@ -331,5 +400,24 @@ body.nx-blog-header-active .ct-header {
     .nx-site-header__panel {
         padding: 14px;
         border-radius: 20px;
+    }
+
+    .nx-site-header__shell--audit {
+        grid-template-columns: 1fr;
+    }
+
+    .nx-site-header__audit-meta {
+        display: none;
+    }
+
+    .nx-site-header__audit-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .nx-site-header__audit-link {
+        min-height: 34px;
+        padding: 0 12px;
+        font-size: 0.78rem;
     }
 }

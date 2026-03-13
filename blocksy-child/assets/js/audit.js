@@ -1,55 +1,18 @@
 /**
  * AUDIT PAGE JS
  * Seitenspezifische Logik fuer die Growth-Audit-Landingpage.
- * NexusCore übernimmt: ScrollSpy, FAQ-Accordion, SmoothScroll, Reveal.
- * Dieses Skript ergänzt: Smart-Nav Sichtbarkeit, FAQ-Schema (SEO).
+ * NexusCore uebernimmt: SmoothScroll, Reveal und globale Interaktionen.
+ * Dieses Skript ergänzt nur das FAQ-Schema.
  */
 (function () {
   'use strict';
 
   function initAuditPage() {
     injectFaqSchema();
-
-    if (window.matchMedia && window.matchMedia('(max-width: 900px)').matches) {
-      return;
-    }
-
-    initSmartNavVisibility();
-    initAuditScrollSpy();
   }
 
   /**
-   * Smart-Nav erst nach Scroll einblenden (weniger Ablenkung above the fold)
-   */
-  function initSmartNavVisibility() {
-    var smartNav = document.querySelector('.audit-wrapper .smart-nav');
-    if (!smartNav) return;
-
-    var showAfter = 520;
-
-    function toggle() {
-      if (window.scrollY > showAfter) {
-        smartNav.classList.add('is-visible');
-      } else {
-        smartNav.classList.remove('is-visible');
-      }
-    }
-
-    toggle();
-    window.addEventListener('scroll', toggle, { passive: true });
-  }
-
-  /**
-   * Audit-spezifischer ScrollSpy (NexusCore.initScrollSpy mit angepasstem Selektor)
-   */
-  function initAuditScrollSpy() {
-    if (window.NexusCore && typeof NexusCore.initScrollSpy === 'function') {
-      NexusCore.initScrollSpy('.audit-wrapper .smart-nav', '.audit-section[id]', 200);
-    }
-  }
-
-  /**
-   * FAQ Schema (JSON-LD) dynamisch injizieren — SEO-Boost für Rich Results
+   * FAQ-Schema (JSON-LD) dynamisch injizieren.
    */
   function injectFaqSchema() {
     var faqSection = document.querySelector('.audit-faq-section');
@@ -88,7 +51,6 @@
     document.head.appendChild(script);
   }
 
-  // Init on DOMContentLoaded or immediately if already loaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAuditPage);
   } else {
