@@ -24,16 +24,17 @@ function nexus_get_wgos_cluster_page_data() {
 	$pages = [
 		'wordpress-seo-hannover' => [
 			'eyebrow'          => 'Sichtbarkeit im WGOS',
-			'title'            => 'WordPress SEO Hannover',
-			'lead'             => 'SEO für WordPress sollte keine lose Einzelleistung sein. Sichtbarkeit entsteht, wenn Technik, Themenstruktur und Conversion zusammenspielen.',
+			'title'            => 'Technisches SEO für WordPress in Hannover',
+			'lead'             => 'Diese Seite ist der Einstieg für technisches SEO auf WordPress: Crawlability, Seitenstruktur, interne Verlinkung und priorisierte Fixes statt losem SEO-Aktionismus.',
 			'intro'            => [
-				'Viele B2B-Websites investieren in Inhalte, ohne die eigentlichen Bremsen zu lösen. Dann entstehen Seiten, die zwar da sind, aber weder sauber ranken noch qualifizierte Anfragen vorbereiten.',
-				'WordPress SEO wird dadurch schnell zur To-do-Liste aus Meta-Titeln, Blogartikeln und Plugin-Einstellungen. Was fehlt, ist die Reihenfolge: Erst die technische Basis, dann die Themenarchitektur und danach die conversion-nahe Seite.',
-				'Genau dort setzt WGOS an. Wir bauen Sichtbarkeit nicht als Content-Fleißaufgabe, sondern als Nachfrage-System für wichtige Seitentypen auf.',
+				'Viele B2B-Websites investieren in Inhalte, ohne zuerst die technischen Bremsen zu lösen. Dann entstehen Seiten, die zwar vorhanden sind, aber weder stabil ranken noch qualifizierte Anfragen sauber vorbereiten.',
+				'WordPress SEO wird dadurch schnell zur To-do-Liste aus Meta-Titeln, Plugins und Blogideen. Was oft fehlt, ist die Reihenfolge: Erst Crawlability, Struktur, interne Verlinkung und technische Sauberkeit, dann Themenarchitektur und conversion-nahe Seiten.',
+				'Genau dort setzt diese Seite an. Sie ist kein Sammelbegriff für eine komplette WordPress-Agenturleistung, sondern der technische SEO-Einstieg innerhalb des WGOS für sichtbare, belastbare Seitentypen.',
 			],
 			'system'           => [
 				'Im WGOS ist SEO kein Solobaustein. Sichtbarkeit folgt auf ein tragfähiges Fundament aus Performance, Messbarkeit und klarer Angebotslogik.',
 				'Statt eine einzige SEO-Leistung zu verkaufen, ordnen wir die richtigen Bausteine für Ihre Lage. Das kann mit einem Technical SEO Audit starten, mit einer Keyword-Strategie weitergehen und später in Pillar Pages, Content Hubs oder interne Verlinkung münden.',
+				'Wenn Sie nicht nur technisches SEO, sondern eine breitere WordPress-Agenturleistung für Angebotsseiten, Tracking, Conversion und Betrieb suchen, ist die Agentur-Seite der bessere Einstieg.',
 			],
 			'assets'           => [
 				'technical-seo-audit' => 'Findet Indexierungs- und Strukturprobleme, die Rankings bereits heute ausbremsen.',
@@ -55,10 +56,16 @@ function nexus_get_wgos_cluster_page_data() {
 					'url'   => home_url( '/core-web-vitals-wachstum-seo-und-roas/' ),
 				],
 			],
-			'meta_title'       => 'WordPress SEO Hannover | Technisches SEO für B2B',
-			'meta_description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und klare Priorisierung für B2B-Websites.',
-			'schema_name'      => 'WordPress SEO Hannover',
-			'schema_description' => 'WGOS-Cluster für WordPress SEO in Hannover: technische Basis, Themenarchitektur und conversion-nahe Sichtbarkeit für B2B-Websites.',
+			'supporting_link'  => [
+				'kicker' => 'Breiterer Einstieg',
+				'label'  => 'WordPress Agentur Hannover',
+				'url'    => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
+				'text'   => 'Wenn der Bedarf über technisches SEO hinausgeht und auch Angebotsseiten, Tracking, Conversion und Betrieb umfasst, ist die Agentur-Seite der klarere Startpunkt.',
+			],
+			'meta_title'       => 'WordPress SEO Hannover | Technisches SEO für WordPress',
+			'meta_description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und priorisierte SEO-Fixes für B2B-Websites.',
+			'schema_name'      => 'Technisches SEO für WordPress in Hannover',
+			'schema_description' => 'WGOS-Cluster für technisches SEO auf WordPress in Hannover: technische Basis, Seitenstruktur und conversion-nahe Sichtbarkeit für B2B-Websites.',
 		],
 		'wordpress-wartung-hannover' => [
 			'eyebrow'          => 'Betrieb im WGOS',
@@ -385,6 +392,16 @@ function nexus_render_wgos_cluster_page( $page ) {
 						<p><?php echo esc_html( (string) $paragraph ); ?></p>
 					<?php endforeach; ?>
 				</div>
+
+				<?php if ( ! empty( $page['supporting_link'] ) && is_array( $page['supporting_link'] ) ) : ?>
+					<div class="nx-card nx-card--flat nx-cluster-hero__card">
+						<span class="nx-cluster-hero__card-kicker"><?php echo esc_html( (string) ( $page['supporting_link']['kicker'] ?? 'Weiterer Einstieg' ) ); ?></span>
+						<p><?php echo esc_html( (string) ( $page['supporting_link']['text'] ?? '' ) ); ?></p>
+						<?php if ( ! empty( $page['supporting_link']['url'] ) && ! empty( $page['supporting_link']['label'] ) ) : ?>
+							<p class="nx-cluster-hero__card-link"><a href="<?php echo esc_url( (string) $page['supporting_link']['url'] ); ?>"><?php echo esc_html( (string) $page['supporting_link']['label'] ); ?></a></p>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</section>
 

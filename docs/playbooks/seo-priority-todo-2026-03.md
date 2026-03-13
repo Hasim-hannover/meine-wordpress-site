@@ -174,6 +174,14 @@ Primaere Vermutung:
 
 ### 6. `/wordpress-seo-hannover/` nicht blind umschreiben
 
+Stand:
+
+- Die Seite wurde technisch und im Snippet klarer auf **technisches SEO für WordPress** zugespitzt.
+- Meta, Schema und Hero-/Systemlogik unterscheiden jetzt stärker zwischen:
+  - technischer SEO-Seite
+  - breiterer Agentur-Seite `/wordpress-agentur-hannover/`
+- Zusaetzlich gibt es jetzt auf der SEO-Seite eine klare Bruecke zur Agentur-Seite fuer den breiteren Intent.
+
 Status:
 
 - viele Impressionen

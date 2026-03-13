@@ -130,8 +130,8 @@ function hu_get_forced_singular_seo_map() {
 				'description' => 'WordPress Wartung in Hannover als Teil des WGOS-Fundaments: Updates, Sicherheit, Backups, Performance und stabile Betriebsroutinen für B2B-Websites.',
 			],
 			'wordpress-seo-hannover' => [
-				'title'       => 'WordPress SEO Hannover | Technisches SEO für B2B',
-				'description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und klare Priorisierung für B2B-Websites.',
+				'title'       => 'WordPress SEO Hannover | Technisches SEO für WordPress',
+				'description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und priorisierte SEO-Fixes für B2B-Websites.',
 			],
 		]
 	);

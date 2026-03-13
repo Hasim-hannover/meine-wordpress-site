@@ -123,9 +123,9 @@ function hu_output_schema()
         ],
 
         'wordpress-seo-hannover' => [
-            'name'        => 'WordPress SEO Hannover',
-            'description' => 'WGOS-Cluster für WordPress SEO in Hannover: technische Basis, Themenarchitektur und conversion-nahe Sichtbarkeit für B2B-Websites.',
-            'serviceType' => 'WordPress SEO',
+            'name'        => 'Technisches SEO für WordPress in Hannover',
+            'description' => 'WGOS-Cluster für technisches SEO auf WordPress in Hannover: technische Basis, Seitenstruktur und conversion-nahe Sichtbarkeit für B2B-Websites.',
+            'serviceType' => 'Technisches SEO für WordPress',
             'serviceOutput' => 'Priorisierte SEO-Bausteine aus Technical SEO, Keyword-Strategie, Pillar Pages und interner Verlinkung'
         ],
 
