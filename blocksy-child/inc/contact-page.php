@@ -423,12 +423,27 @@ function nexus_handle_contact_request_submission( WP_REST_Request $request ) {
 		);
 	}
 
+	$contact_id = function_exists( 'nexus_sync_contact_request_to_crm' )
+		? nexus_sync_contact_request_to_crm( $validated )
+		: 0;
+
+	if ( is_wp_error( $contact_id ) ) {
+		return new WP_REST_Response(
+			[
+				'ok'    => false,
+				'error' => 'Die Anfrage konnte gerade nicht sauber im CRM gespeichert werden. Bitte versuchen Sie es erneut.',
+			],
+			500
+		);
+	}
+
 	nexus_send_contact_request_admin_notification( $validated );
 	nexus_send_contact_request_confirmation( $validated );
 
 	return new WP_REST_Response(
 		[
 			'ok'      => true,
+			'contactId' => $contact_id,
 			'message' => sprintf(
 				'Danke. Ihre %s ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
 				nexus_get_contact_request_response_label( $validated['request_type'] )

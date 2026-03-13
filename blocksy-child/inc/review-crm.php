@@ -152,7 +152,7 @@ function nexus_register_review_request_post_type() {
 			'public'              => false,
 			'publicly_queryable'  => false,
 			'show_ui'             => true,
-			'show_in_menu'        => 'nexus-review-crm',
+			'show_in_menu'        => function_exists( 'nexus_get_crm_menu_slug' ) ? nexus_get_crm_menu_slug() : 'nexus-crm',
 			'show_in_admin_bar'   => false,
 			'show_in_nav_menus'   => false,
 			'exclude_from_search' => true,
@@ -174,25 +174,46 @@ add_action( 'init', 'nexus_register_review_request_post_type' );
  */
 function nexus_register_review_crm_menu() {
 	add_menu_page(
-		'Audit CRM',
-		'Audit CRM',
+		'Nexus CRM',
+		'Nexus CRM',
 		'edit_pages',
-		'nexus-review-crm',
+		function_exists( 'nexus_get_crm_menu_slug' ) ? nexus_get_crm_menu_slug() : 'nexus-crm',
 		'nexus_render_review_crm_dashboard',
 		'dashicons-clipboard',
 		58
 	);
 
 	add_submenu_page(
-		'nexus-review-crm',
-		'Audit CRM',
-		'Dashboard',
+		function_exists( 'nexus_get_crm_menu_slug' ) ? nexus_get_crm_menu_slug() : 'nexus-crm',
+		'Nexus CRM',
+		'Übersicht',
 		'edit_pages',
-		'nexus-review-crm',
+		function_exists( 'nexus_get_crm_menu_slug' ) ? nexus_get_crm_menu_slug() : 'nexus-crm',
 		'nexus_render_review_crm_dashboard'
 	);
 }
 add_action( 'admin_menu', 'nexus_register_review_crm_menu' );
+
+/**
+ * Redirect the previous audit-only CRM slug to the shared CRM dashboard.
+ *
+ * @return void
+ */
+function nexus_redirect_legacy_review_crm_menu() {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	$page = isset( $_GET['page'] ) ? sanitize_key( (string) wp_unslash( $_GET['page'] ) ) : '';
+
+	if ( 'nexus-review-crm' !== $page ) {
+		return;
+	}
+
+	wp_safe_redirect( admin_url( 'admin.php?page=' . ( function_exists( 'nexus_get_crm_menu_slug' ) ? nexus_get_crm_menu_slug() : 'nexus-crm' ) ) );
+	exit;
+}
+add_action( 'admin_init', 'nexus_redirect_legacy_review_crm_menu' );
 
 /**
  * Enqueue the admin styles for CRM screens.
@@ -206,8 +227,8 @@ function nexus_enqueue_review_crm_admin_assets( $hook ) {
 		return;
 	}
 
-	$is_crm_dashboard = 'toplevel_page_nexus-review-crm' === $hook;
-	$is_review_screen = 'nexus_review_request' === $screen->post_type;
+	$is_crm_dashboard = 'toplevel_page_nexus-crm' === $hook || 'nexus-crm_page_edit-php' === $hook;
+	$is_review_screen = in_array( $screen->post_type, [ 'nexus_review_request', 'nexus_contact' ], true );
 	$is_wp_dashboard  = 'dashboard' === $screen->base;
 
 	if ( ! $is_crm_dashboard && ! $is_review_screen && ! $is_wp_dashboard ) {
@@ -677,7 +698,7 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0">
 			<tr>
 				<td style="padding:0 12px 0 0;">
-					<a href="%12$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Im Audit CRM öffnen</a>
+					<a href="%12$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Im CRM öffnen</a>
 				</td>
 				<td>
 					<a href="%13$s" style="display:inline-block; padding:14px 18px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); color:#f7f3ee; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Seite ansehen</a>
@@ -1193,17 +1214,17 @@ function nexus_render_review_crm_dashboard() {
 	}
 
 	$counts = [
-		'new'       => nexus_count_review_requests_by_status( 'new' ),
-		'in_review' => nexus_count_review_requests_by_status( 'in_review' ),
-		'sent'      => nexus_count_review_requests_by_status( 'sent' ),
-		'overdue'   => nexus_count_overdue_review_requests(),
+		'audit_new'    => nexus_count_review_requests_by_status( 'new' ),
+		'projects'     => function_exists( 'nexus_count_project_requests' ) ? nexus_count_project_requests() : 0,
+		'blog_active'  => function_exists( 'nexus_count_active_blog_subscribers' ) ? nexus_count_active_blog_subscribers() : 0,
+		'blog_pending' => function_exists( 'nexus_count_pending_blog_subscribers' ) ? nexus_count_pending_blog_subscribers() : 0,
 	];
 
-	$recent_requests = get_posts(
+	$recent_audits = get_posts(
 		[
 			'post_type'              => 'nexus_review_request',
 			'post_status'            => 'private',
-			'posts_per_page'         => 8,
+			'posts_per_page'         => 6,
 			'orderby'                => 'date',
 			'order'                  => 'DESC',
 			'no_found_rows'          => true,
@@ -1211,37 +1232,65 @@ function nexus_render_review_crm_dashboard() {
 			'update_post_term_cache' => false,
 		]
 	);
+
+	$recent_projects = function_exists( 'nexus_get_recent_crm_contacts' )
+		? nexus_get_recent_crm_contacts(
+			[
+				'posts_per_page' => 6,
+				'meta_query'     => [
+					[
+						'key'   => '_nexus_contact_segment_project_request',
+						'value' => 1,
+					],
+				],
+			]
+		)
+		: [];
+
+	$recent_blog_subscribers = function_exists( 'nexus_get_recent_crm_contacts' )
+		? nexus_get_recent_crm_contacts(
+			[
+				'posts_per_page' => 6,
+				'meta_query'     => [
+					[
+						'key'   => '_nexus_contact_segment_blog_notify',
+						'value' => 1,
+					],
+				],
+			]
+		)
+		: [];
 	?>
 	<div class="wrap nexus-review-dashboard">
-		<h1>Audit CRM</h1>
-		<p class="nexus-review-dashboard-intro">Hier laufen alle persönlichen Audit-Anfragen zusammen. Aktuell vor allem für den Growth Audit. Ziel: Rückmeldung innerhalb von 48 Stunden.</p>
+		<h1>Nexus CRM</h1>
+		<p class="nexus-review-dashboard-intro">Hier laufen Audit-Anfragen, Projektanfragen und Blog-Abos zusammen. WordPress bleibt die zentrale Daten- und Logikschicht; Brevo bleibt reine Zustellungsebene fuer Transaktionsmails.</p>
 
 		<div class="nexus-review-stats">
 			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request&nexus_review_status=new' ) ); ?>">
-				<span class="nexus-review-stat-label">Neu</span>
-				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['new'] ); ?></strong>
+				<span class="nexus-review-stat-label">Audit-Anfragen neu</span>
+				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['audit_new'] ); ?></strong>
 			</a>
-			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request&nexus_review_status=in_review' ) ); ?>">
-				<span class="nexus-review-stat-label">In Bearbeitung</span>
-				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['in_review'] ); ?></strong>
+			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_contact&nexus_contact_segment=project_request' ) ); ?>">
+				<span class="nexus-review-stat-label">Projektanfragen</span>
+				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['projects'] ); ?></strong>
 			</a>
-			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request&nexus_review_status=sent' ) ); ?>">
-				<span class="nexus-review-stat-label">Gesendet</span>
-				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['sent'] ); ?></strong>
+			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_contact&nexus_contact_segment=blog_notify&nexus_contact_blog_status=active' ) ); ?>">
+				<span class="nexus-review-stat-label">Blog-Abos aktiv</span>
+				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['blog_active'] ); ?></strong>
 			</a>
-			<a class="nexus-review-stat-card nexus-review-stat-card-warning" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request' ) ); ?>">
-				<span class="nexus-review-stat-label">Überfällig</span>
-				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['overdue'] ); ?></strong>
+			<a class="nexus-review-stat-card nexus-review-stat-card-warning" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_contact&nexus_contact_segment=blog_notify&nexus_contact_blog_status=pending' ) ); ?>">
+				<span class="nexus-review-stat-label">DOI ausstehend</span>
+				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['blog_pending'] ); ?></strong>
 			</a>
 		</div>
 
 		<div class="nexus-review-panel">
 			<div class="nexus-review-panel-head">
-				<h2>Letzte Anfragen</h2>
-				<a class="button button-secondary" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request' ) ); ?>">Alle Anfragen</a>
+				<h2>Letzte Audit-Anfragen</h2>
+				<a class="button button-secondary" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request' ) ); ?>">Alle Audit-Anfragen</a>
 			</div>
 
-			<?php if ( empty( $recent_requests ) ) : ?>
+			<?php if ( empty( $recent_audits ) ) : ?>
 				<p>Noch keine Audit-Anfragen vorhanden.</p>
 			<?php else : ?>
 				<table class="widefat fixed striped nexus-review-table">
@@ -1255,7 +1304,7 @@ function nexus_render_review_crm_dashboard() {
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ( $recent_requests as $request_post ) : ?>
+						<?php foreach ( $recent_audits as $request_post ) : ?>
 							<?php
 							$status   = (string) get_post_meta( $request_post->ID, '_nexus_review_status', true );
 							$company  = (string) get_post_meta( $request_post->ID, '_nexus_review_company', true );
@@ -1289,6 +1338,98 @@ function nexus_render_review_crm_dashboard() {
 				</table>
 			<?php endif; ?>
 		</div>
+
+		<div class="nexus-review-panel">
+			<div class="nexus-review-panel-head">
+				<h2>Letzte Projektanfragen</h2>
+				<a class="button button-secondary" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_contact&nexus_contact_segment=project_request' ) ); ?>">Alle Projektanfragen</a>
+			</div>
+
+			<?php if ( empty( $recent_projects ) ) : ?>
+				<p>Noch keine Projektanfragen im CRM vorhanden.</p>
+			<?php else : ?>
+				<table class="widefat fixed striped nexus-review-table">
+					<thead>
+						<tr>
+							<th>Kontakt</th>
+							<th>Thema</th>
+							<th>Status</th>
+							<th>Aktualisiert</th>
+							<th>Aktion</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ( $recent_projects as $contact_post ) : ?>
+							<?php
+							$name       = (string) get_post_meta( $contact_post->ID, '_nexus_contact_name', true );
+							$email      = (string) get_post_meta( $contact_post->ID, '_nexus_contact_email', true );
+							$focus      = (string) get_post_meta( $contact_post->ID, '_nexus_contact_focus_label', true );
+							$status     = (string) get_post_meta( $contact_post->ID, '_nexus_contact_status', true );
+							$updated_at = (int) get_post_meta( $contact_post->ID, '_nexus_contact_updated_at', true );
+							?>
+							<tr>
+								<td>
+									<strong><?php echo esc_html( $name ?: get_the_title( $contact_post ) ); ?></strong><br>
+									<span class="nexus-review-muted"><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></span>
+								</td>
+								<td><?php echo esc_html( $focus ?: 'Projektanfrage' ); ?></td>
+								<td>
+									<span class="nexus-review-badge <?php echo esc_attr( function_exists( 'nexus_get_crm_contact_status_badge_class' ) ? nexus_get_crm_contact_status_badge_class( $status ) : 'nexus-review-badge-new' ); ?>">
+										<?php echo esc_html( function_exists( 'nexus_get_crm_contact_status_options' ) ? ( nexus_get_crm_contact_status_options()[ $status ] ?? 'Unbekannt' ) : $status ); ?>
+									</span>
+								</td>
+								<td><?php echo esc_html( $updated_at ? wp_date( 'd.m.Y H:i', $updated_at ) : 'n/a' ); ?></td>
+								<td><a class="button button-small" href="<?php echo esc_url( get_edit_post_link( $contact_post->ID ) ); ?>">Öffnen</a></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			<?php endif; ?>
+		</div>
+
+		<div class="nexus-review-panel">
+			<div class="nexus-review-panel-head">
+				<h2>Letzte Blog-Abos</h2>
+				<a class="button button-secondary" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_contact&nexus_contact_segment=blog_notify' ) ); ?>">Alle Blog-Abos</a>
+			</div>
+
+			<?php if ( empty( $recent_blog_subscribers ) ) : ?>
+				<p>Noch keine Blog-Abos im CRM vorhanden.</p>
+			<?php else : ?>
+				<table class="widefat fixed striped nexus-review-table">
+					<thead>
+						<tr>
+							<th>E-Mail</th>
+							<th>Status</th>
+							<th>Consent</th>
+							<th>Aktualisiert</th>
+							<th>Aktion</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ( $recent_blog_subscribers as $contact_post ) : ?>
+							<?php
+							$email      = (string) get_post_meta( $contact_post->ID, '_nexus_contact_email', true );
+							$status     = (string) get_post_meta( $contact_post->ID, '_nexus_contact_blog_status', true );
+							$consent    = (string) get_post_meta( $contact_post->ID, '_nexus_contact_consent_blog_email', true );
+							$updated_at = (int) get_post_meta( $contact_post->ID, '_nexus_contact_updated_at', true );
+							?>
+							<tr>
+								<td><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></td>
+								<td>
+									<span class="nexus-review-badge <?php echo esc_attr( function_exists( 'nexus_get_crm_contact_status_badge_class' ) ? nexus_get_crm_contact_status_badge_class( $status ) : 'nexus-review-badge-new' ); ?>">
+										<?php echo esc_html( function_exists( 'nexus_get_crm_contact_status_options' ) ? ( nexus_get_crm_contact_status_options()[ $status ] ?? 'Unbekannt' ) : $status ); ?>
+									</span>
+								</td>
+								<td><?php echo esc_html( $consent ?: 'n/a' ); ?></td>
+								<td><?php echo esc_html( $updated_at ? wp_date( 'd.m.Y H:i', $updated_at ) : 'n/a' ); ?></td>
+								<td><a class="button button-small" href="<?php echo esc_url( get_edit_post_link( $contact_post->ID ) ); ?>">Öffnen</a></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			<?php endif; ?>
+		</div>
 	</div>
 	<?php
 }
@@ -1305,7 +1446,7 @@ function nexus_register_review_crm_dashboard_widget() {
 
 	wp_add_dashboard_widget(
 		'nexus_review_crm_dashboard_widget',
-		'Audit CRM Snapshot',
+		'Nexus CRM Snapshot',
 		'nexus_render_review_crm_dashboard_widget'
 	);
 }
@@ -1317,10 +1458,10 @@ add_action( 'wp_dashboard_setup', 'nexus_register_review_crm_dashboard_widget' )
  * @return void
  */
 function nexus_render_review_crm_dashboard_widget() {
-	$new_count      = nexus_count_review_requests_by_status( 'new' );
-	$review_count   = nexus_count_review_requests_by_status( 'in_review' );
-	$overdue_count  = nexus_count_overdue_review_requests();
-	$latest_request = get_posts(
+	$new_count          = nexus_count_review_requests_by_status( 'new' );
+	$project_count      = function_exists( 'nexus_count_project_requests' ) ? nexus_count_project_requests() : 0;
+	$blog_pending_count = function_exists( 'nexus_count_pending_blog_subscribers' ) ? nexus_count_pending_blog_subscribers() : 0;
+	$latest_request     = get_posts(
 		[
 			'post_type'              => 'nexus_review_request',
 			'post_status'            => 'private',
@@ -1334,7 +1475,7 @@ function nexus_render_review_crm_dashboard_widget() {
 	);
 	?>
 	<div class="nexus-review-widget">
-		<p><strong>Neu:</strong> <?php echo esc_html( (string) $new_count ); ?> | <strong>In Bearbeitung:</strong> <?php echo esc_html( (string) $review_count ); ?> | <strong>Überfällig:</strong> <?php echo esc_html( (string) $overdue_count ); ?></p>
+		<p><strong>Audit neu:</strong> <?php echo esc_html( (string) $new_count ); ?> | <strong>Projektanfragen:</strong> <?php echo esc_html( (string) $project_count ); ?> | <strong>DOI ausstehend:</strong> <?php echo esc_html( (string) $blog_pending_count ); ?></p>
 		<?php if ( ! empty( $latest_request ) ) : ?>
 			<?php
 			$latest  = $latest_request[0];
@@ -1344,7 +1485,7 @@ function nexus_render_review_crm_dashboard_widget() {
 			?>
 			<p><strong>Letzte Audit-Anfrage:</strong> <?php echo esc_html( $company ?: $domain ); ?><br><a href="<?php echo esc_url( $page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $page_url ); ?></a></p>
 		<?php endif; ?>
-		<p><a class="button button-secondary" href="<?php echo esc_url( admin_url( 'admin.php?page=nexus-review-crm' ) ); ?>">Zum Audit CRM</a></p>
+		<p><a class="button button-secondary" href="<?php echo esc_url( admin_url( 'admin.php?page=' . ( function_exists( 'nexus_get_crm_menu_slug' ) ? nexus_get_crm_menu_slug() : 'nexus-crm' ) ) ); ?>">Zum Nexus CRM</a></p>
 	</div>
 	<?php
 }

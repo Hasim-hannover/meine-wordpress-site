@@ -67,6 +67,22 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-blog-header-css', 'blog-header.css', [ 'nexus-design-system' ] );
 	}
 
+	// ── GLOBAL: Blog Notify ────────────────────────────────────────
+	if ( is_home() || is_archive() || is_singular( 'post' ) || ( function_exists( 'nexus_is_blog_notify_page' ) && nexus_is_blog_notify_page() ) ) {
+		hu_enqueue_css( 'nexus-blog-notify-css', 'blog-notify.css', [ 'nexus-design-system' ] );
+		hu_enqueue_js( 'nexus-blog-notify-js', 'blog-notify.js', [ 'nexus-core-js' ] );
+		wp_localize_script(
+			'nexus-blog-notify-js',
+			'NexusBlogNotifyConfig',
+			[
+				'restEndpoint'   => esc_url_raw( rest_url( 'nexus/v1/blog-subscribe' ) ),
+				'nonce'          => wp_create_nonce( 'nexus_blog_notify_subscribe' ),
+				'successMessage' => 'Fast geschafft. Bitte bestaetigen Sie Ihre Anmeldung ueber die E-Mail in Ihrem Postfach.',
+				'errorMessage'   => 'Das hat gerade nicht funktioniert. Bitte pruefen Sie Ihre E-Mail-Adresse oder versuchen Sie es gleich noch einmal.',
+			]
+		);
+	}
+
 	// ── A) Startseite & Blog-Home ─────────────────────────────────
 	if ( is_front_page() || is_home() ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );

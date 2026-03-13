@@ -1,6 +1,6 @@
 # System Map
 
-Stand: 2026-03-11. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-03-13. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
@@ -8,6 +8,7 @@ Stand: 2026-03-11. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 | --- | --- | --- | --- | --- |
 | Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/deploy.yml` | WordPress, Blocksy Parent Theme, ACF, Rank Math | live |
 | Audit-Funnel | Diagnose-Einstieg, Audit-Intake und interne Folgequalifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
+| Nexus CRM & Blog Notify | gemeinsames CRM fuer Audit, Projektanfragen und Blog-Abos plus DOI- und Artikel-Mail-Logik | `blocksy-child/inc/crm.php`, `blocksy-child/inc/blog-notify.php`, `blocksy-child/template-parts/blog-notify.php`, `blocksy-child/page-blog-notify.php`, `docs/systems/blog-notify.md` | WordPress CPT/Meta, WordPress REST, wp_mail, Brevo | repo-seitig live, End-to-End offen |
 | Tracking | Tracking-ready Markup, CTA-Events, SEO-/Schema-Layer | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, Templates mit `data-track-*` | GTM, sGTM, GA4, Consent Mode v2, Meta CAPI | teils im Repo, teils extern |
 | CTA- und Leadflow | CTA-Hierarchie vom ersten Besuch bis zur Qualifizierung | `blocksy-child/inc/shortcodes.php`, `blocksy-child/template-parts/footer-cta.php`, `blocksy-child/template-parts/trust-section.php`, Service-Templates | WordPress-Editor, Audit-Funnel, Cal.com, CRM | live |
 | Public Proof Layer | oeffentliche Vertrauenssignale ohne Testimonials, plus Pilot-zu-Case-Mechanik | `blocksy-child/inc/shortcodes.php`, `blocksy-child/assets/css/homepage.css`, `blocksy-child/page-kontakt.php`, `blocksy-child/inc/contact-page.php`, `docs/playbooks/homepage-cro-proof-monitoring-2026-03.md` | GitHub-Repo, oeffentliches LinkedIn-Profil, optional spaeter Facebook | live |
@@ -75,6 +76,22 @@ Aktuelle Logik:
 5. Danach folgt bei Bedarf ein vertiefter Folgeschritt, aber erst nach der persoenlichen Rueckmeldung und direktem Kontakt.
 6. Alternative direkte Eskalation: `Cal.com`-Call.
 7. `audit-live.js` bleibt als vorbereiteter Instant-Results-Layer im Repo, ist aber nicht der aktive Default-Flow.
+
+## Nexus CRM und Blog Notify
+
+Das Repo enthaelt jetzt zusaetzlich ein gemeinsames CRM-Modell fuer:
+
+- Audit-Anfragen
+- Projektanfragen
+- Blog-Abos
+
+Architektur:
+
+- `nexus_review_request` bleibt der spezialisierte Datensatz fuer Audit-Intake
+- `nexus_contact` ist der gemeinsame Kontakt-Datensatz fuer Projektanfragen und Blog-Abos
+- das Admin-Menue heisst jetzt `Nexus CRM`
+- Blog-Abos arbeiten mit eigenem DOI- und Abmelde-Flow ueber `/neue-artikel-per-email/`
+- Artikel-Benachrichtigungen werden in V1 manuell pro Beitrag angestossen und dann in kleinen Batches versendet
 
 ## Tracking
 

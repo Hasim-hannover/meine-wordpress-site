@@ -18,6 +18,7 @@ $inc_dir = get_stylesheet_directory() . '/inc/';
 $modules = [
 	'helpers.php',        // Utility-Funktionen (muss zuerst geladen werden)
 	'mail.php',           // Zentraler Brevo-Mail-Router fuer Transaktionsmails
+	'crm.php',            // Gemeinsame CRM-Grundlage fuer Kontakte, Blog-Abos und Projektanfragen
 	'wgos-assets.php',    // CPT + Helper fuer WGOS Asset-Spokes
 	'wgos-asset-registry.php', // Versionierte WGOS Asset-Registry + Sync
 	'wgos-cluster-pages.php', // Versionierte Cluster-/Pillar-Pages und Blog-Asset-Bridges
@@ -26,6 +27,7 @@ $modules = [
 	'header.php',         // Eigener globaler Header + Navigation
 	'review-crm.php',     // Growth-Audit-Intake + WordPress CRM
 	'contact-page.php',   // Kontakt-Route, schlanke Kontaktform und Mailversand
+	'blog-notify.php',    // Blog-Benachrichtigungen, DOI und Artikel-Mails
 	'enqueue.php',        // CSS/JS Asset-Management
 	'seo-meta.php',       // OG Tags, Canonical, Indexierungssteuerung
 	'org-schema.php',     // JSON-LD Structured Data

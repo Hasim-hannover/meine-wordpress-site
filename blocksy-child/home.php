@@ -26,6 +26,8 @@ get_template_part( 'template-parts/blog-header' );
             ?>
         </div>
 
+        <?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'full' ] ); ?>
+
         <div class="nx-grid nx-grid-auto">
             <?php if (have_posts()) : while (have_posts()) : the_post(); 
                 $thumb = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: 'https://hasimuener.de/wp-content/uploads/2025/09/Impulse_Hasim_uener_Blog.webp';

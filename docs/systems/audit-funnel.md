@@ -36,7 +36,7 @@ Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 4. `blocksy-child/assets/js/review-funnel.js` validiert die Schritte und sendet die Daten an `POST /wp-json/nexus/v1/audit-request`.
 5. `blocksy-child/inc/review-crm.php` prueft Honeypot, Rate Limit und Payload und speichert die Anfrage als `nexus_review_request`.
 6. WordPress versendet eine interne Benachrichtigung und eine kurze Bestaetigung an den Anfragenden ueber `wp_mail`; der zentrale Theme-Mailer routed diese Mails bei gesetzter Brevo-API-Konfiguration ueber Brevo.
-7. Im Backend landet der Lead im `Audit CRM` mit Status, Prioritaet, Faelligkeit und internen Notizen.
+7. Im Backend landet der Lead im `Nexus CRM` im Audit-Bereich mit Status, Prioritaet, Faelligkeit und internen Notizen.
 8. Danach folgt die persoenliche Rueckmeldung innerhalb von 48 Stunden.
 9. Je nach Lage geht der Lead weiter in:
    - kleine Korrektur
@@ -126,5 +126,5 @@ Dieser Layer ist fachlich weiter relevant, aber derzeit nicht die aktive Landing
 ## Naechste sinnvolle Schritte
 
 1. Live-Credentials fuer Brevo prueffest in `wp-config.php` oder Server-Env hinterlegen und Versand einmal end-to-end testen.
-2. Audit-CRM um Follow-up-Felder und Delivery-Templates erweitern.
+2. Den Audit-Bereich im `Nexus CRM` um Follow-up-Felder und Delivery-Templates erweitern.
 3. Entscheiden, ob `audit-live.js` spaeter den aktiven Intake ersetzt oder ein separater Angebotszweig bleibt.

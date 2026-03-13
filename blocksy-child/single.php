@@ -82,6 +82,8 @@ get_template_part( 'template-parts/blog-header' );
 			   </article>
 		   </div>
 
+		<?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'full' ] ); ?>
+
 		<?php if ( is_singular( 'post' ) ) : ?>
 		<div class="nexus-bottom-share" data-track-section="article_share">
 			<h3><?php esc_html_e( 'Diesen Artikel teilen', 'blocksy-child' ); ?></h3>

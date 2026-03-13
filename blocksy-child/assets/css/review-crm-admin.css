@@ -119,6 +119,21 @@
   color: #047857;
 }
 
+.nexus-review-badge-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.nexus-review-badge-active {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.nexus-review-badge-unsubscribed {
+  background: #e2e8f0;
+  color: #334155;
+}
+
 .nexus-review-badge-won {
   background: #ede9fe;
   color: #6d28d9;

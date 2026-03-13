@@ -218,6 +218,8 @@ if ($featured_query->have_posts()) {
 
                 <!-- SIDEBAR: Pillar-Navigation + CTA -->
                 <aside class="pillar-sidebar">
+
+                    <?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'compact' ] ); ?>
                     
                     <!-- Service CTA -->
                     <div class="pillar-sidebar__cta">

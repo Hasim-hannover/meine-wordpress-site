@@ -25,6 +25,8 @@ get_template_part( 'template-parts/blog-header' );
     </header>
 
     <div class="nexus-grid-wrapper">
+        <?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'compact' ] ); ?>
+
         <?php if ( have_posts() ) : ?>
             
             <div class="nexus-card-grid">

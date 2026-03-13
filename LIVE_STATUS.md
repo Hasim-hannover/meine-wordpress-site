@@ -28,6 +28,7 @@ Nicht verifiziert:
 - Der aktive Audit-Pfad nutzt ein natives Multi-Step-Formular, WordPress-REST und ein internes Audit-CRM.
 - Die Kontaktseite kann Pilotprojekt-Anfragen jetzt ueber `?focus=pilot` vorqualifiziert aufnehmen.
 - Das Client Portal existiert technisch inklusive Login- und Upload-Logik.
+- Repo-seitig existiert jetzt ein gemeinsames `Nexus CRM` fuer Audit-Anfragen, Projektanfragen und Blog-Abos; die Blog-Benachrichtigungen inkl. DOI, Abmeldung und manuell anstossbarem Artikelversand liegen im Theme.
 
 ## In Arbeit
 
@@ -43,6 +44,7 @@ Nicht verifiziert:
 - Die Community-Signale auf der Homepage sind derzeit ueber GitHub und ein oeffentliches LinkedIn-Profil versioniert; ein kanonischer Facebook-Link inklusive belastbarer Kennzahl ist im Repo noch nicht hinterlegt.
 - `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.
 - CRM-, Mail- und Follow-up-Logik fuer den Audit sind jetzt im Theme sichtbar; `wp_mail`-basierte Transaktionsmails koennen repo-seitig zentral ueber die Brevo API geroutet werden, sobald die Live-Credentials ausserhalb des Repos gesetzt sind.
+- Das neue Blog-Notify-System ist repo-seitig implementiert, aber End-to-End auf der Live-Instanz noch nicht verifiziert.
 - Das Client Portal arbeitet aktuell mit Mock-Daten und ist noch kein voll dokumentiertes Produktivsystem.
 
 ## Geplant

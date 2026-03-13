@@ -91,7 +91,9 @@ Wichtige Regel:
 | `blocksy-child/inc/org-schema.php` | zentrale strukturierte Daten fuer Organisation und Services |
 | `blocksy-child/inc/shortcodes.php` | traegt grosse Teile der Homepage- und CTA-Logik |
 | `blocksy-child/assets/js/review-funnel.js` | technischer Kern des aktiven Growth-Audit-Formularpfads |
-| `blocksy-child/inc/review-crm.php` | nativer Audit-Intake, internes CRM und Mail-Basis |
+| `blocksy-child/inc/review-crm.php` | nativer Audit-Intake und Audit-Layer innerhalb des gemeinsamen CRM |
+| `blocksy-child/inc/crm.php` | gemeinsames CRM-Modell fuer Projektanfragen, Blog-Abos und Kontaktstatus |
+| `blocksy-child/inc/blog-notify.php` | DOI-, Abmelde- und Versandlogik fuer neue Artikel per E-Mail |
 | `blocksy-child/assets/js/audit-live.js` | versionierter Instant-Results-Layer, aktuell nicht am aktiven Audit-Shell gebunden |
 | `blocksy-child/page-wgos.php` | fachlich zentrales Offer-Template; Sales-Page-Struktur versioniert, Content-Layer weiter template-driven |
 | `blocksy-child/page-seo-cornerstone.php` | strategischer Longform-Content mit direkter Funnel-Rolle |
