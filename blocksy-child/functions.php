@@ -173,16 +173,73 @@ function hu_override_custom_logo_with_wordmark( $html, $blog_id ) {
 	return hu_get_site_wordmark_html();
 }
 
-add_action( 'wp_head', 'hu_output_brand_head_support', 5 );
+function hu_get_brand_favicon_assets() {
+	$base_dir = get_stylesheet_directory() . '/assets/brand/';
+	$base_uri = get_stylesheet_directory_uri() . '/assets/brand/';
+	$assets   = [];
+
+	$variants = [
+		'light' => 'favicon-copper.svg',
+		'dark'  => 'favicon-dark.svg',
+	];
+
+	foreach ( $variants as $variant => $file_name ) {
+		$path = $base_dir . $file_name;
+
+		if ( ! file_exists( $path ) ) {
+			continue;
+		}
+
+		$assets[ $variant ] = [
+			'path'    => $path,
+			'url'     => add_query_arg( 'v', (string) filemtime( $path ), $base_uri . $file_name ),
+			'version' => (int) filemtime( $path ),
+		];
+	}
+
+	return $assets;
+}
+
+add_action( 'after_setup_theme', 'hu_prefer_theme_brand_favicons', 20 );
+function hu_prefer_theme_brand_favicons() {
+	if ( [] === hu_get_brand_favicon_assets() ) {
+		return;
+	}
+
+	remove_action( 'wp_head', 'wp_site_icon', 99 );
+	remove_action( 'admin_head', 'wp_site_icon' );
+	remove_action( 'login_head', 'wp_site_icon' );
+}
+
+function hu_output_brand_favicon_meta() {
+	$favicons = hu_get_brand_favicon_assets();
+
+	if ( [] === $favicons ) {
+		return;
+	}
+
+	if ( ! empty( $favicons['light']['url'] ) ) :
+		?>
+	<link rel="icon" type="image/svg+xml" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
+	<link rel="shortcut icon" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
+		<?php
+	endif;
+
+	if ( ! empty( $favicons['dark']['url'] ) ) :
+		?>
+	<link rel="icon" type="image/svg+xml" media="(prefers-color-scheme: dark)" href="<?php echo esc_url( $favicons['dark']['url'] ); ?>">
+		<?php
+	endif;
+}
+
+add_action( 'wp_head', 'hu_output_brand_favicon_meta', 5 );
+add_action( 'admin_head', 'hu_output_brand_favicon_meta', 5 );
+add_action( 'login_head', 'hu_output_brand_favicon_meta', 5 );
+
+add_action( 'wp_head', 'hu_output_brand_head_support', 6 );
 function hu_output_brand_head_support() {
-	$favicon_path = get_stylesheet_directory() . '/assets/brand/favicon-copper.svg';
-	$favicon_uri  = get_stylesheet_directory_uri() . '/assets/brand/favicon-copper.svg';
 	?>
 	<style>.ft { background: var(--bg, #0a0a0a); }</style>
-	<?php if ( file_exists( $favicon_path ) ) : ?>
-	<link rel="icon" type="image/svg+xml" href="<?php echo esc_url( $favicon_uri ); ?>">
-	<link rel="apple-touch-icon" href="<?php echo esc_url( $favicon_uri ); ?>">
-	<?php endif; ?>
 	<script>
 	(function () {
 		function applyWordmark() {
