@@ -9,6 +9,7 @@ Stand: 2026-03-13. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 | Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/deploy.yml` | WordPress, Blocksy Parent Theme, ACF, Rank Math | live |
 | Audit-Funnel | Diagnose-Einstieg, Audit-Intake und interne Folgequalifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
 | Nexus CRM & Blog Notify | gemeinsames CRM fuer Audit, Projektanfragen und Blog-Abos plus DOI- und Artikel-Mail-Logik | `blocksy-child/inc/crm.php`, `blocksy-child/inc/blog-notify.php`, `blocksy-child/template-parts/blog-notify.php`, `blocksy-child/page-blog-notify.php`, `docs/systems/blog-notify.md` | WordPress CPT/Meta, WordPress REST, wp_mail, Brevo | repo-seitig live, End-to-End offen |
+| SEO Cockpit | Search-Console-basiertes SEO-Dashboard mit optionaler Koko-Erkennung | `blocksy-child/inc/seo-cockpit.php`, `blocksy-child/assets/css/seo-cockpit-admin.css`, `docs/systems/seo-cockpit.md` | Google Search Console API, optional Koko Analytics | repo-seitig vorbereitet, OAuth und Live-Daten offen |
 | Tracking | Tracking-ready Markup, CTA-Events, SEO-/Schema-Layer | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, Templates mit `data-track-*` | GTM, sGTM, GA4, Consent Mode v2, Meta CAPI | teils im Repo, teils extern |
 | CTA- und Leadflow | CTA-Hierarchie vom ersten Besuch bis zur Qualifizierung | `blocksy-child/inc/shortcodes.php`, `blocksy-child/template-parts/footer-cta.php`, `blocksy-child/template-parts/trust-section.php`, Service-Templates | WordPress-Editor, Audit-Funnel, Cal.com, CRM | live |
 | Public Proof Layer | oeffentliche Vertrauenssignale ohne Testimonials, plus Pilot-zu-Case-Mechanik | `blocksy-child/inc/shortcodes.php`, `blocksy-child/assets/css/homepage.css`, `blocksy-child/page-kontakt.php`, `blocksy-child/inc/contact-page.php`, `docs/playbooks/homepage-cro-proof-monitoring-2026-03.md` | GitHub-Repo, oeffentliches LinkedIn-Profil, optional spaeter Facebook | live |
@@ -116,6 +117,23 @@ Systemische Grenze:
 
 - Repo = Markup, Hooks, Dokumentation.
 - Externe Plattformen = operative Konfiguration.
+
+## SEO Cockpit
+
+Neu im Repo:
+
+- eigener Admin-Bereich `SEO Cockpit`
+- kompaktes Snapshot-Widget im WordPress-Dashboard
+- Search-Console-Anbindung per OAuth-Flow direkt im Theme
+- gecachte Kernmetriken fuer Klicks, Impressionen, CTR, Position, Top Pages und Top Queries
+- automatischer Snapshot-Refresh per WP-Cron
+- optionale Koko-Erkennung als lokaler Traffic-Layer fuer spaetere Zusammenfuehrung
+
+Systemische Rolle:
+
+- Search Console liefert die externe SEO-Sicht
+- Koko soll spaeter die lokale Seiten- und Traffic-Sicht liefern
+- WordPress bleibt der Ort, an dem beide Perspektiven in einem operativen Cockpit zusammenlaufen
 
 ## CTA- und Leadflow
 
