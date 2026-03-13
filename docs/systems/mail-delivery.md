@@ -76,3 +76,16 @@ Es werden ausserdem gaengige Alias-Namen wie `BREVO_API_KEY`, `SENDINBLUE_API_KE
 3. Eingangs- und Bestaetigungsmail pruefen
 4. Reply-To und Absenderadresse pruefen
 5. Brevo-Log und WordPress-Fehlerlog einmal gegenchecken
+
+## Diagnose
+
+Fuer Admins gibt es zusaetzlich den Endpoint:
+
+- `/wp-json/nexus/v1/mail-diagnostics`
+
+Er zeigt live:
+
+- ob der Brevo-API-Key im Runtime-Kontext vorhanden ist
+- welche Absenderadresse aktiv ist
+- welcher Transport aktiv ist
+- was der letzte Mailversuch als Status oder Fehler geliefert hat

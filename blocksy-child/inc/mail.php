@@ -263,6 +263,103 @@ function nexus_is_brevo_mail_enabled() {
 }
 
 /**
+ * Return the option key used for mail diagnostics.
+ *
+ * @return string
+ */
+function nexus_get_mail_diagnostics_option_key() {
+	return 'nexus_brevo_mail_diagnostics';
+}
+
+/**
+ * Return a normalized count of intended recipients.
+ *
+ * @param array|string $to wp_mail recipient input.
+ * @return int
+ */
+function nexus_get_mail_recipient_count( $to ) {
+	return count( nexus_parse_mail_recipients( $to ) );
+}
+
+/**
+ * Persist a safe diagnostics snapshot for the last mail event.
+ *
+ * @param string               $event Event name.
+ * @param array<string, mixed> $context Event context.
+ * @return void
+ */
+function nexus_record_mail_diagnostic_event( $event, $context = [] ) {
+	$payload = [
+		'event'      => (string) $event,
+		'timestamp'  => gmdate( 'c' ),
+		'provider'   => isset( $context['provider'] ) ? (string) $context['provider'] : '',
+		'subject'    => isset( $context['subject'] ) ? wp_strip_all_tags( (string) $context['subject'] ) : '',
+		'to_count'   => isset( $context['to_count'] ) ? (int) $context['to_count'] : 0,
+		'status_code' => isset( $context['status_code'] ) ? (int) $context['status_code'] : 0,
+		'error_code' => isset( $context['error_code'] ) ? (string) $context['error_code'] : '',
+		'error_message' => isset( $context['error_message'] ) ? wp_strip_all_tags( (string) $context['error_message'] ) : '',
+		'message_id' => isset( $context['message_id'] ) ? (string) $context['message_id'] : '',
+	];
+
+	update_option( nexus_get_mail_diagnostics_option_key(), $payload, false );
+
+	if ( function_exists( 'error_log' ) ) {
+		error_log( '[Nexus Mail] ' . wp_json_encode( $payload ) );
+	}
+}
+
+/**
+ * Return a live diagnostics snapshot for the current mail layer.
+ *
+ * @return array<string, mixed>
+ */
+function nexus_get_mail_diagnostics_snapshot() {
+	$settings = nexus_get_brevo_mail_settings();
+	$last     = get_option( nexus_get_mail_diagnostics_option_key(), [] );
+
+	return [
+		'mailer_loaded'         => true,
+		'provider'              => nexus_is_brevo_api_enabled() ? 'brevo_api' : ( nexus_is_brevo_mail_enabled() ? 'brevo_smtp_fallback' : 'wordpress_default' ),
+		'api_enabled'           => (bool) $settings['api_enabled'],
+		'api_key_present'       => ! empty( $settings['api_key'] ),
+		'api_endpoint'          => (string) $settings['api_endpoint'],
+		'from_email'            => (string) $settings['from_email'],
+		'from_name'             => (string) $settings['from_name'],
+		'smtp_fallback_enabled' => (bool) $settings['smtp_enabled'],
+		'last_event'            => is_array( $last ) ? $last : [],
+	];
+}
+
+/**
+ * Register an admin-only diagnostics endpoint for the mail layer.
+ *
+ * @return void
+ */
+function nexus_register_mail_diagnostics_rest_route() {
+	register_rest_route(
+		'nexus/v1',
+		'/mail-diagnostics',
+		[
+			'methods'             => 'GET',
+			'callback'            => 'nexus_get_mail_diagnostics_rest_response',
+			'permission_callback' => static function() {
+				return current_user_can( 'manage_options' );
+			},
+		]
+	);
+}
+add_action( 'rest_api_init', 'nexus_register_mail_diagnostics_rest_route' );
+
+/**
+ * Return the live mail diagnostics response.
+ *
+ * @return WP_REST_Response
+ */
+function nexus_get_mail_diagnostics_rest_response() {
+	return new WP_REST_Response( nexus_get_mail_diagnostics_snapshot(), 200 );
+}
+
+/**
  * Normalize and split a mail header list.
  *
  * @param array|string $headers Raw headers.
@@ -637,6 +734,17 @@ function nexus_send_wp_mail_via_brevo_api( $atts ) {
 	$payload  = nexus_build_brevo_api_payload( $atts );
 
 	if ( is_wp_error( $payload ) ) {
+		nexus_record_mail_diagnostic_event(
+			'api_payload_error',
+			[
+				'provider'      => 'brevo_api',
+				'subject'       => $atts['subject'] ?? '',
+				'to_count'      => nexus_get_mail_recipient_count( $atts['to'] ?? [] ),
+				'error_code'    => $payload->get_error_code(),
+				'error_message' => $payload->get_error_message(),
+			]
+		);
+
 		return nexus_create_wp_mail_failed_error(
 			$payload->get_error_code(),
 			$payload->get_error_message(),
@@ -660,6 +768,17 @@ function nexus_send_wp_mail_via_brevo_api( $atts ) {
 	);
 
 	if ( is_wp_error( $response ) ) {
+		nexus_record_mail_diagnostic_event(
+			'api_request_failed',
+			[
+				'provider'      => 'brevo_api',
+				'subject'       => $atts['subject'] ?? '',
+				'to_count'      => nexus_get_mail_recipient_count( $atts['to'] ?? [] ),
+				'error_code'    => 'nexus_brevo_api_request_failed',
+				'error_message' => $response->get_error_message(),
+			]
+		);
+
 		return nexus_create_wp_mail_failed_error(
 			'nexus_brevo_api_request_failed',
 			$response->get_error_message(),
@@ -684,6 +803,18 @@ function nexus_send_wp_mail_via_brevo_api( $atts ) {
 			}
 		}
 
+		nexus_record_mail_diagnostic_event(
+			'api_rejected',
+			[
+				'provider'      => 'brevo_api',
+				'subject'       => $atts['subject'] ?? '',
+				'to_count'      => nexus_get_mail_recipient_count( $atts['to'] ?? [] ),
+				'status_code'   => $status_code,
+				'error_code'    => 'nexus_brevo_api_rejected',
+				'error_message' => $message,
+			]
+		);
+
 		return nexus_create_wp_mail_failed_error(
 			'nexus_brevo_api_rejected',
 			$message,
@@ -694,6 +825,17 @@ function nexus_send_wp_mail_via_brevo_api( $atts ) {
 			]
 		);
 	}
+
+	nexus_record_mail_diagnostic_event(
+		'api_success',
+		[
+			'provider'    => 'brevo_api',
+			'subject'     => $atts['subject'] ?? '',
+			'to_count'    => nexus_get_mail_recipient_count( $atts['to'] ?? [] ),
+			'status_code' => $status_code,
+			'message_id'  => is_array( $decoded ) && ! empty( $decoded['messageId'] ) ? (string) $decoded['messageId'] : '',
+		]
+	);
 
 	do_action( 'nexus_brevo_api_mail_sent', $payload, $decoded, $atts );
 
@@ -738,6 +880,15 @@ function nexus_intercept_wp_mail_with_brevo_api( $return, $atts ) {
 	if ( ! nexus_should_route_wp_mail_via_brevo_api( $atts ) ) {
 		return null;
 	}
+
+	nexus_record_mail_diagnostic_event(
+		'api_attempt',
+		[
+			'provider' => 'brevo_api',
+			'subject'  => $atts['subject'] ?? '',
+			'to_count' => nexus_get_mail_recipient_count( $atts['to'] ?? [] ),
+		]
+	);
 
 	$result = nexus_send_wp_mail_via_brevo_api( $atts );
 	if ( true === $result ) {
