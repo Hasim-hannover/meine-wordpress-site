@@ -174,9 +174,14 @@ function hu_override_custom_logo_with_wordmark( $html, $blog_id ) {
 }
 
 function hu_get_brand_logo_url() {
-	$default_logo_url = home_url( '/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp' );
+	$logo_path = get_stylesheet_directory() . '/assets/brand/hasim-uener-light-copper.svg';
+	$logo_url  = get_stylesheet_directory_uri() . '/assets/brand/hasim-uener-light-copper.svg';
 
-	return (string) apply_filters( 'hu_brand_logo_url', $default_logo_url );
+	if ( file_exists( $logo_path ) ) {
+		return (string) apply_filters( 'hu_brand_logo_url', add_query_arg( 'v', (string) filemtime( $logo_path ), $logo_url ) );
+	}
+
+	return (string) apply_filters( 'hu_brand_logo_url', '' );
 }
 
 function hu_get_brand_image_type( $url ) {
@@ -199,23 +204,6 @@ function hu_get_brand_favicon_assets() {
 	$base_dir = get_stylesheet_directory() . '/assets/brand/';
 	$base_uri = get_stylesheet_directory_uri() . '/assets/brand/';
 	$assets   = [];
-	$logo_url = hu_get_brand_logo_url();
-
-	if ( '' !== $logo_url ) {
-		$logo_url = add_query_arg( 'v', 'brand-logo-2025-08', $logo_url );
-		$type     = hu_get_brand_image_type( $logo_url );
-
-		return [
-			'light' => [
-				'url'  => $logo_url,
-				'type' => $type,
-			],
-			'dark'  => [
-				'url'  => $logo_url,
-				'type' => $type,
-			],
-		];
-	}
 
 	$variants = [
 		'light' => 'favicon-copper.svg',
