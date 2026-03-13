@@ -74,6 +74,195 @@ function nexus_get_blog_posts_url() {
 }
 
 /**
+ * Return the internal post type used for pending blog DOI intents.
+ *
+ * @return string
+ */
+function nexus_get_blog_notify_intent_post_type() {
+	return 'nexus_blog_notify_intent';
+}
+
+/**
+ * Register the hidden post type used for pending blog notification signups.
+ *
+ * @return void
+ */
+function nexus_register_blog_notify_intent_post_type() {
+	register_post_type(
+		nexus_get_blog_notify_intent_post_type(),
+		[
+			'labels'              => [
+				'name'          => 'Blog Notify Intents',
+				'singular_name' => 'Blog Notify Intent',
+			],
+			'public'              => false,
+			'show_ui'             => false,
+			'show_in_menu'        => false,
+			'show_in_nav_menus'   => false,
+			'show_in_admin_bar'   => false,
+			'publicly_queryable'  => false,
+			'exclude_from_search' => true,
+			'has_archive'         => false,
+			'rewrite'             => false,
+			'query_var'           => false,
+			'can_export'          => false,
+			'delete_with_user'    => false,
+			'supports'            => [ 'title' ],
+		]
+	);
+}
+add_action( 'init', 'nexus_register_blog_notify_intent_post_type' );
+
+/**
+ * Find a pending or historical blog notify intent by email address.
+ *
+ * @param string $email Email address.
+ * @return int
+ */
+function nexus_find_blog_notify_intent_by_email( $email ) {
+	$email = function_exists( 'nexus_normalize_contact_email' ) ? nexus_normalize_contact_email( $email ) : sanitize_email( (string) $email );
+
+	if ( '' === $email ) {
+		return 0;
+	}
+
+	$post_ids = get_posts(
+		[
+			'post_type'              => nexus_get_blog_notify_intent_post_type(),
+			'post_status'            => 'private',
+			'posts_per_page'         => 1,
+			'fields'                 => 'ids',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+			'meta_query'             => [
+				[
+					'key'   => '_nexus_blog_notify_email',
+					'value' => $email,
+				],
+			],
+		]
+	);
+
+	return ! empty( $post_ids ) ? (int) $post_ids[0] : 0;
+}
+
+/**
+ * Find a blog notify intent by token meta.
+ *
+ * @param string $meta_key Meta key to search.
+ * @param string $token    Token value.
+ * @return int
+ */
+function nexus_find_blog_notify_intent_by_token( $meta_key, $token ) {
+	$post_ids = get_posts(
+		[
+			'post_type'              => nexus_get_blog_notify_intent_post_type(),
+			'post_status'            => 'private',
+			'posts_per_page'         => 1,
+			'fields'                 => 'ids',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+			'meta_query'             => [
+				[
+					'key'   => $meta_key,
+					'value' => $token,
+				],
+			],
+		]
+	);
+
+	return ! empty( $post_ids ) ? (int) $post_ids[0] : 0;
+}
+
+/**
+ * Create or refresh a hidden DOI intent without creating a CRM lead yet.
+ *
+ * @param array $args Intent payload.
+ * @return int|WP_Error
+ */
+function nexus_upsert_blog_notify_intent( $args ) {
+	$args = wp_parse_args(
+		$args,
+		[
+			'email'             => '',
+			'status'            => 'pending',
+			'confirm_token'     => '',
+			'unsubscribe_token' => '',
+			'context_post_id'   => 0,
+			'requested_at'      => current_time( 'timestamp' ),
+		]
+	);
+
+	$email = function_exists( 'nexus_normalize_contact_email' ) ? nexus_normalize_contact_email( $args['email'] ) : sanitize_email( (string) $args['email'] );
+
+	if ( '' === $email ) {
+		return new WP_Error( 'invalid_email', nexus_get_blog_notify_copy()['error'] );
+	}
+
+	$intent_id = nexus_find_blog_notify_intent_by_email( $email );
+	$is_new    = 0 === $intent_id;
+
+	if ( $is_new ) {
+		$intent_id = wp_insert_post(
+			[
+				'post_type'   => nexus_get_blog_notify_intent_post_type(),
+				'post_status' => 'private',
+				'post_title'  => $email,
+			],
+			true
+		);
+
+		if ( is_wp_error( $intent_id ) ) {
+			return $intent_id;
+		}
+
+		update_post_meta( $intent_id, '_nexus_blog_notify_email', $email );
+		update_post_meta( $intent_id, '_nexus_blog_notify_created_at', current_time( 'timestamp' ) );
+	}
+
+	update_post_meta( $intent_id, '_nexus_blog_notify_status', sanitize_key( (string) $args['status'] ) );
+	update_post_meta( $intent_id, '_nexus_blog_notify_confirm_token', sanitize_text_field( (string) $args['confirm_token'] ) );
+	update_post_meta( $intent_id, '_nexus_blog_notify_unsubscribe_token', sanitize_text_field( (string) $args['unsubscribe_token'] ) );
+	update_post_meta( $intent_id, '_nexus_blog_notify_context_post_id', absint( $args['context_post_id'] ) );
+	update_post_meta( $intent_id, '_nexus_blog_notify_requested_at', absint( $args['requested_at'] ) );
+	update_post_meta( $intent_id, '_nexus_blog_notify_updated_at', current_time( 'timestamp' ) );
+	delete_post_meta( $intent_id, '_nexus_blog_notify_confirmed_at' );
+	delete_post_meta( $intent_id, '_nexus_blog_notify_unsubscribed_at' );
+	delete_post_meta( $intent_id, '_nexus_blog_notify_contact_id' );
+
+	return (int) $intent_id;
+}
+
+/**
+ * Count pending DOI intents that have not yet created a CRM contact.
+ *
+ * @return int
+ */
+function nexus_count_pending_blog_notify_intents() {
+	$post_ids = get_posts(
+		[
+			'post_type'              => nexus_get_blog_notify_intent_post_type(),
+			'post_status'            => 'private',
+			'posts_per_page'         => -1,
+			'fields'                 => 'ids',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+			'meta_query'             => [
+				[
+					'key'   => '_nexus_blog_notify_status',
+					'value' => 'pending',
+				],
+			],
+		]
+	);
+
+	return count( $post_ids );
+}
+
+/**
  * Prevent canonical redirects from interfering with the virtual blog notify route.
  *
  * @param string|false $redirect_url Redirect target.
@@ -413,14 +602,15 @@ function nexus_validate_blog_subscribe_rate_limit() {
  * @return array|WP_Error
  */
 function nexus_subscribe_blog_notify_contact( $validated ) {
-	$email         = $validated['email'];
-	$contact_id    = function_exists( 'nexus_find_contact_by_email' ) ? nexus_find_contact_by_email( $email ) : 0;
-	$existing      = $contact_id ? get_post_meta( $contact_id, '_nexus_contact_blog_status', true ) : '';
-	$existing_blog = $contact_id ? (string) get_post_meta( $contact_id, '_nexus_contact_consent_blog_email', true ) : '';
-	$copy          = nexus_get_blog_notify_copy();
-	$state         = 'success';
+	$email                = $validated['email'];
+	$contact_id           = function_exists( 'nexus_find_contact_by_email' ) ? nexus_find_contact_by_email( $email ) : 0;
+	$existing_blog_status = $contact_id ? (string) get_post_meta( $contact_id, '_nexus_contact_blog_status', true ) : '';
+	$existing_consent     = $contact_id ? (string) get_post_meta( $contact_id, '_nexus_contact_consent_blog_email', true ) : '';
+	$existing_intent_id   = nexus_find_blog_notify_intent_by_email( $email );
+	$existing_intent      = $existing_intent_id ? (string) get_post_meta( $existing_intent_id, '_nexus_blog_notify_status', true ) : '';
+	$copy                 = nexus_get_blog_notify_copy();
 
-	if ( $contact_id && 'active' === $existing && 'confirmed' === $existing_blog ) {
+	if ( $contact_id && 'active' === $existing_blog_status && 'confirmed' === $existing_consent ) {
 		return [
 			'state'      => 'already',
 			'message'    => $copy['already'],
@@ -429,51 +619,43 @@ function nexus_subscribe_blog_notify_contact( $validated ) {
 	}
 
 	$unsubscribe_token = $contact_id ? (string) get_post_meta( $contact_id, '_nexus_contact_unsubscribe_token', true ) : '';
+	if ( '' === $unsubscribe_token && $existing_intent_id ) {
+		$unsubscribe_token = (string) get_post_meta( $existing_intent_id, '_nexus_blog_notify_unsubscribe_token', true );
+	}
+
 	if ( '' === $unsubscribe_token ) {
 		$unsubscribe_token = nexus_generate_contact_token();
 	}
 
 	$confirm_token = nexus_generate_contact_token();
-	$title         = $email;
-
-	$contact_id = nexus_upsert_crm_contact(
+	$intent_id     = nexus_upsert_blog_notify_intent(
 		[
-			'email'         => $email,
-			'title'         => $title,
-			'source'        => 'blog_subscriber',
-			'latest_source' => 'blog_subscriber',
-			'status'        => $contact_id ? '' : 'pending',
-			'segments'      => [ 'blog_notify' ],
-			'meta'          => [
-				'_nexus_contact_blog_status'               => 'pending',
-				'_nexus_contact_consent_blog_email'        => 'pending',
-				'_nexus_contact_blog_confirm_token'        => $confirm_token,
-				'_nexus_contact_blog_confirm_requested_at' => current_time( 'timestamp' ),
-				'_nexus_contact_unsubscribe_token'         => $unsubscribe_token,
-				'_nexus_contact_blog_source_post_id'       => (int) $validated['context_post_id'],
-			],
+			'email'             => $email,
+			'status'            => 'pending',
+			'confirm_token'     => $confirm_token,
+			'unsubscribe_token' => $unsubscribe_token,
+			'context_post_id'   => (int) $validated['context_post_id'],
+			'requested_at'      => current_time( 'timestamp' ),
 		]
 	);
 
-	if ( is_wp_error( $contact_id ) ) {
-		return $contact_id;
+	if ( is_wp_error( $intent_id ) ) {
+		return $intent_id;
 	}
 
-	nexus_sync_contact_primary_status_for_blog( $contact_id, 'pending' );
-
-	$mail_sent = nexus_send_blog_notify_double_opt_in_email( $contact_id );
+	$mail_sent = nexus_send_blog_notify_double_opt_in_email( $intent_id );
 	if ( is_wp_error( $mail_sent ) || ! $mail_sent ) {
 		return new WP_Error( 'blog_notify_mail_failed', $copy['error'] );
 	}
 
-	if ( $contact_id && 'pending' === $existing ) {
-		$state = 'already';
-	}
+	$state = 'pending' === $existing_intent || ( $contact_id && 'pending' === $existing_blog_status && 'pending' === $existing_consent )
+		? 'already'
+		: 'success';
 
 	return [
 		'state'      => $state,
 		'message'    => 'already' === $state ? $copy['already'] : $copy['success'],
-		'contact_id' => $contact_id,
+		'contact_id' => 0,
 	];
 }
 
@@ -499,6 +681,10 @@ function nexus_sync_contact_primary_status_for_blog( $contact_id, $blog_status )
  * @return string
  */
 function nexus_get_blog_notify_email_shell( $args = [] ) {
+	if ( function_exists( 'nexus_get_transactional_email_shell' ) ) {
+		return nexus_get_transactional_email_shell( $args );
+	}
+
 	if ( function_exists( 'nexus_get_audit_email_shell' ) ) {
 		return nexus_get_audit_email_shell( $args );
 	}
@@ -529,19 +715,19 @@ function nexus_send_blog_notify_html_mail( $recipient, $subject, $html, $headers
 /**
  * Send the DOI confirmation mail.
  *
- * @param int $contact_id CRM contact ID.
+ * @param int $intent_id Blog notify intent post ID.
  * @return bool|WP_Error
  */
-function nexus_send_blog_notify_double_opt_in_email( $contact_id ) {
-	$email             = (string) get_post_meta( $contact_id, '_nexus_contact_email', true );
-	$confirm_token     = (string) get_post_meta( $contact_id, '_nexus_contact_blog_confirm_token', true );
-	$unsubscribe_token = (string) get_post_meta( $contact_id, '_nexus_contact_unsubscribe_token', true );
+function nexus_send_blog_notify_double_opt_in_email( $intent_id ) {
+	$email             = (string) get_post_meta( $intent_id, '_nexus_blog_notify_email', true );
+	$confirm_token     = (string) get_post_meta( $intent_id, '_nexus_blog_notify_confirm_token', true );
+	$unsubscribe_token = (string) get_post_meta( $intent_id, '_nexus_blog_notify_unsubscribe_token', true );
 
 	if ( '' === $email || '' === $confirm_token || '' === $unsubscribe_token ) {
 		return new WP_Error( 'missing_tokens', nexus_get_blog_notify_copy()['error'] );
 	}
 
-	$subject         = sprintf( '[%s] Bitte Anmeldung bestaetigen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
+	$subject         = sprintf( '[%s] Bitte Blog-Abo bestaetigen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
 	$confirm_url     = nexus_get_blog_notify_url( [ 'action' => 'confirm', 'token' => $confirm_token ] );
 	$unsubscribe_url = nexus_get_blog_notify_url( [ 'action' => 'unsubscribe', 'token' => $unsubscribe_token ] );
 	$content         = sprintf(
@@ -580,7 +766,19 @@ function nexus_send_blog_notify_double_opt_in_email( $contact_id ) {
 		]
 	);
 
-	return nexus_send_blog_notify_html_mail( $email, $subject, $html );
+	$headers = [];
+
+	if ( function_exists( 'nexus_append_mail_tags_header' ) ) {
+		$headers = nexus_append_mail_tags_header(
+			$headers,
+			[
+				'blog_notify',
+				'double_opt_in',
+			]
+		);
+	}
+
+	return nexus_send_blog_notify_html_mail( $email, $subject, $html, $headers );
 }
 
 /**
@@ -613,38 +811,64 @@ function nexus_find_contact_by_token( $meta_key, $token ) {
 }
 
 /**
- * Confirm a pending blog subscription by token.
+ * Mark a CRM contact as an active, confirmed blog subscriber.
  *
- * @param string $token Confirmation token.
+ * @param int   $contact_id Contact ID.
+ * @param array $args       Confirmation context.
  * @return bool
  */
-function nexus_confirm_blog_subscription( $token ) {
-	$contact_id = nexus_find_contact_by_token( '_nexus_contact_blog_confirm_token', $token );
-
+function nexus_confirm_blog_contact_record( $contact_id, $args = [] ) {
 	if ( ! $contact_id ) {
 		return false;
+	}
+
+	$args = wp_parse_args(
+		$args,
+		[
+			'requested_at'      => 0,
+			'source_post_id'    => 0,
+			'unsubscribe_token' => '',
+		]
+	);
+
+	$unsubscribe_token = sanitize_text_field( (string) $args['unsubscribe_token'] );
+	if ( '' === $unsubscribe_token ) {
+		$unsubscribe_token = (string) get_post_meta( $contact_id, '_nexus_contact_unsubscribe_token', true );
+	}
+
+	if ( '' === $unsubscribe_token ) {
+		$unsubscribe_token = nexus_generate_contact_token();
 	}
 
 	nexus_set_contact_segments( $contact_id, array_merge( nexus_get_contact_segments( $contact_id ), [ 'blog_notify' ] ) );
 	update_post_meta( $contact_id, '_nexus_contact_blog_status', 'active' );
 	update_post_meta( $contact_id, '_nexus_contact_consent_blog_email', 'confirmed' );
 	update_post_meta( $contact_id, '_nexus_contact_double_opt_in_confirmed_at', current_time( 'timestamp' ) );
+	update_post_meta( $contact_id, '_nexus_contact_unsubscribe_token', $unsubscribe_token );
 	update_post_meta( $contact_id, '_nexus_contact_updated_at', current_time( 'timestamp' ) );
 	delete_post_meta( $contact_id, '_nexus_contact_blog_confirm_token' );
+	delete_post_meta( $contact_id, '_nexus_contact_unsubscribed_at' );
+
+	if ( ! empty( $args['requested_at'] ) ) {
+		update_post_meta( $contact_id, '_nexus_contact_blog_confirm_requested_at', absint( $args['requested_at'] ) );
+	}
+
+	if ( ! empty( $args['source_post_id'] ) ) {
+		update_post_meta( $contact_id, '_nexus_contact_blog_source_post_id', absint( $args['source_post_id'] ) );
+	}
+
 	nexus_sync_contact_primary_status_for_blog( $contact_id, 'active' );
 
 	return true;
 }
 
 /**
- * Unsubscribe a blog contact by token.
+ * Mark a CRM contact as unsubscribed from blog notifications.
  *
- * @param string $token Unsubscribe token.
+ * @param int $contact_id Contact ID.
  * @return bool
  */
-function nexus_unsubscribe_blog_subscription( $token ) {
-	$contact_id = nexus_find_contact_by_token( '_nexus_contact_unsubscribe_token', $token );
-
+function nexus_unsubscribe_blog_contact_record( $contact_id ) {
 	if ( ! $contact_id ) {
 		return false;
 	}
@@ -654,9 +878,101 @@ function nexus_unsubscribe_blog_subscription( $token ) {
 	update_post_meta( $contact_id, '_nexus_contact_consent_blog_email', 'revoked' );
 	update_post_meta( $contact_id, '_nexus_contact_unsubscribed_at', current_time( 'timestamp' ) );
 	update_post_meta( $contact_id, '_nexus_contact_updated_at', current_time( 'timestamp' ) );
+	delete_post_meta( $contact_id, '_nexus_contact_blog_confirm_token' );
 	nexus_sync_contact_primary_status_for_blog( $contact_id, 'unsubscribed' );
 
 	return true;
+}
+
+/**
+ * Confirm a pending blog subscription by token.
+ *
+ * @param string $token Confirmation token.
+ * @return bool
+ */
+function nexus_confirm_blog_subscription( $token ) {
+	$intent_id = nexus_find_blog_notify_intent_by_token( '_nexus_blog_notify_confirm_token', $token );
+
+	if ( $intent_id ) {
+		$email             = (string) get_post_meta( $intent_id, '_nexus_blog_notify_email', true );
+		$requested_at      = (int) get_post_meta( $intent_id, '_nexus_blog_notify_requested_at', true );
+		$source_post_id    = (int) get_post_meta( $intent_id, '_nexus_blog_notify_context_post_id', true );
+		$unsubscribe_token = (string) get_post_meta( $intent_id, '_nexus_blog_notify_unsubscribe_token', true );
+		$existing_contact  = function_exists( 'nexus_find_contact_by_email' ) ? nexus_find_contact_by_email( $email ) : 0;
+
+		$contact_id = nexus_upsert_crm_contact(
+			[
+				'email'         => $email,
+				'title'         => $email,
+				'source'        => 'blog_subscriber',
+				'latest_source' => 'blog_subscriber',
+				'status'        => $existing_contact ? '' : 'active',
+				'segments'      => [ 'blog_notify' ],
+			]
+		);
+
+		if ( is_wp_error( $contact_id ) ) {
+			return false;
+		}
+
+		nexus_confirm_blog_contact_record(
+			$contact_id,
+			[
+				'requested_at'      => $requested_at,
+				'source_post_id'    => $source_post_id,
+				'unsubscribe_token' => $unsubscribe_token,
+			]
+		);
+
+		update_post_meta( $intent_id, '_nexus_blog_notify_status', 'confirmed' );
+		update_post_meta( $intent_id, '_nexus_blog_notify_confirmed_at', current_time( 'timestamp' ) );
+		update_post_meta( $intent_id, '_nexus_blog_notify_contact_id', $contact_id );
+		update_post_meta( $intent_id, '_nexus_blog_notify_updated_at', current_time( 'timestamp' ) );
+		delete_post_meta( $intent_id, '_nexus_blog_notify_confirm_token' );
+
+		return true;
+	}
+
+	$contact_id = nexus_find_contact_by_token( '_nexus_contact_blog_confirm_token', $token );
+
+	if ( ! $contact_id ) {
+		return false;
+	}
+
+	return nexus_confirm_blog_contact_record( $contact_id );
+}
+
+/**
+ * Unsubscribe a blog contact by token.
+ *
+ * @param string $token Unsubscribe token.
+ * @return bool
+ */
+function nexus_unsubscribe_blog_subscription( $token ) {
+	$intent_id = nexus_find_blog_notify_intent_by_token( '_nexus_blog_notify_unsubscribe_token', $token );
+
+	if ( $intent_id ) {
+		$linked_contact_id = (int) get_post_meta( $intent_id, '_nexus_blog_notify_contact_id', true );
+
+		update_post_meta( $intent_id, '_nexus_blog_notify_status', 'unsubscribed' );
+		update_post_meta( $intent_id, '_nexus_blog_notify_unsubscribed_at', current_time( 'timestamp' ) );
+		update_post_meta( $intent_id, '_nexus_blog_notify_updated_at', current_time( 'timestamp' ) );
+		delete_post_meta( $intent_id, '_nexus_blog_notify_confirm_token' );
+
+		if ( $linked_contact_id ) {
+			return nexus_unsubscribe_blog_contact_record( $linked_contact_id );
+		}
+
+		return true;
+	}
+
+	$contact_id = nexus_find_contact_by_token( '_nexus_contact_unsubscribe_token', $token );
+
+	if ( ! $contact_id ) {
+		return false;
+	}
+
+	return nexus_unsubscribe_blog_contact_record( $contact_id );
 }
 
 /**
@@ -1032,5 +1348,17 @@ function nexus_send_blog_post_notification_email( $contact_id, $post_id ) {
 		]
 	);
 
-	return nexus_send_blog_notify_html_mail( $email, $subject, $html );
+	$headers = [];
+
+	if ( function_exists( 'nexus_append_mail_tags_header' ) ) {
+		$headers = nexus_append_mail_tags_header(
+			$headers,
+			[
+				'blog_notify',
+				'article_notification',
+			]
+		);
+	}
+
+	return nexus_send_blog_notify_html_mail( $email, $subject, $html, $headers );
 }

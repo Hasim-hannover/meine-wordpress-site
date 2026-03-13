@@ -315,6 +315,22 @@ function nexus_get_contact_request_response_label( $request_type ) {
 }
 
 /**
+ * Return Brevo/mail tags for a contact request type.
+ *
+ * @param string $request_type Current request type.
+ * @return array<int, string>
+ */
+function nexus_get_contact_request_mail_tags( $request_type ) {
+	$map = [
+		'project' => [ 'contact_request', 'project_request' ],
+		'general' => [ 'contact_request', 'general_inquiry' ],
+		'client'  => [ 'contact_request', 'client_request' ],
+	];
+
+	return $map[ $request_type ] ?? [ 'contact_request' ];
+}
+
+/**
  * Return the third step copy for the confirmation mail.
  *
  * @param string $request_type Current request type.
@@ -591,6 +607,11 @@ function nexus_validate_contact_request_rate_limit() {
  * @return void
  */
 function nexus_send_contact_html_mail( $recipient, $subject, $html, $headers = [] ) {
+	if ( function_exists( 'nexus_send_transactional_html_mail' ) ) {
+		nexus_send_transactional_html_mail( $recipient, $subject, $html, $headers );
+		return;
+	}
+
 	if ( function_exists( 'nexus_send_audit_html_mail' ) ) {
 		nexus_send_audit_html_mail( $recipient, $subject, $html, $headers );
 		return;
@@ -608,6 +629,10 @@ function nexus_send_contact_html_mail( $recipient, $subject, $html, $headers = [
  * @return string
  */
 function nexus_get_contact_email_shell( $args = [] ) {
+	if ( function_exists( 'nexus_get_transactional_email_shell' ) ) {
+		return nexus_get_transactional_email_shell( $args );
+	}
+
 	if ( function_exists( 'nexus_get_audit_email_shell' ) ) {
 		return nexus_get_audit_email_shell( $args );
 	}
@@ -637,6 +662,16 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 
 	if ( ! empty( $payload['email'] ) && is_email( $payload['email'] ) ) {
 		$headers[] = 'Reply-To: ' . $payload['email'];
+	}
+
+	if ( function_exists( 'nexus_append_mail_tags_header' ) ) {
+		$headers = nexus_append_mail_tags_header(
+			$headers,
+			array_merge(
+				nexus_get_contact_request_mail_tags( $payload['request_type'] ),
+				[ 'internal_notification' ]
+			)
+		);
 	}
 
 	$meta_rows = sprintf(
@@ -726,7 +761,7 @@ function nexus_send_contact_request_confirmation( $payload ) {
 	}
 
 	$reply_to  = nexus_get_contact_notification_email();
-	$subject   = sprintf( '[%s] Anfrage eingegangen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
+	$subject   = sprintf( '[%s] %s eingegangen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ), $payload['request_type_label'] );
 	$meta_rows = sprintf(
 		'<strong style="color:#f7f3ee;">Anfragetyp:</strong> %1$s<br><strong style="color:#f7f3ee;">Thema:</strong> %2$s',
 		esc_html( $payload['request_type_label'] ),
@@ -804,6 +839,16 @@ function nexus_send_contact_request_confirmation( $payload ) {
 	$headers = [];
 	if ( $reply_to && is_email( $reply_to ) ) {
 		$headers[] = 'Reply-To: ' . $reply_to;
+	}
+
+	if ( function_exists( 'nexus_append_mail_tags_header' ) ) {
+		$headers = nexus_append_mail_tags_header(
+			$headers,
+			array_merge(
+				nexus_get_contact_request_mail_tags( $payload['request_type'] ),
+				[ 'lead_confirmation' ]
+			)
+		);
 	}
 
 	nexus_send_contact_html_mail( $payload['email'], $subject, $html, $headers );

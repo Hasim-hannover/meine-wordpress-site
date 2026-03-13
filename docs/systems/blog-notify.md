@@ -27,15 +27,28 @@ Ziel:
 1. Besucher sieht auf Blog-Home, Kategorie-/Archivseiten oder unter einzelnen Artikeln das Formular `Neue Artikel per E-Mail`.
 2. `blocksy-child/assets/js/blog-notify.js` sendet `POST /wp-json/nexus/v1/blog-subscribe`.
 3. `blocksy-child/inc/blog-notify.php` prueft Honeypot, Rate Limit, Nonce und E-Mail-Adresse.
-4. WordPress speichert oder aktualisiert den Kontakt im CPT `nexus_contact`.
-5. Der Kontakt bleibt im Segment `blog_notify`, Consent steht zuerst auf `pending`.
-6. Eine DOI-Mail wird ueber `wp_mail` und den zentralen Brevo-Mail-Layer versendet.
+4. WordPress speichert zuerst nur eine interne DOI-Intent-Notiz im versteckten CPT `nexus_blog_notify_intent`.
+5. Eine DOI-Mail wird ueber `wp_mail` und den zentralen Brevo-Mail-Layer versendet.
+6. Erst beim Klick auf den Bestaetigungslink wird ein Kontakt im CPT `nexus_contact` angelegt oder ein bestehender CRM-Kontakt fuer `blog_notify` aktualisiert.
 7. Der Klick auf den Bestaetigungslink aktiviert das Abo ueber die Route `/neue-artikel-per-email/?action=confirm&token=...`.
-8. Der Klick auf den Abmeldelink entzieht das Abo ueber dieselbe Route mit `action=unsubscribe`.
+8. Der Klick auf den Abmeldelink entzieht das Abo sofort, egal ob die Anmeldung noch pending oder bereits bestaetigt war.
 
 ## Datenmodell
 
-Primaerer Datensatz:
+Pending vor DOI:
+
+- verstecktes CPT `nexus_blog_notify_intent`
+- `_nexus_blog_notify_email`
+- `_nexus_blog_notify_status` mit `pending|confirmed|unsubscribed`
+- `_nexus_blog_notify_confirm_token`
+- `_nexus_blog_notify_unsubscribe_token`
+- `_nexus_blog_notify_requested_at`
+- `_nexus_blog_notify_confirmed_at`
+- `_nexus_blog_notify_unsubscribed_at`
+- `_nexus_blog_notify_context_post_id`
+- `_nexus_blog_notify_contact_id`
+
+Primaerer CRM-Datensatz nach DOI:
 
 - CPT `nexus_contact`
 
@@ -46,9 +59,8 @@ Wichtige Meta-Felder fuer Blog-Abos:
 - `_nexus_contact_latest_source`
 - `_nexus_contact_segments[]` mit `blog_notify`
 - `_nexus_contact_segment_blog_notify=1`
-- `_nexus_contact_blog_status` mit `pending|active|unsubscribed`
-- `_nexus_contact_consent_blog_email` mit `pending|confirmed|revoked`
-- `_nexus_contact_blog_confirm_token`
+- `_nexus_contact_blog_status` mit `active|unsubscribed`
+- `_nexus_contact_consent_blog_email` mit `confirmed|revoked`
 - `_nexus_contact_blog_confirm_requested_at`
 - `_nexus_contact_double_opt_in_confirmed_at`
 - `_nexus_contact_unsubscribe_token`
@@ -65,6 +77,7 @@ Darin sichtbar:
 - Audit-Anfragen als `nexus_review_request`
 - CRM-Kontakte als `nexus_contact`
 - gefilterte Einstiegspunkte fuer `Blog-Abos` und `Projektanfragen`
+- `DOI ausstehend` zaehlt nur noch interne Pending-Intents und keine unbestaetigten CRM-Leads
 
 ## Versandlogik fuer Artikel
 

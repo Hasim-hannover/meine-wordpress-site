@@ -849,6 +849,10 @@ function nexus_count_active_blog_subscribers() {
  * @return int
  */
 function nexus_count_pending_blog_subscribers() {
+	if ( function_exists( 'nexus_count_pending_blog_notify_intents' ) ) {
+		return nexus_count_pending_blog_notify_intents();
+	}
+
 	return nexus_count_crm_contacts(
 		[
 			'relation' => 'AND',

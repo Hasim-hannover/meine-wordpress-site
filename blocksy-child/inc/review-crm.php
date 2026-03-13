@@ -537,7 +537,38 @@ function nexus_get_review_request_ip() {
 }
 
 /**
- * Send an HTML email for the audit funnel.
+ * Append Brevo mail tags to a wp_mail header array.
+ *
+ * @param array $headers Existing headers.
+ * @param array $tags    Tag list.
+ * @return array<int, string>
+ */
+function nexus_append_mail_tags_header( $headers, $tags ) {
+	$headers = (array) $headers;
+	$tags    = array_values(
+		array_unique(
+			array_filter(
+				array_map(
+					static function( $tag ) {
+						return sanitize_key( (string) $tag );
+					},
+					(array) $tags
+				)
+			)
+		)
+	);
+
+	if ( empty( $tags ) ) {
+		return $headers;
+	}
+
+	$headers[] = 'X-Nexus-Brevo-Tags: ' . implode( ',', $tags );
+
+	return $headers;
+}
+
+/**
+ * Send an HTML transactional email via wp_mail.
  *
  * @param string $recipient Recipient email.
  * @param string $subject   Email subject.
@@ -545,7 +576,7 @@ function nexus_get_review_request_ip() {
  * @param array  $headers   Optional additional headers.
  * @return void
  */
-function nexus_send_audit_html_mail( $recipient, $subject, $html, $headers = [] ) {
+function nexus_send_transactional_html_mail( $recipient, $subject, $html, $headers = [] ) {
 	if ( ! $recipient || ! is_email( $recipient ) || '' === trim( (string) $html ) ) {
 		return;
 	}
@@ -557,12 +588,25 @@ function nexus_send_audit_html_mail( $recipient, $subject, $html, $headers = [] 
 }
 
 /**
- * Wrap audit emails in a consistent branded shell.
+ * Backward-compatible wrapper for audit mail sends.
+ *
+ * @param string $recipient Recipient email.
+ * @param string $subject   Email subject.
+ * @param string $html      Email HTML body.
+ * @param array  $headers   Optional additional headers.
+ * @return void
+ */
+function nexus_send_audit_html_mail( $recipient, $subject, $html, $headers = [] ) {
+	nexus_send_transactional_html_mail( $recipient, $subject, $html, $headers );
+}
+
+/**
+ * Wrap transactional emails in a consistent branded shell.
  *
  * @param array $args Email arguments.
  * @return string
  */
-function nexus_get_audit_email_shell( $args = [] ) {
+function nexus_get_transactional_email_shell( $args = [] ) {
 	$args = wp_parse_args(
 		$args,
 		[
@@ -628,6 +672,16 @@ function nexus_get_audit_email_shell( $args = [] ) {
 }
 
 /**
+ * Backward-compatible wrapper for audit email shell rendering.
+ *
+ * @param array $args Email arguments.
+ * @return string
+ */
+function nexus_get_audit_email_shell( $args = [] ) {
+	return nexus_get_transactional_email_shell( $args );
+}
+
+/**
  * Send the internal notification email for a new request.
  *
  * @param int   $post_id Request post ID.
@@ -653,6 +707,15 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 	if ( ! empty( $payload['email'] ) && is_email( $payload['email'] ) ) {
 		$headers[] = 'Reply-To: ' . $payload['email'];
 	}
+
+	$headers = nexus_append_mail_tags_header(
+		$headers,
+		[
+			'audit_request',
+			'internal_notification',
+			sanitize_key( (string) $payload['audit_type'] ),
+		]
+	);
 
 	$context_line = ! empty( $payload['current_challenge'] )
 		? '<strong style="color:#f7f3ee;">Kurzkontext:</strong> ' . esc_html( $payload['current_challenge'] ) . '<br>'
@@ -720,7 +783,7 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		esc_url( $page_url )
 	);
 
-	$html = nexus_get_audit_email_shell(
+	$html = nexus_get_transactional_email_shell(
 		[
 			'preheader' => 'Neue Audit-Anfrage von ' . $lead_label,
 			'eyebrow'   => $payload['audit_type_label'],
@@ -805,6 +868,15 @@ function nexus_send_review_request_confirmation( $payload ) {
 	if ( $reply_to && is_email( $reply_to ) ) {
 		$headers[] = 'Reply-To: ' . $reply_to;
 	}
+
+	$headers = nexus_append_mail_tags_header(
+		$headers,
+		[
+			'audit_request',
+			'lead_confirmation',
+			sanitize_key( (string) $payload['audit_type'] ),
+		]
+	);
 
 	nexus_send_audit_html_mail( $payload['email'], $subject, $html, $headers );
 }
@@ -1278,10 +1350,10 @@ function nexus_render_review_crm_dashboard() {
 				<span class="nexus-review-stat-label">Blog-Abos aktiv</span>
 				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['blog_active'] ); ?></strong>
 			</a>
-			<a class="nexus-review-stat-card nexus-review-stat-card-warning" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_contact&nexus_contact_segment=blog_notify&nexus_contact_blog_status=pending' ) ); ?>">
+			<div class="nexus-review-stat-card nexus-review-stat-card-warning">
 				<span class="nexus-review-stat-label">DOI ausstehend</span>
 				<strong class="nexus-review-stat-value"><?php echo esc_html( (string) $counts['blog_pending'] ); ?></strong>
-			</a>
+			</div>
 		</div>
 
 		<div class="nexus-review-panel">
