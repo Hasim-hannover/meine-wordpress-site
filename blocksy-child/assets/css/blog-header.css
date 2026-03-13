@@ -192,6 +192,24 @@
     gap: 0.85rem;
 }
 
+.nexus-blog-header__theme-toggle-slot {
+    position: relative;
+    min-width: 176px;
+    min-height: 40px;
+}
+
+.nexus-blog-header__theme-toggle-slot.nx-theme-toggle-host {
+    display: block;
+}
+
+.nexus-blog-header__theme-toggle-slot .nx-theme-toggle,
+.nexus-blog-header__theme-toggle-slot .nx-theme-toggle--mounted {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
 .nexus-blog-header__cta {
     display: inline-flex;
     align-items: center;
@@ -380,6 +398,10 @@
         display: none;
     }
 
+    .nexus-blog-header__theme-toggle-slot {
+        min-width: 88px;
+    }
+
     .nexus-blog-header__toggle {
         display: inline-flex;
     }
@@ -444,6 +466,10 @@
 
     .nexus-blog-header__toggle {
         padding: 0 14px;
+    }
+
+    .nexus-blog-header__theme-toggle-slot {
+        min-width: 78px;
     }
 
     .nexus-blog-header__mobile-panel {

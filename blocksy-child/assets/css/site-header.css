@@ -83,6 +83,10 @@ body.nx-blog-header-active .ct-header {
     flex-wrap: wrap;
 }
 
+.nx-site-header__audit-actions {
+    justify-content: flex-end;
+}
+
 .nx-site-header__audit-meta span,
 .nx-site-header__audit-link {
     display: inline-flex;
@@ -232,6 +236,7 @@ body.nx-blog-header-active .ct-header {
     justify-self: end;
     gap: 0.85rem;
 }
+
 
 .nx-site-header__theme-toggle-slot {
     position: relative;

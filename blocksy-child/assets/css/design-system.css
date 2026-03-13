@@ -1342,6 +1342,12 @@ html.theme-transitioning *::after {
     color: var(--nx-accent-text);
 }
 
+@media (min-width: 1181px) {
+    .nx-theme-toggle__icon {
+        display: none;
+    }
+}
+
 @media (max-width: 767px) {
     .nx-theme-toggle {
         top: 0.75rem;

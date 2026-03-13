@@ -141,6 +141,18 @@ $primary_items = [
 			</nav>
 
 			<div class="nexus-blog-header__actions">
+				<div class="nexus-blog-header__theme-toggle-slot">
+					<?php
+					if ( function_exists( 'nexus_get_theme_toggle_html' ) ) {
+						echo nexus_get_theme_toggle_html(
+							[
+								'source' => 'blog-header',
+							]
+						);
+					}
+					?>
+				</div>
+
 				<a class="nexus-blog-header__cta nexus-blog-header__desktop-cta" href="<?php echo esc_url( $audit_url ); ?>">
 					<?php esc_html_e( 'Audit starten', 'blocksy-child' ); ?>
 				</a>

@@ -392,6 +392,10 @@
         mountThemeToggle: function () {
             var toggles = Array.prototype.slice.call(document.querySelectorAll('.nx-theme-toggle[data-nx-theme-toggle]'));
             var mountSelectors = [
+                '.nexus-blog-header__theme-toggle-slot',
+                '.nexus-blog-header__actions',
+                '.nexus-blog-header__shell',
+                '.nexus-blog-header',
                 '.nx-site-header__theme-toggle-slot',
                 '.nx-site-header__actions',
                 '.nx-site-header__shell',
@@ -402,6 +406,10 @@
                 '.ct-header'
             ];
             var selectorsWithoutMenuCheck = {
+                '.nexus-blog-header__theme-toggle-slot': true,
+                '.nexus-blog-header__actions': true,
+                '.nexus-blog-header__shell': true,
+                '.nexus-blog-header': true,
                 '.nx-site-header__theme-toggle-slot': true,
                 '.nx-site-header__actions': true,
                 '.nx-site-header__shell': true,
@@ -425,7 +433,7 @@
 
             function isHeaderToggle(node) {
                 return isVisible(node) &&
-                    (!!node.closest('.ct-header') || !!node.closest('.nx-site-header')) &&
+                    (!!node.closest('.ct-header') || !!node.closest('.nx-site-header') || !!node.closest('.nexus-blog-header')) &&
                     !node.closest('.ct-panel') &&
                     !node.closest('[aria-hidden="true"]');
             }
