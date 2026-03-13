@@ -548,6 +548,37 @@ function nexus_parse_mail_recipients( $values ) {
 }
 
 /**
+ * Normalize Brevo recipient payloads and drop empty optional fields.
+ *
+ * @param array<int, array{email:string,name:string}> $recipients Parsed recipients.
+ * @return array<int, array<string, string>>
+ */
+function nexus_prepare_brevo_recipients( $recipients ) {
+	$prepared = [];
+
+	foreach ( (array) $recipients as $recipient ) {
+		$email = isset( $recipient['email'] ) ? sanitize_email( (string) $recipient['email'] ) : '';
+		$name  = isset( $recipient['name'] ) ? trim( (string) $recipient['name'] ) : '';
+
+		if ( ! is_email( $email ) ) {
+			continue;
+		}
+
+		$entry = [
+			'email' => $email,
+		];
+
+		if ( '' !== $name ) {
+			$entry['name'] = $name;
+		}
+
+		$prepared[] = $entry;
+	}
+
+	return $prepared;
+}
+
+/**
  * Parse wp_mail headers for API transport.
  *
  * @param array|string $headers Raw wp_mail headers.
@@ -700,7 +731,7 @@ function nexus_get_brevo_api_attachments( $attachments ) {
 function nexus_build_brevo_api_payload( $atts ) {
 	$settings = nexus_get_brevo_mail_settings();
 	$headers  = nexus_parse_wp_mail_headers( $atts['headers'] ?? [] );
-	$to       = nexus_parse_mail_recipients( $atts['to'] ?? [] );
+	$to       = nexus_prepare_brevo_recipients( nexus_parse_mail_recipients( $atts['to'] ?? [] ) );
 
 	if ( empty( $to ) ) {
 		return new WP_Error( 'nexus_brevo_missing_recipient', 'No valid recipient email was found.' );
@@ -751,11 +782,11 @@ function nexus_build_brevo_api_payload( $atts ) {
 	}
 
 	if ( ! empty( $headers['cc'] ) ) {
-		$payload['cc'] = $headers['cc'];
+		$payload['cc'] = nexus_prepare_brevo_recipients( $headers['cc'] );
 	}
 
 	if ( ! empty( $headers['bcc'] ) ) {
-		$payload['bcc'] = $headers['bcc'];
+		$payload['bcc'] = nexus_prepare_brevo_recipients( $headers['bcc'] );
 	}
 
 	if ( ! empty( $headers['custom'] ) ) {
