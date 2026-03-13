@@ -11,6 +11,11 @@ Empfohlene spaetere Unterteilung:
 - `tracking/`
 - `automations/`
 
+Vorhandene Prompts:
+
+- `seo/seo-cockpit-v2-1-hardening.md`
+  Härtungsprompt fuer die naechste Cockpit-Stufe mit Fokus auf Lesbarkeit, interne Links, Koko, Paging und Runtime-Checks.
+
 Jeder Prompt sollte enthalten:
 
 - Zweck
