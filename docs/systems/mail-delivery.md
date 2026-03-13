@@ -89,3 +89,9 @@ Er zeigt live:
 - welche Absenderadresse aktiv ist
 - welcher Transport aktiv ist
 - was der letzte Mailversuch als Status oder Fehler geliefert hat
+
+Fuer schnelle Live-Pruefung ohne Admin-Nonce gibt es ausserdem:
+
+- `/wp-json/nexus/v1/mail-diagnostics-public`
+
+Dieser Endpoint liefert nur redigierte Werte, reicht aber fuer die Fehlersuche an API-Key, Provider und letztem Mailstatus.

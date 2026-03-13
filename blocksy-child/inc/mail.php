@@ -331,6 +331,57 @@ function nexus_get_mail_diagnostics_snapshot() {
 }
 
 /**
+ * Mask an email address for public diagnostics output.
+ *
+ * @param string $email Raw email address.
+ * @return string
+ */
+function nexus_mask_diagnostic_email( $email ) {
+	$email = sanitize_email( (string) $email );
+	if ( ! is_email( $email ) ) {
+		return '';
+	}
+
+	list( $local, $domain ) = explode( '@', $email, 2 );
+	if ( strlen( $local ) <= 2 ) {
+		$local = substr( $local, 0, 1 ) . '*';
+	} else {
+		$local = substr( $local, 0, 1 ) . str_repeat( '*', max( 1, strlen( $local ) - 2 ) ) . substr( $local, -1 );
+	}
+
+	return $local . '@' . $domain;
+}
+
+/**
+ * Return a redacted public diagnostics snapshot.
+ *
+ * @return array<string, mixed>
+ */
+function nexus_get_public_mail_diagnostics_snapshot() {
+	$snapshot   = nexus_get_mail_diagnostics_snapshot();
+	$last_event = isset( $snapshot['last_event'] ) && is_array( $snapshot['last_event'] ) ? $snapshot['last_event'] : [];
+
+	return [
+		'mailer_loaded'         => ! empty( $snapshot['mailer_loaded'] ),
+		'provider'              => (string) ( $snapshot['provider'] ?? '' ),
+		'api_enabled'           => ! empty( $snapshot['api_enabled'] ),
+		'api_key_present'       => ! empty( $snapshot['api_key_present'] ),
+		'api_endpoint'          => (string) ( $snapshot['api_endpoint'] ?? '' ),
+		'from_email_masked'     => nexus_mask_diagnostic_email( (string) ( $snapshot['from_email'] ?? '' ) ),
+		'smtp_fallback_enabled' => ! empty( $snapshot['smtp_fallback_enabled'] ),
+		'last_event'            => [
+			'event'         => isset( $last_event['event'] ) ? (string) $last_event['event'] : '',
+			'timestamp'     => isset( $last_event['timestamp'] ) ? (string) $last_event['timestamp'] : '',
+			'provider'      => isset( $last_event['provider'] ) ? (string) $last_event['provider'] : '',
+			'status_code'   => isset( $last_event['status_code'] ) ? (int) $last_event['status_code'] : 0,
+			'error_code'    => isset( $last_event['error_code'] ) ? (string) $last_event['error_code'] : '',
+			'error_message' => isset( $last_event['error_message'] ) ? (string) $last_event['error_message'] : '',
+			'message_id'    => isset( $last_event['message_id'] ) ? (string) $last_event['message_id'] : '',
+		],
+	];
+}
+
+/**
  * Register an admin-only diagnostics endpoint for the mail layer.
  *
  * @return void
@@ -347,6 +398,16 @@ function nexus_register_mail_diagnostics_rest_route() {
 			},
 		]
 	);
+
+	register_rest_route(
+		'nexus/v1',
+		'/mail-diagnostics-public',
+		[
+			'methods'             => 'GET',
+			'callback'            => 'nexus_get_public_mail_diagnostics_rest_response',
+			'permission_callback' => '__return_true',
+		]
+	);
 }
 add_action( 'rest_api_init', 'nexus_register_mail_diagnostics_rest_route' );
 
@@ -357,6 +418,15 @@ add_action( 'rest_api_init', 'nexus_register_mail_diagnostics_rest_route' );
  */
 function nexus_get_mail_diagnostics_rest_response() {
 	return new WP_REST_Response( nexus_get_mail_diagnostics_snapshot(), 200 );
+}
+
+/**
+ * Return the public mail diagnostics response.
+ *
+ * @return WP_REST_Response
+ */
+function nexus_get_public_mail_diagnostics_rest_response() {
+	return new WP_REST_Response( nexus_get_public_mail_diagnostics_snapshot(), 200 );
 }
 
 /**
