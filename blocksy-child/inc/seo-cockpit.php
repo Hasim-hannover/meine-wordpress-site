@@ -527,7 +527,8 @@ function nexus_handle_seo_cockpit_connect_action() {
 		'state'                  => $state,
 	];
 
-	wp_safe_redirect( 'https://accounts.google.com/o/oauth2/v2/auth?' . http_build_query( $params, '', '&', PHP_QUERY_RFC3986 ) );
+	// Google OAuth lives on an external host; wp_safe_redirect() would fall back to /wp-admin/.
+	wp_redirect( 'https://accounts.google.com/o/oauth2/v2/auth?' . http_build_query( $params, '', '&', PHP_QUERY_RFC3986 ) );
 	exit;
 }
 add_action( 'admin_post_nexus_seo_cockpit_connect', 'nexus_handle_seo_cockpit_connect_action' );
