@@ -287,12 +287,89 @@ add_action( 'admin_init', 'nexus_register_seo_cockpit_settings' );
 function nexus_sanitize_seo_cockpit_settings( $settings ) {
 	$settings = is_array( $settings ) ? $settings : [];
 
-	return [
+	$sanitized = [
 		'client_id'      => sanitize_text_field( (string) ( $settings['client_id'] ?? '' ) ),
 		'client_secret'  => sanitize_text_field( (string) ( $settings['client_secret'] ?? '' ) ),
 		'property'       => sanitize_text_field( (string) ( $settings['property'] ?? '' ) ),
 		'refresh_window' => (string) max( 1, min( 24, absint( $settings['refresh_window'] ?? 12 ) ) ),
 	];
+
+	nexus_add_seo_cockpit_settings_feedback( $sanitized );
+
+	return $sanitized;
+}
+
+/**
+ * Add an explicit connection-status notice after saving cockpit settings.
+ *
+ * @param array<string, string> $settings Sanitized settings payload.
+ * @return void
+ */
+function nexus_add_seo_cockpit_settings_feedback( $settings ) {
+	$option_name = nexus_get_seo_cockpit_option_name();
+	$missing     = [];
+
+	if ( '' === (string) ( $settings['property'] ?? '' ) ) {
+		$missing[] = 'Property';
+	}
+
+	if ( '' === (string) ( $settings['client_id'] ?? '' ) ) {
+		$missing[] = 'Client ID';
+	}
+
+	if ( '' === (string) ( $settings['client_secret'] ?? '' ) ) {
+		$missing[] = 'Client Secret';
+	}
+
+	if ( ! empty( $missing ) ) {
+		add_settings_error(
+			$option_name,
+			'nexus_seo_settings_missing',
+			sprintf(
+				'Einstellungen gespeichert. Es fehlen noch: %s.',
+				implode( ', ', $missing )
+			),
+			'warning'
+		);
+
+		return;
+	}
+
+	$tokens = nexus_get_seo_cockpit_tokens();
+	if ( '' === (string) ( $tokens['access_token'] ?? '' ) ) {
+		add_settings_error(
+			$option_name,
+			'nexus_seo_settings_not_connected',
+			'Einstellungen gespeichert. Es besteht noch keine Google-Verbindung. Klicke in der Übersicht auf "Mit Google verbinden".',
+			'warning'
+		);
+
+		return;
+	}
+
+	nexus_delete_seo_cockpit_snapshot_cache();
+	$sites = nexus_get_seo_cockpit_sites( true );
+
+	if ( is_wp_error( $sites ) ) {
+		add_settings_error(
+			$option_name,
+			'nexus_seo_settings_connection_error',
+			sprintf(
+				'Einstellungen gespeichert, aber die Search-Console-Verbindung ist aktuell nicht nutzbar: %s',
+				$sites->get_error_message()
+			),
+			'error'
+		);
+
+		return;
+	}
+
+	add_settings_error(
+		$option_name,
+		'nexus_seo_settings_connected',
+		'Einstellungen gespeichert. Die Search Console ist verbunden und abrufbar.',
+		'success'
+	);
 }
 
 /**
@@ -1442,6 +1519,7 @@ function nexus_render_seo_cockpit_settings_page() {
 	?>
 	<div class="wrap nexus-seo-cockpit">
 		<h1>SEO Cockpit Einstellungen</h1>
+		<?php settings_errors( nexus_get_seo_cockpit_option_name() ); ?>
 
 		<section class="nexus-seo-cockpit__panel nexus-seo-cockpit__panel--setup">
 			<h2>So aktivierst du Search Console</h2>
