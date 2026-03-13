@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-12.
+Stand: 2026-03-13.
 
 Basis dieses Status:
 
@@ -42,7 +42,7 @@ Nicht verifiziert:
 - Blog-Artikel koennen jetzt theme-seitig passende WGOS-Assets als Anschlussblock ausgeben; weitere Post-Mappings bleiben ausbaubar.
 - Die Community-Signale auf der Homepage sind derzeit ueber GitHub und ein oeffentliches LinkedIn-Profil versioniert; ein kanonischer Facebook-Link inklusive belastbarer Kennzahl ist im Repo noch nicht hinterlegt.
 - `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.
-- CRM-, Mail- und Follow-up-Logik fuer den Audit sind jetzt im Theme sichtbar, aber SMTP/externes Routing bleiben noch offen.
+- CRM-, Mail- und Follow-up-Logik fuer den Audit sind jetzt im Theme sichtbar; `wp_mail`-basierte Transaktionsmails koennen repo-seitig zentral ueber die Brevo API geroutet werden, sobald die Live-Credentials ausserhalb des Repos gesetzt sind.
 - Das Client Portal arbeitet aktuell mit Mock-Daten und ist noch kein voll dokumentiertes Produktivsystem.
 
 ## Geplant

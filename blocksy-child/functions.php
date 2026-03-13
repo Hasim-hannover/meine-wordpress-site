@@ -17,6 +17,7 @@ $inc_dir = get_stylesheet_directory() . '/inc/';
 
 $modules = [
 	'helpers.php',        // Utility-Funktionen (muss zuerst geladen werden)
+	'mail.php',           // Zentraler Brevo-Mail-Router fuer Transaktionsmails
 	'wgos-assets.php',    // CPT + Helper fuer WGOS Asset-Spokes
 	'wgos-asset-registry.php', // Versionierte WGOS Asset-Registry + Sync
 	'wgos-cluster-pages.php', // Versionierte Cluster-/Pillar-Pages und Blog-Asset-Bridges

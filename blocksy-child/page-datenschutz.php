@@ -336,7 +336,7 @@ while ( have_posts() ) :
 						</div>
 						<div class="privacy-meta__item">
 							<span class="privacy-meta__label">Stand</span>
-							<span class="privacy-meta__value"><time datetime="2026-03-09">9. März 2026</time></span>
+							<span class="privacy-meta__value"><time datetime="2026-03-13">13. März 2026</time></span>
 						</div>
 					</div>
 				</aside>
@@ -398,6 +398,24 @@ while ( have_posts() ) :
 							Das betrifft insbesondere Kontakt- und Projektangaben, die Sie selbst eingeben.
 						</p>
 
+						<h3>E-Mail-Zustellung über Brevo</h3>
+						<p>
+							Für die technische Zustellung unserer E-Mails, Formularbestätigungen und sonstigen
+							Transaktionsmails nutzen wir Brevo, einen Dienst der Sendinblue SAS,
+							106 boulevard Haussmann, 75008 Paris, Frankreich.
+						</p>
+						<p>
+							Dabei werden insbesondere E-Mail-Adresse, Absender- und Empfängerinformationen,
+							Versandzeitpunkte, technische Zustellinformationen sowie die für die jeweilige
+							Nachricht erforderlichen Inhalte über Brevo verarbeitet. Soweit Brevo für uns
+							als technischer Versanddienstleister tätig wird, erfolgt dies im Rahmen einer
+							Auftragsverarbeitung gemäß Art. 28 DSGVO.
+						</p>
+						<p>
+							Weitere Informationen finden Sie in den
+							<a href="https://www.brevo.com/blog/legal/privacypolicy/" target="_blank" rel="noopener noreferrer">Datenschutzhinweisen von Brevo</a>.
+						</p>
+
 						<h3>Growth-Audit-Anfrage</h3>
 						<p>
 							Auf der Seite zum Growth Audit können Sie eine Anfrage stellen. Dabei werden
@@ -406,7 +424,8 @@ while ( have_posts() ) :
 						</p>
 						<p>
 							Die Daten werden intern im WordPress-Backend gespeichert und für die
-							Bearbeitung der Anfrage per E-Mail weiterverarbeitet. Rechtsgrundlage ist
+							Bearbeitung der Anfrage und für die Zustellung der Transaktionsmails
+							über Brevo weiterverarbeitet. Rechtsgrundlage ist
 							Art. 6 Abs. 1 lit. b DSGVO, soweit es um vorvertragliche Kommunikation geht,
 							und im Uebrigen Art. 6 Abs. 1 lit. f DSGVO.
 						</p>

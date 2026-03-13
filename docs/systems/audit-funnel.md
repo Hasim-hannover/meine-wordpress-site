@@ -1,6 +1,6 @@
 # Audit Funnel
 
-Stand: 2026-03-11.
+Stand: 2026-03-13.
 
 Diese Doku beschreibt den aktuell aktiven Funnel rund um den `Growth Audit`.
 
@@ -35,7 +35,7 @@ Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
    - leichtem Kontaktabschluss mit optionalem Kurzkontext
 4. `blocksy-child/assets/js/review-funnel.js` validiert die Schritte und sendet die Daten an `POST /wp-json/nexus/v1/audit-request`.
 5. `blocksy-child/inc/review-crm.php` prueft Honeypot, Rate Limit und Payload und speichert die Anfrage als `nexus_review_request`.
-6. WordPress versendet eine interne Benachrichtigung und eine kurze Bestaetigung an den Anfragenden ueber `wp_mail`.
+6. WordPress versendet eine interne Benachrichtigung und eine kurze Bestaetigung an den Anfragenden ueber `wp_mail`; der zentrale Theme-Mailer routed diese Mails bei gesetzter Brevo-API-Konfiguration ueber Brevo.
 7. Im Backend landet der Lead im `Audit CRM` mit Status, Prioritaet, Faelligkeit und internen Notizen.
 8. Danach folgt die persoenliche Rueckmeldung innerhalb von 48 Stunden.
 9. Je nach Lage geht der Lead weiter in:
@@ -97,7 +97,7 @@ Optionale Felder:
 ## Externe Abhaengigkeiten
 
 - WordPress REST API
-- `wp_mail` / spaeter SMTP oder Mail-Bridge
+- Brevo API fuer die technische Zustellung der Transaktionsmails
 - Cal.com
 
 Optional, aber aktuell nicht aktiv im aktiven Landing-Flow:
@@ -118,13 +118,13 @@ Dieser Layer ist fachlich weiter relevant, aber derzeit nicht die aktive Landing
 
 ## Risiken
 
-- Mail-Versand haengt aktuell an `wp_mail`; SMTP/Brevo ist noch nicht hinterlegt.
+- Der Repo-Layer routed Mail nun bevorzugt ueber die Brevo API, braucht dafuer aber gueltigen API-Key und verifizierte Senderdaten ausserhalb des Repos.
 - Der Post-Type-Slug `nexus_review_request` ist historisch und fachlich inzwischen breiter als nur `Review`.
 - Der Instant-Results-Layer und der aktive 48h-Intake leben parallel im Repo und muessen bewusst getrennt bleiben.
 - CRM- und Follow-up-Logik endet aktuell im WordPress-Backend; externes Routing ist noch nicht versioniert.
 
 ## Naechste sinnvolle Schritte
 
-1. SMTP/Brevo fuer zuverlaessigen Versand anschliessen.
+1. Live-Credentials fuer Brevo prueffest in `wp-config.php` oder Server-Env hinterlegen und Versand einmal end-to-end testen.
 2. Audit-CRM um Follow-up-Felder und Delivery-Templates erweitern.
 3. Entscheiden, ob `audit-live.js` spaeter den aktiven Intake ersetzt oder ein separater Angebotszweig bleibt.
