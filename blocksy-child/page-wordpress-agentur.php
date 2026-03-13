@@ -201,8 +201,8 @@ get_header();
 
 		<section id="hero" class="nx-section nx-hero wp-agentur-hero">
 			<div class="nx-container">
-				<span class="nx-badge nx-badge--gold">WordPress Growth Architect in Hannover</span>
-				<h1 class="nx-hero__title">WordPress-Systeme für B2B in Hannover, die Sichtbarkeit, Daten und Anfragen zusammenführen.</h1>
+				<span class="nx-badge nx-badge--gold">WordPress Agentur Hannover für B2B</span>
+				<h1 class="nx-hero__title">WordPress Agentur Hannover für B2B-Websites, die Sichtbarkeit, Daten und Anfragen zusammenführen.</h1>
 				<p class="nx-hero__subtitle">
 					Für Unternehmen aus Hannover und der Region, die mit WordPress mehr wollen als einen Relaunch:
 					klare Angebotsseiten, belastbare Messung, bessere Lead-Führung und eine Umgebung,

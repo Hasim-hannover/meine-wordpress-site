@@ -149,6 +149,12 @@ Jetzt noch noetig:
 
 ### 5. Kannibalisierung fuer lokale Kernqueries aufloesen
 
+Stand:
+
+- Die Fuehrungsseite `/wordpress-agentur-hannover/` wurde im Snippet und im Schema auf das Keyword `WordPress Agentur Hannover` geschaerft.
+- Der Hero der Seite ist jetzt ebenfalls klarer auf dieselbe Suchintention ausgerichtet.
+- Die grundlegende technische Richtung ist damit gesetzt; offen bleiben Search-Console-Beobachtung und ggf. weitere interne Linkverstaerkung.
+
 Betroffen:
 
 - `wordpress agentur hannover`
@@ -181,6 +187,12 @@ Vorgehen:
 - keine grosse Rewrite-Runde, bevor Primaerseiten sauber definiert sind
 
 ### 7. Draft-/noindex-Seiten mit Rest-Sichtbarkeit aufraeumen
+
+Stand:
+
+- `/ga4-tracking-setup/` und `/performance-marketing/` laufen nicht mehr ueber die Legacy-Redirect-Map, sondern koennen als echte WGOS-Cluster-Routen arbeiten.
+- Das SEO-Cockpit liest Legacy-Redirects wie `/roi-rechner/` jetzt sinnvoller als Redirect statt als irrefuehrende Draft-/noindex-Seite.
+- Fuer `/roi-rechner/` bleibt die Redirect-Strategie zur Tools-Uebersicht bewusst bestehen.
 
 Betroffen:
 

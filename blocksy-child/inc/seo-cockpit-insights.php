@@ -48,6 +48,28 @@ function nexus_get_seo_cockpit_cluster_slug_from_url( $url ) {
 }
 
 /**
+ * Resolve one known legacy redirect target for a frontend URL.
+ *
+ * @param string $url Frontend URL.
+ * @return string
+ */
+function nexus_get_seo_cockpit_redirect_target_for_url( $url ) {
+	if ( ! function_exists( 'nexus_get_legacy_offer_redirect_map' ) ) {
+		return '';
+	}
+
+	$path = wp_parse_url( $url, PHP_URL_PATH );
+	$path = trailingslashit( '/' . ltrim( (string) $path, '/' ) );
+	$map  = nexus_get_legacy_offer_redirect_map();
+
+	if ( empty( $map[ $path ] ) ) {
+		return '';
+	}
+
+	return (string) $map[ $path ];
+}
+
+/**
  * Resolve one frontend URL to a local WordPress object where possible.
  *
  * @param string $url Frontend URL.
@@ -66,6 +88,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 	$posts_page_id = absint( get_option( 'page_for_posts' ) );
 	$resolved_id   = url_to_postid( $url );
 	$cluster_slug  = nexus_get_seo_cockpit_cluster_slug_from_url( $url );
+	$redirect_url  = nexus_get_seo_cockpit_redirect_target_for_url( $url );
 
 	if ( 0 === $resolved_id && home_url( '/' ) === $url ) {
 		$resolved_id = $front_page_id;
@@ -105,6 +128,43 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 		'frontend_link'          => $url,
 		'snippet_issues'         => [],
 	];
+
+	if ( '' !== $redirect_url ) {
+		$context = [
+			'resolved'                => true,
+			'url'                     => $url,
+			'post_id'                 => 0,
+			'post_title'              => 'Legacy Redirect',
+			'post_type'               => '',
+			'post_status'             => 'redirect',
+			'page_type'               => 'legacy_redirect',
+			'template'                => '',
+			'modified_at'             => 0,
+			'seo_title'               => '',
+			'seo_description'         => '',
+			'seo_title_present'       => false,
+			'seo_description_present' => false,
+			'title_source'            => '',
+			'description_source'      => '',
+			'canonical'               => $redirect_url,
+			'canonical_present'       => true,
+			'noindex'                 => false,
+			'in_sitemap'              => false,
+			'word_count'              => 0,
+			'internal_links'          => [
+				'status' => 'n/a',
+				'value'  => null,
+				'note'   => 'Diese URL wird serverseitig auf ein kanonisches Ziel weitergeleitet.',
+			],
+			'edit_link'               => '',
+			'frontend_link'           => $redirect_url,
+			'snippet_issues'          => [],
+		];
+
+		$cache[ $url ] = $context;
+
+		return $context;
+	}
 
 	if ( $resolved_id ) {
 		$post = get_post( $resolved_id );

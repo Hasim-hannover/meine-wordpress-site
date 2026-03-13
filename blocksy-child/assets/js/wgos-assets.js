@@ -192,7 +192,7 @@ export const wgosAssets = [
 			label: 'Audit starten',
 			hrefKey: 'audit',
 		},
-		legacyPaths: [ '/ga4-tracking-setup/' ],
+		legacyPaths: [],
 	},
 	{
 		id: 'sgtm-setup',
@@ -215,7 +215,7 @@ export const wgosAssets = [
 			label: 'Audit starten',
 			hrefKey: 'audit',
 		},
-		legacyPaths: [ '/ga4-tracking-setup/' ],
+		legacyPaths: [],
 	},
 	{
 		id: 'consent-mode-v2',
@@ -238,7 +238,7 @@ export const wgosAssets = [
 			label: 'Fundament prüfen',
 			hrefKey: 'credits',
 		},
-		legacyPaths: [ '/ga4-tracking-setup/' ],
+		legacyPaths: [],
 	},
 	{
 		id: 'ga4-event-blueprint',
@@ -261,7 +261,7 @@ export const wgosAssets = [
 			label: 'Credits einplanen',
 			hrefKey: 'credits',
 		},
-		legacyPaths: [ '/ga4-tracking-setup/' ],
+		legacyPaths: [],
 	},
 	{
 		id: 'technical-seo-audit',
@@ -537,7 +537,7 @@ export const wgosAssets = [
 			label: 'Audit starten',
 			hrefKey: 'audit',
 		},
-		legacyPaths: [ '/performance-marketing/' ],
+		legacyPaths: [],
 	},
 	{
 		id: 'paid-social-setup',
@@ -583,7 +583,7 @@ export const wgosAssets = [
 			label: 'Paket auswählen',
 			hrefKey: 'pakete',
 		},
-		legacyPaths: [ '/performance-marketing/', '/meta-ads/' ],
+		legacyPaths: [ '/meta-ads/' ],
 	},
 ];
 
