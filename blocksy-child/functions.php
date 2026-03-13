@@ -288,7 +288,7 @@ add_action( 'after_switch_theme', function() {
  */
 add_action( 'wp_body_open', 'hasim_skip_to_content' );
 function hasim_skip_to_content() {
-	echo '<a href="#main" class="skip-to-content" style="position:absolute;top:-100px;left:16px;background:#D4AF37;color:#000;padding:8px 16px;border-radius:4px;font-weight:700;font-size:13px;z-index:99999;text-decoration:none;transition:top 0.2s;" onfocus="this.style.top=\'16px\'" onblur="this.style.top=\'-100px\'">Zum Hauptinhalt springen</a>';
+	echo '<a href="#main" class="skip-to-content" style="position:absolute;top:-100px;left:16px;background:#b46a3c;color:#fff8f3;padding:10px 16px;border:1px solid rgba(255,248,243,0.18);border-radius:999px;font-weight:800;font-size:13px;letter-spacing:0.01em;box-shadow:0 16px 34px rgba(180,106,60,0.28);z-index:99999;text-decoration:none;transition:top 0.2s ease;" onfocus="this.style.top=\'16px\'" onblur="this.style.top=\'-100px\'">Zum Hauptinhalt springen</a>';
 }
 
 function nexus_get_theme_toggle_html( $args = [] ) {
