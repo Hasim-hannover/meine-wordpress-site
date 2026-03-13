@@ -10,10 +10,16 @@ Das Cockpit ist aus der bisherigen Monolith-Datei in klar getrennte Layer aufget
   Capabilities, Settings, Menues, Konfiguration, URL- und Cache-Helfer.
 - `blocksy-child/inc/seo-cockpit-api.php`
   OAuth, Tokens, Google-Requests, Search-Console-Reports, Sitemaps und URL-Inspection.
+- `blocksy-child/inc/seo-cockpit-koko.php`
+  Koko-Status, REST-Zugriff, Onsite-Metriken und Koko-Kontext fuer Snapshot und Drilldown.
+- `blocksy-child/inc/seo-cockpit-links.php`
+  Interner Linkgraph auf Basis veroeffentlichter Inhalte.
 - `blocksy-child/inc/seo-cockpit-sync.php`
   Snapshot-Aufbau, Historical Layer, Cache-Versionierung, Sync, Cron und Locking.
 - `blocksy-child/inc/seo-cockpit-insights.php`
   Insight-Regeln, WordPress-Kontext, URL-Zuordnung und Drilldown-Datenmodell.
+- `blocksy-child/inc/seo-cockpit-diagnostics.php`
+  Runtime-Diagnostik fuer OAuth, Cron, Koko, Linkgraph und Drilldown.
 - `blocksy-child/inc/seo-cockpit-ui.php`
   Admin-Rendering fuer Uebersicht, Drilldown, Widget und Einstellungen.
 
@@ -43,6 +49,10 @@ Der Uebersichts-Snapshot kombiniert drei Ebenen:
   - Top Devices
   - Query/Page-Kombinationen
   - Sitemaps
+- Koko Analytics:
+  - Besucher und Pageviews je Zeitraum
+  - Tagesverlauf
+  - Top-Seiten fuer den Zeitraum
 - WordPress:
   - Post ID
   - Post Type
@@ -50,6 +60,7 @@ Der Uebersichts-Snapshot kombiniert drei Ebenen:
   - Template / Seitentyp
   - Word Count
   - SEO-Kontext
+  - interne Linksignale
   - Edit- und Frontend-Links
 - Entscheidungslogik:
   - Quick Wins
@@ -68,8 +79,10 @@ Die URL-Detailansicht baut auf einem eigenen Detailmodell auf:
 - Top Queries der URL
 - Geraeteverteilung
 - WordPress-Kontext
+- Koko-Kontext der URL, soweit eindeutig zuordenbar
 - gefilterte Insights fuer diese URL
 - vorbereitete, manuelle URL-Inspection
+- Drilldown-Diagnostik
 
 ## Cache- und Sync-Logik
 
@@ -86,6 +99,8 @@ Statt einzelne Transients schwerfaellig aufzuraeumen, invalidiert das Cockpit be
 - Sitemaps
 - Detailansichten
 - URL-Inspection-Caches
+- Koko-Caches
+- Linkgraph-Caches
 
 ### Refresh-Fenster
 
@@ -115,6 +130,51 @@ Parallele Syncs werden ueber einen Transient-Lock verhindert:
 - `nexus_seo_cockpit_sync_lock`
 
 Dadurch kollidieren manuelle und Cron-Syncs nicht mehr so leicht.
+
+## Interne Linkzaehlung
+
+V2.1 misst interne Links jetzt als einfachen WordPress-internen Linkgraph:
+
+- Quelle sind veroeffentlichte oeffentliche Inhalte
+- Grundlage ist `post_content`
+- gezaehlt werden:
+  - eingehende interne Links
+  - verlinkende Dokumente
+  - ausgehende interne Links
+  - verlinkte interne Ziele
+- Query-Parameter werden entfernt, damit Tracking-Dubletten keine eigenen Knoten bilden
+
+Bewusst noch nicht enthalten:
+
+- Menues
+- Footer-/Header-Navigation
+- Widgets
+- theme-injizierte Links
+
+## Row-Limits und Paging
+
+Search Console arbeitet jetzt mit gekapselten Bucket-Limits statt mit verstreuten Einzelwerten:
+
+- `top_pages`
+- `top_queries`
+- `top_devices`
+- `page_rows`
+- `query_page_rows`
+- `detail_queries`
+- `detail_devices`
+
+Fuer groessere Buckets nutzt das Cockpit jetzt `startRow` plus begrenztes Paging.
+Dadurch bleibt das System fuer groessere Sites robuster, ohne die API unkontrolliert mit Requests zu fluten.
+
+## Runtime-Diagnostik
+
+Das Cockpit fuehrt jetzt kompakte Laufzeitchecks fuer:
+
+- OAuth / Token-Nutzbarkeit
+- Cron / naechster Sync / Lock-Zustand
+- Koko-Verfuegbarkeit
+- Linkgraph-Aufbau
+- Drilldown-Kontext
 
 ## Insight-Regeln
 
@@ -146,10 +206,10 @@ Jede Insight enthaelt:
 
 ## Offene Punkte
 
-- Interne Linkzaehlung ist aktuell nur vorbereitet und noch kein echter Crawler-/Graph-Layer.
 - URL-Inspection ist bewusst manuell im Drilldown, nicht massenhaft automatisiert.
 - Sitemap-Mitgliedschaft pro URL ist derzeit ein WordPress-internes Signal, keine Search-Console-URL-Membership.
-- Koko Analytics ist weiterhin nur ein Nebenlayer und noch nicht tief mit URL-Signalen verschmolzen.
+- Koko basiert auf defensivem REST-Mapping und nicht auf einer harten Plugin-internen API-Vertragsgarantie.
+- Die interne Linkzaehlung bezieht Menues, Widgets und theme-injizierte Navigationspfade noch nicht ein.
 
 ## Grenzen / Risiken
 
@@ -157,3 +217,4 @@ Jede Insight enthaelt:
 - Query/Page-Kombinationsdaten sind auf sinnvolle Row-Limits begrenzt und bilden nicht die komplette Long Tail ab.
 - URL-Zuordnung basiert fuer Search-Console-URLs auf `url_to_postid()` plus Sonderfaellen fuer Startseite und Blog.
 - Inspection und Search-Console-APIs bleiben quota- und permission-abhaengig.
+- Koko-REST-Antworten werden bewusst flexibel geparst; falls das Plugin seine Antwortstruktur stark aendert, kann nur ein Teil des Kontextlayers verfuegbar sein.

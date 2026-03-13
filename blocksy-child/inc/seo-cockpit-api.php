@@ -350,14 +350,30 @@ function nexus_seo_cockpit_search_console_request( $method, $path, $body = [], $
  * @param array<int, string>   $dimensions  Dimensions.
  * @param array<int, array<string, string>> $filters Dimension filters.
  * @param int                  $limit       Maximum row count.
+ * @param array<string, mixed> $options     Optional paging options.
  * @return array<int, array<string, mixed>>|WP_Error
  */
-function nexus_get_seo_cockpit_report_rows( $property, $start, $end, $dimensions = [], $filters = [], $limit = 10 ) {
-	$body = [
+function nexus_get_seo_cockpit_report_rows( $property, $start, $end, $dimensions = [], $filters = [], $limit = 10, $options = [] ) {
+	$options       = wp_parse_args(
+		(array) $options,
+		[
+			'paginate'  => false,
+			'page_size' => max( 1, absint( $limit ) ),
+			'max_pages' => 1,
+			'start_row' => 0,
+		]
+	);
+	$desired_limit = max( 1, absint( $limit ) );
+	$page_size     = max( 1, absint( $options['page_size'] ) );
+	$max_pages     = max( 1, absint( $options['max_pages'] ) );
+	$start_row     = max( 0, absint( $options['start_row'] ) );
+	$paginate      = ! empty( $options['paginate'] );
+	$rows          = [];
+	$pages_loaded  = 0;
+	$body          = [
 		'startDate'  => (string) $start,
 		'endDate'    => (string) $end,
 		'searchType' => 'web',
-		'rowLimit'   => max( 1, absint( $limit ) ),
 	];
 
 	if ( ! empty( $dimensions ) ) {
@@ -401,17 +417,33 @@ function nexus_get_seo_cockpit_report_rows( $property, $start, $end, $dimensions
 		}
 	}
 
-	$response = nexus_seo_cockpit_search_console_request(
-		'POST',
-		'/sites/' . rawurlencode( $property ) . '/searchAnalytics/query',
-		$body
-	);
+	do {
+		$remaining        = max( 1, $desired_limit - count( $rows ) );
+		$body['rowLimit'] = min( $page_size, $remaining );
+		$body['startRow'] = $start_row;
 
-	if ( is_wp_error( $response ) ) {
-		return $response;
-	}
+		$response = nexus_seo_cockpit_search_console_request(
+			'POST',
+			'/sites/' . rawurlencode( $property ) . '/searchAnalytics/query',
+			$body
+		);
 
-	return isset( $response['rows'] ) && is_array( $response['rows'] ) ? array_values( $response['rows'] ) : [];
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$batch = isset( $response['rows'] ) && is_array( $response['rows'] ) ? array_values( $response['rows'] ) : [];
+		$rows  = array_merge( $rows, $batch );
+
+		$pages_loaded++;
+		$start_row += count( $batch );
+
+		if ( ! $paginate || count( $rows ) >= $desired_limit || count( $batch ) < (int) $body['rowLimit'] || $pages_loaded >= $max_pages ) {
+			break;
+		}
+	} while ( true );
+
+	return array_slice( $rows, 0, $desired_limit );
 }
 
 /**

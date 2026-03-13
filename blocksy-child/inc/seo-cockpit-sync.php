@@ -451,6 +451,12 @@ function nexus_get_seo_cockpit_snapshot( $force = false, $range_days = null ) {
 		return $cached;
 	}
 
+	$top_pages_cap  = nexus_get_seo_cockpit_row_cap( 'top_pages' );
+	$top_queries_cap = nexus_get_seo_cockpit_row_cap( 'top_queries' );
+	$top_devices_cap = nexus_get_seo_cockpit_row_cap( 'top_devices' );
+	$page_rows_cap   = nexus_get_seo_cockpit_row_cap( 'page_rows' );
+	$query_rows_cap  = nexus_get_seo_cockpit_row_cap( 'query_page_rows' );
+
 	$current_overview = nexus_get_seo_cockpit_overview_metrics( $property, $ranges['current_start'], $ranges['current_end'] );
 	if ( is_wp_error( $current_overview ) ) {
 		return $current_overview;
@@ -466,37 +472,93 @@ function nexus_get_seo_cockpit_snapshot( $force = false, $range_days = null ) {
 		return $trend;
 	}
 
-	$top_pages = nexus_get_seo_cockpit_dimension_rows( $property, $ranges['current_start'], $ranges['current_end'], 'page', 12 );
+	$top_pages = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['current_start'],
+		$ranges['current_end'],
+		[ 'page' ],
+		[],
+		(int) $top_pages_cap['limit'],
+		$top_pages_cap
+	);
 	if ( is_wp_error( $top_pages ) ) {
 		return $top_pages;
 	}
 
-	$top_queries = nexus_get_seo_cockpit_dimension_rows( $property, $ranges['current_start'], $ranges['current_end'], 'query', 12 );
+	$top_queries = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['current_start'],
+		$ranges['current_end'],
+		[ 'query' ],
+		[],
+		(int) $top_queries_cap['limit'],
+		$top_queries_cap
+	);
 	if ( is_wp_error( $top_queries ) ) {
 		return $top_queries;
 	}
 
-	$top_devices = nexus_get_seo_cockpit_dimension_rows( $property, $ranges['current_start'], $ranges['current_end'], 'device', 5 );
+	$top_devices = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['current_start'],
+		$ranges['current_end'],
+		[ 'device' ],
+		[],
+		(int) $top_devices_cap['limit'],
+		$top_devices_cap
+	);
 	if ( is_wp_error( $top_devices ) ) {
 		return $top_devices;
 	}
 
-	$current_page_rows = nexus_get_seo_cockpit_dimension_rows( $property, $ranges['current_start'], $ranges['current_end'], 'page', 25 );
+	$current_page_rows = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['current_start'],
+		$ranges['current_end'],
+		[ 'page' ],
+		[],
+		(int) $page_rows_cap['limit'],
+		$page_rows_cap
+	);
 	if ( is_wp_error( $current_page_rows ) ) {
 		return $current_page_rows;
 	}
 
-	$previous_page_rows = nexus_get_seo_cockpit_dimension_rows( $property, $ranges['previous_start'], $ranges['previous_end'], 'page', 25 );
+	$previous_page_rows = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['previous_start'],
+		$ranges['previous_end'],
+		[ 'page' ],
+		[],
+		(int) $page_rows_cap['limit'],
+		$page_rows_cap
+	);
 	if ( is_wp_error( $previous_page_rows ) ) {
 		return $previous_page_rows;
 	}
 
-	$query_page_rows = nexus_get_seo_cockpit_report_rows( $property, $ranges['current_start'], $ranges['current_end'], [ 'page', 'query' ], [], 150 );
+	$query_page_rows = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['current_start'],
+		$ranges['current_end'],
+		[ 'page', 'query' ],
+		[],
+		(int) $query_rows_cap['limit'],
+		$query_rows_cap
+	);
 	if ( is_wp_error( $query_page_rows ) ) {
 		return $query_page_rows;
 	}
 
-	$previous_query_page_rows = nexus_get_seo_cockpit_report_rows( $property, $ranges['previous_start'], $ranges['previous_end'], [ 'page', 'query' ], [], 150 );
+	$previous_query_page_rows = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['previous_start'],
+		$ranges['previous_end'],
+		[ 'page', 'query' ],
+		[],
+		(int) $query_rows_cap['limit'],
+		$query_rows_cap
+	);
 	if ( is_wp_error( $previous_query_page_rows ) ) {
 		return $previous_query_page_rows;
 	}
@@ -507,6 +569,7 @@ function nexus_get_seo_cockpit_snapshot( $force = false, $range_days = null ) {
 	}
 
 	$page_contexts = function_exists( 'nexus_get_seo_cockpit_page_context_map' ) ? nexus_get_seo_cockpit_page_context_map( $current_page_rows ) : [];
+	$koko         = function_exists( 'nexus_get_seo_cockpit_koko_snapshot_data' ) ? nexus_get_seo_cockpit_koko_snapshot_data( $ranges ) : [];
 
 	$snapshot = [
 		'generated_at'              => current_time( 'timestamp' ),
@@ -528,6 +591,7 @@ function nexus_get_seo_cockpit_snapshot( $force = false, $range_days = null ) {
 		'previous_query_page_rows'  => $previous_query_page_rows,
 		'page_contexts'             => $page_contexts,
 		'sitemaps'                  => $sitemaps,
+		'koko'                      => $koko,
 	];
 
 	if ( function_exists( 'nexus_get_seo_cockpit_insights' ) ) {

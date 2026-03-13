@@ -354,6 +354,77 @@ function nexus_get_seo_cockpit_allowed_ranges() {
 }
 
 /**
+ * Return per-report row caps and paging defaults.
+ *
+ * @return array<string, array<string, int|bool>>
+ */
+function nexus_get_seo_cockpit_row_caps() {
+	return [
+		'top_pages'       => [
+			'limit'     => 20,
+			'page_size' => 100,
+			'max_pages' => 1,
+			'paginate'  => false,
+		],
+		'top_queries'     => [
+			'limit'     => 20,
+			'page_size' => 100,
+			'max_pages' => 1,
+			'paginate'  => false,
+		],
+		'top_devices'     => [
+			'limit'     => 10,
+			'page_size' => 25,
+			'max_pages' => 1,
+			'paginate'  => false,
+		],
+		'page_rows'       => [
+			'limit'     => 100,
+			'page_size' => 100,
+			'max_pages' => 2,
+			'paginate'  => true,
+		],
+		'query_page_rows' => [
+			'limit'     => 400,
+			'page_size' => 200,
+			'max_pages' => 3,
+			'paginate'  => true,
+		],
+		'detail_queries'  => [
+			'limit'     => 50,
+			'page_size' => 100,
+			'max_pages' => 1,
+			'paginate'  => false,
+		],
+		'detail_devices'  => [
+			'limit'     => 10,
+			'page_size' => 25,
+			'max_pages' => 1,
+			'paginate'  => false,
+		],
+	];
+}
+
+/**
+ * Return one report cap config by bucket.
+ *
+ * @param string $bucket Bucket key.
+ * @return array<string, int|bool>
+ */
+function nexus_get_seo_cockpit_row_cap( $bucket ) {
+	$caps = nexus_get_seo_cockpit_row_caps();
+
+	return isset( $caps[ $bucket ] ) && is_array( $caps[ $bucket ] )
+		? $caps[ $bucket ]
+		: [
+			'limit'     => 25,
+			'page_size' => 100,
+			'max_pages' => 1,
+			'paginate'  => false,
+		];
+}
+
+/**
  * Return the requested range in days from the current admin request.
  *
  * @return int

@@ -10,28 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Return a simple Koko Analytics status payload.
- *
- * @return array<string, mixed>
- */
-function nexus_get_koko_analytics_status() {
-	if ( ! function_exists( 'is_plugin_active' ) && file_exists( ABSPATH . 'wp-admin/includes/plugin.php' ) ) {
-		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-	}
-
-	$plugin_file = 'koko-analytics/koko-analytics.php';
-	$is_active   = function_exists( 'is_plugin_active' ) ? is_plugin_active( $plugin_file ) : false;
-	$is_present  = defined( 'WP_PLUGIN_DIR' ) ? file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) : false;
-
-	return [
-		'plugin_file' => $plugin_file,
-		'installed'   => $is_present,
-		'active'      => $is_active,
-		'label'       => $is_active ? 'Aktiv und bereit fuer die naechste Ausbaustufe' : ( $is_present ? 'Installiert, aber nicht aktiv' : 'Noch nicht installiert' ),
-	];
-}
-
-/**
  * Register a compact WordPress dashboard widget for the SEO cockpit.
  *
  * @return void
@@ -62,6 +40,7 @@ function nexus_render_seo_cockpit_dashboard_widget() {
 	$is_connected = '' !== (string) ( $tokens['access_token'] ?? '' );
 	$snapshot     = nexus_get_seo_cockpit_snapshot( false, 28 );
 	$insights     = ! is_wp_error( $snapshot ) ? array_slice( (array) ( $snapshot['insights'] ?? [] ), 0, 3 ) : [];
+	$koko_data    = ! is_wp_error( $snapshot ) && is_array( $snapshot['koko'] ?? null ) ? $snapshot['koko'] : [];
 	?>
 	<div class="nexus-seo-widget">
 		<p class="nexus-seo-widget__status">
@@ -101,6 +80,15 @@ function nexus_render_seo_cockpit_dashboard_widget() {
 					<strong><?php echo esc_html( nexus_format_seo_cockpit_metric( 'position', $current['position'] ) ); ?></strong>
 				</div>
 			</div>
+
+			<?php if ( ! empty( $koko_data['available'] ) ) : ?>
+				<p class="nexus-seo-widget__hint">
+					Koko: <?php echo esc_html( number_format_i18n( (float) ( $koko_data['overview']['current']['visitors'] ?? 0 ) ) ); ?> Besucher /
+					<?php echo esc_html( number_format_i18n( (float) ( $koko_data['overview']['current']['pageviews'] ?? 0 ) ) ); ?> Pageviews
+				</p>
+			<?php elseif ( ! empty( $koko['active'] ) ) : ?>
+				<p class="nexus-seo-widget__hint">Koko ist aktiv, liefert im Cockpit aktuell aber noch keinen auswertbaren Datensatz.</p>
+			<?php endif; ?>
 
 			<?php if ( ! empty( $insights ) ) : ?>
 				<ul class="nexus-seo-widget__insights">
@@ -168,6 +156,100 @@ function nexus_get_seo_cockpit_metric_delta( $key, $current, $previous ) {
 		'label' => ( $delta > 0 ? '+' : '' ) . number_format_i18n( $delta, 1 ) . ( 'position' === $key ? ' Punkte' : '%' ),
 		'class' => $class,
 	];
+}
+
+/**
+ * Render a standard metric-card grid.
+ *
+ * @param array<string, mixed>      $current Current metric payload.
+ * @param array<string, mixed>      $previous Previous metric payload.
+ * @param array<string, string>|null $labels Optional metric labels.
+ * @return void
+ */
+function nexus_render_seo_cockpit_metric_cards( $current, $previous, $labels = null ) {
+	$labels = is_array( $labels ) ? $labels : [
+		'clicks'      => 'Klicks',
+		'impressions' => 'Impressionen',
+		'ctr'         => 'CTR',
+		'position'    => 'Ø Position',
+	];
+	?>
+	<div class="nexus-seo-cockpit__metrics">
+		<?php foreach ( $labels as $key => $label ) : ?>
+			<?php
+			$current_value  = (float) ( $current[ $key ] ?? 0 );
+			$previous_value = (float) ( $previous[ $key ] ?? 0 );
+			$delta          = nexus_get_seo_cockpit_metric_delta( $key, $current_value, $previous_value );
+			?>
+			<article class="nexus-seo-cockpit__metric-card">
+				<span class="nexus-seo-cockpit__metric-label"><?php echo esc_html( $label ); ?></span>
+				<strong class="nexus-seo-cockpit__metric-value"><?php echo esc_html( nexus_format_seo_cockpit_metric( $key, $current_value ) ); ?></strong>
+				<span class="nexus-seo-cockpit__metric-delta is-<?php echo esc_attr( $delta['class'] ); ?>"><?php echo esc_html( $delta['label'] ); ?></span>
+			</article>
+		<?php endforeach; ?>
+	</div>
+	<?php
+}
+
+/**
+ * Render compact Koko metric cards.
+ *
+ * @param array<string, mixed> $current Current Koko metrics.
+ * @param array<string, mixed> $previous Previous Koko metrics.
+ * @return void
+ */
+function nexus_render_seo_cockpit_koko_metrics( $current, $previous ) {
+	$labels = [
+		'visitors'  => 'Besucher',
+		'pageviews' => 'Pageviews',
+	];
+	?>
+	<div class="nexus-seo-cockpit__koko-metrics">
+		<?php foreach ( $labels as $key => $label ) : ?>
+			<?php
+			$current_value  = (float) ( $current[ $key ] ?? 0 );
+			$previous_value = (float) ( $previous[ $key ] ?? 0 );
+			$delta          = nexus_get_seo_cockpit_metric_delta( 'clicks', $current_value, $previous_value );
+			?>
+			<article class="nexus-seo-cockpit__koko-card">
+				<span class="nexus-seo-cockpit__metric-label"><?php echo esc_html( $label ); ?></span>
+				<strong class="nexus-seo-cockpit__koko-value"><?php echo esc_html( number_format_i18n( $current_value ) ); ?></strong>
+				<span class="nexus-seo-cockpit__delta-inline is-<?php echo esc_attr( $delta['class'] ); ?>"><?php echo esc_html( $delta['label'] ); ?></span>
+			</article>
+		<?php endforeach; ?>
+	</div>
+	<?php
+}
+
+/**
+ * Render compact runtime diagnostics.
+ *
+ * @param array<string, mixed> $diagnostics Diagnostic payload.
+ * @param int                  $limit       Max rows.
+ * @return void
+ */
+function nexus_render_seo_cockpit_diagnostics_list( $diagnostics, $limit = 8 ) {
+	$checks = array_slice( (array) ( $diagnostics['checks'] ?? [] ), 0, $limit );
+
+	if ( empty( $checks ) ) {
+		echo '<p class="nexus-seo-cockpit__hint">Noch keine Laufzeitdiagnostik verfuegbar.</p>';
+		return;
+	}
+	?>
+	<div class="nexus-seo-cockpit__diagnostics">
+		<?php foreach ( $checks as $check ) : ?>
+			<article class="nexus-seo-cockpit__diagnostic-card">
+				<div class="nexus-seo-cockpit__insight-head">
+					<span class="nexus-seo-cockpit__badge is-<?php echo esc_attr( (string) $check['status'] ); ?>">
+						<?php echo esc_html( strtoupper( (string) $check['status'] ) ); ?>
+					</span>
+					<strong><?php echo esc_html( (string) $check['label'] ); ?></strong>
+				</div>
+				<p class="nexus-seo-cockpit__hint"><strong><?php echo esc_html( ucfirst( (string) $check['area'] ) ); ?>:</strong> <?php echo esc_html( (string) $check['message'] ); ?></p>
+			</article>
+		<?php endforeach; ?>
+	</div>
+	<?php
 }
 
 /**
@@ -344,6 +426,8 @@ function nexus_render_seo_cockpit_detail_view( $detail ) {
 	$current         = $detail['overview']['current'];
 	$previous        = $detail['overview']['previous'];
 	$inspection      = is_array( $detail['inspection'] ?? null ) ? $detail['inspection'] : [];
+	$koko_detail     = is_array( $detail['koko'] ?? null ) ? $detail['koko'] : [];
+	$diagnostics     = is_array( $detail['diagnostics'] ?? null ) ? $detail['diagnostics'] : [];
 	$range_days      = (int) ( $detail['range_days'] ?? 28 );
 	$previous_queries = [];
 
@@ -368,16 +452,7 @@ function nexus_render_seo_cockpit_detail_view( $detail ) {
 			</div>
 		</div>
 
-		<div class="nexus-seo-cockpit__metrics">
-			<?php foreach ( [ 'clicks' => 'Klicks', 'impressions' => 'Impressionen', 'ctr' => 'CTR', 'position' => 'Ø Position' ] as $metric => $label ) : ?>
-				<?php $delta = nexus_get_seo_cockpit_metric_delta( $metric, $current[ $metric ], $previous[ $metric ] ); ?>
-				<article class="nexus-seo-cockpit__metric-card">
-					<span class="nexus-seo-cockpit__metric-label"><?php echo esc_html( $label ); ?></span>
-					<strong class="nexus-seo-cockpit__metric-value"><?php echo esc_html( nexus_format_seo_cockpit_metric( $metric, $current[ $metric ] ) ); ?></strong>
-					<span class="nexus-seo-cockpit__metric-delta is-<?php echo esc_attr( $delta['class'] ); ?>"><?php echo esc_html( $delta['label'] ); ?></span>
-				</article>
-			<?php endforeach; ?>
-		</div>
+		<?php nexus_render_seo_cockpit_metric_cards( (array) $current, (array) $previous ); ?>
 	</section>
 
 	<div class="nexus-seo-cockpit__grid nexus-seo-cockpit__grid--detail">
@@ -411,7 +486,11 @@ function nexus_render_seo_cockpit_detail_view( $detail ) {
 				<li><strong>noindex:</strong> <?php echo esc_html( ! empty( $context['noindex'] ) ? 'Ja' : 'Nein' ); ?></li>
 				<li><strong>In Sitemap:</strong> <?php echo esc_html( ! empty( $context['in_sitemap'] ) ? 'Ja' : 'Nein' ); ?></li>
 				<li><strong>Wortanzahl:</strong> <?php echo esc_html( (string) ( $context['word_count'] ?? 0 ) ); ?></li>
-				<li><strong>Interne Links:</strong> <?php echo esc_html( (string) ( $context['internal_links']['note'] ?? 'Noch nicht gemessen' ) ); ?></li>
+				<li><strong>Interne Links eingehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context['internal_links']['incoming_links'] ?? 0 ) ) ); ?></li>
+				<li><strong>Verlinkende Dokumente:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context['internal_links']['incoming_documents'] ?? 0 ) ) ); ?></li>
+				<li><strong>Interne Links ausgehend:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context['internal_links']['outgoing_links'] ?? 0 ) ) ); ?></li>
+				<li><strong>Verlinkte interne Ziele:</strong> <?php echo esc_html( number_format_i18n( (float) ( $context['internal_links']['outgoing_unique_urls'] ?? 0 ) ) ); ?></li>
+				<li><strong>Linkgraph-Notiz:</strong> <?php echo esc_html( (string) ( $context['internal_links']['note'] ?? 'Noch nicht gemessen' ) ); ?></li>
 			</ul>
 		</section>
 	</div>
@@ -420,6 +499,18 @@ function nexus_render_seo_cockpit_detail_view( $detail ) {
 		<section class="nexus-seo-cockpit__panel">
 			<h2>Insights für diese URL</h2>
 			<?php nexus_render_seo_cockpit_insights_list( (array) ( $detail['insights'] ?? [] ), 6 ); ?>
+		</section>
+
+		<section class="nexus-seo-cockpit__panel">
+			<h2>Koko-Kontext</h2>
+			<p class="nexus-seo-cockpit__status <?php echo esc_attr( ! empty( $koko_detail['available'] ) ? 'is-positive' : 'is-neutral' ); ?>">
+				<?php echo esc_html( (string) ( $koko_detail['status']['label'] ?? 'Koko nicht verfuegbar' ) ); ?>
+			</p>
+			<?php if ( ! empty( $koko_detail['matched'] ) ) : ?>
+				<?php nexus_render_seo_cockpit_koko_metrics( (array) ( $koko_detail['current'] ?? [] ), (array) ( $koko_detail['previous'] ?? [] ) ); ?>
+			<?php else : ?>
+				<p class="nexus-seo-cockpit__hint"><?php echo esc_html( (string) ( $koko_detail['note'] ?? 'Fuer diese URL liegt kein eindeutiger Koko-Kontext vor.' ) ); ?></p>
+			<?php endif; ?>
 		</section>
 
 		<section class="nexus-seo-cockpit__panel">
@@ -454,6 +545,11 @@ function nexus_render_seo_cockpit_detail_view( $detail ) {
 	</div>
 
 	<div class="nexus-seo-cockpit__grid nexus-seo-cockpit__grid--detail">
+		<section class="nexus-seo-cockpit__panel">
+			<h2>Drilldown-Diagnostik</h2>
+			<?php nexus_render_seo_cockpit_diagnostics_list( $diagnostics, 5 ); ?>
+		</section>
+
 		<section class="nexus-seo-cockpit__panel">
 			<h2>Top Queries dieser URL</h2>
 			<table class="widefat striped nexus-seo-cockpit__table">
@@ -531,6 +627,7 @@ function nexus_render_seo_cockpit_dashboard() {
 	$snapshot      = nexus_get_seo_cockpit_snapshot( false, $range_days );
 	$site_list     = $is_connected ? nexus_get_seo_cockpit_sites() : new WP_Error( 'nexus_seo_not_connected', 'Die Search Console ist noch nicht verbunden.' );
 	$detail        = '' !== $detail_url ? nexus_get_seo_cockpit_url_detail( $detail_url, false, $range_days ) : null;
+	$diagnostics   = function_exists( 'nexus_get_seo_cockpit_diagnostics' ) ? nexus_get_seo_cockpit_diagnostics( $detail_url ) : [];
 	?>
 	<div class="wrap nexus-seo-cockpit">
 		<h1>SEO Cockpit</h1>
@@ -633,7 +730,14 @@ function nexus_render_seo_cockpit_dashboard() {
 				<p class="nexus-seo-cockpit__status <?php echo esc_attr( $koko['active'] ? 'is-positive' : 'is-neutral' ); ?>">
 					<?php echo esc_html( $koko['label'] ); ?>
 				</p>
-				<p class="nexus-seo-cockpit__hint">Koko bleibt aktuell ein zusätzlicher Kontextlayer. Das Cockpit priorisiert primär Search-Console- und WordPress-Signale.</p>
+				<?php if ( ! empty( $koko['note'] ) ) : ?>
+					<p class="nexus-seo-cockpit__hint"><?php echo esc_html( (string) $koko['note'] ); ?></p>
+				<?php endif; ?>
+				<div class="nexus-seo-cockpit__chips">
+					<span class="nexus-seo-cockpit__chip">Totals: <?php echo esc_html( ! empty( $koko['endpoints']['totals'] ) ? 'ja' : 'nein' ); ?></span>
+					<span class="nexus-seo-cockpit__chip">Stats: <?php echo esc_html( ! empty( $koko['endpoints']['stats'] ) ? 'ja' : 'nein' ); ?></span>
+					<span class="nexus-seo-cockpit__chip">Posts: <?php echo esc_html( ! empty( $koko['endpoints']['posts'] ) ? 'ja' : 'nein' ); ?></span>
+				</div>
 			</section>
 		</div>
 
@@ -645,14 +749,9 @@ function nexus_render_seo_cockpit_dashboard() {
 			</section>
 		<?php else : ?>
 			<?php
-			$current  = $snapshot['overview']['current'];
-			$previous = $snapshot['overview']['previous'];
-			$metrics  = [
-				'clicks'      => 'Klicks',
-				'impressions' => 'Impressionen',
-				'ctr'         => 'CTR',
-				'position'    => 'Ø Position',
-			];
+			$current       = $snapshot['overview']['current'];
+			$previous      = $snapshot['overview']['previous'];
+			$koko_snapshot = is_array( $snapshot['koko'] ?? null ) ? $snapshot['koko'] : [];
 			?>
 			<section class="nexus-seo-cockpit__panel">
 				<div class="nexus-seo-cockpit__panel-head">
@@ -675,16 +774,7 @@ function nexus_render_seo_cockpit_dashboard() {
 					</div>
 				</div>
 
-				<div class="nexus-seo-cockpit__metrics">
-					<?php foreach ( $metrics as $key => $label ) : ?>
-						<?php $delta = nexus_get_seo_cockpit_metric_delta( $key, $current[ $key ], $previous[ $key ] ); ?>
-						<article class="nexus-seo-cockpit__metric-card">
-							<span class="nexus-seo-cockpit__metric-label"><?php echo esc_html( $label ); ?></span>
-							<strong class="nexus-seo-cockpit__metric-value"><?php echo esc_html( nexus_format_seo_cockpit_metric( $key, $current[ $key ] ) ); ?></strong>
-							<span class="nexus-seo-cockpit__metric-delta is-<?php echo esc_attr( $delta['class'] ); ?>"><?php echo esc_html( $delta['label'] ); ?></span>
-						</article>
-					<?php endforeach; ?>
-				</div>
+				<?php nexus_render_seo_cockpit_metric_cards( (array) $current, (array) $previous ); ?>
 			</section>
 
 			<section class="nexus-seo-cockpit__panel">
@@ -706,6 +796,51 @@ function nexus_render_seo_cockpit_dashboard() {
 				<section class="nexus-seo-cockpit__panel">
 					<h2>Prioritäten</h2>
 					<?php nexus_render_seo_cockpit_insights_list( (array) ( $snapshot['insights'] ?? [] ), 8 ); ?>
+				</section>
+
+				<section class="nexus-seo-cockpit__panel">
+					<h2>Runtime-Diagnostik</h2>
+					<?php nexus_render_seo_cockpit_diagnostics_list( $diagnostics, 6 ); ?>
+				</section>
+			</div>
+
+			<div class="nexus-seo-cockpit__grid nexus-seo-cockpit__grid--reports">
+				<section class="nexus-seo-cockpit__panel">
+					<h2>Koko-Kontext</h2>
+					<p class="nexus-seo-cockpit__hint">Onsite-Nutzung fuer denselben Zeitraum. Das ist ein Kontextlayer fuer Nachfrage, nicht der Ersatz fuer Search Console.</p>
+					<?php if ( ! empty( $koko_snapshot['available'] ) ) : ?>
+						<?php nexus_render_seo_cockpit_koko_metrics( (array) ( $koko_snapshot['overview']['current'] ?? [] ), (array) ( $koko_snapshot['overview']['previous'] ?? [] ) ); ?>
+						<?php if ( ! empty( $koko_snapshot['top_pages'] ) ) : ?>
+							<table class="widefat striped nexus-seo-cockpit__table">
+								<thead>
+									<tr>
+										<th>Seite</th>
+										<th>Besucher</th>
+										<th>Pageviews</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ( (array) $koko_snapshot['top_pages'] as $row ) : ?>
+										<tr>
+											<td>
+												<?php if ( ! empty( $row['url'] ) ) : ?>
+													<a href="<?php echo esc_url( nexus_get_seo_cockpit_detail_url( (string) $row['url'] ) ); ?>"><code><?php echo esc_html( (string) ( $row['title'] ?: $row['url'] ) ); ?></code></a>
+												<?php else : ?>
+													<?php echo esc_html( (string) ( $row['title'] ?? '—' ) ); ?>
+												<?php endif; ?>
+											</td>
+											<td><?php echo esc_html( number_format_i18n( (float) ( $row['visitors'] ?? 0 ) ) ); ?></td>
+											<td><?php echo esc_html( number_format_i18n( (float) ( $row['pageviews'] ?? 0 ) ) ); ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						<?php endif; ?>
+					<?php else : ?>
+						<p class="nexus-seo-cockpit__hint">
+							<?php echo esc_html( ! empty( $koko_snapshot['status']['label'] ) ? (string) $koko_snapshot['status']['label'] : 'Koko liefert derzeit keinen auswertbaren Kontext.' ); ?>
+						</p>
+					<?php endif; ?>
 				</section>
 
 				<section class="nexus-seo-cockpit__panel">
@@ -749,12 +884,13 @@ function nexus_render_seo_cockpit_dashboard() {
 								<th>URL</th>
 								<th>Typ</th>
 								<th>Status</th>
-								<th>Impressionen</th>
-								<th>Position</th>
-								<th>SEO</th>
-								<th>Primärer Hinweis</th>
-							</tr>
-						</thead>
+									<th>Impressionen</th>
+									<th>Position</th>
+									<th>SEO</th>
+									<th>Koko</th>
+									<th>Primärer Hinweis</th>
+								</tr>
+							</thead>
 						<tbody>
 							<?php foreach ( (array) $snapshot['problem_pages'] as $page ) : ?>
 								<?php $context = is_array( $page['context'] ?? null ) ? $page['context'] : []; ?>
@@ -773,6 +909,20 @@ function nexus_render_seo_cockpit_dashboard() {
 												! empty( $context['seo_description_present'] ) ? 'Ja' : 'Nein',
 												! empty( $context['noindex'] ) ? 'Ja' : 'Nein'
 											)
+										);
+										?>
+									</td>
+									<td>
+										<?php
+										$koko_page = is_array( $koko_snapshot['page_map'][ (string) $page['url'] ] ?? null ) ? $koko_snapshot['page_map'][ (string) $page['url'] ] : [];
+										echo esc_html(
+											! empty( $koko_page )
+												? sprintf(
+													'%s / %s',
+													number_format_i18n( (float) ( $koko_page['visitors'] ?? 0 ) ),
+													number_format_i18n( (float) ( $koko_page['pageviews'] ?? 0 ) )
+												)
+												: '—'
 										);
 										?>
 									</td>
@@ -795,6 +945,7 @@ function nexus_render_seo_cockpit_dashboard() {
 								<th>Impressionen</th>
 								<th>CTR</th>
 								<th>Position</th>
+								<th>Koko</th>
 								<th>WP-Kontext</th>
 							</tr>
 						</thead>
@@ -810,6 +961,20 @@ function nexus_render_seo_cockpit_dashboard() {
 									<td><?php echo esc_html( number_format_i18n( (float) ( $row['impressions'] ?? 0 ) ) ); ?></td>
 									<td><?php echo esc_html( number_format_i18n( (float) ( ( $row['ctr'] ?? 0 ) * 100 ), 1 ) . '%' ); ?></td>
 									<td><?php echo esc_html( number_format_i18n( (float) ( $row['position'] ?? 0 ), 1 ) ); ?></td>
+									<td>
+										<?php
+										$koko_page = is_array( $koko_snapshot['page_map'][ $url ] ?? null ) ? $koko_snapshot['page_map'][ $url ] : [];
+										echo esc_html(
+											! empty( $koko_page )
+												? sprintf(
+													'%s / %s',
+													number_format_i18n( (float) ( $koko_page['visitors'] ?? 0 ) ),
+													number_format_i18n( (float) ( $koko_page['pageviews'] ?? 0 ) )
+												)
+												: '—'
+										);
+										?>
+									</td>
 									<td><?php echo esc_html( (string) ( $context['post_type'] ?? 'nicht zugeordnet' ) ); ?></td>
 								</tr>
 							<?php endforeach; ?>

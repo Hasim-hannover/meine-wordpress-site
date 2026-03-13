@@ -70,6 +70,26 @@ function nexus_get_seo_cockpit_redirect_target_for_url( $url ) {
 }
 
 /**
+ * Return a default internal-link payload.
+ *
+ * @param string $status Status key.
+ * @param string $note   Human note.
+ * @return array<string, mixed>
+ */
+function nexus_get_seo_cockpit_default_internal_links( $status = 'pending', $note = '' ) {
+	return [
+		'status'               => sanitize_key( (string) $status ),
+		'incoming_links'       => 0,
+		'incoming_documents'   => 0,
+		'outgoing_links'       => 0,
+		'outgoing_unique_urls' => 0,
+		'top_sources'          => [],
+		'top_targets'          => [],
+		'note'                 => '' !== $note ? $note : 'Interne Link-Zaehlung ist noch nicht verfuegbar.',
+	];
+}
+
+/**
  * Resolve one frontend URL to a local WordPress object where possible.
  *
  * @param string $url Frontend URL.
@@ -119,11 +139,9 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 		'noindex'                => false,
 		'in_sitemap'             => false,
 		'word_count'             => 0,
-		'internal_links'         => [
-			'status' => 'pending',
-			'value'  => null,
-			'note'   => 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.',
-		],
+		'internal_links'         => function_exists( 'nexus_get_seo_cockpit_internal_link_context' )
+			? nexus_get_seo_cockpit_internal_link_context( $url )
+			: nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
 		'edit_link'              => '',
 		'frontend_link'          => $url,
 		'snippet_issues'         => [],
@@ -151,11 +169,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 			'noindex'                 => false,
 			'in_sitemap'              => false,
 			'word_count'              => 0,
-			'internal_links'          => [
-				'status' => 'n/a',
-				'value'  => null,
-				'note'   => 'Diese URL wird serverseitig auf ein kanonisches Ziel weitergeleitet.',
-			],
+			'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'n/a', 'Diese URL wird serverseitig auf ein kanonisches Ziel weitergeleitet.' ),
 			'edit_link'               => '',
 			'frontend_link'           => $redirect_url,
 			'snippet_issues'          => [],
@@ -193,11 +207,9 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 					'noindex'                 => false,
 					'in_sitemap'              => false,
 					'word_count'              => nexus_get_seo_cockpit_post_word_count( $resolved_id ),
-					'internal_links'          => [
-						'status' => 'pending',
-						'value'  => null,
-						'note'   => 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.',
-					],
+					'internal_links'          => function_exists( 'nexus_get_seo_cockpit_internal_link_context' )
+						? nexus_get_seo_cockpit_internal_link_context( home_url( '/' . $cluster_slug . '/' ) )
+						: nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
 					'edit_link'               => (string) get_edit_post_link( $resolved_id, 'raw' ),
 					'frontend_link'           => home_url( '/' . $cluster_slug . '/' ),
 					'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues(
@@ -244,11 +256,9 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 				'noindex'                 => ! empty( $seo_context['noindex'] ),
 				'in_sitemap'              => nexus_is_seo_cockpit_post_in_sitemap( $post, ! empty( $seo_context['noindex'] ) ),
 				'word_count'              => nexus_get_seo_cockpit_post_word_count( $resolved_id ),
-				'internal_links'          => [
-					'status' => 'pending',
-					'value'  => null,
-					'note'   => 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.',
-				],
+				'internal_links'          => function_exists( 'nexus_get_seo_cockpit_internal_link_context' )
+					? nexus_get_seo_cockpit_internal_link_context( (string) get_permalink( $resolved_id ) )
+					: nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
 				'edit_link'               => (string) get_edit_post_link( $resolved_id, 'raw' ),
 				'frontend_link'           => (string) get_permalink( $resolved_id ),
 				'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues( $seo_context ),
@@ -279,11 +289,9 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 			'noindex'                 => false,
 			'in_sitemap'              => false,
 			'word_count'              => 0,
-			'internal_links'          => [
-				'status' => 'pending',
-				'value'  => null,
-				'note'   => 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.',
-			],
+			'internal_links'          => function_exists( 'nexus_get_seo_cockpit_internal_link_context' )
+				? nexus_get_seo_cockpit_internal_link_context( home_url( '/' . $cluster_slug . '/' ) )
+				: nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
 			'edit_link'               => '',
 			'frontend_link'           => home_url( '/' . $cluster_slug . '/' ),
 			'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues(
@@ -824,6 +832,8 @@ function nexus_get_seo_cockpit_url_detail( $url, $force = false, $range_days = n
 	$url        = nexus_normalize_seo_cockpit_url( $url );
 	$range_days = null === $range_days ? nexus_get_seo_cockpit_requested_range_days() : absint( $range_days );
 	$ranges     = nexus_get_seo_cockpit_date_ranges( $range_days );
+	$query_cap  = nexus_get_seo_cockpit_row_cap( 'detail_queries' );
+	$device_cap = nexus_get_seo_cockpit_row_cap( 'detail_devices' );
 
 	if ( '' === $property || '' === $url ) {
 		return new WP_Error( 'nexus_seo_missing_detail_context', 'Für den URL-Drilldown fehlt Property oder URL.' );
@@ -858,24 +868,51 @@ function nexus_get_seo_cockpit_url_detail( $url, $force = false, $range_days = n
 		return $trend;
 	}
 
-	$queries = nexus_get_seo_cockpit_report_rows( $property, $ranges['current_start'], $ranges['current_end'], [ 'query' ], $filters, 20 );
+	$queries = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['current_start'],
+		$ranges['current_end'],
+		[ 'query' ],
+		$filters,
+		(int) $query_cap['limit'],
+		$query_cap
+	);
 	if ( is_wp_error( $queries ) ) {
 		return $queries;
 	}
 
-	$previous_queries = nexus_get_seo_cockpit_report_rows( $property, $ranges['previous_start'], $ranges['previous_end'], [ 'query' ], $filters, 20 );
+	$previous_queries = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['previous_start'],
+		$ranges['previous_end'],
+		[ 'query' ],
+		$filters,
+		(int) $query_cap['limit'],
+		$query_cap
+	);
 	if ( is_wp_error( $previous_queries ) ) {
 		return $previous_queries;
 	}
 
-	$devices = nexus_get_seo_cockpit_report_rows( $property, $ranges['current_start'], $ranges['current_end'], [ 'device' ], $filters, 5 );
+	$devices = nexus_get_seo_cockpit_report_rows(
+		$property,
+		$ranges['current_start'],
+		$ranges['current_end'],
+		[ 'device' ],
+		$filters,
+		(int) $device_cap['limit'],
+		$device_cap
+	);
 	if ( is_wp_error( $devices ) ) {
 		return $devices;
 	}
 
-	$snapshot  = nexus_get_seo_cockpit_snapshot( false, $range_days );
-	$insights  = [];
+	$snapshot   = nexus_get_seo_cockpit_snapshot( false, $range_days );
+	$insights   = [];
+	$context    = nexus_get_seo_cockpit_wp_context_for_url( $url );
 	$inspection = function_exists( 'nexus_get_seo_cockpit_cached_url_inspection' ) ? nexus_get_seo_cockpit_cached_url_inspection( $url ) : null;
+	$koko       = function_exists( 'nexus_get_seo_cockpit_koko_detail_data' ) ? nexus_get_seo_cockpit_koko_detail_data( $url, $context, $ranges ) : [];
+	$diagnostics = function_exists( 'nexus_get_seo_cockpit_diagnostics' ) ? nexus_get_seo_cockpit_diagnostics( $url ) : [];
 
 	if ( ! is_wp_error( $snapshot ) ) {
 		foreach ( (array) ( $snapshot['insights'] ?? [] ) as $insight ) {
@@ -899,9 +936,11 @@ function nexus_get_seo_cockpit_url_detail( $url, $force = false, $range_days = n
 		'top_queries'      => $queries,
 		'previous_queries' => $previous_queries,
 		'devices'          => $devices,
-		'context'          => nexus_get_seo_cockpit_wp_context_for_url( $url ),
+		'context'          => $context,
 		'insights'         => $insights,
 		'inspection'       => $inspection,
+		'koko'             => $koko,
+		'diagnostics'      => $diagnostics,
 	];
 
 	set_transient( $cache_key, $detail, nexus_get_seo_cockpit_refresh_interval_seconds() );
