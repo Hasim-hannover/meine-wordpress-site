@@ -307,17 +307,22 @@ function nexus_sanitize_seo_cockpit_settings( $settings ) {
  */
 function nexus_add_seo_cockpit_settings_feedback( $settings ) {
 	$option_name = nexus_get_seo_cockpit_option_name();
+	$effective   = [
+		'property'      => defined( 'NEXUS_GSC_PROPERTY' ) && NEXUS_GSC_PROPERTY ? (string) NEXUS_GSC_PROPERTY : (string) ( $settings['property'] ?? '' ),
+		'client_id'     => defined( 'NEXUS_GSC_CLIENT_ID' ) && NEXUS_GSC_CLIENT_ID ? (string) NEXUS_GSC_CLIENT_ID : (string) ( $settings['client_id'] ?? '' ),
+		'client_secret' => defined( 'NEXUS_GSC_CLIENT_SECRET' ) && NEXUS_GSC_CLIENT_SECRET ? (string) NEXUS_GSC_CLIENT_SECRET : (string) ( $settings['client_secret'] ?? '' ),
+	];
 	$missing     = [];
 
-	if ( '' === (string) ( $settings['property'] ?? '' ) ) {
+	if ( '' === $effective['property'] ) {
 		$missing[] = 'Property';
 	}
 
-	if ( '' === (string) ( $settings['client_id'] ?? '' ) ) {
+	if ( '' === $effective['client_id'] ) {
 		$missing[] = 'Client ID';
 	}
 
-	if ( '' === (string) ( $settings['client_secret'] ?? '' ) ) {
+	if ( '' === $effective['client_secret'] ) {
 		$missing[] = 'Client Secret';
 	}
 
