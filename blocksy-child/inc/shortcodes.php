@@ -278,7 +278,7 @@ function hu_hero_section_shortcode() {
 							<div class="audit-card-premium__intro">
 								<span class="audit-card-premium__eyebrow">Growth Audit</span>
 							</div>
-							<h3 class="audit-card-premium__title">Erster Schritt: Diagnose statt Pitch</h3>
+							<h2 class="audit-card-premium__title">Erster Schritt: Diagnose statt Pitch</h2>
 							<p class="audit-card-premium__copy">
 								Wir prüfen, wo Ihre WordPress-Website Nachfrage verliert:
 								bei Sichtbarkeit, Vertrauen, Datensignalen oder im nächsten Conversion-Schritt.

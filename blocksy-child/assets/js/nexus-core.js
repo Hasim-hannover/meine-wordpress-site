@@ -223,10 +223,19 @@
             var elements = document.querySelectorAll(selector);
             if (!elements.length) return;
 
+            function markVisible(el) {
+                el.classList.add('nx-visible');
+                el.classList.add('is-visible');
+            }
+
+            function isAboveFold(el) {
+                var rect = el.getBoundingClientRect();
+                return rect.bottom > 0 && rect.top < (window.innerHeight * 0.92);
+            }
+
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 elements.forEach(function (el) {
-                    el.classList.add('nx-visible');
-                    el.classList.add('is-visible');
+                    markVisible(el);
                 });
                 return;
             }
@@ -234,8 +243,7 @@
             var observer = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('nx-visible');
-                        entry.target.classList.add('is-visible');
+                        markVisible(entry.target);
                         observer.unobserve(entry.target);
                     }
                 });
@@ -244,7 +252,14 @@
                 rootMargin: '0px 0px -60px 0px'
             });
 
-            elements.forEach(function (el) { observer.observe(el); });
+            elements.forEach(function (el) {
+                if (isAboveFold(el)) {
+                    markVisible(el);
+                    return;
+                }
+
+                observer.observe(el);
+            });
         },
 
 

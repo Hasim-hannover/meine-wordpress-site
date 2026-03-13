@@ -49,12 +49,11 @@ export default function HomepageMindmapTeaser() {
           hochfahren.
         </p>
 
-        <div className="hmt-map" role="list" aria-label="WGOS Teaser Mindmap">
+        <div className="hmt-map" aria-label="WGOS Teaser Mindmap">
           {phases.map((phase, index) => (
             <button
               key={phase.id}
               type="button"
-              role="listitem"
               className={[
                 "hmt-node",
                 mounted ? "is-mounted" : "",
@@ -67,6 +66,7 @@ export default function HomepageMindmapTeaser() {
                 animationDelay: `${index * 140}ms`,
               }}
               aria-expanded={activeId === phase.id}
+              aria-label={`${phase.label}: ${phase.modules.join(", ")}`}
               onClick={() =>
                 setActiveId((current) => (current === phase.id ? null : phase.id))
               }

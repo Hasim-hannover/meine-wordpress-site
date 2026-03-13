@@ -81,6 +81,10 @@
 		return (
 			'<button type="button" class="hmt-node" data-node-id="' +
 			phase.id +
+			'" aria-label="' +
+			phase.label +
+			": " +
+			phase.modules.join(", ") +
 			'" style="--node-color:' +
 			phase.color +
 			';animation-delay:' +
@@ -110,7 +114,7 @@
 		'<p class="hmt-kicker">System-Vorschau</p>' +
 		'<h3 id="hmt-title">WGOS in 3 Phasen</h3>' +
 		'<p class="hmt-subtitle">Fundament aufbauen, Wachstum stabilisieren, Skalierung kontrolliert hochfahren.</p>' +
-		'<div class="hmt-map" role="list" aria-label="WGOS Teaser Mindmap">' +
+		'<div class="hmt-map" aria-label="WGOS Teaser Mindmap">' +
 		phases.map(renderNode).join("") +
 		"</div>" +
 		'<a class="hmt-cta" href="/wordpress-growth-operating-system/">Das vollständige System →</a>' +
