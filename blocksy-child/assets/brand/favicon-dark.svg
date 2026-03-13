@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">Favicon Dark</title>
-  <desc id="desc">Temporary dark favicon placeholder with the initials H and U.</desc>
-  <rect width="128" height="128" rx="28" fill="#121212" />
-  <text x="64" y="78" text-anchor="middle" fill="#f4efe6" font-family="Georgia, serif" font-size="44">
-    HU
-  </text>
+  <title id="title">Haşim Üner Favicon Dark</title>
+  <desc id="desc">Dark favicon derived from the Haşim Üner brand mark.</desc>
+  <rect width="128" height="128" rx="28" fill="#16120f" />
+  <rect x="2" y="2" width="124" height="124" rx="26" fill="none" stroke="#3a3028" stroke-width="3" />
+  <path d="M36 28H48V57H80V28H92V100H80V69H48V100H36V28Z" fill="#f4efe6" />
+  <rect x="36" y="106" width="56" height="6" rx="3" fill="#b46a3c" opacity="0.9" />
 </svg>
