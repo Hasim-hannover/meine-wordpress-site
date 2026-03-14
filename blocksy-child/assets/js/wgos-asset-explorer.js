@@ -56,7 +56,7 @@
 			return links[cta.hrefKey];
 		}
 
-		return '#pakete';
+		return '#audit';
 	}
 
 	function emitExplorerEvent(name, asset) {
@@ -101,12 +101,12 @@
 			var nextHash;
 
 			if (!asset) {
-				setActiveId('');
-				setHoveredId('');
+					setActiveId('');
+					setHoveredId('');
 
-				if (typeof window !== 'undefined' && window.location.hash.indexOf(HASH_PREFIX) === 0) {
-					window.history.replaceState(null, '', '#module');
-				}
+					if (typeof window !== 'undefined' && window.location.hash.indexOf(HASH_PREFIX) === 0) {
+						window.history.replaceState(null, '', '#explorer');
+					}
 
 				return;
 			}
@@ -125,13 +125,13 @@
 		}
 
 		function closeAsset() {
-			setActiveId('');
-			setHoveredId('');
+				setActiveId('');
+				setHoveredId('');
 
-			if (typeof window !== 'undefined' && window.location.hash.indexOf(HASH_PREFIX) === 0) {
-				window.history.replaceState(null, '', '#module');
+				if (typeof window !== 'undefined' && window.location.hash.indexOf(HASH_PREFIX) === 0) {
+					window.history.replaceState(null, '', '#explorer');
+				}
 			}
-		}
 
 		function navigateAsset(direction) {
 			var nextIndex;

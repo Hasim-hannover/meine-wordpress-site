@@ -12,8 +12,29 @@
 	box-shadow: 0 24px 60px hsl(30 22% 4% / 0.26);
 }
 
-#module .wgos-asset-explorer-root {
+#explorer .wgos-asset-explorer-root {
 	margin-top: 0;
+}
+
+.wgos-map-guide {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 0 0 18px;
+}
+
+.wgos-map-guide span {
+	display: inline-flex;
+	align-items: center;
+	padding: 10px 14px;
+	border-radius: 999px;
+	border: 1px solid rgba(212, 175, 55, 0.18);
+	background: rgba(212, 175, 55, 0.08);
+	color: var(--nx-accent-text);
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
 }
 
 .wgos-asset-explorer {
@@ -455,7 +476,7 @@
 }
 
 @media (max-width: 900px) {
-	#module .wgos-asset-explorer-root {
+	#explorer .wgos-asset-explorer-root {
 		padding: 0.8rem;
 		border-radius: 18px;
 	}
