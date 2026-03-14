@@ -197,6 +197,23 @@
     box-shadow: var(--nx-shadow);
 }
 
+.pillar-card:focus-within {
+    border-color: var(--nx-gold);
+    transform: translateY(-4px);
+    box-shadow: var(--nx-shadow);
+}
+
+.pillar-card__linkwrap {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.pillar-card__linkwrap:focus-visible {
+    outline: 2px solid var(--nx-gold);
+    outline-offset: 4px;
+}
+
 .pillar-card__image {
     overflow: hidden;
     aspect-ratio: 16 / 9;

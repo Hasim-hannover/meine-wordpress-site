@@ -32,18 +32,20 @@ get_template_part( 'template-parts/blog-header' );
             <?php if (have_posts()) : while (have_posts()) : the_post(); 
                 $thumb = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: 'https://hasimuener.de/wp-content/uploads/2025/09/Impulse_Hasim_uener_Blog.webp';
             ?>
-                <article class="nx-card" onclick="window.location='<?php the_permalink(); ?>';" style="cursor:pointer;">
-                    <div style="border-radius:var(--nx-radius-md); overflow:hidden; margin-bottom:var(--nx-space-lg); border:1px solid var(--nx-border);">
-                        <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title(); ?>" style="width:100%; height:250px; object-fit:cover; display:block;">
-                    </div>
-                    <div class="card-content">
-                        <span class="nx-metric__label" style="display:block; margin-bottom:var(--nx-space-sm);"><?php echo get_the_date(); ?></span>
-                        <h3 class="nx-card__title"><?php the_title(); ?></h3>
-                        <p class="nx-card__text" style="margin: var(--nx-space-md) 0;">
-                            <?php echo wp_trim_words(get_the_excerpt(), 18); ?>
-                        </p>
-                        <span class="text-gold" style="font-weight:700; font-size:0.9rem;">Analyse lesen →</span>
-                    </div>
+                <article class="nx-card">
+                    <a class="nx-card__linkwrap" href="<?php echo esc_url( get_permalink() ); ?>" aria-label="<?php echo esc_attr( sprintf( 'Analyse lesen: %s', get_the_title() ) ); ?>">
+                        <div style="border-radius:var(--nx-radius-md); overflow:hidden; margin-bottom:var(--nx-space-lg); border:1px solid var(--nx-border);">
+                            <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>" style="width:100%; height:250px; object-fit:cover; display:block;">
+                        </div>
+                        <div class="card-content">
+                            <span class="nx-metric__label" style="display:block; margin-bottom:var(--nx-space-sm);"><?php echo get_the_date(); ?></span>
+                            <h3 class="nx-card__title"><?php the_title(); ?></h3>
+                            <p class="nx-card__text" style="margin: var(--nx-space-md) 0;">
+                                <?php echo wp_trim_words(get_the_excerpt(), 18); ?>
+                            </p>
+                            <span class="text-gold" style="font-weight:700; font-size:0.9rem;">Analyse lesen →</span>
+                        </div>
+                    </a>
                 </article>
             <?php endwhile; endif; ?>
         </div>

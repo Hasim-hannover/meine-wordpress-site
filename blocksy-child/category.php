@@ -184,19 +184,21 @@ if ($featured_query->have_posts()) {
                         if ($grid_query->have_posts()) : while ($grid_query->have_posts()) : $grid_query->the_post();
                             $thumb = get_the_post_thumbnail_url(get_the_ID(), 'medium_large');
                         ?>
-                            <article class="pillar-card" onclick="window.location='<?php the_permalink(); ?>';">
-                                <?php if ($thumb) : ?>
-                                    <div class="pillar-card__image">
-                                        <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy">
+                            <article class="pillar-card">
+                                <a class="pillar-card__linkwrap" href="<?php echo esc_url( get_permalink() ); ?>" aria-label="<?php echo esc_attr( sprintf( 'Analyse lesen: %s', get_the_title() ) ); ?>">
+                                    <?php if ($thumb) : ?>
+                                        <div class="pillar-card__image">
+                                            <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy">
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <div class="pillar-card__body">
+                                        <span class="pillar-card__date"><?php echo get_the_date(); ?></span>
+                                        <h3 class="pillar-card__title"><?php the_title(); ?></h3>
+                                        <p class="pillar-card__excerpt"><?php echo wp_trim_words(get_the_excerpt(), 18); ?></p>
+                                        <span class="pillar-card__link">Analyse lesen →</span>
                                     </div>
-                                <?php endif; ?>
-                                
-                                <div class="pillar-card__body">
-                                    <span class="pillar-card__date"><?php echo get_the_date(); ?></span>
-                                    <h3 class="pillar-card__title"><?php the_title(); ?></h3>
-                                    <p class="pillar-card__excerpt"><?php echo wp_trim_words(get_the_excerpt(), 18); ?></p>
-                                    <span class="pillar-card__link">Analyse lesen →</span>
-                                </div>
+                                </a>
                             </article>
                         <?php endwhile; else : ?>
                             <p class="pillar-empty">In diesem Pillar werden aktuell neue Analysen vorbereitet.</p>
