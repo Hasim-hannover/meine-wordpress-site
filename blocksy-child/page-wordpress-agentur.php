@@ -14,14 +14,24 @@ $audit_url = nexus_get_audit_url();
 $wgos_url  = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
 $cases_url = nexus_get_results_url();
 $about_url = nexus_get_page_url( [ 'uber-mich' ] );
+$e3_url    = nexus_get_page_url( [ 'e3-new-energy' ] );
 $seo_url   = nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ] );
 $measurement_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
 $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ] );
 
-$hero_bullets = [
-	'Diagnose vor Umsetzung',
-	'Angebotsseiten, Datenebene und KPI-Klarheit statt Aktionismus',
-	'Ownership statt Blackbox',
+$hero_highlights = [
+	[
+		'label' => 'Für wen',
+		'text'  => 'B2B-Unternehmen in Hannover und der Region, für die WordPress ein echter Nachfragekanal ist.',
+	],
+	[
+		'label' => 'Typisches Ergebnis',
+		'text'  => 'Klarere Angebotsseiten, belastbare Datensignale und weniger Reibung bis zur qualifizierten Anfrage.',
+	],
+	[
+		'label' => 'Nächster Schritt',
+		'text'  => 'Erst ein Growth Audit. Danach erst die Entscheidung, welche Maßnahme wirklich zuerst zählt.',
+	],
 ];
 
 $proof_metrics = [
@@ -116,21 +126,45 @@ $system_map = [
 		],
 		'actions' => [
 			[
-				'url'      => $audit_url,
-				'label'    => 'Growth Audit starten',
-				'class'    => 'nx-btn nx-btn--primary',
-				'action'   => 'cta_agentur_system_audit',
-				'category' => 'lead_gen',
-			],
-			[
 				'url'      => $wgos_url,
 				'label'    => 'WGOS verstehen',
-				'class'    => 'nx-btn nx-btn--ghost',
+				'class'    => 'wp-agentur-text-link',
 				'action'   => 'cta_agentur_system_wgos',
 				'category' => 'navigation',
 			],
 		],
-		'note'    => 'Der Growth Audit zeigt, welche dieser vier Ebenen bei Ihnen zuerst zählt.',
+		'note'    => 'Der Audit zeigt, welche dieser vier Ebenen bei Ihnen zuerst zählt.',
+	],
+];
+
+$pain_cards = [
+	[
+		'icon'  => '01',
+		'title' => 'Sichtbarkeit ohne Richtung',
+		'text'  => 'Es gibt Inhalte, aber keine saubere Verbindung zwischen Suchintention, Angebotsseite und nächstem Schritt. Genau dort greifen <a href="' . esc_url( $seo_url ) . '">technische SEO</a> und Angebotslogik ineinander.',
+	],
+	[
+		'icon'  => '02',
+		'title' => 'Daten ohne Entscheidungswert',
+		'text'  => 'Tracking ist installiert, aber nicht belastbar. Consent, Events und Attribution erzeugen Rauschen statt Klarheit. Deshalb ist <a href="' . esc_url( $measurement_url ) . '">privacy-first Measurement</a> Fundament und kein Add-on.',
+	],
+	[
+		'icon'  => '03',
+		'title' => 'Seiten ohne Conversion-Führung',
+		'text'  => 'Kontaktformulare am Seitenende sind keine Funnel-Logik. Wenn Proof, CTA-Reihenfolge und Einwandabbau fehlen, verliert die Seite Nachfrage genau dann, wenn sie wertvoll werden könnte. Dort setzt <a href="' . esc_url( $cro_url ) . '">Conversion-Architektur</a> an.',
+	],
+];
+
+$case_teaser_cards = [
+	[
+		'eyebrow' => 'Ausgangslage',
+		'title'   => 'Hoher CPL, schwache Daten, Reibung nach dem Klick',
+		'text'    => 'E3 New Energy kaufte Leads teuer ein, ohne saubere Leadqualität und ohne robuste Conversion-Führung auf der Website.',
+	],
+	[
+		'eyebrow' => 'Maßnahme',
+		'title'   => 'Erst Fundament, dann Aktivierung',
+		'text'    => 'Speed, Tracking, Seitenstruktur und Conversion-Pfade wurden geordnet, bevor neue Skalierung auf das Setup geschaltet wurde.',
 	],
 ];
 
@@ -201,31 +235,51 @@ get_header();
 
 		<section id="hero" class="nx-section nx-hero wp-agentur-hero">
 			<div class="nx-container">
-				<span class="nx-badge nx-badge--gold">WordPress Agentur Hannover für B2B</span>
-				<h1 class="nx-hero__title">WordPress Agentur Hannover für B2B-Websites, die Sichtbarkeit, Daten und Anfragen zusammenführen.</h1>
-				<p class="nx-hero__subtitle">
-					Für Unternehmen aus Hannover und der Region, die mit WordPress mehr wollen als einen Relaunch:
-					klare Angebotsseiten, belastbare Messung, bessere Lead-Führung und eine Umgebung,
-					die kontrolliert weiterentwickelt werden kann.
-				</p>
-				<ul class="hero-bullets">
-					<?php foreach ( $hero_bullets as $hero_bullet ) : ?>
-						<li><?php echo esc_html( $hero_bullet ); ?></li>
-					<?php endforeach; ?>
-				</ul>
-				<div class="hero-cta-block wp-agentur-actions">
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					<a href="<?php echo esc_url( $cases_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_agentur_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
+				<div class="wp-agentur-hero__grid">
+					<div class="wp-agentur-hero__copy">
+						<span class="nx-badge nx-badge--gold">WordPress Agentur Hannover für B2B</span>
+						<h1 class="nx-hero__title">WordPress Agentur Hannover für B2B-Websites, die Sichtbarkeit, Daten und Anfragen zusammenführen.</h1>
+						<p class="nx-hero__subtitle">
+							Für Unternehmen aus Hannover und der Region, die mit WordPress mehr wollen als einen Relaunch:
+							klare Angebotsseiten, belastbare Messung und eine Umgebung, die kontrolliert weiterentwickelt werden kann.
+						</p>
+						<div class="wp-agentur-actions wp-agentur-actions--hero">
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary wp-agentur-hero__primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-agentur-text-link" data-track-action="cta_agentur_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
+						</div>
+						<p class="wp-agentur-hero-support">
+							Workshops und Reviews in Hannover möglich. DACH-weit remote umsetzbar.
+						</p>
+					</div>
+
+					<aside class="wp-agentur-hero-card" aria-labelledby="agentur-hero-card-title">
+						<span class="wp-agentur-hero-card__eyebrow">Sofort orientiert</span>
+						<h2 id="agentur-hero-card-title" class="wp-agentur-hero-card__title">Für wen, mit welchem Ergebnis und wie der Einstieg aussieht.</h2>
+						<div class="wp-agentur-hero-card__items" aria-label="Hero Zusammenfassung">
+							<?php foreach ( $hero_highlights as $highlight ) : ?>
+								<div class="wp-agentur-hero-card__item">
+									<span class="wp-agentur-hero-card__label"><?php echo esc_html( $highlight['label'] ); ?></span>
+									<p><?php echo esc_html( $highlight['text'] ); ?></p>
+								</div>
+							<?php endforeach; ?>
+						</div>
+						<div class="wp-agentur-hero-card__proof" role="list" aria-label="Frühe Proof-Signale">
+							<span role="listitem">3.000+ qualifizierte Leads</span>
+							<span role="listitem">-83% CPL</span>
+							<span role="listitem">8+ Jahre Praxis</span>
+						</div>
+						<p class="wp-agentur-hero-card__note">Lokale Nähe hilft. Entscheidend bleibt, ob aus WordPress ein steuerbares Nachfrage-System wird.</p>
+					</aside>
 				</div>
-				<p class="wp-agentur-hero-support">
-					Workshops und Reviews in Hannover möglich. Entscheidend bleibt die Systemqualität dahinter.
-					<a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_agentur_hero_wgos" data-track-category="navigation">WGOS verstehen</a>
-				</p>
 			</div>
 		</section>
 
 		<section id="proof-bar" class="nx-section wp-agentur-proof">
 			<div class="nx-container">
+				<div class="nx-section-header wp-agentur-proof-header">
+					<h2 class="nx-headline-section">Proof früh sichtbar, damit der Audit nicht im luftleeren Raum startet</h2>
+					<p>Belastbare Kennzahlen, ein wiederholbares Vorgehen und Erfahrung aus echten B2B-Setups.</p>
+				</div>
 				<div class="nx-grid nx-grid-4 wp-agentur-proof-grid">
 					<?php foreach ( $proof_metrics as $proof_metric ) : ?>
 						<div class="nx-card nx-card--flat wp-agentur-proof-item">
@@ -234,6 +288,10 @@ get_header();
 						</div>
 					<?php endforeach; ?>
 				</div>
+				<div class="wp-agentur-proof-cta">
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_proof_audit" data-track-category="lead_gen">Nach dem Proof mit dem Audit starten</a>
+					<p>Oder erst das System dahinter sehen: <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_agentur_proof_wgos" data-track-category="navigation">WGOS verstehen</a></p>
+				</div>
 			</div>
 		</section>
 
@@ -241,15 +299,26 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-section-header">
 					<h2 class="nx-headline-section">Warum viele WordPress-Seiten trotz Sichtbarkeit keine belastbaren Anfragen liefern</h2>
+					<p class="wp-agentur-section-intro">Das Problem ist selten nur Design. Meist fehlt die Verbindung zwischen Angebotsseiten, sauberer Messung, Proof und dem nächsten sinnvollen Schritt.</p>
 				</div>
-				<div class="nx-prose wp-agentur-prose">
-					<p>Das Problem ist selten nur Design. Meist fehlt die Verbindung zwischen Angebotsseiten, sauberer Messung, Proof und dem nächsten sinnvollen Schritt. Dann produziert WordPress zwar Seitenaufrufe, aber kein steuerbares Nachfrage-System.</p>
-					<h3>1. Sichtbarkeit ohne Richtung</h3>
-					<p>Es gibt Inhalte, aber keine klare Informationsarchitektur, keine priorisierten Money Pages und keine saubere Verbindung zwischen Suchintention, Angebotsseite und nächstem Schritt. Genau dort greifen <a href="<?php echo esc_url( $seo_url ); ?>">technische SEO</a> und Angebotslogik ineinander.</p>
-					<h3>2. Daten ohne Entscheidungswert</h3>
-					<p>Tracking ist installiert, aber nicht belastbar. Consent, Events und Attribution erzeugen Rauschen statt Klarheit. Dann sehen Sie zwar Zahlen, aber nicht, welche Seite trägt, wo Anfragen abbrechen oder welche Quelle nur Budget verbrennt. Deshalb ist <a href="<?php echo esc_url( $measurement_url ); ?>">privacy-first Measurement</a> kein Add-on, sondern Fundament.</p>
-					<h3>3. Seiten ohne Conversion-Führung</h3>
-					<p>Kontaktformulare am Seitenende sind keine Funnel-Logik. Wenn Proof, CTA-Reihenfolge und Einwandabbau fehlen, verliert die Seite Nachfrage genau in dem Moment, in dem sie wertvoll werden könnte. Dort setzt <a href="<?php echo esc_url( $cro_url ); ?>">Conversion-Architektur</a> an: auf Seitenebene, nicht erst im Formular.</p>
+				<div class="wp-agentur-pain-grid">
+					<?php foreach ( $pain_cards as $pain_card ) : ?>
+						<article class="wp-agentur-pain-card nx-card">
+							<span class="wp-agentur-pain-card__icon" aria-hidden="true"><?php echo esc_html( $pain_card['icon'] ); ?></span>
+							<h3><?php echo esc_html( $pain_card['title'] ); ?></h3>
+							<p><?php echo wp_kses_post( $pain_card['text'] ); ?></p>
+						</article>
+					<?php endforeach; ?>
+				</div>
+				<div class="wp-agentur-solution-card">
+					<span class="wp-agentur-solution-card__eyebrow">Die Lösung</span>
+					<h3>Erst die Bremsen ordnen. Dann erst über Umsetzungstiefe sprechen.</h3>
+					<p>Wenn Angebotsseiten, Datensignale, Proof und CTA-Führung wieder zusammenarbeiten, entsteht kein schöneres Webprojekt, sondern eine Website mit klarerem Nachfrageweg.</p>
+					<ul>
+						<li>klare Prioritäten statt Relaunch-Reflex</li>
+						<li>belastbare Signale statt Tool-Rauschen</li>
+						<li>bessere Anfrageführung auf kaufnahen Seiten</li>
+					</ul>
 				</div>
 			</div>
 		</section>
@@ -329,6 +398,7 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-section-header">
 					<h2 class="nx-headline-section">Der sinnvolle Einstieg für B2B in Hannover ist nicht der Relaunch, sondern der Audit</h2>
+					<p class="wp-agentur-section-intro">Der Audit hält die Reihenfolge sauber: erst Diagnose, dann Priorisierung, dann erst die passenden Bausteine.</p>
 				</div>
 				<div class="nx-grid nx-grid-3 wp-agentur-process-grid">
 					<article class="nx-step">
@@ -347,10 +417,7 @@ get_header();
 						<p>Erst dann werden die passenden Bausteine aufgebaut oder weiterentwickelt: Money Pages, Datenebene, Proof-Struktur, technisches Fundament und kontrollierter Betrieb.</p>
 					</article>
 				</div>
-				<div class="wp-agentur-actions wp-agentur-actions--center mt-2">
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_prozess_audit" data-track-category="lead_gen">Mit dem Growth Audit starten</a>
-					<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_agentur_prozess_wgos" data-track-category="navigation">WGOS ansehen</a>
-				</div>
+				<p class="wp-agentur-process-link">Mehr zum System? <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_agentur_prozess_wgos" data-track-category="navigation">WGOS ansehen</a></p>
 			</div>
 		</section>
 
@@ -375,45 +442,41 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-section-header">
 					<h2 class="nx-headline-section">Was passiert, wenn die Reihenfolge stimmt</h2>
+					<p class="wp-agentur-section-intro">Kurzer Blick auf die gleiche Logik in der Praxis: Ausgangslage, Eingriff, Ergebnis und nächster sinnvoller Vertiefungsschritt.</p>
 				</div>
-				<div class="nx-prose wp-agentur-prose">
-					<h3>Case Study: E3 New Energy</h3>
-					<p>Ausgangslage: teuer eingekaufte Leads, unsaubere Datenlage, keine robuste Conversion-Führung nach dem Klick.</p>
-					<p>Ansatz: Erst Fundament, dann Aktivierung. Speed, Tracking, Seitenstruktur und Conversion-Pfade wurden geordnet, bevor Skalierung auf dem neuen Setup stattfand. Das Ergebnis war nicht nur eine bessere Website, sondern ein sauber geführtes Nachfrage-System.</p>
-					<div class="wp-agentur-table-wrap">
-						<table class="wp-agentur-table">
-							<thead>
-								<tr>
-									<th>KPI</th>
-									<th>Vorher</th>
-									<th>Nachher</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Cost per Lead</td>
-									<td>150 EUR</td>
-									<td>25 EUR</td>
-								</tr>
-								<tr>
-									<td>Qualifizierte Leads im System</td>
-									<td>eingekauft</td>
-									<td>1.750+ im System</td>
-								</tr>
-								<tr>
-									<td>Sales-Conversion</td>
-									<td>&lt; 2%</td>
-									<td>12&nbsp;%</td>
-								</tr>
-								<tr>
-									<td>Fazit</td>
-									<td>Reibung nach dem Klick</td>
-									<td>Mehr Wirkung aus denselben Kanälen</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<p><a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link" data-track-action="cta_agentur_case_results" data-track-category="trust">Weitere Ergebnisse ansehen</a></p>
+				<div class="wp-agentur-case-grid">
+					<?php foreach ( $case_teaser_cards as $case_teaser_card ) : ?>
+						<article class="wp-agentur-case-card">
+							<span class="wp-agentur-case-card__eyebrow"><?php echo esc_html( $case_teaser_card['eyebrow'] ); ?></span>
+							<h3><?php echo esc_html( $case_teaser_card['title'] ); ?></h3>
+							<p><?php echo esc_html( $case_teaser_card['text'] ); ?></p>
+						</article>
+					<?php endforeach; ?>
+					<article class="wp-agentur-case-card wp-agentur-case-card--result">
+						<span class="wp-agentur-case-card__eyebrow">Ergebnis</span>
+						<h3>Mehr Wirkung aus denselben Kanälen</h3>
+						<div class="wp-agentur-case-card__metrics" role="list" aria-label="Case Kennzahlen">
+							<div role="listitem">
+								<strong>25 EUR</strong>
+								<span>statt 150 EUR CPL</span>
+							</div>
+							<div role="listitem">
+								<strong>1.750+</strong>
+								<span>Leads im System</span>
+							</div>
+							<div role="listitem">
+								<strong>12%</strong>
+								<span>Sales-Conversion</span>
+							</div>
+						</div>
+					</article>
+					<article class="wp-agentur-case-card wp-agentur-case-card--cta">
+						<span class="wp-agentur-case-card__eyebrow">CTA</span>
+						<h3>Die Fallstudie im Detail lesen</h3>
+						<p>Wenn Sie sehen wollen, wie Reihenfolge, Tracking und Conversion-Pfad zusammengewirkt haben, gehen Sie in die offene E3 Case Study.</p>
+						<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_agentur_case_e3" data-track-category="trust">Case Study lesen</a>
+						<p class="wp-agentur-case-card__support"><a href="<?php echo esc_url( $cases_url ); ?>" data-track-action="cta_agentur_case_results" data-track-category="trust">Weitere Ergebnisse ansehen</a></p>
+					</article>
 				</div>
 			</div>
 		</section>
