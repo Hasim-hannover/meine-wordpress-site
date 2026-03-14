@@ -372,6 +372,44 @@ add_action( 'after_switch_theme', function() {
     flush_rewrite_rules();
 } );
 
+// Entferne die native Users-Sitemap (z.B. /wp-sitemap-users-1.xml).
+// Gründe: die Seite ist eine persönliche Autoren-/User-Seite ("Über mich")
+// und soll nicht als eigenständige Sitemap-Quelle ausgegeben werden.
+// Wir versuchen hier robust zwei Ebenen: den Sitemap-Provider entfernen
+// und zusätzlich direkte Anfragen an die Users-Sitemap mit 410 beantworten.
+add_filter( 'wp_sitemaps_add_provider', function ( $provider, $name ) {
+	if ( 'users' === $name ) {
+		return false;
+	}
+
+	return $provider;
+}, 10, 2 );
+
+add_filter( 'wp_sitemaps_register_providers', function ( $providers ) {
+	if ( isset( $providers['users'] ) ) {
+		unset( $providers['users'] );
+	}
+
+	return $providers;
+} );
+
+// Fallback: blockiere direkte Aufrufe an die users-Sitemap (sicherheits-/hygienegrund).
+add_action( 'template_redirect', function() {
+	if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
+		return;
+	}
+
+	$request_path = wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH );
+	$request_path = '/' . ltrim( (string) $request_path, '/' );
+
+	if ( preg_match( '#^/wp-sitemap-users(?:-\d+)?\.xml$#', untrailingslashit( $request_path ) ) ) {
+		// Gone — signalisiert Crawlern, dass die Ressource nicht (mehr) existiert.
+		status_header( 410 );
+		nocache_headers();
+		exit;
+	}
+}, 0 );
+
 /**
  * ACCESSIBILITY FIX 6a: Skip-Link für Tastatur-Navigation.
  * So kommen Keyboard-Nutzer direkt zum Hauptinhalt.
