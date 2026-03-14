@@ -208,6 +208,39 @@ function nexus_maybe_ensure_glossary_hub_page() {
 add_action( 'init', 'nexus_maybe_ensure_glossary_hub_page', 26 );
 
 /**
+ * Return the current rewrite version for glossary routes.
+ *
+ * @return string
+ */
+function nexus_get_glossary_rewrite_version() {
+	return '2026-03-14-glossary-routes-v2';
+}
+
+/**
+ * Flush glossary rewrite rules once after route changes.
+ *
+ * The glossary CPT was introduced after the active theme was already live, so
+ * relying on after_switch_theme alone is not enough for existing installations.
+ *
+ * @return void
+ */
+function nexus_maybe_flush_glossary_rewrite_rules() {
+	if ( wp_installing() || wp_doing_ajax() || wp_doing_cron() ) {
+		return;
+	}
+
+	$version = nexus_get_glossary_rewrite_version();
+
+	if ( $version === get_option( 'nexus_glossary_rewrite_version', '' ) ) {
+		return;
+	}
+
+	flush_rewrite_rules( false );
+	update_option( 'nexus_glossary_rewrite_version', $version, false );
+}
+add_action( 'init', 'nexus_maybe_flush_glossary_rewrite_rules', 40 );
+
+/**
  * Build a lookup table for published glossary posts.
  *
  * @return array<string, WP_Post>
