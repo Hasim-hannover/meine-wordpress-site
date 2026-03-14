@@ -24,6 +24,7 @@ $heading       = get_query_var( 'related_heading', __( 'Verwandte Inhalte', 'blo
 $count         = (int) get_query_var( 'related_count', 3 );
 $related_type  = get_query_var( 'related_type', 'post' );
 $current_id    = get_the_ID();
+$primary_link  = [];
 
 // ── Query: verwandte Beiträge aus gleicher Kategorie ──────────────
 $args = [
@@ -40,6 +41,36 @@ if ( 'post' === $related_type && is_singular( 'post' ) ) {
 	$categories = get_the_category( $current_id );
 	if ( $categories ) {
 		$args['cat'] = $categories[0]->term_id;
+
+		$primary_link_map = [
+			'seo' => [
+				'label' => __( 'WordPress SEO Hannover', 'blocksy-child' ),
+				'url'   => nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) ),
+				'text'  => __( 'Passender Service-Einstieg zum Thema:', 'blocksy-child' ),
+			],
+			'tracking' => [
+				'label' => __( 'GA4 Tracking Setup', 'blocksy-child' ),
+				'url'   => nexus_get_primary_public_url( 'tracking', home_url( '/ga4-tracking-setup/' ) ),
+				'text'  => __( 'Wenn Tracking, Consent oder Datenqualitaet das eigentliche Problem sind:', 'blocksy-child' ),
+			],
+			'cro' => [
+				'label' => __( 'Conversion Rate Optimization', 'blocksy-child' ),
+				'url'   => nexus_get_primary_public_url( 'cro', home_url( '/conversion-rate-optimization/' ) ),
+				'text'  => __( 'Wenn der naechste Hebel in Angebotslogik und Nutzerfuehrung liegt:', 'blocksy-child' ),
+			],
+			'wordpress-performance' => [
+				'label' => __( 'Core Web Vitals', 'blocksy-child' ),
+				'url'   => nexus_get_primary_public_url( 'cwv', home_url( '/core-web-vitals/' ) ),
+				'text'  => __( 'Wenn Ladezeit und technische Reibung im Vordergrund stehen:', 'blocksy-child' ),
+			],
+			'strategie' => [
+				'label' => __( 'WordPress Growth Operating System', 'blocksy-child' ),
+				'url'   => nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) ),
+				'text'  => __( 'Wenn das Thema in ein groesseres System aus Angebot, SEO, Tracking und Conversion eingeordnet werden soll:', 'blocksy-child' ),
+			],
+		];
+
+		$primary_link = $primary_link_map[ $categories[0]->slug ] ?? [];
 	}
 }
 
@@ -103,6 +134,18 @@ if ( ! $related_query->have_posts() ) {
 			</article>
 		<?php endwhile; ?>
 	</div>
+
+	<?php if ( ! empty( $primary_link['url'] ) && ! empty( $primary_link['label'] ) ) : ?>
+		<p class="related-content__primary-link">
+			<?php if ( ! empty( $primary_link['text'] ) ) : ?>
+				<?php echo esc_html( (string) $primary_link['text'] ); ?>
+				<?php echo ' '; ?>
+			<?php endif; ?>
+			<a href="<?php echo esc_url( (string) $primary_link['url'] ); ?>" data-track-action="related_primary_service_click" data-track-category="internal_link">
+				<?php echo esc_html( (string) $primary_link['label'] ); ?>
+			</a>
+		</p>
+	<?php endif; ?>
 </section>
 
 <?php

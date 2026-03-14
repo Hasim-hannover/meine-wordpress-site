@@ -59,7 +59,7 @@ function nexus_get_wgos_cluster_page_data() {
 			'supporting_link'  => [
 				'kicker' => 'Breiterer Einstieg',
 				'label'  => 'WordPress für B2B in Hannover',
-				'url'    => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
+				'url'    => nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) ),
 				'text'   => 'Wenn der Bedarf über technisches SEO hinausgeht und auch Angebotsseiten, Tracking, Conversion und Betrieb umfasst, ist die Agentur-Seite der klarere Startpunkt.',
 			],
 			'meta_title'       => 'WordPress SEO Hannover | Technisches SEO für WordPress',
@@ -607,6 +607,12 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 		return $bridges;
 	}
 
+	$agentur_url             = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
+	$tracking_url            = nexus_get_primary_public_url( 'tracking', home_url( '/ga4-tracking-setup/' ) );
+	$cwv_url                 = nexus_get_primary_public_url( 'cwv', home_url( '/core-web-vitals/' ) );
+	$cro_url                 = nexus_get_primary_public_url( 'cro', home_url( '/conversion-rate-optimization/' ) );
+	$performance_marketing_url = nexus_get_primary_public_url( 'performance_marketing', home_url( '/performance-marketing/' ) );
+
 	$seo_foundation_bridge = [
 		'title' => 'Passende WGOS-Bausteine zu diesem Thema',
 		'intro' => 'Wenn Performance Marketing an technischer Reibung und einer instabilen SEO-Basis scheitert, sind diese Bausteine meist der nächste sinnvolle Schritt:',
@@ -617,7 +623,7 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 		],
 		'supporting_link' => [
 			'label' => 'WordPress für B2B in Hannover',
-			'url'   => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
+			'url'   => $agentur_url,
 			'text'  => 'Wenn Sie für dieses Thema einen lokalen Einstieg suchen, ist die Agentur-Seite der direkte Anschluss zwischen SEO, Technik und Conversion.',
 		],
 	];
@@ -644,7 +650,7 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 			],
 			'supporting_link' => [
 				'label' => 'WordPress für B2B in Hannover',
-				'url'   => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
+				'url'   => $agentur_url,
 				'text'  => 'Wenn Landing Pages Teil eines größeren WordPress-Systems werden sollen, führt die lokale Agentur-Seite direkt in den passenden Kontext.',
 			],
 		],
@@ -656,6 +662,11 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 				'landing-page-optimierung' => 'Verbessert bestehende Zielseiten, wenn Kampagnen zwar klicken, aber nicht sauber konvertieren.',
 				'tracking-audit'           => 'Prüft, ob Kampagnendaten und Conversion-Signale überhaupt belastbar ankommen.',
 			],
+			'supporting_link' => [
+				'label' => 'Performance Marketing',
+				'url'   => $performance_marketing_url,
+				'text'  => 'Wenn Kampagnen schon laufen oder vorbereitet werden, ist die Performance-Marketing-Seite der saubere Anschluss zwischen Zielseite, Tracking und Paid-Aktivierung.',
+			],
 		],
 		'design-ist-mehr-als-aesthetik' => [
 			'title' => 'WGOS-Bausteine für Conversion-Architektur',
@@ -663,6 +674,11 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 			'assets' => [
 				'angebotsseiten-architektur' => 'Ordnet Seiten, Botschaften und Proof in eine klare Angebotslogik.',
 				'cta-formular-optimierung' => 'Reduziert Reibung im letzten Schritt zwischen Interesse und Anfrage.',
+			],
+			'supporting_link' => [
+				'label' => 'Conversion Rate Optimization',
+				'url'   => $cro_url,
+				'text'  => 'Wenn aus guter Gestaltung auch eine klarere Nutzerführung werden soll, führt die CRO-Seite direkt in den passenden Service-Kontext.',
 			],
 		],
 		'server-side-tracking-gtm' => [
@@ -673,6 +689,11 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 				'tracking-audit'       => 'Klärt vorher, wo Browser-Tracking, Event-Setup und Datenqualität heute brechen.',
 				'consent-mode-v2'      => 'Ordnet Datenschutz und Signalverluste, damit die Umsetzung fachlich belastbar bleibt.',
 			],
+			'supporting_link' => [
+				'label' => 'GA4 Tracking Setup',
+				'url'   => $tracking_url,
+				'text'  => 'Wenn Tracking nicht nur technisch, sondern als stabile Entscheidungsgrundlage aufgebaut werden soll, ist die Tracking-Seite der direkte Einstieg.',
+			],
 		],
 		'core-web-vitals-wachstum-seo-und-roas' => [
 			'title' => 'WGOS-Bausteine für Performance als Hebel',
@@ -681,6 +702,11 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 				'cwv-speed-audit' => 'Zeigt, welche technischen Bremsen auf den wichtigen Seitentypen wirklich Priorität haben.',
 				'cwv-optimierung' => 'Setzt die größten Performance-Fixes gezielt um.',
 				'server-tuning'   => 'Geht tiefer in Infrastruktur, Caching und TTFB, wenn der Bottleneck nicht im Frontend endet.',
+			],
+			'supporting_link' => [
+				'label' => 'Core Web Vitals',
+				'url'   => $cwv_url,
+				'text'  => 'Wenn Sie das Thema als kaufnahe Service-Seite statt nur als Insight vertiefen wollen, ist die Core-Web-Vitals-Seite der direkte Anschluss.',
 			],
 		],
 	];

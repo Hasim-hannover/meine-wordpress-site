@@ -21,17 +21,20 @@ function hu_home_urls() {
 		return $urls;
 	}
 
-	$blog_page_id = (int) get_option( 'page_for_posts' );
-
 	$urls = [
-		'audit'       => nexus_get_audit_url(),
-		'wgos'        => nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] ),
-		'cases'       => nexus_get_results_url(),
-		'agentur'     => nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ),
-		'about'       => nexus_get_page_url( [ 'uber-mich' ] ),
-		'blog'        => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
-		'e3'          => nexus_get_page_url( [ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/e3-new-energy/' ) ),
-		'contact'     => function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' ),
+		'audit'       => nexus_get_primary_public_url( 'audit', home_url( '/growth-audit/' ) ),
+		'wgos'        => nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) ),
+		'cases'       => nexus_get_primary_public_url( 'results', home_url( '/ergebnisse/' ) ),
+		'agentur'     => nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) ),
+		'seo'         => nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) ),
+		'wartung'     => nexus_get_primary_public_url( 'wartung', home_url( '/wordpress-wartung-hannover/' ) ),
+		'tracking'    => nexus_get_primary_public_url( 'tracking', home_url( '/ga4-tracking-setup/' ) ),
+		'cwv'         => nexus_get_primary_public_url( 'cwv', home_url( '/core-web-vitals/' ) ),
+		'cro'         => nexus_get_primary_public_url( 'cro', home_url( '/conversion-rate-optimization/' ) ),
+		'about'       => nexus_get_primary_public_url( 'about', home_url( '/uber-mich/' ) ),
+		'blog'        => nexus_get_primary_public_url( 'blog', home_url( '/blog/' ) ),
+		'e3'          => nexus_get_primary_public_url( 'e3', home_url( '/e3-new-energy/' ) ),
+		'contact'     => nexus_get_primary_public_url( 'contact', home_url( '/kontakt/' ) ),
 		'github_repo' => 'https://github.com/Hasim-hannover/meine-wordpress-site',
 		'linkedin'    => 'https://www.linkedin.com/in/hasim-%C3%BCner/',
 	];

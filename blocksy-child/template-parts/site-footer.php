@@ -13,51 +13,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $current_year = wp_date( 'Y' );
-$home_url     = home_url( '/' );
-$blog_page_id = (int) get_option( 'page_for_posts' );
-
-$audit_url   = nexus_get_audit_url();
-$agentur_url = nexus_get_page_url(
-	[ 'wordpress-agentur-hannover', 'wordpress-agentur' ],
-	home_url( '/wordpress-agentur-hannover/' )
-);
-$wgos_url    = nexus_get_page_url(
-	[ 'wordpress-growth-operating-system' ],
-	home_url( '/wordpress-growth-operating-system/' )
-);
-$cases_url   = nexus_get_results_url();
-$e3_url      = nexus_get_page_url(
-	[ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ],
-	home_url( '/e3-new-energy/' )
-);
-$domdar_url  = nexus_get_page_url(
-	[ 'case-study-domdar', 'domdar' ],
-	home_url( '/case-study-domdar/' )
-);
-$whitelabel_url = nexus_get_whitelabel_page_url();
-$blog_url    = $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' );
-$seo_url     = nexus_get_page_url(
-	[ 'wordpress-seo-hannover', 'seo' ],
-	home_url( '/wordpress-seo-hannover/' )
-);
-$cwv_url     = nexus_get_page_url(
-	[ 'core-web-vitals', 'core-web-vitals-optimierung' ],
-	home_url( '/core-web-vitals/' )
-);
-$tools_url   = nexus_get_page_url(
-	[ 'kostenlose-tools', 'tools' ],
-	home_url( '/kostenlose-tools/' )
-);
-$about_url   = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
-$contact_url = nexus_get_contact_url();
+$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
+$home_url     = $primary_urls['home'] ?? home_url( '/' );
+$audit_url    = $primary_urls['audit'] ?? nexus_get_audit_url();
+$agentur_url  = $primary_urls['agentur'] ?? home_url( '/wordpress-agentur-hannover/' );
+$wartung_url  = $primary_urls['wartung'] ?? home_url( '/wordpress-wartung-hannover/' );
+$wgos_url     = $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
+$cases_url    = $primary_urls['results'] ?? nexus_get_results_url();
+$e3_url       = $primary_urls['e3'] ?? home_url( '/e3-new-energy/' );
+$domdar_url   = $primary_urls['domdar'] ?? home_url( '/case-study-domdar/' );
+$whitelabel_url = $primary_urls['whitelabel'] ?? nexus_get_whitelabel_page_url();
+$blog_url     = $primary_urls['blog'] ?? home_url( '/blog/' );
+$seo_url      = $primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' );
+$cwv_url      = $primary_urls['cwv'] ?? home_url( '/core-web-vitals/' );
+$tracking_url = $primary_urls['tracking'] ?? home_url( '/ga4-tracking-setup/' );
+$tools_url    = $primary_urls['tools'] ?? home_url( '/kostenlose-tools/' );
+$about_url    = $primary_urls['about'] ?? home_url( '/uber-mich/' );
+$contact_url  = $primary_urls['contact'] ?? nexus_get_contact_url();
 $project_request_url = add_query_arg(
 	[
 		'type' => 'project',
 	],
 	$contact_url
 );
-$imprint_url = nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) );
-$privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
+$imprint_url = $primary_urls['impressum'] ?? home_url( '/impressum/' );
+$privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 ?>
 
 <?php if ( function_exists( 'nexus_is_audit_page' ) && nexus_is_audit_page() ) : ?>
@@ -101,6 +81,7 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 				<ul class="ft__list">
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit</a></li>
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>">WordPress für B2B in Hannover</a></li>
+					<li><a href="<?php echo esc_url( $wartung_url ); ?>">WordPress Wartung Hannover</a></li>
 					<li><a href="<?php echo esc_url( $wgos_url ); ?>">WGOS</a></li>
 				</ul>
 			</section>
@@ -121,6 +102,7 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 					<li><a href="<?php echo esc_url( $blog_url ); ?>">Insights</a></li>
 					<li><a href="<?php echo esc_url( $seo_url ); ?>">SEO</a></li>
 					<li><a href="<?php echo esc_url( $cwv_url ); ?>">Core Web Vitals</a></li>
+					<li><a href="<?php echo esc_url( $tracking_url ); ?>">GA4 Tracking Setup</a></li>
 					<li><a href="<?php echo esc_url( $tools_url ); ?>">Kostenlose Tools</a></li>
 				</ul>
 			</section>

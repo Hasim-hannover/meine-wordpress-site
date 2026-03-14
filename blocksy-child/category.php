@@ -16,6 +16,7 @@ $cat_slug         = $current_category->slug;
 $cat_name         = $current_category->name;
 $cat_description  = category_description();
 $cat_count        = $current_category->count;
+$primary_urls     = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
 
 // --- Kategorie-Mapping: Kategorie → passende Zielseite + CTA ---
 $pillar_map = [
@@ -24,7 +25,7 @@ $pillar_map = [
         'badge'       => 'Strategie & Growth',
         'subtitle'    => 'Assets bauen statt Kampagnen verbrennen. Frameworks, Systeme und Denkmodelle für nachhaltiges B2B-Wachstum.',
         'cta_label'   => 'WGOS kennenlernen',
-        'cta_url'     => '/wordpress-growth-operating-system/',
+        'cta_url'     => $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
         'cta_text'    => 'Das WordPress Growth Operating System (WGOS) ist der Rahmen, in dem Strategie operativ wird.',
     ],
     'seo' => [
@@ -33,31 +34,31 @@ $pillar_map = [
         'badge'       => 'SEO & Sichtbarkeit',
         'subtitle'    => 'Technisches SEO, CRO und Performance-Synergie — für planbare Sichtbarkeit, bessere Lead-Qualität und effizientere Akquisekosten.',
         'cta_label'   => 'SEO-Analyse starten',
-        'cta_url'     => '/wordpress-seo-hannover/',
+        'cta_url'     => $primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' ),
         'cta_text'    => 'Prüfen Sie zuerst das Fundament: Technik, Seitenstruktur, Tracking und Conversion-Reibung vor der nächsten Budgeterhöhung.',
     ],
     'tracking' => [
         'icon'        => '📊',
         'badge'       => 'Tracking & Analytics',
         'subtitle'    => 'GA4, Server-Side Tagging, Consent Management — Privacy-first Daten, die Entscheidungen ermöglichen.',
-        'cta_label'   => 'Tracking Audit ansehen',
-        'cta_url'     => nexus_get_wgos_asset_anchor_url( 'tracking-audit' ),
-        'cta_text'    => 'Der Tracking Audit zeigt zuerst, wo Datenqualität, Consent und Conversion-Messung heute brechen.',
+        'cta_label'   => 'GA4 Tracking Setup',
+        'cta_url'     => $primary_urls['tracking'] ?? home_url( '/ga4-tracking-setup/' ),
+        'cta_text'    => 'Die Tracking-Seite bündelt Audit, Consent, Event-Logik und serverseitige Messbarkeit in einem sauberen Einstieg.',
     ],
     'cro' => [
         'icon'        => '🎯',
         'badge'       => 'Conversion (CRO) & UX',
         'subtitle'    => 'A/B-Tests, UX-Optimierung und Conversion-Führung — mehr qualifizierte Anfragen aus dem gleichen Traffic.',
-        'cta_label'   => 'Growth Audit',
-        'cta_url'     => $audit_url,
-        'cta_text'    => 'Wir zeigen, wo Proof, Nutzerführung und CTA-Reihenfolge Reibung erzeugen.',
+        'cta_label'   => 'CRO-Einstieg ansehen',
+        'cta_url'     => $primary_urls['cro'] ?? home_url( '/conversion-rate-optimization/' ),
+        'cta_text'    => 'Die CRO-Seite zeigt, wie Angebotslogik, Proof und CTA-Hierarchie in den naechsten sinnvollen Schritt uebergehen.',
     ],
     'wordpress-performance' => [
         'icon'        => '⚡',
         'badge'       => 'WordPress Performance',
         'subtitle'    => 'Core Web Vitals, Caching, Hosting, Theme-/Plugin-Optimierung — Geschwindigkeit als Wettbewerbsvorteil.',
         'cta_label'   => 'Performance-Check starten',
-        'cta_url'     => '/core-web-vitals/',
+        'cta_url'     => $primary_urls['cwv'] ?? home_url( '/core-web-vitals/' ),
         'cta_text'    => 'Ihre Core Web Vitals entscheiden über Rankings und Conversions.',
     ],
 ];

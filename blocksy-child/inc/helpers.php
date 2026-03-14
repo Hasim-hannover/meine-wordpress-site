@@ -218,6 +218,146 @@ function nexus_get_page_url( $paths, $fallback = '' ) {
 }
 
 /**
+ * Resolve a category archive URL by slug with a deterministic fallback.
+ *
+ * @param string $slug     Category slug.
+ * @param string $fallback Optional fallback URL.
+ * @return string
+ */
+function nexus_get_category_url( $slug, $fallback = '' ) {
+	$slug = sanitize_title( (string) $slug );
+
+	if ( '' === $slug ) {
+		return $fallback ? $fallback : home_url( '/category/' );
+	}
+
+	$term = get_term_by( 'slug', $slug, 'category' );
+
+	if ( $term instanceof WP_Term ) {
+		$url = get_term_link( $term );
+
+		if ( ! is_wp_error( $url ) ) {
+			return $url;
+		}
+	}
+
+	if ( $fallback ) {
+		return $fallback;
+	}
+
+	return home_url( '/category/' . $slug . '/' );
+}
+
+/**
+ * Resolve the versioned set of primary public URLs used for SEO and internal linking.
+ *
+ * Keep all canonical internal targets in one place so template, footer, cockpit and
+ * editorial bridges point to the same primary URLs.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_primary_public_url_map() {
+	static $urls = null;
+
+	if ( is_array( $urls ) ) {
+		return $urls;
+	}
+
+	$urls = [
+		'home'                 => home_url( '/' ),
+		'blog'                 => function_exists( 'nexus_get_blog_posts_url' ) ? nexus_get_blog_posts_url() : home_url( '/blog/' ),
+		'audit'                => function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' ),
+		'results'              => function_exists( 'nexus_get_results_url' ) ? nexus_get_results_url() : home_url( '/ergebnisse/' ),
+		'wgos'                 => nexus_get_page_url(
+			[ 'wordpress-growth-operating-system', 'wgos' ],
+			home_url( '/wordpress-growth-operating-system/' )
+		),
+		'agentur'              => nexus_get_page_url(
+			[ 'wordpress-agentur-hannover', 'wordpress-agentur' ],
+			home_url( '/wordpress-agentur-hannover/' )
+		),
+		'seo'                  => nexus_get_page_url(
+			[ 'wordpress-seo-hannover', 'seo' ],
+			home_url( '/wordpress-seo-hannover/' )
+		),
+		'wartung'              => nexus_get_page_url(
+			[ 'wordpress-wartung-hannover' ],
+			home_url( '/wordpress-wartung-hannover/' )
+		),
+		'tracking'             => nexus_get_page_url(
+			[ 'ga4-tracking-setup' ],
+			home_url( '/ga4-tracking-setup/' )
+		),
+		'cwv'                  => nexus_get_page_url(
+			[ 'core-web-vitals', 'core-web-vitals-optimierung' ],
+			home_url( '/core-web-vitals/' )
+		),
+		'cro'                  => nexus_get_page_url(
+			[ 'conversion-rate-optimization', 'conversion-optimierung' ],
+			home_url( '/conversion-rate-optimization/' )
+		),
+		'performance_marketing'=> nexus_get_page_url(
+			[ 'performance-marketing' ],
+			home_url( '/performance-marketing/' )
+		),
+		'tools'                => nexus_get_page_url(
+			[ 'kostenlose-tools', 'tools' ],
+			home_url( '/kostenlose-tools/' )
+		),
+		'performance_analysis' => nexus_get_page_url(
+			[ 'website-performance-analyse', 'kostenlose-tools/website-performance-analyse' ],
+			home_url( '/website-performance-analyse/' )
+		),
+		'about'                => nexus_get_page_url(
+			[ 'uber-mich' ],
+			home_url( '/uber-mich/' )
+		),
+		'contact'              => function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' ),
+		'impressum'            => nexus_get_page_url(
+			[ 'impressum' ],
+			home_url( '/impressum/' )
+		),
+		'datenschutz'          => nexus_get_page_url(
+			[ 'datenschutz' ],
+			home_url( '/datenschutz/' )
+		),
+		'e3'                   => nexus_get_page_url(
+			[ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ],
+			home_url( '/e3-new-energy/' )
+		),
+		'domdar'               => nexus_get_page_url(
+			[ 'case-study-domdar', 'domdar' ],
+			home_url( '/case-study-domdar/' )
+		),
+		'whitelabel'           => function_exists( 'nexus_get_whitelabel_page_url' ) ? nexus_get_whitelabel_page_url() : home_url( '/whitelabel-retainer/' ),
+		'seo_category'         => nexus_get_category_url( 'seo', home_url( '/category/seo/' ) ),
+		'tracking_category'    => nexus_get_category_url( 'tracking', home_url( '/category/tracking/' ) ),
+		'cro_category'         => nexus_get_category_url( 'cro', home_url( '/category/cro/' ) ),
+		'performance_category' => nexus_get_category_url( 'wordpress-performance', home_url( '/category/wordpress-performance/' ) ),
+	];
+
+	return $urls;
+}
+
+/**
+ * Resolve a single primary public URL by semantic key.
+ *
+ * @param string $key      URL key from nexus_get_primary_public_url_map().
+ * @param string $fallback Optional fallback URL.
+ * @return string
+ */
+function nexus_get_primary_public_url( $key, $fallback = '' ) {
+	$key = (string) $key;
+	$map = nexus_get_primary_public_url_map();
+
+	if ( isset( $map[ $key ] ) && '' !== (string) $map[ $key ] ) {
+		return (string) $map[ $key ];
+	}
+
+	return $fallback ? $fallback : home_url( '/' );
+}
+
+/**
  * Resolve the primary audit page ID while supporting legacy slugs.
  *
  * @return int
@@ -379,8 +519,8 @@ function nexus_get_current_request_path() {
  */
 function nexus_get_legacy_offer_redirect_map() {
 	return [
-		'/meta-ads/'                   => nexus_get_wgos_url(),
-		'/roi-rechner/'                => nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ),
+		'/meta-ads/'                   => nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) ),
+		'/roi-rechner/'                => nexus_get_primary_public_url( 'tools', home_url( '/kostenlose-tools/' ) ),
 	];
 }
 

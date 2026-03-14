@@ -11,6 +11,8 @@
  */
 
 get_header();
+
+$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
 ?>
 
 <main id="main" class="site-main nexus-404-container">
@@ -48,7 +50,7 @@ get_header();
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo esc_url( home_url( '/wordpress-growth-operating-system/' ) ); ?>"
+							<a href="<?php echo esc_url( $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ) ); ?>"
 							   data-track-action="404_nav_wgos"
 							   data-track-category="error_recovery">
 								<?php esc_html_e( 'WGOS – Growth Operating System', 'blocksy-child' ); ?>
@@ -62,14 +64,14 @@ get_header();
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo esc_url( home_url( '/wordpress-seo-hannover/' ) ); ?>"
+							<a href="<?php echo esc_url( $primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' ) ); ?>"
 							   data-track-action="404_nav_seo"
 							   data-track-category="error_recovery">
 								<?php esc_html_e( 'WordPress SEO Hannover', 'blocksy-child' ); ?>
 							</a>
 						</li>
 						<li>
-							<a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"
+							<a href="<?php echo esc_url( $primary_urls['blog'] ?? home_url( '/blog/' ) ); ?>"
 							   data-track-action="404_nav_blog"
 							   data-track-category="error_recovery">
 								<?php esc_html_e( 'Blog – Strategische Impulse', 'blocksy-child' ); ?>

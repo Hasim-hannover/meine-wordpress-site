@@ -44,6 +44,24 @@ Nicht zuerst bearbeiten:
 - Live-Pruefung, ob Google die neuen Snippets, Redirects und Cluster-Seiten bereits uebernimmt
 - weitere interne Linkverstaerkung fuer die Fuehrungsseiten, wenn Search Console noch Kannibalisierung zeigt
 
+## Abgleich mit deep-research-report.md
+
+Die externe Research-MD ist als Priorisierungshilfe nuetzlich, wird hier aber an den echten Repo-Stand angepasst. Nicht jede Empfehlung passt 1:1 auf die aktuell aktiven Slugs, Templates und Schema-Hooks.
+
+| Thema aus Research | Repo-Stand | Arbeitsentscheidung |
+|---|---|---|
+| Wartungs-Cluster ueber `/wordpress-wartung/` bzw. `/wordpress-wartung-aus-hannover/` konsolidieren | Im Child-Theme existiert aktuell die aktive Cluster-Route `/wordpress-wartung-hannover/` samt Meta- und Schema-Definition | Fuer dieses Repo gilt `/wordpress-wartung-hannover/` als Primaer-URL fuer Wartung, Betrieb und Sicherheit in Hannover; keine neue Parallel-URL ohne klaren Intent-Split |
+| WebSite/SiteName-Schema auf der Homepage ergaenzen | `inc/org-schema.php` gibt aktuell kein `WebSite` aus; `functions.php` vermeidet zusaetzliches Homepage-JSON-LD wegen moeglicher Rank-Math-Duplikate | Nur nach Live-Head-Pruefung erweitern; wenn Plugin oder Live-Head `WebSite`/`SiteName` bereits sauber liefern, im Theme nichts doppeln |
+| Blocksy Page Title serverseitig abschalten | Doppelte H1 sind dokumentiert, aber der Audit nennt auch Template-Drift auf Live-Seiten; im Repo wird bisher nur bei Posts und Cornerstones per CSS versteckt | Erst Template-Zuordnung und Live-DOM pruefen, dann gezielt serverseitig unterdruecken statt blind global zu patchen |
+| Neue Landing `/woocommerce-agentur-hannover/` | Keyword-Chance ist plausibel, aber Agentur-, SEO- und Wartungsseite sind noch nicht final per Search Console konsolidiert | Als P2-Kandidat behalten; erst nach Primaer-URL-Mapping, Recrawl und interner Linkbereinigung bauen |
+| Sitemap- und Canonical-Konsistenz auditieren | Theme steuert Canonicals bereits selbst fuer Cluster-Routen; parallel koennen WordPress-Core-Sitemaps und Plugin-Ausgaben aktiv sein | Bleibt echte P1-Verifikation vor weiterem Cluster-Ausbau |
+
+Was aus der Research-MD direkt uebernommen wird:
+
+- Query-zu-URL-Mapping verbindlich machen statt weitere Seiten parallel auf denselben Intent zu ziehen
+- interne Money-Links von Startseite, Category-Hubs, Blog-Bridges und Related Content auf die Primaer-URLs konzentrieren
+- Schema-, Canonical- und H1-Checks als Live-Verifikation behandeln, nicht nur als Theme-Annahme
+
 ## P0 - Sofort
 
 ### 1. `/shopify-wartungsvertrag/` sauber aus dem Index nehmen
@@ -271,9 +289,32 @@ Damit vermeidest du drei typische Fehler:
 
 ### Danach
 
-- Primaer-URL-Mapping fuer lokale Queries festhalten
+- Primaer-URL-Mapping in Snippets, interne Links und CTA-Bridges ueberfuehren
 - interne Links auf `/wordpress-agentur-hannover/` weiter staerken
 - alte URLs und nicht gewollte Draft-Signale konsequent aufraeumen
+
+## Verbindliches Primaer-URL-Mapping
+
+Bis neue Search-Console-Daten etwas anderes belegen, gilt fuer Snippets, interne Links, CTA-Bridges und Related Content diese Zuordnung:
+
+| Query / Intent | Primaer-URL | Support-URLs | Nicht gegeneinander optimieren |
+|---|---|---|---|
+| `wordpress agentur hannover` | `/wordpress-agentur-hannover/` | `/`, `/uber-mich/`, passende Blogposts, `/growth-audit/` | `/wordpress-seo-hannover/` nicht auf breiten Agentur-Intent ziehen |
+| `wordpress seo hannover`, `wordpress suchmaschinenoptimierung hannover` | `/wordpress-seo-hannover/` | `/category/seo/`, `/technisches-seo-performance-fundament/`, `/core-web-vitals/` | `/wordpress-agentur-hannover/` nicht auf denselben SEO-Intent zuspitzen |
+| `wordpress wartung hannover`, `wordpress wartungsvertrag hannover` | `/wordpress-wartung-hannover/` | `/wordpress-growth-operating-system/`, wartungsnahe WGOS-Assets, passende Insights | keine zweite Wartungs-LP mit fast identischem Hannover-Intent aufbauen |
+| `ga4 tracking setup`, `server-side tracking`, `consent mode` | `/ga4-tracking-setup/` | Tracking-Posts, `/category/tracking/`, `/growth-audit/` | Tracking-Intent nicht ueber `/performance-marketing/` oder Agentur-Seiten abfangen |
+| `core web vitals optimierung`, `pagespeed optimierung` | `/core-web-vitals/` | `/website-performance-analyse/`, passende Performance-Posts, `/growth-audit/` | Tool-Intent und Service-Intent nicht auf dieselbe Meta/H1 pressen |
+| `woocommerce agentur hannover` | vorerst kein eigener Primaer-Launch | vorlaeufig `/wordpress-agentur-hannover/` als naechstes bestes Ziel | neue LP nicht vor der Bereinigung der Kern-Cluster live ziehen |
+
+## Technische Verifikation aus der Research-MD
+
+Diese Punkte sind nicht "noch ein Audit", sondern die konkrete QA-Liste vor weiteren neuen Seiten:
+
+1. Live-Head der Primaer-URLs pruefen: genau ein Canonical, korrekte `og:url`, kein konkurrierendes Plugin-Meta.
+2. Live-Schema auf `/`, `/wordpress-agentur-hannover/`, `/wordpress-seo-hannover/` und `/wordpress-wartung-hannover/` abgleichen: `LocalBusiness`, `Service` und optional `WebSite` nicht doppelt ausgeben.
+3. Doppelte H1 nicht nur im Theme suchen, sondern zuerst die aktiven Live-Templates und Editor-Heroes pruefen.
+4. Sitemap-Quelle festhalten: WordPress Core, Rank Math oder andere Plugin-Sitemaps duerfen nicht parallel widerspruechliche Ziel-URLs tragen.
+5. Interne Links in Startseite, Category-Hubs, Related Content und Footer gegen das Primaer-Mapping pruefen.
 
 ## Repo-Hinweise
 
@@ -284,6 +325,8 @@ Bereits vorhandene technische Redirect-Stelle:
 Bereits relevante Cluster-/SEO-Stellen:
 
 - `blocksy-child/inc/seo-meta.php`
+- `blocksy-child/inc/org-schema.php`
+- `blocksy-child/inc/enqueue.php`
 - `blocksy-child/inc/wgos-cluster-pages.php`
 - `blocksy-child/inc/helpers.php`
 

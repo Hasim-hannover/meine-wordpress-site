@@ -249,29 +249,31 @@ function nexus_get_seo_cockpit_sitewide_source_definitions() {
 		return $sources;
 	}
 
-	$home_url        = home_url( '/' );
-	$blog_page_id    = (int) get_option( 'page_for_posts' );
-	$blog_url        = $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' );
-	$audit_url       = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
-	$cases_url       = function_exists( 'nexus_get_results_url' ) ? nexus_get_results_url() : home_url( '/ergebnisse/' );
-	$agentur_url     = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) ) : home_url( '/wordpress-agentur-hannover/' );
-	$wgos_url        = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'wordpress-growth-operating-system' ], home_url( '/wordpress-growth-operating-system/' ) ) : home_url( '/wordpress-growth-operating-system/' );
-	$e3_url          = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ], home_url( '/e3-new-energy/' ) ) : home_url( '/e3-new-energy/' );
-	$domdar_url      = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'case-study-domdar', 'domdar' ], home_url( '/case-study-domdar/' ) ) : home_url( '/case-study-domdar/' );
-	$whitelabel_url  = function_exists( 'nexus_get_whitelabel_page_url' ) ? nexus_get_whitelabel_page_url() : home_url( '/whitelabel-retainer/' );
-	$seo_url         = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ], home_url( '/wordpress-seo-hannover/' ) ) : home_url( '/wordpress-seo-hannover/' );
-	$cwv_url         = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'core-web-vitals', 'core-web-vitals-optimierung' ], home_url( '/core-web-vitals/' ) ) : home_url( '/core-web-vitals/' );
-	$tools_url       = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'kostenlose-tools', 'tools' ], home_url( '/kostenlose-tools/' ) ) : home_url( '/kostenlose-tools/' );
-	$about_url       = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) ) : home_url( '/uber-mich/' );
-	$contact_url     = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+	$primary_urls     = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
+	$home_url         = $primary_urls['home'] ?? home_url( '/' );
+	$blog_url         = $primary_urls['blog'] ?? home_url( '/blog/' );
+	$audit_url        = $primary_urls['audit'] ?? home_url( '/growth-audit/' );
+	$cases_url        = $primary_urls['results'] ?? home_url( '/ergebnisse/' );
+	$agentur_url      = $primary_urls['agentur'] ?? home_url( '/wordpress-agentur-hannover/' );
+	$wartung_url      = $primary_urls['wartung'] ?? home_url( '/wordpress-wartung-hannover/' );
+	$wgos_url         = $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
+	$e3_url           = $primary_urls['e3'] ?? home_url( '/e3-new-energy/' );
+	$domdar_url       = $primary_urls['domdar'] ?? home_url( '/case-study-domdar/' );
+	$whitelabel_url   = $primary_urls['whitelabel'] ?? home_url( '/whitelabel-retainer/' );
+	$seo_url          = $primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' );
+	$cwv_url          = $primary_urls['cwv'] ?? home_url( '/core-web-vitals/' );
+	$tracking_url     = $primary_urls['tracking'] ?? home_url( '/ga4-tracking-setup/' );
+	$tools_url        = $primary_urls['tools'] ?? home_url( '/kostenlose-tools/' );
+	$about_url        = $primary_urls['about'] ?? home_url( '/uber-mich/' );
+	$contact_url      = $primary_urls['contact'] ?? home_url( '/kontakt/' );
 	$project_url     = add_query_arg(
 		[
 			'type' => 'project',
 		],
 		$contact_url
 	);
-	$imprint_url     = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) ) : home_url( '/impressum/' );
-	$privacy_url     = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) ) : home_url( '/datenschutz/' );
+	$imprint_url     = $primary_urls['impressum'] ?? home_url( '/impressum/' );
+	$privacy_url     = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 	$primary_links   = nexus_get_seo_cockpit_primary_menu_links();
 
 	$sources = [
@@ -311,6 +313,7 @@ function nexus_get_seo_cockpit_sitewide_source_definitions() {
 				$privacy_url,
 				$audit_url,
 				$agentur_url,
+				$wartung_url,
 				$wgos_url,
 				$cases_url,
 				$e3_url,
@@ -319,6 +322,7 @@ function nexus_get_seo_cockpit_sitewide_source_definitions() {
 				$blog_url,
 				$seo_url,
 				$cwv_url,
+				$tracking_url,
 				$tools_url,
 				$project_url,
 				$about_url,

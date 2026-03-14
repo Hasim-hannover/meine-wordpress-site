@@ -12,16 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$home_url     = home_url( '/' );
-$blog_page_id = (int) get_option( 'page_for_posts' );
-$blog_url     = $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' );
-$wgos_url     = nexus_get_page_url(
-	[ 'wordpress-growth-operating-system', 'wgos' ],
-	home_url( '/wordpress-growth-operating-system/' )
-);
-$cases_url    = nexus_get_results_url();
-$about_url    = nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) );
-$audit_url    = nexus_get_audit_url();
+$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
+$home_url     = $primary_urls['home'] ?? home_url( '/' );
+$blog_url     = $primary_urls['blog'] ?? home_url( '/blog/' );
+$wgos_url     = $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
+$cases_url    = $primary_urls['results'] ?? nexus_get_results_url();
+$about_url    = $primary_urls['about'] ?? home_url( '/uber-mich/' );
+$audit_url    = $primary_urls['audit'] ?? nexus_get_audit_url();
 $brand_text   = function_exists( 'hu_get_site_wordmark_text' ) ? hu_get_site_wordmark_text() : 'HAŞIM ÜNER';
 $panel_id     = 'nx-blog-header-panel';
 $home_label   = sprintf(
