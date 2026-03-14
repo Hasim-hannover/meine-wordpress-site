@@ -53,6 +53,73 @@ function nexus_get_glossary_sync_observability( $post = null ) {
 }
 
 /**
+ * Return the last globally synced glossary registry version.
+ *
+ * @return string
+ */
+function nexus_get_glossary_last_synced_version() {
+	return trim( (string) get_option( 'nexus_glossary_sync_version', '' ) );
+}
+
+/**
+ * Return the last stored glossary routing assertion status.
+ *
+ * @return string
+ */
+function nexus_get_glossary_last_assert_status() {
+	$status = trim( (string) get_option( 'nexus_glossary_last_assert_status', '' ) );
+
+	return in_array( $status, [ 'pass', 'fail' ], true ) ? $status : '';
+}
+
+/**
+ * Check whether the glossary registry changed since the last successful sync.
+ *
+ * @return bool
+ */
+function nexus_glossary_sync_required() {
+	return nexus_get_glossary_registry_version() !== nexus_get_glossary_last_synced_version();
+}
+
+/**
+ * Return a compact technical sync status snapshot for admin/debug views.
+ *
+ * @return array<string, string|bool>
+ */
+function nexus_get_glossary_sync_status_snapshot() {
+	return [
+		'current_registry_version'     => nexus_get_glossary_registry_version(),
+		'last_synced_registry_version' => nexus_get_glossary_last_synced_version(),
+		'last_sync_time_gmt'           => trim( (string) get_option( 'nexus_glossary_sync_last_run_gmt', '' ) ),
+		'last_assert_status'           => nexus_get_glossary_last_assert_status(),
+		'last_assert_time_gmt'         => trim( (string) get_option( 'nexus_glossary_last_assert_time', '' ) ),
+		'sync_required'                => nexus_glossary_sync_required(),
+	];
+}
+
+/**
+ * Format a stored glossary sync timestamp for compact debug output.
+ *
+ * @param string $timestamp_gmt Timestamp string in GMT.
+ * @return string
+ */
+function nexus_format_glossary_sync_timestamp( $timestamp_gmt ) {
+	$timestamp_gmt = trim( (string) $timestamp_gmt );
+
+	if ( '' === $timestamp_gmt ) {
+		return 'n/a';
+	}
+
+	$timestamp = strtotime( $timestamp_gmt );
+
+	if ( false === $timestamp ) {
+		return $timestamp_gmt;
+	}
+
+	return gmdate( 'Y-m-d H:i:s', $timestamp ) . ' UTC';
+}
+
+/**
  * Load the glossary registry from the versioned data file.
  *
  * @return array<string, array<string, mixed>>
@@ -740,6 +807,49 @@ function nexus_sync_glossary_term_posts() {
 }
 
 /**
+ * Persist the latest routing assertion result after a successful sync.
+ *
+ * @return array{status: string, time: string, report: array<string, mixed>}
+ */
+function nexus_run_glossary_routing_assertions_after_sync() {
+	$report = nexus_get_glossary_routing_assertions_report();
+	$status = ! empty( $report['pass'] ) ? 'pass' : 'fail';
+	$time   = gmdate( 'c' );
+
+	update_option( 'nexus_glossary_last_assert_status', $status, false );
+	update_option( 'nexus_glossary_last_assert_time', $time, false );
+
+	return [
+		'status' => $status,
+		'time'   => $time,
+		'report' => $report,
+	];
+}
+
+/**
+ * Write a compact sync log entry for later debugging.
+ *
+ * @param string               $registry_version Active registry version.
+ * @param array<string, mixed> $results         Sync result counters.
+ * @param string               $assert_status   pass|fail
+ * @return void
+ */
+function nexus_log_glossary_sync_event( $registry_version, $results, $assert_status ) {
+	if ( ! function_exists( 'error_log' ) ) {
+		return;
+	}
+
+	$payload = [
+		'registry_version' => (string) $registry_version,
+		'updated_posts'    => (int) ( $results['updated'] ?? 0 ),
+		'created_posts'    => (int) ( $results['created'] ?? 0 ),
+		'assertion_status' => (string) $assert_status,
+	];
+
+	error_log( '[Nexus Glossary Sync] ' . wp_json_encode( $payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
+}
+
+/**
  * Sync glossary posts once per registry version.
  *
  * @return void
@@ -773,6 +883,8 @@ function nexus_maybe_sync_glossary_term_posts() {
 		update_option( 'nexus_glossary_sync_version', $version, false );
 		update_option( 'nexus_glossary_sync_last_run_gmt', gmdate( 'c' ), false );
 		delete_option( 'nexus_glossary_sync_errors' );
+		$assertion = nexus_run_glossary_routing_assertions_after_sync();
+		nexus_log_glossary_sync_event( $version, $results, (string) $assertion['status'] );
 		return;
 	}
 
@@ -1043,3 +1155,91 @@ function nexus_maybe_output_glossary_routing_assertions() {
 	wp_send_json( nexus_get_glossary_routing_assertions_report() );
 }
 add_action( 'template_redirect', 'nexus_maybe_output_glossary_routing_assertions', 0 );
+
+/**
+ * Render glossary sync safety notices in wp-admin.
+ *
+ * @return void
+ */
+function nexus_render_glossary_sync_admin_notices() {
+	if ( ! is_admin() || ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$snapshot = nexus_get_glossary_sync_status_snapshot();
+
+	if ( ! empty( $snapshot['sync_required'] ) ) {
+		printf(
+			'<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+			esc_html__( 'Glossary Sync erforderlich – Registry-Version wurde geändert, Inhalte wurden noch nicht neu generiert.', 'blocksy-child' )
+		);
+	}
+
+	if ( 'fail' === $snapshot['last_assert_status'] ) {
+		printf(
+			'<div class="notice notice-error is-dismissible"><p>%s</p></div>',
+			esc_html__( 'Glossary Routing Assertion fehlgeschlagen – interne Linkstruktur prüfen.', 'blocksy-child' )
+		);
+	}
+}
+add_action( 'admin_notices', 'nexus_render_glossary_sync_admin_notices' );
+
+/**
+ * Register a compact glossary sync debug widget on the default dashboard.
+ *
+ * @return void
+ */
+function nexus_register_glossary_sync_dashboard_widget() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	wp_add_dashboard_widget(
+		'nexus_glossary_sync_dashboard_widget',
+		'Glossary Sync Status',
+		'nexus_render_glossary_sync_dashboard_widget'
+	);
+}
+add_action( 'wp_dashboard_setup', 'nexus_register_glossary_sync_dashboard_widget' );
+
+/**
+ * Render the glossary sync debug widget.
+ *
+ * @return void
+ */
+function nexus_render_glossary_sync_dashboard_widget() {
+	$snapshot            = nexus_get_glossary_sync_status_snapshot();
+	$assert_status_label = '' !== $snapshot['last_assert_status'] ? strtoupper( (string) $snapshot['last_assert_status'] ) : 'NOT RUN';
+	?>
+	<div class="nexus-glossary-sync-widget">
+		<p>
+			<strong>Status:</strong>
+			<?php echo esc_html( ! empty( $snapshot['sync_required'] ) ? 'Sync erforderlich' : 'Synchron' ); ?>
+		</p>
+		<table class="widefat striped">
+			<tbody>
+				<tr>
+					<td><strong>Aktuelle Registry-Version</strong></td>
+					<td><code><?php echo esc_html( (string) $snapshot['current_registry_version'] ); ?></code></td>
+				</tr>
+				<tr>
+					<td><strong>Letzte gesyncte Version</strong></td>
+					<td><code><?php echo esc_html( '' !== (string) $snapshot['last_synced_registry_version'] ? (string) $snapshot['last_synced_registry_version'] : 'n/a' ); ?></code></td>
+				</tr>
+				<tr>
+					<td><strong>Letzter Sync</strong></td>
+					<td><?php echo esc_html( nexus_format_glossary_sync_timestamp( (string) $snapshot['last_sync_time_gmt'] ) ); ?></td>
+				</tr>
+				<tr>
+					<td><strong>Letzter Assertion Status</strong></td>
+					<td><code><?php echo esc_html( $assert_status_label ); ?></code></td>
+				</tr>
+				<tr>
+					<td><strong>Letzte Assertion</strong></td>
+					<td><?php echo esc_html( nexus_format_glossary_sync_timestamp( (string) $snapshot['last_assert_time_gmt'] ) ); ?></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<?php
+}
