@@ -275,7 +275,7 @@ $draft_note = $draft_count > 0
 			</div>
 		</section>
 
-		<section id="library" class="wgos-section wgos-section--gray nx-reveal">
+		<section id="library" class="wgos-section wgos-section--gray">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Arbeitsansicht</span>
@@ -285,7 +285,7 @@ $draft_note = $draft_count > 0
 
 				<div class="wgos-hub-sections">
 					<?php foreach ( $hub_sections as $section ) : ?>
-						<section class="wgos-hub-section-card" aria-labelledby="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>" style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
+						<section class="wgos-hub-section-card nx-reveal" aria-labelledby="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>" style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
 							<header class="wgos-hub-section-card__head">
 								<div>
 									<span class="wgos-hub-section-card__phase"><?php echo esc_html( (string) $section['phase_step'] ); ?> · <?php echo esc_html( (string) $section['phase_label'] ); ?></span>
