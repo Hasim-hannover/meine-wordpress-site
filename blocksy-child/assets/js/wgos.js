@@ -44,6 +44,12 @@
             });
         });
 
+        document.querySelectorAll('[data-track="cta_click_system"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                pushEvent('cta_click_system');
+            });
+        });
+
         document.querySelectorAll('[data-track="cta_click_calendar"]').forEach(function (el) {
             el.addEventListener('click', function () {
                 pushEvent('cta_click_calendar');
@@ -69,9 +75,9 @@
         // =============================================
         var visTargets = {
             'problem': 'wgos_problem_view',
+            'failure': 'wgos_failure_view',
             'system': 'wgos_system_view',
             'module': 'wgos_core_areas_view',
-            'workflow': 'wgos_workflow_view',
             'explorer': 'wgos_asset_explorer_view',
             'proof': 'wgos_proof_view',
             'audit': 'wgos_audit_view',
