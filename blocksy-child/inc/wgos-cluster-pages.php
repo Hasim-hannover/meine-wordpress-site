@@ -328,17 +328,64 @@ function nexus_get_wgos_cluster_page_asset_cards( $page ) {
 }
 
 /**
+ * Return the shared public proof metrics for WGOS cluster pages.
+ *
+ * @return array<int, array<string, string>>
+ */
+function nexus_get_wgos_cluster_page_proof_metrics() {
+	return [
+		[
+			'value' => '1.750+',
+			'label' => 'qualifizierte Leads im aufgebauten System',
+		],
+		[
+			'value' => '-83%',
+			'label' => 'Cost per Lead nach Neuordnung',
+		],
+		[
+			'value' => '<0.8s',
+			'label' => 'LCP auf Angebotsseiten',
+		],
+	];
+}
+
+/**
+ * Return the shared three-step method for cluster pages.
+ *
+ * @return array<int, array<string, string>>
+ */
+function nexus_get_wgos_cluster_page_method_steps() {
+	return [
+		[
+			'title' => '1. Diagnose vor Ausbau',
+			'text'  => 'Wir starten nicht mit Content, Kampagnen oder neuen Seiten, solange Canonical, Tracking, Performance oder Angebotslogik gegeneinander laufen.',
+		],
+		[
+			'title' => '2. Bausteine nach Hebel ordnen',
+			'text'  => 'Im WGOS bekommt nicht jede Idee Prioritaet. Zuerst zaehlt, was Sichtbarkeit, Trust und Conversion auf den kaufnahen Seiten wirklich entsperrt.',
+		],
+		[
+			'title' => '3. Wirkung an echten Signalen messen',
+			'text'  => 'Fortschritt wird nicht ueber Aktivitaet bewertet, sondern ueber belastbare Signale wie Anfragequalitaet, CPL, Ladezeit und technische Stabilitaet.',
+		],
+	];
+}
+
+/**
  * Render the shared WGOS cluster page layout.
  *
  * @param array<string, mixed> $page Cluster page definition.
  * @return string
  */
 function nexus_render_wgos_cluster_page( $page ) {
-	$audit_url    = nexus_get_audit_url();
-	$wgos_url     = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : home_url( '/wordpress-growth-operating-system/' );
+	$audit_url     = nexus_get_audit_url();
+	$wgos_url      = function_exists( 'nexus_get_wgos_url' ) ? nexus_get_wgos_url() : home_url( '/wordpress-growth-operating-system/' );
 	$asset_hub_url = function_exists( 'nexus_get_wgos_asset_hub_url' ) ? nexus_get_wgos_asset_hub_url() : home_url( '/wgos-systemlandkarte/' );
-	$cards        = nexus_get_wgos_cluster_page_asset_cards( $page );
-	$blogs        = isset( $page['blogs'] ) && is_array( $page['blogs'] ) ? $page['blogs'] : [];
+	$results_url   = nexus_get_primary_public_url( 'results', home_url( '/ergebnisse/' ) );
+	$cards         = nexus_get_wgos_cluster_page_asset_cards( $page );
+	$blogs         = isset( $page['blogs'] ) && is_array( $page['blogs'] ) ? $page['blogs'] : [];
+	$proof_metrics = nexus_get_wgos_cluster_page_proof_metrics();
+	$method_steps  = nexus_get_wgos_cluster_page_method_steps();
 
 	ob_start();
 	?>
@@ -402,6 +449,50 @@ function nexus_render_wgos_cluster_page( $page ) {
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
+			</div>
+		</section>
+
+		<section class="nx-section nx-cluster-section">
+			<div class="nx-container nx-cluster-stack">
+				<div class="nx-section-header">
+					<span class="nx-badge nx-badge--ghost">Proof</span>
+					<h2 class="nx-headline-section">Oeffentliche Wirkung statt Behauptungen</h2>
+					<p class="nx-subheadline">Die zentralen Zahlen stammen aus veroeffentlichten Fallbeispielen und dem sichtbaren Proof-Layer, nicht aus anonymen Benchmark-Folien.</p>
+				</div>
+
+				<div class="nx-card nx-card--flat nx-cluster-proof">
+					<div class="nx-metrics nx-cluster-proof__metrics">
+						<?php foreach ( $proof_metrics as $metric ) : ?>
+							<div class="nx-metric">
+								<span class="nx-metric__value"><?php echo esc_html( $metric['value'] ); ?></span>
+								<span class="nx-metric__label"><?php echo esc_html( $metric['label'] ); ?></span>
+							</div>
+						<?php endforeach; ?>
+					</div>
+					<p class="nx-cluster-proof__note">Wenn Sie die oeffentlichen Beispiele und die Herleitung dazu sehen wollen, gehen Sie zuerst in die Ergebnisse. Der Growth Audit klaert danach, welche dieser Hebel in Ihrer Lage wirklich zuerst zahlen.</p>
+					<div class="nx-cluster-hero__actions">
+						<a href="<?php echo esc_url( $results_url ); ?>" class="nx-btn nx-btn--ghost">Ergebnisse ansehen</a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_proof_audit" data-track-category="lead_gen">Growth Audit starten</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="nx-section nx-cluster-section nx-cluster-section--alt">
+			<div class="nx-container nx-cluster-stack">
+				<div class="nx-section-header">
+					<span class="nx-badge nx-badge--gold">Vorgehen</span>
+					<h2 class="nx-headline-section">Was vor neuen Inhalten oder Kampagnen zuerst passiert</h2>
+				</div>
+
+				<ol class="nx-cluster-method">
+					<?php foreach ( $method_steps as $step ) : ?>
+						<li class="nx-card nx-card--flat nx-cluster-method__step">
+							<h3 class="nx-cluster-method__title"><?php echo esc_html( $step['title'] ); ?></h3>
+							<p class="nx-cluster-method__text"><?php echo esc_html( $step['text'] ); ?></p>
+						</li>
+					<?php endforeach; ?>
+				</ol>
 			</div>
 		</section>
 

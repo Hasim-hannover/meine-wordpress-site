@@ -28,6 +28,7 @@ $modules = [
 	'review-crm.php',     // Growth-Audit-Intake + WordPress CRM
 	'contact-page.php',   // Kontakt-Route, schlanke Kontaktform und Mailversand
 	'blog-notify.php',    // Blog-Benachrichtigungen, DOI und Artikel-Mails
+	'llms-txt.php',       // Dynamische /llms.txt-Route fuer KI-Agenten und Entitaetskontext
 	'seo-cockpit.php',    // Search Console basiertes SEO-Cockpit mit optionaler Koko-Erkennung
 	'enqueue.php',        // CSS/JS Asset-Management
 	'seo-meta.php',       // OG Tags, Canonical, Indexierungssteuerung
