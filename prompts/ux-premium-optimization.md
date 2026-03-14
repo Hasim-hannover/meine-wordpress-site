@@ -10,8 +10,8 @@ Optimiere Seiten, Komponenten oder Formulare so, dass sie ruhig, hochwertig und 
 
 ## Pflichtkontext
 
-- `docs/ux/visual-hierarchy-rules.md`
-- `docs/seo/glossary-architecture.md`
+- `docs/ux/premium-ux-system.md`
+- `docs/seo/seo-content-system.md`
 - `blocksy-child/docs/architecture/page-architecture.md`
 - `blocksy-child/docs/ux/form-ux-spec.md`
 
