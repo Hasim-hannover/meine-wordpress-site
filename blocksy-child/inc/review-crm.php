@@ -365,6 +365,7 @@ function nexus_validate_review_request_payload( $payload ) {
 	$name              = isset( $payload['name'] ) ? sanitize_text_field( (string) $payload['name'] ) : '';
 	$email             = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
 	$linkedin          = isset( $payload['linkedin'] ) ? trim( (string) $payload['linkedin'] ) : '';
+	$consent_privacy   = isset( $payload['consent_privacy'] ) ? sanitize_key( (string) $payload['consent_privacy'] ) : '';
 
 	if ( empty( $page_url ) ) {
 		return new WP_Error( 'missing_page_url', 'Bitte die URL der Seite angeben.' );
@@ -394,6 +395,10 @@ function nexus_validate_review_request_payload( $payload ) {
 
 	if ( empty( $email ) || ! is_email( $email ) ) {
 		return new WP_Error( 'invalid_email', 'Bitte eine gültige geschäftliche E-Mail-Adresse angeben.' );
+	}
+
+	if ( 'accepted' !== $consent_privacy ) {
+		return new WP_Error( 'missing_consent_privacy', 'Bitte bestätigen Sie den Datenschutzhinweis, damit ich Ihre Anfrage bearbeiten darf.' );
 	}
 
 	if ( '' !== $linkedin ) {
@@ -428,6 +433,7 @@ function nexus_validate_review_request_payload( $payload ) {
 		'name'              => $name,
 		'email'             => $email,
 		'linkedin'          => $linkedin,
+		'consent_privacy'   => $consent_privacy,
 	];
 }
 
@@ -477,6 +483,7 @@ function nexus_create_review_request_post( $payload ) {
 	update_post_meta( $post_id, '_nexus_review_email', $payload['email'] );
 	update_post_meta( $post_id, '_nexus_review_company', $payload['company'] );
 	update_post_meta( $post_id, '_nexus_review_linkedin', $payload['linkedin'] );
+	update_post_meta( $post_id, '_nexus_review_consent_privacy', $payload['consent_privacy'] );
 	update_post_meta( $post_id, '_nexus_review_source', 'growth_audit_funnel' );
 
 	return (int) $post_id;
@@ -924,6 +931,7 @@ function nexus_render_review_request_details_meta_box( $post ) {
 	$name              = (string) get_post_meta( $post->ID, '_nexus_review_name', true );
 	$email             = (string) get_post_meta( $post->ID, '_nexus_review_email', true );
 	$company           = (string) get_post_meta( $post->ID, '_nexus_review_company', true );
+	$consent_privacy   = (string) get_post_meta( $post->ID, '_nexus_review_consent_privacy', true );
 	$offer             = (string) get_post_meta( $post->ID, '_nexus_review_offer', true );
 	$audience          = (string) get_post_meta( $post->ID, '_nexus_review_audience', true );
 	$issue_label       = (string) get_post_meta( $post->ID, '_nexus_review_biggest_issue_label', true );
@@ -941,6 +949,10 @@ function nexus_render_review_request_details_meta_box( $post ) {
 		<div class="nexus-review-meta-group">
 			<strong>Kontakt</strong>
 			<p><?php echo esc_html( $name ); ?><br><a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></p>
+		</div>
+		<div class="nexus-review-meta-group">
+			<strong>Datenschutzhinweis</strong>
+			<p><?php echo esc_html( 'accepted' === $consent_privacy ? 'Bestätigt' : 'Fehlt' ); ?></p>
 		</div>
 		<div class="nexus-review-meta-group">
 			<strong>Seite</strong>

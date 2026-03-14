@@ -360,7 +360,7 @@
       }
 
       if (!field.checkValidity()) {
-        var validationMessage = field.validationMessage || 'Bitte das Feld korrekt ausfüllen.';
+        var validationMessage = field.getAttribute('data-review-required-message') || field.validationMessage || 'Bitte das Feld korrekt ausfüllen.';
 
         showFeedback(validationMessage, 'error');
         trackValidationError(validationMessage, field.name || field.id || 'unknown');
@@ -442,13 +442,19 @@
   }
 
   function getNextButtonLabel() {
+    var labelsByStep = {
+      0: 'Weiter zu Engpass',
+      1: 'Weiter zu Ziel',
+      2: 'Weiter zu Kontakt'
+    };
+
     var nextIndex = state.stepIndex + 1;
 
     if (nextIndex >= state.steps.length) {
       return 'Weiter';
     }
 
-    return 'Weiter zu ' + getStepLabel(nextIndex);
+    return labelsByStep[state.stepIndex] || ('Weiter zu ' + getStepLabel(nextIndex));
   }
 
   function focusCurrentStep() {
@@ -552,6 +558,13 @@
     if (parentField) {
       parentField.classList.add('is-invalid');
     }
+
+    if (field.type === 'checkbox') {
+      var consentCard = field.closest('.review-consent-card');
+      if (consentCard) {
+        consentCard.classList.add('is-invalid');
+      }
+    }
   }
 
   function clearFieldInvalidState(field) {
@@ -563,6 +576,13 @@
     var parentField = field.closest('.review-field');
     if (parentField) {
       parentField.classList.remove('is-invalid');
+    }
+
+    if (field.type === 'checkbox') {
+      var consentCard = field.closest('.review-consent-card');
+      if (consentCard) {
+        consentCard.classList.remove('is-invalid');
+      }
     }
 
     if (field.type === 'radio' && field.name) {
@@ -586,7 +606,7 @@
   function clearStepInvalidState(step) {
     if (!step) return;
 
-    Array.prototype.forEach.call(step.querySelectorAll('.review-field.is-invalid, .review-choice-block.is-invalid, .review-option.is-invalid'), function (node) {
+    Array.prototype.forEach.call(step.querySelectorAll('.review-field.is-invalid, .review-choice-block.is-invalid, .review-option.is-invalid, .review-consent-card.is-invalid'), function (node) {
       node.classList.remove('is-invalid');
     });
 

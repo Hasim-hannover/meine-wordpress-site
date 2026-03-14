@@ -1425,18 +1425,528 @@
   color: var(--gold);
 }
 
+.review-hero-shell {
+  margin-bottom: clamp(2.75rem, 6vw, 4.5rem);
+}
+
+.review-hero-layout--flow {
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.audit-wrapper .review-hero-main h1 {
+  max-width: 9.5ch;
+}
+
+.audit-wrapper .hero-sub-short {
+  max-width: 34rem;
+  font-size: clamp(1rem, 1.8vw, 1.08rem);
+}
+
+.audit-hero-actions {
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.35rem;
+}
+
+.audit-hero-cta-btn--dominant {
+  min-width: clamp(224px, 24vw, 280px);
+}
+
+.review-hero-microcopy {
+  max-width: 38ch;
+  margin-top: 0.8rem;
+  font-size: 0.86rem;
+}
+
+.review-kpi-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.4rem;
+}
+
+.review-kpi-card,
+.review-problem-shell,
+.review-problem-card,
+.review-system-summary-item,
+.review-caseproof-shell,
+.review-caseproof-card,
+.review-caseproof-kpi,
+.review-form-expectation-card,
+.review-consent-card {
+  border: 1px solid var(--border);
+  box-shadow: var(--audit-shadow-card);
+}
+
+.review-kpi-card {
+  padding: 1rem 1.05rem;
+  border-color: var(--audit-border-accent);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), transparent 32%),
+    var(--audit-surface-strong);
+}
+
+.review-kpi-card strong,
+.review-problem-card h3,
+.review-system-summary-item strong,
+.review-caseproof-kpi strong,
+.review-caseproof-card h3,
+.review-form-expectation-card strong {
+  display: block;
+  color: var(--text-main);
+}
+
+.review-kpi-card strong {
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.review-kpi-card span {
+  display: block;
+  margin-top: 0.28rem;
+  color: var(--audit-text-soft);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.review-offer-panel--problem {
+  padding: 1.55rem;
+}
+
+.review-offer-panel--problem .review-offer-item {
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 32%),
+    var(--audit-glass);
+}
+
+.review-problem-section,
+.review-proof-section,
+.review-caseproof-section,
+.review-form-section {
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.review-problem-shell {
+  padding: clamp(1.45rem, 3vw, 2.1rem);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, hsl(8 82% 64% / 0.05), transparent 24%),
+    var(--audit-glass);
+}
+
+.review-problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+}
+
+.review-problem-card {
+  padding: 1rem 1.05rem;
+  border-radius: 20px;
+  background: var(--audit-surface);
+}
+
+.review-problem-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.4rem;
+  min-height: 2.4rem;
+  padding: 0 0.75rem;
+  border-radius: 999px;
+  border: 1px solid hsl(8 82% 64% / 0.24);
+  background: hsl(8 82% 64% / 0.1);
+  color: var(--red);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.review-problem-card h3 {
+  margin: 0.75rem 0 0.4rem;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.review-problem-card p,
+.review-caseproof-head p,
+.review-caseproof-foot p,
+.review-caseproof-microcopy,
+.review-form-expectation-card span,
+.review-consent span {
+  color: var(--audit-text-soft);
+}
+
+.review-problem-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.62;
+}
+
+.review-problem-impact {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: start;
+  margin-top: 1.15rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.review-problem-impact strong {
+  color: var(--red);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.review-problem-impact span {
+  color: var(--audit-text-soft);
+  font-size: 0.9rem;
+  line-height: 1.68;
+}
+
+.review-proof-bar--system {
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+}
+
+.review-system-summary {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.review-system-summary-item {
+  padding: 0.9rem 0.95rem;
+  border-radius: 18px;
+  background: var(--audit-glass);
+}
+
+.review-system-summary-item strong {
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.review-system-summary-item span {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--audit-text-soft);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.review-flow-strip--system {
+  grid-template-columns: 1fr;
+  margin-top: 0;
+  align-self: stretch;
+}
+
+.review-flow-strip--system .review-flow-step {
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 32%),
+    var(--audit-glass);
+}
+
+.review-caseproof-shell {
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border-color: var(--audit-border-accent);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top right, hsl(var(--accent-hsl) / 0.1), transparent 32%),
+    var(--audit-panel);
+  box-shadow: var(--audit-shadow-panel);
+}
+
+.review-caseproof-head {
+  max-width: 720px;
+  margin-bottom: 1.35rem;
+}
+
+.review-caseproof-head h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.72rem, 3vw, 2.38rem);
+  line-height: 1.12;
+}
+
+.review-caseproof-head p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.68;
+}
+
+.review-caseproof-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(290px, 0.84fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.review-caseproof-card {
+  padding: 1.2rem;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 28%),
+    var(--audit-surface-strong);
+}
+
+.review-caseproof-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.review-caseproof-kicker {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  color: var(--gold);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.review-caseproof-card h3 {
+  margin: 0;
+  font-size: clamp(1.28rem, 2.2vw, 1.76rem);
+  line-height: 1.18;
+}
+
+.review-caseproof-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--audit-glass);
+  color: var(--audit-text-soft);
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.review-caseproof-compare {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: stretch;
+}
+
+.review-caseproof-state {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--audit-glass);
+}
+
+.review-caseproof-state--after {
+  border-color: var(--audit-border-accent);
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), transparent 34%),
+    var(--audit-glass);
+  box-shadow: inset 0 0 0 1px hsl(var(--accent-hsl) / 0.12);
+}
+
+.review-caseproof-state-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--audit-text-dim);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.review-caseproof-state strong {
+  display: block;
+  color: var(--text-main);
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.review-caseproof-points {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.review-caseproof-points li {
+  color: var(--audit-text-soft);
+  font-size: 0.88rem;
+  line-height: 1.58;
+}
+
+.review-caseproof-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  color: var(--gold);
+  font-size: 1.45rem;
+  font-weight: 300;
+}
+
+.review-caseproof-foot {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.review-caseproof-foot p {
+  margin: 0 0 0.55rem;
+  font-size: 0.9rem;
+  line-height: 1.62;
+}
+
+.review-caseproof-aside {
+  display: grid;
+  gap: 0.85rem;
+  align-self: stretch;
+}
+
+.review-caseproof-kpis {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.review-caseproof-kpi {
+  padding: 0.95rem 1rem;
+  border-color: var(--audit-border-accent);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), transparent 34%),
+    var(--audit-glass);
+}
+
+.review-caseproof-kpi strong {
+  font-size: 1.34rem;
+  line-height: 1.05;
+}
+
+.review-caseproof-kpi span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--audit-text-soft);
+  font-size: 0.82rem;
+  line-height: 1.58;
+}
+
+.review-output-card--compact {
+  padding: 1rem 1.05rem;
+  border-radius: 20px;
+}
+
+.review-caseproof-cta {
+  width: 100%;
+}
+
+.review-caseproof-microcopy {
+  margin: -0.05rem 0 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.review-form-topbar {
+  margin-bottom: 1.35rem;
+}
+
+.review-form-expectation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.1rem;
+}
+
+.review-form-expectation-card {
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background: var(--audit-glass);
+}
+
+.review-form-expectation-card strong {
+  font-size: 0.93rem;
+  line-height: 1.35;
+}
+
+.review-form-expectation-card span {
+  display: block;
+  margin-top: 0.28rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.review-form-eta {
+  max-width: 360px;
+}
+
+.review-consent-card {
+  margin-top: 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 34%),
+    var(--audit-glass);
+}
+
+.review-consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: start;
+  cursor: pointer;
+}
+
+.review-consent input {
+  margin: 0.25rem 0 0;
+  accent-color: var(--gold);
+}
+
+.review-consent span {
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.review-consent a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.review-consent a:hover,
+.review-consent a:focus-visible {
+  text-decoration: underline;
+}
+
+.review-consent-card.is-invalid {
+  border-color: var(--audit-danger-border);
+  box-shadow: inset 0 0 0 1px hsl(8 82% 64% / 0.18);
+}
+
 :root[data-theme='light'] .audit-wrapper :is(
   .review-offer-panel,
+  .review-kpi-card,
+  .review-problem-shell,
+  .review-problem-card,
   .review-proof-bar,
+  .review-system-summary-item,
   .review-value-card,
   .review-quality-panel,
   .review-quality-card,
   .report-preview-section,
+  .review-caseproof-shell,
+  .review-caseproof-card,
+  .review-caseproof-kpi,
   .review-output-card,
   .review-aside-card,
   .review-choice-block,
   .review-proof-pill,
   .preview-deliverable,
+  .review-form-expectation-card,
+  .review-consent-card,
   .review-success,
   .review-success-card,
   .audit-faq-section details,
@@ -1444,16 +1954,25 @@
 ),
 :root[data-nx-theme='light'] .audit-wrapper :is(
   .review-offer-panel,
+  .review-kpi-card,
+  .review-problem-shell,
+  .review-problem-card,
   .review-proof-bar,
+  .review-system-summary-item,
   .review-value-card,
   .review-quality-panel,
   .review-quality-card,
   .report-preview-section,
+  .review-caseproof-shell,
+  .review-caseproof-card,
+  .review-caseproof-kpi,
   .review-output-card,
   .review-aside-card,
   .review-choice-block,
   .review-proof-pill,
   .preview-deliverable,
+  .review-form-expectation-card,
+  .review-consent-card,
   .review-success,
   .review-success-card,
   .audit-faq-section details,
@@ -1465,8 +1984,14 @@
 @media (max-width: 1140px) {
   .review-hero-layout,
   .review-proof-bar,
+  .review-caseproof-layout,
   .report-preview-section,
   .review-form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .review-problem-grid,
+  .review-form-expectation-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1486,10 +2011,19 @@
 
 @media (max-width: 900px) {
   .review-flow-strip,
+  .review-kpi-proof,
   .review-value-grid,
   .preview-deliverables,
   .review-field-grid {
     grid-template-columns: 1fr;
+  }
+
+  .review-caseproof-compare {
+    grid-template-columns: 1fr;
+  }
+
+  .review-caseproof-divider {
+    display: none;
   }
 
   .review-form-frame-head {
@@ -1512,24 +2046,47 @@
   .audit-wrapper .review-hero-main h1 {
     max-width: 100%;
   }
+
+  .review-caseproof-card-head,
+  .review-problem-impact {
+    grid-template-columns: 1fr;
+  }
+
+  .review-caseproof-card-head {
+    display: grid;
+  }
 }
 
 @media (max-width: 720px) {
   .review-offer-panel,
+  .review-kpi-card,
+  .review-problem-shell,
+  .review-problem-card,
   .review-proof-bar,
+  .review-system-summary-item,
   .report-preview-section,
+  .review-caseproof-shell,
+  .review-caseproof-card,
+  .review-caseproof-kpi,
   .review-quality-panel,
   .review-value-card,
   .review-quality-card,
   .review-choice-block,
   .review-output-card,
   .review-aside-card,
+  .review-form-expectation-card,
+  .review-consent-card,
   .review-success,
   .final-cta {
     padding: 1.15rem;
   }
 
   .review-offer-timeline,
+  .review-kpi-proof,
+  .review-problem-grid,
+  .review-system-summary,
+  .review-caseproof-kpis,
+  .review-form-expectation-grid,
   .review-success-grid,
   .review-quality-grid,
   .review-proof-grid {
@@ -1557,6 +2114,10 @@
 
   .audit-hero-actions .audit-submit-btn,
   .review-success-actions .cta-btn {
+    width: 100%;
+  }
+
+  .review-caseproof-cta {
     width: 100%;
   }
 
