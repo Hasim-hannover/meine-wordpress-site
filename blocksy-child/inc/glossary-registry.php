@@ -87,9 +87,12 @@ function nexus_glossary_sync_required() {
  * @return array<string, string|bool>
  */
 function nexus_get_glossary_sync_status_snapshot() {
+	$last_synced_version = nexus_get_glossary_last_synced_version();
+
 	return [
 		'current_registry_version'     => nexus_get_glossary_registry_version(),
-		'last_synced_registry_version' => nexus_get_glossary_last_synced_version(),
+		'last_synced_registry_version' => $last_synced_version,
+		'sync_ever_ran'                => '' !== $last_synced_version,
 		'last_sync_time_gmt'           => trim( (string) get_option( 'nexus_glossary_sync_last_run_gmt', '' ) ),
 		'last_assert_status'           => nexus_get_glossary_last_assert_status(),
 		'last_assert_time_gmt'         => trim( (string) get_option( 'nexus_glossary_last_assert_time', '' ) ),
@@ -866,6 +869,17 @@ function nexus_maybe_sync_glossary_term_posts() {
 	$version = nexus_get_glossary_registry_version();
 
 	if ( $version === get_option( 'nexus_glossary_sync_version', '' ) ) {
+		// Version already up-to-date. Backfill assertion data if it was never recorded
+		// (e.g. after a registry version bump that pre-dated the observability layer).
+		$assert_missing = '' === nexus_get_glossary_last_assert_status()
+		               || '' === trim( (string) get_option( 'nexus_glossary_last_assert_time', '' ) );
+
+		if ( $assert_missing && ! get_transient( 'nexus_glossary_sync_lock' ) ) {
+			set_transient( 'nexus_glossary_sync_lock', '1', 5 * MINUTE_IN_SECONDS );
+			nexus_run_glossary_routing_assertions_after_sync();
+			delete_transient( 'nexus_glossary_sync_lock' );
+		}
+
 		return;
 	}
 
@@ -1228,7 +1242,18 @@ function nexus_render_glossary_sync_dashboard_widget() {
 				</tr>
 				<tr>
 					<td><strong>Letzter Sync</strong></td>
-					<td><?php echo esc_html( nexus_format_glossary_sync_timestamp( (string) $snapshot['last_sync_time_gmt'] ) ); ?></td>
+					<td>
+						<?php
+						$sync_ts = (string) $snapshot['last_sync_time_gmt'];
+						if ( '' !== $sync_ts ) {
+							echo esc_html( nexus_format_glossary_sync_timestamp( $sync_ts ) );
+						} elseif ( ! empty( $snapshot['sync_ever_ran'] ) ) {
+							echo '<em>synchronisiert &ndash; Zeitpunkt nicht verf&uuml;gbar</em>';
+						} else {
+							echo '<em>nie synchronisiert</em>';
+						}
+						?>
+					</td>
 				</tr>
 				<tr>
 					<td><strong>Letzter Assertion Status</strong></td>
