@@ -1,311 +1,71 @@
-# Navigation Migration – hasimuener.de
+# Navigation Migration - hasimuener.de
 
-## Manuelle Schritte in WordPress-Admin (nach Code-Deploy)
+Stand: 2026-03-14.
 
-1. Dashboard → Design → Menüs
-2. Neues Menü erstellen: "Hauptmenü Slim"
-3. Diese Seiten hinzufügen:
-   - WordPress Growth Operating System (/wordpress-growth-operating-system/)
-   - Ergebnisse (/ergebnisse/)
-   - Blog (/blog/)
-   - Über mich (/uber-mich/)
-   - Growth Audit (/growth-audit/) → Klasse "nav-cta-button" vergeben
-   - Alle Punkte auf derselben Ebene lassen (keine Untermenüs/Dropdowns)
-4. Menü-Position: "Hauptmenü Slim (Positioniert)" auswählen → Speichern
-5. Altes Menü NICHT löschen – nur deaktivieren (Backup)
+Diese Datei enthaelt nur noch offene manuelle Restarbeiten ausserhalb des Repos.
+Bereits versionierte oder abgeschlossene Code-Migrationen wurden entfernt.
 
-## Was mit den alten Service-Seiten passiert
-- Die nicht mehr benoetigten Legacy-Slugs `/ga4-tracking-setup/`, `/performance-marketing/`, `/meta-ads/` und `/wordpress-wartung-hannover/` werden per `301` auf passende WGOS-Ziele umgeleitet.
-- `/roi-rechner/` wird per `301` auf `/kostenlose-tools/` umgeleitet.
-- Interne Links sollen direkt auf WGOS-Assets, die Tools-Hub-Seite oder den Growth Audit zeigen, nicht mehr auf die Legacy-Slugs.
-- Nach dem Deploy erscheint im WordPress-Admin fuer Administratoren ein Hinweis mit Button `Legacy-Seiten bereinigen`. Der Flow setzt gefundene Altseiten auf `draft` und entfernt verbliebene Menue-Eintraege auf diese Slugs.
+## 1. Navigation im WordPress-Admin
 
-## Kunden-Cockpit Link (empfohlene Platzierung)
-- Nicht im primären Slim-Menü platzieren (fokussiert auf Neukunden-Narrativ).
-- Stattdessen als Utility-Link nutzen: Header-HTML-Element mit Shortcode `[nexus_header_btn]`.
-- Zusätzlich im Footer unter "Unternehmen" als Link "Kunden-Cockpit" auf `/portal/`.
-- Wenn CTA bereits im Menü ist, separaten Header-Button für denselben CTA entfernen (keine Doppelung).
+1. Dashboard -> Design -> Menues.
+2. Pruefen, ob das aktive Hauptmenue der schlanken Zielstruktur folgt:
+   - WordPress Growth Operating System (`/wordpress-growth-operating-system/`)
+   - Ergebnisse (`/ergebnisse/`)
+   - Blog (`/blog/`)
+   - Ueber mich (`/uber-mich/`)
+   - Growth Audit (`/growth-audit/`) mit Klasse `nav-cta-button`
+3. Alle Punkte auf derselben Ebene lassen; keine Dropdowns.
+4. Falls noch ein altes Menue aktiv ist, nur deaktivieren, nicht loeschen, bis die Live-QA sauber ist.
+5. Wenn der Audit-CTA bereits im Menue sitzt, keinen zweiten identischen Header-Button daneben stehen lassen.
 
-## Homepage-Optimierung – Manuelle Schritte in WP-Admin
+## 2. Homepage: offene Editor-Aufgaben
 
-### HERO-SEKTION
-[ ] Hero Subline ändern zu:
-    ALT: "Ich baue aus Ihrer WordPress-Instanz ein eigenes Anfragesystem..."
-    NEU: Subline KÜRZEN auf max. 1 Satz:
-    "Ich baue Ihre WordPress-Instanz zu einem eigenen Anfragesystem um –
-     ohne Ad-Abhängigkeit, mit messbarem Ergebnis."
-    
-[ ] Stack-Text-Block ("Advanced WordPress · Technical SEO...") 
-    → CSS-Klasse "hero-stack-text" zuweisen ODER direkt löschen
-    
-[ ] Primärer Hero CTA bleibt: "Audit starten"
-    → /growth-audit/ ✓ (bereits korrekt)
+### Hero
 
-### WGOS-SEKTION auf Homepage
-[ ] Nach der bestehenden WGOS-Text-Sektion (Speed/Measurement/Flywheel):
-    Neuen Block hinzufügen: Custom HTML
-    → homepage-mindmap-teaser.jsx als kompiliertes Script einbinden
-    → Alternativ: Kurztext-Version mit 3 Spalten als Zwischenlösung
+- Subline auf einen klaren Satz kuerzen:
+  `Ich baue Ihre WordPress-Instanz zu einem eigenen Anfragesystem um - ohne Ad-Abhaengigkeit, mit messbarem Ergebnis.`
+- Falls der Stack-Text-Block noch existiert, entweder die CSS-Klasse `hero-stack-text` vergeben oder den Block entfernen.
+- Falls ein sekundaerer Hero-CTA noch existiert, die Klasse `hero-cta-secondary` vergeben.
 
-### REIHENFOLGE DER SEKTIONEN (Drag & Drop im Editor)
-Ziel-Reihenfolge von oben nach unten:
+### Reihenfolge und Proof
+
+- Reihenfolge im Editor gegen dieses Zielbild pruefen:
   1. Hero
-  2. Schmerz-Sektion (Modell A vs B) ← bereits vorhanden
-  3. WGOS-System-Sektion + Mindmap-Teaser
-  4. Track Record / Cases ← WICHTIG: 1-Satz-Kontext ergänzen
-  5. "Für wen ist das nichts?" ← aus FAQ rausziehen, eigene Sektion
-  6. Audit-CTA Sektion
-  7. FAQ (nur 3 Fragen behalten)
-  8. Blog ← ans Ende
-
-### TRACK RECORD – Kontext ergänzen
-Pro Case 1 Satz VOR den Zahlen:
-E3 New Energy:
-"E3 startete mit 150€ CPL über Google Ads ohne messbare 
- Leadqualität. Nach WGOS-Aufbau:"
-→ dann die Zahlen
-
-DOMDAR:
-"DOMDAR hatte 46€ Warenkorb-Schnitt und 4,2s Ladezeit. 
- Nach Performance Relaunch:"
-→ dann die Zahlen
-
-### "FÜR WEN IST DAS NICHTS?" – eigene Sektion
-Text: (aus FAQ kopieren und als eigene Sektion platzieren)
-"Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht 
- oder Unternehmen die Baukasten-Preise erwarten. 
- Das System ist für B2B-Unternehmen ab ~500.000€ Jahresumsatz, 
- die planbar skalieren wollen."
-
-Styling: Dark-Card mit Rahmen, leicht abgesetzt – 
-signalisiert Selektivität = erhöht Vertrauen bei Zielgruppe
-
----
-
-## Barrierefreiheit & Funnel-Fixes – Manuelle Schritte
-
-### SOFORT in WP-Admin / Editor erledigen:
-
-#### Alt-Texte Blog-Vorschaubilder
-[ ] Medien → Bibliothek → jedes Blog-Bild öffnen
-[ ] Alternativtext setzen (beschreibend, nicht "featured-image-xyz")
-    Beispiele:
-    - "Technisches SEO als Fundament für Performance Marketing"
-    - "150 Euro pro Lead Falle – B2B-Strategie für eigene Anfragen"
-    - "Meta Ads Kampagnenstruktur für B2B Lead Generation"
-    - "Core Web Vitals Optimierung WordPress Performance"
-
-#### WGOS-Seite: "0"-Kennzahlen fixen
-[ ] Seite bearbeiten → Hero-Bereich
-[ ] Statische Werte eintragen:
-    Mobile Performance: 98
-    Data Ownership: 100%
-[ ] Speichern – JS überschreibt diese Werte dynamisch
-
-#### WGOS-Seite: Text vor Credits-Tabelle
-[ ] Direkt über der Credits-Tabelle neuen Absatz-Block einfügen:
-    "Wählen Sie was Sie brauchen. Jedes Asset hat einen 
-     festen Punktwert – kein Verhandeln, kein Mehrkostenrisiko. 
-     Das Risiko für Mehraufwand liegt bei mir."
-
-#### WGOS-Seite: Garantie-Sektion umdrehen
-[ ] Ersten Absatz ("Keine unrealistischen Umsatzversprechen...") 
-    nach unten verschieben – NACH den Garantie-Punkten
-[ ] Neuer erster Satz der Sektion:
-    "Was ich garantiere, sind Dinge die ich kontrollieren kann:"
-[ ] Disclaimer-Satz ans Ende der Sektion
-
-#### Homepage: ARIA-Labels Kennzahlen
-[ ] Hero-Kennzahlen-Block öffnen
-[ ] Jeweils einen visually-hidden Span ergänzen:
-    98 <span class="sr-only">Mobile Performance Score</span>
-    -83% <span class="sr-only">Reduktion Kosten pro Lead</span>
-    < 0.8s <span class="sr-only">Ladezeit LCP</span>
-    100% <span class="sr-only">Data Ownership</span>
-
-CSS für sr-only (in style.css ergänzen falls nicht vorhanden):
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
-}
-
-#### Homepage: Micro-Conversion Zwischenschritt
-[ ] Nach WGOS-System-Sektion (vor Track Record) neuen Block:
-    Text: "Noch nicht sicher? Erst das System verstehen →"
-    Link: /wordpress-growth-operating-system/
-    Style: Kleiner Text-Link, kein Button, keine Ablenkung
-
-#### Homepage: Modell A (Ad-Miete) visuell abschwächen
-[ ] Modell A Spalte: Opacity auf 70%, Rahmen gestrichelt
-    oder Hintergrund leicht gedämpft
-[ ] Modell B Spalte: Goldener linker Rahmen (4px solid #D4AF37)
-    → Signalisiert visuell den Gewinner ohne Text
-
-### Technische Hinweise aus Code-Umsetzung
-- Homepage-Schema in `functions.php` bewusst nicht ergänzt: bereits JSON-LD-Ausgabe über `blocksy-child/inc/org-schema.php` plus Rank-Math-Integration aktiv, um Konflikte/Duplikate zu vermeiden.
-- Sekundärer Hero-CTA wurde mit mehreren Fallback-Selektoren in CSS adressiert; bitte im Live-Frontend per DevTools gegen die echte Homepage-Struktur prüfen und bei Bedarf Zielselektor nachschärfen.
-
----
-
-## WGOS-Seite: Vollständige Umbauanleitung (manuell im Editor)
-
-### ZIEL-REIHENFOLGE der Blöcke (von oben nach unten):
-  1. Hero (Headline + Bullets + CTAs)            ← bleibt
-  2. Prinzip-Sektion (Modell A vs B)             ← bleibt
-     └── Mini-CTA ergänzen (Text-Link):
-         "Direkt zum Audit – kostenlos, 48h, kein Pitch →"
-         Link: /growth-audit/
-  3. Social Proof Strip                          ← NEU (HTML-Block einfügen)
-         Datei: wgos-social-proof.html kopieren und als
-         Custom HTML Block einfügen
-  4. Mindmap: 7 Module                           ← NEU (React-Block)
-         wgos-mindmap-v2.jsx einbinden
-         (Details: siehe Einbindungs-Anleitung unten)
-  5. Modul-Texte (01–07)                         ← KÜRZEN
-         Jeden Modul-Textblock auf max. 2 Sätze kürzen
-         Die Mindmap erklärt Details – der Text ist nur Backup
-  6. Pakete (Maintenance / Growth / Dominance)   ← bleibt, leicht anpassen
-  7. Credits-Tabelle                             ← bleibt
-         Neuer Block DAVOR einfügen:
-         "Wählen Sie was Sie brauchen. Jedes Asset hat einen
-          festen Punktwert – kein Verhandeln, kein Mehrkostenrisiko.
-          Das Risiko für Mehraufwand liegt bei mir."
-  8. Garantie-Sektion                            ← Reihenfolge ändern
-         JETZT: "Keine unrealistischen Versprechen..." (Disclaimer zuerst)
-         NEU:   "Was ich garantiere:" → Garantiepunkte → Disclaimer ans Ende
-         Neuer erster Satz: "Was ich garantiere, sind Dinge
-         die ich kontrollieren kann:"
-  9. FAQ                                         ← bleibt
-  10. Abschluss-CTA                              ← bleibt
-
-### PAKETE: Entscheidungshilfe ergänzen
-Unter jeden Paket-Titel einen Trigger-Satz ergänzen:
-
-Maintenance:
-  "Richtig für Sie wenn: Ihre Site läuft, aber Updates,
-   Backups und Monitoring kosten Sie wertvolle Zeit."
-
-Growth Partner:
-  "Richtig für Sie wenn: Sie ein eigenes Anfragesystem
-   aufbauen wollen – SEO, Content und Conversion systematisch."
-
-Dominance:
-  "Richtig für Sie wenn: Sie Marktführer-Anspruch haben
-   und Full Stack + Paid Booster gleichzeitig skalieren wollen."
-
-### WGOS Hero: "0"-Kennzahlen fixen
-[ ] Hero-Block bearbeiten
-[ ] Statische Werte direkt ins HTML eintragen:
-    Mobile Performance: 98
-    Data Ownership: 100%
-[ ] Speichern (JS überschreibt dynamisch, Fallback bleibt)
-
-### MINDMAP EINBINDEN (React-Komponente)
-Option A – Als iFrame (einfachste Methode):
-  [ ] Separate Seite erstellen: /wgos-mindmap-intern/
-  [ ] Dort die Komponente einbinden via wp_enqueue_script
-  [ ] Auf WGOS-Seite: Custom HTML Block mit iFrame:
-      <iframe src="/wgos-mindmap-intern/"
-              style="width:100%;height:700px;border:none;"
-              loading="lazy"
-              title="WGOS System Übersicht interaktiv">
-      </iframe>
-
-Option B – Via wp_enqueue_script (sauberere Methode):
-  [ ] In functions.php:
-      wp_enqueue_script(
-        'wgos-mindmap',
-        get_stylesheet_directory_uri() . '/assets/js/wgos-mindmap-v2.js',
-        array(),
-        '1.0',
-        true
-      );
-  [ ] JSX zu JS kompilieren via wp-scripts (npm run build)
-  [ ] Auf WGOS-Seite Custom HTML Block:
-      <div id="wgos-mindmap-root"></div>
-
-EMPFEHLUNG: Mit Option A starten – schneller live,
-später auf Option B migrieren.
-
-### Status (bereits im Code umgesetzt)
-- Social Proof Strip ist bereits serverseitig im Template `blocksy-child/page-wgos.php` nach dem Prinzip-Abschnitt eingebunden.
-- Mindmap-Script wird bereits über `blocksy-child/inc/enqueue.php` auf der WGOS-Seite geladen (`wgos-mindmap-v2.js`).
-- Runtime-Script unterstützt beide Mount-IDs: `#wgos-mindmap-v2-root` und `#wgos-mindmap-root`.
-
----
-
-## Homepage: Manuelle Schritte im Editor
-
-### SEKTIONSREIHENFOLGE (Drag & Drop im Block-Editor)
-Ziel von oben nach unten:
-  1. Hero
-  2. Schmerz-Sektion (Modell A vs B)
-  3. WGOS-System-Sektion + Mindmap Teaser (bereits eingebaut)
+  2. Schmerz-Sektion
+  3. WGOS-System-Sektion
   4. Track Record / Cases
-  5. "Für wen ist das nichts?" (eigene Sektion – NEU)
+  5. Selektionskarte "Fuer wen ist das nichts?"
   6. Audit-CTA
-  7. FAQ (gekürzt auf 3 Fragen)
-  8. Blog (ganz ans Ende)
+  7. FAQ
+  8. Blog
+- Vor die Zahlen bei `E3 New Energy` und `DOMDAR` jeweils einen kurzen Kontextsatz setzen.
+- Nach dem Track-Record eine eigene Selektionskarte ergaenzen:
+  `Fuer Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht oder Unternehmen die Baukasten-Preise erwarten. Das System ist fuer B2B-Unternehmen ab ~500.000 EUR Jahresumsatz, die planbar skalieren wollen.`
+- FAQ auf diese drei Fragen reduzieren:
+  1. `Was unterscheidet Credits von Stundensaetzen?`
+  2. `Brauchen wir dann ueberhaupt noch Ads?`
+  3. `Was bedeutet Privacy-first Tracking konkret?`
+- Unter dem FAQ einen Textlink auf `/wordpress-growth-operating-system/#faq` setzen.
+- Nach der Schmerz-Sektion einen kleinen Textlink auf `/wordpress-growth-operating-system/` setzen:
+  `Noch nicht sicher? Erst das System verstehen ->`
 
-### HERO
-[ ] Stack-Text Block identifizieren:
-    "Advanced WordPress · Technical SEO · Privacy-by-Design..."
-    → CSS-Klasse "hero-stack-text" zuweisen ODER Block löschen
-[ ] Subline kürzen auf:
-    "Ich baue Ihre WordPress-Instanz zu einem eigenen Anfragesystem um –
-     ohne Ad-Abhängigkeit, mit messbarem Ergebnis."
-[ ] Sekundärer CTA ("Case Studies ansehen"):
-    → CSS-Klasse "hero-cta-secondary" zuweisen
+### Accessibility
 
-### SCHMERZ-SEKTION (Modell A vs B)
-[ ] Modell A Spalte/Block: CSS-Klasse "modell-a" zuweisen
-[ ] Modell B Spalte/Block: CSS-Klasse "modell-b" zuweisen
-[ ] Am Ende der Sektion neuen Absatz-Block ergänzen:
-    Text:  "Noch nicht sicher? Erst das System verstehen →"
-    Link:  /wordpress-growth-operating-system/
-    Klasse: "micro-cta-link"
+- Im Hero-Kennzahlen-Block `sr-only`-Spans fuer die Werte pruefen oder nachtragen:
+  - `98 Mobile Performance Score`
+  - `-83% Reduktion Kosten pro Lead`
+  - `< 0.8s Ladezeit LCP`
+  - `100% Data Ownership`
+- In der Medienbibliothek die Alt-Texte der Blog-Vorschaubilder auf beschreibende Texte umstellen.
 
-### TRACK RECORD / CASES
-[ ] E3 New Energy – 1 Satz VOR den Zahlen einfügen:
-    "E3 startete mit 150€ CPL ohne messbare Leadqualität.
-     Nach WGOS-Aufbau:"
-[ ] DOMDAR – 1 Satz VOR den Zahlen einfügen:
-    "DOMDAR hatte 46€ Warenkorb-Schnitt und 4,2s Ladezeit.
-     Nach Performance Relaunch:"
+## 3. WGOS und Systemseiten
 
-### "FÜR WEN IST DAS NICHTS?" – Neue eigene Sektion
-[ ] Aus FAQ-Block rausziehen
-[ ] Neuen Gruppe-Block anlegen, CSS-Klasse: "selection-card"
-[ ] Kleines Label oben (Absatz-Block, Klasse "selection-card-label"):
-    "FÜR WEN IST DAS NICHTS"
-[ ] Inhalt:
-    "Für Hobby-Projekte, reine Visitenkarten ohne Lead-Absicht
-     oder Unternehmen die Baukasten-Preise erwarten.
-     Das System ist für B2B-Unternehmen ab ~500.000€ Jahresumsatz,
-     die planbar skalieren wollen."
-[ ] Platzierung: nach Track Record, vor Audit-CTA
+- Fuer `/wordpress-growth-operating-system/` und `/wgos-systemlandkarte/` gibt es repo-seitig keine offenen Editor-Migrationsschritte mehr.
+- Nach jedem Deploy nur noch live gegenpruefen, ob kein alter Editor-Content oder Cache die versionierten Templates ueberlagert.
 
-### FAQ – Kürzen auf 3 Fragen
-[ ] Diese 3 behalten:
-    1. "Was unterscheidet Credits von Stundensätzen?"
-    2. "Brauchen wir dann überhaupt noch Ads?"
-    3. "Was bedeutet Privacy-first Tracking konkret?"
-[ ] Rest entfernen (Antworten stehen vollständig auf WGOS-Seite)
-[ ] Unter dem FAQ Text-Link ergänzen:
-    "Weitere Fragen beantwortet → Das WGOS FAQ"
-    Link: /wordpress-growth-operating-system/#faq
+## 4. Post-Deploy-QA
 
-### KENNZAHLEN: ARIA-Labels
-[ ] Hero-Kennzahlen-Block öffnen (HTML-Ansicht)
-[ ] Ergänzen:
-    98 <span class="sr-only">Mobile Performance Score</span>
-    −83% <span class="sr-only">Reduktion Kosten pro Lead</span>
-    &lt; 0.8s <span class="sr-only">Ladezeit LCP</span>
-    100% <span class="sr-only">Data Ownership</span>
+- Header-Menue auf Desktop und Mobile pruefen.
+- Sicherstellen, dass keine alten Buchungs-, Case-Study- oder Audit-Links aus Editor-Content wieder auftauchen.
+- Homepage, WGOS und Growth Audit einmal ungecacht gegenklicken.
+- Im WordPress-Admin kontrollieren, ob Menues, Utility-Links und Footer-Links noch der aktuellen CTA-Hierarchie folgen.

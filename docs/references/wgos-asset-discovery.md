@@ -243,15 +243,18 @@ Repo-Status:
 | `/customer-journey-audit/` | `/growth-audit/` |
 | `/360-audit/` | `/growth-audit/` |
 | `/wordpress-tech-audit/` | `/growth-audit/` |
+| `/alle-loesungen-im-detail/` | `/alle-loesungen/` |
 | `/meta-ads/` | `/wordpress-growth-operating-system/` |
 | `/wordpress-agentur/` | `/wordpress-agentur-hannover/` |
-| `/wordpress-wartung-hannover/` | `/wgos-assets/security-hardening/` |
 | `/roi-rechner/` | `/kostenlose-tools/` |
 
 ### Bewusst nicht redirectet
 
 | URL | Grund |
 | --- | --- |
+| `/wordpress-wartung-hannover/` | aktive versionierte Clusterseite, kein Legacy-Redirect mehr |
+| `/ga4-tracking-setup/` | aktive versionierte Clusterseite, kein Legacy-Redirect mehr |
+| `/performance-marketing/` | aktive versionierte Clusterseite, kein Legacy-Redirect mehr |
 | `/kostenlose-tools/` | Im Repo existiert weiter ein Tools-Hub, daher kein Zwangsredirect gesetzt |
 
 ## 8. Technische Konsequenzen

@@ -170,14 +170,15 @@ Technik:
 - `/customer-journey-audit/` -> `/growth-audit/`
 - `/360-audit/` -> `/growth-audit/`
 - `/wordpress-tech-audit/` -> `/growth-audit/`
+- `/alle-loesungen-im-detail/` -> `/alle-loesungen/`
 - `/meta-ads/` -> `/wordpress-growth-operating-system/`
 - `/wordpress-agentur/` -> `/wordpress-agentur-hannover/`
-- `/wordpress-wartung-hannover/` -> `/wgos-assets/security-hardening/`
 - `/roi-rechner/` -> `/kostenlose-tools/`
 
 ### Bewusst offen gelassen
 
 - `/kostenlose-tools/` bleibt live, weil im Repo weiterhin ein Tools-Hub existiert
+- `/wordpress-wartung-hannover/`, `/ga4-tracking-setup/` und `/performance-marketing/` bleiben aktive versionierte Clusterseiten und werden nicht mehr als Legacy-Redirects behandelt
 
 ## 7. Blog -> WGOS-Asset Verlinkung
 

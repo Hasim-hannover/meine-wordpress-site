@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-13.
+Stand: 2026-03-14.
 
 Basis dieses Status:
 
@@ -61,11 +61,11 @@ Nicht verifiziert:
 
 ## Deprecated
 
-- Legacy-Slugs `/audit/`, `/customer-journey-audit/` und `/360-audit/` werden auf `/growth-audit/` umgeleitet.
+- Legacy-Slugs `/audit/`, `/customer-journey-audit/`, `/360-audit/` und `/wordpress-tech-audit/` werden auf `/growth-audit/` umgeleitet.
 - Legacy-Slugs `/case-studies/` und `/case-studies-e-commerce/` werden auf `/ergebnisse/` umgeleitet.
-- Legacy-Service-Slugs `/ga4-tracking-setup/`, `/performance-marketing/`, `/meta-ads/` und `/wordpress-wartung-hannover/` werden per `301` auf passende WGOS-Ziele umgeleitet.
-- Der Legacy-Tool-Slug `/roi-rechner/` wird per `301` auf `/kostenlose-tools/` umgeleitet.
-- `/wordpress-tech-audit/` ist als oeffentlicher Funnel-Einstieg deprecated und wird auf `/growth-audit/` umgeleitet.
+- Legacy-Slugs `/meta-ads/`, `/wordpress-agentur/` und `/roi-rechner/` werden auf ihre kanonischen Zielseiten umgeleitet.
+- Der Legacy-Pfad `/alle-loesungen-im-detail/` wird auf die aktuelle Loesungs-Uebersicht umgeleitet.
+- Die Clusterseiten `/ga4-tracking-setup/`, `/performance-marketing/` und `/wordpress-wartung-hannover/` bleiben aktive versionierte Routen und sind keine Legacy-Redirect-Ziele mehr.
 - Im WordPress-Admin erscheint fuer Admins ein Legacy-Cleanup-Hinweis; der Ein-Klick-Flow setzt gefundene Altseiten auf `draft` und entfernt passende Menue-Eintraege.
 - Der `Growth Audit` ist der aktuelle und oeffentliche Primaer-Einstieg. Vertiefte Folgeanalysen sind kein eigenstaendiger Erstkontakt mehr, sondern ergeben sich erst nach Audit und persoenlichem Kontakt.
 - Ein WordPress-Editor-Shell als Source of Truth fuer den Audit ist nicht mehr Zielbild.
