@@ -17,17 +17,11 @@ $primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_ge
 $home_url     = $primary_urls['home'] ?? home_url( '/' );
 $audit_url    = $primary_urls['audit'] ?? nexus_get_audit_url();
 $agentur_url  = $primary_urls['agentur'] ?? home_url( '/wordpress-agentur-hannover/' );
-$wartung_url  = $primary_urls['wartung'] ?? home_url( '/wordpress-wartung-hannover/' );
 $wgos_url     = $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
 $cases_url    = $primary_urls['results'] ?? nexus_get_results_url();
-$e3_url       = $primary_urls['e3'] ?? home_url( '/e3-new-energy/' );
-$domdar_url   = $primary_urls['domdar'] ?? home_url( '/case-study-domdar/' );
-$whitelabel_url = $primary_urls['whitelabel'] ?? nexus_get_whitelabel_page_url();
 $blog_url     = $primary_urls['blog'] ?? home_url( '/blog/' );
 $seo_url      = $primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' );
 $cwv_url      = $primary_urls['cwv'] ?? home_url( '/core-web-vitals/' );
-$tracking_url = $primary_urls['tracking'] ?? home_url( '/ga4-tracking-setup/' );
-$tools_url    = $primary_urls['tools'] ?? home_url( '/kostenlose-tools/' );
 $about_url    = $primary_urls['about'] ?? home_url( '/uber-mich/' );
 $contact_url  = $primary_urls['contact'] ?? nexus_get_contact_url();
 $project_request_url = add_query_arg(
@@ -46,7 +40,7 @@ $privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 	<div class="ft__audit-shell">
 		<p class="ft__audit-note">Growth Audit: persönliche Ersteinschätzung, schriftliche Rückmeldung in 48 Stunden, kein Pflicht-Call.</p>
 		<nav class="ft__audit-links" aria-label="Audit-Footer-Navigation">
-			<a href="<?php echo esc_url( $cases_url ); ?>">Einblicke</a>
+			<a href="<?php echo esc_url( $cases_url ); ?>" data-track-action="cta_audit_footer_results" data-track-category="trust">Ergebnisse</a>
 			<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
 			<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz</a>
 		</nav>
@@ -61,7 +55,7 @@ $privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 		<div class="ft__brand">
 			<a class="ft__logo site-logo site-logo--accent" href="<?php echo esc_url( $home_url ); ?>" aria-label="Startseite - HAŞIM ÜNER">HAŞIM ÜNER</a>
 			<p class="ft__tag">WordPress als Nachfrage-System für B2B.</p>
-			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit starten</a>
+			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_audit" data-track-category="lead_gen">Growth Audit starten</a>
 			<p class="ft__privacy-note">
 				<span class="ft__privacy-badge" aria-hidden="true">
 					<svg viewBox="0 0 24 24" focusable="false">
@@ -79,40 +73,28 @@ $privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 			<section class="ft__col" aria-labelledby="ft-einstieg">
 				<h3 id="ft-einstieg">Einstieg</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit</a></li>
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>">WordPress für B2B in Hannover</a></li>
-					<li><a href="<?php echo esc_url( $wartung_url ); ?>">WordPress Wartung Hannover</a></li>
-					<li><a href="<?php echo esc_url( $wgos_url ); ?>">WGOS</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_nav_audit" data-track-category="lead_gen">Growth Audit</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_footer_nav_agentur" data-track-category="navigation">WordPress für B2B in Hannover</a></li>
+					<li><a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_footer_nav_wgos" data-track-category="navigation">WGOS</a></li>
 				</ul>
 			</section>
 
-			<section class="ft__col" aria-labelledby="ft-proof">
-				<h3 id="ft-proof">Proof</h3>
+			<section class="ft__col" aria-labelledby="ft-proof-wissen">
+				<h3 id="ft-proof-wissen">Proof &amp; Wissen</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $cases_url ); ?>">Ergebnisse</a></li>
-					<li><a href="<?php echo esc_url( $e3_url ); ?>">E3 New Energy</a></li>
-					<li><a href="<?php echo esc_url( $domdar_url ); ?>">DOMDAR</a></li>
-					<li><a href="<?php echo esc_url( $whitelabel_url ); ?>">Whitelabel Proof</a></li>
-				</ul>
-			</section>
-
-			<section class="ft__col" aria-labelledby="ft-wissen">
-				<h3 id="ft-wissen">Wissen</h3>
-				<ul class="ft__list">
-					<li><a href="<?php echo esc_url( $blog_url ); ?>">Insights</a></li>
-					<li><a href="<?php echo esc_url( $seo_url ); ?>">SEO</a></li>
-					<li><a href="<?php echo esc_url( $cwv_url ); ?>">Core Web Vitals</a></li>
-					<li><a href="<?php echo esc_url( $tracking_url ); ?>">GA4 Tracking Setup</a></li>
-					<li><a href="<?php echo esc_url( $tools_url ); ?>">Kostenlose Tools</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $cases_url ); ?>" data-track-action="cta_footer_nav_results" data-track-category="trust">Ergebnisse</a></li>
+					<li><a href="<?php echo esc_url( $blog_url ); ?>" data-track-action="cta_footer_nav_insights" data-track-category="navigation">Insights</a></li>
+					<li><a href="<?php echo esc_url( $seo_url ); ?>" data-track-action="cta_footer_nav_seo" data-track-category="navigation">WordPress SEO</a></li>
+					<li><a href="<?php echo esc_url( $cwv_url ); ?>" data-track-action="cta_footer_nav_cwv" data-track-category="navigation">Core Web Vitals</a></li>
 				</ul>
 			</section>
 
 			<section class="ft__col" aria-labelledby="ft-unternehmen">
 				<h3 id="ft-unternehmen">Unternehmen</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $project_request_url ); ?>">Projektanfrage</a></li>
-					<li><a href="<?php echo esc_url( $about_url ); ?>">Über mich</a></li>
-					<li><a href="<?php echo esc_url( $contact_url ); ?>">Kontakt</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $project_request_url ); ?>" data-track-action="cta_footer_nav_project" data-track-category="lead_gen">Projektanfrage</a></li>
+					<li><a href="<?php echo esc_url( $about_url ); ?>" data-track-action="cta_footer_nav_about" data-track-category="navigation">Über mich</a></li>
+					<li><a href="<?php echo esc_url( $contact_url ); ?>" data-track-action="cta_footer_nav_contact" data-track-category="navigation">Kontakt</a></li>
 				</ul>
 
 				<nav class="ft__legal" aria-label="Rechtliches">
