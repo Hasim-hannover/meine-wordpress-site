@@ -256,6 +256,72 @@ function hu_output_schema()
             $slug = nexus_get_current_wgos_cluster_route_slug();
         }
 
+        if ( function_exists( 'nexus_is_glossary_hub_page' ) && nexus_is_glossary_hub_page() && function_exists( 'nexus_get_glossary_registry' ) ) {
+            $term_set = [
+                '@context'    => 'https://schema.org',
+                '@type'       => 'DefinedTermSet',
+                '@id'         => trailingslashit( get_permalink( $post_id ) ) . '#definedtermset',
+                'name'        => get_the_title( $post_id ),
+                'description' => get_the_excerpt( $post_id ) ? wp_strip_all_tags( get_the_excerpt( $post_id ) ) : 'Glossar fuer SEO, Tracking, Performance und Conversion mit sauberer Rueckfuehrung auf die passenden Primary URLs.',
+                'url'         => get_permalink( $post_id ),
+                'inLanguage'  => 'de',
+            ];
+
+            $defined_terms = [];
+
+            foreach ( nexus_get_glossary_registry() as $term ) {
+                if ( 'publish' !== ( $term['status'] ?? '' ) || 'alias' === ( $term['index_policy'] ?? '' ) ) {
+                    continue;
+                }
+
+                if ( ! function_exists( 'nexus_get_glossary_term_detail_url' ) ) {
+                    continue;
+                }
+
+                $term_url = nexus_get_glossary_term_detail_url( $term );
+
+                if ( '' === $term_url ) {
+                    continue;
+                }
+
+                $defined_terms[] = [
+                    '@type'       => 'DefinedTerm',
+                    '@id'         => trailingslashit( $term_url ) . '#definedterm',
+                    'name'        => (string) $term['title'],
+                    'description' => (string) ( $term['short_definition'] ?? $term['excerpt'] ?? '' ),
+                    'url'         => $term_url,
+                    'termCode'    => (string) $term['slug'],
+                ];
+            }
+
+            if ( ! empty( $defined_terms ) ) {
+                $term_set['hasDefinedTerm'] = $defined_terms;
+            }
+
+            $schemas[] = $term_set;
+        }
+
+        if ( is_singular( 'glossary_term' ) && function_exists( 'nexus_get_glossary_definition' ) ) {
+            $term = nexus_get_glossary_definition( get_post( $post_id ) );
+
+            if ( is_array( $term ) ) {
+                $term_schema = [
+                    '@context'         => 'https://schema.org',
+                    '@type'            => 'DefinedTerm',
+                    '@id'              => trailingslashit( get_permalink( $post_id ) ) . '#definedterm',
+                    'name'             => (string) $term['title'],
+                    'description'      => (string) ( $term['short_definition'] ?? $term['excerpt'] ?? '' ),
+                    'url'              => get_permalink( $post_id ),
+                    'termCode'         => (string) $term['slug'],
+                    'inDefinedTermSet' => [
+                        '@id' => trailingslashit( function_exists( 'nexus_get_glossary_hub_url' ) ? nexus_get_glossary_hub_url() : home_url( '/glossar/' ) ) . '#definedtermset',
+                    ],
+                ];
+
+                $schemas[] = $term_schema;
+            }
+        }
+
         if (is_singular('wgos_asset') && function_exists('nexus_get_wgos_asset_definition')) {
             $asset = nexus_get_wgos_asset_definition(get_post($post_id));
             $schema_type = $asset['schema_type'] ?? 'Service';

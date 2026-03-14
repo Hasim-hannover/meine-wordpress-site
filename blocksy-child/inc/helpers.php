@@ -272,6 +272,10 @@ function nexus_get_primary_public_url_map() {
 			[ 'wordpress-growth-operating-system', 'wgos' ],
 			home_url( '/wordpress-growth-operating-system/' )
 		),
+		'glossary'             => nexus_get_page_url(
+			[ 'glossar' ],
+			home_url( '/glossar/' )
+		),
 		'agentur'              => nexus_get_page_url(
 			[ 'wordpress-agentur-hannover', 'wordpress-agentur' ],
 			home_url( '/wordpress-agentur-hannover/' )

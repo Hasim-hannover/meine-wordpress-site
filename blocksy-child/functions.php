@@ -21,6 +21,8 @@ $modules = [
 	'crm.php',            // Gemeinsame CRM-Grundlage fuer Kontakte, Blog-Abos und Projektanfragen
 	'wgos-assets.php',    // CPT + Helper fuer WGOS Asset-Spokes
 	'wgos-asset-registry.php', // Versionierte WGOS Asset-Registry + Sync
+	'glossary.php',       // Glossar-Hub + CPT fuer definitorische Begriffe
+	'glossary-registry.php', // Versionierte Glossar-Registry + Sync
 	'wgos-cluster-pages.php', // Versionierte Cluster-/Pillar-Pages und Blog-Asset-Bridges
 	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
 	'audit-page.php',     // Audit-Shell-Fallback fuer die Audit-Landing-Page

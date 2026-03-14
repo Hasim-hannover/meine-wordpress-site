@@ -209,6 +209,30 @@ function hu_enqueue_assets() {
 		);
 	}
 
+	// ── G4) Template: Glossar Hub ─────────────────────────────────
+	if ( function_exists( 'nexus_is_glossary_hub_page' ) && nexus_is_glossary_hub_page() ) {
+		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );
+		hu_enqueue_css( 'nexus-glossary-css', 'glossary.css', [ 'nexus-wgos-css' ] );
+	}
+
+	// ── G5) Template: Glossar Detail ──────────────────────────────
+	if ( is_singular( 'glossary_term' ) ) {
+		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );
+		hu_enqueue_css( 'nexus-glossary-css', 'glossary.css', [ 'nexus-wgos-css' ] );
+
+		wp_add_inline_style(
+			'blocksy-child-style',
+			'
+			.single-glossary_term .entry-header .entry-title,
+			.single-glossary_term .ct-page-title {
+				display: none !important;
+			}
+		'
+		);
+	}
+
 	// ── H) Template: Growth Audit Funnel ──────────────────────────
 	if ( nexus_is_audit_page() ) {
 		hu_enqueue_css( 'nexus-audit-css', 'audit.css', [ 'nexus-design-system' ] );
