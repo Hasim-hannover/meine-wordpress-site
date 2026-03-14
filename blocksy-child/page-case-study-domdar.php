@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $audit_url    = nexus_get_audit_url();
 $cases_url    = nexus_get_results_url();
-$wgos_url     = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ], home_url( '/wordpress-growth-operating-system/' ) );
-$local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) );
+$wgos_url     = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
+$local_wp_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
 $instagram_url = 'https://www.instagram.com/domdar.de/';
 $portrait_url = home_url( '/wp-content/uploads/2025/09/Wordpress_Bild_Hero.webp' );
 

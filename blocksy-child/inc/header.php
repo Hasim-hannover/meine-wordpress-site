@@ -96,14 +96,12 @@ function nexus_get_site_header_fallback_items() {
 	$blog_page_id = (int) get_option( 'page_for_posts' );
 	$wgos_page_id = nexus_get_page_id( [ 'wordpress-growth-operating-system', 'wgos' ] );
 	$about_page_id = nexus_get_page_id( [ 'uber-mich' ] );
+	$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
 
 	return [
 		[
 			'label'  => __( 'System', 'blocksy-child' ),
-			'url'    => nexus_get_page_url(
-				[ 'wordpress-growth-operating-system', 'wgos' ],
-				home_url( '/wordpress-growth-operating-system/' )
-			),
+			'url'    => $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
 			'active' => $wgos_page_id ? is_page( $wgos_page_id ) : false,
 			'class'  => '',
 		],
@@ -115,19 +113,19 @@ function nexus_get_site_header_fallback_items() {
 		],
 		[
 			'label'  => __( 'Insights', 'blocksy-child' ),
-			'url'    => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
+			'url'    => $blog_page_id ? get_permalink( $blog_page_id ) : ( $primary_urls['blog'] ?? home_url( '/blog/' ) ),
 			'active' => is_home() || is_archive() || is_singular( 'post' ),
 			'class'  => '',
 		],
 		[
 			'label'  => __( 'Über mich', 'blocksy-child' ),
-			'url'    => nexus_get_page_url( [ 'uber-mich' ], home_url( '/uber-mich/' ) ),
+			'url'    => $primary_urls['about'] ?? home_url( '/uber-mich/' ),
 			'active' => $about_page_id ? is_page( $about_page_id ) : false,
 			'class'  => '',
 		],
 		[
 			'label'  => __( 'Audit starten', 'blocksy-child' ),
-			'url'    => nexus_get_audit_url(),
+			'url'    => $primary_urls['audit'] ?? nexus_get_audit_url(),
 			'active' => nexus_is_audit_page(),
 			'class'  => 'nav-cta-button',
 		],

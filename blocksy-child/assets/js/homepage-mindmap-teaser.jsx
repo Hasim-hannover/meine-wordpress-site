@@ -33,6 +33,12 @@ export const phases = [
 export default function HomepageMindmapTeaser() {
   const [mounted, setMounted] = useState(false);
   const [activeId, setActiveId] = useState(null);
+  const wgosUrl =
+    typeof window !== "undefined" &&
+    window.NexusHomeMindmapConfig &&
+    window.NexusHomeMindmapConfig.wgosUrl
+      ? String(window.NexusHomeMindmapConfig.wgosUrl)
+      : "/wordpress-growth-operating-system/";
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setMounted(true));
@@ -92,7 +98,7 @@ export default function HomepageMindmapTeaser() {
           ))}
         </div>
 
-        <a className="hmt-cta" href="/wordpress-growth-operating-system/">
+        <a className="hmt-cta" href={wgosUrl}>
           Das vollständige System →
         </a>
       </div>

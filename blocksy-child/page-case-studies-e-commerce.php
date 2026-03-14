@@ -13,10 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $audit_url      = nexus_get_audit_url();
-$wgos_url       = nexus_get_page_url(
-	[ 'wordpress-growth-operating-system', 'wgos' ],
-	home_url( '/wordpress-growth-operating-system/' )
-);
+$wgos_url       = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
 $e3_url         = nexus_get_page_url(
 	[ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ],
 	home_url( '/e3-new-energy/' )

@@ -88,6 +88,7 @@ function nexus_is_results_menu_item( $item ) {
 function nexus_setup_main_menu() {
 
 	$menu_name = 'Nexus Hauptmenü';
+	$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
 
 	// Bestehendes Menü löschen falls vorhanden (Neuaufbau)
 	$existing = wp_get_nav_menu_object( $menu_name );
@@ -107,7 +108,7 @@ function nexus_setup_main_menu() {
 		'menu-item-object'    => 'page',
 		'menu-item-object-id' => $system_id,
 		'menu-item-type'      => $system_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $system_id ? '' : home_url( '/wordpress-growth-operating-system/' ),
+		'menu-item-url'       => $system_id ? '' : ( $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ) ),
 		'menu-item-status'    => 'publish',
 	] );
 
@@ -130,7 +131,7 @@ function nexus_setup_main_menu() {
 		'menu-item-object'    => $blog_page_id ? 'page' : '',
 		'menu-item-object-id' => $blog_page_id ?: 0,
 		'menu-item-type'      => $blog_page_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $blog_page_id ? '' : home_url( '/blog/' ),
+		'menu-item-url'       => $blog_page_id ? '' : ( $primary_urls['blog'] ?? home_url( '/blog/' ) ),
 		'menu-item-status'    => 'publish',
 	] );
 
@@ -141,7 +142,7 @@ function nexus_setup_main_menu() {
 		'menu-item-object'    => 'page',
 		'menu-item-object-id' => $about_id,
 		'menu-item-type'      => $about_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $about_id ? '' : home_url( '/uber-mich/' ),
+		'menu-item-url'       => $about_id ? '' : ( $primary_urls['about'] ?? home_url( '/uber-mich/' ) ),
 		'menu-item-status'    => 'publish',
 	] );
 

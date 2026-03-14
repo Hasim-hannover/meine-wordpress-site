@@ -10,15 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$wgos_url = nexus_get_page_url(
-	[ 'wordpress-growth-operating-system', 'wgos' ],
-	home_url( '/wordpress-growth-operating-system/' )
-);
+$wgos_url = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
 $cases_url = nexus_get_results_url();
-$agentur_url = nexus_get_page_url(
-	[ 'wordpress-agentur-hannover', 'wordpress-agentur' ],
-	home_url( '/wordpress-agentur-hannover/' )
-);
+$agentur_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
 
 $hero_facts = [
 	[

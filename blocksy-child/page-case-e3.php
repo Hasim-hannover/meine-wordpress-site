@@ -13,7 +13,8 @@ get_header();
 
 $audit_url   = nexus_get_audit_url();
 $cases_url   = nexus_get_results_url();
-$local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], home_url( '/wordpress-agentur-hannover/' ) );
+$wgos_url    = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
+$local_wp_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
 ?>
 
 <div class="cs-case-wrapper">
@@ -611,7 +612,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
                     Das WGOS ist ein monatliches Credit-Modell: Sie buchen ein Kontingent,
                     wir setzen Module nach Priorität um. Kein Stundensatz, kein Lock-in.
                     Details und Pakete finden Sie auf der
-                    <a href="/wordpress-growth-operating-system/">WGOS-Seite</a>.
+                    <a href="<?php echo esc_url( $wgos_url ); ?>">WGOS-Seite</a>.
                 </div>
             </details>
 
@@ -669,7 +670,7 @@ $local_wp_url = nexus_get_page_url( [ 'wordpress-agentur-hannover', 'wordpress-a
 
             <!-- 3 Internal Links -->
             <div class="cs-internal-links">
-                <a href="/wordpress-growth-operating-system/" class="cs-internal-link">
+                <a href="<?php echo esc_url( $wgos_url ); ?>" class="cs-internal-link">
                     WGOS: Das System dahinter →
                 </a>
                 <a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">

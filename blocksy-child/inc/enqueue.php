@@ -88,6 +88,15 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-home-js', 'homepage.js', [ 'nexus-core-js' ] );
 		hu_enqueue_js( 'nexus-home-mindmap-teaser-js', 'homepage-mindmap-teaser.js', [ 'nexus-home-js' ] );
+		wp_localize_script(
+			'nexus-home-mindmap-teaser-js',
+			'NexusHomeMindmapConfig',
+			[
+				'wgosUrl' => function_exists( 'nexus_get_primary_public_url' )
+					? nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) )
+					: home_url( '/wordpress-growth-operating-system/' ),
+			]
+		);
 	}
 
 	// ── B) Blog-Archive Scripts ───────────────────────────────────

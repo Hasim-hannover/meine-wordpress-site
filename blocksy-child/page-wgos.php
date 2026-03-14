@@ -21,7 +21,7 @@ $asset_hub_url = function_exists( 'nexus_get_wgos_asset_hub_url' ) ? nexus_get_w
 $page_url     = get_permalink( get_queried_object_id() );
 
 if ( ! $page_url ) {
-	$page_url = home_url( '/wordpress-growth-operating-system/' );
+	$page_url = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
 }
 
 $nav_items = [

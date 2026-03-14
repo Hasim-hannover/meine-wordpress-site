@@ -10,6 +10,11 @@
 		return;
 	}
 
+	var wgosUrl =
+		window.NexusHomeMindmapConfig && window.NexusHomeMindmapConfig.wgosUrl
+			? String(window.NexusHomeMindmapConfig.wgosUrl)
+			: "/wordpress-growth-operating-system/";
+
 	var phases = [
 		{
 			id: 1,
@@ -117,7 +122,7 @@
 		'<div class="hmt-map" aria-label="WGOS Teaser Mindmap">' +
 		phases.map(renderNode).join("") +
 		"</div>" +
-		'<a class="hmt-cta" href="/wordpress-growth-operating-system/">Das vollständige System →</a>' +
+		'<a class="hmt-cta" href="' + wgosUrl + '">Das vollständige System →</a>' +
 		"</div>" +
 		"</section>";
 

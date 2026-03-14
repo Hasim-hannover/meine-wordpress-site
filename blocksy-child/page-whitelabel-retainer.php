@@ -14,10 +14,7 @@ get_header();
 
 $audit_url    = nexus_get_audit_url();
 $results_url  = nexus_get_results_url();
-$wgos_url     = nexus_get_page_url(
-	[ 'wordpress-growth-operating-system', 'wgos' ],
-	home_url( '/wordpress-growth-operating-system/' )
-);
+$wgos_url     = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
 $portrait_url = 'https://hasimuener.de/wp-content/uploads/2026/01/Hasim-Uener-Prtraeit_Startseite.webp';
 
 $focus_areas = [
