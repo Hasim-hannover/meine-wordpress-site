@@ -26,6 +26,7 @@ $modules = [
 	'wgos-cluster-pages.php', // Versionierte Cluster-/Pillar-Pages und Blog-Asset-Bridges
 	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
 	'audit-page.php',     // Audit-Shell-Fallback fuer die Audit-Landing-Page
+	'tools-page.php',     // Versionierter Tools-Hub + Fallback fuer die Tools-Seite
 	'header.php',         // Eigener globaler Header + Navigation
 	'review-crm.php',     // Growth-Audit-Intake + WordPress CRM
 	'contact-page.php',   // Kontakt-Route, schlanke Kontaktform und Mailversand

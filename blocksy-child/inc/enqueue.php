@@ -310,8 +310,23 @@ function hu_enqueue_assets() {
 	}
 
 	// ── O) Template: Kostenlose Tools Hub ─────────────────────────
-	if ( is_page_template( 'page-tools.php' ) || is_page( 'tools' ) || is_page( 'kostenlose-tools' ) ) {
+	if ( function_exists( 'nexus_is_tools_page' ) && nexus_is_tools_page() ) {
 		hu_enqueue_css( 'nexus-tools-css', 'tools.css', [ 'nexus-design-system' ] );
+		wp_add_inline_style(
+			'blocksy-child-style',
+			'
+			.page-template-page-tools .entry-header .entry-title,
+			.page-template-page-tools .ct-page-title,
+			.page-template-page-tools-php .entry-header .entry-title,
+			.page-template-page-tools-php .ct-page-title,
+			.page-kostenlose-tools .entry-header .entry-title,
+			.page-kostenlose-tools .ct-page-title,
+			.page-tools .entry-header .entry-title,
+			.page-tools .ct-page-title {
+				display: none !important;
+			}
+		'
+		);
 	}
 
 	// ── P) Template: Ergebnisse Hub + Whitelabel Proof ─────────────

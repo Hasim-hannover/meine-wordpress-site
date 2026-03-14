@@ -15,30 +15,13 @@ get_header();
 	<?php
 	while ( have_posts() ) :
 		the_post();
-		$content = apply_filters( 'the_content', get_the_content() );
-		$content = str_replace( ']]>', ']]&gt;', $content );
 
-		$legacy_audit_labels = [
-			'Customer Journey Audit',
-			'customer journey audit',
-			'Coustomer Journey Audit',
-			'coustomer journey audit',
-			'Customer Joourney Audit',
-			'customer joourney audit',
-			'Coustomer Joourney Audit',
-			'coustomer joourney audit',
-		];
-
-		$legacy_audit_urls = [
-			home_url( '/customer-journey-audit/' ),
-			trailingslashit( home_url( '/customer-journey-audit' ) ),
-			'/customer-journey-audit/',
-		];
-
-		$content = str_ireplace( $legacy_audit_labels, 'Growth Audit', $content );
-		$content = str_replace( $legacy_audit_urls, nexus_get_audit_url(), $content );
-
-		echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		// Render the versioned tools shell directly from the template.
+		if ( function_exists( 'nexus_get_tools_hub_shell_markup' ) ) {
+			echo nexus_get_tools_hub_shell_markup(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		} else {
+			get_template_part( 'template-parts/tools-page-shell' );
+		}
 	endwhile;
 	?>
 </div>

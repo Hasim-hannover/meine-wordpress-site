@@ -518,33 +518,44 @@ function hu_output_schema()
 
         // Kostenlose Tools: CollectionPage
         if ($slug === 'kostenlose-tools') {
+            $toolParts = [];
+
+            if (function_exists('nexus_get_tools_hub_items')) {
+                foreach ((array) nexus_get_tools_hub_items() as $toolItem) {
+                    $toolParts[] = [
+                        '@type' => $toolItem['schema_type'] ?? 'WebPage',
+                        'name'  => $toolItem['title'] ?? '',
+                        'description' => $toolItem['description'] ?? '',
+                        'url'   => $toolItem['url'] ?? home_url('/kostenlose-tools/'),
+                    ];
+                }
+            }
+
+            if (empty($toolParts)) {
+                $toolParts = [
+                    [
+                        '@type' => 'WebPage',
+                        'name'  => 'Growth Audit',
+                        'description' => 'Persoenlicher Diagnose-Einstieg fuer Nachfrage, Conversion, Tracking und Priorisierung.',
+                        'url'   => home_url('/growth-audit/')
+                    ],
+                    [
+                        '@type' => 'WebPage',
+                        'name'  => 'WordPress Growth Operating System',
+                        'description' => 'Systemlogik fuer Sichtbarkeit, Tracking, Conversion und kontrollierte Weiterentwicklung.',
+                        'url'   => home_url('/wordpress-growth-operating-system/')
+                    ],
+                ];
+            }
+
             $toolsPage = [
                 '@context' => 'https://schema.org',
                 '@type'    => 'CollectionPage',
                 '@id'      => home_url('/kostenlose-tools/#collection'),
                 'url'      => home_url('/kostenlose-tools/'),
                 'name'     => 'Kostenlose Tools für dein Wachstum',
-                'description' => 'Kostenlose Tools zur Berechnung deiner Kampagnenrentabilität, Solarpotenziale und Website-Performance.',
-                'hasPart'  => [
-                    [
-                        '@type' => 'SoftwareApplication',
-                        'name'  => 'ROI-Rechner',
-                        'description' => 'Berechnet die Rentabilität und den Break-even-Point deiner Marketing-Kampagnen',
-                        'url' => home_url('/kostenlose-tools/roi-rechner/')
-                    ],
-                    [
-                        '@type' => 'SoftwareApplication',
-                        'name'  => 'Solarrechner',
-                        'description' => 'Analysiert das Potenzial und die Wirtschaftlichkeit einer Photovoltaikanlage',
-                        'url' => home_url('/kostenlose-tools/solar-rechner/')
-                    ],
-                    [
-                        '@type' => 'SoftwareApplication',
-                        'name'  => 'Website Performance Analyse',
-                        'description' => 'Analysiert Ladezeiten und identifiziert Engpässe, um die User Experience zu verbessern',
-                        'url' => home_url('/kostenlose-tools/website-performance-analyse/')
-                    ]
-                ],
+                'description' => 'Kuratiertes Hub fuer kostenlose Diagnose-Einstiege rund um Website-Performance, Systemverstaendnis und Nachfrage-Qualitaet.',
+                'hasPart'  => $toolParts,
                 'inLanguage' => 'de',
                 'publisher'  => ['@id' => home_url('/#organization')]
             ];

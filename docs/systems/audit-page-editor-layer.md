@@ -12,7 +12,8 @@ Die aktive `Growth Audit`-Seite wird aus dem Theme gerendert:
 - `blocksy-child/inc/audit-page.php`
 - `blocksy-child/template-parts/audit-page-shell.php`
 
-`blocksy-child/inc/audit-page.php` ersetzt auf der Audit-Seite den normalen `the_content()`-Output durch den versionierten Shell aus dem Repo.
+`blocksy-child/page-audit.php` rendert den versionierten Shell direkt aus dem Repo.
+`blocksy-child/inc/audit-page.php` bleibt als Fallback erhalten und ersetzt nur dann `the_content()`, wenn die Audit-Seite temporaer ueber einen content-basierten Standardpfad laeuft.
 
 Folge:
 

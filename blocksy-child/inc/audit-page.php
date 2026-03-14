@@ -2,8 +2,9 @@
 /**
  * Audit page rendering helpers.
  *
- * Keeps the audit landing page functional even if the WordPress editor content
- * is empty, broken or the page temporarily uses the default page template.
+ * The page template renders the versioned shell directly. The content filter
+ * below remains as a fallback in case the audit page temporarily falls back to
+ * a default page flow that still calls the_content().
  *
  * @package Blocksy_Child
  */
@@ -25,22 +26,20 @@ function nexus_get_audit_shell_markup() {
 }
 
 /**
- * Ensure the audit landing page always outputs the versioned theme shell.
+ * Replace audit page content with the versioned theme shell as a fallback.
  *
- * The editor content is intentionally bypassed so the live funnel stays coupled
- * to versioned theme code instead of fragile HTML snippets in the page editor.
+ * This keeps the live funnel coupled to versioned theme code instead of fragile
+ * HTML snippets in the page editor when the page is rendered via the_content().
  *
  * @param string $content Rendered page content.
  * @return string
  */
-add_filter(
-	'the_content',
-	function ( $content ) {
-		if ( is_admin() || ! nexus_is_audit_page() || ! is_singular( 'page' ) || ! in_the_loop() || ! is_main_query() ) {
-			return $content;
-		}
+function nexus_replace_audit_page_content_with_shell( $content ) {
+	if ( is_admin() || ! nexus_is_audit_page() || ! is_singular( 'page' ) || ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
 
-		return nexus_get_audit_shell_markup();
-	},
-	20
-);
+	return nexus_get_audit_shell_markup();
+}
+
+add_filter( 'the_content', 'nexus_replace_audit_page_content_with_shell', 20 );

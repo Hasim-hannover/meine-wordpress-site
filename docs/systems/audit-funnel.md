@@ -27,7 +27,7 @@ Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 ## Aktiver Flow
 
 1. Besucher landet auf `/growth-audit/`.
-2. `blocksy-child/page-audit.php` rendert ueber `blocksy-child/inc/audit-page.php` die versionierte Shell aus `blocksy-child/template-parts/audit-page-shell.php`.
+2. `blocksy-child/page-audit.php` rendert die versionierte Shell direkt aus `blocksy-child/template-parts/audit-page-shell.php`; `blocksy-child/inc/audit-page.php` haelt zusaetzlich einen Fallback fuer `the_content()`-basierte Renderpfade.
 3. Das Frontend zeigt einen fokussierten nativen 4-Schritt-Flow mit:
    - konkreter Seiten-URL
    - groesstem Klaerungsbedarf

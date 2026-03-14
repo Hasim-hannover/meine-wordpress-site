@@ -16,7 +16,13 @@ get_header();
 	<?php
 	while ( have_posts() ) :
 		the_post();
-		the_content();
+
+		// Render the versioned audit shell directly from the template.
+		if ( function_exists( 'nexus_get_audit_shell_markup' ) ) {
+			echo nexus_get_audit_shell_markup(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		} else {
+			get_template_part( 'template-parts/audit-page-shell' );
+		}
 	endwhile;
 	?>
 </div>
