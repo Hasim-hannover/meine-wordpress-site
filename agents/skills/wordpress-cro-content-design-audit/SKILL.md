@@ -15,7 +15,7 @@ Use this skill when the task is not only visual polish. The goal is to decide wh
 - `blocksy-child/template-parts/footer-cta.php`
 - `blocksy-child/template-parts/trust-section.php`
 - `blocksy-child/assets/css/*.css`
-- supporting system docs such as `SYSTEM_MAP.md`
+- supporting system docs such as `docs/architecture/SYSTEM_MAP.md`
 
 Always classify the page first:
 

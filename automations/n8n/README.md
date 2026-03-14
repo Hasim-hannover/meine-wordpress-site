@@ -38,7 +38,7 @@ automations/n8n/
 - Jeder Workflow braucht zusaetzlich eine Doku unter `docs/`.
 - Jeder kritische Workflow braucht eine Flow-Map unter `flow-maps/`.
 - Jeder stabile Frontend- oder System-Contract gehoert unter `data-models/`.
-- Statusaenderungen muessen auch in `LIVE_STATUS.md` und bei Bedarf in `SYSTEM_MAP.md` auftauchen.
+- Statusaenderungen muessen auch in `docs/architecture/LIVE_STATUS.md` und bei Bedarf in `docs/architecture/SYSTEM_MAP.md` auftauchen.
 
 ## Dokumentationspflicht pro Workflow
 

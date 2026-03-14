@@ -16,18 +16,18 @@ Es soll nicht nur Code ablegen, sondern sichtbar machen:
 Menschen und Agenten steigen immer in dieser Reihenfolge ein:
 
 1. `README.md`
-2. `SYSTEM_MAP.md`
-3. `LIVE_STATUS.md`
+2. `docs/architecture/SYSTEM_MAP.md`
+3. `docs/architecture/LIVE_STATUS.md`
 4. `AGENT_CONTEXT.md`
-5. die passende Detaildoku unter `docs/systems/`
+5. die passende Detaildoku unter `docs/systems/`, `docs/seo/` oder `blocksy-child/docs/`
 
 ## Repo-Logik
 
 | Ebene | Zweck | Hauptorte |
 | --- | --- | --- |
-| Betrieb | Status, Entscheidungen, Playbooks, Betriebswissen | `LIVE_STATUS.md`, `docs/playbooks/`, `docs/decisions/` |
+| Betrieb | Status, Entscheidungen, Playbooks, Betriebswissen | `docs/architecture/LIVE_STATUS.md`, `docs/playbooks/`, `docs/decisions/` |
 | Technik | deploybarer Website-Code und technische Systemlogik | `blocksy-child/`, `.github/workflows/` |
-| Wissen | Positionierung, Funnel-Kontext, Content, Agenten- und Prompt-Wissen | `SYSTEM_MAP.md`, `AGENT_CONTEXT.md`, `content/`, `agents/`, `prompts/` |
+| Wissen | Positionierung, Funnel-Kontext, Content, Agenten- und Prompt-Wissen | `docs/architecture/SYSTEM_MAP.md`, `AGENT_CONTEXT.md`, `content/`, `agents/`, `prompts/` |
 | Automation | versionierbare Workflow-Exporte und Flow-Doku | `automations/n8n/` |
 
 ## Struktur
@@ -35,11 +35,13 @@ Menschen und Agenten steigen immer in dieser Reihenfolge ein:
 ```text
 .
 ├── README.md
-├── SYSTEM_MAP.md
 ├── AGENT_CONTEXT.md
-├── LIVE_STATUS.md
 ├── SKILL.md
 ├── blocksy-child/
+│   └── docs/
+│       ├── architecture/
+│       ├── implementation/
+│       └── ux/
 ├── automations/
 │   └── n8n/
 ├── agents/
@@ -47,10 +49,13 @@ Menschen und Agenten steigen immer in dieser Reihenfolge ein:
 ├── content/
 │   └── blog-drafts/
 ├── docs/
+│   ├── architecture/
 │   ├── decisions/
 │   ├── playbooks/
 │   ├── references/
-│   └── systems/
+│   ├── seo/
+│   ├── systems/
+│   └── ux/
 ├── prompts/
 └── .github/workflows/
 ```
@@ -58,13 +63,25 @@ Menschen und Agenten steigen immer in dieser Reihenfolge ein:
 ## Was wo liegt
 
 - `blocksy-child/`: Live-Theme fuer WordPress, inklusive Templates, Assets, Schema, CTA-Bausteinen und Website-Logik.
+- `blocksy-child/docs/`: runtime-nahe Theme-Doku fuer Seitentypen, UX-Regeln und Implementierungsnotizen ohne Aenderung am Frontend-Code.
 - `automations/n8n/`: Zielort fuer exportierte n8n-Workflows, Flow-Maps und menschlich lesbare Workflow-Doku.
+- `docs/architecture/`: strategische Architekturdateien wie Systemkarte, Live-Status und Dokumentationsinventuren.
+- `docs/seo/`: SEO-Architektur, Content-Trennung und thematische Regeln fuer das Wachstumssystem.
+- `docs/ux/`: repo-weite UX- und Hierarchieregeln fuer wiedererkennbare Premium-Fuehrung.
 - `docs/systems/`: fachliche und technische Systemdokumentation.
 - `docs/playbooks/`: manuelle Betriebsablaeufe fuer WordPress-Admin, Migrationen und Rollouts.
 - `docs/references/`: lose HTML-, Snippet- oder Referenz-Artefakte, die nicht direkt Live-Code sind.
 - `content/`: vorbereitete Inhalte, die noch nicht sauber in WordPress oder in die finale Systemstruktur ueberfuehrt wurden.
 - `agents/`: Agenten-spezifische Artefakte wie Skills, Operating Notes und kuenftige Agenten-Assets.
 - `prompts/`: wiederverwendbare Prompt-Bausteine, Briefings und Task-Patterns.
+
+## Repository Structure
+
+- `/docs` enthaelt strategisches Wissen, das repo-weit gilt: Architektur, SEO-Regeln, UX-Leitplanken und Betriebskontext.
+- `/blocksy-child/docs` enthaelt runtime-nahe Theme-Dokumentation: Seitentypen, Formularlogik und konkrete Implementierungsleitplanken fuer das Child Theme.
+- UX-Specs sind absichtlich geteilt: generelle Regeln liegen unter `/docs/ux`, theme-spezifische Runtime-Regeln unter `/blocksy-child/docs/ux`.
+- Architecture-Docs definieren Funnel-Rollen, Seitentypen und Systemgrenzen, damit Service-, Pillar-, Proof- und Glossar-Seiten sauber getrennt bleiben.
+- `/prompts` sammelt wiederverwendbare Agenten-Briefings; sie steuern Arbeitsweise, sind aber nicht die Source of Truth fuer Live-Code oder SEO-Logik.
 
 ## Aktueller Fokus
 

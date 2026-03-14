@@ -16,7 +16,7 @@ Belastbare Entscheidungsdaten schaffen, ohne Datenschutz, Vertrauen oder Systemk
   - `blocksy-child/inc/helpers.php`
   - `blocksy-child/inc/shortcodes.php`
   - Templates mit `data-track-*`
-  - `SYSTEM_MAP.md`
+  - `docs/architecture/SYSTEM_MAP.md`
 
 ## Inputs
 

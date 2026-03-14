@@ -206,7 +206,7 @@ Aktualisiert in dieser Runde:
 - `docs/references/wgos-asset-discovery.md`
 - `docs/references/wgos-asset-overhaul-report.md`
 - `docs/playbooks/navigation-migration.md`
-- `LIVE_STATUS.md`
+- `docs/architecture/LIVE_STATUS.md`
 - `docs/decisions/0004-wgos-cluster-pages-and-results-canonical.md`
 
 ## 9. Offene Punkte

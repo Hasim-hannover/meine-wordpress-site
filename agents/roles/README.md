@@ -5,8 +5,8 @@ Dieser Ordner enthaelt spezialisierte agentenlesbare Rollenprofile fuer den aktu
 ## Pflichtkontext vor jeder Rollenarbeit
 
 1. `README.md`
-2. `SYSTEM_MAP.md`
-3. `LIVE_STATUS.md`
+2. `docs/architecture/SYSTEM_MAP.md`
+3. `docs/architecture/LIVE_STATUS.md`
 4. `AGENT_CONTEXT.md`
 
 ## Rollen

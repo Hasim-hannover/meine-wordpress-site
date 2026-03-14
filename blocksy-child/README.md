@@ -14,6 +14,12 @@
 
 **Kernregel:** Repo = WIE es aussieht. Editor = WAS drin steht.
 
+## Runtime-Doku
+
+- `docs/architecture/`: Seitentypen, Funnel-Rollen und Template-Entscheidungslogik im Theme.
+- `docs/ux/`: Formular- und Interaktionsregeln fuer runtime-nahe Conversion-Pfade.
+- `docs/implementation/`: technische Leitplanken und Umsetzungsnotizen fuer Theme-spezifische Arbeiten.
+
 ---
 
 ## Verzeichnisstruktur

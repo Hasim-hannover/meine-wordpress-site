@@ -104,7 +104,7 @@ Wichtige Regel:
 ## Arbeitsmodus fuer Agenten
 
 - Vor jeder Aenderung zuerst Root-Doku lesen.
-- Bei Eingriffen in ein Live-System immer `LIVE_STATUS.md` und die passende Systemdoku mitdenken.
+- Bei Eingriffen in ein Live-System immer `docs/architecture/LIVE_STATUS.md` und die passende Systemdoku mitdenken.
 - n8n, GTM, CRM und Consent nie als implizit annehmen. Fehlende Information knapp markieren.
 - Keine neue operative Logik ohne Benennung von Abhaengigkeiten, Risiken und Fail-States.
 - Wenn sich Status, CTA-Hierarchie oder Angebotslogik aendern, ist die Doku Teil der Aenderung.

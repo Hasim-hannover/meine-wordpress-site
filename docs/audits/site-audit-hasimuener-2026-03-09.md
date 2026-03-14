@@ -455,5 +455,5 @@ Befunde: Besteht als Seite, erfuellt aber die Funktion eines direkten Kontaktweg
 - Schema-Doppelungen auf dem Cornerstone und fehlendes Service-Schema fuer SEO bereinigen.
 
 ### ⏭️ Skip (Low Impact, High Effort)
-- `page-wgos.php` grundlegend refactoren; laut `LIVE_STATUS.md` ist das weiterhin "in Arbeit".
+- `page-wgos.php` grundlegend refactoren; laut `docs/architecture/LIVE_STATUS.md` ist das weiterhin "in Arbeit".
 - Externe GTM/GA4/Consent-/n8n-/SMTP-Konfigurationen aendern; ausserhalb des versionierten Repo-Layers.

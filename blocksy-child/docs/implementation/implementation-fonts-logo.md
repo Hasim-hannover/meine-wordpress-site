@@ -1,4 +1,4 @@
-# AUFGABE: Self-Hosted Fonts + Logo-Implementierung
+# IMPLEMENTATION – Self-Hosted Fonts + Logo
 
 ## Kontext
 Die Website hasimuener.de darf KEINE externen Font-Requests machen. Keine Google Fonts, keine Adobe Fonts, keine CDNs. Alles wird lokal vom eigenen Server geladen. DSGVO-konform, Performance-optimal.

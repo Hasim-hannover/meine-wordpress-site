@@ -14,8 +14,8 @@ Das Repo als wartbares Operating System halten, damit Menschen und Agenten schne
 - Es verbindet Website, n8n, Doku, Agentenkontext und kuenftige Prompt- und Workflow-Systeme.
 - Relevante Orte:
   - `README.md`
-  - `SYSTEM_MAP.md`
-  - `LIVE_STATUS.md`
+  - `docs/architecture/SYSTEM_MAP.md`
+  - `docs/architecture/LIVE_STATUS.md`
   - `AGENT_CONTEXT.md`
   - `docs/`
   - `automations/`
