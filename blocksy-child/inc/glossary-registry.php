@@ -19,6 +19,40 @@ function nexus_get_glossary_registry_version() {
 }
 
 /**
+ * Return sync observability payload for one glossary post.
+ *
+ * Uses stored sync metadata (post meta / options), never the code constant.
+ *
+ * @param int|WP_Post|null $post Glossary post object or ID.
+ * @return array<string, string>
+ */
+function nexus_get_glossary_sync_observability( $post = null ) {
+	$post = get_post( $post );
+
+	if ( ! ( $post instanceof WP_Post ) || 'glossary_term' !== $post->post_type ) {
+		return [
+			'registry_version'   => '',
+			'post_synced_at_gmt' => '',
+			'last_sync_run_gmt'  => '',
+		];
+	}
+
+	$registry_version = trim( (string) get_post_meta( $post->ID, '_nexus_glossary_registry_version', true ) );
+	$post_synced_at   = trim( (string) get_post_meta( $post->ID, '_nexus_glossary_synced_at_gmt', true ) );
+	$last_sync_run    = trim( (string) get_option( 'nexus_glossary_sync_last_run_gmt', '' ) );
+
+	if ( '' === $registry_version ) {
+		$registry_version = trim( (string) get_option( 'nexus_glossary_sync_version', '' ) );
+	}
+
+	return [
+		'registry_version'   => $registry_version,
+		'post_synced_at_gmt' => $post_synced_at,
+		'last_sync_run_gmt'  => $last_sync_run,
+	];
+}
+
+/**
  * Load the glossary registry from the versioned data file.
  *
  * @return array<string, array<string, mixed>>
@@ -353,7 +387,7 @@ function nexus_get_glossary_related_primary_items( $term ) {
  * Resolve related WGOS asset cards for one glossary term.
  *
  * @param array<string, mixed> $term Term definition.
- * @return array<int, array<string, string>>
+ * @return array<int, array{slug: string, label: string, url: string, reason: string}>
  */
 function nexus_get_glossary_related_asset_items( $term ) {
 	$items = [];
@@ -375,6 +409,7 @@ function nexus_get_glossary_related_asset_items( $term ) {
 		}
 
 		$items[] = [
+			'slug'   => (string) $asset['slug'],
 			'label'  => is_array( $definition ) && ! empty( $definition['title'] ) ? (string) $definition['title'] : ucwords( str_replace( '-', ' ', (string) $asset['slug'] ) ),
 			'url'    => $url,
 			'reason' => isset( $asset['reason'] ) ? (string) $asset['reason'] : '',
@@ -616,6 +651,7 @@ function nexus_sync_glossary_term_posts() {
 	];
 	$menu_order   = 0;
 	$active_slugs = [];
+	$synced_at_gmt = gmdate( 'c' );
 
 	foreach ( nexus_get_glossary_registry() as $term ) {
 		if ( ! nexus_glossary_term_requires_post( $term ) ) {
@@ -655,6 +691,7 @@ function nexus_sync_glossary_term_posts() {
 		update_post_meta( $post_id, 'seo_description', (string) $term['seo_description'] );
 		update_post_meta( $post_id, '_nexus_glossary_managed', '1' );
 		update_post_meta( $post_id, '_nexus_glossary_registry_version', nexus_get_glossary_registry_version() );
+		update_post_meta( $post_id, '_nexus_glossary_synced_at_gmt', $synced_at_gmt );
 		update_post_meta( $post_id, '_nexus_glossary_index_policy', (string) $term['index_policy'] );
 		update_post_meta( $post_id, '_nexus_glossary_core_area', (string) $term['core_area'] );
 
@@ -734,6 +771,7 @@ function nexus_maybe_sync_glossary_term_posts() {
 
 	if ( empty( $results['errors'] ) ) {
 		update_option( 'nexus_glossary_sync_version', $version, false );
+		update_option( 'nexus_glossary_sync_last_run_gmt', gmdate( 'c' ), false );
 		delete_option( 'nexus_glossary_sync_errors' );
 		return;
 	}
@@ -741,3 +779,267 @@ function nexus_maybe_sync_glossary_term_posts() {
 	update_option( 'nexus_glossary_sync_errors', wp_json_encode( $results['errors'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ), false );
 }
 add_action( 'init', 'nexus_maybe_sync_glossary_term_posts', 31 );
+
+/**
+ * Print sync observability meta tags on glossary detail pages.
+ *
+ * @return void
+ */
+function nexus_output_glossary_sync_observability_meta() {
+	if ( ! is_singular( 'glossary_term' ) ) {
+		return;
+	}
+
+	$payload = nexus_get_glossary_sync_observability( get_queried_object_id() );
+
+	if ( '' !== $payload['registry_version'] ) {
+		printf(
+			'<meta name="nexus-glossary-registry-version" content="%s">' . "\n",
+			esc_attr( $payload['registry_version'] )
+		);
+	}
+
+	if ( '' !== $payload['post_synced_at_gmt'] ) {
+		printf(
+			'<meta name="nexus-glossary-post-synced-at" content="%s">' . "\n",
+			esc_attr( $payload['post_synced_at_gmt'] )
+		);
+	}
+
+	if ( '' !== $payload['last_sync_run_gmt'] ) {
+		printf(
+			'<meta name="nexus-glossary-sync-last-run" content="%s">' . "\n",
+			esc_attr( $payload['last_sync_run_gmt'] )
+		);
+	}
+}
+add_action( 'wp_head', 'nexus_output_glossary_sync_observability_meta', 5 );
+
+/**
+ * Add sync observability response headers on glossary detail pages.
+ *
+ * @return void
+ */
+function nexus_send_glossary_sync_observability_headers() {
+	if ( ! is_singular( 'glossary_term' ) || headers_sent() ) {
+		return;
+	}
+
+	$payload = nexus_get_glossary_sync_observability( get_queried_object_id() );
+	$clean   = static function ( $value ) {
+		return str_replace( [ "\r", "\n" ], '', (string) $value );
+	};
+
+	if ( '' !== $payload['registry_version'] ) {
+		header( 'X-Nexus-Glossary-Registry-Version: ' . $clean( $payload['registry_version'] ) );
+	}
+
+	if ( '' !== $payload['post_synced_at_gmt'] ) {
+		header( 'X-Nexus-Glossary-Post-Synced-At: ' . $clean( $payload['post_synced_at_gmt'] ) );
+	}
+
+	if ( '' !== $payload['last_sync_run_gmt'] ) {
+		header( 'X-Nexus-Glossary-Sync-Last-Run: ' . $clean( $payload['last_sync_run_gmt'] ) );
+	}
+}
+add_action( 'send_headers', 'nexus_send_glossary_sync_observability_headers' );
+
+/**
+ * Run low-level assertions for glossary and WGOS destination rules.
+ *
+ * @return array<string, mixed>
+ */
+function nexus_get_glossary_routing_assertions_report() {
+	$report    = [
+		'generated_at_gmt' => gmdate( 'c' ),
+		'total'            => 0,
+		'failed'           => 0,
+		'pass'             => true,
+		'failures'         => [],
+	];
+	$wgos_hub_url = function_exists( 'nexus_get_wgos_url' ) ? trailingslashit( nexus_get_wgos_url() ) : trailingslashit( home_url( '/wordpress-growth-operating-system/' ) );
+	$terms        = nexus_get_glossary_registry();
+
+	$assert = static function ( $condition, $code, $message, $context = [] ) use ( &$report ) {
+		$report['total'] += 1;
+
+		if ( $condition ) {
+			return;
+		}
+
+		$report['failed']   += 1;
+		$report['pass']      = false;
+		$report['failures'][] = [
+			'code'    => $code,
+			'message' => $message,
+			'context' => $context,
+		];
+	};
+
+	foreach ( $terms as $term ) {
+		if ( 'publish' !== (string) ( $term['status'] ?? '' ) ) {
+			continue;
+		}
+
+		$policy      = (string) ( $term['index_policy'] ?? 'index' );
+		$destination = nexus_get_glossary_term_destination( $term );
+		$detail_url  = nexus_get_glossary_term_detail_url( $term );
+		$primary_url = nexus_get_glossary_primary_url( $term );
+		$term_slug   = (string) ( $term['slug'] ?? '' );
+
+		// A) index / noindex / alias destination behaviour.
+		if ( 'alias' === $policy ) {
+			$assert(
+				'' !== $primary_url && $destination['url'] === $primary_url,
+				'glossary_alias_destination',
+				'Alias term must resolve to the primary URL.',
+				[
+					'term'        => $term_slug,
+					'destination' => (string) $destination['url'],
+					'primary_url' => $primary_url,
+				]
+			);
+		} elseif ( 'noindex' === $policy ) {
+			$expected_url = '' !== $detail_url ? $detail_url : nexus_get_glossary_hub_url();
+
+			$assert(
+				$destination['url'] === $expected_url,
+				'glossary_noindex_destination',
+				'Noindex term must resolve to detail URL or glossary fallback.',
+				[
+					'term'         => $term_slug,
+					'destination'  => (string) $destination['url'],
+					'expected_url' => $expected_url,
+				]
+			);
+		} else {
+			$assert(
+				'' !== $detail_url,
+				'glossary_index_has_detail',
+				'Index term must resolve to a published glossary detail URL.',
+				[
+					'term'       => $term_slug,
+					'detail_url' => $detail_url,
+				]
+			);
+			$assert(
+				$destination['url'] === $detail_url,
+				'glossary_index_destination',
+				'Index term destination must equal glossary detail URL.',
+				[
+					'term'        => $term_slug,
+					'destination' => (string) $destination['url'],
+					'detail_url'  => $detail_url,
+				]
+			);
+		}
+
+		// B + D) Related terms must follow central destination logic and avoid WGOS pillar drift.
+		$related_items_by_label = [];
+
+		foreach ( nexus_get_glossary_related_term_items( $term ) as $item ) {
+			$related_items_by_label[ (string) $item['label'] ] = (string) $item['url'];
+		}
+
+		foreach ( (array) ( $term['related_terms'] ?? [] ) as $related_slug ) {
+			$related_definition = nexus_get_glossary_definition( (string) $related_slug );
+
+			if ( ! is_array( $related_definition ) || 'publish' !== (string) ( $related_definition['status'] ?? '' ) ) {
+				continue;
+			}
+
+			$related_destination = nexus_get_glossary_term_destination( $related_definition );
+			$related_label       = (string) $related_definition['title'];
+			$related_url         = $related_items_by_label[ $related_label ] ?? '';
+
+			$assert(
+				$related_url === (string) $related_destination['url'],
+				'related_terms_destination_logic',
+				'Related term card must use central glossary destination logic.',
+				[
+					'term'         => $term_slug,
+					'related_term' => (string) $related_definition['slug'],
+					'card_url'     => $related_url,
+					'expected_url' => (string) $related_destination['url'],
+				]
+			);
+
+			$related_policy = (string) ( $related_definition['index_policy'] ?? 'index' );
+			$related_detail = nexus_get_glossary_term_detail_url( $related_definition );
+
+			if ( 'alias' !== $related_policy && '' !== $related_detail ) {
+				$assert(
+					0 !== strpos( trailingslashit( $related_url ), $wgos_hub_url ),
+					'related_terms_no_wgos_pillar_drift',
+					'Related glossary terms must not drift to WGOS pillar when a glossary detail exists.',
+					[
+						'term'         => $term_slug,
+						'related_term' => (string) $related_definition['slug'],
+						'card_url'     => $related_url,
+						'wgos_hub_url' => $wgos_hub_url,
+					]
+				);
+			}
+		}
+
+		// C) WGOS asset routing must resolve to detail page or clean anchor fallback.
+		$related_asset_items = nexus_get_glossary_related_asset_items( $term );
+		$asset_items_by_slug = [];
+
+		foreach ( $related_asset_items as $item ) {
+			if ( ! empty( $item['slug'] ) ) {
+				$asset_items_by_slug[ (string) $item['slug'] ] = (string) $item['url'];
+			}
+		}
+
+		foreach ( (array) ( $term['related_assets'] ?? [] ) as $asset ) {
+			if ( ! is_array( $asset ) || empty( $asset['slug'] ) ) {
+				continue;
+			}
+
+			$asset_slug   = (string) $asset['slug'];
+			$detail_url   = function_exists( 'nexus_get_wgos_asset_detail_url' ) ? nexus_get_wgos_asset_detail_url( $asset_slug ) : '';
+			$fallback_url = function_exists( 'nexus_get_wgos_asset_anchor_url' ) ? nexus_get_wgos_asset_anchor_url( $asset_slug ) : '';
+			$expected_url = '' !== $detail_url ? $detail_url : $fallback_url;
+			$actual_url   = $asset_items_by_slug[ $asset_slug ] ?? '';
+
+			$assert(
+				$actual_url === $expected_url,
+				'wgos_asset_destination_fallback',
+				'Related WGOS asset link must resolve to detail URL or anchor fallback.',
+				[
+					'term'         => $term_slug,
+					'asset_slug'   => $asset_slug,
+					'asset_url'    => $actual_url,
+					'expected_url' => $expected_url,
+				]
+			);
+		}
+	}
+
+	return $report;
+}
+
+/**
+ * Provide routing assertions as JSON for authenticated QA checks.
+ *
+ * URL: /?nexus_glossary_routing_assert=1
+ *
+ * @return void
+ */
+function nexus_maybe_output_glossary_routing_assertions() {
+	$is_assert_request = isset( $_GET['nexus_glossary_routing_assert'] ) && '1' === sanitize_text_field( wp_unslash( (string) $_GET['nexus_glossary_routing_assert'] ) );
+
+	if ( is_admin() || ! $is_assert_request ) {
+		return;
+	}
+
+	if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+		status_header( 403 );
+		wp_die( esc_html__( 'Forbidden', 'blocksy-child' ) );
+	}
+
+	nocache_headers();
+	wp_send_json( nexus_get_glossary_routing_assertions_report() );
+}
+add_action( 'template_redirect', 'nexus_maybe_output_glossary_routing_assertions', 0 );

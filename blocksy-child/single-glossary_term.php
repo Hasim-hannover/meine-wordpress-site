@@ -21,13 +21,24 @@ $glossary_url = function_exists( 'nexus_get_glossary_hub_url' ) ? nexus_get_glos
 		$excerpt    = has_excerpt() ? get_the_excerpt() : '';
 		$content    = get_the_content();
 		$definition = function_exists( 'nexus_get_glossary_definition' ) ? nexus_get_glossary_definition( get_post() ) : null;
+		$sync_meta  = function_exists( 'nexus_get_glossary_sync_observability' ) ? nexus_get_glossary_sync_observability( get_post() ) : [];
 
 		if ( '' === trim( wp_strip_all_tags( (string) $content ) ) && is_array( $definition ) && function_exists( 'nexus_get_glossary_term_content_html' ) ) {
 			$content = nexus_get_glossary_term_content_html( $definition );
 		}
 		?>
 
-		<div class="wgos-wrapper glossary-wrapper">
+		<div class="wgos-wrapper glossary-wrapper"
+			<?php if ( ! empty( $sync_meta['registry_version'] ) ) : ?>
+				data-nexus-glossary-registry="<?php echo esc_attr( (string) $sync_meta['registry_version'] ); ?>"
+			<?php endif; ?>
+			<?php if ( ! empty( $sync_meta['post_synced_at_gmt'] ) ) : ?>
+				data-nexus-glossary-synced-at="<?php echo esc_attr( (string) $sync_meta['post_synced_at_gmt'] ); ?>"
+			<?php endif; ?>
+			<?php if ( ! empty( $sync_meta['last_sync_run_gmt'] ) ) : ?>
+				data-nexus-glossary-sync-last-run="<?php echo esc_attr( (string) $sync_meta['last_sync_run_gmt'] ); ?>"
+			<?php endif; ?>
+		>
 			<section class="wgos-hero">
 				<div class="wgos-container wgos-hero__inner">
 					<nav class="wgos-section-intro wgos-breadcrumb" aria-label="Breadcrumb">
