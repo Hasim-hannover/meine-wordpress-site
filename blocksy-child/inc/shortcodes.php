@@ -268,13 +268,20 @@ function hu_hero_section_shortcode() {
 							<span class="wp-hero-proof-item" role="listitem">Privacy-first Measurement statt Daten-Blackbox</span>
 						</div>
 
-						<div class="wp-hero-actions nx-reveal">
-							<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_hero_primary_audit" data-track-category="lead_gen">Audit starten</a>
-							<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Ergebnisse ansehen</a>
+							<div class="wp-hero-actions nx-reveal">
+								<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_hero_primary_audit" data-track-category="lead_gen">Audit starten</a>
+								<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Ergebnisse ansehen</a>
+							</div>
+							<p class="wp-hero-supporting-link nx-reveal">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
+							<p class="wp-hero-supporting-link nx-reveal">Lokaler Einstieg für Hannover: <a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress für B2B in Hannover</a></p>
+							<div class="wp-hero-direct-links nx-reveal" aria-label="Direkteinstiege zu zentralen Leistungen">
+								<span class="wp-hero-direct-links__label">Direkteinstiege</span>
+								<a href="<?php echo esc_url( $urls['seo'] ); ?>">WordPress SEO Hannover</a>
+								<a href="<?php echo esc_url( $urls['wartung'] ); ?>">WordPress Wartung Hannover</a>
+								<a href="<?php echo esc_url( $urls['tracking'] ); ?>">GA4 Tracking Setup</a>
+								<a href="<?php echo esc_url( $urls['cwv'] ); ?>">Core Web Vitals</a>
+							</div>
 						</div>
-						<p class="wp-hero-supporting-link nx-reveal">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
-						<p class="wp-hero-supporting-link nx-reveal">Lokaler Einstieg für Hannover: <a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress für B2B in Hannover</a></p>
-					</div>
 
 					<div class="wp-hero-panel nx-reveal">
 						<div class="audit-card-premium" id="audit">
