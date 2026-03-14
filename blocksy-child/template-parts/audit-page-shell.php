@@ -9,9 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$cases_url   = nexus_get_results_url();
-$e3_url      = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/' ) );
-$privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
+$cases_url    = nexus_get_results_url();
+$e3_url       = nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/' ) );
+$privacy_url  = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
+$calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' );
 ?>
 
 <div class="audit-wrapper" id="audit-main-wrapper">
@@ -534,6 +535,11 @@ $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' 
 								</div>
 
 								<p class="audit-form-meta">Nur Rückmeldungen zu dieser Anfrage. DSGVO-konform, kein Spam, keine generische Tool-Auswertung.</p>
+
+								<p class="audit-form-escape">
+									Lieber direkt sprechen?
+									<a href="<?php echo esc_url( $calendar_url ); ?>" target="_blank" rel="noopener noreferrer" data-track-action="cta_audit_form_escape_call" data-track-category="lead_gen">Termin buchen &rarr;</a>
+								</p>
 							</form>
 
 							<div id="review-request-success" class="review-success" hidden>

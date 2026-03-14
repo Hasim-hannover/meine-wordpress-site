@@ -13,6 +13,7 @@
     stepIndex: 0,
     steps: [],
     submitting: false,
+    submitted: false,
     lastTrackedStepIndex: null,
     furthestStepIndex: 0
   };
@@ -43,8 +44,28 @@
     form.addEventListener('input', handleFieldChange);
     form.addEventListener('change', handleFieldChange);
 
+    document.addEventListener('visibilitychange', handleAbandon);
+    window.addEventListener('pagehide', handleAbandon);
+
     updateStepUi();
     syncSummary(form);
+  }
+
+  function handleAbandon() {
+    if (state.submitted || state.submitting) return;
+    if (state.furthestStepIndex === 0) {
+      var form = getForm();
+      var urlField = form && form.querySelector('input[type="url"]');
+      if (!urlField || !urlField.value.trim()) return;
+    }
+
+    pushDataLayerEvent({
+      event: 'review_funnel_abandoned',
+      review_step_index: state.stepIndex + 1,
+      review_step_name: getStepLabel(state.stepIndex),
+      review_furthest_step: state.furthestStepIndex + 1,
+      review_furthest_step_name: getStepLabel(state.furthestStepIndex)
+    });
   }
 
   function getForm() {
@@ -500,6 +521,8 @@
     if (reviewBox) {
       reviewBox.classList.add('is-success');
     }
+
+    state.submitted = true;
 
     pushDataLayerEvent({
       event: 'review_request_submit_success',

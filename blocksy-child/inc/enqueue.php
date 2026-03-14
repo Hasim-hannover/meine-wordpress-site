@@ -118,6 +118,13 @@ function hu_enqueue_assets() {
 	if ( is_singular( 'post' ) || $is_seo_cornerstone_template ) {
 		hu_enqueue_css( 'nexus-single-css', 'single.css', [ 'nexus-design-system' ] );
 		hu_enqueue_css( 'nexus-wgos-bridge-css', 'wgos-bridge.css', [ 'nexus-single-css' ] );
+	}
+
+	if ( is_singular( 'post' ) ) {
+		hu_enqueue_js( 'nexus-blog-inline-cta-js', 'blog-inline-cta.js', [ 'nexus-core-js' ] );
+	}
+
+	if ( is_singular( 'post' ) || $is_seo_cornerstone_template ) {
 
 		// Hide duplicate title from Blocksy (single posts + cornerstone template)
 		wp_add_inline_style( 'blocksy-child-style', '
