@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Glossar Hub
- * Description: Strukturierter Glossar-Hub fuer definitorische Begriffe.
+ * Description: Strukturierter Glossar-Hub für definitorische Begriffe.
  *
  * @package Blocksy_Child
  */
@@ -25,13 +25,13 @@ $hub_sections = function_exists( 'nexus_get_glossary_hub_sections' ) ? nexus_get
 				<div class="wgos-hero-grid">
 					<div class="wgos-hero-copy">
 						<span class="wgos-kicker">Glossar</span>
-						<h1 class="wgos-hero__title">Begriffe erklaeren, ohne die Primary URLs zu verdoppeln.</h1>
-						<p class="wgos-hero__subtitle">Dieses Glossar sammelt definitorische Begriffe fuer SEO, Tracking, Performance und Conversion. Es ist bewusst als Intent-Layer unterhalb der Cluster- und Angebotsseiten gebaut: Sub-Terms hier, Head Terms auf den Primary URLs.</p>
+						<h1 class="wgos-hero__title">Begriffe erklären, ohne die Primary URLs zu verdoppeln.</h1>
+						<p class="wgos-hero__subtitle">Dieses Glossar sammelt definitorische Begriffe für SEO, Tracking, Performance und Conversion. Es ist bewusst als Intent-Layer unterhalb der Cluster- und Angebotsseiten gebaut: Sub-Terms hier, Head Terms auf den Primary URLs.</p>
 
 						<ul class="wgos-hero__bullets">
-							<li>Eigener Namespace fuer definitorische Suchintentionen</li>
-							<li>Alias-Eintraege leiten auf die richtige Primary URL</li>
-							<li>Jeder Begriff fuehrt in den naechsten sinnvollen Schritt</li>
+							<li>Eigener Namespace für definitorische Suchintentionen</li>
+							<li>Alias-Einträge leiten auf die richtige Primary URL</li>
+							<li>Jeder Begriff führt in den nächsten sinnvollen Schritt</li>
 						</ul>
 
 						<div class="wgos-hero__actions">
@@ -39,7 +39,7 @@ $hub_sections = function_exists( 'nexus_get_glossary_hub_sections' ) ? nexus_get
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_glossary_hub_audit" data-track-category="lead_gen">Mit dem Growth Audit starten</a>
 						</div>
 
-						<p class="wgos-hero__microcopy">Glossar bedeutet hier nicht „zweites Lexikon neben dem Angebot“, sondern ein kontrollierter Begriffs-Layer mit klarer Rueckfuehrung auf die richtige Seite.</p>
+						<p class="wgos-hero__microcopy">Glossar bedeutet hier nicht „zweites Lexikon neben dem Angebot“, sondern ein kontrollierter Begriffs-Layer mit klarer Rückführung auf die richtige Seite.</p>
 					</div>
 
 					<aside class="wgos-hero-card" aria-label="Arbeitsprinzip des Glossars">
@@ -55,7 +55,7 @@ $hub_sections = function_exists( 'nexus_get_glossary_hub_sections' ) ? nexus_get
 							</div>
 							<div class="wgos-hero-card__row">
 								<dt>Alias</dt>
-								<dd>Glossar-Eintraege duerfen bewusst nur auf die Primary URL verweisen.</dd>
+								<dd>Glossar-Einträge dürfen bewusst nur auf die Primary URL verweisen.</dd>
 							</div>
 						</dl>
 					</aside>
@@ -72,7 +72,7 @@ $hub_sections = function_exists( 'nexus_get_glossary_hub_sections' ) ? nexus_get
 					</div>
 					<div class="wgos-trust-item">
 						<span class="wgos-trust-value"><?php echo esc_html( (string) ( $summary['aliasTerms'] ?? 0 ) ); ?></span>
-						<span class="wgos-trust-label">Alias-Eintraege</span>
+						<span class="wgos-trust-label">Alias-Einträge</span>
 					</div>
 				</div>
 			</div>
@@ -83,7 +83,7 @@ $hub_sections = function_exists( 'nexus_get_glossary_hub_sections' ) ? nexus_get
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Begriffs-Layer</span>
 					<h2 class="wgos-h2">Strukturiert nach denselben Kernbereichen wie das System.</h2>
-					<p class="wgos-section-intro">Die Begriffe sind nicht alphabetisch zufaellig gesammelt, sondern nach Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion geordnet. So bleibt die Einordnung systemisch statt lexikalisch beliebig.</p>
+					<p class="wgos-section-intro">Die Begriffe sind nicht alphabetisch zufällig gesammelt, sondern nach Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion geordnet. So bleibt die Einordnung systemisch statt lexikalisch beliebig.</p>
 				</div>
 
 				<div class="glossary-area-stack">
@@ -115,7 +115,7 @@ $hub_sections = function_exists( 'nexus_get_glossary_hub_sections' ) ? nexus_get
 											</p>
 										<?php elseif ( ! empty( $item['primary_label'] ) ) : ?>
 											<p class="glossary-term-card__hint">
-												Starker Rueckverweis auf: <?php echo esc_html( (string) $item['primary_label'] ); ?>
+												Starker Rückverweis auf: <?php echo esc_html( (string) $item['primary_label'] ); ?>
 											</p>
 										<?php endif; ?>
 
@@ -137,17 +137,17 @@ $hub_sections = function_exists( 'nexus_get_glossary_hub_sections' ) ? nexus_get
 					<article class="wgos-contrast-card">
 						<h3>Was das Glossar leisten soll</h3>
 						<ul class="wgos-checklist wgos-checklist--compact">
-							<li>Begriffe klar definieren, die auf Angebotsseiten zu granular waeren.</li>
+							<li>Begriffe klar definieren, die auf Angebotsseiten zu granular wären.</li>
 							<li>Technische und strategische Sprache im System vereinheitlichen.</li>
-							<li>Von Definitions-Intent sauber in Audit, Tool oder Cluster ueberleiten.</li>
+							<li>Von Definitions-Intent sauber in Audit, Tool oder Cluster überleiten.</li>
 						</ul>
 					</article>
 
 					<article class="wgos-contrast-card">
 						<h3>Was es bewusst nicht leisten soll</h3>
 						<ul class="wgos-checklist wgos-checklist--compact">
-							<li>Keine zweite Rankingerklaerung fuer Head Terms wie Core Web Vitals oder CRO.</li>
-							<li>Keine unverbundenen Woerterbuchseiten ohne Primary-URL-Mapping.</li>
+							<li>Keine zweite Rankingerklärung für Head Terms wie Core Web Vitals oder CRO.</li>
+							<li>Keine unverbundenen Wörterbuchseiten ohne Primary-URL-Mapping.</li>
 							<li>Keine Content-Drift weg von der eigentlichen Angebots- und Cluster-Struktur.</li>
 						</ul>
 					</article>

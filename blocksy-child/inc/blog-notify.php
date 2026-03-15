@@ -363,13 +363,13 @@ function nexus_get_blog_notify_copy() {
 		'body'            => 'Ich schicke nur dann eine kurze Mail, wenn ein neuer Beitrag zu WordPress, SEO, Tracking oder digitalem Wachstum online ist. Kein Newsletter-Rauschen. Keine Sales-Mails.',
 		'placeholder'     => 'Ihre E-Mail-Adresse',
 		'button'          => 'Neue Artikel erhalten',
-		'hint'            => 'Sie erhalten nur Benachrichtigungen zu neuen Artikeln. Keine unnoetigen Werbemails. Abmeldung jederzeit moeglich.',
-		'success'         => 'Fast geschafft. Bitte bestaetigen Sie Ihre Anmeldung ueber die E-Mail in Ihrem Postfach.',
-		'error'           => 'Das hat gerade nicht funktioniert. Bitte pruefen Sie Ihre E-Mail-Adresse oder versuchen Sie es gleich noch einmal.',
-		'already'         => 'Diese E-Mail-Adresse ist bereits eingetragen oder wartet noch auf Bestaetigung.',
+		'hint'            => 'Sie erhalten nur Benachrichtigungen zu neuen Artikeln. Keine unnötigen Werbemails. Abmeldung jederzeit möglich.',
+		'success'         => 'Fast geschafft. Bitte bestätigen Sie Ihre Anmeldung über die E-Mail in Ihrem Postfach.',
+		'error'           => 'Das hat gerade nicht funktioniert. Bitte prüfen Sie Ihre E-Mail-Adresse oder versuchen Sie es gleich noch einmal.',
+		'already'         => 'Diese E-Mail-Adresse ist bereits eingetragen oder wartet noch auf Bestätigung.',
 		'unsubscribe'     => 'Sie wurden erfolgreich von den Blog-Benachrichtigungen abgemeldet.',
-		'confirm_success' => 'Ihre Anmeldung ist bestaetigt. Kuenftige neue Artikel erhalten Sie ab jetzt per E-Mail.',
-		'invalid'         => 'Der Link ist nicht mehr gueltig oder wurde bereits verwendet.',
+		'confirm_success' => 'Ihre Anmeldung ist bestätigt. Künftige neue Artikel erhalten Sie ab jetzt per E-Mail.',
+		'invalid'         => 'Der Link ist nicht mehr gültig oder wurde bereits verwendet.',
 	];
 }
 
@@ -390,7 +390,7 @@ function nexus_get_blog_notify_state_copy( $state ) {
 			'showForm' => true,
 		],
 		'confirmed' => [
-			'eyebrow'  => 'Bestaetigt',
+			'eyebrow'  => 'Bestätigt',
 			'title'    => $copy['headline'],
 			'body'     => $copy['confirm_success'],
 			'variant'  => 'success',
@@ -404,7 +404,7 @@ function nexus_get_blog_notify_state_copy( $state ) {
 			'showForm' => true,
 		],
 		'invalid' => [
-			'eyebrow'  => 'Link ungueltig',
+			'eyebrow'  => 'Link ungültig',
 			'title'    => $copy['headline'],
 			'body'     => $copy['invalid'],
 			'variant'  => 'error',
@@ -729,7 +729,7 @@ function nexus_send_blog_notify_double_opt_in_email( $intent_id ) {
 		return new WP_Error( 'missing_tokens', nexus_get_blog_notify_copy()['error'] );
 	}
 
-	$subject         = sprintf( '[%s] Bitte Blog-Abo bestaetigen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
+	$subject         = sprintf( '[%s] Bitte Blog-Abo bestätigen', wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) );
 	$confirm_url     = nexus_get_blog_notify_url( [ 'action' => 'confirm', 'token' => $confirm_token ] );
 	$unsubscribe_url = nexus_get_blog_notify_url( [ 'action' => 'unsubscribe', 'token' => $unsubscribe_token ] );
 	$content         = sprintf(
@@ -737,7 +737,7 @@ function nexus_send_blog_notify_double_opt_in_email( $intent_id ) {
 			<tr>
 				<td style="padding:16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
 					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
-						Bitte bestaetigen Sie Ihre Anmeldung mit einem Klick. Danach erhalten Sie nur dann eine kurze E-Mail, wenn ein neuer Fachartikel online geht.
+						Bitte bestätigen Sie Ihre Anmeldung mit einem Klick. Danach erhalten Sie nur dann eine kurze E-Mail, wenn ein neuer Fachartikel online geht.
 					</div>
 				</td>
 			</tr>
@@ -745,12 +745,12 @@ function nexus_send_blog_notify_double_opt_in_email( $intent_id ) {
 		<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 20px 0;">
 			<tr>
 				<td style="padding:0 12px 0 0;">
-					<a href="%1$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Anmeldung bestaetigen</a>
+					<a href="%1$s" style="display:inline-block; padding:14px 18px; border-radius:14px; background:#b46a3c; color:#fff8f3; text-decoration:none; font-family:Helvetica, Arial, sans-serif; font-size:14px; font-weight:700;">Anmeldung bestätigen</a>
 				</td>
 			</tr>
 		</table>
 		<p style="margin:0; font-family:Helvetica, Arial, sans-serif; font-size:13px; line-height:1.8; color:#c5ced7;">
-			Wenn Sie das nicht moechten, koennen Sie die Anfrage direkt ignorieren oder hier abbrechen:
+			Wenn Sie das nicht möchten, können Sie die Anfrage direkt ignorieren oder hier abbrechen:
 			<a href="%2$s" style="color:#d3a98c; text-decoration:none;">Abmelden</a>
 		</p>',
 		esc_url( $confirm_url ),
@@ -759,12 +759,12 @@ function nexus_send_blog_notify_double_opt_in_email( $intent_id ) {
 
 	$html = nexus_get_blog_notify_email_shell(
 		[
-			'preheader' => 'Bitte bestaetigen Sie Ihre Anmeldung fuer neue Artikel per E-Mail.',
+			'preheader' => 'Bitte bestätigen Sie Ihre Anmeldung für neue Artikel per E-Mail.',
 			'eyebrow'   => 'Neue Artikel per E-Mail',
 			'headline'  => 'Fast geschafft',
-			'intro'     => 'Ein Klick fehlt noch, damit die Anmeldung sauber bestaetigt ist.',
+			'intro'     => 'Ein Klick fehlt noch, damit die Anmeldung sauber bestätigt ist.',
 			'content'   => $content,
-			'footer'    => 'Sie erhalten ausschliesslich kurze Hinweise auf neue Artikel. Keine Sales-Mails.',
+			'footer'    => 'Sie erhalten ausschließlich kurze Hinweise auf neue Artikel. Keine Sales-Mails.',
 		]
 	);
 
@@ -1026,7 +1026,7 @@ function nexus_render_blog_notification_meta_box( $post ) {
 	$last_error      = (string) get_post_meta( $post->ID, '_nexus_blog_notify_last_error', true );
 
 	if ( 'publish' !== $post->post_status ) {
-		echo '<p>Die Benachrichtigung kann erst fuer veroeffentlichte Artikel ausgelost werden.</p>';
+		echo '<p>Die Benachrichtigung kann erst für veröffentlichte Artikel ausgelöst werden.</p>';
 		return;
 	}
 
@@ -1034,7 +1034,7 @@ function nexus_render_blog_notification_meta_box( $post ) {
 	?>
 	<p><strong>Status:</strong> <?php echo esc_html( $status_labels[ $current_status ] ?? $current_status ); ?></p>
 	<?php if ( $recipient_count ) : ?>
-		<p><strong>Empfaenger:</strong> <?php echo esc_html( (string) $recipient_count ); ?></p>
+		<p><strong>Empfänger:</strong> <?php echo esc_html( (string) $recipient_count ); ?></p>
 	<?php endif; ?>
 	<?php if ( $success_count || $failure_count ) : ?>
 		<p><strong>Versendet:</strong> <?php echo esc_html( (string) $success_count ); ?> erfolgreich<?php if ( $failure_count ) : ?>, <?php echo esc_html( (string) $failure_count ); ?> mit Fehlern<?php endif; ?></p>
@@ -1047,7 +1047,7 @@ function nexus_render_blog_notification_meta_box( $post ) {
 	<?php endif; ?>
 
 	<?php if ( in_array( $current_status, [ 'sent', 'sent_with_errors' ], true ) ) : ?>
-		<p>Version 1 blockiert absichtliche Doppelsendungen pro Artikel. Fuer einen erneuten Versand koennte spaeter ein expliziter Resend-Flow ergaenzt werden.</p>
+		<p>Version 1 blockiert absichtliche Doppelsendungen pro Artikel. Für einen erneuten Versand könnte später ein expliziter Resend-Flow ergänzt werden.</p>
 	<?php else : ?>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<?php wp_nonce_field( 'nexus_queue_blog_notification_' . $post->ID, 'nexus_blog_notify_nonce' ); ?>
@@ -1055,7 +1055,7 @@ function nexus_render_blog_notification_meta_box( $post ) {
 			<input type="hidden" name="post_id" value="<?php echo esc_attr( (string) $post->ID ); ?>">
 			<button type="submit" class="button button-primary button-large">Benachrichtigung jetzt senden</button>
 		</form>
-		<p style="margin-top:10px;">Der Versand wird manuell pro Artikel angestossen und dann in kleinen Batches an bestaetigte Blog-Abonnenten verarbeitet.</p>
+		<p style="margin-top:10px;">Der Versand wird manuell pro Artikel angestoßen und dann in kleinen Batches an bestätigte Blog-Abonnenten verarbeitet.</p>
 	<?php endif; ?>
 	<?php
 }
@@ -1077,7 +1077,7 @@ function nexus_handle_queue_blog_notification_action() {
 	}
 
 	if ( empty( $_POST['nexus_blog_notify_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nexus_blog_notify_nonce'] ) ), 'nexus_queue_blog_notification_' . $post_id ) ) {
-		wp_die( 'Ungueltige Anfrage.' );
+		wp_die( 'Ungültige Anfrage.' );
 	}
 
 	$result = nexus_queue_blog_notification( $post_id, get_current_user_id() );
@@ -1112,7 +1112,7 @@ function nexus_render_blog_notify_admin_notice() {
 
 	$messages = [
 		'queued'  => [ 'class' => 'notice notice-success is-dismissible', 'text' => 'Die Artikel-Benachrichtigung wurde in die Queue gelegt und der erste Batch wurde bereits verarbeitet.' ],
-		'skipped' => [ 'class' => 'notice notice-warning is-dismissible', 'text' => 'Es gibt aktuell keine aktiven Blog-Abonnenten fuer diesen Versand.' ],
+		'skipped' => [ 'class' => 'notice notice-warning is-dismissible', 'text' => 'Es gibt aktuell keine aktiven Blog-Abonnenten für diesen Versand.' ],
 		'error'   => [ 'class' => 'notice notice-error is-dismissible', 'text' => 'Die Benachrichtigung konnte gerade nicht gestartet werden.' ],
 	];
 
@@ -1138,13 +1138,13 @@ function nexus_queue_blog_notification( $post_id, $user_id = 0 ) {
 	$post = get_post( $post_id );
 
 	if ( ! $post instanceof WP_Post || 'post' !== $post->post_type || 'publish' !== $post->post_status ) {
-		return new WP_Error( 'invalid_post', 'Der Artikel ist nicht veroeffentlicht.' );
+		return new WP_Error( 'invalid_post', 'Der Artikel ist nicht veröffentlicht.' );
 	}
 
 	$current_status = (string) get_post_meta( $post_id, '_nexus_blog_notify_status', true );
 
 	if ( in_array( $current_status, [ 'queued', 'processing', 'sent', 'sent_with_errors' ], true ) ) {
-		return new WP_Error( 'already_processed', 'Fuer diesen Artikel wurde bereits eine Benachrichtigung angestossen.' );
+		return new WP_Error( 'already_processed', 'Für diesen Artikel wurde bereits eine Benachrichtigung angestoßen.' );
 	}
 
 	$recipient_ids = nexus_get_active_blog_subscriber_ids();
@@ -1298,7 +1298,7 @@ function nexus_send_blog_post_notification_email( $contact_id, $post_id ) {
 	$post              = get_post( $post_id );
 
 	if ( '' === $email || ! $post instanceof WP_Post ) {
-		return new WP_Error( 'invalid_payload', 'Empfaenger oder Artikel ungueltig.' );
+		return new WP_Error( 'invalid_payload', 'Empfänger oder Artikel ungültig.' );
 	}
 
 	if ( '' === $unsubscribe_token ) {
@@ -1330,7 +1330,7 @@ function nexus_send_blog_post_notification_email( $contact_id, $post_id ) {
 			</tr>
 		</table>
 		<p style="margin:0; font-family:Helvetica, Arial, sans-serif; font-size:13px; line-height:1.8; color:#c5ced7;">
-			Wenn Sie diese Hinweise nicht mehr erhalten moechten, koennen Sie sich hier direkt abmelden:
+			Wenn Sie diese Hinweise nicht mehr erhalten möchten, können Sie sich hier direkt abmelden:
 			<a href="%4$s" style="color:#d3a98c; text-decoration:none;">Abmelden</a>
 		</p>',
 		esc_html( $post_title ),
@@ -1346,7 +1346,7 @@ function nexus_send_blog_post_notification_email( $contact_id, $post_id ) {
 			'headline'  => $post_title,
 			'intro'     => 'Ein neuer Beitrag ist online. Kurz, ohne Sales-Rauschen, nur der direkte Link zum Artikel.',
 			'content'   => $content,
-			'footer'    => 'Sie erhalten diese Mail, weil Sie neue Artikel per E-Mail bestaetigt haben.',
+			'footer'    => 'Sie erhalten diese Mail, weil Sie neue Artikel per E-Mail bestätigt haben.',
 		]
 	);
 

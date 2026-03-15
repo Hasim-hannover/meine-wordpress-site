@@ -110,7 +110,7 @@ function nexus_get_seo_cockpit_default_internal_links( $status = 'pending', $not
 			'outgoing_links'       => 0,
 			'outgoing_unique_urls' => 0,
 		],
-		'note'                 => '' !== $note ? $note : 'Interne Link-Zaehlung ist noch nicht verfuegbar.',
+		'note'                 => '' !== $note ? $note : 'Interne Link-Zählung ist noch nicht verfügbar.',
 	];
 }
 
@@ -164,7 +164,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 		'noindex'                => false,
 		'in_sitemap'             => false,
 		'word_count'             => 0,
-		'internal_links'         => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
+		'internal_links'         => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zählung ist für eine spätere Stufe vorbereitet.' ),
 		'edit_link'              => '',
 		'frontend_link'          => $url,
 		'snippet_issues'         => [],
@@ -230,7 +230,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 					'noindex'                 => false,
 					'in_sitemap'              => false,
 					'word_count'              => nexus_get_seo_cockpit_post_word_count( $resolved_id ),
-					'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
+					'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zählung ist für eine spätere Stufe vorbereitet.' ),
 					'edit_link'               => (string) get_edit_post_link( $resolved_id, 'raw' ),
 					'frontend_link'           => home_url( '/' . $cluster_slug . '/' ),
 					'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues(
@@ -277,7 +277,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 				'noindex'                 => ! empty( $seo_context['noindex'] ),
 				'in_sitemap'              => nexus_is_seo_cockpit_post_in_sitemap( $post, ! empty( $seo_context['noindex'] ) ),
 				'word_count'              => nexus_get_seo_cockpit_post_word_count( $resolved_id ),
-				'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
+				'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zählung ist für eine spätere Stufe vorbereitet.' ),
 				'edit_link'               => (string) get_edit_post_link( $resolved_id, 'raw' ),
 				'frontend_link'           => (string) get_permalink( $resolved_id ),
 				'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues( $seo_context ),
@@ -308,7 +308,7 @@ function nexus_get_seo_cockpit_wp_context_for_url( $url ) {
 			'noindex'                 => false,
 			'in_sitemap'              => false,
 			'word_count'              => 0,
-			'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zaehlung ist fuer eine spaetere Stufe vorbereitet.' ),
+			'internal_links'          => nexus_get_seo_cockpit_default_internal_links( 'pending', 'Interne Link-Zählung ist für eine spätere Stufe vorbereitet.' ),
 			'edit_link'               => '',
 			'frontend_link'           => home_url( '/' . $cluster_slug . '/' ),
 			'snippet_issues'          => nexus_get_seo_cockpit_snippet_issues(
@@ -567,7 +567,7 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 				[
 					'type'               => 'QUICK_WIN',
 					'severity'           => $position <= 12 && $impressions >= 80 ? 'high' : 'medium',
-					'label'              => sprintf( 'Quick Win fuer "%s"', $query ),
+					'label'              => sprintf( 'Quick Win für "%s"', $query ),
 					'reason'             => sprintf( 'Die URL rankt bereits auf Position %.1f bei %.0f Impressionen.', $position, $impressions ),
 					'url'                => $url,
 					'query'              => $query,
@@ -586,7 +586,7 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 				[
 					'type'               => 'CTR_OPPORTUNITY',
 					'severity'           => $impressions >= 300 ? 'high' : 'medium',
-					'label'              => sprintf( 'CTR-Chance fuer "%s"', $query ),
+					'label'              => sprintf( 'CTR-Chance für "%s"', $query ),
 					'reason'             => sprintf( 'Viele Impressionen (%.0f), aber nur %.1f%% CTR bei Position %.1f.', $impressions, $ctr * 100, $position ),
 					'url'                => $url,
 					'query'              => $query,
@@ -606,8 +606,8 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 				[
 					'type'               => 'LOW_SIGNAL',
 					'severity'           => $impressions >= 60 ? 'medium' : 'low',
-					'label'              => sprintf( 'Schwaches Signal fuer "%s"', $query ),
-					'reason'             => sprintf( 'Die URL erscheint bereits, liegt aber mit Position %.1f noch ausserhalb der Top 20.', $position ),
+					'label'              => sprintf( 'Schwaches Signal für "%s"', $query ),
+					'reason'             => sprintf( 'Die URL erscheint bereits, liegt aber mit Position %.1f noch außerhalb der Top 20.', $position ),
 					'url'                => $url,
 					'query'              => $query,
 					'metrics'            => [
@@ -645,8 +645,8 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 				[
 					'type'               => 'DECAY',
 					'severity'           => $drop <= -50 ? 'high' : 'medium',
-					'label'              => 'Traffic-Rueckgang auf dieser URL',
-					'reason'             => sprintf( 'Klicks oder Impressionen sind gegenueber dem Vergleichsfenster deutlich gefallen (%.1f%%).', $drop ),
+					'label'              => 'Traffic-Rückgang auf dieser URL',
+					'reason'             => sprintf( 'Klicks oder Impressionen sind gegenüber dem Vergleichsfenster deutlich gefallen (%.1f%%).', $drop ),
 					'url'                => $url,
 					'query'              => '',
 					'metrics'            => [
@@ -655,7 +655,7 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 						'current_impressions'  => $current_impressions,
 						'previous_impressions' => $previous_impressions,
 					],
-					'recommended_action' => 'Aendere diese Seite zuerst nicht blind. Pruefe Query-Verschiebungen, Snippet und interne Verlinkung.',
+					'recommended_action' => 'Ändere diese Seite zuerst nicht blind. Prüfe Query-Verschiebungen, Snippet und interne Verlinkung.',
 				]
 			);
 		}
@@ -666,15 +666,15 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 				[
 					'type'               => 'SNIPPET_WEAKNESS',
 					'severity'           => $current_impressions >= 120 ? 'high' : 'medium',
-					'label'              => 'Snippet-Schwaeche auf dieser URL',
-					'reason'             => sprintf( 'Die Seite sammelt Impressionen, aber Title/Description zeigen Luecken: %s.', implode( ', ', (array) $context['snippet_issues'] ) ),
+					'label'              => 'Snippet-Schwäche auf dieser URL',
+					'reason'             => sprintf( 'Die Seite sammelt Impressionen, aber Title/Description zeigen Lücken: %s.', implode( ', ', (array) $context['snippet_issues'] ) ),
 					'url'                => $url,
 					'query'              => '',
 					'metrics'            => [
 						'impressions'    => $current_impressions,
 						'snippet_issues' => $context['snippet_issues'],
 					],
-					'recommended_action' => 'SEO-Title und Description gegen Suchintention, Klarheit und Laenge nachschleifen.',
+					'recommended_action' => 'SEO-Title und Description gegen Suchintention, Klarheit und Länge nachschleifen.',
 				]
 			);
 		}
@@ -727,15 +727,15 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 			[
 				'type'               => 'POSSIBLE_CANNIBALIZATION',
 				'severity'           => count( $urls ) >= 3 ? 'high' : 'medium',
-				'label'              => sprintf( 'Moegliche Kannibalisierung fuer "%s"', $group['query'] ),
-				'reason'             => sprintf( 'Mehrere URLs sammeln fuer dieselbe Query Impressionen (gesamt %.0f).', $group['total_impressions'] ),
+				'label'              => sprintf( 'Mögliche Kannibalisierung für "%s"', $group['query'] ),
+				'reason'             => sprintf( 'Mehrere URLs sammeln für dieselbe Query Impressionen (gesamt %.0f).', $group['total_impressions'] ),
 				'url'                => (string) ( $top_urls[0]['url'] ?? '' ),
 				'query'              => (string) $group['query'],
 				'metrics'            => [
 					'urls'              => $top_urls,
 					'total_impressions' => $group['total_impressions'],
 				],
-				'recommended_action' => 'Primaerseite festlegen und interne Links sowie Snippets auf diese URL konzentrieren.',
+				'recommended_action' => 'Primärseite festlegen und interne Links sowie Snippets auf diese URL konzentrieren.',
 			]
 		);
 	}

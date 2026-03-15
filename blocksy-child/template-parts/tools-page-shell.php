@@ -21,8 +21,8 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 			<span class="tools-kicker">Kostenlose Diagnose-Einstiege</span>
 			<h1 id="tools-hero-title" class="tools-hero__title">Kostenlose Tools, wenn Klarheit wichtiger ist als noch ein Schnellrechner.</h1>
 			<p class="tools-hero__subtitle">
-				Diese Seite buendelt die sinnvollsten Einstiege fuer Performance, Systemverstaendnis und Nachfrage-Probleme:
-				repo-versioniert, ohne tote Enden und mit klarer naechster Handlung.
+				Diese Seite bündelt die sinnvollsten Einstiege für Performance, Systemverständnis und Nachfrage-Probleme:
+				repo-versioniert, ohne tote Enden und mit klarer nächster Handlung.
 			</p>
 
 			<div class="tools-hero__actions">
@@ -42,7 +42,7 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 			<h2 class="tools-panel__title">Der ROI-Intent bleibt. Die isolierte Rechner-Logik nicht.</h2>
 			<p class="tools-panel__copy">
 				Wenn Sie hier wegen des alten ROI-Rechners gelandet sind: diese Einzeltool-Logik wird nicht mehr separat gepflegt.
-				Wirtschaftlichkeit wird jetzt zusammen mit Nachfrage, Conversion und Tracking eingeordnet, damit keine falschen Prioritaeten aus einem isolierten Zahlenwert entstehen.
+				Wirtschaftlichkeit wird jetzt zusammen mit Nachfrage, Conversion und Tracking eingeordnet, damit keine falschen Prioritäten aus einem isolierten Zahlenwert entstehen.
 			</p>
 			<a href="<?php echo esc_url( $audit_url ); ?>" class="tools-text-link" data-track-action="cta_tools_legacy_roi" data-track-category="lead_gen">ROI-Frage im Audit einordnen</a>
 		</aside>
@@ -53,7 +53,7 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 			<span class="tools-kicker">Kuratiert statt gesammelt</span>
 			<h2 id="tools-grid-title" class="tools-section__title">Vier belastbare Einstiege statt einer unverbundenen Tool-Sammlung.</h2>
 			<p class="tools-section__intro">
-				Jeder Einstieg fuehrt in einen klaren Kontext: Diagnose, Systemverstaendnis, Systemlandkarte oder Performance.
+				Jeder Einstieg führt in einen klaren Kontext: Diagnose, Systemverständnis, Systemlandkarte oder Performance.
 				Keine Sackgassen, keine toten Legacy-Tools und kein Editor-Markup als Source of Truth.
 			</p>
 		</div>
@@ -69,7 +69,7 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 
 					<dl class="tools-card__facts">
 						<div class="tools-card__fact">
-							<dt>Wofuer</dt>
+							<dt>Wofür</dt>
 							<dd><?php echo esc_html( $card['use_case'] ); ?></dd>
 						</div>
 						<div class="tools-card__fact">
@@ -92,7 +92,7 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 			<h2 id="tools-bridge-title" class="tools-section__title">Nicht sicher, welcher Einstieg zuerst Sinn ergibt?</h2>
 			<p class="tools-section__intro">
 				Dann starten Sie nicht mit dem falschen Tool. Der Growth Audit ordnet zuerst ein, ob das Problem eher in Botschaft,
-				Proof, Performance, Tracking oder im naechsten Schritt liegt.
+				Proof, Performance, Tracking oder im nächsten Schritt liegt.
 			</p>
 		</div>
 

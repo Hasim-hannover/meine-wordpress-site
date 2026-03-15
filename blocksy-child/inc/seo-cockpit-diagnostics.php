@@ -63,7 +63,7 @@ function nexus_get_seo_cockpit_diagnostics( $detail_url = '' ) {
 			'oauth',
 			'Access Token',
 			'warning',
-			'Die aktive Token-Pruefung ist nur fuer Verwalter sichtbar.'
+			'Die aktive Token-Prüfung ist nur für Verwalter sichtbar.'
 		);
 	} elseif ( '' !== (string) ( $tokens['access_token'] ?? '' ) ) {
 		$access = nexus_get_seo_cockpit_access_token();
@@ -97,7 +97,7 @@ function nexus_get_seo_cockpit_diagnostics( $detail_url = '' ) {
 		'sync',
 		'Cron-Event',
 		! empty( $runtime['next_sync_at'] ) ? 'ok' : 'error',
-		! empty( $runtime['next_sync_at'] ) ? 'Der naechste Sync ist geplant.' : 'Es ist aktuell kein naechster Sync geplant.'
+		! empty( $runtime['next_sync_at'] ) ? 'Der nächste Sync ist geplant.' : 'Es ist aktuell kein nächster Sync geplant.'
 	);
 
 	$checks[] = nexus_build_seo_cockpit_diagnostic(
@@ -130,7 +130,7 @@ function nexus_get_seo_cockpit_diagnostics( $detail_url = '' ) {
 		'Interner Linkgraph',
 		! empty( $link_graph['built_at'] ) ? 'ok' : 'warning',
 		! empty( $link_graph['built_at'] )
-			? sprintf( 'Linkgraph wurde aus %d veroeffentlichten Inhalten aufgebaut.', (int) ( $link_graph['post_count'] ?? 0 ) )
+			? sprintf( 'Linkgraph wurde aus %d veröffentlichten Inhalten aufgebaut.', (int) ( $link_graph['post_count'] ?? 0 ) )
 			: 'Linkgraph wurde noch nicht aufgebaut.'
 	);
 
@@ -141,7 +141,7 @@ function nexus_get_seo_cockpit_diagnostics( $detail_url = '' ) {
 			'drilldown',
 			'URL-Normalisierung',
 			'' !== $detail_url ? 'ok' : 'error',
-			'' !== $detail_url ? 'Detail-URL wurde erfolgreich normalisiert.' : 'Die Detail-URL ist leer oder ungueltig.'
+			'' !== $detail_url ? 'Detail-URL wurde erfolgreich normalisiert.' : 'Die Detail-URL ist leer oder ungültig.'
 		);
 
 		$checks[] = nexus_build_seo_cockpit_diagnostic(
@@ -155,7 +155,7 @@ function nexus_get_seo_cockpit_diagnostics( $detail_url = '' ) {
 			'drilldown',
 			'Detail-Cache',
 			'' !== nexus_get_seo_cockpit_cache_key( 'detail', [ nexus_get_seo_cockpit_property(), nexus_get_seo_cockpit_requested_range_days(), $detail_url ] ) ? 'ok' : 'error',
-			'Ein Detail-Cache-Key kann fuer diese URL erzeugt werden.'
+			'Ein Detail-Cache-Key kann für diese URL erzeugt werden.'
 		);
 	}
 

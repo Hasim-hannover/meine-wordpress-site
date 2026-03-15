@@ -149,7 +149,7 @@ function hu_output_schema()
             'name'        => 'Speed & Core Web Vitals Optimierung',
             'description' => 'Performance-Optimierung mit Fokus auf Ladezeit, INP/LCP und Nutzererlebnis.',
             'serviceType' => 'Performance Optimierung',
-            'serviceOutput' => 'Gruene Core Web Vitals und schnellere Ladezeiten'
+            'serviceOutput' => 'Grüne Core Web Vitals und schnellere Ladezeiten'
         ],
 
         'tracking-data' => [
@@ -262,7 +262,7 @@ function hu_output_schema()
                 '@type'       => 'DefinedTermSet',
                 '@id'         => trailingslashit( get_permalink( $post_id ) ) . '#definedtermset',
                 'name'        => get_the_title( $post_id ),
-                'description' => get_the_excerpt( $post_id ) ? wp_strip_all_tags( get_the_excerpt( $post_id ) ) : 'Glossar fuer SEO, Tracking, Performance und Conversion mit sauberer Rueckfuehrung auf die passenden Primary URLs.',
+                'description' => get_the_excerpt( $post_id ) ? wp_strip_all_tags( get_the_excerpt( $post_id ) ) : 'Glossar für SEO, Tracking, Performance und Conversion mit sauberer Rückführung auf die passenden Primary URLs.',
                 'url'         => get_permalink( $post_id ),
                 'inLanguage'  => 'de',
             ];
@@ -536,13 +536,13 @@ function hu_output_schema()
                     [
                         '@type' => 'WebPage',
                         'name'  => 'Growth Audit',
-                        'description' => 'Persoenlicher Diagnose-Einstieg fuer Nachfrage, Conversion, Tracking und Priorisierung.',
+                        'description' => 'Persönlicher Diagnose-Einstieg für Nachfrage, Conversion, Tracking und Priorisierung.',
                         'url'   => home_url('/growth-audit/')
                     ],
                     [
                         '@type' => 'WebPage',
                         'name'  => 'WordPress Growth Operating System',
-                        'description' => 'Systemlogik fuer Sichtbarkeit, Tracking, Conversion und kontrollierte Weiterentwicklung.',
+                        'description' => 'Systemlogik für Sichtbarkeit, Tracking, Conversion und kontrollierte Weiterentwicklung.',
                         'url'   => home_url('/wordpress-growth-operating-system/')
                     ],
                 ];
@@ -554,7 +554,7 @@ function hu_output_schema()
                 '@id'      => home_url('/kostenlose-tools/#collection'),
                 'url'      => home_url('/kostenlose-tools/'),
                 'name'     => 'Kostenlose Tools für dein Wachstum',
-                'description' => 'Kuratiertes Hub fuer kostenlose Diagnose-Einstiege rund um Website-Performance, Systemverstaendnis und Nachfrage-Qualitaet.',
+                'description' => 'Kuratiertes Hub für kostenlose Diagnose-Einstiege rund um Website-Performance, Systemverständnis und Nachfrage-Qualität.',
                 'hasPart'  => $toolParts,
                 'inLanguage' => 'de',
                 'publisher'  => ['@id' => home_url('/#organization')]

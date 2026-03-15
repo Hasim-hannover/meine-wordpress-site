@@ -77,8 +77,8 @@ function hu_enqueue_assets() {
 			[
 				'restEndpoint'   => esc_url_raw( rest_url( 'nexus/v1/blog-subscribe' ) ),
 				'nonce'          => wp_create_nonce( 'nexus_blog_notify_subscribe' ),
-				'successMessage' => 'Fast geschafft. Bitte bestaetigen Sie Ihre Anmeldung ueber die E-Mail in Ihrem Postfach.',
-				'errorMessage'   => 'Das hat gerade nicht funktioniert. Bitte pruefen Sie Ihre E-Mail-Adresse oder versuchen Sie es gleich noch einmal.',
+				'successMessage' => 'Fast geschafft. Bitte bestätigen Sie Ihre Anmeldung über die E-Mail in Ihrem Postfach.',
+				'errorMessage'   => 'Das hat gerade nicht funktioniert. Bitte prüfen Sie Ihre E-Mail-Adresse oder versuchen Sie es gleich noch einmal.',
 			]
 		);
 	}

@@ -2,7 +2,7 @@
 /**
  * Template Part: Footer CTA
  *
- * Wiederverwendbarer Bottom-CTA-Block fuer Service- und Blog-Seiten.
+ * Wiederverwendbarer Bottom-CTA-Block für Service- und Blog-Seiten.
  * Tracking-ready mit data-track-* Attributen.
  *
  * Usage:

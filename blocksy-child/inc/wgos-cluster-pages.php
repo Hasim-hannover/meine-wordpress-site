@@ -143,7 +143,7 @@ function nexus_get_wgos_cluster_page_data() {
 			'title'            => 'GA4 Tracking Setup',
 			'lead'             => 'Tracking soll Entscheidungen ermöglichen, nicht nur Dashboards füllen. Ohne saubere Daten bleibt Optimierung Vermutung.',
 			'intro'            => [
-				'Viele Unternehmen haben GA4, GTM und Consent technisch installiert. Trotzdem fehlen belastbare Antworten auf einfache Fragen: Welche Seiten erzeugen Nachfrage, welcher Kanal bringt die besseren Leads und wo bricht die Nutzerfuehrung weg?',
+				'Viele Unternehmen haben GA4, GTM und Consent technisch installiert. Trotzdem fehlen belastbare Antworten auf einfache Fragen: Welche Seiten erzeugen Nachfrage, welcher Kanal bringt die besseren Leads und wo bricht die Nutzerführung weg?',
 				'Das Problem liegt selten in einem einzigen Tag. Meist fehlen Event-Logik, Consent-Verhalten, UTM-Standards und eine sinnvolle Management-Sicht auf dieselben Daten.',
 				'Im WGOS wird Messbarkeit deshalb als eigener Kernbereich behandelt. Erst mit sauberen Signalen wird aus Website-Arbeit eine steuerbare Wachstumslogik.',
 			],
@@ -362,11 +362,11 @@ function nexus_get_wgos_cluster_page_method_steps() {
 		],
 		[
 			'title' => '2. Bausteine nach Hebel ordnen',
-			'text'  => 'Im WGOS bekommt nicht jede Idee Prioritaet. Zuerst zaehlt, was Sichtbarkeit, Trust und Conversion auf den kaufnahen Seiten wirklich entsperrt.',
+			'text'  => 'Im WGOS bekommt nicht jede Idee Priorität. Zuerst zählt, was Sichtbarkeit, Trust und Conversion auf den kaufnahen Seiten wirklich entsperrt.',
 		],
 		[
 			'title' => '3. Wirkung an echten Signalen messen',
-			'text'  => 'Fortschritt wird nicht ueber Aktivitaet bewertet, sondern ueber belastbare Signale wie Anfragequalitaet, CPL, Ladezeit und technische Stabilitaet.',
+			'text'  => 'Fortschritt wird nicht über Aktivität bewertet, sondern über belastbare Signale wie Anfragequalität, CPL, Ladezeit und technische Stabilität.',
 		],
 	];
 }
@@ -457,8 +457,8 @@ function nexus_render_wgos_cluster_page( $page ) {
 			<div class="nx-container nx-cluster-stack">
 				<div class="nx-section-header">
 					<span class="nx-badge nx-badge--ghost">Proof</span>
-					<h2 class="nx-headline-section">Oeffentliche Wirkung statt Behauptungen</h2>
-					<p class="nx-subheadline">Die zentralen Zahlen stammen aus veroeffentlichten Fallbeispielen und dem sichtbaren Proof-Layer, nicht aus anonymen Benchmark-Folien.</p>
+					<h2 class="nx-headline-section">Öffentliche Wirkung statt Behauptungen</h2>
+					<p class="nx-subheadline">Die zentralen Zahlen stammen aus veröffentlichten Fallbeispielen und dem sichtbaren Proof-Layer, nicht aus anonymen Benchmark-Folien.</p>
 				</div>
 
 				<div class="nx-card nx-card--flat nx-cluster-proof">
@@ -470,7 +470,7 @@ function nexus_render_wgos_cluster_page( $page ) {
 							</div>
 						<?php endforeach; ?>
 					</div>
-					<p class="nx-cluster-proof__note">Wenn Sie die oeffentlichen Beispiele und die Herleitung dazu sehen wollen, gehen Sie zuerst in die Ergebnisse. Der Growth Audit klaert danach, welche dieser Hebel in Ihrer Lage wirklich zuerst zahlen.</p>
+					<p class="nx-cluster-proof__note">Wenn Sie die öffentlichen Beispiele und die Herleitung dazu sehen wollen, gehen Sie zuerst in die Ergebnisse. Der Growth Audit klärt danach, welche dieser Hebel in Ihrer Lage wirklich zuerst zählen.</p>
 					<div class="nx-cluster-hero__actions">
 						<a href="<?php echo esc_url( $results_url ); ?>" class="nx-btn nx-btn--ghost">Ergebnisse ansehen</a>
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_proof_audit" data-track-category="lead_gen">Growth Audit starten</a>

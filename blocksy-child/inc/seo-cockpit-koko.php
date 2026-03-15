@@ -75,12 +75,12 @@ function nexus_get_koko_analytics_status() {
 	$is_active      = function_exists( 'is_plugin_active' ) ? is_plugin_active( $plugin_file ) : false;
 	$is_present     = defined( 'WP_PLUGIN_DIR' ) ? file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) : false;
 	$available      = $is_active && nexus_is_seo_cockpit_koko_route_available( 'totals' );
-	$available_text = $available ? 'Koko ist aktiv und als Traffic-Kontext im Cockpit verfuegbar.' : '';
+	$available_text = $available ? 'Koko ist aktiv und als Traffic-Kontext im Cockpit verfügbar.' : '';
 
 	if ( $available ) {
 		$label = 'Aktiv und mit Cockpit-Kontext verbunden';
 	} elseif ( $is_active ) {
-		$label = 'Aktiv, aber die REST-Datenroute ist nicht verfuegbar';
+		$label = 'Aktiv, aber die REST-Datenroute ist nicht verfügbar';
 	} elseif ( $is_present ) {
 		$label = 'Installiert, aber nicht aktiv';
 	} else {
@@ -118,11 +118,11 @@ function nexus_seo_cockpit_koko_request( $endpoint, $params = [] ) {
 	}
 
 	if ( empty( $status['endpoints'][ sanitize_key( (string) $endpoint ) ] ) || '' === $route ) {
-		return new WP_Error( 'nexus_seo_koko_route_missing', 'Die benoetigte Koko-REST-Route ist nicht verfuegbar.' );
+		return new WP_Error( 'nexus_seo_koko_route_missing', 'Die benötigte Koko-REST-Route ist nicht verfügbar.' );
 	}
 
 	if ( ! function_exists( 'rest_do_request' ) ) {
-		return new WP_Error( 'nexus_seo_koko_rest_unavailable', 'Der WordPress-REST-Server ist nicht verfuegbar.' );
+		return new WP_Error( 'nexus_seo_koko_rest_unavailable', 'Der WordPress-REST-Server ist nicht verfügbar.' );
 	}
 
 	$request = new WP_REST_Request( 'GET', $route );
@@ -539,7 +539,7 @@ function nexus_get_seo_cockpit_koko_detail_data( $url, $context, $ranges ) {
 	];
 
 	if ( empty( $status['rest_available'] ) ) {
-		$detail['note'] = 'Koko ist fuer diese Installation oder diesen Request nicht als Datenquelle verfuegbar.';
+		$detail['note'] = 'Koko ist für diese Installation oder diesen Request nicht als Datenquelle verfügbar.';
 
 		return $detail;
 	}
@@ -593,7 +593,7 @@ function nexus_get_seo_cockpit_koko_detail_data( $url, $context, $ranges ) {
 	}
 
 	if ( ! $detail['matched'] ) {
-		$detail['note'] = 'Fuer diese URL wurde im gewaehlten Zeitraum kein eindeutiger Koko-Eintrag gefunden.';
+		$detail['note'] = 'Für diese URL wurde im gewählten Zeitraum kein eindeutiger Koko-Eintrag gefunden.';
 	}
 
 	return $detail;

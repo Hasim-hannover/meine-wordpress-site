@@ -17,21 +17,21 @@ $inc_dir = get_stylesheet_directory() . '/inc/';
 
 $modules = [
 	'helpers.php',        // Utility-Funktionen (muss zuerst geladen werden)
-	'mail.php',           // Zentraler Brevo-Mail-Router fuer Transaktionsmails
-	'crm.php',            // Gemeinsame CRM-Grundlage fuer Kontakte, Blog-Abos und Projektanfragen
-	'wgos-assets.php',    // CPT + Helper fuer WGOS Asset-Spokes
+	'mail.php',           // Zentraler Brevo-Mail-Router für Transaktionsmails
+	'crm.php',            // Gemeinsame CRM-Grundlage für Kontakte, Blog-Abos und Projektanfragen
+	'wgos-assets.php',    // CPT + Helper für WGOS Asset-Spokes
 	'wgos-asset-registry.php', // Versionierte WGOS Asset-Registry + Sync
-	'glossary.php',       // Glossar-Hub + CPT fuer definitorische Begriffe
+	'glossary.php',       // Glossar-Hub + CPT für definitorische Begriffe
 	'glossary-registry.php', // Versionierte Glossar-Registry + Sync
 	'wgos-cluster-pages.php', // Versionierte Cluster-/Pillar-Pages und Blog-Asset-Bridges
 	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
-	'audit-page.php',     // Audit-Shell-Fallback fuer die Audit-Landing-Page
-	'tools-page.php',     // Versionierter Tools-Hub + Fallback fuer die Tools-Seite
+	'audit-page.php',     // Audit-Shell-Fallback für die Audit-Landing-Page
+	'tools-page.php',     // Versionierter Tools-Hub + Fallback für die Tools-Seite
 	'header.php',         // Eigener globaler Header + Navigation
 	'review-crm.php',     // Growth-Audit-Intake + WordPress CRM
 	'contact-page.php',   // Kontakt-Route, schlanke Kontaktform und Mailversand
 	'blog-notify.php',    // Blog-Benachrichtigungen, DOI und Artikel-Mails
-	'llms-txt.php',       // Dynamische /llms.txt-Route fuer KI-Agenten und Entitaetskontext
+	'llms-txt.php',       // Dynamische /llms.txt-Route für KI-Agenten und Entitätskontext
 	'seo-cockpit.php',    // Search Console basiertes SEO-Cockpit mit optionaler Koko-Erkennung
 	'enqueue.php',        // CSS/JS Asset-Management
 	'seo-meta.php',       // OG Tags, Canonical, Indexierungssteuerung
@@ -331,7 +331,7 @@ add_filter( 'blocksy:post_types:post:has_page_title', '__return_false' );
 
 // --- 4b. SITEMAP ---
 // Solange Rank Math aktiv ist, bleibt die native WordPress-Sitemap aus.
-// Ohne Rank Math faellt die Site automatisch auf /wp-sitemap.xml zurueck.
+// Ohne Rank Math fällt die Site automatisch auf /wp-sitemap.xml zurück.
 add_filter(
 	'wp_sitemaps_enabled',
 	function( $enabled ) {
@@ -431,7 +431,7 @@ function nexus_get_theme_toggle_html( $args = [] ) {
 	ob_start();
 	?>
 	<div class="nx-theme-toggle" data-nx-theme-toggle data-nx-theme-toggle-source="<?php echo esc_attr( $source ); ?>">
-		<div class="nx-theme-toggle__group" role="group" aria-label="<?php esc_attr_e( 'Farbschema waehlen', 'blocksy-child' ); ?>">
+		<div class="nx-theme-toggle__group" role="group" aria-label="<?php esc_attr_e( 'Farbschema wählen', 'blocksy-child' ); ?>">
 			<button type="button" class="nx-theme-toggle__button" data-theme-value="dark" aria-pressed="false" aria-label="<?php esc_attr_e( 'Dunkles Farbschema aktivieren', 'blocksy-child' ); ?>" title="<?php esc_attr_e( 'Dunkel', 'blocksy-child' ); ?>">
 				<span class="nx-theme-toggle__icon" aria-hidden="true">D</span>
 				<span><?php esc_html_e( 'Dunkel', 'blocksy-child' ); ?></span>

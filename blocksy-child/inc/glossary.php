@@ -38,23 +38,23 @@ function nexus_get_glossary_area_catalog() {
 			'id'          => 'foundation',
 			'label'       => 'Technisches Fundament',
 			'accent'      => '#6ea8ff',
-			'summary'     => 'Metriken und Technikbegriffe, die Ladezeit, Stabilitaet und Systemtragfaehigkeit erklaeren.',
-			'description' => 'Hier liegt die definitorische Tiefe fuer Performance-Themen, die Head Terms nicht dupliziert.',
+			'summary'     => 'Metriken und Technikbegriffe, die Ladezeit, Stabilität und Systemtragfähigkeit erklären.',
+			'description' => 'Hier liegt die definitorische Tiefe für Performance-Themen, die Head Terms nicht dupliziert.',
 			'aliases'     => [ 'technisches-fundament', 'performance', 'core-web-vitals', 'server' ],
 		],
 		'Messbarkeit' => [
 			'id'          => 'measurement',
 			'label'       => 'Messbarkeit',
 			'accent'      => '#b084ff',
-			'summary'     => 'Tracking-, Analytics- und Attributionsbegriffe als Bruecke zum Setup.',
-			'description' => 'Das Glossar erklaert die Begriffe, waehrend die Setup-Seiten die operative Umsetzung uebernehmen.',
+			'summary'     => 'Tracking-, Analytics- und Attributionsbegriffe als Brücke zum Setup.',
+			'description' => 'Das Glossar erklärt die Begriffe, während die Setup-Seiten die operative Umsetzung übernehmen.',
 			'aliases'     => [ 'messbarkeit', 'tracking', 'analytics', 'ga4', 'utm' ],
 		],
 		'Sichtbarkeit' => [
 			'id'          => 'visibility',
 			'label'       => 'Sichtbarkeit',
 			'accent'      => '#52d39a',
-			'summary'     => 'SEO- und IA-Begriffe, die technische Klarheit auf die Primary URL zurueckfuehren.',
+			'summary'     => 'SEO- und IA-Begriffe, die technische Klarheit auf die Primary URL zurückführen.',
 			'description' => 'Hier landen definitorische Sub-Terms, nicht die kommerziellen Head Terms selbst.',
 			'aliases'     => [ 'sichtbarkeit', 'seo', 'indexierung', 'canonical', 'crawlability' ],
 		],
@@ -63,7 +63,7 @@ function nexus_get_glossary_area_catalog() {
 			'label'       => 'Conversion',
 			'accent'      => '#f2c15f',
 			'summary'     => 'Mikrokonzepte aus CRO und Angebotslogik, die kaufnahe Reibung sichtbarer machen.',
-			'description' => 'Statt CRO als Head Term zu wiederholen, erklaert das Glossar die kleinen Hebel darunter.',
+			'description' => 'Statt CRO als Head Term zu wiederholen, erklärt das Glossar die kleinen Hebel darunter.',
 			'aliases'     => [ 'conversion', 'cro', 'message-match', 'cta', 'proof' ],
 		],
 	];
@@ -78,18 +78,18 @@ function nexus_get_glossary_policy_catalog() {
 	return [
 		'index' => [
 			'label'       => 'Index',
-			'description' => 'Eigenstaendige Glossar-Seite mit eigener Suchintention.',
-			'cta_label'   => 'Begriff oeffnen',
+			'description' => 'Eigenständige Glossar-Seite mit eigener Suchintention.',
+			'cta_label'   => 'Begriff öffnen',
 		],
 		'noindex' => [
 			'label'       => 'Noindex',
-			'description' => 'Eigenstaendige Seite fuer Klarheit auf der Website, aber ohne Ranking-Ziel.',
-			'cta_label'   => 'Begriff oeffnen',
+			'description' => 'Eigenständige Seite für Klarheit auf der Website, aber ohne Ranking-Ziel.',
+			'cta_label'   => 'Begriff öffnen',
 		],
 		'alias' => [
 			'label'       => 'Alias',
 			'description' => 'Glossar-Eintrag verweist bewusst auf die Primary URL, um Kannibalisierung zu vermeiden.',
-			'cta_label'   => 'Primary URL oeffnen',
+			'cta_label'   => 'Primary URL öffnen',
 		],
 	];
 }
@@ -168,7 +168,7 @@ function nexus_maybe_ensure_glossary_hub_page() {
 					'post_title'   => 'Glossar',
 					'post_name'    => 'glossar',
 					'post_content' => '',
-					'post_excerpt' => 'Glossar fuer SEO, Tracking, Performance und Conversion mit klaren Links auf die richtigen Primary URLs.',
+					'post_excerpt' => 'Glossar für SEO, Tracking, Performance und Conversion mit klaren Links auf die richtigen Primary URLs.',
 				]
 			),
 			true
@@ -192,17 +192,17 @@ function nexus_maybe_ensure_glossary_hub_page() {
 		wp_update_post(
 			[
 				'ID'           => $page_id,
-				'post_excerpt' => 'Glossar fuer SEO, Tracking, Performance und Conversion mit klaren Links auf die richtigen Primary URLs.',
+				'post_excerpt' => 'Glossar für SEO, Tracking, Performance und Conversion mit klaren Links auf die richtigen Primary URLs.',
 			]
 		);
 	}
 
 	if ( '' === trim( (string) get_post_meta( $page_id, 'seo_title', true ) ) ) {
-		update_post_meta( $page_id, 'seo_title', 'Glossar fuer SEO, Tracking und CRO | Haşim Üner' );
+		update_post_meta( $page_id, 'seo_title', 'Glossar für SEO, Tracking und CRO | Haşim Üner' );
 	}
 
 	if ( '' === trim( (string) get_post_meta( $page_id, 'seo_description', true ) ) ) {
-		update_post_meta( $page_id, 'seo_description', 'Glossar fuer SEO, Tracking, Performance und Conversion: definitorische Begriffe mit sauberer Bruecke zu den passenden Primary URLs.' );
+		update_post_meta( $page_id, 'seo_description', 'Glossar für SEO, Tracking, Performance und Conversion: definitorische Begriffe mit sauberer Brücke zu den passenden Primary URLs.' );
 	}
 }
 add_action( 'init', 'nexus_maybe_ensure_glossary_hub_page', 26 );
@@ -468,10 +468,10 @@ function nexus_register_glossary_term_post_type() {
 				'all_items'             => __( 'Alle Glossar-Begriffe', 'blocksy-child' ),
 				'archives'              => __( 'Glossar-Archiv', 'blocksy-child' ),
 				'attributes'            => __( 'Glossar-Attribute', 'blocksy-child' ),
-				'insert_into_item'      => __( 'In Glossar-Begriff einfuegen', 'blocksy-child' ),
+				'insert_into_item'      => __( 'In Glossar-Begriff einfügen', 'blocksy-child' ),
 				'uploaded_to_this_item' => __( 'Zu diesem Glossar-Begriff hochgeladen', 'blocksy-child' ),
 			],
-			'description'         => __( 'Glossar-Begriffe fuer SEO, Tracking, Performance und Conversion mit sauberem Bezug auf die Primary URLs.', 'blocksy-child' ),
+			'description'         => __( 'Glossar-Begriffe für SEO, Tracking, Performance und Conversion mit sauberem Bezug auf die Primary URLs.', 'blocksy-child' ),
 			'public'              => true,
 			'publicly_queryable'  => true,
 			'show_ui'             => true,

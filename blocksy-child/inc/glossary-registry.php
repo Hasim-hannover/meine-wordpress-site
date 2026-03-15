@@ -609,7 +609,7 @@ function nexus_get_glossary_term_content_html( $term ) {
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Typische Fehler</span>
-					<h2 class="wgos-h2">Wo Begriffsverstaendnis und Umsetzung oft auseinanderlaufen.</h2>
+					<h2 class="wgos-h2">Wo Begriffsverständnis und Umsetzung oft auseinanderlaufen.</h2>
 				</div>
 				<ul class="glossary-checklist">
 					<?php foreach ( (array) $term['mistakes'] as $mistake ) : ?>
@@ -624,7 +624,7 @@ function nexus_get_glossary_term_content_html( $term ) {
 		<div class="wgos-container">
 			<div class="wgos-section-head">
 				<span class="wgos-principle-kicker">Im WGOS-Kontext</span>
-				<h2 class="wgos-h2">Der Begriff ist nur dann sinnvoll, wenn er auf die richtige Primary URL zurueckfuehrt.</h2>
+				<h2 class="wgos-h2">Der Begriff ist nur dann sinnvoll, wenn er auf die richtige Primary URL zurückführt.</h2>
 			</div>
 
 			<div class="glossary-context-grid">
@@ -635,7 +635,7 @@ function nexus_get_glossary_term_content_html( $term ) {
 				</div>
 
 				<div class="glossary-card">
-					<span class="glossary-card__kicker">Naechste sinnvolle Seiten</span>
+					<span class="glossary-card__kicker">Nächste sinnvolle Seiten</span>
 					<div class="glossary-link-stack">
 						<?php foreach ( $primary_items as $item ) : ?>
 							<a class="glossary-link-card" href="<?php echo esc_url( $item['url'] ); ?>">
@@ -665,7 +665,7 @@ function nexus_get_glossary_term_content_html( $term ) {
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Verwandte Begriffe</span>
-					<h2 class="wgos-h2">Weitere Eintraege, die direkt anschliessen.</h2>
+					<h2 class="wgos-h2">Weitere Einträge, die direkt anschließen.</h2>
 				</div>
 				<div class="glossary-related-grid">
 					<?php foreach ( $related_terms as $item ) : ?>
@@ -682,11 +682,11 @@ function nexus_get_glossary_term_content_html( $term ) {
 	<section class="wgos-section wgos-section--white wgos-final-cta">
 		<div class="wgos-container">
 			<div class="wgos-final-cta__inner">
-				<span class="wgos-principle-kicker">Naechster Schritt</span>
-				<h2 class="wgos-h2">Begriff verstanden. Jetzt die richtige Prioritaet fuer Ihre Website setzen.</h2>
-				<p class="wgos-prose">Wenn klar ist, was der Begriff bedeutet, bleibt die eigentliche Frage offen: Ist das Thema fuer Ihre Website gerade wirklich der Engpass oder nur ein Symptom? Der Growth Audit bringt die Reihenfolge zurueck.</p>
+				<span class="wgos-principle-kicker">Nächster Schritt</span>
+				<h2 class="wgos-h2">Begriff verstanden. Jetzt die richtige Priorität für Ihre Website setzen.</h2>
+				<p class="wgos-prose">Wenn klar ist, was der Begriff bedeutet, bleibt die eigentliche Frage offen: Ist das Thema für Ihre Website gerade wirklich der Engpass oder nur ein Symptom? Der Growth Audit bringt die Reihenfolge zurück.</p>
 				<div class="wgos-hero__actions">
-					<a href="<?php echo esc_url( $hub_url ); ?>" class="wgos-btn wgos-btn--outline">Zurueck zum Glossar</a>
+					<a href="<?php echo esc_url( $hub_url ); ?>" class="wgos-btn wgos-btn--outline">Zurück zum Glossar</a>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_glossary_term_audit" data-track-category="lead_gen">Growth Audit starten</a>
 				</div>
 			</div>

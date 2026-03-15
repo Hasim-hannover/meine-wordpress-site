@@ -4,7 +4,7 @@
  *
  * Rendert einen projekt-eigenen Header im Child-Theme und blendet den
  * Blocksy Header visuell aus, damit Navigation, Sticky-Verhalten und
- * Mobile-Menue zentral gesteuert werden.
+ * Mobile-Menü zentral gesteuert werden.
  *
  * @package Blocksy_Child
  */

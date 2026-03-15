@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Ergebnisse Hub
- * Description: Hub fuer E3, DOMDAR und Whitelabel & Retainer.
+ * Description: Hub für E3, DOMDAR und Whitelabel & Retainer.
  *
  * @package Blocksy_Child
  */

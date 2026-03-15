@@ -232,7 +232,7 @@ function nexus_render_seo_cockpit_diagnostics_list( $diagnostics, $limit = 8 ) {
 	$checks = array_slice( (array) ( $diagnostics['checks'] ?? [] ), 0, $limit );
 
 	if ( empty( $checks ) ) {
-		echo '<p class="nexus-seo-cockpit__hint">Noch keine Laufzeitdiagnostik verfuegbar.</p>';
+		echo '<p class="nexus-seo-cockpit__hint">Noch keine Laufzeitdiagnostik verfügbar.</p>';
 		return;
 	}
 	?>
@@ -265,16 +265,16 @@ function nexus_render_seo_cockpit_notice() {
 	}
 
 	$messages = [
-		'missing_credentials'   => [ 'error', 'Bitte zuerst Client-ID und Client-Secret fuer Search Console hinterlegen.' ],
+		'missing_credentials'   => [ 'error', 'Bitte zuerst Client-ID und Client-Secret für Search Console hinterlegen.' ],
 		'oauth_connected'       => [ 'success', 'Die Search Console wurde erfolgreich verbunden.' ],
 		'oauth_disconnected'    => [ 'success', 'Die Search-Console-Verbindung wurde entfernt.' ],
 		'oauth_denied'          => [ 'error', 'Die Google-Freigabe wurde abgebrochen.' ],
-		'oauth_state_invalid'   => [ 'error', 'Der OAuth-Status war ungueltig oder abgelaufen. Bitte erneut verbinden.' ],
+		'oauth_state_invalid'   => [ 'error', 'Der OAuth-Status war ungültig oder abgelaufen. Bitte erneut verbinden.' ],
 		'oauth_missing_code'    => [ 'error', 'Google hat keinen Authorization Code geliefert.' ],
 		'oauth_exchange_failed' => [ 'error', 'Der Google-Code konnte nicht in ein Token getauscht werden.' ],
 		'refresh_success'       => [ 'success', 'Das SEO-Cockpit wurde frisch synchronisiert.' ],
-		'refresh_failed'        => [ 'error', 'Die Synchronisierung ist fehlgeschlagen. Bitte Verbindung und Property pruefen.' ],
-		'refresh_locked'        => [ 'warning', 'Es laeuft bereits eine Synchronisierung. Bitte gleich erneut versuchen.' ],
+		'refresh_failed'        => [ 'error', 'Die Synchronisierung ist fehlgeschlagen. Bitte Verbindung und Property prüfen.' ],
+		'refresh_locked'        => [ 'warning', 'Es läuft bereits eine Synchronisierung. Bitte gleich erneut versuchen.' ],
 		'inspection_success'    => [ 'success', 'Die URL-Inspektion wurde aktualisiert.' ],
 		'inspection_failed'     => [ 'error', 'Die URL-Inspektion konnte nicht geladen werden.' ],
 	];
@@ -385,7 +385,7 @@ function nexus_render_seo_cockpit_insights_list( $insights, $limit = 8 ) {
 	$insights = array_slice( (array) $insights, 0, $limit );
 
 	if ( empty( $insights ) ) {
-		echo '<p class="nexus-seo-cockpit__hint">Aktuell keine priorisierten Auffaelligkeiten fuer dieses Zeitfenster.</p>';
+		echo '<p class="nexus-seo-cockpit__hint">Aktuell keine priorisierten Auffälligkeiten für dieses Zeitfenster.</p>';
 		return;
 	}
 	?>
@@ -398,7 +398,7 @@ function nexus_render_seo_cockpit_insights_list( $insights, $limit = 8 ) {
 				</div>
 				<p><?php echo esc_html( (string) $insight['reason'] ); ?></p>
 				<?php if ( ! empty( $insight['recommended_action'] ) ) : ?>
-					<p class="nexus-seo-cockpit__hint"><strong>Naechster Schritt:</strong> <?php echo esc_html( (string) $insight['recommended_action'] ); ?></p>
+					<p class="nexus-seo-cockpit__hint"><strong>Nächster Schritt:</strong> <?php echo esc_html( (string) $insight['recommended_action'] ); ?></p>
 				<?php endif; ?>
 				<div class="nexus-seo-cockpit__insight-meta">
 					<?php if ( ! empty( $insight['query'] ) ) : ?>
@@ -527,12 +527,12 @@ function nexus_render_seo_cockpit_detail_view( $detail ) {
 		<section class="nexus-seo-cockpit__panel">
 			<h2>Koko-Kontext</h2>
 			<p class="nexus-seo-cockpit__status <?php echo esc_attr( ! empty( $koko_detail['available'] ) ? 'is-positive' : 'is-neutral' ); ?>">
-				<?php echo esc_html( (string) ( $koko_detail['status']['label'] ?? 'Koko nicht verfuegbar' ) ); ?>
+				<?php echo esc_html( (string) ( $koko_detail['status']['label'] ?? 'Koko nicht verfügbar' ) ); ?>
 			</p>
 			<?php if ( ! empty( $koko_detail['matched'] ) ) : ?>
 				<?php nexus_render_seo_cockpit_koko_metrics( (array) ( $koko_detail['current'] ?? [] ), (array) ( $koko_detail['previous'] ?? [] ) ); ?>
 			<?php else : ?>
-				<p class="nexus-seo-cockpit__hint"><?php echo esc_html( (string) ( $koko_detail['note'] ?? 'Fuer diese URL liegt kein eindeutiger Koko-Kontext vor.' ) ); ?></p>
+				<p class="nexus-seo-cockpit__hint"><?php echo esc_html( (string) ( $koko_detail['note'] ?? 'Für diese URL liegt kein eindeutiger Koko-Kontext vor.' ) ); ?></p>
 			<?php endif; ?>
 		</section>
 
@@ -830,7 +830,7 @@ function nexus_render_seo_cockpit_dashboard() {
 			<div class="nexus-seo-cockpit__grid nexus-seo-cockpit__grid--reports">
 				<section class="nexus-seo-cockpit__panel">
 					<h2>Koko-Kontext</h2>
-					<p class="nexus-seo-cockpit__hint">Onsite-Nutzung fuer denselben Zeitraum. Das ist ein Kontextlayer fuer Nachfrage, nicht der Ersatz fuer Search Console.</p>
+					<p class="nexus-seo-cockpit__hint">Onsite-Nutzung für denselben Zeitraum. Das ist ein Kontextlayer für Nachfrage, nicht der Ersatz für Search Console.</p>
 					<?php if ( ! empty( $koko_snapshot['available'] ) ) : ?>
 						<?php nexus_render_seo_cockpit_koko_metrics( (array) ( $koko_snapshot['overview']['current'] ?? [] ), (array) ( $koko_snapshot['overview']['previous'] ?? [] ) ); ?>
 						<?php if ( ! empty( $koko_snapshot['top_pages'] ) ) : ?>
@@ -1086,7 +1086,7 @@ function nexus_render_seo_cockpit_settings_page() {
 							<th scope="row"><label for="nexus-seo-client-id">Client ID</label></th>
 							<td>
 								<input id="nexus-seo-client-id" name="<?php echo esc_attr( nexus_get_seo_cockpit_option_name() ); ?>[client_id]" type="text" class="regular-text" value="<?php echo esc_attr( $settings['client_id'] ); ?>" <?php disabled( 'Konstante' === $source['client_id'] ); ?>>
-								<p class="description">Aktive Quelle: <?php echo esc_html( $source['client_id'] ); ?>. Secrets und IDs koennen auch ausserhalb des Repos als Konstanten gesetzt werden.</p>
+								<p class="description">Aktive Quelle: <?php echo esc_html( $source['client_id'] ); ?>. Secrets und IDs können auch außerhalb des Repos als Konstanten gesetzt werden.</p>
 							</td>
 						</tr>
 						<tr>

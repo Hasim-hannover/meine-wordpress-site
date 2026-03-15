@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Growth Audit
- * Description: Landing Page fuer einen persoenlichen Growth Audit mit Rueckmeldung innerhalb von 48 Stunden
+ * Description: Landing Page für einen persönlichen Growth Audit mit Rückmeldung innerhalb von 48 Stunden
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *

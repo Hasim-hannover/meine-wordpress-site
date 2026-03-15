@@ -1347,7 +1347,7 @@ function nexus_render_review_crm_dashboard() {
 	?>
 	<div class="wrap nexus-review-dashboard">
 		<h1>Nexus CRM</h1>
-		<p class="nexus-review-dashboard-intro">Hier laufen Audit-Anfragen, Projektanfragen und Blog-Abos zusammen. WordPress bleibt die zentrale Daten- und Logikschicht; Brevo bleibt reine Zustellungsebene fuer Transaktionsmails.</p>
+		<p class="nexus-review-dashboard-intro">Hier laufen Audit-Anfragen, Projektanfragen und Blog-Abos zusammen. WordPress bleibt die zentrale Daten- und Logikschicht; Brevo bleibt reine Zustellungsebene für Transaktionsmails.</p>
 
 		<div class="nexus-review-stats">
 			<a class="nexus-review-stat-card" href="<?php echo esc_url( admin_url( 'edit.php?post_type=nexus_review_request&nexus_review_status=new' ) ); ?>">

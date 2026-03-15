@@ -51,12 +51,12 @@ if ( 'post' === $related_type && is_singular( 'post' ) ) {
 			'tracking' => [
 				'label' => __( 'GA4 Tracking Setup', 'blocksy-child' ),
 				'url'   => nexus_get_primary_public_url( 'tracking', home_url( '/ga4-tracking-setup/' ) ),
-				'text'  => __( 'Wenn Tracking, Consent oder Datenqualitaet das eigentliche Problem sind:', 'blocksy-child' ),
+				'text'  => __( 'Wenn Tracking, Consent oder Datenqualität das eigentliche Problem sind:', 'blocksy-child' ),
 			],
 			'cro' => [
 				'label' => __( 'Conversion Rate Optimization', 'blocksy-child' ),
 				'url'   => nexus_get_primary_public_url( 'cro', home_url( '/conversion-rate-optimization/' ) ),
-				'text'  => __( 'Wenn der naechste Hebel in Angebotslogik und Nutzerfuehrung liegt:', 'blocksy-child' ),
+				'text'  => __( 'Wenn der nächste Hebel in Angebotslogik und Nutzerführung liegt:', 'blocksy-child' ),
 			],
 			'wordpress-performance' => [
 				'label' => __( 'Core Web Vitals', 'blocksy-child' ),
@@ -66,7 +66,7 @@ if ( 'post' === $related_type && is_singular( 'post' ) ) {
 			'strategie' => [
 				'label' => __( 'WordPress Growth Operating System', 'blocksy-child' ),
 				'url'   => nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) ),
-				'text'  => __( 'Wenn das Thema in ein groesseres System aus Angebot, SEO, Tracking und Conversion eingeordnet werden soll:', 'blocksy-child' ),
+				'text'  => __( 'Wenn das Thema in ein größeres System aus Angebot, SEO, Tracking und Conversion eingeordnet werden soll:', 'blocksy-child' ),
 			],
 		];
 
