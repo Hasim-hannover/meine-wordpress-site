@@ -77,10 +77,10 @@
     color: var(--text-inverse);
 }
 
-/* ── Blog-Notify: Abstand im Archiv ────────────────────────── */
+/* ── Blog-Notify Slot im Grid ───────────────────────────────── */
 
-.blog-archive-shell .nexus-blog-notify {
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+.blog-archive-notify-slot {
+    grid-column: 1 / -1;
 }
 
 /* ── Artikel-Grid ───────────────────────────────────────────── */

@@ -5,6 +5,8 @@
  * Sauber aus dem Design-System gebaut.
  * Kategorie-Filter via blog-archive.js (.hu-blog-wrapper, .hu-filter-btn, .post-card).
  *
+ * CRO-Reihenfolge: Intro → Filter → 3 Artikel → Blog-Notify → Rest → Audit-CTA
+ *
  * @package Blocksy_Child
  */
 
@@ -23,12 +25,12 @@ get_template_part( 'template-parts/blog-header' );
 	<section class="blog-archive-intro" aria-labelledby="blog-archive-heading">
 		<div class="blog-archive-intro__inner">
 			<h1 id="blog-archive-heading" class="blog-archive-intro__headline">
-				WordPress, SEO &amp; B2B-Conversion:
-				<span class="blog-archive-intro__headline-accent">Analysen</span>,
-				die Wachstum steuern.
+				Was B2B-Websites wirklich bremst —
+				<span class="blog-archive-intro__headline-accent">und wie man es löst.</span>
 			</h1>
 			<p class="blog-archive-intro__sub">
-				Praxisnahe Einblicke zu SEO, Tracking und Conversion-Logik für B2B-Websites auf WordPress-Basis.
+				Analysen zu SEO, Conversion und Tracking für WordPress-Websites,
+				die mehr qualifizierte Anfragen wollen. Kein Rauschen — nur was wirtschaftlich zählt.
 			</p>
 		</div>
 	</section>
@@ -52,12 +54,11 @@ get_template_part( 'template-parts/blog-header' );
 				<?php endforeach; ?>
 			</nav>
 
-			<?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'compact' ] ); ?>
-
 			<div class="blog-archive-grid">
 
 				<?php
-				$post_index = 0;
+				$post_index    = 0;
+				$notify_shown  = false;
 
 				if ( have_posts() ) :
 					while ( have_posts() ) :
@@ -68,25 +69,12 @@ get_template_part( 'template-parts/blog-header' );
 						$cat_slugs = wp_list_pluck( $cats, 'slug' );
 						$thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
 
-						// In-Feed CTA nach dem 3. Artikel
-						if ( $post_index === 4 ) :
+						// Blog-Notify nach Artikel 3 (Nutzer hat Wert gesehen)
+						if ( $post_index === 4 && ! $notify_shown ) :
+							$notify_shown = true;
 				?>
-					<div class="blog-archive-infeed-cta" aria-label="Kostenloser Growth Audit">
-						<div class="blog-archive-infeed-cta__inner">
-							<span class="blog-archive-infeed-cta__tag">Kostenloser Audit</span>
-							<h2 class="blog-archive-infeed-cta__headline">Was bremst dein Wachstum?</h2>
-							<p class="blog-archive-infeed-cta__sub">
-								Persönliche Analyse deiner Website — schriftliche Rückmeldung in 48 Stunden.
-							</p>
-							<a
-								href="<?php echo esc_url( $audit_url ); ?>"
-								class="nexus-btn nexus-btn--primary blog-archive-infeed-cta__btn"
-								data-track-action="cta_blog_archive_infeed"
-								data-track-category="lead_gen"
-							>
-								Audit starten
-							</a>
-						</div>
+					<div class="blog-archive-notify-slot">
+						<?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'compact' ] ); ?>
 					</div>
 				<?php
 						endif;
@@ -151,7 +139,33 @@ get_template_part( 'template-parts/blog-header' );
 				<?php
 					endwhile;
 				endif;
+
+				// Falls weniger als 4 Artikel: Notify trotzdem zeigen
+				if ( ! $notify_shown ) :
 				?>
+					<div class="blog-archive-notify-slot">
+						<?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'compact' ] ); ?>
+					</div>
+				<?php endif; ?>
+
+				<!-- Audit CTA am Ende aller Artikel -->
+				<div class="blog-archive-infeed-cta" aria-label="Kostenloser Growth Audit">
+					<div class="blog-archive-infeed-cta__inner">
+						<span class="blog-archive-infeed-cta__tag">Kostenloser Audit</span>
+						<h2 class="blog-archive-infeed-cta__headline">Du weißt jetzt was bremst — lass es uns konkret machen.</h2>
+						<p class="blog-archive-infeed-cta__sub">
+							Persönliche Analyse deiner Website. Schriftliche Rückmeldung mit den 3 stärksten Bremsen — in 48 Stunden.
+						</p>
+						<a
+							href="<?php echo esc_url( $audit_url ); ?>"
+							class="nexus-btn nexus-btn--primary blog-archive-infeed-cta__btn"
+							data-track-action="cta_blog_archive_end"
+							data-track-category="lead_gen"
+						>
+							Audit starten
+						</a>
+					</div>
+				</div>
 
 			</div><!-- .blog-archive-grid -->
 
