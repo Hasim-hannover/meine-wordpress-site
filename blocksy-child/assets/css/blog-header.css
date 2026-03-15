@@ -370,7 +370,8 @@
     outline-offset: 3px;
 }
 
-.blog-home--with-blog-header .nx-hero {
+.blog-home--with-blog-header .nx-hero,
+.blog-home--with-blog-header .blog-archive-intro {
     min-height: auto;
     padding-top: calc(var(--nx-header-height) + clamp(1.75rem, 4vw, 3.25rem));
 }
