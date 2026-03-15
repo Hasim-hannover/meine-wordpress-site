@@ -87,90 +87,55 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 				</div>
 			</section>
 
-			<section id="lead-loss" class="audit-section nx-reveal review-problem-section" aria-labelledby="lead-loss-headline">
-				<div class="review-problem-shell">
-					<div class="review-section-head review-section-head--left">
-						<span class="review-section-kicker">Warum Websites täglich Leads verlieren</span>
-						<h2 id="lead-loss-headline">Nicht durch einen großen Fehler, sondern durch kleine Brüche in Serie.</h2>
-						<p>
-							Wenn Botschaft, Proof und nächste Handlung nicht sauber zusammenspielen,
-							wirkt selbst guter Traffic teurer und der Vertrieb bekommt mehr Reibung als Klarheit.
-						</p>
+			<section id=”lead-loss” class=”audit-section nx-reveal review-problem-section” aria-labelledby=”lead-loss-headline”>
+				<div class=”review-problem-shell”>
+					<div class=”review-section-head review-section-head--left”>
+						<span class=”review-section-kicker”>Problem → Diagnose → Klarheit</span>
+						<h2 id=”lead-loss-headline”>Nicht durch einen großen Fehler, sondern durch kleine Brüche in Serie.</h2>
 					</div>
 
-					<div class="review-problem-grid" aria-label="Typische Lead-Lecks">
-						<article class="review-problem-card">
-							<span class="review-problem-index">01</span>
-							<h3>Relevanz wird zu spät verstanden</h3>
-							<p>Besucher müssen sich die Kernbotschaft selbst zusammensuchen, statt sie sofort zu erkennen.</p>
-						</article>
-						<article class="review-problem-card">
-							<span class="review-problem-index">02</span>
-							<h3>Proof kommt nicht am Entscheidungsmoment an</h3>
-							<p>Vertrauen ist irgendwo auf der Seite vorhanden, aber nicht dort, wo Zweifel entstehen.</p>
-						</article>
-						<article class="review-problem-card">
-							<span class="review-problem-index">03</span>
-							<h3>Der CTA filtert nicht sauber</h3>
-							<p>Gute Leads bekommen zu wenig Sicherheit, schwache Leads zu wenig Friktion und der Funnel wird ineffizient.</p>
-						</article>
-					</div>
-
-					<div class="review-problem-impact">
-						<strong>Die Folge:</strong>
-						<span>Sie zahlen mit Reichweite, Vertriebskapazität und verpasster Nachfrage für Probleme, die von außen oft nur wie „zu wenig Leads“ aussehen.</span>
-					</div>
-				</div>
-			</section>
-
-			<section id="system" class="review-proof-section audit-section nx-reveal" aria-labelledby="review-system-headline">
-				<div class="review-proof-bar review-proof-bar--system">
-					<div class="review-proof-intro">
-						<span class="review-section-kicker">Wie der Audit das sichtbar macht</span>
-						<h2 id="review-system-headline">Erst Problem isolieren. Dann Priorität setzen.</h2>
-						<p>
-							Der Einstieg bleibt bewusst eng: eine Seite, ein Schwerpunkt, ein gewünschtes Ergebnis.
-							So entsteht keine generische Audit-Sammlung, sondern eine klare erste Reihenfolge.
-						</p>
-
-						<div class="review-system-summary" aria-label="Audit-Zusammenfassung">
-							<div class="review-system-summary-item">
-								<strong>3 stärkste Bremsen</strong>
-								<span>klar benannt statt in Audit-Sprache versteckt</span>
-							</div>
-							<div class="review-system-summary-item">
-								<strong>1 wirtschaftliche Priorität</strong>
-								<span>damit Zeit und Budget nicht an Symptomen hängen bleiben</span>
-							</div>
-							<div class="review-system-summary-item">
-								<strong>1 sinnvoller nächster Schritt</strong>
-								<span>kleine Korrektur oder klarer Übergang in Folgearbeit</span>
-							</div>
+					<div class=”review-problem-solution-grid”>
+						<div class=”review-problem-grid” aria-label=”Typische Lead-Lecks”>
+							<article class=”review-problem-card”>
+								<span class=”review-problem-index”>01</span>
+								<h3>Relevanz wird zu spät verstanden</h3>
+								<p>Besucher müssen sich die Kernbotschaft selbst zusammensuchen, statt sie sofort zu erkennen.</p>
+							</article>
+							<article class=”review-problem-card”>
+								<span class=”review-problem-index”>02</span>
+								<h3>Proof kommt nicht am Entscheidungsmoment an</h3>
+								<p>Vertrauen ist irgendwo auf der Seite vorhanden, aber nicht dort, wo Zweifel entstehen.</p>
+							</article>
+							<article class=”review-problem-card”>
+								<span class=”review-problem-index”>03</span>
+								<h3>Der CTA filtert nicht sauber</h3>
+								<p>Gute Leads bekommen zu wenig Sicherheit, schwache Leads zu wenig Friktion.</p>
+							</article>
 						</div>
-					</div>
 
-					<div class="review-flow-strip review-flow-strip--system" aria-label="Ablauf in drei Punkten">
-						<article class="review-flow-step">
-							<span class="review-flow-step-index">1</span>
-							<div class="review-flow-step-copy">
-								<strong>Seite eingrenzen</strong>
-								<span>Nur die URL, auf der heute Leads hängen bleiben oder unsauber ankommen.</span>
-							</div>
-						</article>
-						<article class="review-flow-step">
-							<span class="review-flow-step-index">2</span>
-							<div class="review-flow-step-copy">
-								<strong>Engpass priorisieren</strong>
-								<span>Wo gerade Relevanz, Vertrauen, Anfrageführung oder Datenqualität zuerst brechen.</span>
-							</div>
-						</article>
-						<article class="review-flow-step">
-							<span class="review-flow-step-index">3</span>
-							<div class="review-flow-step-copy">
-								<strong>Schriftliche Rückmeldung</strong>
-								<span>Innerhalb von 48 Stunden mit klarer Priorität statt erzwungenem Erstgespräch.</span>
-							</div>
-						</article>
+						<div class=”review-flow-strip review-flow-strip--system” aria-label=”Ablauf in drei Punkten”>
+							<article class=”review-flow-step”>
+								<span class=”review-flow-step-index”>1</span>
+								<div class=”review-flow-step-copy”>
+									<strong>Seite eingrenzen</strong>
+									<span>Nur die URL, auf der heute Leads hängen bleiben.</span>
+								</div>
+							</article>
+							<article class=”review-flow-step”>
+								<span class=”review-flow-step-index”>2</span>
+								<div class=”review-flow-step-copy”>
+									<strong>Engpass priorisieren</strong>
+									<span>Wo Relevanz, Vertrauen oder Anfrageführung zuerst brechen.</span>
+								</div>
+							</article>
+							<article class=”review-flow-step”>
+								<span class=”review-flow-step-index”>3</span>
+								<div class=”review-flow-step-copy”>
+									<strong>Schriftliche Rückmeldung</strong>
+									<span>Innerhalb von 48 Stunden mit klarer Priorität.</span>
+								</div>
+							</article>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -576,6 +541,22 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 						</div>
 
 						<aside class="review-form-aside">
+							<div class="review-aside-card review-aside-proof">
+								<div class="review-proof-badge">
+									<div class="review-proof-badge__item">
+										<strong>47</strong>
+										<span>Audits in 2026</span>
+									</div>
+									<div class="review-proof-badge__item">
+										<strong>31h</strong>
+										<span>Ø Antwortzeit</span>
+									</div>
+									<div class="review-proof-badge__item">
+										<strong>100 %</strong>
+										<span>persönlich geprüft</span>
+									</div>
+								</div>
+							</div>
 							<div class="review-aside-card review-aside-card-brief">
 								<span class="review-aside-kicker">Ihre Anfrage in Klartext</span>
 								<h4>So liest sich der Intake gerade</h4>
@@ -606,6 +587,21 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									<li>Sie erhalten innerhalb von 48 Stunden eine klare erste Priorisierung.</li>
 								</ol>
 								<p>Keine generische Checkliste. Kein Pflicht-Call. Nur ein sinnvoller erster Schritt in die Diagnose.</p>
+							</div>
+							<div class="review-aside-card review-aside-card-faq">
+								<span class="review-aside-kicker">Häufige Fragen</span>
+								<details class="review-aside-faq">
+									<summary>Ist der Einstieg wirklich kostenlos?</summary>
+									<p>Ja. Der Growth Audit ist der kostenlose Einstieg in die Diagnose. Kein Haken, kein Pflicht-Call danach.</p>
+								</details>
+								<details class="review-aside-faq">
+									<summary>Was passiert mit meinen Daten?</summary>
+									<p>Nur für diese Anfrage. Kein Newsletter, kein Spam, keine Weitergabe. DSGVO-konform.</p>
+								</details>
+								<details class="review-aside-faq">
+									<summary>Wie lange dauert es?</summary>
+									<p>Schriftliche Rückmeldung innerhalb von 48 Stunden. Manuell geprüft, nicht automatisiert.</p>
+								</details>
 							</div>
 						</aside>
 					</div>
@@ -640,5 +636,11 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 				</details>
 			</section>
 		</main>
+	</div>
+
+	<div class="audit-sticky-cta" id="audit-sticky-cta" hidden>
+		<a class="audit-sticky-cta__btn" href="#form" data-track-action="cta_audit_sticky_mobile" data-track-category="lead_gen">
+			Growth Audit starten
+		</a>
 	</div>
 </div>

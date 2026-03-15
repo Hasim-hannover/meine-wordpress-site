@@ -1255,3 +1255,141 @@
     opacity: 1;
     color: hsl(var(--accent-hsl));
 }
+
+/* ── Proof Badge (Form-Sidebar) ─────────────────────────────── */
+
+.review-aside-proof {
+    padding: 1rem 1.25rem;
+}
+
+.review-proof-badge {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: space-between;
+}
+
+.review-proof-badge__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    text-align: center;
+    flex: 1;
+}
+
+.review-proof-badge__item strong {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: hsl(var(--accent-hsl));
+    line-height: 1;
+}
+
+.review-proof-badge__item span {
+    font-size: 0.7rem;
+    color: var(--text-secondary, var(--nx-text-muted));
+    line-height: 1.3;
+}
+
+/* ── Sidebar FAQ ────────────────────────────────────────────── */
+
+.review-aside-card-faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.review-aside-faq {
+    border-top: 1px solid var(--border-subtle, var(--nx-border));
+    padding: 0;
+}
+
+.review-aside-faq:first-of-type {
+    border-top: none;
+}
+
+.review-aside-faq summary {
+    padding: 0.75rem 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary, var(--nx-text));
+    cursor: pointer;
+    list-style: none;
+}
+
+.review-aside-faq summary::before {
+    content: '+';
+    display: inline-block;
+    width: 1.25em;
+    font-weight: 700;
+    color: hsl(var(--accent-hsl));
+}
+
+.review-aside-faq[open] summary::before {
+    content: '−';
+}
+
+.review-aside-faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.review-aside-faq p {
+    margin: 0 0 0.75rem;
+    padding-left: 1.25em;
+    font-size: 0.8rem;
+    color: var(--text-secondary, var(--nx-text-muted));
+    line-height: 1.55;
+}
+
+/* ── Merged Problem+Solution Grid ───────────────────────────── */
+
+.review-problem-solution-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-items: start;
+}
+
+@media (max-width: 860px) {
+    .review-problem-solution-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Sticky Mobile CTA ──────────────────────────────────────── */
+
+.audit-sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1003;
+    padding: 0.75rem 1rem;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg-base, #0d0c0b) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border-subtle, var(--nx-border));
+}
+
+.audit-sticky-cta__btn {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-inverse, #0d0c0b);
+    background: var(--accent, #b46a3c);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.audit-sticky-cta__btn:hover {
+    background: var(--accent-hover, #c47a4c);
+}
+
+@media (min-width: 769px) {
+    .audit-sticky-cta {
+        display: none !important;
+    }
+}

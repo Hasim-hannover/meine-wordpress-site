@@ -74,8 +74,8 @@ get_template_part( 'template-parts/blog-header' );
 				   <div class="nexus-inline-cta" id="nexus-inline-cta" hidden aria-hidden="true">
 					   <div class="nexus-inline-cta__inner">
 						   <span class="nexus-inline-cta__tag">Kostenloser Audit</span>
-						   <h3 class="nexus-inline-cta__headline">Was bremst dein Wachstum?</h3>
-						   <p class="nexus-inline-cta__sub">Persönliche Analyse deiner Website — Antwort in 48 Stunden.</p>
+						   <h3 class="nexus-inline-cta__headline">Was bremst Ihr Wachstum?</h3>
+						   <p class="nexus-inline-cta__sub">Persönliche Analyse Ihrer Website — schriftliche Rückmeldung in 48 Stunden.</p>
 						   <a href="<?php echo esc_url( home_url( '/growth-audit/' ) ); ?>"
 							  class="nexus-btn nexus-btn--primary nexus-inline-cta__btn"
 							  data-track-action="cta_blog_inline"

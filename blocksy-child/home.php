@@ -152,9 +152,9 @@ get_template_part( 'template-parts/blog-header' );
 				<div class="blog-archive-infeed-cta" aria-label="Kostenloser Growth Audit">
 					<div class="blog-archive-infeed-cta__inner">
 						<span class="blog-archive-infeed-cta__tag">Kostenloser Audit</span>
-						<h2 class="blog-archive-infeed-cta__headline">Du weißt jetzt was bremst — lass es uns konkret machen.</h2>
+						<h2 class="blog-archive-infeed-cta__headline">Sie wissen jetzt was bremst — lassen Sie es uns konkret machen.</h2>
 						<p class="blog-archive-infeed-cta__sub">
-							Persönliche Analyse deiner Website. Schriftliche Rückmeldung mit den 3 stärksten Bremsen — in 48 Stunden.
+							Persönliche Analyse Ihrer Website. Schriftliche Rückmeldung mit den 3 stärksten Bremsen — in 48 Stunden.
 						</p>
 						<a
 							href="<?php echo esc_url( $audit_url ); ?>"

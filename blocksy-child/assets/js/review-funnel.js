@@ -712,9 +712,31 @@
     return value.slice(0, maxLength - 1).trim() + '…';
   }
 
+  function initStickyCta() {
+    var stickyCta = document.getElementById('audit-sticky-cta');
+    var hero = document.getElementById('start');
+    var formSection = document.getElementById('form');
+    if (!stickyCta || !hero) return;
+
+    var mql = window.matchMedia('(max-width: 768px)');
+    if (!mql.matches) return;
+
+    function check() {
+      var heroBottom = hero.getBoundingClientRect().bottom;
+      var formVisible = formSection && formSection.getBoundingClientRect().top < window.innerHeight;
+      var show = heroBottom < 0 && !formVisible && !state.submitted;
+
+      stickyCta.hidden = !show;
+    }
+
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function () { init(); initStickyCta(); });
   } else {
     init();
+    initStickyCta();
   }
 })();
