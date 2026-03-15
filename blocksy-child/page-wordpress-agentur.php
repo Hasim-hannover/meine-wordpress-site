@@ -247,6 +247,7 @@ get_header();
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary wp-agentur-hero__primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
 							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-agentur-text-link" data-track-action="cta_agentur_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
 						</div>
+						<p class="nx-cta-microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
 						<p class="wp-agentur-hero-support">
 							Workshops und Reviews in Hannover möglich. DACH-weit remote umsetzbar.
 						</p>

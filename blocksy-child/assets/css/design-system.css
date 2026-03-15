@@ -1021,6 +1021,18 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* =========================================
+   15b. KOMPONENTEN: CTA Microcopy (Risk-Reversal)
+   ========================================= */
+.nx-cta-microcopy {
+    margin: 0.5rem 0 0;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--nx-text-muted);
+    letter-spacing: 0.01em;
+}
+
+
+/* =========================================
    16. KOMPONENTEN: Author Row
    ========================================= */
 .nx-author {

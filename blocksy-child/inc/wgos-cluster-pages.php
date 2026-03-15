@@ -401,6 +401,7 @@ function nexus_render_wgos_cluster_page( $page ) {
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_audit" data-track-category="lead_gen">Growth Audit starten</a>
 							<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost">WGOS verstehen</a>
 						</div>
+						<p class="nx-cta-microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
 					</div>
 
 					<aside class="nx-card nx-card--flat nx-cluster-hero__card">

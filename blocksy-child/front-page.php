@@ -141,6 +141,7 @@ get_header();
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen">Audit starten</a>
 							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_hero_cases" data-track-category="trust">Ergebnisse ansehen</a>
 						</div>
+						<p class="nx-cta-microcopy nx-reveal">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
 
 						<p class="wp-home-hero__support nx-reveal">
 							Lokaler Einstieg für Hannover:

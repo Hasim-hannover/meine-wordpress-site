@@ -429,8 +429,10 @@ foreach ( $faq_items as $faq_item ) {
 							</div>
 
 								<div class="wgos-hero__actions">
-									<a href="#system" class="wgos-btn wgos-btn--primary" data-track="cta_click_system">WGOS in 60 Sekunden verstehen</a>
+									<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit_hero">Growth Audit starten (0€)</a>
+									<a href="#system" class="wgos-btn wgos-btn--ghost" data-track="cta_click_system">WGOS in 60 Sekunden verstehen</a>
 								</div>
+								<p class="nx-cta-microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
 
 							<p class="wgos-hero__microcopy">Der Growth Audit ist der nächste Schritt, wenn die Systemlogik fachlich passt.</p>
 						</div>
