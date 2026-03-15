@@ -101,6 +101,7 @@ function hu_enqueue_assets() {
 
 	// ── B) Blog-Archive Scripts ───────────────────────────────────
 	if ( is_home() ) {
+		hu_enqueue_css( 'nexus-blog-archive-css', 'blog-archive.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-archive-js', 'blog-archive.js', [ 'nexus-core-js' ] );
 	}
 

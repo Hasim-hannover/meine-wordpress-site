@@ -1,55 +1,164 @@
 <?php
 /**
- * NEXUS Edition: Das Template für die Blog-Startseite
+ * Blog-Archiv-Template (Blog-Startseite)
+ *
+ * Sauber aus dem Design-System gebaut.
+ * Kategorie-Filter via blog-archive.js (.hu-blog-wrapper, .hu-filter-btn, .post-card).
+ *
+ * @package Blocksy_Child
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$audit_url = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
+
 get_header();
 get_template_part( 'template-parts/blog-header' );
 ?>
 
 <main id="main" class="site-main blog-home blog-home--with-blog-header">
-    <section class="nx-hero nx-hero--compact" style="background: linear-gradient(rgba(5,5,5,0.8), rgba(5,5,5,0.8)), url('https://hasimuener.de/wp-content/uploads/2025/09/Impulse_Hasim_uener_Blog.webp') center/cover;">
-        <div class="nx-container">
-            <span class="nx-badge nx-badge--gold">Strategische Impulse</span>
-            <h1 class="nx-hero__title">Expertise, die <span>Wachstum</span> steuert.</h1>
-            <p class="nx-hero__subtitle">Kein Rauschen. Nur Analysen zu den digitalen Hebeln, die im B2B-Markt den Unterschied zwischen Stagnation und Marktführerschaft machen.</p>
-        </div>
-    </section>
 
-    <div class="nx-container nx-section">
-        <div class="flex gap-md flex-center flex-wrap mb-xl">
-            <span class="nx-badge nx-badge--gold nx-btn--sm" style="cursor: pointer;">Alle Beiträge</span>
-            <?php 
-            $categories = get_categories(['hide_empty' => true]);
-            foreach($categories as $cat) {
-                echo '<a href="'.get_category_link($cat->term_id).'" class="nx-badge nx-badge--ghost" style="text-decoration:none;">'.$cat->name.'</a>';
-            }
-            ?>
-        </div>
+	<section class="blog-archive-intro" aria-labelledby="blog-archive-heading">
+		<div class="blog-archive-intro__inner">
+			<h1 id="blog-archive-heading" class="blog-archive-intro__headline">
+				WordPress, SEO &amp; B2B-Conversion:
+				<span class="blog-archive-intro__headline-accent">Analysen</span>,
+				die Wachstum steuern.
+			</h1>
+			<p class="blog-archive-intro__sub">
+				Praxisnahe Einblicke zu SEO, Tracking und Conversion-Logik für B2B-Websites auf WordPress-Basis.
+			</p>
+		</div>
+	</section>
 
-        <?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'full' ] ); ?>
+	<div class="blog-archive-shell">
 
-        <div class="nx-grid nx-grid-auto">
-            <?php if (have_posts()) : while (have_posts()) : the_post(); 
-                $thumb = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: 'https://hasimuener.de/wp-content/uploads/2025/09/Impulse_Hasim_uener_Blog.webp';
-            ?>
-                <article class="nx-card">
-                    <a class="nx-card__linkwrap" href="<?php echo esc_url( get_permalink() ); ?>" aria-label="<?php echo esc_attr( sprintf( 'Analyse lesen: %s', get_the_title() ) ); ?>">
-                        <div style="border-radius:var(--nx-radius-md); overflow:hidden; margin-bottom:var(--nx-space-lg); border:1px solid var(--nx-border);">
-                            <img src="<?php echo esc_url($thumb); ?>" alt="<?php the_title_attribute(); ?>" style="width:100%; height:250px; object-fit:cover; display:block;">
-                        </div>
-                        <div class="card-content">
-                            <span class="nx-metric__label" style="display:block; margin-bottom:var(--nx-space-sm);"><?php echo get_the_date(); ?></span>
-                            <h3 class="nx-card__title"><?php the_title(); ?></h3>
-                            <p class="nx-card__text" style="margin: var(--nx-space-md) 0;">
-                                <?php echo wp_trim_words(get_the_excerpt(), 18); ?>
-                            </p>
-                            <span class="text-gold" style="font-weight:700; font-size:0.9rem;">Analyse lesen →</span>
-                        </div>
-                    </a>
-                </article>
-            <?php endwhile; endif; ?>
-        </div>
-    </div>
+		<div class="hu-blog-wrapper">
+
+			<nav class="blog-archive-filter" aria-label="Artikel nach Kategorie filtern">
+				<button class="hu-filter-btn is-active" data-filter="all" aria-pressed="true">
+					Alle Beiträge
+				</button>
+				<?php foreach ( get_categories( [ 'hide_empty' => true ] ) as $cat ) : ?>
+					<button
+						class="hu-filter-btn"
+						data-filter="<?php echo esc_attr( $cat->slug ); ?>"
+						aria-pressed="false"
+					>
+						<?php echo esc_html( $cat->name ); ?>
+					</button>
+				<?php endforeach; ?>
+			</nav>
+
+			<?php get_template_part( 'template-parts/blog-notify', null, [ 'variant' => 'compact' ] ); ?>
+
+			<div class="blog-archive-grid">
+
+				<?php
+				$post_index = 0;
+
+				if ( have_posts() ) :
+					while ( have_posts() ) :
+						the_post();
+						$post_index++;
+
+						$cats      = get_the_category();
+						$cat_slugs = wp_list_pluck( $cats, 'slug' );
+						$thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
+
+						// In-Feed CTA nach dem 3. Artikel
+						if ( $post_index === 4 ) :
+				?>
+					<div class="blog-archive-infeed-cta" aria-label="Kostenloser Growth Audit">
+						<div class="blog-archive-infeed-cta__inner">
+							<span class="blog-archive-infeed-cta__tag">Kostenloser Audit</span>
+							<h2 class="blog-archive-infeed-cta__headline">Was bremst dein Wachstum?</h2>
+							<p class="blog-archive-infeed-cta__sub">
+								Persönliche Analyse deiner Website — schriftliche Rückmeldung in 48 Stunden.
+							</p>
+							<a
+								href="<?php echo esc_url( $audit_url ); ?>"
+								class="nexus-btn nexus-btn--primary blog-archive-infeed-cta__btn"
+								data-track-action="cta_blog_archive_infeed"
+								data-track-category="lead_gen"
+							>
+								Audit starten
+							</a>
+						</div>
+					</div>
+				<?php
+						endif;
+				?>
+
+				<article
+					class="post-card"
+					data-categories="<?php echo esc_attr( wp_json_encode( $cat_slugs ) ); ?>"
+				>
+					<?php if ( $thumb_url ) : ?>
+						<a
+							href="<?php the_permalink(); ?>"
+							class="post-card__thumb-link"
+							tabindex="-1"
+							aria-hidden="true"
+						>
+							<div class="post-card__thumb">
+								<img
+									src="<?php echo esc_url( $thumb_url ); ?>"
+									alt="<?php the_title_attribute(); ?>"
+									loading="lazy"
+									width="600"
+									height="338"
+								>
+							</div>
+						</a>
+					<?php endif; ?>
+
+					<div class="post-card__body">
+
+						<?php if ( ! empty( $cats ) ) : ?>
+							<a
+								href="<?php echo esc_url( get_category_link( $cats[0]->term_id ) ); ?>"
+								class="post-card__cat"
+							>
+								<?php echo esc_html( $cats[0]->name ); ?>
+							</a>
+						<?php endif; ?>
+
+						<h2 class="post-card__title">
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						</h2>
+
+						<p class="post-card__excerpt">
+							<?php echo wp_trim_words( get_the_excerpt(), 20 ); ?>
+						</p>
+
+						<div class="post-card__meta">
+							<time class="post-card__date" datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>">
+								<?php echo esc_html( get_the_date( 'd. M Y' ) ); ?>
+							</time>
+							<?php if ( function_exists( 'nexus_get_reading_time' ) ) : ?>
+								<span class="post-card__reading-time">
+									<?php printf( '%d Min. Lesezeit', nexus_get_reading_time() ); ?>
+								</span>
+							<?php endif; ?>
+						</div>
+
+					</div>
+				</article>
+
+				<?php
+					endwhile;
+				endif;
+				?>
+
+			</div><!-- .blog-archive-grid -->
+
+		</div><!-- .hu-blog-wrapper -->
+
+	</div><!-- .blog-archive-shell -->
+
 </main>
 
 <?php get_footer(); ?>
