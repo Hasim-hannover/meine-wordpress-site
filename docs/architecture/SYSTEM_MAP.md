@@ -183,7 +183,7 @@ Risiko:
 
 - WordPress Block-Editor fuer editorgetriebene Seiten ausserhalb des Audit-Shells
 - ACF fuer SEO- und Content-Fallbacks
-- Theme-eigener SEO-Layer (seo-meta.php) fuer Title, Description, OG, Canonical und Robots
+- Theme-eigener SEO-Layer (seo-meta.php) für Title, Description, OG, Canonical und Robots
 - Native WordPress-Sitemap (/wp-sitemap.xml)
 - Fluent Forms fuer die vertiefte Folgeanalyse
 - n8n Cloud fuer den optionalen Instant-Results-Audit
