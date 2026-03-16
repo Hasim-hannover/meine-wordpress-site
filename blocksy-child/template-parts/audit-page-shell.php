@@ -87,50 +87,50 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 				</div>
 			</section>
 
-			<section id=”lead-loss” class=”audit-section nx-reveal review-problem-section” aria-labelledby=”lead-loss-headline”>
-				<div class=”review-problem-shell”>
-					<div class=”review-section-head review-section-head--left”>
-						<span class=”review-section-kicker”>Problem → Diagnose → Klarheit</span>
-						<h2 id=”lead-loss-headline”>Nicht durch einen großen Fehler, sondern durch kleine Brüche in Serie.</h2>
+			<section id="lead-loss" class="audit-section nx-reveal review-problem-section" aria-labelledby="lead-loss-headline">
+				<div class="review-problem-shell">
+					<div class="review-section-head review-section-head--left">
+						<span class="review-section-kicker">Problem → Diagnose → Klarheit</span>
+						<h2 id="lead-loss-headline">Nicht durch einen großen Fehler, sondern durch kleine Brüche in Serie.</h2>
 					</div>
 
-					<div class=”review-problem-solution-grid”>
-						<div class=”review-problem-grid” aria-label=”Typische Lead-Lecks”>
-							<article class=”review-problem-card”>
-								<span class=”review-problem-index”>01</span>
+					<div class="review-problem-solution-grid">
+						<div class="review-problem-grid" aria-label="Typische Lead-Lecks">
+							<article class="review-problem-card">
+								<span class="review-problem-index">01</span>
 								<h3>Relevanz wird zu spät verstanden</h3>
 								<p>Besucher müssen sich die Kernbotschaft selbst zusammensuchen, statt sie sofort zu erkennen.</p>
 							</article>
-							<article class=”review-problem-card”>
-								<span class=”review-problem-index”>02</span>
+							<article class="review-problem-card">
+								<span class="review-problem-index">02</span>
 								<h3>Proof kommt nicht am Entscheidungsmoment an</h3>
 								<p>Vertrauen ist irgendwo auf der Seite vorhanden, aber nicht dort, wo Zweifel entstehen.</p>
 							</article>
-							<article class=”review-problem-card”>
-								<span class=”review-problem-index”>03</span>
+							<article class="review-problem-card">
+								<span class="review-problem-index">03</span>
 								<h3>Der CTA filtert nicht sauber</h3>
 								<p>Gute Leads bekommen zu wenig Sicherheit, schwache Leads zu wenig Friktion.</p>
 							</article>
 						</div>
 
-						<div class=”review-flow-strip review-flow-strip--system” aria-label=”Ablauf in drei Punkten”>
-							<article class=”review-flow-step”>
-								<span class=”review-flow-step-index”>1</span>
-								<div class=”review-flow-step-copy”>
+						<div class="review-flow-strip review-flow-strip--system" aria-label="Ablauf in drei Punkten">
+							<article class="review-flow-step">
+								<span class="review-flow-step-index">1</span>
+								<div class="review-flow-step-copy">
 									<strong>Seite eingrenzen</strong>
 									<span>Nur die URL, auf der heute Leads hängen bleiben.</span>
 								</div>
 							</article>
-							<article class=”review-flow-step”>
-								<span class=”review-flow-step-index”>2</span>
-								<div class=”review-flow-step-copy”>
+							<article class="review-flow-step">
+								<span class="review-flow-step-index">2</span>
+								<div class="review-flow-step-copy">
 									<strong>Engpass priorisieren</strong>
 									<span>Wo Relevanz, Vertrauen oder Anfrageführung zuerst brechen.</span>
 								</div>
 							</article>
-							<article class=”review-flow-step”>
-								<span class=”review-flow-step-index”>3</span>
-								<div class=”review-flow-step-copy”>
+							<article class="review-flow-step">
+								<span class="review-flow-step-index">3</span>
+								<div class="review-flow-step-copy">
 									<strong>Schriftliche Rückmeldung</strong>
 									<span>Innerhalb von 48 Stunden mit klarer Priorität.</span>
 								</div>
