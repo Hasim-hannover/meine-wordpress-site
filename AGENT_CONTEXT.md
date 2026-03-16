@@ -2,7 +2,7 @@
 
 ## Positionierung
 
-Hasim Uener arbeitet als Growth Architect mit Fokus auf:
+Hasim Üner arbeitet als Growth Architect mit Fokus auf:
 
 - WordPress
 - technische SEO
