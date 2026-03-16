@@ -360,6 +360,42 @@ add_action( 'after_switch_theme', function() {
     flush_rewrite_rules();
 } );
 
+// --- 4c. SITEMAP: noindex-Seiten ausschließen ---
+// Entfernt Posts aus der Sitemap, die per ACF oder Legacy-Meta als noindex markiert sind.
+add_filter( 'wp_sitemaps_posts_query_args', function ( $args, $post_type ) {
+	$args['meta_query'] = isset( $args['meta_query'] ) ? $args['meta_query'] : [];
+
+	$args['meta_query'][] = [
+		'relation' => 'AND',
+		[
+			'relation' => 'OR',
+			[
+				'key'     => 'seo_noindex',
+				'compare' => 'NOT EXISTS',
+			],
+			[
+				'key'     => 'seo_noindex',
+				'value'   => '1',
+				'compare' => '!=',
+			],
+		],
+		[
+			'relation' => 'OR',
+			[
+				'key'     => 'rank_math_robots',
+				'compare' => 'NOT EXISTS',
+			],
+			[
+				'key'     => 'rank_math_robots',
+				'value'   => 'noindex',
+				'compare' => 'NOT LIKE',
+			],
+		],
+	];
+
+	return $args;
+}, 10, 2 );
+
 // Entferne die native Users-Sitemap (z.B. /wp-sitemap-users-1.xml).
 // Gründe: die Seite ist eine persönliche Autoren-/User-Seite ("Über mich")
 // und soll nicht als eigenständige Sitemap-Quelle ausgegeben werden.
