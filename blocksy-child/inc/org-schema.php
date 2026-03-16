@@ -46,7 +46,69 @@ function hu_output_schema()
         'sameAs' => [
             'https://www.linkedin.com/in/hasim-%C3%BCner/',
             'https://github.com/Hasim-hannover/'
-        ]
+        ],
+        'areaServed' => [
+            [
+                '@type'  => 'City',
+                'name'   => 'Hannover',
+                'sameAs' => 'https://de.wikipedia.org/wiki/Hannover'
+            ],
+            [
+                '@type'  => 'City',
+                'name'   => 'Pattensen',
+                'sameAs' => 'https://de.wikipedia.org/wiki/Pattensen'
+            ],
+            [
+                '@type' => 'AdministrativeArea',
+                'name'  => 'Niedersachsen'
+            ],
+            [
+                '@type' => 'AdministrativeArea',
+                'name'  => 'DACH'
+            ],
+        ],
+        'hasOfferCatalog' => [
+            '@type'           => 'OfferCatalog',
+            'name'            => 'Leistungen für B2B-Unternehmen',
+            'itemListElement' => [
+                [
+                    '@type'       => 'OfferCatalog',
+                    'name'        => 'Growth Audit',
+                    'description' => 'Kostenloser Ersteinstieg: persönliche Analyse der drei größten Anfragebremsen auf einer B2B-Website.',
+                    'url'         => home_url('/growth-audit/'),
+                ],
+                [
+                    '@type'       => 'OfferCatalog',
+                    'name'        => 'WordPress Growth Operating System (WGOS)',
+                    'description' => 'Strukturiertes Nachfrage-System: Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion auf WordPress-Basis.',
+                    'url'         => home_url('/wordpress-growth-operating-system/'),
+                ],
+                [
+                    '@type'       => 'OfferCatalog',
+                    'name'        => 'Technische SEO',
+                    'description' => 'Technische Suchmaschinenoptimierung: Core Web Vitals, Crawlability, Schema-Markup und Seitenarchitektur.',
+                    'url'         => home_url('/seo-fuer-b2b-unternehmen/'),
+                ],
+                [
+                    '@type'       => 'OfferCatalog',
+                    'name'        => 'Speed & Core Web Vitals',
+                    'description' => 'Performance-Optimierung mit Fokus auf Ladezeit, INP/LCP und Nutzererlebnis.',
+                    'url'         => home_url('/core-web-vitals-optimierung/'),
+                ],
+                [
+                    '@type'       => 'OfferCatalog',
+                    'name'        => 'Conversion-Optimierung',
+                    'description' => 'Systematische Optimierung von Angebotsseiten und Nutzerpfaden für mehr qualifizierte B2B-Anfragen.',
+                    'url'         => home_url('/conversion-optimierung/'),
+                ],
+                [
+                    '@type'       => 'OfferCatalog',
+                    'name'        => 'WordPress Agentur Hannover',
+                    'description' => 'WordPress-Entwicklung und Weiterentwicklung als Nachfragesystem für B2B-Unternehmen in Hannover und der Region.',
+                    'url'         => home_url('/wordpress-agentur-hannover/'),
+                ],
+            ],
+        ],
     ];
 
     $schemas = [$org];
