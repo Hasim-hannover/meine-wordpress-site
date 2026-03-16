@@ -28,8 +28,8 @@ function hu_register_acf_fields() {
 	}
 
 	// ── 1. SEO Meta Fields ────────────────────────────────────────
-	// Funktioniert pluginlos. Wenn Rank Math deaktiviert wird, greift das Theme
-	// auf diese Felder und auf bestehende Rank-Math-Post-Meta-Fallbacks zurück.
+	// Pluginlose SEO-Felder. Das Theme nutzt diese ACF-Felder als primaere
+	// Quelle fuer Title, Description und Noindex-Steuerung.
 	acf_add_local_field_group( [
 		'key'      => 'group_nexus_seo',
 		'title'    => 'SEO Meta (Growth Architect)',
@@ -405,4 +405,4 @@ function hu_register_acf_fields() {
 	] );
 }
 
-// <title> wird von Rank Math verwaltet — kein ACF-Override mehr nötig.
+// <title> wird vom Theme verwaltet (seo-meta.php) — kein ACF-Override noetig.

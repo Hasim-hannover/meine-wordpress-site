@@ -765,6 +765,8 @@ function nexus_sync_glossary_term_posts() {
 		update_post_meta( $post_id, '_nexus_glossary_index_policy', (string) $term['index_policy'] );
 		update_post_meta( $post_id, '_nexus_glossary_core_area', (string) $term['core_area'] );
 
+		// Legacy: rank_math_robots meta is still read by seo-meta.php as noindex
+		// fallback. Write it here so existing noindex logic keeps working.
 		if ( 'noindex' === (string) $term['index_policy'] ) {
 			update_post_meta( $post_id, 'rank_math_robots', [ 'noindex' ] );
 		} else {

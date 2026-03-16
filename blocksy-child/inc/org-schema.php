@@ -589,8 +589,8 @@ function hu_output_schema()
 
             if ($maybe_has_faq) {
 
-                // do_shortcode statt apply_filters('the_content') um Rank Math
-                // nicht als Nebeneffekt ein zweites FAQPage-Schema ausgeben zu lassen.
+                // do_shortcode statt apply_filters('the_content') um Nebeneffekte
+                // durch andere Plugins oder Filter zu vermeiden.
                 $content = do_shortcode($raw);
 
                 $faq_entities = [];

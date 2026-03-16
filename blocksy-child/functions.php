@@ -330,25 +330,13 @@ add_action(
 add_filter( 'blocksy:post_types:post:has_page_title', '__return_false' );
 
 // --- 4b. SITEMAP ---
-// Solange Rank Math aktiv ist, bleibt die native WordPress-Sitemap aus.
-// Ohne Rank Math fällt die Site automatisch auf /wp-sitemap.xml zurück.
-add_filter(
-	'wp_sitemaps_enabled',
-	function( $enabled ) {
-		if ( defined( 'RANK_MATH_VERSION' ) ) {
-			return false;
-		}
-
-		return $enabled;
-	}
-);
-
-// Leite die bisherige Rank-Math-Sitemap auf die native WordPress-Sitemap um,
-// falls Rank Math deaktiviert wird.
+// Die native WordPress-Sitemap (/wp-sitemap.xml) ist aktiv.
+// Legacy-Redirect: /sitemap_index.xml (fruehere Plugin-URL) leitet auf die
+// native Sitemap weiter, damit externe Backlinks und GSC-Eintraege erhalten bleiben.
 add_action(
 	'template_redirect',
 	function() {
-		if ( defined( 'RANK_MATH_VERSION' ) || is_admin() || wp_doing_ajax() ) {
+		if ( is_admin() || wp_doing_ajax() ) {
 			return;
 		}
 
@@ -367,7 +355,7 @@ add_action(
 	1
 );
 
-// Rewrite Rules flushen bei Theme-Aktivierung (nötig für Rank Math Sitemap-Routen)
+// Rewrite Rules flushen bei Theme-Aktivierung.
 add_action( 'after_switch_theme', function() {
     flush_rewrite_rules();
 } );

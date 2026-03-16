@@ -410,10 +410,10 @@ function nexus_get_seo_cockpit_post_seo_context( $post_id ) {
 		$description = '' !== trim( $excerpt ) ? wp_trim_words( wp_strip_all_tags( $excerpt ), 25, '…' ) : '';
 	}
 
-	$acf_noindex       = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
-	$rank_math_robots  = get_post_meta( $post_id, 'rank_math_robots', true );
-	$rank_math_noindex = is_array( $rank_math_robots ) ? in_array( 'noindex', $rank_math_robots, true ) : 'noindex' === $rank_math_robots;
-	$noindex           = (bool) ( $acf_noindex || $rank_math_noindex );
+	$acf_noindex          = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
+	$legacy_robots_meta   = get_post_meta( $post_id, 'rank_math_robots', true );
+	$legacy_noindex       = is_array( $legacy_robots_meta ) ? in_array( 'noindex', $legacy_robots_meta, true ) : 'noindex' === $legacy_robots_meta;
+	$noindex              = (bool) ( $acf_noindex || $legacy_noindex );
 
 	return [
 		'title'              => trim( wp_strip_all_tags( (string) $title ) ),

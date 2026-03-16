@@ -6,14 +6,14 @@ Stand: 2026-03-13. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 
 | System | Zweck | Repo-Orte | Externe Abhaengigkeiten | Status |
 | --- | --- | --- | --- | --- |
-| Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/deploy.yml` | WordPress, Blocksy Parent Theme, ACF, Rank Math | live |
+| Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/deploy.yml` | WordPress, Blocksy Parent Theme, ACF | live |
 | Audit-Funnel | Diagnose-Einstieg, Audit-Intake und interne Folgequalifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
 | Nexus CRM & Blog Notify | gemeinsames CRM fuer Audit, Projektanfragen und Blog-Abos plus DOI- und Artikel-Mail-Logik | `blocksy-child/inc/crm.php`, `blocksy-child/inc/blog-notify.php`, `blocksy-child/template-parts/blog-notify.php`, `blocksy-child/page-blog-notify.php`, `docs/systems/blog-notify.md` | WordPress CPT/Meta, WordPress REST, wp_mail, Brevo | repo-seitig live, End-to-End offen |
 | SEO Cockpit | Search-Console-basiertes SEO-Dashboard mit optionaler Koko-Erkennung | `blocksy-child/inc/seo-cockpit.php`, `blocksy-child/assets/css/seo-cockpit-admin.css`, `docs/systems/seo-cockpit.md` | Google Search Console API, optional Koko Analytics | repo-seitig vorbereitet, OAuth und Live-Daten offen |
 | Tracking | Tracking-ready Markup, CTA-Events, SEO-/Schema-Layer | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, Templates mit `data-track-*` | GTM, sGTM, GA4, Consent Mode v2, Meta CAPI | teils im Repo, teils extern |
 | CTA- und Leadflow | CTA-Hierarchie vom ersten Besuch bis zur Qualifizierung | `blocksy-child/inc/shortcodes.php`, `blocksy-child/template-parts/footer-cta.php`, `blocksy-child/template-parts/trust-section.php`, Service-Templates | WordPress-Editor, Audit-Funnel, Cal.com, CRM | live |
 | Public Proof Layer | oeffentliche Vertrauenssignale ohne Testimonials, plus Pilot-zu-Case-Mechanik | `blocksy-child/inc/shortcodes.php`, `blocksy-child/assets/css/homepage.css`, `blocksy-child/page-kontakt.php`, `blocksy-child/inc/contact-page.php`, `docs/playbooks/homepage-cro-proof-monitoring-2026-03.md` | GitHub-Repo, oeffentliches LinkedIn-Profil, optional spaeter Facebook | live |
-| Content- und SEO-System | Blog, Pillar-Hubs, Cornerstone-Content, interne Verlinkung | `blocksy-child/category.php`, `blocksy-child/single.php`, `blocksy-child/page-seo-cornerstone.php`, `content/blog-drafts/` | WordPress-Editor, Rank Math | live plus Ausbau |
+| Content- und SEO-System | Blog, Pillar-Hubs, Cornerstone-Content, interne Verlinkung | `blocksy-child/category.php`, `blocksy-child/single.php`, `blocksy-child/page-seo-cornerstone.php`, `content/blog-drafts/` | WordPress-Editor | live plus Ausbau |
 | Client Portal | Kunden-Cockpit mit Login, Upload und Roadmap-Slots | `blocksy-child/template-portal.php`, `blocksy-child/inc/client-portal.php`, `blocksy-child/inc/snippets.php` | WordPress-User-System, Media Library | live, aber aktuell mit Mock-Daten |
 | n8n-Automationen | Workflow-Logik fuer Analyse, Routing, Reporting, Nurture | kuenftig `automations/n8n/` | n8n Cloud, CRM, Mail, evtl. Sheets | geplant als versionierter Layer |
 | Agenten- und Prompt-System | Kontext, Guardrails, wiederverwendbare Briefings | `AGENT_CONTEXT.md`, `agents/`, `prompts/`, `SKILL.md` | keine direkte Laufzeitabhaengigkeit | in Aufbau |
@@ -183,7 +183,8 @@ Risiko:
 
 - WordPress Block-Editor fuer editorgetriebene Seiten ausserhalb des Audit-Shells
 - ACF fuer SEO- und Content-Fallbacks
-- Rank Math fuer SEO-Meta und Sitemaps
+- Theme-eigener SEO-Layer (seo-meta.php) für Title, Description, OG, Canonical und Robots
+- Native WordPress-Sitemap (/wp-sitemap.xml)
 - Fluent Forms fuer die vertiefte Folgeanalyse
 - n8n Cloud fuer den optionalen Instant-Results-Audit
 - Cal.com fuer direkte Gespraechsbuchung
