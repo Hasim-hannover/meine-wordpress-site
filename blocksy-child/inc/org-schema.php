@@ -24,7 +24,7 @@ function hu_output_schema()
         'image'       => 'https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp',
         'address'     => [
             '@type' => 'PostalAddress',
-            'streetAddress'   => 'Warschauer Straße',
+            'streetAddress'   => 'Warschauer Str. 5',
             'addressLocality' => 'Pattensen',
             'addressRegion'   => 'Niedersachsen',
             'postalCode'      => '30982',
@@ -35,18 +35,37 @@ function hu_output_schema()
             'latitude'  => '52.264',
             'longitude' => '9.761'
         ],
+        'priceRange'  => '€€',
+        'currenciesAccepted' => 'EUR',
+        'paymentAccepted'    => 'Überweisung',
         'openingHoursSpecification' => [
             [
                 '@type'    => 'OpeningHoursSpecification',
                 'dayOfWeek' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
                 'opens'     => '08:30',
                 'closes'    => '16:00'
+            ],
+            [
+                '@type'    => 'OpeningHoursSpecification',
+                'dayOfWeek' => ['Friday'],
+                'opens'     => '08:30',
+                'closes'    => '13:00'
             ]
         ],
         'sameAs' => [
             'https://www.linkedin.com/in/hasim-%C3%BCner/',
             'https://github.com/Hasim-hannover/'
         ],
+        'knowsAbout' => [
+            'WordPress',
+            'Technische SEO',
+            'Core Web Vitals',
+            'Conversion Rate Optimization',
+            'GA4 Tracking',
+            'Server-Side Tagging',
+            'B2B Lead Generation',
+        ],
+        'knowsLanguage' => ['de', 'en', 'tr'],
         'areaServed' => [
             [
                 '@type'  => 'City',
