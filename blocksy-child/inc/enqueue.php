@@ -258,17 +258,19 @@ function hu_enqueue_assets() {
 			}
 		'
 		);
-		// Problem-Sektion (#lead-loss): Inline-CSS als Absicherung gegen
-		// Blocksy-Overrides und Cache-Probleme bei externen Stylesheets.
+		// Problem-Sektion (#lead-loss): Bulletproof-Inline-CSS auf blocksy-child-style
+		// (lädt IMMER) mit harten Fallback-Werten für jede CSS-Variable.
+		// Damit funktioniert die Problem-Sektion unabhängig davon, ob externe
+		// CSS-Dateien gecacht, kombiniert oder verzögert geladen werden.
 		wp_add_inline_style(
-			'nexus-review-funnel-css',
+			'blocksy-child-style',
 			'
 			.review-problem-shell {
 				padding: clamp(1.45rem, 3vw, 2.1rem) !important;
 				border-radius: 28px !important;
-				border: 1px solid var(--audit-border-strong, var(--border)) !important;
-				background: linear-gradient(180deg, hsla(8,82%,64%,0.06), transparent 28%), var(--audit-glass) !important;
-				box-shadow: var(--audit-shadow-card) !important;
+				border: 1px solid var(--audit-border-strong, hsl(30 3% 18%)) !important;
+				background: linear-gradient(180deg, hsla(8,82%,64%,0.06), transparent 28%), var(--audit-glass, linear-gradient(180deg, hsl(0 0% 100% / 0.045), hsl(30 10% 100% / 0.04))) !important;
+				box-shadow: var(--audit-shadow-card, 0 8px 24px hsl(30 25% 2% / 0.42)) !important;
 			}
 			.review-problem-shell .review-section-head h2 {
 				font-size: clamp(1.65rem, 3vw, 2.3rem) !important;
@@ -292,9 +294,9 @@ function hu_enqueue_assets() {
 			.review-problem-card {
 				padding: 0.85rem 1rem !important;
 				border-radius: 14px !important;
-				border: 1px solid var(--border) !important;
-				background: var(--audit-surface) !important;
-				box-shadow: var(--audit-shadow-card) !important;
+				border: 1px solid var(--border, hsl(30 4% 13%)) !important;
+				background: var(--audit-surface, linear-gradient(180deg, hsl(30 5% 9% / 0.92), hsl(30 6% 6% / 0.98))) !important;
+				box-shadow: var(--audit-shadow-card, 0 8px 24px hsl(30 25% 2% / 0.42)) !important;
 			}
 			.review-problem-card h3 {
 				margin: 0.4rem 0 0.35rem !important;
@@ -302,14 +304,14 @@ function hu_enqueue_assets() {
 				font-size: 0.92rem !important;
 				font-weight: 700 !important;
 				line-height: 1.35 !important;
-				color: var(--text-main) !important;
+				color: var(--text-main, hsl(30 4% 90%)) !important;
 			}
 			.review-problem-card p {
 				margin: 0 !important;
 				padding: 0 !important;
 				font-size: 0.88rem !important;
 				line-height: 1.62 !important;
-				color: var(--audit-text-soft) !important;
+				color: var(--audit-text-soft, hsl(30 3% 58%)) !important;
 			}
 			.review-problem-index {
 				display: inline-flex !important;
@@ -320,7 +322,7 @@ function hu_enqueue_assets() {
 				border-radius: 999px !important;
 				border: 1px solid hsla(8,82%,64%,0.24) !important;
 				background: hsla(8,82%,64%,0.1) !important;
-				color: var(--red) !important;
+				color: var(--red, hsl(8 82% 64%)) !important;
 				font-size: 0.7rem !important;
 				font-weight: 800 !important;
 			}
@@ -337,10 +339,10 @@ function hu_enqueue_assets() {
 				gap: 0.75rem !important;
 				align-items: start !important;
 				padding: 0.95rem 1rem !important;
-				border: 1px solid var(--border) !important;
+				border: 1px solid var(--border, hsl(30 4% 13%)) !important;
 				border-radius: 18px !important;
-				background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 32%), var(--audit-glass) !important;
-				box-shadow: var(--audit-shadow-card) !important;
+				background: linear-gradient(180deg, hsla(23,50%,47%,0.08), transparent 32%), var(--audit-glass, linear-gradient(180deg, hsl(0 0% 100% / 0.045), hsl(30 10% 100% / 0.04))) !important;
+				box-shadow: var(--audit-shadow-card, 0 8px 24px hsl(30 25% 2% / 0.42)) !important;
 			}
 			.review-flow-step-index {
 				display: inline-flex !important;
@@ -349,9 +351,9 @@ function hu_enqueue_assets() {
 				width: 2rem !important;
 				height: 2rem !important;
 				border-radius: 999px !important;
-				background: var(--audit-accent-soft) !important;
-				border: 1px solid var(--audit-border-accent) !important;
-				color: var(--gold) !important;
+				background: var(--audit-accent-soft, hsl(23 50% 47% / 0.1)) !important;
+				border: 1px solid var(--audit-border-accent, hsl(23 50% 47% / 0.28)) !important;
+				color: var(--gold, #b46a3c) !important;
 				font-size: 0.8rem !important;
 				font-weight: 800 !important;
 			}
@@ -360,12 +362,12 @@ function hu_enqueue_assets() {
 				gap: 0.18rem !important;
 			}
 			.review-flow-step-copy strong {
-				color: var(--text-main) !important;
+				color: var(--text-main, hsl(30 4% 90%)) !important;
 				font-size: 0.92rem !important;
 				font-weight: 700 !important;
 			}
 			.review-flow-step-copy span {
-				color: var(--audit-text-soft) !important;
+				color: var(--audit-text-soft, hsl(30 3% 58%)) !important;
 				font-size: 0.85rem !important;
 			}
 			@media (max-width: 860px) {
