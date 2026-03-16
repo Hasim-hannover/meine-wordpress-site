@@ -1340,12 +1340,13 @@
 }
 
 /* ── Merged Problem+Solution Grid ───────────────────────────── */
+/* ID selector (#audit-main-wrapper) ensures Blocksy overrides are beaten */
 
-.audit-wrapper .review-problem-section {
+#audit-main-wrapper .review-problem-section {
     margin-bottom: clamp(3rem, 6vw, 5rem);
 }
 
-.audit-wrapper .review-problem-shell {
+#audit-main-wrapper .review-problem-shell {
     padding: clamp(1.45rem, 3vw, 2.1rem);
     border-radius: 28px;
     border: 1px solid var(--audit-border-strong, var(--border));
@@ -1355,13 +1356,15 @@
     box-shadow: var(--audit-shadow-card);
 }
 
-.audit-wrapper .review-problem-shell .review-section-head h2 {
+#audit-main-wrapper .review-problem-shell .review-section-head h2 {
     margin: 0 0 0.7rem;
     font-size: clamp(1.65rem, 3vw, 2.3rem);
+    font-weight: 360;
     line-height: 1.14;
+    letter-spacing: -0.02em;
 }
 
-.audit-wrapper .review-problem-solution-grid {
+#audit-main-wrapper .review-problem-solution-grid {
     display: grid;
     grid-template-columns: 1.15fr 0.85fr;
     gap: clamp(1.5rem, 3vw, 2.5rem);
@@ -1369,13 +1372,13 @@
     margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.audit-wrapper .review-problem-solution-grid .review-problem-grid {
+#audit-main-wrapper .review-problem-solution-grid .review-problem-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.75rem;
 }
 
-.audit-wrapper .review-problem-solution-grid .review-problem-card {
+#audit-main-wrapper .review-problem-solution-grid .review-problem-card {
     padding: 0.85rem 1rem;
     border-radius: 14px;
     border: 1px solid var(--border);
@@ -1383,21 +1386,26 @@
     box-shadow: var(--audit-shadow-card);
 }
 
-.audit-wrapper .review-problem-solution-grid .review-problem-card h3 {
+#audit-main-wrapper .review-problem-card h3 {
+    display: block;
     margin: 0.4rem 0 0.35rem;
+    padding: 0;
     font-size: 0.92rem;
+    font-weight: 700;
     line-height: 1.35;
+    letter-spacing: normal;
     color: var(--text-main);
 }
 
-.audit-wrapper .review-problem-solution-grid .review-problem-card p {
+#audit-main-wrapper .review-problem-card p {
     margin: 0;
+    padding: 0;
     font-size: 0.88rem;
     line-height: 1.62;
     color: var(--audit-text-soft);
 }
 
-.audit-wrapper .review-problem-solution-grid .review-problem-index {
+#audit-main-wrapper .review-problem-solution-grid .review-problem-index {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1412,7 +1420,7 @@
     letter-spacing: 0.06em;
 }
 
-.audit-wrapper .review-problem-solution-grid .review-flow-strip {
+#audit-main-wrapper .review-problem-solution-grid .review-flow-strip {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0.85rem;
@@ -1422,7 +1430,7 @@
     align-self: stretch;
 }
 
-.audit-wrapper .review-problem-solution-grid .review-flow-step {
+#audit-main-wrapper .review-problem-solution-grid .review-flow-step {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 0.75rem;
@@ -1436,7 +1444,7 @@
     box-shadow: var(--audit-shadow-card);
 }
 
-.audit-wrapper .review-problem-solution-grid .review-flow-step-index {
+#audit-main-wrapper .review-problem-solution-grid .review-flow-step-index {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1451,21 +1459,35 @@
     line-height: 1;
 }
 
-.audit-wrapper .review-problem-solution-grid .review-flow-step-copy strong {
+#audit-main-wrapper .review-flow-step-copy strong {
     display: block;
     color: var(--text-main);
     font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.38;
 }
 
-.audit-wrapper .review-problem-solution-grid .review-flow-step-copy span {
+#audit-main-wrapper .review-flow-step-copy span {
     color: var(--audit-text-soft);
     font-size: 0.85rem;
     line-height: 1.55;
 }
 
+#audit-main-wrapper .review-flow-step-copy {
+    display: grid;
+    gap: 0.18rem;
+}
+
 @media (max-width: 860px) {
-    .audit-wrapper .review-problem-solution-grid {
+    #audit-main-wrapper .review-problem-solution-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    #audit-main-wrapper .review-problem-shell,
+    #audit-main-wrapper .review-problem-card {
+        padding: 1.15rem;
     }
 }
 

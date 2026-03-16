@@ -141,56 +141,8 @@
   line-height: 1.6;
 }
 
-.review-flow-strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.85rem;
-  margin-top: 1.25rem;
-}
-
-.review-flow-step {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.75rem;
-  align-items: start;
-  padding: 0.95rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--audit-glass);
-  box-shadow: var(--audit-shadow-card);
-}
-
-.review-flow-step-index {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-  background: var(--audit-accent-soft);
-  border: 1px solid var(--audit-border-accent);
-  color: var(--gold);
-  font-size: 0.8rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.review-flow-step-copy {
-  display: grid;
-  gap: 0.18rem;
-}
-
-.review-flow-step-copy strong {
-  color: var(--text-main);
-  font-size: 0.91rem;
-  line-height: 1.38;
-}
-
-.review-flow-step-copy span {
-  color: var(--audit-text-soft);
-  font-size: 0.82rem;
-  line-height: 1.55;
-}
+/* review-flow-strip + review-flow-step base styles
+   → single source of truth in audit.css (.audit-wrapper prefix) */
 
 .review-offer-panel,
 .review-proof-bar,
@@ -1466,8 +1418,6 @@
 }
 
 .review-kpi-card,
-.review-problem-shell,
-.review-problem-card,
 .review-system-summary-item,
 .review-caseproof-shell,
 .review-caseproof-card,
@@ -1488,7 +1438,6 @@
 }
 
 .review-kpi-card strong,
-.review-problem-card h3,
 .review-system-summary-item strong,
 .review-caseproof-kpi strong,
 .review-caseproof-card h3,
@@ -1527,84 +1476,15 @@
   margin-bottom: clamp(3rem, 6vw, 5rem);
 }
 
-.review-problem-shell {
-  padding: clamp(1.45rem, 3vw, 2.1rem);
-  border-radius: 28px;
-  background:
-    linear-gradient(180deg, hsl(8 82% 64% / 0.05), transparent 24%),
-    var(--audit-glass);
-}
+/* problem-shell, problem-grid, problem-card, problem-index styles
+   → single source of truth in audit.css (.audit-wrapper prefix) */
 
-.review-problem-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.9rem;
-  margin-top: 1.25rem;
-}
-
-.review-problem-card {
-  padding: 1rem 1.05rem;
-  border-radius: 20px;
-  background: var(--audit-surface);
-}
-
-.review-problem-index {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 2.4rem;
-  min-height: 2.4rem;
-  padding: 0 0.75rem;
-  border-radius: 999px;
-  border: 1px solid hsl(8 82% 64% / 0.24);
-  background: hsl(8 82% 64% / 0.1);
-  color: var(--red);
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-}
-
-.review-problem-card h3 {
-  margin: 0.75rem 0 0.4rem;
-  font-size: 1rem;
-  line-height: 1.35;
-}
-
-.review-problem-card p,
 .review-caseproof-head p,
 .review-caseproof-foot p,
 .review-caseproof-microcopy,
 .review-form-expectation-card span,
 .review-consent span {
   color: var(--audit-text-soft);
-}
-
-.review-problem-card p {
-  margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.62;
-}
-
-.review-problem-impact {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.8rem;
-  align-items: start;
-  margin-top: 1.15rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-
-.review-problem-impact strong {
-  color: var(--red);
-  font-size: 0.92rem;
-  line-height: 1.5;
-}
-
-.review-problem-impact span {
-  color: var(--audit-text-soft);
-  font-size: 0.9rem;
-  line-height: 1.68;
 }
 
 .review-proof-bar--system {
@@ -1636,17 +1516,7 @@
   line-height: 1.55;
 }
 
-.review-flow-strip--system {
-  grid-template-columns: 1fr;
-  margin-top: 0;
-  align-self: stretch;
-}
-
-.review-flow-strip--system .review-flow-step {
-  background:
-    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 32%),
-    var(--audit-glass);
-}
+/* review-flow-strip--system styles → single source of truth in audit.css */
 
 .review-caseproof-shell {
   padding: clamp(1.4rem, 3vw, 2rem);
@@ -1990,7 +1860,6 @@
     grid-template-columns: 1fr;
   }
 
-  .review-problem-grid,
   .review-form-expectation-grid {
     grid-template-columns: 1fr;
   }
@@ -2010,7 +1879,6 @@
 }
 
 @media (max-width: 900px) {
-  .review-flow-strip,
   .review-kpi-proof,
   .review-value-grid,
   .preview-deliverables,
@@ -2047,8 +1915,7 @@
     max-width: 100%;
   }
 
-  .review-caseproof-card-head,
-  .review-problem-impact {
+  .review-caseproof-card-head {
     grid-template-columns: 1fr;
   }
 
@@ -2060,8 +1927,6 @@
 @media (max-width: 720px) {
   .review-offer-panel,
   .review-kpi-card,
-  .review-problem-shell,
-  .review-problem-card,
   .review-proof-bar,
   .review-system-summary-item,
   .report-preview-section,
@@ -2083,7 +1948,6 @@
 
   .review-offer-timeline,
   .review-kpi-proof,
-  .review-problem-grid,
   .review-system-summary,
   .review-caseproof-kpis,
   .review-form-expectation-grid,
