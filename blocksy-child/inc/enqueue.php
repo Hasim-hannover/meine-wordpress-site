@@ -258,6 +258,130 @@ function hu_enqueue_assets() {
 			}
 		'
 		);
+		// Problem-Sektion (#lead-loss): Inline-CSS als Absicherung gegen
+		// Blocksy-Overrides und Cache-Probleme bei externen Stylesheets.
+		wp_add_inline_style(
+			'nexus-review-funnel-css',
+			'
+			.review-problem-shell {
+				padding: clamp(1.45rem, 3vw, 2.1rem) !important;
+				border-radius: 28px !important;
+				border: 1px solid var(--audit-border-strong, var(--border)) !important;
+				background: linear-gradient(180deg, hsla(8,82%,64%,0.06), transparent 28%), var(--audit-glass) !important;
+				box-shadow: var(--audit-shadow-card) !important;
+			}
+			.review-problem-shell .review-section-head h2 {
+				font-size: clamp(1.65rem, 3vw, 2.3rem) !important;
+				font-weight: 360 !important;
+				line-height: 1.14 !important;
+				letter-spacing: -0.02em !important;
+				margin: 0 0 0.7rem !important;
+			}
+			.review-problem-solution-grid {
+				display: grid !important;
+				grid-template-columns: 1.15fr 0.85fr !important;
+				gap: clamp(1.5rem, 3vw, 2.5rem) !important;
+				align-items: start !important;
+				margin-top: clamp(1.5rem, 3vw, 2.5rem) !important;
+			}
+			.review-problem-grid {
+				display: grid !important;
+				grid-template-columns: 1fr !important;
+				gap: 0.75rem !important;
+			}
+			.review-problem-card {
+				padding: 0.85rem 1rem !important;
+				border-radius: 14px !important;
+				border: 1px solid var(--border) !important;
+				background: var(--audit-surface) !important;
+				box-shadow: var(--audit-shadow-card) !important;
+			}
+			.review-problem-card h3 {
+				margin: 0.4rem 0 0.35rem !important;
+				padding: 0 !important;
+				font-size: 0.92rem !important;
+				font-weight: 700 !important;
+				line-height: 1.35 !important;
+				color: var(--text-main) !important;
+			}
+			.review-problem-card p {
+				margin: 0 !important;
+				padding: 0 !important;
+				font-size: 0.88rem !important;
+				line-height: 1.62 !important;
+				color: var(--audit-text-soft) !important;
+			}
+			.review-problem-index {
+				display: inline-flex !important;
+				align-items: center !important;
+				justify-content: center !important;
+				width: 1.6rem !important;
+				height: 1.6rem !important;
+				border-radius: 999px !important;
+				border: 1px solid hsla(8,82%,64%,0.24) !important;
+				background: hsla(8,82%,64%,0.1) !important;
+				color: var(--red) !important;
+				font-size: 0.7rem !important;
+				font-weight: 800 !important;
+			}
+			.review-flow-strip--system {
+				display: grid !important;
+				grid-template-columns: 1fr !important;
+				gap: 0.85rem !important;
+				padding: clamp(1rem, 2vw, 1.5rem) !important;
+				border-radius: 20px !important;
+			}
+			.review-flow-step {
+				display: grid !important;
+				grid-template-columns: auto 1fr !important;
+				gap: 0.75rem !important;
+				align-items: start !important;
+				padding: 0.95rem 1rem !important;
+				border: 1px solid var(--border) !important;
+				border-radius: 18px !important;
+				background: linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 32%), var(--audit-glass) !important;
+				box-shadow: var(--audit-shadow-card) !important;
+			}
+			.review-flow-step-index {
+				display: inline-flex !important;
+				align-items: center !important;
+				justify-content: center !important;
+				width: 2rem !important;
+				height: 2rem !important;
+				border-radius: 999px !important;
+				background: var(--audit-accent-soft) !important;
+				border: 1px solid var(--audit-border-accent) !important;
+				color: var(--gold) !important;
+				font-size: 0.8rem !important;
+				font-weight: 800 !important;
+			}
+			.review-flow-step-copy {
+				display: grid !important;
+				gap: 0.18rem !important;
+			}
+			.review-flow-step-copy strong {
+				color: var(--text-main) !important;
+				font-size: 0.92rem !important;
+				font-weight: 700 !important;
+			}
+			.review-flow-step-copy span {
+				color: var(--audit-text-soft) !important;
+				font-size: 0.85rem !important;
+			}
+			@media (max-width: 860px) {
+				.review-problem-solution-grid {
+					grid-template-columns: 1fr !important;
+				}
+			}
+			@media (max-width: 720px) {
+				.review-problem-shell,
+				.review-problem-card {
+					padding: 1.15rem !important;
+				}
+			}
+		'
+		);
+
 		wp_localize_script(
 			'nexus-review-funnel-js',
 			'NexusReviewConfig',
