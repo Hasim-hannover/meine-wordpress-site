@@ -250,11 +250,25 @@ function hu_enqueue_assets() {
 		wp_add_inline_style(
 			'blocksy-child-style',
 			'
-			.page-template-page-audit .entry-header .entry-title,
+			.page-template-page-audit .entry-header,
 			.page-template-page-audit .ct-page-title,
-			.page-template-page-audit-php .entry-header .entry-title,
+			.page-template-page-audit-php .entry-header,
 			.page-template-page-audit-php .ct-page-title {
 				display: none !important;
+			}
+			/* Blocksy-Container-Overrides: Falls Blocksy doch Wrapper rendert */
+			.page-template-page-audit .site-main,
+			.page-template-page-audit .ct-container,
+			.page-template-page-audit .content-area,
+			.page-template-page-audit .entry-content {
+				max-width: none !important;
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+				margin: 0 !important;
+				width: 100% !important;
+			}
+			.page-template-page-audit .ct-container {
+				display: block !important;
 			}
 		'
 		);
