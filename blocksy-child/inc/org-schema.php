@@ -72,37 +72,37 @@ function hu_output_schema()
             'name'            => 'Leistungen für B2B-Unternehmen',
             'itemListElement' => [
                 [
-                    '@type'       => 'OfferCatalog',
+                    '@type'       => 'Offer',
                     'name'        => 'Growth Audit',
                     'description' => 'Kostenloser Ersteinstieg: persönliche Analyse der drei größten Anfragebremsen auf einer B2B-Website.',
                     'url'         => home_url('/growth-audit/'),
                 ],
                 [
-                    '@type'       => 'OfferCatalog',
+                    '@type'       => 'Offer',
                     'name'        => 'WordPress Growth Operating System (WGOS)',
                     'description' => 'Strukturiertes Nachfrage-System: Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion auf WordPress-Basis.',
                     'url'         => home_url('/wordpress-growth-operating-system/'),
                 ],
                 [
-                    '@type'       => 'OfferCatalog',
+                    '@type'       => 'Offer',
                     'name'        => 'Technische SEO',
                     'description' => 'Technische Suchmaschinenoptimierung: Core Web Vitals, Crawlability, Schema-Markup und Seitenarchitektur.',
                     'url'         => home_url('/seo-fuer-b2b-unternehmen/'),
                 ],
                 [
-                    '@type'       => 'OfferCatalog',
+                    '@type'       => 'Offer',
                     'name'        => 'Speed & Core Web Vitals',
                     'description' => 'Performance-Optimierung mit Fokus auf Ladezeit, INP/LCP und Nutzererlebnis.',
                     'url'         => home_url('/core-web-vitals-optimierung/'),
                 ],
                 [
-                    '@type'       => 'OfferCatalog',
+                    '@type'       => 'Offer',
                     'name'        => 'Conversion-Optimierung',
                     'description' => 'Systematische Optimierung von Angebotsseiten und Nutzerpfaden für mehr qualifizierte B2B-Anfragen.',
                     'url'         => home_url('/conversion-optimierung/'),
                 ],
                 [
-                    '@type'       => 'OfferCatalog',
+                    '@type'       => 'Offer',
                     'name'        => 'WordPress Agentur Hannover',
                     'description' => 'WordPress-Entwicklung und Weiterentwicklung als Nachfragesystem für B2B-Unternehmen in Hannover und der Region.',
                     'url'         => home_url('/wordpress-agentur-hannover/'),
