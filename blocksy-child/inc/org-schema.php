@@ -727,6 +727,128 @@ function hu_output_schema()
         }
     }
 
+    // ── BreadcrumbList Schema ─────────────────────────────────────
+    // Output on all pages except the homepage.
+    if ( ! is_front_page() ) {
+        $breadcrumb_items = [];
+        $bc_position      = 1;
+
+        // Always start with Home
+        $breadcrumb_items[] = [
+            '@type'    => 'ListItem',
+            'position' => $bc_position++,
+            'name'     => 'Start',
+            'item'     => home_url( '/' ),
+        ];
+
+        if ( is_singular( 'post' ) ) {
+            // Blog > Category > Post
+            $blog_page_id = get_option( 'page_for_posts' );
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => $blog_page_id ? get_the_title( $blog_page_id ) : 'Blog',
+                'item'     => $blog_page_id ? get_permalink( $blog_page_id ) : home_url( '/blog/' ),
+            ];
+
+            $categories = get_the_category();
+            if ( $categories ) {
+                $primary = $categories[0];
+                $breadcrumb_items[] = [
+                    '@type'    => 'ListItem',
+                    'position' => $bc_position++,
+                    'name'     => $primary->name,
+                    'item'     => get_category_link( $primary->term_id ),
+                ];
+            }
+
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => get_the_title(),
+            ];
+
+        } elseif ( is_singular( 'glossary_term' ) ) {
+            // Glossar > Term
+            $glossar_hub_url = function_exists( 'nexus_get_glossary_hub_url' ) ? nexus_get_glossary_hub_url() : home_url( '/glossar/' );
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => 'Glossar',
+                'item'     => $glossar_hub_url,
+            ];
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => get_the_title(),
+            ];
+
+        } elseif ( is_singular( 'wgos_asset' ) ) {
+            // WGOS > Asset
+            $wgos_url = function_exists( 'nexus_get_primary_public_url' )
+                ? nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) )
+                : home_url( '/wordpress-growth-operating-system/' );
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => 'WGOS',
+                'item'     => $wgos_url,
+            ];
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => get_the_title(),
+            ];
+
+        } elseif ( is_page() ) {
+            // Pages with parent hierarchy
+            $page_id   = get_queried_object_id();
+            $ancestors = array_reverse( get_post_ancestors( $page_id ) );
+            foreach ( $ancestors as $ancestor_id ) {
+                $breadcrumb_items[] = [
+                    '@type'    => 'ListItem',
+                    'position' => $bc_position++,
+                    'name'     => get_the_title( $ancestor_id ),
+                    'item'     => get_permalink( $ancestor_id ),
+                ];
+            }
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => get_the_title(),
+            ];
+
+        } elseif ( is_category() ) {
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => single_cat_title( '', false ),
+            ];
+
+        } elseif ( is_home() ) {
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => 'Blog',
+            ];
+
+        } elseif ( is_tag() || is_tax() ) {
+            $breadcrumb_items[] = [
+                '@type'    => 'ListItem',
+                'position' => $bc_position++,
+                'name'     => single_term_title( '', false ),
+            ];
+        }
+
+        if ( count( $breadcrumb_items ) > 1 ) {
+            $schemas[] = [
+                '@context'        => 'https://schema.org',
+                '@type'           => 'BreadcrumbList',
+                'itemListElement' => $breadcrumb_items,
+            ];
+        }
+    }
+
     // Output each schema as JSON-LD
     foreach ($schemas as $schema) {
         echo '<script type="application/ld+json">' . json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
