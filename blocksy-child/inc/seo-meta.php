@@ -2,10 +2,11 @@
 /**
  * NEXUS SEO Meta & Indexierungssteuerung
  *
- * Wenn Rank Math aktiv ist: Nur OG-Bild-Override (ACF) + noindex-Toggle.
- * Rank Math übernimmt: Title, Description, OG Tags, Twitter Card, Canonical.
+ * Pluginlose Eigenimplementierung fuer Title, Description, OG Tags,
+ * Twitter Card, Canonical und Robots.
  *
- * Ohne Rank Math: vollständige Eigenimplementierung als Fallback.
+ * Legacy: Liest noch vorhandene rank_math_* Post-Meta als Fallback,
+ * falls ACF-Felder leer sind. Neue Inhalte nutzen ausschliesslich ACF.
  *
  * [SEO] inc/seo-meta: OG-Bild Override, Indexierungs-Logik
  *
@@ -18,21 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'wp_head', 'hu_seo_meta_tags', 1 );
 
-add_filter( 'rank_math/frontend/title', 'hu_rank_math_cornerstone_title' );
-add_filter( 'rank_math/frontend/description', 'hu_rank_math_cornerstone_description' );
-add_filter( 'rank_math/frontend/title', 'hu_rank_math_audit_title' );
-add_filter( 'rank_math/frontend/description', 'hu_rank_math_audit_description' );
-add_filter( 'rank_math/frontend/title', 'hu_rank_math_contact_title' );
-add_filter( 'rank_math/frontend/description', 'hu_rank_math_contact_description' );
-add_filter( 'rank_math/frontend/title', 'hu_rank_math_domdar_case_title' );
-add_filter( 'rank_math/frontend/description', 'hu_rank_math_domdar_case_description' );
-add_filter( 'rank_math/frontend/title', 'hu_rank_math_generic_stored_title', 99 );
-add_filter( 'rank_math/frontend/description', 'hu_rank_math_generic_stored_description', 99 );
-add_filter( 'rank_math/frontend/title', 'hu_rank_math_front_page_title', 120 );
-add_filter( 'rank_math/frontend/description', 'hu_rank_math_front_page_description', 120 );
-add_filter( 'rank_math/frontend/title', 'hu_rank_math_blog_archive_title', 120 );
-add_filter( 'rank_math/frontend/description', 'hu_rank_math_blog_archive_description', 120 );
-add_filter( 'rank_math/frontend/title', 'hu_rank_math_post_title_pattern', 120 );
 add_filter( 'pre_get_document_title', 'hu_pre_get_document_title_override' );
 add_filter( 'document_title_parts', 'hu_document_title_overrides' );
 
@@ -231,14 +217,18 @@ function hu_seo_value_has_tokens( $value ) {
 }
 
 /**
- * Read a pluginless SEO value from ACF first, then from stored Rank Math meta.
+ * Read an SEO value from ACF first, then from legacy post meta.
  *
- * @param int    $post_id       Post ID.
- * @param string $acf_field     ACF field name.
- * @param string $rank_math_key Rank Math post meta key.
+ * Legacy post meta (e.g. rank_math_title, rank_math_description) may still
+ * exist in the database from a previous plugin installation. New content
+ * should use ACF fields exclusively.
+ *
+ * @param int    $post_id          Post ID.
+ * @param string $acf_field        ACF field name.
+ * @param string $legacy_meta_key  Legacy post meta key (e.g. former plugin data).
  * @return string
  */
-function hu_get_stored_seo_value( $post_id, $acf_field, $rank_math_key ) {
+function hu_get_stored_seo_value( $post_id, $acf_field, $legacy_meta_key = '' ) {
 	$post_id = (int) $post_id;
 
 	if ( $post_id <= 0 ) {
@@ -252,161 +242,23 @@ function hu_get_stored_seo_value( $post_id, $acf_field, $rank_math_key ) {
 		}
 	}
 
-	if ( ! $rank_math_key ) {
+	if ( ! $legacy_meta_key ) {
 		return '';
 	}
 
-	$rank_math_value = get_post_meta( $post_id, $rank_math_key, true );
-	if ( ! is_string( $rank_math_value ) || '' === trim( $rank_math_value ) ) {
+	$legacy_value = get_post_meta( $post_id, $legacy_meta_key, true );
+	if ( ! is_string( $legacy_value ) || '' === trim( $legacy_value ) ) {
 		return '';
 	}
 
-	if ( hu_seo_value_has_tokens( $rank_math_value ) ) {
+	if ( hu_seo_value_has_tokens( $legacy_value ) ) {
 		return '';
 	}
 
-	return trim( wp_strip_all_tags( $rank_math_value ) );
+	return trim( wp_strip_all_tags( $legacy_value ) );
 }
 
-/**
- * Reuse stored SEO titles even if a plugin takes over frontend output.
- *
- * @param string $title Existing title.
- * @return string
- */
-function hu_rank_math_generic_stored_title( $title ) {
-	if ( ! is_singular() ) {
-		return $title;
-	}
 
-	$post_id   = get_queried_object_id();
-	$forced_seo = hu_get_forced_singular_seo( $post_id );
-
-	if ( ! empty( $forced_seo['title'] ) ) {
-		return (string) $forced_seo['title'];
-	}
-
-	$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
-
-	if ( '' !== $seo_title ) {
-		return $seo_title;
-	}
-
-	if ( function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ) {
-		$defaults = nexus_get_wgos_cluster_page_seo_defaults( get_post( $post_id ) );
-
-		if ( ! empty( $defaults['title'] ) ) {
-			return (string) $defaults['title'];
-		}
-	}
-
-	return $title;
-}
-
-/**
- * Reuse stored SEO descriptions even if a plugin takes over frontend output.
- *
- * @param string $description Existing description.
- * @return string
- */
-function hu_rank_math_generic_stored_description( $description ) {
-	if ( ! is_singular() ) {
-		return $description;
-	}
-
-	$post_id         = get_queried_object_id();
-	$forced_seo      = hu_get_forced_singular_seo( $post_id );
-
-	if ( ! empty( $forced_seo['description'] ) ) {
-		return (string) $forced_seo['description'];
-	}
-
-	$seo_description = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
-
-	if ( '' !== $seo_description ) {
-		return $seo_description;
-	}
-
-	if ( function_exists( 'nexus_get_wgos_cluster_page_seo_defaults' ) ) {
-		$defaults = nexus_get_wgos_cluster_page_seo_defaults( get_post( $post_id ) );
-
-		if ( ! empty( $defaults['description'] ) ) {
-			return (string) $defaults['description'];
-		}
-	}
-
-	return $description;
-}
-
-/**
- * Override Rank Math title for the homepage.
- *
- * @param string $title Existing title.
- * @return string
- */
-function hu_rank_math_front_page_title( $title ) {
-	if ( is_front_page() ) {
-		return hu_get_homepage_title();
-	}
-
-	return $title;
-}
-
-/**
- * Override Rank Math description for the homepage.
- *
- * @param string $description Existing description.
- * @return string
- */
-function hu_rank_math_front_page_description( $description ) {
-	if ( is_front_page() ) {
-		return hu_get_homepage_description();
-	}
-
-	return $description;
-}
-
-/**
- * Override Rank Math title for the blog index and archives.
- *
- * @param string $title Existing title.
- * @return string
- */
-function hu_rank_math_blog_archive_title( $title ) {
-	if ( is_home() ) {
-		return hu_get_blog_archive_title();
-	}
-
-	return $title;
-}
-
-/**
- * Override Rank Math description for the blog index and archives.
- *
- * @param string $description Existing description.
- * @return string
- */
-function hu_rank_math_blog_archive_description( $description ) {
-	if ( is_home() ) {
-		return hu_get_blog_archive_description();
-	}
-
-	return $description;
-}
-
-/**
- * Standardize single post titles to a compact branded pattern.
- *
- * @param string $title Existing title.
- * @return string
- */
-function hu_rank_math_post_title_pattern( $title ) {
-	if ( ! is_singular( 'post' ) || hu_is_seo_cornerstone_article() ) {
-		return $title;
-	}
-
-	return hu_get_post_title_pattern( get_queried_object_id() );
-}
 
 /**
  * Check whether current query is the SEO cornerstone article.
@@ -427,33 +279,7 @@ function hu_is_seo_cornerstone_article() {
 	return 'technisches-seo-performance-fundament' === $slug;
 }
 
-/**
- * Override Rank Math title for cornerstone article.
- *
- * @param string $title Existing title.
- * @return string
- */
-function hu_rank_math_cornerstone_title( $title ) {
-	if ( hu_is_seo_cornerstone_article() ) {
-		return 'Technisches SEO + Performance Marketing: Fundament fehlt';
-	}
 
-	return $title;
-}
-
-/**
- * Override Rank Math description for cornerstone article.
- *
- * @param string $description Existing description.
- * @return string
- */
-function hu_rank_math_cornerstone_description( $description ) {
-	if ( hu_is_seo_cornerstone_article() ) {
-		return 'Performance Marketing ohne technisches SEO-Fundament verbrennt Budget. So wirken Technik, CRO und Tracking zusammen - inklusive Entscheider-Checkliste.';
-	}
-
-	return $description;
-}
 
 /**
  * Check whether current query is the audit offer page.
@@ -529,103 +355,7 @@ function hu_get_contact_offer_description() {
 	return 'Projektanfrage für WordPress, SEO, Tracking und CRO: kurzer Einstieg, klare nächste Schritte und Rückmeldung für neue Projekte und bestehende Kunden.';
 }
 
-/**
- * Override Rank Math title for the audit offer page.
- *
- * @param string $title Existing title.
- * @return string
- */
-function hu_rank_math_audit_title( $title ) {
-	if ( hu_is_audit_offer_page() ) {
-		return 'Growth Audit für B2B-WordPress-Seiten';
-	}
 
-	return $title;
-}
-
-/**
- * Override Rank Math description for the audit offer page.
- *
- * @param string $description Existing description.
- * @return string
- */
-function hu_rank_math_audit_description( $description ) {
-	if ( hu_is_audit_offer_page() ) {
-		return 'Persönlicher Growth Audit für Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Priorität und Rückmeldung innerhalb von 48 Stunden.';
-	}
-
-	return $description;
-}
-
-/**
- * Override Rank Math title for the contact request page.
- *
- * @param string $title Existing title.
- * @return string
- */
-function hu_rank_math_contact_title( $title ) {
-	if ( hu_is_contact_offer_page() ) {
-		return hu_get_contact_offer_title();
-	}
-
-	return $title;
-}
-
-/**
- * Override Rank Math description for the contact request page.
- *
- * @param string $description Existing description.
- * @return string
- */
-function hu_rank_math_contact_description( $description ) {
-	if ( hu_is_contact_offer_page() ) {
-		return hu_get_contact_offer_description();
-	}
-
-	return $description;
-}
-
-/**
- * Override Rank Math title for the DOMDAR case study when no custom SEO title exists.
- *
- * @param string $title Existing title.
- * @return string
- */
-function hu_rank_math_domdar_case_title( $title ) {
-	if ( ! hu_is_domdar_case_study_page() ) {
-		return $title;
-	}
-
-	$post_id   = get_queried_object_id();
-	$seo_title = hu_get_stored_seo_value( $post_id, 'seo_title', 'rank_math_title' );
-
-	if ( '' !== $seo_title ) {
-		return $title;
-	}
-
-	return hu_get_domdar_case_study_title();
-}
-
-/**
- * Override Rank Math description for the DOMDAR case study when no custom description exists.
- *
- * @param string $description Existing description.
- * @return string
- */
-function hu_rank_math_domdar_case_description( $description ) {
-	if ( ! hu_is_domdar_case_study_page() ) {
-		return $description;
-	}
-
-	$post_id         = get_queried_object_id();
-	$seo_description = hu_get_stored_seo_value( $post_id, 'seo_description', 'rank_math_description' );
-
-	if ( '' !== $seo_description ) {
-		return $description;
-	}
-
-	return hu_get_domdar_case_study_description();
-}
 
 /**
  * Override the document title where an exact title string is required.
@@ -808,10 +538,10 @@ function hu_get_singular_post_seo_context( $post_id ) {
 		$description = '' !== trim( $excerpt ) ? wp_trim_words( wp_strip_all_tags( $excerpt ), 25, '…' ) : '';
 	}
 
-	$acf_noindex       = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
-	$rank_math_robots  = get_post_meta( $post_id, 'rank_math_robots', true );
-	$rank_math_noindex = is_array( $rank_math_robots ) ? in_array( 'noindex', $rank_math_robots, true ) : 'noindex' === $rank_math_robots;
-	$noindex           = (bool) ( $acf_noindex || $rank_math_noindex );
+	$acf_noindex          = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
+	$legacy_robots_meta   = get_post_meta( $post_id, 'rank_math_robots', true );
+	$legacy_noindex       = is_array( $legacy_robots_meta ) ? in_array( 'noindex', $legacy_robots_meta, true ) : 'noindex' === $legacy_robots_meta;
+	$noindex              = (bool) ( $acf_noindex || $legacy_noindex );
 
 	return [
 		'title'              => trim( wp_strip_all_tags( (string) $title ) ),
@@ -827,8 +557,8 @@ function hu_get_singular_post_seo_context( $post_id ) {
 /**
  * Output SEO meta tags.
  *
- * Wenn Rank Math aktiv: Nur OG-Bild-Override (ACF) ausgeben — alles andere
- * übernimmt Rank Math. Ohne Rank Math: vollständiger Fallback.
+ * Pluginlose Eigenimplementierung: Title, Description, OG Tags,
+ * Twitter Card, Canonical und Robots.
  *
  * @return void
  */
@@ -838,27 +568,6 @@ function hu_seo_meta_tags() {
 		return;
 	}
 
-	$rank_math_active = defined( 'RANK_MATH_VERSION' );
-	$virtual_contact  = function_exists( 'nexus_is_contact_request_path' ) && nexus_is_contact_request_path() && ! is_page( 'kontakt' );
-
-	// ── Rank Math aktiv: nur ACF OG-Bild-Override ausgeben ────────
-	if ( $rank_math_active && ! $virtual_contact ) {
-		if ( is_singular() && function_exists( 'get_field' ) ) {
-			$og_image = get_field( 'og_image', get_queried_object_id() );
-			if ( $og_image ) {
-				$url = is_array( $og_image ) ? ( $og_image['url'] ?? '' ) : $og_image;
-				if ( $url ) {
-					printf( '<meta property="og:image" content="%s">' . "\n", esc_url( $url ) );
-					echo '<meta property="og:image:width" content="1200">' . "\n";
-					echo '<meta property="og:image:height" content="630">' . "\n";
-					printf( '<meta name="twitter:image" content="%s">' . "\n", esc_url( $url ) );
-				}
-			}
-		}
-		return; // Rank Math kümmert sich um den Rest
-	}
-
-	// ── Fallback: kein SEO-Plugin aktiv ───────────────────────────
 	$meta = hu_get_seo_meta();
 
 	if ( empty( $meta ) ) {
@@ -979,12 +688,12 @@ function hu_get_seo_meta() {
 		$slug     = get_post_field( 'post_name', $post_id );
 		$forced_seo = hu_get_forced_singular_seo( $post_id );
 
-		// noindex check: Template/Slug-basiert oder ACF-Feld
-		$acf_noindex      = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
-		$rank_math_robots = get_post_meta( $post_id, 'rank_math_robots', true );
-		$rank_math_noindex = is_array( $rank_math_robots ) ? in_array( 'noindex', $rank_math_robots, true ) : 'noindex' === $rank_math_robots;
+		// noindex check: Template/Slug-basiert, ACF-Feld oder Legacy-Meta
+		$acf_noindex          = function_exists( 'get_field' ) ? get_field( 'seo_noindex', $post_id ) : false;
+		$legacy_robots_meta   = get_post_meta( $post_id, 'rank_math_robots', true );
+		$legacy_noindex       = is_array( $legacy_robots_meta ) ? in_array( 'noindex', $legacy_robots_meta, true ) : 'noindex' === $legacy_robots_meta;
 
-		if ( in_array( $template, $noindex_templates, true ) || in_array( $slug, $noindex_slugs, true ) || $acf_noindex || $rank_math_noindex ) {
+		if ( in_array( $template, $noindex_templates, true ) || in_array( $slug, $noindex_slugs, true ) || $acf_noindex || $legacy_noindex ) {
 			$meta['robots'] = 'noindex, nofollow';
 		}
 
@@ -1110,10 +819,14 @@ function hu_get_seo_meta() {
 }
 
 /**
- * Remove Blocksy's default canonical if we manage it ourselves.
+ * Remove Blocksy's default canonical since we manage it ourselves.
+ *
+ * If a third-party SEO plugin is ever re-introduced, this guard prevents
+ * duplicate canonical tags by only removing rel_canonical when no known
+ * plugin is active.
  */
 add_action( 'template_redirect', function () {
-	if ( ! defined( 'WPSEO_VERSION' ) && ! defined( 'RANK_MATH_VERSION' ) && ! defined( 'SEOPRESS_VERSION' ) ) {
+	if ( ! defined( 'WPSEO_VERSION' ) && ! defined( 'SEOPRESS_VERSION' ) ) {
 		remove_action( 'wp_head', 'rel_canonical' );
 	}
 } );

@@ -50,7 +50,7 @@ Primarlogik: `blocksy-child/inc/seo-meta.php`
 Wesentliche Mechanik:
 
 - `hu_get_stored_seo_value()` liest zuerst ACF (`seo_title`, `seo_description`), danach gespeicherte Rank-Math-Meta.
-- `hu_rank_math_generic_stored_title()` und `hu_rank_math_generic_stored_description()` halten gespeicherte Werte auch bei aktivem Rank Math stabil.
+- `hu_get_stored_seo_value()` liest SEO-Werte aus ACF-Feldern und Legacy-Post-Meta.
 - `hu_document_title_overrides()` und `hu_get_seo_meta()` liefern pluginlose Fallbacks fuer Title, Description, Canonical, Robots und OG-Daten.
 - WGOS-Assets werden ueber `nexus_sync_wgos_asset_posts()` aus der Registry synchronisiert; dabei schreibt das Theme `seo_title` und `seo_description` direkt in die Post-Meta.
 - Legacy-Clusterseiten erhalten zusaetzlich versionierte SEO-Fallbacks aus `blocksy-child/inc/wgos-cluster-pages.php`, falls im Editor keine sauberen Metas gepflegt sind.
