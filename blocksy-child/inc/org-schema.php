@@ -851,7 +851,10 @@ function hu_output_schema()
 
     // Output each schema as JSON-LD
     foreach ($schemas as $schema) {
-        echo '<script type="application/ld+json">' . json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
+        $json = wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        if ($json) {
+            echo '<script type="application/ld+json">' . $json . '</script>';
+        }
     }
 }
 

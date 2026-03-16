@@ -815,6 +815,11 @@ function hu_get_seo_meta() {
 		$meta['og_title'] = __( 'Seite nicht gefunden (404)', 'blocksy-child' ) . ' · ' . get_bloginfo( 'name' );
 	}
 
+	// Global OG-Image Fallback: Profilbild als Default wenn kein seitenspezifisches Bild gesetzt ist.
+	if ( empty( $meta['og_image'] ) ) {
+		$meta['og_image'] = 'https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp';
+	}
+
 	return $meta;
 }
 
