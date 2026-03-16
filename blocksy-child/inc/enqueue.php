@@ -250,25 +250,72 @@ function hu_enqueue_assets() {
 		wp_add_inline_style(
 			'blocksy-child-style',
 			'
+			/* Hide Blocksy page title/header on audit page */
 			.page-template-page-audit .entry-header,
 			.page-template-page-audit .ct-page-title,
 			.page-template-page-audit-php .entry-header,
 			.page-template-page-audit-php .ct-page-title {
 				display: none !important;
 			}
-			/* Blocksy-Container-Overrides: Falls Blocksy doch Wrapper rendert */
+
+			/*
+			 * Blocksy Container Breakout
+			 * .audit-wrapper is ALWAYS in the HTML (from audit-page-shell.php).
+			 * These rules work regardless of whether page-audit.php template
+			 * loads or Blocksy falls back to the_content() rendering.
+			 */
+
+			/* Break .audit-wrapper out of any restrictive parent container */
+			.audit-wrapper {
+				width: 100vw !important;
+				max-width: 100vw !important;
+				margin-left: calc(-50vw + 50%) !important;
+				margin-right: 0 !important;
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+				box-sizing: border-box !important;
+			}
+
+			/* Remove constraints from every ancestor up to body */
 			.page-template-page-audit .site-main,
 			.page-template-page-audit .ct-container,
 			.page-template-page-audit .content-area,
-			.page-template-page-audit .entry-content {
+			.page-template-page-audit .entry-content,
+			.page-template-page-audit-php .site-main,
+			.page-template-page-audit-php .ct-container,
+			.page-template-page-audit-php .content-area,
+			.page-template-page-audit-php .entry-content {
 				max-width: none !important;
 				padding-left: 0 !important;
 				padding-right: 0 !important;
-				margin: 0 !important;
+				margin-left: 0 !important;
+				margin-right: 0 !important;
 				width: 100% !important;
+				overflow: visible !important;
 			}
-			.page-template-page-audit .ct-container {
+			.page-template-page-audit .ct-container,
+			.page-template-page-audit-php .ct-container {
 				display: block !important;
+			}
+
+			/* Also target by slug body class (always present) */
+			body.page-growth-audit .site-main,
+			body.page-growth-audit .ct-container,
+			body.page-growth-audit .content-area,
+			body.page-growth-audit .entry-content {
+				max-width: none !important;
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+				margin-left: 0 !important;
+				margin-right: 0 !important;
+				width: 100% !important;
+				overflow: visible !important;
+			}
+			body.page-growth-audit .ct-container {
+				display: block !important;
+			}
+			body.page-growth-audit .entry-header {
+				display: none !important;
 			}
 		'
 		);
