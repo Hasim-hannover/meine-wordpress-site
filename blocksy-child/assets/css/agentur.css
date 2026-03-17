@@ -10,6 +10,10 @@
     linear-gradient(180deg, #182028 0%, #12181e 42%, #161d25 100%);
 }
 
+.wp-agentur-hero {
+  padding-top: calc(var(--nx-space-section) + 20px);
+}
+
 .wp-agentur-hero .nx-hero__title {
   max-width: 22ch;
   margin-inline: 0;
