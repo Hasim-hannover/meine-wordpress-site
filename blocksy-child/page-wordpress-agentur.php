@@ -275,6 +275,19 @@ get_header();
 			</div>
 		</section>
 
+		<figure class="wp-agentur-portrait">
+			<div class="nx-container">
+				<img
+					src="https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp"
+					alt="Haşim Üner – WordPress Agentur Hannover, Growth Architect für B2B-Websites"
+					loading="eager"
+					width="120"
+					height="148"
+				/>
+				<figcaption>Haşim Üner · WordPress Growth Architect · Hannover</figcaption>
+			</div>
+		</figure>
+
 		<section id="proof-bar" class="nx-section wp-agentur-proof">
 			<div class="nx-container">
 				<div class="nx-section-header wp-agentur-proof-header">
