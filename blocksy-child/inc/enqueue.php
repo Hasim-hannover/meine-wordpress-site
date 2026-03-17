@@ -174,6 +174,27 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-wgos-js', 'wgos.js', [ 'nexus-core-js' ] );
 	}
 
+	// ── G1b) Template: KI-Integration Dachseite ──────────────────
+	if ( is_page_template( 'page-ki-integration.php' ) || is_page( 'ki-integration-wordpress' ) ) {
+		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-wgos-css', 'wgos.css', [ 'nexus-home-css' ] );
+		hu_enqueue_js( 'nexus-wgos-js', 'wgos.js', [ 'nexus-core-js' ] );
+
+		wp_add_inline_style(
+			'blocksy-child-style',
+			'
+			.page-template-page-ki-integration .entry-header .entry-title,
+			.page-template-page-ki-integration .ct-page-title,
+			.page-template-page-ki-integration-php .entry-header .entry-title,
+			.page-template-page-ki-integration-php .ct-page-title,
+			.page-ki-integration-wordpress .entry-header .entry-title,
+			.page-ki-integration-wordpress .ct-page-title {
+				display: none !important;
+			}
+		'
+		);
+	}
+
 	// ── G2) Template: WGOS Asset Hub ──────────────────────────────
 	if ( is_page_template( 'page-wgos-assets.php' ) || is_page( 'wgos-systemlandkarte' ) || is_page( 'wgos-asset-hub' ) || is_page( 'systemlandkarte' ) ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
