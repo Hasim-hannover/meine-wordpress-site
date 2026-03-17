@@ -32,11 +32,7 @@ $hub_sections  = function_exists( 'nexus_get_wgos_asset_hub_sections' ) ? nexus_
 $nav_items = [
 	[
 		'id'    => 'context',
-		'label' => 'Kontext',
-	],
-	[
-		'id'    => 'logic',
-		'label' => 'Logik',
+		'label' => 'Struktur',
 	],
 	[
 		'id'    => 'explorer',
@@ -107,18 +103,18 @@ $logic_cards = [
 
 $authority_cards = [
 	[
-		'title' => 'Versionierte Source of Truth',
-		'copy'  => 'Systemlandkarte, Detailseiten und Linklogik greifen auf dieselbe Asset-Registry im Theme zu.',
+		'title' => $publish_count > 0
+			? sprintf( '%d operative Bausteine', $publish_count )
+			: 'Operative Bausteine',
+		'copy'  => 'Jedes Asset hat eine eigene Detailseite mit Ergebnis, Voraussetzung und klarem nächsten Schritt.',
 	],
 	[
-		'title' => 'Feste Phasen und Module',
-		'copy'  => 'Assets hängen an einer klaren Reihenfolge statt an einer zufälligen Leistungsübersicht.',
+		'title' => 'Feste Reihenfolge statt Bauchladen',
+		'copy'  => 'Drei Phasen geben vor, wann welcher Baustein Sinn ergibt, damit nichts auf Verdacht umgesetzt wird.',
 	],
 	[
-		'title' => 'Direkte operative Tiefe',
-		'copy'  => $publish_count > 0
-			? sprintf( '%d aktive Detailseiten führen direkt in die jeweilige operative Ebene.', $publish_count )
-			: 'Die operative Tiefe wird erst sichtbar, wenn veröffentlichte Detailseiten die Struktur tragen.',
+		'title' => 'Ein System, keine Einzelleistungen',
+		'copy'  => 'Alle Assets greifen ineinander. Credits, Abhängigkeiten und Ergebnisse sind transparent dokumentiert.',
 	],
 ];
 
@@ -205,36 +201,12 @@ $draft_note = $draft_count > 0
 		<section id="context" class="wgos-section wgos-section--white nx-reveal">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
-					<span class="wgos-principle-kicker">Kontext</span>
-					<h2 class="wgos-h2">Ein Asset-Hub wird erst wertvoll, wenn er nicht wie ein Katalog funktioniert.</h2>
+					<span class="wgos-principle-kicker">Warum diese Struktur</span>
+					<h2 class="wgos-h2">Operative Tiefe braucht Reihenfolge, nicht nur Auswahl.</h2>
+					<p class="wgos-section-intro">Viele Leistungsübersichten scheitern nicht an fehlender Tiefe, sondern an fehlender Struktur. Die Systemlandkarte sortiert deshalb alle Bausteine nach drei Ebenen:</p>
 				</div>
 
-				<div class="wgos-problem-grid">
-					<div class="wgos-prose">
-						<p>Viele Leistungsübersichten scheitern nicht an fehlender Tiefe, sondern an fehlender Struktur. Sobald operative Bausteine nicht mehr im Kontext von Reihenfolge und Wirkung sichtbar sind, entsteht Auswahlstress statt Klarheit.</p>
-						<p class="wgos-bold-statement">Die Systemlandkarte macht operative Tiefe sichtbar, ohne die strategische Hauptseite zu überladen.</p>
-					</div>
-
-					<div class="wgos-issue-list" aria-label="Typische Probleme ohne Systemlandkarte">
-						<?php foreach ( $problem_points as $problem_point ) : ?>
-							<article class="wgos-issue-card">
-								<p><?php echo esc_html( $problem_point ); ?></p>
-							</article>
-						<?php endforeach; ?>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section id="logic" class="wgos-section wgos-section--gray nx-reveal">
-			<div class="wgos-container">
-				<div class="wgos-section-head">
-					<span class="wgos-principle-kicker">Nutzungslogik</span>
-					<h2 class="wgos-h2">Diese Ebene trennt Verstehen, operative Tiefe und Priorisierung sauber voneinander.</h2>
-					<p class="wgos-section-intro">So bleibt die Seite ruhig, strukturiert und psychologisch klar: erst Orientierung, dann Tiefe, dann Entscheidung.</p>
-				</div>
-
-				<div class="wgos-phase-grid" aria-label="Wie die Ebenen zusammenarbeiten">
+				<div class="wgos-phase-grid" aria-label="Drei Ebenen der Systemlandkarte">
 					<?php foreach ( $logic_cards as $logic_card ) : ?>
 						<article class="wgos-phase-card">
 							<div class="wgos-phase-card__top">
@@ -286,6 +258,7 @@ $draft_note = $draft_count > 0
 
 				<div class="wgos-hub-sections">
 					<?php $prev_phase_step = ''; ?>
+					<?php $hub_index = 0; ?>
 					<?php foreach ( $hub_sections as $section ) : ?>
 						<?php if ( '' !== $prev_phase_step && $prev_phase_step !== (string) $section['phase_step'] ) : ?>
 							<div class="wgos-hub-phase-bridge">
@@ -294,7 +267,8 @@ $draft_note = $draft_count > 0
 							</div>
 						<?php endif; ?>
 						<?php $prev_phase_step = (string) $section['phase_step']; ?>
-						<details class="wgos-hub-section-card nx-reveal" style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
+						<details class="wgos-hub-section-card nx-reveal"<?php echo 0 === $hub_index ? ' open' : ''; ?> style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
+						<?php ++$hub_index; ?>
 							<summary class="wgos-hub-section-card__head" aria-labelledby="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>">
 								<div>
 									<span class="wgos-hub-section-card__phase"><?php echo esc_html( (string) $section['phase_step'] ); ?> · <?php echo esc_html( (string) $section['phase_label'] ); ?></span>
