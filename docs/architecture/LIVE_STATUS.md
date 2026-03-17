@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-14.
+Stand: 2026-03-17.
 
 Basis dieses Status:
 
@@ -36,7 +36,7 @@ Nicht verifiziert:
 - Das Repo wird gerade von einem Theme-Repo zu einem Website Operating System erweitert.
 - `page-wgos.php` bleibt template-driven; eine spaetere Auslagerung des Content-Layers in Editor oder ACF ist weiter offen.
 - WGOS Asset-Detailseiten laufen jetzt ueber den hierarchischen CPT `wgos_asset` mit ACF-Meta und Single-Template; die redaktionelle Befuellung der Spokes passiert weiter im WordPress-Admin.
-- WGOS-Assets sind jetzt zusaetzlich als versionierte Registry im Theme definiert: 35 Assets, alle auf `publish`.
+- WGOS-Assets sind jetzt zusaetzlich als versionierte Registry im Theme definiert: 39 Assets (35 auf `publish`, 4 neue KI-Assets auf `draft`).
 - Die neue WGOS-Asset-Struktur rendert 8 feste Abschnitte, versionierte SEO-Meta, Related-Links und `Service`-Schema aus derselben Registry.
 - Die WGOS Systemlandkarte wird jetzt bei Bedarf automatisch als Seite angelegt und listet alle Assets zusaetzlich in einer festen, gruppierten Hub-Ansicht.
 - Die eigentliche Post-Erstellung und Aktualisierung fuer WGOS-Assets haengt aktuell noch am neuen Theme-Sync und damit am naechsten Deployment auf die Live-Umgebung.
@@ -48,6 +48,7 @@ Nicht verifiziert:
 - Das neue Blog-Notify-System ist repo-seitig implementiert, aber End-to-End auf der Live-Instanz noch nicht verifiziert.
 - Das neue SEO-Cockpit ist repo-seitig implementiert, aber ohne echte Google-OAuth-Credentials und ohne installiertes Koko-Plugin noch nicht end-to-end verifiziert.
 - Das Client Portal arbeitet aktuell mit Mock-Daten und ist noch kein voll dokumentiertes Produktivsystem.
+- KI-Erweiterung: 4 neue WGOS-Assets (KI-Assistent/Chatbot 30 Cr, KI-Lead-Qualifizierung 20 Cr, RAG-Wissenssuche 25 Cr, LLM-Workflow-Automatisierung 20 Cr) liegen als `draft` in der Registry. Dachseite `/ki-integration-wordpress/` als versioniertes Page-Template (`page-ki-integration.php`) mit Service- und FAQPage-Schema im Repo. Interne Verlinkung von WGOS, Systemlandkarte und Ueber-mich-Seite eingebaut. WordPress-Admin-Schritte (Seite anlegen, Template zuweisen, Assets auf `publish` setzen) stehen noch aus.
 
 ## Geplant
 

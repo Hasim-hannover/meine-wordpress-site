@@ -146,7 +146,8 @@ get_header();
 						<p class="about-hero__context">
 							Mehr Kontext dazu finden Sie dezent bei
 							<a href="<?php echo esc_url( $wgos_url ); ?>">WGOS</a>,
-							<a href="<?php echo esc_url( $cases_url ); ?>">Ergebnisse</a>
+							<a href="<?php echo esc_url( $cases_url ); ?>">Ergebnisse</a>,
+							<a href="<?php echo esc_url( home_url( '/ki-integration-wordpress/' ) ); ?>">KI-Integration</a>
 							und
 							<a href="<?php echo esc_url( $agentur_url ); ?>">WordPress Agentur</a>.
 						</p>

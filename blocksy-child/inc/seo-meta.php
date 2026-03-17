@@ -119,6 +119,10 @@ function hu_get_forced_singular_seo_map() {
 				'title'       => 'WordPress SEO Hannover | Technisches SEO für WordPress',
 				'description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und priorisierte SEO-Fixes für B2B-Websites.',
 			],
+			'ki-integration-wordpress' => [
+				'title'       => 'KI-Integration für WordPress – DSGVO-konform | Haşim Üner',
+				'description' => 'KI-Features direkt in WordPress: Chatbots, Lead-Qualifizierung, Wissenssuche, Automatisierung – auf eigener Infrastruktur, ohne Datenabfluss.',
+			],
 		]
 	);
 }

@@ -1788,4 +1788,208 @@ return [
 			'monthly-review'           => 'Bringt fortlaufend neue Beobachtungen ein, aus denen Testing-Ansatze priorisiert werden können.',
 		],
 	],
+	'ki-assistent-chatbot' => [
+		'title'           => 'KI-Assistent / Chatbot (DSGVO-konform)',
+		'slug'            => 'ki-assistent-chatbot',
+		'status'          => 'draft',
+		'core_area'       => 'Conversion',
+		'credits'         => '30',
+		'keyword'         => 'KI Chatbot WordPress DSGVO',
+		'excerpt'         => 'Ein KI-Assistent, der Besuchern auf Basis Ihrer eigenen Inhalte antwortet – DSGVO-konform, auf Ihrer Infrastruktur, ohne externen Datenabfluss.',
+		'goal'            => 'Besucher bekommen sofort relevante Antworten aus Ihren Inhalten, ohne zu suchen – ohne Datenabfluss an Dritte.',
+		'result'          => 'Sie erhalten einen DSGVO-konformen KI-Assistenten, der aus Ihren Inhalten antwortet und Vertrieb wie Support bei Standardfragen entlastet.',
+		'prerequisite'    => 'Saubere Inhalte als Wissensbasis und eine klare Positionierung müssen stehen',
+		'seo_title'       => 'KI-Chatbot für WordPress – DSGVO-konform | WGOS Asset',
+		'seo_description' => 'Ein KI-Assistent, der aus Ihren Inhalten antwortet – auf eigener Infrastruktur, ohne Datenabfluss. 30 Credits im WGOS-System.',
+		'problem'         => [
+			'Besucher haben Fragen, finden aber die Antworten auf der Website nicht schnell genug. Support und Vertrieb beantworten dieselben Standardfragen immer wieder – das kostet Zeit und verzögert echte Qualifizierung.',
+			'Ein KI-Assistent löst dieses Problem, wenn er aus Ihren eigenen Inhalten antwortet statt aus dem offenen Internet. Entscheidend ist, dass keine Besucherdaten an US-Provider fließen und die Verarbeitung auf eigener Infrastruktur bleibt.',
+		],
+		'deliverables'    => [
+			[
+				'title'       => 'Wissensbasis aus Ihren Inhalten aufbauen',
+				'description' => 'Wir indexieren Ihre Seiten, Blog-Beiträge und FAQs als durchsuchbare Wissensbasis. So antwortet der Assistent aus Ihrem Content, nicht aus dem Internet.',
+			],
+			[
+				'title'       => 'RAG-Architektur auf eigener Infrastruktur einrichten',
+				'description' => 'Wir setzen Retrieval-Augmented Generation auf europäischem Server oder Ihrer eigenen Infrastruktur auf. Kein API-Call an US-Provider aus dem Frontend.',
+			],
+			[
+				'title'       => 'WordPress-native Einbindung umsetzen',
+				'description' => 'Wir integrieren den Assistenten direkt in Ihre WordPress-Seite – consent-integriert, ohne externen Widget-Code, wartbar im WGOS-Stack.',
+			],
+			[
+				'title'       => 'Qualifizierungslogik und Grenzen definieren',
+				'description' => 'Wir legen fest, welche Fragen der Assistent beantwortet, wann er an den Vertrieb übergibt und wo seine Grenzen liegen. So bleibt er ein Werkzeug, kein Ersatz.',
+			],
+		],
+		'system_context'  => [
+			'Der KI-Assistent gehört im WGOS zum Kernbereich Conversion und kommt typischerweise nach Fundament und Messbarkeit. Voraussetzung sind saubere Inhalte, die der Assistent als Wissensbasis nutzen kann, und eine klare Positionierung.',
+			'In Kombination mit Landing Page und Lead-Qualifizierung entsteht ein Conversion-Pfad, der Besucher zuerst informiert, dann qualifiziert und erst danach an den Vertrieb übergibt. Der Assistent ist dabei kein ChatGPT-Widget, sondern ein kontrollierter Baustein im System.',
+		],
+		'priority'        => [
+			'Wenn wiederkehrende Fragen Support und Vertrieb binden, die der Assistent aus vorhandenen Inhalten beantworten könnte.',
+			'Wenn das Angebot komplex ist und Besucher einen langen Entscheidungspfad durchlaufen.',
+			'Wenn DSGVO-Konformität nicht verhandelbar ist und externe Chatbot-Widgets ausscheiden.',
+			'Wenn Positionierung, Angebotsseiten und Inhalte bereits sauber stehen und der nächste Conversion-Hebel gesucht wird.',
+		],
+		'related_assets'  => [
+			'ki-lead-qualifizierung'     => 'Ergänzt den Assistenten um eine automatische Vorselektion eingehender Anfragen nach Relevanz.',
+			'landing-page-neu'           => 'Schafft die Seitenstruktur, auf der der Assistent als Conversion-Baustein wirkt.',
+			'rag-wissenssuche'           => 'Nutzt dieselbe RAG-Architektur, fokussiert aber auf Suche statt auf Dialog.',
+		],
+	],
+	'ki-lead-qualifizierung' => [
+		'title'           => 'KI-gestützte Lead-Qualifizierung',
+		'slug'            => 'ki-lead-qualifizierung',
+		'status'          => 'draft',
+		'core_area'       => 'Conversion',
+		'credits'         => '20',
+		'keyword'         => 'KI Lead Qualifizierung B2B',
+		'excerpt'         => 'Formulare und Anfrageprozesse, die mit KI-Unterstützung Leads bewerten und vorsortieren – bevor der Vertrieb übernimmt.',
+		'goal'            => 'Eingehende Anfragen automatisch nach Relevanz und Passung bewerten, damit der Vertrieb sich auf die richtigen Leads konzentriert.',
+		'result'          => 'Sie erhalten einen automatisierten Qualifizierungsprozess, der Leads priorisiert weiterleitet und unpassende Anfragen freundlich umleitet.',
+		'prerequisite'    => 'Klare Angebotsstruktur, sauberes Tracking und definierte Qualifizierungskriterien müssen stehen',
+		'seo_title'       => 'KI-Lead-Qualifizierung für B2B – WGOS Asset | Haşim Üner',
+		'seo_description' => 'Formulare, die verstehen statt nur sammeln. KI-gestützte Vorselektion nach Relevanz – DSGVO-konform, direkt in WordPress. 20 Credits.',
+		'problem'         => [
+			'Viele B2B-Websites sammeln Anfragen, ohne sie zu bewerten. Der Vertrieb arbeitet dann jede Anfrage gleich ab – unabhängig von Passung und Potenzial. Das kostet Zeit und verwässert den Fokus.',
+			'KI-gestützte Lead-Qualifizierung sortiert eingehende Anfragen automatisch vor: nach Relevanz, Passung und definierten Kriterien. So bekommt der Vertrieb bessere Leads, nicht mehr Leads.',
+		],
+		'deliverables'    => [
+			[
+				'title'       => 'Qualifizierungskriterien definieren',
+				'description' => 'Wir legen gemeinsam fest, welche Merkmale einen guten Lead ausmachen. So wird die Klassifikation nachvollziehbar statt beliebig.',
+			],
+			[
+				'title'       => 'LLM-basierte Klassifikation einrichten',
+				'description' => 'Wir bauen einen regelbasierten und KI-gestützten Bewertungsschritt in den Anfrageprozess ein. Kein reines Black-Box-Scoring, sondern transparente Logik.',
+			],
+			[
+				'title'       => 'n8n-Workflow für Routing aufsetzen',
+				'description' => 'Wir verbinden Formular, Klassifikation und Weiterleitung in einem n8n-Workflow. Qualifizierte Leads gehen priorisiert an den Vertrieb, der Rest wird freundlich umgeleitet.',
+			],
+			[
+				'title'       => 'Scoring-Kriterien wartbar machen',
+				'description' => 'Wir dokumentieren die Logik so, dass Kriterien ohne Entwickler angepasst werden können. Das hält den Prozess lebendig statt statisch.',
+			],
+		],
+		'system_context'  => [
+			'KI-gestützte Lead-Qualifizierung gehört im WGOS zum Kernbereich Conversion und kommt nach den Conversion-Grundlagen. Landing Pages, CTA-Logik und eine belastbare Messbasis sollten stehen, bevor Leads automatisch bewertet werden.',
+			'In Kombination mit dem KI-Chatbot entsteht ein Conversion-Pfad, der Besucher erst informiert, dann qualifiziert und dann priorisiert an den Vertrieb übergibt. Die Datenverarbeitung bleibt server-seitig auf eigenem Server – DSGVO-konform.',
+		],
+		'priority'        => [
+			'Wenn mehr als 20 Anfragen pro Monat eingehen und die Lead-Qualität stark schwankt.',
+			'Wenn der Vertrieb zu viel Zeit mit unpassenden Anfragen verbringt.',
+			'Wenn Qualifizierungskriterien klar sind, aber manuell nicht konsequent angewendet werden.',
+			'Wenn der nächste Conversion-Hebel nach Landing Pages und CTA-Optimierung gesucht wird.',
+		],
+		'related_assets'  => [
+			'ki-assistent-chatbot'       => 'Ergänzt die Qualifizierung um einen vorgelagerten Assistenten, der Besucher schon vor der Anfrage informiert.',
+			'landing-page-neu'           => 'Schafft die Angebotsseite, auf der qualifizierte Anfragen überhaupt erst entstehen.',
+			'cta-formular-optimierung'   => 'Verbessert den Formularpfad, bevor die KI-Qualifizierung darauf aufsetzt.',
+		],
+	],
+	'rag-wissenssuche' => [
+		'title'           => 'RAG-Wissenssuche',
+		'slug'            => 'rag-wissenssuche',
+		'status'          => 'draft',
+		'core_area'       => 'Technisches Fundament',
+		'credits'         => '25',
+		'keyword'         => 'RAG Wissenssuche WordPress',
+		'excerpt'         => 'Eine KI-gestützte Suche, die Antworten aus Ihren eigenen Dokumenten, Blog-Beiträgen und FAQs findet – statt nur Keywords zu matchen.',
+		'goal'            => 'Besuchern und Mitarbeitern semantische Antworten aus dem eigenen Content-Pool liefern, ohne Datenabfluss an Dritte.',
+		'result'          => 'Sie erhalten eine KI-gestützte Suche, die natürliche Fragen versteht und Antworten mit Quellenangabe aus Ihren Inhalten zurückgibt.',
+		'prerequisite'    => 'Umfangreicher Content-Pool (50+ Seiten) und saubere, aktuelle Inhalte als Quelldaten',
+		'seo_title'       => 'RAG-Wissenssuche für WordPress – DSGVO-konform | WGOS Asset',
+		'seo_description' => 'Mitarbeiter und Kunden finden Antworten in Ihren Inhalten – KI-gestützt, ohne externe Datenflüsse. 25 Credits im WGOS-System.',
+		'problem'         => [
+			'Die eingebaute WordPress-Suche matcht Keywords, versteht aber keine Fragen. Besucher finden Ergebnisse, aber selten die Antwort, die sie tatsächlich suchen. Bei komplexen Angeboten oder umfangreichem Content wird das zum Conversion-Killer.',
+			'RAG-Wissenssuche durchsucht Ihre Inhalte semantisch: Besucher stellen eine Frage in natürlicher Sprache und bekommen eine Antwort mit Quellenangabe. Keine Halluzinationen, weil nur Ihr eigener Content als Basis dient.',
+		],
+		'deliverables'    => [
+			[
+				'title'       => 'Inhalte indexieren und Vektordatenbank aufbauen',
+				'description' => 'Wir bereiten Ihre Seiten, Beiträge und Dokumente als durchsuchbare Vektordatenbank auf. So wird semantische Suche auf Ihren Daten möglich.',
+			],
+			[
+				'title'       => 'RAG-Pipeline auf eigener Infrastruktur einrichten',
+				'description' => 'Wir setzen Retrieval und Antwortgenerierung auf europäischem Server auf. Bei jeder Anfrage werden relevante Passagen abgerufen und das LLM formuliert die Antwort.',
+			],
+			[
+				'title'       => 'WordPress-Integration umsetzen',
+				'description' => 'Wir binden die Suche als Suchfeld, Widget oder eigene Seite in WordPress ein – öffentlich für Besucher oder intern für Mitarbeiter.',
+			],
+			[
+				'title'       => 'Aktualisierungslogik automatisieren',
+				'description' => 'Wir richten ein, dass neue oder geänderte Inhalte automatisch in die Wissensbasis übernommen werden. So bleibt die Suche aktuell ohne manuellen Aufwand.',
+			],
+		],
+		'system_context'  => [
+			'Die RAG-Wissenssuche gehört im WGOS zum technischen Fundament und verbessert die Content-Infrastruktur. Sie setzt voraus, dass genügend saubere Inhalte als Quelldaten existieren – ein dünner Content-Pool ergibt keine brauchbare Suche.',
+			'Das Asset kann standalone laufen oder als Grundlage für den KI-Chatbot dienen, der dieselbe RAG-Architektur für dialogbasierte Interaktion nutzt. In beiden Fällen bleibt die Verarbeitung auf eigenem Server.',
+		],
+		'priority'        => [
+			'Wenn ein umfangreicher Content-Pool existiert (50+ Seiten) und Besucher relevante Inhalte nicht schnell genug finden.',
+			'Wenn das Angebot komplex ist und die Standard-WordPress-Suche keine brauchbaren Ergebnisse liefert.',
+			'Wenn intern Mitarbeiter-Wissen in Dokumenten verstreut liegt und eine zentrale Anlaufstelle fehlt.',
+			'Wenn die Content-Infrastruktur steht und der nächste Schritt im technischen Fundament gesucht wird.',
+		],
+		'related_assets'  => [
+			'ki-assistent-chatbot'       => 'Nutzt dieselbe RAG-Architektur, erweitert aber die Suche um einen dialogbasierten Assistenten.',
+			'content-hub-aufbau'         => 'Schafft die Inhaltsstruktur, aus der die Wissenssuche ihre Quelldaten bezieht.',
+			'pillar-page'                => 'Liefert thematisch verdichtete Inhalte, die als hochwertige Quellen in der RAG-Suche dienen.',
+		],
+	],
+	'llm-workflow-automatisierung' => [
+		'title'           => 'LLM-Workflow-Automatisierung (n8n)',
+		'slug'            => 'llm-workflow-automatisierung',
+		'status'          => 'draft',
+		'core_area'       => 'Weiterentwicklung',
+		'credits'         => '20',
+		'keyword'         => 'LLM Automatisierung n8n WordPress',
+		'excerpt'         => 'Automatisierte Workflows mit KI-Schritten – Zusammenfassungen, Klassifikation, Routing – server-seitig auf n8n, DSGVO-konform.',
+		'goal'            => 'Wiederkehrende Geschäftsprozesse mit LLM-Schritten automatisieren, ohne SaaS-Lock-in und ohne Datenabfluss.',
+		'result'          => 'Sie erhalten dokumentierte n8n-Workflows mit KI-Schritten, die auf Ihrem eigenen Server laufen und wartbar bleiben.',
+		'prerequisite'    => 'Klarer, definierter Prozess mit bekannter Ein- und Ausgabe muss stehen',
+		'seo_title'       => 'LLM-Workflow-Automatisierung mit n8n – WGOS Asset | Haşim Üner',
+		'seo_description' => 'Geschäftsprozesse mit KI-Schritten automatisieren: Zusammenfassungen, Klassifikation, Routing – server-seitig auf n8n. 20 Credits.',
+		'problem'         => [
+			'Viele Aufgaben im Tagesgeschäft sind repetitiv und textlastig: Anfragen zusammenfassen, E-Mails klassifizieren, Content-Entwürfe vorbereiten, Leads routen. Manuell kosten diese Schritte Stunden pro Woche, ohne dass sie besonderen Sachverstand erfordern.',
+			'LLM-Workflow-Automatisierung baut KI-Schritte in bestehende Geschäftsprozesse ein – visuell in n8n, nachvollziehbar, versioniert und auf eigenem Server. Kein SaaS-Lock-in, keine Daten an Dritte.',
+		],
+		'deliverables'    => [
+			[
+				'title'       => 'Prozess analysieren und Automatisierungspotenzial identifizieren',
+				'description' => 'Wir prüfen gemeinsam, welche Schritte sich sinnvoll automatisieren lassen und wo menschliche Checkpoints bleiben müssen. So entsteht kein Blindflug.',
+			],
+			[
+				'title'       => 'n8n-Workflow mit LLM-Nodes aufsetzen',
+				'description' => 'Wir bauen den Workflow in n8n: Trigger, LLM-Schritt (Klassifikation, Zusammenfassung, Extraktion), Ausgabe an CRM, E-Mail oder Dashboard. Alles self-hosted.',
+			],
+			[
+				'title'       => 'Workflow dokumentieren und versionieren',
+				'description' => 'Wir halten Logik, Trigger, Ein-/Ausgabe und Fail-States fest. So bleibt der Workflow wartbar, auch wenn sich Anforderungen ändern.',
+			],
+			[
+				'title'       => 'Monitoring und Checkpoints einrichten',
+				'description' => 'Wir definieren, wann der Workflow menschliche Freigabe braucht und wie Fehler sichtbar werden. Das verhindert stille Fehlläufe.',
+			],
+		],
+		'system_context'  => [
+			'LLM-Workflow-Automatisierung gehört im WGOS zur Weiterentwicklung und kommt erst, wenn Fundament und Messbarkeit stehen. Automatisierung braucht einen sauberen Prozess als Grundlage – ohne definierten Ablauf entsteht nur automatisiertes Chaos.',
+			'Das Asset ergänzt die Lead-Qualifizierung und andere Conversion-Bausteine um prozessübergreifende Automatisierung. n8n als Self-hosted-Plattform auf eigenem Hetzner-Server hält die Datenhoheit im Haus.',
+		],
+		'priority'        => [
+			'Wenn wiederkehrende manuelle Aufgaben mit Textverarbeitung mehr als 5 Stunden pro Woche kosten.',
+			'Wenn der zugrunde liegende Prozess klar definiert ist und die Ein-/Ausgabe feststeht.',
+			'Wenn Datensouveränität wichtig ist und SaaS-Plattformen wie Zapier oder Make nicht infrage kommen.',
+			'Wenn nach Fundament und Messbarkeit der nächste Effizienz-Hebel in der Weiterentwicklung gesucht wird.',
+		],
+		'related_assets'  => [
+			'ki-lead-qualifizierung'     => 'Nutzt n8n-Workflows für die automatische Klassifikation und Weiterleitung von Leads.',
+			'monthly-review'             => 'Kann Reporting-Daten automatisch aufbereiten und als Grundlage für Reviews bereitstellen.',
+			'conversion-testing'         => 'Liefert automatisierte Datenpunkte, die in Testing-Hypothesen einfließen können.',
+		],
+	],
 ];

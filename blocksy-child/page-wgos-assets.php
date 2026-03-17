@@ -332,6 +332,13 @@ $draft_note = $draft_count > 0
 					<?php endforeach; ?>
 				</div>
 			</div>
+			<div class="wgos-asset-hub-bridge">
+				<div class="wgos-note-card">
+					<h3>KI-Bausteine im WGOS</h3>
+					<p>Vier neue Assets für KI-Integration: Chatbot, Lead-Qualifizierung, Wissenssuche und Automatisierung – DSGVO-konform, auf eigener Infrastruktur.</p>
+					<a href="<?php echo esc_url( home_url( '/ki-integration-wordpress/' ) ); ?>" class="wgos-link--arrow">KI-Integration ansehen</a>
+				</div>
+			</div>
 		</section>
 
 		<section id="proof" class="wgos-section wgos-section--white nx-reveal">

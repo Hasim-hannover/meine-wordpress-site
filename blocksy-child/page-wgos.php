@@ -581,6 +581,11 @@ foreach ( $faq_items as $faq_item ) {
 							<p>Die WGOS-Systemlandkarte zeigt die zugehörigen Assets strukturiert, gruppiert und direkt verlinkt.</p>
 							<a href="<?php echo esc_url( $asset_hub_url ); ?>" class="wgos-link--arrow">Zur WGOS Asset-Landkarte</a>
 						</div>
+						<div class="wgos-note-card">
+							<h3>KI-Bausteine im WGOS</h3>
+							<p>Chatbot, Lead-Qualifizierung, Wissenssuche und Automatisierung – DSGVO-konform, auf eigener Infrastruktur.</p>
+							<a href="<?php echo esc_url( home_url( '/ki-integration-wordpress/' ) ); ?>" class="wgos-link--arrow">KI-Integration ansehen</a>
+						</div>
 					</div>
 				</div>
 			</section>
