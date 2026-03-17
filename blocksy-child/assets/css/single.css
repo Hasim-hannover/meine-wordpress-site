@@ -818,3 +818,140 @@ button.nexus-share-btn {
         text-align: center;
     }
 }
+
+/* ── Article Content CTA Block ─────────────────────────────── */
+
+.nexus-article-content .nexus-content-cta {
+    background: hsl(var(--accent-hsl) / 0.06);
+    border: 1px solid hsl(var(--accent-hsl) / 0.18);
+    border-radius: 12px;
+    padding: clamp(2rem, 4vw, 2.5rem);
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.nexus-content-cta__headline {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--nx-text);
+    margin: 0 0 0.75rem;
+}
+
+.nexus-content-cta__text {
+    color: var(--nx-text-secondary);
+    margin: 0 0 1.5rem;
+    line-height: 1.7;
+}
+
+.nexus-article-content .nexus-content-cta__text a {
+    color: var(--nx-accent-text);
+}
+
+.nexus-article-content .nexus-content-cta__btn {
+    display: inline-block;
+    background: linear-gradient(180deg, var(--accent-hover, #ffc040), var(--accent, #ffb020));
+    color: var(--text-inverse, #1a1a1a) !important;
+    font-weight: 700;
+    padding: 0.9rem 2.25rem;
+    border-radius: var(--radius-full, 8px);
+    text-decoration: none;
+    font-size: 1.05em;
+    letter-spacing: 0.01em;
+    box-shadow: 0 12px 28px hsl(var(--accent-hsl) / 0.22);
+    transition:
+        transform var(--duration-normal, 0.2s) var(--ease-default, ease),
+        box-shadow var(--duration-fast, 0.15s) var(--ease-default, ease);
+}
+
+.nexus-article-content .nexus-content-cta__btn:hover {
+    color: var(--text-inverse, #1a1a1a) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px hsl(var(--accent-hsl) / 0.32);
+}
+
+/* ── Article Link Box ──────────────────────────────────────── */
+
+.nexus-article-content .nexus-link-box {
+    background: hsl(var(--accent-hsl) / 0.04);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-md, 8px);
+    padding: 1.5rem 1.75rem;
+    margin: 2.5rem 0;
+}
+
+.nexus-link-box__title {
+    font-weight: 700;
+    color: var(--nx-text);
+    margin: 0 0 0.75rem;
+}
+
+.nexus-link-box ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    line-height: 2;
+}
+
+.nexus-article-content .nexus-link-box a {
+    color: var(--nx-accent-text);
+    text-decoration: none;
+}
+
+.nexus-article-content .nexus-link-box a:hover {
+    color: var(--nx-accent-text-hover);
+    text-decoration: underline;
+}
+
+/* ── Article FAQ (details/summary) ─────────────────────────── */
+
+.nexus-article-content details {
+    background: hsl(var(--accent-hsl) / 0.04);
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-md, 8px);
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    transition: border-color var(--duration-fast, 0.15s) ease;
+}
+
+.nexus-article-content details[open] {
+    border-color: hsl(var(--accent-hsl) / 0.22);
+}
+
+.nexus-article-content details summary {
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    color: var(--nx-text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: background var(--duration-fast, 0.15s) ease;
+}
+
+.nexus-article-content details summary::-webkit-details-marker {
+    display: none;
+}
+
+.nexus-article-content details summary::after {
+    content: '+';
+    font-size: 1.3em;
+    font-weight: 400;
+    color: var(--nx-accent-text);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.nexus-article-content details[open] summary::after {
+    content: '−';
+}
+
+.nexus-article-content details summary:hover {
+    background: hsl(var(--accent-hsl) / 0.06);
+}
+
+.nexus-article-content details > p,
+.nexus-article-content details > div {
+    padding: 0 1.25rem 1rem;
+    margin: 0;
+}
