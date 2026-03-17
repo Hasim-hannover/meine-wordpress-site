@@ -3,13 +3,11 @@
    ========================================= */
 .wgos-asset-explorer-root {
 	margin: 0;
-	background:
-		linear-gradient(180deg, rgba(19, 17, 23, 0.96), rgba(10, 11, 15, 0.98)),
-		var(--nx-card-gradient);
+	background: var(--nx-card-gradient);
 	border: 1px solid color-mix(in srgb, var(--nx-border-gold) 36%, var(--nx-border));
 	border-radius: 24px;
 	padding: 1rem;
-	box-shadow: 0 24px 60px hsl(30 22% 4% / 0.26);
+	box-shadow: var(--nx-shadow-lg);
 }
 
 #explorer .wgos-asset-explorer-root {
@@ -28,8 +26,8 @@
 	align-items: center;
 	padding: 10px 14px;
 	border-radius: 999px;
-	border: 1px solid rgba(212, 175, 55, 0.18);
-	background: rgba(212, 175, 55, 0.08);
+	border: 1px solid var(--nx-border-gold);
+	background: var(--nx-gold-subtle);
 	color: var(--nx-accent-text);
 	font-size: 0.8rem;
 	font-weight: 800;
@@ -53,8 +51,8 @@
 	gap: 0.2rem;
 	padding: 1rem 1.1rem;
 	border-radius: 18px;
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
-	border: 1px solid rgba(212, 175, 55, 0.14);
+	background: var(--nx-bg-glass-light);
+	border: 1px solid var(--nx-border-gold);
 }
 
 .wgos-asset-explorer__legend-item strong {
@@ -68,7 +66,7 @@
 }
 
 .wgos-asset-explorer__legend-eyebrow {
-	font-size: 0.7rem;
+	font-size: 0.78rem;
 	font-weight: 800;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
@@ -85,8 +83,8 @@
 	gap: 1rem;
 	padding: 1.25rem;
 	border-radius: 22px;
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-	border: 1px solid rgba(255, 255, 255, 0.08);
+	background: var(--nx-bg-glass-light);
+	border: 1px solid var(--nx-border);
 }
 
 .wgos-asset-explorer__lane-head {
@@ -112,8 +110,8 @@
 	display: inline-flex;
 	padding: 0.35rem 0.65rem;
 	border-radius: 999px;
-	background: rgba(212, 175, 55, 0.12);
-	font-size: 0.7rem;
+	background: var(--nx-gold-subtle);
+	font-size: 0.78rem;
 	font-weight: 800;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
@@ -133,10 +131,9 @@
 	padding: 1.25rem;
 	border-radius: 20px;
 	background:
-		linear-gradient(180deg, color-mix(in srgb, var(--wgos-module-accent) 12%, rgba(255, 255, 255, 0.04)), rgba(9, 10, 14, 0.92)),
-		rgba(10, 11, 16, 0.92);
-	border: 1px solid color-mix(in srgb, var(--wgos-module-accent) 28%, rgba(255, 255, 255, 0.08));
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+		linear-gradient(180deg, color-mix(in srgb, var(--wgos-module-accent) 12%, var(--nx-bg-glass-light)), var(--nx-bg-card));
+	border: 1px solid color-mix(in srgb, var(--wgos-module-accent) 28%, var(--nx-border));
+	box-shadow: inset 0 1px 0 var(--nx-bg-glass-light);
 }
 
 .wgos-asset-explorer__module-top {
@@ -184,9 +181,9 @@
 	gap: 0.18rem;
 	min-width: min(100%, 15rem);
 	padding: 0.8rem 0.9rem;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--nx-border);
 	border-radius: 16px;
-	background: rgba(8, 9, 13, 0.92);
+	background: var(--nx-bg-card);
 	color: var(--nx-text);
 	text-align: left;
 	cursor: pointer;
@@ -201,13 +198,13 @@
 .wgos-asset-explorer__asset-chip:focus-visible,
 .wgos-asset-explorer__asset-chip.is-active {
 	transform: translateY(-2px);
-	border-color: color-mix(in srgb, var(--wgos-module-accent) 60%, rgba(255, 255, 255, 0.18));
-	box-shadow: 0 14px 24px hsl(30 20% 5% / 0.18);
-	background: color-mix(in srgb, var(--wgos-module-accent) 12%, rgba(8, 9, 13, 0.96));
+	border-color: color-mix(in srgb, var(--wgos-module-accent) 60%, var(--nx-border));
+	box-shadow: var(--nx-shadow);
+	background: color-mix(in srgb, var(--wgos-module-accent) 12%, var(--nx-bg-card));
 }
 
 .wgos-asset-explorer__asset-chip:focus-visible {
-	outline: 3px solid rgba(212, 175, 55, 0.42);
+	outline: 3px solid var(--nx-border-gold);
 	outline-offset: 2px;
 }
 
@@ -218,7 +215,7 @@
 }
 
 .wgos-asset-explorer__asset-meta {
-	font-size: 0.73rem;
+	font-size: 0.78rem;
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
@@ -233,9 +230,9 @@
 	width: min(18rem, 80vw);
 	padding: 0.8rem 0.9rem;
 	border-radius: 14px;
-	background: rgba(8, 9, 13, 0.96);
-	border: 1px solid rgba(212, 175, 55, 0.24);
-	box-shadow: 0 18px 32px hsl(30 20% 4% / 0.28);
+	background: var(--nx-floating-surface);
+	border: 1px solid var(--nx-border-gold);
+	box-shadow: var(--nx-shadow-lg);
 	font-size: 0.82rem;
 	line-height: 1.55;
 	color: var(--nx-text-secondary);
@@ -252,7 +249,7 @@
 	top: 100%;
 	border-width: 8px 8px 0;
 	border-style: solid;
-	border-color: rgba(212, 175, 55, 0.24) transparent transparent;
+	border-color: var(--nx-border-gold) transparent transparent;
 }
 
 .wgos-asset-explorer__tooltip.is-visible,
@@ -276,10 +273,10 @@
 	padding: 1.4rem;
 	border-radius: 22px;
 	background:
-		radial-gradient(circle at top right, rgba(212, 175, 55, 0.14), transparent 22%),
-		linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(9, 10, 14, 0.96));
-	border: 1px solid rgba(212, 175, 55, 0.16);
-	box-shadow: 0 24px 48px hsl(30 22% 4% / 0.2);
+		radial-gradient(circle at top right, color-mix(in srgb, var(--nx-gold) 14%, transparent), transparent 22%),
+		var(--nx-card-gradient);
+	border: 1px solid var(--nx-border-gold);
+	box-shadow: var(--nx-shadow-xl);
 }
 
 .wgos-asset-explorer__panel-head {
@@ -300,9 +297,9 @@
 	display: inline-flex;
 	padding: 0.42rem 0.72rem;
 	border-radius: 999px;
-	background: rgba(255, 255, 255, 0.05);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	font-size: 0.72rem;
+	background: var(--nx-bg-glass-light);
+	border: 1px solid var(--nx-border);
+	font-size: 0.78rem;
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
@@ -315,9 +312,9 @@
 	justify-content: center;
 	width: 42px;
 	height: 42px;
-	border: 1px solid rgba(255, 255, 255, 0.12);
+	border: 1px solid var(--nx-border);
 	border-radius: 14px;
-	background: rgba(255, 255, 255, 0.03);
+	background: var(--nx-bg-glass-light);
 	color: var(--nx-text);
 	font-size: 1.5rem;
 	line-height: 1;
@@ -327,8 +324,12 @@
 .wgos-asset-explorer__close:hover,
 .wgos-asset-explorer__close:focus-visible {
 	border-color: var(--nx-border-gold);
-	background: rgba(212, 175, 55, 0.08);
-	outline: none;
+	background: var(--nx-gold-subtle);
+}
+
+.wgos-asset-explorer__close:focus-visible {
+	outline: 3px solid var(--nx-border-gold);
+	outline-offset: 2px;
 }
 
 .wgos-asset-explorer__panel-body {
@@ -379,12 +380,12 @@
 	gap: 0.4rem;
 	padding: 1rem;
 	border-radius: 18px;
-	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid rgba(255, 255, 255, 0.07);
+	background: var(--nx-bg-glass-light);
+	border: 1px solid var(--nx-border);
 }
 
 .wgos-asset-explorer__panel-stat-label {
-	font-size: 0.72rem;
+	font-size: 0.78rem;
 	font-weight: 800;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
@@ -404,7 +405,7 @@
 	gap: 1rem;
 	margin-top: 1.2rem;
 	padding-top: 1rem;
-	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	border-top: 1px solid var(--nx-border);
 }
 
 .wgos-asset-explorer__panel-nav {
@@ -417,9 +418,9 @@
 .wgos-asset-explorer__panel-nav button {
 	min-height: 40px;
 	padding: 0 0.95rem;
-	border: 1px solid rgba(255, 255, 255, 0.12);
+	border: 1px solid var(--nx-border);
 	border-radius: 999px;
-	background: rgba(255, 255, 255, 0.04);
+	background: var(--nx-bg-glass-light);
 	color: var(--nx-text);
 	font-weight: 700;
 	cursor: pointer;
@@ -428,7 +429,11 @@
 .wgos-asset-explorer__panel-nav button:hover,
 .wgos-asset-explorer__panel-nav button:focus-visible {
 	border-color: var(--nx-border-gold);
-	outline: none;
+}
+
+.wgos-asset-explorer__panel-nav button:focus-visible {
+	outline: 3px solid var(--nx-border-gold);
+	outline-offset: 2px;
 }
 
 .wgos-asset-explorer__panel-nav span {
@@ -449,22 +454,26 @@
 	font-weight: 800;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
-	box-shadow: 0 18px 28px hsl(var(--accent-hsl) / 0.22);
+	box-shadow: var(--nx-shadow-gold);
 }
 
 .wgos-asset-explorer__cta:hover,
 .wgos-asset-explorer__cta:focus-visible {
 	color: var(--text-inverse) !important;
-	outline: none;
 	transform: translateY(-1px);
+}
+
+.wgos-asset-explorer__cta:focus-visible {
+	outline: 3px solid var(--nx-border-gold);
+	outline-offset: 3px;
 }
 
 .wgos-asset-explorer__noscript {
 	margin-top: 1rem;
 	padding: 1rem 1.2rem;
 	border-radius: 16px;
-	background: rgba(255, 255, 255, 0.04);
-	border: 1px solid rgba(212, 175, 55, 0.18);
+	background: var(--nx-bg-glass-light);
+	border: 1px solid var(--nx-border-gold);
 	font-size: 0.95rem;
 	color: var(--nx-text-secondary);
 }

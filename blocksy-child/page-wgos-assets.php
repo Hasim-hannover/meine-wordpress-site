@@ -179,6 +179,7 @@ $draft_note = $draft_count > 0
 
 						<div class="wgos-hero__actions">
 							<a href="#explorer" class="wgos-btn wgos-btn--primary" data-track="cta_click_explorer">Explorer öffnen</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit_hero">Growth Audit starten</a>
 						</div>
 
 						<p class="wgos-hero__microcopy">Erst die strategische Logik sehen? <a href="<?php echo esc_url( $wgos_url ); ?>">Zum WGOS-System</a>.</p>
@@ -190,7 +191,7 @@ $draft_note = $draft_count > 0
 							<?php foreach ( $hero_layers as $hero_layer ) : ?>
 								<article class="wgos-phase-list__item">
 									<span class="wgos-phase-list__label"><?php echo esc_html( $hero_layer['phase'] ); ?></span>
-									<h3><?php echo esc_html( $hero_layer['title'] ); ?></h3>
+									<p class="wgos-phase-list__title"><?php echo esc_html( $hero_layer['title'] ); ?></p>
 									<p><?php echo esc_html( $hero_layer['text'] ); ?></p>
 								</article>
 							<?php endforeach; ?>
@@ -284,7 +285,15 @@ $draft_note = $draft_count > 0
 				</div>
 
 				<div class="wgos-hub-sections">
+					<?php $prev_phase_step = ''; ?>
 					<?php foreach ( $hub_sections as $section ) : ?>
+						<?php if ( '' !== $prev_phase_step && $prev_phase_step !== (string) $section['phase_step'] ) : ?>
+							<div class="wgos-hub-phase-bridge">
+								<p>Wissen Sie bereits, welche Assets für Sie Priorität haben?</p>
+								<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit_bridge">Growth Audit starten</a>
+							</div>
+						<?php endif; ?>
+						<?php $prev_phase_step = (string) $section['phase_step']; ?>
 						<section class="wgos-hub-section-card nx-reveal" aria-labelledby="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>" style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
 							<header class="wgos-hub-section-card__head">
 								<div>

@@ -214,7 +214,6 @@ function WGOSAssetExplorer({ links = {} }) {
 														<button
 															key={asset.id}
 															type="button"
-															role="button"
 															tabIndex={0}
 															className={`wgos-asset-explorer__asset-chip${isActive ? ' is-active' : ''}`}
 															aria-controls="wgos-asset-explorer-panel"
@@ -270,7 +269,7 @@ function WGOSAssetExplorer({ links = {} }) {
 										<span>{activeAsset.group}</span>
 									</div>
 									<button type="button" className="wgos-asset-explorer__close" onClick={closeAsset} aria-label="Detailansicht schließen">
-										×
+										<span aria-hidden="true">×</span>
 									</button>
 								</div>
 

@@ -468,8 +468,10 @@
 	color: var(--nx-accent-text);
 }
 
-.wgos-phase-list__item h3 {
+.wgos-phase-list__title {
+	margin: 0;
 	font-size: 1rem;
+	font-weight: 700;
 }
 
 .wgos-phase-list__item p {
@@ -1755,9 +1757,9 @@
 }
 
 .wgos-hub-asset-card__status.is-draft {
-	border-color: rgba(255, 159, 103, 0.24);
-	background: rgba(255, 159, 103, 0.1);
-	color: #ffbf94;
+	border-color: rgba(255, 159, 103, 0.32);
+	background: rgba(255, 159, 103, 0.14);
+	color: #e08a50;
 }
 
 .wgos-hub-asset-card__facts {
@@ -1775,7 +1777,7 @@
 }
 
 .wgos-hub-asset-card__facts dt {
-	font-size: 0.72rem;
+	font-size: 0.78rem;
 	font-weight: 800;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
@@ -1792,6 +1794,24 @@
 .wgos-hub-asset-card__actions {
 	display: flex;
 	justify-content: flex-start;
+}
+
+.wgos-hub-phase-bridge {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 18px;
+	padding: 22px 24px;
+	border: 1px dashed var(--nx-border-gold);
+	border-radius: var(--nx-radius-lg);
+	background: var(--nx-gold-subtle);
+}
+
+.wgos-hub-phase-bridge p {
+	margin: 0;
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: var(--nx-text-secondary);
 }
 
 /* Responsive */
@@ -1818,6 +1838,15 @@
 
 	.wgos-proof-grid {
 		grid-template-columns: 1fr;
+	}
+
+	.wgos-hub-asset-card__facts {
+		grid-template-columns: 1fr;
+	}
+
+	.wgos-hub-phase-bridge {
+		flex-direction: column;
+		text-align: center;
 	}
 }
 
