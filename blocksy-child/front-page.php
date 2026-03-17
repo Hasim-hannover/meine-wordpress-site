@@ -150,11 +150,6 @@ get_header();
 							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_hero_cases" data-track-category="trust">Ergebnisse ansehen</a>
 						</div>
 						<p class="nx-cta-microcopy nx-reveal">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
-
-						<p class="wp-home-hero__support nx-reveal">
-							Lokaler Einstieg für Hannover:
-							<a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_home_hero_agentur" data-track-category="navigation">WordPress Agentur in Hannover</a>
-						</p>
 					</div>
 
 					<aside class="wp-home-hero-card nx-reveal" aria-labelledby="home-hero-card-title">
@@ -172,15 +167,7 @@ get_header();
 					</aside>
 				</div>
 
-				<div class="wp-home-kpi-row nx-reveal" role="list" aria-label="Track-Record im Hero">
-					<?php foreach ( $hero_metrics as $metric ) : ?>
-						<article class="wp-home-kpi-card" role="listitem">
-							<span class="wp-home-kpi-card__value"><?php echo esc_html( $metric['value'] ); ?></span>
-							<span class="wp-home-kpi-card__label"><?php echo esc_html( $metric['label'] ); ?></span>
-							<span class="wp-home-kpi-card__context"><?php echo esc_html( $metric['context'] ); ?></span>
-						</article>
-					<?php endforeach; ?>
-				</div>
+				<!-- KPI-Row bewusst entfernt: Metriken kommen in der Proof-Section (E3 Case) -->
 			</div>
 		</section>
 

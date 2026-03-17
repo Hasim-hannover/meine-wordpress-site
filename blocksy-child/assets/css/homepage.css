@@ -146,7 +146,7 @@
   position: relative;
 }
 
-.wp-hero-title { font-size: clamp(2.75rem, 4.8vw, 4.55rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.018em; margin: 0 0 1.35rem; color: var(--nx-text); max-width: 12.5ch; }
+.wp-hero-title { font-size: clamp(2.75rem, 4.8vw, 4.55rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.018em; margin: 0 0 1.35rem; color: var(--nx-text); max-width: 16ch; }
 .wp-hero-title span { color: var(--nx-accent-text); }
 .wp-hero-subtitle { font-size: 1.1rem; color: var(--nx-text-secondary); max-width: 60ch; margin: 0 0 1.75rem; line-height: 1.74; }
 .wp-hero-platform-note {
