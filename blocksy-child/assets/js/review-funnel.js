@@ -534,8 +534,9 @@
 
     currentStep.setAttribute('tabindex', '-1');
 
-    if (typeof currentStep.scrollIntoView === 'function') {
-      currentStep.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    var scrollTarget = document.querySelector('.review-progress') || currentStep;
+    if (typeof scrollTarget.scrollIntoView === 'function') {
+      scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     var firstInput = currentStep.querySelector('input:not([type="hidden"]):not([type="radio"]), textarea, select');
