@@ -8,7 +8,35 @@
   'use strict';
 
   function initAuditPage() {
+    captureAdsParams();
     injectFaqSchema();
+  }
+
+  /**
+   * URL-Parameter (utm_source, keyword) im sessionStorage sichern
+   * und in versteckte Formularfelder schreiben. Keine Cookies.
+   */
+  function captureAdsParams() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var utmSource = urlParams.get('utm_source');
+    var utmKeyword = urlParams.get('keyword');
+
+    if (utmSource) {
+      sessionStorage.setItem('ads_source', utmSource);
+    }
+    if (utmKeyword) {
+      sessionStorage.setItem('ads_keyword', utmKeyword);
+    }
+
+    var adsSourceField = document.getElementById('ads_source');
+    var adsKeywordField = document.getElementById('ads_keyword');
+
+    if (adsSourceField) {
+      adsSourceField.value = sessionStorage.getItem('ads_source') || '';
+    }
+    if (adsKeywordField) {
+      adsKeywordField.value = sessionStorage.getItem('ads_keyword') || '';
+    }
   }
 
   /**
