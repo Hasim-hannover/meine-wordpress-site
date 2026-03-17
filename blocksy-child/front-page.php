@@ -107,6 +107,14 @@ $faq_items = [
 		'question' => 'Was bedeutet privacy-first Measurement konkret?',
 		'answer'   => 'Consent, Tracking und Conversion-Signale werden so aufgebaut, dass Entscheidungen belastbar werden, ohne WordPress in eine Daten-Blackbox zu verwandeln.',
 	],
+	[
+		'question' => 'Was passiert nach dem Growth Audit?',
+		'answer'   => 'Sie bekommen eine klare Einschätzung, wo Ihre Website Nachfrage verliert und welche Hebel Priorität haben. Danach entscheiden Sie, ob und wie es weitergeht. Kein automatischer Folgevertrag.',
+	],
+	[
+		'question' => 'Arbeiten Sie auch mit bestehenden WordPress-Websites?',
+		'answer'   => 'Ja. In den meisten Fällen ist kein Relaunch nötig. Häufig reichen gezielte Eingriffe an Angebotsseiten, Tracking, Proof oder technischer Reibung, bevor größer gedacht werden muss.',
+	],
 ];
 
 get_header();
@@ -448,7 +456,7 @@ get_header();
 				<div class="wp-home-section-title text-center nx-reveal">
 					<span class="nx-badge nx-badge--ghost">Knowledge Base</span>
 					<h2 class="wp-section-h2">Analysen für Teams, die den Mechanismus hinter Sichtbarkeit und Conversion verstehen wollen.</h2>
-					<p class="wp-section-p">Bewusst ruhiger platziert: als Wissenslayer für spätere Vertiefung, nicht als Konkurrenz zum primären Audit-Funnel.</p>
+					<p class="wp-section-p">Keine Taktik-Tipps, sondern Analysen zur Verbindung zwischen Sichtbarkeit, Daten und Anfragen.</p>
 				</div>
 
 				<div class="homepage-blog-grid">

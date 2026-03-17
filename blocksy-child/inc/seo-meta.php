@@ -42,7 +42,7 @@ function hu_get_homepage_title() {
 function hu_get_homepage_description() {
 	return (string) apply_filters(
 		'hu_homepage_seo_description',
-		'Ich mache aus Ihrer WordPress-Website ein planbares Anfragesystem: klare Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik für B2B.'
+		'Ich mache aus Ihrer WordPress-Website ein planbares Anfragesystem: Positionierung, technische SEO, Tracking und Conversion-Logik für B2B.'
 	);
 }
 
