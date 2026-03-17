@@ -26,6 +26,27 @@
             return;
         }
 
+        var urlParams = new URLSearchParams(window.location.search);
+        var utmSource = urlParams.get('utm_source');
+        var utmKeyword = urlParams.get('keyword');
+
+        if (utmSource) {
+            sessionStorage.setItem('ads_source', utmSource);
+        }
+        if (utmKeyword) {
+            sessionStorage.setItem('ads_keyword', utmKeyword);
+        }
+
+        var adsSourceField = form.querySelector('#ads_source');
+        var adsKeywordField = form.querySelector('#ads_keyword');
+
+        if (adsSourceField) {
+            adsSourceField.value = sessionStorage.getItem('ads_source') || '';
+        }
+        if (adsKeywordField) {
+            adsKeywordField.value = sessionStorage.getItem('ads_keyword') || '';
+        }
+
         var typeContent = {
             project: {
                 focusLabel: 'Wobei benötigen Sie Unterstützung?',

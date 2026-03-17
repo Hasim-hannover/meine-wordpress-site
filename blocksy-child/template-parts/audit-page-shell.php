@@ -270,6 +270,8 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 								<input type="hidden" name="company_website" value="">
 								<input type="hidden" name="started_at" value="">
 								<input type="hidden" name="audit_type" value="growth_audit">
+								<input type="hidden" name="ads_source" id="ads_source" value="">
+								<input type="hidden" name="ads_keyword" id="ads_keyword" value="">
 
 								<div class="review-progress" aria-label="Fortschritt im Diagnose-Flow">
 									<div class="review-progress-head">

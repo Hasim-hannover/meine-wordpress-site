@@ -391,6 +391,8 @@ function nexus_sync_contact_request_to_crm( $payload ) {
 				'_nexus_contact_message'                 => sanitize_textarea_field( (string) ( $payload['message'] ?? '' ) ),
 				'_nexus_contact_consent_contact_request' => 1,
 				'_nexus_contact_last_inquiry_at'         => current_time( 'timestamp' ),
+				'_nexus_contact_ads_source'              => sanitize_text_field( (string) ( $payload['ads_source'] ?? '' ) ),
+				'_nexus_contact_ads_keyword'             => sanitize_text_field( (string) ( $payload['ads_keyword'] ?? '' ) ),
 			],
 		]
 	);

@@ -145,6 +145,9 @@ $message_minlength     = $is_general_type ? 18 : 24;
 						<input id="contact-company-website" type="text" name="company_website" tabindex="-1" autocomplete="off">
 					</div>
 
+					<input type="hidden" name="ads_source" id="ads_source" value="">
+					<input type="hidden" name="ads_keyword" id="ads_keyword" value="">
+
 					<fieldset class="contact-intent">
 						<legend>Worum geht es?</legend>
 						<p class="contact-field__help">Nicht sicher? Wählen Sie einfach die Option, die am ehesten passt.</p>

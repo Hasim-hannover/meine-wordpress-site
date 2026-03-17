@@ -35,6 +35,27 @@
       startedField.value = String(Date.now());
     }
 
+    var urlParams = new URLSearchParams(window.location.search);
+    var utmSource = urlParams.get('utm_source');
+    var utmKeyword = urlParams.get('keyword');
+
+    if (utmSource) {
+      sessionStorage.setItem('ads_source', utmSource);
+    }
+    if (utmKeyword) {
+      sessionStorage.setItem('ads_keyword', utmKeyword);
+    }
+
+    var adsSourceField = form.querySelector('#ads_source');
+    var adsKeywordField = form.querySelector('#ads_keyword');
+
+    if (adsSourceField) {
+      adsSourceField.value = sessionStorage.getItem('ads_source') || '';
+    }
+    if (adsKeywordField) {
+      adsKeywordField.value = sessionStorage.getItem('ads_keyword') || '';
+    }
+
     Array.prototype.forEach.call(form.querySelectorAll('input[type="url"]'), function (input) {
       input.addEventListener('blur', function () {
         normalizeUrlField(this);

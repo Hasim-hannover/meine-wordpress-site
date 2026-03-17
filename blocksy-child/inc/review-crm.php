@@ -418,6 +418,9 @@ function nexus_validate_review_request_payload( $payload ) {
 		$audit_type = 'growth_audit';
 	}
 
+	$ads_source  = isset( $payload['ads_source'] ) ? sanitize_text_field( (string) $payload['ads_source'] ) : '';
+	$ads_keyword = isset( $payload['ads_keyword'] ) ? sanitize_text_field( (string) $payload['ads_keyword'] ) : '';
+
 	return [
 		'audit_type'        => $audit_type,
 		'audit_type_label'  => $type_options[ $audit_type ],
@@ -434,6 +437,8 @@ function nexus_validate_review_request_payload( $payload ) {
 		'email'             => $email,
 		'linkedin'          => $linkedin,
 		'consent_privacy'   => $consent_privacy,
+		'ads_source'        => $ads_source,
+		'ads_keyword'       => $ads_keyword,
 	];
 }
 
@@ -485,6 +490,8 @@ function nexus_create_review_request_post( $payload ) {
 	update_post_meta( $post_id, '_nexus_review_linkedin', $payload['linkedin'] );
 	update_post_meta( $post_id, '_nexus_review_consent_privacy', $payload['consent_privacy'] );
 	update_post_meta( $post_id, '_nexus_review_source', 'growth_audit_funnel' );
+	update_post_meta( $post_id, '_nexus_review_ads_source', sanitize_text_field( (string) ( $payload['ads_source'] ?? '' ) ) );
+	update_post_meta( $post_id, '_nexus_review_ads_keyword', sanitize_text_field( (string) ( $payload['ads_keyword'] ?? '' ) ) );
 
 	return (int) $post_id;
 }
@@ -788,6 +795,25 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 		$extra_context_line,
 		esc_url( $edit_url ),
 		esc_url( $page_url )
+	);
+
+	$ads_source_label  = ! empty( $payload['ads_source'] ) ? $payload['ads_source'] : 'Organisch/Direkt';
+	$ads_keyword_label = ! empty( $payload['ads_keyword'] ) ? $payload['ads_keyword'] : 'Keines';
+
+	$content .= sprintf(
+		'<table role="presentation" width="100%%%%" cellspacing="0" cellpadding="0" border="0" style="margin:18px 0 0 0; border-collapse:separate; border-spacing:0 10px;">
+			<tr>
+				<td style="padding:14px 16px; border:1px solid rgba(255,255,255,0.08); border-radius:18px; background:rgba(255,255,255,0.03); font-family:Helvetica, Arial, sans-serif;">
+					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Tracking Info</div>
+					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
+						<strong style="color:#f7f3ee;">Quelle:</strong> %1$s<br>
+						<strong style="color:#f7f3ee;">Keyword:</strong> %2$s
+					</div>
+				</td>
+			</tr>
+		</table>',
+		esc_html( $ads_source_label ),
+		esc_html( $ads_keyword_label )
 	);
 
 	$html = nexus_get_transactional_email_shell(
