@@ -273,7 +273,7 @@ function hu_hero_section_shortcode() {
 								<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-btn wp-btn-secondary">Ergebnisse ansehen</a>
 							</div>
 							<p class="wp-hero-supporting-link nx-reveal">Erst das Vorgehen verstehen? <a href="<?php echo esc_url( $urls['about'] ); ?>">Meine Arbeitsweise ansehen</a></p>
-							<p class="wp-hero-supporting-link nx-reveal">Lokaler Einstieg für Hannover: <a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress für B2B in Hannover</a></p>
+							<p class="wp-hero-supporting-link nx-reveal">Lokaler Einstieg für Hannover: <a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress Agentur Hannover</a></p>
 							<div class="wp-hero-direct-links nx-reveal" aria-label="Direkteinstiege zu zentralen Leistungen">
 								<span class="wp-hero-direct-links__label">Direkteinstiege</span>
 								<a href="<?php echo esc_url( $urls['seo'] ); ?>">WordPress SEO Hannover</a>
@@ -675,7 +675,7 @@ function hu_prozess_section_shortcode() {
 			</div>
 			<p style="margin:1rem auto 0; max-width:44rem; text-align:center; color:var(--muted);">
 				Wenn Sie einen lokalen Einstieg suchen, finden Sie hier die passende Seite zur
-				<a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress für B2B in Hannover</a>.
+				<a href="<?php echo esc_url( $urls['agentur'] ); ?>">WordPress-Agentur in Hannover</a>.
 			</p>
 		</div>
 	</section>

@@ -105,11 +105,11 @@ function hu_get_forced_singular_seo_map() {
 			],
 			'wordpress-agentur-hannover' => [
 				'title'       => 'WordPress Agentur Hannover | B2B-Websites mit System',
-				'description' => 'WordPress Agentur in Hannover für B2B: Angebotsseiten, technische SEO, Tracking, Conversion und kontrollierte Weiterentwicklung als Nachfrage-System.',
+				'description' => 'WordPress Agentur Hannover für B2B-Unternehmen: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmaßnahmen. Kostenloser Growth Audit als Einstieg.',
 			],
 			'wordpress-agentur' => [
 				'title'       => 'WordPress Agentur Hannover | B2B-Websites mit System',
-				'description' => 'WordPress Agentur in Hannover für B2B: Angebotsseiten, technische SEO, Tracking, Conversion und kontrollierte Weiterentwicklung als Nachfrage-System.',
+				'description' => 'WordPress Agentur Hannover für B2B-Unternehmen: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmaßnahmen. Kostenloser Growth Audit als Einstieg.',
 			],
 			'wordpress-wartung-hannover' => [
 				'title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',

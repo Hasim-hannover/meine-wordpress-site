@@ -145,7 +145,7 @@ get_header();
 
 						<p class="wp-home-hero__support nx-reveal">
 							Lokaler Einstieg für Hannover:
-							<a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_home_hero_agentur" data-track-category="navigation">WordPress für B2B in Hannover</a>
+							<a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_home_hero_agentur" data-track-category="navigation">WordPress Agentur in Hannover</a>
 						</p>
 					</div>
 

@@ -74,7 +74,7 @@ $privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 				<h3 id="ft-einstieg">Einstieg</h3>
 				<ul class="ft__list">
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_nav_audit" data-track-category="lead_gen">Growth Audit</a></li>
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_footer_nav_agentur" data-track-category="navigation">WordPress für B2B in Hannover</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_footer_nav_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></li>
 					<li><a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_footer_nav_wgos" data-track-category="navigation">WGOS</a></li>
 				</ul>
 			</section>
