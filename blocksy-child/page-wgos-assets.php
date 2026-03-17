@@ -294,8 +294,8 @@ $draft_note = $draft_count > 0
 							</div>
 						<?php endif; ?>
 						<?php $prev_phase_step = (string) $section['phase_step']; ?>
-						<section class="wgos-hub-section-card nx-reveal" aria-labelledby="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>" style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
-							<header class="wgos-hub-section-card__head">
+						<details class="wgos-hub-section-card nx-reveal" style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
+							<summary class="wgos-hub-section-card__head" aria-labelledby="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>">
 								<div>
 									<span class="wgos-hub-section-card__phase"><?php echo esc_html( (string) $section['phase_step'] ); ?> · <?php echo esc_html( (string) $section['phase_label'] ); ?></span>
 									<h3 id="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>">
@@ -307,7 +307,7 @@ $draft_note = $draft_count > 0
 									<p><?php echo esc_html( (string) $section['summary'] ); ?></p>
 									<span class="wgos-hub-section-card__count"><?php echo esc_html( (string) count( (array) $section['items'] ) ); ?> Assets</span>
 								</div>
-							</header>
+							</summary>
 
 							<div class="wgos-hub-asset-grid">
 								<?php foreach ( (array) $section['items'] as $item ) : ?>
@@ -354,7 +354,7 @@ $draft_note = $draft_count > 0
 									</article>
 								<?php endforeach; ?>
 							</div>
-						</section>
+						</details>
 					<?php endforeach; ?>
 				</div>
 			</div>
