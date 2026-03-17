@@ -432,8 +432,9 @@ function nexus_handle_contact_request_submission( WP_REST_Request $request ) {
 	if ( is_wp_error( $validated ) ) {
 		return new WP_REST_Response(
 			[
-				'ok'    => false,
-				'error' => $validated->get_error_message(),
+				'ok'         => false,
+				'error'      => $validated->get_error_message(),
+				'error_code' => $validated->get_error_code(),
 			],
 			400
 		);
@@ -534,8 +535,8 @@ function nexus_validate_contact_request_payload( $payload ) {
 	}
 
 	if ( in_array( $request_type, [ 'project', 'client' ], true ) ) {
-		if ( ! isset( $timeline_options[ $timeline ] ) ) {
-			return new WP_Error( 'missing_timeline', 'Bitte das gewünschte Zeitfenster angeben.' );
+		if ( '' !== $timeline && ! isset( $timeline_options[ $timeline ] ) ) {
+			return new WP_Error( 'invalid_timeline', 'Bitte ein gültiges Zeitfenster auswählen.' );
 		}
 	} else {
 		$timeline = '';
@@ -557,8 +558,12 @@ function nexus_validate_contact_request_payload( $payload ) {
 		return new WP_Error( 'missing_consent', 'Bitte der Verarbeitung Ihrer Nachricht zustimmen.' );
 	}
 
-	$ads_source  = isset( $payload['ads_source'] ) ? sanitize_text_field( (string) $payload['ads_source'] ) : '';
-	$ads_keyword = isset( $payload['ads_keyword'] ) ? sanitize_text_field( (string) $payload['ads_keyword'] ) : '';
+	$ads_source   = isset( $payload['ads_source'] ) ? sanitize_text_field( (string) $payload['ads_source'] ) : '';
+	$ads_keyword  = isset( $payload['ads_keyword'] ) ? sanitize_text_field( (string) $payload['ads_keyword'] ) : '';
+	$utm_medium   = isset( $payload['utm_medium'] ) ? sanitize_text_field( (string) $payload['utm_medium'] ) : '';
+	$utm_campaign = isset( $payload['utm_campaign'] ) ? sanitize_text_field( (string) $payload['utm_campaign'] ) : '';
+	$gclid        = isset( $payload['gclid'] ) ? sanitize_text_field( (string) $payload['gclid'] ) : '';
+	$matchtype    = isset( $payload['matchtype'] ) ? sanitize_text_field( (string) $payload['matchtype'] ) : '';
 
 	return [
 		'name'               => $name,
@@ -576,6 +581,10 @@ function nexus_validate_contact_request_payload( $payload ) {
 		'budget_label'       => '' !== $budget ? $budget_options[ $budget ] : '',
 		'ads_source'         => $ads_source,
 		'ads_keyword'        => $ads_keyword,
+		'utm_medium'         => $utm_medium,
+		'utm_campaign'       => $utm_campaign,
+		'gclid'              => $gclid,
+		'matchtype'          => $matchtype,
 	];
 }
 
@@ -717,6 +726,10 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 
 	$ads_source_label  = '' !== $payload['ads_source'] ? $payload['ads_source'] : 'Organisch/Direkt';
 	$ads_keyword_label = '' !== $payload['ads_keyword'] ? $payload['ads_keyword'] : 'Keines';
+	$utm_medium_label  = '' !== $payload['utm_medium'] ? $payload['utm_medium'] : '';
+	$utm_campaign_label = '' !== $payload['utm_campaign'] ? $payload['utm_campaign'] : '';
+	$gclid_label       = '' !== $payload['gclid'] ? $payload['gclid'] : '';
+	$matchtype_label   = '' !== $payload['matchtype'] ? $payload['matchtype'] : '';
 
 	$content = sprintf(
 		'<table role="presentation" width="100%%" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 18px 0; border-collapse:separate; border-spacing:0 10px;">
@@ -741,7 +754,11 @@ function nexus_send_contact_request_admin_notification( $payload ) {
 					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:8px;">Tracking Info</div>
 					<div style="font-size:14px; line-height:1.75; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">Quelle:</strong> %5$s<br>
-						<strong style="color:#f7f3ee;">Keyword:</strong> %6$s
+						<strong style="color:#f7f3ee;">Keyword:</strong> %6$s' .
+		( '' !== $utm_medium_label ? '<br><strong style="color:#f7f3ee;">Medium:</strong> ' . esc_html( $utm_medium_label ) : '' ) .
+		( '' !== $utm_campaign_label ? '<br><strong style="color:#f7f3ee;">Kampagne:</strong> ' . esc_html( $utm_campaign_label ) : '' ) .
+		( '' !== $gclid_label ? '<br><strong style="color:#f7f3ee;">GCLID:</strong> ' . esc_html( $gclid_label ) : '' ) .
+		( '' !== $matchtype_label ? '<br><strong style="color:#f7f3ee;">Matchtype:</strong> ' . esc_html( $matchtype_label ) : '' ) . '
 					</div>
 				</td>
 			</tr>

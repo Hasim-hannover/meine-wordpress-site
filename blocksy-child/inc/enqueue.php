@@ -149,14 +149,19 @@ function hu_enqueue_assets() {
 	if ( function_exists( 'nexus_is_contact_page' ) && nexus_is_contact_page() ) {
 		hu_enqueue_css( 'nexus-contact-css', 'contact.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-contact-js', 'contact.js', [ 'nexus-core-js' ] );
+		$contact_requested_type = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '';
+		$contact_type_options   = function_exists( 'nexus_get_contact_request_type_options' ) ? nexus_get_contact_request_type_options() : [];
+		$contact_is_project_landing = 'project' === $contact_requested_type && isset( $contact_type_options['project'] );
+
 		wp_localize_script(
 			'nexus-contact-js',
 			'NexusContactConfig',
 			[
-				'restEndpoint'   => esc_url_raw( rest_url( 'nexus/v1/contact-request' ) ),
-				'successMessage' => 'Danke. Ihre Anfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
-				'errorMessage'   => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
-				'callUrl'        => esc_url_raw( function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' ) ),
+				'restEndpoint'     => esc_url_raw( rest_url( 'nexus/v1/contact-request' ) ),
+				'successMessage'   => 'Danke. Ihre Anfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
+				'errorMessage'     => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
+				'callUrl'          => esc_url_raw( function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' ) ),
+				'isProjectLanding' => $contact_is_project_landing,
 			]
 		);
 	}
