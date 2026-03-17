@@ -265,44 +265,44 @@ $audit_steps = [
 $packages = [
 	[
 		'name'     => 'Fundament',
-		'tagline'  => 'Grundlage, Messbarkeit und Stabilität ordnen',
-		'price'    => 'ab 1.500 EUR',
-		'credits'  => '30 Credits / Monat',
+		'tagline'  => 'Fokussierte Optimierungen und priorisierte Maßnahmen',
+		'price'    => '2.250 €',
+		'credits'  => '30 Credits',
 		'featured' => false,
-		'trigger'  => 'Richtig, wenn die Website zuerst tragfähig, messbar und priorisierbar werden muss.',
+		'trigger'  => 'Für klar umrissene Ausbaustufen, gezielte Engpass-Beseitigung und technische Grundlagenarbeit.',
 		'features' => [
-			'3 Monate Fokus auf Technik, Tracking und Priorisierung',
-			'1 Strategietermin pro Monat',
-			'Roadmap für Fundament, Messbarkeit und erste Conversion-Bremsen',
-			'Monatlicher Review mit klaren Entscheidungen',
+			'Priorisierte Maßnahmen mit definiertem Scope',
+			'Strategietermin zur Ausrichtung',
+			'Roadmap für Fundament, Messbarkeit und erste Hebel',
+			'Review mit klaren Entscheidungsgrundlagen',
 		],
 	],
 	[
 		'name'     => 'Systemaufbau',
-		'tagline'  => 'Sichtbarkeit und Conversion auf saubere Basis setzen',
-		'price'    => 'ab 2.800 EUR',
-		'credits'  => '60 Credits / Monat',
+		'tagline'  => 'Mehrere Module sauber aufbauen und strategisch verzahnen',
+		'price'    => '4.200 €',
+		'credits'  => '60 Credits',
 		'featured' => true,
-		'trigger'  => 'Richtig, wenn aus einer Website ein belastbares Nachfrage-System werden soll.',
+		'trigger'  => 'Für Unternehmen, die Sichtbarkeit, Conversion und Datenqualität gleichzeitig auf ein belastbares Niveau bringen wollen.',
 		'features' => [
-			'6 Monate für Reihenfolge, Sichtbarkeit und Conversion',
-			'2 Strategietermine pro Monat',
-			'Ausbau von Angebotsseiten, SEO-Struktur und Nutzerführung',
-			'Regelmäßige Review- und Priorisierungsschleifen',
+			'Strukturierter Ausbau über mehrere WGOS-Module',
+			'Regelmäßige Strategietermine',
+			'Verzahnung von Angebotsseiten, SEO-Struktur und Nutzerführung',
+			'Laufende Priorisierung auf Basis echter Signale',
 		],
 	],
 	[
 		'name'     => 'Weiterentwicklung',
-		'tagline'  => 'System kontrolliert ausbauen und weiter nachschärfen',
-		'price'    => 'ab 4.500 EUR',
-		'credits'  => '100+ Credits / Monat',
+		'tagline'  => 'Langfristige Systemtiefe und operative Schlagkraft',
+		'price'    => '6.900 €',
+		'credits'  => '100 Credits',
 		'featured' => false,
-		'trigger'  => 'Richtig, wenn Fundament und Kernlogik stehen und das System weiter wachsen soll.',
+		'trigger'  => 'Für tiefere Eingriffe, langfristige Weiterentwicklung und spürbar mehr operative Kapazität im System.',
 		'features' => [
-			'12 Monate für kontinuierliche Systempflege und Ausbau',
+			'Kontinuierlicher Systemausbau mit maximaler Tiefe',
 			'Wöchentlicher Strategie-Slot',
 			'Weiterentwicklung von Reporting, Automationen und Engpass-Themen',
-			'Laufende Priorisierung auf Basis echter Signale',
+			'Höchste Planbarkeit durch effizienten Ressourceneinsatz',
 		],
 	],
 ];
@@ -675,9 +675,9 @@ foreach ( $faq_items as $faq_item ) {
 		<section id="pakete" class="wgos-section wgos-section--white nx-reveal">
 			<div class="wgos-container">
 					<div class="wgos-section-head">
-						<span class="wgos-principle-kicker">Zusammenarbeitsmodell</span>
-						<h2 class="wgos-h2">Wenn die Diagnose steht, folgt die passende Systemtiefe.</h2>
-						<p class="wgos-section-intro">Die Pakete verkaufen nicht das System. Sie geben dem System nach dem Audit den passenden Umfang.</p>
+						<span class="wgos-principle-kicker">Zusammenarbeit</span>
+						<h2 class="wgos-h2">Planbare Growth-Kapazität statt unklarer Einzelstunden.</h2>
+						<p class="wgos-section-intro">WGOS Credits strukturieren Strategie, Umsetzung und Optimierung in einer klaren, flexiblen Systemlogik – damit Prioritäten, Aufwand und Weiterentwicklung sauber planbar bleiben.</p>
 					</div>
 
 					<div class="wgos-pricing-grid">
@@ -692,7 +692,7 @@ foreach ( $faq_items as $faq_item ) {
 								<p class="wgos-pricing-card__tagline"><?php echo esc_html( $package['tagline'] ); ?></p>
 							</div>
 
-							<div class="wgos-pricing-card__price"><?php echo esc_html( $package['price'] ); ?><small>/Monat</small></div>
+							<div class="wgos-pricing-card__price"><?php echo esc_html( $package['price'] ); ?></div>
 							<div class="wgos-pricing-card__credits"><?php echo esc_html( $package['credits'] ); ?></div>
 
 								<ul class="wgos-pricing-card__features">
@@ -708,8 +708,8 @@ foreach ( $faq_items as $faq_item ) {
 
 				<div id="credits" class="wgos-credit-summary nx-reveal">
 					<div class="wgos-credit-summary__copy">
-						<h3>Credits ordnen den Umfang, nicht die Strategie.</h3>
-						<p>Credits schaffen Planbarkeit: Ein Asset hat einen festen Wert, unabhängig vom realen Zeitaufwand. So sprechen wir über Priorität und Wirkung, nicht über Minuten.</p>
+						<h3>Credits sind die operative Einheit im WGOS.</h3>
+						<p>Jedes Asset und Arbeitspaket hat einen definierten Credit-Wert. So lassen sich Maßnahmen, Prioritäten und Weiterentwicklung klar planen – unabhängig davon, ob es um Tracking, SEO, CRO oder technische Optimierung geht. Die Zusammenarbeit bleibt transparent, planbar und auf Wirkung ausgerichtet.</p>
 					</div>
 
 					<div class="wgos-table-wrap">
