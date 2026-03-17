@@ -238,19 +238,25 @@ get_header();
 				<div class="wp-agentur-hero__grid">
 					<div class="wp-agentur-hero__copy">
 						<span class="nx-badge nx-badge--gold">WordPress Agentur Hannover für B2B</span>
-						<h1 class="nx-hero__title">WordPress Agentur Hannover für B2B-Websites, die Sichtbarkeit, Daten und Anfragen zusammenführen.</h1>
+						<h1 class="nx-hero__title">WordPress Agentur Hannover: B2B-Websites, die Anfragen liefern.</h1>
 						<p class="nx-hero__subtitle">
-							Für Unternehmen aus Hannover und der Region, die mit WordPress mehr wollen als einen Relaunch:
-							klare Angebotsseiten, belastbare Messung und eine Umgebung, die kontrolliert weiterentwickelt werden kann.
+							Angebotsseiten, technische SEO, Tracking und Conversion-Führung als zusammenhängendes System statt Einzelmaßnahmen.
 						</p>
 						<div class="wp-agentur-actions wp-agentur-actions--hero">
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary wp-agentur-hero__primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
 							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-agentur-text-link" data-track-action="cta_agentur_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
 						</div>
 						<p class="nx-cta-microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
-						<p class="wp-agentur-hero-support">
-							Workshops und Reviews in Hannover möglich. DACH-weit remote umsetzbar.
-						</p>
+						<figure class="wp-agentur-hero-portrait">
+							<img
+								src="https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp"
+								alt="Haşim Üner – WordPress Agentur Hannover, Growth Architect für B2B-Websites"
+								loading="eager"
+								width="120"
+								height="148"
+							/>
+							<figcaption>Haşim Üner · Growth Architect · Hannover<br/>Workshops und Reviews vor Ort möglich. DACH-weit remote umsetzbar.</figcaption>
+						</figure>
 					</div>
 
 					<aside class="wp-agentur-hero-card" aria-labelledby="agentur-hero-card-title">
@@ -274,19 +280,6 @@ get_header();
 				</div>
 			</div>
 		</section>
-
-		<figure class="wp-agentur-portrait">
-			<div class="nx-container">
-				<img
-					src="https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp"
-					alt="Haşim Üner – WordPress Agentur Hannover, Growth Architect für B2B-Websites"
-					loading="eager"
-					width="120"
-					height="148"
-				/>
-				<figcaption>Haşim Üner · WordPress Growth Architect · Hannover</figcaption>
-			</div>
-		</figure>
 
 		<section id="proof-bar" class="nx-section wp-agentur-proof">
 			<div class="nx-container">

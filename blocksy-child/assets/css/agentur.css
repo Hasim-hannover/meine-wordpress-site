@@ -11,8 +11,9 @@
 }
 
 .wp-agentur-hero .nx-hero__title {
-  max-width: 18ch;
+  max-width: 22ch;
   margin-inline: 0;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
 }
 
 .wp-agentur-hero .nx-hero__subtitle {
@@ -33,7 +34,7 @@
 .wp-agentur-actions--hero {
   justify-content: flex-start;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .wp-agentur-hero__primary {
@@ -180,20 +181,16 @@
   font-weight: 700;
 }
 
-.wp-agentur-portrait {
-  margin: 0;
-  padding: 1.5rem 0 0;
-}
-
-.wp-agentur-portrait .nx-container {
+.wp-agentur-hero-portrait {
   display: flex;
   align-items: center;
-  gap: 1.15rem;
+  gap: 1rem;
+  margin: 0;
 }
 
-.wp-agentur-portrait img {
+.wp-agentur-hero-portrait img {
   display: block;
-  width: 64px;
+  width: 56px;
   height: auto;
   border-radius: 50%;
   border: 2px solid hsl(var(--accent-hsl) / 0.25);
@@ -201,10 +198,10 @@
   aspect-ratio: 1;
 }
 
-.wp-agentur-portrait figcaption {
-  color: var(--nx-text-secondary);
-  font-size: 0.88rem;
-  line-height: 1.5;
+.wp-agentur-hero-portrait figcaption {
+  color: var(--nx-text-dim);
+  font-size: 0.85rem;
+  line-height: 1.55;
 }
 
 .wp-agentur-proof {
