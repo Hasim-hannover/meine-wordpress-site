@@ -7,8 +7,9 @@
         }
 
         var feedback = form.querySelector('[data-contact-feedback]');
-        var submitButton = form.querySelector('button[type="submit"]');
+        var submitButton = form.querySelector('[data-contact-submit]');
         var endpoint = window.NexusContactConfig && window.NexusContactConfig.restEndpoint;
+        var isProjectLanding = window.NexusContactConfig && window.NexusContactConfig.isProjectLanding;
         var typeInputs = form.querySelectorAll('[data-contact-type-input]');
         var focusSelect = form.querySelector('[data-contact-focus-select]');
         var focusLabel = form.querySelector('[data-contact-focus-label]');
@@ -20,41 +21,72 @@
         var messageLabel = form.querySelector('[data-contact-message-label]');
         var messageHelp = form.querySelector('[data-contact-message-help]');
         var messageField = form.querySelector('[data-contact-message]');
+        var errorSummary = document.querySelector('[data-contact-error-summary]');
+        var errorList = document.querySelector('[data-contact-error-list]');
+        var intentFieldset = form.querySelector('[data-contact-intent]');
+        var typeStatusBar = document.querySelector('[data-contact-type-status]');
+        var typeExpandBtn = document.querySelector('[data-contact-type-expand]');
         var currentSubmitLabel = submitButton ? submitButton.textContent : '';
 
         if (!endpoint) {
             return;
         }
 
+        // ── Attribution: direct URL param capture (no sessionStorage) ──
         var urlParams = new URLSearchParams(window.location.search);
-        var utmSource = urlParams.get('utm_source');
-        var utmKeyword = urlParams.get('keyword');
+        var paramMap = {
+            'utm_source': 'ads_source',
+            'ads_source': 'ads_source',
+            'keyword': 'ads_keyword',
+            'ads_keyword': 'ads_keyword',
+            'utm_medium': 'utm_medium',
+            'utm_campaign': 'utm_campaign',
+            'gclid': 'gclid',
+            'matchtype': 'matchtype'
+        };
 
-        if (utmSource) {
-            sessionStorage.setItem('ads_source', utmSource);
-        }
-        if (utmKeyword) {
-            sessionStorage.setItem('ads_keyword', utmKeyword);
+        Object.keys(paramMap).forEach(function (urlKey) {
+            var val = urlParams.get(urlKey);
+            if (val) {
+                var field = form.querySelector('#' + paramMap[urlKey]);
+                if (field) {
+                    field.value = val;
+                }
+            }
+        });
+
+        // ── Auto-scroll to form when type/focus is in URL ──
+        if (document.querySelector('[data-contact-autoscroll]')) {
+            var formPanel = document.getElementById('kontakt-form');
+            if (formPanel) {
+                requestAnimationFrame(function () {
+                    formPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
         }
 
-        var adsSourceField = form.querySelector('#ads_source');
-        var adsKeywordField = form.querySelector('#ads_keyword');
+        // ── Type status bar toggle (project landing) ──
+        if (typeExpandBtn && intentFieldset) {
+            typeExpandBtn.addEventListener('click', function () {
+                var isCollapsed = intentFieldset.classList.contains('contact-intent--collapsed');
+                intentFieldset.classList.toggle('contact-intent--collapsed', !isCollapsed);
+                typeExpandBtn.setAttribute('aria-expanded', isCollapsed ? 'true' : 'false');
 
-        if (adsSourceField) {
-            adsSourceField.value = sessionStorage.getItem('ads_source') || '';
-        }
-        if (adsKeywordField) {
-            adsKeywordField.value = sessionStorage.getItem('ads_keyword') || '';
+                if (isCollapsed && typeStatusBar) {
+                    typeStatusBar.classList.add('is-hidden');
+                }
+            });
         }
 
+        // ── Type content definitions ──
         var typeContent = {
             project: {
                 focusLabel: 'Wobei benötigen Sie Unterstützung?',
                 focusHelp: 'Wählen Sie den Hebel, der fachlich am nächsten an Ihrem Anliegen liegt.',
                 messageLabel: 'Kurzbeschreibung',
-                messageHelp: 'Beschreiben Sie Ziel, Hürde und das gewünschte Ergebnis.',
-                messagePlaceholder: 'Worum geht es im Projekt, was ist das Ziel und was soll sich konkret verbessern?',
-                submitLabel: 'Projektanfrage senden',
+                messageHelp: 'Was ist das Ziel? Was ist die aktuelle Hürde? Welches Ergebnis wünschen Sie sich?',
+                messagePlaceholder: '1. Ziel: Was soll erreicht werden?\n2. Hürde: Was steht aktuell im Weg?\n3. Ergebnis: Was soll sich konkret verbessern?',
+                submitLabel: 'Unverbindlich Projekt anfragen',
                 messageMinlength: 24,
                 timelineLabel: 'Zeitfenster',
                 showTimeline: true,
@@ -86,16 +118,206 @@
             }
         };
 
+        // ── Field-level error helpers ──
+        var fieldErrorMap = {
+            request_type: { label: 'Anfragetyp', errorId: null },
+            focus: { label: 'Thema', errorId: 'contact-focus-error' },
+            message: { label: 'Nachricht', errorId: 'contact-message-error' },
+            name: { label: 'Name', errorId: 'contact-name-error' },
+            email: { label: 'E-Mail', errorId: 'contact-email-error' },
+            consent: { label: 'Datenschutz', errorId: 'contact-consent-error' }
+        };
+
+        function clearFieldErrors() {
+            var errorEls = form.querySelectorAll('.contact-field__error');
+            Array.prototype.forEach.call(errorEls, function (el) {
+                el.textContent = '';
+                el.classList.add('is-hidden');
+            });
+
+            var invalidEls = form.querySelectorAll('[aria-invalid]');
+            Array.prototype.forEach.call(invalidEls, function (el) {
+                el.removeAttribute('aria-invalid');
+            });
+
+            if (errorSummary) {
+                errorSummary.classList.add('is-hidden');
+            }
+            if (errorList) {
+                errorList.innerHTML = '';
+            }
+        }
+
+        function setFieldError(fieldName, message) {
+            var meta = fieldErrorMap[fieldName];
+            if (!meta) {
+                return;
+            }
+
+            var errorEl = meta.errorId ? document.getElementById(meta.errorId) : null;
+            if (errorEl) {
+                errorEl.textContent = message;
+                errorEl.classList.remove('is-hidden');
+            }
+
+            // Set aria-invalid on the control
+            var control = null;
+            if (fieldName === 'request_type') {
+                control = form.querySelector('[data-contact-type-input]');
+            } else if (fieldName === 'consent') {
+                control = form.querySelector('input[name="consent"]');
+            } else {
+                control = form.querySelector('[name="' + fieldName + '"]');
+            }
+
+            if (control) {
+                control.setAttribute('aria-invalid', 'true');
+            }
+
+            return control;
+        }
+
+        function showErrorSummary(errors) {
+            if (!errorSummary || !errorList || !errors.length) {
+                return;
+            }
+
+            errorList.innerHTML = '';
+            errors.forEach(function (err) {
+                var li = document.createElement('li');
+                var controlId = null;
+                if (err.field === 'request_type') {
+                    controlId = form.querySelector('[data-contact-type-input]') ? form.querySelector('[data-contact-type-input]').id : null;
+                } else if (err.field === 'consent') {
+                    controlId = null;
+                } else {
+                    var ctrl = form.querySelector('[name="' + err.field + '"]');
+                    controlId = ctrl ? ctrl.id : null;
+                }
+
+                if (controlId) {
+                    var link = document.createElement('a');
+                    link.href = '#' + controlId;
+                    link.textContent = err.message;
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        var target = document.getElementById(controlId);
+                        if (target) {
+                            target.focus();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
+                    li.appendChild(link);
+                } else {
+                    li.textContent = err.message;
+                }
+
+                errorList.appendChild(li);
+            });
+
+            errorSummary.classList.remove('is-hidden');
+            errorSummary.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            errorSummary.focus();
+        }
+
+        function validateForm() {
+            clearFieldErrors();
+            var errors = [];
+            var firstInvalid = null;
+
+            // request_type
+            var hasType = false;
+            Array.prototype.forEach.call(typeInputs, function (input) {
+                if (input.checked) hasType = true;
+            });
+            if (!hasType) {
+                var ctrl = setFieldError('request_type', 'Bitte auswählen, worum es geht.');
+                errors.push({ field: 'request_type', message: 'Bitte auswählen, worum es geht.' });
+                if (!firstInvalid) firstInvalid = ctrl;
+            }
+
+            // focus
+            if (focusSelect && !focusSelect.value) {
+                var ctrl = setFieldError('focus', 'Bitte ein passendes Thema auswählen.');
+                errors.push({ field: 'focus', message: 'Bitte ein passendes Thema auswählen.' });
+                if (!firstInvalid) firstInvalid = ctrl || focusSelect;
+            }
+
+            // message
+            var messageMinlen = 24;
+            var content = typeContent[getSelectedType()];
+            if (content) messageMinlen = content.messageMinlength;
+            var msgVal = messageField ? messageField.value.trim() : '';
+            if (!msgVal || msgVal.length < messageMinlen) {
+                var ctrl = setFieldError('message', 'Bitte Ihr Anliegen kurz und konkret beschreiben (mind. ' + messageMinlen + ' Zeichen).');
+                errors.push({ field: 'message', message: 'Bitte Ihr Anliegen kurz beschreiben.' });
+                if (!firstInvalid) firstInvalid = ctrl || messageField;
+            }
+
+            // name
+            var nameField = form.querySelector('[name="name"]');
+            if (nameField && !nameField.value.trim()) {
+                var ctrl = setFieldError('name', 'Bitte Ihren Namen angeben.');
+                errors.push({ field: 'name', message: 'Bitte Ihren Namen angeben.' });
+                if (!firstInvalid) firstInvalid = ctrl || nameField;
+            }
+
+            // email
+            var emailField = form.querySelector('[name="email"]');
+            var emailVal = emailField ? emailField.value.trim() : '';
+            if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                var ctrl = setFieldError('email', 'Bitte eine gültige E-Mail-Adresse angeben.');
+                errors.push({ field: 'email', message: 'Bitte eine gültige E-Mail-Adresse angeben.' });
+                if (!firstInvalid) firstInvalid = ctrl || emailField;
+            }
+
+            // consent
+            var consentInput = form.querySelector('input[name="consent"]');
+            if (consentInput && !consentInput.checked) {
+                var ctrl = setFieldError('consent', 'Bitte der Verarbeitung Ihrer Nachricht zustimmen.');
+                errors.push({ field: 'consent', message: 'Bitte der Verarbeitung zustimmen.' });
+                if (!firstInvalid) firstInvalid = ctrl || consentInput;
+            }
+
+            if (errors.length > 0) {
+                showErrorSummary(errors);
+                if (firstInvalid && firstInvalid.focus) {
+                    firstInvalid.focus();
+                }
+                return false;
+            }
+
+            return true;
+        }
+
         function setFeedback(message, type) {
             if (!feedback) {
                 return;
             }
 
-            feedback.textContent = message || '';
+            feedback.textContent = '';
             feedback.classList.remove('is-error', 'is-success');
 
-            if (type) {
-                feedback.classList.add(type === 'error' ? 'is-error' : 'is-success');
+            if (message && type === 'success') {
+                // Rich success message
+                feedback.innerHTML = '';
+                var strong = document.createElement('strong');
+                strong.textContent = message;
+                feedback.appendChild(strong);
+
+                var nextStep = document.createElement('span');
+                nextStep.className = 'contact-form__feedback-next';
+                nextStep.textContent = 'Nächster Schritt: Prüfen Sie Ihr Postfach für die Bestätigung.';
+                feedback.appendChild(nextStep);
+
+                feedback.classList.add('is-success');
+                feedback.setAttribute('tabindex', '-1');
+                feedback.focus();
+            } else if (message) {
+                feedback.textContent = message;
+                if (type) {
+                    feedback.classList.add(type === 'error' ? 'is-error' : 'is-success');
+                }
             }
         }
 
@@ -105,7 +327,8 @@
             }
 
             submitButton.disabled = isPending;
-            submitButton.textContent = isPending ? 'Wird gesendet ...' : currentSubmitLabel;
+            submitButton.textContent = isPending ? 'Ihre Anfrage wird übermittelt …' : currentSubmitLabel;
+            form.setAttribute('aria-busy', isPending ? 'true' : 'false');
         }
 
         function getPayload() {
@@ -136,16 +359,11 @@
                 return;
             }
 
-            var control = field.querySelector('input, select, textarea');
-
             field.classList.toggle('is-hidden', !shouldShow);
 
+            var control = field.querySelector('input, select, textarea');
             if (!control) {
                 return;
-            }
-
-            if (control.hasAttribute('data-required-when-visible')) {
-                control.required = shouldShow;
             }
 
             if (!shouldShow) {
@@ -194,7 +412,10 @@
             }
 
             if (timelineLabel) {
-                timelineLabel.textContent = content.timelineLabel;
+                timelineLabel.textContent = content.timelineLabel + ' ';
+                var span = document.createElement('span');
+                span.textContent = 'optional';
+                timelineLabel.appendChild(span);
             }
 
             if (messageLabel) {
@@ -219,6 +440,16 @@
             if (timelineSelect && !content.showTimeline) {
                 timelineSelect.value = '';
             }
+
+            // Update type status bar if present
+            if (typeStatusBar) {
+                var typeLabel = typeContent[requestType] ? typeContent[requestType].submitLabel : '';
+                var statusValue = typeStatusBar.querySelector('.contact-type-status__value');
+                if (statusValue) {
+                    var labels = { project: 'Projektanfrage', general: 'Allgemeine Anfrage', client: 'Bestehender Kunde' };
+                    statusValue.textContent = labels[requestType] || 'Projektanfrage';
+                }
+            }
         }
 
         Array.prototype.forEach.call(typeInputs, function (input) {
@@ -227,9 +458,16 @@
 
         syncFormExperience();
 
+        // ── Submit handler ──
         form.addEventListener('submit', function (event) {
             event.preventDefault();
+            clearFieldErrors();
             setFeedback('', '');
+
+            if (!validateForm()) {
+                return;
+            }
+
             setPending(true);
 
             window.fetch(endpoint, {
@@ -256,6 +494,25 @@
                             ? result.data.error
                             : (window.NexusContactConfig && window.NexusContactConfig.errorMessage) || 'Die Anfrage konnte gerade nicht gesendet werden.';
 
+                        // Try to map server-side field errors
+                        if (result.data && result.data.error_code) {
+                            var codeFieldMap = {
+                                'missing_name': 'name',
+                                'invalid_email': 'email',
+                                'missing_request_type': 'request_type',
+                                'missing_focus': 'focus',
+                                'invalid_focus_type': 'focus',
+                                'missing_timeline': 'timeline',
+                                'invalid_budget': 'budget',
+                                'message_too_short': 'message',
+                                'missing_consent': 'consent'
+                            };
+                            var fieldName = codeFieldMap[result.data.error_code];
+                            if (fieldName) {
+                                setFieldError(fieldName, errorMessage);
+                            }
+                        }
+
                         throw new Error(errorMessage);
                     }
 
@@ -274,6 +531,29 @@
                 .finally(function () {
                     setPending(false);
                 });
+        });
+
+        // Clear field errors on input
+        form.addEventListener('input', function (e) {
+            var fieldWrap = e.target.closest('[data-contact-field]');
+            if (!fieldWrap) return;
+            var errorEl = fieldWrap.querySelector('.contact-field__error');
+            if (errorEl) {
+                errorEl.textContent = '';
+                errorEl.classList.add('is-hidden');
+            }
+            e.target.removeAttribute('aria-invalid');
+        });
+
+        form.addEventListener('change', function (e) {
+            if (e.target.name === 'consent') {
+                var errorEl = document.getElementById('contact-consent-error');
+                if (errorEl) {
+                    errorEl.textContent = '';
+                    errorEl.classList.add('is-hidden');
+                }
+                e.target.removeAttribute('aria-invalid');
+            }
         });
     }
 
