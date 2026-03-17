@@ -442,7 +442,7 @@ get_header();
 		<section id="case-study" class="nx-section">
 			<div class="nx-container">
 				<div class="nx-section-header">
-					<h2 class="nx-headline-section">Was passiert, wenn die Reihenfolge stimmt</h2>
+					<h2 class="nx-headline-section">WordPress-Projekt Hannover: Was passiert, wenn die Reihenfolge stimmt</h2>
 					<p class="wp-agentur-section-intro">Kurzer Blick auf die gleiche Logik in der Praxis: Ausgangslage, Eingriff, Ergebnis und nächster sinnvoller Vertiefungsschritt.</p>
 				</div>
 				<div class="wp-agentur-case-grid">
@@ -485,7 +485,7 @@ get_header();
 		<section id="hannover" class="nx-section">
 			<div class="nx-container">
 				<div class="nx-section-header">
-					<h2 class="nx-headline-section">Hannover ist ein Vorteil, aber nicht der eigentliche Grund</h2>
+					<h2 class="nx-headline-section">WordPress Agentur vor Ort in Hannover — ein Vorteil, aber nicht der eigentliche Grund</h2>
 				</div>
 				<div class="nx-grid nx-grid-2 wp-agentur-local-grid">
 					<?php foreach ( $local_cards as $local_card ) : ?>
