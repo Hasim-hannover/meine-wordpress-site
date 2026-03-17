@@ -549,29 +549,29 @@ foreach ( $faq_items as $faq_item ) {
 
 					<div class="wgos-component-grid">
 						<?php foreach ( $core_areas as $core_area ) : ?>
-							<article class="wgos-component-card nx-reveal">
-								<div class="wgos-component-card__top">
+							<details class="wgos-component-card nx-reveal">
+								<summary class="wgos-component-card__top">
 									<span class="wgos-core-card__number"><?php echo esc_html( $core_area['number'] ); ?></span>
 									<div>
 										<h3><?php echo esc_html( $core_area['title'] ); ?></h3>
 										<p class="wgos-component-card__summary"><?php echo esc_html( $core_area['summary'] ); ?></p>
 									</div>
-								</div>
+								</summary>
 								<dl class="wgos-component-card__details">
 									<div>
 										<dt>Funktion</dt>
 										<dd><?php echo esc_html( $core_area['function'] ); ?></dd>
 									</div>
-										<div>
-											<dt>Wirkung</dt>
-											<dd><?php echo esc_html( $core_area['impact'] ); ?></dd>
-										</div>
+									<div>
+										<dt>Wirkung</dt>
+										<dd><?php echo esc_html( $core_area['impact'] ); ?></dd>
+									</div>
 									<div>
 										<dt>Erwartbares Ergebnis</dt>
 										<dd><?php echo esc_html( $core_area['outcome'] ); ?></dd>
 									</div>
 								</dl>
-							</article>
+							</details>
 						<?php endforeach; ?>
 					</div>
 

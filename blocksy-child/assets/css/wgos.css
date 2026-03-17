@@ -787,6 +787,34 @@
 	display: flex;
 	align-items: flex-start;
 	gap: 14px;
+	cursor: pointer;
+	list-style: none;
+}
+
+.wgos-component-card__top::-webkit-details-marker {
+	display: none;
+}
+
+details.wgos-component-card {
+	position: relative;
+}
+
+.wgos-component-card__top::after {
+	content: '';
+	position: absolute;
+	right: 24px;
+	top: 28px;
+	width: 10px;
+	height: 10px;
+	border-right: 2.5px solid var(--nx-text-muted);
+	border-bottom: 2.5px solid var(--nx-text-muted);
+	transform: rotate(45deg);
+	transition: transform var(--nx-duration, 0.2s) var(--nx-ease, ease);
+	flex-shrink: 0;
+}
+
+details[open].wgos-component-card > .wgos-component-card__top::after {
+	transform: rotate(-135deg);
 }
 
 .wgos-core-card__number {
