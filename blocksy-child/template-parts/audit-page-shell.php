@@ -275,7 +275,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									<div class="review-progress-head">
 										<div class="review-progress-copy">
 											<span class="review-progress-eyebrow">Diagnose-Flow</span>
-											<strong id="review-progress-current">Schritt 1 von 4: Seite</strong>
+											<strong id="review-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von 4: Seite</strong>
 										</div>
 										<span class="review-progress-meta">kompakt, ohne Pitch, ohne Ballast</span>
 									</div>
@@ -334,8 +334,8 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									<p class="review-step-copy">Am besten genau die Startseite oder Angebotsseite, auf der heute qualifizierte Leads hängen bleiben.</p>
 									<div class="review-field">
 										<label for="review-page-url">Seiten-URL</label>
-										<input id="review-page-url" name="page_url" type="url" placeholder="https://www.beispiel.de/angebot" required autocomplete="url">
-										<p class="review-field-help">Bitte nur eine konkrete Seite angeben, nicht die ganze Website.</p>
+										<input id="review-page-url" name="page_url" type="url" placeholder="https://www.beispiel.de/angebot" required autocomplete="url" aria-describedby="review-page-url-help">
+										<p class="review-field-help" id="review-page-url-help">Bitte nur eine konkrete Seite angeben, nicht die ganze Website.</p>
 									</div>
 								</div>
 
@@ -344,9 +344,9 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									<h4>Wo verlieren Sie heute am ehesten qualifizierte Leads?</h4>
 									<p class="review-step-copy">Wählen Sie den Bereich, der auf dieser Seite zuerst wirtschaftlich geklärt werden muss.</p>
 
-									<fieldset class="review-choice-block">
+									<fieldset class="review-choice-block" aria-describedby="review-focus-help">
 										<legend>Prüffokus</legend>
-										<p class="review-choice-help">Das priorisiert die Diagnose, statt einfach alles gleichzeitig anzuschneiden.</p>
+										<p class="review-choice-help" id="review-focus-help">Das priorisiert die Diagnose, statt einfach alles gleichzeitig anzuschneiden.</p>
 										<div class="review-option-group">
 											<label class="review-option">
 												<input type="radio" name="focus_area" value="positioning_page_message" required>
@@ -399,9 +399,9 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									<h4>Woran würden Sie eine bessere Seite zuerst merken?</h4>
 									<p class="review-step-copy">So wird die Rückmeldung wirtschaftlich priorisiert und nicht nur fachlich korrekt formuliert.</p>
 
-									<fieldset class="review-choice-block">
+									<fieldset class="review-choice-block" aria-describedby="review-goal-help">
 										<legend>Wichtigstes Ziel</legend>
-										<p class="review-choice-help">Ein Ziel reicht. Das schafft Klarheit in der ersten Priorisierung.</p>
+										<p class="review-choice-help" id="review-goal-help">Ein Ziel reicht. Das schafft Klarheit in der ersten Priorisierung.</p>
 										<div class="review-option-group">
 											<label class="review-option">
 												<input type="radio" name="primary_goal" value="more_qualified_inquiries" required>
@@ -473,8 +473,8 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 											</div>
 											<div class="review-field review-field-full">
 												<label for="review-current-challenge">Wichtig zu wissen (optional)</label>
-												<textarea id="review-current-challenge" name="current_challenge" rows="4" placeholder="Zum Beispiel: Relaunch steht an, Paid Traffic läuft bereits oder die Seite trägt das neue Angebot noch nicht sauber."></textarea>
-												<p class="review-field-help">Wenn Sie nichts ergänzen, prüfe ich die Seite anhand Ihrer URL, Ihres Fokus und Ihres Ziels.</p>
+												<textarea id="review-current-challenge" name="current_challenge" rows="4" placeholder="Zum Beispiel: Relaunch steht an, Paid Traffic läuft bereits oder die Seite trägt das neue Angebot noch nicht sauber." aria-describedby="review-challenge-help"></textarea>
+												<p class="review-field-help" id="review-challenge-help">Wenn Sie nichts ergänzen, prüfe ich die Seite anhand Ihrer URL, Ihres Fokus und Ihres Ziels.</p>
 											</div>
 										</div>
 									</details>

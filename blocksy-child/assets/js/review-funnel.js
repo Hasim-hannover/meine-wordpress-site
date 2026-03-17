@@ -9,13 +9,15 @@
   var config = window.NexusReviewConfig || {};
   var auditLabel = config.auditLabel || 'Growth Audit';
   var submitLabel = config.submitLabel || (auditLabel + ' anfragen');
+  var AUTO_ADVANCE_DELAY = 500;
   var state = {
     stepIndex: 0,
     steps: [],
     submitting: false,
     submitted: false,
     lastTrackedStepIndex: null,
-    furthestStepIndex: 0
+    furthestStepIndex: 0,
+    autoAdvanceTimer: null
   };
 
   function init() {
@@ -187,6 +189,30 @@
     syncSummary(form);
     clearFeedback();
     clearFieldInvalidState(event.target);
+
+    if (event.target.type === 'radio') {
+      scheduleAutoAdvance(event.target);
+    }
+  }
+
+  function scheduleAutoAdvance(radio) {
+    cancelAutoAdvance();
+
+    var currentStep = state.steps[state.stepIndex];
+    if (!currentStep || state.stepIndex >= state.steps.length - 1) return;
+
+    var option = radio.closest('.review-option');
+    if (option) {
+      option.classList.add('is-just-selected');
+    }
+
+    state.autoAdvanceTimer = setTimeout(function () {
+      state.autoAdvanceTimer = null;
+      if (option) {
+        option.classList.remove('is-just-selected');
+      }
+      goToNextStep();
+    }, AUTO_ADVANCE_DELAY);
   }
 
   function goToNextStep() {
@@ -207,6 +233,7 @@
 
   function goToPrevStep() {
     clearFeedback();
+    cancelAutoAdvance();
 
     if (state.stepIndex > 0) {
       var previousIndex = state.stepIndex;
@@ -218,12 +245,20 @@
     }
   }
 
+  function cancelAutoAdvance() {
+    if (state.autoAdvanceTimer) {
+      clearTimeout(state.autoAdvanceTimer);
+      state.autoAdvanceTimer = null;
+    }
+  }
+
   function goToStep(index, direction) {
     if (index < 0 || index >= state.steps.length || index === state.stepIndex) {
       return;
     }
 
     clearFeedback();
+    cancelAutoAdvance();
 
     var previousIndex = state.stepIndex;
     state.stepIndex = index;
@@ -407,9 +442,24 @@
     var progressFill = document.getElementById('review-progress-fill');
     var progressCurrent = document.getElementById('review-progress-current');
     var progressSteps = form.querySelectorAll('.review-progress-steps li');
+    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     state.steps.forEach(function (step, index) {
-      step.classList.toggle('is-active', index === state.stepIndex);
+      var isTarget = index === state.stepIndex;
+
+      if (isTarget) {
+        step.classList.remove('is-leaving');
+        step.classList.add('is-active');
+      } else if (step.classList.contains('is-active') && !prefersReducedMotion) {
+        step.classList.remove('is-active');
+        step.classList.add('is-leaving');
+        step.addEventListener('animationend', function handler() {
+          step.removeEventListener('animationend', handler);
+          step.classList.remove('is-leaving');
+        }, { once: true });
+      } else {
+        step.classList.remove('is-active', 'is-leaving');
+      }
     });
 
     Array.prototype.forEach.call(progressSteps, function (step, index) {
@@ -488,7 +538,10 @@
       currentStep.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    if (typeof currentStep.focus === 'function') {
+    var firstInput = currentStep.querySelector('input:not([type="hidden"]):not([type="radio"]), textarea, select');
+    if (firstInput) {
+      firstInput.focus({ preventScroll: true });
+    } else {
       currentStep.focus({ preventScroll: true });
     }
   }
