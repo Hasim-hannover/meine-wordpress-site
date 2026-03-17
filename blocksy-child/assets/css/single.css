@@ -405,6 +405,11 @@ button.nexus-share-btn {
     color: var(--nx-accent-text-hover);
 }
 
+.nexus-article-content .nexus-btn,
+.nexus-article-content .nexus-inline-cta__btn {
+    color: var(--text-inverse) !important;
+}
+
 .nexus-article-content blockquote {
     margin: 2rem 0;
     padding: 1.3rem 1.5rem;
