@@ -87,7 +87,7 @@ $hero_proof = [
 	[
 		'context' => 'DOMDAR',
 		'value'   => '120 EUR',
-		'label'   => 'AOV nach 9 Monaten',
+		'label'   => 'AOV in 6 Wochen',
 	],
 ];
 
@@ -218,7 +218,7 @@ $proof_metrics = [
 	[
 		'case'    => 'DOMDAR',
 		'value'   => '120 EUR',
-		'label'   => 'Average Order Value nach 9 Monaten',
+		'label'   => 'Average Order Value in 6 Wochen',
 		'context' => 'ohne zusätzliches Ad-Budget, durch Angebotsstruktur, Recovery-Loops und weniger Reibung',
 	],
 ];
@@ -230,7 +230,7 @@ $case_references = [
 	],
 	[
 		'title' => 'DOMDAR',
-		'copy'  => 'Profitabilität aus bestehendem Traffic: von 46 EUR AOV und 1,5 % CR zu 120 EUR AOV und 4,6 % Conversion durch Struktur, Recovery und Operations.',
+		'copy'  => 'Profitabilität aus bestehendem Traffic: von 54 EUR AOV und 1,5 % CR zu 120 EUR AOV und 4,6 % Conversion in 6 Wochen durch Struktur, Recovery und Operations.',
 	],
 	[
 		'title' => 'Wiederkehrendes Muster',

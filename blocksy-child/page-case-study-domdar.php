@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Case Study – DOMDAR
- * Description: Sustainable Commerce Case Study: DOMDAR – vom 46-Euro-Warenkorb zur Profit-Architektur
+ * Description: Sustainable Commerce Case Study: DOMDAR – vom 54-Euro-Warenkorb zur Profit-Architektur
  *
  * Design: Nutzt Nexus Design System (design-system.css + case-study.css)
  * SEO-Meta: inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
@@ -23,7 +23,7 @@ $portrait_url = home_url( '/wp-content/uploads/2025/09/Wordpress_Bild_Hero.webp'
 $hero_kpis = [
 	[
 		'value' => '120 €',
-		'label' => 'AOV nach 9 Monaten',
+		'label' => 'AOV in 6 Wochen',
 	],
 	[
 		'value' => '4,6 %',
@@ -42,7 +42,7 @@ $fact_items = [
 	],
 	[
 		'label' => 'Startpunkt',
-		'value' => '46 € AOV · 1,5 % CR · 4,2 s Ladezeit',
+		'value' => '54 € AOV · 1,5 % CR · 4,2 s Ladezeit',
 	],
 	[
 		'label' => 'Ziel',
@@ -58,7 +58,7 @@ $fact_items = [
 	],
 	[
 		'label' => 'Zeitraum',
-		'value' => '9 Monate',
+		'value' => '6 Wochen',
 	],
 	[
 		'label' => 'Fokus',
@@ -69,7 +69,7 @@ $fact_items = [
 $strengths = [
 	[
 		'label' => 'Deckungsbeitrag',
-		'text'  => 'Mit 46 € durchschnittlichem Warenkorb deckte der Shop Kosten, aber nicht das nächste Wachstumslevel.',
+		'text'  => 'Mit 54 € durchschnittlichem Warenkorb deckte der Shop Kosten, aber nicht das nächste Wachstumslevel.',
 	],
 	[
 		'label' => 'Funnel',
@@ -106,7 +106,7 @@ $results = [
 	[
 		'value'   => '120 €',
 		'label'   => 'Average Order Value',
-		'note'    => 'Ausgangswert: 46 €',
+		'note'    => 'Ausgangswert: 54 €',
 		'primary' => true,
 	],
 	[
@@ -233,7 +233,7 @@ get_header();
 		</h1>
 
 		<p class="cs-case-hero__subtitle">
-			Vom 46-Euro-Warenkorb zur 120-Euro-Profit-Architektur in 9 Monaten:
+			Vom 54-Euro-Warenkorb zur 120-Euro-Profit-Architektur in 6 Wochen:
 			Wie DOMDAR mit Bundles, Recovery-Loops und operativer Entlastung
 			mehr Deckungsbeitrag aus bestehendem Traffic holte.
 		</p>
@@ -266,11 +266,11 @@ get_header();
 			<span class="cs-meta-sep">·</span>
 			<span class="cs-meta-item">B2C + B2B-Handel</span>
 			<span class="cs-meta-sep">·</span>
-			<span class="cs-meta-item">46 € AOV am Start</span>
+			<span class="cs-meta-item">54 € AOV am Start</span>
 			<span class="cs-meta-sep">·</span>
 			<span class="cs-meta-item">4,2 s Ladezeit vor dem Relaunch</span>
 			<span class="cs-meta-sep">·</span>
-			<span class="cs-meta-item">9 Monate Umsetzung</span>
+			<span class="cs-meta-item">6 Wochen Umsetzung</span>
 			<span class="cs-meta-sep">·</span>
 			<span class="cs-meta-item">kein höheres Werbebudget</span>
 		</div>
