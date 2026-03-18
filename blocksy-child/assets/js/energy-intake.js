@@ -156,7 +156,7 @@
 
   function handleClick(event) {
     var optionCard = event.target.closest('.review-option');
-    var nextButton = event.target.closest('[data-energy-next]');
+    var nextButton = event.target.closest('[data-energy-next-button]');
     var prevButton = event.target.closest('[data-energy-prev]');
     var stepButton = event.target.closest('[data-energy-step-target]');
 
@@ -386,7 +386,7 @@
 
   function updateActionButtons(activeSteps, currentIndex) {
     var prevButton = state.form.querySelector('[data-energy-prev]');
-    var nextButton = state.form.querySelector('[data-energy-next]');
+    var nextButton = state.form.querySelector('[data-energy-next-button]');
     var submitButton = state.form.querySelector('[data-energy-submit]');
     var isLast = currentIndex >= activeSteps.length - 1;
     var nextLabel = activeSteps[currentIndex + 1] ? activeSteps[currentIndex + 1].label : 'Weiter';

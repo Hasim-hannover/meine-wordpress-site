@@ -637,7 +637,7 @@ get_header();
 											data-energy-field="<?php echo esc_attr( $field_key ); ?>"
 											data-energy-kind="<?php echo esc_attr( $step['kind'] ); ?>"
 											<?php if ( ! empty( $step['next'] ) ) : ?>
-												data-energy-next="<?php echo esc_attr( $step['next'] ); ?>"
+												data-energy-next-step="<?php echo esc_attr( $step['next'] ); ?>"
 											<?php endif; ?>
 											<?php if ( ! empty( $step['auto_advance'] ) ) : ?>
 												data-energy-auto-advance="true"
@@ -758,7 +758,7 @@ get_header();
 
 									<div class="review-actions energy-actions">
 										<button type="button" class="review-prev-btn" data-energy-prev hidden>Zurück</button>
-										<button type="button" class="audit-submit-btn" data-energy-next>Weiter</button>
+										<button type="button" class="audit-submit-btn" data-energy-next-button>Weiter</button>
 										<button type="submit" class="audit-submit-btn" data-energy-submit hidden>Growth Audit passend einordnen</button>
 									</div>
 
