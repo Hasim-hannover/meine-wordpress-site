@@ -155,9 +155,29 @@
   }
 
   function handleClick(event) {
+    var optionCard = event.target.closest('.review-option');
     var nextButton = event.target.closest('[data-energy-next]');
     var prevButton = event.target.closest('[data-energy-prev]');
     var stepButton = event.target.closest('[data-energy-step-target]');
+
+    if (optionCard && !nextButton && !prevButton && !stepButton) {
+      var optionInput = optionCard.querySelector('input[type="radio"]');
+
+      if (optionInput && !optionInput.disabled && event.target !== optionInput) {
+        event.preventDefault();
+
+        if (!optionInput.checked) {
+          optionInput.checked = true;
+          optionInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        if (typeof optionInput.focus === 'function') {
+          optionInput.focus({ preventScroll: true });
+        }
+
+        return;
+      }
+    }
 
     if (nextButton) {
       event.preventDefault();
@@ -305,7 +325,7 @@
       });
       var isActive = isRelevant && stepId === state.stepId;
 
-      step.hidden = !isRelevant;
+      setDisplayed(step, isActive);
       step.setAttribute('aria-hidden', isActive ? 'false' : 'true');
       step.classList.toggle('is-active', isActive);
     });
@@ -372,18 +392,34 @@
     var nextLabel = activeSteps[currentIndex + 1] ? activeSteps[currentIndex + 1].label : 'Weiter';
 
     if (prevButton) {
-      prevButton.hidden = currentIndex <= 0;
+      setDisplayed(prevButton, currentIndex > 0, 'inline-flex');
     }
 
     if (nextButton) {
-      nextButton.hidden = isLast;
+      setDisplayed(nextButton, !isLast, 'inline-flex');
       nextButton.textContent = activeSteps[currentIndex + 1] ? ('Weiter: ' + nextLabel) : 'Weiter';
     }
 
     if (submitButton) {
-      submitButton.hidden = !isLast;
+      setDisplayed(submitButton, isLast, 'inline-flex');
       submitButton.textContent = config.submitLabel || 'Growth Audit passend einordnen';
     }
+  }
+
+  function setDisplayed(node, isVisible, displayValue) {
+    if (!node) {
+      return;
+    }
+
+    node.hidden = !isVisible;
+    node.style.display = isVisible ? (displayValue || '') : 'none';
+
+    if (isVisible) {
+      node.removeAttribute('aria-hidden');
+      return;
+    }
+
+    node.setAttribute('aria-hidden', 'true');
   }
 
   function announceCurrentStep(activeSteps, currentIndex) {
@@ -782,8 +818,14 @@
   function readSummaryValue(key) {
     var checked = state.form.querySelector('input[name="' + key + '"]:checked');
     if (checked) {
+      var optionLabel = checked.getAttribute('data-energy-label');
       var option = checked.closest('.review-option');
       var label = option ? option.querySelector('[data-energy-option-label]') : null;
+
+      if (optionLabel) {
+        return optionLabel.trim();
+      }
+
       return label ? label.textContent.trim() : checked.value;
     }
 

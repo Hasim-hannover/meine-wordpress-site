@@ -665,6 +665,7 @@ get_header();
 																	type="radio"
 																	name="<?php echo esc_attr( $field_key ); ?>"
 																	value="<?php echo esc_attr( $option_value ); ?>"
+																	data-energy-label="<?php echo esc_attr( $option_definition['label'] ); ?>"
 																	<?php checked( $get_value( $field_key ), $option_value ); ?>
 																	required
 																>
