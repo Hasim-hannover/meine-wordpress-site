@@ -15,6 +15,7 @@ $audit_url   = nexus_get_audit_url();
 $cases_url   = nexus_get_results_url();
 $wgos_url    = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
 $local_wp_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
+$energy_url  = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'website-fuer-solar-und-waermepumpen-anbieter', 'solar-waermepumpen-leadgenerierung' ], home_url( '/website-fuer-solar-und-waermepumpen-anbieter/' ) ) : home_url( '/website-fuer-solar-und-waermepumpen-anbieter/' );
 ?>
 
 <div class="cs-case-wrapper">
@@ -678,6 +679,9 @@ $local_wp_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-a
                 </a>
                 <a href="<?php echo esc_url( $local_wp_url ); ?>" class="cs-internal-link">
                     WordPress Growth Architect in Hannover →
+                </a>
+                <a href="<?php echo esc_url( $energy_url ); ?>" class="cs-internal-link">
+                    Für Solar- und Wärmepumpen-Anbieter →
                 </a>
             </div>
 

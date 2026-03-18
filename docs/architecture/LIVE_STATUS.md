@@ -22,6 +22,7 @@ Nicht verifiziert:
 - Service-Seiten, Tools-Hub, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Die aktive `Growth Audit`-Landingpage ist als versionierter Template-Shell im Repo hinterlegt.
+- Repo-seitig liegt jetzt zusaetzlich eine B2B-Branchen-Landingpage fuer Solar-, Waermepumpen- und Speicher-Anbieter unter `/website-fuer-solar-und-waermepumpen-anbieter/`; der Intake nutzt denselben Audit-/CRM-Stack mit eigener Branchen-Variante.
 - `page-wgos.php` ist als kompaktere WGOS-Sales-Page versioniert: Hero mit Audit-CTA, System-Diagramm, frueher platzierte Pakete, modulare Cards und reduzierte FAQ.
 - Die wichtigsten Legacy-Clusterseiten fuer SEO, Core Web Vitals, CRO, GA4 und Performance Marketing sind jetzt als versionierte WGOS-Clusterseiten im Theme hinterlegt.
 - Ergebnisse laufen repo-seitig kanonisch ueber `/ergebnisse/`; alte Proof-Slugs bleiben nur als Legacy-Redirects bestehen.
@@ -47,6 +48,7 @@ Nicht verifiziert:
 - Die Community-Signale auf der Homepage sind derzeit ueber GitHub und ein oeffentliches LinkedIn-Profil versioniert; ein kanonischer Facebook-Link inklusive belastbarer Kennzahl ist im Repo noch nicht hinterlegt.
 - `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.
 - CRM-, Mail- und Follow-up-Logik fuer den Audit sind jetzt im Theme sichtbar; `wp_mail`-basierte Transaktionsmails koennen repo-seitig zentral ueber die Brevo API geroutet werden, sobald die Live-Credentials ausserhalb des Repos gesetzt sind.
+- Die neue Energie-Landingpage bringt einen branch-faehigen Multi-Step-Intake mit serverseitigem Fallback; falls die Seite im WordPress-Admin noch nicht existiert, fehlt nur noch der veroeffentlichte Page-Eintrag mit dem kanonischen Slug.
 - Das neue Blog-Notify-System ist repo-seitig implementiert, aber End-to-End auf der Live-Instanz noch nicht verifiziert.
 - Das neue SEO-Cockpit ist repo-seitig implementiert, aber ohne echte Google-OAuth-Credentials und ohne installiertes Koko-Plugin noch nicht end-to-end verifiziert.
 - Das Client Portal arbeitet aktuell mit Mock-Daten und ist noch kein voll dokumentiertes Produktivsystem.

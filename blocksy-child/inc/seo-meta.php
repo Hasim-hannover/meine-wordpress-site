@@ -123,6 +123,14 @@ function hu_get_forced_singular_seo_map() {
 				'title'       => 'KI-Integration für WordPress – DSGVO-konform | Haşim Üner',
 				'description' => 'KI-Features direkt in WordPress: Chatbots, Lead-Qualifizierung, Wissenssuche, Automatisierung – auf eigener Infrastruktur, ohne Datenabfluss.',
 			],
+			'website-fuer-solar-und-waermepumpen-anbieter' => [
+				'title'       => 'Website für Solar- und Wärmepumpen-Anbieter | B2B-System',
+				'description' => 'B2B-Landingpage für Solar-, Wärmepumpen- und Speicher-Anbieter: Website, Tracking, SEO und Conversion als System für qualifizierte Anfragen.',
+			],
+			'solar-waermepumpen-leadgenerierung' => [
+				'title'       => 'Website für Solar- und Wärmepumpen-Anbieter | B2B-System',
+				'description' => 'B2B-Landingpage für Solar-, Wärmepumpen- und Speicher-Anbieter: Website, Tracking, SEO und Conversion als System für qualifizierte Anfragen.',
+			],
 		]
 	);
 }

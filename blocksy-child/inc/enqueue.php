@@ -189,6 +189,22 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-agentur-css', 'agentur.css', [ 'nexus-home-css' ] );
 	}
 
+	// ── F1) Template: Energy Systems Landing ──────────────────────
+	if ( is_page( 'website-fuer-solar-und-waermepumpen-anbieter' ) || is_page( 'solar-waermepumpen-leadgenerierung' ) || is_page_template( 'page-website-fuer-solar-und-waermepumpen-anbieter.php' ) ) {
+		hu_enqueue_css( 'nexus-review-funnel-css', 'review-funnel.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-energy-systems-css', 'energy-systems.css', [ 'nexus-review-funnel-css' ] );
+		hu_enqueue_js( 'nexus-energy-intake-js', 'energy-intake.js', [ 'nexus-core-js' ] );
+		wp_localize_script(
+			'nexus-energy-intake-js',
+			'NexusEnergyFormConfig',
+			[
+				'restEndpoint' => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
+				'submitLabel'  => 'Growth Audit passend einordnen',
+				'errorMessage' => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
+			]
+		);
+	}
+
 	// ── G) Template: WGOS System ──────────────────────────────────
 	if ( is_page_template( 'page-wgos.php' ) || is_page( 'wgos' ) || is_page( 'wordpress-growth-operating-system' ) ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
