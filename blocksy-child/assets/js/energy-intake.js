@@ -5,6 +5,7 @@
   var AUTO_ADVANCE_DELAY = 260;
   var state = {
     form: null,
+    root: null,
     steps: [],
     stepButtons: [],
     stepId: '',
@@ -21,6 +22,7 @@
     }
 
     state.form = form;
+    state.root = form.closest('.energy-form-shell') || form.parentElement || document;
     state.steps = Array.prototype.slice.call(form.querySelectorAll('[data-energy-step-id]'));
     state.stepButtons = Array.prototype.slice.call(form.querySelectorAll('[data-energy-step-target]'));
 
@@ -375,7 +377,7 @@
 
     if (nextButton) {
       nextButton.hidden = isLast;
-      nextButton.textContent = activeSteps[currentIndex + 1] ? ('Weiter zu ' + nextLabel) : 'Weiter';
+      nextButton.textContent = activeSteps[currentIndex + 1] ? ('Weiter: ' + nextLabel) : 'Weiter';
     }
 
     if (submitButton) {
@@ -430,8 +432,9 @@
       var fieldName = step.getAttribute('data-energy-field') || '';
       var checked = fieldName ? step.querySelector('input[name="' + fieldName + '"]:checked') : null;
       if (!checked) {
-        showFeedback('Bitte eine Option auswählen.', 'error');
-        markRadioGroupInvalid(step);
+        var radioMessage = 'Bitte eine Option auswählen.';
+        showFeedback(radioMessage, 'error');
+        markRadioGroupInvalid(step, radioMessage);
         var firstRadio = step.querySelector('input[type="radio"]');
         if (firstRadio) {
           firstRadio.focus();
@@ -559,6 +562,14 @@
       if (choiceBlock) {
         choiceBlock.classList.remove('is-invalid');
       }
+
+      var choiceError = state.root
+        ? state.root.querySelector('[data-energy-choice-error="' + field.name + '"]')
+        : null;
+      if (choiceError) {
+        choiceError.textContent = '';
+      }
+
       Array.prototype.forEach.call(state.form.querySelectorAll('input[name="' + field.name + '"]'), function (radio) {
         radio.removeAttribute('aria-invalid');
         var option = radio.closest('.review-option');
@@ -583,12 +594,19 @@
     });
   }
 
-  function markRadioGroupInvalid(step) {
+  function markRadioGroupInvalid(step, message) {
     var block = step.querySelector('.review-choice-block');
     var firstRadio = step.querySelector('input[type="radio"]');
 
     if (block) {
       block.classList.add('is-invalid');
+    }
+
+    if (firstRadio && state.root) {
+      var choiceError = state.root.querySelector('[data-energy-choice-error="' + firstRadio.name + '"]');
+      if (choiceError) {
+        choiceError.textContent = message || 'Bitte eine Option auswählen.';
+      }
     }
 
     if (!firstRadio) {
@@ -750,7 +768,11 @@
   }
 
   function syncSummary() {
-    Array.prototype.forEach.call(state.form.querySelectorAll('[data-energy-summary]'), function (node) {
+    var summaryNodes = state.root
+      ? state.root.querySelectorAll('[data-energy-summary]')
+      : state.form.querySelectorAll('[data-energy-summary]');
+
+    Array.prototype.forEach.call(summaryNodes, function (node) {
       var key = node.getAttribute('data-energy-summary') || '';
       var value = readSummaryValue(key);
       node.textContent = formatSummaryValue(key, value);

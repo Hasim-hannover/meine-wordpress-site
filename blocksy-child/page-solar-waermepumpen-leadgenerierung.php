@@ -520,7 +520,7 @@ get_header();
 						<span class="nx-badge nx-badge--gold">Multi-Step-Form</span>
 						<h2>Ihr Setup in wenigen Antworten sauber einordnen.</h2>
 						<p>
-							Ein Frage pro Schritt, große klickbare Antworten, Auto-Advance bei Auswahl und Kontaktangaben erst am Ende.
+							Eine Frage pro Schritt, große klickbare Antworten, Auto-Advance bei Auswahl und Kontaktangaben erst am Ende.
 							Ohne generischen Fragebogen, ohne Plugin-Overhead, ohne unnötige Reibung.
 						</p>
 						<div class="energy-form-points">
@@ -539,264 +539,268 @@ get_header();
 						</div>
 					</div>
 
-					<div class="energy-form-shell__main">
-						<?php if ( $form_success ) : ?>
-							<div id="energy-request-success" class="review-success energy-review-success is-server-success" role="status" aria-live="polite" aria-atomic="true">
-								<div class="review-success-pill">Anfrage eingegangen</div>
-								<h3>Die Einordnung ist jetzt im System.</h3>
-								<p class="review-success-copy"><?php echo esc_html( $form_success['message'] ?? 'Danke. Die Anfrage ist eingegangen.' ); ?></p>
-								<div class="review-success-meta">
-									<span>persönliche Rückmeldung</span>
-									<span>diagnose vor pitch</span>
-									<span>keine generische agenturstrecke</span>
-								</div>
-								<div class="review-success-actions">
-									<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">E3 Case Study lesen</a>
-									<a class="audit-text-link" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit ansehen</a>
-								</div>
-							</div>
-						<?php else : ?>
-							<form
-								id="energy-intake-form"
-								class="review-funnel energy-intake-form"
-								action="<?php echo esc_url( trailingslashit( $page_url ) . '#energie-anfrage' ); ?>"
-								method="post"
-								data-energy-form
-								novalidate
-							>
-								<input type="hidden" name="company_website" value="">
-								<input type="hidden" name="started_at" value="">
-								<input type="hidden" name="audit_type" value="growth_audit">
-								<input type="hidden" name="intake_variant" value="energy_systems">
-								<input type="hidden" name="ads_source" value="">
-								<input type="hidden" name="ads_keyword" value="">
-
-								<div class="review-progress energy-progress" aria-label="Fortschritt im Branchen-Flow">
-									<div class="review-progress-head">
-										<div class="review-progress-copy">
-											<span class="review-progress-eyebrow">Anfrage-Flow</span>
-											<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?>: <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_html( $flow_steps[0]['title_short'] ) : 'Leistung'; ?></strong>
-										</div>
-										<span class="review-progress-meta">ca. 60-90 Sekunden</span>
+					<div class="energy-form-shell__flow">
+						<div class="energy-form-shell__main">
+							<?php if ( $form_success ) : ?>
+								<div id="energy-request-success" class="review-success energy-review-success is-server-success" role="status" aria-live="polite" aria-atomic="true">
+									<div class="review-success-pill">Anfrage eingegangen</div>
+									<h3>Die Einordnung ist jetzt im System.</h3>
+									<p class="review-success-copy"><?php echo esc_html( $form_success['message'] ?? 'Danke. Die Anfrage ist eingegangen.' ); ?></p>
+									<div class="review-success-meta">
+										<span>persönliche Rückmeldung</span>
+										<span>diagnose vor pitch</span>
+										<span>keine generische agenturstrecke</span>
 									</div>
-									<div class="review-progress-track">
-										<div class="review-progress-fill" id="energy-progress-fill"></div>
+									<div class="review-success-actions">
+										<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">E3 Case Study lesen</a>
+										<a class="audit-text-link" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit ansehen</a>
 									</div>
-									<ol class="review-progress-steps energy-progress-steps">
-										<?php foreach ( $flow_steps as $index => $step ) : ?>
-											<li class="<?php echo 0 === $index ? 'is-current is-reached' : ''; ?>">
-												<button
-													type="button"
-													data-energy-step-target="<?php echo esc_attr( $step['id'] ); ?>"
-													aria-controls="<?php echo esc_attr( 'energy-step-' . $step['id'] ); ?>"
-													<?php echo 0 === $index ? 'disabled' : ''; ?>
-												>
-													<span class="review-progress-step-index"><?php echo esc_html( (string) ( $index + 1 ) ); ?></span>
-													<span class="review-progress-step-label"><?php echo esc_html( $step['title_short'] ); ?></span>
-												</button>
-											</li>
-										<?php endforeach; ?>
-									</ol>
 								</div>
+							<?php else : ?>
+								<form
+									id="energy-intake-form"
+									class="review-funnel energy-intake-form"
+									action="<?php echo esc_url( trailingslashit( $page_url ) . '#energie-anfrage' ); ?>"
+									method="post"
+									data-energy-form
+									novalidate
+								>
+									<input type="hidden" name="company_website" value="">
+									<input type="hidden" name="started_at" value="">
+									<input type="hidden" name="audit_type" value="growth_audit">
+									<input type="hidden" name="intake_variant" value="energy_systems">
+									<input type="hidden" name="ads_source" value="">
+									<input type="hidden" name="ads_keyword" value="">
 
-								<div class="screen-reader-text" aria-live="assertive" aria-atomic="true" data-energy-step-live></div>
-
-								<details class="review-mobile-summary">
-									<summary>Ihre Angaben bisher</summary>
-									<dl class="review-brief-list review-brief-list--mobile">
-										<?php foreach ( $flow_steps as $step ) : ?>
-											<?php if ( empty( $step['name'] ) || empty( $step['summary_label'] ) ) : ?>
-												<?php continue; ?>
-											<?php endif; ?>
-											<div class="review-brief-row">
-												<dt><?php echo esc_html( $step['summary_label'] ); ?></dt>
-												<dd data-energy-summary="<?php echo esc_attr( $step['name'] ); ?>"><?php echo esc_html( $get_summary_value( $step['name'] ) ); ?></dd>
+									<div class="review-progress energy-progress" aria-label="Fortschritt im Branchen-Flow">
+										<div class="review-progress-head">
+											<div class="review-progress-copy">
+												<span class="review-progress-eyebrow">Anfrage-Flow</span>
+												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?>: <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_html( $flow_steps[0]['title_short'] ) : 'Leistung'; ?></strong>
 											</div>
-										<?php endforeach; ?>
-									</dl>
-								</details>
+											<span class="review-progress-meta">ca. 60-90 Sekunden</span>
+										</div>
+										<div class="review-progress-track">
+											<div class="review-progress-fill" id="energy-progress-fill"></div>
+										</div>
+										<ol class="review-progress-steps energy-progress-steps">
+											<?php foreach ( $flow_steps as $index => $step ) : ?>
+												<li class="<?php echo 0 === $index ? 'is-current is-reached' : ''; ?>">
+													<button
+														type="button"
+														data-energy-step-target="<?php echo esc_attr( $step['id'] ); ?>"
+														aria-controls="<?php echo esc_attr( 'energy-step-' . $step['id'] ); ?>"
+														<?php echo 0 === $index ? 'disabled' : ''; ?>
+													>
+														<span class="review-progress-step-index"><?php echo esc_html( (string) ( $index + 1 ) ); ?></span>
+														<span class="review-progress-step-label"><?php echo esc_html( $step['title_short'] ); ?></span>
+													</button>
+												</li>
+											<?php endforeach; ?>
+										</ol>
+									</div>
 
-								<div
-									id="energy-form-feedback"
-									class="review-form-feedback<?php echo '' !== $form_error ? ' is-visible is-error' : ''; ?>"
-									aria-live="<?php echo '' !== $form_error ? 'assertive' : 'polite'; ?>"
-									aria-atomic="true"
-									<?php echo '' !== $form_error ? 'role="alert"' : ''; ?>
-								><?php echo esc_html( $form_error ); ?></div>
+									<div class="screen-reader-text" aria-live="assertive" aria-atomic="true" data-energy-step-live></div>
 
-								<noscript>
-									<p class="energy-noscript-note">Ohne JavaScript bleibt das Formular vollständig nutzbar, aber ohne Schrittlogik und Auto-Advance.</p>
-								</noscript>
+									<details class="review-mobile-summary">
+										<summary>Ihre Angaben bisher</summary>
+										<dl class="review-brief-list review-brief-list--mobile">
+											<?php foreach ( $flow_steps as $step ) : ?>
+												<?php if ( empty( $step['name'] ) || empty( $step['summary_label'] ) ) : ?>
+													<?php continue; ?>
+												<?php endif; ?>
+												<div class="review-brief-row">
+													<dt><?php echo esc_html( $step['summary_label'] ); ?></dt>
+													<dd data-energy-summary="<?php echo esc_attr( $step['name'] ); ?>"><?php echo esc_html( $get_summary_value( $step['name'] ) ); ?></dd>
+												</div>
+											<?php endforeach; ?>
+										</dl>
+									</details>
 
-								<?php foreach ( $flow_steps as $index => $step ) : ?>
-									<?php
-									$step_id   = isset( $step['id'] ) ? (string) $step['id'] : 'step-' . (string) $index;
-									$field_key = isset( $step['name'] ) ? (string) $step['name'] : '';
-									$is_active = 0 === $index;
-									?>
-									<section
-										id="<?php echo esc_attr( 'energy-step-' . $step_id ); ?>"
-										class="review-step energy-step<?php echo $is_active ? ' is-active' : ''; ?>"
-										data-energy-step-id="<?php echo esc_attr( $step_id ); ?>"
-										data-energy-step-index="<?php echo esc_attr( (string) $index ); ?>"
-										data-energy-step-label="<?php echo esc_attr( $step['title_short'] ); ?>"
-										data-energy-field="<?php echo esc_attr( $field_key ); ?>"
-										data-energy-kind="<?php echo esc_attr( $step['kind'] ); ?>"
-										<?php if ( ! empty( $step['next'] ) ) : ?>
-											data-energy-next="<?php echo esc_attr( $step['next'] ); ?>"
-										<?php endif; ?>
-										<?php if ( ! empty( $step['auto_advance'] ) ) : ?>
-											data-energy-auto-advance="true"
-										<?php endif; ?>
-										<?php if ( ! empty( $step['show_when']['field'] ) && ! empty( $step['show_when']['values'] ) ) : ?>
-											data-energy-show-field="<?php echo esc_attr( $step['show_when']['field'] ); ?>"
-											data-energy-show-values="<?php echo esc_attr( implode( ',', array_map( 'sanitize_key', (array) $step['show_when']['values'] ) ) ); ?>"
-										<?php endif; ?>
-										<?php if ( ! empty( $step['next_by_value'] ) ) : ?>
-											data-energy-next-map="<?php echo esc_attr( wp_json_encode( $step['next_by_value'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?>"
-										<?php endif; ?>
-									>
-										<span class="review-step-kicker">Schritt <?php echo esc_html( (string) ( $index + 1 ) ); ?> von <?php echo esc_html( (string) count( $flow_steps ) ); ?></span>
-										<h3 class="energy-step__title"><?php echo esc_html( $step['question'] ); ?></h3>
-										<p class="review-step-copy"><?php echo esc_html( $step['description'] ); ?></p>
+									<noscript>
+										<p class="energy-noscript-note">Ohne JavaScript bleibt das Formular vollständig nutzbar, aber ohne Schrittlogik und Auto-Advance.</p>
+									</noscript>
 
-										<?php if ( 'single_choice' === $step['kind'] ) : ?>
-											<fieldset class="review-choice-block energy-choice-block" aria-describedby="<?php echo esc_attr( 'energy-help-' . $step_id ); ?>">
-												<legend><?php echo esc_html( $step['summary_label'] ); ?></legend>
-												<p class="review-choice-help" id="<?php echo esc_attr( 'energy-help-' . $step_id ); ?>"><?php echo esc_html( $step['description'] ); ?></p>
-												<div class="review-option-group energy-option-group">
-													<?php foreach ( $step['options'] as $option_value => $option_definition ) : ?>
-														<label class="review-option energy-option">
-															<input
-																type="radio"
-																name="<?php echo esc_attr( $field_key ); ?>"
-																value="<?php echo esc_attr( $option_value ); ?>"
-																<?php checked( $get_value( $field_key ), $option_value ); ?>
-																required
-															>
-															<div class="review-option-copy">
-																<strong data-energy-option-label><?php echo esc_html( $option_definition['label'] ); ?></strong>
-																<span><?php echo esc_html( $option_definition['description'] ); ?></span>
+									<?php foreach ( $flow_steps as $index => $step ) : ?>
+										<?php
+										$step_id         = isset( $step['id'] ) ? (string) $step['id'] : 'step-' . (string) $index;
+										$field_key       = isset( $step['name'] ) ? (string) $step['name'] : '';
+										$choice_error_id = 'energy-error-' . $step_id;
+										$is_active       = 0 === $index;
+										?>
+										<section
+											id="<?php echo esc_attr( 'energy-step-' . $step_id ); ?>"
+											class="review-step energy-step<?php echo $is_active ? ' is-active' : ''; ?>"
+											data-energy-step-id="<?php echo esc_attr( $step_id ); ?>"
+											data-energy-step-index="<?php echo esc_attr( (string) $index ); ?>"
+											data-energy-step-label="<?php echo esc_attr( $step['title_short'] ); ?>"
+											data-energy-field="<?php echo esc_attr( $field_key ); ?>"
+											data-energy-kind="<?php echo esc_attr( $step['kind'] ); ?>"
+											<?php if ( ! empty( $step['next'] ) ) : ?>
+												data-energy-next="<?php echo esc_attr( $step['next'] ); ?>"
+											<?php endif; ?>
+											<?php if ( ! empty( $step['auto_advance'] ) ) : ?>
+												data-energy-auto-advance="true"
+											<?php endif; ?>
+											<?php if ( ! empty( $step['show_when']['field'] ) && ! empty( $step['show_when']['values'] ) ) : ?>
+												data-energy-show-field="<?php echo esc_attr( $step['show_when']['field'] ); ?>"
+												data-energy-show-values="<?php echo esc_attr( implode( ',', array_map( 'sanitize_key', (array) $step['show_when']['values'] ) ) ); ?>"
+											<?php endif; ?>
+											<?php if ( ! empty( $step['next_by_value'] ) ) : ?>
+												data-energy-next-map="<?php echo esc_attr( wp_json_encode( $step['next_by_value'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?>"
+											<?php endif; ?>
+										>
+											<span class="review-step-kicker">Schritt <?php echo esc_html( (string) ( $index + 1 ) ); ?> von <?php echo esc_html( (string) count( $flow_steps ) ); ?></span>
+											<h3 class="energy-step__title"><?php echo esc_html( $step['question'] ); ?></h3>
+											<p class="review-step-copy"><?php echo esc_html( $step['description'] ); ?></p>
+
+											<?php if ( 'single_choice' === $step['kind'] ) : ?>
+												<fieldset class="review-choice-block energy-choice-block" aria-describedby="<?php echo esc_attr( trim( 'energy-help-' . $step_id . ' ' . $choice_error_id ) ); ?>">
+													<legend><?php echo esc_html( $step['summary_label'] ); ?></legend>
+													<p class="review-choice-help" id="<?php echo esc_attr( 'energy-help-' . $step_id ); ?>"><?php echo esc_html( $step['description'] ); ?></p>
+													<div class="review-option-group energy-option-group">
+														<?php foreach ( $step['options'] as $option_value => $option_definition ) : ?>
+															<label class="review-option energy-option">
+																<input
+																	type="radio"
+																	name="<?php echo esc_attr( $field_key ); ?>"
+																	value="<?php echo esc_attr( $option_value ); ?>"
+																	<?php checked( $get_value( $field_key ), $option_value ); ?>
+																	required
+																>
+																<div class="review-option-copy">
+																	<strong data-energy-option-label><?php echo esc_html( $option_definition['label'] ); ?></strong>
+																	<span><?php echo esc_html( $option_definition['description'] ); ?></span>
+																</div>
+															</label>
+														<?php endforeach; ?>
+													</div>
+													<p class="energy-field-error energy-choice-error" id="<?php echo esc_attr( $choice_error_id ); ?>" data-energy-choice-error="<?php echo esc_attr( $field_key ); ?>"></p>
+												</fieldset>
+											<?php elseif ( 'contact' === $step['kind'] ) : ?>
+												<div class="review-field-grid energy-field-grid">
+													<?php foreach ( $step['fields'] as $field ) : ?>
+														<?php
+														$field_name        = (string) $field['name'];
+														$field_id          = 'energy-field-' . $field_name;
+														$field_value       = $get_value( $field_name );
+														$field_help_id     = ! empty( $field['help'] ) ? $field_id . '-help' : '';
+														$field_error_id    = $field_id . '-error';
+														$field_description = trim( implode( ' ', array_filter( [ $field_help_id, $field_error_id ] ) ) );
+														$is_checkbox       = 'checkbox' === $field['type'];
+														$is_textarea       = 'textarea' === $field['type'];
+														?>
+														<?php if ( $is_checkbox ) : ?>
+															<div class="review-consent-card energy-consent-card">
+																<label class="review-consent" for="<?php echo esc_attr( $field_id ); ?>">
+																	<input
+																		id="<?php echo esc_attr( $field_id ); ?>"
+																		name="<?php echo esc_attr( $field_name ); ?>"
+																		type="checkbox"
+																		value="<?php echo esc_attr( $field['value'] ); ?>"
+																		<?php checked( $field_value, $field['value'] ); ?>
+																		<?php echo ! empty( $field['required'] ) ? 'required' : ''; ?>
+																		aria-describedby="<?php echo esc_attr( $field_error_id ); ?>"
+																	>
+																	<span>
+																		<?php echo esc_html( $field['label'] ); ?>
+																		<a href="<?php echo esc_url( $privacy_url ); ?>">Datenschutzerklärung</a>.
+																	</span>
+																</label>
+																<p class="energy-field-error" id="<?php echo esc_attr( $field_error_id ); ?>" data-energy-field-error="<?php echo esc_attr( $field_name ); ?>"></p>
 															</div>
-														</label>
+														<?php else : ?>
+															<div class="review-field<?php echo $is_textarea || 'page_url' === $field_name ? ' review-field-full' : ''; ?>">
+																<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
+																<?php if ( ! empty( $field['help'] ) ) : ?>
+																	<p class="review-field-help" id="<?php echo esc_attr( $field_help_id ); ?>"><?php echo esc_html( $field['help'] ); ?></p>
+																<?php endif; ?>
+																<?php if ( $is_textarea ) : ?>
+																	<textarea
+																		id="<?php echo esc_attr( $field_id ); ?>"
+																		name="<?php echo esc_attr( $field_name ); ?>"
+																		rows="<?php echo esc_attr( (string) ( $field['rows'] ?? 4 ) ); ?>"
+																		<?php echo ! empty( $field['maxlength'] ) ? 'maxlength="' . esc_attr( (string) $field['maxlength'] ) . '"' : ''; ?>
+																		<?php echo ! empty( $field['required'] ) ? 'required' : ''; ?>
+																		<?php echo '' !== $field_description ? 'aria-describedby="' . esc_attr( $field_description ) . '"' : ''; ?>
+																		placeholder="<?php echo esc_attr( $field['placeholder'] ?? '' ); ?>"
+																	><?php echo esc_textarea( $field_value ); ?></textarea>
+																<?php else : ?>
+																	<input
+																		id="<?php echo esc_attr( $field_id ); ?>"
+																		name="<?php echo esc_attr( $field_name ); ?>"
+																		type="<?php echo esc_attr( $field['type'] ); ?>"
+																		value="<?php echo esc_attr( $field_value ); ?>"
+																		<?php echo ! empty( $field['autocomplete'] ) ? 'autocomplete="' . esc_attr( $field['autocomplete'] ) . '"' : ''; ?>
+																		<?php echo ! empty( $field['inputmode'] ) ? 'inputmode="' . esc_attr( $field['inputmode'] ) . '"' : ''; ?>
+																		<?php echo ! empty( $field['required'] ) ? 'required' : ''; ?>
+																		<?php echo '' !== $field_description ? 'aria-describedby="' . esc_attr( $field_description ) . '"' : ''; ?>
+																		<?php echo ! empty( $field['placeholder'] ) ? 'placeholder="' . esc_attr( $field['placeholder'] ) . '"' : ''; ?>
+																	>
+																<?php endif; ?>
+																<p class="energy-field-error" id="<?php echo esc_attr( $field_error_id ); ?>" data-energy-field-error="<?php echo esc_attr( $field_name ); ?>"></p>
+															</div>
+														<?php endif; ?>
 													<?php endforeach; ?>
 												</div>
-											</fieldset>
-										<?php elseif ( 'contact' === $step['kind'] ) : ?>
-											<div class="review-field-grid energy-field-grid">
-												<?php foreach ( $step['fields'] as $field ) : ?>
-													<?php
-													$field_name        = (string) $field['name'];
-													$field_id          = 'energy-field-' . $field_name;
-													$field_value       = $get_value( $field_name );
-													$field_help_id     = ! empty( $field['help'] ) ? $field_id . '-help' : '';
-													$field_error_id    = $field_id . '-error';
-													$field_description = trim( implode( ' ', array_filter( [ $field_help_id, $field_error_id ] ) ) );
-													$is_checkbox       = 'checkbox' === $field['type'];
-													$is_textarea       = 'textarea' === $field['type'];
-													?>
-													<?php if ( $is_checkbox ) : ?>
-														<div class="review-consent-card energy-consent-card">
-															<label class="review-consent" for="<?php echo esc_attr( $field_id ); ?>">
-																<input
-																	id="<?php echo esc_attr( $field_id ); ?>"
-																	name="<?php echo esc_attr( $field_name ); ?>"
-																	type="checkbox"
-																	value="<?php echo esc_attr( $field['value'] ); ?>"
-																	<?php checked( $field_value, $field['value'] ); ?>
-																	<?php echo ! empty( $field['required'] ) ? 'required' : ''; ?>
-																	aria-describedby="<?php echo esc_attr( $field_error_id ); ?>"
-																>
-																<span>
-																	<?php echo esc_html( $field['label'] ); ?>
-																	<a href="<?php echo esc_url( $privacy_url ); ?>">Datenschutzerklärung</a>.
-																</span>
-															</label>
-															<p class="energy-field-error" id="<?php echo esc_attr( $field_error_id ); ?>" data-energy-field-error="<?php echo esc_attr( $field_name ); ?>"></p>
-														</div>
-													<?php else : ?>
-														<div class="review-field<?php echo $is_textarea || 'page_url' === $field_name ? ' review-field-full' : ''; ?>">
-															<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
-															<?php if ( ! empty( $field['help'] ) ) : ?>
-																<p class="review-field-help" id="<?php echo esc_attr( $field_help_id ); ?>"><?php echo esc_html( $field['help'] ); ?></p>
-															<?php endif; ?>
-															<?php if ( $is_textarea ) : ?>
-																<textarea
-																	id="<?php echo esc_attr( $field_id ); ?>"
-																	name="<?php echo esc_attr( $field_name ); ?>"
-																	rows="<?php echo esc_attr( (string) ( $field['rows'] ?? 4 ) ); ?>"
-																	<?php echo ! empty( $field['maxlength'] ) ? 'maxlength="' . esc_attr( (string) $field['maxlength'] ) . '"' : ''; ?>
-																	<?php echo ! empty( $field['required'] ) ? 'required' : ''; ?>
-																	<?php echo '' !== $field_description ? 'aria-describedby="' . esc_attr( $field_description ) . '"' : ''; ?>
-																	placeholder="<?php echo esc_attr( $field['placeholder'] ?? '' ); ?>"
-																><?php echo esc_textarea( $field_value ); ?></textarea>
-															<?php else : ?>
-																<input
-																	id="<?php echo esc_attr( $field_id ); ?>"
-																	name="<?php echo esc_attr( $field_name ); ?>"
-																	type="<?php echo esc_attr( $field['type'] ); ?>"
-																	value="<?php echo esc_attr( $field_value ); ?>"
-																	<?php echo ! empty( $field['autocomplete'] ) ? 'autocomplete="' . esc_attr( $field['autocomplete'] ) . '"' : ''; ?>
-																	<?php echo ! empty( $field['inputmode'] ) ? 'inputmode="' . esc_attr( $field['inputmode'] ) . '"' : ''; ?>
-																	<?php echo ! empty( $field['required'] ) ? 'required' : ''; ?>
-																	<?php echo '' !== $field_description ? 'aria-describedby="' . esc_attr( $field_description ) . '"' : ''; ?>
-																	<?php echo ! empty( $field['placeholder'] ) ? 'placeholder="' . esc_attr( $field['placeholder'] ) . '"' : ''; ?>
-																>
-															<?php endif; ?>
-															<p class="energy-field-error" id="<?php echo esc_attr( $field_error_id ); ?>" data-energy-field-error="<?php echo esc_attr( $field_name ); ?>"></p>
-														</div>
-													<?php endif; ?>
-												<?php endforeach; ?>
-											</div>
-										<?php endif; ?>
-									</section>
-								<?php endforeach; ?>
+											<?php endif; ?>
+										</section>
+									<?php endforeach; ?>
 
-								<div class="review-actions energy-actions">
-									<button type="button" class="review-prev-btn" data-energy-prev hidden>Zurück</button>
-									<button type="button" class="audit-submit-btn" data-energy-next>Weiter</button>
-									<button type="submit" class="audit-submit-btn" data-energy-submit hidden>Growth Audit passend einordnen</button>
-								</div>
+									<div
+										id="energy-form-feedback"
+										class="review-form-feedback<?php echo '' !== $form_error ? ' is-visible is-error' : ''; ?>"
+										aria-live="<?php echo '' !== $form_error ? 'assertive' : 'polite'; ?>"
+										aria-atomic="true"
+										<?php echo '' !== $form_error ? 'role="alert"' : ''; ?>
+									><?php echo esc_html( $form_error ); ?></div>
 
-								<p class="energy-form-meta">Nur Rückmeldungen zu dieser Anfrage. Kein Newsletter-Opt-in, keine Weitergabe, kein Sales-Call als Pflichtschritt.</p>
-							</form>
+									<div class="review-actions energy-actions">
+										<button type="button" class="review-prev-btn" data-energy-prev hidden>Zurück</button>
+										<button type="button" class="audit-submit-btn" data-energy-next>Weiter</button>
+										<button type="submit" class="audit-submit-btn" data-energy-submit hidden>Growth Audit passend einordnen</button>
+									</div>
 
-							<div id="energy-request-success" class="review-success energy-review-success" role="status" aria-live="polite" aria-atomic="true" hidden>
-								<div class="review-success-pill">Anfrage eingegangen</div>
-								<h3>Die Einordnung ist jetzt im System.</h3>
-								<p id="energy-success-message" class="review-success-copy">Danke. Ich melde mich mit einer priorisierten ersten Einschätzung zu Website, Tracking und Anfrageprozess.</p>
-								<div class="review-success-meta">
-									<span>persönliche Rückmeldung</span>
-									<span>diagnose vor pitch</span>
-									<span>keine generische agenturstrecke</span>
-								</div>
-								<div class="review-success-actions">
-									<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">E3 Case Study lesen</a>
-									<a class="audit-text-link" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit ansehen</a>
-								</div>
-							</div>
-						<?php endif; ?>
-					</div>
+									<p class="energy-form-meta">Nur Rückmeldungen zu dieser Anfrage. Kein Newsletter-Opt-in, keine Weitergabe, kein Sales-Call als Pflichtschritt.</p>
+								</form>
 
-					<aside class="energy-form-shell__aside" aria-labelledby="energy-aside-title">
-						<h3 id="energy-aside-title">Ihre Anfrage in Klartext</h3>
-						<p>So lässt sich sofort erkennen, ob eher Nachfrage, Website-Struktur, Messbarkeit oder Vorqualifizierung zuerst zählt.</p>
-						<dl class="review-brief-list">
-							<?php foreach ( $flow_steps as $step ) : ?>
-								<?php if ( empty( $step['name'] ) || empty( $step['summary_label'] ) ) : ?>
-									<?php continue; ?>
-								<?php endif; ?>
-								<div class="review-brief-row">
-									<dt><?php echo esc_html( $step['summary_label'] ); ?></dt>
-									<dd data-energy-summary="<?php echo esc_attr( $step['name'] ); ?>"><?php echo esc_html( $get_summary_value( $step['name'] ) ); ?></dd>
+								<div id="energy-request-success" class="review-success energy-review-success" role="status" aria-live="polite" aria-atomic="true" hidden>
+									<div class="review-success-pill">Anfrage eingegangen</div>
+									<h3>Die Einordnung ist jetzt im System.</h3>
+									<p id="energy-success-message" class="review-success-copy">Danke. Ich melde mich mit einer priorisierten ersten Einschätzung zu Website, Tracking und Anfrageprozess.</p>
+									<div class="review-success-meta">
+										<span>persönliche Rückmeldung</span>
+										<span>diagnose vor pitch</span>
+										<span>keine generische agenturstrecke</span>
+									</div>
+									<div class="review-success-actions">
+										<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">E3 Case Study lesen</a>
+										<a class="audit-text-link" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit ansehen</a>
+									</div>
 								</div>
-							<?php endforeach; ?>
-						</dl>
-						<div class="energy-form-shell__aside-note">
-							<strong>Warum dieser Flow?</strong>
-							<p>Er fragt zuerst Systemsignale ab und erst spät persönliche Daten. Dadurch steigt Komfort, aber die Anfrage bleibt trotzdem sauber vorqualifiziert.</p>
+							<?php endif; ?>
 						</div>
-					</aside>
+
+						<aside class="energy-form-shell__aside" aria-labelledby="energy-aside-title">
+							<h3 id="energy-aside-title">Ihre Anfrage in Klartext</h3>
+							<p>So lässt sich sofort erkennen, ob eher Nachfrage, Website-Struktur, Messbarkeit oder Vorqualifizierung zuerst zählt.</p>
+							<dl class="review-brief-list">
+								<?php foreach ( $flow_steps as $step ) : ?>
+									<?php if ( empty( $step['name'] ) || empty( $step['summary_label'] ) ) : ?>
+										<?php continue; ?>
+									<?php endif; ?>
+									<div class="review-brief-row">
+										<dt><?php echo esc_html( $step['summary_label'] ); ?></dt>
+										<dd data-energy-summary="<?php echo esc_attr( $step['name'] ); ?>"><?php echo esc_html( $get_summary_value( $step['name'] ) ); ?></dd>
+									</div>
+								<?php endforeach; ?>
+							</dl>
+							<div class="energy-form-shell__aside-note">
+								<strong>Warum dieser Flow?</strong>
+								<p>Er fragt zuerst Systemsignale ab und erst spät persönliche Daten. Dadurch steigt Komfort, aber die Anfrage bleibt trotzdem sauber vorqualifiziert.</p>
+							</div>
+						</aside>
+					</div>
 				</div>
 			</div>
 		</section>

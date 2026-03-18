@@ -82,13 +82,14 @@
 .energy-fit-layout,
 .energy-form-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
   gap: 2rem;
   align-items: start;
 }
 
 .energy-hero__copy,
-.energy-form-shell__intro {
+.energy-form-shell__intro,
+.energy-form-shell__flow {
   display: grid;
   gap: 1.25rem;
 }
@@ -319,7 +320,8 @@
 
 .energy-form-shell__main {
   position: relative;
-  overflow: clip;
+  min-width: 0;
+  overflow: visible;
 }
 
 .energy-form-shell__main::before {
@@ -334,8 +336,11 @@
 .energy-form-shell__aside {
   display: grid;
   gap: 1rem;
-  position: sticky;
-  top: 5.5rem;
+  min-width: 0;
+  position: static;
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 46%),
+    var(--nx-card-gradient);
 }
 
 .energy-form-shell__aside h3,
@@ -354,17 +359,57 @@
 
 .energy-intake-form {
   display: grid;
-  gap: 1.1rem;
+  gap: 1rem;
+  min-width: 0;
 }
 
 .energy-progress .review-progress-meta {
   white-space: nowrap;
 }
 
+.energy-progress .review-progress-head {
+  align-items: center;
+}
+
+.energy-progress .review-progress-copy strong {
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+}
+
+.energy-progress-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.energy-progress .review-progress-steps li button {
+  min-height: 5.15rem;
+  padding: 0.9rem 0.65rem;
+}
+
+.energy-progress .review-progress-step-label {
+  text-align: center;
+  line-height: 1.35;
+}
+
+.energy-intake-form.review-funnel--js .review-step.is-active {
+  display: grid;
+  gap: 1rem;
+  padding: 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 48%),
+    var(--audit-glass);
+}
+
 .energy-step__title {
   margin: 0 0 0.35rem;
   font-size: clamp(1.45rem, 2.8vw, 2rem);
   line-height: 1.12;
+}
+
+.energy-intake-form .review-step-copy {
+  margin: 0;
+  max-width: 60ch;
 }
 
 .energy-choice-block legend {
@@ -374,11 +419,14 @@
 }
 
 .energy-option-group {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0.85rem;
 }
 
 .energy-option {
   min-height: 100%;
+  align-content: start;
+  padding: 1rem 2.8rem 1rem 1rem;
 }
 
 .energy-option .review-option-copy {
@@ -400,12 +448,24 @@
   font-size: 0.85rem;
 }
 
+.energy-choice-error {
+  margin-top: 0.75rem;
+}
+
 .energy-consent-card {
   margin-top: 0.5rem;
 }
 
 .energy-actions {
-  align-items: center;
+  align-items: stretch;
+}
+
+.energy-actions .review-prev-btn {
+  justify-self: flex-start;
+}
+
+.energy-actions .audit-submit-btn {
+  width: 100%;
 }
 
 .energy-noscript-note,
@@ -499,6 +559,10 @@
 
   .energy-progress .review-progress-head {
     flex-direction: column;
+  }
+
+  .energy-progress-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
