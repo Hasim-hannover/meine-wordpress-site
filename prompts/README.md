@@ -1,27 +1,10 @@
 # Prompts
 
-Hier liegen wiederverwendbare Prompts und Briefing-Bausteine.
+Dieser Ordner ist nur noch ein Legacy-Parkplatz fuer einmalige Briefings.
 
-Empfohlene spaetere Unterteilung:
+Neue wiederverwendbare Arbeitslogik gehoert nach `agents/skills/`.
 
-- `offers/`
-- `audits/`
-- `seo/`
-- `cro/`
-- `tracking/`
-- `automations/`
+Migriert:
 
-Vorhandene Prompts:
-
-- `ux-premium-optimization.md`
-  Prompt fuer Premium-UX-Optimierungen entlang von visueller Hierarchie, Funnel-Logik und Formularfuehrung.
-- `seo/seo-cockpit-v2-1-hardening.md`
-  Härtungsprompt fuer die naechste Cockpit-Stufe mit Fokus auf Lesbarkeit, interne Links, Koko, Paging und Runtime-Checks.
-
-Jeder Prompt sollte enthalten:
-
-- Zweck
-- Zielgruppe
-- Input-Annahmen
-- gewuenschte Ausgabe
-- No-Go-Regeln
+- `ux-premium-optimization.md` -> `agents/skills/b2b-design-system/` plus `agents/skills/wordpress-cro-content-design-audit/`
+- `seo/seo-cockpit-v2-1-hardening.md` -> `agents/skills/seo-cockpit-hardening/`

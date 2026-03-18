@@ -1,39 +1,26 @@
 # Agent Roles
 
-Dieser Ordner enthaelt spezialisierte agentenlesbare Rollenprofile fuer den aktuellen Stack.
+Rollen sind nur noch Kurzlabels. Detaillierte Arbeitslogik lebt in `AGENTS.md`, lokalen `CONTEXT.md`-Dateien und Skills.
 
-## Pflichtkontext vor jeder Rollenarbeit
+## Pflichtkontext
 
-1. `README.md`
+1. `AGENTS.md`
 2. `docs/architecture/SYSTEM_MAP.md`
 3. `docs/architecture/LIVE_STATUS.md`
-4. `AGENT_CONTEXT.md`
+4. das passende lokale `CONTEXT.md`
 
-## Rollen
+## Rollenmatrix
 
-- `audit-agent.md`
-- `cro-agent.md`
-- `seo-agent.md`
-- `content-agent.md`
-- `n8n-agent.md`
-- `tracking-agent.md`
-- `repo-architect-agent.md`
-
-## Einsatzlogik
-
-- `Audit Agent`: Diagnose, Audit-Funnel, Deep-Dive-Handover
-- `CRO Agent`: CTA-Hierarchie, Trust, Conversion-Pfade, Formularlogik
-- `SEO Agent`: technische SEO, Pillar-Struktur, interne Verlinkung, Sichtbarkeit
-- `Content Agent`: Drafts, Cornerstones, Publish-Packs, CTA-Bridge
-- `n8n Agent`: Workflows, Webhooks, Statusmodelle, Delivery-Logik
-- `Tracking Agent`: Event-Blueprints, Consent, Datenqualitaet, Measurement
-- `Repo Architect Agent`: Source-of-Truth-Struktur, Systemkarten, Status- und Dokumentationslogik
+| Rolle | Wann verwenden | Primäre Orte | Bevorzugte Skills |
+| --- | --- | --- | --- |
+| `Audit` | Audit-Funnel, Diagnose, Deep-Dive-Bruecke | `docs/systems/audit-funnel.md`, `automations/n8n/`, `blocksy-child/assets/js/` | `wordpress-performance-marketing`, `registry-release-qa` |
+| `CRO` | CTA-Hierarchie, Proof, Form-Reibung | `blocksy-child/template-parts/`, `blocksy-child/inc/shortcodes.php` | `wordpress-cro-content-design-audit`, `b2b-design-system`, `homepage-proof-monitoring` |
+| `SEO` | Meta, Schema, interne Verlinkung, kaufnahe Sichtbarkeit | `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, `docs/seo/` | `seo-live-qa`, `wordpress-performance-marketing`, `seo-cockpit-hardening` |
+| `Content` | Drafts, Cornerstones, CTA-Bridges | `content/`, `blocksy-child/category.php`, `blocksy-child/single.php` | `pillar-cornerstone-writer` |
+| `n8n` | Workflows, Webhooks, Contracts, Delivery | `automations/n8n/` | `registry-release-qa` |
+| `Tracking` | Event-Hooks, Consent, Measurement | `blocksy-child/inc/helpers.php`, Templates mit `data-track-*` | `wordpress-performance-marketing`, `homepage-proof-monitoring` |
+| `Repo Architect` | Source of truth, Struktur, Statusfuehrung | `AGENTS.md`, `docs/architecture/`, `agents/skills/` | keine, zuerst Root- und lokale Kontexte laden |
 
 ## Grundregel
 
-Jede Rollenarbeit muss den Unterschied zwischen diesen Ebenen sauber halten:
-
-- Live-Code
-- externe Systeme
-- Betriebsdoku
-- Wissensdoku
+Rollen beschreiben Blickwinkel, nicht eigene Regelwerke. Wenn ein Workflow wiederholt auftritt, entsteht daraus ein Skill statt einer neuen Rollen-Datei.

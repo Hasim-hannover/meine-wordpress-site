@@ -13,21 +13,25 @@ Es soll nicht nur Code ablegen, sondern sichtbar machen:
 
 ## Schnellstart
 
-Menschen und Agenten steigen immer in dieser Reihenfolge ein:
+Menschen lesen diese Reihenfolge:
 
 1. `README.md`
 2. `docs/architecture/SYSTEM_MAP.md`
 3. `docs/architecture/LIVE_STATUS.md`
-4. `AGENT_CONTEXT.md`
-5. die passende Detaildoku unter `docs/systems/`, `docs/seo/` oder `blocksy-child/docs/`
+
+Agenten lesen diese Reihenfolge:
+
+1. `AGENTS.md`
+2. das passende lokale `CONTEXT.md`
+3. nur danach die notwendige System- oder Detaildoku
 
 ## Repo-Logik
 
 | Ebene | Zweck | Hauptorte |
 | --- | --- | --- |
-| Betrieb | Status, Entscheidungen, Playbooks, Betriebswissen | `docs/architecture/LIVE_STATUS.md`, `docs/playbooks/`, `docs/decisions/` |
+| Betrieb | Status, Entscheidungen und Betriebswissen | `docs/architecture/LIVE_STATUS.md`, `docs/decisions/` |
 | Technik | deploybarer Website-Code und technische Systemlogik | `blocksy-child/`, `.github/workflows/` |
-| Wissen | Positionierung, Funnel-Kontext, Content, Agenten- und Prompt-Wissen | `docs/architecture/SYSTEM_MAP.md`, `AGENT_CONTEXT.md`, `content/`, `agents/`, `prompts/` |
+| Wissen | Positionierung, Funnel-Kontext, Content, Agenten- und Skill-Wissen | `AGENTS.md`, `content/`, `agents/`, `prompts/` als Legacy-Briefing-Ablage |
 | Automation | versionierbare Workflow-Exporte und Flow-Doku | `automations/n8n/` |
 
 ## Struktur
@@ -35,23 +39,28 @@ Menschen und Agenten steigen immer in dieser Reihenfolge ein:
 ```text
 .
 ├── README.md
-├── AGENT_CONTEXT.md
-├── SKILL.md
+├── AGENTS.md
+├── .claudeignore
+├── .ai/
 ├── blocksy-child/
+│   ├── CONTEXT.md
 │   └── docs/
 │       ├── architecture/
 │       ├── implementation/
 │       └── ux/
 ├── automations/
 │   └── n8n/
+│       └── CONTEXT.md
 ├── agents/
 │   └── skills/
+│       └── CONTEXT.md
 ├── content/
+│   ├── CONTEXT.md
 │   └── blog-drafts/
 ├── docs/
+│   ├── CONTEXT.md
 │   ├── architecture/
 │   ├── decisions/
-│   ├── playbooks/
 │   ├── references/
 │   ├── seo/
 │   ├── systems/
@@ -69,11 +78,11 @@ Menschen und Agenten steigen immer in dieser Reihenfolge ein:
 - `docs/seo/`: SEO-Architektur, Content-Trennung und thematische Regeln fuer das Wachstumssystem.
 - `docs/ux/`: repo-weite UX- und Hierarchieregeln fuer wiedererkennbare Premium-Fuehrung.
 - `docs/systems/`: fachliche und technische Systemdokumentation.
-- `docs/playbooks/`: manuelle Betriebsablaeufe fuer WordPress-Admin, Migrationen und Rollouts.
+- `docs/playbooks/`: derzeit leer; neue wiederholbare Betriebsablaeufe werden als Skills unter `agents/skills/` modelliert.
 - `docs/references/`: lose HTML-, Snippet- oder Referenz-Artefakte, die nicht direkt Live-Code sind.
 - `content/`: vorbereitete Inhalte, die noch nicht sauber in WordPress oder in die finale Systemstruktur ueberfuehrt wurden.
-- `agents/`: Agenten-spezifische Artefakte wie Skills, Operating Notes und kuenftige Agenten-Assets.
-- `prompts/`: wiederverwendbare Prompt-Bausteine, Briefings und Task-Patterns.
+- `agents/`: Agenten-spezifische Artefakte wie Skills und eine kompakte Rollenmatrix.
+- `prompts/`: Legacy-Ablage fuer einmalige Briefings; neue wiederverwendbare Ablaufe werden als Skills modelliert.
 
 ## Repository Structure
 
@@ -81,7 +90,7 @@ Menschen und Agenten steigen immer in dieser Reihenfolge ein:
 - `/blocksy-child/docs` enthaelt runtime-nahe Theme-Dokumentation: Seitentypen, Formularlogik und konkrete Implementierungsleitplanken fuer das Child Theme.
 - UX-Specs sind absichtlich geteilt: generelle Regeln liegen unter `/docs/ux`, theme-spezifische Runtime-Regeln unter `/blocksy-child/docs/ux`.
 - Architecture-Docs definieren Funnel-Rollen, Seitentypen und Systemgrenzen, damit Service-, Pillar-, Proof- und Glossar-Seiten sauber getrennt bleiben.
-- `/prompts` sammelt wiederverwendbare Agenten-Briefings; sie steuern Arbeitsweise, sind aber nicht die Source of Truth fuer Live-Code oder SEO-Logik.
+- `/prompts` ist nur noch eine Legacy-Ablage fuer seltene Briefings; neue Arbeitslogik gehoert in `/agents/skills`.
 
 ## Aktueller Fokus
 
@@ -95,4 +104,5 @@ Menschen und Agenten steigen immer in dieser Reihenfolge ein:
 - `blocksy-child/` wird ueber GitHub Actions per SSH-Rsync deployt. Der Deploy-Pfad bleibt deshalb vorerst unveraendert.
 - Ein Teil des Live-Contents liegt im WordPress-Editor und ist nicht im Repo versioniert.
 - Externe Systeme wie n8n, GTM, GA4, Consent, CRM und Cal.com sind aktuell nur teilweise im Repo dokumentiert.
-- `SKILL.md` bleibt vorerst im Repo-Root, solange sein technischer Consumer nicht sauber migriert ist.
+- `AGENTS.md` ist die einzige Root-Datei fuer globalen Agentenkontext.
+- Wiederverwendbare Arbeitsablaeufe liegen als Skills unter `agents/skills/<skill>/`.

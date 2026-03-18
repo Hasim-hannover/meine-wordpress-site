@@ -1,0 +1,15 @@
+# Human-facing summaries and changelogs
+README.md
+**/README.md
+CHANGELOG.md
+.ai/**
+
+# Historical audits and research notes
+docs/audits/**
+docs/cro-deep-research-audit-2026-03-15.md
+docs/references/**
+
+# Human operational notes replaced by skills or manual lookup
+docs/playbooks/**
+prompts/**
+agents/roles/**

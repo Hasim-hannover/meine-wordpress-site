@@ -1,0 +1,33 @@
+---
+name: pillar-cornerstone-writer
+description: Write conversion-focused cornerstone articles for WordPress pillar categories. Use for long-form category articles, SEO packaging, slug proposals, internal-link plans, or decision-maker educational pages.
+---
+
+# Pillar Cornerstone Writer
+
+Use this skill when the output is a durable pillar article, not a short blog post.
+
+## Run First
+
+```bash
+agents/skills/pillar-cornerstone-writer/scripts/scaffold.sh "Topic" "optional-slug"
+```
+
+The script prints the required package skeleton with a normalized slug.
+
+## Writing Rules
+
+- Write for founders, CEOs, CMOs, and sales-adjacent decision-makers.
+- Keep the progression `Problem -> Mechanism -> Proof logic -> Action`.
+- Use short paragraphs and consistent terminology.
+- End with a soft strategic CTA, not a hard sell.
+- Suggest internal links to one service page and supporting cluster articles.
+
+## Deliver
+
+1. SEO title
+2. Meta description
+3. URL slug
+4. Full article in Markdown
+5. Suggested internal links
+6. Optional image brief
