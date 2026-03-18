@@ -10,6 +10,7 @@
   var auditLabel = config.auditLabel || 'Growth Audit';
   var submitLabel = config.submitLabel || (auditLabel + ' anfragen');
   var AUTO_ADVANCE_DELAY = 500;
+  var FEEDBACK_ID = 'review-form-feedback';
   var state = {
     stepIndex: 0,
     steps: [],
@@ -19,6 +20,14 @@
     furthestStepIndex: 0,
     autoAdvanceTimer: null
   };
+
+  function prefersReducedMotionEnabled() {
+    return Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function getScrollBehavior() {
+    return prefersReducedMotionEnabled() ? 'auto' : 'smooth';
+  }
 
   function init() {
     var form = document.getElementById('review-request-form');
@@ -220,7 +229,20 @@
     cancelAutoAdvance();
 
     var currentStep = state.steps[state.stepIndex];
+    var shouldAutoAdvance = !prefersReducedMotionEnabled();
     if (!currentStep || state.stepIndex >= state.steps.length - 1) return;
+
+    if (shouldAutoAdvance && typeof radio.matches === 'function') {
+      try {
+        shouldAutoAdvance = !radio.matches(':focus-visible');
+      } catch (error) {
+        shouldAutoAdvance = true;
+      }
+    }
+
+    if (!shouldAutoAdvance) {
+      return;
+    }
 
     var option = radio.closest('.review-option');
     if (option) {
@@ -463,7 +485,7 @@
     var progressFill = document.getElementById('review-progress-fill');
     var progressCurrent = document.getElementById('review-progress-current');
     var progressSteps = form.querySelectorAll('.review-progress-steps li');
-    var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var prefersReducedMotion = prefersReducedMotionEnabled();
 
     state.steps.forEach(function (step, index) {
       var isTarget = index === state.stepIndex;
@@ -557,7 +579,7 @@
 
     var scrollTarget = document.querySelector('.review-progress') || currentStep;
     if (typeof scrollTarget.scrollIntoView === 'function') {
-      scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollTarget.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
     }
 
     var firstInput = currentStep.querySelector('input:not([type="hidden"]):not([type="radio"]), textarea, select');
@@ -610,7 +632,7 @@
     });
 
     if (focusTarget && typeof focusTarget.scrollIntoView === 'function') {
-      focusTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      focusTarget.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
     }
 
     if (success && typeof success.focus === 'function') {
@@ -636,6 +658,9 @@
     feedback.textContent = message;
     feedback.className = 'review-form-feedback is-visible';
     feedback.classList.add(type === 'error' ? 'is-error' : 'is-success');
+    feedback.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+    feedback.setAttribute('aria-atomic', 'true');
+    feedback.setAttribute('role', type === 'error' ? 'alert' : 'status');
   }
 
   function clearFeedback() {
@@ -644,12 +669,47 @@
 
     feedback.textContent = '';
     feedback.className = 'review-form-feedback';
+    feedback.setAttribute('aria-live', 'polite');
+    feedback.setAttribute('aria-atomic', 'true');
+    feedback.removeAttribute('role');
+  }
+
+  function attachFeedbackDescription(field) {
+    if (!field) return;
+
+    var describedBy = (field.getAttribute('aria-describedby') || '')
+      .split(/\s+/)
+      .filter(Boolean);
+
+    if (describedBy.indexOf(FEEDBACK_ID) === -1) {
+      describedBy.push(FEEDBACK_ID);
+      field.setAttribute('aria-describedby', describedBy.join(' '));
+    }
+  }
+
+  function detachFeedbackDescription(field) {
+    if (!field) return;
+
+    var describedBy = (field.getAttribute('aria-describedby') || '')
+      .split(/\s+/)
+      .filter(Boolean)
+      .filter(function (value) {
+        return value !== FEEDBACK_ID;
+      });
+
+    if (describedBy.length) {
+      field.setAttribute('aria-describedby', describedBy.join(' '));
+      return;
+    }
+
+    field.removeAttribute('aria-describedby');
   }
 
   function markFieldInvalid(field) {
     if (!field) return;
 
     field.setAttribute('aria-invalid', 'true');
+    attachFeedbackDescription(field);
     field.classList.add('is-invalid');
 
     var parentField = field.closest('.review-field');
@@ -669,6 +729,7 @@
     if (!field) return;
 
     field.removeAttribute('aria-invalid');
+    detachFeedbackDescription(field);
     field.classList.remove('is-invalid');
 
     var parentField = field.closest('.review-field');
@@ -697,6 +758,7 @@
       var block = field.closest('.review-choice-block');
       if (block) {
         block.classList.remove('is-invalid');
+        block.removeAttribute('aria-invalid');
       }
     }
   }
@@ -716,14 +778,24 @@
       if (field.classList) {
         field.classList.remove('is-invalid');
       }
+
+      detachFeedbackDescription(field);
     });
   }
 
   function markRadioGroupInvalid(radio) {
     if (!radio) return;
 
+    var form = getForm();
     var option = radio.closest('.review-option');
     var block = radio.closest('.review-choice-block');
+
+    if (form && radio.name) {
+      Array.prototype.forEach.call(form.querySelectorAll('input[name="' + radio.name + '"]'), function (groupRadio) {
+        groupRadio.setAttribute('aria-invalid', 'true');
+        attachFeedbackDescription(groupRadio);
+      });
+    }
 
     if (option) {
       option.classList.add('is-invalid');
@@ -731,6 +803,7 @@
 
     if (block) {
       block.classList.add('is-invalid');
+      block.setAttribute('aria-invalid', 'true');
     }
   }
 

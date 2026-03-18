@@ -18,11 +18,11 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 <div class="audit-wrapper" id="audit-main-wrapper">
 	<div class="audit-container">
 		<main class="audit-content">
-			<section id="start" class="audit-hero-centered audit-section nx-reveal review-hero-shell">
+			<section id="start" class="audit-hero-centered audit-section nx-reveal review-hero-shell" aria-labelledby="review-hero-title">
 				<div class="review-hero-layout review-hero-layout--flow">
 					<div class="review-hero-main">
 						<div class="review-hero-kicker">Growth Audit für B2B-WordPress-Seiten</div>
-						<h1>Ihre Website verliert täglich Leads, die schon da sind.</h1>
+						<h1 id="review-hero-title">Ihre Website verliert täglich Leads, die schon da sind.</h1>
 						<p class="hero-sub-short">
 							Der Growth Audit zeigt die drei Bremsen, die qualifizierte Anfragen kosten,
 							und priorisiert den nächsten wirtschaftlichen Schritt.
@@ -50,9 +50,9 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 						</div>
 					</div>
 
-					<aside class="review-offer-panel review-offer-panel--hero review-offer-panel--problem" aria-label="Problem-Mirror">
+					<aside class="review-offer-panel review-offer-panel--hero review-offer-panel--problem" aria-labelledby="review-offer-title">
 						<span class="review-offer-kicker">Was gerade Geld kostet</span>
-						<h2>Die meisten Lead-Verluste passieren vor dem eigentlichen Kontakt.</h2>
+						<h2 id="review-offer-title">Die meisten Lead-Verluste passieren vor dem eigentlichen Kontakt.</h2>
 						<p class="review-offer-copy">
 							Nicht weil niemand auf die Seite kommt, sondern weil Relevanz, Vertrauen
 							und nächster Schritt nicht schnell genug ineinandergreifen.
@@ -84,6 +84,42 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 							</div>
 						</div>
 					</aside>
+				</div>
+			</section>
+
+			<section id="fit" class="audit-section nx-reveal review-proof-section review-fit-section" aria-labelledby="review-fit-headline">
+				<div class="review-proof-bar review-proof-bar--system review-fit-bar">
+					<div class="review-proof-intro">
+						<span class="review-section-kicker">Schnelle Einordnung vor dem Start</span>
+						<h2 id="review-fit-headline">Der Audit ist bewusst eng geschnitten: eine Seite, ein Engpass, eine erste Priorität.</h2>
+						<p>
+							So bleibt die Rückmeldung konkret statt generisch. Wenn bereits Nachfrage, Vertrieb oder Budget
+							an genau dieser Seite hängen, wird der Audit meist sofort wirtschaftlich brauchbar.
+						</p>
+					</div>
+
+					<div class="review-proof-grid review-fit-grid" aria-label="Passung des Growth Audits">
+						<article class="review-proof-pill review-fit-pill review-fit-pill--positive">
+							<span class="review-fit-label review-fit-label--positive">Passt gut</span>
+							<strong>Wenn eine Start- oder Angebotsseite bereits wichtig für Anfragen ist.</strong>
+							<span>Zum Beispiel weil genau dort qualifizierte Leads hängen bleiben oder vor dem Kontakt Relevanz verloren geht.</span>
+						</article>
+						<article class="review-proof-pill review-fit-pill review-fit-pill--positive">
+							<span class="review-fit-label review-fit-label--positive">Passt gut</span>
+							<strong>Wenn bereits Traffic, Sales-Druck oder Werbebudget auf diese Seite wirken.</strong>
+							<span>Dann ist schneller sichtbar, welche Bremse zuerst wirtschaftlich gelöst werden sollte.</span>
+						</article>
+						<article class="review-proof-pill review-fit-pill review-fit-pill--neutral">
+							<span class="review-fit-label review-fit-label--neutral">Nicht gedacht für</span>
+							<strong>Einen Komplett-Audit der ganzen Website direkt im Einstieg.</strong>
+							<span>Der Start bleibt bewusst auf eine konkrete URL begrenzt, damit die Diagnose präzise bleibt.</span>
+						</article>
+						<article class="review-proof-pill review-fit-pill review-fit-pill--neutral">
+							<span class="review-fit-label review-fit-label--neutral">Nicht gedacht für</span>
+							<strong>Reine Tool-Scores ohne manuelle Einordnung.</strong>
+							<span>Sie erhalten eine priorisierte Ersteinschätzung statt einer automatisierten Checkliste ohne Reihenfolge.</span>
+						</article>
+					</div>
 				</div>
 			</section>
 
@@ -232,13 +268,13 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 				</div>
 			</section>
 
-			<section id="form" class="audit-section nx-reveal review-form-section">
+			<section id="form" class="audit-section nx-reveal review-form-section" aria-labelledby="review-form-title">
 				<div class="black-box black-box--centered review-box review-box--flow">
 					<div class="review-form-topbar">
 						<div class="box-head review-form-frame-head">
 							<div>
 								<span class="review-form-kicker">Growth Audit anfragen</span>
-								<h3>In ca. 30 bis 45 Sekunden steht Ihre Seite im Audit.</h3>
+								<h3 id="review-form-title">In ca. 30 bis 45 Sekunden steht Ihre Seite im Audit.</h3>
 								<p>Sie nennen nur die Seite, den stärksten Engpass und das gewünschte Ergebnis. Danach kommt die schriftliche Rückmeldung statt eines Sales-Calls.</p>
 							</div>
 							<div class="review-form-eta" aria-label="Formular-Microcopy">
@@ -286,25 +322,25 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									</div>
 									<ol class="review-progress-steps">
 										<li class="is-current is-reached">
-											<button type="button" data-review-step-target="0" aria-label="Zu Schritt 1: Seite">
+											<button type="button" data-review-step-target="0" aria-label="Zu Schritt 1: Seite" aria-controls="review-step-page">
 												<span class="review-progress-step-index">1</span>
 												<span class="review-progress-step-label">Seite</span>
 											</button>
 										</li>
 										<li>
-											<button type="button" data-review-step-target="1" aria-label="Zu Schritt 2: Engpass" disabled>
+											<button type="button" data-review-step-target="1" aria-label="Zu Schritt 2: Engpass" aria-controls="review-step-focus" disabled>
 												<span class="review-progress-step-index">2</span>
 												<span class="review-progress-step-label">Engpass</span>
 											</button>
 										</li>
 										<li>
-											<button type="button" data-review-step-target="2" aria-label="Zu Schritt 3: Ziel" disabled>
+											<button type="button" data-review-step-target="2" aria-label="Zu Schritt 3: Ziel" aria-controls="review-step-goal" disabled>
 												<span class="review-progress-step-index">3</span>
 												<span class="review-progress-step-label">Ziel</span>
 											</button>
 										</li>
 										<li>
-											<button type="button" data-review-step-target="3" aria-label="Zu Schritt 4: Kontakt" disabled>
+											<button type="button" data-review-step-target="3" aria-label="Zu Schritt 4: Kontakt" aria-controls="review-step-contact" disabled>
 												<span class="review-progress-step-index">4</span>
 												<span class="review-progress-step-label">Kontakt</span>
 											</button>
@@ -330,20 +366,20 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									</dl>
 								</details>
 
-								<div class="review-step is-active" data-step="0">
+								<div class="review-step is-active" id="review-step-page" data-step="0" aria-labelledby="review-step-page-title">
 									<span class="review-step-kicker">Schritt 1 von 4</span>
-									<h4>Welche konkrete Seite soll ich prüfen?</h4>
+									<h4 id="review-step-page-title">Welche konkrete Seite soll ich prüfen?</h4>
 									<p class="review-step-copy">Am besten genau die Startseite oder Angebotsseite, auf der heute qualifizierte Leads hängen bleiben.</p>
 									<div class="review-field">
 										<label for="review-page-url">Seiten-URL</label>
-										<input id="review-page-url" name="page_url" type="url" placeholder="https://www.beispiel.de/angebot" required autocomplete="url" aria-describedby="review-page-url-help">
+										<input id="review-page-url" name="page_url" type="url" placeholder="https://www.beispiel.de/angebot" required autocomplete="url" inputmode="url" autocapitalize="off" spellcheck="false" aria-describedby="review-page-url-help">
 										<p class="review-field-help" id="review-page-url-help">Bitte nur eine konkrete Seite angeben, nicht die ganze Website.</p>
 									</div>
 								</div>
 
-								<div class="review-step" data-step="1" data-review-radio-message="Bitte zuerst den Bereich mit dem größten Klärungsbedarf auswählen.">
+								<div class="review-step" id="review-step-focus" data-step="1" data-review-radio-message="Bitte zuerst den Bereich mit dem größten Klärungsbedarf auswählen." aria-labelledby="review-step-focus-title">
 									<span class="review-step-kicker">Schritt 2 von 4</span>
-									<h4>Wo verlieren Sie heute am ehesten qualifizierte Leads?</h4>
+									<h4 id="review-step-focus-title">Wo verlieren Sie heute am ehesten qualifizierte Leads?</h4>
 									<p class="review-step-copy">Wählen Sie den Bereich, der auf dieser Seite zuerst wirtschaftlich geklärt werden muss.</p>
 
 									<fieldset class="review-choice-block" aria-describedby="review-focus-help">
@@ -396,9 +432,9 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									</fieldset>
 								</div>
 
-								<div class="review-step" data-step="2" data-review-radio-message="Bitte das wichtigste Ziel für diese Seite auswählen.">
+								<div class="review-step" id="review-step-goal" data-step="2" data-review-radio-message="Bitte das wichtigste Ziel für diese Seite auswählen." aria-labelledby="review-step-goal-title">
 									<span class="review-step-kicker">Schritt 3 von 4</span>
-									<h4>Woran würden Sie eine bessere Seite zuerst merken?</h4>
+									<h4 id="review-step-goal-title">Woran würden Sie eine bessere Seite zuerst merken?</h4>
 									<p class="review-step-copy">So wird die Rückmeldung wirtschaftlich priorisiert und nicht nur fachlich korrekt formuliert.</p>
 
 									<fieldset class="review-choice-block" aria-describedby="review-goal-help">
@@ -451,9 +487,9 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									</fieldset>
 								</div>
 
-								<div class="review-step" data-step="3">
+								<div class="review-step" id="review-step-contact" data-step="3" aria-labelledby="review-step-contact-title">
 									<span class="review-step-kicker">Schritt 4 von 4</span>
-									<h4>Wohin soll die Rückmeldung gehen?</h4>
+									<h4 id="review-step-contact-title">Wohin soll die Rückmeldung gehen?</h4>
 									<p class="review-step-copy">Name und geschäftliche E-Mail reichen. Sie erhalten nur Rückmeldungen zu dieser Anfrage, keinen Spam.</p>
 									<div class="review-field-grid">
 										<div class="review-field">
@@ -462,7 +498,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 										</div>
 										<div class="review-field">
 											<label for="review-email">Geschäftliche E-Mail</label>
-											<input id="review-email" name="email" type="email" required autocomplete="email">
+											<input id="review-email" name="email" type="email" required autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false">
 										</div>
 									</div>
 
@@ -493,7 +529,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									</div>
 								</div>
 
-								<div id="review-form-feedback" class="review-form-feedback" aria-live="polite"></div>
+								<div id="review-form-feedback" class="review-form-feedback" aria-live="polite" aria-atomic="true"></div>
 
 								<div class="review-actions">
 									<button type="button" class="review-prev-btn" data-review-prev hidden>Zurück</button>
@@ -509,7 +545,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 								</p>
 							</form>
 
-							<div id="review-request-success" class="review-success" hidden>
+							<div id="review-request-success" class="review-success" role="status" aria-live="polite" aria-atomic="true" hidden>
 								<div class="review-success-pill">Anfrage eingegangen</div>
 								<h3>Die Seite ist jetzt im Audit.</h3>
 								<p id="review-success-message" class="review-success-copy">
@@ -542,7 +578,8 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 							</div>
 						</div>
 
-						<aside class="review-form-aside">
+						<aside class="review-form-aside" aria-labelledby="review-form-aside-title">
+							<h4 id="review-form-aside-title" class="screen-reader-text">Zusammenfassung und Hinweise zum Growth Audit</h4>
 							<div class="review-aside-card review-aside-proof">
 								<div class="review-proof-badge">
 									<div class="review-proof-badge__item">

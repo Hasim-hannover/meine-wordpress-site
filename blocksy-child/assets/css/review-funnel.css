@@ -330,6 +330,56 @@
   line-height: 1.55;
 }
 
+.review-fit-bar {
+  border-color: var(--audit-border-accent);
+}
+
+.review-fit-grid {
+  align-content: start;
+}
+
+.review-fit-pill {
+  gap: 0.45rem;
+}
+
+.review-fit-pill--positive {
+  border-color: var(--audit-border-accent);
+  background:
+    linear-gradient(180deg, hsl(var(--accent-hsl) / 0.12), transparent 34%),
+    var(--audit-glass);
+}
+
+.review-fit-pill--neutral {
+  background:
+    linear-gradient(180deg, hsl(0 0% 100% / 0.03), transparent 34%),
+    var(--audit-glass);
+}
+
+.review-fit-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  padding: 0 0.7rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.review-fit-label--positive {
+  border: 1px solid var(--audit-border-accent);
+  background: hsl(var(--accent-hsl) / 0.1);
+  color: var(--gold);
+}
+
+.review-fit-label--neutral {
+  border: 1px solid var(--border);
+  background: var(--nx-bg-glass-light);
+  color: var(--audit-text-dim);
+}
+
 .review-inline-link,
 .audit-text-link {
   color: var(--gold);
@@ -871,6 +921,14 @@
   border-radius: 12px;
 }
 
+.audit-wrapper .audit-submit-btn:focus-visible,
+.audit-text-link:focus-visible,
+.cta-btn:focus-visible,
+.review-prev-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
 .review-option:focus-within:has(input:focus-visible) {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
@@ -881,10 +939,13 @@
   outline-offset: 2px;
 }
 
-.review-prev-btn:focus-visible,
-.review-actions .audit-submit-btn:focus-visible {
+.audit-faq-section summary:focus-visible,
+.review-aside-faq summary:focus-visible,
+.review-mobile-summary summary:focus-visible,
+.review-optional-details summary:focus-visible {
   outline: 2px solid var(--gold);
-  outline-offset: 3px;
+  outline-offset: 4px;
+  border-radius: 10px;
 }
 
 .review-step h4 {
