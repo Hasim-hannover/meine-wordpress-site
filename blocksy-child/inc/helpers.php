@@ -329,6 +329,7 @@ function nexus_get_primary_public_url_map() {
 			[ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ],
 			home_url( '/e3-new-energy/' )
 		),
+		'energy'               => function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_energy_systems_url() : home_url( '/solar-waermepumpen-leadgenerierung/' ),
 		'domdar'               => nexus_get_page_url(
 			[ 'case-study-domdar', 'domdar' ],
 			home_url( '/case-study-domdar/' )
@@ -409,6 +410,32 @@ function nexus_is_audit_page() {
 		|| is_page( 'growth-audit' )
 		|| is_page( 'audit' )
 		|| is_page( 'customer-journey-audit' );
+}
+
+/**
+ * Resolve the canonical energy systems landing page URL.
+ *
+ * @return string
+ */
+function nexus_get_energy_systems_url() {
+	$page_id = nexus_get_page_id( [ 'solar-waermepumpen-leadgenerierung' ] );
+
+	if ( $page_id ) {
+		return get_permalink( $page_id );
+	}
+
+	$template_page_id = nexus_get_page_id_by_template( 'page-solar-waermepumpen-leadgenerierung.php' );
+
+	if ( $template_page_id ) {
+		$permalink = get_permalink( $template_page_id );
+		$path      = trailingslashit( '/' . ltrim( (string) wp_parse_url( $permalink, PHP_URL_PATH ), '/' ) );
+
+		if ( '/website-fuer-solar-und-waermepumpen-anbieter/' !== $path ) {
+			return $permalink;
+		}
+	}
+
+	return home_url( '/solar-waermepumpen-leadgenerierung/' );
 }
 
 /**
@@ -549,6 +576,60 @@ function nexus_get_current_request_path() {
 }
 
 /**
+ * Ensure the energy systems landing page exists on the canonical slug.
+ *
+ * @return void
+ */
+function nexus_maybe_ensure_energy_systems_page() {
+	if ( wp_installing() || wp_doing_ajax() || wp_doing_cron() ) {
+		return;
+	}
+
+	$page_id = nexus_get_page_id( [ 'solar-waermepumpen-leadgenerierung' ] );
+
+	if ( ! $page_id ) {
+		$legacy_page = get_page_by_path( 'website-fuer-solar-und-waermepumpen-anbieter' );
+
+		if ( $legacy_page instanceof WP_Post ) {
+			$page_id = wp_update_post(
+				wp_slash(
+					[
+						'ID'        => (int) $legacy_page->ID,
+						'post_name' => 'solar-waermepumpen-leadgenerierung',
+					]
+				),
+				true
+			);
+
+			if ( is_wp_error( $page_id ) ) {
+				return;
+			}
+		} else {
+			$page_id = wp_insert_post(
+				wp_slash(
+					[
+						'post_type'    => 'page',
+						'post_status'  => 'publish',
+						'post_title'   => 'Leadgenerierung für Solar- und Wärmepumpen-Anbieter',
+						'post_name'    => 'solar-waermepumpen-leadgenerierung',
+						'post_content' => '',
+						'post_excerpt' => 'B2B-Landingpage für Solar-, Wärmepumpen- und Speicher-Anbieter mit Website-, Tracking- und Conversion-Fokus.',
+					]
+				),
+				true
+			);
+
+			if ( is_wp_error( $page_id ) ) {
+				return;
+			}
+		}
+	}
+
+	update_post_meta( (int) $page_id, '_wp_page_template', 'page-solar-waermepumpen-leadgenerierung.php' );
+}
+add_action( 'init', 'nexus_maybe_ensure_energy_systems_page', 27 );
+
+/**
  * Map deprecated service and tool slugs to their canonical WGOS or hub targets.
  *
  * @return array<string, string>
@@ -675,6 +756,34 @@ function nexus_redirect_legacy_results_path() {
 	exit;
 }
 
+add_action( 'template_redirect', 'nexus_redirect_legacy_energy_systems_path', 1 );
+/**
+ * Redirect the deprecated energy landing slug to the canonical path.
+ *
+ * @return void
+ */
+function nexus_redirect_legacy_energy_systems_path() {
+	if ( is_admin() || wp_doing_ajax() || is_feed() ) {
+		return;
+	}
+
+	$current_path = nexus_get_current_request_path();
+
+	if ( '/website-fuer-solar-und-waermepumpen-anbieter/' !== $current_path ) {
+		return;
+	}
+
+	$target_url  = nexus_get_energy_systems_url();
+	$target_path = trailingslashit( '/' . ltrim( (string) wp_parse_url( $target_url, PHP_URL_PATH ), '/' ) );
+
+	if ( $target_path === $current_path ) {
+		return;
+	}
+
+	wp_safe_redirect( $target_url, 301 );
+	exit;
+}
+
 add_filter( 'template_include', 'nexus_force_results_route_templates', 98 );
 /**
  * Force route-specific proof templates even if WordPress pages use another template in admin.
@@ -693,6 +802,36 @@ function nexus_force_results_route_templates( $template ) {
 		'whitelabel-retainer'       => get_stylesheet_directory() . '/page-whitelabel-retainer.php',
 		'whitelabel-retainer-proof' => get_stylesheet_directory() . '/page-whitelabel-retainer.php',
 		'whitelabel'                => get_stylesheet_directory() . '/page-whitelabel-retainer.php',
+	];
+
+	foreach ( $route_templates as $slug => $forced_template ) {
+		if ( ! is_page( $slug ) ) {
+			continue;
+		}
+
+		if ( file_exists( $forced_template ) ) {
+			return $forced_template;
+		}
+	}
+
+	return $template;
+}
+
+add_filter( 'template_include', 'nexus_force_energy_systems_route_template', 98 );
+/**
+ * Force the energy systems route templates even if the page template was changed in admin.
+ *
+ * @param string $template Resolved template path.
+ * @return string
+ */
+function nexus_force_energy_systems_route_template( $template ) {
+	if ( is_admin() || ! is_page() ) {
+		return $template;
+	}
+
+	$route_templates = [
+		'solar-waermepumpen-leadgenerierung'             => get_stylesheet_directory() . '/page-solar-waermepumpen-leadgenerierung.php',
+		'website-fuer-solar-und-waermepumpen-anbieter' => get_stylesheet_directory() . '/page-website-fuer-solar-und-waermepumpen-anbieter.php',
 	];
 
 	foreach ( $route_templates as $slug => $forced_template ) {
