@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-17.
+Stand: 2026-03-18.
 
 Basis dieses Status:
 
@@ -26,6 +26,7 @@ Nicht verifiziert:
 - Die wichtigsten Legacy-Clusterseiten fuer SEO, Core Web Vitals, CRO, GA4 und Performance Marketing sind jetzt als versionierte WGOS-Clusterseiten im Theme hinterlegt.
 - Ergebnisse laufen repo-seitig kanonisch ueber `/ergebnisse/`; alte Proof-Slugs bleiben nur als Legacy-Redirects bestehen.
 - Der aktive Audit-Pfad nutzt ein natives Multi-Step-Formular, WordPress-REST und ein internes Audit-CRM.
+- Direkte Gespraechs-CTAs fuer Audit-, Kontakt- und WGOS-Kontexte nutzen theme-seitig jetzt zentral `https://cal.com/hasim-uener/30min?overlayCalendar=true`.
 - Die Kontaktseite kann Pilotprojekt-Anfragen jetzt ueber `?focus=pilot` vorqualifiziert aufnehmen.
 - Das Client Portal existiert technisch inklusive Login- und Upload-Logik.
 - Repo-seitig existiert jetzt ein gemeinsames `Nexus CRM` fuer Audit-Anfragen, Projektanfragen und Blog-Abos; die Blog-Benachrichtigungen inkl. DOI, Abmeldung und manuell anstossbarem Artikelversand liegen im Theme.

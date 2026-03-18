@@ -87,12 +87,20 @@ function nexus_get_audit_request_type_options() {
  * @return string
  */
 function nexus_get_audit_calendar_url() {
-	$default_url = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
+	$default_url = 'https://cal.com/hasim-uener/30min?overlayCalendar=true';
 
-	return (string) apply_filters(
+	$resolved_url = (string) apply_filters(
 		'nexus_audit_calendar_url',
 		apply_filters( 'nexus_review_calendar_url', $default_url )
 	);
+
+	$sanitized_url = esc_url_raw( $resolved_url, [ 'https' ] );
+
+	if ( '' !== $sanitized_url ) {
+		return $sanitized_url;
+	}
+
+	return $default_url;
 }
 
 /**

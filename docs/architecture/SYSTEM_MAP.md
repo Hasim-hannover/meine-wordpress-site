@@ -1,6 +1,6 @@
 # System Map
 
-Stand: 2026-03-13. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-03-18. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
@@ -75,7 +75,7 @@ Aktuelle Logik:
 3. Die aktive Landingpage sammelt Seite plus Kontext ueber ein natives Multi-Step-Formular.
 4. WordPress speichert die Anfrage direkt im internen Audit-CRM und versendet Benachrichtigungen ueber `wp_mail`.
 5. Danach folgt bei Bedarf ein vertiefter Folgeschritt, aber erst nach der persoenlichen Rueckmeldung und direktem Kontakt.
-6. Alternative direkte Eskalation: `Cal.com`-Call.
+6. Alternative direkte Eskalation: `Cal.com`-Call ueber `https://cal.com/hasim-uener/30min?overlayCalendar=true`.
 7. `audit-live.js` bleibt als vorbereiteter Instant-Results-Layer im Repo, ist aber nicht der aktive Default-Flow.
 
 ## Nexus CRM und Blog Notify
@@ -144,6 +144,7 @@ Die CTA-Hierarchie ist klar und sollte nicht verwischt werden.
 - Risikoarmer Zusatz-Einstieg: `Pilotprojekt / Proof-of-Value`
 - Kein oeffentlicher 360-/Blueprint-CTA mehr im Erstkontakt
 - Eskalations-CTA: `Cal.com`-Strategiecall
+- Zentrale Default-URL fuer direkte Gespraechsbuchung: `https://cal.com/hasim-uener/30min?overlayCalendar=true`
 - Utility-CTA: Kunden-Portal fuer Bestandskunden
 
 Wichtige Repopunkte:
