@@ -371,16 +371,24 @@
   function updateProgress(activeSteps, currentIndex) {
     var fill = document.getElementById('energy-progress-fill');
     var current = document.getElementById('energy-progress-current');
+    var track = document.getElementById('energy-progress-track');
     var label = activeSteps[currentIndex] ? activeSteps[currentIndex].label : '';
     var total = activeSteps.length || 1;
     var width = ((currentIndex + 1) / total) * 100;
+    var currentText = 'Abschnitt ' + (currentIndex + 1) + ' von ' + total + ': ' + label;
 
     if (fill) {
       fill.style.width = width + '%';
     }
 
     if (current) {
-      current.textContent = 'Schritt ' + (currentIndex + 1) + ' von ' + total + ': ' + label;
+      current.textContent = currentText;
+    }
+
+    if (track) {
+      track.setAttribute('aria-valuemax', String(total));
+      track.setAttribute('aria-valuenow', String(currentIndex + 1));
+      track.setAttribute('aria-valuetext', currentText);
     }
   }
 
@@ -430,7 +438,7 @@
       return;
     }
 
-    liveRegion.textContent = 'Schritt ' + (currentIndex + 1) + ' von ' + activeSteps.length + ': ' + current.label + '.';
+    liveRegion.textContent = 'Abschnitt ' + (currentIndex + 1) + ' von ' + activeSteps.length + ': ' + current.label + '.';
   }
 
   function focusCurrentStep() {

@@ -372,22 +372,24 @@
 }
 
 .energy-progress .review-progress-copy strong {
-  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
 }
 
-.energy-progress-steps {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.55rem;
+.energy-progress {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 0.7rem;
 }
 
-.energy-progress .review-progress-steps li button {
-  min-height: 5.15rem;
-  padding: 0.9rem 0.65rem;
+.energy-progress-note {
+  margin: 0;
+  color: var(--nx-text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.55;
 }
 
-.energy-progress .review-progress-step-label {
-  text-align: center;
-  line-height: 1.35;
+.energy-progress .review-progress-track[role="progressbar"] {
+  position: relative;
 }
 
 .energy-intake-form.review-funnel--js .energy-step {
@@ -399,9 +401,10 @@
   position: relative;
   z-index: 1;
   isolation: isolate;
-  padding: 1.15rem;
+  padding: clamp(1.2rem, 2.2vw, 1.55rem);
   border: 1px solid var(--border);
   border-radius: 20px;
+  box-shadow: var(--audit-shadow-card);
   background:
     linear-gradient(180deg, hsl(var(--accent-hsl) / 0.08), transparent 48%),
     var(--audit-glass);
@@ -415,6 +418,7 @@
   margin: 0 0 0.35rem;
   font-size: clamp(1.45rem, 2.8vw, 2rem);
   line-height: 1.12;
+  max-width: 18ch;
 }
 
 .energy-intake-form .review-step-copy {
@@ -508,6 +512,10 @@
   color: var(--nx-text-secondary);
 }
 
+.energy-form-shell__aside {
+  align-content: start;
+}
+
 .energy-review-success {
   margin-top: 0.5rem;
 }
@@ -584,9 +592,6 @@
     flex-direction: column;
   }
 
-  .energy-progress-steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 640px) {
@@ -603,10 +608,6 @@
 
   .energy-section__head {
     margin-bottom: 1.8rem;
-  }
-
-  .energy-progress-steps {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

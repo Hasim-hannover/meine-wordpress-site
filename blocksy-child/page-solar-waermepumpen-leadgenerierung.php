@@ -575,29 +575,24 @@ get_header();
 									<div class="review-progress energy-progress" aria-label="Fortschritt im Branchen-Flow">
 										<div class="review-progress-head">
 											<div class="review-progress-copy">
-												<span class="review-progress-eyebrow">Anfrage-Flow</span>
-												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?>: <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_html( $flow_steps[0]['title_short'] ) : 'Leistung'; ?></strong>
+												<span class="review-progress-eyebrow">Eine Frage pro View</span>
+												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Abschnitt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?>: <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_html( $flow_steps[0]['title_short'] ) : 'Leistung'; ?></strong>
 											</div>
-											<span class="review-progress-meta">ca. 60-90 Sekunden</span>
+											<span class="review-progress-meta" aria-hidden="true">ca. 60-90 Sekunden</span>
 										</div>
-										<div class="review-progress-track">
+										<div
+											class="review-progress-track"
+											id="energy-progress-track"
+											role="progressbar"
+											aria-label="Fortschritt im Anfrage-Flow"
+											aria-valuemin="1"
+											aria-valuemax="<?php echo esc_attr( (string) count( $flow_steps ) ); ?>"
+											aria-valuenow="1"
+											aria-valuetext="Abschnitt 1 von <?php echo esc_attr( (string) count( $flow_steps ) ); ?>: <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_attr( $flow_steps[0]['title_short'] ) : 'Leistung'; ?>"
+										>
 											<div class="review-progress-fill" id="energy-progress-fill"></div>
 										</div>
-										<ol class="review-progress-steps energy-progress-steps">
-											<?php foreach ( $flow_steps as $index => $step ) : ?>
-												<li class="<?php echo 0 === $index ? 'is-current is-reached' : ''; ?>">
-													<button
-														type="button"
-														data-energy-step-target="<?php echo esc_attr( $step['id'] ); ?>"
-														aria-controls="<?php echo esc_attr( 'energy-step-' . $step['id'] ); ?>"
-														<?php echo 0 === $index ? 'disabled' : ''; ?>
-													>
-														<span class="review-progress-step-index"><?php echo esc_html( (string) ( $index + 1 ) ); ?></span>
-														<span class="review-progress-step-label"><?php echo esc_html( $step['title_short'] ); ?></span>
-													</button>
-												</li>
-											<?php endforeach; ?>
-										</ol>
+										<p class="energy-progress-note">Sichtbar ist immer nur die aktuelle Frage. Ihre bisherigen Angaben bleiben erhalten und werden im Flow sauber weitergef&uuml;hrt.</p>
 									</div>
 
 									<div class="screen-reader-text" aria-live="assertive" aria-atomic="true" data-energy-step-live></div>
@@ -650,7 +645,7 @@ get_header();
 												data-energy-next-map="<?php echo esc_attr( wp_json_encode( $step['next_by_value'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?>"
 											<?php endif; ?>
 										>
-											<span class="review-step-kicker">Schritt <?php echo esc_html( (string) ( $index + 1 ) ); ?> von <?php echo esc_html( (string) count( $flow_steps ) ); ?></span>
+											<span class="review-step-kicker">Abschnitt <?php echo esc_html( (string) ( $index + 1 ) ); ?> von <?php echo esc_html( (string) count( $flow_steps ) ); ?></span>
 											<h3 class="energy-step__title"><?php echo esc_html( $step['question'] ); ?></h3>
 											<p class="review-step-copy"><?php echo esc_html( $step['description'] ); ?></p>
 
