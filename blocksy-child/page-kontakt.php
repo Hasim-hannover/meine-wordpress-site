@@ -86,7 +86,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 
 				<div class="contact-hero__actions">
 					<a class="contact-btn contact-btn--primary" href="#kontakt-form"><?php echo esc_html( $hero_cta ); ?></a>
-					<a class="contact-btn contact-btn--ghost" href="<?php echo esc_url( $calendar_url ); ?>" target="_blank" rel="noopener noreferrer" data-track-action="cta_click_contact_call">Direkt Termin buchen</a>
+					<a class="contact-btn contact-btn--ghost" href="<?php echo esc_url( $calendar_url ); ?>" data-track-action="cta_click_contact_call">Direkt Termin buchen</a>
 				</div>
 
 				<ul class="contact-hero__meta" aria-label="Kontaktvorteile">
@@ -113,7 +113,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 						als mehrere Mails.
 					</p>
 					<div class="contact-note-card__actions">
-						<a class="contact-btn contact-btn--primary" href="<?php echo esc_url( $calendar_url ); ?>" target="_blank" rel="noopener noreferrer" data-track-action="cta_click_contact_call_panel">30-Minuten-Termin buchen</a>
+						<a class="contact-btn contact-btn--primary" href="<?php echo esc_url( $calendar_url ); ?>" data-track-action="cta_click_contact_call_panel">30-Minuten-Termin buchen</a>
 					</div>
 					<p class="contact-note-card__meta">Ideal, wenn Ziel, Timing und Kontext bereits klar sind.</p>
 				</section>
@@ -329,7 +329,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 
 					<div class="contact-form__actions">
 						<button class="contact-submit" type="submit" data-contact-submit><?php echo esc_html( $submit_label ); ?></button>
-						<a class="contact-form__aux-link" href="<?php echo esc_url( $calendar_url ); ?>" target="_blank" rel="noopener noreferrer">Lieber direkt Termin buchen</a>
+						<a class="contact-form__aux-link" href="<?php echo esc_url( $calendar_url ); ?>">Lieber direkt Termin buchen</a>
 					</div>
 
 					<div class="contact-form__feedback" data-contact-feedback aria-live="polite" role="status"></div>

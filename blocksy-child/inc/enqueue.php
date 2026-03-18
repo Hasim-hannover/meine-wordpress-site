@@ -61,6 +61,23 @@ function hu_enqueue_assets() {
 	hu_enqueue_js( 'nexus-core-js', 'nexus-core.js' );
 	hu_enqueue_js( 'nexus-site-header-js', 'site-header.js', [ 'nexus-core-js' ] );
 
+	$calendar_embed = function_exists( 'nexus_get_audit_calendar_embed_config' ) ? nexus_get_audit_calendar_embed_config() : [];
+
+	if ( ! empty( $calendar_embed['origin'] ) && ! empty( $calendar_embed['cal_link'] ) && ! empty( $calendar_embed['url'] ) ) {
+		hu_enqueue_js( 'nexus-cal-embed-js', 'cal-embed.js', [ 'nexus-core-js' ] );
+		wp_localize_script(
+			'nexus-cal-embed-js',
+			'NexusCalEmbedConfig',
+			[
+				'bookingUrl'     => esc_url_raw( (string) $calendar_embed['url'] ),
+				'calOrigin'      => esc_url_raw( (string) $calendar_embed['origin'] ),
+				'calLink'        => sanitize_text_field( (string) $calendar_embed['cal_link'] ),
+				'namespace'      => 'nexus-audit-call',
+				'embedScriptUrl' => esc_url_raw( 'https://app.cal.com/embed/embed.js' ),
+			]
+		);
+	}
+
 
 	// ── GLOBAL: Blog-Header Fallback ───────────────────────────────
 	if ( is_home() || is_archive() || is_singular( 'post' ) ) {

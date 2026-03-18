@@ -377,7 +377,7 @@ $draft_note = $draft_count > 0
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Growth Audit starten</a>
 						</div>
 
-						<p class="wgos-hero__microcopy">Lieber erst sprechen? <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>.</p>
+						<p class="wgos-hero__microcopy">Lieber erst sprechen? <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>
 					</div>
 
 					<div class="wgos-audit-results">

@@ -469,7 +469,7 @@ function nexus_get_wgos_asset_content_html( $asset ) {
 				<p class="wgos-section-intro">Der Growth Audit zeigt, ob dieses Asset jetzt Priorität hat - oder ob ein anderer Baustein zuerst dran ist.</p>
 				<div class="wgos-hero__actions">
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_content_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track-action="cta_wgos_asset_content_calendar" data-track-category="lead_gen" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>
+					<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track-action="cta_wgos_asset_content_calendar" data-track-category="lead_gen">Strategiegespräch vereinbaren</a>
 				</div>
 			</div>
 		</div>

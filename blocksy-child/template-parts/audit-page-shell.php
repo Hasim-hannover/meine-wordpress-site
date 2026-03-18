@@ -541,7 +541,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 
 								<p class="audit-form-escape">
 									Lieber direkt sprechen?
-									<a href="<?php echo esc_url( $calendar_url ); ?>" target="_blank" rel="noopener noreferrer" data-track-action="cta_audit_form_escape_call" data-track-category="lead_gen">Termin buchen &rarr;</a>
+									<a href="<?php echo esc_url( $calendar_url ); ?>" data-track-action="cta_audit_form_escape_call" data-track-category="lead_gen">Termin buchen &rarr;</a>
 								</p>
 							</form>
 

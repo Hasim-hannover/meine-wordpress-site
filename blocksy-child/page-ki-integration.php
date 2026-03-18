@@ -442,7 +442,7 @@ foreach ( $faq_items as $faq_item ) {
 							<a href="<?php echo esc_url( $wgos_url ); ?>" class="wgos-btn wgos-btn--outline" data-track-action="cta_ki_footer_wgos" data-track-category="navigation">WGOS verstehen</a>
 						</div>
 
-						<p class="wgos-hero__microcopy">Lieber erst sprechen? <a href="<?php echo esc_url( $calendar_url ); ?>" data-track-action="cta_ki_footer_calendar" data-track-category="lead_gen" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>.</p>
+						<p class="wgos-hero__microcopy">Lieber erst sprechen? <a href="<?php echo esc_url( $calendar_url ); ?>" data-track-action="cta_ki_footer_calendar" data-track-category="lead_gen">Strategiegespräch vereinbaren</a>.</p>
 					</div>
 
 					<div class="wgos-audit-aside">

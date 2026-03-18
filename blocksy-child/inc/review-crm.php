@@ -104,6 +104,29 @@ function nexus_get_audit_calendar_url() {
 }
 
 /**
+ * Return normalized Cal.com embed config for direct booking CTAs.
+ *
+ * @return array<string, string>
+ */
+function nexus_get_audit_calendar_embed_config() {
+	$calendar_url = nexus_get_audit_calendar_url();
+	$parsed_url   = wp_parse_url( $calendar_url );
+	$scheme       = isset( $parsed_url['scheme'] ) ? strtolower( (string) $parsed_url['scheme'] ) : 'https';
+	$host         = isset( $parsed_url['host'] ) ? strtolower( (string) $parsed_url['host'] ) : '';
+	$path         = isset( $parsed_url['path'] ) ? trim( (string) $parsed_url['path'], '/' ) : '';
+
+	if ( 'http' !== $scheme && 'https' !== $scheme ) {
+		$scheme = 'https';
+	}
+
+	return [
+		'url'      => $calendar_url,
+		'origin'   => $host ? $scheme . '://' . $host : '',
+		'cal_link' => $path,
+	];
+}
+
+/**
  * Resolve the internal notification recipient for audit requests.
  *
  * @return string

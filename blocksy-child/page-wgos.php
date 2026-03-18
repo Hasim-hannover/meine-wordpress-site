@@ -640,7 +640,7 @@ foreach ( $faq_items as $faq_item ) {
 								<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Growth Audit starten</a>
 							</div>
 
-							<p class="wgos-hero__microcopy">Lieber erst sprechen? <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>.</p>
+							<p class="wgos-hero__microcopy">Lieber erst sprechen? <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>
 						</div>
 
 						<div class="wgos-audit-aside">
@@ -784,7 +784,7 @@ foreach ( $faq_items as $faq_item ) {
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Growth Audit starten</a>
 						</div>
 
-						<p class="wgos-hero__microcopy">Persönliche Rückmeldung in 48 Stunden. Kein Pitch, wenn kein fachlicher Fit da ist. <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar" target="_blank" rel="noopener noreferrer">Strategiegespräch vereinbaren</a>.</p>
+						<p class="wgos-hero__microcopy">Persönliche Rückmeldung in 48 Stunden. Kein Pitch, wenn kein fachlicher Fit da ist. <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>
 					</div>
 				</div>
 			</section>
