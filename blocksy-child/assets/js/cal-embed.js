@@ -2,7 +2,7 @@
  * Progressive enhancement for Cal.com booking links.
  *
  * Existing anchors keep their normal href as fallback.
- * When JS is available, matching links open the Cal modal inline.
+ * When JS is available, matching links open the Cal modal on-page.
  */
 (function () {
     'use strict';
@@ -12,6 +12,53 @@
     var initialized = false;
     var preloaded = false;
     var observedRoot = null;
+
+    function ensureBootstrapNamespace(cal, namespace) {
+        var namespaceApi = cal.ns[namespace];
+
+        if (typeof namespaceApi === 'function') {
+            namespaceApi.q = namespaceApi.q || [];
+            return namespaceApi;
+        }
+
+        namespaceApi = function () {
+            namespaceApi.q.push(Array.prototype.slice.call(arguments));
+        };
+
+        namespaceApi.q = namespaceApi.q || [];
+        cal.ns[namespace] = namespaceApi;
+
+        return namespaceApi;
+    }
+
+    function ensureCalBootstrap() {
+        var existingCal = window.Cal;
+
+        if (existingCal && typeof existingCal === 'function' && typeof existingCal.version === 'string') {
+            return existingCal;
+        }
+
+        if (existingCal && typeof existingCal === 'function' && existingCal.q && existingCal.ns) {
+            return existingCal;
+        }
+
+        existingCal = function () {
+            var args = Array.prototype.slice.call(arguments);
+
+            if ('init' === args[0] && typeof args[1] === 'string') {
+                ensureBootstrapNamespace(existingCal, args[1]).q.push(args);
+                return;
+            }
+
+            existingCal.q.push(args);
+        };
+
+        existingCal.q = existingCal.q || [];
+        existingCal.ns = existingCal.ns || {};
+        window.Cal = existingCal;
+
+        return existingCal;
+    }
 
     function normalizePath(path) {
         var value = String(path || '').trim();
@@ -99,8 +146,6 @@
         }
 
         link.setAttribute('aria-haspopup', 'dialog');
-        link.setAttribute('data-cal-link', String(config.calLink || '').trim());
-        link.setAttribute('data-cal-namespace', String(config.namespace || '').trim());
 
         return true;
     }
@@ -130,7 +175,9 @@
     }
 
     function loadEmbedScript() {
-        if (window.Cal && typeof window.Cal === 'function') {
+        ensureCalBootstrap();
+
+        if (window.Cal && typeof window.Cal === 'function' && typeof window.Cal.version === 'string') {
             return Promise.resolve(window.Cal);
         }
 
@@ -144,7 +191,7 @@
             script.src = String(config.embedScriptUrl);
             script.async = true;
             script.onload = function () {
-                if (window.Cal && typeof window.Cal === 'function') {
+                if (window.Cal && typeof window.Cal === 'function' && typeof window.Cal.version === 'string') {
                     resolve(window.Cal);
                     return;
                 }
@@ -164,7 +211,7 @@
     }
 
     function resolveNamespaceApi(resolve, reject, attempt) {
-        var namespaceApi = window.Cal && window.Cal.ns ? window.Cal.ns[config.namespace] : null;
+        var namespaceApi = window.Cal && typeof window.Cal.version === 'string' && window.Cal.ns ? window.Cal.ns[config.namespace] : null;
 
         if (typeof namespaceApi === 'function') {
             resolve(namespaceApi);
@@ -182,12 +229,15 @@
     }
 
     function getNamespaceApi() {
-        return loadEmbedScript().then(function (Cal) {
-            if (!initialized) {
-                Cal('init', String(config.namespace), { origin: calOrigin });
-                initialized = true;
-            }
+        var Cal = ensureCalBootstrap();
 
+        if (!initialized) {
+            ensureBootstrapNamespace(Cal, String(config.namespace));
+            Cal('init', String(config.namespace), { origin: calOrigin });
+            initialized = true;
+        }
+
+        return loadEmbedScript().then(function () {
             return new Promise(function (resolve, reject) {
                 resolveNamespaceApi(resolve, reject, 0);
             });
