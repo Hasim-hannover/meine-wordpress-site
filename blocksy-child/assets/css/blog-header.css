@@ -457,12 +457,13 @@
         border-radius: 22px;
     }
 
-    .nexus-blog-header__title {
-        font-size: 0.92rem;
+    .nexus-blog-header__text,
+    .nexus-blog-header__mobile-context {
+        display: none;
     }
 
-    .nexus-blog-header__text {
-        font-size: 0.78rem;
+    .nexus-blog-header__title {
+        font-size: 0.92rem;
     }
 
     .nexus-blog-header__toggle {
