@@ -27,35 +27,35 @@ $linkedin_url = $urls['linkedin'] ?? '';
 
 $proof_strip_items = [
 	[
-		'value' => '-83 %',
-		'label' => 'CPL im offenen E3 Case',
-	],
-	[
 		'value' => '1.750+',
-		'label' => 'qualifizierte Leads im sichtbaren System',
+		'label' => 'qualifizierte Leads',
 	],
 	[
-		'value' => '8+ Jahre',
-		'label' => 'B2B-, Performance- und CRO-Praxis',
+		'value' => '12 %',
+		'label' => 'Sales-Conversion',
 	],
 	[
-		'value' => 'Erst Diagnose',
-		'label' => 'kein Pflicht-Call, kein Schnell-Pitch',
+		'value' => '34x',
+		'label' => 'ROAS-Spitze',
 	],
 ];
 
-$fit_cards = [
+$audit_checks = [
 	[
-		'title' => 'Bestehende WordPress-Basis',
-		'text'  => 'Website, Inhalte oder Kampagnen sind da. Es fehlt eher Ordnung in Positionierung, Proof und CTA-Führung als noch ein Relaunch.',
+		'title' => 'Positionierung & Klarheit',
+		'text'  => 'Ist in den ersten Sekunden klar, für wen Ihr Angebot gedacht ist, welches Problem Sie lösen und warum man gerade Ihnen vertrauen sollte?',
 	],
 	[
-		'title' => 'Sichtbarkeit ist da, Qualität bleibt unscharf',
-		'text'  => 'Traffic, Rankings oder Ads bringen Besuche, aber nicht genug belastbare Gespräche oder saubere Signale für Leadqualität.',
+		'title' => 'Nutzerführung & Conversion',
+		'text'  => 'Führt die Seite logisch zum nächsten Schritt — oder verliert sie Aufmerksamkeit durch Reibung, Unklarheit oder zu viele konkurrierende Signale?',
 	],
 	[
-		'title' => 'Marketing, Vertrieb und Geschäftsführung brauchen Klarheit',
-		'text'  => 'Die Seite soll zeigen, wo Nachfrage verloren geht und was als Nächstes Priorität hat, statt nur mehr Output zu produzieren.',
+		'title' => 'Vertrauen & Proof',
+		'text'  => 'Sind Ergebnisse, Referenzen, Argumente und Angebotslogik stark genug, um aus Interesse echte Anfragebereitschaft zu machen?',
+	],
+	[
+		'title' => 'Tracking & Messbarkeit',
+		'text'  => 'Sehen Sie überhaupt, wo Anfragen entstehen, wo Nutzer abspringen und welche Maßnahmen wirklich Wirkung haben?',
 	],
 ];
 
@@ -126,45 +126,29 @@ get_header();
 		<nav class="smart-nav" aria-label="Seitennavigation">
 			<ul>
 				<li><a href="#hero" title="Start"><span class="nav-dot"></span><span class="nav-text">Start</span></a></li>
-				<li><a href="#fit" title="Ideal Fit"><span class="nav-dot"></span><span class="nav-text">Fit</span></a></li>
+				<li><a href="#audit" title="Growth Audit"><span class="nav-dot"></span><span class="nav-text">Audit</span></a></li>
 				<li><a href="#proof" title="Track Record"><span class="nav-dot"></span><span class="nav-text">Proof</span></a></li>
 				<li><a href="#system" title="WGOS"><span class="nav-dot"></span><span class="nav-text">WGOS</span></a></li>
 				<li><a href="#faq" title="FAQ"><span class="nav-dot"></span><span class="nav-text">FAQ</span></a></li>
 			</ul>
 		</nav>
 
-		<section id="hero" class="wp-hero wp-home-hero" role="banner">
+		<section id="hero" class="wp-hero wp-home-hero">
 			<div class="wp-container wp-home-shell">
 				<div class="wp-home-hero__grid">
 					<div class="wp-hero-copy wp-home-hero__copy">
 						<span class="wp-badge nx-reveal">WordPress Growth Architect für B2B</span>
-						<h1 class="wp-hero-title nx-reveal">
-							WordPress, das aus Sichtbarkeit<br><span>qualifizierte B2B-Anfragen macht.</span>
-						</h1>
+						<h1 class="wp-hero-title nx-reveal">Ich mache aus Ihrer WordPress-Website ein planbares Anfragesystem für B2B.</h1>
 						<p class="wp-hero-subtitle wp-home-hero__subtitle nx-reveal">
-							Ich ordne Positionierung, Proof, Conversion-Führung und Measurement so, dass Ihre Website nicht nur besucht wird, sondern als nutzbarer Anfragepfad arbeitet.
+							Für Unternehmen, die nicht noch mehr Website-Fläche brauchen, sondern klare Positionierung, belastbare Messbarkeit und einen nächsten Schritt, der aus Besuchern qualifizierte Anfragen macht.
 						</p>
 
 						<div class="wp-home-hero__actions nx-reveal">
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
-							<a href="<?php echo esc_url( $e3_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_hero_e3" data-track-category="trust">E3-Case ansehen</a>
+							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
 						</div>
 						<p class="nx-cta-microcopy nx-reveal">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
 					</div>
-
-					<aside class="wp-home-hero-card nx-reveal" aria-labelledby="home-hero-card-title">
-						<span class="wp-home-hero-card__eyebrow">Diagnose vor Umsetzung</span>
-						<h2 id="home-hero-card-title" class="wp-home-hero-card__title">Im Audit wird sichtbar, warum Ihre Website heute noch nicht sauber in Anfragen übersetzt.</h2>
-						<p class="wp-home-hero-card__text">
-							Wir prüfen nicht nur Design oder Technik, sondern die Stellen, an denen relevante Besucher, Datensignale und der nächste Schritt auseinanderfallen.
-						</p>
-						<ul class="wp-home-hero-card__list" aria-label="Audit-Schwerpunkte">
-							<li>Kaufnahe Seiten, Argumentationslogik und CTA-Führung</li>
-							<li>Tracking, Consent und Signale für echte Leadqualität</li>
-							<li>Proof, Reibung und Prioritäten für die nächsten 30 bis 90 Tage</li>
-						</ul>
-						<p class="wp-home-hero-card__note">Kein Pitch. Keine Maßnahmenliste ohne Kontext. Erst Diagnose, dann Priorisierung.</p>
-					</aside>
 				</div>
 			</div>
 		</section>
@@ -175,7 +159,7 @@ get_header();
 
 		<section class="homepage-proof-strip" aria-label="Schnelle Vertrauenssignale">
 			<div class="wp-container wp-home-shell">
-				<div class="homepage-proof-strip__list" role="list">
+				<div class="homepage-proof-strip__list" role="list" aria-label="Proof Kennzahlen">
 					<?php foreach ( $proof_strip_items as $item ) : ?>
 						<div class="homepage-proof-strip__item nx-reveal" role="listitem">
 							<strong><?php echo esc_html( $item['value'] ); ?></strong>
@@ -186,25 +170,27 @@ get_header();
 			</div>
 		</section>
 
-		<section id="fit" class="wp-section homepage-fit-section" data-track-section="homepage_fit">
+		<section id="audit" class="wp-section homepage-audit-section" data-track-section="homepage_audit">
 			<div class="wp-container wp-home-shell">
-				<div class="wp-home-section-title text-center nx-reveal">
-					<span class="wp-badge">Ideal Fit</span>
-					<h2 class="wp-section-h2">Für B2B-Teams, die mit WordPress schon sichtbar sind, aber zu wenig qualifizierte Anfragen daraus machen.</h2>
-					<p class="wp-section-p">Der Fit ist hoch, wenn nicht eine neue Website fehlt, sondern ein klarer Anfragepfad.</p>
+				<div class="wp-home-section-title nx-reveal">
+					<span class="wp-badge">Growth Audit</span>
+					<h2 class="wp-section-h2">Was wir im Growth Audit konkret prüfen</h2>
+					<p class="wp-section-p homepage-audit-section__intro">Viele Websites haben nicht ein großes Problem, sondern mehrere kleine Brüche im Zusammenspiel: Positionierung, Nutzerführung, Vertrauen, Tracking oder der nächste sinnvolle Schritt. Genau dort setzen wir an.</p>
 				</div>
 
-				<div class="homepage-fit-section__grid">
-					<?php foreach ( $fit_cards as $card ) : ?>
-						<article class="wp-success-card homepage-fit-section__card nx-reveal">
+				<div class="homepage-audit-section__grid" role="list" aria-label="Prüfbereiche im Growth Audit">
+					<?php foreach ( $audit_checks as $card ) : ?>
+						<article class="wp-success-card homepage-audit-section__card nx-reveal" role="listitem">
 							<h3 class="wp-success-title"><?php echo esc_html( $card['title'] ); ?></h3>
 							<p><?php echo esc_html( $card['text'] ); ?></p>
 						</article>
 					<?php endforeach; ?>
-					<p class="homepage-fit-section__note nx-reveal">
-						Weniger passend, wenn Sie primär ein kosmetisches Redesign oder lose Einzelleistungen ohne vorherige Diagnose suchen.
-						<a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_fit_audit" data-track-category="lead_gen">Wenn es passt, ist das Growth Audit der direkte Einstieg.</a>
-					</p>
+				</div>
+
+				<div class="homepage-audit-section__footer nx-reveal">
+					<p class="homepage-audit-section__note">Sie bekommen keine generische Checkliste, sondern eine priorisierte Einordnung: Was bremst aktuell, was hat den größten Hebel und was sollte als Nächstes passieren.</p>
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary homepage-audit-section__cta" data-track-action="cta_home_audit_block_audit" data-track-category="lead_gen">Growth Audit starten</a>
+					<p class="homepage-audit-section__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
 				</div>
 			</div>
 		</section>
