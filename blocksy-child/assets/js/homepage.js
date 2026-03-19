@@ -37,6 +37,7 @@ function initMobileStickyCta() {
     const stickyCta = document.querySelector("[data-home-mobile-cta]");
     const hero = document.getElementById("hero");
     const audit = document.getElementById("audit");
+    const fit = document.getElementById("fit");
     const finalCta = document.getElementById("cta");
 
     if (!stickyCta) {
@@ -71,8 +72,10 @@ function initMobileStickyCta() {
 
     if (typeof IntersectionObserver === "undefined") {
         function syncStickyState() {
-            if (audit) {
-                const trigger = audit.offsetTop + (audit.offsetHeight * 0.2);
+            const revealAnchor = fit || audit;
+
+            if (revealAnchor) {
+                const trigger = revealAnchor.offsetTop + (revealAnchor.offsetHeight * 0.2);
                 heroPassed = window.scrollY > trigger;
             } else if (hero) {
                 const trigger = hero.offsetTop + (hero.offsetHeight * 0.6);
@@ -90,14 +93,14 @@ function initMobileStickyCta() {
         syncStickyState();
         window.addEventListener("scroll", syncStickyState, { passive: true });
         window.addEventListener("resize", syncStickyState);
-    } else if (audit || hero) {
-        const revealAnchor = audit || hero;
+    } else if (fit || audit || hero) {
+        const revealAnchor = fit || audit || hero;
 
         const heroObserver = new IntersectionObserver(function (entries) {
             heroPassed = !(entries[0] && entries[0].isIntersecting);
             updateStickyState();
         }, {
-            threshold: audit ? 0.18 : 0.22
+            threshold: (fit || audit) ? 0.18 : 0.22
         });
 
         heroObserver.observe(revealAnchor);

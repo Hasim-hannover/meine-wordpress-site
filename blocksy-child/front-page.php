@@ -65,6 +65,21 @@ $audit_checks = [
 	],
 ];
 
+$fit_cards = [
+	[
+		'title' => 'Sie haben bereits Sichtbarkeit oder erste Anfragen — aber zu wenig Klarheit.',
+		'text'  => 'Ihre Website bekommt Besuch, Rankings, Kampagnenklicks oder Weiterleitungen. Aber es bleibt unklar, warum Anfragen ausbleiben, schwanken oder qualitativ nicht passen.',
+	],
+	[
+		'title' => 'Sie wollen nicht blind mehr Maßnahmen einkaufen.',
+		'text'  => 'Sie brauchen zuerst eine belastbare Einordnung: Was bremst wirklich — Positionierung, Proof, Tracking, Reibung oder Conversion-Führung?',
+	],
+	[
+		'title' => 'Sie wollen WordPress als Arbeitsgrundlage, nicht als Baustelle.',
+		'text'  => 'Nicht noch mehr Tool-Chaos, Relaunch-Theater oder Reports ohne Richtung, sondern ein System, das verständlicher, messbarer und gezielter weiterentwickelt werden kann.',
+	],
+];
+
 $system_layers = [
 	[
 		'label'  => 'Ebene 1',
@@ -133,6 +148,7 @@ get_header();
 			<ul>
 				<li><a href="#hero" title="Start"><span class="nav-dot"></span><span class="nav-text">Start</span></a></li>
 				<li><a href="#audit" title="Growth Audit"><span class="nav-dot"></span><span class="nav-text">Audit</span></a></li>
+				<li><a href="#fit" title="Für Wen Das Passt"><span class="nav-dot"></span><span class="nav-text">Fit</span></a></li>
 				<li><a href="#proof" title="Track Record"><span class="nav-dot"></span><span class="nav-text">Proof</span></a></li>
 				<li><a href="#system" title="WGOS"><span class="nav-dot"></span><span class="nav-text">WGOS</span></a></li>
 				<li><a href="#faq" title="FAQ"><span class="nav-dot"></span><span class="nav-text">FAQ</span></a></li>
@@ -197,6 +213,42 @@ get_header();
 					<p class="homepage-audit-section__note">Sie bekommen keine generische Checkliste, sondern eine priorisierte Einordnung: Was bremst aktuell, was hat den größten Hebel und was sollte als Nächstes passieren.</p>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary homepage-audit-section__cta" data-track-action="cta_home_audit_block_audit" data-track-category="lead_gen">Growth Audit starten</a>
 					<p class="homepage-audit-section__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="fit" class="wp-section homepage-fit-section" data-track-section="homepage_fit">
+			<div class="wp-container wp-home-shell">
+				<div class="wp-home-section-title homepage-fit-section__title nx-reveal">
+					<span class="wp-badge">Für Wen Das Passt</span>
+					<h2 class="wp-section-h2">Für wen das sinnvoll ist</h2>
+					<p class="wp-section-p homepage-fit-section__intro">Das hier ist kein Angebot für jeden. Es ist sinnvoll für B2B-Unternehmen, die mit WordPress nicht einfach „online sein“, sondern Nachfrage, Klarheit und den nächsten Schritt systematisch verbessern wollen.</p>
+				</div>
+
+				<div class="homepage-fit-section__grid" role="list" aria-label="Für wen das Angebot sinnvoll ist">
+					<?php foreach ( $fit_cards as $card ) : ?>
+						<article class="wp-success-card homepage-fit-section__card nx-reveal" role="listitem">
+							<h3 class="wp-success-title"><?php echo esc_html( $card['title'] ); ?></h3>
+							<p><?php echo esc_html( $card['text'] ); ?></p>
+						</article>
+					<?php endforeach; ?>
+				</div>
+
+				<div class="homepage-fit-section__qualifiers">
+					<section class="homepage-fit-section__qualifier nx-reveal" aria-labelledby="homepage-fit-good">
+						<p id="homepage-fit-good" class="homepage-fit-section__qualifier-label">Besonders passend, wenn …</p>
+						<p class="homepage-fit-section__qualifier-text">… bereits Angebot, Zielgruppe und ein echter Leistungsanspruch vorhanden sind — die Website diesen Wert aber noch nicht sauber übersetzt.</p>
+					</section>
+					<section class="homepage-fit-section__qualifier homepage-fit-section__qualifier--muted nx-reveal" aria-labelledby="homepage-fit-bad">
+						<p id="homepage-fit-bad" class="homepage-fit-section__qualifier-label">Eher nicht passend, wenn …</p>
+						<p class="homepage-fit-section__qualifier-text">… primär nur eine neue schöne Website gesucht wird, ohne Bereitschaft, Positionierung, Proof, Daten und Anfrageführung zusammenzudenken.</p>
+					</section>
+				</div>
+
+				<div class="homepage-fit-section__footer nx-reveal">
+					<p class="homepage-fit-section__note">Wenn das auf Ihre Situation zutrifft, ist der Growth Audit der richtige erste Schritt: nicht größer denken als nötig, aber präziser als üblich.</p>
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary homepage-fit-section__cta" data-track-action="cta_home_fit_audit" data-track-category="lead_gen">Growth Audit starten</a>
+					<p class="homepage-fit-section__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
 				</div>
 			</div>
 		</section>
