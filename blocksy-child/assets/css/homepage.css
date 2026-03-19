@@ -103,6 +103,7 @@
 }
 
 .smart-nav.is-visible.is-scrolling,
+.smart-nav.is-visible:hover,
 .smart-nav.is-visible:focus-within {
   opacity: 1;
   pointer-events: auto;
