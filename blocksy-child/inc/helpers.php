@@ -249,6 +249,26 @@ function nexus_get_category_url( $slug, $fallback = '' ) {
 }
 
 /**
+ * Return the canonical public URL for one versioned WGOS cluster route.
+ *
+ * Cluster routes stay on stable public slugs even if legacy editor pages with
+ * shorter aliases still exist in the database.
+ *
+ * @param string $slug     Canonical cluster slug.
+ * @param string $fallback Optional fallback URL.
+ * @return string
+ */
+function nexus_get_wgos_cluster_route_url( $slug, $fallback = '' ) {
+	$slug = sanitize_title( (string) $slug );
+
+	if ( '' === $slug ) {
+		return $fallback ? $fallback : home_url( '/' );
+	}
+
+	return home_url( '/' . $slug . '/' );
+}
+
+/**
  * Resolve the versioned set of primary public URLs used for SEO and internal linking.
  *
  * Keep all canonical internal targets in one place so template, footer, cockpit and
@@ -280,28 +300,28 @@ function nexus_get_primary_public_url_map() {
 			[ 'wordpress-agentur-hannover', 'wordpress-agentur' ],
 			home_url( '/wordpress-agentur-hannover/' )
 		),
-		'seo'                  => nexus_get_page_url(
-			[ 'wordpress-seo-hannover', 'seo' ],
+		'seo'                  => nexus_get_wgos_cluster_route_url(
+			'wordpress-seo-hannover',
 			home_url( '/wordpress-seo-hannover/' )
 		),
-		'wartung'              => nexus_get_page_url(
-			[ 'wordpress-wartung-hannover' ],
+		'wartung'              => nexus_get_wgos_cluster_route_url(
+			'wordpress-wartung-hannover',
 			home_url( '/wordpress-wartung-hannover/' )
 		),
-		'tracking'             => nexus_get_page_url(
-			[ 'ga4-tracking-setup' ],
+		'tracking'             => nexus_get_wgos_cluster_route_url(
+			'ga4-tracking-setup',
 			home_url( '/ga4-tracking-setup/' )
 		),
-		'cwv'                  => nexus_get_page_url(
-			[ 'core-web-vitals', 'core-web-vitals-optimierung' ],
+		'cwv'                  => nexus_get_wgos_cluster_route_url(
+			'core-web-vitals',
 			home_url( '/core-web-vitals/' )
 		),
-		'cro'                  => nexus_get_page_url(
-			[ 'conversion-rate-optimization', 'conversion-optimierung' ],
+		'cro'                  => nexus_get_wgos_cluster_route_url(
+			'conversion-rate-optimization',
 			home_url( '/conversion-rate-optimization/' )
 		),
-		'performance_marketing'=> nexus_get_page_url(
-			[ 'performance-marketing' ],
+		'performance_marketing'=> nexus_get_wgos_cluster_route_url(
+			'performance-marketing',
 			home_url( '/performance-marketing/' )
 		),
 		'tools'                => nexus_get_page_url(
@@ -630,13 +650,15 @@ function nexus_maybe_ensure_energy_systems_page() {
 add_action( 'init', 'nexus_maybe_ensure_energy_systems_page', 27 );
 
 /**
- * Map deprecated service and tool slugs to their canonical WGOS or hub targets.
+ * Map deprecated service, cluster and tool slugs to their canonical targets.
  *
  * @return array<string, string>
  */
 function nexus_get_legacy_offer_redirect_map() {
 	return [
 		'/meta-ads/'                   => nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) ),
+		'/seo/'                        => nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) ),
+		'/wordpress-agentur/'          => nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) ),
 		'/roi-rechner/'                => nexus_get_primary_public_url( 'tools', home_url( '/kostenlose-tools/' ) ),
 	];
 }

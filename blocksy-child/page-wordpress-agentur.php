@@ -15,7 +15,7 @@ $wgos_url  = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ]
 $cases_url = nexus_get_results_url();
 $about_url = nexus_get_page_url( [ 'uber-mich' ] );
 $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ] );
-$seo_url   = nexus_get_page_url( [ 'wordpress-seo-hannover', 'seo' ] );
+$seo_url   = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) );
 $measurement_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
 $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ] );
 
