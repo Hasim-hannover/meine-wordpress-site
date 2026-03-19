@@ -439,8 +439,8 @@ $energy_url  = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_ene
             <div class="cs-not-item">
                 <span class="cs-not-x">✕</span>
                 <div>
-                    <strong>Kein Agentur-Lock-in</strong>
-                    <p>Alle Assets, Zugänge und Dokumentationen beim Kunden. Wechsel jederzeit möglich.</p>
+                    <strong>Volle Ownership</strong>
+                    <p>Code, Inhalte, Zugänge und Setups bleiben beim Kunden. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.</p>
                 </div>
             </div>
 
@@ -610,8 +610,8 @@ $energy_url  = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_ene
             <details class="nx-faq__item">
                 <summary>Was kostet das WordPress Growth Operating System?</summary>
                 <div class="nx-faq__content">
-                    Das WGOS ist ein monatliches Credit-Modell: Sie buchen ein Kontingent,
-                    wir setzen Module nach Priorität um. Kein Stundensatz, kein Lock-in.
+                    Das WGOS arbeitet mit planbarer Growth-Kapazität über Credits: Sie buchen ein Kontingent,
+                    wir setzen Module nach Priorität um. Code, Inhalte, Zugänge und Setups bleiben bei Ihnen.
                     Details und Pakete finden Sie auf der
                     <a href="<?php echo esc_url( $wgos_url ); ?>">WGOS-Seite</a>.
                 </div>
@@ -672,7 +672,7 @@ $energy_url  = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_ene
             <!-- 3 Internal Links -->
             <div class="cs-internal-links">
                 <a href="<?php echo esc_url( $wgos_url ); ?>" class="cs-internal-link">
-                    WGOS: Das System dahinter →
+                    WGOS: Die Systemlogik dahinter →
                 </a>
                 <a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">
                     Weitere Ergebnisse →

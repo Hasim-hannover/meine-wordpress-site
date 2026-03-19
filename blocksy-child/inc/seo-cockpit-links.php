@@ -266,9 +266,9 @@ function nexus_get_seo_cockpit_sitewide_source_definitions() {
 	$tools_url        = $primary_urls['tools'] ?? home_url( '/kostenlose-tools/' );
 	$about_url        = $primary_urls['about'] ?? home_url( '/uber-mich/' );
 	$contact_url      = $primary_urls['contact'] ?? home_url( '/kontakt/' );
-	$project_url     = add_query_arg(
+	$implementation_url = add_query_arg(
 		[
-			'type' => 'project',
+			'type' => 'implementation',
 		],
 		$contact_url
 	);
@@ -324,7 +324,7 @@ function nexus_get_seo_cockpit_sitewide_source_definitions() {
 				$cwv_url,
 				$tracking_url,
 				$tools_url,
-				$project_url,
+				$implementation_url,
 				$about_url,
 				$contact_url,
 				$imprint_url,

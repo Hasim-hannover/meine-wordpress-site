@@ -18,6 +18,10 @@ $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ] );
 $seo_url   = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) );
 $measurement_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
 $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ] );
+$proof_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [];
+$canonical_ownership_sentence = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
+$framework_label             = function_exists( 'nexus_get_public_framework_label' ) ? nexus_get_public_framework_label() : 'WGOS = WordPress Growth Operating System';
+$primary_term                = function_exists( 'nexus_get_public_primary_term' ) ? nexus_get_public_primary_term() : 'WordPress als Nachfrage-System für B2B';
 
 $hero_highlights = [
 	[
@@ -31,25 +35,6 @@ $hero_highlights = [
 	[
 		'label' => 'Nächster Schritt',
 		'text'  => 'Erst ein Growth Audit. Danach erst die Entscheidung, welche Maßnahme wirklich zuerst zählt.',
-	],
-];
-
-$proof_metrics = [
-	[
-		'value' => '3.000+',
-		'label' => 'qualifizierte Leads in 18 Monaten',
-	],
-	[
-		'value' => '-83%',
-		'label' => 'Kosten pro Lead',
-	],
-	[
-		'value' => '<0.8s',
-		'label' => 'LCP auf Angebotsseiten',
-	],
-	[
-		'value' => '8+',
-		'label' => 'Jahre B2B- und Performance-Praxis',
 	],
 ];
 
@@ -127,7 +112,7 @@ $system_map = [
 		'actions' => [
 			[
 				'url'      => $wgos_url,
-				'label'    => 'WGOS verstehen',
+				'label'    => $framework_label . ' verstehen',
 				'class'    => 'wp-agentur-text-link',
 				'action'   => 'cta_agentur_system_wgos',
 				'category' => 'navigation',
@@ -240,7 +225,7 @@ get_header();
 						<span class="nx-badge nx-badge--gold">WordPress Agentur Hannover für B2B</span>
 						<h1 class="nx-hero__title">WordPress Agentur Hannover: B2B-Websites, die Anfragen liefern.</h1>
 						<p class="nx-hero__subtitle">
-							Angebotsseiten, technische SEO, Tracking und Conversion-Führung als zusammenhängendes System statt Einzelmaßnahmen.
+							<?php echo esc_html( $primary_term ); ?> statt Einzelmaßnahmen: Angebotsseiten, technische SEO, Tracking und Conversion-Führung greifen als ein sauberes System zusammen.
 						</p>
 						<div class="wp-agentur-actions wp-agentur-actions--hero">
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary wp-agentur-hero__primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
@@ -271,9 +256,9 @@ get_header();
 							<?php endforeach; ?>
 						</div>
 						<div class="wp-agentur-hero-card__proof" role="list" aria-label="Frühe Proof-Signale">
-							<span role="listitem">3.000+ qualifizierte Leads</span>
-							<span role="listitem">-83% CPL</span>
-							<span role="listitem">8+ Jahre Praxis</span>
+							<?php foreach ( $proof_metrics as $proof_metric ) : ?>
+								<span role="listitem"><?php echo esc_html( $proof_metric['value'] . ' ' . $proof_metric['label'] ); ?></span>
+							<?php endforeach; ?>
 						</div>
 						<p class="wp-agentur-hero-card__note">Lokale Nähe hilft. Entscheidend bleibt, ob aus WordPress ein steuerbares Nachfrage-System wird.</p>
 					</aside>
@@ -297,7 +282,7 @@ get_header();
 				</div>
 				<div class="wp-agentur-proof-cta">
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_proof_audit" data-track-category="lead_gen">Nach dem Proof mit dem Audit starten</a>
-					<p>Oder erst das System dahinter sehen: <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_agentur_proof_wgos" data-track-category="navigation">WGOS verstehen</a></p>
+					<p>Oder erst die Systemlogik dahinter sehen: <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_agentur_proof_wgos" data-track-category="navigation"><?php echo esc_html( $framework_label ); ?> verstehen</a></p>
 				</div>
 			</div>
 		</section>
@@ -326,6 +311,7 @@ get_header();
 						<li>belastbare Signale statt Tool-Rauschen</li>
 						<li>bessere Anfrageführung auf kaufnahen Seiten</li>
 					</ul>
+					<p><?php echo esc_html( $canonical_ownership_sentence ); ?></p>
 				</div>
 			</div>
 		</section>
@@ -420,11 +406,11 @@ get_header();
 					</article>
 					<article class="nx-step">
 						<div class="nx-step__number">3</div>
-						<h3>WGOS Umsetzung und Retainer</h3>
+						<h3>Kontrollierte Umsetzung und laufende Weiterentwicklung</h3>
 						<p>Erst dann werden die passenden Bausteine aufgebaut oder weiterentwickelt: Money Pages, Datenebene, Proof-Struktur, technisches Fundament und kontrollierter Betrieb.</p>
 					</article>
 				</div>
-				<p class="wp-agentur-process-link">Mehr zum System? <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_agentur_prozess_wgos" data-track-category="navigation">WGOS ansehen</a></p>
+				<p class="wp-agentur-process-link">Mehr zum System? <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_agentur_prozess_wgos" data-track-category="navigation"><?php echo esc_html( $framework_label ); ?> ansehen</a></p>
 			</div>
 		</section>
 
@@ -464,8 +450,8 @@ get_header();
 						<h3>Mehr Wirkung aus denselben Kanälen</h3>
 						<div class="wp-agentur-case-card__metrics" role="list" aria-label="Case Kennzahlen">
 							<div role="listitem">
-								<strong>25 EUR</strong>
-								<span>statt 150 EUR CPL</span>
+								<strong>-83 %</strong>
+								<span>CPL</span>
 							</div>
 							<div role="listitem">
 								<strong>1.750+</strong>
@@ -533,7 +519,7 @@ get_header();
 					<h2>Prüfen wir, an welcher Stelle Ihr WordPress-System heute Nachfrage verliert.</h2>
 					<p>Der Growth Audit zeigt, ob Angebotsseiten, Datenlage, CTA-Führung oder technische Reibung zuerst angegangen werden sollten und ob ein tieferer Umbau überhaupt sinnvoll ist.</p>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_final_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					<p class="wp-cta-desc mt-1">Kein Pitch. Klare Priorisierung. Sinnvoller nächster Schritt.</p>
+					<p class="wp-cta-desc mt-1">Kein Pitch. Klare Priorisierung. Wenn fachlich sinnvoll, kann daraus als nächster Schritt eine vertiefte Analyse, eine fokussierte Korrektur oder eine laufende Weiterentwicklung entstehen.</p>
 					<p class="wp-cta-desc mb-0"><a href="<?php echo esc_url( $about_url ); ?>" data-track-action="cta_agentur_final_about" data-track-category="navigation">Mehr über meine Arbeitsweise</a></p>
 				</div>
 			</div>

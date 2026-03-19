@@ -158,9 +158,21 @@ add_filter( 'body_class', 'nexus_add_virtual_contact_body_class', 20 );
  */
 function nexus_get_contact_request_type_options() {
 	return [
-		'project' => [
-			'label'       => 'Projektanfrage',
-			'description' => 'Neue Vorhaben, Relaunches oder Wachstumshebel rund um Ihre Website.',
+		'audit' => [
+			'label'       => 'Erstdiagnose / Growth Audit',
+			'description' => 'Der saubere Diagnose-Einstieg, wenn zuerst Klarheit und Priorisierung gebraucht werden.',
+		],
+		'analysis' => [
+			'label'       => 'Fokussierte Folgeanalyse',
+			'description' => 'Für tiefere Prüfung eines klar abgegrenzten Engpasses nach erster Einordnung.',
+		],
+		'implementation' => [
+			'label'       => 'Umsetzung / Optimierung',
+			'description' => 'Für konkrete Korrekturen, Optimierungen oder einen klar umrissenen Umsetzungsbedarf.',
+		],
+		'ongoing' => [
+			'label'       => 'Laufende Weiterentwicklung',
+			'description' => 'Für planbare Growth-Kapazität und kontrollierte Weiterentwicklung ohne Abhängigkeit.',
 		],
 		'general' => [
 			'label'       => 'Allgemeine Anfrage',
@@ -195,37 +207,49 @@ function nexus_get_contact_request_type_labels() {
  */
 function nexus_get_contact_focus_options() {
 	return [
+		'audit_scope'      => [
+			'label' => 'Erstdiagnose / Growth Audit',
+			'types' => [ 'audit' ],
+		],
+		'followup_scope'   => [
+			'label' => 'Fokussierte Folgeanalyse',
+			'types' => [ 'analysis' ],
+		],
+		'implementation_scope' => [
+			'label' => 'Umsetzung / Optimierung',
+			'types' => [ 'implementation' ],
+		],
+		'ongoing_scope'    => [
+			'label' => 'Laufende Weiterentwicklung',
+			'types' => [ 'ongoing', 'client' ],
+		],
 		'website_strategy' => [
-			'label' => 'Website Strategie',
-			'types' => [ 'project', 'general', 'client' ],
+			'label' => 'Positionierung / Seitenbotschaft',
+			'types' => [ 'audit', 'analysis', 'implementation', 'ongoing', 'client' ],
 		],
 		'seo'              => [
 			'label' => 'SEO',
-			'types' => [ 'project', 'client' ],
+			'types' => [ 'audit', 'analysis', 'implementation', 'ongoing', 'client' ],
 		],
 		'performance'      => [
 			'label' => 'Performance',
-			'types' => [ 'project', 'client' ],
+			'types' => [ 'audit', 'analysis', 'implementation', 'ongoing', 'client' ],
 		],
 		'tracking'         => [
 			'label' => 'Tracking & Analytics',
-			'types' => [ 'project', 'client' ],
+			'types' => [ 'audit', 'analysis', 'implementation', 'ongoing', 'client' ],
 		],
 		'conversion'       => [
 			'label' => 'Conversion & CRO',
-			'types' => [ 'project', 'client' ],
+			'types' => [ 'audit', 'analysis', 'implementation', 'ongoing', 'client' ],
 		],
 		'relaunch'         => [
 			'label' => 'Relaunch / Neue Seite',
-			'types' => [ 'project' ],
-		],
-		'pilot'            => [
-			'label' => 'Pilotprojekt / Proof-of-Value',
-			'types' => [ 'project' ],
+			'types' => [ 'analysis', 'implementation' ],
 		],
 		'support'          => [
 			'label' => 'Support / Weiterentwicklung',
-			'types' => [ 'project', 'client' ],
+			'types' => [ 'implementation', 'ongoing', 'client' ],
 		],
 		'existing_client'  => [
 			'label' => 'Laufendes Projekt / Kundenanliegen',
@@ -258,7 +282,7 @@ function nexus_get_contact_focus_labels() {
 }
 
 /**
- * Return the available budget options for project requests.
+ * Return the available budget options for implementation and ongoing requests.
  *
  * @return array<string, string>
  */
@@ -272,7 +296,7 @@ function nexus_get_contact_budget_options() {
 }
 
 /**
- * Return the available timing options for project and client requests.
+ * Return the available timing options for follow-up, implementation and client requests.
  *
  * @return array<string, string>
  */
@@ -306,9 +330,12 @@ function nexus_get_contact_notification_email() {
  */
 function nexus_get_contact_request_response_label( $request_type ) {
 	$labels = [
-		'project' => 'Projektanfrage',
-		'general' => 'Anfrage',
-		'client'  => 'Kundenanliegen',
+		'audit'          => 'Growth Audit Anfrage',
+		'analysis'       => 'Folgeanalyse',
+		'implementation' => 'Umsetzungsanfrage',
+		'ongoing'        => 'Weiterentwicklungsanfrage',
+		'general'        => 'Anfrage',
+		'client'         => 'Kundenanliegen',
 	];
 
 	return isset( $labels[ $request_type ] ) ? $labels[ $request_type ] : 'Anfrage';
@@ -322,9 +349,12 @@ function nexus_get_contact_request_response_label( $request_type ) {
  */
 function nexus_get_contact_request_mail_tags( $request_type ) {
 	$map = [
-		'project' => [ 'contact_request', 'project_request' ],
-		'general' => [ 'contact_request', 'general_inquiry' ],
-		'client'  => [ 'contact_request', 'client_request' ],
+		'audit'          => [ 'contact_request', 'growth_audit_request' ],
+		'analysis'       => [ 'contact_request', 'followup_analysis_request' ],
+		'implementation' => [ 'contact_request', 'implementation_request' ],
+		'ongoing'        => [ 'contact_request', 'ongoing_development_request' ],
+		'general'        => [ 'contact_request', 'general_inquiry' ],
+		'client'         => [ 'contact_request', 'client_request' ],
 	];
 
 	return $map[ $request_type ] ?? [ 'contact_request' ];
@@ -338,14 +368,26 @@ function nexus_get_contact_request_mail_tags( $request_type ) {
  */
 function nexus_get_contact_confirmation_step_three( $request_type ) {
 	if ( 'client' === $request_type ) {
-		return 'Wenn es schneller geht, ziehen wir das Thema direkt in eine kurze Abstimmung.';
+		return 'Wenn es schneller geht, ziehen wir das Thema direkt in die laufende Priorisierung.';
 	}
 
 	if ( 'general' === $request_type ) {
 		return 'Wenn ein Termin sinnvoller ist als E-Mail-Pingpong, schlage ich direkt den passenden nächsten Schritt vor.';
 	}
 
-	return 'Wenn es fachlich passt, erhalten Sie direkt einen Terminvorschlag oder den sinnvollsten nächsten Schritt.';
+	if ( 'audit' === $request_type ) {
+		return 'Sie erhalten die Bestätigung und die diagnostische Rückmeldung per E-Mail.';
+	}
+
+	if ( 'analysis' === $request_type ) {
+		return 'Wenn der Fit klar ist, verdichten wir die nächste Analysefrage sauber und ohne Scope-Nebel.';
+	}
+
+	if ( 'ongoing' === $request_type ) {
+		return 'Wenn die Zusammenarbeit passt, entsteht daraus planbare Weiterentwicklung statt loses Ticket-Pingpong.';
+	}
+
+	return 'Wenn der Fit klar ist, folgt daraus ein sauber umrissener Umsetzungs- oder Optimierungsschritt.';
 }
 
 /**
@@ -534,7 +576,7 @@ function nexus_validate_contact_request_payload( $payload ) {
 		return new WP_Error( 'invalid_focus_type', 'Bitte ein Thema wählen, das zu Ihrer Anfrage passt.' );
 	}
 
-	if ( in_array( $request_type, [ 'project', 'client' ], true ) ) {
+	if ( in_array( $request_type, [ 'analysis', 'implementation', 'ongoing', 'client' ], true ) ) {
 		if ( '' !== $timeline && ! isset( $timeline_options[ $timeline ] ) ) {
 			return new WP_Error( 'invalid_timeline', 'Bitte ein gültiges Zeitfenster auswählen.' );
 		}
@@ -542,7 +584,7 @@ function nexus_validate_contact_request_payload( $payload ) {
 		$timeline = '';
 	}
 
-	if ( 'project' === $request_type ) {
+	if ( in_array( $request_type, [ 'implementation', 'ongoing' ], true ) ) {
 		if ( '' !== $budget && ! isset( $budget_options[ $budget ] ) ) {
 			return new WP_Error( 'invalid_budget', 'Bitte ein gültiges Budget auswählen.' );
 		}

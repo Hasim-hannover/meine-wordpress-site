@@ -1,6 +1,6 @@
 # System Map
 
-Stand: 2026-03-18. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-03-20. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
@@ -8,11 +8,11 @@ Stand: 2026-03-18. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 | --- | --- | --- | --- | --- |
 | Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/deploy.yml` | WordPress, Blocksy Parent Theme, ACF | live |
 | Audit-Funnel | Diagnose-Einstieg, Audit-Intake und interne Folgequalifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/page-solar-waermepumpen-leadgenerierung.php`, `blocksy-child/page-website-fuer-solar-und-waermepumpen-anbieter.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/assets/js/energy-intake.js`, `blocksy-child/assets/js/cal-embed.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
-| Nexus CRM & Blog Notify | gemeinsames CRM fuer Audit, Projektanfragen und Blog-Abos plus DOI- und Artikel-Mail-Logik | `blocksy-child/inc/crm.php`, `blocksy-child/inc/blog-notify.php`, `blocksy-child/template-parts/blog-notify.php`, `blocksy-child/page-blog-notify.php`, `docs/systems/blog-notify.md` | WordPress CPT/Meta, WordPress REST, wp_mail, Brevo | repo-seitig live, End-to-End offen |
+| Nexus CRM & Blog Notify | gemeinsames CRM fuer Audit-, Folgeanalyse-, Umsetzungs- und Bestandskunden-Anfragen plus DOI- und Artikel-Mail-Logik | `blocksy-child/inc/crm.php`, `blocksy-child/inc/blog-notify.php`, `blocksy-child/template-parts/blog-notify.php`, `blocksy-child/page-blog-notify.php`, `docs/systems/blog-notify.md` | WordPress CPT/Meta, WordPress REST, wp_mail, Brevo | repo-seitig live, End-to-End offen |
 | SEO Cockpit | Search-Console-basiertes SEO-Dashboard mit optionaler Koko-Erkennung | `blocksy-child/inc/seo-cockpit.php`, `blocksy-child/assets/css/seo-cockpit-admin.css`, `docs/systems/seo-cockpit.md` | Google Search Console API, optional Koko Analytics | repo-seitig vorbereitet, OAuth und Live-Daten offen |
 | Tracking | Tracking-ready Markup, CTA-Events, SEO-/Schema-Layer | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, Templates mit `data-track-*` | GTM, sGTM, GA4, Consent Mode v2, Meta CAPI | teils im Repo, teils extern |
-| CTA- und Leadflow | CTA-Hierarchie vom ersten Besuch bis zur Qualifizierung | `blocksy-child/inc/shortcodes.php`, `blocksy-child/template-parts/footer-cta.php`, `blocksy-child/template-parts/trust-section.php`, Service-Templates | WordPress-Editor, Audit-Funnel, Cal.com, CRM | live |
-| Public Proof Layer | oeffentliche Vertrauenssignale ohne Testimonials, plus Pilot-zu-Case-Mechanik | `blocksy-child/inc/shortcodes.php`, `blocksy-child/assets/css/homepage.css`, `blocksy-child/page-kontakt.php`, `blocksy-child/inc/contact-page.php`, `agents/skills/homepage-proof-monitoring/` | GitHub-Repo, oeffentliches LinkedIn-Profil, optional spaeter Facebook | live |
+| CTA- und Leadflow | CTA-Hierarchie vom ersten Besuch bis zur Diagnose, Folgeeinordnung und Qualifizierung | `blocksy-child/inc/shortcodes.php`, `blocksy-child/template-parts/footer-cta.php`, `blocksy-child/template-parts/trust-section.php`, Service-Templates | WordPress-Editor, Audit-Funnel, Cal.com, CRM | live |
+| Public Proof Layer | zentraler oeffentlicher Proof- und Vokabular-Layer fuer kaufnahe Seiten | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/shortcodes.php`, `blocksy-child/front-page.php`, `blocksy-child/page-wordpress-agentur.php`, `blocksy-child/page-wgos.php`, `blocksy-child/page-kontakt.php`, `blocksy-child/inc/contact-page.php` | WordPress-Editor, oeffentliche Cases und Profile | live |
 | Content- und SEO-System | Blog, Pillar-Hubs, Cornerstone-Content, interne Verlinkung | `blocksy-child/category.php`, `blocksy-child/single.php`, `blocksy-child/page-seo-cornerstone.php`, `content/blog-drafts/` | WordPress-Editor | live plus Ausbau |
 | Client Portal | Kunden-Cockpit mit Login, Upload und Roadmap-Slots | `blocksy-child/template-portal.php`, `blocksy-child/inc/client-portal.php`, `blocksy-child/inc/snippets.php` | WordPress-User-System, Media Library | live, aber aktuell mit Mock-Daten |
 | n8n-Automationen | Workflow-Logik fuer Analyse, Routing, Reporting, Nurture | kuenftig `automations/n8n/` | n8n Cloud, CRM, Mail, evtl. Sheets | geplant als versionierter Layer |
@@ -28,8 +28,8 @@ Wichtige Merkmale:
 - `inc/enqueue.php` ist der Asset-Hub fuer CSS und JS pro Seitentyp.
 - Ein Teil der Seiten ist editor-getrieben und nutzt `the_content()`.
 - Ein anderer Teil ist hart codiert und traegt Business-Logik direkt im Template.
-- `page-wgos.php` ist als template-getriebene Sales-Page fuer das WGOS versioniert; Struktur und CTA-Hierarchie liegen im Repo, nicht im Editor.
-- Die Homepage-Shortcodes liefern jetzt auch einen versionierten Public-Proof-Layer aus GitHub-Transparenz, Community-Signalen und Pilotprojekt-CTA.
+- `page-wgos.php` ist als template-getriebene Sales-Page fuer `WGOS = WordPress Growth Operating System` versioniert; Struktur, erklaerter Framework-Kontext und CTA-Hierarchie liegen im Repo, nicht im Editor.
+- Die Homepage-Shortcodes liefern jetzt einen versionierten Public-Proof-Layer aus konservativen Leistungsmetriken, GitHub-Transparenz und audit-first Folgelogik statt Pilotangebot.
 
 Kritische Dateien:
 
@@ -85,13 +85,13 @@ Aktuelle Logik:
 Das Repo enthaelt jetzt zusaetzlich ein gemeinsames CRM-Modell fuer:
 
 - Audit-Anfragen
-- Projektanfragen
+- Folgeanalyse-, Umsetzungs- und Weiterentwicklungs-Anfragen
 - Blog-Abos
 
 Architektur:
 
 - `nexus_review_request` bleibt der spezialisierte Datensatz fuer Audit-Intake
-- `nexus_contact` ist der gemeinsame Kontakt-Datensatz fuer Projektanfragen und Blog-Abos
+- `nexus_contact` ist der gemeinsame Kontakt-Datensatz fuer kontaktnahe Folgeanliegen und Blog-Abos
 - das Admin-Menue heisst jetzt `Nexus CRM`
 - Blog-Abos arbeiten mit eigenem DOI- und Abmelde-Flow ueber `/neue-artikel-per-email/`
 - Artikel-Benachrichtigungen werden in V1 manuell pro Beitrag angestossen und dann in kleinen Batches versendet
@@ -105,7 +105,7 @@ Im Repo vorhanden:
 - `data-track-*` Attribute auf CTAs und Content-Bausteinen
 - noindex- und SEO-Meta-Logik
 - Schema-Ausgabe fuer Organisation, Services und Profile
-- neue Homepage-Actions fuer Trust und Einstiegsangebote: `cta_github_repo`, `cta_proof_linkedin`, `cta_pilot_contact`
+- neue Homepage-Actions fuer Trust und Einstiegsangebote: `cta_github_repo`, `cta_proof_linkedin`
 
 Ausserhalb des Repos:
 
@@ -143,7 +143,8 @@ Die CTA-Hierarchie ist klar und sollte nicht verwischt werden.
 
 - Primaerer CTA: `Growth Audit`
 - Sekundaerer CTA: `WGOS verstehen`, `Case Studies ansehen`
-- Risikoarmer Zusatz-Einstieg: `Pilotprojekt / Proof-of-Value`
+- Folgeeinstieg nur nach Diagnose: `Fokussierte Folgeanalyse`
+- Umsetzungsnahe Kontaktwege: `Umsetzung / Optimierung`, `Laufende Weiterentwicklung`
 - Kein oeffentlicher 360-/Blueprint-CTA mehr im Erstkontakt
 - Eskalations-CTA: `Cal.com`-Strategiecall
 - Zentrale Default-URL fuer direkte Gespraechsbuchung: `https://cal.com/hasim-uener/30min?overlayCalendar=true`
@@ -197,6 +198,7 @@ Risiko:
 ## Groesste Risiken
 
 - `page-wgos.php` ist fachlich wichtig und inzwischen deutlich verschlankt, bleibt aber technisch template-driven statt editor- oder ACF-getrieben.
+- Kaufnahe Inhalte liegen weiter teils im Repo und teils im WordPress-Editor; Titel, Excerpts, Karten und manuell kuratierte Related-Module koennen die neue Proof- und Tonalitaetslogik unterlaufen, wenn sie nicht separat gepflegt werden.
 - `audit-live.js` haengt an harten Webhook-URLs und an einem impliziten n8n-Payload-Contract, solange der Instant-Results-Flow nicht voll aktiviert ist.
 - Tracking-, Consent- und CRM-Logik sind operativ relevant, aber noch nicht als Repo-System dokumentiert.
 - Manuelle WordPress-Admin-Schritte existieren noch als Betriebswissen und muessen weiter systematisiert werden.

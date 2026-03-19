@@ -2,8 +2,8 @@
 /**
  * Native contact page for the canonical /kontakt/ path.
  *
- * Supports intent-based display via ?type=project for a dedicated
- * project request landing page experience.
+ * Supports intent-based display via query params for dedicated
+ * contact routing entry points.
  *
  * @package Blocksy_Child
  */
@@ -18,8 +18,16 @@ $budget_options       = function_exists( 'nexus_get_contact_budget_options' ) ? 
 $timeline_options     = function_exists( 'nexus_get_contact_timeline_options' ) ? nexus_get_contact_timeline_options() : [];
 $calendar_url         = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' );
 $requested_focus      = isset( $_GET['focus'] ) ? sanitize_key( wp_unslash( $_GET['focus'] ) ) : '';
-$selected_focus       = isset( $focus_options[ $requested_focus ] ) ? $requested_focus : '';
 $requested_type       = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '';
+$legacy_focus_map     = [
+	'pilot' => 'followup_scope',
+];
+$legacy_type_map      = [
+	'project' => 'implementation',
+];
+$requested_focus      = isset( $legacy_focus_map[ $requested_focus ] ) ? $legacy_focus_map[ $requested_focus ] : $requested_focus;
+$requested_type       = isset( $legacy_type_map[ $requested_type ] ) ? $legacy_type_map[ $requested_type ] : $requested_type;
+$selected_focus       = isset( $focus_options[ $requested_focus ] ) ? $requested_focus : '';
 $selected_type        = isset( $request_type_options[ $requested_type ] ) ? $requested_type : '';
 $social_links         = [
 	[
@@ -34,42 +42,103 @@ $social_links         = [
 	],
 ];
 
-if ( '' === $selected_type && 'pilot' === $selected_focus ) {
-	$selected_type = 'project';
+if ( '' === $selected_type && 'followup_scope' === $selected_focus ) {
+	$selected_type = 'analysis';
 }
 
-if ( '' === $selected_type && isset( $request_type_options['project'] ) ) {
-	$selected_type = 'project';
+if ( '' === $selected_type && isset( $request_type_options['audit'] ) ) {
+	$selected_type = 'audit';
 }
 
-$is_project_type       = 'project' === $selected_type;
-$is_general_type       = 'general' === $selected_type;
-$is_client_type        = 'client' === $selected_type;
+$is_audit_type          = 'audit' === $selected_type;
+$is_analysis_type       = 'analysis' === $selected_type;
+$is_implementation_type = 'implementation' === $selected_type;
+$is_ongoing_type        = 'ongoing' === $selected_type;
+$is_general_type        = 'general' === $selected_type;
+$is_client_type         = 'client' === $selected_type;
 $has_explicit_type     = '' !== $requested_type && isset( $request_type_options[ $requested_type ] );
-$show_timeline_field   = ! $is_general_type;
-$show_budget_field     = $is_project_type;
-$focus_label           = $is_general_type ? 'Worum geht es?' : ( $is_client_type ? 'Wobei kann ich unterstützen?' : 'Wobei benötigen Sie Unterstützung?' );
-$focus_help            = $is_general_type ? 'Wählen Sie den Bereich, damit das Anliegen direkt passend eingeordnet werden kann.' : 'Wählen Sie den Hebel, der fachlich am nächsten an Ihrem Anliegen liegt.';
-$message_label         = $is_general_type ? 'Ihre Frage oder Nachricht' : 'Kurzbeschreibung';
-$message_help          = $is_general_type ? 'Schildern Sie kurz Ihre Frage, Anfrage oder den Anlass.' : ( $is_client_type ? 'Beschreiben Sie kurz Status, Blocker oder die nächste Entscheidung.' : 'Was ist das Ziel? Was ist die aktuelle Hürde? Welches Ergebnis wünschen Sie sich?' );
-$message_placeholder   = $is_general_type ? 'Worum geht es und welche Rückmeldung wäre hilfreich?' : ( $is_client_type ? 'Worum geht es gerade, was blockiert und was soll als Nächstes entschieden werden?' : ( 'pilot' === $selected_focus ? 'Welche Seite ist kritisch, woran scheitert sie aktuell und was soll sich nach dem Pilot verändern?' : "1. Ziel: Was soll erreicht werden?\n2. Hürde: Was steht aktuell im Weg?\n3. Ergebnis: Was soll sich konkret verbessern?" ) );
-$submit_label          = $is_general_type ? 'Anfrage senden' : ( $is_client_type ? 'Kundenanliegen senden' : 'Unverbindlich Projekt anfragen' );
-$timeline_label        = $is_client_type ? 'Dringlichkeit' : 'Zeitfenster';
+$show_timeline_field   = in_array( $selected_type, [ 'analysis', 'implementation', 'ongoing', 'client' ], true );
+$show_budget_field     = in_array( $selected_type, [ 'implementation', 'ongoing' ], true );
+$type_copy_map         = [
+	'audit'          => [
+		'focus_label'         => 'Was soll zuerst diagnostiziert werden?',
+		'focus_help'          => 'Wählen Sie die Fläche, auf der aktuell die größte Unklarheit liegt.',
+		'message_label'       => 'Kurzbeschreibung',
+		'message_help'        => 'Welche URL ist relevant? Was ist unklar? Welches Ergebnis wünschen Sie sich?',
+		'message_placeholder' => "1. Seite: Welche URL ist relevant?\n2. Unklarheit: Was bremst gerade?\n3. Ziel: Was soll sich verbessern?",
+		'submit_label'        => 'Growth Audit anfragen',
+		'timeline_label'      => 'Zeitfenster',
+	],
+	'analysis'       => [
+		'focus_label'         => 'Was soll vertieft werden?',
+		'focus_help'          => 'Wählen Sie den Bereich, der fachlich als Nächstes genauer geprüft werden soll.',
+		'message_label'       => 'Kurzbeschreibung',
+		'message_help'        => 'Welche Erkenntnis fehlt noch? Was soll genauer geprüft oder priorisiert werden?',
+		'message_placeholder' => "1. Fokus: Was soll vertieft werden?\n2. Hürde: Wo bleibt noch Unklarheit?\n3. Ziel: Welche Entscheidung soll danach leichter werden?",
+		'submit_label'        => 'Folgeanalyse anfragen',
+		'timeline_label'      => 'Zeitfenster',
+	],
+	'implementation' => [
+		'focus_label'         => 'Was soll umgesetzt oder korrigiert werden?',
+		'focus_help'          => 'Wählen Sie den Hebel, der fachlich am nächsten an Ihrem Umsetzungsbedarf liegt.',
+		'message_label'       => 'Kurzbeschreibung',
+		'message_help'        => 'Was ist das Ziel? Was ist die aktuelle Hürde? Welches Ergebnis wünschen Sie sich?',
+		'message_placeholder' => "1. Ziel: Was soll erreicht werden?\n2. Hürde: Was steht aktuell im Weg?\n3. Ergebnis: Was soll sich konkret verbessern?",
+		'submit_label'        => 'Umsetzung anfragen',
+		'timeline_label'      => 'Zeitfenster',
+	],
+	'ongoing'        => [
+		'focus_label'         => 'Was soll laufend weiterentwickelt werden?',
+		'focus_help'          => 'Wählen Sie den Bereich, der dauerhaft sauber betreut oder weiterentwickelt werden soll.',
+		'message_label'       => 'Kurzbeschreibung',
+		'message_help'        => 'Welche Themen laufen bereits und wo soll laufend mehr Klarheit, Stabilität oder Wirkung entstehen?',
+		'message_placeholder' => "1. System: Was läuft bereits?\n2. Engpass: Was blockiert oder kostet gerade Wirkung?\n3. Weiterentwicklung: Was soll planbar besser werden?",
+		'submit_label'        => 'Weiterentwicklung anfragen',
+		'timeline_label'      => 'Zeitfenster',
+	],
+	'general'        => [
+		'focus_label'         => 'Worum geht es?',
+		'focus_help'          => 'Wählen Sie den Bereich, damit das Anliegen direkt passend eingeordnet werden kann.',
+		'message_label'       => 'Ihre Frage oder Nachricht',
+		'message_help'        => 'Schildern Sie kurz Ihre Frage, Anfrage oder den Anlass.',
+		'message_placeholder' => 'Worum geht es und welche Rückmeldung wäre hilfreich?',
+		'submit_label'        => 'Anfrage senden',
+		'timeline_label'      => 'Zeitfenster',
+	],
+	'client'         => [
+		'focus_label'         => 'Wobei kann ich unterstützen?',
+		'focus_help'          => 'Wählen Sie den Bereich, damit Priorisierung und Rückmeldung direkt anschließen können.',
+		'message_label'       => 'Kurzbeschreibung',
+		'message_help'        => 'Beschreiben Sie kurz Status, Blocker oder die nächste Entscheidung.',
+		'message_placeholder' => 'Worum geht es gerade, was blockiert und was soll als Nächstes entschieden werden?',
+		'submit_label'        => 'Kundenanliegen senden',
+		'timeline_label'      => 'Dringlichkeit',
+	],
+];
+$current_type_copy     = isset( $type_copy_map[ $selected_type ] ) ? $type_copy_map[ $selected_type ] : $type_copy_map['audit'];
+$focus_label           = $current_type_copy['focus_label'];
+$focus_help            = $current_type_copy['focus_help'];
+$message_label         = $current_type_copy['message_label'];
+$message_help          = $current_type_copy['message_help'];
+$message_placeholder   = $current_type_copy['message_placeholder'];
+$submit_label          = $current_type_copy['submit_label'];
+$timeline_label        = $current_type_copy['timeline_label'];
 $message_minlength     = $is_general_type ? 18 : 24;
 
-$is_project_landing    = $has_explicit_type && $is_project_type;
+$is_scoped_landing     = $has_explicit_type && ! $is_general_type && ! $is_client_type;
+$current_type_label    = isset( $request_type_options[ $selected_type ]['label'] ) ? (string) $request_type_options[ $selected_type ]['label'] : 'Kontakt';
 
-$hero_eyebrow = $is_project_landing ? 'Projektanfrage' : 'Kontakt';
-$hero_title   = $is_project_landing ? 'Projekt anfragen' : 'Projektanfrage, Rückfrage oder direkter Termin.';
-$hero_lead    = $is_project_landing
-	? 'Beschreiben Sie Ihr Vorhaben in wenigen Feldern. Keine Wartezeit, kein Sales-Team – Sie erhalten innerhalb von 24 Stunden eine persönliche Einschätzung.'
-	: 'Ein zentraler Einstieg für neue Projekte, allgemeine Fragen und bestehende Kunden. Die Seite bleibt bewusst schlank, qualifiziert aber die wichtigsten Punkte direkt vor.';
-$hero_cta     = $is_project_landing ? 'Anfrage ausfüllen' : 'Anfrage starten';
+$hero_eyebrow = $is_scoped_landing ? $current_type_label : 'Kontakt';
+$hero_title   = $is_scoped_landing ? $current_type_label : 'Growth Audit, Folgeanalyse oder Weiterentwicklung.';
+$hero_lead    = $is_scoped_landing
+	? 'Beschreiben Sie Ihr Anliegen in wenigen Feldern. Sie erhalten eine persönliche Einschätzung und eine saubere Einordnung ohne Sales-Nebel.'
+	: 'Ein zentraler Einstieg für Growth Audit, fokussierte Folgeanalyse, Umsetzung / Optimierung, laufende Weiterentwicklung, allgemeine Anfragen und Bestandskunden.';
+$hero_cta     = $is_scoped_landing ? 'Anfrage ausfüllen' : 'Anfrage starten';
 
 $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 ?>
 
-<main id="main" class="site-main contact-page<?php echo $is_project_landing ? ' contact-page--project' : ''; ?>" data-track-section="contact_page"<?php echo $auto_scroll ? ' data-contact-autoscroll' : ''; ?>>
+<main id="main" class="site-main contact-page<?php echo $is_scoped_landing ? ' contact-page--scoped' : ''; ?>" data-track-section="contact_page"<?php echo $auto_scroll ? ' data-contact-autoscroll' : ''; ?>>
 	<div class="contact-page__shell">
 		<section class="contact-hero" aria-labelledby="contact-title">
 			<div class="contact-hero__copy nx-reveal">
@@ -77,7 +146,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 				<h1 id="contact-title" class="contact-title"><?php echo esc_html( $hero_title ); ?></h1>
 				<p class="contact-lead"><?php echo esc_html( $hero_lead ); ?></p>
 
-				<?php if ( ! $is_project_landing ) : ?>
+				<?php if ( ! $is_scoped_landing ) : ?>
 					<p class="contact-lead">
 						Wenn das Thema bereits klar ist, führt ein zweiter CTA direkt zu <span class="contact-inline-highlight">cal.com</span>.
 						Wenn noch Kontext fehlt, reicht die Anfrage in wenigen Feldern.
@@ -92,10 +161,10 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 				<ul class="contact-hero__meta" aria-label="Kontaktvorteile">
 					<li>Antwort in der Regel innerhalb von 24 Stunden</li>
 					<li>Direkter Kontakt statt Sales-Team</li>
-					<?php if ( $is_project_landing ) : ?>
+					<?php if ( $is_scoped_landing ) : ?>
 						<li>Unverbindlich und kostenfrei</li>
 					<?php else : ?>
-						<li>Geeignet für Projekte, Fragen und Bestandskunden</li>
+						<li>Geeignet für Diagnose, Folgeanalyse, Weiterentwicklung und Bestandskunden</li>
 					<?php endif; ?>
 				</ul>
 			</div>
@@ -121,12 +190,12 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 				<section class="contact-note-card nx-reveal" aria-labelledby="contact-routing-title">
 					<div class="contact-section-head contact-section-head--tight">
 						<span class="contact-section-head__eyebrow">Routing</span>
-						<h2 id="contact-routing-title">Drei klare Einstiege statt eines offenen Formulars.</h2>
+						<h2 id="contact-routing-title">Klare Einstiege statt eines offenen Formulars.</h2>
 					</div>
 					<ul class="contact-list">
-						<li><strong>Projektanfrage</strong> für Relaunch, SEO, CRO, Performance, Tracking oder Pilotprojekte.</li>
-						<li><strong>Allgemeine Anfrage</strong> für Rückfragen, Kooperationen und kurze Abstimmungen.</li>
-						<li><strong>Bestehender Kunde</strong> für Priorisierung, Support und nächste Schritte im laufenden Setup.</li>
+						<?php foreach ( $request_type_options as $request_type_option ) : ?>
+							<li><strong><?php echo esc_html( $request_type_option['label'] ); ?></strong> <?php echo esc_html( $request_type_option['description'] ); ?></li>
+						<?php endforeach; ?>
 					</ul>
 				</section>
 
@@ -151,7 +220,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 				<div class="contact-section-head">
 					<span class="contact-section-head__eyebrow">Anfrage</span>
 					<h2 id="contact-form-title">
-						<?php echo $is_project_landing ? 'In wenigen Angaben zur Projekteinschätzung.' : 'In wenigen Angaben zum passenden nächsten Schritt.'; ?>
+						<?php echo $is_scoped_landing ? 'In wenigen Angaben zur sauberen Einordnung.' : 'In wenigen Angaben zum passenden nächsten Schritt.'; ?>
 					</h2>
 				</div>
 
@@ -179,16 +248,16 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 					<input type="hidden" name="gclid" id="gclid" value="">
 					<input type="hidden" name="matchtype" id="matchtype" value="">
 
-					<?php if ( $is_project_landing ) : ?>
+					<?php if ( $is_scoped_landing ) : ?>
 						<div class="contact-type-status" data-contact-type-status>
 							<span class="contact-type-status__label">Anfragetyp:</span>
-							<strong class="contact-type-status__value"><?php echo esc_html( $request_type_options['project']['label'] ); ?></strong>
+							<strong class="contact-type-status__value"><?php echo esc_html( $current_type_label ); ?></strong>
 							<button type="button" class="contact-type-status__change" data-contact-type-expand aria-expanded="false">ändern</button>
 						</div>
 					<?php endif; ?>
 
-					<fieldset class="contact-intent<?php echo $is_project_landing ? ' contact-intent--collapsed' : ''; ?>" data-contact-intent>
-						<?php if ( ! $is_project_landing ) : ?>
+					<fieldset class="contact-intent<?php echo $is_scoped_landing ? ' contact-intent--collapsed' : ''; ?>" data-contact-intent>
+						<?php if ( ! $is_scoped_landing ) : ?>
 							<legend>Worum geht es?</legend>
 							<p class="contact-field__help">Nicht sicher? Wählen Sie einfach die Option, die am ehesten passt.</p>
 						<?php else : ?>

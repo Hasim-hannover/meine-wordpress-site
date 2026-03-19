@@ -138,7 +138,7 @@ function hu_output_schema()
             'name'        => 'WordPress Agentur Hannover',
             'description' => 'WordPress Agentur in Hannover für B2B-Unternehmen: Angebotsseiten, technische SEO, privacy-first Measurement, Conversion-Logik und kontrollierte Weiterentwicklung als Nachfrage-System.',
             'serviceType' => 'WordPress Agentur',
-            'serviceOutput' => 'Steuerbares WordPress-System mit Angebotsseiten, Datenebene, KPI-Klarheit und Ownership statt Lock-in'
+            'serviceOutput' => 'Steuerbares WordPress-System mit Angebotsseiten, Datenebene, KPI-Klarheit und vollen Zugängen'
         ],
 
         'customer-journey-audit' => [
@@ -268,7 +268,7 @@ function hu_output_schema()
             'name'        => 'Conversion Rate Optimization',
             'description' => 'Vom Chaos zur Klarheit: Wir analysieren Nutzerverhalten und bauen den direktesten Weg zum messbaren Ergebnis.',
             'serviceType' => 'Conversion Rate Optimization',
-            'serviceOutput' => 'Steigerung von Leads, Sales und ROAS durch datenbasierte Tests und Optimierungen'
+            'serviceOutput' => 'Verbesserung von Anfragequalität, Sales-Conversion und Effizienz durch datenbasierte Tests und Optimierungen'
         ],
 
         'ga4-tracking-setup' => [
@@ -549,7 +549,7 @@ function hu_output_schema()
                 'url'      => home_url('/' . $slug . '/'),
                 'name'     => 'Ergebnisse',
                 'headline' => 'Ergebnisse, Case Studies und Whitelabel-Proof von Haşim Üner',
-                'description' => 'Öffentliche Case Studies, anonymisierte Whitelabel-Arbeit und laufende Retainer als gemeinsamer Proof-Layer für WordPress-Systemarbeit.',
+                'description' => 'Öffentliche Case Studies, anonymisierte Whitelabel-Arbeit und laufende Weiterentwicklung als gemeinsamer Proof-Layer für WordPress-Systemarbeit.',
                 'inLanguage' => 'de',
                 'isPartOf' => ['@id' => home_url('/#website')],
                 'about' => ['@id' => home_url('/#organization')],
@@ -566,7 +566,7 @@ function hu_output_schema()
                     ] : null,
                     nexus_get_whitelabel_page_id() ? [
                         '@type' => 'WebPage',
-                        'name'  => 'Whitelabel & Retainer',
+                        'name'  => 'Whitelabel & Weiterentwicklung',
                         'url'   => nexus_get_whitelabel_page_url()
                     ] : null,
                 ])),
@@ -581,9 +581,9 @@ function hu_output_schema()
                 '@type'    => 'AboutPage',
                 '@id'      => home_url('/' . $slug . '/#about'),
                 'url'      => home_url('/' . $slug . '/'),
-                'name'     => 'Whitelabel & Retainer',
-                'headline' => 'Whitelabel-Arbeit und laufende Retainer von Haşim Üner',
-                'description' => 'Anonymisierte Einblicke in Whitelabel-Projekte, laufende Retainer und typische Eingriffstiefen für WordPress, SEO, Tracking und CRO.',
+                'name'     => 'Whitelabel & Weiterentwicklung',
+                'headline' => 'Whitelabel-Arbeit und laufende Weiterentwicklung von Haşim Üner',
+                'description' => 'Anonymisierte Einblicke in Whitelabel-Projekte, laufende Weiterentwicklung und typische Eingriffstiefen für WordPress, SEO, Tracking und CRO.',
                 'inLanguage' => 'de',
                 'about'    => ['@id' => home_url('/#organization')],
                 'mainEntity' => [

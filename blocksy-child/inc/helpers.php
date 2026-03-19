@@ -50,6 +50,104 @@ function nexus_get_field( $field_name, $default = '', $post_id = false ) {
 }
 
 /**
+ * Return the canonical public proof and vocabulary set for public pages.
+ *
+ * @return array<string, mixed>
+ */
+function nexus_get_public_proof_data() {
+	static $proof = null;
+
+	if ( null !== $proof ) {
+		return $proof;
+	}
+
+	$proof = [
+		'metrics'             => [
+			'lead_count'       => [
+				'value'   => '1.750+',
+				'label'   => 'qualifizierte Leads',
+				'context' => 'im aufgebauten System',
+			],
+			'sales_conversion' => [
+				'value'   => '12 %',
+				'label'   => 'Sales-Conversion',
+				'context' => 'vom Lead bis zum Abschluss',
+			],
+			'cpl_reduction'    => [
+				'value'   => '-83 %',
+				'label'   => 'CPL',
+				'context' => 'gegenüber Lead-Einkauf',
+			],
+		],
+		'ownership_sentence'  => 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.',
+		'primary_term'        => 'WordPress als Nachfrage-System für B2B',
+		'framework_label'     => 'WGOS = WordPress Growth Operating System',
+		'framework_long'      => 'WordPress Growth Operating System',
+		'allowed_subterms'    => [
+			'Growth Audit',
+			'priorisierte Folgeanalyse',
+			'kontrollierte Weiterentwicklung',
+			'planbare Growth-Kapazität',
+		],
+	];
+
+	return $proof;
+}
+
+/**
+ * Return selected canonical public proof metrics in display order.
+ *
+ * @param array<int, string> $keys Metric keys.
+ * @return array<int, array<string, string>>
+ */
+function nexus_get_public_proof_metric_list( $keys ) {
+	$proof   = nexus_get_public_proof_data();
+	$metrics = isset( $proof['metrics'] ) && is_array( $proof['metrics'] ) ? $proof['metrics'] : [];
+	$list    = [];
+
+	foreach ( (array) $keys as $key ) {
+		if ( isset( $metrics[ $key ] ) && is_array( $metrics[ $key ] ) ) {
+			$list[] = $metrics[ $key ];
+		}
+	}
+
+	return $list;
+}
+
+/**
+ * Return the public ownership sentence used on kaufnahen Seiten.
+ *
+ * @return string
+ */
+function nexus_get_public_ownership_sentence() {
+	$proof = nexus_get_public_proof_data();
+
+	return isset( $proof['ownership_sentence'] ) ? (string) $proof['ownership_sentence'] : '';
+}
+
+/**
+ * Return the primary public market category.
+ *
+ * @return string
+ */
+function nexus_get_public_primary_term() {
+	$proof = nexus_get_public_proof_data();
+
+	return isset( $proof['primary_term'] ) ? (string) $proof['primary_term'] : '';
+}
+
+/**
+ * Return the expanded public framework label.
+ *
+ * @return string
+ */
+function nexus_get_public_framework_label() {
+	$proof = nexus_get_public_proof_data();
+
+	return isset( $proof['framework_label'] ) ? (string) $proof['framework_label'] : '';
+}
+
+/**
  * Render a tracking-ready CTA button.
  *
  * Outputs an <a> element with proper data-track-* attributes

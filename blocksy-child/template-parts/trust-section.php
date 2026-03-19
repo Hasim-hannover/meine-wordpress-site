@@ -40,7 +40,7 @@ $variant = get_query_var( 'trust_variant', 'compact' );
 			</div>
 			<div class="trust-section__item">
 				<span class="trust-section__icon" aria-hidden="true">04</span>
-				<span class="trust-section__text"><?php esc_html_e( 'Volle Ownership statt Lock-in', 'blocksy-child' ); ?></span>
+				<span class="trust-section__text"><?php esc_html_e( 'Eigentum, Zugänge und Setups bleiben bei Ihnen', 'blocksy-child' ); ?></span>
 			</div>
 		</div>
 
@@ -52,7 +52,7 @@ $variant = get_query_var( 'trust_variant', 'compact' );
 			echo ' &nbsp;·&nbsp; ';
 			echo esc_html__( 'Privacy-first Measurement', 'blocksy-child' );
 			echo ' &nbsp;·&nbsp; ';
-			echo esc_html__( 'Volle Ownership', 'blocksy-child' );
+			echo esc_html__( 'Volles Eigentum an Code und Setups', 'blocksy-child' );
 			?>
 		</p>
 

@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Whitelabel & Retainer
- * Description: Anonymisierte Whitelabel-Arbeit, Retainer und Delivery im Hintergrund.
+ * Template Name: Whitelabel & Weiterentwicklung
+ * Description: Anonymisierte Whitelabel-Arbeit, laufende Weiterentwicklung und Delivery im Hintergrund.
  *
  * @package Blocksy_Child
  */
@@ -47,7 +47,7 @@ $pattern_cards = [
 	],
 	[
 		'title' => 'Von punktuellen Fixes zu laufender Systempflege',
-		'copy'  => 'Retainer-Arbeit bedeutet nicht Dauerbeschäftigung, sondern wiederkehrend an den größten Reibungsverlusten arbeiten, bevor sie teuer werden.',
+		'copy'  => 'Laufende Weiterentwicklung bedeutet nicht Dauerbeschäftigung, sondern wiederkehrend an den größten Reibungsverlusten arbeiten, bevor sie teuer werden.',
 	],
 ];
 
@@ -57,7 +57,7 @@ $work_modes = [
 		'copy'  => 'Im Hintergrund an Strategie, UX, SEO, Tracking oder Conversion arbeiten, während die Kundenbeziehung bei der Agentur bleibt.',
 	],
 	[
-		'title' => 'Retainer für laufende Systeme',
+		'title' => 'Laufende Weiterentwicklung für bestehende Systeme',
 		'copy'  => 'Für Teams, bei denen Fundament und Kernlogik stehen, aber Priorisierung, Monitoring und kontrollierte Iteration dauerhaft gebraucht werden.',
 	],
 	[
@@ -73,7 +73,7 @@ $skill_items = [
 	'Privacy-first Tracking',
 	'Page Messaging',
 	'Performance-Fundament',
-	'Retainer-Struktur',
+	'Weiterentwicklungs-Setup',
 	'Whitelabel Delivery',
 ];
 ?>
@@ -83,25 +83,25 @@ $skill_items = [
 		<div class="nx-container">
 			<div class="wl-hero__grid">
 				<div class="wl-hero__copy">
-					<span class="nx-badge nx-badge--gold">Whitelabel &amp; Retainer</span>
-					<h1 class="wl-hero__title">12 Whitelabel-Projekte. 4 laufende Retainer. Viel Wirkung bleibt im Hintergrund.</h1>
+					<span class="nx-badge nx-badge--gold">Whitelabel &amp; laufende Weiterentwicklung</span>
+					<h1 class="wl-hero__title">Whitelabel-Arbeit und laufende Weiterentwicklung. Viel Wirkung bleibt im Hintergrund.</h1>
 					<p class="wl-hero__subtitle">
 						Ein Teil meiner stärksten Arbeit darf nicht als öffentliche Case Study erscheinen.
-						Nicht weil sie schwächer wäre, sondern weil sie in Agentur-Setups, Retainer-Strukturen
+						Nicht weil sie schwächer wäre, sondern weil sie in Agentur-Setups, laufender Systemarbeit
 						oder sensiblen Projekten bewusst unsichtbar bleibt. Genau deshalb ist diese Seite wichtig.
 					</p>
 
 					<div class="wl-metrics" role="list" aria-label="Whitelabel-Kennzahlen">
 						<div class="wl-metric" role="listitem">
-							<strong>12</strong>
-							<span>Whitelabel-Projekte</span>
+							<strong>Whitelabel</strong>
+							<span>unsichtbare Delivery im Hintergrund</span>
 						</div>
 						<div class="wl-metric" role="listitem">
-							<strong>4</strong>
-							<span>laufende Retainer</span>
+							<strong>laufend</strong>
+							<span>kontrollierte Weiterentwicklung statt Einzelfix</span>
 						</div>
 						<div class="wl-metric" role="listitem">
-							<strong>1</strong>
+							<strong>klar</strong>
 							<span>Rolle: im Hintergrund Wirkung erzeugen</span>
 						</div>
 					</div>
@@ -122,7 +122,7 @@ $skill_items = [
 					<div class="wl-portrait-card__media">
 						<img
 							src="<?php echo esc_url( $portrait_url ); ?>"
-							alt="Haşim Üner Portrait für die Whitelabel- und Retainer-Seite"
+							alt="Haşim Üner Portrait für die Whitelabel- und Weiterentwicklungs-Seite"
 							loading="eager"
 							width="960"
 							height="1200"
@@ -165,7 +165,7 @@ $skill_items = [
 			<div class="nx-section-header">
 				<span class="nx-badge nx-badge--gold">Anonymisierte Ergebnismuster</span>
 				<h2 class="nx-headline-section">Was sich in diesen Projekten typischerweise verbessert</h2>
-				<p class="nx-subheadline">Keine erfundenen Logos. Keine geschönten Slides. Sondern die Muster, die in Whitelabel- und Retainer-Arbeit immer wieder auftauchen.</p>
+				<p class="nx-subheadline">Keine erfundenen Logos. Keine geschönten Slides. Sondern die Muster, die in Whitelabel-Arbeit und laufender Weiterentwicklung immer wieder auftauchen.</p>
 			</div>
 
 			<div class="results-framework__grid">

@@ -87,7 +87,7 @@ $problem_cards = [
 		'text'  => 'Die meisten KI-Widgets senden jede Nutzereingabe an US-Server. Das ist kein Implementierungsdetail, sondern ein Compliance-Problem.',
 	],
 	[
-		'title' => 'Vendor-Lock-in',
+		'title' => 'Vendor-Abhängigkeit',
 		'text'  => 'Wer sein KI-Feature an einen SaaS-Anbieter koppelt, verliert Datenhoheit und Kontrolle über die eigene Infrastruktur.',
 	],
 	[
@@ -284,7 +284,7 @@ foreach ( $faq_items as $faq_item ) {
 								<p>Repetitive Prozesse mit KI-Schritten automatisieren.</p>
 							</article>
 						</div>
-						<p class="wgos-hero-card__note">Alle Bausteine laufen auf eigener Infrastruktur. Kein SaaS-Lock-in.</p>
+						<p class="wgos-hero-card__note">Alle Bausteine laufen auf eigener Infrastruktur. Keine SaaS-Abhängigkeit.</p>
 					</aside>
 				</div>
 			</div>

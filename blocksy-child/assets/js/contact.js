@@ -9,7 +9,6 @@
         var feedback = form.querySelector('[data-contact-feedback]');
         var submitButton = form.querySelector('[data-contact-submit]');
         var endpoint = window.NexusContactConfig && window.NexusContactConfig.restEndpoint;
-        var isProjectLanding = window.NexusContactConfig && window.NexusContactConfig.isProjectLanding;
         var typeInputs = form.querySelectorAll('[data-contact-type-input]');
         var focusSelect = form.querySelector('[data-contact-focus-select]');
         var focusLabel = form.querySelector('[data-contact-focus-label]');
@@ -65,7 +64,7 @@
             }
         }
 
-        // ── Type status bar toggle (project landing) ──
+        // ── Type status bar toggle (scoped landing) ──
         if (typeExpandBtn && intentFieldset) {
             typeExpandBtn.addEventListener('click', function () {
                 var isCollapsed = intentFieldset.classList.contains('contact-intent--collapsed');
@@ -80,13 +79,49 @@
 
         // ── Type content definitions ──
         var typeContent = {
-            project: {
-                focusLabel: 'Wobei benötigen Sie Unterstützung?',
-                focusHelp: 'Wählen Sie den Hebel, der fachlich am nächsten an Ihrem Anliegen liegt.',
+            audit: {
+                focusLabel: 'Was soll zuerst diagnostiziert werden?',
+                focusHelp: 'Wählen Sie die Fläche, auf der aktuell die größte Unklarheit liegt.',
+                messageLabel: 'Kurzbeschreibung',
+                messageHelp: 'Welche URL ist relevant? Was ist unklar? Welches Ergebnis wünschen Sie sich?',
+                messagePlaceholder: '1. Seite: Welche URL ist relevant?\n2. Unklarheit: Was bremst gerade?\n3. Ziel: Was soll sich verbessern?',
+                submitLabel: 'Growth Audit anfragen',
+                messageMinlength: 24,
+                timelineLabel: 'Zeitfenster',
+                showTimeline: false,
+                showBudget: false
+            },
+            analysis: {
+                focusLabel: 'Was soll vertieft werden?',
+                focusHelp: 'Wählen Sie den Bereich, der fachlich als Nächstes genauer geprüft werden soll.',
+                messageLabel: 'Kurzbeschreibung',
+                messageHelp: 'Welche Erkenntnis fehlt noch? Was soll genauer geprüft oder priorisiert werden?',
+                messagePlaceholder: '1. Fokus: Was soll vertieft werden?\n2. Hürde: Wo bleibt noch Unklarheit?\n3. Ziel: Welche Entscheidung soll danach leichter werden?',
+                submitLabel: 'Folgeanalyse anfragen',
+                messageMinlength: 24,
+                timelineLabel: 'Zeitfenster',
+                showTimeline: true,
+                showBudget: false
+            },
+            implementation: {
+                focusLabel: 'Was soll umgesetzt oder korrigiert werden?',
+                focusHelp: 'Wählen Sie den Hebel, der fachlich am nächsten an Ihrem Umsetzungsbedarf liegt.',
                 messageLabel: 'Kurzbeschreibung',
                 messageHelp: 'Was ist das Ziel? Was ist die aktuelle Hürde? Welches Ergebnis wünschen Sie sich?',
                 messagePlaceholder: '1. Ziel: Was soll erreicht werden?\n2. Hürde: Was steht aktuell im Weg?\n3. Ergebnis: Was soll sich konkret verbessern?',
-                submitLabel: 'Unverbindlich Projekt anfragen',
+                submitLabel: 'Umsetzung anfragen',
+                messageMinlength: 24,
+                timelineLabel: 'Zeitfenster',
+                showTimeline: true,
+                showBudget: true
+            },
+            ongoing: {
+                focusLabel: 'Was soll laufend weiterentwickelt werden?',
+                focusHelp: 'Wählen Sie den Bereich, der dauerhaft sauber betreut oder weiterentwickelt werden soll.',
+                messageLabel: 'Kurzbeschreibung',
+                messageHelp: 'Welche Themen laufen bereits und wo soll laufend mehr Klarheit, Stabilität oder Wirkung entstehen?',
+                messagePlaceholder: '1. System: Was läuft bereits?\n2. Engpass: Was blockiert oder kostet gerade Wirkung?\n3. Weiterentwicklung: Was soll planbar besser werden?',
+                submitLabel: 'Weiterentwicklung anfragen',
                 messageMinlength: 24,
                 timelineLabel: 'Zeitfenster',
                 showTimeline: true,
@@ -343,7 +378,7 @@
         }
 
         function getSelectedType() {
-            var selected = 'project';
+            var selected = 'audit';
 
             Array.prototype.forEach.call(typeInputs, function (input) {
                 if (input.checked) {
@@ -397,7 +432,7 @@
 
         function syncFormExperience() {
             var requestType = getSelectedType();
-            var content = typeContent[requestType] || typeContent.project;
+            var content = typeContent[requestType] || typeContent.audit;
 
             syncFocusOptions(requestType);
             toggleContextField(timelineField, content.showTimeline);
@@ -446,8 +481,15 @@
                 var typeLabel = typeContent[requestType] ? typeContent[requestType].submitLabel : '';
                 var statusValue = typeStatusBar.querySelector('.contact-type-status__value');
                 if (statusValue) {
-                    var labels = { project: 'Projektanfrage', general: 'Allgemeine Anfrage', client: 'Bestehender Kunde' };
-                    statusValue.textContent = labels[requestType] || 'Projektanfrage';
+                    var labels = {
+                        audit: 'Erstdiagnose / Growth Audit',
+                        analysis: 'Fokussierte Folgeanalyse',
+                        implementation: 'Umsetzung / Optimierung',
+                        ongoing: 'Laufende Weiterentwicklung',
+                        general: 'Allgemeine Anfrage',
+                        client: 'Bestandskunde'
+                    };
+                    statusValue.textContent = labels[requestType] || 'Erstdiagnose / Growth Audit';
                 }
             }
         }

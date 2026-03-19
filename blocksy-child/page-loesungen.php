@@ -46,7 +46,7 @@ get_header();
 				</li>
 				<li class="solution-item">
 					<a href="<?php echo esc_url( $wgos_url ); ?>">
-						<h2>3. WGOS Umsetzung &amp; Retainer</h2>
+						<h2>3. Kontrollierte Umsetzung &amp; laufende Weiterentwicklung</h2>
 						<p>Umsetzung und laufende Optimierung in der richtigen Reihenfolge: Technik, SEO, Tracking, Content und Conversion auf WordPress-Basis.</p>
 						<span class="cta-btn">System ansehen</span>
 					</a>

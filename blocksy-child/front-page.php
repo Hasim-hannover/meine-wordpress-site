@@ -14,12 +14,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $urls  = function_exists( 'hu_home_urls' ) ? hu_home_urls() : [];
 $proof = function_exists( 'hu_home_public_proof_data' ) ? hu_home_public_proof_data() : [];
+$public_proof = function_exists( 'nexus_get_public_proof_data' ) ? nexus_get_public_proof_data() : [];
 
 $public_proof_display = [
 	'github_commits'     => ! empty( $proof['github_commits'] ) ? 'über ' . number_format_i18n( (int) $proof['github_commits'] ) : 'über 1.500',
 	'linkedin_followers' => number_format_i18n( (int) ( $proof['linkedin_followers'] ?? 600 ) ),
 	'linkedin_posts'     => number_format_i18n( (int) ( $proof['linkedin_posts'] ?? 20 ) ),
 ];
+
+$canonical_ownership_sentence = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
+$primary_term                = function_exists( 'nexus_get_public_primary_term' ) ? nexus_get_public_primary_term() : 'WordPress als Nachfrage-System für B2B';
+$framework_label             = function_exists( 'nexus_get_public_framework_label' ) ? nexus_get_public_framework_label() : 'WGOS = WordPress Growth Operating System';
 
 $audit_url   = $urls['audit'] ?? home_url( '/growth-audit/' );
 $wgos_url    = $urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
@@ -29,20 +34,7 @@ $e3_url      = $urls['e3'] ?? home_url( '/e3-new-energy/' );
 $github_url  = $urls['github_repo'] ?? '';
 $linkedin_url = $urls['linkedin'] ?? '';
 
-$proof_strip_items = [
-	[
-		'value' => '1.750+',
-		'label' => 'qualifizierte Leads',
-	],
-	[
-		'value' => '12 %',
-		'label' => 'Sales-Conversion',
-	],
-	[
-		'value' => '34x',
-		'label' => 'ROAS-Spitze',
-	],
-];
+$proof_strip_items = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [];
 
 $audit_checks = [
 	[
@@ -89,24 +81,7 @@ $e3_proof_blocks = [
 	],
 ];
 
-$e3_result_metrics = [
-	[
-		'value' => '1.750+',
-		'label' => 'qualifizierte Leads',
-	],
-	[
-		'value' => '12 %',
-		'label' => 'Sales-Conversion',
-	],
-	[
-		'value' => '34x',
-		'label' => 'ROAS-Spitze',
-	],
-	[
-		'value' => '-83 %',
-		'label' => 'CPL',
-	],
-];
+$e3_result_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [];
 
 $system_layers = [
 	[
@@ -138,7 +113,7 @@ $system_layers = [
 		'items'  => [
 			'wartbare Codebasis',
 			'kontrollierte Deployments',
-			'Ownership statt Lock-in',
+			'Eigentum, Zugänge und Setups bleiben bei Ihnen',
 		],
 		'result' => 'WordPress bleibt verlässlich, erweiterbar und kaufmännisch nachvollziehbar.',
 	],
@@ -159,7 +134,7 @@ $faq_items = [
 	],
 	[
 		'question' => 'Was passiert nach dem Growth Audit?',
-		'answer'   => 'Sie bekommen eine klare Einschätzung, wo Ihre Website Nachfrage verliert und welche Hebel Priorität haben. Danach entscheiden Sie, ob und wie es weitergeht. Kein automatischer Folgevertrag.',
+		'answer'   => 'Sie bekommen eine klare Einschätzung, wo Ihre Website Nachfrage verliert und welche Hebel Priorität haben. Wenn fachlich sinnvoll, kann daraus als nächster Schritt eine vertiefte Analyse, eine fokussierte Korrektur oder eine laufende Weiterentwicklung entstehen.',
 	],
 	[
 		'question' => 'Arbeiten Sie auch mit bestehenden WordPress-Websites?',
@@ -188,7 +163,7 @@ get_header();
 				<div class="wp-home-hero__grid">
 					<div class="wp-hero-copy wp-home-hero__copy">
 						<span class="wp-badge nx-reveal">WordPress Growth Architect für B2B</span>
-						<h1 class="wp-hero-title nx-reveal">Ich mache aus Ihrer WordPress-Website ein planbares Anfragesystem für B2B.</h1>
+						<h1 class="wp-hero-title nx-reveal">Ich mache aus Ihrer WordPress-Website ein planbares Nachfrage-System für B2B.</h1>
 						<p class="wp-hero-subtitle wp-home-hero__subtitle nx-reveal">
 							Für Unternehmen, die nicht noch mehr Website-Fläche brauchen, sondern klare Positionierung, belastbare Messbarkeit und einen nächsten Schritt, der aus Besuchern qualifizierte Anfragen macht.
 						</p>
@@ -385,8 +360,8 @@ get_header();
 		<section id="system" class="wp-section homepage-system-blueprint" data-track-section="homepage_wgos">
 			<div class="wp-container wp-home-shell">
 				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
-					<span class="wp-badge">WGOS Kurzfassung</span>
-					<h2 class="wp-section-h2">WGOS ordnet WordPress auf der Homepage in drei kaufnahe Ebenen.</h2>
+					<span class="wp-badge"><?php echo esc_html( $framework_label ); ?></span>
+					<h2 class="wp-section-h2"><?php echo esc_html( $primary_term ); ?> in drei kaufnahen Ebenen.</h2>
 					<p class="wp-section-p">Für die Startseite reicht die Kurzlogik: Anfragepfad, Messbarkeit und kontrollierte Umsetzung müssen zusammenspielen.</p>
 				</div>
 
@@ -433,12 +408,13 @@ get_header();
 					<aside class="homepage-system-blueprint__aside nx-reveal" aria-labelledby="homepage-system-aside-title">
 						<span class="homepage-system-blueprint__eyebrow">Für die Tiefe</span>
 						<h3 id="homepage-system-aside-title">Die volle Systemlogik braucht auf der Startseite keinen langen Exkurs.</h3>
-						<p>Wenn Sie verstehen wollen, wie daraus ein dauerhaftes Operating System wird, ist WGOS die Detailseite.</p>
+						<p>WGOS ist die interne Detaillogik hinter dieser öffentlichen Lesart. Dort werden Reihenfolge, Module und Zusammenhänge sauber erklärt.</p>
 						<ul class="homepage-system-benefits" aria-label="WGOS Nutzen">
 							<li>klare Reihenfolge statt Relaunch-Vermutungen</li>
 							<li>weniger Reibung zwischen Besuch, Signal und Anfrage</li>
 							<li>bessere Steuerbarkeit für Marketing, Vertrieb und Geschäftsführung</li>
 						</ul>
+						<p class="homepage-system-blueprint__aside-note"><?php echo esc_html( $canonical_ownership_sentence ); ?></p>
 						<p class="homepage-system-blueprint__aside-link">Mehr Kontext? <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_home_system_wgos" data-track-category="navigation">WGOS im Detail ansehen</a></p>
 					</aside>
 				</div>
@@ -477,7 +453,7 @@ get_header();
 						</ul>
 						<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen">Growth Audit starten</a>
 						<p class="homepage-conversion-cta__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
-						<p class="homepage-conversion-cta__support">Wenn es fachlich passt, kann daraus der nächste sinnvolle Schritt entstehen. Wenn nicht, haben Sie trotzdem mehr Klarheit als vorher.</p>
+						<p class="homepage-conversion-cta__support">Wenn fachlich sinnvoll, kann daraus als nächster Schritt eine vertiefte Analyse, eine fokussierte Korrektur oder eine laufende Weiterentwicklung entstehen.</p>
 					</div>
 				</div>
 			</section>

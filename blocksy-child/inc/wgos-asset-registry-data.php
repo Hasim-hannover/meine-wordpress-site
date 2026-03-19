@@ -43,7 +43,7 @@ return [
 		'priority'        => [
 			'Wenn viele Baustellen gleichzeitig sichtbar sind und niemand sicher sagen kann, was zuerst gelöst werden muss.',
 			'Wenn Marketing, Vertrieb und Technik unterschiedliche Bilder vom eigentlichen Engpass haben.',
-			'Wenn ein Relaunch, Kampagnenstart oder Retainer geplant ist, aber die Priorisierung noch unscharf bleibt.',
+			'Wenn ein Relaunch, Kampagnenstart oder laufende Weiterentwicklung geplant ist, aber die Priorisierung noch unscharf bleibt.',
 			'Wenn Anfragen stagnieren und unklar ist, ob Tracking, Angebot, Geschwindigkeit oder Nutzerführung bremst.',
 		],
 		'related_assets'  => [
@@ -237,7 +237,7 @@ return [
 			],
 			[
 				'title'       => 'Umsetzungsreihenfolge festlegen',
-				'description' => 'Sie erhalten eine klare Staffelung in jetzt, danach und später. Damit lassen sich Retainer, Sprints oder interne Ressourcen sauber planen.',
+				'description' => 'Sie erhalten eine klare Staffelung in jetzt, danach und später. Damit lassen sich laufende Weiterentwicklung, Sprints oder interne Ressourcen sauber planen.',
 			],
 		],
 		'system_context'  => [
@@ -247,7 +247,7 @@ return [
 		'priority'        => [
 			'Wenn es mehr sinnvolle Themen gibt, als sofort umgesetzt werden können.',
 			'Wenn Technik, Marketing und Geschäftsführung eine gemeinsame Reihenfolge brauchen.',
-			'Wenn Retainer- oder Sprintplanung an widersprüchlichen Prioritäten scheitert.',
+			'Wenn Sprintplanung oder laufende Weiterentwicklung an widersprüchlichen Prioritäten scheitern.',
 			'Wenn aus Audit-Ergebnissen ein konkreter Arbeitsplan entstehen soll.',
 		],
 		'related_assets'  => [
@@ -452,7 +452,7 @@ return [
 			'Wenn das WordPress-System über Jahre gewachsen ist und niemand Sicherheitsregeln bewusst gepflegt hat.',
 			'Wenn viele Nutzer, Dienstleister oder Plugins Zugriff auf produktive Systeme haben.',
 			'Wenn sensible Leads, Formulare oder Kundendaten über die Website laufen.',
-			'Wenn vor Retainer, Relaunch oder Performance-Ausbau zuerst das Risiko gesenkt werden soll.',
+			'Wenn vor laufender Weiterentwicklung, Relaunch oder Performance-Ausbau zuerst das Risiko gesenkt werden soll.',
 		],
 		'related_assets'  => [
 			'plugin-audit'       => 'Reduziert die Zahl der Komponenten, die Sicherheits- und Wartungslast erzeugen.',
@@ -1626,7 +1626,7 @@ return [
 		'priority'        => [
 			'Wenn Daten vorhanden sind, aber der monatliche Entscheidungsprozess noch fehlt.',
 			'Wenn Teams auf Einzelbeobachtungen reagieren, ohne systemische Prioritäten zu setzen.',
-			'Wenn Retainer- oder Weiterentwicklungsarbeit regelmäßig neu sortiert werden muss.',
+			'Wenn laufende Weiterentwicklungsarbeit regelmäßig neu sortiert werden muss.',
 			'Wenn Fortschritt über mehrere Bereiche hinweg sichtbar und handlungsfähig werden soll.',
 		],
 		'related_assets'  => [
@@ -1676,7 +1676,7 @@ return [
 		],
 		'priority'        => [
 			'Wenn sich Prioritäten im laufenden Quartal sichtbar verschoben haben.',
-			'Wenn ein Retainer oder kontinuierlicher Ausbau eine neue grobe Reihenfolge braucht.',
+			'Wenn kontinuierlicher Ausbau eine neue grobe Reihenfolge braucht.',
 			'Wenn Teams zwar monatlich reviewen, aber der übergeordnete Quartalsfokus fehlt.',
 			'Wenn neue Chancen oder Risiken entstanden sind, die in die nächste Phase eingearbeitet werden müssen.',
 		],
@@ -1949,14 +1949,14 @@ return [
 		'credits'         => '20',
 		'keyword'         => 'LLM Automatisierung n8n WordPress',
 		'excerpt'         => 'Automatisierte Workflows mit KI-Schritten – Zusammenfassungen, Klassifikation, Routing – server-seitig auf n8n, DSGVO-konform.',
-		'goal'            => 'Wiederkehrende Geschäftsprozesse mit LLM-Schritten automatisieren, ohne SaaS-Lock-in und ohne Datenabfluss.',
+		'goal'            => 'Wiederkehrende Geschäftsprozesse mit LLM-Schritten automatisieren, ohne SaaS-Abhängigkeit und ohne Datenabfluss.',
 		'result'          => 'Sie erhalten dokumentierte n8n-Workflows mit KI-Schritten, die auf Ihrem eigenen Server laufen und wartbar bleiben.',
 		'prerequisite'    => 'Klarer, definierter Prozess mit bekannter Ein- und Ausgabe muss stehen',
 		'seo_title'       => 'LLM-Workflow-Automatisierung mit n8n – WGOS Asset | Haşim Üner',
 		'seo_description' => 'Geschäftsprozesse mit KI-Schritten automatisieren: Zusammenfassungen, Klassifikation, Routing – server-seitig auf n8n. 20 Credits.',
 		'problem'         => [
 			'Viele Aufgaben im Tagesgeschäft sind repetitiv und textlastig: Anfragen zusammenfassen, E-Mails klassifizieren, Content-Entwürfe vorbereiten, Leads routen. Manuell kosten diese Schritte Stunden pro Woche, ohne dass sie besonderen Sachverstand erfordern.',
-			'LLM-Workflow-Automatisierung baut KI-Schritte in bestehende Geschäftsprozesse ein – visuell in n8n, nachvollziehbar, versioniert und auf eigenem Server. Kein SaaS-Lock-in, keine Daten an Dritte.',
+			'LLM-Workflow-Automatisierung baut KI-Schritte in bestehende Geschäftsprozesse ein – visuell in n8n, nachvollziehbar, versioniert und auf eigenem Server. Keine SaaS-Abhängigkeit, keine Daten an Dritte.',
 		],
 		'deliverables'    => [
 			[

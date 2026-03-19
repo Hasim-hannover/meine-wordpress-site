@@ -82,7 +82,7 @@ $logic_cards = [
 		'step'    => '01',
 		'label'   => 'Strategische Ebene',
 		'title'   => 'WGOS-System',
-		'copy'    => 'Die Hauptseite erklärt das Operating Model, die Reihenfolge und die Logik hinter dem System.',
+		'copy'    => 'Die Hauptseite erklärt die Systemlogik, die Reihenfolge und die Struktur hinter dem System.',
 		'outcome' => 'Sie verstehen, warum die Ebenen zusammenspielen.',
 	],
 	[

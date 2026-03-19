@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-19.
+Stand: 2026-03-20.
 
 Basis dieses Status:
 
@@ -21,6 +21,7 @@ Nicht verifiziert:
 - Die versionierte Homepage priorisiert jetzt im oberen Funnel einen kompakteren Hero, einen direkten Outcome-Proof-Strip, einen scanbaren Audit-/Diagnose-Block, einen klaren Fit-Block, einen verdichteten E3-Proof mit Case-First-CTA und einen ruhigeren finalen Audit-CTA mit klaren Erwartungspunkten vor dem Knowledge-Base-Nebenpfad; mobile Scroll-CTAs fuer Audit-Einstiege sind auf den repo-seitig gesteuerten Flächen entfernt, weil der Header den Einstieg bereits abdeckt.
 - Service-Seiten, Tools-Hub, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
+- Repo-seitig gibt es jetzt einen zentralen oeffentlichen Proof- und Vokabular-Layer: `1.750+ qualifizierte Leads`, `12 % Sales-Conversion` und `-83 % CPL` sind das konservative Standard-Proof-Set; `WGOS = WordPress Growth Operating System` bleibt als erklaertes Framework hinter dem oeffentlichen Hauptbegriff `WordPress als Nachfrage-System fuer B2B`.
 - Die aktive `Growth Audit`-Landingpage ist als versionierter Template-Shell im Repo hinterlegt.
 - Repo-seitig liegt jetzt zusaetzlich eine B2B-Branchen-Landingpage fuer Solar-, Waermepumpen- und Speicher-Anbieter kanonisch unter `/solar-waermepumpen-leadgenerierung/`; der Intake nutzt denselben Audit-/CRM-Stack mit eigener Branchen-Variante.
 - `page-wgos.php` ist als kompaktere WGOS-Sales-Page versioniert: Hero mit Audit-CTA, System-Diagramm, frueher platzierte Pakete, modulare Cards und reduzierte FAQ.
@@ -30,7 +31,7 @@ Nicht verifiziert:
 - Der aktive Audit-Pfad nutzt ein natives Multi-Step-Formular, WordPress-REST und ein internes Audit-CRM.
 - Direkte Gespraechs-CTAs fuer Audit-, Kontakt- und WGOS-Kontexte nutzen theme-seitig jetzt zentral `https://cal.com/hasim-uener/30min?overlayCalendar=true`.
 - Diese Gespraechs-CTAs oeffnen bei verfuegbarem JavaScript ein eingebettetes Cal.com-Popup im Seitenkontext; der direkte Kalender-Link bleibt als robuster Fallback erhalten.
-- Die Kontaktseite kann Pilotprojekt-Anfragen jetzt ueber `?focus=pilot` vorqualifiziert aufnehmen.
+- Die Kontaktseite fuehrt oeffentlich jetzt ueber sechs saubere Anfragearten: `Erstdiagnose / Growth Audit`, `Fokussierte Folgeanalyse`, `Umsetzung / Optimierung`, `Laufende Weiterentwicklung`, `Allgemeine Anfrage` und `Bestehender Kunde`; alte `pilot`-/`project`-Parameter werden nur noch als Legacy-Mapping aufgefangen.
 - Das Client Portal existiert technisch inklusive Login- und Upload-Logik.
 - Repo-seitig existiert jetzt ein gemeinsames `Nexus CRM` fuer Audit-Anfragen, Projektanfragen und Blog-Abos; die Blog-Benachrichtigungen inkl. DOI, Abmeldung und manuell anstossbarem Artikelversand liegen im Theme.
 - Repo-seitig existiert jetzt ein `SEO Cockpit` im WordPress-Admin: Search-Console-OAuth, Cache-Layer, Kernmetriken, Dashboard-Widget, Cron-Snapshot und optionale Koko-Erkennung sind im Theme vorbereitet.
@@ -45,6 +46,7 @@ Nicht verifiziert:
 - Die WGOS Systemlandkarte wird jetzt bei Bedarf automatisch als Seite angelegt und listet alle Assets zusaetzlich in einer festen, gruppierten Hub-Ansicht.
 - Die eigentliche Post-Erstellung und Aktualisierung fuer WGOS-Assets haengt aktuell noch am neuen Theme-Sync und damit am naechsten Deployment auf die Live-Umgebung.
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten oder editorgetriebenen Default-Seiten ausserhalb der route-forced Clusterpages.
+- Editorgetriebene Seitentitel, Excerpts, Karten und `the_content()`-Bereiche koennen weiter alte Proof-, Tonalitaets- oder Du/Sie-Brueche enthalten und muessen im WordPress-Admin separat verifiziert werden.
 - Blog-Artikel koennen jetzt theme-seitig passende WGOS-Assets als Anschlussblock ausgeben; weitere Post-Mappings bleiben ausbaubar.
 - Die Community-Signale auf der Homepage sind derzeit ueber GitHub und ein oeffentliches LinkedIn-Profil versioniert; ein kanonischer Facebook-Link inklusive belastbarer Kennzahl ist im Repo noch nicht hinterlegt.
 - `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.
@@ -74,5 +76,6 @@ Nicht verifiziert:
 - Die Clusterseiten `/ga4-tracking-setup/`, `/performance-marketing/` und `/wordpress-wartung-hannover/` bleiben aktive versionierte Routen und sind keine Legacy-Redirect-Ziele mehr.
 - Im WordPress-Admin erscheint fuer Admins ein Legacy-Cleanup-Hinweis; der Ein-Klick-Flow setzt gefundene Altseiten auf `draft` und entfernt passende Menue-Eintraege.
 - Der `Growth Audit` ist der aktuelle und oeffentliche Primaer-Einstieg. Vertiefte Folgeanalysen sind kein eigenstaendiger Erstkontakt mehr, sondern ergeben sich erst nach Audit und persoenlichem Kontakt.
+- Oeffentliche Kontakt- und CTA-Texte mit `Pilotprojekt`, `Proof-of-Value`, `3.000+ Leads`, `34x ROAS` ohne Kontext oder `Retainer` als kaufnaher Standardbegriff sind nicht mehr Zielbild.
 - Ein WordPress-Editor-Shell als Source of Truth fuer den Audit ist nicht mehr Zielbild.
 - Lose Root-Ablage fuer Playbooks, Referenz-Snippets und Content-Drafts ist nicht mehr Zielstruktur.

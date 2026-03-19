@@ -26,7 +26,7 @@ $about_url    = $primary_urls['about'] ?? home_url( '/uber-mich/' );
 $contact_url  = $primary_urls['contact'] ?? nexus_get_contact_url();
 $project_request_url = add_query_arg(
 	[
-		'type' => 'project',
+		'type' => 'implementation',
 	],
 	$contact_url
 );
@@ -75,7 +75,7 @@ $privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 				<ul class="ft__list">
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_nav_audit" data-track-category="lead_gen">Growth Audit</a></li>
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_footer_nav_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></li>
-					<li><a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_footer_nav_wgos" data-track-category="navigation">WGOS</a></li>
+					<li><a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_footer_nav_wgos" data-track-category="navigation">Systemlogik (WGOS)</a></li>
 				</ul>
 			</section>
 
@@ -92,7 +92,7 @@ $privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 			<section class="ft__col" aria-labelledby="ft-unternehmen">
 				<h3 id="ft-unternehmen">Unternehmen</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $project_request_url ); ?>" data-track-action="cta_footer_nav_project" data-track-category="lead_gen">Projektanfrage</a></li>
+					<li><a class="ft__link-strong" href="<?php echo esc_url( $project_request_url ); ?>" data-track-action="cta_footer_nav_project" data-track-category="lead_gen">Umsetzung / Optimierung</a></li>
 					<li><a href="<?php echo esc_url( $about_url ); ?>" data-track-action="cta_footer_nav_about" data-track-category="navigation">Über mich</a></li>
 					<li><a href="<?php echo esc_url( $contact_url ); ?>" data-track-action="cta_footer_nav_contact" data-track-category="navigation">Kontakt</a></li>
 				</ul>

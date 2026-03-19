@@ -261,7 +261,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 							</div>
 
 							<a class="audit-submit-btn review-caseproof-cta" href="#form" data-track-action="cta_caseproof_growth_audit" data-track-category="lead_gen">Mit derselben Logik prüfen</a>
-							<p class="review-caseproof-microcopy">Kostenlos, kein Pitch. Erst die Diagnose, dann erst ein möglicher nächster Schritt.</p>
+							<p class="review-caseproof-microcopy">Kostenlos, kein Pitch. Erst die Diagnose, dann Priorisierung und nur bei fachlichem Fit ein nächster Schritt.</p>
 							<a class="audit-text-link" href="<?php echo esc_url( $cases_url ); ?>">Weitere Ergebnisse ansehen</a>
 						</aside>
 					</div>
@@ -540,7 +540,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 								<p class="audit-form-meta">Nur Rückmeldungen zu dieser Anfrage. DSGVO-konform, kein Spam, keine generische Tool-Auswertung.</p>
 
 								<p class="audit-form-escape">
-									Lieber direkt sprechen?
+									Wenn ein Gespräch fachlich sinnvoller ist:
 									<a href="<?php echo esc_url( $calendar_url ); ?>" data-track-action="cta_audit_form_escape_call" data-track-category="lead_gen">Termin buchen &rarr;</a>
 								</p>
 							</form>
@@ -583,12 +583,12 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 							<div class="review-aside-card review-aside-proof">
 								<div class="review-proof-badge">
 									<div class="review-proof-badge__item">
-										<strong>47</strong>
-										<span>Audits in 2026</span>
+										<strong>48h</strong>
+										<span>schriftliche Rückmeldung</span>
 									</div>
 									<div class="review-proof-badge__item">
-										<strong>31h</strong>
-										<span>Ø Antwortzeit</span>
+										<strong>klar</strong>
+										<span>erste Priorisierung statt Tool-Score</span>
 									</div>
 									<div class="review-proof-badge__item">
 										<strong>100 %</strong>
@@ -625,7 +625,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 									<li>Ich prüfe die Seite manuell und verdichte die stärksten Bremsen.</li>
 									<li>Sie erhalten innerhalb von 48 Stunden eine klare erste Priorisierung.</li>
 								</ol>
-								<p>Keine generische Checkliste. Kein Pflicht-Call. Nur ein sinnvoller erster Schritt in die Diagnose.</p>
+								<p>Keine generische Checkliste. Kein Pflicht-Call. Erst Diagnose, dann Priorisierung und nur bei fachlichem Fit der nächste Schritt.</p>
 							</div>
 							<div class="review-aside-card review-aside-card-faq">
 								<span class="review-aside-kicker">Häufige Fragen</span>

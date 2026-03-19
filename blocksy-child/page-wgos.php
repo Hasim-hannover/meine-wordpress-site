@@ -19,6 +19,10 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 $cases_url    = nexus_get_results_url();
 $asset_hub_url = function_exists( 'nexus_get_wgos_asset_hub_url' ) ? nexus_get_wgos_asset_hub_url() : home_url( '/wgos-systemlandkarte/' );
 $page_url     = get_permalink( get_queried_object_id() );
+$public_proof = function_exists( 'nexus_get_public_proof_data' ) ? nexus_get_public_proof_data() : [];
+$canonical_ownership_sentence = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
+$primary_term                = function_exists( 'nexus_get_public_primary_term' ) ? nexus_get_public_primary_term() : 'WordPress als Nachfrage-System für B2B';
+$framework_label             = function_exists( 'nexus_get_public_framework_label' ) ? nexus_get_public_framework_label() : 'WGOS = WordPress Growth Operating System';
 
 if ( ! $page_url ) {
 	$page_url = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
@@ -76,18 +80,18 @@ $hero_snapshot = [
 $hero_proof = [
 	[
 		'context' => 'E3 New Energy',
-		'value'   => '1.750+',
-		'label'   => 'Leads im Skalierungsfenster',
+		'value'   => $public_proof['metrics']['lead_count']['value'] ?? '1.750+',
+		'label'   => 'qualifizierte Leads',
 	],
 	[
 		'context' => 'E3 New Energy',
-		'value'   => '-83%',
-		'label'   => 'CPL vs. Lead-Einkauf',
+		'value'   => $public_proof['metrics']['sales_conversion']['value'] ?? '12 %',
+		'label'   => 'Sales-Conversion',
 	],
 	[
-		'context' => 'DOMDAR',
-		'value'   => '120 EUR',
-		'label'   => 'AOV in 6 Wochen',
+		'context' => 'E3 New Energy',
+		'value'   => $public_proof['metrics']['cpl_reduction']['value'] ?? '-83 %',
+		'label'   => 'CPL gegenüber Lead-Einkauf',
 	],
 ];
 
@@ -105,7 +109,7 @@ $failure_cards = [
 		'result'  => 'Ohne belastbare Signale bleibt unklar, welche Seiten echte Nachfrage tragen.',
 	],
 	[
-		'title'   => 'Tracking ohne Operating Model',
+		'title'   => 'Tracking ohne Systemlogik',
 		'surface' => 'Dashboards sehen sauber aus.',
 		'result'  => 'Wenn Angebotslogik und Seitenpfade nicht stimmen, dokumentiert Tracking nur besser denselben Blindflug.',
 	],
@@ -205,21 +209,21 @@ $core_areas = [
 $proof_metrics = [
 	[
 		'case'    => 'E3 New Energy',
-		'value'   => '1.750+',
+		'value'   => $public_proof['metrics']['lead_count']['value'] ?? '1.750+',
 		'label'   => 'Leads im 5-Monats-Skalierungsfenster',
 		'context' => 'nach Fundament, sauberer Landingpage-Logik und skalierter Nachfrage',
 	],
 	[
 		'case'    => 'E3 New Energy',
-		'value'   => '-83%',
-		'label'   => 'Cost per Lead gegenüber Lead-Einkauf',
-		'context' => 'weil Tracking, Qualifizierung und Performance nicht mehr gegeneinander gearbeitet haben',
+		'value'   => $public_proof['metrics']['sales_conversion']['value'] ?? '12 %',
+		'label'   => 'Sales-Conversion',
+		'context' => 'weil Übergabe, Vorqualifizierung und Angebotslogik sauberer zusammenspielten',
 	],
 	[
-		'case'    => 'DOMDAR',
-		'value'   => '120 EUR',
-		'label'   => 'Average Order Value in 6 Wochen',
-		'context' => 'ohne zusätzliches Ad-Budget, durch Angebotsstruktur, Recovery-Loops und weniger Reibung',
+		'case'    => 'E3 New Energy',
+		'value'   => $public_proof['metrics']['cpl_reduction']['value'] ?? '-83 %',
+		'label'   => 'Cost per Lead gegenüber Lead-Einkauf',
+		'context' => 'weil Tracking, Qualifizierung und Performance nicht mehr gegeneinander gearbeitet haben',
 	],
 ];
 
@@ -229,8 +233,8 @@ $case_references = [
 		'copy'  => 'Vom Lead-Einkauf zur eigenen Pipeline: 1.750+ Leads im System, 12 % Sales-Conversion und deutlich geringere Abhängigkeit von Zukauf-Leads.',
 	],
 	[
-		'title' => 'DOMDAR',
-		'copy'  => 'Profitabilität aus bestehendem Traffic: von 54 EUR AOV und 1,5 % CR zu 120 EUR AOV und 4,6 % Conversion in 6 Wochen durch Struktur, Recovery und Operations.',
+		'title' => 'Was die Zahlen belegen',
+		'copy'  => 'Nicht Lautstärke, sondern Reihenfolge: erst Fundament, dann Nachfrage, dann saubere Übergaben. Genau deshalb bleiben die Kennzahlen anschlussfähig.',
 	],
 	[
 		'title' => 'Wiederkehrendes Muster',
@@ -258,7 +262,7 @@ $audit_steps = [
 	[
 		'number' => '03',
 		'title'  => 'Nächsten Schritt wählen',
-		'text'   => 'Kleine Korrektur, Folgeanalyse, Strategiecall oder Umsetzung - passend zur Lage, nicht pauschal.',
+		'text'   => 'Wenn fachlich sinnvoll, kann daraus als nächster Schritt eine vertiefte Analyse, eine fokussierte Korrektur oder eine laufende Weiterentwicklung entstehen.',
 	],
 ];
 
@@ -337,8 +341,8 @@ $credit_examples = [
 
 $guarantee_points = [
 	'Klare Priorisierung statt blinder Umsetzungslisten.',
-	'Volle Ownership von Code, Inhalten, Tracking und Zugängen.',
-	'Transparente Entscheidungen statt Black-Box-Retainer.',
+	$canonical_ownership_sentence,
+	'Transparente Entscheidungen statt Blackbox-Zuständigkeiten.',
 ];
 
 $faq_items = [
@@ -356,11 +360,11 @@ $faq_items = [
 	],
 	[
 		'question' => 'Was passiert nach dem Audit?',
-		'answer'   => 'Danach ist klar, ob zuerst eine kleine Korrektur, eine vertiefte Folgeanalyse, ein Strategiecall oder direkte Umsetzung sinnvoll ist. Das System startet nicht mit Vermutung, sondern mit Klarheit.',
+		'answer'   => 'Wenn fachlich sinnvoll, kann daraus als nächster Schritt eine vertiefte Analyse, eine fokussierte Korrektur oder eine laufende Weiterentwicklung entstehen.',
 	],
 	[
 		'question' => 'Bleibt das System nach der Zusammenarbeit bei uns?',
-		'answer'   => 'Ja. Code, Inhalte, Setups und Zugänge bleiben bei Ihnen. WGOS ist auf Ownership gebaut, nicht auf Abhängigkeit.',
+		'answer'   => $canonical_ownership_sentence,
 	],
 ];
 
@@ -408,9 +412,9 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-container">
 					<div class="wgos-hero-grid">
 						<div class="wgos-hero-copy">
-							<span class="wgos-kicker">WordPress Growth Operating System</span>
-							<h1 class="wgos-hero__title">WordPress Growth Operating System für planbare Nachfrage.</h1>
-							<p class="wgos-hero__subtitle">WGOS ordnet Strategie, Technik, Daten, Sichtbarkeit und Conversion in ein Operating Model, damit Wachstum steuerbar wird statt von Einzelmaßnahmen abzuhängen.</p>
+							<span class="wgos-kicker"><?php echo esc_html( $framework_label ); ?></span>
+							<h1 class="wgos-hero__title"><?php echo esc_html( $framework_label ); ?> für planbare Nachfrage.</h1>
+							<p class="wgos-hero__subtitle"><?php echo esc_html( $primary_term ); ?> ist die öffentliche Lesart. WGOS beschreibt die interne Systemlogik dahinter: Strategie, Technik, Daten, Sichtbarkeit und Conversion greifen in einer klaren Reihenfolge ineinander.</p>
 
 							<ul class="wgos-hero__bullets">
 								<li>Struktur statt Taktik-Sammlung</li>
@@ -503,7 +507,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-container">
 					<div class="wgos-section-head">
 						<span class="wgos-principle-kicker">Systemübersicht</span>
-						<h2 class="wgos-h2">WGOS ordnet Wachstum in ein belastbares Operating Model.</h2>
+						<h2 class="wgos-h2">WGOS ordnet Wachstum in eine belastbare Systemlogik.</h2>
 						<p class="wgos-section-intro">Kein Leistungsbaukasten, kein Kanalmix ohne Zusammenhang, kein hübscher Relaunch ohne System. Sondern ein Modell, das Nachfrage strukturiert.</p>
 					</div>
 
@@ -640,7 +644,7 @@ foreach ( $faq_items as $faq_item ) {
 								<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Growth Audit starten</a>
 							</div>
 
-							<p class="wgos-hero__microcopy">Lieber erst sprechen? <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>
+							<p class="wgos-hero__microcopy">Wenn ein kurzes Gespräch fachlich sinnvoller ist: <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>
 						</div>
 
 						<div class="wgos-audit-aside">
@@ -784,7 +788,7 @@ foreach ( $faq_items as $faq_item ) {
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Growth Audit starten</a>
 						</div>
 
-						<p class="wgos-hero__microcopy">Persönliche Rückmeldung in 48 Stunden. Kein Pitch, wenn kein fachlicher Fit da ist. <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>
+						<p class="wgos-hero__microcopy">Persönliche Rückmeldung in 48 Stunden. Kein Pitch, wenn kein fachlicher Fit da ist. Wenn ein Gespräch sinnvoller ist: <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>
 					</div>
 				</div>
 			</section>

@@ -184,7 +184,7 @@ function nexus_seed_results_pages() {
 		],
 		[
 			'slug'   => 'whitelabel-retainer',
-			'title'  => 'Whitelabel & Retainer',
+			'title'  => 'Whitelabel & Weiterentwicklung',
 			'update' => [],
 		],
 	];

@@ -168,7 +168,8 @@ function hu_enqueue_assets() {
 		hu_enqueue_js( 'nexus-contact-js', 'contact.js', [ 'nexus-core-js' ] );
 		$contact_requested_type = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '';
 		$contact_type_options   = function_exists( 'nexus_get_contact_request_type_options' ) ? nexus_get_contact_request_type_options() : [];
-		$contact_is_project_landing = 'project' === $contact_requested_type && isset( $contact_type_options['project'] );
+		$contact_is_scoped_landing = in_array( $contact_requested_type, [ 'audit', 'analysis', 'implementation', 'ongoing' ], true )
+			&& isset( $contact_type_options[ $contact_requested_type ] );
 
 		wp_localize_script(
 			'nexus-contact-js',
@@ -178,7 +179,7 @@ function hu_enqueue_assets() {
 				'successMessage'   => 'Danke. Ihre Anfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
 				'errorMessage'     => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
 				'callUrl'          => esc_url_raw( function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' ) ),
-				'isProjectLanding' => $contact_is_project_landing,
+				'isScopedLanding'  => $contact_is_scoped_landing,
 			]
 		);
 	}

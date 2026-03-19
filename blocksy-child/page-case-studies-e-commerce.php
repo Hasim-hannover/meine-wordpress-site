@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Ergebnisse Hub
- * Description: Hub für E3, DOMDAR und Whitelabel & Retainer.
+ * Description: Hub für E3, DOMDAR und Whitelabel-Arbeit mit laufender Weiterentwicklung.
  *
  * @package Blocksy_Child
  */
@@ -47,9 +47,9 @@ $proof_cards = [
 	],
 	[
 		'badge'   => 'Anonymisierter Proof',
-		'title'   => 'Whitelabel & Retainer',
-		'copy'    => '12 Whitelabel-Projekte und 4 laufende Retainer zeigen, wie die Arbeit aussieht, wenn Vertrauen da ist, aber Logos nicht öffentlich werden.',
-		'stats'   => [ '12 Projekte', '4 laufende Retainer', 'SEO + CRO + Tracking + Delivery' ],
+		'title'   => 'Whitelabel & laufende Weiterentwicklung',
+		'copy'    => 'Anonymisierte Delivery zeigt, wie die Arbeit aussieht, wenn Vertrauen da ist, aber Logos nicht öffentlich werden.',
+		'stats'   => [ 'anonymisierte Delivery', 'laufende Weiterentwicklung', 'SEO + CRO + Tracking + Delivery' ],
 		'cta'     => 'Zum Bereich',
 		'url'     => $whitelabel_url,
 		'jump'    => '#bereich-whitelabel',
@@ -91,14 +91,14 @@ $detail_sections = [
 	[
 		'id'      => 'bereich-whitelabel',
 		'eyebrow' => 'Bereich 03',
-		'title'   => 'Whitelabel & Retainer',
+		'title'   => 'Whitelabel & laufende Weiterentwicklung',
 		'intro'   => 'Der dritte Bereich macht sichtbar, was sonst unsichtbar bleibt: laufende Systempflege, Delivery im Hintergrund und anonymisierte Projektmuster.',
 		'bullets' => [
-			'12 Whitelabel-Projekte und 4 laufende Retainer als Vertrauenssignal',
+			'anonymisierte Delivery und laufende Weiterentwicklung als Vertrauenssignal',
 			'geeignet für Besucher, die nicht nur Cases, sondern wiederholbare Zusammenarbeit prüfen wollen',
 			'inklusive Portrait, Arbeitsfeldern, anonymisierten Mustern und Systemkontext',
 		],
-		'stats'   => [ '12 Projekte', '4 Retainer', 'Whitelabel + Sparring + Delivery' ],
+		'stats'   => [ 'anonymisiert', 'laufend', 'Whitelabel + Sparring + Delivery' ],
 		'url'     => $whitelabel_url,
 		'link'    => 'Whitelabel-Seite öffnen',
 		'accent'  => 'highlight',
@@ -115,8 +115,8 @@ $framework_cards = [
 		'copy'  => 'Whitelabel-Projekte zeigen Muster statt Logos: wiederkehrende Hebel, typische Engpässe und die Art der Verantwortung im Hintergrund.',
 	],
 	[
-		'title' => 'Laufende Retainer',
-		'copy'  => 'Retainer sind der stärkste Vertrauensbeweis: Wer im System bleibt, kauft keine Einzelleistung, sondern wiederholbare Wirkung.',
+		'title' => 'Laufende Weiterentwicklung',
+		'copy'  => 'Laufende Zusammenarbeit ist dann sinnvoll, wenn Prioritäten, Ownership und kontrollierte Weiterentwicklung wichtiger sind als Einzelfixes.',
 	],
 ];
 
@@ -136,7 +136,7 @@ $cro_points = [
 				<p class="results-hero__subtitle">
 					Nicht jede Zusammenarbeit darf öffentlich als Case Study auftauchen.
 					Deshalb bündelt dieser Hub drei Formen von Nachweis: zwei offene Deep Dives
-					und eine dritte Seite für Whitelabel-Arbeit, laufende Retainer und typische Eingriffstiefen.
+					und eine dritte Seite für Whitelabel-Arbeit, laufende Weiterentwicklung und typische Eingriffstiefen.
 				</p>
 
 				<div class="results-metrics" role="list" aria-label="Ergebnisse-Überblick">
@@ -145,12 +145,12 @@ $cro_points = [
 						<span>öffentliche Deep Dives</span>
 					</div>
 					<div class="results-metric" role="listitem">
-						<strong>12</strong>
-						<span>Whitelabel-Projekte</span>
+						<strong>anonymisiert</strong>
+						<span>Whitelabel-Arbeit im Hintergrund</span>
 					</div>
 					<div class="results-metric" role="listitem">
-						<strong>4</strong>
-						<span>laufende Retainer</span>
+						<strong>laufend</strong>
+						<span>kontrollierte Weiterentwicklung</span>
 					</div>
 					<div class="results-metric" role="listitem">
 						<strong>1</strong>
@@ -160,7 +160,7 @@ $cro_points = [
 
 				<div class="results-hero__actions">
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_results_hero_audit" data-track-category="lead_gen">Audit starten</a>
-					<a href="<?php echo esc_url( $whitelabel_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_results_hero_whitelabel" data-track-category="trust">Whitelabel &amp; Retainer</a>
+					<a href="<?php echo esc_url( $whitelabel_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_results_hero_whitelabel" data-track-category="trust">Whitelabel &amp; Weiterentwicklung</a>
 				</div>
 			</div>
 		</div>

@@ -132,7 +132,7 @@ function hu_home_system_section_markup() {
 				'saubere Codebasis',
 				'GitHub und Versionierung',
 				'kontrollierte Deployments',
-				'Ownership statt Lock-in',
+				'Eigentum, Zugänge und Setups bleiben bei Ihnen',
 				'keine unnötigen Plugin-Abhängigkeiten',
 				'wartbare Umgebung',
 			],
@@ -233,7 +233,10 @@ function hu_home_system_section_markup() {
  * @return string
  */
 function hu_hero_section_shortcode() {
-	$urls = hu_home_urls();
+	$urls          = hu_home_urls();
+	$public_proof  = function_exists( 'nexus_get_public_proof_data' ) ? nexus_get_public_proof_data() : [];
+	$primary_term  = function_exists( 'nexus_get_public_primary_term' ) ? nexus_get_public_primary_term() : 'WordPress als Nachfrage-System für B2B';
+	$ownership_copy = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
 
 	ob_start();
 	?>
@@ -255,17 +258,17 @@ function hu_hero_section_shortcode() {
 					<div class="wp-hero-copy">
 						<span class="wp-badge nx-reveal">WordPress Growth Architect für B2B</span>
 						<h1 class="wp-hero-title nx-reveal">
-							Ich mache aus Ihrer<br><span>WordPress-Website ein planbares Anfragesystem.</span>
+							Ich mache aus Ihrer<br><span>WordPress-Website ein planbares Nachfrage-System.</span>
 						</h1>
 						<p class="wp-hero-subtitle nx-reveal">
 							Für B2B-Unternehmen, die aus WordPress mehr brauchen als eine digitale Visitenkarte:
 							klare Positionierung, technische SEO, privacy-first Messbarkeit und Conversion-Logik.
 						</p>
-						<p class="wp-hero-platform-note nx-reveal">So wird aus einer Website eine steuerbare Business-Plattform für Sichtbarkeit, Lead-Führung, Datensignale und kontrollierte Weiterentwicklung.</p>
+						<p class="wp-hero-platform-note nx-reveal"><?php echo esc_html( $primary_term ); ?> statt digitaler Visitenkarte: Sichtbarkeit, Lead-Führung, Datensignale und kontrollierte Weiterentwicklung greifen als ein sauberes System zusammen.</p>
 						<div class="wp-hero-proof nx-reveal" role="list" aria-label="Vertrauenssignale">
-							<span class="wp-hero-proof-item" role="listitem">3.000+ qualifizierte Leads in 18 Monaten aus einem aufgebauten System</span>
-							<span class="wp-hero-proof-item" role="listitem">98/100 Mobile Performance auf Kernseiten</span>
-							<span class="wp-hero-proof-item" role="listitem">Privacy-first Measurement statt Daten-Blackbox</span>
+							<span class="wp-hero-proof-item" role="listitem"><?php echo esc_html( ( $public_proof['metrics']['lead_count']['value'] ?? '1.750+' ) . ' qualifizierte Leads im aufgebauten System' ); ?></span>
+							<span class="wp-hero-proof-item" role="listitem"><?php echo esc_html( ( $public_proof['metrics']['sales_conversion']['value'] ?? '12 %' ) . ' Sales-Conversion' ); ?></span>
+							<span class="wp-hero-proof-item" role="listitem"><?php echo esc_html( ( $public_proof['metrics']['cpl_reduction']['value'] ?? '-83 %' ) . ' CPL gegenüber Lead-Einkauf' ); ?></span>
 						</div>
 
 							<div class="wp-hero-actions nx-reveal">
@@ -313,20 +316,20 @@ function hu_hero_section_shortcode() {
 
 				<div class="vertical-metrics nx-reveal" role="group" aria-label="Erfolgsmetriken">
 					<div class="wp-metric">
-						<span class="wp-metric-value" data-value="98">98</span>
-						<span class="wp-metric-label">Mobile Performance</span>
+						<span class="wp-metric-value" data-value="1750">1.750+</span>
+						<span class="wp-metric-label">qualifizierte Leads</span>
+					</div>
+					<div class="wp-metric">
+						<span class="wp-metric-value" data-value="12">12%</span>
+						<span class="wp-metric-label">Sales-Conversion</span>
 					</div>
 					<div class="wp-metric">
 						<span class="wp-metric-value" data-value="-83">-83%</span>
-						<span class="wp-metric-label">CPL-Reduktion</span>
-					</div>
-					<div class="wp-metric">
-						<span class="wp-metric-value text-gold">&lt;&nbsp;0.8s</span>
-						<span class="wp-metric-label">LCP auf Kernseiten</span>
+						<span class="wp-metric-label">CPL gegenüber Lead-Einkauf</span>
 					</div>
 					<div class="wp-metric">
 						<span class="wp-metric-value" data-value="100">100%</span>
-						<span class="wp-metric-label">Ownership statt Lock-in</span>
+						<span class="wp-metric-label">Eigentum an Code und Setups</span>
 					</div>
 				</div>
 			</div>
@@ -440,7 +443,7 @@ function hu_owned_section_shortcode() {
 						<?php
 						echo esc_html(
 							sprintf(
-								'Jeder Code, jedes System, jede Entscheidung für meine eigene Positionierung liegt offen auf GitHub. %s Commits, vollständige Historie. Ownership statt Lock-in. Nachvollziehbar statt Blackbox. So arbeite ich auch für Sie.',
+								'Jeder Code, jedes System, jede Entscheidung für meine eigene Positionierung liegt offen auf GitHub. %s Commits, vollständige Historie. Eigentum und Nachvollziehbarkeit statt Blackbox. So arbeite ich auch für Sie.',
 								number_format_i18n( $proof['github_commits'] )
 							)
 						);
@@ -450,7 +453,7 @@ function hu_owned_section_shortcode() {
 					<div class="homepage-github-proof__meta" role="list" aria-label="GitHub-Vertrauenssignale">
 						<span class="homepage-github-proof__pill" role="listitem"><?php echo esc_html( number_format_i18n( $proof['github_commits'] ) ); ?> Commits</span>
 						<span class="homepage-github-proof__pill" role="listitem">vollständige Historie</span>
-						<span class="homepage-github-proof__pill" role="listitem">Ownership statt Lock-in</span>
+						<span class="homepage-github-proof__pill" role="listitem">Eigentum statt Abhängigkeit</span>
 					</div>
 				</div>
 
@@ -519,7 +522,7 @@ function hu_wgos_block_shortcode() {
 				</div>
 				<div class="wp-step nx-reveal">
 					<div class="wp-step-num">3</div>
-					<h3>WGOS Umsetzung und Retainer</h3>
+					<h3>Kontrollierte Umsetzung und laufende Weiterentwicklung</h3>
 					<p>Dann folgt die kontrollierte Umsetzung: Seiten, Datenlogik, Tracking, SEO und Weiterentwicklung in einer Reihenfolge, die Reibung senkt und bessere Anfragen erzeugt.</p>
 				</div>
 			</div>
@@ -544,8 +547,9 @@ add_shortcode( 'hu_wgos_block', 'hu_wgos_block_shortcode' );
  * @return string
  */
 function hu_erfolge_section_shortcode() {
-	$urls  = hu_home_urls();
-	$proof = hu_home_public_proof_data();
+	$urls             = hu_home_urls();
+	$proof            = hu_home_public_proof_data();
+	$canonical_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'cpl_reduction', 'sales_conversion' ] ) : [];
 
 	ob_start();
 	?>
@@ -563,22 +567,12 @@ function hu_erfolge_section_shortcode() {
 					<h3 class="nx-card__title">E3 New Energy</h3>
 					<p style="color:var(--nx-text-muted); margin:0.8rem 0 0;">Eingekaufte Leads, keine saubere Datenlage, hohe Reibung nach dem Klick. Nach systematischer Neuordnung von Positionierung, Tracking und Conversion-Pfad:</p>
 					<div class="nx-metrics" style="margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
-						<div class="nx-metric">
-							<span class="nx-metric__value" style="color:var(--nx-success);">1.750+</span>
-							<span class="nx-metric__label">Qualifizierte Leads</span>
-						</div>
-						<div class="nx-metric">
-							<span class="nx-metric__value" style="color:var(--nx-success);">-83%</span>
-							<span class="nx-metric__label">CPL</span>
-						</div>
-						<div class="nx-metric">
-							<span class="nx-metric__value" style="color:var(--nx-gold);">12&nbsp;%</span>
-							<span class="nx-metric__label">Sales-Conversion</span>
-						</div>
-						<div class="nx-metric">
-							<span class="nx-metric__value" style="color:var(--nx-success);">34x</span>
-							<span class="nx-metric__label">ROAS-Spitze</span>
-						</div>
+						<?php foreach ( $canonical_metrics as $metric ) : ?>
+							<div class="nx-metric">
+								<span class="nx-metric__value" style="color:var(--nx-success);"><?php echo esc_html( $metric['value'] ); ?></span>
+								<span class="nx-metric__label"><?php echo esc_html( $metric['label'] ); ?></span>
+							</div>
+						<?php endforeach; ?>
 					</div>
 					<p class="homepage-proof-note">Ähnliche Effekte erzielt in weiteren, nicht öffentlichen Projekten – fragen Sie mich danach.</p>
 					<a href="<?php echo esc_url( $urls['e3'] ); ?>" style="display:inline-block; margin-top:1.5rem; color:var(--nx-gold); font-size:0.85rem; font-weight:700; text-decoration:none;">Case Study lesen -></a>
@@ -664,7 +658,7 @@ function hu_prozess_section_shortcode() {
 				<article class="step"><div class="num">1</div><h3>Diagnose vor Pitch</h3><p class="muted">Erst prüfen wir, wo Sichtbarkeit, Vertrauen oder Conversion wegbrechen. Dann entscheiden wir, ob ein tieferer Eingriff wirtschaftlich Sinn ergibt.</p></article>
 				<article class="step"><div class="num">2</div><h3>WordPress als Infrastruktur</h3><p class="muted">Ich denke nicht in Einzelseiten, sondern in Seitenrollen, internen Verbindungen, Measurement und dem nächsten sinnvollen Schritt für den Nutzer.</p></article>
 				<article class="step"><div class="num">3</div><h3>Measurement mit Maß</h3><p class="muted">Privacy-first heißt nicht blind. Wir messen nur das, was Entscheidungen verbessert und Teams handlungsfähig macht.</p></article>
-				<article class="step"><div class="num">4</div><h3>Ownership statt Lock-in</h3><p class="muted">Code, Content, Tracking-Logik und Priorisierung bleiben nachvollziehbar. Keine Blackbox, kein künstlicher Agenturbedarf.</p></article>
+				<article class="step"><div class="num">4</div><h3>Eigentum statt Abhängigkeit</h3><p class="muted">Code, Content, Tracking-Logik und Priorisierung bleiben nachvollziehbar. Keine Blackbox, kein künstlicher Agenturbedarf.</p></article>
 			</div>
 			<div style="text-align:center; margin-top:2rem;">
 				<a href="<?php echo esc_url( $urls['about'] ); ?>" class="btn btn-ghost">Mehr über meine Arbeitsweise</a>
@@ -804,8 +798,8 @@ add_shortcode( 'hu_blog', 'hu_blog_section_shortcode' );
  * @return string
  */
 function hu_cta_section_shortcode() {
-	$urls = hu_home_urls();
-	$pilot_url = add_query_arg( 'focus', 'pilot', $urls['contact'] ) . '#kontakt-form';
+	$urls            = hu_home_urls();
+	$ownership_copy = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
 
 	ob_start();
 	?>
@@ -835,32 +829,32 @@ function hu_cta_section_shortcode() {
 		</div>
 	</section>
 
-	<section id="pilot" class="homepage-pilot-section" aria-labelledby="pilot-heading" data-track-section="homepage_pilot_offer">
+	<section id="followup" class="homepage-pilot-section" aria-labelledby="followup-heading" data-track-section="homepage_followup_offer">
 		<div class="nx-container">
 			<div class="homepage-pilot-card nx-reveal">
 				<div class="homepage-pilot-card__copy">
-					<span class="nx-badge nx-badge--gold">Proof-of-Value</span>
-					<h2 id="pilot-heading" class="homepage-pilot-card__title">Erste Ergebnisse in 5 Tagen – mit Risikobegrenzung</h2>
-					<p class="homepage-pilot-card__lead">Sie sind noch unsicher? Starten Sie mit einem gedeckelten Pilotprojekt. Für einen Festpreis von 1.500 € analysiere ich Ihre kritischste Unterseite, zum Beispiel Ihre wichtigste Money Page, und liefere Ihnen einen umsetzungsfertigen Report mit den drei größten Hebeln.</p>
-					<p class="homepage-pilot-card__lead">Wenn das Projekt passt, kann es mit Ihrer Einwilligung später als anonymisierte Referenz aufbereitet werden, damit andere Teams von den Learnings profitieren und Sie früh einen sichtbaren Proof-Baustein aus der Zusammenarbeit gewinnen.</p>
+					<span class="nx-badge nx-badge--gold">Fokussierte Folgeanalyse</span>
+					<h2 id="followup-heading" class="homepage-pilot-card__title">Wenn nach dem Audit ein tieferer Blick sinnvoll ist</h2>
+					<p class="homepage-pilot-card__lead">Die Folgeanalyse ist kein öffentlicher Erstschritt. Sie entsteht erst, wenn der Audit zeigt, dass eine vertiefte Analyse oder eine fokussierte Korrektur fachlich sinnvoll ist.</p>
+					<p class="homepage-pilot-card__lead">Dann wird nicht pauschal verkauft, sondern die kritischste Seite, der wichtigste Engpass oder die nächste fachlich sinnvolle Korrektur vertieft.</p>
 				</div>
 
 				<div class="homepage-pilot-card__details">
-					<div class="homepage-pilot-card__price">1.500 € Festpreis</div>
+					<div class="homepage-pilot-card__price">Nur nach Audit-Fit</div>
 					<ul class="premium-list" style="margin:1.25rem 0 0;">
-						<li><span class="check-icon">✓</span> <div>kritischste Angebots- oder Money Page im Detail priorisiert</div></li>
-						<li><span class="check-icon">✓</span> <div>drei größte Hebel inkl. klarer Reihenfolge und Umsetzungslogik</div></li>
-						<li><span class="check-icon">✓</span> <div>anonymisierbare Referenz-Option, wenn Ergebnisse und Freigabe passen</div></li>
+						<li><span class="check-icon">✓</span> <div>kritischste Seite oder stärkster Engpass vertieft</div></li>
+						<li><span class="check-icon">✓</span> <div>klare Reihenfolge für den nächsten wirtschaftlich sinnvollen Schritt</div></li>
+						<li><span class="check-icon">✓</span> <div>Weiterentwicklung nur dann, wenn sie fachlich wirklich passt</div></li>
 					</ul>
 					<a
 						class="wp-btn wp-btn-primary full-width"
-						href="<?php echo esc_url( $pilot_url ); ?>"
-						data-track-action="cta_pilot_contact"
+						href="<?php echo esc_url( $urls['audit'] ); ?>"
+						data-track-action="cta_followup_audit"
 						data-track-category="lead_gen"
 					>
-						Jetzt Pilotprojekt anfragen
+						Erst mit dem Audit starten
 					</a>
-					<p class="homepage-pilot-card__note">Kein offener Scope, kein Endlos-Retainer als Erstschritt. Erst ein belastbarer Proof-of-Value, dann die größere Entscheidung.</p>
+					<p class="homepage-pilot-card__note"><?php echo esc_html( $ownership_copy ); ?></p>
 				</div>
 			</div>
 		</div>

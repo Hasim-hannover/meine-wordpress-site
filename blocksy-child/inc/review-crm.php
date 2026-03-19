@@ -77,7 +77,7 @@ function nexus_get_audit_request_type_options() {
 	return [
 		'growth_audit'     => 'Growth Audit',
 		'growth_blueprint' => 'Growth Blueprint',
-		'implementation'   => 'Umsetzung / Retainer',
+		'implementation'   => 'Umsetzung / Weiterentwicklung',
 	];
 }
 
