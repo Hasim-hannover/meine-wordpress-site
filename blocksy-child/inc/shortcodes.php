@@ -58,8 +58,8 @@ function hu_home_public_proof_data() {
 	}
 
 	$proof = [
-		'github_commits'    => (int) apply_filters( 'hu_home_github_commit_count', 701 ),
-		'linkedin_followers'=> (int) apply_filters( 'hu_home_linkedin_followers', 569 ),
+		'github_commits'    => (int) apply_filters( 'hu_home_github_commit_count', 1500 ),
+		'linkedin_followers'=> (int) apply_filters( 'hu_home_linkedin_followers', 600 ),
 		'linkedin_posts'    => (int) apply_filters( 'hu_home_linkedin_post_count', 20 ),
 	];
 

@@ -1862,17 +1862,20 @@
 
 .homepage-template .homepage-system-card {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
     padding: clamp(1.4rem, 3vw, 1.85rem);
     border-radius: var(--nx-radius-xl);
     border: 1px solid var(--nx-border);
     background: var(--nx-card-gradient-strong);
     box-shadow: var(--nx-shadow-sm);
+    align-content: start;
 }
 
 .homepage-template .homepage-system-card__header {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.85rem;
 }
 
@@ -1939,6 +1942,7 @@
 }
 
 .homepage-template .homepage-system-card__result {
+    grid-column: auto;
     margin: 0;
     padding: 0.95rem 0 0;
     border: 0;
@@ -1963,6 +1967,7 @@
         radial-gradient(circle at 100% 0%, hsl(var(--accent-hsl) / 0.14), transparent 32%),
         var(--nx-card-gradient);
     box-shadow: var(--nx-shadow-sm);
+    align-self: start;
 }
 
 .homepage-system-blueprint__eyebrow {

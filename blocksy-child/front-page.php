@@ -15,6 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 $urls  = function_exists( 'hu_home_urls' ) ? hu_home_urls() : [];
 $proof = function_exists( 'hu_home_public_proof_data' ) ? hu_home_public_proof_data() : [];
 
+$public_proof_display = [
+	'github_commits'     => ! empty( $proof['github_commits'] ) ? 'über ' . number_format_i18n( (int) $proof['github_commits'] ) : 'über 1.500',
+	'linkedin_followers' => number_format_i18n( (int) ( $proof['linkedin_followers'] ?? 600 ) ),
+	'linkedin_posts'     => number_format_i18n( (int) ( $proof['linkedin_posts'] ?? 20 ) ),
+];
+
 $audit_url   = $urls['audit'] ?? home_url( '/growth-audit/' );
 $wgos_url    = $urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
 $cases_url   = $urls['cases'] ?? home_url( '/ergebnisse/' );
@@ -248,15 +254,15 @@ get_header();
 							<p class="homepage-track-record__lead">GitHub, LinkedIn und offene Dokumentation sind nützlich, stehen hier aber bewusst hinter echtem Ergebnis-Proof.</p>
 							<div class="homepage-track-record__public-proof" role="list" aria-label="Öffentliche Proof-Signale">
 								<div class="homepage-track-record__public-item" role="listitem">
-									<strong><?php echo esc_html( number_format_i18n( $proof['github_commits'] ?? 701 ) ); ?></strong>
+									<strong><?php echo esc_html( $public_proof_display['github_commits'] ); ?></strong>
 									<span>Commits im öffentlichen Repo</span>
 								</div>
 								<div class="homepage-track-record__public-item" role="listitem">
-									<strong><?php echo esc_html( number_format_i18n( $proof['linkedin_followers'] ?? 569 ) ); ?></strong>
+									<strong><?php echo esc_html( $public_proof_display['linkedin_followers'] ); ?></strong>
 									<span>LinkedIn-Follower</span>
 								</div>
 								<div class="homepage-track-record__public-item" role="listitem">
-									<strong><?php echo esc_html( number_format_i18n( $proof['linkedin_posts'] ?? 20 ) ); ?></strong>
+									<strong><?php echo esc_html( $public_proof_display['linkedin_posts'] ); ?></strong>
 									<span>öffentliche Fachbeiträge</span>
 								</div>
 							</div>
