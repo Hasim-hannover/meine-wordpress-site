@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-18.
+Stand: 2026-03-19.
 
 Basis dieses Status:
 
@@ -18,7 +18,7 @@ Nicht verifiziert:
 - `blocksy-child/` ist der deploybare Website-Code.
 - Push auf `main` und `hotfix/*` deployt das Theme per SSH-Rsync ueber `.github/workflows/deploy.yml`; zusaetzlich ist ein manueller Start per GitHub Actions moeglich.
 - Zentrale Theme-Module fuer Assets, SEO-Meta, Schema, Shortcodes, Portal und Snippets sind versioniert.
-- Die Homepage nutzt jetzt einen versionierten Public-Proof-Layer aus GitHub-Transparenz, ausgebautem E3-Proof und einem Pilotprojekt-CTA mit direktem Kontaktpfad.
+- Die versionierte Homepage priorisiert jetzt Audit-CTA, fruehen Micro-Proof, klaren Ideal-Fit, verdichteten E3-Outcome-Proof, eine kompaktere WGOS-Kurzfassung und eine bewusst sekundaere Knowledge Base.
 - Service-Seiten, Tools-Hub, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Die aktive `Growth Audit`-Landingpage ist als versionierter Template-Shell im Repo hinterlegt.

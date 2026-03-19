@@ -25,72 +25,73 @@ $e3_url      = $urls['e3'] ?? home_url( '/e3-new-energy/' );
 $github_url  = $urls['github_repo'] ?? '';
 $linkedin_url = $urls['linkedin'] ?? '';
 
-$hero_metrics = [
+$proof_strip_items = [
 	[
-		'value'   => '3.000+',
-		'label'   => 'qualifizierte Leads',
-		'context' => 'in 18 Monaten aus einem aufgebauten System',
+		'value' => '-83 %',
+		'label' => 'CPL im offenen E3 Case',
 	],
 	[
-		'value'   => '-83%',
-		'label'   => 'Kosten pro Lead',
-		'context' => 'nach Neuordnung von Positionierung, Daten und Conversion-Pfad',
+		'value' => '1.750+',
+		'label' => 'qualifizierte Leads im sichtbaren System',
 	],
 	[
-		'value'   => '<0.8s',
-		'label'   => 'LCP auf Kernseiten',
-		'context' => 'wenn Angebotsseiten technisch und argumentativ zusammenpassen',
+		'value' => '8+ Jahre',
+		'label' => 'B2B-, Performance- und CRO-Praxis',
+	],
+	[
+		'value' => 'Erst Diagnose',
+		'label' => 'kein Pflicht-Call, kein Schnell-Pitch',
+	],
+];
+
+$fit_cards = [
+	[
+		'title' => 'Bestehende WordPress-Basis',
+		'text'  => 'Website, Inhalte oder Kampagnen sind da. Es fehlt eher Ordnung in Positionierung, Proof und CTA-Führung als noch ein Relaunch.',
+	],
+	[
+		'title' => 'Sichtbarkeit ist da, Qualität bleibt unscharf',
+		'text'  => 'Traffic, Rankings oder Ads bringen Besuche, aber nicht genug belastbare Gespräche oder saubere Signale für Leadqualität.',
+	],
+	[
+		'title' => 'Marketing, Vertrieb und Geschäftsführung brauchen Klarheit',
+		'text'  => 'Die Seite soll zeigen, wo Nachfrage verloren geht und was als Nächstes Priorität hat, statt nur mehr Output zu produzieren.',
 	],
 ];
 
 $system_layers = [
 	[
 		'label'  => 'Ebene 1',
-		'title'  => 'Öffentliche Website',
-		'text'   => 'Startseite, Angebotsseiten, Proof und interne Wege bilden die sichtbare Vertriebsoberfläche.',
+		'title'  => 'Relevanter Anfragepfad',
+		'text'   => 'Hero, Money Pages, Proof und der nächste Schritt greifen ineinander statt nebeneinander zu laufen.',
 		'items'  => [
 			'klare Positionierung',
-			'Money Pages',
-			'Proof-Seiten',
-			'nächster Schritt sichtbar',
+			'sichtbarer Proof',
+			'CTA ohne Konkurrenz',
 		],
 		'result' => 'Besucher verstehen schneller, warum Sie relevant sind und was sie als Nächstes tun sollen.',
 	],
 	[
 		'label'  => 'Ebene 2',
-		'title'  => 'Mess- und Datenebene',
-		'text'   => 'Consent, Events, Conversion-Signale und Performance-Daten liefern belastbare Entscheidungsgrundlagen.',
+		'title'  => 'Messbarkeit mit Entscheidungssignalen',
+		'text'   => 'Consent, Tracking und Lead-Signale zeigen, wo Qualität entsteht und wo Nachfrage verloren geht.',
 		'items'  => [
 			'privacy-first Tracking',
-			'Conversion-Signale',
-			'Consent sauber abgestimmt',
-			'SEO- und Performance-Daten',
+			'Leadqualität statt Vanity-Metriken',
+			'klare Prioritäten',
 		],
-		'result' => 'Sie sehen nicht nur Traffic, sondern wo Reibung, Nachfrage und Qualität tatsächlich entstehen.',
+		'result' => 'Sie sehen nicht nur Aktivität, sondern was kaufnah wirkt.',
 	],
 	[
 		'label'  => 'Ebene 3',
-		'title'  => 'Kundencockpit',
-		'text'   => 'Leads, Engpässe und Prioritäten werden in eine lesbare Steueransicht übersetzt.',
+		'title'  => 'Kontrollierte Umsetzung',
+		'text'   => 'Änderungen werden priorisiert, versioniert und in sinnvoller Reihenfolge umgesetzt statt als Taktik-Sammlung.',
 		'items'  => [
-			'Lead-Qualität',
-			'Engpässe',
-			'Prioritäten',
-			'nächste 30 bis 90 Tage',
-		],
-		'result' => 'Weniger Dashboard-Theater, mehr Orientierung für Marketing, Vertrieb und Geschäftsführung.',
-	],
-	[
-		'label'  => 'Ebene 4',
-		'title'  => 'Kontrollierte Weiterentwicklung',
-		'text'   => 'Saubere Codebasis, Versionierung und ein schlanker Stack halten WordPress wartbar und erweiterbar.',
-		'items'  => [
-			'GitHub und Versionierung',
+			'wartbare Codebasis',
 			'kontrollierte Deployments',
 			'Ownership statt Lock-in',
-			'wartbare Umgebung',
 		],
-		'result' => 'Änderungen bleiben nachvollziehbar und die Plattform wird nicht mit jedem Eingriff fragiler.',
+		'result' => 'WordPress bleibt verlässlich, erweiterbar und kaufmännisch nachvollziehbar.',
 	],
 ];
 
@@ -125,10 +126,9 @@ get_header();
 		<nav class="smart-nav" aria-label="Seitennavigation">
 			<ul>
 				<li><a href="#hero" title="Start"><span class="nav-dot"></span><span class="nav-text">Start</span></a></li>
+				<li><a href="#fit" title="Ideal Fit"><span class="nav-dot"></span><span class="nav-text">Fit</span></a></li>
 				<li><a href="#proof" title="Track Record"><span class="nav-dot"></span><span class="nav-text">Proof</span></a></li>
-				<li><a href="#problem" title="Problem-Frame"><span class="nav-dot"></span><span class="nav-text">Problem</span></a></li>
 				<li><a href="#system" title="WGOS"><span class="nav-dot"></span><span class="nav-text">WGOS</span></a></li>
-				<li><a href="#case" title="Case"><span class="nav-dot"></span><span class="nav-text">Case</span></a></li>
 				<li><a href="#faq" title="FAQ"><span class="nav-dot"></span><span class="nav-text">FAQ</span></a></li>
 			</ul>
 		</nav>
@@ -139,56 +139,94 @@ get_header();
 					<div class="wp-hero-copy wp-home-hero__copy">
 						<span class="wp-badge nx-reveal">WordPress Growth Architect für B2B</span>
 						<h1 class="wp-hero-title nx-reveal">
-							Ich mache aus Ihrer<br><span>WordPress-Website ein planbares Anfragesystem.</span>
+							WordPress, das aus Sichtbarkeit<br><span>qualifizierte B2B-Anfragen macht.</span>
 						</h1>
 						<p class="wp-hero-subtitle wp-home-hero__subtitle nx-reveal">
-							Für B2B-Unternehmen, die aus WordPress klare Positionierung, belastbare Messbarkeit und planbare Anfrageführung machen wollen.
+							Ich ordne Positionierung, Proof, Conversion-Führung und Measurement so, dass Ihre Website nicht nur besucht wird, sondern als nutzbarer Anfragepfad arbeitet.
 						</p>
 
 						<div class="wp-home-hero__actions nx-reveal">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen">Audit starten</a>
-							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_hero_cases" data-track-category="trust">Ergebnisse ansehen</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $e3_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_hero_e3" data-track-category="trust">E3-Case ansehen</a>
 						</div>
 						<p class="nx-cta-microcopy nx-reveal">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
 					</div>
 
 					<aside class="wp-home-hero-card nx-reveal" aria-labelledby="home-hero-card-title">
 						<span class="wp-home-hero-card__eyebrow">Diagnose vor Umsetzung</span>
-						<h2 id="home-hero-card-title" class="wp-home-hero-card__title">Der erste Schritt ist nicht mehr Output. Sondern mehr Klarheit.</h2>
+						<h2 id="home-hero-card-title" class="wp-home-hero-card__title">Im Audit wird sichtbar, warum Ihre Website heute noch nicht sauber in Anfragen übersetzt.</h2>
 						<p class="wp-home-hero-card__text">
-							Im Growth Audit prüfen wir, wo WordPress heute Nachfrage verliert: bei Positionierung, Datensignalen oder im nächsten Conversion-Schritt.
+							Wir prüfen nicht nur Design oder Technik, sondern die Stellen, an denen relevante Besucher, Datensignale und der nächste Schritt auseinanderfallen.
 						</p>
 						<ul class="wp-home-hero-card__list" aria-label="Audit-Schwerpunkte">
-							<li>Kaufnahe Seiten und Argumentationslogik</li>
-							<li>Tracking, Consent und echte Entscheidungssignale</li>
-							<li>Proof, CTA-Führung und der nächste sinnvolle Schritt</li>
+							<li>Kaufnahe Seiten, Argumentationslogik und CTA-Führung</li>
+							<li>Tracking, Consent und Signale für echte Leadqualität</li>
+							<li>Proof, Reibung und Prioritäten für die nächsten 30 bis 90 Tage</li>
 						</ul>
-						<p class="wp-home-hero-card__note">Kein Pitch. Keine Maßnahmensammlung. Erst Diagnose, dann Priorisierung.</p>
+						<p class="wp-home-hero-card__note">Kein Pitch. Keine Maßnahmenliste ohne Kontext. Erst Diagnose, dann Priorisierung.</p>
 					</aside>
 				</div>
-
-				<!-- KPI-Row bewusst entfernt: Metriken kommen in der Proof-Section (E3 Case) -->
 			</div>
 		</section>
 
 		<div class="wp-mobile-cta-bar" data-home-mobile-cta aria-label="Schneller Audit-Einstieg">
-			<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_mobile_sticky_audit" data-track-category="lead_gen">Audit starten</a>
+			<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_mobile_sticky_audit" data-track-category="lead_gen">Growth Audit starten</a>
 		</div>
+
+		<section class="homepage-proof-strip" aria-label="Schnelle Vertrauenssignale">
+			<div class="wp-container wp-home-shell">
+				<div class="homepage-proof-strip__list" role="list">
+					<?php foreach ( $proof_strip_items as $item ) : ?>
+						<div class="homepage-proof-strip__item nx-reveal" role="listitem">
+							<strong><?php echo esc_html( $item['value'] ); ?></strong>
+							<span><?php echo esc_html( $item['label'] ); ?></span>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</section>
+
+		<section id="fit" class="wp-section homepage-fit-section" data-track-section="homepage_fit">
+			<div class="wp-container wp-home-shell">
+				<div class="wp-home-section-title text-center nx-reveal">
+					<span class="wp-badge">Ideal Fit</span>
+					<h2 class="wp-section-h2">Für B2B-Teams, die mit WordPress schon sichtbar sind, aber zu wenig qualifizierte Anfragen daraus machen.</h2>
+					<p class="wp-section-p">Der Fit ist hoch, wenn nicht eine neue Website fehlt, sondern ein klarer Anfragepfad.</p>
+				</div>
+
+				<div class="homepage-fit-section__grid">
+					<?php foreach ( $fit_cards as $card ) : ?>
+						<article class="wp-success-card homepage-fit-section__card nx-reveal">
+							<h3 class="wp-success-title"><?php echo esc_html( $card['title'] ); ?></h3>
+							<p><?php echo esc_html( $card['text'] ); ?></p>
+						</article>
+					<?php endforeach; ?>
+					<p class="homepage-fit-section__note nx-reveal">
+						Weniger passend, wenn Sie primär ein kosmetisches Redesign oder lose Einzelleistungen ohne vorherige Diagnose suchen.
+						<a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_fit_audit" data-track-category="lead_gen">Wenn es passt, ist das Growth Audit der direkte Einstieg.</a>
+					</p>
+				</div>
+			</div>
+		</section>
 
 		<section id="proof" class="wp-section homepage-track-record" data-track-section="homepage_proof">
 			<div class="wp-container wp-home-shell">
 				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
-					<span class="wp-badge">Track Record</span>
-					<h2 class="wp-section-h2">Proof soll Risiko senken. Nicht die Seite lauter machen.</h2>
-					<p class="wp-section-p">Deshalb kommt er früh, konkret und in klarer Reihenfolge: sichtbare Wirkung, Erfahrung und öffentliche Nachvollziehbarkeit.</p>
+					<span class="wp-badge">Proof</span>
+					<h2 class="wp-section-h2">Outcome-Proof zuerst. Alles andere kommt danach.</h2>
+					<p class="wp-section-p">Der stärkste Vertrauenshebel ist ein nachvollziehbares Ergebnis. Deshalb steht E3 vorne. Erfahrung und Transparenz bleiben sichtbar, aber sekundär.</p>
 				</div>
 
 				<div class="homepage-track-record__grid">
-					<article class="wp-success-card homepage-track-record__card nx-reveal">
-						<p class="wp-success-subtitle">Öffentlicher Case Proof</p>
+					<article class="wp-success-card homepage-track-record__card homepage-track-record__card--primary nx-reveal">
+						<p class="wp-success-subtitle">Outcome Proof</p>
 						<h3 class="wp-success-title">E3 New Energy</h3>
-						<p class="homepage-track-record__lead">E3 startete mit 150 EUR CPL ohne messbare Leadqualität. Nach Neuordnung von Positionierung, Tracking und Conversion-Pfad:</p>
+						<p class="homepage-track-record__lead">Aus 150 EUR CPL ohne messbare Leadqualität wurde nach Neuordnung von Positionierung, Tracking und Conversion-Pfad ein deutlich robusterer Anfragepfad.</p>
 						<div class="homepage-track-record__metrics" role="list" aria-label="E3 Kennzahlen">
+							<div class="homepage-track-record__metric" role="listitem">
+								<span class="homepage-track-record__metric-value">-83&nbsp;%</span>
+								<span class="homepage-track-record__metric-label">Kosten pro Lead</span>
+							</div>
 							<div class="homepage-track-record__metric" role="listitem">
 								<span class="homepage-track-record__metric-value">1.750+</span>
 								<span class="homepage-track-record__metric-label">qualifizierte Leads</span>
@@ -197,53 +235,55 @@ get_header();
 								<span class="homepage-track-record__metric-value">12&nbsp;%</span>
 								<span class="homepage-track-record__metric-label">Sales-Conversion</span>
 							</div>
-							<div class="homepage-track-record__metric" role="listitem">
-								<span class="homepage-track-record__metric-value">34x</span>
-								<span class="homepage-track-record__metric-label">ROAS-Spitze</span>
-							</div>
 						</div>
-						<a href="<?php echo esc_url( $e3_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_proof_e3" data-track-category="trust">Case Study lesen</a>
+						<p class="homepage-track-record__lead">Die offene Case Study zeigt nicht nur Zahlen, sondern die Reihenfolge dahinter: erst Fundament, dann Aktivierung.</p>
+						<div class="homepage-track-record__actions">
+							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_home_proof_e3" data-track-category="trust">E3 Case Study lesen</a>
+							<p class="homepage-track-record__microcopy">Offene Case Study statt Sales-Behauptung.</p>
+						</div>
 					</article>
 
-					<article class="wp-success-card homepage-track-record__card nx-reveal">
-						<p class="wp-success-subtitle">Experience Proof</p>
-						<h3 class="wp-success-title">B2B-, Performance- und Whitelabel-Praxis</h3>
-						<p class="homepage-track-record__lead">Nicht aus Theorie, sondern aus echten Projekten mit Sichtbarkeits-, Daten- und Anfrageproblemen.</p>
-						<ul class="premium-list homepage-track-record__list">
-							<li><span class="check-icon">✓</span><div>8+ Jahre Praxis in B2B, Performance und Conversion</div></li>
-							<li><span class="check-icon">✓</span><div>öffentliche und nicht öffentliche Projekte mit denselben systemischen Hebeln</div></li>
-							<li><span class="check-icon">✓</span><div>WordPress, SEO, Tracking und CRO nicht getrennt, sondern als Verbund gedacht</div></li>
-						</ul>
-						<a href="<?php echo esc_url( $about_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_proof_about" data-track-category="navigation">Arbeitsweise ansehen</a>
-					</article>
+					<div class="homepage-track-record__stack">
+						<article class="wp-success-card homepage-track-record__card nx-reveal">
+							<p class="wp-success-subtitle">Experience Proof</p>
+							<h3 class="wp-success-title">8+ Jahre B2B-, Performance- und Whitelabel-Praxis</h3>
+							<p class="homepage-track-record__lead">Nicht aus Theorie, sondern aus Projekten mit Sichtbarkeits-, Tracking- und Anfrageproblemen.</p>
+							<ul class="premium-list homepage-track-record__list">
+								<li><span class="check-icon">✓</span><div>öffentliche und nicht öffentliche Projekte mit denselben systemischen Hebeln</div></li>
+								<li><span class="check-icon">✓</span><div>WordPress, SEO, Tracking und CRO nicht getrennt, sondern als Verbund gedacht</div></li>
+								<li><span class="check-icon">✓</span><div>kaufnahe Priorisierung vor Taktik-Sammlung</div></li>
+							</ul>
+							<a href="<?php echo esc_url( $about_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_proof_about" data-track-category="navigation">Arbeitsweise ansehen</a>
+						</article>
 
-					<article class="wp-success-card homepage-track-record__card nx-reveal">
-						<p class="wp-success-subtitle">Öffentliche Nachvollziehbarkeit</p>
-						<h3 class="wp-success-title">Transparent statt Blackbox</h3>
-						<p class="homepage-track-record__lead">Eigene Systeme, Entscheidungen und Weiterentwicklung sind öffentlich nachvollziehbar, nicht nur im Sales-Call erzählt.</p>
-						<div class="homepage-track-record__public-proof" role="list" aria-label="Öffentliche Proof-Signale">
-							<div class="homepage-track-record__public-item" role="listitem">
-								<strong><?php echo esc_html( number_format_i18n( $proof['github_commits'] ?? 701 ) ); ?></strong>
-								<span>Commits im öffentlichen Repo</span>
+						<article class="wp-success-card homepage-track-record__card homepage-track-record__card--quiet nx-reveal">
+							<p class="wp-success-subtitle">Öffentliche Nachvollziehbarkeit</p>
+							<h3 class="wp-success-title">Transparent, ohne Outcome-Proof zu ersetzen</h3>
+							<p class="homepage-track-record__lead">GitHub, LinkedIn und offene Dokumentation sind nützlich, stehen hier aber bewusst hinter echtem Ergebnis-Proof.</p>
+							<div class="homepage-track-record__public-proof" role="list" aria-label="Öffentliche Proof-Signale">
+								<div class="homepage-track-record__public-item" role="listitem">
+									<strong><?php echo esc_html( number_format_i18n( $proof['github_commits'] ?? 701 ) ); ?></strong>
+									<span>Commits im öffentlichen Repo</span>
+								</div>
+								<div class="homepage-track-record__public-item" role="listitem">
+									<strong><?php echo esc_html( number_format_i18n( $proof['linkedin_followers'] ?? 569 ) ); ?></strong>
+									<span>LinkedIn-Follower</span>
+								</div>
+								<div class="homepage-track-record__public-item" role="listitem">
+									<strong><?php echo esc_html( number_format_i18n( $proof['linkedin_posts'] ?? 20 ) ); ?></strong>
+									<span>öffentliche Fachbeiträge</span>
+								</div>
 							</div>
-							<div class="homepage-track-record__public-item" role="listitem">
-								<strong><?php echo esc_html( number_format_i18n( $proof['linkedin_followers'] ?? 569 ) ); ?></strong>
-								<span>LinkedIn-Follower</span>
+							<div class="homepage-track-record__public-links">
+								<?php if ( $github_url ) : ?>
+									<a href="<?php echo esc_url( $github_url ); ?>" class="wp-home-text-link" target="_blank" rel="noopener noreferrer" data-track-action="cta_home_proof_github" data-track-category="trust">GitHub ansehen</a>
+								<?php endif; ?>
+								<?php if ( $linkedin_url ) : ?>
+									<a href="<?php echo esc_url( $linkedin_url ); ?>" class="wp-home-text-link" target="_blank" rel="noopener noreferrer" data-track-action="cta_home_proof_linkedin" data-track-category="trust">LinkedIn ansehen</a>
+								<?php endif; ?>
 							</div>
-							<div class="homepage-track-record__public-item" role="listitem">
-								<strong><?php echo esc_html( number_format_i18n( $proof['linkedin_posts'] ?? 20 ) ); ?></strong>
-								<span>öffentliche Fachbeiträge</span>
-							</div>
-						</div>
-						<div class="homepage-track-record__public-links">
-							<?php if ( $github_url ) : ?>
-								<a href="<?php echo esc_url( $github_url ); ?>" class="wp-home-text-link" target="_blank" rel="noopener noreferrer" data-track-action="cta_home_proof_github" data-track-category="trust">GitHub ansehen</a>
-							<?php endif; ?>
-							<?php if ( $linkedin_url ) : ?>
-								<a href="<?php echo esc_url( $linkedin_url ); ?>" class="wp-home-text-link" target="_blank" rel="noopener noreferrer" data-track-action="cta_home_proof_linkedin" data-track-category="trust">LinkedIn ansehen</a>
-							<?php endif; ?>
-						</div>
-					</article>
+						</article>
+					</div>
 				</div>
 
 				<div class="homepage-track-record__cta nx-reveal">
@@ -256,9 +296,9 @@ get_header();
 		<section id="problem" class="wp-section homepage-problem-frame" data-track-section="homepage_problem">
 			<div class="wp-container wp-home-shell">
 				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
-					<span class="wp-badge">Problem-Frame</span>
-					<h2 class="wp-section-h2">Viele WordPress-Seiten erzeugen Traffic. Aber kein steuerbares Nachfrage-System.</h2>
-					<p class="wp-section-p">Der Engpass ist selten nur Design. Meist fehlt die Verbindung zwischen Positionierung, Datensignalen, Proof und dem nächsten sinnvollen Schritt.</p>
+					<span class="wp-badge">Warum Seiten verlieren</span>
+					<h2 class="wp-section-h2">Das Problem ist selten fehlender Traffic. Meist fehlt der saubere Weg zur qualifizierten Anfrage.</h2>
+					<p class="wp-section-p">Wenn Positionierung, Proof, CTA und Measurement nicht zusammenspielen, bleibt Nachfrage teuer und unklar.</p>
 				</div>
 
 				<div class="homepage-problem-frame__grid">
@@ -290,16 +330,16 @@ get_header();
 		<section id="system" class="wp-section homepage-system-blueprint" data-track-section="homepage_wgos">
 			<div class="wp-container wp-home-shell">
 				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
-					<span class="wp-badge">WGOS System</span>
-					<h2 class="wp-section-h2">WGOS bringt die richtigen Ebenen in die richtige Reihenfolge.</h2>
-					<p class="wp-section-p">Nicht noch ein Leistungsmenü, sondern eine Systemlogik für Nachfrage, Datenklarheit und kontrollierte Weiterentwicklung auf WordPress-Basis.</p>
+					<span class="wp-badge">WGOS Kurzfassung</span>
+					<h2 class="wp-section-h2">WGOS ordnet WordPress auf der Homepage in drei kaufnahe Ebenen.</h2>
+					<p class="wp-section-p">Für die Startseite reicht die Kurzlogik: Anfragepfad, Messbarkeit und kontrollierte Umsetzung müssen zusammenspielen.</p>
 				</div>
 
 				<div class="homepage-system-blueprint__steps">
 					<article class="wp-step nx-reveal">
 						<div class="wp-step-num">1</div>
 						<h3>Audit</h3>
-						<p>Wir machen sichtbar, wo Sichtbarkeit, Datensignale oder Anfrageführung gerade bremsen.</p>
+						<p>Wir machen sichtbar, wo Positionierung, Proof, Datensignale oder Anfrageführung gerade bremsen.</p>
 					</article>
 					<article class="wp-step highlight-step nx-reveal">
 						<div class="wp-step-num highlight-num">2</div>
@@ -309,7 +349,7 @@ get_header();
 					<article class="wp-step nx-reveal">
 						<div class="wp-step-num">3</div>
 						<h3>Umsetzung</h3>
-						<p>Dann folgen die passenden WGOS-Bausteine in kontrollierter Reihenfolge statt als Taktik-Sammlung.</p>
+						<p>Dann folgen die passenden Bausteine in kontrollierter Reihenfolge statt als Taktik-Sammlung.</p>
 					</article>
 				</div>
 
@@ -318,103 +358,34 @@ get_header();
 						<ol class="homepage-system-flow" aria-label="WGOS Ebenen">
 							<?php foreach ( $system_layers as $index => $layer ) : ?>
 								<li class="homepage-system-card nx-reveal">
-									<div class="homepage-system-card__rail" aria-hidden="true">
+									<div class="homepage-system-card__header">
 										<span class="homepage-system-card__number"><?php echo esc_html( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></span>
-										<?php if ( $index < count( $system_layers ) - 1 ) : ?>
-											<span class="homepage-system-card__line"></span>
-										<?php endif; ?>
+										<span class="homepage-system-card__eyebrow"><?php echo esc_html( $layer['label'] ); ?></span>
 									</div>
-									<div class="homepage-system-card__body">
-										<div class="homepage-system-card__header">
-											<span class="homepage-system-card__eyebrow"><?php echo esc_html( $layer['label'] ); ?></span>
-											<h3><?php echo esc_html( $layer['title'] ); ?></h3>
-										</div>
-										<p class="homepage-system-card__text"><?php echo esc_html( $layer['text'] ); ?></p>
-										<ul class="homepage-system-card__items" aria-label="<?php echo esc_attr( $layer['title'] . ' Inhalte' ); ?>">
-											<?php foreach ( $layer['items'] as $item ) : ?>
-												<li><?php echo esc_html( $item ); ?></li>
-											<?php endforeach; ?>
-										</ul>
-									</div>
+									<h3><?php echo esc_html( $layer['title'] ); ?></h3>
+									<p class="homepage-system-card__text"><?php echo esc_html( $layer['text'] ); ?></p>
+									<ul class="homepage-system-card__items" aria-label="<?php echo esc_attr( $layer['title'] . ' Inhalte' ); ?>">
+										<?php foreach ( $layer['items'] as $item ) : ?>
+											<li><?php echo esc_html( $item ); ?></li>
+										<?php endforeach; ?>
+									</ul>
 									<p class="homepage-system-card__result"><?php echo esc_html( $layer['result'] ); ?></p>
 								</li>
 							<?php endforeach; ?>
 						</ol>
-
-						<div id="homepage-mindmap-teaser-root" class="homepage-mindmap-section nx-reveal" aria-label="WGOS Mindmap Teaser"></div>
 					</div>
 
 					<aside class="homepage-system-blueprint__aside nx-reveal" aria-labelledby="homepage-system-aside-title">
-						<span class="homepage-system-blueprint__eyebrow">Warum das kaufnah relevant ist</span>
-						<h3 id="homepage-system-aside-title">Klarer sehen, welche Seiten tragen und welche nur Fläche belegen.</h3>
-						<p>Wenn Website, Datenebene, Kundencockpit und Weiterentwicklung zusammenspielen, entsteht kein Relaunch-Theater, sondern ein nutzbares Nachfrage-System.</p>
+						<span class="homepage-system-blueprint__eyebrow">Für die Tiefe</span>
+						<h3 id="homepage-system-aside-title">Die volle Systemlogik braucht auf der Startseite keinen langen Exkurs.</h3>
+						<p>Wenn Sie verstehen wollen, wie daraus ein dauerhaftes Operating System wird, ist WGOS die Detailseite.</p>
 						<ul class="homepage-system-benefits" aria-label="WGOS Nutzen">
-							<li>weniger Reibung zwischen erstem Besuch und qualifizierter Anfrage</li>
-							<li>klare Prioritäten für die nächsten 30 bis 90 Tage</li>
-							<li>Ownership statt Blackbox-Setup</li>
-							<li>bessere Gesprächsgrundlage für Marketing, Vertrieb und Geschäftsführung</li>
+							<li>klare Reihenfolge statt Relaunch-Vermutungen</li>
+							<li>weniger Reibung zwischen Besuch, Signal und Anfrage</li>
+							<li>bessere Steuerbarkeit für Marketing, Vertrieb und Geschäftsführung</li>
 						</ul>
 						<p class="homepage-system-blueprint__aside-link">Mehr Kontext? <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_home_system_wgos" data-track-category="navigation">WGOS im Detail ansehen</a></p>
 					</aside>
-				</div>
-			</div>
-		</section>
-
-		<section id="case" class="wp-section homepage-case-teaser" data-track-section="homepage_case_teaser">
-			<div class="wp-container wp-home-shell">
-				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
-					<span class="wp-badge">Case Teaser</span>
-					<h2 class="wp-section-h2">Wenn die Reihenfolge stimmt, verändert sich nicht nur die Seite. Sondern der ganze Anfragepfad.</h2>
-					<p class="wp-section-p">E3 New Energy ist der sichtbare Ausschnitt einer wiederholbaren Systemlogik: erst Fundament, dann Aktivierung.</p>
-				</div>
-
-				<div class="homepage-case-teaser__grid">
-					<article class="homepage-case-teaser__card nx-reveal">
-						<span class="homepage-case-teaser__eyebrow">Ausgangslage</span>
-						<h3>Teure Leads, schwache Daten, hohe Reibung</h3>
-						<p>150 EUR CPL, keine messbare Leadqualität und keine robuste Conversion-Führung nach dem Klick.</p>
-					</article>
-					<article class="homepage-case-teaser__card nx-reveal">
-						<span class="homepage-case-teaser__eyebrow">Maßnahme</span>
-						<h3>Erst Fundament, dann Skalierung</h3>
-						<p>Positionierung, Tracking, Seitenstruktur, Speed und Conversion-Pfade wurden vor weiterer Aktivierung neu geordnet.</p>
-					</article>
-					<article class="homepage-case-teaser__card homepage-case-teaser__card--result nx-reveal">
-						<span class="homepage-case-teaser__eyebrow">Ergebnis</span>
-						<h3>Mehr Wirkung aus denselben Kanälen</h3>
-						<div class="homepage-case-teaser__result-metrics" role="list" aria-label="Ergebnis Kennzahlen">
-							<div role="listitem">
-								<strong>-83%</strong>
-								<span>CPL</span>
-							</div>
-							<div role="listitem">
-								<strong>1.750+</strong>
-								<span>Leads im System</span>
-							</div>
-							<div role="listitem">
-								<strong>12%</strong>
-								<span>Sales-Conversion</span>
-							</div>
-						</div>
-					</article>
-					<article class="homepage-case-teaser__card homepage-case-teaser__card--cta nx-reveal">
-						<span class="homepage-case-teaser__eyebrow">CTA</span>
-						<h3>Die Logik im Detail ansehen</h3>
-						<p>Der offene Case zeigt nicht nur Zahlen, sondern auch die Reihenfolge dahinter.</p>
-						<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_home_case_e3" data-track-category="trust">Case Study lesen</a>
-					</article>
-				</div>
-			</div>
-		</section>
-
-		<section id="cta" class="wp-section homepage-conversion-cta" data-track-section="homepage_cta">
-			<div class="wp-container wp-home-shell">
-				<div class="nx-cta-box nx-reveal homepage-conversion-cta__box">
-					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2>Prüfen wir, wo Ihre WordPress-Seite heute Nachfrage verliert.</h2>
-					<p>Der Growth Audit zeigt, ob zuerst Positionierung, Datensignale, Proof, technische Reibung oder Conversion-Führung angegangen werden sollten.</p>
-					<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					<p class="homepage-conversion-cta__support">Erst die Logik dahinter sehen? <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_home_final_wgos" data-track-category="navigation">WGOS verstehen</a></p>
 				</div>
 			</div>
 		</section>
@@ -438,12 +409,25 @@ get_header();
 			</div>
 		</section>
 
+		<section id="cta" class="wp-section homepage-conversion-cta" data-track-section="homepage_cta">
+			<div class="wp-container wp-home-shell">
+				<div class="nx-cta-box nx-reveal homepage-conversion-cta__box">
+					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
+					<h2>Prüfen wir zuerst, wo Ihre WordPress-Seite heute qualifizierte Nachfrage verliert.</h2>
+					<p>Im Growth Audit wird sichtbar, ob Positionierung, Proof, CTA-Führung, Measurement oder technische Reibung zuerst gelöst werden sollten. Danach entscheiden Sie in Ruhe, ob und wie es weitergeht.</p>
+					<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen">Growth Audit starten</a>
+					<p class="homepage-conversion-cta__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+					<p class="homepage-conversion-cta__support">Noch nicht bereit für den Einstieg? <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_home_final_wgos" data-track-category="navigation">Erst WGOS im Detail ansehen</a></p>
+				</div>
+			</div>
+		</section>
+
 		<section id="knowledge" class="wp-section homepage-blog-section homepage-blog-section--quiet" data-track-section="homepage_knowledge">
 			<div class="wp-container wp-home-shell">
 				<div class="wp-home-section-title text-center nx-reveal">
 					<span class="nx-badge nx-badge--ghost">Knowledge Base</span>
-					<h2 class="wp-section-h2">Analysen für Teams, die den Mechanismus hinter Sichtbarkeit und Conversion verstehen wollen.</h2>
-					<p class="wp-section-p">Keine Taktik-Tipps, sondern Analysen zur Verbindung zwischen Sichtbarkeit, Daten und Anfragen.</p>
+					<h2 class="wp-section-h2">Wenn Sie zuerst die Denkweise prüfen wollen: hier sind die Analysen.</h2>
+					<p class="wp-section-p">Die Artikel sind bewusst der längere Nebenpfad. Der direkte Einstieg bleibt das Growth Audit.</p>
 				</div>
 
 				<div class="homepage-blog-grid">

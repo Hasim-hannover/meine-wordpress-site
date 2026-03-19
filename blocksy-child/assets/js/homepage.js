@@ -1,70 +1,119 @@
-document.addEventListener("DOMContentLoaded", function() {
-    function initHomepageNav() {
-        const smartNav = document.querySelector('.cs-page .smart-nav');
-        if (!smartNav) return;
+document.addEventListener("DOMContentLoaded", function () {
+    initHomepageNav();
+    initMobileStickyCta();
+});
 
-        const showAfter = 520;
+function initHomepageNav() {
+    const smartNav = document.querySelector(".homepage-template .smart-nav");
+    const hero = document.getElementById("hero");
 
+    if (!smartNav || !hero) {
+        return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
         function toggleNav() {
-            smartNav.classList.toggle('is-visible', window.scrollY > showAfter);
+            const trigger = hero.offsetTop + (hero.offsetHeight * 0.65);
+            smartNav.classList.toggle("is-visible", window.scrollY > trigger);
         }
 
         toggleNav();
-        window.addEventListener('scroll', toggleNav, { passive: true });
+        window.addEventListener("scroll", toggleNav, { passive: true });
+        window.addEventListener("resize", toggleNav);
+        return;
     }
 
-    function initMobileStickyCta() {
-        const stickyCta = document.querySelector('[data-home-mobile-cta]');
-        const hero = document.getElementById('hero');
-        if (!stickyCta || !hero) return;
+    const navObserver = new IntersectionObserver(function (entries) {
+        const heroIsVisible = entries[0] && entries[0].isIntersecting;
+        smartNav.classList.toggle("is-visible", !heroIsVisible);
+    }, {
+        threshold: 0.18
+    });
 
-        function toggleStickyCta() {
-            const isMobile = window.innerWidth <= 767;
-            const trigger = hero.offsetTop + hero.offsetHeight * 0.55;
-            stickyCta.classList.toggle('is-visible', isMobile && window.scrollY > trigger);
+    navObserver.observe(hero);
+}
+
+function initMobileStickyCta() {
+    const stickyCta = document.querySelector("[data-home-mobile-cta]");
+    const hero = document.getElementById("hero");
+    const finalCta = document.getElementById("cta");
+
+    if (!stickyCta) {
+        return;
+    }
+
+    const stickyLink = stickyCta.querySelector("a");
+    const mobileQuery = window.matchMedia("(max-width: 767px)");
+    let heroPassed = false;
+    let finalCtaVisible = false;
+
+    function setStickyState(isVisible) {
+        stickyCta.classList.toggle("is-visible", isVisible);
+        stickyCta.setAttribute("aria-hidden", isVisible ? "false" : "true");
+
+        if (!stickyLink) {
+            return;
         }
 
-        toggleStickyCta();
-        window.addEventListener('scroll', toggleStickyCta, { passive: true });
-        window.addEventListener('resize', toggleStickyCta);
+        if (isVisible) {
+            stickyLink.removeAttribute("tabindex");
+        } else {
+            stickyLink.setAttribute("tabindex", "-1");
+        }
     }
 
-    // 1. ZOMBIE KILLER
-    const zombieCode = document.getElementById('nexus-home-critical');
-    if (zombieCode) zombieCode.remove();
+    function updateStickyState() {
+        setStickyState(mobileQuery.matches && heroPassed && !finalCtaVisible);
+    }
 
-    // 2. FORCE BLOG GRID
-    function forceBlogGrid() {
-        const container = document.querySelector('.homepage-blog-grid');
-        if (!container) return;
+    setStickyState(false);
 
-        const articles = container.querySelectorAll('article, .post, .type-post');
-        if (articles.length === 0) return;
+    if (typeof IntersectionObserver === "undefined") {
+        function syncStickyState() {
+            if (hero) {
+                const trigger = hero.offsetTop + (hero.offsetHeight * 0.6);
+                heroPassed = window.scrollY > trigger;
+            }
 
-        container.style.display = 'grid';
-        container.style.gap = '2rem';
-        container.style.listStyle = 'none';
-        container.style.padding = '0';
+            if (finalCta) {
+                const rect = finalCta.getBoundingClientRect();
+                finalCtaVisible = rect.top < (window.innerHeight * 0.82) && rect.bottom > (window.innerHeight * 0.18);
+            }
 
-        const updateGrid = () => {
-            if (window.innerWidth > 1024) container.style.gridTemplateColumns = 'repeat(3, 1fr)';
-            else if (window.innerWidth > 768) container.style.gridTemplateColumns = 'repeat(2, 1fr)';
-            else container.style.gridTemplateColumns = '1fr';
-        };
+            updateStickyState();
+        }
 
-        updateGrid();
-        window.addEventListener('resize', updateGrid);
-
-        articles.forEach((art) => {
-            art.style.boxSizing = 'border-box';
-            art.style.width = '100%';
-            art.classList.add('nexus-card-forced');
+        syncStickyState();
+        window.addEventListener("scroll", syncStickyState, { passive: true });
+        window.addEventListener("resize", syncStickyState);
+    } else if (hero) {
+        const heroObserver = new IntersectionObserver(function (entries) {
+            heroPassed = !(entries[0] && entries[0].isIntersecting);
+            updateStickyState();
+        }, {
+            threshold: 0.22
         });
+
+        heroObserver.observe(hero);
+
+        if (finalCta) {
+            const finalCtaObserver = new IntersectionObserver(function (entries) {
+                finalCtaVisible = !!(entries[0] && entries[0].isIntersecting);
+                updateStickyState();
+            }, {
+                threshold: 0.25
+            });
+
+            finalCtaObserver.observe(finalCta);
+        }
     }
-    setTimeout(forceBlogGrid, 100);
 
-    initHomepageNav();
-    initMobileStickyCta();
+    if (typeof mobileQuery.addEventListener === "function") {
+        mobileQuery.addEventListener("change", updateStickyState);
+    } else if (typeof mobileQuery.addListener === "function") {
+        mobileQuery.addListener(updateStickyState);
+    }
 
-    // Scroll-Spy, FAQ, KPI Counter → jetzt zentral in nexus-core.js
-});
+    window.addEventListener("resize", updateStickyState);
+    updateStickyState();
+}
