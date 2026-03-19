@@ -24,9 +24,7 @@ $public_proof_display = [
 $audit_url   = $urls['audit'] ?? home_url( '/growth-audit/' );
 $wgos_url    = $urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
 $cases_url   = $urls['cases'] ?? home_url( '/ergebnisse/' );
-$agentur_url = $urls['agentur'] ?? home_url( '/wordpress-agentur-hannover/' );
 $blog_url    = $urls['blog'] ?? home_url( '/blog/' );
-$about_url   = $urls['about'] ?? home_url( '/uber-mich/' );
 $e3_url      = $urls['e3'] ?? home_url( '/e3-new-energy/' );
 $github_url  = $urls['github_repo'] ?? '';
 $linkedin_url = $urls['linkedin'] ?? '';
@@ -77,6 +75,36 @@ $fit_cards = [
 	[
 		'title' => 'Sie wollen WordPress als Arbeitsgrundlage, nicht als Baustelle.',
 		'text'  => 'Nicht noch mehr Tool-Chaos, Relaunch-Theater oder Reports ohne Richtung, sondern ein System, das verständlicher, messbarer und gezielter weiterentwickelt werden kann.',
+	],
+];
+
+$e3_proof_blocks = [
+	[
+		'title' => 'Ausgangslage',
+		'text'  => 'E3 New Energy startete mit hohen Leadkosten, unklarer Leadqualität und Reibung im Anfragepfad.',
+	],
+	[
+		'title' => 'Neuordnung',
+		'text'  => 'Statt sofort mehr Budget in Aktivierung zu schieben, wurden zuerst Positionierung, Tracking, Seitenstruktur und Conversion-Führung neu geordnet.',
+	],
+];
+
+$e3_result_metrics = [
+	[
+		'value' => '1.750+',
+		'label' => 'qualifizierte Leads',
+	],
+	[
+		'value' => '12 %',
+		'label' => 'Sales-Conversion',
+	],
+	[
+		'value' => '34x',
+		'label' => 'ROAS-Spitze',
+	],
+	[
+		'value' => '-83 %',
+		'label' => 'CPL',
 	],
 ];
 
@@ -257,82 +285,69 @@ get_header();
 			<div class="wp-container wp-home-shell">
 				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
 					<span class="wp-badge">Proof</span>
-					<h2 class="wp-section-h2">Outcome-Proof zuerst. Alles andere kommt danach.</h2>
-					<p class="wp-section-p">Der stärkste Vertrauenshebel ist ein nachvollziehbares Ergebnis. Deshalb steht E3 vorne. Erfahrung und Transparenz bleiben sichtbar, aber sekundär.</p>
+					<h2 class="wp-section-h2">Ergebnis-Proof statt Behauptung</h2>
+					<p class="wp-section-p">Wie sieht das in der Praxis aus? Nicht als Versprechen, sondern als sichtbare Veränderung in Anfragequalität, Effizienz und Vertriebsrelevanz.</p>
 				</div>
 
 				<div class="homepage-track-record__grid">
-					<article class="wp-success-card homepage-track-record__card homepage-track-record__card--primary nx-reveal">
-						<p class="wp-success-subtitle">Outcome Proof</p>
-						<h3 class="wp-success-title">E3 New Energy</h3>
-						<p class="homepage-track-record__lead">Aus 150 EUR CPL ohne messbare Leadqualität wurde nach Neuordnung von Positionierung, Tracking und Conversion-Pfad ein deutlich robusterer Anfragepfad.</p>
-						<div class="homepage-track-record__metrics" role="list" aria-label="E3 Kennzahlen">
-							<div class="homepage-track-record__metric" role="listitem">
-								<span class="homepage-track-record__metric-value">-83&nbsp;%</span>
-								<span class="homepage-track-record__metric-label">Kosten pro Lead</span>
-							</div>
-							<div class="homepage-track-record__metric" role="listitem">
-								<span class="homepage-track-record__metric-value">1.750+</span>
-								<span class="homepage-track-record__metric-label">qualifizierte Leads</span>
-							</div>
-							<div class="homepage-track-record__metric" role="listitem">
-								<span class="homepage-track-record__metric-value">12&nbsp;%</span>
-								<span class="homepage-track-record__metric-label">Sales-Conversion</span>
-							</div>
+					<article class="wp-success-card homepage-track-record__card homepage-track-record__card--primary nx-reveal" aria-labelledby="homepage-proof-case-title">
+						<div class="homepage-track-record__case-head">
+							<p class="wp-success-subtitle">E3 New Energy</p>
+							<h3 id="homepage-proof-case-title" class="wp-success-title">Ein kompakter Beweis, wie aus Reibung ein belastbarer Anfragepfad wird.</h3>
 						</div>
-						<p class="homepage-track-record__lead">Die offene Case Study zeigt nicht nur Zahlen, sondern die Reihenfolge dahinter: erst Fundament, dann Aktivierung.</p>
+						<div class="homepage-track-record__story" role="list" aria-label="E3 Proof Logik">
+							<?php foreach ( $e3_proof_blocks as $block ) : ?>
+								<section class="homepage-track-record__story-block" role="listitem">
+									<h3 class="homepage-track-record__story-title"><?php echo esc_html( $block['title'] ); ?></h3>
+									<p><?php echo esc_html( $block['text'] ); ?></p>
+								</section>
+							<?php endforeach; ?>
+							<section class="homepage-track-record__story-block homepage-track-record__story-block--result" role="listitem" aria-labelledby="homepage-proof-result-title">
+								<h3 id="homepage-proof-result-title" class="homepage-track-record__story-title">Ergebnis</h3>
+								<div class="homepage-track-record__metrics" role="list" aria-label="E3 Kennzahlen">
+									<?php foreach ( $e3_result_metrics as $metric ) : ?>
+										<div class="homepage-track-record__metric" role="listitem">
+											<span class="homepage-track-record__metric-value"><?php echo esc_html( $metric['value'] ); ?></span>
+											<span class="homepage-track-record__metric-label"><?php echo esc_html( $metric['label'] ); ?></span>
+										</div>
+									<?php endforeach; ?>
+								</div>
+							</section>
+						</div>
+						<p class="homepage-track-record__note">Der Punkt ist nicht nur das Ergebnis. Sondern die Reihenfolge: erst Fundament, dann Skalierung.</p>
 						<div class="homepage-track-record__actions">
-							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_home_proof_e3" data-track-category="trust">E3 Case Study lesen</a>
-							<p class="homepage-track-record__microcopy">Offene Case Study statt Sales-Behauptung.</p>
+							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_proof_case" data-track-category="trust">Case Study lesen</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_proof_audit" data-track-category="lead_gen">Growth Audit starten</a>
 						</div>
 					</article>
 
-					<div class="homepage-track-record__stack">
-						<article class="wp-success-card homepage-track-record__card nx-reveal">
-							<p class="wp-success-subtitle">Experience Proof</p>
-							<h3 class="wp-success-title">8+ Jahre B2B-, Performance- und Whitelabel-Praxis</h3>
-							<p class="homepage-track-record__lead">Nicht aus Theorie, sondern aus Projekten mit Sichtbarkeits-, Tracking- und Anfrageproblemen.</p>
-							<ul class="premium-list homepage-track-record__list">
-								<li><span class="check-icon">✓</span><div>öffentliche und nicht öffentliche Projekte mit denselben systemischen Hebeln</div></li>
-								<li><span class="check-icon">✓</span><div>WordPress, SEO, Tracking und CRO nicht getrennt, sondern als Verbund gedacht</div></li>
-								<li><span class="check-icon">✓</span><div>kaufnahe Priorisierung vor Taktik-Sammlung</div></li>
-							</ul>
-							<a href="<?php echo esc_url( $about_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_proof_about" data-track-category="navigation">Arbeitsweise ansehen</a>
-						</article>
-
-						<article class="wp-success-card homepage-track-record__card homepage-track-record__card--quiet nx-reveal">
-							<p class="wp-success-subtitle">Öffentliche Nachvollziehbarkeit</p>
-							<h3 class="wp-success-title">Transparent, ohne Outcome-Proof zu ersetzen</h3>
-							<p class="homepage-track-record__lead">GitHub, LinkedIn und offene Dokumentation sind nützlich, stehen hier aber bewusst hinter echtem Ergebnis-Proof.</p>
-							<div class="homepage-track-record__public-proof" role="list" aria-label="Öffentliche Proof-Signale">
-								<div class="homepage-track-record__public-item" role="listitem">
-									<strong><?php echo esc_html( $public_proof_display['github_commits'] ); ?></strong>
-									<span>Commits im öffentlichen Repo</span>
-								</div>
-								<div class="homepage-track-record__public-item" role="listitem">
-									<strong><?php echo esc_html( $public_proof_display['linkedin_followers'] ); ?></strong>
-									<span>LinkedIn-Follower</span>
-								</div>
-								<div class="homepage-track-record__public-item" role="listitem">
-									<strong><?php echo esc_html( $public_proof_display['linkedin_posts'] ); ?></strong>
-									<span>öffentliche Fachbeiträge</span>
-								</div>
+					<aside class="wp-success-card homepage-track-record__card homepage-track-record__card--quiet homepage-track-record__public nx-reveal" aria-labelledby="homepage-proof-public-title">
+						<p class="wp-success-subtitle">Öffentliche Nachvollziehbarkeit</p>
+						<h3 id="homepage-proof-public-title" class="wp-success-title">Nützlich zur Einordnung, aber bewusst nachgeordnet.</h3>
+						<p class="homepage-track-record__lead">GitHub, LinkedIn und offene Beiträge zeigen Kontinuität und Arbeitsweise. Für die Conversion-Logik bleibt der E3-Outcome-Proof der stärkere Beleg.</p>
+						<div class="homepage-track-record__public-proof" role="list" aria-label="Öffentliche Proof-Signale">
+							<div class="homepage-track-record__public-item" role="listitem">
+								<strong><?php echo esc_html( $public_proof_display['github_commits'] ); ?></strong>
+								<span>Commits im öffentlichen Repo</span>
 							</div>
-							<div class="homepage-track-record__public-links">
-								<?php if ( $github_url ) : ?>
-									<a href="<?php echo esc_url( $github_url ); ?>" class="wp-home-text-link" target="_blank" rel="noopener noreferrer" data-track-action="cta_home_proof_github" data-track-category="trust">GitHub ansehen</a>
-								<?php endif; ?>
-								<?php if ( $linkedin_url ) : ?>
-									<a href="<?php echo esc_url( $linkedin_url ); ?>" class="wp-home-text-link" target="_blank" rel="noopener noreferrer" data-track-action="cta_home_proof_linkedin" data-track-category="trust">LinkedIn ansehen</a>
-								<?php endif; ?>
+							<div class="homepage-track-record__public-item" role="listitem">
+								<strong><?php echo esc_html( $public_proof_display['linkedin_followers'] ); ?></strong>
+								<span>LinkedIn-Follower</span>
 							</div>
-						</article>
-					</div>
-				</div>
-
-				<div class="homepage-track-record__cta nx-reveal">
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_proof_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					<p class="homepage-track-record__cta-note">Mehr Proof im Detail? <a href="<?php echo esc_url( $cases_url ); ?>" data-track-action="cta_home_proof_results" data-track-category="trust">Alle Ergebnisse ansehen</a></p>
+							<div class="homepage-track-record__public-item" role="listitem">
+								<strong><?php echo esc_html( $public_proof_display['linkedin_posts'] ); ?></strong>
+								<span>öffentliche Fachbeiträge</span>
+							</div>
+						</div>
+						<div class="homepage-track-record__public-links">
+							<?php if ( $github_url ) : ?>
+								<a href="<?php echo esc_url( $github_url ); ?>" class="wp-home-text-link" target="_blank" rel="noopener noreferrer" data-track-action="cta_home_proof_github" data-track-category="trust">GitHub ansehen</a>
+							<?php endif; ?>
+							<?php if ( $linkedin_url ) : ?>
+								<a href="<?php echo esc_url( $linkedin_url ); ?>" class="wp-home-text-link" target="_blank" rel="noopener noreferrer" data-track-action="cta_home_proof_linkedin" data-track-category="trust">LinkedIn ansehen</a>
+							<?php endif; ?>
+						</div>
+					</aside>
 				</div>
 			</div>
 		</section>

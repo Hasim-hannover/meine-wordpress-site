@@ -1748,14 +1748,9 @@
     gap: 1.5rem;
 }
 
-.homepage-track-record__stack {
-    display: grid;
-    gap: 1.5rem;
-}
-
 .homepage-track-record__card {
     display: grid;
-    gap: 1rem;
+    gap: 1.15rem;
     height: 100%;
 }
 
@@ -1774,15 +1769,57 @@
         var(--nx-card-gradient);
 }
 
+.homepage-track-record__case-head {
+    display: grid;
+    gap: 0.55rem;
+    max-width: 64ch;
+}
+
 .homepage-track-record__lead {
     margin: 0;
     color: var(--nx-text-secondary);
     line-height: 1.75;
 }
 
+.homepage-track-record__story {
+    display: grid;
+    gap: 1rem;
+}
+
+.homepage-track-record__story-block {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.1rem 1.15rem;
+    border: 1px solid var(--nx-border);
+    border-radius: var(--nx-radius-lg);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+}
+
+.homepage-track-record__story-block--result {
+    background:
+        linear-gradient(180deg, hsl(var(--accent-hsl) / 0.11), rgba(255, 255, 255, 0.02)),
+        var(--nx-card-gradient);
+    border-color: hsl(var(--accent-hsl) / 0.2);
+}
+
+.homepage-track-record__story-title {
+    margin: 0;
+    color: var(--nx-text);
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.homepage-track-record__story-block p {
+    margin: 0;
+    color: var(--nx-text-secondary);
+    line-height: 1.7;
+}
+
 .homepage-track-record__metrics {
     display: grid;
     gap: 0.85rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 }
 
 .homepage-track-record__metric,
@@ -1798,7 +1835,7 @@
 .homepage-track-record__metric-value,
 .homepage-track-record__public-item strong {
     color: var(--nx-text);
-    font-size: clamp(1.65rem, 2.4vw, 2rem);
+    font-size: clamp(1.55rem, 2.2vw, 1.95rem);
     font-weight: 800;
     line-height: 1;
 }
@@ -1810,8 +1847,15 @@
     line-height: 1.55;
 }
 
-.homepage-track-record__list {
+.homepage-track-record__public-item strong {
+    font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+}
+
+.homepage-track-record__note {
     margin: 0;
+    color: var(--nx-text-secondary);
+    line-height: 1.72;
+    max-width: 62ch;
 }
 
 .homepage-track-record__public-proof {
@@ -1826,46 +1870,25 @@
 }
 
 .homepage-track-record__actions {
-    display: grid;
-    gap: 0.8rem;
-    align-content: start;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem 1.1rem;
 }
 
 .homepage-track-record__actions .nx-btn {
-    width: fit-content;
+    min-width: min(100%, 240px);
 }
 
-.homepage-track-record__microcopy {
-    margin: 0;
-    color: var(--nx-text-secondary);
-    font-size: 0.92rem;
-    line-height: 1.6;
+.homepage-track-record__actions .wp-home-text-link,
+.homepage-track-record__public-links .wp-home-text-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
 }
 
-.homepage-track-record__cta {
-    display: grid;
-    justify-items: center;
-    gap: 0.85rem;
-    margin-top: 2.4rem;
-}
-
-.homepage-track-record__cta-note {
-    margin: 0;
-    color: var(--nx-text-secondary);
-    text-align: center;
-    line-height: 1.65;
-}
-
-.homepage-track-record__cta-note a {
-    color: var(--nx-text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--nx-link-divider);
-}
-
-.homepage-track-record__cta-note a:hover,
-.homepage-track-record__cta-note a:focus-visible {
-    color: var(--nx-accent-text);
-    border-bottom-color: hsl(var(--accent-hsl) / 0.3);
+.homepage-track-record__public {
+    align-content: start;
 }
 
 .homepage-problem-frame {
@@ -2375,8 +2398,16 @@
         grid-template-columns: minmax(0, 1.24fr) minmax(320px, 0.76fr);
     }
 
-    .homepage-track-record__stack {
-        grid-template-columns: 1fr;
+    .homepage-track-record__story {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .homepage-track-record__story-block--result {
+        grid-column: 1 / -1;
+    }
+
+    .homepage-track-record__public-proof {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .homepage-problem-frame__grid {
@@ -2414,9 +2445,13 @@
         grid-template-columns: 1fr;
     }
 
-    .homepage-track-record__stack,
+    .homepage-track-record__story,
     .homepage-system-flow {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .homepage-track-record__story-block--result {
+        grid-column: 1 / -1;
     }
 
     .homepage-system-blueprint__layout {
@@ -2458,7 +2493,8 @@
     .homepage-fit-section__grid,
     .homepage-fit-section__qualifiers,
     .homepage-track-record__grid,
-    .homepage-track-record__stack,
+    .homepage-track-record__story,
+    .homepage-track-record__public-proof,
     .homepage-problem-frame__grid,
     .homepage-system-blueprint__steps,
     .homepage-system-flow,
@@ -2475,6 +2511,11 @@
     .homepage-case-teaser__card--cta .nx-btn,
     .homepage-conversion-cta__button {
         width: 100%;
+    }
+
+    .homepage-track-record__actions {
+        display: grid;
+        justify-items: stretch;
     }
 
     .homepage-track-record__public-links {
