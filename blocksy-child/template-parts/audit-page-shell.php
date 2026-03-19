@@ -677,9 +677,4 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 		</main>
 	</div>
 
-	<div class="audit-sticky-cta" id="audit-sticky-cta" hidden>
-		<a class="audit-sticky-cta__btn" href="#form" data-track-action="cta_audit_sticky_mobile" data-track-category="lead_gen">
-			Growth Audit starten
-		</a>
 	</div>
-</div>

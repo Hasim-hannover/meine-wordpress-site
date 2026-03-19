@@ -331,14 +331,10 @@ function hu_hero_section_shortcode() {
 				</div>
 			</div>
 		</section>
-		<div class="wp-mobile-cta-bar" data-home-mobile-cta aria-label="Schneller Audit-Einstieg">
-			<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_mobile_sticky_audit" data-track-category="lead_gen">Audit starten</a>
-			<a href="<?php echo esc_url( $urls['cases'] ); ?>" class="wp-mobile-cta-bar__secondary">Ergebnisse</a>
-		</div>
-	<?php
+		<?php
 
-	return ob_get_clean();
-}
+		return ob_get_clean();
+	}
 add_shortcode( 'hu_hero', 'hu_hero_section_shortcode' );
 
 /**
