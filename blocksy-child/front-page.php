@@ -203,10 +203,6 @@ get_header();
 			</div>
 		</section>
 
-		<div class="wp-mobile-cta-bar" data-home-mobile-cta aria-label="Schneller Audit-Einstieg">
-			<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_mobile_sticky_audit" data-track-category="lead_gen">Growth Audit starten</a>
-		</div>
-
 		<section class="homepage-proof-strip" aria-label="Schnelle Vertrauenssignale">
 			<div class="wp-container wp-home-shell">
 				<div class="homepage-proof-strip__list" role="list" aria-label="Proof Kennzahlen">
