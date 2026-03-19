@@ -18,7 +18,7 @@ Nicht verifiziert:
 - `blocksy-child/` ist der deploybare Website-Code.
 - Push auf `main` und `hotfix/*` deployt das Theme per SSH-Rsync ueber `.github/workflows/deploy.yml`; zusaetzlich ist ein manueller Start per GitHub Actions moeglich.
 - Zentrale Theme-Module fuer Assets, SEO-Meta, Schema, Shortcodes, Portal und Snippets sind versioniert.
-- Die versionierte Homepage priorisiert jetzt im oberen Funnel einen kompakteren Hero, einen direkten Outcome-Proof-Strip, einen scanbaren Audit-/Diagnose-Block, einen klaren Fit-Block und einen verdichteten E3-Proof mit Case-First-CTA vor der tieferen WGOS-Erklaerung.
+- Die versionierte Homepage priorisiert jetzt im oberen Funnel einen kompakteren Hero, einen direkten Outcome-Proof-Strip, einen scanbaren Audit-/Diagnose-Block, einen klaren Fit-Block, einen verdichteten E3-Proof mit Case-First-CTA und einen ruhigeren finalen Audit-CTA mit klaren Erwartungspunkten vor dem Knowledge-Base-Nebenpfad.
 - Service-Seiten, Tools-Hub, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Die aktive `Growth Audit`-Landingpage ist als versionierter Template-Shell im Repo hinterlegt.

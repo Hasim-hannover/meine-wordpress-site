@@ -468,18 +468,23 @@ get_header();
 			</div>
 		</section>
 
-		<section id="cta" class="wp-section homepage-conversion-cta" data-track-section="homepage_cta">
-			<div class="wp-container wp-home-shell">
-				<div class="nx-cta-box nx-reveal homepage-conversion-cta__box">
-					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2>Prüfen wir zuerst, wo Ihre WordPress-Seite heute qualifizierte Nachfrage verliert.</h2>
-					<p>Im Growth Audit wird sichtbar, ob Positionierung, Proof, CTA-Führung, Measurement oder technische Reibung zuerst gelöst werden sollten. Danach entscheiden Sie in Ruhe, ob und wie es weitergeht.</p>
-					<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					<p class="homepage-conversion-cta__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
-					<p class="homepage-conversion-cta__support">Noch nicht bereit für den Einstieg? <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_home_final_wgos" data-track-category="navigation">Erst WGOS im Detail ansehen</a></p>
+			<section id="cta" class="wp-section homepage-conversion-cta" data-track-section="homepage_cta">
+				<div class="wp-container wp-home-shell">
+					<div class="nx-cta-box nx-reveal homepage-conversion-cta__box">
+						<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
+						<h2>Der nächste sinnvolle Schritt ist kein Relaunch, sondern Klarheit.</h2>
+						<p class="homepage-conversion-cta__lead">Wenn Sie wissen wollen, was auf Ihrer Website gerade wirklich bremst, müssen Sie nicht sofort alles neu bauen. Der sinnvollere erste Schritt ist eine klare Einordnung: Was verliert Nachfrage, was hat Priorität und was sollte als Nächstes passieren?</p>
+						<ul class="homepage-conversion-cta__list" aria-label="Was Sie im Growth Audit erwarten können">
+							<li>Sie bekommen eine priorisierte Einordnung statt einer generischen Checkliste.</li>
+							<li>Sie müssen keinen Pflicht-Call buchen, nur um eine erste Einschätzung zu erhalten.</li>
+							<li>Sie erfahren, welcher Hebel auf Ihrer Website gerade den größten Unterschied machen würde.</li>
+						</ul>
+						<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen">Growth Audit starten</a>
+						<p class="homepage-conversion-cta__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+						<p class="homepage-conversion-cta__support">Wenn es fachlich passt, kann daraus der nächste sinnvolle Schritt entstehen. Wenn nicht, haben Sie trotzdem mehr Klarheit als vorher.</p>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 
 		<section id="knowledge" class="wp-section homepage-blog-section homepage-blog-section--quiet" data-track-section="homepage_knowledge">
 			<div class="wp-container wp-home-shell">
