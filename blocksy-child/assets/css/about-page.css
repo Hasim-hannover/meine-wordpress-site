@@ -46,6 +46,21 @@
   border-bottom-color: hsl(var(--accent-hsl) / 0.32);
 }
 
+.nexus-about .nx-btn {
+  border-bottom: none;
+}
+
+.nexus-about .nx-btn:hover,
+.nexus-about .nx-btn:focus-visible {
+  border-bottom: none;
+}
+
+.nexus-about .nx-btn--ghost,
+.nexus-about .nx-btn--ghost:hover,
+.nexus-about .nx-btn--ghost:focus-visible {
+  color: var(--nx-text);
+}
+
 .about-hero {
   padding-top: calc(var(--nx-space-section) + 2rem);
 }
@@ -66,7 +81,7 @@
 
 .about-hero__title {
   margin: 0 0 1.5rem;
-  max-width: 12ch;
+  max-width: 13.5ch;
   font-size: clamp(2.9rem, 5.1vw, 5rem);
   line-height: 1.02;
   letter-spacing: -0.03em;
@@ -87,6 +102,10 @@
   color: var(--nx-text-secondary);
   font-size: 1rem;
   line-height: 1.82;
+}
+
+.about-hero__actions {
+  margin: 0;
 }
 
 .about-hero__facts {
@@ -218,6 +237,7 @@
   line-height: 1.8;
 }
 
+.about-principle-grid,
 .about-problem-grid,
 .about-role-grid,
 .about-practice-grid,
@@ -227,6 +247,7 @@
   gap: 1.25rem;
 }
 
+.about-principle-grid,
 .about-problem-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -243,6 +264,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.about-principle-card,
 .about-quiet-card,
 .about-role-card,
 .about-practice-card,
@@ -256,6 +278,7 @@
   box-shadow: var(--nx-shadow-sm);
 }
 
+.about-principle-card h3,
 .about-quiet-card h3,
 .about-role-card h3,
 .about-practice-card h3,
@@ -266,6 +289,7 @@
   line-height: 1.22;
 }
 
+.about-principle-card p,
 .about-quiet-card p,
 .about-role-card p,
 .about-practice-card p,
@@ -275,12 +299,14 @@
   line-height: 1.72;
 }
 
+.about-principle-card,
 .about-role-card,
 .about-practice-card {
   position: relative;
   overflow: hidden;
 }
 
+.about-principle-card::before,
 .about-role-card::before,
 .about-practice-card::before {
   content: "";
@@ -289,6 +315,63 @@
   width: 100%;
   height: 2px;
   background: linear-gradient(90deg, hsl(var(--accent-hsl) / 0.6), transparent 75%);
+}
+
+.about-personal {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.25rem);
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: var(--nx-radius-xl);
+  border: 1px solid var(--nx-border);
+  background:
+    radial-gradient(circle at 0% 0%, hsl(var(--accent-hsl) / 0.16), transparent 34%),
+    var(--nx-card-gradient);
+  box-shadow: var(--nx-shadow-sm);
+}
+
+.about-personal__intro .nx-badge {
+  margin-bottom: 1rem;
+}
+
+.about-personal__intro h2 {
+  margin: 0;
+}
+
+.about-personal__lead {
+  margin: 1rem 0 0;
+  max-width: 30ch;
+  color: var(--nx-text);
+  font-size: clamp(1.18rem, 2vw, 1.42rem);
+  line-height: 1.62;
+}
+
+.about-personal__body {
+  display: grid;
+  gap: 1rem;
+}
+
+.about-personal__body p {
+  margin: 0;
+  color: var(--nx-text-secondary);
+  line-height: 1.8;
+}
+
+.about-personal__signals {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.about-personal__signal {
+  margin: 0;
+  padding: 0.95rem 1rem;
+  border-radius: var(--nx-radius-lg);
+  border: 1px solid hsl(var(--accent-hsl) / 0.16);
+  background: hsl(var(--accent-hsl) / 0.08);
+  color: var(--nx-text) !important;
+  line-height: 1.6 !important;
 }
 
 .about-method-card {
@@ -391,6 +474,10 @@
   margin-bottom: 0;
 }
 
+.about-close__actions {
+  margin-top: 1.4rem !important;
+}
+
 body.page-template-template-about .nx-site-header__menu .nav-cta-button > a,
 body.page-template-template-about-php .nx-site-header__menu .nav-cta-button > a,
 body.page-template-template-about .nx-site-header__menu .nav-cta-button > a:hover,
@@ -433,14 +520,24 @@ body.page-template-template-about-php .ft__privacy-note {
   .about-hero__grid {
     grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.74fr);
   }
+
+  .about-personal {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    align-items: start;
+  }
 }
 
 @media (max-width: 1100px) {
+  .about-principle-grid,
   .about-problem-grid,
   .about-role-grid,
   .about-practice-grid,
   .about-method-grid,
   .about-fit-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-personal__signals {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -451,9 +548,10 @@ body.page-template-template-about-php .ft__privacy-note {
   }
 
   .about-hero__title {
-    max-width: 12.5ch;
+    max-width: 14ch;
   }
 
+  .about-principle-grid,
   .about-hero__facts,
   .about-problem-grid,
   .about-role-grid,
@@ -463,8 +561,13 @@ body.page-template-template-about-php .ft__privacy-note {
     grid-template-columns: 1fr;
   }
 
+  .about-personal__signals {
+    grid-template-columns: 1fr;
+  }
+
   .about-close__inner,
-  .about-profile-card {
+  .about-profile-card,
+  .about-personal {
     padding-inline: 1.2rem;
   }
 }
