@@ -297,8 +297,15 @@ add_action(
 		<script>
 		(function () {
 			var theme = 'dark';
+			var isMobileThemeLocked = false;
 
-			if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+			if (window.matchMedia) {
+				isMobileThemeLocked = window.matchMedia('(max-width: 1180px)').matches;
+			} else if (typeof window.innerWidth === 'number') {
+				isMobileThemeLocked = window.innerWidth <= 1180;
+			}
+
+			if (!isMobileThemeLocked && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
 				theme = 'light';
 			}
 

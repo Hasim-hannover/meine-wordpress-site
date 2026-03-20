@@ -689,13 +689,41 @@
         initThemeToggle: function () {
             var root = document.documentElement;
             var buttons = document.querySelectorAll('[data-nx-theme-toggle] [data-theme-value]');
+            var systemLightMedia = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
+            var desktopThemeMedia = window.matchMedia ? window.matchMedia('(min-width: 1181px)') : null;
+            var hasManualDesktopTheme = false;
+            var manualDesktopTheme = null;
 
-            function resolveTheme() {
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            function isDesktopThemeEnabled() {
+                if (desktopThemeMedia) {
+                    return desktopThemeMedia.matches;
+                }
+
+                if (typeof window.innerWidth === 'number') {
+                    return window.innerWidth >= 1181;
+                }
+
+                return true;
+            }
+
+            function resolveSystemTheme() {
+                if (systemLightMedia && systemLightMedia.matches) {
                     return 'light';
                 }
 
                 return 'dark';
+            }
+
+            function resolveTheme() {
+                if (!isDesktopThemeEnabled()) {
+                    return 'dark';
+                }
+
+                if (manualDesktopTheme) {
+                    return manualDesktopTheme;
+                }
+
+                return resolveSystemTheme();
             }
 
             function syncButtons(theme) {
@@ -723,13 +751,49 @@
                 }
             }
 
+            function applyResolvedTheme(withTransition) {
+                applyTheme(resolveTheme(), withTransition);
+            }
+
             buttons.forEach(function (button) {
                 button.addEventListener('click', function () {
-                    applyTheme(button.getAttribute('data-theme-value'), true);
+                    manualDesktopTheme = button.getAttribute('data-theme-value');
+                    hasManualDesktopTheme = true;
+                    applyResolvedTheme(true);
                 });
             });
 
-            applyTheme(resolveTheme(), false);
+            if (systemLightMedia) {
+                var handleSystemThemeChange = function () {
+                    if (!hasManualDesktopTheme && isDesktopThemeEnabled()) {
+                        applyResolvedTheme(false);
+                    }
+                };
+
+                if (typeof systemLightMedia.addEventListener === 'function') {
+                    systemLightMedia.addEventListener('change', handleSystemThemeChange);
+                } else if (typeof systemLightMedia.addListener === 'function') {
+                    systemLightMedia.addListener(handleSystemThemeChange);
+                }
+            }
+
+            if (desktopThemeMedia) {
+                var handleViewportThemeChange = function () {
+                    applyResolvedTheme(false);
+                };
+
+                if (typeof desktopThemeMedia.addEventListener === 'function') {
+                    desktopThemeMedia.addEventListener('change', handleViewportThemeChange);
+                } else if (typeof desktopThemeMedia.addListener === 'function') {
+                    desktopThemeMedia.addListener(handleViewportThemeChange);
+                }
+            } else {
+                window.addEventListener('resize', function () {
+                    applyResolvedTheme(false);
+                }, { passive: true });
+            }
+
+            applyResolvedTheme(false);
         },
 
 
