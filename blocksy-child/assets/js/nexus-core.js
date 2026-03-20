@@ -647,15 +647,11 @@
         },
 
 
-        /**
-         * 11. THEME TOGGLE CLEANUP
-         * Behaelt nur den globalen Desktop-Toggle und entfernt Header-Instanzen.
-         */
-        mountThemeToggle: function () {
+        getPrimaryThemeToggle: function () {
             var toggles = Array.prototype.slice.call(document.querySelectorAll('.nx-theme-toggle[data-nx-theme-toggle]'));
             var toggle = null;
 
-            if (!toggles.length) return;
+            if (!toggles.length) return null;
 
             for (var i = 0; i < toggles.length; i += 1) {
                 if (toggles[i].getAttribute('data-nx-theme-toggle-source') === 'fallback') {
@@ -667,6 +663,20 @@
             if (!toggle) {
                 toggle = toggles[0];
             }
+
+            return toggle;
+        },
+
+
+        /**
+         * 11. THEME TOGGLE CLEANUP
+         * Behaelt nur den globalen Desktop-Toggle und entfernt Header-Instanzen.
+         */
+        mountThemeToggle: function () {
+            var toggles = Array.prototype.slice.call(document.querySelectorAll('.nx-theme-toggle[data-nx-theme-toggle]'));
+            var toggle = this.getPrimaryThemeToggle();
+
+            if (!toggle) return;
 
             toggles.forEach(function (candidate) {
                 if (candidate !== toggle) {
@@ -683,7 +693,156 @@
 
 
         /**
-         * 12. THEME TOGGLE
+         * 12. THEME TOGGLE VISIBILITY
+         * Desktop-Toggle nur am Seitenanfang kurz zeigen und danach ausblenden.
+         */
+        initThemeToggleVisibility: function () {
+            var toggle = this.getPrimaryThemeToggle();
+            var desktopMedia = window.matchMedia ? window.matchMedia('(min-width: 1181px)') : null;
+            var hideDelay = 5000;
+            var topThreshold = 4;
+            var hideTimer = 0;
+            var isPointerInside = false;
+            var isFocusInside = false;
+            var wasAtTop = false;
+
+            if (!toggle) return;
+
+            function isDesktopToggleVisible() {
+                if (desktopMedia) {
+                    return desktopMedia.matches;
+                }
+
+                if (typeof window.innerWidth === 'number') {
+                    return window.innerWidth >= 1181;
+                }
+
+                return true;
+            }
+
+            function isAtTop() {
+                return window.scrollY <= topThreshold;
+            }
+
+            function clearHideTimer() {
+                if (!hideTimer) {
+                    return;
+                }
+
+                window.clearTimeout(hideTimer);
+                hideTimer = 0;
+            }
+
+            function shouldHoldVisible() {
+                return isPointerInside || isFocusInside;
+            }
+
+            function showToggle() {
+                toggle.classList.remove('nx-theme-toggle--auto-hidden');
+            }
+
+            function hideToggle() {
+                toggle.classList.add('nx-theme-toggle--auto-hidden');
+            }
+
+            function scheduleHide() {
+                clearHideTimer();
+
+                if (!isDesktopToggleVisible() || !isAtTop() || shouldHoldVisible()) {
+                    return;
+                }
+
+                hideTimer = window.setTimeout(function () {
+                    hideTimer = 0;
+
+                    if (!isDesktopToggleVisible() || !isAtTop() || shouldHoldVisible()) {
+                        return;
+                    }
+
+                    hideToggle();
+                }, hideDelay);
+            }
+
+            function syncVisibility(forceRestart) {
+                var atTop = isAtTop();
+                var enteredTop = atTop && !wasAtTop;
+
+                wasAtTop = atTop;
+
+                if (!isDesktopToggleVisible()) {
+                    clearHideTimer();
+                    showToggle();
+                    return;
+                }
+
+                if (!atTop) {
+                    clearHideTimer();
+                    hideToggle();
+                    return;
+                }
+
+                showToggle();
+
+                if (forceRestart || enteredTop || !hideTimer) {
+                    scheduleHide();
+                }
+            }
+
+            toggle.addEventListener('mouseenter', function () {
+                isPointerInside = true;
+                showToggle();
+                clearHideTimer();
+            });
+
+            toggle.addEventListener('mouseleave', function () {
+                isPointerInside = false;
+                syncVisibility(true);
+            });
+
+            toggle.addEventListener('focusin', function () {
+                isFocusInside = true;
+                showToggle();
+                clearHideTimer();
+            });
+
+            toggle.addEventListener('focusout', function () {
+                window.setTimeout(function () {
+                    isFocusInside = toggle.contains(document.activeElement);
+                    syncVisibility(true);
+                }, 0);
+            });
+
+            toggle.addEventListener('click', function () {
+                syncVisibility(true);
+            });
+
+            window.addEventListener('scroll', function () {
+                syncVisibility(false);
+            }, { passive: true });
+
+            if (desktopMedia) {
+                var handleViewportChange = function () {
+                    syncVisibility(true);
+                };
+
+                if (typeof desktopMedia.addEventListener === 'function') {
+                    desktopMedia.addEventListener('change', handleViewportChange);
+                } else if (typeof desktopMedia.addListener === 'function') {
+                    desktopMedia.addListener(handleViewportChange);
+                }
+            } else {
+                window.addEventListener('resize', function () {
+                    syncVisibility(true);
+                }, { passive: true });
+            }
+
+            wasAtTop = isAtTop();
+            syncVisibility(true);
+        },
+
+
+        /**
+         * 13. THEME TOGGLE
          * Wechselt Dark/Light ohne Browser-Storage und synchronisiert alle Toggle-Buttons.
          */
         initThemeToggle: function () {
@@ -818,6 +977,7 @@
 
             runAfterNextPaint(function () {
                 self.initThemeToggle();
+                self.initThemeToggleVisibility();
             });
 
             runWhenIdle(function () {

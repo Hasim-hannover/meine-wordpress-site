@@ -1303,10 +1303,27 @@ html.theme-transitioning *::after {
     box-shadow: var(--nx-toggle-shadow);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    transition: opacity 720ms var(--nx-ease),
+                transform 720ms var(--nx-ease),
+                visibility 0s linear 0s;
+    will-change: opacity, transform;
 }
 
 .admin-bar .nx-theme-toggle {
     top: calc(1rem + 32px);
+}
+
+.nx-theme-toggle--auto-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(0, -10px, 0);
+    transition: opacity 720ms var(--nx-ease),
+                transform 720ms var(--nx-ease),
+                visibility 0s linear 720ms;
 }
 
 .nx-theme-toggle-host {
@@ -1406,6 +1423,13 @@ html.theme-transitioning *::after {
 
     .nx-theme-toggle__button span:last-child {
         display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nx-theme-toggle,
+    .nx-theme-toggle--auto-hidden {
+        transition: none;
     }
 }
 .mt-section { margin-top: var(--nx-space-section); }
