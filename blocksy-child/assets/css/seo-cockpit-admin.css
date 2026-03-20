@@ -405,6 +405,13 @@
     font-size: 12px;
 }
 
+.nexus-seo-cockpit__table-note {
+    margin: 6px 0 0;
+    color: #5e6977;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
 .nexus-seo-cockpit__settings-form .form-table th {
     width: 220px;
 }

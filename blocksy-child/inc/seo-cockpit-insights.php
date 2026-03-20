@@ -521,6 +521,369 @@ function nexus_get_seo_cockpit_severity_score( $severity ) {
 }
 
 /**
+ * Return one normalized path for cockpit role mapping.
+ *
+ * @param string $url Frontend URL.
+ * @return string
+ */
+function nexus_get_seo_cockpit_url_path( $url ) {
+	$url = nexus_normalize_seo_cockpit_url( $url );
+
+	if ( '' === $url ) {
+		return '/';
+	}
+
+	$path = (string) wp_parse_url( $url, PHP_URL_PATH );
+	$path = '/' . ltrim( $path, '/' );
+
+	return '/' === $path ? '/' : trailingslashit( $path );
+}
+
+/**
+ * Return the semantic page role for one cockpit URL context.
+ *
+ * @param array<string, mixed> $context Optional WordPress context.
+ * @param string               $url     Optional frontend URL.
+ * @return string
+ */
+function nexus_get_seo_cockpit_page_role( $context = [], $url = '' ) {
+	$context   = is_array( $context ) ? $context : [];
+	$url       = '' !== $url ? $url : (string) ( $context['frontend_link'] ?? $context['url'] ?? '' );
+	$path      = nexus_get_seo_cockpit_url_path( $url );
+	$page_type = (string) ( $context['page_type'] ?? '' );
+	$post_type = (string) ( $context['post_type'] ?? '' );
+	$paths     = [];
+
+	if ( function_exists( 'nexus_get_primary_public_url_map' ) ) {
+		foreach ( (array) nexus_get_primary_public_url_map() as $key => $mapped_url ) {
+			$paths[ $key ] = nexus_get_seo_cockpit_url_path( (string) $mapped_url );
+		}
+	}
+
+	if ( 'legacy_redirect' === $page_type ) {
+		return 'legacy';
+	}
+
+	if ( 'front_page' === $page_type || '/' === $path ) {
+		return 'home';
+	}
+
+	if ( ! empty( $paths['audit'] ) && $paths['audit'] === $path ) {
+		return 'audit';
+	}
+
+	if ( ! empty( $paths['contact'] ) && $paths['contact'] === $path ) {
+		return 'contact';
+	}
+
+	if ( ! empty( $paths['about'] ) && $paths['about'] === $path ) {
+		return 'about';
+	}
+
+	if ( in_array( $path, array_filter( [ $paths['results'] ?? '', $paths['e3'] ?? '', $paths['domdar'] ?? '', $paths['whitelabel'] ?? '' ] ), true ) ) {
+		return 'results';
+	}
+
+	if ( in_array( $path, array_filter( [ $paths['seo'] ?? '', $paths['wartung'] ?? '', $paths['tracking'] ?? '', $paths['cwv'] ?? '', $paths['cro'] ?? '', $paths['performance_marketing'] ?? '', $paths['agentur'] ?? '' ] ), true ) ) {
+		return 'service';
+	}
+
+	if ( in_array( $path, array_filter( [ $paths['wgos'] ?? '', $paths['glossary'] ?? '', $paths['tools'] ?? '', $paths['performance_analysis'] ?? '' ] ), true ) ) {
+		return 'system';
+	}
+
+	if ( in_array( $path, array_filter( [ $paths['impressum'] ?? '', $paths['datenschutz'] ?? '' ] ), true ) ) {
+		return 'legal';
+	}
+
+	if ( 'post' === $post_type ) {
+		return 'blog';
+	}
+
+	if ( 'blog_index' === $page_type || 0 === strpos( $path, '/category/' ) || 0 === strpos( $path, '/tag/' ) || 0 === strpos( $path, '/author/' ) || '/blog/' === $path ) {
+		return 'hub';
+	}
+
+	if ( ! empty( $context['noindex'] ) ) {
+		return 'utility';
+	}
+
+	if ( 'page' === $post_type ) {
+		return 'page';
+	}
+
+	return 'unknown';
+}
+
+/**
+ * Return one human label for a cockpit page role.
+ *
+ * @param string $role Page role.
+ * @return string
+ */
+function nexus_get_seo_cockpit_page_role_label( $role ) {
+	$labels = [
+		'audit'   => 'Audit',
+		'service' => 'Service',
+		'results' => 'Proof',
+		'system'  => 'System',
+		'contact' => 'Kontakt',
+		'home'    => 'Startseite',
+		'hub'     => 'Hub',
+		'blog'    => 'Blog',
+		'about'   => 'About',
+		'legal'   => 'Rechtlich',
+		'utility' => 'Utility',
+		'page'    => 'Seite',
+		'legacy'  => 'Legacy',
+		'unknown' => 'Sonstiges',
+	];
+
+	return $labels[ sanitize_key( (string) $role ) ] ?? 'Sonstiges';
+}
+
+/**
+ * Determine whether one page role is business-critical.
+ *
+ * @param string $role Page role.
+ * @return bool
+ */
+function nexus_is_seo_cockpit_high_value_role( $role ) {
+	return in_array( sanitize_key( (string) $role ), [ 'audit', 'service', 'results', 'system', 'contact', 'home' ], true );
+}
+
+/**
+ * Return business-value and funnel-proximity scores for a page role.
+ *
+ * @param string $role Page role.
+ * @return array<string, int>
+ */
+function nexus_get_seo_cockpit_page_role_scores( $role ) {
+	$map = [
+		'audit'   => [ 'business' => 20, 'funnel' => 15 ],
+		'service' => [ 'business' => 19, 'funnel' => 13 ],
+		'contact' => [ 'business' => 18, 'funnel' => 15 ],
+		'results' => [ 'business' => 16, 'funnel' => 12 ],
+		'system'  => [ 'business' => 15, 'funnel' => 11 ],
+		'home'    => [ 'business' => 14, 'funnel' => 10 ],
+		'hub'     => [ 'business' => 10, 'funnel' => 8 ],
+		'blog'    => [ 'business' => 7, 'funnel' => 5 ],
+		'about'   => [ 'business' => 4, 'funnel' => 2 ],
+		'page'    => [ 'business' => 6, 'funnel' => 4 ],
+		'utility' => [ 'business' => 2, 'funnel' => 1 ],
+		'legal'   => [ 'business' => 0, 'funnel' => 0 ],
+		'legacy'  => [ 'business' => 1, 'funnel' => 0 ],
+		'unknown' => [ 'business' => 5, 'funnel' => 3 ],
+	];
+
+	return $map[ sanitize_key( (string) $role ) ] ?? $map['unknown'];
+}
+
+/**
+ * Return one priority label from a priority bucket.
+ *
+ * @param string $bucket Priority bucket.
+ * @return string
+ */
+function nexus_get_seo_cockpit_priority_label( $bucket ) {
+	$labels = [
+		'critical' => 'P1',
+		'high'     => 'P2',
+		'medium'   => 'P3',
+		'low'      => 'P4',
+	];
+
+	return $labels[ sanitize_key( (string) $bucket ) ] ?? 'P4';
+}
+
+/**
+ * Return one actionability score for an insight type.
+ *
+ * @param string $type Insight type.
+ * @return int
+ */
+function nexus_get_seo_cockpit_actionability_score( $type ) {
+	$map = [
+		'INDEXING_MISMATCH'         => 14,
+		'QUICK_WIN'                 => 12,
+		'CTR_OPPORTUNITY'           => 11,
+		'MONEY_PAGE_UNDERPERFORMING' => 12,
+		'ORPHAN_VALUE_PAGE'         => 10,
+		'WEAK_FUNNEL_BRIDGE'        => 10,
+		'SNIPPET_WEAKNESS'          => 9,
+		'DECAY'                     => 8,
+		'POSSIBLE_CANNIBALIZATION'  => 8,
+		'LOW_SIGNAL'                => 6,
+	];
+
+	return $map[ strtoupper( (string) $type ) ] ?? 6;
+}
+
+/**
+ * Return one demand score from impression volume.
+ *
+ * @param float $impressions Impression count.
+ * @return int
+ */
+function nexus_get_seo_cockpit_demand_score( $impressions ) {
+	$impressions = (float) $impressions;
+
+	if ( $impressions >= 500 ) {
+		return 20;
+	}
+
+	if ( $impressions >= 250 ) {
+		return 17;
+	}
+
+	if ( $impressions >= 120 ) {
+		return 14;
+	}
+
+	if ( $impressions >= 60 ) {
+		return 10;
+	}
+
+	if ( $impressions >= 20 ) {
+		return 6;
+	}
+
+	return 2;
+}
+
+/**
+ * Return one confidence score for an insight.
+ *
+ * @param float                $impressions Impressions.
+ * @param float                $clicks      Clicks.
+ * @param array<string, mixed> $context     WordPress context.
+ * @param array<string, mixed> $koko_page   Koko page payload.
+ * @return int
+ */
+function nexus_get_seo_cockpit_confidence_score( $impressions, $clicks, $context = [], $koko_page = [] ) {
+	$score       = 0;
+	$impressions = (float) $impressions;
+	$clicks      = (float) $clicks;
+	$context     = is_array( $context ) ? $context : [];
+	$koko_page   = is_array( $koko_page ) ? $koko_page : [];
+
+	if ( ! empty( $context['resolved'] ) ) {
+		$score += 3;
+	}
+
+	if ( $impressions >= 80 ) {
+		$score += 3;
+	} elseif ( $impressions >= 20 ) {
+		$score += 1;
+	}
+
+	if ( $clicks >= 10 ) {
+		$score += 2;
+	} elseif ( $clicks > 0 ) {
+		$score += 1;
+	}
+
+	if ( ! empty( $koko_page ) ) {
+		$score += 2;
+	}
+
+	return min( 10, $score );
+}
+
+/**
+ * Return one priority bucket from a numeric score.
+ *
+ * @param int $score Priority score.
+ * @return string
+ */
+function nexus_get_seo_cockpit_priority_bucket( $score ) {
+	$score = absint( $score );
+
+	if ( $score >= 75 ) {
+		return 'critical';
+	}
+
+	if ( $score >= 58 ) {
+		return 'high';
+	}
+
+	if ( $score >= 40 ) {
+		return 'medium';
+	}
+
+	return 'low';
+}
+
+/**
+ * Return one current page row by URL from the snapshot.
+ *
+ * @param array<string, mixed> $snapshot Snapshot payload.
+ * @param string               $url      Frontend URL.
+ * @return array<string, mixed>
+ */
+function nexus_get_seo_cockpit_current_page_row_for_url( $snapshot, $url ) {
+	$url = nexus_normalize_seo_cockpit_url( $url );
+
+	foreach ( (array) ( $snapshot['current_page_rows'] ?? [] ) as $row ) {
+		if ( $url === nexus_normalize_seo_cockpit_url( nexus_get_seo_cockpit_row_key( $row, 0 ) ) ) {
+			return is_array( $row ) ? $row : [];
+		}
+	}
+
+	return [];
+}
+
+/**
+ * Enrich one insight with business-aware priority data.
+ *
+ * @param array<string, mixed> $insight  Insight payload.
+ * @param array<string, mixed> $snapshot Snapshot payload.
+ * @return array<string, mixed>
+ */
+function nexus_enrich_seo_cockpit_insight_priority( $insight, $snapshot ) {
+	$url          = nexus_normalize_seo_cockpit_url( (string) ( $insight['url'] ?? '' ) );
+	$page_context = isset( $snapshot['page_contexts'][ $url ] ) && is_array( $snapshot['page_contexts'][ $url ] ) ? $snapshot['page_contexts'][ $url ] : [];
+	$page_row     = nexus_get_seo_cockpit_current_page_row_for_url( $snapshot, $url );
+	$koko_page    = isset( $snapshot['koko']['page_map'][ $url ] ) && is_array( $snapshot['koko']['page_map'][ $url ] ) ? $snapshot['koko']['page_map'][ $url ] : [];
+	$page_role    = nexus_get_seo_cockpit_page_role( $page_context, $url );
+	$role_scores  = nexus_get_seo_cockpit_page_role_scores( $page_role );
+	$type         = strtoupper( (string) ( $insight['type'] ?? '' ) );
+	$severity     = sanitize_key( (string) ( $insight['severity'] ?? 'low' ) );
+	$impressions  = (float) ( $insight['metrics']['impressions'] ?? $insight['metrics']['total_impressions'] ?? $page_row['impressions'] ?? 0 );
+	$clicks       = (float) ( $insight['metrics']['clicks'] ?? $insight['metrics']['current_clicks'] ?? $page_row['clicks'] ?? 0 );
+	$severity_map = [
+		'critical' => 24,
+		'high'     => 18,
+		'medium'   => 12,
+		'low'      => 6,
+	];
+	$components   = [
+		'severity'      => $severity_map[ $severity ] ?? 6,
+		'demand'        => nexus_get_seo_cockpit_demand_score( $impressions ),
+		'business'      => (int) ( $role_scores['business'] ?? 0 ),
+		'funnel'        => (int) ( $role_scores['funnel'] ?? 0 ),
+		'actionability' => nexus_get_seo_cockpit_actionability_score( $type ),
+		'confidence'    => nexus_get_seo_cockpit_confidence_score( $impressions, $clicks, $page_context, $koko_page ),
+	];
+	$score        = min( 100, array_sum( $components ) );
+	$bucket       = nexus_get_seo_cockpit_priority_bucket( $score );
+
+	return array_merge(
+		$insight,
+		[
+			'page_role'        => $page_role,
+			'page_role_label'  => nexus_get_seo_cockpit_page_role_label( $page_role ),
+			'priority_score'   => $score,
+			'priority_bucket'  => $bucket,
+			'priority_label'   => nexus_get_seo_cockpit_priority_label( $bucket ),
+			'priority_parts'   => $components,
+			'koko_visitors'    => (float) ( $koko_page['visitors'] ?? 0 ),
+			'koko_pageviews'   => (float) ( $koko_page['pageviews'] ?? 0 ),
+		]
+	);
+}
+
+/**
  * Create a normalized insight payload.
  *
  * @param array<string, mixed> $insight Raw insight data.
@@ -634,9 +997,23 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 	foreach ( $current_pages as $url => $row ) {
 		$current_clicks      = (float) ( $row['clicks'] ?? 0 );
 		$current_impressions = (float) ( $row['impressions'] ?? 0 );
+		$current_ctr         = (float) ( $row['ctr'] ?? 0 );
+		$current_position    = (float) ( $row['position'] ?? 0 );
 		$previous_row        = $previous_pages[ $url ] ?? [];
 		$previous_clicks     = (float) ( $previous_row['clicks'] ?? 0 );
 		$previous_impressions = (float) ( $previous_row['impressions'] ?? 0 );
+		$context             = $page_context[ $url ] ?? [];
+		$page_role           = nexus_get_seo_cockpit_page_role( $context, $url );
+		$role_label          = nexus_get_seo_cockpit_page_role_label( $page_role );
+		$is_high_value       = nexus_is_seo_cockpit_high_value_role( $page_role );
+		$link_context        = isset( $context['internal_links'] ) && is_array( $context['internal_links'] ) ? $context['internal_links'] : [];
+		$context_links       = isset( $link_context['context'] ) && is_array( $link_context['context'] ) ? $link_context['context'] : [];
+		$total_links         = isset( $link_context['totals'] ) && is_array( $link_context['totals'] ) ? $link_context['totals'] : [];
+		$incoming_documents  = (int) ( $context_links['incoming_documents'] ?? 0 );
+		$total_incoming      = (int) ( $total_links['incoming_sources'] ?? 0 );
+		$outgoing_unique     = (int) ( $context_links['outgoing_unique_urls'] ?? 0 );
+		$indexing_flags      = [];
+		$is_virtual_context  = in_array( (string) ( $context['page_type'] ?? '' ), [ 'virtual_cluster', 'legacy_redirect' ], true );
 
 		if ( ( $previous_clicks >= 5 && $current_clicks < ( $previous_clicks * 0.7 ) ) || ( $previous_impressions >= 50 && $current_impressions < ( $previous_impressions * 0.7 ) ) ) {
 			$drop = $previous_clicks > 0 ? ( ( $current_clicks - $previous_clicks ) / $previous_clicks ) * 100 : 0;
@@ -660,7 +1037,6 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 			);
 		}
 
-		$context = $page_context[ $url ] ?? [];
 		if ( ! empty( $context['snippet_issues'] ) && $current_impressions >= 30 ) {
 			$insights[] = nexus_build_seo_cockpit_insight(
 				[
@@ -675,6 +1051,93 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 						'snippet_issues' => $context['snippet_issues'],
 					],
 					'recommended_action' => 'SEO-Title und Description gegen Suchintention, Klarheit und Länge nachschleifen.',
+				]
+			);
+		}
+
+		if ( $is_high_value && $current_impressions >= 40 && ( $current_position > 12 || ( $current_position <= 12 && $current_ctr < max( 0.01, $overall_ctr * 0.55 ) ) ) ) {
+			$insights[] = nexus_build_seo_cockpit_insight(
+				[
+					'type'               => 'MONEY_PAGE_UNDERPERFORMING',
+					'severity'           => $current_impressions >= 120 || 'audit' === $page_role ? 'high' : 'medium',
+					'label'              => sprintf( '%s mit Nachfrage, aber unter Zielwert', $role_label ),
+					'reason'             => sprintf( 'Die %s-Seite sammelt %.0f Impressionen, liegt aber bei Position %.1f und %.1f%% CTR.', strtolower( $role_label ), $current_impressions, $current_position, $current_ctr * 100 ),
+					'url'                => $url,
+					'query'              => '',
+					'metrics'            => [
+						'clicks'      => $current_clicks,
+						'impressions' => $current_impressions,
+						'ctr'         => $current_ctr,
+						'position'    => $current_position,
+					],
+					'recommended_action' => 'Snippet, Proof-Layer und interne Links dieser kaufnahen Seite zuerst schärfen.',
+				]
+			);
+		}
+
+		if ( $is_high_value && $incoming_documents <= 1 && $total_incoming <= 3 ) {
+			$insights[] = nexus_build_seo_cockpit_insight(
+				[
+					'type'               => 'ORPHAN_VALUE_PAGE',
+					'severity'           => ( $current_impressions >= 80 || 'audit' === $page_role ) ? 'high' : 'medium',
+					'label'              => sprintf( '%s bekommt zu wenig Kontextlinks', $role_label ),
+					'reason'             => sprintf( 'Die Seite ist kaufnah, hat aber nur %d kontextuelle Eingangsdokumente und insgesamt %d verlinkende Quellen.', $incoming_documents, $total_incoming ),
+					'url'                => $url,
+					'query'              => '',
+					'metrics'            => [
+						'impressions'        => $current_impressions,
+						'context_documents'  => $incoming_documents,
+						'total_sources'      => $total_incoming,
+					],
+					'recommended_action' => 'Aus Hubs, Blog-Bridges und angrenzenden Service-Seiten gezielt Kontextlinks aufbauen.',
+				]
+			);
+		}
+
+		if ( in_array( $page_role, [ 'blog', 'hub' ], true ) && $current_impressions >= 100 && $outgoing_unique <= 1 ) {
+			$insights[] = nexus_build_seo_cockpit_insight(
+				[
+					'type'               => 'WEAK_FUNNEL_BRIDGE',
+					'severity'           => $current_impressions >= 250 ? 'high' : 'medium',
+					'label'              => sprintf( '%s mit Nachfrage, aber schwacher Funnel-Bridge', $role_label ),
+					'reason'             => sprintf( 'Die Seite sammelt %.0f Impressionen, führt im Inhalt aber nur auf %d eindeutige interne Ziele weiter.', $current_impressions, $outgoing_unique ),
+					'url'                => $url,
+					'query'              => '',
+					'metrics'            => [
+						'impressions'         => $current_impressions,
+						'outgoing_unique_urls' => $outgoing_unique,
+					],
+					'recommended_action' => 'Im Content 2 bis 3 klare Brücken zu Audit, Service oder Proof ergänzen.',
+				]
+			);
+		}
+
+		if ( ! empty( $context['noindex'] ) ) {
+			$indexing_flags[] = 'noindex';
+		}
+
+		if ( empty( $context['in_sitemap'] ) && ! $is_virtual_context ) {
+			$indexing_flags[] = 'not_in_sitemap';
+		}
+
+		if ( empty( $context['canonical_present'] ) ) {
+			$indexing_flags[] = 'canonical_missing';
+		}
+
+		if ( $is_high_value && ! empty( $indexing_flags ) ) {
+			$insights[] = nexus_build_seo_cockpit_insight(
+				[
+					'type'               => 'INDEXING_MISMATCH',
+					'severity'           => ! empty( $context['noindex'] ) ? 'critical' : 'high',
+					'label'              => sprintf( '%s mit Indexierungs-Lücke', $role_label ),
+					'reason'             => sprintf( 'Die Seite ist kaufnah, hat aber technische SEO-Signale mit Reibung: %s.', implode( ', ', $indexing_flags ) ),
+					'url'                => $url,
+					'query'              => '',
+					'metrics'            => [
+						'impressions'    => $current_impressions,
+						'indexing_flags' => $indexing_flags,
+					],
+					'recommended_action' => 'noindex, Canonical und Sitemap-Status für diese Seite zuerst bereinigen.',
 				]
 			);
 		}
@@ -757,12 +1220,18 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 		}
 
 		$seen[ $key ] = true;
-		$deduped[]    = $insight;
+		$deduped[]    = nexus_enrich_seo_cockpit_insight_priority( $insight, $snapshot );
 	}
 
 	usort(
 		$deduped,
 		static function ( $left, $right ) {
+			$priority_diff = (int) ( $right['priority_score'] ?? 0 ) <=> (int) ( $left['priority_score'] ?? 0 );
+
+			if ( 0 !== $priority_diff ) {
+				return $priority_diff;
+			}
+
 			$severity_diff = nexus_get_seo_cockpit_severity_score( (string) ( $right['severity'] ?? '' ) ) <=> nexus_get_seo_cockpit_severity_score( (string) ( $left['severity'] ?? '' ) );
 
 			if ( 0 !== $severity_diff ) {
@@ -813,7 +1282,7 @@ function nexus_get_seo_cockpit_problem_pages( $snapshot ) {
 
 		$pages[ $url ]['insights'][] = $insight;
 
-		if ( null === $pages[ $url ]['primary'] || nexus_get_seo_cockpit_severity_score( $insight['severity'] ) > nexus_get_seo_cockpit_severity_score( $pages[ $url ]['primary']['severity'] ) ) {
+		if ( null === $pages[ $url ]['primary'] || (int) ( $insight['priority_score'] ?? 0 ) > (int) ( $pages[ $url ]['primary']['priority_score'] ?? 0 ) ) {
 			$pages[ $url ]['primary'] = $insight;
 		}
 	}
@@ -830,10 +1299,10 @@ function nexus_get_seo_cockpit_problem_pages( $snapshot ) {
 	usort(
 		$pages,
 		static function ( $left, $right ) {
-			$severity_diff = nexus_get_seo_cockpit_severity_score( (string) ( $right['primary']['severity'] ?? '' ) ) <=> nexus_get_seo_cockpit_severity_score( (string) ( $left['primary']['severity'] ?? '' ) );
+			$priority_diff = (int) ( $right['primary']['priority_score'] ?? 0 ) <=> (int) ( $left['primary']['priority_score'] ?? 0 );
 
-			if ( 0 !== $severity_diff ) {
-				return $severity_diff;
+			if ( 0 !== $priority_diff ) {
+				return $priority_diff;
 			}
 
 			return (float) ( $right['row']['impressions'] ?? 0 ) <=> (float) ( $left['row']['impressions'] ?? 0 );

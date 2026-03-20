@@ -393,6 +393,19 @@ function nexus_render_seo_cockpit_insights_list( $insights, $limit = 8 ) {
 		<?php foreach ( $insights as $insight ) : ?>
 			<article class="nexus-seo-cockpit__insight-card">
 				<div class="nexus-seo-cockpit__insight-head">
+					<?php if ( ! empty( $insight['priority_bucket'] ) ) : ?>
+						<span class="nexus-seo-cockpit__badge is-<?php echo esc_attr( (string) $insight['priority_bucket'] ); ?>">
+							<?php
+							echo esc_html(
+								sprintf(
+									'%s · %d',
+									(string) ( $insight['priority_label'] ?? nexus_get_seo_cockpit_priority_label( (string) $insight['priority_bucket'] ) ),
+									(int) ( $insight['priority_score'] ?? 0 )
+								)
+							);
+							?>
+						</span>
+					<?php endif; ?>
 					<span class="nexus-seo-cockpit__badge is-<?php echo esc_attr( (string) $insight['severity'] ); ?>"><?php echo esc_html( nexus_get_seo_cockpit_severity_label( (string) $insight['severity'] ) ); ?></span>
 					<strong><?php echo esc_html( (string) $insight['label'] ); ?></strong>
 				</div>
@@ -401,6 +414,10 @@ function nexus_render_seo_cockpit_insights_list( $insights, $limit = 8 ) {
 					<p class="nexus-seo-cockpit__hint"><strong>Nächster Schritt:</strong> <?php echo esc_html( (string) $insight['recommended_action'] ); ?></p>
 				<?php endif; ?>
 				<div class="nexus-seo-cockpit__insight-meta">
+					<?php if ( ! empty( $insight['page_role_label'] ) ) : ?>
+						<span>Segment: <?php echo esc_html( (string) $insight['page_role_label'] ); ?></span>
+					<?php endif; ?>
+					<span>Typ: <?php echo esc_html( str_replace( '_', ' ', (string) ( $insight['type'] ?? '' ) ) ); ?></span>
 					<?php if ( ! empty( $insight['query'] ) ) : ?>
 						<span>Query: <?php echo esc_html( (string) $insight['query'] ); ?></span>
 					<?php endif; ?>
@@ -411,6 +428,75 @@ function nexus_render_seo_cockpit_insights_list( $insights, $limit = 8 ) {
 			</article>
 		<?php endforeach; ?>
 	</div>
+	<?php
+}
+
+/**
+ * Render a compact priority queue table.
+ *
+ * @param array<int, array<string, mixed>> $insights Insight rows.
+ * @param int                              $limit    Max items.
+ * @return void
+ */
+function nexus_render_seo_cockpit_priority_queue( $insights, $limit = 10 ) {
+	$insights = array_slice( (array) $insights, 0, $limit );
+
+	if ( empty( $insights ) ) {
+		echo '<p class="nexus-seo-cockpit__hint">Aktuell keine priorisierte Queue für dieses Zeitfenster.</p>';
+		return;
+	}
+	?>
+	<table class="widefat striped nexus-seo-cockpit__table">
+		<thead>
+			<tr>
+				<th>Prio</th>
+				<th>Segment</th>
+				<th>Hinweis</th>
+				<th>URL</th>
+				<th>Nächster Schritt</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ( $insights as $insight ) : ?>
+				<tr>
+					<td>
+						<span class="nexus-seo-cockpit__badge is-<?php echo esc_attr( (string) ( $insight['priority_bucket'] ?? 'low' ) ); ?>">
+							<?php
+							echo esc_html(
+								sprintf(
+									'%s · %d',
+									(string) ( $insight['priority_label'] ?? 'P4' ),
+									(int) ( $insight['priority_score'] ?? 0 )
+								)
+							);
+							?>
+						</span>
+					</td>
+					<td><?php echo esc_html( (string) ( $insight['page_role_label'] ?? '—' ) ); ?></td>
+					<td>
+						<strong><?php echo esc_html( (string) ( $insight['label'] ?? '' ) ); ?></strong>
+						<p class="nexus-seo-cockpit__table-note">
+							<?php
+							echo esc_html(
+								! empty( $insight['query'] )
+									? sprintf( '%s | Query: %s', (string) ( $insight['reason'] ?? '' ), (string) $insight['query'] )
+									: (string) ( $insight['reason'] ?? '' )
+							);
+							?>
+						</p>
+					</td>
+					<td>
+						<?php if ( ! empty( $insight['url'] ) ) : ?>
+							<a href="<?php echo esc_url( nexus_get_seo_cockpit_detail_url( (string) $insight['url'] ) ); ?>"><code><?php echo esc_html( (string) $insight['url'] ); ?></code></a>
+						<?php else : ?>
+							—
+						<?php endif; ?>
+					</td>
+					<td><?php echo esc_html( (string) ( $insight['recommended_action'] ?? '—' ) ); ?></td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
 	<?php
 }
 
@@ -817,8 +903,9 @@ function nexus_render_seo_cockpit_dashboard() {
 
 			<div class="nexus-seo-cockpit__grid nexus-seo-cockpit__grid--reports">
 				<section class="nexus-seo-cockpit__panel">
-					<h2>Prioritäten</h2>
-					<?php nexus_render_seo_cockpit_insights_list( (array) ( $snapshot['insights'] ?? [] ), 8 ); ?>
+					<h2>Prioritäts-Queue</h2>
+					<p class="nexus-seo-cockpit__hint">Sortiert nach SEO-Chance, Business-Wert, Funnel-Nähe und Datensicherheit.</p>
+					<?php nexus_render_seo_cockpit_priority_queue( (array) ( $snapshot['insights'] ?? [] ), 10 ); ?>
 				</section>
 
 				<section class="nexus-seo-cockpit__panel">
@@ -826,6 +913,11 @@ function nexus_render_seo_cockpit_dashboard() {
 					<?php nexus_render_seo_cockpit_diagnostics_list( $diagnostics, 6 ); ?>
 				</section>
 			</div>
+
+			<section class="nexus-seo-cockpit__panel">
+				<h2>Top Hinweise</h2>
+				<?php nexus_render_seo_cockpit_insights_list( (array) ( $snapshot['insights'] ?? [] ), 6 ); ?>
+			</section>
 
 			<div class="nexus-seo-cockpit__grid nexus-seo-cockpit__grid--reports">
 				<section class="nexus-seo-cockpit__panel">
@@ -904,23 +996,40 @@ function nexus_render_seo_cockpit_dashboard() {
 					<table class="widefat striped nexus-seo-cockpit__table">
 						<thead>
 							<tr>
+								<th>Prio</th>
+								<th>Segment</th>
 								<th>URL</th>
 								<th>Typ</th>
-								<th>Status</th>
-									<th>Impressionen</th>
-									<th>Position</th>
-									<th>SEO</th>
-									<th>Koko</th>
-									<th>Primärer Hinweis</th>
-								</tr>
-							</thead>
+								<th>Impressionen</th>
+								<th>Position</th>
+								<th>SEO</th>
+								<th>Koko</th>
+								<th>Primärer Hinweis</th>
+							</tr>
+						</thead>
 						<tbody>
 							<?php foreach ( (array) $snapshot['problem_pages'] as $page ) : ?>
-								<?php $context = is_array( $page['context'] ?? null ) ? $page['context'] : []; ?>
+								<?php
+								$context = is_array( $page['context'] ?? null ) ? $page['context'] : [];
+								$primary = is_array( $page['primary'] ?? null ) ? $page['primary'] : [];
+								?>
 								<tr>
+									<td>
+										<span class="nexus-seo-cockpit__badge is-<?php echo esc_attr( (string) ( $primary['priority_bucket'] ?? 'low' ) ); ?>">
+											<?php
+											echo esc_html(
+												sprintf(
+													'%s · %d',
+													(string) ( $primary['priority_label'] ?? 'P4' ),
+													(int) ( $primary['priority_score'] ?? 0 )
+												)
+											);
+											?>
+										</span>
+									</td>
+									<td><?php echo esc_html( (string) ( $primary['page_role_label'] ?? '—' ) ); ?></td>
 									<td><a href="<?php echo esc_url( (string) $page['detail_url'] ); ?>"><code><?php echo esc_html( (string) $page['url'] ); ?></code></a></td>
 									<td><?php echo esc_html( (string) ( $context['post_type'] ?? '—' ) ); ?></td>
-									<td><?php echo esc_html( (string) ( $context['post_status'] ?? '—' ) ); ?></td>
 									<td><?php echo esc_html( number_format_i18n( (float) ( $page['row']['impressions'] ?? 0 ) ) ); ?></td>
 									<td><?php echo esc_html( number_format_i18n( (float) ( $page['row']['position'] ?? 0 ), 1 ) ); ?></td>
 									<td>
@@ -949,7 +1058,7 @@ function nexus_render_seo_cockpit_dashboard() {
 										);
 										?>
 									</td>
-									<td><?php echo esc_html( (string) ( $page['primary']['label'] ?? '' ) ); ?></td>
+									<td><?php echo esc_html( (string) ( $primary['label'] ?? '' ) ); ?></td>
 								</tr>
 							<?php endforeach; ?>
 						</tbody>

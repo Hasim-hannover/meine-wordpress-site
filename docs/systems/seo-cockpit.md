@@ -21,6 +21,7 @@ Repo-seitig vorhanden:
 
 - Top-Level-Admin-Menue `SEO Cockpit`
 - kompaktes Snapshot-Widget im Standard-WordPress-Dashboard
+- priorisierte Queue im Admin, die SEO-Signale jetzt gegen Business-Wert, Funnel-Naehe und Confidence gewichtet
 - Settings-Seite fuer
   - Search-Console-Property
   - Google Client ID
@@ -36,6 +37,14 @@ Repo-seitig vorhanden:
   - Top Pages
   - Top Queries
   - Device-Split
+- heuristische Insight-Typen fuer
+  - Quick Wins
+  - CTR-Chancen
+  - Decay
+  - Snippet-Schwächen
+  - Kannibalisierung
+  - Money-Page-Unterperformance
+  - Orphan-/Bridge-/Indexierungs-Signale
 - automatischer Snapshot-Refresh per WP-Cron (`twicedaily`)
 - optionale Erkennung des Plugins `koko-analytics/koko-analytics.php`
 
@@ -64,7 +73,7 @@ Wichtige technische Entscheidungen:
 
 ## Geplante Phase 2
 
-- echte Koko-Daten pro Landingpage
-- Korrelation von Search-Console-Performance und lokalen Seitenaufrufen
-- Sicht auf Gewinner/Verlierer nach URL
+- CTA- und Lead-Signale statt nur Traffic-Kontext
+- staerkerer Koko-Layer jenseits der aktuellen Top-Page-Zuordnung
+- Ownership-/Notiz-/Status-Layer fuer operative SEO-Arbeit direkt im Admin
 - URL-Inspection oder Indexing-nahe Erweiterungen nur, wenn der operative Nutzen klar ist

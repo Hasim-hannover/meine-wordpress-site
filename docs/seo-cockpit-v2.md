@@ -69,6 +69,16 @@ Der Uebersichts-Snapshot kombiniert drei Ebenen:
   - Low Signal
   - Possible Cannibalization
   - Snippet Weakness
+  - Money-Page-Unterperformance
+  - Orphan Value Pages
+  - Weak Funnel Bridges
+  - Indexing Mismatches
+- Priorisierungslayer:
+  - Page Role Mapping
+  - Business-Wert
+  - Funnel-Naehe
+  - Demand ueber Impressionen
+  - Confidence ueber Kontext und Koko-Signale
 
 ### 3. Drilldown
 
@@ -197,6 +207,24 @@ Die Insights sind bewusst heuristisch und regelbasiert, nicht "smart" behauptet:
   Mehrere URLs sammeln fuer dieselbe Query nennenswerte Impressionen.
 - `SNIPPET_WEAKNESS`
   Impressionen vorhanden, aber Title/Description fehlen oder wirken formal schwach.
+- `MONEY_PAGE_UNDERPERFORMING`
+  Kaufnahe Seite sammelt Nachfrage, bleibt aber bei Position oder CTR unter Zielwert.
+- `ORPHAN_VALUE_PAGE`
+  Kaufnahe Seite hat zu wenig kontextuelle interne Signale.
+- `WEAK_FUNNEL_BRIDGE`
+  Content-/Hub-Seite sammelt Nachfrage, fuehrt aber kaum in Richtung Audit, Service oder Proof weiter.
+- `INDEXING_MISMATCH`
+  Kaufnahe Seite hat noindex-, Canonical- oder Sitemap-Reibung.
+
+Seit 2026-03-20 werden die Insights nicht mehr nur nach Severity sortiert.
+Zusaetzlich berechnet das Cockpit jetzt einen `Priority Score`, der mehrere Ebenen kombiniert:
+
+- Severity
+- Demand / Impressionen
+- Business-Wert der URL
+- Funnel-Naehe der URL
+- Actionability des Insight-Typs
+- Confidence aus WordPress-Kontext und optionalem Koko-Match
 
 Jede Insight enthaelt:
 
@@ -208,6 +236,11 @@ Jede Insight enthaelt:
 - `query`
 - `metrics`
 - `recommended_action`
+- `page_role`
+- `page_role_label`
+- `priority_score`
+- `priority_bucket`
+- `priority_label`
 
 ## Offene Punkte
 
@@ -215,6 +248,7 @@ Jede Insight enthaelt:
 - Sitemap-Mitgliedschaft pro URL ist derzeit ein WordPress-internes Signal, keine Search-Console-URL-Membership.
 - Koko basiert auf defensivem REST-Mapping und nicht auf einer harten Plugin-internen API-Vertragsgarantie.
 - Die interne Linkzaehlung trennt jetzt Kontext- und Sitewide-Signale, bleibt aber bei Widgets und dynamisch von Plugins injizierten Navigationspfaden noch konservativ.
+- Koko fliesst aktuell nur als leichter Confidence-/Traffic-Layer in die Priorisierung ein; es ist noch keine belastbare Lead- oder CTA-Attribution.
 
 ## Grenzen / Risiken
 
