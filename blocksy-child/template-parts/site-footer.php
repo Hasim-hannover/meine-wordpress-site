@@ -34,13 +34,15 @@ $imprint_url      = $primary_urls['impressum'] ?? home_url( '/impressum/' );
 $privacy_url      = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 $hide_primary_cta = function_exists( 'nexus_should_hide_footer_primary_cta' ) && nexus_should_hide_footer_primary_cta();
 $footer_class     = $hide_primary_cta ? 'ft ft--no-primary-cta' : 'ft';
+$audit_cta_label  = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+$audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_get_audit_footer_note() : 'Growth Audit: persönliche Ersteinschätzung, schriftliche Rückmeldung in 48 Stunden, kein Pflicht-Call.';
 ?>
 
 <?php if ( function_exists( 'nexus_is_audit_page' ) && nexus_is_audit_page() ) : ?>
 <footer id="footer" class="ft ft--audit-minimal" aria-labelledby="ft-heading" role="contentinfo">
 	<h2 id="ft-heading" class="ft__sr">Footer-Navigation</h2>
 	<div class="ft__audit-shell">
-		<p class="ft__audit-note">Growth Audit: persönliche Ersteinschätzung, schriftliche Rückmeldung in 48 Stunden, kein Pflicht-Call.</p>
+		<p class="ft__audit-note"><?php echo esc_html( $audit_footer_note ); ?></p>
 		<nav class="ft__audit-links" aria-label="Audit-Footer-Navigation">
 			<a href="<?php echo esc_url( $cases_url ); ?>" data-track-action="cta_audit_footer_results" data-track-category="trust">Ergebnisse</a>
 			<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
@@ -58,7 +60,7 @@ $footer_class     = $hide_primary_cta ? 'ft ft--no-primary-cta' : 'ft';
 			<a class="ft__logo site-logo site-logo--accent" href="<?php echo esc_url( $home_url ); ?>" aria-label="Startseite - HAŞIM ÜNER">HAŞIM ÜNER</a>
 			<p class="ft__tag">WordPress als Nachfrage-System für B2B.</p>
 			<?php if ( ! $hide_primary_cta ) : ?>
-			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_audit" data-track-category="lead_gen">Growth Audit starten</a>
+			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 			<?php endif; ?>
 			<p class="ft__privacy-note">
 				<span class="ft__privacy-badge" aria-hidden="true">

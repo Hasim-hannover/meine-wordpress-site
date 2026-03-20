@@ -809,7 +809,7 @@ function nexus_get_wgos_asset_explorer_payload() {
 					'href'  => $detail_url,
 				]
 				: [
-					'label'   => __( 'Growth Audit starten', 'blocksy-child' ),
+					'label'   => nexus_get_audit_cta_label(),
 					'hrefKey' => 'audit',
 				],
 		];

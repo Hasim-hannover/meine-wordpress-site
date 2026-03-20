@@ -29,7 +29,7 @@ $calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_au
 						</p>
 
 						<div class="audit-hero-actions">
-							<a class="audit-submit-btn audit-hero-cta-btn audit-hero-cta-btn--dominant" href="#form" data-track-action="cta_hero_growth_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a class="audit-submit-btn audit-hero-cta-btn audit-hero-cta-btn--dominant" href="#form" data-track-action="cta_hero_growth_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 							<a class="audit-text-link audit-text-link--hero" href="<?php echo esc_url( $e3_url ); ?>">Öffentliche Case Study ansehen</a>
 						</div>
 						<p class="review-hero-microcopy">Kostenlos, kein Pitch, schriftliche Rückmeldung in 48 Stunden.</p>

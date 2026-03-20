@@ -23,6 +23,8 @@ $public_proof = function_exists( 'nexus_get_public_proof_data' ) ? nexus_get_pub
 $canonical_ownership_sentence = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
 $primary_term                = function_exists( 'nexus_get_public_primary_term' ) ? nexus_get_public_primary_term() : 'WordPress als Nachfrage-System für B2B';
 $framework_label             = function_exists( 'nexus_get_public_framework_label' ) ? nexus_get_public_framework_label() : 'WGOS = WordPress Growth Operating System';
+$audit_cta_label             = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+$audit_compact_microcopy     = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '0 € · Rückmeldung in 48h · kein Pflicht‑Call';
 
 if ( ! $page_url ) {
 	$page_url = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
@@ -433,10 +435,10 @@ foreach ( $faq_items as $faq_item ) {
 							</div>
 
 								<div class="wgos-hero__actions">
-									<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit_hero">Growth Audit starten (0€)</a>
+									<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit_hero"><?php echo esc_html( $audit_cta_label ); ?></a>
 									<a href="#system" class="wgos-btn wgos-btn--ghost" data-track="cta_click_system">WGOS in 60 Sekunden verstehen</a>
 								</div>
-								<p class="nx-cta-microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+								<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 
 							<p class="wgos-hero__microcopy">Der Growth Audit ist der nächste Schritt, wenn die Systemlogik fachlich passt.</p>
 						</div>
@@ -641,7 +643,7 @@ foreach ( $faq_items as $faq_item ) {
 							</div>
 
 							<div class="wgos-hero__actions">
-								<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Growth Audit starten</a>
+								<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit"><?php echo esc_html( $audit_cta_label ); ?></a>
 							</div>
 
 							<p class="wgos-hero__microcopy">Wenn ein kurzes Gespräch fachlich sinnvoller ist: <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>
@@ -785,7 +787,7 @@ foreach ( $faq_items as $faq_item ) {
 						<p class="wgos-prose">Wenn aus Ihrer WordPress-Website kein Sammelbecken einzelner Maßnahmen mehr werden soll, sondern ein strukturiertes Nachfrage-System, dann beginnt der sinnvolle nächste Schritt mit einem klaren Audit.</p>
 
 						<div class="wgos-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Mit dem Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit"><?php echo esc_html( $audit_cta_label ); ?></a>
 						</div>
 
 						<p class="wgos-hero__microcopy">Persönliche Rückmeldung in 48 Stunden. Kein Pitch, wenn kein fachlicher Fit da ist. Wenn ein Gespräch sinnvoller ist: <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>

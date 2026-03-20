@@ -175,7 +175,7 @@ $draft_note = $draft_count > 0
 
 						<div class="wgos-hero__actions">
 							<a href="#explorer" class="wgos-btn wgos-btn--primary" data-track="cta_click_explorer">Explorer öffnen</a>
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit_hero">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit_hero"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 						</div>
 
 						<p class="wgos-hero__microcopy">Erst die strategische Logik sehen? <a href="<?php echo esc_url( $wgos_url ); ?>">Zum WGOS-System</a>.</p>
@@ -263,7 +263,7 @@ $draft_note = $draft_count > 0
 						<?php if ( '' !== $prev_phase_step && $prev_phase_step !== (string) $section['phase_step'] ) : ?>
 							<div class="wgos-hub-phase-bridge">
 								<p>Wissen Sie bereits, welche Assets für Sie Priorität haben?</p>
-								<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit_bridge">Growth Audit starten</a>
+								<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_audit_bridge"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 							</div>
 						<?php endif; ?>
 						<?php $prev_phase_step = (string) $section['phase_step']; ?>
@@ -374,7 +374,7 @@ $draft_note = $draft_count > 0
 						</div>
 
 						<div class="wgos-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 						</div>
 
 						<p class="wgos-hero__microcopy">Lieber erst sprechen? <a href="<?php echo esc_url( $calendar_url ); ?>" data-track="cta_click_calendar">Strategiegespräch vereinbaren</a>.</p>

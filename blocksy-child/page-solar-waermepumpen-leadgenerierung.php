@@ -325,7 +325,7 @@ get_header();
 							wird aus Sichtbarkeit kein belastbarer Anfrageprozess. Genau dort setze ich an.
 						</p>
 						<div class="energy-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_hero_case" data-track-category="trust">E3 Case Study ansehen</a>
 							<a href="#energie-anfrage" class="energy-text-link" data-track-action="cta_energy_hero_form" data-track-category="lead_gen">Oder direkt Ihr Setup einordnen</a>
 						</div>
@@ -825,7 +825,7 @@ get_header();
 					<h2>Wenn Nachfrage da ist, sollte die Website sie nicht wieder verlieren.</h2>
 					<p>Sie können direkt in den Growth Audit gehen oder Ihr Setup auf dieser Seite erst kurz vorqualifizieren. Beides führt bewusst in dieselbe Diagnose-Logik.</p>
 					<div class="energy-cta-box__actions">
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Growth Audit starten</a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 						<a href="#energie-anfrage" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_footer_form" data-track-category="lead_gen">Setup einordnen</a>
 					</div>
 					<p class="energy-cta-box__microcopy">Zur thematischen Einordnung: <a href="<?php echo esc_url( $agentur_url ); ?>">WordPress Agentur Hannover</a>, <a href="<?php echo esc_url( $wgos_url ); ?>">WGOS</a> und die <a href="<?php echo esc_url( $e3_url ); ?>">E3 Case Study</a> bleiben bewusst separate Seiten, damit diese Landingpage nicht zu einer generischen Sammelseite wird.</p>

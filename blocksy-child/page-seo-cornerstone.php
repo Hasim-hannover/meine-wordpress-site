@@ -129,7 +129,7 @@ get_header();
 				<div class="seo-cornerstone__inline-cta">
 					<p>Wie tragfähig ist Ihr Fundament heute?</p>
 					<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( nexus_get_audit_url() ); ?>" data-track-action="cta_inline_cornerstone_journey" data-track-category="lead_gen">
-						Growth Audit starten
+						<?php echo esc_html( nexus_get_audit_cta_label() ); ?>
 					</a>
 				</div>
 

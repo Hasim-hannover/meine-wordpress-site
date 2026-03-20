@@ -468,7 +468,7 @@ function nexus_get_wgos_asset_content_html( $asset ) {
 				<h2 class="wgos-h2">Prüfen, ob dieses Asset jetzt Priorität hat.</h2>
 				<p class="wgos-section-intro">Der Growth Audit zeigt, ob dieses Asset jetzt Priorität hat - oder ob ein anderer Baustein zuerst dran ist.</p>
 				<div class="wgos-hero__actions">
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_content_audit" data-track-category="lead_gen">Growth Audit starten</a>
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_content_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 					<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track-action="cta_wgos_asset_content_calendar" data-track-category="lead_gen">Strategiegespräch vereinbaren</a>
 				</div>
 			</div>
@@ -556,7 +556,7 @@ function nexus_sync_wgos_asset_posts() {
 		update_post_meta( $post_id, 'asset_schema_type', $asset['schema_type'] );
 		update_post_meta( $post_id, 'asset_registry_status', $asset['status'] );
 		update_post_meta( $post_id, 'asset_related_slugs', array_keys( (array) $asset['related_assets'] ) );
-		update_post_meta( $post_id, 'asset_cta_label', 'publish' === $asset['status'] ? 'Asset im Detail ansehen' : 'Growth Audit starten' );
+		update_post_meta( $post_id, 'asset_cta_label', 'publish' === $asset['status'] ? 'Asset im Detail ansehen' : nexus_get_audit_cta_label() );
 		update_post_meta( $post_id, 'asset_cta_target', 'publish' === $asset['status'] ? $asset['slug'] : 'audit' );
 		update_post_meta( $post_id, 'seo_title', $asset['seo_title'] );
 		update_post_meta( $post_id, 'seo_description', $asset['seo_description'] );

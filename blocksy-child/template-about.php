@@ -179,12 +179,12 @@ get_header();
 						<p class="about-hero__actions">
 							<a
 								href="<?php echo esc_url( $audit_url ); ?>"
-								class="nx-btn nx-btn--ghost"
-								data-track-action="cta_about_hero_audit"
-								data-track-category="lead_gen"
-								data-track-section="about_hero"
-							>
-								Growth Audit starten
+							class="nx-btn nx-btn--ghost"
+							data-track-action="cta_about_hero_audit"
+							data-track-category="lead_gen"
+							data-track-section="about_hero"
+						>
+								<?php echo esc_html( nexus_get_audit_cta_label() ); ?>
 							</a>
 						</p>
 					</div>
@@ -426,7 +426,7 @@ get_header();
 							data-track-category="lead_gen"
 							data-track-section="about_close"
 						>
-							Growth Audit starten
+							<?php echo esc_html( nexus_get_audit_cta_label() ); ?>
 						</a>
 					</p>
 					<p>

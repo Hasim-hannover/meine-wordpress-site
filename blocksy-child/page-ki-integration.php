@@ -258,7 +258,7 @@ foreach ( $faq_items as $faq_item ) {
 						</ul>
 
 						<div class="wgos-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_ki_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_ki_hero_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 							<a href="#bausteine" class="wgos-btn wgos-btn--ghost">KI-Bausteine ansehen</a>
 						</div>
 
@@ -438,7 +438,7 @@ foreach ( $faq_items as $faq_item ) {
 						</div>
 
 						<div class="wgos-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_ki_footer_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_ki_footer_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 							<a href="<?php echo esc_url( $wgos_url ); ?>" class="wgos-btn wgos-btn--outline" data-track-action="cta_ki_footer_wgos" data-track-category="navigation">WGOS verstehen</a>
 						</div>
 

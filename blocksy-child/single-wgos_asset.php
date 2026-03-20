@@ -50,7 +50,7 @@ $hub_url   = function_exists( 'nexus_get_wgos_asset_hub_url' ) ? nexus_get_wgos_
 
 					<div class="wgos-hero__actions">
 						<a href="<?php echo esc_url( $hub_focus_url ); ?>" class="wgos-btn wgos-btn--outline">Zur Asset-Landkarte</a>
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_wgos_asset_hero_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 					</div>
 
 					<p class="wgos-hero__microcopy">Dieses Asset ist Teil eines dokumentierten WGOS-Systems. Struktur, interne Verlinkung und Theme-Logik sind versioniert nachvollziehbar.</p>

@@ -14,6 +14,7 @@ $eyebrow_text = nexus_get_site_header_eyebrow();
 $mobile_eyebrow_text = function_exists( 'nexus_get_public_primary_term' ) ? trim( (string) nexus_get_public_primary_term() ) : '';
 $panel_id     = 'nx-site-header-panel';
 $cases_url    = function_exists( 'nexus_get_results_url' ) ? nexus_get_results_url() : home_url( '/ergebnisse/' );
+$audit_header_meta_items = function_exists( 'nexus_get_audit_header_meta_items' ) ? nexus_get_audit_header_meta_items() : [];
 $home_label   = sprintf(
 	/* translators: %s: site or brand name. */
 	__( 'Startseite - %s', 'blocksy-child' ),
@@ -22,6 +23,13 @@ $home_label   = sprintf(
 
 if ( '' === $mobile_eyebrow_text ) {
 	$mobile_eyebrow_text = __( 'WordPress als Nachfrage-System für B2B.', 'blocksy-child' );
+}
+
+if ( empty( $audit_header_meta_items ) ) {
+	$audit_header_meta_items = [
+		'manuelle Ersteinschätzung',
+		'schriftliche Rückmeldung in 48h',
+	];
 }
 ?>
 
@@ -42,8 +50,9 @@ if ( '' === $mobile_eyebrow_text ) {
 			</div>
 
 			<div class="nx-site-header__audit-meta" aria-label="Audit-Microcopy">
-				<span>manuelle Ersteinschätzung</span>
-				<span>schriftliche Rückmeldung in 48h</span>
+				<?php foreach ( $audit_header_meta_items as $audit_header_meta_item ) : ?>
+					<span><?php echo esc_html( $audit_header_meta_item ); ?></span>
+				<?php endforeach; ?>
 			</div>
 
 			<div class="nx-site-header__audit-actions">

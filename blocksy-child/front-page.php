@@ -33,6 +33,8 @@ $blog_url    = $urls['blog'] ?? home_url( '/blog/' );
 $e3_url      = $urls['e3'] ?? home_url( '/e3-new-energy/' );
 $github_url  = $urls['github_repo'] ?? '';
 $linkedin_url = $urls['linkedin'] ?? '';
+$audit_cta_label         = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+$audit_compact_microcopy = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '0 € · Rückmeldung in 48h · kein Pflicht‑Call';
 
 $proof_strip_items = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [];
 
@@ -169,10 +171,10 @@ get_header();
 						</p>
 
 						<div class="wp-home-hero__actions nx-reveal">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
 						</div>
-						<p class="nx-cta-microcopy nx-reveal">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+						<p class="nx-cta-microcopy nx-reveal"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 					</div>
 				</div>
 			</div>
@@ -210,8 +212,8 @@ get_header();
 
 				<div class="homepage-audit-section__footer nx-reveal">
 					<p class="homepage-audit-section__note">Sie bekommen keine generische Checkliste, sondern eine priorisierte Einordnung: Was bremst aktuell, was hat den größten Hebel und was sollte als Nächstes passieren.</p>
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary homepage-audit-section__cta" data-track-action="cta_home_audit_block_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					<p class="homepage-audit-section__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary homepage-audit-section__cta" data-track-action="cta_home_audit_block_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+					<p class="homepage-audit-section__microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 				</div>
 			</div>
 		</section>
@@ -246,8 +248,8 @@ get_header();
 
 				<div class="homepage-fit-section__footer nx-reveal">
 					<p class="homepage-fit-section__note">Wenn das auf Ihre Situation zutrifft, ist der Growth Audit der richtige erste Schritt: nicht größer denken als nötig, aber präziser als üblich.</p>
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary homepage-fit-section__cta" data-track-action="cta_home_fit_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					<p class="homepage-fit-section__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary homepage-fit-section__cta" data-track-action="cta_home_fit_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+					<p class="homepage-fit-section__microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 				</div>
 			</div>
 		</section>
@@ -288,7 +290,7 @@ get_header();
 						<p class="homepage-track-record__note">Der Punkt ist nicht nur das Ergebnis. Sondern die Reihenfolge: erst Fundament, dann Skalierung.</p>
 						<div class="homepage-track-record__actions">
 							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_proof_case" data-track-category="trust">Case Study lesen</a>
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_proof_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_proof_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 						</div>
 					</article>
 
@@ -451,8 +453,8 @@ get_header();
 							<li>Sie müssen keinen Pflicht-Call buchen, nur um eine erste Einschätzung zu erhalten.</li>
 							<li>Sie erfahren, welcher Hebel auf Ihrer Website gerade den größten Unterschied machen würde.</li>
 						</ul>
-						<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen">Growth Audit starten</a>
-						<p class="homepage-conversion-cta__microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+						<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+						<p class="homepage-conversion-cta__microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 						<p class="homepage-conversion-cta__support">Wenn fachlich sinnvoll, kann daraus als nächster Schritt eine vertiefte Analyse, eine fokussierte Korrektur oder eine laufende Weiterentwicklung entstehen.</p>
 					</div>
 				</div>

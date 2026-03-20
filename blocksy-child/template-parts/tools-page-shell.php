@@ -26,7 +26,7 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 			</p>
 
 			<div class="tools-hero__actions">
-				<a href="<?php echo esc_url( $audit_url ); ?>" class="tools-btn tools-btn--primary" data-track-action="cta_tools_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
+				<a href="<?php echo esc_url( $audit_url ); ?>" class="tools-btn tools-btn--primary" data-track-action="cta_tools_hero_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 				<a href="<?php echo esc_url( $wgos_url ); ?>" class="tools-btn tools-btn--text" data-track-action="cta_tools_hero_wgos" data-track-category="navigation">WGOS verstehen</a>
 			</div>
 

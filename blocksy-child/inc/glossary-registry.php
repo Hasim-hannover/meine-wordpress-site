@@ -687,7 +687,7 @@ function nexus_get_glossary_term_content_html( $term ) {
 				<p class="wgos-prose">Wenn klar ist, was der Begriff bedeutet, bleibt die eigentliche Frage offen: Ist das Thema für Ihre Website gerade wirklich der Engpass oder nur ein Symptom? Der Growth Audit bringt die Reihenfolge zurück.</p>
 				<div class="wgos-hero__actions">
 					<a href="<?php echo esc_url( $hub_url ); ?>" class="wgos-btn wgos-btn--outline">Zurück zum Glossar</a>
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_glossary_term_audit" data-track-category="lead_gen">Growth Audit starten</a>
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_glossary_term_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 				</div>
 			</div>
 		</div>

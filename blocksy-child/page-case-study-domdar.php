@@ -254,7 +254,7 @@ get_header();
 				data-track-action="cta_domdar_hero_audit"
 				data-track-category="lead_gen"
 			>
-				Growth Audit starten
+				<?php echo esc_html( nexus_get_audit_cta_label() ); ?>
 			</a>
 			<a href="#architektur" class="nx-btn nx-btn--ghost">
 				Profit-Architektur ansehen
@@ -494,7 +494,7 @@ get_header();
 						data-track-action="cta_domdar_partner_audit"
 						data-track-category="lead_gen"
 					>
-						Growth Audit starten
+						<?php echo esc_html( nexus_get_audit_cta_label() ); ?>
 					</a>
 					<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost">
 						WGOS ansehen
@@ -551,7 +551,7 @@ get_header();
 					data-track-action="cta_domdar_nextstep_audit"
 					data-track-category="lead_gen"
 				>
-					Growth Audit starten
+					<?php echo esc_html( nexus_get_audit_cta_label() ); ?>
 				</a>
 			</div>
 

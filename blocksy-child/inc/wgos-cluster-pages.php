@@ -464,6 +464,8 @@ function nexus_render_wgos_cluster_page( $page ) {
 	$method_steps  = nexus_get_wgos_cluster_page_method_steps();
 	$proof_note    = isset( $page['proof_note'] ) ? (string) $page['proof_note'] : '';
 	$proof_links   = isset( $page['proof_links'] ) && is_array( $page['proof_links'] ) ? $page['proof_links'] : [];
+	$audit_cta_label         = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+	$audit_compact_microcopy = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '0 € · Rückmeldung in 48h · kein Pflicht‑Call';
 
 	ob_start();
 	?>
@@ -476,10 +478,10 @@ function nexus_render_wgos_cluster_page( $page ) {
 						<h1 class="nx-cluster-hero__title"><?php echo esc_html( (string) $page['title'] ); ?></h1>
 						<p class="nx-cluster-hero__lead"><?php echo esc_html( (string) $page['lead'] ); ?></p>
 						<div class="nx-cluster-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_audit" data-track-category="lead_gen">Growth Audit starten</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 							<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost">WGOS verstehen</a>
 						</div>
-						<p class="nx-cta-microcopy">0 € · Rückmeldung in 48h · kein Pflicht‑Call</p>
+						<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 					</div>
 
 					<aside class="nx-card nx-card--flat nx-cluster-hero__card">
@@ -577,10 +579,10 @@ function nexus_render_wgos_cluster_page( $page ) {
 							<?php endforeach; ?>
 						</p>
 					<?php endif; ?>
-					<div class="nx-cluster-hero__actions">
-						<a href="<?php echo esc_url( $results_url ); ?>" class="nx-btn nx-btn--ghost">Ergebnisse ansehen</a>
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_proof_audit" data-track-category="lead_gen">Growth Audit starten</a>
-					</div>
+						<div class="nx-cluster-hero__actions">
+							<a href="<?php echo esc_url( $results_url ); ?>" class="nx-btn nx-btn--ghost">Ergebnisse ansehen</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_proof_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+						</div>
 				</div>
 			</div>
 		</section>
@@ -646,7 +648,7 @@ function nexus_render_wgos_cluster_page( $page ) {
 					<h2 class="nx-headline-section">Erst die Lage klären. Dann den richtigen Baustein priorisieren.</h2>
 					<p>Der Growth Audit zeigt, ob dieses Cluster jetzt dran ist oder ob Fundament, Messbarkeit oder Angebotslogik zuerst korrigiert werden müssen.</p>
 					<div class="nx-cluster-hero__actions">
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_footer_audit" data-track-category="lead_gen">Growth Audit starten</a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_footer_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 						<a href="<?php echo esc_url( $asset_hub_url ); ?>" class="nx-btn nx-btn--ghost">Alle WGOS-Assets ansehen</a>
 					</div>
 				</div>

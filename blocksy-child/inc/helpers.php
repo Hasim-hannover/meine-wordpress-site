@@ -148,6 +148,88 @@ function nexus_get_public_framework_label() {
 }
 
 /**
+ * Return the canonical entry CTA copy for the Growth Audit.
+ *
+ * Keep purchase-intent copy in one place so the primary CTA label and its
+ * supporting promise stay aligned across key surfaces.
+ *
+ * @return array<string, mixed>
+ */
+function nexus_get_audit_cta_copy() {
+	static $copy = null;
+
+	if ( null !== $copy ) {
+		return $copy;
+	}
+
+	$copy = [
+		'label'             => 'Growth Audit starten',
+		'compact_microcopy' => '0 € · Rückmeldung in 48h · kein Pflicht‑Call',
+		'header_meta_items' => [
+			'manuelle Ersteinschätzung',
+			'schriftliche Rückmeldung in 48h',
+		],
+		'footer_note'       => 'Growth Audit: persönliche Ersteinschätzung, schriftliche Rückmeldung in 48 Stunden, kein Pflicht-Call.',
+	];
+
+	return $copy;
+}
+
+/**
+ * Return the canonical primary CTA label for the Growth Audit.
+ *
+ * @return string
+ */
+function nexus_get_audit_cta_label() {
+	$copy = nexus_get_audit_cta_copy();
+
+	return isset( $copy['label'] ) ? (string) $copy['label'] : 'Growth Audit starten';
+}
+
+/**
+ * Return the compact Growth Audit CTA microcopy.
+ *
+ * @return string
+ */
+function nexus_get_audit_compact_microcopy() {
+	$copy = nexus_get_audit_cta_copy();
+
+	return isset( $copy['compact_microcopy'] ) ? (string) $copy['compact_microcopy'] : '';
+}
+
+/**
+ * Return the compact metadata items used in the audit header.
+ *
+ * @return array<int, string>
+ */
+function nexus_get_audit_header_meta_items() {
+	$copy = nexus_get_audit_cta_copy();
+	$items = isset( $copy['header_meta_items'] ) && is_array( $copy['header_meta_items'] ) ? $copy['header_meta_items'] : [];
+
+	return array_values(
+		array_filter(
+			array_map(
+				static function ( $item ) {
+					return trim( (string) $item );
+				},
+				$items
+			)
+		)
+	);
+}
+
+/**
+ * Return the full Growth Audit footer note.
+ *
+ * @return string
+ */
+function nexus_get_audit_footer_note() {
+	$copy = nexus_get_audit_cta_copy();
+
+	return isset( $copy['footer_note'] ) ? (string) $copy['footer_note'] : '';
+}
+
+/**
  * Render a tracking-ready CTA button.
  *
  * Outputs an <a> element with proper data-track-* attributes

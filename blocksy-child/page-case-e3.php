@@ -78,7 +78,7 @@ $energy_url  = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_ene
                class="nx-btn nx-btn--primary"
                data-track-action="cta_case_hero_audit"
                data-track-category="lead_gen">
-                Growth Audit starten
+                <?php echo esc_html( nexus_get_audit_cta_label() ); ?>
             </a>
             <a href="<?php echo esc_url( $cases_url ); ?>"
                class="nx-btn nx-btn--ghost">
@@ -661,7 +661,7 @@ $energy_url  = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_ene
                    class="nx-btn nx-btn--primary"
                    data-track-action="cta_case_nextstep_audit"
                    data-track-category="lead_gen">
-                    Growth Audit starten
+                    <?php echo esc_html( nexus_get_audit_cta_label() ); ?>
                 </a>
             </div>
 

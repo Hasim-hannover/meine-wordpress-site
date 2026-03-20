@@ -56,7 +56,7 @@ $glossary_url = function_exists( 'nexus_get_glossary_hub_url' ) ? nexus_get_glos
 
 					<div class="wgos-hero__actions">
 						<a href="<?php echo esc_url( $glossary_url ); ?>" class="wgos-btn wgos-btn--outline">Zum Glossar</a>
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_glossary_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_glossary_hero_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
 					</div>
 
 					<p class="wgos-hero__microcopy">Diese Begriffsseite ist Teil eines kontrollierten Glossar-Layers. Head Terms bleiben auf den Primary URLs, damit Definition und Angebots-Intent sauber getrennt bleiben.</p>
