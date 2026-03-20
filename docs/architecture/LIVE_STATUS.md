@@ -22,6 +22,7 @@ Nicht verifiziert:
 - Service-Seiten, Tools-Hub, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Repo-seitig gibt es jetzt einen zentralen oeffentlichen Proof- und Vokabular-Layer: `1.750+ qualifizierte Leads`, `12 % Sales-Conversion` und `-83 % CPL` sind das konservative Standard-Proof-Set; `WGOS = WordPress Growth Operating System` bleibt als erklaertes Framework hinter dem oeffentlichen Hauptbegriff `WordPress als Nachfrage-System fuer B2B`.
+- Der versionierte Ergebnisse-Hub priorisiert jetzt eine klarere Hero-Einordnung, schnellere Proof-Selbstselektion, E3 als primaeren B2B-Einstieg, DOMDAR als Commerce-Ergaenzung, einen konkreteren Whitelabel-Vertrauensbeleg und eine segmentierte Audit-/WGOS-Abschluss-CTA.
 - Die aktive `Growth Audit`-Landingpage ist als versionierter Template-Shell im Repo hinterlegt.
 - Repo-seitig liegt jetzt zusaetzlich eine B2B-Branchen-Landingpage fuer Solar-, Waermepumpen- und Speicher-Anbieter kanonisch unter `/solar-waermepumpen-leadgenerierung/`; der Intake nutzt denselben Audit-/CRM-Stack mit eigener Branchen-Variante.
 - `page-wgos.php` ist als kompaktere WGOS-Sales-Page versioniert: Hero mit Audit-CTA, System-Diagramm, frueher platzierte Pakete, modulare Cards und reduzierte FAQ.

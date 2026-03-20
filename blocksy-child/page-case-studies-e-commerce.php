@@ -24,106 +24,125 @@ $domdar_url     = nexus_get_page_url(
 );
 $whitelabel_url = nexus_get_whitelabel_page_url();
 
+$hero_highlights = [
+	[
+		'label' => 'E3 zuerst',
+		'copy'  => 'für B2B-Leadgen, Angebotsseiten und Nachfrage-Systeme',
+	],
+	[
+		'label' => 'DOMDAR',
+		'copy'  => 'für Commerce, CRO, AOV und Profitabilität im Shop-Kontext',
+	],
+	[
+		'label' => 'Whitelabel',
+		'copy'  => 'für Rolle, Eingriffe und Zusammenarbeit im Hintergrund',
+	],
+	[
+		'label' => 'Danach',
+		'copy'  => 'eigene Seite prüfen oder die Systemlogik hinter den Ergebnissen verstehen',
+	],
+];
+
 $proof_cards = [
 	[
-		'badge'   => 'Öffentlicher Deep Dive',
-		'title'   => 'E3 New Energy',
-		'copy'    => 'B2B-Leadgen mit harter Zahlenlage: vom externen Lead-Einkauf zum eigenen Nachfrage-System mit klarer Conversion-Architektur.',
-		'stats'   => [ '1.750+ Leads', '-83 % CPL', '12 % Sales-Conversion' ],
-		'cta'     => 'Zum Bereich',
-		'url'     => $e3_url,
-		'jump'    => '#bereich-e3',
-		'accent'  => 'success',
+		'badge'  => 'Stärkster B2B-Case',
+		'title'  => 'E3 New Energy',
+		'copy'   => 'Relevant für B2B-Seiten, Leadgen und Angebotslogik. Hier sehen Sie den offensten Case im Hub: Ausgangslage, Eingriffe, Kennzahlen und Systemlogik.',
+		'stats'  => [
+			'für B2B Leadgen und Angebotsseiten',
+			'öffentlicher Deep Dive mit Zahlen und Reihenfolge',
+			'1.750+ Leads, -83 % CPL, 12 % Sales-Conversion',
+		],
+		'cta'    => 'E3-Case ansehen',
+		'url'    => $e3_url,
+		'accent' => 'success featured',
+		'button' => 'primary',
+		'track'  => 'cta_results_card_e3',
 	],
 	[
-		'badge'   => 'Öffentlicher Deep Dive',
-		'title'   => 'DOMDAR',
-		'copy'    => 'Sustainable Commerce ohne Mehrbudget: Profitabilität aus Bundle-Logik, Recovery-Loops und operativer Entlastung.',
-		'stats'   => [ '120 € AOV', '4,6 % Conversion Rate', '0 € mehr Ad-Spend' ],
-		'cta'     => 'Zum Bereich',
-		'url'     => $domdar_url,
-		'jump'    => '#bereich-domdar',
-		'accent'  => 'gold',
+		'badge'  => 'Commerce-/CRO-Proof',
+		'title'  => 'DOMDAR',
+		'copy'   => 'Relevant für Shops, Conversion und Profitabilität. Der Case zeigt, wie Bundle-Logik, Recovery-Loops und operative Entlastung ohne Mehrbudget zusammenspielen.',
+		'stats'  => [
+			'für Shops, CRO und Profitabilität',
+			'Commerce-Case mit klarer Hebellogik',
+			'120 € AOV, 4,6 % Conversion Rate, 0 € mehr Ad-Spend',
+		],
+		'cta'    => 'DOMDAR-Case ansehen',
+		'url'    => $domdar_url,
+		'accent' => 'gold',
+		'button' => 'ghost',
+		'track'  => 'cta_results_card_domdar',
 	],
 	[
-		'badge'   => 'Anonymisierter Proof',
-		'title'   => 'Whitelabel & laufende Weiterentwicklung',
-		'copy'    => 'Anonymisierte Delivery zeigt, wie die Arbeit aussieht, wenn Vertrauen da ist, aber Logos nicht öffentlich werden.',
-		'stats'   => [ 'anonymisierte Delivery', 'laufende Weiterentwicklung', 'SEO + CRO + Tracking + Delivery' ],
-		'cta'     => 'Zum Bereich',
-		'url'     => $whitelabel_url,
-		'jump'    => '#bereich-whitelabel',
-		'accent'  => 'highlight',
+		'badge'  => 'Anonymisierter Vertrauensbeleg',
+		'title'  => 'Whitelabel & Weiterentwicklung',
+		'copy'   => 'Relevant, wenn Sie wissen wollen, wie ich im Hintergrund für Agenturen und Teams arbeite: Landingpages, Tracking, CRO-nahe Eingriffe, Systempflege und Sparring.',
+		'stats'  => [
+			'für Rolle, Verantwortung und Zusammenarbeit',
+			'anonymisierte Einblicke statt öffentlicher Logos',
+			'Landingpages, Tracking, CRO und laufende Systempflege',
+		],
+		'cta'    => 'Whitelabel-Proof ansehen',
+		'url'    => $whitelabel_url,
+		'accent' => 'highlight',
+		'button' => 'ghost',
+		'track'  => 'cta_results_card_whitelabel',
 	],
 ];
 
 $detail_sections = [
 	[
 		'id'      => 'bereich-e3',
-		'eyebrow' => 'Bereich 01',
+		'eyebrow' => 'Empfohlener Einstieg',
 		'title'   => 'E3 New Energy',
-		'intro'   => 'Der öffentlich stärkste B2B-Leadgen-Case auf der Seite. Gut für Besucher, die harte Kennzahlen, Reihenfolge und Systemlogik nachvollziehen wollen.',
+		'intro'   => 'Wenn Sie B2B-Anfragen, Leadqualität oder Angebotsseiten verbessern wollen, ist das der sinnvollste erste Case. E3 zeigt öffentlich, wie aus externem Lead-Einkauf ein eigenes Nachfrage-System wurde.',
+		'note'    => 'Wenn Sie nur einen Case ansehen, sollte es dieser sein.',
 		'bullets' => [
-			'extern eingekaufte Leads wurden durch ein eigenes Nachfrage-System ersetzt',
-			'Tracking, Landingpages, Qualifizierung und Aktivierung wurden in der richtigen Reihenfolge verbunden',
-			'die Seite zeigt Wirkung, Vorgehen und Grenzen des Setups offen',
+			'zeigt offen, welche Ausgangslage vorlag und welche Eingriffe zuerst gemacht wurden',
+			'relevant für B2B-Leadgen, Angebotsseiten, Tracking und Conversion-Architektur',
+			'macht Ursache, Reihenfolge und Ergebnis nachvollziehbar statt nur einzelne Zahlen zu zeigen',
 		],
-		'stats'   => [ '1.750+ Leads', '-83 % CPL', '12 % Sales-Conversion' ],
+		'stats'   => [ 'Öffentlicher B2B-Deep Dive', '1.750+ Leads', '-83 % CPL', '12 % Sales-Conversion' ],
 		'url'     => $e3_url,
-		'link'    => 'E3-Case lesen',
+		'link'    => 'Öffentlichen B2B-Case öffnen',
 		'accent'  => 'success',
+		'track'   => 'cta_results_detail_e3',
 	],
 	[
 		'id'      => 'bereich-domdar',
-		'eyebrow' => 'Bereich 02',
+		'eyebrow' => 'Commerce- und CRO-Proof',
 		'title'   => 'DOMDAR',
-		'intro'   => 'Der Commerce-Case im Hub. Er zeigt, dass die Logik nicht nur in Leadgen gilt, sondern auch bei Profitabilität, Funnel-Recovery und operativer Reibung.',
+		'intro'   => 'Wenn Ihr Kontext eher Shop, AOV, Checkout-Reibung oder Profitabilität ist, ergänzt DOMDAR den Hub sinnvoll. Der Case zeigt, wie Conversion- und Recovery-Hebel ohne zusätzliches Mediabudget zusammenspielen.',
+		'note'    => 'Relevant, wenn Shop-Optimierung wichtiger ist als klassisches B2B-Leadgen.',
 		'bullets' => [
-			'mehr Deckungsbeitrag ohne zusätzliches Mediabudget',
-			'Bundles, Recovery-Loops und Operations als gemeinsamer Hebel statt Einzelmaßnahmen',
-			'ideal für Besucher, die eher auf E-Commerce-Mechanik als auf klassische Leads schauen',
+			'zeigt, wie Profitabilität aus Angebotslogik, Bundle-Struktur und Recovery entsteht',
+			'relevant für Shops, CRO, AOV und operative Reibungsverluste im Conversion-Pfad',
+			'ergänzt E3 logisch, statt mit einem zweiten B2B-Case um Aufmerksamkeit zu konkurrieren',
 		],
-		'stats'   => [ '120 € AOV', '4,6 % Conversion Rate', '0 € mehr Ad-Spend' ],
+		'stats'   => [ 'Commerce-/CRO-Case', '120 € AOV', '4,6 % Conversion Rate', '0 € mehr Ad-Spend' ],
 		'url'     => $domdar_url,
-		'link'    => 'DOMDAR-Case lesen',
+		'link'    => 'Commerce-CRO-Case öffnen',
 		'accent'  => 'gold',
+		'track'   => 'cta_results_detail_domdar',
 	],
 	[
 		'id'      => 'bereich-whitelabel',
-		'eyebrow' => 'Bereich 03',
-		'title'   => 'Whitelabel & laufende Weiterentwicklung',
-		'intro'   => 'Der dritte Bereich macht sichtbar, was sonst unsichtbar bleibt: laufende Systempflege, Delivery im Hintergrund und anonymisierte Projektmuster.',
+		'eyebrow' => 'Vertrauensvertiefung',
+		'title'   => 'Whitelabel & Weiterentwicklung',
+		'intro'   => 'Wenn Sie nicht nur öffentliche Cases, sondern die Art der Zusammenarbeit prüfen wollen, ist dieser Proof relevant. Er macht sichtbar, welche Rolle ich im Hintergrund für Agenturen und Teams übernehme.',
+		'note'    => 'Relevant, wenn Sie Verantwortung, Eingriffstiefe und Verlässlichkeit prüfen wollen.',
 		'bullets' => [
-			'anonymisierte Delivery und laufende Weiterentwicklung als Vertrauenssignal',
-			'geeignet für Besucher, die nicht nur Cases, sondern wiederholbare Zusammenarbeit prüfen wollen',
-			'inklusive Portrait, Arbeitsfeldern, anonymisierten Mustern und Systemkontext',
+			'konkretisiert typische Arbeit im Hintergrund: Landingpages, Funnel-Teile, Tracking, SEO-nahe Eingriffe und Systempflege',
+			'zeigt, in welcher Rolle ich andocke: operative Umsetzung, laufende Weiterentwicklung und strategisch-operatives Sparring',
+			'macht nachvollziehbar, warum wiederholte Zusammenarbeit auch ohne öffentliche Logos ein relevanter Vertrauensbeleg ist',
 		],
-		'stats'   => [ 'anonymisiert', 'laufend', 'Whitelabel + Sparring + Delivery' ],
+		'stats'   => [ 'Anonymisierte Whitelabel-Arbeit', 'Landingpages & Funnelpflege', 'Tracking & technische Eingriffe', 'Sparring & Systempflege' ],
 		'url'     => $whitelabel_url,
-		'link'    => 'Whitelabel-Seite öffnen',
+		'link'    => 'Whitelabel-Proof öffnen',
 		'accent'  => 'highlight',
+		'track'   => 'cta_results_detail_whitelabel',
 	],
-];
-
-$framework_cards = [
-	[
-		'title' => 'Öffentliche Cases',
-		'copy'  => 'Tiefe Einblicke mit Zahlen, Reihenfolge und klarer Herleitung. Gut für Entscheider, die Ursache und Wirkung verstehen wollen.',
-	],
-	[
-		'title' => 'Anonymisierte Delivery',
-		'copy'  => 'Whitelabel-Projekte zeigen Muster statt Logos: wiederkehrende Hebel, typische Engpässe und die Art der Verantwortung im Hintergrund.',
-	],
-	[
-		'title' => 'Laufende Weiterentwicklung',
-		'copy'  => 'Laufende Zusammenarbeit ist dann sinnvoll, wenn Prioritäten, Ownership und kontrollierte Weiterentwicklung wichtiger sind als Einzelfixes.',
-	],
-];
-
-$cro_points = [
-	'Weniger Selbstaussage, mehr sichtbare Wirkung und belastbare Muster.',
-	'Ein Besucher kann sich selbst einordnen: public case, anonymisierte Arbeit oder laufende Systempflege.',
-	'Die Navigation bleibt schlank, aber der Proof wird breiter und glaubwürdiger.',
 ];
 ?>
 
@@ -132,35 +151,28 @@ $cro_points = [
 		<div class="nx-container">
 			<div class="results-hero__inner">
 				<span class="nx-badge nx-badge--gold">Ergebnisse</span>
-				<h1 class="results-hero__title">Sichtbare Cases. Verdeckte Systemarbeit. Ein gemeinsamer Proof-Layer.</h1>
+				<h1 class="results-hero__title">Ergebnisse aus echten Projekten, öffentlich, anonymisiert und nachvollziehbar.</h1>
 				<p class="results-hero__subtitle">
-					Nicht jede Zusammenarbeit darf öffentlich als Case Study auftauchen.
-					Deshalb bündelt dieser Hub drei Formen von Nachweis: zwei offene Deep Dives
-					und eine dritte Seite für Whitelabel-Arbeit, laufende Weiterentwicklung und typische Eingriffstiefen.
+					Hier sehen Sie, wie WordPress, CRO, Tracking und Nachfrage-Systeme in der Praxis wirken:
+					als öffentlicher B2B-Case, als Commerce-CRO-Case und als anonymisierte Whitelabel-Arbeit.
+				</p>
+				<p class="results-hero__note">
+					Wenn Sie nur einen Case zuerst ansehen wollen, starten Sie mit
+					<a href="<?php echo esc_url( $e3_url ); ?>" data-track-action="cta_results_hero_note_e3" data-track-category="trust">E3 New Energy</a>.
 				</p>
 
-				<div class="results-metrics" role="list" aria-label="Ergebnisse-Überblick">
-					<div class="results-metric" role="listitem">
-						<strong>2</strong>
-						<span>öffentliche Deep Dives</span>
-					</div>
-					<div class="results-metric" role="listitem">
-						<strong>anonymisiert</strong>
-						<span>Whitelabel-Arbeit im Hintergrund</span>
-					</div>
-					<div class="results-metric" role="listitem">
-						<strong>laufend</strong>
-						<span>kontrollierte Weiterentwicklung</span>
-					</div>
-					<div class="results-metric" role="listitem">
-						<strong>1</strong>
-						<span>gemeinsame Logik: Reihenfolge vor Aktionismus</span>
-					</div>
+				<div class="results-metrics" role="list" aria-label="Schnelle Orientierung">
+					<?php foreach ( $hero_highlights as $highlight ) : ?>
+						<div class="results-metric" role="listitem">
+							<strong><?php echo esc_html( $highlight['label'] ); ?></strong>
+							<span><?php echo esc_html( $highlight['copy'] ); ?></span>
+						</div>
+					<?php endforeach; ?>
 				</div>
 
 				<div class="results-hero__actions">
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_results_hero_audit" data-track-category="lead_gen">Audit starten</a>
-					<a href="<?php echo esc_url( $whitelabel_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_results_hero_whitelabel" data-track-category="trust">Whitelabel &amp; Weiterentwicklung</a>
+					<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_results_hero_e3" data-track-category="trust">Mit E3 starten</a>
+					<a href="#proof-grid" class="nx-btn nx-btn--ghost" data-track-action="cta_results_hero_select" data-track-category="trust">Proof-Typ auswählen</a>
 				</div>
 			</div>
 		</div>
@@ -169,9 +181,9 @@ $cro_points = [
 	<section class="nx-section results-grid-section" id="proof-grid">
 		<div class="nx-container">
 			<div class="nx-section-header">
-				<span class="nx-badge nx-badge--ghost">Proof-Formate</span>
-				<h2 class="nx-headline-section">Drei Bereiche. Ein gemeinsamer Ergebnisse-Hub.</h2>
-				<p class="nx-subheadline">Oben springen Sie in den passenden Bereich. Innerhalb jedes Bereichs geht es dann weiter auf die jeweilige Detailseite.</p>
+				<span class="nx-badge nx-badge--ghost">Schnelle Auswahl</span>
+				<h2 class="nx-headline-section">Welcher Proof passt zuerst zu Ihrer Situation?</h2>
+				<p class="nx-subheadline">Die Karten helfen bei der Selbstselektion. Für die meisten kaufnahen B2B-Besucher ist E3 der beste Einstieg.</p>
 			</div>
 
 			<div class="results-card-grid">
@@ -180,13 +192,13 @@ $cro_points = [
 						<span class="results-card__badge"><?php echo esc_html( $card['badge'] ); ?></span>
 						<h3 class="results-card__title"><?php echo esc_html( $card['title'] ); ?></h3>
 						<p class="results-card__copy"><?php echo esc_html( $card['copy'] ); ?></p>
-						<ul class="results-card__stats" aria-label="<?php echo esc_attr( $card['title'] . ' Kennzahlen' ); ?>">
+						<ul class="results-card__stats" aria-label="<?php echo esc_attr( $card['title'] . ' Orientierung' ); ?>">
 							<?php foreach ( $card['stats'] as $stat ) : ?>
 								<li><?php echo esc_html( $stat ); ?></li>
 							<?php endforeach; ?>
 						</ul>
 						<div class="results-card__actions">
-							<a href="<?php echo esc_url( $card['jump'] ); ?>" class="nx-btn nx-btn--ghost"><?php echo esc_html( $card['cta'] ); ?></a>
+							<a href="<?php echo esc_url( $card['url'] ); ?>" class="nx-btn nx-btn--<?php echo esc_attr( $card['button'] ); ?>" data-track-action="<?php echo esc_attr( $card['track'] ); ?>" data-track-category="trust"><?php echo esc_html( $card['cta'] ); ?></a>
 						</div>
 					</article>
 				<?php endforeach; ?>
@@ -196,61 +208,39 @@ $cro_points = [
 
 	<section class="nx-section results-detail-sections">
 		<div class="nx-container">
-			<?php foreach ( $detail_sections as $section ) : ?>
-				<article id="<?php echo esc_attr( $section['id'] ); ?>" class="results-detail-card results-detail-card--<?php echo esc_attr( $section['accent'] ); ?>">
-					<div class="results-detail-card__content">
-						<span class="results-detail-card__eyebrow"><?php echo esc_html( $section['eyebrow'] ); ?></span>
-						<h2 class="results-detail-card__title"><?php echo esc_html( $section['title'] ); ?></h2>
-						<p class="results-detail-card__intro"><?php echo esc_html( $section['intro'] ); ?></p>
-						<ul class="results-bullet-list">
-							<?php foreach ( $section['bullets'] as $bullet ) : ?>
-								<li><?php echo esc_html( $bullet ); ?></li>
-							<?php endforeach; ?>
-						</ul>
-					</div>
-
-					<div class="results-detail-card__sidebar">
-						<div class="results-detail-card__statbox">
-							<?php foreach ( $section['stats'] as $stat ) : ?>
-								<span><?php echo esc_html( $stat ); ?></span>
-							<?php endforeach; ?>
-						</div>
-						<div class="results-detail-card__actions">
-							<a href="<?php echo esc_url( $section['url'] ); ?>" class="nx-btn nx-btn--primary"><?php echo esc_html( $section['link'] ); ?></a>
-						</div>
-					</div>
-				</article>
-			<?php endforeach; ?>
-		</div>
-	</section>
-
-	<section class="nx-section results-framework">
-		<div class="nx-container">
 			<div class="nx-section-header">
-				<span class="nx-badge nx-badge--gold">Warum das so aufgebaut ist</span>
-				<h2 class="nx-headline-section">Ein guter Proof-Hub verkauft keine Selbstdarstellung.</h2>
-				<p class="nx-subheadline">Er hilft Besuchern zu verstehen, wie belastbar die Arbeit über unterschiedliche Projektsituationen hinweg ist.</p>
+				<span class="nx-badge nx-badge--gold">Kurze Einordnung</span>
+				<h2 class="nx-headline-section">Was zeigt jeder Proof konkret?</h2>
+				<p class="nx-subheadline">Oben wählen Sie schnell. Unten sehen Sie, warum E3 zuerst kommt, wie DOMDAR ergänzt und wofür der Whitelabel-Proof relevant ist.</p>
 			</div>
 
-			<div class="results-framework__grid">
-				<?php foreach ( $framework_cards as $card ) : ?>
-					<article class="nx-card nx-card--flat results-framework__card">
-						<h3 class="results-framework__title"><?php echo esc_html( $card['title'] ); ?></h3>
-						<p class="results-framework__copy"><?php echo esc_html( $card['copy'] ); ?></p>
+			<div class="results-detail-sections__stack">
+				<?php foreach ( $detail_sections as $section ) : ?>
+					<article id="<?php echo esc_attr( $section['id'] ); ?>" class="results-detail-card results-detail-card--<?php echo esc_attr( $section['accent'] ); ?>">
+						<div class="results-detail-card__content">
+							<span class="results-detail-card__eyebrow"><?php echo esc_html( $section['eyebrow'] ); ?></span>
+							<h2 class="results-detail-card__title"><?php echo esc_html( $section['title'] ); ?></h2>
+							<p class="results-detail-card__intro"><?php echo esc_html( $section['intro'] ); ?></p>
+							<ul class="results-bullet-list">
+								<?php foreach ( $section['bullets'] as $bullet ) : ?>
+									<li><?php echo esc_html( $bullet ); ?></li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+
+						<div class="results-detail-card__sidebar">
+							<p class="results-detail-card__note"><?php echo esc_html( $section['note'] ); ?></p>
+							<div class="results-detail-card__statbox">
+								<?php foreach ( $section['stats'] as $stat ) : ?>
+									<span><?php echo esc_html( $stat ); ?></span>
+								<?php endforeach; ?>
+							</div>
+							<div class="results-detail-card__actions">
+								<a href="<?php echo esc_url( $section['url'] ); ?>" class="nx-btn nx-btn--primary" data-track-action="<?php echo esc_attr( $section['track'] ); ?>" data-track-category="trust"><?php echo esc_html( $section['link'] ); ?></a>
+							</div>
+						</div>
 					</article>
 				<?php endforeach; ?>
-			</div>
-
-			<div class="results-cro-card">
-				<div>
-					<span class="results-cro-card__eyebrow">CRO-Sicht</span>
-					<h3 class="results-cro-card__title">Warum das stärker ist als eine reine Skill-Seite</h3>
-				</div>
-				<ul class="results-bullet-list">
-					<?php foreach ( $cro_points as $point ) : ?>
-						<li><?php echo esc_html( $point ); ?></li>
-					<?php endforeach; ?>
-				</ul>
 			</div>
 		</div>
 	</section>
@@ -260,16 +250,22 @@ $cro_points = [
 			<div class="results-cta__shell">
 				<div>
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2 class="results-cta__title">Erst Proof prüfen. Dann die eigene Situation einordnen.</h2>
+					<h2 class="results-cta__title">Wenn der Proof passt, gibt es zwei sinnvolle nächste Wege.</h2>
 					<p class="results-cta__copy">
-						Wenn Sie wissen wollen, welche dieser Muster auf Ihre WordPress-Seite zutreffen,
-						ist der sinnvollste Schritt der Growth Audit. Wenn Sie erst die Systemlogik dahinter
-						verstehen wollen, gehen Sie über die WGOS-Seite tiefer.
+						Nicht jeder Besucher ist sofort audit-ready. Wer die eigene Seite einordnen will,
+						sollte mit dem Audit starten. Wer erst verstehen will, wie die Systemlogik hinter
+						diesen Ergebnissen aufgebaut ist, geht über die WGOS-Seite tiefer.
 					</p>
 				</div>
-				<div class="results-cta__actions">
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_results_footer_audit" data-track-category="lead_gen">Audit starten</a>
-					<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost">WGOS ansehen</a>
+				<div class="results-cta__choices" aria-label="Nächste Schritte">
+					<div class="results-cta__choice">
+						<span class="results-cta__choice-copy">Wenn Sie Ihre eigene Seite prüfen und priorisieren lassen wollen.</span>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_results_footer_audit" data-track-category="lead_gen">Mit dem Growth Audit starten</a>
+					</div>
+					<div class="results-cta__choice">
+						<span class="results-cta__choice-copy">Wenn Sie erst die Systemlogik hinter den Ergebnissen verstehen wollen.</span>
+						<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_results_footer_wgos" data-track-category="trust">Systemlogik hinter den Ergebnissen verstehen</a>
+					</div>
 				</div>
 			</div>
 		</div>
