@@ -40,7 +40,7 @@
 }
 
 .result-title {
-  font-family: var(--nx-font-heading, 'Outfit', 'Satoshi', sans-serif);
+  font-family: var(--nx-font-heading, 'Satoshi', 'Figtree', sans-serif);
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 900;
   color: #fff;
@@ -121,7 +121,7 @@
 
 /* ─── SECTION TITLE ──────────────────────────────────────── */
 .result-section-title {
-  font-family: var(--nx-font-heading, 'Outfit', 'Satoshi', sans-serif);
+  font-family: var(--nx-font-heading, 'Satoshi', 'Figtree', sans-serif);
   font-size: 1.1rem;
   font-weight: 800;
   color: #fff;
@@ -419,7 +419,7 @@
 }
 
 .result-cta h3 {
-  font-family: var(--nx-font-heading, 'Outfit', 'Satoshi', sans-serif);
+  font-family: var(--nx-font-heading, 'Satoshi', 'Figtree', sans-serif);
   font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   font-weight: 900;
   color: #fff;
@@ -695,7 +695,7 @@
 }
 
 .deepdive-title {
-  font-family: var(--nx-font-heading, 'Outfit', 'Satoshi', sans-serif);
+  font-family: var(--nx-font-heading, 'Satoshi', 'Figtree', sans-serif);
   font-size: clamp(1.3rem, 2.5vw, 1.8rem);
   font-weight: 900;
   color: #fff;
@@ -810,7 +810,7 @@
 
 .deepdive-form-wrap .ff-el-section-break .ff-el-section-title {
   color: #fff !important;
-  font-family: var(--nx-font-heading, 'Outfit', 'Satoshi', sans-serif) !important;
+  font-family: var(--nx-font-heading, 'Satoshi', 'Figtree', sans-serif) !important;
 }
 
 /* Next/Prev buttons */

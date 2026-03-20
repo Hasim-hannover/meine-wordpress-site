@@ -14,7 +14,7 @@
   --transition: all 0.3s ease;
   --success: #10b981;
   color: #fff;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--nx-font, 'Figtree', sans-serif);
   line-height: 1.6;
 }
 

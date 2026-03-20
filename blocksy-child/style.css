@@ -5,8 +5,8 @@ Version: 7.1.1-FIXED
 */
 
 :root {
-    --theme-font-family: 'Figtree', 'Satoshi', sans-serif;
-    --theme-font-heading: 'Outfit', 'Merriweather', sans-serif;
+    --theme-font-family: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --theme-font-heading: 'Satoshi', 'Figtree', sans-serif;
     --hasim-audit-orange: #b46a3c;
     --hasim-audit-orange-hover: hsl(23 50% 54%);
     --theme-palette-color-1: var(--hasim-audit-orange);

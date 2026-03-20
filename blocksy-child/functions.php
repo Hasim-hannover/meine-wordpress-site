@@ -82,9 +82,9 @@ function hu_preload_self_hosted_fonts() {
 	$font_dir = get_stylesheet_directory();
 	$font_uri = get_stylesheet_directory_uri() . '/fonts';
 
-	if ( file_exists( $font_dir . '/fonts/outfit-600.woff2' ) ) {
+	if ( file_exists( $font_dir . '/fonts/Satoshi-Variable.woff2' ) ) {
 		printf(
-			'<link rel="preload" href="%s/outfit-600.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
+			'<link rel="preload" href="%s/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
 			esc_url( $font_uri )
 		);
 	}
