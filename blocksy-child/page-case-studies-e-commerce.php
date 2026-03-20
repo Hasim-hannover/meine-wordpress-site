@@ -30,6 +30,8 @@ $domdar_url     = nexus_get_page_url(
 	home_url( '/case-study-domdar/' )
 );
 $whitelabel_url = nexus_get_whitelabel_page_url();
+$agentur_url    = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
+$seo_url        = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) );
 
 $hero_highlights = [
 	[
@@ -151,6 +153,54 @@ $detail_sections = [
 		'track'   => 'cta_results_detail_whitelabel',
 	],
 ];
+
+$service_bridge_cards = [
+	[
+		'badge'  => 'Breiterer Einstieg',
+		'title'  => 'WordPress Agentur Hannover',
+		'copy'   => 'Wenn nach dem Proof nicht nur Rankings, sondern auch Angebotsseiten, Tracking, Conversion, WooCommerce oder Betrieb mit betroffen sind, ist die Agentur-Seite der passendere Einstieg.',
+		'stats'  => [
+			'für breitere B2B-Scopes über SEO hinaus',
+			'verbindet Angebotsseiten, Proof, Tracking und Conversion',
+			'geeignet für Service-, Hybrid- und WooCommerce-Kontexte',
+		],
+		'cta'    => 'Zur Agentur-Seite',
+		'url'    => $agentur_url,
+		'accent' => 'success',
+		'button' => 'primary',
+		'track'  => 'cta_results_bridge_agentur',
+	],
+	[
+		'badge'  => 'Technischer Einstieg',
+		'title'  => 'WordPress SEO Hannover',
+		'copy'   => 'Wenn Indexierung, interne Verlinkung, Seitentypen und technische Rankingsignale das Hauptproblem sind, führt die SEO-Seite direkter in den richtigen Cluster.',
+		'stats'  => [
+			'für Crawlability, interne Verlinkung und kaufnahe Rankings',
+			'engerer Einstieg als die Agentur-Seite',
+			'gut, wenn Technik und Seitentypen der Kernengpass sind',
+		],
+		'cta'    => 'Zur SEO-Seite',
+		'url'    => $seo_url,
+		'accent' => 'gold',
+		'button' => 'ghost',
+		'track'  => 'cta_results_bridge_seo',
+	],
+	[
+		'badge'  => 'Wenn die Lage noch offen ist',
+		'title'  => 'Growth Audit',
+		'copy'   => 'Wenn Sie nach dem Proof noch nicht sicher wissen, ob Agentur, SEO, CRO oder technische Stabilisierung zuerst zählt, ist der Audit der richtige nächste Schritt.',
+		'stats'  => [
+			'ordnet den Engpass vor der Umsetzung',
+			'kein Pitch, sondern Priorisierung',
+			'passend, wenn der nächste Baustein noch unklar ist',
+		],
+		'cta'    => 'Mit dem Audit starten',
+		'url'    => $audit_url,
+		'accent' => 'highlight',
+		'button' => 'ghost',
+		'track'  => 'cta_results_bridge_audit',
+	],
+];
 ?>
 
 <main id="main" class="site-main results-hub" data-track-section="results_hub">
@@ -245,6 +295,34 @@ $detail_sections = [
 							<div class="results-detail-card__actions">
 								<a href="<?php echo esc_url( $section['url'] ); ?>" class="nx-btn nx-btn--primary" data-track-action="<?php echo esc_attr( $section['track'] ); ?>" data-track-category="trust"><?php echo esc_html( $section['link'] ); ?></a>
 							</div>
+						</div>
+					</article>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+
+	<section class="nx-section results-grid-section">
+		<div class="nx-container">
+			<div class="nx-section-header">
+				<span class="nx-badge nx-badge--gold">Passender Einstieg</span>
+				<h2 class="nx-headline-section">WordPress-, SEO- und Conversion-Ergebnisse im B2B-Kontext richtig einordnen</h2>
+				<p class="nx-subheadline">Der Hub ist Proof. Der passende nächste Einstieg hängt davon ab, ob Ihr Engpass breiter Systemaufbau, technisches SEO oder erst die Priorisierung zwischen mehreren Baustellen ist.</p>
+			</div>
+
+			<div class="results-card-grid">
+				<?php foreach ( $service_bridge_cards as $card ) : ?>
+					<article class="nx-card results-card results-card--<?php echo esc_attr( $card['accent'] ); ?>">
+						<span class="results-card__badge"><?php echo esc_html( $card['badge'] ); ?></span>
+						<h3 class="results-card__title"><?php echo esc_html( $card['title'] ); ?></h3>
+						<p class="results-card__copy"><?php echo esc_html( $card['copy'] ); ?></p>
+						<ul class="results-card__stats" aria-label="<?php echo esc_attr( $card['title'] . ' Orientierung' ); ?>">
+							<?php foreach ( $card['stats'] as $stat ) : ?>
+								<li><?php echo esc_html( $stat ); ?></li>
+							<?php endforeach; ?>
+						</ul>
+						<div class="results-card__actions">
+							<a href="<?php echo esc_url( $card['url'] ); ?>" class="nx-btn nx-btn--<?php echo esc_attr( $card['button'] ); ?>" data-track-action="<?php echo esc_attr( $card['track'] ); ?>" data-track-category="navigation"><?php echo esc_html( $card['cta'] ); ?></a>
 						</div>
 					</article>
 				<?php endforeach; ?>

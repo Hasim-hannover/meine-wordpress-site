@@ -32,10 +32,12 @@ function nexus_get_wgos_cluster_page_data() {
 			'intro'            => [
 				'Viele B2B-Websites investieren in Inhalte, ohne zuerst die technischen Bremsen zu lösen. Dann entstehen Seiten, die zwar vorhanden sind, aber weder stabil ranken noch qualifizierte Anfragen sauber vorbereiten.',
 				'WordPress SEO wird dadurch schnell zur To-do-Liste aus Meta-Titeln, Plugins und Blogideen. Was oft fehlt, ist die Reihenfolge: Erst Crawlability, Struktur, interne Verlinkung und technische Sauberkeit, dann Themenarchitektur und conversion-nahe Seiten.',
+				'Für lokale B2B-Suchen in Hannover wird technisches SEO vor allem auf kaufnahen Seitentypen relevant: Angebotsseiten, Audit-Einstiege und zentrale Proof-Seiten müssen sauber indexierbar, intern angebunden und technisch stabil sein.',
 				'Genau dort setzt diese Seite an. Sie ist bewusst kein Sammelbegriff für eine komplette WordPress-Agenturleistung, WooCommerce-Umsetzung oder den laufenden Betriebs-Stack, sondern der technische SEO-Einstieg innerhalb des WGOS für sichtbare, belastbare Seitentypen.',
 			],
 			'system'           => [
 				'Im WGOS ist SEO kein Solobaustein. Sichtbarkeit folgt auf ein tragfähiges Fundament aus Performance, Messbarkeit und klarer Angebotslogik.',
+				'Technisches WordPress SEO ist hier deshalb kein Meta-Feintuning, sondern Arbeit an Crawlability, interner Verlinkung, Seitentypen und der Frage, welche kaufnahen URLs überhaupt Rankings tragen sollen.',
 				'Statt eine einzige SEO-Leistung zu verkaufen, ordnen wir die richtigen Bausteine für Ihre Lage. Das kann mit einem Technical SEO Audit starten, mit einer Keyword-Strategie weitergehen und später in Pillar Pages, Content Hubs oder interne Verlinkung münden.',
 				'Wenn Angebotsseiten, Tracking, Conversion, WooCommerce oder der laufende Betrieb mit betroffen sind, ist die Agentur-Seite der bessere Einstieg als diese fokussierte SEO-Seite.',
 			],
@@ -65,7 +67,7 @@ function nexus_get_wgos_cluster_page_data() {
 				'url'    => $agentur_url,
 				'text'   => 'Wenn der Bedarf über technisches SEO hinausgeht und auch Angebotsseiten, Tracking, Conversion, WooCommerce oder Betrieb umfasst, ist die Agentur-Seite der klarere Startpunkt.',
 			],
-			'proof_note'       => 'Technisches SEO wird erst dann kaufnah relevant, wenn Sichtbarkeit auf saubere Angebotsseiten, belastbare Daten und einen klaren Anfragepfad trifft. Genau das zeigen die offenen Ergebnisse und die E3 Case Study.',
+			'proof_note'       => 'Technisches SEO wird erst dann kaufnah relevant, wenn Sichtbarkeit auf saubere Angebotsseiten, Audit-Einstiege und einen klaren Anfragepfad trifft. Genau das zeigen die offenen Ergebnisse und die E3 Case Study.',
 			'proof_links'      => [
 				[
 					'label' => 'E3 Case Study lesen',

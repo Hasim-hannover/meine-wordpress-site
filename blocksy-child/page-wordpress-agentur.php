@@ -22,6 +22,10 @@ $implementation_contact_url = add_query_arg(
 	$contact_url
 );
 $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ] );
+$domdar_url = nexus_get_page_url(
+	[ 'case-study-domdar', 'domdar' ],
+	home_url( '/case-study-domdar/' )
+);
 $seo_url   = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) );
 $wartung_url = nexus_get_primary_public_url( 'wartung', home_url( '/wordpress-wartung-hannover/' ) );
 $measurement_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
@@ -189,6 +193,60 @@ $local_cards = [
 	],
 ];
 
+$setup_scope_cards = [
+	[
+		'title'        => 'B2B-Angebotsseiten und Lead-Gen',
+		'text'         => 'Wenn WordPress Leistungen, Beratung oder erklärungsbedürftige Angebote in qualifizierte Anfragen übersetzen soll, zählt zuerst die Verbindung aus Positionierung, Money Pages, Proof und sauberem Tracking.',
+		'items'        => [
+			'typisch für Angebotsseiten, Audit-Einstiege und längere Entscheidungswege',
+			'öffentlicher Proof über E3 und den Ergebnisse-Hub',
+			'meist bremst nicht das Design, sondern die falsche Reihenfolge',
+		],
+		'link_url'     => $e3_url,
+		'link_label'   => 'E3 Case Study ansehen',
+		'track_action' => 'cta_agentur_setup_e3',
+	],
+	[
+		'title'        => 'B2B mit WooCommerce oder Hybrid-Setup',
+		'text'         => 'B2B ist nicht automatisch nur Lead-Gen. Wenn WordPress Produktlogik, Anfragepfade und Vertrieb zusammenspielen, braucht das System Klarheit bei Tracking, Conversion und Seitenrollen.',
+		'items'        => [
+			'relevant für WooCommerce, hybride Shops und Anfrage-/Shop-Kombinationen',
+			'WooCommerce ist hier ein Setup-Typ, nicht ein zweites Positionierungsversprechen',
+			'öffentlicher Commerce-Proof über DOMDAR und weitere Ergebnisse',
+		],
+		'link_url'     => $domdar_url,
+		'link_label'   => 'DOMDAR Case ansehen',
+		'track_action' => 'cta_agentur_setup_domdar',
+	],
+];
+
+$entry_choice_cards = [
+	[
+		'title'        => 'Die Agentur-Seite ist richtig, wenn ...',
+		'text'         => '... nicht nur Rankings, sondern auch Angebotsseiten, Tracking, Proof, WooCommerce oder der laufende Betrieb mit betroffen sind.',
+		'items'        => [
+			'der Scope breiter als technisches SEO ist',
+			'Money Pages, Conversion und Datenebene zusammenhängen',
+			'der nächste Schritt noch priorisiert werden muss',
+		],
+		'link_url'     => $audit_url,
+		'link_label'   => 'Mit dem Growth Audit starten',
+		'track_action' => 'cta_agentur_entry_audit',
+	],
+	[
+		'title'        => 'Die SEO-Seite ist richtig, wenn ...',
+		'text'         => '... das Hauptproblem wirklich bei Crawlability, interner Verlinkung, technischen Rankingsignalen und der Struktur kaufnaher Seiten liegt.',
+		'items'        => [
+			'technisches SEO der klare Engpass ist',
+			'Indexierung, Verlinkung und Seitentypen Rankings ausbremsen',
+			'für den breiteren Scope die Agentur-Seite der bessere Einstieg bleibt',
+		],
+		'link_url'     => $seo_url,
+		'link_label'   => 'WordPress SEO Hannover ansehen',
+		'track_action' => 'cta_agentur_entry_seo',
+	],
+];
+
 $faq_items = [
 	[
 		'question' => 'Was ist der Unterschied zu einer klassischen WordPress-Agentur?',
@@ -300,6 +358,29 @@ get_header();
 			</div>
 		</section>
 
+		<section id="setups" class="nx-section">
+			<div class="nx-container">
+				<div class="nx-section-header">
+					<h2 class="nx-headline-section">WordPress Agentur Hannover für B2B-Unternehmen mit WordPress- oder WooCommerce-Setup</h2>
+					<p class="wp-agentur-section-intro">B2B ist hier nicht auf Formulare reduziert. Entscheidend ist, ob WordPress Services, Produkte oder hybride Nachfragepfade sauber tragen muss.</p>
+				</div>
+				<div class="nx-grid nx-grid-2 wp-agentur-local-grid">
+					<?php foreach ( $setup_scope_cards as $setup_scope_card ) : ?>
+						<article class="wp-agentur-local-card nx-card">
+							<h3><?php echo esc_html( $setup_scope_card['title'] ); ?></h3>
+							<p><?php echo esc_html( $setup_scope_card['text'] ); ?></p>
+							<ul>
+								<?php foreach ( $setup_scope_card['items'] as $setup_scope_item ) : ?>
+									<li><?php echo esc_html( $setup_scope_item ); ?></li>
+								<?php endforeach; ?>
+							</ul>
+							<p><a href="<?php echo esc_url( $setup_scope_card['link_url'] ); ?>" data-track-action="<?php echo esc_attr( $setup_scope_card['track_action'] ); ?>" data-track-category="navigation"><?php echo esc_html( $setup_scope_card['link_label'] ); ?></a></p>
+						</article>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</section>
+
 		<section id="problem" class="nx-section">
 			<div class="nx-container">
 				<div class="nx-section-header">
@@ -325,6 +406,29 @@ get_header();
 						<li>bessere Anfrageführung auf kaufnahen Seiten</li>
 					</ul>
 					<p><?php echo esc_html( $canonical_ownership_sentence ); ?></p>
+				</div>
+			</div>
+		</section>
+
+		<section id="agentur-oder-seo" class="nx-section">
+			<div class="nx-container">
+				<div class="nx-section-header">
+					<h2 class="nx-headline-section">Wann die Agentur-Seite richtiger ist als WordPress SEO Hannover</h2>
+					<p class="wp-agentur-section-intro">Die SEO-Seite bleibt bewusst enger. Diese Seite ist der breitere Einstieg, wenn nicht nur Rankings, sondern der gesamte Nachfragepfad sortiert werden muss.</p>
+				</div>
+				<div class="nx-grid nx-grid-2 wp-agentur-local-grid">
+					<?php foreach ( $entry_choice_cards as $entry_choice_card ) : ?>
+						<article class="wp-agentur-local-card nx-card">
+							<h3><?php echo esc_html( $entry_choice_card['title'] ); ?></h3>
+							<p><?php echo esc_html( $entry_choice_card['text'] ); ?></p>
+							<ul>
+								<?php foreach ( $entry_choice_card['items'] as $entry_choice_item ) : ?>
+									<li><?php echo esc_html( $entry_choice_item ); ?></li>
+								<?php endforeach; ?>
+							</ul>
+							<p><a href="<?php echo esc_url( $entry_choice_card['link_url'] ); ?>" data-track-action="<?php echo esc_attr( $entry_choice_card['track_action'] ); ?>" data-track-category="navigation"><?php echo esc_html( $entry_choice_card['link_label'] ); ?></a></p>
+						</article>
+					<?php endforeach; ?>
 				</div>
 			</div>
 		</section>
