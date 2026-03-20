@@ -17,6 +17,9 @@ $focus_options        = function_exists( 'nexus_get_contact_focus_options' ) ? n
 $budget_options       = function_exists( 'nexus_get_contact_budget_options' ) ? nexus_get_contact_budget_options() : [];
 $timeline_options     = function_exists( 'nexus_get_contact_timeline_options' ) ? nexus_get_contact_timeline_options() : [];
 $calendar_url         = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' );
+$agentur_url          = function_exists( 'nexus_get_primary_public_url' ) ? nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) ) : home_url( '/wordpress-agentur-hannover/' );
+$wartung_url          = function_exists( 'nexus_get_primary_public_url' ) ? nexus_get_primary_public_url( 'wartung', home_url( '/wordpress-wartung-hannover/' ) ) : home_url( '/wordpress-wartung-hannover/' );
+$results_url          = function_exists( 'nexus_get_results_url' ) ? nexus_get_results_url() : home_url( '/ergebnisse/' );
 $requested_focus      = isset( $_GET['focus'] ) ? sanitize_key( wp_unslash( $_GET['focus'] ) ) : '';
 $requested_type       = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '';
 $selected_focus       = isset( $focus_options[ $requested_focus ] ) ? $requested_focus : '';
@@ -188,6 +191,18 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 						<?php foreach ( $request_type_options as $request_type_option ) : ?>
 							<li><strong><?php echo esc_html( $request_type_option['label'] ); ?></strong> <?php echo esc_html( $request_type_option['description'] ); ?></li>
 						<?php endforeach; ?>
+					</ul>
+				</section>
+
+				<section class="contact-note-card nx-reveal" aria-labelledby="contact-entry-title">
+					<div class="contact-section-head contact-section-head--tight">
+						<span class="contact-section-head__eyebrow">Einordnung</span>
+						<h2 id="contact-entry-title">Vor der Anfrage noch kurz orientieren?</h2>
+					</div>
+					<ul class="contact-list">
+						<li><a href="<?php echo esc_url( $agentur_url ); ?>">WordPress Agentur Hannover</a> ist der breite Einstieg für Angebotsseiten, SEO, Tracking und Conversion.</li>
+						<li><a href="<?php echo esc_url( $wartung_url ); ?>">WordPress Wartung Hannover</a> passt, wenn Betrieb, Updates und Stabilisierung im Vordergrund stehen.</li>
+						<li><a href="<?php echo esc_url( $results_url ); ?>">Ergebnisse</a> ist der richtige Schritt, wenn Sie zuerst offenen Proof und Cases sehen wollen.</li>
 					</ul>
 				</section>
 

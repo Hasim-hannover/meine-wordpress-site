@@ -10,7 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$audit_url = home_url( '/growth-audit/' );
+$audit_url   = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
+$contact_url = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+$analysis_contact_url = add_query_arg(
+	[
+		'type' => 'analysis',
+	],
+	$contact_url
+);
 
 $hero_facts = [
 	[
@@ -421,6 +428,10 @@ get_header();
 						>
 							Growth Audit starten
 						</a>
+					</p>
+					<p>
+						Wenn Ziel, Timing oder Scope schon klar sind, geht der direkte Einstieg auch über
+						<a href="<?php echo esc_url( $analysis_contact_url ); ?>" data-track-action="cta_about_final_contact" data-track-category="navigation" data-track-section="about_close">Kontakt</a>.
 					</p>
 				</div>
 			</div>

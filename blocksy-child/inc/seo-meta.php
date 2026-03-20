@@ -87,6 +87,10 @@ function hu_get_forced_singular_seo_map() {
 				'title'       => 'Kontakt für WordPress, SEO und CRO | Haşim Üner',
 				'description' => 'Projektanfrage für WordPress, SEO, Tracking und CRO: kurzer Einstieg, klare nächste Schritte und Rückmeldung für neue Projekte und bestehende Kunden.',
 			],
+			'uber-mich' => [
+				'title'       => 'Über Haşim Üner | WordPress, SEO und klare Systeme',
+				'description' => 'Über Haşim Üner: WordPress, technische SEO, privacy-first Messbarkeit und klare Nutzerführung für B2B-Websites mit Diagnose vor Aktion.',
+			],
 			'wgos' => [
 				'title'       => 'WordPress Growth Operating System | Haşim Üner',
 				'description' => 'Das WordPress Growth Operating System verbindet SEO, Tracking, Conversion und Angebotslogik zu einem strukturierten Nachfrage-System für B2B-Websites.',

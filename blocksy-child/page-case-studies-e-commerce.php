@@ -14,6 +14,13 @@ get_header();
 
 $audit_url      = nexus_get_audit_url();
 $wgos_url       = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
+$contact_url    = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+$implementation_contact_url = add_query_arg(
+	[
+		'type' => 'implementation',
+	],
+	$contact_url
+);
 $e3_url         = nexus_get_page_url(
 	[ 'e3-new-energy', 'case-studies/e3-new-energy', 'case-e3' ],
 	home_url( '/e3-new-energy/' )
@@ -267,6 +274,10 @@ $detail_sections = [
 						<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_results_footer_wgos" data-track-category="trust">Systemlogik hinter den Ergebnissen verstehen</a>
 					</div>
 				</div>
+				<p class="results-cta__copy">
+					Wenn der Proof passt und Ziel, Scope oder Timing bereits klar sind, geht der direkte Einstieg auch über
+					<a href="<?php echo esc_url( $implementation_contact_url ); ?>" data-track-action="cta_results_footer_contact" data-track-category="navigation">Kontakt</a>.
+				</p>
 			</div>
 		</div>
 	</section>

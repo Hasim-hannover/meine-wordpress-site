@@ -207,6 +207,7 @@ function nexus_get_seo_cockpit_template_internal_links( $post_id, $post = null )
 	$post_slug    = sanitize_title( (string) $post->post_name );
 	$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
 	$links        = [];
+	$contact_url  = $primary_urls['contact'] ?? home_url( '/kontakt/' );
 
 	if ( function_exists( 'nexus_get_wgos_cluster_page' ) ) {
 		$cluster_page = nexus_get_wgos_cluster_page( $post );
@@ -256,8 +257,10 @@ function nexus_get_seo_cockpit_template_internal_links( $post_id, $post = null )
 				$primary_urls['results'] ?? home_url( '/ergebnisse/' ),
 				$primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
 				$primary_urls['about'] ?? home_url( '/uber-mich/' ),
+				$contact_url,
 				$primary_urls['e3'] ?? home_url( '/e3-new-energy/' ),
 				$primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' ),
+				$primary_urls['wartung'] ?? home_url( '/wordpress-wartung-hannover/' ),
 				$primary_urls['cro'] ?? home_url( '/conversion-rate-optimization/' ),
 				function_exists( 'nexus_get_wgos_asset_anchor_url' ) ? nexus_get_wgos_asset_anchor_url( 'tracking-audit' ) : home_url( '/wgos-systemlandkarte/#asset-tracking-audit' ),
 			]
@@ -273,9 +276,31 @@ function nexus_get_seo_cockpit_template_internal_links( $post_id, $post = null )
 			[
 				$primary_urls['audit'] ?? home_url( '/growth-audit/' ),
 				$primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
+				$contact_url,
 				$primary_urls['e3'] ?? home_url( '/e3-new-energy/' ),
 				$primary_urls['domdar'] ?? home_url( '/case-study-domdar/' ),
 				$primary_urls['whitelabel'] ?? home_url( '/whitelabel-retainer/' ),
+			]
+		);
+	}
+
+	if ( 'template-about.php' === $template || 'uber-mich' === $post_slug ) {
+		$links = array_merge(
+			$links,
+			[
+				$primary_urls['audit'] ?? home_url( '/growth-audit/' ),
+				$contact_url,
+			]
+		);
+	}
+
+	if ( 'page-kontakt.php' === $template || in_array( $post_slug, [ 'kontakt', 'kontaktiere-mich' ], true ) ) {
+		$links = array_merge(
+			$links,
+			[
+				$primary_urls['agentur'] ?? home_url( '/wordpress-agentur-hannover/' ),
+				$primary_urls['wartung'] ?? home_url( '/wordpress-wartung-hannover/' ),
+				$primary_urls['results'] ?? home_url( '/ergebnisse/' ),
 			]
 		);
 	}

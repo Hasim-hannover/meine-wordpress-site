@@ -14,8 +14,16 @@ $audit_url = nexus_get_audit_url();
 $wgos_url  = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
 $cases_url = nexus_get_results_url();
 $about_url = nexus_get_page_url( [ 'uber-mich' ] );
+$contact_url = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+$implementation_contact_url = add_query_arg(
+	[
+		'type' => 'implementation',
+	],
+	$contact_url
+);
 $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ] );
 $seo_url   = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) );
+$wartung_url = nexus_get_primary_public_url( 'wartung', home_url( '/wordpress-wartung-hannover/' ) );
 $measurement_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
 $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ] );
 $proof_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [];
@@ -521,7 +529,15 @@ get_header();
 					<p>Der Growth Audit zeigt, ob Angebotsseiten, Datenlage, CTA-Führung oder technische Reibung zuerst angegangen werden sollten und ob ein tieferer Umbau überhaupt sinnvoll ist.</p>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_final_audit" data-track-category="lead_gen">Growth Audit starten</a>
 					<p class="wp-cta-desc mt-1">Kein Pitch. Klare Priorisierung. Wenn fachlich sinnvoll, kann daraus als nächster Schritt eine vertiefte Analyse, eine fokussierte Korrektur oder eine laufende Weiterentwicklung entstehen.</p>
-					<p class="wp-cta-desc mb-0"><a href="<?php echo esc_url( $about_url ); ?>" data-track-action="cta_agentur_final_about" data-track-category="navigation">Mehr über meine Arbeitsweise</a></p>
+					<p class="wp-cta-desc mb-0">
+						<a href="<?php echo esc_url( $about_url ); ?>" data-track-action="cta_agentur_final_about" data-track-category="navigation">Mehr über meine Arbeitsweise</a>
+						<span aria-hidden="true"> · </span>
+						Wenn der Scope schon klar ist:
+						<a href="<?php echo esc_url( $implementation_contact_url ); ?>" data-track-action="cta_agentur_final_contact" data-track-category="navigation">direkt Kontakt</a>
+						<span aria-hidden="true"> · </span>
+						Für Betrieb und Stabilisierung:
+						<a href="<?php echo esc_url( $wartung_url ); ?>" data-track-action="cta_agentur_final_wartung" data-track-category="navigation">WordPress Wartung Hannover</a>
+					</p>
 				</div>
 			</div>
 		</section>
