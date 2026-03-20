@@ -165,6 +165,10 @@ body.nx-blog-header-active .ct-header {
     white-space: nowrap;
 }
 
+.nx-site-header__mobile-eyebrow {
+    display: none;
+}
+
 .nx-site-header__brand.site-logo {
     font-size: 0.96rem;
     letter-spacing: 0.2em;
@@ -394,8 +398,25 @@ body.nx-blog-header-active .ct-header {
         padding-top: 12px;
     }
 
+    .nx-site-header__brand-block {
+        gap: 0.2rem;
+        align-items: flex-start;
+    }
+
     .nx-site-header__eyebrow {
         display: none;
+    }
+
+    .nx-site-header__mobile-eyebrow {
+        display: block;
+        max-width: min(48vw, 19rem);
+        color: color-mix(in srgb, var(--nx-text-dim) 86%, var(--nx-text) 14%);
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        line-height: 1.25;
+        text-wrap: balance;
+        white-space: normal;
     }
 
     .nx-site-header__shell {

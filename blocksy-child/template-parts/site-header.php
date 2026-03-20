@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $brand_text   = function_exists( 'hu_get_site_wordmark_text' ) ? hu_get_site_wordmark_text() : 'HAŞIM ÜNER';
 $eyebrow_text = nexus_get_site_header_eyebrow();
+$mobile_eyebrow_text = function_exists( 'nexus_get_public_primary_term' ) ? trim( (string) nexus_get_public_primary_term() ) : '';
 $panel_id     = 'nx-site-header-panel';
 $cases_url    = function_exists( 'nexus_get_results_url' ) ? nexus_get_results_url() : home_url( '/ergebnisse/' );
 $home_label   = sprintf(
@@ -18,6 +19,10 @@ $home_label   = sprintf(
 	__( 'Startseite - %s', 'blocksy-child' ),
 	$brand_text
 );
+
+if ( '' === $mobile_eyebrow_text ) {
+	$mobile_eyebrow_text = __( 'WordPress als Nachfrage-System für B2B.', 'blocksy-child' );
+}
 ?>
 
 <?php if ( function_exists( 'nexus_is_audit_page' ) && nexus_is_audit_page() ) : ?>
@@ -63,6 +68,7 @@ $home_label   = sprintf(
 				>
 					<?php echo esc_html( $brand_text ); ?>
 				</a>
+				<span class="nx-site-header__mobile-eyebrow"><?php echo esc_html( $mobile_eyebrow_text ); ?></span>
 			</div>
 
 			<nav class="nx-site-header__nav" aria-label="<?php esc_attr_e( 'Primäre Navigation', 'blocksy-child' ); ?>">
