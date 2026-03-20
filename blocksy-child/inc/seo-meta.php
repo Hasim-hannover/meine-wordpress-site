@@ -109,11 +109,11 @@ function hu_get_forced_singular_seo_map() {
 			],
 			'wordpress-agentur-hannover' => [
 				'title'       => 'WordPress Agentur Hannover | B2B, SEO, Tracking',
-				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmassnahmen. Growth Audit mit Rueckmeldung in 48h.',
+				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion fuer Service- und WooCommerce-Setups. Growth Audit mit Rueckmeldung in 48h.',
 			],
 			'wordpress-agentur' => [
 				'title'       => 'WordPress Agentur Hannover | B2B, SEO, Tracking',
-				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmassnahmen. Growth Audit mit Rueckmeldung in 48h.',
+				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion fuer Service- und WooCommerce-Setups. Growth Audit mit Rueckmeldung in 48h.',
 			],
 			'ergebnisse' => [
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
@@ -133,7 +133,7 @@ function hu_get_forced_singular_seo_map() {
 			],
 			'wordpress-seo-hannover' => [
 				'title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
-				'description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, interne Verlinkung und priorisierte Fixes fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
+				'description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability, interne Verlinkung und priorisierte Fixes fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
 			],
 			'ki-integration-wordpress' => [
 				'title'       => 'KI-Integration für WordPress – DSGVO-konform | Haşim Üner',

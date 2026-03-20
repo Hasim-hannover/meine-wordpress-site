@@ -34,11 +34,11 @@ $primary_term                = function_exists( 'nexus_get_public_primary_term' 
 $hero_highlights = [
 	[
 		'label' => 'Für wen',
-		'text'  => 'B2B-Unternehmen in Hannover und der Region, für die WordPress ein echter Nachfragekanal ist.',
+		'text'  => 'B2B-Unternehmen in Hannover und der Region, für die WordPress oder WooCommerce ein echter Nachfragekanal ist.',
 	],
 	[
 		'label' => 'Typisches Ergebnis',
-		'text'  => 'Klarere Angebotsseiten, belastbare Datensignale und weniger Reibung bis zur qualifizierten Anfrage.',
+		'text'  => 'Klarere Angebotsseiten, belastbare Datensignale und weniger Reibung zwischen erstem Besuch und qualifizierter Anfrage.',
 	],
 	[
 		'label' => 'Nächster Schritt',
@@ -207,6 +207,10 @@ $faq_items = [
 		'answer'   => 'Ja. Oft ist kein kompletter Neuaufbau nötig. Häufig reichen priorisierte Eingriffe an Money Pages, Datenebene, Proof oder technischer Reibung, bevor größer gedacht werden muss.',
 	],
 	[
+		'question' => 'Passt das auch für WordPress mit WooCommerce?',
+		'answer'   => 'Ja. Gerade bei B2B-Setups mit WooCommerce, Angebotsseiten und hybriden Anfragepfaden ist die Reihenfolge entscheidend. Erst klären, ob Produktseiten, Tracking, Conversion-Führung oder technisches Fundament die eigentliche Bremse sind, dann erst einzelne Maßnahmen umsetzen.',
+	],
+	[
 		'question' => 'Ist das eher SEO, Tracking, CRO oder Relaunch?',
 		'answer'   => 'Die Trennung klingt sauberer als die Realität. In der Praxis hängen Sichtbarkeit, Messbarkeit, Nutzerführung und technisches Fundament direkt zusammen. Ich arbeite an der Verbindung statt an isolierten Gewerken.',
 	],
@@ -233,7 +237,7 @@ get_header();
 						<span class="nx-badge nx-badge--gold">WordPress Agentur Hannover für B2B</span>
 						<h1 class="nx-hero__title">WordPress Agentur Hannover: B2B-Websites, die Anfragen liefern.</h1>
 						<p class="nx-hero__subtitle">
-							<?php echo esc_html( $primary_term ); ?> statt Einzelmaßnahmen: Angebotsseiten, technische SEO, Tracking und Conversion-Führung greifen als ein sauberes System zusammen.
+							WordPress Agentur in Hannover heißt hier: <?php echo esc_html( $primary_term ); ?> statt Einzelmaßnahmen. Angebotsseiten, technische SEO, Tracking und Conversion-Führung greifen als ein sauberes System zusammen, auch bei WooCommerce- oder Hybrid-Setups mit echtem Anfragebezug.
 						</p>
 						<div class="wp-agentur-actions wp-agentur-actions--hero">
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary wp-agentur-hero__primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen">Growth Audit starten</a>
@@ -278,7 +282,7 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-section-header wp-agentur-proof-header">
 					<h2 class="nx-headline-section">Proof früh sichtbar, damit der Audit nicht im luftleeren Raum startet</h2>
-					<p>Belastbare Kennzahlen, ein wiederholbares Vorgehen und Erfahrung aus echten B2B-Setups.</p>
+					<p>Belastbare Kennzahlen, ein wiederholbares Vorgehen und Erfahrung aus echten B2B-Setups für WordPress-, Lead-Gen- und WooCommerce-Kontexte.</p>
 				</div>
 				<div class="nx-grid nx-grid-4 wp-agentur-proof-grid">
 					<?php foreach ( $proof_metrics as $proof_metric ) : ?>
@@ -443,7 +447,7 @@ get_header();
 		<section id="case-study" class="nx-section">
 			<div class="nx-container">
 				<div class="nx-section-header">
-					<h2 class="nx-headline-section">WordPress-Projekt Hannover: Was passiert, wenn die Reihenfolge stimmt</h2>
+					<h2 class="nx-headline-section">WordPress Agentur Hannover: Was passiert, wenn die Reihenfolge stimmt</h2>
 					<p class="wp-agentur-section-intro">Kurzer Blick auf die gleiche Logik in der Praxis: Ausgangslage, Eingriff, Ergebnis und nächster sinnvoller Vertiefungsschritt.</p>
 				</div>
 				<div class="wp-agentur-case-grid">
