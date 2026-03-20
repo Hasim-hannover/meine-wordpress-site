@@ -1400,6 +1400,10 @@ html.theme-transitioning *::after {
 }
 
 @media (max-width: 1180px) {
+    .nx-theme-toggle {
+        display: none;
+    }
+
     .nx-theme-toggle__button span:last-child {
         display: none;
     }

@@ -648,89 +648,25 @@
 
 
         /**
-         * 11. THEME TOGGLE MOUNT
-         * Verschiebt den Toggle in den sichtbaren Header fuer konsistente Platzierung.
+         * 11. THEME TOGGLE CLEANUP
+         * Behaelt nur den globalen Desktop-Toggle und entfernt Header-Instanzen.
          */
         mountThemeToggle: function () {
             var toggles = Array.prototype.slice.call(document.querySelectorAll('.nx-theme-toggle[data-nx-theme-toggle]'));
-            var directMountSelector = '.nx-site-header__theme-toggle-slot, .nexus-blog-header__theme-toggle-slot';
-            var mountSelectors = [
-                '.nexus-blog-header__theme-toggle-slot',
-                '.nexus-blog-header__actions',
-                '.nexus-blog-header__shell',
-                '.nexus-blog-header',
-                '.nx-site-header__theme-toggle-slot',
-                '.nx-site-header__actions',
-                '.nx-site-header__shell',
-                '.nx-site-header',
-                '.ct-header [data-device="desktop"] .ct-container',
-                '.ct-header .ct-middle-row .ct-container',
-                '.ct-header .ct-container',
-                '.ct-header'
-            ];
-            var selectorsWithoutMenuCheck = {
-                '.nexus-blog-header__theme-toggle-slot': true,
-                '.nexus-blog-header__actions': true,
-                '.nexus-blog-header__shell': true,
-                '.nexus-blog-header': true,
-                '.nx-site-header__theme-toggle-slot': true,
-                '.nx-site-header__actions': true,
-                '.nx-site-header__shell': true,
-                '.nx-site-header': true,
-                '.ct-header': true
-            };
+            var toggle = null;
 
             if (!toggles.length) return;
 
-            function resolveDirectToggle() {
-                return document.querySelector(
-                    '.nx-site-header__theme-toggle-slot .nx-theme-toggle[data-nx-theme-toggle-source="header"], ' +
-                    '.nexus-blog-header__theme-toggle-slot .nx-theme-toggle[data-nx-theme-toggle-source="header"]'
-                );
-            }
-
-            function isVisible(node) {
-                if (!node) return false;
-
-                var style = window.getComputedStyle(node);
-                var rect = node.getBoundingClientRect();
-
-                return style.display !== 'none' &&
-                    style.visibility !== 'hidden' &&
-                    rect.width > 0 &&
-                    rect.height > 0;
-            }
-
-            function isHeaderToggle(node) {
-                return isVisible(node) &&
-                    (!!node.closest('.ct-header') || !!node.closest('.nx-site-header') || !!node.closest('.nexus-blog-header')) &&
-                    !node.closest('.ct-panel') &&
-                    !node.closest('[aria-hidden="true"]');
-            }
-
-            function resolvePrimaryToggle() {
-                var directToggle = resolveDirectToggle();
-
-                if (directToggle) {
-                    return directToggle;
+            for (var i = 0; i < toggles.length; i += 1) {
+                if (toggles[i].getAttribute('data-nx-theme-toggle-source') === 'fallback') {
+                    toggle = toggles[i];
+                    break;
                 }
-
-                for (var i = 0; i < toggles.length; i += 1) {
-                    if (isHeaderToggle(toggles[i])) {
-                        return toggles[i];
-                    }
-                }
-
-                for (var j = 0; j < toggles.length; j += 1) {
-                    if (toggles[j].getAttribute('data-nx-theme-toggle-source') !== 'fallback') {
-                        return toggles[j];
-                    }
-                }
-
-                return toggles[0];
             }
 
-            var toggle = resolvePrimaryToggle();
+            if (!toggle) {
+                toggle = toggles[0];
+            }
 
             toggles.forEach(function (candidate) {
                 if (candidate !== toggle) {
@@ -738,77 +674,11 @@
                 }
             });
 
-            function resolveMountTarget() {
-                if (toggle.parentElement && toggle.parentElement.matches(directMountSelector)) {
-                    return toggle.parentElement;
-                }
-
-                var directTarget = document.querySelector(directMountSelector);
-
-                if (directTarget && !directTarget.closest('.ct-panel') && !directTarget.closest('[aria-hidden="true"]')) {
-                    return directTarget;
-                }
-
-                for (var i = 0; i < mountSelectors.length; i += 1) {
-                    var nodes = document.querySelectorAll(mountSelectors[i]);
-
-                    for (var j = 0; j < nodes.length; j += 1) {
-                        var node = nodes[j];
-
-                        if (!isVisible(node)) {
-                            continue;
-                        }
-
-                        if (node.closest('.ct-panel') || node.closest('[aria-hidden="true"]')) {
-                            continue;
-                        }
-
-                        if (!node.querySelector('.ct-menu, .header-navigation, [data-id="menu"], .nx-site-header__menu') && !selectorsWithoutMenuCheck[mountSelectors[i]]) {
-                            continue;
-                        }
-
-                        return node;
-                    }
-                }
-
-                return null;
+            if (toggle.parentElement && toggle.parentElement.classList.contains('nx-theme-toggle-host')) {
+                toggle.parentElement.classList.remove('nx-theme-toggle-host');
             }
 
-            function applyMount() {
-                var mountTarget = resolveMountTarget();
-
-                toggle.classList.remove('nx-theme-toggle--mounted');
-
-                if (!mountTarget) {
-                    return;
-                }
-
-                mountTarget.classList.add('nx-theme-toggle-host');
-
-                if (toggle.parentElement !== mountTarget) {
-                    mountTarget.appendChild(toggle);
-                }
-
-                toggle.classList.add('nx-theme-toggle--mounted');
-            }
-
-            var mountQueued = false;
-            function queueMount() {
-                if (mountQueued) {
-                    return;
-                }
-
-                mountQueued = true;
-                window.requestAnimationFrame(function () {
-                    mountQueued = false;
-                    applyMount();
-                });
-            }
-
-            applyMount();
-            window.setTimeout(queueMount, 250);
-            window.setTimeout(queueMount, 1200);
-            window.addEventListener('resize', queueMount, { passive: true });
+            toggle.classList.remove('nx-theme-toggle--mounted');
         },
 
 

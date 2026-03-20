@@ -42,17 +42,6 @@ $home_label   = sprintf(
 			</div>
 
 			<div class="nx-site-header__audit-actions">
-				<div class="nx-site-header__theme-toggle-slot">
-					<?php
-					if ( function_exists( 'nexus_get_theme_toggle_html' ) ) {
-						echo nexus_get_theme_toggle_html(
-							[
-								'source' => 'audit-header',
-							]
-						);
-					}
-					?>
-				</div>
 				<a class="nx-site-header__audit-link" href="<?php echo esc_url( $cases_url ); ?>">Einblicke</a>
 				<a class="nx-site-header__audit-link nx-site-header__audit-link--primary" href="#form">Zum Flow</a>
 			</div>
@@ -81,18 +70,6 @@ $home_label   = sprintf(
 			</nav>
 
 			<div class="nx-site-header__actions">
-				<div class="nx-site-header__theme-toggle-slot">
-					<?php
-					if ( function_exists( 'nexus_get_theme_toggle_html' ) ) {
-						echo nexus_get_theme_toggle_html(
-							[
-								'source' => 'header',
-							]
-						);
-					}
-					?>
-				</div>
-
 				<button
 					type="button"
 					class="nx-site-header__toggle"
