@@ -53,6 +53,10 @@ function hu_enqueue_assets() {
 	hu_enqueue_js( 'nexus-core-js', 'nexus-core.js' );
 	hu_enqueue_js( 'nexus-site-header-js', 'site-header.js', [ 'nexus-core-js' ] );
 
+	if ( is_front_page() && wp_script_is( 'ct-scripts', 'registered' ) ) {
+		hu_mark_script_for_defer( 'ct-scripts' );
+	}
+
 	$calendar_embed = function_exists( 'nexus_get_audit_calendar_embed_config' ) ? nexus_get_audit_calendar_embed_config() : [];
 
 	if ( ! empty( $calendar_embed['origin'] ) && ! empty( $calendar_embed['cal_link'] ) && ! empty( $calendar_embed['url'] ) ) {
@@ -708,6 +712,38 @@ function hu_get_non_deferred_script_handles() {
 }
 
 /**
+ * Return script handles that should be force-deferred for the current request.
+ *
+ * This is used for route-specific performance tuning where otherwise-blocking
+ * scripts are safe to delay until after parsing.
+ *
+ * @return array<int, string>
+ */
+function hu_get_force_deferred_script_handles() {
+	$handles = [];
+
+	if ( is_front_page() ) {
+		$handles = [
+			'ct-scripts',
+			'nexus-core-js',
+			'nexus-site-header-js',
+		];
+	}
+
+	$handles = apply_filters( 'hu_force_deferred_script_handles', $handles );
+	$handles = array_filter(
+		array_map(
+			static function ( $handle ) {
+				return sanitize_key( (string) $handle );
+			},
+			(array) $handles
+		)
+	);
+
+	return array_values( array_unique( $handles ) );
+}
+
+/**
  * Check whether a theme script should receive defer.
  *
  * @param string $handle Script handle.
@@ -716,7 +752,15 @@ function hu_get_non_deferred_script_handles() {
 function hu_should_defer_script( $handle ) {
 	$handle = sanitize_key( (string) $handle );
 
-	if ( '' === $handle || 0 !== strpos( $handle, 'nexus-' ) ) {
+	if ( '' === $handle ) {
+		return false;
+	}
+
+	if ( in_array( $handle, hu_get_force_deferred_script_handles(), true ) ) {
+		return true;
+	}
+
+	if ( 0 !== strpos( $handle, 'nexus-' ) ) {
 		return false;
 	}
 

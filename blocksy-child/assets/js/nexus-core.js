@@ -44,21 +44,112 @@
          * Sucht sections mit [id] und markiert passende Links als .active.
          */
         initScrollSpy: function (navSelector, sectionSelector, offset) {
-            const navLinks = document.querySelectorAll(navSelector + ' a');
-            const sections = document.querySelectorAll(sectionSelector);
+            const navLinks = Array.prototype.slice.call(document.querySelectorAll(navSelector + ' a'));
+            const sections = Array.prototype.slice.call(document.querySelectorAll(sectionSelector)).filter(function (section) {
+                return !!section.getAttribute('id');
+            });
             var sectionPositions = [];
             var activeId = '';
             var isQueued = false;
+            var measurementTimer = 0;
+            var observer = null;
+            var observedState = {};
+            var sectionIndexes = {};
 
             if (!navLinks.length || !sections.length) return;
 
             offset = offset || 300;
 
+            sections.forEach(function (section, index) {
+                sectionIndexes[section.getAttribute('id')] = index;
+            });
+
+            function setActive(current) {
+                if (current === activeId) {
+                    return;
+                }
+
+                activeId = current;
+                navLinks.forEach(function (link) {
+                    var href = link.getAttribute('href');
+                    link.classList.toggle('active', !!current && !!href && href.indexOf('#' + current) !== -1);
+                });
+            }
+
+            function resolveObservedActiveId() {
+                var candidates = Object.keys(observedState).map(function (id) {
+                    return observedState[id];
+                });
+
+                if (!candidates.length) {
+                    return '';
+                }
+
+                candidates.sort(function (left, right) {
+                    var leftPassed = left.top <= offset;
+                    var rightPassed = right.top <= offset;
+
+                    if (leftPassed && rightPassed) {
+                        return right.index - left.index;
+                    }
+
+                    if (leftPassed !== rightPassed) {
+                        return leftPassed ? -1 : 1;
+                    }
+
+                    return left.top - right.top;
+                });
+
+                return candidates[0].id;
+            }
+
+            function createObserver() {
+                if (typeof window.IntersectionObserver !== 'function') {
+                    return false;
+                }
+
+                observedState = {};
+                observer = new window.IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        var id = entry.target.getAttribute('id');
+
+                        if (!id) {
+                            return;
+                        }
+
+                        if (entry.isIntersecting) {
+                            observedState[id] = {
+                                id: id,
+                                index: sectionIndexes[id] || 0,
+                                top: entry.boundingClientRect.top
+                            };
+                            return;
+                        }
+
+                        delete observedState[id];
+                    });
+
+                    setActive(resolveObservedActiveId());
+                }, {
+                    rootMargin: '-' + Math.max(80, offset - 80) + 'px 0px -55% 0px',
+                    threshold: [0, 0.1, 0.35, 0.6]
+                });
+
+                sections.forEach(function (section) {
+                    observer.observe(section);
+                });
+
+                return true;
+            }
+
             function syncMeasurements() {
-                sectionPositions = Array.prototype.map.call(sections, function (section) {
+                measurementTimer = 0;
+                sectionPositions = sections.map(function (section) {
+                    var rect = section.getBoundingClientRect();
+
                     return {
                         id: section.getAttribute('id'),
-                        top: section.offsetTop
+                        top: rect.top + window.scrollY
                     };
                 }).filter(function (entry) {
                     return !!entry.id;
@@ -79,15 +170,7 @@
                     }
                 });
 
-                if (current === activeId) {
-                    return;
-                }
-
-                activeId = current;
-                navLinks.forEach(function (link) {
-                    var href = link.getAttribute('href');
-                    link.classList.toggle('active', !!current && !!href && href.indexOf('#' + current) !== -1);
-                });
+                setActive(current);
             }
 
             function queueUpdate() {
@@ -99,10 +182,38 @@
                 window.requestAnimationFrame(update);
             }
 
-            syncMeasurements();
+            function queueMeasurementSync(delay) {
+                if (measurementTimer) {
+                    window.clearTimeout(measurementTimer);
+                }
+
+                measurementTimer = window.setTimeout(syncMeasurements, typeof delay === 'number' ? delay : 180);
+            }
+
+            if (createObserver()) {
+                window.addEventListener('resize', function () {
+                    if (observer) {
+                        observer.disconnect();
+                    }
+
+                    createObserver();
+                }, { passive: true });
+
+                window.addEventListener('load', function () {
+                    setActive(resolveObservedActiveId());
+                }, { once: true });
+
+                return;
+            }
+
+            queueMeasurementSync(220);
             window.addEventListener('scroll', queueUpdate, { passive: true });
-            window.addEventListener('resize', syncMeasurements, { passive: true });
-            window.addEventListener('load', syncMeasurements, { once: true });
+            window.addEventListener('resize', function () {
+                queueMeasurementSync(160);
+            }, { passive: true });
+            window.addEventListener('load', function () {
+                queueMeasurementSync(0);
+            }, { once: true });
         },
 
 
@@ -542,6 +653,7 @@
          */
         mountThemeToggle: function () {
             var toggles = Array.prototype.slice.call(document.querySelectorAll('.nx-theme-toggle[data-nx-theme-toggle]'));
+            var directMountSelector = '.nx-site-header__theme-toggle-slot, .nexus-blog-header__theme-toggle-slot';
             var mountSelectors = [
                 '.nexus-blog-header__theme-toggle-slot',
                 '.nexus-blog-header__actions',
@@ -570,6 +682,13 @@
 
             if (!toggles.length) return;
 
+            function resolveDirectToggle() {
+                return document.querySelector(
+                    '.nx-site-header__theme-toggle-slot .nx-theme-toggle[data-nx-theme-toggle-source="header"], ' +
+                    '.nexus-blog-header__theme-toggle-slot .nx-theme-toggle[data-nx-theme-toggle-source="header"]'
+                );
+            }
+
             function isVisible(node) {
                 if (!node) return false;
 
@@ -590,6 +709,12 @@
             }
 
             function resolvePrimaryToggle() {
+                var directToggle = resolveDirectToggle();
+
+                if (directToggle) {
+                    return directToggle;
+                }
+
                 for (var i = 0; i < toggles.length; i += 1) {
                     if (isHeaderToggle(toggles[i])) {
                         return toggles[i];
@@ -614,6 +739,16 @@
             });
 
             function resolveMountTarget() {
+                if (toggle.parentElement && toggle.parentElement.matches(directMountSelector)) {
+                    return toggle.parentElement;
+                }
+
+                var directTarget = document.querySelector(directMountSelector);
+
+                if (directTarget && !directTarget.closest('.ct-panel') && !directTarget.closest('[aria-hidden="true"]')) {
+                    return directTarget;
+                }
+
                 for (var i = 0; i < mountSelectors.length; i += 1) {
                     var nodes = document.querySelectorAll(mountSelectors[i]);
 
@@ -737,15 +872,23 @@
 
             // Smart Nav (Homepage & About)
             if (document.querySelector('.smart-nav')) {
-                this.initScrollSpy('.smart-nav', 'section[id], .audit-section[id]');
+                runWhenIdle(function () {
+                    self.initScrollSpy('.smart-nav', 'section[id], .audit-section[id]');
+                }, 900);
             }
             if (document.querySelector('.nx-sidenav')) {
-                this.initScrollSpy('.nx-sidenav', 'section[id]');
+                runWhenIdle(function () {
+                    self.initScrollSpy('.nx-sidenav', 'section[id]');
+                }, 900);
             }
 
-            // Theme Toggle
-            this.mountThemeToggle();
-            this.initThemeToggle();
+            runAfterNextPaint(function () {
+                self.initThemeToggle();
+            });
+
+            runWhenIdle(function () {
+                self.mountThemeToggle();
+            }, 1000);
 
             // Header Flight Mode
             this.initHeaderFlight();
