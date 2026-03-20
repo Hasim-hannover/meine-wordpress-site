@@ -1556,12 +1556,52 @@ button.nexus-share-btn {
         padding-top: calc(env(safe-area-inset-top, 0px) + 48px);
     }
 
+    .ct-panel {
+        background: hsl(30 6% 5% / 0.82);
+        backdrop-filter: blur(18px) saturate(140%);
+        -webkit-backdrop-filter: blur(18px) saturate(140%);
+    }
+
+    .ct-panel-content,
+    .ct-panel-inner {
+        background: var(--nx-panel-gradient);
+        color: var(--nx-text);
+        border-left: 1px solid color-mix(in srgb, var(--nx-border) 90%, white 10%);
+        box-shadow: var(--nx-shadow-xl);
+        --theme-link-initial-color: var(--nx-text-secondary);
+        --theme-link-hover-color: var(--nx-text);
+        --theme-text-color: var(--nx-text);
+        --theme-heading-color: var(--nx-text);
+    }
+
     .ct-panel .ct-panel-close {
         top: calc(env(safe-area-inset-top, 0px) + 16px);
     }
 
     .ct-panel .ct-menu {
         margin-top: 16px;
+    }
+
+    .ct-panel .ct-menu > li > a,
+    .ct-panel .ct-menu-link,
+    .ct-panel [data-id="menu"] a {
+        color: var(--nx-text) !important;
+        background: var(--nx-bg-glass-light);
+        border: 1px solid var(--nx-border);
+        border-radius: 18px;
+        box-shadow: inset 0 1px 0 hsl(30 10% 100% / 0.03);
+    }
+
+    .ct-panel .ct-menu > li > a:hover,
+    .ct-panel .ct-menu > li.current-menu-item > a,
+    .ct-panel .ct-menu > li.current-menu-ancestor > a,
+    .ct-panel .ct-menu-link:hover,
+    .ct-panel [data-id="menu"] .current-menu-item > a,
+    .ct-panel [data-id="menu"] .current-menu-ancestor > a {
+        color: var(--nx-text) !important;
+        background: color-mix(in srgb, var(--accent) 12%, var(--nx-bg-elevated));
+        border-color: color-mix(in srgb, var(--accent) 28%, var(--nx-border));
+        box-shadow: 0 12px 26px hsl(var(--accent-hsl) / 0.12);
     }
 
     .ct-panel .ct-panel-close {
@@ -1585,6 +1625,20 @@ button.nexus-share-btn {
     .ct-panel .site-logo-container {
         font-size: 12px;
         letter-spacing: 0.16em;
+    }
+}
+
+@media (max-width: 1023px) {
+    :root[data-nx-theme='light'] .ct-panel,
+    :root[data-theme='light'] .ct-panel {
+        background: hsl(35 14% 96% / 0.74);
+    }
+
+    :root[data-nx-theme='light'] .ct-panel-content,
+    :root[data-theme='light'] .ct-panel-content,
+    :root[data-nx-theme='light'] .ct-panel-inner,
+    :root[data-theme='light'] .ct-panel-inner {
+        border-left-color: var(--nx-border);
     }
 }
 
