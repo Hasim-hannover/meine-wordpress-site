@@ -303,6 +303,35 @@
     margin: 0 0 8px;
 }
 
+.nexus-seo-cockpit__insight-sublist {
+    margin: 10px 0 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #f2f5f8;
+}
+
+.nexus-seo-cockpit__insight-sublist strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #24303c;
+}
+
+.nexus-seo-cockpit__competing-urls {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.nexus-seo-cockpit__competing-urls li {
+    margin: 0 0 6px;
+}
+
+.nexus-seo-cockpit__competing-urls span {
+    display: inline-block;
+    margin-left: 8px;
+    color: #5e6977;
+    font-size: 12px;
+}
+
 .nexus-seo-cockpit__insight-head {
     display: flex;
     align-items: center;
@@ -410,6 +439,10 @@
     color: #5e6977;
     font-size: 12px;
     line-height: 1.5;
+}
+
+.nexus-seo-cockpit__table .nexus-seo-cockpit__insight-sublist {
+    margin-top: 10px;
 }
 
 .nexus-seo-cockpit__settings-form .form-table th {

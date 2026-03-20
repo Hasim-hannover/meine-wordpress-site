@@ -1208,7 +1208,7 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 			}
 		);
 
-		$top_urls = array_slice( $urls, 0, 2 );
+		$top_urls = array_slice( $urls, 0, 5 );
 
 		$insights[] = nexus_build_seo_cockpit_insight(
 			[
@@ -1220,6 +1220,7 @@ function nexus_get_seo_cockpit_insights( $snapshot ) {
 				'query'              => (string) $group['query'],
 				'metrics'            => [
 					'urls'              => $top_urls,
+					'url_count'         => count( $urls ),
 					'total_impressions' => $group['total_impressions'],
 				],
 				'recommended_action' => 'Primärseite festlegen und interne Links sowie Snippets auf diese URL konzentrieren.',

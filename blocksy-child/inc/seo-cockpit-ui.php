@@ -490,6 +490,57 @@ function nexus_render_seo_cockpit_trend_card( $series, $metric, $label ) {
 }
 
 /**
+ * Render the competing URLs for one cannibalization insight.
+ *
+ * @param array<string, mixed> $insight Insight row.
+ * @return void
+ */
+function nexus_render_seo_cockpit_competing_urls( $insight ) {
+	$metrics  = isset( $insight['metrics'] ) && is_array( $insight['metrics'] ) ? $insight['metrics'] : [];
+	$url_rows = isset( $metrics['urls'] ) && is_array( $metrics['urls'] ) ? $metrics['urls'] : [];
+
+	if ( empty( $url_rows ) ) {
+		return;
+	}
+
+	$url_count = max( count( $url_rows ), (int) ( $metrics['url_count'] ?? 0 ) );
+	?>
+	<div class="nexus-seo-cockpit__insight-sublist">
+		<strong>Konkurrierende URLs</strong>
+		<ul class="nexus-seo-cockpit__competing-urls">
+			<?php foreach ( $url_rows as $row ) : ?>
+				<?php
+				$url         = (string) ( $row['url'] ?? '' );
+				$impressions = (float) ( $row['impressions'] ?? 0 );
+				$position    = (float) ( $row['position'] ?? 0 );
+				?>
+				<?php if ( '' === $url ) : ?>
+					<?php continue; ?>
+				<?php endif; ?>
+				<li>
+					<a href="<?php echo esc_url( nexus_get_seo_cockpit_detail_url( $url ) ); ?>"><code><?php echo esc_html( $url ); ?></code></a>
+					<span>
+						<?php
+						echo esc_html(
+							sprintf(
+								'%s Impressionen · Pos. %s',
+								number_format_i18n( $impressions, 0 ),
+								number_format_i18n( $position, 1 )
+							)
+						);
+						?>
+					</span>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+		<?php if ( $url_count > count( $url_rows ) ) : ?>
+			<p class="nexus-seo-cockpit__hint">Im Snapshot sind insgesamt <?php echo esc_html( number_format_i18n( $url_count ) ); ?> konkurrierende URLs erkannt; hier werden die stärksten Ziele angezeigt.</p>
+		<?php endif; ?>
+	</div>
+	<?php
+}
+
+/**
  * Render the insight list.
  *
  * @param array<int, array<string, mixed>> $insights Insight rows.
@@ -527,6 +578,9 @@ function nexus_render_seo_cockpit_insights_list( $insights, $limit = 8 ) {
 				<p><?php echo esc_html( (string) $insight['reason'] ); ?></p>
 				<?php if ( ! empty( $insight['recommended_action'] ) ) : ?>
 					<p class="nexus-seo-cockpit__hint"><strong>Nächster Schritt:</strong> <?php echo esc_html( (string) $insight['recommended_action'] ); ?></p>
+				<?php endif; ?>
+				<?php if ( 'POSSIBLE_CANNIBALIZATION' === (string) ( $insight['type'] ?? '' ) ) : ?>
+					<?php nexus_render_seo_cockpit_competing_urls( $insight ); ?>
 				<?php endif; ?>
 				<div class="nexus-seo-cockpit__insight-meta">
 					<?php if ( ! empty( $insight['page_role_label'] ) ) : ?>
@@ -621,6 +675,9 @@ function nexus_render_seo_cockpit_priority_queue( $insights, $limit = 10 ) {
 							echo esc_html( $note );
 							?>
 						</p>
+						<?php if ( 'POSSIBLE_CANNIBALIZATION' === (string) ( $insight['type'] ?? '' ) ) : ?>
+							<?php nexus_render_seo_cockpit_competing_urls( $insight ); ?>
+						<?php endif; ?>
 					</td>
 					<td>
 						<?php if ( ! empty( $insight['url'] ) ) : ?>
