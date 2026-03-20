@@ -154,7 +154,7 @@ get_header();
 						<h1 class="about-hero__title">Ich entwickle Websites, die für Unternehmen mehr leisten als Präsenz.</h1>
 						<p class="about-hero__lead">
 							Eine Website sollte nicht nur gut aussehen oder technisch laufen. Sie sollte verständlich machen, was ein Unternehmen anbietet,
-							Vertrauen aufbauen, relevante Anfragen unterstützen und eine belastbare Grundlage für Sichtbarkeit, Nutzerführung und Weiterentwicklung schaffen.
+							Vertrauen aufbauen, Anfragen unterstützen und eine belastbare Grundlage für Sichtbarkeit, Nutzerführung und Weiterentwicklung schaffen.
 						</p>
 						<p class="about-hero__text">
 							Genau daran arbeite ich: an WordPress-Systemen, die Klarheit, Struktur, technische Qualität und sinnvolle Messbarkeit miteinander verbinden.
@@ -195,12 +195,12 @@ get_header();
 						<div class="about-profile-card__body">
 							<span class="about-profile-card__eyebrow">Haşim Üner</span>
 							<p class="about-profile-card__quote">
-								Ich arbeite an der Schnittstelle von Kommunikation, Struktur, technischer Umsetzung und geschäftlicher Klarheit.
+								Ich arbeite an der Schnittstelle von Kommunikation, Struktur, technischer Umsetzung und geschäftlicher Wirkung.
 							</p>
 							<ul class="about-profile-card__list">
 								<li>Ich übersetze erklärungsbedürftige Leistungen in verständliche digitale Strukturen.</li>
 								<li>Ich behandle Kommunikation, Nutzerführung und technische Umsetzung als zusammenhängende Aufgabe.</li>
-								<li>Ich denke Web, SEO, Tracking und Projektkoordination nicht nebeneinander, sondern als System.</li>
+								<li>Ich denke Web, SEO, Tracking und Projektkoordination nicht nebeneinander, sondern als zusammenhängende digitale Arbeitsgrundlage.</li>
 							</ul>
 						</div>
 					</aside>
@@ -235,7 +235,7 @@ get_header();
 					<span class="nx-badge nx-badge--ghost">Problembild</span>
 					<h2 class="nx-headline-section">Warum viele Websites geschäftlich zu wenig leisten</h2>
 					<p class="about-section__intro">
-						Viele Unternehmensseiten wirken auf den ersten Blick ordentlich. Trotzdem bleiben sie oft unter ihren Möglichkeiten - nicht wegen fehlender Arbeit, sondern wegen eines zu kleinen Verständnisses ihrer eigentlichen Aufgabe.
+						Viele Unternehmensseiten wirken auf den ersten Blick ordentlich. Trotzdem bleiben sie oft unter ihren Möglichkeiten – nicht wegen fehlender Arbeit, sondern wegen eines zu engen Verständnisses ihrer eigentlichen Aufgabe.
 					</p>
 				</div>
 
@@ -280,7 +280,7 @@ get_header();
 						</div>
 
 						<p>
-							Und eine unsaubere Grundlage macht Weiterentwicklung teuer, langsam oder beliebig.
+							Und eine unsaubere Grundlage macht Weiterentwicklung teuer, langsam und fehleranfällig.
 						</p>
 						<p>
 							Deshalb arbeite ich nicht zuerst an Oberfläche, sondern an der Frage, ob eine Website geschäftlich verständlich,
@@ -369,7 +369,7 @@ get_header();
 					<span class="nx-badge nx-badge--ghost">Passung</span>
 					<h2 class="nx-headline-section">Für wen das passt — und für wen eher nicht</h2>
 					<p class="about-section__intro">
-						Diese Art der Arbeit passt gut, wenn eine Website geschäftlich ernst genommen wird - und weniger, wenn sie nur Fassade bleiben soll.
+						Diese Art der Arbeit passt gut, wenn eine Website als geschäftliches Arbeitsinstrument verstanden wird – und weniger, wenn sie nur Fassade bleiben soll.
 					</p>
 				</div>
 
