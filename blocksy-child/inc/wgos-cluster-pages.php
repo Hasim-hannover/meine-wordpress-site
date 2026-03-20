@@ -411,16 +411,16 @@ function nexus_get_wgos_cluster_page_asset_cards( $page ) {
 function nexus_get_wgos_cluster_page_proof_metrics() {
 	return [
 		[
-			'value' => '1.750+',
-			'label' => 'qualifizierte Leads im aufgebauten System',
+			'value' => '100 %',
+			'label' => 'B2B-Fokus auf WordPress-, SEO-, Tracking- und CRO-Systeme',
 		],
 		[
-			'value' => '-83%',
-			'label' => 'Cost per Lead nach Neuordnung',
+			'value' => '48h',
+			'label' => 'schriftliche Diagnosezeit im Growth Audit',
 		],
 		[
-			'value' => '<0.8s',
-			'label' => 'LCP auf Angebotsseiten',
+			'value' => '3 Proof-Routen',
+			'label' => 'E3, DOMDAR und Ergebnisse sind oeffentlich einsehbar',
 		],
 	];
 }

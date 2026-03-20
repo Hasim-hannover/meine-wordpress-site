@@ -3,7 +3,7 @@
  * NEXUS Asset Management (CSS/JS Enqueue)
  *
  * Zentrale Registrierung aller Styles und Scripts.
- * Cache-Busting via filemtime(), kein Inline-CSS/JS in Templates.
+ * Static asset versions on live-like environments, filemtime() only in local development.
  *
  * [Speed] Enqueue-Logik: Conditional Loading per Template/Seitentyp.
  *
@@ -40,7 +40,7 @@ function hu_enqueue_assets() {
 		'blocksy-child-style',
 		get_stylesheet_uri(),
 		[],
-		filemtime( get_stylesheet_directory() . '/style.css' )
+		hu_get_asset_version( get_stylesheet_directory() . '/style.css' )
 	);
 
 	// ── GLOBAL: Design System (Single Source of Truth) ─────────────
@@ -395,132 +395,6 @@ function hu_enqueue_assets() {
 			}
 		'
 		);
-		// Problem-Sektion (#lead-loss): Bulletproof-Inline-CSS auf blocksy-child-style
-		// (lädt IMMER) mit harten Fallback-Werten für jede CSS-Variable.
-		// Damit funktioniert die Problem-Sektion unabhängig davon, ob externe
-		// CSS-Dateien gecacht, kombiniert oder verzögert geladen werden.
-		wp_add_inline_style(
-			'blocksy-child-style',
-			'
-			.review-problem-shell {
-				padding: clamp(1.45rem, 3vw, 2.1rem) !important;
-				border-radius: 28px !important;
-				border: 1px solid var(--audit-border-strong, hsl(30 3% 18%)) !important;
-				background: linear-gradient(180deg, hsla(8,82%,64%,0.06), transparent 28%), var(--audit-glass, linear-gradient(180deg, hsl(0 0% 100% / 0.045), hsl(30 10% 100% / 0.04))) !important;
-				box-shadow: var(--audit-shadow-card, 0 8px 24px hsl(30 25% 2% / 0.42)) !important;
-			}
-			.review-problem-shell .review-section-head h2 {
-				font-size: clamp(1.65rem, 3vw, 2.3rem) !important;
-				font-weight: 360 !important;
-				line-height: 1.14 !important;
-				letter-spacing: -0.02em !important;
-				margin: 0 0 0.7rem !important;
-			}
-			.review-problem-solution-grid {
-				display: grid !important;
-				grid-template-columns: 1.15fr 0.85fr !important;
-				gap: clamp(1.5rem, 3vw, 2.5rem) !important;
-				align-items: start !important;
-				margin-top: clamp(1.5rem, 3vw, 2.5rem) !important;
-			}
-			.review-problem-grid {
-				display: grid !important;
-				grid-template-columns: 1fr !important;
-				gap: 0.75rem !important;
-			}
-			.review-problem-card {
-				padding: 0.85rem 1rem !important;
-				border-radius: 14px !important;
-				border: 1px solid var(--border, hsl(30 4% 13%)) !important;
-				background: var(--audit-surface, linear-gradient(180deg, hsl(30 5% 9% / 0.92), hsl(30 6% 6% / 0.98))) !important;
-				box-shadow: var(--audit-shadow-card, 0 8px 24px hsl(30 25% 2% / 0.42)) !important;
-			}
-			.review-problem-card h3 {
-				margin: 0.4rem 0 0.35rem !important;
-				padding: 0 !important;
-				font-size: 0.92rem !important;
-				font-weight: 700 !important;
-				line-height: 1.35 !important;
-				color: var(--text-main, hsl(30 4% 90%)) !important;
-			}
-			.review-problem-card p {
-				margin: 0 !important;
-				padding: 0 !important;
-				font-size: 0.88rem !important;
-				line-height: 1.62 !important;
-				color: var(--audit-text-soft, hsl(30 3% 58%)) !important;
-			}
-			.review-problem-index {
-				display: inline-flex !important;
-				align-items: center !important;
-				justify-content: center !important;
-				width: 1.6rem !important;
-				height: 1.6rem !important;
-				border-radius: 999px !important;
-				border: 1px solid hsla(8,82%,64%,0.24) !important;
-				background: hsla(8,82%,64%,0.1) !important;
-				color: var(--red, hsl(8 82% 64%)) !important;
-				font-size: 0.7rem !important;
-				font-weight: 800 !important;
-			}
-			.review-flow-strip--system {
-				display: grid !important;
-				grid-template-columns: 1fr !important;
-				gap: 0.85rem !important;
-				padding: clamp(1rem, 2vw, 1.5rem) !important;
-				border-radius: 20px !important;
-			}
-			.review-flow-step {
-				display: grid !important;
-				grid-template-columns: auto 1fr !important;
-				gap: 0.75rem !important;
-				align-items: start !important;
-				padding: 0.95rem 1rem !important;
-				border: 1px solid var(--border, hsl(30 4% 13%)) !important;
-				border-radius: 18px !important;
-				background: linear-gradient(180deg, hsla(23,50%,47%,0.08), transparent 32%), var(--audit-glass, linear-gradient(180deg, hsl(0 0% 100% / 0.045), hsl(30 10% 100% / 0.04))) !important;
-				box-shadow: var(--audit-shadow-card, 0 8px 24px hsl(30 25% 2% / 0.42)) !important;
-			}
-			.review-flow-step-index {
-				display: inline-flex !important;
-				align-items: center !important;
-				justify-content: center !important;
-				width: 2rem !important;
-				height: 2rem !important;
-				border-radius: 999px !important;
-				background: var(--audit-accent-soft, hsl(23 50% 47% / 0.1)) !important;
-				border: 1px solid var(--audit-border-accent, hsl(23 50% 47% / 0.28)) !important;
-				color: var(--gold, #b46a3c) !important;
-				font-size: 0.8rem !important;
-				font-weight: 800 !important;
-			}
-			.review-flow-step-copy {
-				display: grid !important;
-				gap: 0.18rem !important;
-			}
-			.review-flow-step-copy strong {
-				color: var(--text-main, hsl(30 4% 90%)) !important;
-				font-size: 0.92rem !important;
-				font-weight: 700 !important;
-			}
-			.review-flow-step-copy span {
-				color: var(--audit-text-soft, hsl(30 3% 58%)) !important;
-				font-size: 0.85rem !important;
-			}
-			@media (max-width: 860px) {
-				.review-problem-solution-grid {
-					grid-template-columns: 1fr !important;
-				}
-			}
-			@media (max-width: 720px) {
-				.review-problem-shell,
-				.review-problem-card {
-					padding: 1.15rem !important;
-				}
-			}
-		'
-		);
-
 		wp_localize_script(
 			'nexus-review-funnel-js',
 			'NexusReviewConfig',
@@ -639,7 +513,93 @@ function hu_disable_core_block_styles_on_homepage() {
 add_action( 'wp_enqueue_scripts', 'hu_disable_core_block_styles_on_homepage', 100 );
 
 /**
- * Helper: Enqueue a CSS file with filemtime cache-busting.
+ * Return the active WordPress environment name for asset versioning.
+ *
+ * @return string
+ */
+function hu_get_asset_environment_type() {
+	if ( function_exists( 'wp_get_environment_type' ) ) {
+		return sanitize_key( (string) wp_get_environment_type() );
+	}
+
+	return 'production';
+}
+
+/**
+ * Determine whether asset versions should stay dynamic for local work.
+ *
+ * @return bool
+ */
+function hu_should_use_dynamic_asset_versions() {
+	return in_array( hu_get_asset_environment_type(), [ 'local', 'development' ], true );
+}
+
+/**
+ * Return the static asset version used on live-like environments.
+ *
+ * `HU_THEME_VERSION` may be injected from `wp-config.php` or deployment
+ * tooling. If it is absent, fall back to the child theme stylesheet version.
+ *
+ * @return string
+ */
+function hu_get_static_asset_version() {
+	static $version = null;
+
+	if ( null !== $version ) {
+		return $version;
+	}
+
+	if ( defined( 'HU_THEME_VERSION' ) ) {
+		$constant_version = trim( (string) HU_THEME_VERSION );
+
+		if ( '' !== $constant_version ) {
+			$version = $constant_version;
+
+			return $version;
+		}
+	}
+
+	$theme          = wp_get_theme( get_stylesheet() );
+	$theme_version  = $theme instanceof WP_Theme ? trim( (string) $theme->get( 'Version' ) ) : '';
+	$version        = '' !== $theme_version ? $theme_version : '1.0.0';
+
+	return $version;
+}
+
+/**
+ * Resolve the correct asset version for the current environment.
+ *
+ * Local and development keep `filemtime()` for zero-config cache busting.
+ * Live-like environments use the static theme version and avoid per-request
+ * filesystem I/O.
+ *
+ * @param string $path Absolute asset path.
+ * @return string
+ */
+function hu_get_asset_version( $path ) {
+	static $dynamic_versions = [];
+
+	$path = (string) $path;
+
+	if ( '' === $path || ! file_exists( $path ) ) {
+		return hu_get_static_asset_version();
+	}
+
+	if ( ! hu_should_use_dynamic_asset_versions() ) {
+		return hu_get_static_asset_version();
+	}
+
+	if ( isset( $dynamic_versions[ $path ] ) ) {
+		return $dynamic_versions[ $path ];
+	}
+
+	$dynamic_versions[ $path ] = (string) filemtime( $path );
+
+	return $dynamic_versions[ $path ];
+}
+
+/**
+ * Helper: Enqueue a CSS file with environment-aware cache busting.
  *
  * @param string $handle  Stylesheet handle.
  * @param string $file    Filename inside assets/css/.
@@ -655,12 +615,12 @@ function hu_enqueue_css( $handle, $file, $deps = [] ) {
 		$handle,
 		get_stylesheet_directory_uri() . '/assets/css/' . $file,
 		$deps,
-		filemtime( $path )
+		hu_get_asset_version( $path )
 	);
 }
 
 /**
- * Helper: Enqueue a JS file with filemtime cache-busting (footer, defer).
+ * Helper: Enqueue a JS file with environment-aware cache busting (footer, defer).
  *
  * @param string $handle  Script handle.
  * @param string $file    Filename inside assets/js/.
@@ -676,7 +636,7 @@ function hu_enqueue_js( $handle, $file, $deps = [] ) {
 		$handle,
 		get_stylesheet_directory_uri() . '/assets/js/' . $file,
 		$deps,
-		filemtime( $path ),
+		hu_get_asset_version( $path ),
 		true
 	);
 
@@ -791,7 +751,7 @@ function hu_mark_script_for_defer( $handle ) {
 }
 
 /**
- * Helper: Enqueue a JS module file with filemtime cache-busting.
+ * Helper: Enqueue a JS module file with environment-aware cache busting.
  *
  * @param string $handle Script handle.
  * @param string $file   Filename inside assets/js/.

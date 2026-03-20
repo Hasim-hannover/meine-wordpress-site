@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-20.
+Stand: 2026-03-21.
 
 Basis dieses Status:
 
@@ -27,6 +27,8 @@ Nicht verifiziert:
 - Repo-seitig liegt jetzt zusaetzlich eine B2B-Branchen-Landingpage fuer Solar-, Waermepumpen- und Speicher-Anbieter kanonisch unter `/solar-waermepumpen-leadgenerierung/`; der Intake nutzt denselben Audit-/CRM-Stack mit eigener Branchen-Variante.
 - `page-wgos.php` ist als kompaktere WGOS-Sales-Page versioniert: Hero mit Audit-CTA, System-Diagramm, frueher platzierte Pakete, modulare Cards und reduzierte FAQ.
 - Die wichtigsten Legacy-Clusterseiten fuer SEO, Core Web Vitals, CRO, GA4 und Performance Marketing sind jetzt als versionierte WGOS-Clusterseiten im Theme hinterlegt.
+- `inc/enqueue.php` nutzt fuer CSS- und JS-Assets jetzt in Live-Umgebungen eine statische Theme-Version und faellt nur in `local`/`development` auf `filemtime()` zurueck; der fruehere Inline-CSS-Block fuer die Audit-Problemsektion liegt nicht mehr doppelt im HTML-Head, sondern wird ueber `review-funnel.css` ausgeliefert.
+- Die WGOS-Clusterseiten zeigen im Proof-Block jetzt bewusst belastbare System-Beweise (`100 % B2B-Fokus`, `48h` Diagnosezeit, `3 Proof-Routen`) statt uebergreifend wiederholter Leistungszahlen, die als generischer Platzhalter gelesen werden koennten.
 - Die kanonischen Cluster-Routen und die Kontaktseite `/kontakt/` werden repo-seitig jetzt zusaetzlich als veroeffentlichte WordPress-Seiten mit zugewiesenem Template abgesichert, damit oeffentliche URL, native Sitemap, Canonical-Logik und Admin-Aufloesung konsistent bleiben.
 - Repo-seitige Primary-Links auf diese Clusterseiten zeigen jetzt direkt auf ihre kanonischen Routen und fallen nicht mehr auf kuerzere Legacy-Slugs wie `/seo/` zurueck.
 - Ergebnisse laufen repo-seitig kanonisch ueber `/ergebnisse/`; alte Proof-Slugs bleiben nur als Legacy-Redirects bestehen.
