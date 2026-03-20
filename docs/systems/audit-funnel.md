@@ -1,6 +1,6 @@
 # Audit Funnel
 
-Stand: 2026-03-13.
+Stand: 2026-03-20.
 
 Diese Doku beschreibt den aktuell aktiven Funnel rund um den `Growth Audit`.
 
@@ -59,6 +59,10 @@ Implizite Felder:
 - `audit_type=growth_audit`
 - `company_website` als Honeypot
 - `started_at` fuer einfaches Frontend-Timing
+- `landing_page_url` als aktuelle Formularseite
+- `entry_page_url` als erster interner Seitenaufruf der Session
+- `previous_internal_url` als letzte interne Seite vor dem Audit-Formular
+- `referrer_url` als technischer Referrer, falls vorhanden
 
 Optionale Felder:
 
@@ -77,6 +81,7 @@ Optionale Felder:
 
 - WordPress-CPT-Eintrag `nexus_review_request`
 - Metadaten zu Seite, Kontakt, Audit-Typ und Status
+- zusaetzliche Attributions-Metadaten fuer kuenftige SEO-/Lead-Auswertung im `SEO Cockpit`
 - interne Benachrichtigungs-Mail
 - Bestaetigungs-Mail an den Lead
 

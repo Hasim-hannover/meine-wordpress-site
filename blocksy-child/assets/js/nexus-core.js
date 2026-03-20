@@ -957,11 +957,118 @@
 
 
         /**
+         * Lead attribution: merkt sich den internen Einstieg und die letzte interne Seite der Session.
+         */
+        normalizeAttributionUrl: function (url) {
+            if (!url || !window.location || !window.location.origin) {
+                return '';
+            }
+
+            try {
+                var parsed = new URL(url, window.location.origin);
+
+                if (parsed.origin !== window.location.origin) {
+                    return '';
+                }
+
+                var path = parsed.pathname || '/';
+
+                if (path !== '/' && path.slice(-1) !== '/') {
+                    path += '/';
+                }
+
+                return parsed.origin + path;
+            } catch (error) {
+                return '';
+            }
+        },
+
+        initLeadAttributionSession: function () {
+            if (typeof window.sessionStorage === 'undefined') {
+                return;
+            }
+
+            try {
+                var currentUrl = this.normalizeAttributionUrl(window.location.href);
+                var firstUrl = window.sessionStorage.getItem('nexus_first_internal_url') || '';
+                var lastUrl = window.sessionStorage.getItem('nexus_last_internal_url') || '';
+                var referrerOrigin = '';
+
+                if (!currentUrl) {
+                    return;
+                }
+
+                if (document.referrer) {
+                    try {
+                        referrerOrigin = new URL(document.referrer, window.location.origin).origin || '';
+                    } catch (error) {
+                        referrerOrigin = '';
+                    }
+                }
+
+                if (referrerOrigin && referrerOrigin !== window.location.origin) {
+                    window.sessionStorage.setItem('nexus_first_internal_url', currentUrl);
+                    window.sessionStorage.removeItem('nexus_previous_internal_url');
+                    window.sessionStorage.setItem('nexus_last_internal_url', currentUrl);
+                    return;
+                }
+
+                if (!firstUrl) {
+                    window.sessionStorage.setItem('nexus_first_internal_url', currentUrl);
+                }
+
+                if (lastUrl && lastUrl !== currentUrl) {
+                    window.sessionStorage.setItem('nexus_previous_internal_url', lastUrl);
+                }
+
+                window.sessionStorage.setItem('nexus_last_internal_url', currentUrl);
+            } catch (error) {
+                // Ignore storage access failures.
+            }
+        },
+
+        getLeadAttributionPayload: function () {
+            var payload = {
+                landing_page_url: this.normalizeAttributionUrl(window.location.href),
+                entry_page_url: '',
+                previous_internal_url: '',
+                referrer_url: ''
+            };
+
+            if (document.referrer) {
+                try {
+                    payload.referrer_url = String(new URL(document.referrer, window.location.origin)).split('#')[0];
+                } catch (error) {
+                    payload.referrer_url = '';
+                }
+            }
+
+            if (typeof window.sessionStorage !== 'undefined') {
+                try {
+                    payload.entry_page_url = this.normalizeAttributionUrl(window.sessionStorage.getItem('nexus_first_internal_url') || '');
+                    payload.previous_internal_url = this.normalizeAttributionUrl(window.sessionStorage.getItem('nexus_previous_internal_url') || '');
+                } catch (error) {
+                    payload.entry_page_url = '';
+                    payload.previous_internal_url = '';
+                }
+            }
+
+            if (!payload.entry_page_url && payload.landing_page_url) {
+                payload.entry_page_url = payload.landing_page_url;
+            }
+
+            return payload;
+        },
+
+
+        /**
          * INIT: Wird auf DOMContentLoaded automatisch aufgerufen.
          * Prüft welche Elemente auf der Seite existieren und initialisiert nur relevante Module.
          */
         init: function () {
             var self = this;
+
+            this.initLeadAttributionSession();
 
             // Smart Nav (Homepage & About)
             if (document.querySelector('.smart-nav')) {

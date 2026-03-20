@@ -1,6 +1,6 @@
 # SEO Cockpit
 
-Stand: 2026-03-13.
+Stand: 2026-03-20.
 
 Diese Doku beschreibt den repo-seitigen Startpunkt fuer ein internes SEO-Dashboard im WordPress-Admin.
 
@@ -12,7 +12,8 @@ Stattdessen:
 
 - WordPress bleibt die operative Schicht
 - Google Search Console liefert die externe SEO-Sicht
-- Koko Analytics soll spaeter die lokale Traffic-Sicht liefern
+- Koko Analytics liefert optional die lokale Traffic-Sicht
+- das interne Audit-CRM liefert jetzt zusaetzlich Lead- und Attributionssignale
 - das Repo enthaelt die Logik, das Caching und die Admin-Oberflaeche
 
 ## Aktueller Scope
@@ -22,6 +23,7 @@ Repo-seitig vorhanden:
 - Top-Level-Admin-Menue `SEO Cockpit`
 - kompaktes Snapshot-Widget im Standard-WordPress-Dashboard
 - priorisierte Queue im Admin, die SEO-Signale jetzt gegen Business-Wert, Funnel-Naehe und Confidence gewichtet
+- Lead-Layer aus `nexus_review_request` mit Audit-Leads, Status, Source-Mix und intern attribuierten Seiten
 - Settings-Seite fuer
   - Search-Console-Property
   - Google Client ID
@@ -45,6 +47,11 @@ Repo-seitig vorhanden:
   - Kannibalisierung
   - Money-Page-Unterperformance
   - Orphan-/Bridge-/Indexierungs-Signale
+- browserseitige Lead-Attribution fuer neue Audit-Leads ueber
+  - Formular-Landingpage
+  - ersten internen Einstieg der Session
+  - vorherige interne Seite
+  - Referrer-URL
 - automatischer Snapshot-Refresh per WP-Cron (`twicedaily`)
 - optionale Erkennung des Plugins `koko-analytics/koko-analytics.php`
 
@@ -69,11 +76,12 @@ Wichtige technische Entscheidungen:
 - API-Zugriff direkt per `wp_remote_*`
 - leichter Cache ueber WordPress-Transients
 - letzter Sync-Status in WordPress-Optionen fuer Admin-Sichtbarkeit
-- Koko nur optional und spaeter als zweiter Datenlayer
+- Koko nur optional als zweiter Traffic-Layer
+- Audit-CRM als dritter Datenlayer fuer Lead-Kontext und Priorisierung
 
-## Geplante Phase 2
+## Naechster Ausbau
 
-- CTA- und Lead-Signale statt nur Traffic-Kontext
+- CTA-Klickpfade jenseits des Audit-Intakes serverseitig oder ueber einen belastbaren Event-Layer versionieren
 - staerkerer Koko-Layer jenseits der aktuellen Top-Page-Zuordnung
 - Ownership-/Notiz-/Status-Layer fuer operative SEO-Arbeit direkt im Admin
 - URL-Inspection oder Indexing-nahe Erweiterungen nur, wenn der operative Nutzen klar ist

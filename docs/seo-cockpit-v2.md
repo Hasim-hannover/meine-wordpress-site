@@ -14,6 +14,8 @@ Das Cockpit ist aus der bisherigen Monolith-Datei in klar getrennte Layer aufget
   Koko-Status, REST-Zugriff, Onsite-Metriken und Koko-Kontext fuer Snapshot und Drilldown.
 - `blocksy-child/inc/seo-cockpit-links.php`
   Interner Linkgraph auf Basis veroeffentlichter Inhalte.
+- `blocksy-child/inc/seo-cockpit-leads.php`
+  Audit-Lead-Layer aus dem internen CRM inkl. Seitenattribution fuer neue Leads.
 - `blocksy-child/inc/seo-cockpit-sync.php`
   Snapshot-Aufbau, Historical Layer, Cache-Versionierung, Sync, Cron und Locking.
 - `blocksy-child/inc/seo-cockpit-insights.php`
@@ -53,6 +55,10 @@ Der Uebersichts-Snapshot kombiniert drei Ebenen:
   - Besucher und Pageviews je Zeitraum
   - Tagesverlauf
   - Top-Seiten fuer den Zeitraum
+- Audit-CRM:
+  - Audit-Leads je Zeitraum
+  - Statusverteilung und Source-Mix
+  - intern attribuierte Seiten auf Basis von Einstieg, letzter interner Seite und Formular-Landing
 - WordPress:
   - Post ID
   - Post Type
@@ -78,6 +84,7 @@ Der Uebersichts-Snapshot kombiniert drei Ebenen:
   - Business-Wert
   - Funnel-Naehe
   - Demand ueber Impressionen
+  - Lead-Signal ueber intern attribuierte Audit-Leads
   - Confidence ueber Kontext und Koko-Signale
 
 ### 3. Drilldown
@@ -90,6 +97,7 @@ Die URL-Detailansicht baut auf einem eigenen Detailmodell auf:
 - Geraeteverteilung
 - WordPress-Kontext
 - Koko-Kontext der URL, soweit eindeutig zuordenbar
+- Lead-Kontext der URL mit aktuellem, vorherigem und Lifetime-Fenster
 - gefilterte Insights fuer diese URL
 - vorbereitete, manuelle URL-Inspection
 - Drilldown-Diagnostik
@@ -224,6 +232,7 @@ Zusaetzlich berechnet das Cockpit jetzt einen `Priority Score`, der mehrere Eben
 - Business-Wert der URL
 - Funnel-Naehe der URL
 - Actionability des Insight-Typs
+- Lead-Signal aus dem Audit-CRM
 - Confidence aus WordPress-Kontext und optionalem Koko-Match
 
 Jede Insight enthaelt:
@@ -241,6 +250,9 @@ Jede Insight enthaelt:
 - `priority_score`
 - `priority_bucket`
 - `priority_label`
+- `lead_requests_current`
+- `lead_requests_lifetime`
+- `lead_won_lifetime`
 
 ## Offene Punkte
 
@@ -248,7 +260,7 @@ Jede Insight enthaelt:
 - Sitemap-Mitgliedschaft pro URL ist derzeit ein WordPress-internes Signal, keine Search-Console-URL-Membership.
 - Koko basiert auf defensivem REST-Mapping und nicht auf einer harten Plugin-internen API-Vertragsgarantie.
 - Die interne Linkzaehlung trennt jetzt Kontext- und Sitewide-Signale, bleibt aber bei Widgets und dynamisch von Plugins injizierten Navigationspfaden noch konservativ.
-- Koko fliesst aktuell nur als leichter Confidence-/Traffic-Layer in die Priorisierung ein; es ist noch keine belastbare Lead- oder CTA-Attribution.
+- Die neue Lead-Attribution deckt den Audit-Intake bereits ab, aber noch keine generische serverseitige CTA-Klickhistorie ausserhalb dieses Funnels.
 
 ## Grenzen / Risiken
 
@@ -257,3 +269,4 @@ Jede Insight enthaelt:
 - URL-Zuordnung basiert fuer Search-Console-URLs auf `url_to_postid()` plus Sonderfaellen fuer Startseite und Blog.
 - Inspection und Search-Console-APIs bleiben quota- und permission-abhaengig.
 - Koko-REST-Antworten werden bewusst flexibel geparst; falls das Plugin seine Antwortstruktur stark aendert, kann nur ein Teil des Kontextlayers verfuegbar sein.
+- Audit-Leads vor dem 2026-03-20-Attributionsausbau koennen im Cockpit nur aggregiert, aber nicht immer intern einer Seite zugeordnet werden.

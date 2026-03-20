@@ -880,6 +880,69 @@ function nexus_handle_review_request_submission( WP_REST_Request $request ) {
 }
 
 /**
+ * Sanitize one optional internal attribution URL for audit requests.
+ *
+ * @param string $url Raw URL.
+ * @return string
+ */
+function nexus_sanitize_review_request_internal_url( $url ) {
+	$url = trim( (string) $url );
+
+	if ( '' === $url ) {
+		return '';
+	}
+
+	$url = esc_url_raw( $url );
+	if ( ! $url || ! wp_http_validate_url( $url ) ) {
+		return '';
+	}
+
+	$scheme = wp_parse_url( $url, PHP_URL_SCHEME );
+	$host   = strtolower( (string) wp_parse_url( $url, PHP_URL_HOST ) );
+	$home   = strtolower( (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST ) );
+
+	if ( ! in_array( $scheme, [ 'http', 'https' ], true ) || '' === $host || $host !== $home ) {
+		return '';
+	}
+
+	$path = (string) wp_parse_url( $url, PHP_URL_PATH );
+	$path = '/' . ltrim( $path, '/' );
+
+	if ( '/' !== $path ) {
+		$path = trailingslashit( $path );
+	}
+
+	return home_url( $path );
+}
+
+/**
+ * Sanitize one optional referrer URL for audit requests.
+ *
+ * @param string $url Raw URL.
+ * @return string
+ */
+function nexus_sanitize_review_request_referrer_url( $url ) {
+	$url = trim( (string) $url );
+
+	if ( '' === $url ) {
+		return '';
+	}
+
+	$url = esc_url_raw( $url );
+	if ( ! $url || ! wp_http_validate_url( $url ) ) {
+		return '';
+	}
+
+	$scheme = wp_parse_url( $url, PHP_URL_SCHEME );
+
+	if ( ! in_array( $scheme, [ 'http', 'https' ], true ) ) {
+		return '';
+	}
+
+	return $url;
+}
+
+/**
  * Validate and sanitize the review request payload.
  *
  * @param array $payload Raw request payload.
@@ -958,8 +1021,13 @@ function nexus_validate_review_request_payload( $payload ) {
 		$audit_type = 'growth_audit';
 	}
 
-	$ads_source  = isset( $payload['ads_source'] ) ? sanitize_text_field( (string) $payload['ads_source'] ) : '';
-	$ads_keyword = isset( $payload['ads_keyword'] ) ? sanitize_text_field( (string) $payload['ads_keyword'] ) : '';
+	$ads_source            = isset( $payload['ads_source'] ) ? sanitize_text_field( (string) $payload['ads_source'] ) : '';
+	$ads_keyword           = isset( $payload['ads_keyword'] ) ? sanitize_text_field( (string) $payload['ads_keyword'] ) : '';
+	$landing_page_url      = nexus_sanitize_review_request_internal_url( $payload['landing_page_url'] ?? '' );
+	$entry_page_url        = nexus_sanitize_review_request_internal_url( $payload['entry_page_url'] ?? '' );
+	$previous_internal_url = nexus_sanitize_review_request_internal_url( $payload['previous_internal_url'] ?? '' );
+	$referrer_url          = nexus_sanitize_review_request_referrer_url( $payload['referrer_url'] ?? '' );
+	$referrer_host         = $referrer_url ? sanitize_text_field( strtolower( (string) wp_parse_url( $referrer_url, PHP_URL_HOST ) ) ) : '';
 
 	return [
 		'intake_variant'       => '',
@@ -982,6 +1050,11 @@ function nexus_validate_review_request_payload( $payload ) {
 		'consent_privacy'   => $consent_privacy,
 		'ads_source'        => $ads_source,
 		'ads_keyword'       => $ads_keyword,
+		'landing_page_url'  => $landing_page_url,
+		'entry_page_url'    => $entry_page_url,
+		'previous_internal_url' => $previous_internal_url,
+		'referrer_url'      => $referrer_url,
+		'referrer_host'     => $referrer_host,
 	];
 }
 
@@ -1087,8 +1160,12 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 		$audit_type = 'growth_audit';
 	}
 
-	$ads_source  = isset( $payload['ads_source'] ) ? sanitize_text_field( (string) $payload['ads_source'] ) : '';
-	$ads_keyword = isset( $payload['ads_keyword'] ) ? sanitize_text_field( (string) $payload['ads_keyword'] ) : '';
+	$ads_source            = isset( $payload['ads_source'] ) ? sanitize_text_field( (string) $payload['ads_source'] ) : '';
+	$ads_keyword           = isset( $payload['ads_keyword'] ) ? sanitize_text_field( (string) $payload['ads_keyword'] ) : '';
+	$landing_page_url      = nexus_sanitize_review_request_internal_url( $payload['landing_page_url'] ?? '' );
+	$entry_page_url        = nexus_sanitize_review_request_internal_url( $payload['entry_page_url'] ?? '' );
+	$previous_internal_url = nexus_sanitize_review_request_internal_url( $payload['previous_internal_url'] ?? '' );
+	$referrer_url          = nexus_sanitize_review_request_referrer_url( $payload['referrer_url'] ?? '' );
 	$resolved_domain = $page_url
 		? (string) wp_parse_url( $page_url, PHP_URL_HOST )
 		: nexus_get_review_request_domain_from_email( $email );
@@ -1114,6 +1191,11 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 		'consent_privacy'             => $consent_privacy,
 		'ads_source'                  => $ads_source,
 		'ads_keyword'                 => $ads_keyword,
+		'landing_page_url'            => $landing_page_url,
+		'entry_page_url'              => $entry_page_url,
+		'previous_internal_url'       => $previous_internal_url,
+		'referrer_url'                => $referrer_url,
+		'referrer_host'               => $referrer_url ? sanitize_text_field( strtolower( (string) wp_parse_url( $referrer_url, PHP_URL_HOST ) ) ) : '',
 		'solution_focus'              => $solution_focus,
 		'solution_focus_label'        => $field_options['solution_focus'][ $solution_focus ]['label'],
 		'sales_audience'              => $sales_audience,
@@ -1192,6 +1274,11 @@ function nexus_create_review_request_post( $payload ) {
 	);
 	update_post_meta( $post_id, '_nexus_review_ads_source', sanitize_text_field( (string) ( $payload['ads_source'] ?? '' ) ) );
 	update_post_meta( $post_id, '_nexus_review_ads_keyword', sanitize_text_field( (string) ( $payload['ads_keyword'] ?? '' ) ) );
+	update_post_meta( $post_id, '_nexus_review_landing_page_url', sanitize_text_field( (string) ( $payload['landing_page_url'] ?? '' ) ) );
+	update_post_meta( $post_id, '_nexus_review_entry_page_url', sanitize_text_field( (string) ( $payload['entry_page_url'] ?? '' ) ) );
+	update_post_meta( $post_id, '_nexus_review_previous_internal_url', sanitize_text_field( (string) ( $payload['previous_internal_url'] ?? '' ) ) );
+	update_post_meta( $post_id, '_nexus_review_referrer_url', sanitize_text_field( (string) ( $payload['referrer_url'] ?? '' ) ) );
+	update_post_meta( $post_id, '_nexus_review_referrer_host', sanitize_text_field( (string) ( $payload['referrer_host'] ?? '' ) ) );
 
 	if ( 'energy_systems' === ( $payload['intake_variant'] ?? '' ) ) {
 		update_post_meta( $post_id, '_nexus_review_energy_solution_focus', sanitize_key( (string) ( $payload['solution_focus'] ?? '' ) ) );
@@ -1212,6 +1299,10 @@ function nexus_create_review_request_post( $payload ) {
 		update_post_meta( $post_id, '_nexus_review_energy_improvement_goal_label', sanitize_text_field( (string) ( $payload['improvement_goal_label'] ?? '' ) ) );
 		update_post_meta( $post_id, '_nexus_review_energy_project_timing', sanitize_key( (string) ( $payload['project_timing'] ?? '' ) ) );
 		update_post_meta( $post_id, '_nexus_review_energy_project_timing_label', sanitize_text_field( (string) ( $payload['project_timing_label'] ?? '' ) ) );
+	}
+
+	if ( function_exists( 'nexus_bump_seo_cockpit_cache_version' ) ) {
+		nexus_bump_seo_cockpit_cache_version();
 	}
 
 	return (int) $post_id;
@@ -1777,6 +1868,10 @@ function nexus_render_review_request_details_meta_box( $post ) {
 	$intake_variant    = (string) get_post_meta( $post->ID, '_nexus_review_intake_variant', true );
 	$variant_label     = (string) get_post_meta( $post->ID, '_nexus_review_intake_variant_label', true );
 	$page_url          = (string) get_post_meta( $post->ID, '_nexus_review_page_url', true );
+	$landing_page_url  = (string) get_post_meta( $post->ID, '_nexus_review_landing_page_url', true );
+	$entry_page_url    = (string) get_post_meta( $post->ID, '_nexus_review_entry_page_url', true );
+	$previous_page_url = (string) get_post_meta( $post->ID, '_nexus_review_previous_internal_url', true );
+	$referrer_url      = (string) get_post_meta( $post->ID, '_nexus_review_referrer_url', true );
 	$focus_area_label  = nexus_get_review_meta_value( $post->ID, '_nexus_review_focus_area_label' );
 	$current_challenge = nexus_get_review_meta_value( $post->ID, '_nexus_review_current_challenge' );
 	$primary_goal_label = nexus_get_review_meta_value( $post->ID, '_nexus_review_primary_goal_label' );
@@ -1837,6 +1932,25 @@ function nexus_render_review_request_details_meta_box( $post ) {
 				<p>Nicht angegeben</p>
 			<?php endif; ?>
 		</div>
+		<?php if ( '' !== $landing_page_url || '' !== $entry_page_url || '' !== $previous_page_url || '' !== $referrer_url ) : ?>
+			<div class="nexus-review-meta-group">
+				<strong>Attribution</strong>
+				<p>
+					<?php if ( '' !== $landing_page_url ) : ?>
+						Form-Seite: <a href="<?php echo esc_url( $landing_page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $landing_page_url ); ?></a><br>
+					<?php endif; ?>
+					<?php if ( '' !== $entry_page_url ) : ?>
+						Einstieg intern: <a href="<?php echo esc_url( $entry_page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $entry_page_url ); ?></a><br>
+					<?php endif; ?>
+					<?php if ( '' !== $previous_page_url ) : ?>
+						Vorherige interne Seite: <a href="<?php echo esc_url( $previous_page_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $previous_page_url ); ?></a><br>
+					<?php endif; ?>
+					<?php if ( '' !== $referrer_url ) : ?>
+						Referrer: <a href="<?php echo esc_url( $referrer_url ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $referrer_url ); ?></a>
+					<?php endif; ?>
+				</p>
+			</div>
+		<?php endif; ?>
 
 		<?php if ( $has_new_intake ) : ?>
 			<div class="nexus-review-meta-group">

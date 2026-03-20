@@ -14,6 +14,7 @@ $nexus_seo_cockpit_modules = [
 	'seo-cockpit-api.php',
 	'seo-cockpit-koko.php',
 	'seo-cockpit-links.php',
+	'seo-cockpit-leads.php',
 	'seo-cockpit-sync.php',
 	'seo-cockpit-insights.php',
 	'seo-cockpit-diagnostics.php',

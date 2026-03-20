@@ -643,9 +643,20 @@
   function serializeForm(form) {
     var formData = new FormData(form);
     var payload = {};
+    var attribution = window.NexusCore && typeof window.NexusCore.getLeadAttributionPayload === 'function'
+      ? window.NexusCore.getLeadAttributionPayload()
+      : {};
 
     formData.forEach(function (value, key) {
       payload[key] = typeof value === 'string' ? value.trim() : value;
+    });
+
+    Object.keys(attribution).forEach(function (key) {
+      if (!attribution[key]) {
+        return;
+      }
+
+      payload[key] = attribution[key];
     });
 
     return payload;
