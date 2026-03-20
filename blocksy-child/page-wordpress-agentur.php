@@ -281,6 +281,7 @@ get_header();
 					<?php endforeach; ?>
 				</div>
 				<div class="wp-agentur-proof-cta">
+					<p>Öffentlich nachvollziehbar über die <a href="<?php echo esc_url( $e3_url ); ?>" data-track-action="cta_agentur_proof_e3" data-track-category="trust">E3 Case Study</a> und <a href="<?php echo esc_url( $cases_url ); ?>" data-track-action="cta_agentur_proof_results" data-track-category="trust">weitere Ergebnisse</a>.</p>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_proof_audit" data-track-category="lead_gen">Nach dem Proof mit dem Audit starten</a>
 					<p>Oder erst die Systemlogik dahinter sehen: <a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_agentur_proof_wgos" data-track-category="navigation"><?php echo esc_html( $framework_label ); ?> verstehen</a></p>
 				</div>

@@ -21,6 +21,9 @@ function nexus_get_wgos_cluster_page_data() {
 		return $pages;
 	}
 
+	$agentur_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
+	$seo_url     = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) );
+
 	$pages = [
 		'wordpress-seo-hannover' => [
 			'eyebrow'          => 'Sichtbarkeit im WGOS',
@@ -59,11 +62,22 @@ function nexus_get_wgos_cluster_page_data() {
 			'supporting_link'  => [
 				'kicker' => 'Breiterer Einstieg',
 				'label'  => 'WordPress Agentur Hannover',
-				'url'    => nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) ),
+				'url'    => $agentur_url,
 				'text'   => 'Wenn der Bedarf über technisches SEO hinausgeht und auch Angebotsseiten, Tracking, Conversion und Betrieb umfasst, ist die Agentur-Seite der klarere Startpunkt.',
 			],
-			'meta_title'       => 'WordPress SEO Hannover | Technisches SEO für WordPress',
-			'meta_description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und priorisierte SEO-Fixes für B2B-Websites.',
+			'proof_note'       => 'Technisches SEO wird erst dann kaufnah relevant, wenn Sichtbarkeit auf saubere Angebotsseiten, belastbare Daten und einen klaren Anfragepfad trifft. Genau das zeigen die offenen Ergebnisse und die E3 Case Study.',
+			'proof_links'      => [
+				[
+					'label' => 'E3 Case Study lesen',
+					'url'   => nexus_get_page_url( [ 'e3-new-energy' ] ),
+				],
+				[
+					'label' => 'Weitere Ergebnisse ansehen',
+					'url'   => nexus_get_primary_public_url( 'results', home_url( '/ergebnisse/' ) ),
+				],
+			],
+			'meta_title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
+			'meta_description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, interne Verlinkung und priorisierte Fixes fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
 			'schema_name'      => 'Technisches SEO für WordPress in Hannover',
 			'schema_description' => 'WGOS-Cluster für technisches SEO auf WordPress in Hannover: technische Basis, Seitenstruktur und conversion-nahe Sichtbarkeit für B2B-Websites.',
 		],
@@ -96,6 +110,18 @@ function nexus_get_wgos_cluster_page_data() {
 					'title' => 'Warum Performance Marketing ohne technisches SEO Geld verbrennt',
 					'url'   => home_url( '/technisches-seo-performance-fundament/' ),
 				],
+			],
+			'supporting_link'  => [
+				'kicker' => 'Breiterer Einstieg',
+				'label'  => 'WordPress Agentur Hannover',
+				'url'    => $agentur_url,
+				'text'   => 'Wenn Wartung nicht isoliert laufen soll, sondern mit Angebotsseiten, SEO, Tracking und Conversion zusammenspielen muss, ist die Agentur-Seite der bessere Gesamt-Einstieg.',
+			],
+			'adjacent_link'    => [
+				'kicker' => 'Angrenzendes Thema',
+				'label'  => 'WordPress SEO Hannover',
+				'url'    => $seo_url,
+				'text'   => 'Wenn Indexierung, interne Verlinkung oder technische Struktur mit dem Betriebszustand zusammenhaengen, fuehrt die SEO-Seite direkt in den passenden Cluster.',
 			],
 			'meta_title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',
 			'meta_description' => 'WordPress Wartung in Hannover als Teil des WGOS-Fundaments: Updates, Sicherheit, Backups, Performance und stabile Betriebsroutinen für B2B-Websites.',
@@ -133,6 +159,18 @@ function nexus_get_wgos_cluster_page_data() {
 					'url'   => home_url( '/technisches-seo-performance-fundament/' ),
 				],
 			],
+			'supporting_link'  => [
+				'kicker' => 'Breiterer Einstieg',
+				'label'  => 'WordPress Agentur Hannover',
+				'url'    => $agentur_url,
+				'text'   => 'Wenn Performance direkt auf Angebotsseiten, SEO und Conversion einzahlt, ist die Agentur-Seite der passendere Einstieg ins Gesamtsystem.',
+			],
+			'adjacent_link'    => [
+				'kicker' => 'Angrenzendes Thema',
+				'label'  => 'WordPress SEO Hannover',
+				'url'    => $seo_url,
+				'text'   => 'Wenn langsame Seitentypen Rankings und organische Einstiege ausbremsen, fuehrt die SEO-Seite direkt in den Sichtbarkeits-Kontext.',
+			],
 			'meta_title'       => 'Core Web Vitals für WordPress | WGOS von Haşim Üner',
 			'meta_description' => 'Core Web Vitals als WGOS-Cluster: Audit, Optimierung, Server-Tuning und Stabilisierung für schnellere WordPress-Seiten.',
 			'schema_name'      => 'Core Web Vitals für WordPress',
@@ -164,6 +202,18 @@ function nexus_get_wgos_cluster_page_data() {
 					'title' => 'Datenhoheit mit Server-Side GTM',
 					'url'   => home_url( '/server-side-tracking-gtm/' ),
 				],
+			],
+			'supporting_link'  => [
+				'kicker' => 'Breiterer Einstieg',
+				'label'  => 'WordPress Agentur Hannover',
+				'url'    => $agentur_url,
+				'text'   => 'Wenn Tracking, Angebotsseiten und Conversion gemeinsam sauber werden muessen, ist die Agentur-Seite der klarere Startpunkt als ein isolierter Tracking-Fix.',
+			],
+			'adjacent_link'    => [
+				'kicker' => 'Angrenzendes Thema',
+				'label'  => 'WordPress SEO Hannover',
+				'url'    => $seo_url,
+				'text'   => 'Wenn organische Nachfrage sichtbar ist, aber nicht sauber gemessen oder priorisiert wird, schliesst die SEO-Seite die Luecke zwischen Sichtbarkeit und Datensignalen.',
 			],
 			'meta_title'       => 'GA4 Tracking Setup | WGOS-Cluster von Haşim Üner',
 			'meta_description' => 'GA4 Tracking Setup als WGOS-Cluster: Tracking Audit, Event-Blueprint, Consent und serverseitige Messung für belastbare Daten.',
@@ -205,6 +255,18 @@ function nexus_get_wgos_cluster_page_data() {
 					'url'   => home_url( '/owned-leads-statt-ad-miete/' ),
 				],
 			],
+			'supporting_link'  => [
+				'kicker' => 'Breiterer Einstieg',
+				'label'  => 'WordPress Agentur Hannover',
+				'url'    => $agentur_url,
+				'text'   => 'Wenn Nutzerfuehrung, Proof, Tracking und Seitenrollen zusammen korrigiert werden muessen, ist die Agentur-Seite der breitere Einstieg.',
+			],
+			'adjacent_link'    => [
+				'kicker' => 'Angrenzendes Thema',
+				'label'  => 'WordPress SEO Hannover',
+				'url'    => $seo_url,
+				'text'   => 'Wenn Sichtbarkeit vorhanden ist, aber organische Einstiege nicht sauber in Anfragen uebergehen, fuehrt die SEO-Seite in den passenden Service-Kontext.',
+			],
 			'meta_title'       => 'Conversion Rate Optimization | WGOS von Haşim Üner',
 			'meta_description' => 'CRO als WGOS-Cluster: Landing Pages, Angebotsseiten, Formulare und Proof für mehr qualifizierte WordPress-Anfragen.',
 			'schema_name'      => 'Conversion Rate Optimization',
@@ -240,6 +302,18 @@ function nexus_get_wgos_cluster_page_data() {
 					'title' => 'Die 150-Euro-pro-Lead-Falle',
 					'url'   => home_url( '/owned-leads-statt-ad-miete/' ),
 				],
+			],
+			'supporting_link'  => [
+				'kicker' => 'Breiterer Einstieg',
+				'label'  => 'WordPress Agentur Hannover',
+				'url'    => $agentur_url,
+				'text'   => 'Wenn Kampagnen nicht isoliert, sondern zusammen mit Angebotsseiten, Tracking und Conversion sauber aufgebaut werden sollen, ist die Agentur-Seite der sinnvollere Einstieg.',
+			],
+			'adjacent_link'    => [
+				'kicker' => 'Angrenzendes Thema',
+				'label'  => 'WordPress SEO Hannover',
+				'url'    => $seo_url,
+				'text'   => 'Wenn Paid auf technisch schwache oder schlecht verlinkte Seitentypen trifft, fuehrt die SEO-Seite direkt in den relevanten Fundament-Cluster.',
 			],
 			'meta_title'       => 'Performance Marketing im WGOS | Haşim Üner',
 			'meta_description' => 'Performance Marketing als WGOS-Aktivierungslayer: erst Tracking, Technik und Landing Page, dann Reichweite mit sauberer Priorisierung.',
@@ -386,6 +460,8 @@ function nexus_render_wgos_cluster_page( $page ) {
 	$blogs         = isset( $page['blogs'] ) && is_array( $page['blogs'] ) ? $page['blogs'] : [];
 	$proof_metrics = nexus_get_wgos_cluster_page_proof_metrics();
 	$method_steps  = nexus_get_wgos_cluster_page_method_steps();
+	$proof_note    = isset( $page['proof_note'] ) ? (string) $page['proof_note'] : '';
+	$proof_links   = isset( $page['proof_links'] ) && is_array( $page['proof_links'] ) ? $page['proof_links'] : [];
 
 	ob_start();
 	?>
@@ -450,6 +526,16 @@ function nexus_render_wgos_cluster_page( $page ) {
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
+
+				<?php if ( ! empty( $page['adjacent_link'] ) && is_array( $page['adjacent_link'] ) ) : ?>
+					<div class="nx-card nx-card--flat nx-cluster-hero__card">
+						<span class="nx-cluster-hero__card-kicker"><?php echo esc_html( (string) ( $page['adjacent_link']['kicker'] ?? 'Angrenzender Einstieg' ) ); ?></span>
+						<p><?php echo esc_html( (string) ( $page['adjacent_link']['text'] ?? '' ) ); ?></p>
+						<?php if ( ! empty( $page['adjacent_link']['url'] ) && ! empty( $page['adjacent_link']['label'] ) ) : ?>
+							<p class="nx-cluster-hero__card-link"><a href="<?php echo esc_url( (string) $page['adjacent_link']['url'] ); ?>"><?php echo esc_html( (string) ( $page['adjacent_link']['label'] ) ); ?></a></p>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</section>
 
@@ -470,7 +556,25 @@ function nexus_render_wgos_cluster_page( $page ) {
 							</div>
 						<?php endforeach; ?>
 					</div>
-					<p class="nx-cluster-proof__note">Wenn Sie die öffentlichen Beispiele und die Herleitung dazu sehen wollen, gehen Sie zuerst in die Ergebnisse. Der Growth Audit klärt danach, welche dieser Hebel in Ihrer Lage wirklich zuerst zählen.</p>
+					<p class="nx-cluster-proof__note">
+						<?php
+						echo esc_html(
+							'' !== $proof_note
+								? $proof_note
+								: 'Wenn Sie die öffentlichen Beispiele und die Herleitung dazu sehen wollen, gehen Sie zuerst in die Ergebnisse. Der Growth Audit klärt danach, welche dieser Hebel in Ihrer Lage wirklich zuerst zählen.'
+						);
+						?>
+					</p>
+					<?php if ( ! empty( $proof_links ) ) : ?>
+						<p class="nx-cluster-proof__note">
+							<?php foreach ( $proof_links as $index => $proof_link ) : ?>
+								<?php if ( $index > 0 ) : ?>
+									<span aria-hidden="true"> · </span>
+								<?php endif; ?>
+								<a href="<?php echo esc_url( (string) ( $proof_link['url'] ?? '' ) ); ?>"><?php echo esc_html( (string) ( $proof_link['label'] ?? '' ) ); ?></a>
+							<?php endforeach; ?>
+						</p>
+					<?php endif; ?>
 					<div class="nx-cluster-hero__actions">
 						<a href="<?php echo esc_url( $results_url ); ?>" class="nx-btn nx-btn--ghost">Ergebnisse ansehen</a>
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_proof_audit" data-track-category="lead_gen">Growth Audit starten</a>
@@ -688,6 +792,101 @@ function nexus_add_virtual_cluster_body_class( $classes ) {
 add_filter( 'body_class', 'nexus_add_virtual_cluster_body_class', 20 );
 
 /**
+ * Ensure versioned cluster routes exist as published WordPress pages.
+ *
+ * Virtual rendering stays active, but real published pages make native sitemap
+ * output, URL resolution and admin-level SEO tooling align with the public URL.
+ *
+ * @return void
+ */
+function nexus_maybe_ensure_cluster_route_pages() {
+	if ( wp_installing() || wp_doing_ajax() || wp_doing_cron() ) {
+		return;
+	}
+
+	$route_templates = nexus_get_wgos_cluster_route_templates();
+	$page_data       = nexus_get_wgos_cluster_page_data();
+
+	foreach ( $route_templates as $slug => $template_path ) {
+		$page_id  = 0;
+		$existing = get_page_by_path( $slug );
+
+		if ( $existing instanceof WP_Post ) {
+			$page_id = (int) $existing->ID;
+
+			if ( 'publish' !== (string) $existing->post_status ) {
+				$updated_id = wp_update_post(
+					wp_slash(
+						[
+							'ID'          => $page_id,
+							'post_status' => 'publish',
+						]
+					),
+					true
+				);
+
+				if ( is_wp_error( $updated_id ) ) {
+					continue;
+				}
+			}
+		} else {
+			$definition = isset( $page_data[ $slug ] ) && is_array( $page_data[ $slug ] ) ? $page_data[ $slug ] : [];
+			$title      = ! empty( $definition['title'] ) ? (string) $definition['title'] : ucwords( str_replace( '-', ' ', $slug ) );
+			$excerpt    = ! empty( $definition['lead'] ) ? (string) $definition['lead'] : '';
+
+			$page_id = wp_insert_post(
+				wp_slash(
+					[
+						'post_type'    => 'page',
+						'post_status'  => 'publish',
+						'post_title'   => $title,
+						'post_name'    => $slug,
+						'post_content' => '',
+						'post_excerpt' => $excerpt,
+					]
+				),
+				true
+			);
+
+			if ( is_wp_error( $page_id ) ) {
+				continue;
+			}
+		}
+
+		$page_id = (int) $page_id;
+
+		if ( $page_id <= 0 ) {
+			continue;
+		}
+
+		update_post_meta( $page_id, '_wp_page_template', basename( $template_path ) );
+		delete_post_meta( $page_id, 'seo_noindex' );
+		delete_post_meta( $page_id, 'rank_math_robots' );
+
+		$definition = isset( $page_data[ $slug ] ) && is_array( $page_data[ $slug ] ) ? $page_data[ $slug ] : [];
+		$lead       = ! empty( $definition['lead'] ) ? (string) $definition['lead'] : '';
+
+		if ( '' !== $lead && '' === trim( (string) get_post_field( 'post_excerpt', $page_id ) ) ) {
+			wp_update_post(
+				[
+					'ID'           => $page_id,
+					'post_excerpt' => $lead,
+				]
+			);
+		}
+
+		if ( '' === trim( (string) get_post_meta( $page_id, 'seo_title', true ) ) && ! empty( $definition['meta_title'] ) ) {
+			update_post_meta( $page_id, 'seo_title', (string) $definition['meta_title'] );
+		}
+
+		if ( '' === trim( (string) get_post_meta( $page_id, 'seo_description', true ) ) && ! empty( $definition['meta_description'] ) ) {
+			update_post_meta( $page_id, 'seo_description', (string) $definition['meta_description'] );
+		}
+	}
+}
+add_action( 'init', 'nexus_maybe_ensure_cluster_route_pages', 28 );
+
+/**
  * Return the versioned mapping from blog articles to WGOS asset recommendations.
  *
  * @return array<string, array<string, mixed>>
@@ -714,9 +913,9 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 			'cwv-optimierung'      => 'Setzt die größten Performance-Fixes dort um, wo sie Rankings und Conversion direkt entlasten.',
 		],
 		'supporting_link' => [
-			'label' => 'WordPress-Entwicklung Hannover',
-			'url'   => $agentur_url,
-			'text'  => 'Wenn Sie für dieses Thema einen lokalen Einstieg suchen, ist die Agentur-Seite der direkte Anschluss zwischen SEO, Technik und Conversion.',
+			'label' => 'WordPress SEO Hannover',
+			'url'   => $seo_url,
+			'text'  => 'Wenn Sie fuer dieses Thema einen kaufnahen Einstieg suchen, ist die SEO-Seite der direkte Anschluss zwischen technischer Basis, Sichtbarkeit und Anfragepfad.',
 		],
 	];
 

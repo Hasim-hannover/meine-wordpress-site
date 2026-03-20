@@ -104,20 +104,20 @@ function hu_get_forced_singular_seo_map() {
 				'description' => 'Kostenlose Tools für ROI, Website-Analyse und Performance: schnelle Checks für Marketing-, Website- und WordPress-Entscheidungen.',
 			],
 			'wordpress-agentur-hannover' => [
-				'title'       => 'WordPress Agentur Hannover | B2B-Websites mit System',
-				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmaßnahmen. Kostenloser Growth Audit.',
+				'title'       => 'WordPress Agentur Hannover für B2B | SEO, Tracking, Conversion',
+				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmassnahmen. Growth Audit mit Rueckmeldung in 48h.',
 			],
 			'wordpress-agentur' => [
-				'title'       => 'WordPress Agentur Hannover | B2B-Websites mit System',
-				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmaßnahmen. Kostenloser Growth Audit.',
+				'title'       => 'WordPress Agentur Hannover für B2B | SEO, Tracking, Conversion',
+				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmassnahmen. Growth Audit mit Rueckmeldung in 48h.',
 			],
 			'wordpress-wartung-hannover' => [
 				'title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',
 				'description' => 'WordPress Wartung in Hannover als Teil des WGOS-Fundaments: Updates, Sicherheit, Backups, Performance und stabile Betriebsroutinen für B2B-Websites.',
 			],
 			'wordpress-seo-hannover' => [
-				'title'       => 'WordPress SEO Hannover | Technisches SEO für WordPress',
-				'description' => 'Technisches SEO für WordPress in Hannover: Diagnose, Crawlability, interne Verlinkung und priorisierte SEO-Fixes für B2B-Websites.',
+				'title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
+				'description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, interne Verlinkung und priorisierte Fixes fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
 			],
 			'ki-integration-wordpress' => [
 				'title'       => 'KI-Integration für WordPress – DSGVO-konform | Haşim Üner',

@@ -152,6 +152,87 @@ function nexus_add_virtual_contact_body_class( $classes ) {
 add_filter( 'body_class', 'nexus_add_virtual_contact_body_class', 20 );
 
 /**
+ * Ensure the canonical /kontakt/ page exists as a published WordPress page.
+ *
+ * This keeps the public route compatible with native sitemap discovery and
+ * page resolution helpers while the actual rendering stays template-driven.
+ *
+ * @return void
+ */
+function nexus_maybe_ensure_contact_page() {
+	if ( wp_installing() || wp_doing_ajax() || wp_doing_cron() ) {
+		return;
+	}
+
+	$page_id = nexus_get_page_id( [ 'kontakt' ] );
+
+	if ( ! $page_id ) {
+		$legacy_page = get_page_by_path( 'kontaktiere-mich' );
+
+		if ( $legacy_page instanceof WP_Post ) {
+			$page_id = wp_update_post(
+				wp_slash(
+					[
+						'ID'          => (int) $legacy_page->ID,
+						'post_name'   => 'kontakt',
+						'post_status' => 'publish',
+					]
+				),
+				true
+			);
+
+			if ( is_wp_error( $page_id ) ) {
+				return;
+			}
+		} else {
+			$page_id = wp_insert_post(
+				wp_slash(
+					[
+						'post_type'    => 'page',
+						'post_status'  => 'publish',
+						'post_title'   => 'Kontakt',
+						'post_name'    => 'kontakt',
+						'post_content' => '',
+						'post_excerpt' => 'Kontakt für Growth Audit, Folgeanalyse, Umsetzung und laufende Weiterentwicklung.',
+					]
+				),
+				true
+			);
+
+			if ( is_wp_error( $page_id ) ) {
+				return;
+			}
+		}
+	}
+
+	$page_id = (int) $page_id;
+
+	update_post_meta( $page_id, '_wp_page_template', 'page-kontakt.php' );
+	delete_post_meta( $page_id, 'seo_noindex' );
+	delete_post_meta( $page_id, 'rank_math_robots' );
+
+	$current_excerpt = (string) get_post_field( 'post_excerpt', $page_id );
+
+	if ( '' === trim( $current_excerpt ) ) {
+		wp_update_post(
+			[
+				'ID'           => $page_id,
+				'post_excerpt' => 'Kontakt für Growth Audit, Folgeanalyse, Umsetzung und laufende Weiterentwicklung.',
+			]
+		);
+	}
+
+	if ( '' === trim( (string) get_post_meta( $page_id, 'seo_title', true ) ) ) {
+		update_post_meta( $page_id, 'seo_title', 'Kontakt für WordPress, SEO und CRO | Haşim Üner' );
+	}
+
+	if ( '' === trim( (string) get_post_meta( $page_id, 'seo_description', true ) ) ) {
+		update_post_meta( $page_id, 'seo_description', 'Kontakt für Growth Audit, Folgeanalyse, Umsetzung und laufende Weiterentwicklung: direkter Einstieg ohne Sales-Team.' );
+	}
+}
+add_action( 'init', 'nexus_maybe_ensure_contact_page', 28 );
+
+/**
  * Return the available contact request type options.
  *
  * @return array<string, array<string, string>>
