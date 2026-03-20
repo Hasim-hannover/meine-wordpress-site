@@ -163,7 +163,33 @@ function hu_override_custom_logo_with_wordmark( $html, $blog_id ) {
 	return hu_get_site_wordmark_html();
 }
 
+function hu_get_custom_logo_image_url() {
+	$custom_logo_id = (int) get_theme_mod( 'custom_logo' );
+
+	if ( $custom_logo_id <= 0 ) {
+		return '';
+	}
+
+	$custom_logo_url = wp_get_attachment_image_url( $custom_logo_id, 'full' );
+
+	return is_string( $custom_logo_url ) ? $custom_logo_url : '';
+}
+
 function hu_get_brand_logo_url() {
+	$custom_logo_url = hu_get_custom_logo_image_url();
+
+	if ( '' !== $custom_logo_url ) {
+		return (string) apply_filters( 'hu_brand_logo_url', $custom_logo_url );
+	}
+
+	if ( function_exists( 'has_site_icon' ) && has_site_icon() ) {
+		$site_icon_url = get_site_icon_url( 512 );
+
+		if ( is_string( $site_icon_url ) && '' !== $site_icon_url ) {
+			return (string) apply_filters( 'hu_brand_logo_url', $site_icon_url );
+		}
+	}
+
 	$logo_path = get_stylesheet_directory() . '/assets/brand/hasim-uener-light-copper.svg';
 	$logo_url  = get_stylesheet_directory_uri() . '/assets/brand/hasim-uener-light-copper.svg';
 
@@ -188,6 +214,36 @@ function hu_get_brand_image_type( $url ) {
 	];
 
 	return isset( $mime_map[ $extension ] ) ? $mime_map[ $extension ] : 'image/svg+xml';
+}
+
+function hu_get_wp_site_icon_assets() {
+	$assets = [];
+
+	if ( ! function_exists( 'has_site_icon' ) || ! has_site_icon() ) {
+		return $assets;
+	}
+
+	$sizes = [
+		'icon'       => 48,
+		'icon_large' => 192,
+		'apple'      => 180,
+	];
+
+	foreach ( $sizes as $key => $size ) {
+		$url = get_site_icon_url( $size );
+
+		if ( ! is_string( $url ) || '' === $url ) {
+			continue;
+		}
+
+		$assets[ $key ] = [
+			'url'   => $url,
+			'type'  => hu_get_brand_image_type( $url ),
+			'sizes' => sprintf( '%1$dx%1$d', $size ),
+		];
+	}
+
+	return $assets;
 }
 
 function hu_get_brand_favicon_assets() {
@@ -219,7 +275,7 @@ function hu_get_brand_favicon_assets() {
 
 add_action( 'after_setup_theme', 'hu_prefer_theme_brand_favicons', 20 );
 function hu_prefer_theme_brand_favicons() {
-	if ( [] === hu_get_brand_favicon_assets() ) {
+	if ( [] === hu_get_wp_site_icon_assets() && [] === hu_get_brand_favicon_assets() ) {
 		return;
 	}
 
@@ -229,23 +285,44 @@ function hu_prefer_theme_brand_favicons() {
 }
 
 function hu_output_brand_favicon_meta() {
-	$favicons = hu_get_brand_favicon_assets();
+	$wp_favicons    = hu_get_wp_site_icon_assets();
+	$theme_favicons = hu_get_brand_favicon_assets();
 
-	if ( [] === $favicons ) {
+	if ( [] === $wp_favicons && [] === $theme_favicons ) {
 		return;
 	}
 
-	if ( ! empty( $favicons['light']['url'] ) ) :
+	if ( ! empty( $wp_favicons['icon']['url'] ) ) :
 		?>
-	<link rel="icon" type="<?php echo esc_attr( $favicons['light']['type'] ?? 'image/svg+xml' ); ?>" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
-	<link rel="shortcut icon" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
-	<link rel="apple-touch-icon" href="<?php echo esc_url( $favicons['light']['url'] ); ?>">
+	<link rel="icon" type="<?php echo esc_attr( $wp_favicons['icon']['type'] ?? 'image/png' ); ?>" sizes="<?php echo esc_attr( $wp_favicons['icon']['sizes'] ?? '48x48' ); ?>" href="<?php echo esc_url( $wp_favicons['icon']['url'] ); ?>">
+	<link rel="shortcut icon" href="<?php echo esc_url( $wp_favicons['icon']['url'] ); ?>">
+		<?php
+	elseif ( ! empty( $theme_favicons['light']['url'] ) ) :
+		?>
+	<link rel="icon" type="<?php echo esc_attr( $theme_favicons['light']['type'] ?? 'image/svg+xml' ); ?>" sizes="any" href="<?php echo esc_url( $theme_favicons['light']['url'] ); ?>">
+	<link rel="shortcut icon" href="<?php echo esc_url( $theme_favicons['light']['url'] ); ?>">
 		<?php
 	endif;
 
-	if ( ! empty( $favicons['dark']['url'] ) ) :
+	if ( ! empty( $wp_favicons['icon_large']['url'] ) ) :
 		?>
-	<link rel="icon" type="<?php echo esc_attr( $favicons['dark']['type'] ?? 'image/svg+xml' ); ?>" media="(prefers-color-scheme: dark)" href="<?php echo esc_url( $favicons['dark']['url'] ); ?>">
+	<link rel="icon" type="<?php echo esc_attr( $wp_favicons['icon_large']['type'] ?? 'image/png' ); ?>" sizes="<?php echo esc_attr( $wp_favicons['icon_large']['sizes'] ?? '192x192' ); ?>" href="<?php echo esc_url( $wp_favicons['icon_large']['url'] ); ?>">
+		<?php
+	endif;
+
+	if ( ! empty( $wp_favicons['apple']['url'] ) ) :
+		?>
+	<link rel="apple-touch-icon" sizes="<?php echo esc_attr( $wp_favicons['apple']['sizes'] ?? '180x180' ); ?>" href="<?php echo esc_url( $wp_favicons['apple']['url'] ); ?>">
+		<?php
+	elseif ( ! empty( $theme_favicons['light']['url'] ) ) :
+		?>
+	<link rel="apple-touch-icon" href="<?php echo esc_url( $theme_favicons['light']['url'] ); ?>">
+		<?php
+	endif;
+
+	if ( empty( $wp_favicons['icon']['url'] ) && ! empty( $theme_favicons['dark']['url'] ) ) :
+		?>
+	<link rel="icon" type="<?php echo esc_attr( $theme_favicons['dark']['type'] ?? 'image/svg+xml' ); ?>" sizes="any" media="(prefers-color-scheme: dark)" href="<?php echo esc_url( $theme_favicons['dark']['url'] ); ?>">
 		<?php
 	endif;
 }
