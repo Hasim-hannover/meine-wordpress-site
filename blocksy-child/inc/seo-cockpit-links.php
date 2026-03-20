@@ -156,6 +156,138 @@ function nexus_get_seo_cockpit_internal_target_counts( $links ) {
 }
 
 /**
+ * Return one flat list of internal URLs from one structured link collection.
+ *
+ * Accepts rows that either contain a direct `url` key or a nested link map.
+ *
+ * @param array<int|string, mixed> $items Structured item list.
+ * @return array<int, string>
+ */
+function nexus_get_seo_cockpit_structured_internal_urls( $items ) {
+	$urls = [];
+
+	foreach ( (array) $items as $item ) {
+		if ( is_string( $item ) ) {
+			$urls[] = $item;
+			continue;
+		}
+
+		if ( ! is_array( $item ) ) {
+			continue;
+		}
+
+		if ( ! empty( $item['url'] ) ) {
+			$urls[] = (string) $item['url'];
+		}
+	}
+
+	return $urls;
+}
+
+/**
+ * Return template-driven internal links that are not visible in raw post_content.
+ *
+ * The cockpit graph already parses editor content. This helper adds links that are
+ * injected by runtime templates so service hubs, proof pages and blog bridges are
+ * measured closer to what visitors actually see.
+ *
+ * @param int           $post_id Post ID.
+ * @param WP_Post|null  $post    Optional post object.
+ * @return array<int, string>
+ */
+function nexus_get_seo_cockpit_template_internal_links( $post_id, $post = null ) {
+	$post_id = absint( $post_id );
+	$post    = $post instanceof WP_Post ? $post : get_post( $post_id );
+
+	if ( $post_id <= 0 || ! ( $post instanceof WP_Post ) ) {
+		return [];
+	}
+
+	$template     = 'page' === $post->post_type ? (string) get_page_template_slug( $post_id ) : '';
+	$post_slug    = sanitize_title( (string) $post->post_name );
+	$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
+	$links        = [];
+
+	if ( function_exists( 'nexus_get_wgos_cluster_page' ) ) {
+		$cluster_page = nexus_get_wgos_cluster_page( $post );
+
+		if ( is_array( $cluster_page ) ) {
+			$links[] = $primary_urls['audit'] ?? home_url( '/growth-audit/' );
+			$links[] = $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
+			$links[] = $primary_urls['results'] ?? home_url( '/ergebnisse/' );
+			$links[] = function_exists( 'nexus_get_wgos_asset_hub_url' ) ? nexus_get_wgos_asset_hub_url() : home_url( '/wgos-systemlandkarte/' );
+			$links   = array_merge( $links, nexus_get_seo_cockpit_structured_internal_urls( (array) ( $cluster_page['blogs'] ?? [] ) ) );
+			$links   = array_merge( $links, nexus_get_seo_cockpit_structured_internal_urls( (array) ( $cluster_page['proof_links'] ?? [] ) ) );
+
+			foreach ( [ 'supporting_link', 'adjacent_link' ] as $field ) {
+				if ( ! empty( $cluster_page[ $field ] ) && is_array( $cluster_page[ $field ] ) ) {
+					$links = array_merge( $links, nexus_get_seo_cockpit_structured_internal_urls( [ $cluster_page[ $field ] ] ) );
+				}
+			}
+
+			if ( function_exists( 'nexus_get_wgos_cluster_page_asset_cards' ) ) {
+				$links = array_merge( $links, nexus_get_seo_cockpit_structured_internal_urls( nexus_get_wgos_cluster_page_asset_cards( $cluster_page ) ) );
+			}
+		}
+	}
+
+	if ( 'post' === $post->post_type && function_exists( 'nexus_get_wgos_blog_asset_bridge' ) ) {
+		$bridge = nexus_get_wgos_blog_asset_bridge( $post );
+
+		if ( is_array( $bridge ) ) {
+			if ( function_exists( 'nexus_get_wgos_cluster_page_asset_cards' ) ) {
+				$links = array_merge( $links, nexus_get_seo_cockpit_structured_internal_urls( nexus_get_wgos_cluster_page_asset_cards( $bridge ) ) );
+			}
+
+			if ( ! empty( $bridge['supporting_link'] ) && is_array( $bridge['supporting_link'] ) ) {
+				$links = array_merge( $links, nexus_get_seo_cockpit_structured_internal_urls( [ $bridge['supporting_link'] ] ) );
+			}
+		}
+	}
+
+	if (
+		in_array( $template, [ 'page-wordpress-agentur.php', 'page-wordpress-agentur-hannover.php' ], true )
+		|| in_array( $post_slug, [ 'wordpress-agentur-hannover', 'wordpress-agentur' ], true )
+	) {
+		$links = array_merge(
+			$links,
+			[
+				$primary_urls['audit'] ?? home_url( '/growth-audit/' ),
+				$primary_urls['results'] ?? home_url( '/ergebnisse/' ),
+				$primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
+				$primary_urls['about'] ?? home_url( '/uber-mich/' ),
+				$primary_urls['e3'] ?? home_url( '/e3-new-energy/' ),
+				$primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' ),
+				$primary_urls['cro'] ?? home_url( '/conversion-rate-optimization/' ),
+				function_exists( 'nexus_get_wgos_asset_anchor_url' ) ? nexus_get_wgos_asset_anchor_url( 'tracking-audit' ) : home_url( '/wgos-systemlandkarte/#asset-tracking-audit' ),
+			]
+		);
+	}
+
+	if (
+		'page-case-studies-e-commerce.php' === $template
+		|| in_array( $post_slug, [ 'ergebnisse', 'case-studies-e-commerce', 'case-studies' ], true )
+	) {
+		$links = array_merge(
+			$links,
+			[
+				$primary_urls['audit'] ?? home_url( '/growth-audit/' ),
+				$primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
+				$primary_urls['e3'] ?? home_url( '/e3-new-energy/' ),
+				$primary_urls['domdar'] ?? home_url( '/case-study-domdar/' ),
+				$primary_urls['whitelabel'] ?? home_url( '/whitelabel-retainer/' ),
+			]
+		);
+	}
+
+	return array_values(
+		array_unique(
+			nexus_normalize_seo_cockpit_internal_link_list( $links )
+		)
+	);
+}
+
+/**
  * Convert one count map to a sorted list payload.
  *
  * @param array<string, int> $counts Count map.
@@ -479,7 +611,7 @@ function nexus_get_seo_cockpit_sitewide_outgoing_context( $url, $context = [] ) 
  * @return array<string, mixed>
  */
 function nexus_get_seo_cockpit_internal_link_graph() {
-	$cache_key = nexus_get_seo_cockpit_cache_key( 'link_graph', [ home_url( '/' ), 'sitewide_v2' ] );
+	$cache_key = nexus_get_seo_cockpit_cache_key( 'link_graph', [ home_url( '/' ), 'sitewide_v3' ] );
 	$cached    = get_transient( $cache_key );
 
 	if ( is_array( $cached ) ) {
@@ -523,6 +655,7 @@ function nexus_get_seo_cockpit_internal_link_graph() {
 		}
 
 		$links = nexus_get_seo_cockpit_internal_links_from_content( (string) get_post_field( 'post_content', $post_id ) );
+		$links = array_merge( $links, nexus_get_seo_cockpit_template_internal_links( $post_id, get_post( $post_id ) ) );
 
 		foreach ( $links as $target_url ) {
 			if ( $source_url === $target_url ) {

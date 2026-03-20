@@ -104,12 +104,24 @@ function hu_get_forced_singular_seo_map() {
 				'description' => 'Kostenlose Tools für ROI, Website-Analyse und Performance: schnelle Checks für Marketing-, Website- und WordPress-Entscheidungen.',
 			],
 			'wordpress-agentur-hannover' => [
-				'title'       => 'WordPress Agentur Hannover für B2B | SEO, Tracking, Conversion',
+				'title'       => 'WordPress Agentur Hannover | B2B, SEO, Tracking',
 				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmassnahmen. Growth Audit mit Rueckmeldung in 48h.',
 			],
 			'wordpress-agentur' => [
-				'title'       => 'WordPress Agentur Hannover für B2B | SEO, Tracking, Conversion',
+				'title'       => 'WordPress Agentur Hannover | B2B, SEO, Tracking',
 				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmassnahmen. Growth Audit mit Rueckmeldung in 48h.',
+			],
+			'ergebnisse' => [
+				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
+				'description' => 'Ergebnisse aus WordPress-, SEO-, Tracking- und CRO-Projekten: E3, DOMDAR und Whitelabel-Proof mit klarem naechsten Schritt.',
+			],
+			'case-studies-e-commerce' => [
+				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
+				'description' => 'Ergebnisse aus WordPress-, SEO-, Tracking- und CRO-Projekten: E3, DOMDAR und Whitelabel-Proof mit klarem naechsten Schritt.',
+			],
+			'case-studies' => [
+				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
+				'description' => 'Ergebnisse aus WordPress-, SEO-, Tracking- und CRO-Projekten: E3, DOMDAR und Whitelabel-Proof mit klarem naechsten Schritt.',
 			],
 			'wordpress-wartung-hannover' => [
 				'title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',

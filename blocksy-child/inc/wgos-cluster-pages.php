@@ -899,6 +899,7 @@ function nexus_get_wgos_blog_asset_bridge_data() {
 	}
 
 	$agentur_url             = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
+	$seo_url                 = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) );
 	$tracking_url            = nexus_get_primary_public_url( 'tracking', home_url( '/ga4-tracking-setup/' ) );
 	$cwv_url                 = nexus_get_primary_public_url( 'cwv', home_url( '/core-web-vitals/' ) );
 	$cro_url                 = nexus_get_primary_public_url( 'cro', home_url( '/conversion-rate-optimization/' ) );
