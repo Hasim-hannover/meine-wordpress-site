@@ -65,6 +65,7 @@ add_action( 'wp_head', 'hu_preload_self_hosted_fonts', 1 );
 function hu_preload_self_hosted_fonts() {
 	$font_dir = get_stylesheet_directory();
 	$font_uri = get_stylesheet_directory_uri() . '/fonts';
+	$critical_figtree_font = is_front_page() ? 'figtree-600.woff2' : 'figtree-400.woff2';
 
 	if ( file_exists( $font_dir . '/fonts/Satoshi-Variable.woff2' ) ) {
 		printf(
@@ -73,10 +74,11 @@ function hu_preload_self_hosted_fonts() {
 		);
 	}
 
-	if ( file_exists( $font_dir . '/fonts/figtree-400.woff2' ) ) {
+	if ( file_exists( $font_dir . '/fonts/' . $critical_figtree_font ) ) {
 		printf(
-			'<link rel="preload" href="%s/figtree-400.woff2" as="font" type="font/woff2" crossorigin>' . "\n",
-			esc_url( $font_uri )
+			'<link rel="preload" href="%1$s/%2$s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( $font_uri ),
+			esc_attr( $critical_figtree_font )
 		);
 	}
 }

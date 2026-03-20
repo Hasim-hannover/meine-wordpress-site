@@ -40,6 +40,7 @@ Nicht verifiziert:
 - Nicht-kritische Theme-Skripte werden zentral ueber `inc/enqueue.php` mit `defer` ausgeliefert; `nexus-core-js` und `nexus-site-header-js` bleiben fuer unmittelbare Boot- und Header-Interaktionen ausgenommen.
 - Zusaetzliche INP-Haertung: `nexus-core.js` verschiebt nicht-kritische Observer/TOC/Progress-Initialisierung auf `requestAnimationFrame` bzw. Idle-Zeit, der Header verarbeitet Scroll- und Pointer-Bewegungen nur noch RAF-gebuendelt und das Cal.com-Enhancement bindet Preload-Listener direkt an passende Buchungslinks statt global am gesamten Dokument.
 - Zusaetzliche Homepage-Performance: die Font-Faces liegen jetzt direkt in `style.css` statt in einer separaten `fonts.css`-Anfrage, `related-content.css` und `footer-cta.css` laden nur noch auf Blog-Singles und die Homepage zieht die Core-Block-Library nicht mehr in den kritischen CSS-Pfad.
+- Zusaetzliche Homepage-Font-Optimierung: auf der Startseite wird fuer Figtree jetzt gezielt `figtree-600.woff2` als kritischer Schnitt vorgeladen; gleichzeitig sind Floating-Nav, Hero-Badge, Hero-CTA, Hero-Textlink und der fruehe Proof-Strip typografisch auf leichtere Figtree-Gewichte reduziert, damit `figtree-700.woff2` nicht mehr fuer den ersten Viewport notwendig wird.
 
 ## In Arbeit
 
