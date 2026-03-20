@@ -12,6 +12,7 @@
     var initialized = false;
     var preloaded = false;
     var observedRoot = null;
+    var pointerEnterEvent = window.PointerEvent ? 'pointerenter' : 'mouseenter';
 
     function ensureBootstrapNamespace(cal, namespace) {
         var namespaceApi = cal.ns[namespace];
@@ -145,12 +146,6 @@
             || event.altKey;
     }
 
-    function findAnchor(target) {
-        var node = target && target.nodeType === 1 ? target : target && target.parentElement ? target.parentElement : null;
-
-        return node && node.closest ? node.closest('a[href]') : null;
-    }
-
     function getAnchorUrl(link) {
         if (!link) {
             return null;
@@ -181,6 +176,46 @@
         }
 
         link.setAttribute('aria-haspopup', 'dialog');
+        link.setAttribute('data-cal-booking-link', 'true');
+
+        return true;
+    }
+
+    function handleBoundLinkClick(event) {
+        var link = event.currentTarget;
+
+        if (!link || !markBookingLink(link) || isModifiedClick(event)) {
+            return;
+        }
+
+        event.preventDefault();
+        openModal(link);
+    }
+
+    function handleBoundLinkPreload(event) {
+        var link = event.currentTarget;
+
+        if (!link || !markBookingLink(link)) {
+            return;
+        }
+
+        preloadModal(link);
+    }
+
+    function bindBookingLink(link) {
+        if (!link || !markBookingLink(link)) {
+            return false;
+        }
+
+        if ('true' === link.getAttribute('data-cal-embed-bound')) {
+            return true;
+        }
+
+        link.setAttribute('data-cal-embed-bound', 'true');
+        link.addEventListener('click', handleBoundLinkClick);
+        link.addEventListener('focus', handleBoundLinkPreload, { once: true });
+        link.addEventListener(pointerEnterEvent, handleBoundLinkPreload, { passive: true, once: true });
+        link.addEventListener('pointerdown', handleBoundLinkPreload, { passive: true, once: true });
 
         return true;
     }
@@ -194,7 +229,7 @@
         }
 
         if (scope.nodeType === 1 && scope.tagName === 'A') {
-            markBookingLink(scope);
+            bindBookingLink(scope);
             return;
         }
 
@@ -205,7 +240,7 @@
         links = scope.querySelectorAll('a[href]');
 
         for (index = 0; index < links.length; index += 1) {
-            markBookingLink(links[index]);
+            bindBookingLink(links[index]);
         }
     }
 
@@ -332,47 +367,6 @@
             });
     }
 
-    function handleClick(event) {
-        var link = findAnchor(event.target);
-
-        if (!link || !markBookingLink(link) || isModifiedClick(event)) {
-            return;
-        }
-
-        event.preventDefault();
-        openModal(link);
-    }
-
-    function handleFocusIn(event) {
-        var link = findAnchor(event.target);
-
-        if (!link || !markBookingLink(link)) {
-            return;
-        }
-
-        preloadModal(link);
-    }
-
-    function handlePointerOver(event) {
-        var link = findAnchor(event.target);
-
-        if (!link || !markBookingLink(link)) {
-            return;
-        }
-
-        preloadModal(link);
-    }
-
-    function handlePointerDown(event) {
-        var link = findAnchor(event.target);
-
-        if (!link || !markBookingLink(link)) {
-            return;
-        }
-
-        preloadModal(link);
-    }
-
     function observeDynamicLinks() {
         if (!window.MutationObserver || !document.body || observedRoot) {
             return;
@@ -403,11 +397,6 @@
     function init() {
         decorateScope(document);
         observeDynamicLinks();
-
-        document.addEventListener('click', handleClick);
-        document.addEventListener('focusin', handleFocusIn);
-        document.addEventListener('pointerdown', handlePointerDown, { passive: true });
-        document.addEventListener('mouseover', handlePointerOver, { passive: true });
     }
 
     if ('loading' === document.readyState) {

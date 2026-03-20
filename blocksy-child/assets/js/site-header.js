@@ -18,10 +18,26 @@
         var revealAfter = 120;
         var desktopHideDelay = 260;
         var topEdgeThreshold = 40;
+        var headerHeightRaf = 0;
+        var scrollRaf = 0;
+        var pointerMoveRaf = 0;
+        var pendingPointerY = 0;
+        var pointerMoveEvent = window.PointerEvent ? 'pointermove' : 'mousemove';
 
         function syncHeaderHeight() {
             var height = Math.max(76, Math.ceil(header.getBoundingClientRect().height + 12));
             document.documentElement.style.setProperty('--nx-header-height', height + 'px');
+        }
+
+        function queueHeaderHeightSync() {
+            if (headerHeightRaf) {
+                return;
+            }
+
+            headerHeightRaf = window.requestAnimationFrame(function () {
+                headerHeightRaf = 0;
+                syncHeaderHeight();
+            });
         }
 
         function clearHideTimer() {
@@ -91,7 +107,7 @@
             panel.hidden = !isOpen;
             updateVisibility(isOpen);
 
-            window.requestAnimationFrame(syncHeaderHeight);
+            queueHeaderHeightSync();
         }
 
         function closePanel() {
@@ -107,7 +123,52 @@
 
             isCondensed = nextCondensed;
             header.classList.toggle('nexus-flight-mode', nextCondensed);
-            window.requestAnimationFrame(syncHeaderHeight);
+            queueHeaderHeightSync();
+        }
+
+        function queueScrollUpdate() {
+            if (scrollRaf) {
+                return;
+            }
+
+            scrollRaf = window.requestAnimationFrame(function () {
+                scrollRaf = 0;
+                updateFlightMode();
+                updateVisibility(false);
+            });
+        }
+
+        function applyPointerProximity(clientY) {
+            var nextNearTopEdge = desktopMedia.matches && window.scrollY > revealAfter && clientY <= topEdgeThreshold;
+
+            if (isNearTopEdge === nextNearTopEdge) {
+                return;
+            }
+
+            isNearTopEdge = nextNearTopEdge;
+            updateVisibility(nextNearTopEdge);
+        }
+
+        function queuePointerProximity(clientY) {
+            if (!desktopMedia.matches || window.scrollY <= revealAfter) {
+                if (isNearTopEdge) {
+                    isNearTopEdge = false;
+                    updateVisibility(false);
+                }
+
+                return;
+            }
+
+            pendingPointerY = clientY;
+
+            if (pointerMoveRaf) {
+                return;
+            }
+
+            pointerMoveRaf = window.requestAnimationFrame(function () {
+                pointerMoveRaf = 0;
+                applyPointerProximity(pendingPointerY);
+            });
         }
 
         if (toggle && panel) {
@@ -140,7 +201,7 @@
                     }
 
                     updateVisibility(false);
-                    syncHeaderHeight();
+                    queueHeaderHeightSync();
                 });
             } else if (typeof desktopMedia.addListener === 'function') {
                 desktopMedia.addListener(function (event) {
@@ -149,7 +210,7 @@
                     }
 
                     updateVisibility(false);
-                    syncHeaderHeight();
+                    queueHeaderHeightSync();
                 });
             }
         }
@@ -176,16 +237,9 @@
             }, 0);
         });
 
-        document.addEventListener('mousemove', function (event) {
-            var nextNearTopEdge = desktopMedia.matches && window.scrollY > revealAfter && event.clientY <= topEdgeThreshold;
-
-            if (isNearTopEdge === nextNearTopEdge) {
-                return;
-            }
-
-            isNearTopEdge = nextNearTopEdge;
-            updateVisibility(nextNearTopEdge);
-        });
+        document.addEventListener(pointerMoveEvent, function (event) {
+            queuePointerProximity(event.clientY);
+        }, { passive: true });
 
         document.addEventListener('mouseleave', function () {
             if (!isNearTopEdge) {
@@ -200,14 +254,11 @@
         updateVisibility(false);
         syncHeaderHeight();
 
-        window.addEventListener('scroll', function () {
-            updateFlightMode();
-            updateVisibility(false);
-        }, { passive: true });
-        window.addEventListener('resize', syncHeaderHeight, { passive: true });
+        window.addEventListener('scroll', queueScrollUpdate, { passive: true });
+        window.addEventListener('resize', queueHeaderHeightSync, { passive: true });
 
         if (typeof window.ResizeObserver === 'function') {
-            new window.ResizeObserver(syncHeaderHeight).observe(header);
+            new window.ResizeObserver(queueHeaderHeightSync).observe(header);
         }
     }
 

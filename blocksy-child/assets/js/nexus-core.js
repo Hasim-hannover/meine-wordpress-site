@@ -14,6 +14,28 @@
 (function () {
     'use strict';
 
+    function runWhenIdle(callback, timeout) {
+        if (typeof callback !== 'function') {
+            return 0;
+        }
+
+        if (typeof window.requestIdleCallback === 'function') {
+            return window.requestIdleCallback(callback, { timeout: timeout || 1200 });
+        }
+
+        return window.setTimeout(callback, timeout || 1200);
+    }
+
+    function runAfterNextPaint(callback) {
+        if (typeof callback !== 'function') {
+            return;
+        }
+
+        window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(callback);
+        });
+    }
+
     const NexusCore = {
 
         /**
@@ -24,30 +46,63 @@
         initScrollSpy: function (navSelector, sectionSelector, offset) {
             const navLinks = document.querySelectorAll(navSelector + ' a');
             const sections = document.querySelectorAll(sectionSelector);
+            var sectionPositions = [];
+            var activeId = '';
+            var isQueued = false;
 
             if (!navLinks.length || !sections.length) return;
 
             offset = offset || 300;
 
+            function syncMeasurements() {
+                sectionPositions = Array.prototype.map.call(sections, function (section) {
+                    return {
+                        id: section.getAttribute('id'),
+                        top: section.offsetTop
+                    };
+                }).filter(function (entry) {
+                    return !!entry.id;
+                });
+
+                update();
+            }
+
             function update() {
+                isQueued = false;
+
                 let current = '';
-                sections.forEach(function (section) {
-                    if (window.scrollY >= section.offsetTop - offset) {
-                        current = section.getAttribute('id');
+                var scrollPosition = window.scrollY + offset;
+
+                sectionPositions.forEach(function (section) {
+                    if (scrollPosition >= section.top) {
+                        current = section.id;
                     }
                 });
 
+                if (current === activeId) {
+                    return;
+                }
+
+                activeId = current;
                 navLinks.forEach(function (link) {
-                    link.classList.remove('active');
                     var href = link.getAttribute('href');
-                    if (current && href && href.indexOf('#' + current) !== -1) {
-                        link.classList.add('active');
-                    }
+                    link.classList.toggle('active', !!current && !!href && href.indexOf('#' + current) !== -1);
                 });
             }
 
-            update();
-            window.addEventListener('scroll', update, { passive: true });
+            function queueUpdate() {
+                if (isQueued) {
+                    return;
+                }
+
+                isQueued = true;
+                window.requestAnimationFrame(update);
+            }
+
+            syncMeasurements();
+            window.addEventListener('scroll', queueUpdate, { passive: true });
+            window.addEventListener('resize', syncMeasurements, { passive: true });
+            window.addEventListener('load', syncMeasurements, { once: true });
         },
 
 
@@ -168,6 +223,8 @@
          */
         initProgressBar: function () {
             var bar = document.getElementById('nx-progress-bar');
+            var isQueued = false;
+
             if (!bar) {
                 bar = document.createElement('div');
                 bar.id = 'nx-progress-bar';
@@ -175,14 +232,30 @@
             }
 
             function updateProgress() {
+                isQueued = false;
+
                 var scrollTop = window.scrollY;
                 var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                if (docHeight <= 0) return;
+                if (docHeight <= 0) {
+                    bar.style.width = '0%';
+                    return;
+                }
+
                 var percent = Math.min((scrollTop / docHeight) * 100, 100);
                 bar.style.width = percent + '%';
             }
 
-            window.addEventListener('scroll', updateProgress, { passive: true });
+            function queueUpdateProgress() {
+                if (isQueued) {
+                    return;
+                }
+
+                isQueued = true;
+                window.requestAnimationFrame(updateProgress);
+            }
+
+            window.addEventListener('scroll', queueUpdateProgress, { passive: true });
+            window.addEventListener('resize', queueUpdateProgress, { passive: true });
             updateProgress();
         },
 
@@ -273,6 +346,17 @@
 
             var hasPulsed = false;
             var pulseTimer = null;
+            var interactionTargets = [
+                { node: window, eventName: 'scroll', options: { passive: true } },
+                { node: document, eventName: 'pointerdown', options: { passive: true } },
+                { node: document, eventName: 'keydown', options: false }
+            ];
+
+            function cleanup() {
+                interactionTargets.forEach(function (binding) {
+                    binding.node.removeEventListener(binding.eventName, queuePulse, binding.options);
+                });
+            }
 
             function queuePulse() {
                 if (hasPulsed) return;
@@ -280,11 +364,12 @@
                 pulseTimer = window.setTimeout(function () {
                     cta.classList.add('btn-primary--pulse');
                     hasPulsed = true;
+                    cleanup();
                 }, 5000);
             }
 
-            ['scroll', 'click', 'mousemove', 'touchstart'].forEach(function (eventName) {
-                document.addEventListener(eventName, queuePulse, { passive: true });
+            interactionTargets.forEach(function (binding) {
+                binding.node.addEventListener(binding.eventName, queuePulse, binding.options);
             });
 
             queuePulse();
@@ -298,6 +383,10 @@
         initToc: function (contentSelector, tocListSelector) {
             var content = document.querySelector(contentSelector);
             var tocList = document.querySelector(tocListSelector);
+            var headingPositions = [];
+            var activeId = '';
+            var isQueued = false;
+
             if (!content || !tocList) return;
 
             var headings = content.querySelectorAll('h2, h3');
@@ -333,19 +422,52 @@
 
             // Scroll-Spy für TOC Links
             var tocLinks = tocList.querySelectorAll('a');
+            function syncMeasurements() {
+                headingPositions = Array.prototype.map.call(headings, function (heading) {
+                    return {
+                        id: heading.id,
+                        top: heading.offsetTop
+                    };
+                });
+
+                updateTocActive();
+            }
+
             function updateTocActive() {
+                isQueued = false;
+
                 var current = '';
-                headings.forEach(function (h) {
-                    if (window.scrollY >= h.offsetTop - 150) {
-                        current = h.id;
+                var scrollPosition = window.scrollY + 150;
+
+                headingPositions.forEach(function (heading) {
+                    if (scrollPosition >= heading.top) {
+                        current = heading.id;
                     }
                 });
+
+                if (current === activeId) {
+                    return;
+                }
+
+                activeId = current;
                 tocLinks.forEach(function (a) {
                     a.classList.toggle('active', a.getAttribute('href') === '#' + current);
                 });
             }
-            window.addEventListener('scroll', updateTocActive, { passive: true });
-            updateTocActive();
+
+            function queueTocActive() {
+                if (isQueued) {
+                    return;
+                }
+
+                isQueued = true;
+                window.requestAnimationFrame(updateTocActive);
+            }
+
+            syncMeasurements();
+            window.addEventListener('scroll', queueTocActive, { passive: true });
+            window.addEventListener('resize', syncMeasurements, { passive: true });
+            window.addEventListener('load', syncMeasurements, { once: true });
         },
 
 
@@ -385,9 +507,14 @@
          */
         initHeaderFlight: function () {
             var header = document.querySelector('.ct-header');
+            var isQueued = false;
+
+            if (document.querySelector('[data-site-header]')) return;
             if (!header) return;
 
             function update() {
+                isQueued = false;
+
                 if (window.scrollY > 50) {
                     header.classList.add('nexus-flight-mode');
                 } else {
@@ -395,8 +522,17 @@
                 }
             }
 
+            function queueUpdate() {
+                if (isQueued) {
+                    return;
+                }
+
+                isQueued = true;
+                window.requestAnimationFrame(update);
+            }
+
             update();
-            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('scroll', queueUpdate, { passive: true });
         },
 
 
@@ -521,10 +657,23 @@
                 toggle.classList.add('nx-theme-toggle--mounted');
             }
 
+            var mountQueued = false;
+            function queueMount() {
+                if (mountQueued) {
+                    return;
+                }
+
+                mountQueued = true;
+                window.requestAnimationFrame(function () {
+                    mountQueued = false;
+                    applyMount();
+                });
+            }
+
             applyMount();
-            window.setTimeout(applyMount, 250);
-            window.setTimeout(applyMount, 1200);
-            window.addEventListener('resize', applyMount, { passive: true });
+            window.setTimeout(queueMount, 250);
+            window.setTimeout(queueMount, 1200);
+            window.addEventListener('resize', queueMount, { passive: true });
         },
 
 
@@ -584,6 +733,8 @@
          * Prüft welche Elemente auf der Seite existieren und initialisiert nur relevante Module.
          */
         init: function () {
+            var self = this;
+
             // Smart Nav (Homepage & About)
             if (document.querySelector('.smart-nav')) {
                 this.initScrollSpy('.smart-nav', 'section[id], .audit-section[id]');
@@ -599,31 +750,29 @@
             // Header Flight Mode
             this.initHeaderFlight();
 
-            // FAQ Accordion (global)
-            this.initFaqAccordion();
-
-            // KPI Counter Animation
-            this.initCounters();
-
             // Smooth Scroll
             this.initSmoothScroll();
 
-            // Reveal Animations
-            this.initReveal();
+            runAfterNextPaint(function () {
+                self.initFaqAccordion();
+                self.initCounters();
+                self.initReveal();
+            });
 
-            // Hero CTA pulse
-            this.initCtaPulse();
+            runWhenIdle(function () {
+                self.initCtaPulse();
+            }, 1400);
 
-            // Progress Bar auf Single Posts und seitenweiten Case-Study-Templates
-            if (document.querySelector('.nexus-single-container, .single-post, #nx-progress-bar')) {
-                this.initProgressBar();
-            }
+            runWhenIdle(function () {
+                if (document.querySelector('.nexus-single-container, .single-post, #nx-progress-bar')) {
+                    self.initProgressBar();
+                }
 
-            // TOC auf Single Posts
-            if (document.querySelector('#article-content') && document.querySelector('#toc-list')) {
-                this.initToc('#article-content', '#toc-list');
-                this.cleanupDuplicateToc();
-            }
+                if (document.querySelector('#article-content') && document.querySelector('#toc-list')) {
+                    self.initToc('#article-content', '#toc-list');
+                    self.cleanupDuplicateToc();
+                }
+            }, 1600);
         }
     };
 

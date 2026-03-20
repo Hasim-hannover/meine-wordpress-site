@@ -38,6 +38,7 @@ Nicht verifiziert:
 - Repo-seitig existiert jetzt ein `SEO Cockpit` im WordPress-Admin: Search-Console-OAuth, Cache-Layer, Kernmetriken, Dashboard-Widget, Cron-Snapshot und optionale Koko-Erkennung sind im Theme vorbereitet.
 - Die KI-Crawler-Oberflaeche fuer `/llms.txt` folgt jetzt repo- und theme-seitig demselben kompakten Format mit verdichteter Audit-Zusammenfassung und kanonischen Hauptpfaden.
 - Nicht-kritische Theme-Skripte werden zentral ueber `inc/enqueue.php` mit `defer` ausgeliefert; `nexus-core-js` und `nexus-site-header-js` bleiben fuer unmittelbare Boot- und Header-Interaktionen ausgenommen.
+- Zusaetzliche INP-Haertung: `nexus-core.js` verschiebt nicht-kritische Observer/TOC/Progress-Initialisierung auf `requestAnimationFrame` bzw. Idle-Zeit, der Header verarbeitet Scroll- und Pointer-Bewegungen nur noch RAF-gebuendelt und das Cal.com-Enhancement bindet Preload-Listener direkt an passende Buchungslinks statt global am gesamten Dokument.
 
 ## In Arbeit
 
