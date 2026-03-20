@@ -634,7 +634,7 @@ function hu_output_schema()
                 '@type'    => 'CollectionPage',
                 '@id'      => home_url('/kostenlose-tools/#collection'),
                 'url'      => home_url('/kostenlose-tools/'),
-                'name'     => 'Kostenlose Tools für dein Wachstum',
+                'name'     => 'Kostenlose Tools für Nachfrage und Conversion',
                 'description' => 'Kuratiertes Hub für kostenlose Diagnose-Einstiege rund um Website-Performance, Systemverständnis und Nachfrage-Qualität.',
                 'hasPart'  => $toolParts,
                 'inLanguage' => 'de',

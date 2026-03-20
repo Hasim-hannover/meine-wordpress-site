@@ -28,6 +28,7 @@ Wichtige Merkmale:
 - `inc/enqueue.php` ist der Asset-Hub fuer CSS und JS pro Seitentyp.
 - Ein Teil der Seiten ist editor-getrieben und nutzt `the_content()`.
 - Ein anderer Teil ist hart codiert und traegt Business-Logik direkt im Template.
+- Die kanonische Kontaktseite `/kontakt/` rendert im Frontend jetzt immer das versionierte Theme-Template statt editorgetriebener Altinhalte.
 - `page-wgos.php` ist als template-getriebene Sales-Page fuer `WGOS = WordPress Growth Operating System` versioniert; Struktur, erklaerter Framework-Kontext und CTA-Hierarchie liegen im Repo, nicht im Editor.
 - Die Homepage-Shortcodes liefern jetzt einen versionierten Public-Proof-Layer aus konservativen Leistungsmetriken, GitHub-Transparenz und audit-first Folgelogik statt Pilotangebot.
 

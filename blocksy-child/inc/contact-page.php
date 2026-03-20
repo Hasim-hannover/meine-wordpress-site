@@ -111,13 +111,13 @@ function nexus_preempt_contact_404( $preempt, $wp_query ) {
 add_filter( 'pre_handle_404', 'nexus_preempt_contact_404', 10, 2 );
 
 /**
- * Use the native contact template for the virtual /kontakt/ route.
+ * Use the native contact template for the canonical /kontakt/ route.
  *
  * @param string $template Resolved template path.
  * @return string
  */
 function nexus_use_virtual_contact_template( $template ) {
-	if ( ! nexus_is_contact_request_path() || is_page( 'kontakt' ) ) {
+	if ( ! nexus_is_contact_request_path() ) {
 		return $template;
 	}
 
@@ -138,7 +138,7 @@ add_filter( 'template_include', 'nexus_use_virtual_contact_template', 99 );
  * @return array<int, string>
  */
 function nexus_add_virtual_contact_body_class( $classes ) {
-	if ( ! nexus_is_contact_request_path() || is_page( 'kontakt' ) ) {
+	if ( ! nexus_is_contact_request_path() ) {
 		return $classes;
 	}
 

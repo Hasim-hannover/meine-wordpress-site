@@ -19,14 +19,6 @@ $timeline_options     = function_exists( 'nexus_get_contact_timeline_options' ) 
 $calendar_url         = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' );
 $requested_focus      = isset( $_GET['focus'] ) ? sanitize_key( wp_unslash( $_GET['focus'] ) ) : '';
 $requested_type       = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : '';
-$legacy_focus_map     = [
-	'pilot' => 'followup_scope',
-];
-$legacy_type_map      = [
-	'project' => 'implementation',
-];
-$requested_focus      = isset( $legacy_focus_map[ $requested_focus ] ) ? $legacy_focus_map[ $requested_focus ] : $requested_focus;
-$requested_type       = isset( $legacy_type_map[ $requested_type ] ) ? $legacy_type_map[ $requested_type ] : $requested_type;
 $selected_focus       = isset( $focus_options[ $requested_focus ] ) ? $requested_focus : '';
 $selected_type        = isset( $request_type_options[ $requested_type ] ) ? $requested_type : '';
 $social_links         = [

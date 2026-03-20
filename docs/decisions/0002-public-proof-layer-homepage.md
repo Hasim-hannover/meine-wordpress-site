@@ -17,7 +17,7 @@ Die Homepage bekommt einen versionierten Public-Proof-Layer an drei Stellen:
 
 1. Nach dem Prinzip-Block zeigt ein GitHub-Modul die offene Arbeitsweise mit Repo-Link und Commit-Badge.
 2. Der Proof-Bereich rahmt `E3 New Energy` als beispielhafte Wirkung eines wiederholbaren Systems und ergaenzt einen Community-Kasten mit oeffentlichen LinkedIn-Signalen.
-3. Nach dem Abschluss-CTA fuehrt ein gedeckeltes Pilotprojekt in einen risikoarmen Erstschritt, der spaeter als anonymisierte Referenz nutzbar werden kann.
+3. Nach dem Abschluss-CTA fuehrt nur noch der audit-first Folgepfad weiter: erst Diagnose, dann eine fokussierte Folgeanalyse oder eine kontrollierte Weiterentwicklung, falls fachlich sinnvoll.
 
 ## Datenbasis
 
@@ -28,5 +28,5 @@ Die Homepage bekommt einen versionierten Public-Proof-Layer an drei Stellen:
 ## Folgen
 
 - Vertrauen wird ueber nachvollziehbare Arbeit und sichtbare Systemlogik aufgebaut, nicht ueber ausgedachte Referenzen.
-- Das Pilotprojekt schafft einen echten Mechanismus fuer neue anonymisierte Case Studies in den naechsten 3 bis 6 Monaten.
+- Folgearbeit entsteht nicht aus einem oeffentlichen Pilotangebot, sondern erst aus einer klaren Diagnose und einem sauberen fachlichen Fit.
 - Die oeffentlichen Kennzahlen muessen bei groesseren Homepage-Iterationen manuell nachgezogen werden.
