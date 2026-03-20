@@ -30,8 +30,10 @@ $project_request_url = add_query_arg(
 	],
 	$contact_url
 );
-$imprint_url = $primary_urls['impressum'] ?? home_url( '/impressum/' );
-$privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
+$imprint_url      = $primary_urls['impressum'] ?? home_url( '/impressum/' );
+$privacy_url      = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
+$hide_primary_cta = function_exists( 'nexus_should_hide_footer_primary_cta' ) && nexus_should_hide_footer_primary_cta();
+$footer_class     = $hide_primary_cta ? 'ft ft--no-primary-cta' : 'ft';
 ?>
 
 <?php if ( function_exists( 'nexus_is_audit_page' ) && nexus_is_audit_page() ) : ?>
@@ -48,14 +50,16 @@ $privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 </footer>
 <?php return; endif; ?>
 
-<footer id="footer" class="ft" aria-labelledby="ft-heading" role="contentinfo">
+<footer id="footer" class="<?php echo esc_attr( $footer_class ); ?>" aria-labelledby="ft-heading" role="contentinfo">
 	<h2 id="ft-heading" class="ft__sr">Footer-Navigation</h2>
 
 	<div class="ft__top">
 		<div class="ft__brand">
 			<a class="ft__logo site-logo site-logo--accent" href="<?php echo esc_url( $home_url ); ?>" aria-label="Startseite - HAŞIM ÜNER">HAŞIM ÜNER</a>
 			<p class="ft__tag">WordPress als Nachfrage-System für B2B.</p>
+			<?php if ( ! $hide_primary_cta ) : ?>
 			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_audit" data-track-category="lead_gen">Growth Audit starten</a>
+			<?php endif; ?>
 			<p class="ft__privacy-note">
 				<span class="ft__privacy-badge" aria-hidden="true">
 					<svg viewBox="0 0 24 24" focusable="false">

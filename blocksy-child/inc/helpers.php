@@ -844,6 +844,76 @@ function nexus_is_contact_page() {
 		|| is_page( 'kontaktiere-mich' );
 }
 
+/**
+ * Determine whether the large footer audit CTA should be hidden on the current request.
+ *
+ * Hide the button on pages that already end with a dedicated audit CTA block.
+ *
+ * @return bool
+ */
+function nexus_should_hide_footer_primary_cta() {
+	if ( (bool) get_query_var( 'nexus_hide_footer_primary_cta', false ) ) {
+		return true;
+	}
+
+	if ( is_home() ) {
+		return true;
+	}
+
+	if ( function_exists( 'nexus_is_wgos_cluster_page' ) && nexus_is_wgos_cluster_page() ) {
+		return true;
+	}
+
+	$results_page_id = nexus_get_results_page_id();
+
+	if ( $results_page_id && is_page( $results_page_id ) ) {
+		return true;
+	}
+
+	$page_templates = [
+		'template-about.php',
+		'page-loesungen.php',
+		'page-wordpress-agentur.php',
+		'page-wordpress-agentur-hannover.php',
+		'page-case-studies-e-commerce.php',
+		'page-case-e3.php',
+		'page-case-study-domdar.php',
+		'page-wgos.php',
+		'page-wgos-assets.php',
+		'page-ki-integration.php',
+		'page-solar-waermepumpen-leadgenerierung.php',
+	];
+
+	foreach ( $page_templates as $page_template ) {
+		if ( is_page_template( $page_template ) ) {
+			return true;
+		}
+	}
+
+	return is_page(
+		[
+			'uber-mich',
+			'wordpress-agentur',
+			'wordpress-agentur-hannover',
+			'case-studies-e-commerce',
+			'case-studies',
+			'ergebnisse',
+			'e3-new-energy',
+			'case-study-domdar',
+			'domdar',
+			'wgos',
+			'wordpress-growth-operating-system',
+			'wgos-systemlandkarte',
+			'wgos-asset-hub',
+			'systemlandkarte',
+			'ki-integration-wordpress',
+			'solar-waermepumpen-leadgenerierung',
+			'website-fuer-solar-und-waermepumpen-anbieter',
+			'loesungen',
+		]
+	);
+}
+
 add_action( 'template_redirect', 'nexus_redirect_legacy_results_path', 1 );
 /**
  * Redirect legacy proof overview paths to the canonical results hub.

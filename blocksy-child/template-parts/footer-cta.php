@@ -29,6 +29,8 @@ $button_text = get_query_var( 'cta_button_text', __( 'Audit starten', 'blocksy-c
 $action      = get_query_var( 'cta_action', 'cta_footer_audit' );
 $imprint_url = nexus_get_page_url( [ 'impressum' ], home_url( '/impressum/' ) );
 $privacy_url = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
+
+set_query_var( 'nexus_hide_footer_primary_cta', true );
 ?>
 
 <section class="nexus-footer-cta" data-track-section="footer_cta">

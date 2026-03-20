@@ -555,6 +555,7 @@ p.hero-stack,
 .ft__privacy-note a:focus-visible {
     opacity: 1;
 }
+.ft--no-primary-cta .ft__privacy-note { margin-top: 8px; }
 
 /* Nav columns */
 .ft__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
