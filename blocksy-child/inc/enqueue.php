@@ -49,14 +49,6 @@ function hu_enqueue_assets() {
 	// ── GLOBAL: Custom Header ──────────────────────────────────────
 	hu_enqueue_css( 'nexus-site-header-css', 'site-header.css', [ 'nexus-design-system' ] );
 
-	// ── GLOBAL: Related Content (NEU POSITIONIERT) ────────────────
-	// Damit das CSS auf ALLEN Seiten geladen wird (Startseite, Single Posts, Pages etc.)
-	hu_enqueue_css( 'nexus-related-content-css', 'related-content.css', [ 'nexus-design-system' ] );
-
-	// ── GLOBAL: Footer CTA (Pre-Footer) ───────────────────────────
-	// Damit der Footer CTA auf allen Seiten gestylt wird
-	hu_enqueue_css( 'nexus-footer-cta-css', 'footer-cta.css', [ 'nexus-design-system' ] );
-
 	// ── GLOBAL: Core JS (Scroll-Spy, FAQ, Counter, Progress Bar) ──
 	hu_enqueue_js( 'nexus-core-js', 'nexus-core.js' );
 	hu_enqueue_js( 'nexus-site-header-js', 'site-header.js', [ 'nexus-core-js' ] );
@@ -163,6 +155,8 @@ function hu_enqueue_assets() {
 	}
 
 	if ( is_singular( 'post' ) ) {
+		hu_enqueue_css( 'nexus-related-content-css', 'related-content.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-footer-cta-css', 'footer-cta.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-blog-inline-cta-js', 'blog-inline-cta.js', [ 'nexus-core-js' ] );
 	}
 
@@ -621,6 +615,24 @@ function hu_enqueue_assets() {
 		hu_enqueue_css( 'nexus-case-study-css', 'case-study.css', [ 'nexus-home-css' ] );
 	}
 }
+
+/**
+ * Disable core block styles on the fully versioned homepage.
+ *
+ * The homepage is rendered from PHP templates and does not need the global
+ * block library in its critical rendering path.
+ *
+ * @return void
+ */
+function hu_disable_core_block_styles_on_homepage() {
+	if ( is_admin() || ! is_front_page() ) {
+		return;
+	}
+
+	wp_dequeue_style( 'wp-block-library' );
+	wp_dequeue_style( 'wp-block-library-theme' );
+}
+add_action( 'wp_enqueue_scripts', 'hu_disable_core_block_styles_on_homepage', 100 );
 
 /**
  * Helper: Enqueue a CSS file with filemtime cache-busting.

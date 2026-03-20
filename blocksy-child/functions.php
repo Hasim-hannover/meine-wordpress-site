@@ -61,22 +61,6 @@ function blocksy_child_register_slim_nav_menu() {
 }
 
 // ── 2. TYPOGRAFIE & BRANDING: SELF-HOSTED FONTS ──────────────────
-add_action( 'wp_enqueue_scripts', 'theme_self_hosted_fonts', 1 );
-function theme_self_hosted_fonts() {
-	$fonts_css_path = get_stylesheet_directory() . '/fonts.css';
-
-	if ( ! file_exists( $fonts_css_path ) ) {
-		return;
-	}
-
-	wp_enqueue_style(
-		'self-hosted-fonts',
-		get_stylesheet_directory_uri() . '/fonts.css',
-		array(),
-		filemtime( $fonts_css_path )
-	);
-}
-
 add_action( 'wp_head', 'hu_preload_self_hosted_fonts', 1 );
 function hu_preload_self_hosted_fonts() {
 	$font_dir = get_stylesheet_directory();
