@@ -77,7 +77,7 @@ function nexus_get_wgos_cluster_page_data() {
 				],
 			],
 			'meta_title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
-			'meta_description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability, interne Verlinkung und priorisierte Fixes fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
+			'meta_description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability und interne Verlinkung fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
 			'schema_name'      => 'Technisches SEO für WordPress in Hannover',
 			'schema_description' => 'WGOS-Cluster für technisches SEO auf WordPress in Hannover: technische Basis, Seitenstruktur und conversion-nahe Sichtbarkeit für B2B-Websites.',
 		],

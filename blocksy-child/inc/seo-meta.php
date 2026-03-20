@@ -133,7 +133,7 @@ function hu_get_forced_singular_seo_map() {
 			],
 			'wordpress-seo-hannover' => [
 				'title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
-				'description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability, interne Verlinkung und priorisierte Fixes fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
+				'description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability und interne Verlinkung fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
 			],
 			'ki-integration-wordpress' => [
 				'title'       => 'KI-Integration für WordPress – DSGVO-konform | Haşim Üner',
