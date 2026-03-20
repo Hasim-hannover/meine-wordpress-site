@@ -72,6 +72,30 @@ function hu_enqueue_assets() {
 				'bookingUrl'     => esc_url_raw( (string) $calendar_embed['url'] ),
 				'calOrigin'      => esc_url_raw( (string) $calendar_embed['origin'] ),
 				'calLink'        => sanitize_text_field( (string) $calendar_embed['cal_link'] ),
+				'bookingLinks'   => array_values(
+					array_filter(
+						array_map(
+							static function ( $entry ) {
+								if ( ! is_array( $entry ) ) {
+									return null;
+								}
+
+								$url      = isset( $entry['url'] ) ? esc_url_raw( (string) $entry['url'] ) : '';
+								$cal_link = isset( $entry['cal_link'] ) ? sanitize_text_field( (string) $entry['cal_link'] ) : '';
+
+								if ( '' === $url || '' === $cal_link ) {
+									return null;
+								}
+
+								return [
+									'url'      => $url,
+									'calLink'  => $cal_link,
+								];
+							},
+							(array) ( $calendar_embed['booking_links'] ?? [] )
+						)
+					)
+				),
 				'namespace'      => 'nexus-audit-call',
 				'embedScriptUrl' => esc_url_raw( 'https://app.cal.com/embed/embed.js' ),
 			]

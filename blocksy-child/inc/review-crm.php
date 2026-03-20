@@ -470,6 +470,39 @@ function nexus_get_energy_intake_flow_definition() {
 }
 
 /**
+ * Normalize a public Cal.com URL into modal embed config fragments.
+ *
+ * @param string $calendar_url Public booking URL.
+ * @return array<string, string>
+ */
+function nexus_build_calendar_embed_entry( $calendar_url ) {
+	$calendar_url = esc_url_raw( (string) $calendar_url, [ 'https' ] );
+
+	if ( '' === $calendar_url ) {
+		return [
+			'url'      => '',
+			'origin'   => '',
+			'cal_link' => '',
+		];
+	}
+
+	$parsed_url = wp_parse_url( $calendar_url );
+	$scheme     = isset( $parsed_url['scheme'] ) ? strtolower( (string) $parsed_url['scheme'] ) : 'https';
+	$host       = isset( $parsed_url['host'] ) ? strtolower( (string) $parsed_url['host'] ) : '';
+	$path       = isset( $parsed_url['path'] ) ? trim( (string) $parsed_url['path'], '/' ) : '';
+
+	if ( 'http' !== $scheme && 'https' !== $scheme ) {
+		$scheme = 'https';
+	}
+
+	return [
+		'url'      => $calendar_url,
+		'origin'   => $host ? $scheme . '://' . $host : '',
+		'cal_link' => $path,
+	];
+}
+
+/**
  * Resolve the public calendar URL for audit-related flows.
  *
  * @return string
@@ -492,25 +525,53 @@ function nexus_get_audit_calendar_url() {
 }
 
 /**
+ * Resolve the public calendar URL for whitelabel fit conversations.
+ *
+ * @return string
+ */
+function nexus_get_whitelabel_calendar_url() {
+	$default_url = 'https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true';
+
+	$resolved_url = (string) apply_filters(
+		'nexus_whitelabel_calendar_url',
+		$default_url
+	);
+
+	$sanitized_url = esc_url_raw( $resolved_url, [ 'https' ] );
+
+	if ( '' !== $sanitized_url ) {
+		return $sanitized_url;
+	}
+
+	return $default_url;
+}
+
+/**
  * Return normalized Cal.com embed config for direct booking CTAs.
  *
- * @return array<string, string>
+ * @return array<string, mixed>
  */
 function nexus_get_audit_calendar_embed_config() {
-	$calendar_url = nexus_get_audit_calendar_url();
-	$parsed_url   = wp_parse_url( $calendar_url );
-	$scheme       = isset( $parsed_url['scheme'] ) ? strtolower( (string) $parsed_url['scheme'] ) : 'https';
-	$host         = isset( $parsed_url['host'] ) ? strtolower( (string) $parsed_url['host'] ) : '';
-	$path         = isset( $parsed_url['path'] ) ? trim( (string) $parsed_url['path'], '/' ) : '';
+	$audit_entry      = nexus_build_calendar_embed_entry( nexus_get_audit_calendar_url() );
+	$whitelabel_entry = nexus_build_calendar_embed_entry( nexus_get_whitelabel_calendar_url() );
+	$booking_links    = [];
 
-	if ( 'http' !== $scheme && 'https' !== $scheme ) {
-		$scheme = 'https';
+	foreach ( [ $audit_entry, $whitelabel_entry ] as $entry ) {
+		if ( empty( $entry['url'] ) || empty( $entry['origin'] ) || empty( $entry['cal_link'] ) ) {
+			continue;
+		}
+
+		$booking_links[] = [
+			'url'      => $entry['url'],
+			'cal_link' => $entry['cal_link'],
+		];
 	}
 
 	return [
-		'url'      => $calendar_url,
-		'origin'   => $host ? $scheme . '://' . $host : '',
-		'cal_link' => $path,
+		'url'           => $audit_entry['url'],
+		'origin'        => $audit_entry['origin'],
+		'cal_link'      => $audit_entry['cal_link'],
+		'booking_links' => $booking_links,
 	];
 }
 

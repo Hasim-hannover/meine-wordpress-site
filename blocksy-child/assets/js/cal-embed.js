@@ -100,8 +100,37 @@
         return parsedBookingUrl ? normalizePath(parsedBookingUrl.pathname) : '';
     }
 
+    function getConfiguredBookingPaths() {
+        var entries = Array.isArray(config.bookingLinks) ? config.bookingLinks : [];
+        var seen = {};
+        var paths = [];
+        var index;
+        var entry;
+        var entryPath;
+
+        if (calPath) {
+            seen[calPath] = true;
+            paths.push(calPath);
+        }
+
+        for (index = 0; index < entries.length; index += 1) {
+            entry = entries[index] || {};
+            entryPath = normalizePath(entry.calLink || entry.cal_link || '');
+
+            if (!entryPath || seen[entryPath]) {
+                continue;
+            }
+
+            seen[entryPath] = true;
+            paths.push(entryPath);
+        }
+
+        return paths;
+    }
+
     var calOrigin = getConfiguredOrigin();
     var calPath = getConfiguredPath();
+    var allowedCalPaths = getConfiguredBookingPaths();
 
     if (!calOrigin || !calPath || !config.embedScriptUrl || !config.namespace) {
         return;
@@ -130,14 +159,20 @@
         return parseUrl(link.getAttribute('href'));
     }
 
-    function isMatchingBookingLink(link) {
+    function getLinkCalPath(link) {
         var linkUrl = getAnchorUrl(link);
 
-        if (!linkUrl) {
-            return false;
+        if (!linkUrl || linkUrl.origin !== calOrigin) {
+            return '';
         }
 
-        return linkUrl.origin === calOrigin && normalizePath(linkUrl.pathname) === calPath;
+        return normalizePath(linkUrl.pathname);
+    }
+
+    function isMatchingBookingLink(link) {
+        var linkPath = getLinkCalPath(link);
+
+        return !!linkPath && allowedCalPaths.indexOf(linkPath) !== -1;
     }
 
     function markBookingLink(link) {
@@ -260,31 +295,35 @@
         window.location.assign(href);
     }
 
-    function preloadModal() {
-        if (preloaded) {
+    function preloadModal(link) {
+        var linkPath = getLinkCalPath(link) || calPath;
+
+        if (preloaded === linkPath) {
             return;
         }
 
-        preloaded = true;
+        preloaded = linkPath;
 
         getNamespaceApi()
             .then(function (calApi) {
                 calApi('preload', {
-                    calLink: String(config.calLink),
+                    calLink: String(linkPath),
                     calOrigin: calOrigin,
                     type: 'modal'
                 });
             })
             .catch(function () {
-                preloaded = false;
+                preloaded = '';
             });
     }
 
     function openModal(link) {
+        var linkPath = getLinkCalPath(link) || calPath;
+
         getNamespaceApi()
             .then(function (calApi) {
                 calApi('modal', {
-                    calLink: String(config.calLink),
+                    calLink: String(linkPath),
                     calOrigin: calOrigin
                 });
             })
@@ -311,7 +350,7 @@
             return;
         }
 
-        preloadModal();
+        preloadModal(link);
     }
 
     function handlePointerOver(event) {
@@ -321,7 +360,7 @@
             return;
         }
 
-        preloadModal();
+        preloadModal(link);
     }
 
     function handlePointerDown(event) {
@@ -331,7 +370,7 @@
             return;
         }
 
-        preloadModal();
+        preloadModal(link);
     }
 
     function observeDynamicLinks() {

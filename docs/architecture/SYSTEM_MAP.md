@@ -77,8 +77,8 @@ Aktuelle Logik:
 4. Die Branchen-Landingpage fuer Solar-/Waermepumpen-Anbieter nutzt denselben Request-Stack mit eigenem, branch-faehigem Multi-Step-Intake und serverseitigem Fallback.
 5. WordPress speichert die Anfrage direkt im internen Audit-CRM und versendet Benachrichtigungen ueber `wp_mail`.
 6. Danach folgt bei Bedarf ein vertiefter Folgeschritt, aber erst nach der persoenlichen Rueckmeldung und direktem Kontakt.
-7. Alternative direkte Eskalation: `Cal.com`-Call ueber `https://cal.com/hasim-uener/30min?overlayCalendar=true`.
-8. Direkte Gespraechs-CTAs bleiben als normale Links erhalten, werden im Frontend aber per `blocksy-child/assets/js/cal-embed.js` zu einem Modal-Embed im Seitenkontext erweitert.
+7. Alternative direkte Eskalation: `Cal.com`-Call ueber `https://cal.com/hasim-uener/30min?overlayCalendar=true`; fuer Agentur-/Partner-Fit auf der Whitelabel-Seite zusaetzlich `https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true`.
+8. Direkte Gespraechs-CTAs bleiben als normale Links erhalten, werden im Frontend aber per `blocksy-child/assets/js/cal-embed.js` event-typ-spezifisch zu einem Modal-Embed im Seitenkontext erweitert.
 9. `audit-live.js` bleibt als vorbereiteter Instant-Results-Layer im Repo, ist aber nicht der aktive Default-Flow.
 
 ## Nexus CRM und Blog Notify
@@ -146,10 +146,12 @@ Die CTA-Hierarchie ist klar und sollte nicht verwischt werden.
 - Sekundaerer CTA: `WGOS verstehen`, `Case Studies ansehen`
 - Folgeeinstieg nur nach Diagnose: `Fokussierte Folgeanalyse`
 - Umsetzungsnahe Kontaktwege: `Umsetzung / Optimierung`, `Laufende Weiterentwicklung`
+- Partner-/Agentur-Einstieg auf der Whitelabel-Seite: `Whitelabel-Fit-Gespraech`
 - Kein oeffentlicher 360-/Blueprint-CTA mehr im Erstkontakt
 - Eskalations-CTA: `Cal.com`-Strategiecall
-- Zentrale Default-URL fuer direkte Gespraechsbuchung: `https://cal.com/hasim-uener/30min?overlayCalendar=true`
-- Direkte Gespraechsbuchung wird repo-seitig als progressive Enhancement umgesetzt: Modal bei aktivem JS, normaler Link als Fallback.
+- Default-URL fuer direkte Gespraechsbuchung in Audit-, Kontakt- und WGOS-Kontexten: `https://cal.com/hasim-uener/30min?overlayCalendar=true`
+- Partner-/Agentur-URL fuer direkte Gespraechsbuchung auf der Whitelabel-Seite: `https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true`
+- Direkte Gespraechsbuchung wird repo-seitig als progressive Enhancement umgesetzt: Modal bei aktivem JS, normaler Link als Fallback, auch bei mehreren Cal.com-Event-Typen.
 - Utility-CTA: Kunden-Portal fuer Bestandskunden
 
 Wichtige Repopunkte:

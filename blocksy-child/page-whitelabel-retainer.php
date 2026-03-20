@@ -12,10 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$audit_url    = nexus_get_audit_url();
-$results_url  = nexus_get_results_url();
-$wgos_url     = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
-$portrait_url = 'https://hasimuener.de/wp-content/uploads/2026/01/Hasim-Uener-Prtraeit_Startseite.webp';
+$results_url         = nexus_get_results_url();
+$wgos_url            = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
+$whitelabel_fit_url  = function_exists( 'nexus_get_whitelabel_calendar_url' ) ? nexus_get_whitelabel_calendar_url() : 'https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true';
+$portrait_url        = 'https://hasimuener.de/wp-content/uploads/2026/01/Hasim-Uener-Prtraeit_Startseite.webp';
 
 $focus_areas = [
 	[
@@ -90,6 +90,10 @@ $skill_items = [
 						Nicht weil sie schwächer wäre, sondern weil sie in Agentur-Setups, laufender Systemarbeit
 						oder sensiblen Projekten bewusst unsichtbar bleibt. Genau deshalb ist diese Seite wichtig.
 					</p>
+					<p class="results-cta__copy">
+						Wenn Sie agenturseitig oder als Partner prüfen wollen, ob ich im Hintergrund zu Ihrem Fall passe,
+						ist ein kurzes Whitelabel-Fit-Gespräch der direkteste Einstieg.
+					</p>
 
 					<div class="wl-metrics" role="list" aria-label="Whitelabel-Kennzahlen">
 						<div class="wl-metric" role="listitem">
@@ -113,8 +117,8 @@ $skill_items = [
 					</ul>
 
 					<div class="wl-hero__actions">
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_whitelabel_hero_audit" data-track-category="lead_gen">Audit starten</a>
-						<a href="<?php echo esc_url( $results_url ); ?>" class="nx-btn nx-btn--ghost">Alle Ergebnisse</a>
+						<a href="<?php echo esc_url( $whitelabel_fit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_whitelabel_hero_fit_call" data-track-category="lead_gen">Whitelabel-Fit-Gespräch buchen</a>
+						<a href="<?php echo esc_url( $results_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_whitelabel_hero_results" data-track-category="trust">Alle Ergebnisse</a>
 					</div>
 				</div>
 
@@ -224,15 +228,15 @@ $skill_items = [
 			<div class="results-cta__shell">
 				<div>
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2 class="results-cta__title">Wenn Ihre Seite eher nach Systemarbeit als nach Schönheitskorrektur verlangt</h2>
+					<h2 class="results-cta__title">Wenn Sie einen verlässlichen Partner im Hintergrund suchen</h2>
 					<p class="results-cta__copy">
-						Dann lohnt kein loses Leistungsmenü. Dann lohnt zuerst eine Diagnose, die die größten
-						Reibungsverluste sichtbar macht und daraus eine saubere Reihenfolge ableitet.
+						Dann ist kein loses Leistungsmenü hilfreich. Im Whitelabel-Fit-Gespräch klären wir kurz,
+						ob ich fachlich, technisch und operativ zu Ihrem Setup passe und welche Form der Zusammenarbeit sinnvoll wäre.
 					</p>
 				</div>
 				<div class="results-cta__actions">
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_whitelabel_footer_audit" data-track-category="lead_gen">Audit starten</a>
-					<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost">WGOS ansehen</a>
+					<a href="<?php echo esc_url( $whitelabel_fit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_whitelabel_footer_fit_call" data-track-category="lead_gen">Whitelabel-Fit-Gespräch buchen</a>
+					<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_whitelabel_footer_wgos" data-track-category="trust">WGOS ansehen</a>
 				</div>
 			</div>
 		</div>
