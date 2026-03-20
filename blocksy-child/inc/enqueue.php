@@ -268,13 +268,7 @@ function hu_enqueue_assets() {
 		$explorer_path = get_stylesheet_directory() . '/assets/js/wgos-asset-explorer.js';
 
 		if ( file_exists( $explorer_path ) ) {
-			wp_enqueue_script(
-				'nexus-wgos-asset-explorer-js',
-				get_stylesheet_directory_uri() . '/assets/js/wgos-asset-explorer.js',
-				[ 'wp-element' ],
-				filemtime( $explorer_path ),
-				true
-			);
+			hu_enqueue_js( 'nexus-wgos-asset-explorer-js', 'wgos-asset-explorer.js', [ 'wp-element' ] );
 
 			wp_add_inline_script(
 				'nexus-wgos-asset-explorer-js',
@@ -669,6 +663,75 @@ function hu_enqueue_js( $handle, $file, $deps = [] ) {
 		filemtime( $path ),
 		true
 	);
+
+	hu_mark_script_for_defer( $handle );
+}
+
+/**
+ * Return theme script handles that should stay blocking/immediate.
+ *
+ * Keep core boot logic and the global header runtime outside the defer path.
+ *
+ * @return array<int, string>
+ */
+function hu_get_non_deferred_script_handles() {
+	$handles = apply_filters(
+		'hu_non_deferred_script_handles',
+		[
+			'nexus-core-js',
+			'nexus-site-header-js',
+		]
+	);
+
+	$handles = array_filter(
+		array_map(
+			static function ( $handle ) {
+				return sanitize_key( (string) $handle );
+			},
+			(array) $handles
+		)
+	);
+
+	return array_values( array_unique( $handles ) );
+}
+
+/**
+ * Check whether a theme script should receive defer.
+ *
+ * @param string $handle Script handle.
+ * @return bool
+ */
+function hu_should_defer_script( $handle ) {
+	$handle = sanitize_key( (string) $handle );
+
+	if ( '' === $handle || 0 !== strpos( $handle, 'nexus-' ) ) {
+		return false;
+	}
+
+	return ! in_array( $handle, hu_get_non_deferred_script_handles(), true );
+}
+
+/**
+ * Mark a script handle for deferred loading with a WordPress strategy plus fallback.
+ *
+ * @param string $handle Script handle.
+ * @return void
+ */
+function hu_mark_script_for_defer( $handle ) {
+	global $hu_deferred_script_handles;
+
+	if ( ! hu_should_defer_script( $handle ) ) {
+		return;
+	}
+
+	if ( ! is_array( $hu_deferred_script_handles ) ) {
+		$hu_deferred_script_handles = [];
+	}
+
+	$hu_deferred_script_handles[] = sanitize_key( (string) $handle );
+	$hu_deferred_script_handles   = array_values( array_unique( $hu_deferred_script_handles ) );
+
+	wp_script_add_data( $handle, 'strategy', 'defer' );
 }
 
 /**
@@ -700,10 +763,18 @@ function hu_enqueue_module_js( $handle, $file, $deps = [] ) {
  * @return string
  */
 function hu_filter_module_script_tag( $tag, $handle, $src ) {
-	global $hu_module_script_handles;
+	global $hu_deferred_script_handles, $hu_module_script_handles;
 
 	if ( empty( $hu_module_script_handles ) || ! in_array( $handle, $hu_module_script_handles, true ) ) {
-		return $tag;
+		if ( empty( $hu_deferred_script_handles ) || ! in_array( $handle, $hu_deferred_script_handles, true ) ) {
+			return $tag;
+		}
+
+		if ( false !== strpos( $tag, ' defer' ) || false !== strpos( $tag, ' async' ) ) {
+			return $tag;
+		}
+
+		return preg_replace( '/<script\b/', '<script defer', $tag, 1 ) ?: $tag;
 	}
 
 	return sprintf(

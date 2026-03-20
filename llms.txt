@@ -1,0 +1,11 @@
+# Haşim Üner
+
+> WordPress Growth Architect für B2B in Hannover. Einstieg über den Growth Audit: Diagnose von SEO, Tracking, Core Web Vitals und Conversion-Reibung mit priorisierten nächsten Schritten statt isolierten Einzelmaßnahmen.
+
+## Wichtige URLs
+- [Startseite](/)
+- [Growth Audit](/growth-audit/)
+- [WordPress Agentur Hannover](/wordpress-agentur-hannover/)
+- [WordPress Growth Operating System](/wordpress-growth-operating-system/)
+- [Ergebnisse](/ergebnisse/)
+- [Blog](/blog/)
