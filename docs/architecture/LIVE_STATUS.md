@@ -18,7 +18,7 @@ Nicht verifiziert:
 - `blocksy-child/` ist der deploybare Website-Code.
 - Push auf `main` und `hotfix/*` deployt das Theme per SSH-Rsync ueber `.github/workflows/deploy.yml`; zusaetzlich ist ein manueller Start per GitHub Actions moeglich.
 - Zentrale Theme-Module fuer Assets, SEO-Meta, Schema, Shortcodes, Portal und Snippets sind versioniert.
-- Die versionierte Homepage priorisiert jetzt im oberen Funnel einen kompakteren Hero, einen direkten Outcome-Proof-Strip, einen scanbaren Audit-/Diagnose-Block, einen klaren Fit-Block, einen verdichteten E3-Proof mit Case-First-CTA und einen ruhigeren finalen Audit-CTA mit klaren Erwartungspunkten vor dem Knowledge-Base-Nebenpfad; mobile Scroll-CTAs fuer Audit-Einstiege sind auf den repo-seitig gesteuerten Flächen entfernt, weil der Header den Einstieg bereits abdeckt.
+- Die versionierte Homepage folgt jetzt einem kompakteren 7-Sektionen-CRO-Flow: Hero mit Audit-CTA, Ergebnis-Stats und Trust-Line, verdichteter E3-Proof mit Legacy-Anchor `#audit`, ein gekürzter Zwei-Wege-Vergleich, ein reiner WGOS-Teaser, reduzierte FAQ, kurzer finaler Audit-CTA und der bestehende Knowledge-Base-Nebenpfad; Audit-Prüffelder, Fit-Gating, öffentliche Community-Signale und die Sticky-Seitennavigation sind repo-seitig entfernt.
 - Service-Seiten, Tools-Hub, Blog, Kategorie-Hubs, Footer-CTA und Trust-Bausteine sind im Repo.
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Repo-seitig gibt es jetzt einen zentralen oeffentlichen Proof- und Vokabular-Layer: `1.750+ qualifizierte Leads`, `12 % Sales-Conversion` und `-83 % CPL` sind das konservative Standard-Proof-Set; `WGOS = WordPress Growth Operating System` bleibt als erklaertes Framework hinter dem oeffentlichen Hauptbegriff `WordPress als Nachfrage-System fuer B2B`.
@@ -61,7 +61,6 @@ Nicht verifiziert:
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten oder editorgetriebenen Default-Seiten ausserhalb der route-forced Clusterpages.
 - Editorgetriebene Seitentitel, Excerpts, Karten und `the_content()`-Bereiche koennen weiter alte Proof-, Tonalitaets- oder Du/Sie-Brueche enthalten und muessen im WordPress-Admin separat verifiziert werden.
 - Blog-Artikel koennen jetzt theme-seitig passende WGOS-Assets als Anschlussblock ausgeben; weitere Post-Mappings bleiben ausbaubar.
-- Die Community-Signale auf der Homepage sind derzeit ueber GitHub und ein oeffentliches LinkedIn-Profil versioniert; ein kanonischer Facebook-Link inklusive belastbarer Kennzahl ist im Repo noch nicht hinterlegt.
 - `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.
 - CRM-, Mail- und Follow-up-Logik fuer den Audit sind jetzt im Theme sichtbar; `wp_mail`-basierte Transaktionsmails koennen repo-seitig zentral ueber die Brevo API geroutet werden, sobald die Live-Credentials ausserhalb des Repos gesetzt sind.
 - Neue Audit-Anfragen speichern repo-seitig jetzt zusaetzlich Formular-Landingpage, ersten internen Einstieg, vorherige interne Seite und Referrer fuer kuenftige Lead-Attribution im SEO-Cockpit.
