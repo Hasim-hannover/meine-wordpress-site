@@ -272,27 +272,6 @@
 		});
 	});
 
-	/* ── Smooth scroll for anchor links ─────────────────────────── */
-
-	document.querySelectorAll('a[href="#audit-form"]').forEach(function (link) {
-		link.addEventListener('click', function (e) {
-			e.preventDefault();
-			var target = document.getElementById('audit-form');
-			if (!target) return;
-
-			target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-			var firstInput = form.querySelector('[name="name"]');
-			if (firstInput) {
-				setTimeout(function () { firstInput.focus(); }, 600);
-			}
-
-			pushEvent('audit_linkedin_cta_click', {
-				audit_cta_source: link.getAttribute('data-track-action') || 'scroll_to_form',
-			});
-		});
-	});
-
 	/* ── Track page view ────────────────────────────────────────── */
 
 	pushEvent('audit_linkedin_page_view', {
