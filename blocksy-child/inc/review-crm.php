@@ -804,7 +804,7 @@ function nexus_get_review_request_success_message( $payload ) {
 	}
 
 	if ( nexus_is_growth_audit_simple_intake_variant( $variant ) ) {
-		return 'Ich prüfe die Seite und melde mich innerhalb von 48 Stunden per E-Mail.';
+		return 'Die Rückmeldung kommt innerhalb von 48 Stunden per E-Mail.';
 	}
 
 	return 'Ich prüfe Ihre Seite manuell und ergänze die Einschätzung durch KI-gestützte Analyse. Sie erhalten innerhalb von 48 Stunden eine persönliche Rückmeldung.';

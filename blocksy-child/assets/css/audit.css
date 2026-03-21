@@ -308,6 +308,11 @@
 	gap: 0.95rem;
 }
 
+.ga-form[hidden],
+.ga-success[hidden] {
+	display: none !important;
+}
+
 .ga-form__hp {
 	position: absolute;
 	left: -9999px;

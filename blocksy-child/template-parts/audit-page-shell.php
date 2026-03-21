@@ -132,8 +132,8 @@ $audit_cta_label = 'Kostenlosen Growth Audit anfragen';
 
 						<div id="ga-request-success" class="ga-success" role="status" aria-live="polite" aria-atomic="true" hidden>
 							<div class="ga-success__pill">Anfrage eingegangen.</div>
-							<h3>Growth Audit angefragt.</h3>
-							<p id="ga-success-message">Ich prüfe die Seite und melde mich innerhalb von 48 Stunden per E-Mail.</p>
+							<h3>Ich prüfe die Seite.</h3>
+							<p id="ga-success-message">Die Rückmeldung kommt innerhalb von 48 Stunden per E-Mail.</p>
 						</div>
 					</div>
 				</div>

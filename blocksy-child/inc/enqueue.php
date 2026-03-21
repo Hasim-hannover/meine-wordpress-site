@@ -396,14 +396,14 @@ function hu_enqueue_assets() {
 		wp_localize_script(
 			'nexus-audit-js',
 			'NexusAuditConfig',
-			[
-				'restEndpoint'  => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
-				'submitLabel'   => 'Kostenlosen Growth Audit anfragen',
-				'successMessage' => 'Ich prüfe die Seite und melde mich innerhalb von 48 Stunden per E-Mail.',
-				'errorMessage'  => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
-			]
-		);
-	}
+				[
+					'restEndpoint'  => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
+					'submitLabel'   => 'Kostenlosen Growth Audit anfragen',
+					'successMessage' => 'Die Rückmeldung kommt innerhalb von 48 Stunden per E-Mail.',
+					'errorMessage'  => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
+				]
+			);
+		}
 
 	// ── H-LI) Template: LinkedIn Audit Landing Page ──────────────
 	if ( function_exists( 'nexus_is_audit_linkedin_page' ) && nexus_is_audit_linkedin_page() ) {
