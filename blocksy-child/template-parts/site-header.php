@@ -34,43 +34,7 @@ if ( empty( $audit_header_meta_items ) ) {
 ?>
 
 <?php if ( function_exists( 'nexus_is_audit_linkedin_page' ) && nexus_is_audit_linkedin_page() ) : ?>
-<header class="nx-site-header nx-site-header--audit is-visible" data-site-header role="banner">
-	<div class="nx-container">
-		<div class="nx-site-header__shell nx-site-header__shell--audit">
-			<div class="nx-site-header__brand-block">
-				<span class="nx-site-header__eyebrow">Website Audit</span>
-				<a
-					class="site-logo nx-site-header__brand"
-					href="<?php echo esc_url( home_url( '/' ) ); ?>"
-					rel="home"
-					aria-label="<?php echo esc_attr( $home_label ); ?>"
-				>
-					<?php echo esc_html( $brand_text ); ?>
-				</a>
-			</div>
-
-			<div class="nx-site-header__audit-meta" aria-label="Audit-Microcopy">
-				<span>fundierte Ersteinschätzung</span>
-				<span>kein Pflicht-Call</span>
-			</div>
-
-			<div class="nx-site-header__audit-actions">
-				<div class="nx-site-header__theme-toggle-slot">
-					<?php
-					if ( function_exists( 'nexus_get_theme_toggle_html' ) ) {
-						echo nexus_get_theme_toggle_html(
-							[
-								'source' => 'audit-linkedin-header',
-							]
-						);
-					}
-					?>
-				</div>
-				<a class="nx-site-header__audit-link nx-site-header__audit-link--primary" href="#audit-form">Audit starten</a>
-			</div>
-		</div>
-	</div>
-</header>
+<?php /* Header suppressed — logo rendered inline in audit-linkedin-shell.php */ ?>
 <?php return; endif; ?>
 
 <?php if ( function_exists( 'nexus_is_audit_page' ) && nexus_is_audit_page() ) : ?>
