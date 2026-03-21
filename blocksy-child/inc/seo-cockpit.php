@@ -9,6 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// SEO Cockpit ist ein reines Admin-Dashboard — nicht im Frontend laden.
+if ( ! is_admin() && ! wp_doing_ajax() && ! ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+	return;
+}
+
 $nexus_seo_cockpit_modules = [
 	'seo-cockpit-core.php',
 	'seo-cockpit-api.php',

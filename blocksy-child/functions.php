@@ -23,6 +23,7 @@ $modules = [
 	'wgos-asset-registry.php', // Versionierte WGOS Asset-Registry + Sync
 	'glossary.php',       // Glossar-Hub + CPT für definitorische Begriffe
 	'glossary-registry.php', // Versionierte Glossar-Registry + Sync
+	'glossary-autolink.php', // Auto-Linking: Glossar-Begriffe in Blog-Posts verlinken
 	'wgos-cluster-pages.php', // Versionierte Cluster-/Pillar-Pages und Blog-Asset-Bridges
 	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
 	'audit-page.php',     // Audit-Shell-Fallback für die Audit-Landing-Page
