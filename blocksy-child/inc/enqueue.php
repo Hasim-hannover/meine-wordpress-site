@@ -53,6 +53,11 @@ function hu_enqueue_assets() {
 	hu_enqueue_js( 'nexus-core-js', 'nexus-core.js' );
 	hu_enqueue_js( 'nexus-site-header-js', 'site-header.js', [ 'nexus-core-js' ] );
 
+	// ── GLOBAL: Legal Page Modal (Datenschutz / Impressum Overlay) ──
+	if ( ! is_page( 'datenschutz' ) && ! is_page( 'impressum' ) ) {
+		hu_enqueue_js( 'nexus-legal-modal-js', 'legal-modal.js' );
+	}
+
 	if ( is_front_page() && wp_script_is( 'ct-scripts', 'registered' ) ) {
 		hu_mark_script_for_defer( 'ct-scripts' );
 	}
