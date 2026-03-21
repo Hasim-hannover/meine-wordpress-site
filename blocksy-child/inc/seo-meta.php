@@ -710,7 +710,7 @@ function hu_get_seo_meta() {
 		$meta['og_title']    = 'Kostenloses Website Audit für mehr Anfragen | Haşim Üner';
 		$meta['description'] = 'Ich analysiere, wo Klarheit, Vertrauen, Struktur und Conversion-Logik auf deiner Website bremsen – mit fundierter Ersteinschätzung ohne Pflicht-Call.';
 		$meta['canonical']   = function_exists( 'nexus_get_audit_linkedin_url' ) ? nexus_get_audit_linkedin_url() : home_url( '/audit-linkedin/' );
-		$meta['robots']      = 'noindex, nofollow';
+		$meta['robots']      = 'noindex, follow';
 
 	} elseif ( function_exists( 'nexus_get_current_wgos_cluster_route_slug' ) && '' !== nexus_get_current_wgos_cluster_route_slug() ) {
 		$cluster_slug        = nexus_get_current_wgos_cluster_route_slug();
