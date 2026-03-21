@@ -12,6 +12,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Return the canonical featured image URL for the LinkedIn audit landing page.
+ *
+ * @return string
+ */
+function nexus_get_audit_linkedin_featured_image_source_url() {
+	return 'https://hasimuener.de/wp-content/uploads/2026/03/audit-linkedin-featured-1200x675-1.png';
+}
+
+/**
+ * Resolve the current featured image URL for the LinkedIn audit landing page.
+ *
+ * Prefer the real page thumbnail when it exists, otherwise fall back to the
+ * canonical campaign image URL.
+ *
+ * @return string
+ */
+function nexus_get_audit_linkedin_featured_image_url() {
+	$page_id = nexus_get_page_id( [ 'audit-linkedin' ] );
+
+	if ( $page_id ) {
+		$thumbnail_url = get_the_post_thumbnail_url( (int) $page_id, 'full' );
+
+		if ( $thumbnail_url ) {
+			return $thumbnail_url;
+		}
+	}
+
+	return nexus_get_audit_linkedin_featured_image_source_url();
+}
+
 /* ──────────────────────────────────────────────────────────────────
  * 1. PATH HELPERS
  * ────────────────────────────────────────────────────────────────── */
@@ -62,6 +93,53 @@ function nexus_get_audit_linkedin_url() {
 
 	return home_url( '/audit-linkedin/' );
 }
+
+/**
+ * Ensure the canonical /audit-linkedin/ page exists as a published page.
+ *
+ * The route can still render virtually, but a real page keeps native helpers,
+ * editor access and featured-image handling aligned with the rest of WordPress.
+ *
+ * @return void
+ */
+function nexus_maybe_ensure_audit_linkedin_page() {
+	if ( wp_installing() || wp_doing_ajax() || wp_doing_cron() ) {
+		return;
+	}
+
+	$page_id = nexus_get_page_id( [ 'audit-linkedin' ] );
+
+	if ( ! $page_id ) {
+		$page_id = wp_insert_post(
+			wp_slash(
+				[
+					'post_type'    => 'page',
+					'post_status'  => 'publish',
+					'post_title'   => 'Audit LinkedIn',
+					'post_name'    => 'audit-linkedin',
+					'post_content' => '',
+					'post_excerpt' => 'Noindex-Kampagnenseite für den LinkedIn-Traffic des Website Audits.',
+				]
+			),
+			true
+		);
+
+		if ( is_wp_error( $page_id ) ) {
+			return;
+		}
+	}
+
+	$page_id = (int) $page_id;
+
+	update_post_meta( $page_id, '_wp_page_template', 'page-audit-linkedin.php' );
+
+	$attachment_id = attachment_url_to_postid( nexus_get_audit_linkedin_featured_image_source_url() );
+
+	if ( $attachment_id > 0 && (int) get_post_meta( $page_id, '_thumbnail_id', true ) !== (int) $attachment_id ) {
+		update_post_meta( $page_id, '_thumbnail_id', (int) $attachment_id );
+	}
+}
+add_action( 'init', 'nexus_maybe_ensure_audit_linkedin_page', 29 );
 
 /* ──────────────────────────────────────────────────────────────────
  * 2. VIRTUAL ROUTE (pre_handle_404 → template_include)
