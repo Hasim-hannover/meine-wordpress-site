@@ -467,6 +467,7 @@ function nexus_get_primary_public_url_map() {
 		'home'                 => home_url( '/' ),
 		'blog'                 => function_exists( 'nexus_get_blog_posts_url' ) ? nexus_get_blog_posts_url() : home_url( '/blog/' ),
 		'audit'                => function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' ),
+		'audit_linkedin'       => function_exists( 'nexus_get_audit_linkedin_url' ) ? nexus_get_audit_linkedin_url() : home_url( '/audit-linkedin/' ),
 		'results'              => function_exists( 'nexus_get_results_url' ) ? nexus_get_results_url() : home_url( '/ergebnisse/' ),
 		'wgos'                 => nexus_get_page_url(
 			[ 'wordpress-growth-operating-system', 'wgos' ],
