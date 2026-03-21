@@ -44,15 +44,15 @@
             });
         });
 
-        document.querySelectorAll('[data-track="cta_click_system"]').forEach(function (el) {
-            el.addEventListener('click', function () {
-                pushEvent('cta_click_system');
-            });
-        });
-
         document.querySelectorAll('[data-track="cta_click_explorer"]').forEach(function (el) {
             el.addEventListener('click', function () {
                 pushEvent('cta_click_explorer');
+            });
+        });
+
+        document.querySelectorAll('[data-track="cta_click_results"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                pushEvent('cta_click_results');
             });
         });
 
@@ -80,14 +80,11 @@
         // 5. SECTION VISIBILITY TRACKING
         // =============================================
         var visTargets = {
-            'problem': 'wgos_problem_view',
-            'failure': 'wgos_failure_view',
-            'system': 'wgos_system_view',
+            'problem': 'wgos_shortform_view',
+            'system': 'wgos_system_diagram_view',
             'module': 'wgos_core_areas_view',
-            'library': 'wgos_asset_library_view',
-            'explorer': 'wgos_asset_explorer_view',
             'proof': 'wgos_proof_view',
-            'audit': 'wgos_audit_view',
+            'audit': 'wgos_final_cta_view',
             'pakete': 'wgos_package_view',
             'faq': 'wgos_faq_view'
         };
