@@ -44,10 +44,47 @@
 	margin: 0 0 var(--space-6);
 }
 
+/* ─── TOPBAR (inline logo, no full header) ───────────────────── */
+
+.ali-topbar {
+	padding: var(--space-4) 0;
+	background: var(--bg-base);
+}
+
+.ali-topbar .ali-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.ali-topbar__logo {
+	font-family: var(--font-display);
+	font-size: var(--text-base);
+	font-weight: var(--weight-bold);
+	letter-spacing: var(--tracking-tight);
+	color: var(--text-primary);
+	text-decoration: none;
+}
+
+.ali-topbar__logo:hover {
+	color: var(--accent);
+}
+
+.ali-topbar__logo:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+	border-radius: var(--radius-sm);
+}
+
+.ali-topbar__actions {
+	display: flex;
+	align-items: center;
+}
+
 /* ─── HERO ───────────────────────────────────────────────────── */
 
 .ali-hero {
-	padding: clamp(5rem, 12vh, 9rem) 0 var(--section-y);
+	padding: clamp(3rem, 8vh, 6rem) 0 var(--section-y);
 	background: var(--gradient-hero), var(--bg-base);
 	text-align: center;
 }
@@ -93,22 +130,36 @@
 	margin: 0 auto var(--space-8);
 }
 
-.ali-hero__cta-wrap {
-	margin: 0 0 var(--space-4);
-}
-
-.ali-hero__micro {
+.ali-hero__bullets {
+	list-style: none;
+	margin: 0 auto var(--space-8);
+	padding: 0;
+	display: inline-flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--space-2) var(--space-5);
 	font-size: var(--text-sm);
 	color: var(--text-secondary);
-	margin: 0 0 var(--space-6);
-	letter-spacing: var(--tracking-wide);
 }
 
-.ali-hero__trust-note {
-	font-size: var(--text-sm);
-	color: var(--text-tertiary);
+.ali-hero__bullets li {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+}
+
+.ali-hero__bullets li::before {
+	content: '';
+	width: 0.45rem;
+	height: 0.45rem;
+	border-radius: 50%;
+	background: var(--accent);
+	opacity: 0.6;
+	flex-shrink: 0;
+}
+
+.ali-hero__cta-wrap {
 	margin: 0;
-	line-height: var(--leading-relaxed);
 }
 
 /* ─── PRIMARY BUTTON ─────────────────────────────────────────── */
@@ -182,66 +233,6 @@
 
 @keyframes ali-spin {
 	to { transform: rotate(360deg); }
-}
-
-/* ─── TRUST SECTION ──────────────────────────────────────────── */
-
-.ali-trust {
-	border-top: 1px solid var(--border-subtle);
-}
-
-.ali-trust__intro {
-	font-size: var(--text-md);
-	line-height: var(--leading-relaxed);
-	color: var(--text-secondary);
-	margin: 0 0 var(--space-8);
-}
-
-.ali-trust__list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: grid;
-	gap: var(--space-4);
-}
-
-.ali-trust__list li {
-	display: flex;
-	align-items: flex-start;
-	gap: var(--space-3);
-	font-size: var(--text-base);
-	line-height: var(--leading-normal);
-	color: var(--text-primary);
-}
-
-.ali-trust__icon {
-	flex-shrink: 0;
-	width: 1.4rem;
-	height: 1.4rem;
-	margin-top: 0.15rem;
-	color: var(--accent);
-}
-
-.ali-trust__icon svg {
-	width: 100%;
-	height: 100%;
-}
-
-/* ─── BENEFIT SECTION ────────────────────────────────────────── */
-
-.ali-benefit {
-	border-top: 1px solid var(--border-subtle);
-}
-
-.ali-benefit__text {
-	font-size: var(--text-md);
-	line-height: var(--leading-relaxed);
-	color: var(--text-secondary);
-	margin: 0 0 var(--space-4);
-}
-
-.ali-benefit__text:last-child {
-	margin-bottom: 0;
 }
 
 /* ─── FORM SECTION ───────────────────────────────────────────── */
@@ -581,13 +572,6 @@
 	line-height: var(--leading-normal);
 }
 
-.ali-steps__note {
-	font-size: var(--text-sm);
-	color: var(--text-tertiary);
-	margin: var(--space-6) 0 0;
-	text-align: center;
-}
-
 /* ─── FAQ SECTION ────────────────────────────────────────────── */
 
 .ali-faq {
@@ -684,12 +668,6 @@
 	margin-top: var(--space-8);
 }
 
-.ali-final-cta__micro {
-	font-size: var(--text-sm);
-	color: var(--text-tertiary);
-	margin: var(--space-4) 0 0;
-}
-
 /* ─── MINIMAL FOOTER ────────────────────────────────────────── */
 
 .ali-footer {
@@ -704,12 +682,6 @@
 	align-items: center;
 	gap: var(--space-3);
 	text-align: center;
-}
-
-.ali-footer__note {
-	font-size: var(--text-xs);
-	color: var(--text-tertiary);
-	margin: 0;
 }
 
 .ali-footer__links {
@@ -762,7 +734,7 @@
 	}
 
 	.ali-hero {
-		padding-top: clamp(3.5rem, 8vh, 6rem);
+		padding-top: clamp(2rem, 6vh, 4rem);
 	}
 
 	.ali-hero__h1 {

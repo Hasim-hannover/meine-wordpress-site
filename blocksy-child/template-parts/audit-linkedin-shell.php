@@ -3,7 +3,7 @@
  * LinkedIn Audit Landing Page Shell.
  *
  * Kampagnenscharfe Conversion-Landingpage für LinkedIn-Traffic.
- * Fokussierter als die Haupt-Audit-Seite, ein CTA, kein Navigations-Overload.
+ * Fokussierter Microfunnel: Post → Landingpage → Audit-Anfrage.
  *
  * @package Blocksy_Child
  */
@@ -19,95 +19,60 @@ $privacy_url = function_exists( 'nexus_get_primary_public_url' )
 $imprint_url = function_exists( 'nexus_get_primary_public_url' )
 	? nexus_get_primary_public_url( 'impressum', home_url( '/impressum/' ) )
 	: home_url( '/impressum/' );
+
+$brand_text = function_exists( 'hu_get_site_wordmark_text' ) ? hu_get_site_wordmark_text() : 'HAŞIM ÜNER';
+$home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 ?>
+
+<div class="ali-topbar">
+	<div class="ali-container">
+		<a class="ali-topbar__logo site-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php echo esc_attr( $home_label ); ?>">
+			<?php echo esc_html( $brand_text ); ?>
+		</a>
+		<div class="ali-topbar__actions">
+			<?php
+			if ( function_exists( 'nexus_get_theme_toggle_html' ) ) {
+				echo nexus_get_theme_toggle_html( [ 'source' => 'audit-linkedin-topbar' ] );
+			}
+			?>
+		</div>
+	</div>
+</div>
 
 <main id="main" class="ali" role="main">
 
-	<!-- ════════════════════════════════════════════════════════════
+	<!-- ═══════════════════════════════════════════════════
 	     1. HERO
-	     ════════════════════════════════════════════════════════════ -->
+	     ═══════════════════════════════════════════════════ -->
 	<section class="ali-hero" aria-labelledby="ali-hero-heading">
 		<div class="ali-container">
 			<p class="ali-eyebrow">Audit für Websites mit Conversion-Fokus</p>
 
 			<h1 id="ali-hero-heading" class="ali-hero__h1">
-				Deine Website bekommt Besucher,<br class="ali-br-desktop"> aber zu wenig qualifizierte Anfragen?
+				Deine Website bekommt Besucher,<br class="ali-br-desktop"> aber zu wenig Anfragen?
 			</h1>
 
 			<p class="ali-hero__sub">
-				Ich analysiere, wo Klarheit, Vertrauen, Struktur oder Conversion-Logik auf deiner Seite bremsen — und zeige dir, welche Hebel zuerst Wirkung bringen.
+				Ich analysiere, wo Klarheit, Vertrauen und Conversion-Logik bremsen — und welche Hebel zuerst Wirkung bringen.
 			</p>
+
+			<ul class="ali-hero__bullets" role="list">
+				<li>Schriftliche Ersteinschätzung</li>
+				<li>Klare Prioritäten statt allgemeiner Tipps</li>
+				<li>Kein Pflicht-Call</li>
+			</ul>
 
 			<div class="ali-hero__cta-wrap">
 				<a href="#audit-form" class="ali-btn ali-btn--primary" data-track-action="cta_hero_audit_linkedin" data-track-category="lead_gen">
 					Website für Audit einreichen
 				</a>
 			</div>
-
-			<p class="ali-hero__micro">
-				Schriftliche Einschätzung · klare Prioritäten · kein Pflicht-Call
-			</p>
-
-			<p class="ali-hero__trust-note">
-				Kein Standard-Blabla. Keine automatische KI-Massenanalyse.<br>
-				Sondern eine fundierte, praxisnahe Einschätzung.
-			</p>
 		</div>
 	</section>
 
-	<!-- ════════════════════════════════════════════════════════════
-	     2. TRUST / PROOF BLOCK
-	     ════════════════════════════════════════════════════════════ -->
-	<section class="ali-section ali-trust" aria-labelledby="ali-trust-heading">
-		<div class="ali-container ali-container--narrow">
-			<h2 id="ali-trust-heading" class="ali-section__h2">Worum es im Audit wirklich geht</h2>
-
-			<p class="ali-trust__intro">
-				Nicht noch mehr allgemeine Website-Tipps. Sondern eine gezielte Analyse der Punkte, die darüber entscheiden, ob deine Website Orientierung schafft, Vertrauen aufbaut und Anfragen unterstützt.
-			</p>
-
-			<ul class="ali-trust__list" role="list">
-				<li>
-					<span class="ali-trust__icon" aria-hidden="true">
-						<svg viewBox="0 0 20 20" fill="none"><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</span>
-					Fokus auf Conversion, Klarheit, Nutzerführung und Struktur
-				</li>
-				<li>
-					<span class="ali-trust__icon" aria-hidden="true">
-						<svg viewBox="0 0 20 20" fill="none"><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</span>
-					Konkrete Hinweise statt oberflächlicher Allgemeinplätze
-				</li>
-				<li>
-					<span class="ali-trust__icon" aria-hidden="true">
-						<svg viewBox="0 0 20 20" fill="none"><path d="M6 10l3 3 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-					</span>
-					Priorisierte Hebel statt unverbundener Einzelkritik
-				</li>
-			</ul>
-		</div>
-	</section>
-
-	<!-- ════════════════════════════════════════════════════════════
-	     3. NUTZENBLOCK
-	     ════════════════════════════════════════════════════════════ -->
-	<section class="ali-section ali-benefit" aria-labelledby="ali-benefit-heading">
-		<div class="ali-container ali-container--narrow">
-			<h2 id="ali-benefit-heading" class="ali-section__h2">Was eine gute Website leisten muss</h2>
-
-			<p class="ali-benefit__text">
-				Eine Website ist nicht einfach „online". Sie muss Orientierung geben, Vertrauen aufbauen, Relevanz klarmachen und den nächsten Schritt leichter machen.
-			</p>
-			<p class="ali-benefit__text">
-				Genau dort verlieren viele Seiten Wirkung — nicht weil ein einzelnes Detail falsch ist, sondern weil Struktur, Copy, UX und Conversion-Logik nicht sauber zusammenspielen.
-			</p>
-		</div>
-	</section>
-
-	<!-- ════════════════════════════════════════════════════════════
-	     4. FORMULAR / ANFRAGEBLOCK
-	     ════════════════════════════════════════════════════════════ -->
+	<!-- ═══════════════════════════════════════════════════
+	     2. FORMULAR
+	     ═══════════════════════════════════════════════════ -->
 	<section id="audit-form" class="ali-section ali-form-section" aria-labelledby="ali-form-heading">
 		<div class="ali-container ali-container--narrow">
 			<h2 id="ali-form-heading" class="ali-section__h2">Reich deine Website ein</h2>
@@ -179,14 +144,14 @@ $imprint_url = function_exists( 'nexus_get_primary_public_url' )
 					<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2.5"/><path d="M15 24l6 6 12-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 				</div>
 				<h3 class="ali-form-success__h3">Deine Anfrage ist eingegangen.</h3>
-				<p class="ali-form-success__text">Ich prüfe deine Website persönlich und melde mich mit einer fundierten Ersteinschätzung. Du erhältst innerhalb von 48 Stunden eine schriftliche Rückmeldung.</p>
+				<p class="ali-form-success__text">Ich prüfe deine Website persönlich und melde mich innerhalb von 48 Stunden mit einer schriftlichen Ersteinschätzung.</p>
 			</div>
 		</div>
 	</section>
 
-	<!-- ════════════════════════════════════════════════════════════
-	     5. FÜR WEN / FÜR WEN NICHT
-	     ════════════════════════════════════════════════════════════ -->
+	<!-- ═══════════════════════════════════════════════════
+	     3. FÜR WEN / FÜR WEN NICHT
+	     ═══════════════════════════════════════════════════ -->
 	<section class="ali-section ali-fit" aria-labelledby="ali-fit-heading">
 		<div class="ali-container">
 			<h2 id="ali-fit-heading" class="ali-section__h2">Für wen dieses Audit sinnvoll ist</h2>
@@ -195,29 +160,29 @@ $imprint_url = function_exists( 'nexus_get_primary_public_url' )
 				<div class="ali-fit__col ali-fit__col--yes">
 					<p class="ali-fit__label">Passt, wenn du …</p>
 					<ul class="ali-fit__list" role="list">
-						<li>bereits eine Website hast, aber zu wenig Anfragen generierst</li>
+						<li>eine Website hast, aber zu wenig Anfragen generierst</li>
 						<li>vermutest, dass Klarheit, Vertrauen oder Struktur bremsen</li>
-						<li>keine beliebigen Tipps willst, sondern priorisierte Hebel</li>
-						<li>deine Website wirksamer statt nur „schöner" machen willst</li>
+						<li>konkrete Hebel statt allgemeiner Tipps willst</li>
+						<li>deine Website wirksamer machen willst</li>
 					</ul>
 				</div>
 
 				<div class="ali-fit__col ali-fit__col--no">
 					<p class="ali-fit__label">Eher nicht ideal, wenn du …</p>
 					<ul class="ali-fit__list" role="list">
-						<li>nur ein kostenloses Allgemein-Feedback suchst</li>
-						<li>noch kein klares Angebot oder keine Website hast</li>
-						<li>eigentlich sofort nur Traffic einkaufen willst, ohne das Fundament zu verbessern</li>
-						<li>nur eine schnelle Design-Meinung statt einer fundierten Einschätzung suchst</li>
+						<li>nur kostenloses Allgemein-Feedback suchst</li>
+						<li>noch keine Website oder kein klares Angebot hast</li>
+						<li>nur mehr Traffic willst, ohne die Basis zu verbessern</li>
+						<li>nur eine schnelle Design-Meinung suchst</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- ════════════════════════════════════════════════════════════
-	     6. ABLAUF IN 3 SCHRITTEN
-	     ════════════════════════════════════════════════════════════ -->
+	<!-- ═══════════════════════════════════════════════════
+	     4. ABLAUF IN 3 SCHRITTEN
+	     ═══════════════════════════════════════════════════ -->
 	<section class="ali-section ali-steps" aria-labelledby="ali-steps-heading">
 		<div class="ali-container ali-container--narrow">
 			<h2 id="ali-steps-heading" class="ali-section__h2">So läuft es ab</h2>
@@ -227,96 +192,80 @@ $imprint_url = function_exists( 'nexus_get_primary_public_url' )
 					<span class="ali-steps__index" aria-hidden="true">1</span>
 					<div class="ali-steps__copy">
 						<strong>Du reichst deine Website ein</strong>
-						<span>Kurzes Formular, keine unnötigen Pflichtfelder.</span>
+						<span>Kurzes Formular, vier Felder, fertig.</span>
 					</div>
 				</li>
 				<li class="ali-steps__item">
 					<span class="ali-steps__index" aria-hidden="true">2</span>
 					<div class="ali-steps__copy">
-						<strong>Ich prüfe Struktur, Copy, Nutzerführung, Vertrauenssignale und Conversion-Logik</strong>
-						<span>Persönliche Analyse, keine automatisierte Massenprüfung.</span>
+						<strong>Ich prüfe Struktur, Nutzerführung und Conversion-Logik</strong>
+						<span>Persönlich, keine automatisierte Massenprüfung.</span>
 					</div>
 				</li>
 				<li class="ali-steps__item">
 					<span class="ali-steps__index" aria-hidden="true">3</span>
 					<div class="ali-steps__copy">
-						<strong>Du bekommst eine klare Einschätzung mit priorisierten Hebeln</strong>
-						<span>Schriftlich, umsetzungsnah und ohne Pflicht-Call.</span>
+						<strong>Du bekommst eine Einschätzung mit priorisierten Hebeln</strong>
+						<span>Schriftlich, umsetzungsnah, innerhalb von 48h.</span>
 					</div>
 				</li>
 			</ol>
-
-			<p class="ali-steps__note">
-				Kein automatisierter Massenreport. Keine beliebige Checkliste. Sondern eine fundierte, umsetzungsnahe Einschätzung.
-			</p>
 		</div>
 	</section>
 
-	<!-- ════════════════════════════════════════════════════════════
-	     7. FAQ
-	     ════════════════════════════════════════════════════════════ -->
+	<!-- ═══════════════════════════════════════════════════
+	     5. FAQ
+	     ═══════════════════════════════════════════════════ -->
 	<section class="ali-section ali-faq" aria-labelledby="ali-faq-heading">
 		<div class="ali-container ali-container--narrow">
 			<h2 id="ali-faq-heading" class="ali-section__h2">Häufige Fragen</h2>
 
 			<div class="ali-faq__list">
 				<details class="ali-faq__item">
-					<summary class="ali-faq__question">Ist das Audit wirklich kostenlos?</summary>
+					<summary class="ali-faq__question">Ist das Audit kostenlos?</summary>
 					<div class="ali-faq__answer">
-						<p>Ja, der Ersteinstieg ist kostenlos. Ziel ist eine fundierte Ersteinschätzung deiner Website, damit du klarer siehst, wo die größten Hebel liegen.</p>
+						<p>Ja. Du bekommst eine fundierte Ersteinschätzung, damit du siehst, wo die größten Hebel liegen.</p>
 					</div>
 				</details>
 
 				<details class="ali-faq__item">
 					<summary class="ali-faq__question">Muss ich danach einen Call buchen?</summary>
 					<div class="ali-faq__answer">
-						<p>Nein. Du bekommst eine Einschätzung ohne Pflicht-Call. Wenn danach Gesprächsbedarf besteht, kann man immer weitersehen.</p>
-					</div>
-				</details>
-
-				<details class="ali-faq__item">
-					<summary class="ali-faq__question">Für welche Websites ist das sinnvoll?</summary>
-					<div class="ali-faq__answer">
-						<p>Vor allem für Websites, die Anfragen, Leads oder geschäftliche Wirkung erzeugen sollen — nicht nur „da sein" sollen.</p>
+						<p>Nein. Die Einschätzung kommt schriftlich, ohne Pflicht-Call.</p>
 					</div>
 				</details>
 
 				<details class="ali-faq__item">
 					<summary class="ali-faq__question">Wie schnell bekomme ich Rückmeldung?</summary>
 					<div class="ali-faq__answer">
-						<p>In der Regel innerhalb von 48 Stunden. Bei hohem Aufkommen kann es etwas länger dauern, aber du bekommst immer eine persönliche Rückmeldung.</p>
+						<p>In der Regel innerhalb von 48 Stunden.</p>
 					</div>
 				</details>
 			</div>
 		</div>
 	</section>
 
-	<!-- ════════════════════════════════════════════════════════════
-	     8. ABSCHLUSS-CTA
-	     ════════════════════════════════════════════════════════════ -->
+	<!-- ═══════════════════════════════════════════════════
+	     6. ABSCHLUSS-CTA
+	     ═══════════════════════════════════════════════════ -->
 	<section class="ali-section ali-final-cta" aria-labelledby="ali-final-heading">
 		<div class="ali-container ali-container--narrow">
 			<h2 id="ali-final-heading" class="ali-section__h2">
-				Wenn du wissen willst, warum deine Website noch unter ihrem Potenzial bleibt, reich sie hier ein.
+				Bereit? Reich deine Website ein.
 			</h2>
 
 			<div class="ali-final-cta__wrap">
 				<a href="#audit-form" class="ali-btn ali-btn--primary" data-track-action="cta_final_audit_linkedin" data-track-category="lead_gen">
 					Website für Audit einreichen
 				</a>
-				<p class="ali-final-cta__micro">Klar. Direkt. Ohne Pflicht-Call.</p>
 			</div>
 		</div>
 	</section>
 
 </main>
 
-<!-- ════════════════════════════════════════════════════════════
-     MINIMAL FOOTER
-     ════════════════════════════════════════════════════════════ -->
 <footer class="ali-footer" role="contentinfo">
 	<div class="ali-container">
-		<p class="ali-footer__note">Persönliche Ersteinschätzung, schriftliche Rückmeldung in 48 Stunden, kein Pflicht-Call.</p>
 		<nav class="ali-footer__links" aria-label="Footer-Navigation">
 			<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
 			<a href="<?php echo esc_url( $privacy_url ); ?>" rel="nofollow">Datenschutz</a>
