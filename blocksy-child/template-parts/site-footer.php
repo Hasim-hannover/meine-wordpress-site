@@ -34,6 +34,10 @@ $imprint_url = $primary_urls['impressum'] ?? home_url( '/impressum/' );
 $privacy_url = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 ?>
 
+<?php if ( function_exists( 'nexus_is_audit_linkedin_page' ) && nexus_is_audit_linkedin_page() ) : ?>
+<?php /* Footer rendered inline in audit-linkedin-shell.php */ ?>
+<?php return; endif; ?>
+
 <?php if ( function_exists( 'nexus_is_audit_page' ) && nexus_is_audit_page() ) : ?>
 <footer id="footer" class="ft ft--audit-minimal" aria-labelledby="ft-heading" role="contentinfo">
 	<h2 id="ft-heading" class="ft__sr">Footer-Navigation</h2>

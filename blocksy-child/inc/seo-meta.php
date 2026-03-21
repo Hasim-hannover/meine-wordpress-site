@@ -111,6 +111,10 @@ function hu_get_forced_singular_seo_map() {
 				'title'       => 'WordPress Agentur Hannover | B2B-Websites mit System',
 				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, Tracking und Conversion als System statt Einzelmaßnahmen. Kostenloser Growth Audit.',
 			],
+			'audit-linkedin' => [
+				'title'       => 'Kostenloses Website Audit für mehr Anfragen | Haşim Üner',
+				'description' => 'Ich analysiere, wo Klarheit, Vertrauen, Struktur und Conversion-Logik auf deiner Website bremsen – mit fundierter Ersteinschätzung ohne Pflicht-Call.',
+			],
 			'wordpress-wartung-hannover' => [
 				'title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',
 				'description' => 'WordPress Wartung in Hannover als Teil des WGOS-Fundaments: Updates, Sicherheit, Backups, Performance und stabile Betriebsroutinen für B2B-Websites.',
@@ -387,6 +391,10 @@ function hu_pre_get_document_title_override( $title ) {
 
 	if ( hu_is_contact_offer_page() ) {
 		return hu_get_contact_offer_title();
+	}
+
+	if ( function_exists( 'nexus_is_audit_linkedin_page' ) && nexus_is_audit_linkedin_page() ) {
+		return 'Kostenloses Website Audit für mehr Anfragen | Haşim Üner';
 	}
 
 	if ( hu_is_domdar_case_study_page() ) {
@@ -669,6 +677,12 @@ function hu_get_seo_meta() {
 		$meta['og_title']    = hu_get_contact_offer_title();
 		$meta['description'] = hu_get_contact_offer_description();
 		$meta['canonical']   = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+
+	} elseif ( function_exists( 'nexus_is_audit_linkedin_page' ) && nexus_is_audit_linkedin_page() ) {
+		$meta['og_title']    = 'Kostenloses Website Audit für mehr Anfragen | Haşim Üner';
+		$meta['description'] = 'Ich analysiere, wo Klarheit, Vertrauen, Struktur und Conversion-Logik auf deiner Website bremsen – mit fundierter Ersteinschätzung ohne Pflicht-Call.';
+		$meta['canonical']   = function_exists( 'nexus_get_audit_linkedin_url' ) ? nexus_get_audit_linkedin_url() : home_url( '/audit-linkedin/' );
+		$meta['robots']      = 'noindex, nofollow';
 
 	} elseif ( function_exists( 'nexus_get_current_wgos_cluster_route_slug' ) && '' !== nexus_get_current_wgos_cluster_route_slug() ) {
 		$cluster_slug        = nexus_get_current_wgos_cluster_route_slug();

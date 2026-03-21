@@ -458,6 +458,33 @@ function hu_enqueue_assets() {
 		);
 	}
 
+	// ── H-LI) Template: LinkedIn Audit Landing Page ──────────────
+	if ( function_exists( 'nexus_is_audit_linkedin_page' ) && nexus_is_audit_linkedin_page() ) {
+		hu_enqueue_css( 'nexus-audit-linkedin-css', 'audit-linkedin.css', [ 'nexus-design-system' ] );
+		hu_enqueue_js( 'nexus-audit-linkedin-js', 'audit-linkedin.js', [ 'nexus-core-js' ] );
+		wp_localize_script(
+			'nexus-audit-linkedin-js',
+			'NexusAuditLinkedInConfig',
+			[
+				'restEndpoint'  => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
+				'errorMessage'  => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuche es erneut.',
+			]
+		);
+
+		wp_add_inline_style(
+			'blocksy-child-style',
+			'
+			/* Hide Blocksy page title/header on audit-linkedin page */
+			.page-audit-linkedin .entry-header,
+			.page-audit-linkedin .ct-page-title,
+			.page-template-page-audit-linkedin .entry-header,
+			.page-template-page-audit-linkedin .ct-page-title {
+				display: none !important;
+			}
+		'
+		);
+	}
+
 	// ── H2) Template: 360° Deep-Dive ─────────────────────────────
 	if ( is_page_template( 'page-360-deep-dive.php' ) || is_page( '360-deep-dive' ) ) {
 		hu_enqueue_css( 'nexus-audit-results-css', 'audit-results.css', [ 'nexus-design-system' ] );
