@@ -320,9 +320,7 @@ function hu_enqueue_assets() {
 	// ── H) Template: Growth Audit Funnel ──────────────────────────
 	if ( nexus_is_audit_page() ) {
 		hu_enqueue_css( 'nexus-audit-css', 'audit.css', [ 'nexus-design-system' ] );
-		hu_enqueue_css( 'nexus-review-funnel-css', 'review-funnel.css', [ 'nexus-audit-css' ] );
 		hu_enqueue_js( 'nexus-audit-js', 'audit.js', [ 'nexus-core-js' ] );
-		hu_enqueue_js( 'nexus-review-funnel-js', 'review-funnel.js', [ 'nexus-audit-js' ] );
 		wp_add_inline_style(
 			'blocksy-child-style',
 			'
@@ -396,14 +394,13 @@ function hu_enqueue_assets() {
 		'
 		);
 		wp_localize_script(
-			'nexus-review-funnel-js',
-			'NexusReviewConfig',
+			'nexus-audit-js',
+			'NexusAuditConfig',
 			[
 				'restEndpoint'  => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
-				'callUrl'       => esc_url_raw( function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' ) ),
-				'responseHours' => 48,
-				'auditLabel'    => 'Growth Audit',
 				'submitLabel'   => 'Kostenlosen Growth Audit anfragen',
+				'successMessage' => 'Ich prüfe die Seite und melde mich innerhalb von 48 Stunden per E-Mail.',
+				'errorMessage'  => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
 			]
 		);
 	}

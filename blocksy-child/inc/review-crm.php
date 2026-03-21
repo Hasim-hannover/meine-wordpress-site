@@ -91,6 +91,25 @@ function nexus_get_energy_intake_variant_label() {
 }
 
 /**
+ * Check whether the request comes from the simplified Growth Audit landing page.
+ *
+ * @param string $variant Intake variant slug.
+ * @return bool
+ */
+function nexus_is_growth_audit_simple_intake_variant( $variant ) {
+	return 'growth_audit_simple' === sanitize_key( (string) $variant );
+}
+
+/**
+ * Return the public label for the simplified Growth Audit intake.
+ *
+ * @return string
+ */
+function nexus_get_growth_audit_simple_intake_variant_label() {
+	return 'Growth Audit Landingpage';
+}
+
+/**
  * Return field option definitions for the energy-systems intake.
  *
  * @return array<string, array<string, array<string, string>>>
@@ -747,7 +766,7 @@ function nexus_get_review_request_domain_from_email( $email ) {
 }
 
 /**
- * Register the public REST route for the multi-step intake form.
+ * Register the public REST route for audit request submissions.
  *
  * @return void
  */
@@ -782,6 +801,10 @@ function nexus_get_review_request_success_message( $payload ) {
 
 	if ( 'energy_systems' === $variant ) {
 		return 'Danke. Ich prüfe Ihre Angaben als B2B-Energiesystem und melde mich mit einer priorisierten ersten Einordnung. Wenn ein Growth Audit der sinnvollste nächste Schritt ist, sehen Sie das direkt in der Rückmeldung.';
+	}
+
+	if ( nexus_is_growth_audit_simple_intake_variant( $variant ) ) {
+		return 'Ich prüfe die Seite und melde mich innerhalb von 48 Stunden per E-Mail.';
 	}
 
 	return 'Ich prüfe Ihre Seite manuell und ergänze die Einschätzung durch KI-gestützte Analyse. Sie erhalten innerhalb von 48 Stunden eine persönliche Rückmeldung.';
@@ -843,7 +866,7 @@ function nexus_process_review_request_submission( $payload ) {
 }
 
 /**
- * Handle incoming review requests from the public multi-step funnel.
+ * Handle incoming review requests from public audit landing pages.
  *
  * @param WP_REST_Request $request REST request object.
  * @return WP_REST_Response
@@ -951,6 +974,10 @@ function nexus_sanitize_review_request_referrer_url( $url ) {
 function nexus_validate_review_request_payload( $payload ) {
 	$intake_variant = isset( $payload['intake_variant'] ) ? sanitize_key( (string) $payload['intake_variant'] ) : '';
 
+	if ( nexus_is_growth_audit_simple_intake_variant( $intake_variant ) ) {
+		return nexus_validate_growth_audit_simple_review_request_payload( $payload );
+	}
+
 	if ( 'energy_systems' === $intake_variant ) {
 		return nexus_validate_energy_review_request_payload( $payload );
 	}
@@ -1055,6 +1082,88 @@ function nexus_validate_review_request_payload( $payload ) {
 		'previous_internal_url' => $previous_internal_url,
 		'referrer_url'      => $referrer_url,
 		'referrer_host'     => $referrer_host,
+	];
+}
+
+/**
+ * Validate and sanitize the simplified Growth Audit landing page payload.
+ *
+ * @param array $payload Raw request payload.
+ * @return array|WP_Error
+ */
+function nexus_validate_growth_audit_simple_review_request_payload( $payload ) {
+	$type_options        = nexus_get_audit_request_type_options();
+	$audit_type          = isset( $payload['audit_type'] ) ? sanitize_key( (string) $payload['audit_type'] ) : 'growth_audit';
+	$page_url            = isset( $payload['page_url'] ) ? trim( (string) $payload['page_url'] ) : '';
+	$current_challenge   = isset( $payload['current_challenge'] ) ? sanitize_textarea_field( (string) $payload['current_challenge'] ) : '';
+	$name                = isset( $payload['name'] ) ? sanitize_text_field( (string) $payload['name'] ) : '';
+	$email               = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
+	$consent_privacy     = isset( $payload['consent_privacy'] ) ? sanitize_key( (string) $payload['consent_privacy'] ) : '';
+
+	if ( empty( $page_url ) ) {
+		return new WP_Error( 'missing_page_url', 'Bitte die URL der Seite angeben.' );
+	}
+
+	$page_url = esc_url_raw( $page_url );
+	if ( ! $page_url || ! wp_http_validate_url( $page_url ) ) {
+		return new WP_Error( 'invalid_page_url', 'Bitte eine gültige URL angeben, z. B. https://example.de.' );
+	}
+
+	$scheme = wp_parse_url( $page_url, PHP_URL_SCHEME );
+	if ( ! in_array( $scheme, [ 'http', 'https' ], true ) ) {
+		return new WP_Error( 'invalid_scheme', 'Nur http- oder https-URLs sind erlaubt.' );
+	}
+
+	if ( empty( $name ) ) {
+		return new WP_Error( 'missing_name', 'Bitte Ihren Namen angeben.' );
+	}
+
+	if ( empty( $email ) || ! is_email( $email ) ) {
+		return new WP_Error( 'invalid_email', 'Bitte eine gültige geschäftliche E-Mail-Adresse angeben.' );
+	}
+
+	if ( 'accepted' !== $consent_privacy ) {
+		return new WP_Error( 'missing_consent_privacy', 'Bitte bestätigen Sie den Datenschutzhinweis, damit ich Ihre Anfrage bearbeiten darf.' );
+	}
+
+	if ( empty( $audit_type ) || ! isset( $type_options[ $audit_type ] ) ) {
+		$audit_type = 'growth_audit';
+	}
+
+	$ads_source            = isset( $payload['ads_source'] ) ? sanitize_text_field( (string) $payload['ads_source'] ) : '';
+	$ads_keyword           = isset( $payload['ads_keyword'] ) ? sanitize_text_field( (string) $payload['ads_keyword'] ) : '';
+	$landing_page_url      = nexus_sanitize_review_request_internal_url( $payload['landing_page_url'] ?? '' );
+	$entry_page_url        = nexus_sanitize_review_request_internal_url( $payload['entry_page_url'] ?? '' );
+	$previous_internal_url = nexus_sanitize_review_request_internal_url( $payload['previous_internal_url'] ?? '' );
+	$referrer_url          = nexus_sanitize_review_request_referrer_url( $payload['referrer_url'] ?? '' );
+	$referrer_host         = $referrer_url ? sanitize_text_field( strtolower( (string) wp_parse_url( $referrer_url, PHP_URL_HOST ) ) ) : '';
+
+	return [
+		'intake_variant'         => 'growth_audit_simple',
+		'intake_variant_label'   => nexus_get_growth_audit_simple_intake_variant_label(),
+		'audit_type'             => $audit_type,
+		'audit_type_label'       => $type_options[ $audit_type ],
+		'page_url'               => $page_url,
+		'domain'                 => (string) wp_parse_url( $page_url, PHP_URL_HOST ),
+		'company'                => '',
+		'focus_area'             => '',
+		'focus_area_label'       => '',
+		'current_challenge'      => $current_challenge,
+		'primary_goal'           => '',
+		'primary_goal_label'     => '',
+		'extra_context'          => '',
+		'name'                   => $name,
+		'email'                  => $email,
+		'phone'                  => '',
+		'linkedin'               => '',
+		'consent_privacy'        => $consent_privacy,
+		'ads_source'             => $ads_source,
+		'ads_keyword'            => $ads_keyword,
+		'landing_page_url'       => $landing_page_url,
+		'entry_page_url'         => $entry_page_url,
+		'previous_internal_url'  => $previous_internal_url,
+		'referrer_url'           => $referrer_url,
+		'referrer_host'          => $referrer_host,
 	];
 }
 
@@ -1270,7 +1379,9 @@ function nexus_create_review_request_post( $payload ) {
 	update_post_meta(
 		$post_id,
 		'_nexus_review_source',
-		'energy_systems' === ( $payload['intake_variant'] ?? '' ) ? 'energy_systems_landing' : 'growth_audit_funnel'
+		'energy_systems' === ( $payload['intake_variant'] ?? '' )
+			? 'energy_systems_landing'
+			: ( nexus_is_growth_audit_simple_intake_variant( $payload['intake_variant'] ?? '' ) ? 'growth_audit_landing' : 'growth_audit_funnel' )
 	);
 	update_post_meta( $post_id, '_nexus_review_ads_source', sanitize_text_field( (string) ( $payload['ads_source'] ?? '' ) ) );
 	update_post_meta( $post_id, '_nexus_review_ads_keyword', sanitize_text_field( (string) ( $payload['ads_keyword'] ?? '' ) ) );
@@ -1517,7 +1628,18 @@ function nexus_get_review_request_detail_rows( $payload ) {
 	$variant = isset( $payload['intake_variant'] ) ? sanitize_key( (string) $payload['intake_variant'] ) : '';
 	$rows    = [];
 
-	if ( 'energy_systems' === $variant ) {
+	if ( nexus_is_growth_audit_simple_intake_variant( $variant ) ) {
+		$rows = [
+			[
+				'label' => 'URL',
+				'value' => (string) ( $payload['page_url'] ?? '' ),
+			],
+			[
+				'label' => 'Nicht übersehen',
+				'value' => (string) ( $payload['current_challenge'] ?? '' ),
+			],
+		];
+	} elseif ( 'energy_systems' === $variant ) {
 		$rows = [
 			[
 				'label' => 'Leistung',
@@ -1752,7 +1874,7 @@ function nexus_send_review_request_admin_notification( $post_id, $payload ) {
 			'preheader' => 'Neue Audit-Anfrage von ' . $lead_label,
 			'eyebrow'   => $payload['audit_type_label'],
 			'headline'  => 'Neue Audit-Anfrage',
-			'intro'     => 'Ein neuer Lead ist eingegangen. Seite, Fokus und Ziel sind unten kompakt zusammengefasst.',
+			'intro'     => 'Ein neuer Lead ist eingegangen. Seite und Intake sind unten kompakt zusammengefasst.',
 			'content'   => $content,
 			'footer'    => 'Sie können direkt auf diese E-Mail antworten. Reply-To zeigt bereits auf den Lead.',
 		]
@@ -1784,8 +1906,8 @@ function nexus_send_review_request_confirmation( $payload ) {
 					<div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:#9ea8b2; margin-bottom:6px;">Was jetzt passiert</div>
 					<div style="font-size:14px; line-height:1.8; color:#c5ced7;">
 						<strong style="color:#f7f3ee;">1.</strong> Ihre Anfrage ist sauber im System.<br>
-						<strong style="color:#f7f3ee;">2.</strong> Ihre Seite wird manuell geprüft und durch KI-gestützte Analyse ergänzt.<br>
-						<strong style="color:#f7f3ee;">3.</strong> Innerhalb von 48 Stunden erhalten Sie eine persönliche Rückmeldung mit Priorisierung.
+						<strong style="color:#f7f3ee;">2.</strong> Ich prüfe die Seite manuell und ergänze die Einschätzung durch KI-Unterstützung.<br>
+						<strong style="color:#f7f3ee;">3.</strong> Innerhalb von 48 Stunden erhalten Sie die Rückmeldung per E-Mail.
 					</div>
 				</td>
 			</tr>
@@ -1808,7 +1930,7 @@ function nexus_send_review_request_confirmation( $payload ) {
 			'preheader' => 'Ihre Anfrage für den ' . $payload['audit_type_label'] . ' ist eingegangen.',
 			'eyebrow'   => $payload['audit_type_label'],
 			'headline'  => 'Ihr ' . $payload['audit_type_label'] . ' ist im System.',
-			'intro'     => 'Danke, ' . $payload['name'] . '. Sie erhalten keine generische Checkliste, sondern eine persönliche erste Priorisierung für Ihre Seite.',
+			'intro'     => 'Danke, ' . $payload['name'] . '. Ich prüfe die Seite und melde mich innerhalb von 48 Stunden per E-Mail.',
 			'content'   => $content,
 			'footer'    => 'Viele Grüße, Haşim Üner',
 		]
@@ -1885,7 +2007,8 @@ function nexus_render_review_request_details_meta_box( $post ) {
 	$offer             = (string) get_post_meta( $post->ID, '_nexus_review_offer', true );
 	$audience          = (string) get_post_meta( $post->ID, '_nexus_review_audience', true );
 	$issue_label       = (string) get_post_meta( $post->ID, '_nexus_review_biggest_issue_label', true );
-	$has_new_intake    = '' !== trim( $focus_area_label . $current_challenge . $primary_goal_label . $linkedin );
+	$is_simple_intake  = nexus_is_growth_audit_simple_intake_variant( $intake_variant );
+	$has_new_intake    = $is_simple_intake || '' !== trim( $focus_area_label . $current_challenge . $primary_goal_label . $linkedin );
 	$is_energy_intake  = 'energy_systems' === $intake_variant;
 	$energy_solution   = (string) get_post_meta( $post->ID, '_nexus_review_energy_solution_focus_label', true );
 	$energy_audience   = (string) get_post_meta( $post->ID, '_nexus_review_energy_sales_audience_label', true );
@@ -1953,25 +2076,34 @@ function nexus_render_review_request_details_meta_box( $post ) {
 		<?php endif; ?>
 
 		<?php if ( $has_new_intake ) : ?>
-			<div class="nexus-review-meta-group">
-				<strong>Bereich mit Klärungsbedarf</strong>
-				<p><?php echo esc_html( $focus_area_label ); ?></p>
-			</div>
-			<?php if ( '' !== $current_challenge ) : ?>
+			<?php if ( $is_simple_intake ) : ?>
+				<?php if ( '' !== $current_challenge ) : ?>
+					<div class="nexus-review-meta-group">
+						<strong>Nicht übersehen</strong>
+						<p><?php echo nl2br( esc_html( $current_challenge ) ); ?></p>
+					</div>
+				<?php endif; ?>
+			<?php else : ?>
 				<div class="nexus-review-meta-group">
-					<strong>Kurzkontext</strong>
-					<p><?php echo nl2br( esc_html( $current_challenge ) ); ?></p>
+					<strong>Bereich mit Klärungsbedarf</strong>
+					<p><?php echo esc_html( $focus_area_label ); ?></p>
 				</div>
-			<?php endif; ?>
-			<div class="nexus-review-meta-group">
-				<strong>Wichtigstes Ziel</strong>
-				<p><?php echo esc_html( $primary_goal_label ); ?></p>
-			</div>
-			<?php if ( '' !== $linkedin ) : ?>
+				<?php if ( '' !== $current_challenge ) : ?>
+					<div class="nexus-review-meta-group">
+						<strong>Kurzkontext</strong>
+						<p><?php echo nl2br( esc_html( $current_challenge ) ); ?></p>
+					</div>
+				<?php endif; ?>
 				<div class="nexus-review-meta-group">
-					<strong>LinkedIn</strong>
-					<p><a href="<?php echo esc_url( $linkedin ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $linkedin ); ?></a></p>
+					<strong>Wichtigstes Ziel</strong>
+					<p><?php echo esc_html( $primary_goal_label ); ?></p>
 				</div>
+				<?php if ( '' !== $linkedin ) : ?>
+					<div class="nexus-review-meta-group">
+						<strong>LinkedIn</strong>
+						<p><a href="<?php echo esc_url( $linkedin ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $linkedin ); ?></a></p>
+					</div>
+				<?php endif; ?>
 			<?php endif; ?>
 			<?php if ( $is_energy_intake ) : ?>
 				<div class="nexus-review-meta-group">
@@ -2145,7 +2277,7 @@ function nexus_filter_review_request_columns( $columns ) {
 		'review_status'   => 'Status',
 		'review_priority' => 'Priorität',
 		'review_page'     => 'Seite',
-		'review_goal'     => 'Audit-Fokus',
+		'review_goal'     => 'Audit-Fokus / Hinweis',
 		'review_contact'  => 'Kontakt',
 		'review_due'      => 'Fällig',
 		'date'            => $columns['date'],
@@ -2206,8 +2338,15 @@ function nexus_render_review_request_columns( $column, $post_id ) {
 			break;
 
 		case 'review_goal':
+			$variant            = (string) get_post_meta( $post_id, '_nexus_review_intake_variant', true );
 			$focus_area_label   = nexus_get_review_meta_value( $post_id, '_nexus_review_focus_area_label' );
 			$primary_goal_label = nexus_get_review_meta_value( $post_id, '_nexus_review_primary_goal_label' );
+			$current_challenge  = nexus_get_review_meta_value( $post_id, '_nexus_review_current_challenge' );
+
+			if ( nexus_is_growth_audit_simple_intake_variant( $variant ) ) {
+				echo esc_html( $current_challenge ? wp_trim_words( $current_challenge, 12 ) : '1-Schritt-Intake' );
+				break;
+			}
 
 			if ( $focus_area_label || $primary_goal_label ) {
 				echo esc_html( $focus_area_label ?: $primary_goal_label );
