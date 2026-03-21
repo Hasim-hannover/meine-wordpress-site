@@ -52,7 +52,7 @@ $audit_cta_label = 'Kostenlosen Growth Audit anfragen';
 
 					<p class="ga-proof__lead">
 						E3 New Energy: 83 % niedrigere Kosten pro Anfrage, 34x Return on Ad Spend,
-						über 3.000 Leads in 18 Monaten.
+						1.750+ Leads im System.
 					</p>
 
 					<div class="ga-proof__foot">
