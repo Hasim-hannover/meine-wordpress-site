@@ -1,6 +1,6 @@
 /* =========================================
    About Page
-   Ruhige Vertrauens- und Positionierungsseite
+   Kompakte Positionsseite — 5 Sektionen
    ========================================= */
 
 .nexus-about {
@@ -61,6 +61,10 @@
   color: var(--nx-text);
 }
 
+/* -----------------------------------------
+   Hero
+   ----------------------------------------- */
+
 .about-hero {
   padding-top: calc(var(--nx-space-section) + 2rem);
 }
@@ -89,18 +93,10 @@
 }
 
 .about-hero__lead {
-  margin: 0 0 1.35rem;
-  max-width: 63ch;
-  color: var(--nx-text);
-  font-size: 1.08rem;
-  line-height: 1.82;
-}
-
-.about-hero__text {
   margin: 0 0 2rem;
-  max-width: 60ch;
+  max-width: 63ch;
   color: var(--nx-text-secondary);
-  font-size: 1rem;
+  font-size: 1.08rem;
   line-height: 1.82;
 }
 
@@ -139,13 +135,9 @@
   line-height: 1.55;
 }
 
-.about-hero__context {
-  margin: 0;
-  max-width: 58ch;
-  color: var(--nx-text-dim);
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
+/* -----------------------------------------
+   Profile Card (Hero aside)
+   ----------------------------------------- */
 
 .about-profile-card {
   display: grid;
@@ -185,33 +177,9 @@
   text-transform: uppercase;
 }
 
-.about-profile-card__quote {
-  margin: 0;
-  color: var(--nx-text);
-  font-size: 1.15rem;
-  line-height: 1.6;
-}
-
-.about-profile-card__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.9rem;
-}
-
-.about-profile-card__list li {
-  display: flex;
-  gap: 0.75rem;
-  color: var(--nx-text-secondary);
-  line-height: 1.6;
-}
-
-.about-profile-card__list li::before {
-  content: "•";
-  color: var(--nx-accent-text);
-  font-weight: 700;
-}
+/* -----------------------------------------
+   Section shared
+   ----------------------------------------- */
 
 .about-section__header {
   max-width: 780px;
@@ -222,188 +190,126 @@
   margin-bottom: 1rem;
 }
 
-.about-section__intro {
-  max-width: 63ch;
-  margin: 1rem auto 0;
-  color: var(--nx-text-secondary);
-  line-height: 1.8;
+/* -----------------------------------------
+   Projekt-Timeline (Sektion 2)
+   ----------------------------------------- */
+
+.about-project-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  padding-left: 2rem;
+  max-width: 780px;
+  margin: 0 auto;
+  border-left: 2px solid hsl(var(--accent-hsl) / 0.3);
 }
 
-.about-section__closing {
-  max-width: 760px;
-  margin: 2rem auto 0;
-  color: var(--nx-text-secondary);
-  text-align: center;
-  line-height: 1.8;
+.about-project-phase {
+  position: relative;
 }
 
-.about-principle-grid,
-.about-problem-grid,
-.about-role-grid,
-.about-practice-grid,
-.about-method-grid,
-.about-fit-grid {
-  display: grid;
-  gap: 1.25rem;
+.about-project-phase::before {
+  content: '';
+  position: absolute;
+  left: calc(-2rem - 5px);
+  top: 0.25rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: hsl(var(--accent-hsl) / 1);
 }
 
-.about-principle-grid,
-.about-problem-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.about-project-phase__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--nx-accent-text);
+  margin-bottom: 0.25rem;
 }
 
-.about-role-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.about-practice-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.about-method-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.about-principle-card,
-.about-quiet-card,
-.about-role-card,
-.about-practice-card,
-.about-method-card,
-.about-fit-card {
-  height: 100%;
-  padding: clamp(1.25rem, 3vw, 1.5rem);
-  border-radius: var(--nx-radius-xl);
-  border: 1px solid var(--nx-border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02));
-  box-shadow: var(--nx-shadow-sm);
-}
-
-.about-principle-card h3,
-.about-quiet-card h3,
-.about-role-card h3,
-.about-practice-card h3,
-.about-method-card h3 {
-  margin: 0 0 0.85rem;
-  color: var(--nx-text);
+.about-project-phase h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
   font-size: clamp(1.16rem, 1.8vw, 1.34rem);
   line-height: 1.22;
-}
-
-.about-principle-card p,
-.about-quiet-card p,
-.about-role-card p,
-.about-practice-card p,
-.about-method-card p {
-  margin: 0;
-  color: var(--nx-text-secondary);
-  line-height: 1.72;
-}
-
-.about-principle-card,
-.about-role-card,
-.about-practice-card {
-  position: relative;
-  overflow: hidden;
-}
-
-.about-principle-card::before,
-.about-role-card::before,
-.about-practice-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, hsl(var(--accent-hsl) / 0.6), transparent 75%);
-}
-
-.about-personal {
-  max-width: 1040px;
-  margin: 0 auto;
-  display: grid;
-  gap: clamp(1.5rem, 4vw, 2.25rem);
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-  border-radius: var(--nx-radius-xl);
-  border: 1px solid var(--nx-border);
-  background:
-    radial-gradient(circle at 0% 0%, hsl(var(--accent-hsl) / 0.16), transparent 34%),
-    var(--nx-card-gradient);
-  box-shadow: var(--nx-shadow-sm);
-}
-
-.about-personal__intro .nx-badge {
-  margin-bottom: 1rem;
-}
-
-.about-personal__intro h2 {
-  margin: 0;
-}
-
-.about-personal__lead {
-  margin: 1rem 0 0;
-  max-width: 30ch;
+  margin: 0 0 0.5rem;
   color: var(--nx-text);
-  font-size: clamp(1.18rem, 2vw, 1.42rem);
-  line-height: 1.62;
 }
 
-.about-personal__body {
-  display: grid;
-  gap: 1rem;
-}
-
-.about-personal__body p {
-  margin: 0;
+.about-project-phase p {
+  margin: 0 0 0.5rem;
   color: var(--nx-text-secondary);
   line-height: 1.8;
 }
 
-.about-personal__signals {
+.about-project-phase p:last-child {
+  margin-bottom: 0;
+}
+
+/* -----------------------------------------
+   Services-Liste (Sektion 3)
+   ----------------------------------------- */
+
+.about-services-list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 780px;
   display: grid;
-  gap: 0.9rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
-.about-personal__signal {
-  margin: 0;
-  padding: 0.95rem 1rem;
-  border-radius: var(--nx-radius-lg);
-  border: 1px solid hsl(var(--accent-hsl) / 0.16);
-  background: hsl(var(--accent-hsl) / 0.08);
-  color: var(--nx-text) !important;
-  line-height: 1.6 !important;
+.about-services-list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  color: var(--nx-text);
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
-.about-method-card {
-  position: relative;
-  padding-top: 4rem;
-}
-
-.about-method-card__number {
-  position: absolute;
-  top: 1.2rem;
-  left: 1.25rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: hsl(var(--accent-hsl) / 0.14);
-  border: 1px solid hsl(var(--accent-hsl) / 0.24);
+.about-services-list li::before {
+  content: "—";
   color: var(--nx-accent-text);
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
-.about-fit-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+/* -----------------------------------------
+   Hintergrund (Sektion 4)
+   ----------------------------------------- */
+
+.about-background {
+  max-width: 780px;
+  margin: 0 auto;
 }
 
-.about-fit-card__label {
-  display: inline-block;
-  margin-bottom: 1rem;
+.about-background h2 {
+  margin: 0 0 1rem;
+}
+
+.about-background > p {
+  margin: 0 0 1.5rem;
+  color: var(--nx-text-secondary);
+  line-height: 1.8;
+  max-width: 63ch;
+}
+
+.about-background__meta {
+  display: flex;
+  gap: 2rem;
+}
+
+.about-background__meta-item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.about-background__meta-item dt {
   color: var(--nx-accent-text);
   font-size: 0.76rem;
   font-weight: 700;
@@ -411,36 +317,15 @@
   text-transform: uppercase;
 }
 
-.about-fit-card--no .about-fit-card__label {
-  color: var(--nx-text-dim);
-}
-
-.about-fit-card ul {
-  list-style: none;
+.about-background__meta-item dd {
   margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.9rem;
-}
-
-.about-fit-card li {
-  display: flex;
-  gap: 0.75rem;
   color: var(--nx-text-secondary);
   line-height: 1.6;
 }
 
-.about-fit-card--yes li::before {
-  content: "✓";
-  color: var(--nx-accent-text);
-  font-weight: 700;
-}
-
-.about-fit-card--no li::before {
-  content: "–";
-  color: var(--nx-text-dim);
-  font-weight: 700;
-}
+/* -----------------------------------------
+   CTA Close (Sektion 5)
+   ----------------------------------------- */
 
 .about-close {
   padding-top: 0;
@@ -475,8 +360,16 @@
 }
 
 .about-close__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-top: 1.4rem !important;
 }
+
+/* -----------------------------------------
+   Header / Footer overrides
+   ----------------------------------------- */
 
 body.page-template-template-about .nx-site-header__menu .nav-cta-button > a,
 body.page-template-template-about-php .nx-site-header__menu .nav-cta-button > a,
@@ -516,29 +409,13 @@ body.page-template-template-about-php .ft__privacy-note {
   margin-top: 8px;
 }
 
+/* -----------------------------------------
+   Responsive
+   ----------------------------------------- */
+
 @media (min-width: 1040px) {
   .about-hero__grid {
     grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.74fr);
-  }
-
-  .about-personal {
-    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-    align-items: start;
-  }
-}
-
-@media (max-width: 1100px) {
-  .about-principle-grid,
-  .about-problem-grid,
-  .about-role-grid,
-  .about-practice-grid,
-  .about-method-grid,
-  .about-fit-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-personal__signals {
-    grid-template-columns: 1fr 1fr;
   }
 }
 
@@ -551,23 +428,17 @@ body.page-template-template-about-php .ft__privacy-note {
     max-width: 14ch;
   }
 
-  .about-principle-grid,
-  .about-hero__facts,
-  .about-problem-grid,
-  .about-role-grid,
-  .about-practice-grid,
-  .about-method-grid,
-  .about-fit-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-personal__signals {
+  .about-hero__facts {
     grid-template-columns: 1fr;
   }
 
   .about-close__inner,
-  .about-profile-card,
-  .about-personal {
+  .about-profile-card {
     padding-inline: 1.2rem;
+  }
+
+  .about-background__meta {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }
