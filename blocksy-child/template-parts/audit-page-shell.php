@@ -134,6 +134,10 @@ $audit_cta_label = 'Kostenlosen Growth Audit anfragen';
 							<div class="ga-success__pill">Anfrage eingegangen.</div>
 							<h3>Ich prüfe die Seite.</h3>
 							<p id="ga-success-message">Die Rückmeldung kommt innerhalb von 48 Stunden per E-Mail.</p>
+							<div class="ga-success__next">
+								<p class="ga-success__next-label">In der Zwischenzeit:</p>
+								<a href="<?php echo esc_url( $cases_url ); ?>" class="ga-success__link" data-track-action="cta_audit_success_results" data-track-category="trust">Ergebnisse ansehen</a>
+							</div>
 						</div>
 					</div>
 				</div>

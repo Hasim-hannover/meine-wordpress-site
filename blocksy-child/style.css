@@ -556,6 +556,8 @@ p.hero-stack,
     opacity: 1;
 }
 .ft--no-primary-cta .ft__privacy-note { margin-top: 8px; }
+.ft__cta--mobile-only { display: none; }
+@media (max-width: 900px) { .ft__cta--mobile-only { display: inline-block; } }
 
 /* Nav columns */
 .ft__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }

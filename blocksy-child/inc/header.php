@@ -104,30 +104,35 @@ function nexus_get_site_header_fallback_items() {
 			'url'    => $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
 			'active' => $wgos_page_id ? is_page( $wgos_page_id ) : false,
 			'class'  => '',
+			'track'  => 'system',
 		],
 		[
 			'label'  => __( 'Ergebnisse', 'blocksy-child' ),
 			'url'    => nexus_get_results_url(),
 			'active' => nexus_is_results_context(),
 			'class'  => '',
+			'track'  => 'results',
 		],
 		[
 			'label'  => __( 'Insights', 'blocksy-child' ),
 			'url'    => $blog_page_id ? get_permalink( $blog_page_id ) : ( $primary_urls['blog'] ?? home_url( '/blog/' ) ),
 			'active' => is_home() || is_archive() || is_singular( 'post' ),
 			'class'  => '',
+			'track'  => 'insights',
 		],
 		[
 			'label'  => __( 'Über mich', 'blocksy-child' ),
 			'url'    => $primary_urls['about'] ?? home_url( '/uber-mich/' ),
 			'active' => $about_page_id ? is_page( $about_page_id ) : false,
 			'class'  => '',
+			'track'  => 'about',
 		],
 		[
 			'label'  => __( 'Audit starten', 'blocksy-child' ),
 			'url'    => $primary_urls['audit'] ?? nexus_get_audit_url(),
 			'active' => nexus_is_audit_page(),
 			'class'  => 'nav-cta-button',
+			'track'  => 'audit',
 		],
 	];
 }
@@ -168,12 +173,14 @@ function nexus_render_site_header_menu( $context = 'desktop' ) {
 	foreach ( $fallback_items as $item ) {
 		$item_class = ! empty( $item['class'] ) ? ' ' . sanitize_html_class( $item['class'] ) : '';
 		$link_class = ! empty( $item['active'] ) ? ' aria-current="page"' : '';
+		$track_attr = ! empty( $item['track'] ) ? sprintf( ' data-track-action="nav_header_%s" data-track-category="navigation"', esc_attr( $item['track'] ) ) : '';
 
 		printf(
-			'<li class="menu-item%1$s"><a href="%2$s"%3$s>%4$s</a></li>',
+			'<li class="menu-item%1$s"><a href="%2$s"%3$s%4$s>%5$s</a></li>',
 			esc_attr( $item_class ),
 			esc_url( $item['url'] ),
 			$link_class,
+			$track_attr,
 			esc_html( $item['label'] )
 		);
 	}

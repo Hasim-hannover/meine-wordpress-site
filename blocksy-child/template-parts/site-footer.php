@@ -33,7 +33,7 @@ $project_request_url = add_query_arg(
 $imprint_url      = $primary_urls['impressum'] ?? home_url( '/impressum/' );
 $privacy_url      = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 $hide_primary_cta = function_exists( 'nexus_should_hide_footer_primary_cta' ) && nexus_should_hide_footer_primary_cta();
-$footer_class     = $hide_primary_cta ? 'ft ft--no-primary-cta' : 'ft';
+$footer_class     = $hide_primary_cta ? 'ft ft--no-primary-cta ft--mobile-cta' : 'ft';
 $audit_cta_label  = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
 $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_get_audit_footer_note() : 'Growth Audit: persönliche Ersteinschätzung, schriftliche Rückmeldung in 48 Stunden, kein Pflicht-Call.';
 ?>
@@ -65,6 +65,8 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 			<p class="ft__tag">WordPress als Nachfrage-System für B2B.</p>
 			<?php if ( ! $hide_primary_cta ) : ?>
 			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+			<?php else : ?>
+			<a class="ft__cta ft__cta--mobile-only" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_audit_mobile" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 			<?php endif; ?>
 			<p class="ft__privacy-note">
 				<span class="ft__privacy-badge" aria-hidden="true">

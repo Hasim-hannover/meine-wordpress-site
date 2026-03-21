@@ -465,6 +465,14 @@
 	width: 100%;
 }
 
+.ali-form__microcopy {
+	margin: 0.6rem 0 0;
+	text-align: center;
+	color: var(--text-secondary);
+	font-size: 0.8rem;
+	line-height: 1.5;
+}
+
 .ali-btn[disabled] {
 	opacity: 0.6;
 	pointer-events: none;
@@ -525,6 +533,22 @@
 	font-size: var(--text-base);
 	line-height: var(--leading-relaxed);
 	color: var(--text-secondary);
+}
+
+.ali-form-success__link {
+	display: inline-flex;
+	align-items: center;
+	margin-top: 0.75rem;
+	color: var(--accent);
+	font-size: var(--text-sm);
+	font-weight: 600;
+	text-decoration: none;
+	border-bottom: 1px solid hsl(var(--accent-hsl) / 0.22);
+}
+
+.ali-form-success__link:hover,
+.ali-form-success__link:focus-visible {
+	border-bottom-color: hsl(var(--accent-hsl) / 0.5);
 }
 
 .ali-footer {
@@ -685,13 +709,14 @@
 	}
 
 	.ali-process {
-		grid-template-columns: 1fr;
-		gap: 0.7rem;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.5rem;
 		margin-top: 1.35rem;
 	}
 
 	.ali-process__step {
-		padding: 0.9rem;
+		padding: 0.7rem 0.5rem;
+		text-align: center;
 	}
 
 	.ali-process::before {
@@ -707,7 +732,7 @@
 	}
 
 	.ali-form__label {
-		font-size: 0.74rem;
+		font-size: 0.78rem;
 	}
 
 	.ali-form__input,

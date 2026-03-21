@@ -150,6 +150,8 @@ get_header();
 						</ul>
 					</article>
 				</div>
+
+				<p class="homepage-problem-frame__link nx-reveal">Welches Modell passt? <a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_models_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a></p>
 			</div>
 		</section>
 
@@ -190,7 +192,7 @@ get_header();
 			<div class="wp-container wp-home-shell">
 				<div class="nx-cta-box nx-reveal homepage-conversion-cta__box">
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2>Klarheit vor dem nächsten Schritt.</h2>
+					<h2>Lassen Sie uns prüfen, wo Ihre Website Anfragen verliert.</h2>
 					<p class="homepage-conversion-cta__lead">Eine URL reicht. Schriftlich, manuell geprüft, in 48 Stunden.</p>
 					<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 					<p class="homepage-conversion-cta__microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>

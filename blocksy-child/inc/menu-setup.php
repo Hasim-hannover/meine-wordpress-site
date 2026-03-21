@@ -306,3 +306,35 @@ add_filter( 'wp_nav_menu_objects', function ( $items, $args ) {
 
 	return $items;
 }, 20, 2 );
+
+/**
+ * Add data-track attributes to primary nav links.
+ */
+add_filter( 'nav_menu_link_attributes', function ( $atts, $item ) {
+	if ( ! isset( $item->classes ) || ! is_array( $item->classes ) ) {
+		return $atts;
+	}
+
+	$title_lower = strtolower( wp_strip_all_tags( (string) $item->title ) );
+	$track_map   = [
+		'system'     => 'system',
+		'ergebnisse' => 'results',
+		'insights'   => 'insights',
+		'über mich'  => 'about',
+	];
+
+	foreach ( $track_map as $label => $track_key ) {
+		if ( $title_lower === $label ) {
+			$atts['data-track-action']   = 'nav_header_' . $track_key;
+			$atts['data-track-category'] = 'navigation';
+			return $atts;
+		}
+	}
+
+	if ( in_array( 'nav-cta-button', $item->classes, true ) ) {
+		$atts['data-track-action']   = 'nav_header_audit';
+		$atts['data-track-category'] = 'lead_gen';
+	}
+
+	return $atts;
+}, 10, 2 );

@@ -119,6 +119,7 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 									<span class="ali-btn__label">Audit anfragen</span>
 									<span class="ali-btn__spinner" aria-hidden="true"></span>
 								</button>
+								<p class="ali-form__microcopy">Schriftliche Rückmeldung in 48h. Kein Pflicht-Call.</p>
 							</div>
 						</form>
 
@@ -128,6 +129,7 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 							</div>
 							<h2 class="ali-form-success__h3">Anfrage eingegangen.</h2>
 							<p class="ali-form-success__text">Ich melde mich innerhalb von 48 Stunden.</p>
+							<a href="<?php echo esc_url( home_url( '/ergebnisse/' ) ); ?>" class="ali-form-success__link" data-track-action="cta_audit_li_success_results" data-track-category="trust">Ergebnisse ansehen</a>
 						</div>
 					</div>
 				</div>
