@@ -1791,8 +1791,8 @@ return [
 	'ki-assistent-chatbot' => [
 		'title'           => 'KI-Assistent / Chatbot (DSGVO-konform)',
 		'slug'            => 'ki-assistent-chatbot',
-		'status'          => 'draft',
-		'core_area'       => 'Conversion',
+		'status'          => 'publish',
+		'core_area'       => 'Weiterentwicklung',
 		'credits'         => '30',
 		'keyword'         => 'KI Chatbot WordPress DSGVO',
 		'excerpt'         => 'Ein KI-Assistent, der Besuchern auf Basis Ihrer eigenen Inhalte antwortet – DSGVO-konform, auf Ihrer Infrastruktur, ohne externen Datenabfluss.',
@@ -1824,8 +1824,8 @@ return [
 			],
 		],
 		'system_context'  => [
-			'Der KI-Assistent gehört im WGOS zum Kernbereich Conversion und kommt typischerweise nach Fundament und Messbarkeit. Voraussetzung sind saubere Inhalte, die der Assistent als Wissensbasis nutzen kann, und eine klare Positionierung.',
-			'In Kombination mit Landing Page und Lead-Qualifizierung entsteht ein Conversion-Pfad, der Besucher zuerst informiert, dann qualifiziert und erst danach an den Vertrieb übergibt. Der Assistent ist dabei kein ChatGPT-Widget, sondern ein kontrollierter Baustein im System.',
+			'Der KI-Assistent gehört im aktualisierten WGOS in den Kernbereich Weiterentwicklung. Er baut auf Fundament, Messbarkeit und klaren Inhalten auf und erweitert ein bereits tragfähiges System um einen dialogbasierten KI-Baustein.',
+			'In Kombination mit Lead-Qualifizierung, RAG-Wissenssuche und n8n-Workflows entsteht daraus eine kontrollierte KI- und Automatisierungsschicht. Der Assistent bleibt dabei ein versionierter Systembaustein und kein loses ChatGPT-Widget.',
 		],
 		'priority'        => [
 			'Wenn wiederkehrende Fragen Support und Vertrieb binden, die der Assistent aus vorhandenen Inhalten beantworten könnte.',
@@ -1842,8 +1842,8 @@ return [
 	'ki-lead-qualifizierung' => [
 		'title'           => 'KI-gestützte Lead-Qualifizierung',
 		'slug'            => 'ki-lead-qualifizierung',
-		'status'          => 'draft',
-		'core_area'       => 'Conversion',
+		'status'          => 'publish',
+		'core_area'       => 'Weiterentwicklung',
 		'credits'         => '20',
 		'keyword'         => 'KI Lead Qualifizierung B2B',
 		'excerpt'         => 'Formulare und Anfrageprozesse, die mit KI-Unterstützung Leads bewerten und vorsortieren – bevor der Vertrieb übernimmt.',
@@ -1875,8 +1875,8 @@ return [
 			],
 		],
 		'system_context'  => [
-			'KI-gestützte Lead-Qualifizierung gehört im WGOS zum Kernbereich Conversion und kommt nach den Conversion-Grundlagen. Landing Pages, CTA-Logik und eine belastbare Messbasis sollten stehen, bevor Leads automatisch bewertet werden.',
-			'In Kombination mit dem KI-Chatbot entsteht ein Conversion-Pfad, der Besucher erst informiert, dann qualifiziert und dann priorisiert an den Vertrieb übergibt. Die Datenverarbeitung bleibt server-seitig auf eigenem Server – DSGVO-konform.',
+			'KI-gestützte Lead-Qualifizierung gehört im aktualisierten WGOS in den Kernbereich Weiterentwicklung. Sie setzt eine funktionierende Conversion-Basis voraus und ergänzt diese um eine server-seitige Automatisierungslogik für Routing und Priorisierung.',
+			'Zusammen mit KI-Assistent, RAG-Wissenssuche und n8n-Workflows bildet sie die operative KI-Schicht oberhalb der klassischen Kernbereiche. Die Datenverarbeitung bleibt dabei server-seitig auf eigenem Server und DSGVO-konform.',
 		],
 		'priority'        => [
 			'Wenn mehr als 20 Anfragen pro Monat eingehen und die Lead-Qualität stark schwankt.',
@@ -1893,8 +1893,8 @@ return [
 	'rag-wissenssuche' => [
 		'title'           => 'RAG-Wissenssuche',
 		'slug'            => 'rag-wissenssuche',
-		'status'          => 'draft',
-		'core_area'       => 'Technisches Fundament',
+		'status'          => 'publish',
+		'core_area'       => 'Weiterentwicklung',
 		'credits'         => '25',
 		'keyword'         => 'RAG Wissenssuche WordPress',
 		'excerpt'         => 'Eine KI-gestützte Suche, die Antworten aus Ihren eigenen Dokumenten, Blog-Beiträgen und FAQs findet – statt nur Keywords zu matchen.',
@@ -1926,8 +1926,8 @@ return [
 			],
 		],
 		'system_context'  => [
-			'Die RAG-Wissenssuche gehört im WGOS zum technischen Fundament und verbessert die Content-Infrastruktur. Sie setzt voraus, dass genügend saubere Inhalte als Quelldaten existieren – ein dünner Content-Pool ergibt keine brauchbare Suche.',
-			'Das Asset kann standalone laufen oder als Grundlage für den KI-Chatbot dienen, der dieselbe RAG-Architektur für dialogbasierte Interaktion nutzt. In beiden Fällen bleibt die Verarbeitung auf eigenem Server.',
+			'Die RAG-Wissenssuche gehört im aktualisierten WGOS in den Kernbereich Weiterentwicklung. Sie nutzt bestehende Inhalte und technische Stabilität als Grundlage und erweitert das System um eine semantische Wissensschicht.',
+			'Das Asset kann standalone laufen oder als Grundlage für den KI-Assistenten dienen, der dieselbe RAG-Architektur für dialogbasierte Interaktion nutzt. In beiden Fällen bleibt die Verarbeitung auf eigenem Server.',
 		],
 		'priority'        => [
 			'Wenn ein umfangreicher Content-Pool existiert (50+ Seiten) und Besucher relevante Inhalte nicht schnell genug finden.',
@@ -1944,7 +1944,7 @@ return [
 	'llm-workflow-automatisierung' => [
 		'title'           => 'LLM-Workflow-Automatisierung (n8n)',
 		'slug'            => 'llm-workflow-automatisierung',
-		'status'          => 'draft',
+		'status'          => 'publish',
 		'core_area'       => 'Weiterentwicklung',
 		'credits'         => '20',
 		'keyword'         => 'LLM Automatisierung n8n WordPress',

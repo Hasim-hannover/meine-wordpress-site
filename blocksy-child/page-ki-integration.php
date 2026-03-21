@@ -53,21 +53,21 @@ $nav_items = [
 $ki_assets = [
 	[
 		'title'      => 'KI-Assistent / Chatbot',
-		'badge'      => 'Conversion',
+		'badge'      => 'Weiterentwicklung',
 		'credits'    => '30',
 		'excerpt'    => 'Ein Assistent, der Besuchern auf Basis Ihrer Inhalte antwortet – DSGVO-konform, auf eigener Infrastruktur.',
 		'url'        => home_url( '/wgos-assets/ki-assistent-chatbot/' ),
 	],
 	[
 		'title'      => 'KI-gestützte Lead-Qualifizierung',
-		'badge'      => 'Conversion',
+		'badge'      => 'Weiterentwicklung',
 		'credits'    => '20',
 		'excerpt'    => 'Formulare, die verstehen statt nur sammeln. Automatische Vorselektion nach Relevanz und Passung.',
 		'url'        => home_url( '/wgos-assets/ki-lead-qualifizierung/' ),
 	],
 	[
 		'title'      => 'RAG-Wissenssuche',
-		'badge'      => 'Technisches Fundament',
+		'badge'      => 'Weiterentwicklung',
 		'credits'    => '25',
 		'excerpt'    => 'Antworten aus Ihren Inhalten, nicht aus dem Internet. Semantische Suche mit Quellenangabe.',
 		'url'        => home_url( '/wgos-assets/rag-wissenssuche/' ),
@@ -106,19 +106,9 @@ $privacy_points = [
 
 $system_areas = [
 	[
-		'area'   => 'Conversion',
-		'assets' => 'KI-Chatbot + Lead-Qualifizierung',
-		'text'   => 'Besucher informieren, qualifizieren und priorisiert an den Vertrieb übergeben.',
-	],
-	[
-		'area'   => 'Technisches Fundament',
-		'assets' => 'RAG-Wissenssuche',
-		'text'   => 'Content-Infrastruktur mit semantischer Suche stärken.',
-	],
-	[
 		'area'   => 'Weiterentwicklung',
-		'assets' => 'LLM-Workflow-Automatisierung',
-		'text'   => 'Repetitive Prozesse mit KI-Schritten automatisieren.',
+		'assets' => 'KI-Assistent, Lead-Qualifizierung, RAG-Wissenssuche und LLM-Workflows',
+		'text'   => 'KI- und Automatisierungs-Bausteine kontrolliert auf ein bestehendes System setzen.',
 	],
 ];
 
@@ -269,19 +259,19 @@ foreach ( $faq_items as $faq_item ) {
 						<span class="wgos-principle-kicker">4 Bausteine</span>
 						<div class="wgos-phase-list">
 							<article class="wgos-phase-list__item">
-								<span class="wgos-phase-list__label">Conversion</span>
-								<h3>Chatbot + Lead-Qualifizierung</h3>
-								<p>Besucher informieren und Anfragen automatisch bewerten.</p>
+								<span class="wgos-phase-list__label">Weiterentwicklung</span>
+								<h3>KI-Assistent + Lead-Qualifizierung</h3>
+								<p>Besucher informieren, Anfragen vorqualifizieren und sauber weiterleiten.</p>
 							</article>
 							<article class="wgos-phase-list__item">
-								<span class="wgos-phase-list__label">Fundament</span>
+								<span class="wgos-phase-list__label">Weiterentwicklung</span>
 								<h3>RAG-Wissenssuche</h3>
-								<p>Semantische Suche auf Ihren eigenen Inhalten.</p>
+								<p>Semantische Antworten aus Ihren eigenen Inhalten aufbauen.</p>
 							</article>
 							<article class="wgos-phase-list__item">
 								<span class="wgos-phase-list__label">Weiterentwicklung</span>
 								<h3>LLM-Workflow-Automatisierung</h3>
-								<p>Repetitive Prozesse mit KI-Schritten automatisieren.</p>
+								<p>Repetitive Prozesse mit KI-Schritten auf n8n automatisieren.</p>
 							</article>
 						</div>
 						<p class="wgos-hero-card__note">Alle Bausteine laufen auf eigener Infrastruktur. Keine SaaS-Abhängigkeit.</p>
@@ -317,7 +307,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">KI-Bausteine im WGOS</span>
 					<h2 class="wgos-h2">Was KI auf WordPress konkret leisten kann – wenn das Fundament stimmt.</h2>
-					<p class="wgos-section-intro">Vier Bausteine, die KI dort einsetzen, wo sie messbaren Geschäftswert erzeugt. Jeder Baustein ist ein WGOS-Asset mit klarem Credit-Wert und Kernbereich.</p>
+					<p class="wgos-section-intro">Vier Bausteine, die KI dort einsetzen, wo sie messbaren Geschäftswert erzeugt. Jeder Baustein ist ein WGOS-Asset mit klarem Credit-Wert im Kernbereich Weiterentwicklung.</p>
 				</div>
 
 				<div class="wgos-component-grid">
@@ -366,7 +356,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">WGOS-Einordnung</span>
 					<h2 class="wgos-h2">KI ist kein neues System. Es erweitert das bestehende.</h2>
-					<p class="wgos-section-intro">Die KI-Bausteine sitzen in drei bestehenden WGOS-Kernbereichen. Die Reihenfolge entscheidet der Audit, nicht die Technologie.</p>
+					<p class="wgos-section-intro">Die KI-Bausteine liegen im WGOS jetzt gebündelt im Kernbereich Weiterentwicklung. Die Reihenfolge entscheidet weiterhin der Audit, nicht die Technologie.</p>
 				</div>
 
 				<div class="wgos-phase-grid" aria-label="KI-Bausteine nach Kernbereich">

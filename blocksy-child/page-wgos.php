@@ -177,7 +177,7 @@ $core_areas = [
 		'intro'  => 'Hält das System lernfähig und steuerbar.',
 		'points' => [
 			'Wirkung laufend auswerten und priorisieren',
-			'Nächste Hebel aus echten Signalen ableiten',
+			'KI, Automatisierung und neue Hebel kontrolliert einführen',
 			'Performance kontrolliert weiterentwickeln statt neu starten',
 		],
 	],

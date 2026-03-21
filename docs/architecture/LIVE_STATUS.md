@@ -54,9 +54,9 @@ Nicht verifiziert:
 - Das Repo wird gerade von einem Theme-Repo zu einem Website Operating System erweitert.
 - `page-wgos.php` bleibt template-driven; eine spaetere Auslagerung des Content-Layers in Editor oder ACF ist weiter offen.
 - WGOS Asset-Detailseiten laufen jetzt ueber den hierarchischen CPT `wgos_asset` mit ACF-Meta und Single-Template; die redaktionelle Befuellung der Spokes passiert weiter im WordPress-Admin.
-- WGOS-Assets sind jetzt zusaetzlich als versionierte Registry im Theme definiert: 39 Assets (35 auf `publish`, 4 neue KI-Assets auf `draft`).
-- Die neue WGOS-Asset-Struktur rendert 8 feste Abschnitte, versionierte SEO-Meta, Related-Links und `Service`-Schema aus derselben Registry.
-- Die WGOS Systemlandkarte wird jetzt bei Bedarf automatisch als Seite angelegt und listet alle Assets zusaetzlich in einer festen, gruppierten Hub-Ansicht.
+- WGOS-Assets sind jetzt zusaetzlich als versionierte Registry im Theme definiert: 39 Assets stehen repo-seitig auf `publish`, inklusive 4 KI-/Automatisierungs-Assets im Kernbereich `Weiterentwicklung`.
+- Die neue WGOS-Asset-Struktur rendert versionierte SEO-Meta, Related-Links und `Service`-Schema aus derselben Registry.
+- Die WGOS Systemlandkarte wird jetzt bei Bedarf automatisch als Seite angelegt und ist repo-seitig auf einen kompakten 3-Block-Flow reduziert: Hero, Explorer/Library und kurzer Audit-CTA.
 - Die eigentliche Post-Erstellung und Aktualisierung fuer WGOS-Assets haengt aktuell noch am neuen Theme-Sync und damit am naechsten Deployment auf die Live-Umgebung.
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten oder editorgetriebenen Default-Seiten ausserhalb der route-forced Clusterpages.
 - Editorgetriebene Seitentitel, Excerpts, Karten und `the_content()`-Bereiche koennen weiter alte Proof-, Tonalitaets- oder Du/Sie-Brueche enthalten und muessen im WordPress-Admin separat verifiziert werden.
@@ -71,7 +71,7 @@ Nicht verifiziert:
 - Sekundaere Anschlusslinks zu `/kontakt/` und `/wordpress-wartung-hannover/` laufen jetzt zusaetzlich ueber die Agentur-Seite, die Ueber-mich-Seite, den Ergebnisse-Hub und die Kontakt-Seite selbst, damit Audit-first als Primaerpfad bleibt, der direkte Projekt- oder Betriebs-Einstieg aber dennoch sauber verlinkt ist.
 - Kannibalisierungs-Hinweise im SEO-Cockpit zeigen jetzt direkt die staerksten konkurrierenden URLs mit Impressionen und Position an, statt nur auf den normalen URL-Drilldown der Primaer-URL zu verweisen.
 - Das Client Portal arbeitet aktuell mit Mock-Daten und ist noch kein voll dokumentiertes Produktivsystem.
-- KI-Erweiterung: 4 neue WGOS-Assets (KI-Assistent/Chatbot 30 Cr, KI-Lead-Qualifizierung 20 Cr, RAG-Wissenssuche 25 Cr, LLM-Workflow-Automatisierung 20 Cr) liegen als `draft` in der Registry. Dachseite `/ki-integration-wordpress/` als versioniertes Page-Template (`page-ki-integration.php`) mit Service- und FAQPage-Schema im Repo. Interne Verlinkung von WGOS, Systemlandkarte und Ueber-mich-Seite eingebaut. WordPress-Admin-Schritte (Seite anlegen, Template zuweisen, Assets auf `publish` setzen) stehen noch aus.
+- KI-Erweiterung: 4 WGOS-Assets (KI-Assistent/Chatbot 30 Cr, KI-Lead-Qualifizierung 20 Cr, RAG-Wissenssuche 25 Cr, LLM-Workflow-Automatisierung 20 Cr) stehen repo-seitig jetzt auf `publish` und sind dem Weiterentwicklungs-Layer zugeordnet. Dachseite `/ki-integration-wordpress/` als versioniertes Page-Template (`page-ki-integration.php`) mit Service- und FAQPage-Schema bleibt im Repo; die Live-Synchronisation der Asset-Posts ueber den Theme-Sync ist noch nicht verifiziert.
 
 ## Geplant
 

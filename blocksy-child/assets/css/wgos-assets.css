@@ -10,6 +10,10 @@
 	box-shadow: var(--nx-shadow-lg);
 }
 
+.wgos-hero-copy--compact {
+	max-width: 760px;
+}
+
 #explorer .wgos-asset-explorer-root {
 	margin-top: 0;
 }
@@ -33,6 +37,14 @@
 	font-weight: 800;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
+}
+
+.wgos-hub-library {
+	margin-top: clamp(40px, 6vw, 72px);
+}
+
+.wgos-hub-library .wgos-section-head {
+	margin-bottom: 24px;
 }
 
 .wgos-asset-explorer {
