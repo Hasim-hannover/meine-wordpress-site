@@ -76,11 +76,6 @@
 	border-radius: var(--radius-sm);
 }
 
-.ali-topbar__actions {
-	display: flex;
-	align-items: center;
-}
-
 /* ─── HERO ───────────────────────────────────────────────────── */
 
 .ali-hero {
@@ -242,13 +237,6 @@
 	background: var(--gradient-surface);
 }
 
-.ali-form-section__intro {
-	font-size: var(--text-md);
-	line-height: var(--leading-relaxed);
-	color: var(--text-secondary);
-	margin: 0 0 var(--space-8);
-}
-
 .ali-form {
 	display: grid;
 	gap: var(--space-5);
@@ -379,13 +367,6 @@
 
 .ali-form__submit-wrap {
 	padding-top: var(--space-2);
-}
-
-.ali-form__micro {
-	font-size: var(--text-sm);
-	color: var(--text-tertiary);
-	text-align: center;
-	margin: var(--space-3) 0 0;
 }
 
 /* ─── FORM SUCCESS STATE ─────────────────────────────────────── */

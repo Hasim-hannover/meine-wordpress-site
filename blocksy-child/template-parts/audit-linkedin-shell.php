@@ -29,13 +29,6 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 		<a class="ali-topbar__logo site-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php echo esc_attr( $home_label ); ?>">
 			<?php echo esc_html( $brand_text ); ?>
 		</a>
-		<div class="ali-topbar__actions">
-			<?php
-			if ( function_exists( 'nexus_get_theme_toggle_html' ) ) {
-				echo nexus_get_theme_toggle_html( [ 'source' => 'audit-linkedin-topbar' ] );
-			}
-			?>
-		</div>
 	</div>
 </div>
 
@@ -76,10 +69,6 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 	<section id="audit-form" class="ali-section ali-form-section" aria-labelledby="ali-form-heading">
 		<div class="ali-container ali-container--narrow">
 			<h2 id="ali-form-heading" class="ali-section__h2">Reich deine Website ein</h2>
-
-			<p class="ali-form-section__intro">
-				Wenn du wissen willst, warum deine Website noch unter ihrem Potenzial bleibt, reich sie hier ein.
-			</p>
 
 			<form id="ali-audit-form" class="ali-form" novalidate>
 				<!-- Honeypot -->
@@ -133,9 +122,6 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 					</button>
 				</div>
 
-				<p class="ali-form__micro">
-					Kurze Prüfung. Klare Rückmeldung. Ohne Pflicht-Call.
-				</p>
 			</form>
 
 			<!-- Success state -->
@@ -143,8 +129,8 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 				<div class="ali-form-success__icon" aria-hidden="true">
 					<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2.5"/><path d="M15 24l6 6 12-14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
 				</div>
-				<h3 class="ali-form-success__h3">Deine Anfrage ist eingegangen.</h3>
-				<p class="ali-form-success__text">Ich prüfe deine Website persönlich und melde mich innerhalb von 48 Stunden mit einer schriftlichen Ersteinschätzung.</p>
+				<h3 class="ali-form-success__h3">Anfrage eingegangen.</h3>
+				<p class="ali-form-success__text">Ich melde mich innerhalb von 48 Stunden mit meiner Einschätzung.</p>
 			</div>
 		</div>
 	</section>
@@ -191,22 +177,22 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 				<li class="ali-steps__item">
 					<span class="ali-steps__index" aria-hidden="true">1</span>
 					<div class="ali-steps__copy">
-						<strong>Du reichst deine Website ein</strong>
-						<span>Kurzes Formular, vier Felder, fertig.</span>
+						<strong>Website einreichen</strong>
+						<span>Name, E-Mail, URL — fertig.</span>
 					</div>
 				</li>
 				<li class="ali-steps__item">
 					<span class="ali-steps__index" aria-hidden="true">2</span>
 					<div class="ali-steps__copy">
-						<strong>Ich prüfe Struktur, Nutzerführung und Conversion-Logik</strong>
-						<span>Persönlich, keine automatisierte Massenprüfung.</span>
+						<strong>Ich analysiere deine Seite</strong>
+						<span>Struktur, Nutzerführung, Conversion-Logik.</span>
 					</div>
 				</li>
 				<li class="ali-steps__item">
 					<span class="ali-steps__index" aria-hidden="true">3</span>
 					<div class="ali-steps__copy">
-						<strong>Du bekommst eine Einschätzung mit priorisierten Hebeln</strong>
-						<span>Schriftlich, umsetzungsnah, innerhalb von 48h.</span>
+						<strong>Du bekommst priorisierte Hebel</strong>
+						<span>Schriftlich, innerhalb von 48 Stunden.</span>
 					</div>
 				</li>
 			</ol>
@@ -224,21 +210,21 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 				<details class="ali-faq__item">
 					<summary class="ali-faq__question">Ist das Audit kostenlos?</summary>
 					<div class="ali-faq__answer">
-						<p>Ja. Du bekommst eine fundierte Ersteinschätzung, damit du siehst, wo die größten Hebel liegen.</p>
+						<p>Ja, komplett. Kein Haken, kein Abo.</p>
 					</div>
 				</details>
 
 				<details class="ali-faq__item">
-					<summary class="ali-faq__question">Muss ich danach einen Call buchen?</summary>
+					<summary class="ali-faq__question">Was genau bekomme ich?</summary>
 					<div class="ali-faq__answer">
-						<p>Nein. Die Einschätzung kommt schriftlich, ohne Pflicht-Call.</p>
+						<p>Eine persönliche, schriftliche Analyse mit konkreten Handlungsempfehlungen — priorisiert nach Wirkung.</p>
 					</div>
 				</details>
 
 				<details class="ali-faq__item">
-					<summary class="ali-faq__question">Wie schnell bekomme ich Rückmeldung?</summary>
+					<summary class="ali-faq__question">Wie schnell kommt die Rückmeldung?</summary>
 					<div class="ali-faq__answer">
-						<p>In der Regel innerhalb von 48 Stunden.</p>
+						<p>Innerhalb von 48 Stunden per E-Mail.</p>
 					</div>
 				</details>
 			</div>
