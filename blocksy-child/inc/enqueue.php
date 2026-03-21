@@ -470,19 +470,6 @@ function hu_enqueue_assets() {
 				'errorMessage'  => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuche es erneut.',
 			]
 		);
-
-		wp_add_inline_style(
-			'blocksy-child-style',
-			'
-			/* Hide Blocksy page title/header on audit-linkedin page */
-			.page-audit-linkedin .entry-header,
-			.page-audit-linkedin .ct-page-title,
-			.page-template-page-audit-linkedin .entry-header,
-			.page-template-page-audit-linkedin .ct-page-title {
-				display: none !important;
-			}
-		'
-		);
 	}
 
 	// ── H2) Template: 360° Deep-Dive ─────────────────────────────

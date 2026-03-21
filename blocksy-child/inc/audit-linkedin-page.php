@@ -137,42 +137,34 @@ function nexus_use_virtual_audit_linkedin_template( $template ) {
 add_filter( 'template_include', 'nexus_use_virtual_audit_linkedin_template', 99 );
 
 /**
- * Remove 404 body classes for the virtual audit-linkedin route.
+ * Clean body classes for the audit-linkedin standalone landing page.
  *
  * @param array<int, string> $classes Existing body classes.
  * @return array<int, string>
  */
 function nexus_add_virtual_audit_linkedin_body_class( $classes ) {
-	if ( ! nexus_is_audit_linkedin_request_path() || is_page( 'audit-linkedin' ) ) {
+	if ( ! nexus_is_audit_linkedin_page() ) {
 		return $classes;
 	}
 
-	$classes   = array_diff( $classes, [ 'error404' ] );
+	// Remove classes from Blocksy / global header that don't apply.
+	$classes = array_diff(
+		$classes,
+		[ 'error404', 'nx-custom-header-active', 'nx-blog-header-active' ]
+	);
+
 	$classes[] = 'page';
 	$classes[] = 'page-audit-linkedin';
 	$classes[] = 'page-template-page-audit-linkedin';
+	$classes[] = 'ali-standalone';
 
 	return array_values( array_unique( $classes ) );
 }
 add_filter( 'body_class', 'nexus_add_virtual_audit_linkedin_body_class', 20 );
 
 /* ──────────────────────────────────────────────────────────────────
- * 3. NOINDEX — Campaign page must not compete with /growth-audit/
+ * 3. SITEMAP — Exclude campaign page
  * ────────────────────────────────────────────────────────────────── */
-
-/**
- * Output noindex robots meta for the LinkedIn audit page.
- *
- * @return void
- */
-function nexus_audit_linkedin_noindex() {
-	if ( ! nexus_is_audit_linkedin_page() ) {
-		return;
-	}
-
-	echo '<meta name="robots" content="noindex, nofollow">' . "\n";
-}
-add_action( 'wp_head', 'nexus_audit_linkedin_noindex', 2 );
 
 /**
  * Exclude the audit-linkedin virtual page from the WordPress sitemap.
@@ -199,52 +191,22 @@ function nexus_exclude_audit_linkedin_from_sitemap( $args, $post_type ) {
 add_filter( 'wp_sitemaps_posts_query_args', 'nexus_exclude_audit_linkedin_from_sitemap', 10, 2 );
 
 /* ──────────────────────────────────────────────────────────────────
- * 4. HEAD STYLES — Break out of Blocksy container
+ * 4. ASSET ISOLATION — Dequeue global assets not needed on this LP
  * ────────────────────────────────────────────────────────────────── */
 
 /**
- * Output critical breakout CSS in <head> for the LinkedIn audit page.
+ * Remove global CSS/JS that a standalone landing page doesn't need.
  *
  * @return void
  */
-function nexus_audit_linkedin_head_styles() {
+function nexus_audit_linkedin_dequeue_globals() {
 	if ( ! nexus_is_audit_linkedin_page() ) {
 		return;
 	}
-	?>
-	<style id="nexus-audit-linkedin-breakout">
-		.audit-linkedin-wrapper {
-			width: 100vw !important;
-			max-width: 100vw !important;
-			margin-left: calc(-50vw + 50%) !important;
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-			box-sizing: border-box !important;
-		}
-		.entry-content:has(.audit-linkedin-wrapper),
-		.ct-container:has(.audit-linkedin-wrapper) {
-			max-width: none !important;
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-			overflow: visible !important;
-		}
-		body.page-audit-linkedin .entry-content,
-		body.page-audit-linkedin .ct-container,
-		body.page-audit-linkedin .site-main,
-		body.page-audit-linkedin .content-area {
-			max-width: none !important;
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-			margin-left: 0 !important;
-			margin-right: 0 !important;
-			width: 100% !important;
-			overflow: visible !important;
-		}
-		body.page-audit-linkedin .entry-header,
-		body.page-audit-linkedin .ct-page-title {
-			display: none !important;
-		}
-	</style>
-	<?php
+
+	wp_dequeue_style( 'nexus-site-header-css' );
+	wp_dequeue_style( 'nexus-related-content-css' );
+	wp_dequeue_style( 'nexus-footer-cta-css' );
+	wp_dequeue_script( 'nexus-site-header-js' );
 }
-add_action( 'wp_head', 'nexus_audit_linkedin_head_styles', 999 );
+add_action( 'wp_enqueue_scripts', 'nexus_audit_linkedin_dequeue_globals', 999 );
