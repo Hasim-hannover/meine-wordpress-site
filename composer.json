@@ -1,0 +1,14 @@
+{
+    "name": "hasim/meine-wordpress-site",
+    "description": "WordPress Child Theme",
+    "type": "wordpress-theme",
+    "authors": [
+        {
+            "name": "Hasim",
+            "email": "hasimuener@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "php-stubs/wordpress-stubs": "^6.9"
+    }
+}

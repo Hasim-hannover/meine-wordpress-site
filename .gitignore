@@ -1,3 +1,4 @@
 .ai/memory/*
 !.ai/memory/.gitkeep
 .DS_Store
+vendor/
