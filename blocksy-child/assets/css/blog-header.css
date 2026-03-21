@@ -452,22 +452,37 @@
     }
 
     .nexus-blog-header__shell {
-        min-height: 76px;
-        padding: 14px 16px;
-        border-radius: 22px;
+        min-height: 64px;
+        padding: 12px 14px;
+        gap: 0.65rem;
+        border-radius: 20px;
     }
 
+    .nexus-blog-header__brand-block {
+        align-items: center;
+        flex-direction: row;
+        gap: 0.7rem;
+    }
+
+    .nexus-blog-header__brand.site-logo {
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+    }
+
+    .nexus-blog-header__intro,
     .nexus-blog-header__text,
     .nexus-blog-header__mobile-context {
         display: none;
     }
 
-    .nexus-blog-header__title {
-        font-size: 0.92rem;
+    .nexus-blog-header__toggle {
+        min-height: 42px;
+        padding: 0 12px;
+        gap: 0.55rem;
     }
 
-    .nexus-blog-header__toggle {
-        padding: 0 14px;
+    .nexus-blog-header__toggle-label {
+        font-size: 0.82rem;
     }
 
     .nexus-blog-header__theme-toggle-slot {
@@ -475,15 +490,32 @@
     }
 
     .nexus-blog-header__mobile-panel {
-        padding: 14px;
-        border-radius: 20px;
+        gap: 0.75rem;
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    .nexus-blog-header__mobile-nav {
+        gap: 0.55rem;
+    }
+
+    .nexus-blog-header__mobile-link {
+        min-height: 48px;
+        padding: 0 14px;
+        border-radius: 16px;
     }
 
     .nexus-blog-header__context-links {
-        margin-top: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        border-radius: 18px;
+        gap: 0.45rem;
+        margin-top: 8px;
+        padding: 8px 10px;
+        border-radius: 16px;
+    }
+
+    .nexus-blog-header__context-link {
+        min-height: 34px;
+        padding: 0 12px;
+        font-size: 0.74rem;
     }
 }
 

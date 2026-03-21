@@ -483,12 +483,26 @@ button.nexus-share-btn {
     padding: 0.9rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--nx-border);
+    vertical-align: top;
+    white-space: normal;
+    word-break: normal;
+    hyphens: auto;
 }
 
 .nexus-article-content th {
     color: var(--nx-text);
     font-weight: 700;
     background: hsl(var(--accent-hsl) / 0.08);
+}
+
+.nexus-article-content .wp-block-table {
+    width: 100%;
+    max-width: 100%;
+    margin: 2rem 0;
+}
+
+.nexus-article-content .wp-block-table table {
+    margin: 0;
 }
 
 .nexus-article-content hr {
@@ -745,6 +759,10 @@ button.nexus-share-btn {
         padding-top: 1rem;
     }
 
+    .nexus-single-container--with-blog-header {
+        padding-top: calc(var(--nx-header-height) + 0.75rem);
+    }
+
     .nexus-article-hero {
         max-width: calc(100vw - 1rem);
         padding: 0.75rem;
@@ -762,6 +780,53 @@ button.nexus-share-btn {
     .nexus-author-row,
     .nexus-share-box {
         width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .nexus-article-content .wp-block-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.3rem;
+        scrollbar-gutter: stable;
+    }
+
+    .nexus-article-content .wp-block-table::before {
+        content: 'Seitlich wischen';
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--nx-text-dim);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .nexus-article-content .wp-block-table table {
+        display: table;
+        width: max-content;
+        min-width: 100%;
+        table-layout: auto;
+    }
+
+    .nexus-article-content > table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: max-content;
+        min-width: 100%;
+        table-layout: auto;
+    }
+
+    .nexus-article-content th,
+    .nexus-article-content td {
+        min-width: 10rem;
+        padding: 0.85rem 0.9rem;
+    }
+
+    .nexus-article-content th:first-child,
+    .nexus-article-content td:first-child {
+        min-width: 11rem;
     }
 }
 
