@@ -16,6 +16,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Minify CSS & JS
+        run: |
+          npm install --no-save lightningcss-cli terser
+          # CSS minification
+          find blocksy-child/assets/css -name '*.css' ! -name '*.min.css' -exec sh -c '
+            npx lightningcss --minify --bundle "$1" -o "$1"
+          ' _ {} \;
+          # Minify style.css (preserve header comment)
+          if [ -f blocksy-child/style.css ]; then
+            npx lightningcss --minify blocksy-child/style.css -o blocksy-child/style.css
+          fi
+          # JS minification
+          find blocksy-child/assets/js -name '*.js' ! -name '*.min.js' -exec sh -c '
+            npx terser "$1" --compress --mangle -o "$1"
+          ' _ {} \;
+
       - name: Prepare SSH key
         run: |
           mkdir -p ~/.ssh

@@ -62,15 +62,24 @@
             return isPointerInside || isFocusInside || isNearTopEdge || header.classList.contains('is-open');
         }
 
+        // Cache scrollY um Forced Reflow nach DOM-Writes zu vermeiden.
+        var cachedScrollY = window.scrollY;
+
+        function readScrollY() {
+            cachedScrollY = window.scrollY;
+            return cachedScrollY;
+        }
+
         function scheduleHide() {
             clearHideTimer();
 
-            if (!desktopMedia.matches || shouldPinHeader() || window.scrollY <= revealAfter) {
+            if (!desktopMedia.matches || shouldPinHeader() || cachedScrollY <= revealAfter) {
                 return;
             }
 
             hideTimer = window.setTimeout(function () {
-                if (!shouldPinHeader() && window.scrollY > revealAfter) {
+                readScrollY();
+                if (!shouldPinHeader() && cachedScrollY > revealAfter) {
                     setHeaderVisibility(false);
                 }
             }, desktopHideDelay);
@@ -84,7 +93,7 @@
                 return;
             }
 
-            if (window.scrollY <= revealAfter) {
+            if (cachedScrollY <= revealAfter) {
                 setHeaderVisibility(true);
                 return;
             }
@@ -115,7 +124,7 @@
         }
 
         function updateFlightMode() {
-            var nextCondensed = window.scrollY > 36;
+            var nextCondensed = cachedScrollY > 36;
 
             if (isCondensed === nextCondensed) {
                 return;
@@ -133,13 +142,22 @@
 
             scrollRaf = window.requestAnimationFrame(function () {
                 scrollRaf = 0;
-                updateFlightMode();
+                // Batch-Read: scrollY einmal lesen, bevor DOM-Writes passieren.
+                readScrollY();
+                var nextCondensed = cachedScrollY > 36;
+
+                if (isCondensed !== nextCondensed) {
+                    isCondensed = nextCondensed;
+                    header.classList.toggle('nexus-flight-mode', nextCondensed);
+                    queueHeaderHeightSync();
+                }
+
                 updateVisibility(false);
             });
         }
 
         function applyPointerProximity(clientY) {
-            var nextNearTopEdge = desktopMedia.matches && window.scrollY > revealAfter && clientY <= topEdgeThreshold;
+            var nextNearTopEdge = desktopMedia.matches && cachedScrollY > revealAfter && clientY <= topEdgeThreshold;
 
             if (isNearTopEdge === nextNearTopEdge) {
                 return;
@@ -150,7 +168,7 @@
         }
 
         function queuePointerProximity(clientY) {
-            if (!desktopMedia.matches || window.scrollY <= revealAfter) {
+            if (!desktopMedia.matches || cachedScrollY <= revealAfter) {
                 if (isNearTopEdge) {
                     isNearTopEdge = false;
                     updateVisibility(false);
@@ -250,6 +268,7 @@
             updateVisibility(false);
         });
 
+        readScrollY();
         updateFlightMode();
         updateVisibility(false);
         syncHeaderHeight();
