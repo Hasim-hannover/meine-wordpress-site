@@ -103,7 +103,7 @@ $home_label = sprintf( __( 'Startseite - %s', 'blocksy-child' ), $brand_text );
 
 							<div class="ali-form__field ali-form__field--full">
 								<label for="ali-challenge" class="ali-form__label">Was ist aktuell das größte Problem? <span class="ali-form__opt">(optional)</span></label>
-								<textarea id="ali-challenge" name="current_challenge" rows="3" class="ali-form__textarea" placeholder="z. B. Wir haben Besucher, aber kaum Anfragen …"></textarea>
+									<textarea id="ali-challenge" name="current_challenge" rows="2" class="ali-form__textarea" placeholder="z. B. Wir haben Besucher, aber kaum Anfragen …"></textarea>
 							</div>
 
 							<div class="ali-form__field ali-form__field--full ali-form__consent">
