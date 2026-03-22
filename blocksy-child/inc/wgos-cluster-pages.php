@@ -27,7 +27,7 @@ function nexus_get_wgos_cluster_page_data() {
 	$pages = [
 		'wordpress-seo-hannover' => [
 			'eyebrow'          => 'Sichtbarkeit im WGOS',
-			'title'            => 'Technisches SEO für WordPress in Hannover',
+			'title'            => 'WordPress SEO Hannover – technisch sauber, messbar, B2B-ready',
 			'lead'             => 'Diese Seite ist der Einstieg für technisches WordPress SEO in Hannover: Crawlability, Seitenstruktur, interne Verlinkung und priorisierte Fixes, wenn Rankings an Technik und Seitentypen scheitern.',
 			'intro'            => [
 				'Viele B2B-Websites investieren in Inhalte, ohne zuerst die technischen Bremsen zu lösen. Dann entstehen Seiten, die zwar vorhanden sind, aber weder stabil ranken noch qualifizierte Anfragen sauber vorbereiten.',
@@ -80,7 +80,7 @@ function nexus_get_wgos_cluster_page_data() {
 			],
 			'meta_title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
 			'meta_description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability und interne Verlinkung fuer kaufnahe Seiten. Growth Audit mit Rueckmeldung in 48h.',
-			'schema_name'      => 'Technisches SEO für WordPress in Hannover',
+			'schema_name'      => 'WordPress SEO Hannover – technisch sauber, messbar, B2B-ready',
 			'schema_description' => 'WGOS-Cluster für technisches SEO auf WordPress in Hannover: technische Basis, Seitenstruktur und conversion-nahe Sichtbarkeit für B2B-Websites.',
 		],
 		'wordpress-wartung-hannover' => [
@@ -125,8 +125,8 @@ function nexus_get_wgos_cluster_page_data() {
 				'url'    => $seo_url,
 				'text'   => 'Wenn Indexierung, interne Verlinkung oder technische Struktur mit dem Betriebszustand zusammenhaengen, fuehrt die SEO-Seite direkt in den passenden Cluster.',
 			],
-			'meta_title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',
-			'meta_description' => 'WordPress Wartung in Hannover als Teil des WGOS-Fundaments: Updates, Sicherheit, Backups, Performance und stabile Betriebsroutinen für B2B-Websites.',
+			'meta_title'       => 'WordPress Wartung Hannover – B2B Wartungsvertrag',
+			'meta_description' => 'Sicherheits-Updates, Backups und Performance für B2B WordPress-Websites. Kein Ticket-System – direkter Ansprechpartner. Wartungspaket anfragen.',
 			'schema_name'      => 'WordPress Wartung Hannover',
 			'schema_description' => 'WGOS-Cluster für WordPress-Wartung in Hannover: Betrieb, Updates, Sicherheit und technische Stabilität für B2B-Websites.',
 		],

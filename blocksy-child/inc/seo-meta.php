@@ -132,8 +132,8 @@ function hu_get_forced_singular_seo_map() {
 				'description' => 'Ich analysiere, wo Klarheit, Vertrauen, Struktur und Conversion-Logik auf deiner Website bremsen – mit fundierter Ersteinschätzung ohne Pflicht-Call.',
 			],
 			'wordpress-wartung-hannover' => [
-				'title'       => 'WordPress Wartung Hannover | Betrieb, Updates und Sicherheit',
-				'description' => 'WordPress Wartung in Hannover als Teil des WGOS-Fundaments: Updates, Sicherheit, Backups, Performance und stabile Betriebsroutinen für B2B-Websites.',
+				'title'       => 'WordPress Wartung Hannover – B2B Wartungsvertrag',
+				'description' => 'Sicherheits-Updates, Backups und Performance für B2B WordPress-Websites. Kein Ticket-System – direkter Ansprechpartner. Wartungspaket anfragen.',
 			],
 			'wordpress-seo-hannover' => [
 				'title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
