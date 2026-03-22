@@ -26,6 +26,7 @@ $seo_url   = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hann
 $wartung_url = nexus_get_primary_public_url( 'wartung', home_url( '/wordpress-wartung-hannover/' ) );
 $measurement_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
 $cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ] );
+$tools_url = nexus_get_primary_public_url( 'tools', home_url( '/kostenlose-tools/' ) );
 $proof_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [];
 $canonical_ownership_sentence = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
 $primary_term                = function_exists( 'nexus_get_public_primary_term' ) ? nexus_get_public_primary_term() : 'WordPress als Nachfrage-System für B2B';
@@ -374,6 +375,9 @@ get_header();
 						<span aria-hidden="true"> · </span>
 						Für Betrieb und Stabilisierung:
 						<a href="<?php echo esc_url( $wartung_url ); ?>" data-track-action="cta_agentur_final_wartung" data-track-category="navigation">WordPress Wartung Hannover</a>
+						<span aria-hidden="true"> · </span>
+						Schneller Selbst-Check:
+						<a href="<?php echo esc_url( $tools_url ); ?>" data-track-action="cta_agentur_final_tools" data-track-category="navigation">Kostenlose Tools</a>
 					</p>
 				</div>
 			</div>

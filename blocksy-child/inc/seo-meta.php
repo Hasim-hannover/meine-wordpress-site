@@ -80,12 +80,12 @@ function hu_get_forced_singular_seo_map() {
 		'hu_forced_singular_seo_map',
 		[
 			'kontakt' => [
-				'title'       => 'Kontakt für WordPress, SEO und CRO | Haşim Üner',
-				'description' => 'Projektanfrage für WordPress, SEO, Tracking und CRO: kurzer Einstieg, klare nächste Schritte und Rückmeldung für neue Projekte und bestehende Kunden.',
+				'title'       => 'Kontakt & Projektanfrage | Haşim Üner',
+				'description' => 'Projekt starten oder Frage stellen: Formular ausfuellen, Rueckmeldung in 48 h. Kein Pflicht-Call, kein Sales-Druck – nur eine fundierte Ersteinschaetzung.',
 			],
 			'kontaktiere-mich' => [
-				'title'       => 'Kontakt für WordPress, SEO und CRO | Haşim Üner',
-				'description' => 'Projektanfrage für WordPress, SEO, Tracking und CRO: kurzer Einstieg, klare nächste Schritte und Rückmeldung für neue Projekte und bestehende Kunden.',
+				'title'       => 'Kontakt & Projektanfrage | Haşim Üner',
+				'description' => 'Projekt starten oder Frage stellen: Formular ausfuellen, Rueckmeldung in 48 h. Kein Pflicht-Call, kein Sales-Druck – nur eine fundierte Ersteinschaetzung.',
 			],
 			'uber-mich' => [
 				'title'       => 'Über Haşim Üner | WordPress, SEO und klare Systeme',
@@ -108,12 +108,12 @@ function hu_get_forced_singular_seo_map() {
 				'description' => 'Kostenlose Tools für ROI, Website-Analyse und Performance: schnelle Checks für Marketing-, Website- und WordPress-Entscheidungen.',
 			],
 			'wordpress-agentur-hannover' => [
-				'title'       => 'WordPress Agentur Hannover | B2B Growth Architect | Haşim Üner',
-				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion fuer Service- und WooCommerce-Setups. Growth Audit mit Rueckmeldung in 48h.',
+				'title'       => 'WordPress Agentur Hannover für B2B | Haşim Üner',
+				'description' => 'WordPress Agentur in Hannover: Angebotsseiten, technische SEO, Tracking und Conversion-Optimierung fuer B2B- und WooCommerce-Websites. Kostenloses Growth Audit mit Rueckmeldung in 48 h.',
 			],
 			'wordpress-agentur' => [
-				'title'       => 'WordPress Agentur Hannover | B2B Growth Architect | Haşim Üner',
-				'description' => 'WordPress Agentur Hannover fuer B2B: Angebotsseiten, SEO, Tracking und Conversion fuer Service- und WooCommerce-Setups. Growth Audit mit Rueckmeldung in 48h.',
+				'title'       => 'WordPress Agentur Hannover für B2B | Haşim Üner',
+				'description' => 'WordPress Agentur in Hannover: Angebotsseiten, technische SEO, Tracking und Conversion-Optimierung fuer B2B- und WooCommerce-Websites. Kostenloses Growth Audit mit Rueckmeldung in 48 h.',
 			],
 			'ergebnisse' => [
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',

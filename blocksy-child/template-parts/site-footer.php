@@ -22,6 +22,7 @@ $cases_url    = $primary_urls['results'] ?? nexus_get_results_url();
 $blog_url     = $primary_urls['blog'] ?? home_url( '/blog/' );
 $seo_url      = $primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' );
 $cwv_url      = $primary_urls['cwv'] ?? home_url( '/core-web-vitals/' );
+$tools_url    = $primary_urls['tools'] ?? home_url( '/kostenlose-tools/' );
 $about_url    = $primary_urls['about'] ?? home_url( '/uber-mich/' );
 $contact_url  = $primary_urls['contact'] ?? nexus_get_contact_url();
 $project_request_url = add_query_arg(
@@ -98,6 +99,7 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 					<li><a href="<?php echo esc_url( $blog_url ); ?>" data-track-action="cta_footer_nav_insights" data-track-category="navigation">Insights</a></li>
 					<li><a href="<?php echo esc_url( $seo_url ); ?>" data-track-action="cta_footer_nav_seo" data-track-category="navigation">WordPress SEO</a></li>
 					<li><a href="<?php echo esc_url( $cwv_url ); ?>" data-track-action="cta_footer_nav_cwv" data-track-category="navigation">Core Web Vitals</a></li>
+					<li><a href="<?php echo esc_url( $tools_url ); ?>" data-track-action="cta_footer_nav_tools" data-track-category="navigation">Kostenlose Tools</a></li>
 				</ul>
 			</section>
 
