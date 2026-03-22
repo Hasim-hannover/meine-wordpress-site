@@ -200,7 +200,7 @@ get_header();
 			<div class="nx-container">
 				<div class="about-close__inner">
 					<h2 class="nx-headline-section">Prüfen wir Ihren Status quo.</h2>
-					<p>Der Growth Audit zeigt, wo Ihre Website geschäftlich mehr leisten kann.</p>
+					<p>Der Growth Audit zeigt, wo Ihre Website geschäftlich mehr leisten kann. Für Agenturen und laufende Projekte gibt es einen eigenen Einstieg.</p>
 					<p class="about-close__actions">
 						<a
 							href="<?php echo esc_url( $audit_url ); ?>"
@@ -219,6 +219,15 @@ get_header();
 							data-track-section="about_close"
 						>
 							Kontakt
+						</a>
+						<a
+							href="<?php echo esc_url( home_url( '/whitelabel-retainer/' ) ); ?>"
+							class="nx-btn nx-btn--ghost"
+							data-track-action="cta_about_final_whitelabel"
+							data-track-category="navigation"
+							data-track-section="about_close"
+						>
+							Whitelabel &amp; Weiterentwicklung
 						</a>
 					</p>
 				</div>

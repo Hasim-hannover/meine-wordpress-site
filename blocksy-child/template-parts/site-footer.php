@@ -31,6 +31,7 @@ $project_request_url = add_query_arg(
 	],
 	$contact_url
 );
+$whitelabel_url   = $primary_urls['whitelabel'] ?? home_url( '/whitelabel-retainer/' );
 $imprint_url      = $primary_urls['impressum'] ?? home_url( '/impressum/' );
 $privacy_url      = $primary_urls['datenschutz'] ?? home_url( '/datenschutz/' );
 $hide_primary_cta = function_exists( 'nexus_should_hide_footer_primary_cta' ) && nexus_should_hide_footer_primary_cta();
@@ -89,6 +90,8 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_nav_audit" data-track-category="lead_gen">Growth Audit</a></li>
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_footer_nav_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></li>
 					<li><a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_footer_nav_wgos" data-track-category="navigation">Systemlogik (WGOS)</a></li>
+					<li><a href="<?php echo esc_url( $whitelabel_url ); ?>" data-track-action="cta_footer_nav_whitelabel" data-track-category="navigation">Whitelabel &amp; Weiterentwicklung</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/loesungen/' ) ); ?>" data-track-action="cta_footer_nav_loesungen" data-track-category="navigation">Alle Lösungen</a></li>
 				</ul>
 			</section>
 
@@ -100,6 +103,7 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 					<li><a href="<?php echo esc_url( $seo_url ); ?>" data-track-action="cta_footer_nav_seo" data-track-category="navigation">WordPress SEO</a></li>
 					<li><a href="<?php echo esc_url( $cwv_url ); ?>" data-track-action="cta_footer_nav_cwv" data-track-category="navigation">Core Web Vitals</a></li>
 					<li><a href="<?php echo esc_url( $tools_url ); ?>" data-track-action="cta_footer_nav_tools" data-track-category="navigation">Kostenlose Tools</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/ki-integration/' ) ); ?>" data-track-action="cta_footer_nav_ki" data-track-category="navigation">KI-Integration</a></li>
 				</ul>
 			</section>
 
