@@ -91,7 +91,7 @@ $hero_subtitle   = sprintf(
 					<div class="wgos-hub-sections">
 						<?php $hub_index = 0; ?>
 						<?php foreach ( $hub_sections as $section ) : ?>
-							<details class="wgos-hub-section-card nx-reveal"<?php echo 0 === $hub_index ? ' open' : ''; ?> style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
+							<details class="wgos-hub-section-card"<?php echo 0 === $hub_index ? ' open' : ''; ?> style="--wgos-module-accent: <?php echo esc_attr( (string) $section['accent'] ); ?>;">
 								<?php ++$hub_index; ?>
 								<summary class="wgos-hub-section-card__head" aria-labelledby="<?php echo esc_attr( $section['module_id'] . '-list' ); ?>">
 									<div>
@@ -159,7 +159,7 @@ $hero_subtitle   = sprintf(
 			</div>
 		</section>
 
-		<section id="audit" class="wgos-section wgos-section--gray wgos-final-cta nx-reveal">
+		<section id="audit" class="wgos-section wgos-section--gray wgos-final-cta">
 			<div class="wgos-container">
 				<div class="wgos-final-cta__inner">
 					<span class="wgos-principle-kicker">Audit</span>
