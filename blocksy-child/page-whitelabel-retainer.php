@@ -15,7 +15,7 @@ get_header();
 $results_url         = nexus_get_results_url();
 $wgos_url            = nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) );
 $whitelabel_fit_url  = function_exists( 'nexus_get_whitelabel_calendar_url' ) ? nexus_get_whitelabel_calendar_url() : 'https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true';
-$portrait_url        = 'https://hasimuener.de/wp-content/uploads/2026/01/Hasim-Uener-Prtraeit_Startseite.webp';
+$portrait_url        = hu_get_portrait_image_url();
 
 $focus_areas = [
 	[

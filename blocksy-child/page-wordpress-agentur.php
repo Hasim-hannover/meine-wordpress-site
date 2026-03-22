@@ -131,7 +131,7 @@ get_header();
 						<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 						<figure class="wp-agentur-hero-portrait">
 							<img
-								src="https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp"
+								src="<?php echo esc_url( hu_get_profile_image_url() ); ?>"
 								alt="Haşim Üner – WordPress Agentur Hannover, Growth Architect für B2B-Websites"
 								loading="eager"
 								fetchpriority="high"

@@ -21,7 +21,7 @@ function hu_output_schema()
         'telephone'   => '+49 176 81407134',
         'email'       => 'info@hasimuener.de',
         'logo'        => function_exists( 'hu_get_brand_logo_url' ) ? hu_get_brand_logo_url() : 'https://hasimuener.de/wp-content/uploads/2025/08/cropped-Logo-hasim-uener-1.webp',
-        'image'       => 'https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp',
+        'image'       => hu_get_profile_image_url(),
         'address'     => [
             '@type' => 'PostalAddress',
             'streetAddress'   => 'Warschauer Str. 5',
@@ -466,7 +466,7 @@ function hu_output_schema()
                 'name'     => 'Haşim Üner',
                 'jobTitle' => 'Growth Architect & Medienwissenschaftler',
                 'url'      => home_url('/uber-mich/'),
-                'image'    => 'https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp',
+                'image'    => hu_get_profile_image_url(),
                 'worksFor' => ['@id' => home_url('/#organization')],
                 'sameAs'   => [
                     'https://www.linkedin.com/in/hasim-%C3%BCner/',
@@ -591,7 +591,7 @@ function hu_output_schema()
                     'name'  => 'Haşim Üner',
                     'url'   => home_url('/uber-mich/')
                 ],
-                'image' => 'https://hasimuener.de/wp-content/uploads/2026/01/Hasim-Uener-Prtraeit_Startseite.webp',
+                'image' => hu_get_portrait_image_url(),
             ];
 
             $schemas[] = $whitelabelPage;
