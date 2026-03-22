@@ -121,7 +121,7 @@ get_header();
 					<aside class="about-profile-card" aria-label="Profil">
 						<figure class="about-profile-card__media">
 							<img
-								src="https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp"
+								src="<?php echo esc_url( hu_get_profile_image_url() ); ?>"
 								alt="Haşim Üner, Growth Architect"
 								loading="eager"
 								width="340"

@@ -50,6 +50,24 @@ function nexus_get_field( $field_name, $default = '', $post_id = false ) {
 }
 
 /**
+ * Return the default profile image URL (Profilbild).
+ *
+ * @return string Absolute URL.
+ */
+function hu_get_profile_image_url() {
+	return home_url( '/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp' );
+}
+
+/**
+ * Return the portrait image URL (Startseite/Whitelabel variant).
+ *
+ * @return string Absolute URL.
+ */
+function hu_get_portrait_image_url() {
+	return home_url( '/wp-content/uploads/2026/01/Hasim-Uener-Prtraeit_Startseite.webp' );
+}
+
+/**
  * Return the canonical public proof and vocabulary set for public pages.
  *
  * @return array<string, mixed>

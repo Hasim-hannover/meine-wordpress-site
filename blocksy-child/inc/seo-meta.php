@@ -860,7 +860,7 @@ function hu_get_seo_meta() {
 
 	// Global OG-Image Fallback: Profilbild als Default wenn kein seitenspezifisches Bild gesetzt ist.
 	if ( empty( $meta['og_image'] ) ) {
-		$meta['og_image'] = 'https://hasimuener.de/wp-content/uploads/2024/10/Profilbild_Hasim-Uener.webp';
+		$meta['og_image'] = hu_get_profile_image_url();
 	}
 
 	return $meta;
