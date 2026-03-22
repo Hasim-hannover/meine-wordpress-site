@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function nexus_is_blog_header_context() {
-	return is_home() || is_archive() || is_singular( 'post' );
+	return ( is_archive() || is_singular( 'post' ) ) && ! is_home();
 }
 
 add_filter( 'body_class', 'nexus_add_custom_header_body_class' );

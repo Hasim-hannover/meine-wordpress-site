@@ -5,7 +5,7 @@
  * Sauber aus dem Design-System gebaut.
  * Kategorie-Filter via blog-archive.js (.hu-blog-wrapper, .hu-filter-btn, .post-card).
  *
- * CRO-Reihenfolge: Intro → Filter → 3 Artikel → Blog-Notify → Rest → Audit-CTA
+ * CRO-Reihenfolge: Featured → Filter → 3 Artikel → Blog-Notify → Rest → Audit-CTA
  *
  * @package Blocksy_Child
  */
@@ -17,10 +17,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 $audit_url = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
 
 get_header();
-get_template_part( 'template-parts/blog-header' );
 ?>
 
-<main id="main" class="site-main blog-home blog-home--with-blog-header">
+<main id="main" class="site-main blog-home">
 
 	<section class="blog-archive-intro" aria-labelledby="blog-archive-heading">
 		<div class="blog-archive-intro__inner">
@@ -29,8 +28,7 @@ get_template_part( 'template-parts/blog-header' );
 				<span class="blog-archive-intro__headline-accent">und wie man es löst.</span>
 			</h1>
 			<p class="blog-archive-intro__sub">
-				Analysen zu SEO, Conversion und Tracking für WordPress-Websites,
-				die mehr qualifizierte Anfragen wollen. Kein Rauschen — nur was wirtschaftlich zählt.
+				Analysen zu SEO, Conversion und Tracking für WordPress-Websites.
 			</p>
 		</div>
 	</section>
@@ -57,17 +55,18 @@ get_template_part( 'template-parts/blog-header' );
 			<div class="blog-archive-grid">
 
 				<?php
-				$post_index    = 0;
-				$notify_shown  = false;
+				$post_index   = 0;
+				$notify_shown = false;
 
 				if ( have_posts() ) :
 					while ( have_posts() ) :
 						the_post();
 						$post_index++;
 
-						$cats      = get_the_category();
-						$cat_slugs = wp_list_pluck( $cats, 'slug' );
-						$thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
+						$cats        = get_the_category();
+						$cat_slugs   = wp_list_pluck( $cats, 'slug' );
+						$thumb_url   = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
+						$is_featured = ( 1 === $post_index );
 
 						// Blog-Notify nach Artikel 3 (Nutzer hat Wert gesehen)
 						if ( $post_index === 4 && ! $notify_shown ) :
@@ -81,7 +80,7 @@ get_template_part( 'template-parts/blog-header' );
 				?>
 
 				<article
-					class="post-card"
+					class="post-card<?php echo $is_featured ? ' post-card--featured' : ''; ?>"
 					data-categories="<?php echo esc_attr( wp_json_encode( $cat_slugs ) ); ?>"
 				>
 					<?php if ( $thumb_url ) : ?>
@@ -95,7 +94,7 @@ get_template_part( 'template-parts/blog-header' );
 								<img
 									src="<?php echo esc_url( $thumb_url ); ?>"
 									alt="<?php the_title_attribute(); ?>"
-									loading="lazy"
+									loading="<?php echo $is_featured ? 'eager' : 'lazy'; ?>"
 									width="600"
 									height="338"
 								>
@@ -119,14 +118,14 @@ get_template_part( 'template-parts/blog-header' );
 						</h2>
 
 						<p class="post-card__excerpt">
-							<?php echo wp_trim_words( get_the_excerpt(), 20 ); ?>
+							<?php echo wp_trim_words( get_the_excerpt(), $is_featured ? 40 : 20 ); ?>
 						</p>
 
 						<div class="post-card__meta">
 							<time class="post-card__date" datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>">
 								<?php echo esc_html( get_the_date( 'd. M Y' ) ); ?>
 							</time>
-							<?php if ( function_exists( 'nexus_get_reading_time' ) ) : ?>
+							<?php if ( function_exists( 'nexus_get_reading_time' ) && nexus_get_reading_time() >= 3 ) : ?>
 								<span class="post-card__reading-time">
 									<?php printf( '%d Min. Lesezeit', nexus_get_reading_time() ); ?>
 								</span>
@@ -152,7 +151,7 @@ get_template_part( 'template-parts/blog-header' );
 				<div class="blog-archive-infeed-cta" aria-label="Kostenloser Growth Audit">
 					<div class="blog-archive-infeed-cta__inner">
 						<span class="blog-archive-infeed-cta__tag">Kostenloser Audit</span>
-						<h2 class="blog-archive-infeed-cta__headline">Sie wissen jetzt was bremst — lassen Sie es uns konkret machen.</h2>
+						<h2 class="blog-archive-infeed-cta__headline">Lassen Sie es uns konkret machen.</h2>
 						<p class="blog-archive-infeed-cta__sub">
 							Persönliche Analyse Ihrer Website. Schriftliche Rückmeldung mit den 3 stärksten Bremsen — in 48 Stunden.
 						</p>
