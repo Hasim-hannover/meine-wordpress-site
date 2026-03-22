@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string
  */
 function nexus_get_audit_linkedin_featured_image_source_url() {
-	return 'https://hasimuener.de/wp-content/uploads/2026/03/audit-linkedin-featured-1200x675-1.png';
+	return content_url( '/uploads/2026/03/audit-linkedin-featured-1200x675-1.png' );
 }
 
 /**

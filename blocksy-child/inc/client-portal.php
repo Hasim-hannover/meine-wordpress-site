@@ -188,7 +188,7 @@ function hu_render_custom_login_form() {
             <span class="nexus-login-badge">Client Access</span>
             <h2>Performance Cockpit</h2>
             <p class="nexus-login-subtitle">Bitte einloggen, um Ihr Dashboard zu sehen.</p>
-            <?php echo $form; ?>
+            <?php echo $form; // raw-ok -- wp_login_form() markup ?>
         </div>
     </section>
     <?php

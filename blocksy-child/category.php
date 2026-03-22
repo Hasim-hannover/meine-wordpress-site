@@ -120,7 +120,7 @@ if ($featured_query->have_posts()) {
 
             <div class="pillar-hero__meta">
                 <span class="pillar-meta-item">
-                    <strong><?php echo (int) $cat_count; ?></strong> <?php echo $cat_count === 1 ? 'Beitrag' : 'Beiträge'; ?>
+                    <strong><?php echo (int) $cat_count; ?></strong> <?php echo esc_html( $cat_count === 1 ? 'Beitrag' : 'Beiträge' ); ?>
                 </span>
                 <span class="pillar-meta-divider">·</span>
                 <span class="pillar-meta-item">Pillar Content Hub</span>
@@ -226,7 +226,7 @@ if ($featured_query->have_posts()) {
                     
                     <!-- Service CTA -->
                     <div class="pillar-sidebar__cta">
-                        <span class="pillar-sidebar__cta-icon"><?php echo $pillar['icon']; ?></span>
+                        <span class="pillar-sidebar__cta-icon"><?php echo $pillar['icon']; // raw-ok -- SVG icon markup ?></span>
                         <h3 class="pillar-sidebar__cta-title"><?php echo esc_html($pillar['cta_label']); ?></h3>
                         <p class="pillar-sidebar__cta-text"><?php echo esc_html($pillar['cta_text']); ?></p>
                         <a href="<?php echo esc_url($pillar['cta_url']); ?>" class="nx-btn nx-btn--primary nx-btn--full nx-btn--sm">
@@ -246,7 +246,7 @@ if ($featured_query->have_posts()) {
                             ?>
                                 <li>
                                     <a href="<?php echo esc_url(get_term_link($term)); ?>" class="pillar-sidebar__nav-link">
-                                        <span class="pillar-sidebar__nav-icon"><?php echo $data['icon']; ?></span>
+                                        <span class="pillar-sidebar__nav-icon"><?php echo $data['icon']; // raw-ok -- SVG icon markup ?></span>
                                         <span class="pillar-sidebar__nav-name"><?php echo esc_html($data['badge']); ?></span>
                                         <span class="pillar-sidebar__nav-count"><?php echo (int) $term->count; ?></span>
                                     </a>

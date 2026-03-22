@@ -133,7 +133,7 @@ $hero_cta     = $is_scoped_landing ? 'Anfrage ausfüllen' : 'Anfrage starten';
 $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 ?>
 
-<main id="main" class="site-main contact-page<?php echo $is_scoped_landing ? ' contact-page--scoped' : ''; ?>" data-track-section="contact_page"<?php echo $auto_scroll ? ' data-contact-autoscroll' : ''; ?>>
+<main id="main" class="site-main contact-page<?php echo esc_attr( $is_scoped_landing ? ' contact-page--scoped' : '' ); ?>" data-track-section="contact_page"<?php echo $auto_scroll ? ' data-contact-autoscroll' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- boolean attribute ?>>
 	<div class="contact-page__shell">
 		<section class="contact-hero" aria-labelledby="contact-title">
 			<div class="contact-hero__copy nx-reveal">
@@ -227,7 +227,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 				<div class="contact-section-head">
 					<span class="contact-section-head__eyebrow">Anfrage</span>
 					<h2 id="contact-form-title">
-						<?php echo $is_scoped_landing ? 'In wenigen Angaben zur sauberen Einordnung.' : 'In wenigen Angaben zum passenden nächsten Schritt.'; ?>
+						<?php echo esc_html( $is_scoped_landing ? 'In wenigen Angaben zur sauberen Einordnung.' : 'In wenigen Angaben zum passenden nächsten Schritt.' ); ?>
 					</h2>
 				</div>
 
@@ -263,7 +263,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 						</div>
 					<?php endif; ?>
 
-					<fieldset class="contact-intent<?php echo $is_scoped_landing ? ' contact-intent--collapsed' : ''; ?>" data-contact-intent>
+					<fieldset class="contact-intent<?php echo esc_attr( $is_scoped_landing ? ' contact-intent--collapsed' : '' ); ?>" data-contact-intent>
 						<?php if ( ! $is_scoped_landing ) : ?>
 							<legend>Worum geht es?</legend>
 							<p class="contact-field__help">Nicht sicher? Wählen Sie einfach die Option, die am ehesten passt.</p>
@@ -371,7 +371,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 							</div>
 
 							<div class="contact-form__row">
-								<div class="contact-field<?php echo $show_budget_field ? '' : ' is-hidden'; ?>" data-contact-context-field="budget">
+								<div class="contact-field<?php echo esc_attr( $show_budget_field ? '' : ' is-hidden' ); ?>" data-contact-context-field="budget">
 									<label for="contact-budget">Budget <span>optional</span></label>
 									<select id="contact-budget" name="budget">
 										<option value="" selected>Optional auswählen</option>
@@ -381,7 +381,7 @@ $auto_scroll  = $has_explicit_type || '' !== $selected_focus;
 									</select>
 								</div>
 
-								<div class="contact-field<?php echo $show_timeline_field ? '' : ' is-hidden'; ?>" data-contact-context-field="timeline">
+								<div class="contact-field<?php echo esc_attr( $show_timeline_field ? '' : ' is-hidden' ); ?>" data-contact-context-field="timeline">
 									<label for="contact-timeline" data-contact-timeline-label><?php echo esc_html( $timeline_label ); ?> <span>optional</span></label>
 									<select id="contact-timeline" name="timeline" data-contact-timeline-select>
 										<option value="" selected>Optional auswählen</option>

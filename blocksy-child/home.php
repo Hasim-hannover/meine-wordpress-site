@@ -80,7 +80,7 @@ get_header();
 				?>
 
 				<article
-					class="post-card<?php echo $is_featured ? ' post-card--featured' : ''; ?>"
+					class="post-card<?php echo esc_attr( $is_featured ? ' post-card--featured' : '' ); ?>"
 					data-categories="<?php echo esc_attr( wp_json_encode( $cat_slugs ) ); ?>"
 				>
 					<?php if ( $thumb_url ) : ?>
@@ -94,7 +94,7 @@ get_header();
 								<img
 									src="<?php echo esc_url( $thumb_url ); ?>"
 									alt="<?php the_title_attribute(); ?>"
-									loading="<?php echo $is_featured ? 'eager' : 'lazy'; ?>"
+									loading="<?php echo esc_attr( $is_featured ? 'eager' : 'lazy' ); ?>"
 									<?php if ( $is_featured ) : ?>fetchpriority="high"<?php endif; ?>
 									width="600"
 									height="338"

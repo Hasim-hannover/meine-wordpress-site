@@ -1474,7 +1474,7 @@ function nexus_render_seo_cockpit_settings_page() {
 						<tr>
 							<th scope="row"><label for="nexus-seo-property">Property</label></th>
 							<td>
-								<input id="nexus-seo-property" name="<?php echo esc_attr( nexus_get_seo_cockpit_option_name() ); ?>[property]" type="text" class="regular-text" value="<?php echo esc_attr( $settings['property'] ); ?>" placeholder="sc-domain:hasimuener.de oder https://hasimuener.de/" <?php disabled( 'Konstante' === $source['property'] ); ?>>
+								<input id="nexus-seo-property" name="<?php echo esc_attr( nexus_get_seo_cockpit_option_name() ); ?>[property]" type="text" class="regular-text" value="<?php echo esc_attr( $settings['property'] ); ?>" placeholder="sc-domain:example.com oder https://example.com/" <?php disabled( 'Konstante' === $source['property'] ); ?>>
 								<p class="description">Aktive Quelle: <?php echo esc_html( $source['property'] ); ?>.</p>
 							</td>
 						</tr>
