@@ -25,3 +25,7 @@ Scope: `agents/skills/`
 - `navigation-migration`
 - `seo-live-qa`
 - `seo-cockpit-hardening`
+- `pre-deploy-smoke`
+- `landing-page-builder`
+- `page-speed-audit`
+- `internal-linking-audit`
