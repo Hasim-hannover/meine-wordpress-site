@@ -128,7 +128,7 @@ $primary_items = [
 							<a
 								class="nexus-blog-header__menu-link<?php echo esc_attr( $item['active'] ? ' is-active' : '' ); ?>"
 								href="<?php echo esc_url( $item['url'] ); ?>"
-								<?php echo $item['active'] ? 'aria-current="page"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static attribute ?>
+								<?php echo $item['active'] ? 'aria-current="page"' : ''; // raw-ok -- static attribute ?>
 							>
 								<?php echo esc_html( $item['label'] ); ?>
 							</a>
@@ -168,7 +168,7 @@ $primary_items = [
 					<a
 						class="nexus-blog-header__mobile-link<?php echo esc_attr( $item['active'] ? ' is-active' : '' ); ?>"
 						href="<?php echo esc_url( $item['url'] ); ?>"
-						<?php echo $item['active'] ? 'aria-current="page"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static attribute ?>
+						<?php echo $item['active'] ? 'aria-current="page"' : ''; // raw-ok -- static attribute ?>
 					>
 						<?php echo esc_html( $item['label'] ); ?>
 					</a>

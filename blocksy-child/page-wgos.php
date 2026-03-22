@@ -413,7 +413,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-diagram-card">
 					<div class="wgos-diagram-frame" aria-label="WGOS Systemdiagramm">
 						<?php if ( '' !== $diagram_svg_markup ) : ?>
-							<?php echo $diagram_svg_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php echo $diagram_svg_markup; // raw-ok -- SVG markup ?>
 						<?php endif; ?>
 					</div>
 					<p class="wgos-diagram-caption">Sechs Bereiche. Eine Reihenfolge. Jeder Schritt baut auf dem vorherigen auf.</p>
@@ -470,7 +470,7 @@ foreach ( $faq_items as $faq_item ) {
 
 				<div class="wgos-pricing-grid">
 					<?php foreach ( $packages as $package ) : ?>
-						<article class="wgos-pricing-card<?php echo $package['featured'] ? ' wgos-pricing-card--featured' : ''; ?> nx-reveal">
+						<article class="wgos-pricing-card<?php echo esc_attr( $package['featured'] ? ' wgos-pricing-card--featured' : '' ); ?> nx-reveal">
 							<?php if ( $package['featured'] ) : ?>
 								<span class="wgos-pricing-badge">Häufigster Start</span>
 							<?php endif; ?>

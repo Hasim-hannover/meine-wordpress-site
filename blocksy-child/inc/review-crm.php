@@ -1589,7 +1589,7 @@ function nexus_get_transactional_email_shell( $args = [] ) {
 								<p style="margin:0 0 24px 0; font-family:Helvetica, Arial, sans-serif; font-size:16px; line-height:1.7; color:#c5ced7;">
 									<?php echo esc_html( $args['intro'] ); ?>
 								</p>
-								<?php echo $args['content']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo $args['content']; // raw-ok -- pre-sanitized HTML ?>
 							</td>
 						</tr>
 						<tr>
