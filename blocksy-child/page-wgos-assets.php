@@ -64,7 +64,7 @@ $hero_subtitle   = sprintf(
 			</div>
 		</section>
 
-		<section id="explorer" class="wgos-section wgos-section--white nx-reveal">
+		<section id="explorer" class="wgos-section wgos-section--white">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Explorer</span>
