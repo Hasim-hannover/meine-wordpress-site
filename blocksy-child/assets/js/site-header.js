@@ -34,9 +34,13 @@
                 return;
             }
 
+            // Double-rAF: Read getBoundingClientRect after browser layout pass
+            // to avoid forced reflow when called after classList writes.
             headerHeightRaf = window.requestAnimationFrame(function () {
-                headerHeightRaf = 0;
-                syncHeaderHeight();
+                headerHeightRaf = window.requestAnimationFrame(function () {
+                    headerHeightRaf = 0;
+                    syncHeaderHeight();
+                });
             });
         }
 

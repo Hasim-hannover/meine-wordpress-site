@@ -95,6 +95,7 @@ get_header();
 									src="<?php echo esc_url( $thumb_url ); ?>"
 									alt="<?php the_title_attribute(); ?>"
 									loading="<?php echo $is_featured ? 'eager' : 'lazy'; ?>"
+									<?php if ( $is_featured ) : ?>fetchpriority="high"<?php endif; ?>
 									width="600"
 									height="338"
 								>

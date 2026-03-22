@@ -104,8 +104,8 @@ function hu_enqueue_assets() {
 	}
 
 
-	// ── GLOBAL: Blog-Header Fallback ───────────────────────────────
-	if ( is_home() || is_archive() || is_singular( 'post' ) ) {
+	// ── GLOBAL: Blog-Header Fallback (nicht auf Blog-Index — nutzt Site-Header) ──
+	if ( ( is_archive() || is_singular( 'post' ) ) && ! is_home() ) {
 		hu_enqueue_css( 'nexus-blog-header-css', 'blog-header.css', [ 'nexus-design-system' ] );
 	}
 
@@ -125,8 +125,8 @@ function hu_enqueue_assets() {
 		);
 	}
 
-	// ── A) Startseite & Blog-Home ─────────────────────────────────
-	if ( is_front_page() || is_home() ) {
+	// ── A) Startseite (homepage.css nur auf Front, nicht Blog-Index) ──
+	if ( is_front_page() ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
 		hu_enqueue_js( 'nexus-home-js', 'homepage.js', [ 'nexus-core-js' ] );
 		hu_enqueue_js( 'nexus-home-mindmap-teaser-js', 'homepage-mindmap-teaser.js', [ 'nexus-home-js' ] );
@@ -518,15 +518,17 @@ function hu_enqueue_assets() {
  *
  * @return void
  */
-function hu_disable_core_block_styles_on_homepage() {
-	if ( is_admin() || ! is_front_page() ) {
+function hu_disable_core_block_styles_on_custom_templates() {
+	if ( is_admin() ) {
 		return;
 	}
 
-	wp_dequeue_style( 'wp-block-library' );
-	wp_dequeue_style( 'wp-block-library-theme' );
+	if ( is_front_page() || is_home() ) {
+		wp_dequeue_style( 'wp-block-library' );
+		wp_dequeue_style( 'wp-block-library-theme' );
+	}
 }
-add_action( 'wp_enqueue_scripts', 'hu_disable_core_block_styles_on_homepage', 100 );
+add_action( 'wp_enqueue_scripts', 'hu_disable_core_block_styles_on_custom_templates', 100 );
 
 /**
  * Return the active WordPress environment name for asset versioning.
