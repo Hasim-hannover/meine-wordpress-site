@@ -28,6 +28,13 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html {
+  background: #0a0a0a;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
 body {
   width: 1920px;
   height: 1080px;
@@ -35,6 +42,8 @@ body {
   background: var(--bg);
   font-family: 'Figtree', sans-serif;
   color: var(--text-primary);
+  transform-origin: top left;
+  /* Wird per JS dynamisch gesetzt */
 }
 
 #canvas-layer {
@@ -1680,6 +1689,18 @@ function init() {
 
   requestAnimationFrame(tick);
 }
+
+// ── Viewport Scaler: 1920×1080 → beliebige Fenstergröße ──
+function scaleViewport() {
+  const sx = window.innerWidth / 1920;
+  const sy = window.innerHeight / 1080;
+  const s = Math.min(sx, sy);
+  const ox = (window.innerWidth - 1920 * s) / 2;
+  const oy = (window.innerHeight - 1080 * s) / 2;
+  document.body.style.transform = `translate(${ox}px, ${oy}px) scale(${s})`;
+}
+window.addEventListener('resize', scaleViewport);
+scaleViewport();
 
 // Wait for fonts
 document.fonts.ready.then(init);
