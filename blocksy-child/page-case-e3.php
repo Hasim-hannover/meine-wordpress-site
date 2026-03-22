@@ -678,7 +678,7 @@ $energy_url  = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_ene
                     Weitere Ergebnisse →
                 </a>
                 <a href="<?php echo esc_url( $local_wp_url ); ?>" class="cs-internal-link">
-                    WordPress Growth Architect in Hannover →
+                    WordPress Agentur Hannover →
                 </a>
                 <a href="<?php echo esc_url( $energy_url ); ?>" class="cs-internal-link">
                     Für Solar- und Wärmepumpen-Anbieter →

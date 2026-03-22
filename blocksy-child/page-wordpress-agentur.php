@@ -96,16 +96,16 @@ $service_items = [
 
 $faq_items = [
 	[
-		'question' => 'Sind persönliche Termine in Hannover möglich?',
-		'answer'   => 'Ja. Strategie-Workshops, Kick-offs und Reviews sind in Hannover und Umgebung persönlich möglich. Die Zusammenarbeit funktioniert aber genauso sauber remote im gesamten DACH-Raum.',
+		'question' => 'Was unterscheidet einen WordPress Growth Architect von einer Agentur?',
+		'answer'   => 'Eine Agentur liefert Seiten und Pakete. Ein Growth Architect ordnet WordPress als Nachfrage-System: Angebotsseiten, Tracking, Conversion und Betrieb greifen als zusammenhängender Prozess ineinander, nicht als Einzelmaßnahmen.',
 	],
 	[
-		'question' => 'Arbeiten Sie auch mit Unternehmen außerhalb von Hannover?',
-		'answer'   => 'Ja. Die Zusammenarbeit funktioniert remote im gesamten DACH-Raum. Der Standort Hannover ermöglicht persönliche Termine, wenn das Projekt es sinnvoll macht.',
+		'question' => 'Für welche Unternehmensgrößen ist die Zusammenarbeit geeignet?',
+		'answer'   => 'Für B2B-Unternehmen, bei denen WordPress ein echter Geschäftskanal ist — typischerweise ab 10 Mitarbeitenden oder einem klaren Anfrageziel. Entscheidend ist nicht die Größe, sondern ob die Website Anfragen liefern soll.',
 	],
 	[
-		'question' => 'Wie startet die Zusammenarbeit?',
-		'answer'   => 'Mit dem Growth Audit. Danach ist klar, was zuerst zählt und ob ein tieferer Folgeprozess sinnvoll ist.',
+		'question' => 'Wie lange dauert es, bis erste Ergebnisse sichtbar sind?',
+		'answer'   => 'Das hängt vom Ausgangszustand ab. Technische Fixes und Tracking-Korrekturen wirken oft in Wochen. SEO-Sichtbarkeit und Conversion-Verbesserungen zeigen sich typischerweise in 2–4 Monaten. Der Growth Audit klärt, was bei Ihnen zuerst greift.',
 	],
 ];
 
@@ -287,6 +287,37 @@ get_header();
 							<li><?php echo esc_html( $fit_item ); ?></li>
 						<?php endforeach; ?>
 					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section id="wgos" class="nx-section">
+			<div class="nx-container">
+				<div class="nx-section-header">
+					<h2 class="nx-headline-section">Mein Ansatz: Das WordPress Growth Operating System (WGOS)</h2>
+				</div>
+				<div class="nx-prose wp-agentur-prose">
+					<p>WGOS ist kein Plugin und kein Seitenpaket, sondern eine Arbeitsweise: Angebotsseiten, technische SEO, Tracking, Conversion und Betrieb werden als zusammenhängendes System behandelt, nicht als isolierte Maßnahmen. Für B2B-Unternehmen heißt das: Erst Diagnose, dann Priorisierung, dann kontrollierte Umsetzung auf die größten Hebel.</p>
+					<p>Jeder Baustein hat eine klare Reihenfolge und wird erst dann aktiviert, wenn das Fundament trägt. So entsteht kein Projektrisiko, sondern ein steuerbares Nachfrage-System.</p>
+					<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_agentur_wgos_detail" data-track-category="navigation">WGOS kennenlernen</a>
+				</div>
+			</div>
+		</section>
+
+		<section id="leistungen" class="nx-section">
+			<div class="nx-container">
+				<div class="nx-section-header">
+					<h2 class="nx-headline-section">Spezialisierte Leistungen</h2>
+				</div>
+				<div class="wp-agentur-spoke-grid">
+					<a href="<?php echo esc_url( $seo_url ); ?>" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_seo" data-track-category="navigation">
+						<span class="wp-agentur-spoke-card__title">WordPress SEO Hannover</span>
+						<span class="wp-agentur-spoke-card__desc">Crawlability, Seitenstruktur, interne Verlinkung und technische Fixes für kaufnahe Rankings.</span>
+					</a>
+					<a href="<?php echo esc_url( $wartung_url ); ?>" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_wartung" data-track-category="navigation">
+						<span class="wp-agentur-spoke-card__title">WordPress Wartung Hannover</span>
+						<span class="wp-agentur-spoke-card__desc">Updates, Sicherheit, Backups und stabile Betriebsroutinen als WGOS-Fundament.</span>
+					</a>
 				</div>
 			</div>
 		</section>

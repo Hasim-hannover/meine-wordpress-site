@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $audit_url   = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
+$agentur_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
 $contact_url = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
 $analysis_contact_url = add_query_arg(
 	[
@@ -184,7 +185,7 @@ get_header();
 					<dl class="about-background__meta">
 						<div class="about-background__meta-item">
 							<dt>Standort</dt>
-							<dd>Pattensen bei Hannover.</dd>
+							<dd>Pattensen bei Hannover. <a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_about_bg_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></dd>
 						</div>
 						<div class="about-background__meta-item">
 							<dt>Projekte</dt>

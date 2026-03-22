@@ -969,3 +969,47 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+/* Spoke-Grid (SEO / Wartung Links) */
+.wp-agentur-spoke-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--nx-space-card, 1.5rem);
+  margin-top: var(--nx-space-element, 1.5rem);
+}
+
+@media (min-width: 640px) {
+  .wp-agentur-spoke-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.wp-agentur-spoke-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(201, 154, 87, 0.18);
+  border-radius: var(--nx-radius, 12px);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.wp-agentur-spoke-card:hover {
+  border-color: rgba(201, 154, 87, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.wp-agentur-spoke-card__title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--nx-gold, #c99a57);
+}
+
+.wp-agentur-spoke-card__desc {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  line-height: 1.5;
+}

@@ -19,6 +19,7 @@ $wgos_url              = $urls['wgos'] ?? home_url( '/wordpress-growth-operating
 $cases_url             = $urls['cases'] ?? home_url( '/ergebnisse/' );
 $blog_url              = $urls['blog'] ?? home_url( '/blog/' );
 $e3_url                = $urls['e3'] ?? home_url( '/e3-new-energy/' );
+$agentur_url           = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
 $audit_cta_label       = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
 $audit_compact_microcopy = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '0 € · Rückmeldung in 48h · kein Pflicht‑Call';
 
@@ -152,6 +153,7 @@ get_header();
 				</div>
 
 				<p class="homepage-problem-frame__link nx-reveal">Welches Modell passt? <a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_models_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a></p>
+				<p class="homepage-problem-frame__link nx-reveal">Lokaler Ansprechpartner gesucht? <a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_home_models_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></p>
 			</div>
 		</section>
 
