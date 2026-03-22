@@ -62,20 +62,20 @@ get_header();
 			<div class="wp-container wp-home-shell">
 				<div class="wp-home-hero__grid">
 					<div class="wp-hero-copy wp-home-hero__copy">
-						<span class="wp-badge nx-reveal">WordPress Growth Architect für B2B</span>
-						<h1 class="wp-hero-title nx-reveal">Ich mache aus Ihrer WordPress-Website ein planbares Nachfrage-System für B2B.</h1>
-						<p class="wp-hero-subtitle wp-home-hero__subtitle nx-reveal">
+						<span class="wp-badge">WordPress Growth Architect für B2B</span>
+						<h1 class="wp-hero-title">Ich mache aus Ihrer WordPress-Website ein planbares Nachfrage-System für B2B.</h1>
+						<p class="wp-hero-subtitle wp-home-hero__subtitle">
 							Für Unternehmen, die klare Positionierung, belastbare Messbarkeit und einen nächsten Schritt brauchen, der aus Besuchern qualifizierte Anfragen macht.
 						</p>
 
-						<div class="wp-home-hero__actions nx-reveal">
+						<div class="wp-home-hero__actions">
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
 						</div>
-						<p class="nx-cta-microcopy nx-reveal"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
+						<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 
 						<?php if ( ! empty( $hero_metrics ) ) : ?>
-							<div class="wp-home-kpi-row nx-reveal" role="list" aria-label="Zentrale Ergebniskennzahlen">
+							<div class="wp-home-kpi-row" role="list" aria-label="Zentrale Ergebniskennzahlen">
 								<?php foreach ( $hero_metrics as $metric ) : ?>
 									<div class="wp-home-kpi-card" role="listitem">
 										<span class="wp-home-kpi-card__value"><?php echo esc_html( $metric['value'] ); ?></span>
@@ -92,12 +92,12 @@ get_header();
 		<section id="proof" class="wp-section homepage-track-record" data-track-section="homepage_proof">
 			<div id="audit" class="homepage-legacy-anchor" aria-hidden="true"></div>
 			<div class="wp-container wp-home-shell">
-				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
+				<div class="wp-section-title wp-home-section-title text-center">
 					<span class="wp-badge">Proof</span>
 					<h2 class="wp-section-h2">Ergebnis statt Behauptung.</h2>
 				</div>
 
-				<article class="wp-success-card homepage-track-record__card homepage-track-record__card--primary nx-reveal" aria-labelledby="homepage-proof-case-title">
+				<article class="wp-success-card homepage-track-record__card homepage-track-record__card--primary" aria-labelledby="homepage-proof-case-title">
 					<div class="homepage-track-record__case-head">
 						<p class="wp-success-subtitle">E3 New Energy</p>
 						<h3 id="homepage-proof-case-title" class="wp-success-title">Ausgangslage</h3>
@@ -125,13 +125,13 @@ get_header();
 
 		<section class="wp-section homepage-problem-frame" data-track-section="homepage_models">
 			<div class="wp-container wp-home-shell">
-				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
+				<div class="wp-section-title wp-home-section-title text-center">
 					<span class="wp-badge">Modell</span>
 					<h2 class="wp-section-h2">Zwei Wege. Ein Unterschied.</h2>
 				</div>
 
 				<div class="homepage-problem-frame__grid">
-					<article class="wp-success-card homepage-problem-frame__card homepage-problem-frame__card--muted nx-reveal">
+					<article class="wp-success-card homepage-problem-frame__card homepage-problem-frame__card--muted">
 						<p class="wp-success-subtitle">Modell A</p>
 						<h3 class="wp-success-title">Nachfrage mieten</h3>
 						<ul class="premium-list" aria-label="Modell A">
@@ -141,7 +141,7 @@ get_header();
 						</ul>
 					</article>
 
-					<article class="wp-success-card homepage-problem-frame__card homepage-problem-frame__card--accent nx-reveal">
+					<article class="wp-success-card homepage-problem-frame__card homepage-problem-frame__card--accent">
 						<p class="wp-success-subtitle">Modell B</p>
 						<h3 class="wp-success-title">Infrastruktur aufbauen</h3>
 						<ul class="premium-list" aria-label="Modell B">
@@ -152,19 +152,19 @@ get_header();
 					</article>
 				</div>
 
-				<p class="homepage-problem-frame__link nx-reveal">Welches Modell passt? <a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_models_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a></p>
-				<p class="homepage-problem-frame__link nx-reveal">Lokaler Ansprechpartner gesucht? <a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_home_models_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></p>
+				<p class="homepage-problem-frame__link">Welches Modell passt? <a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_models_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a></p>
+				<p class="homepage-problem-frame__link">Lokaler Ansprechpartner gesucht? <a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_home_models_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></p>
 			</div>
 		</section>
 
 		<section id="system" class="wp-section homepage-system-teaser" data-track-section="homepage_wgos">
 			<div class="wp-container wp-home-shell">
-				<div class="wp-section-title wp-home-section-title text-center nx-reveal">
+				<div class="wp-section-title wp-home-section-title text-center">
 					<span class="wp-badge">WGOS</span>
 					<h2 class="wp-section-h2">Das System dahinter: WGOS</h2>
 				</div>
 
-				<div class="homepage-system-teaser__card nx-reveal">
+				<div class="homepage-system-teaser__card">
 					<p class="homepage-system-teaser__lead">Drei Ebenen, eine Logik:</p>
 					<p class="homepage-system-teaser__text">Erst den Anfragepfad klären, dann Messbarkeit schaffen, dann kontrolliert umsetzen.</p>
 					<a href="<?php echo esc_url( $wgos_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_system_wgos" data-track-category="navigation">WGOS im Detail ansehen</a>
@@ -174,14 +174,14 @@ get_header();
 
 		<section id="faq" class="homepage-faq-section homepage-faq-section--home" aria-labelledby="faq-heading">
 			<div class="nx-container wp-home-shell">
-				<div class="wp-home-section-title text-center nx-reveal">
+				<div class="wp-home-section-title text-center">
 					<span class="nx-badge nx-badge--gold">FAQ</span>
 					<h2 id="faq-heading" class="wp-section-h2">Häufige Fragen</h2>
 					<p class="wp-section-p">Klarheit vor dem nächsten Schritt.</p>
 				</div>
 				<div class="nx-faq">
 					<?php foreach ( $faq_items as $index => $item ) : ?>
-						<details class="nx-faq__item nx-reveal"<?php echo 0 === $index ? ' open' : ''; ?>>
+						<details class="nx-faq__item"<?php echo 0 === $index ? ' open' : ''; ?>>
 							<summary><?php echo esc_html( $item['question'] ); ?></summary>
 							<div class="nx-faq__content"><?php echo esc_html( $item['answer'] ); ?></div>
 						</details>
@@ -192,7 +192,7 @@ get_header();
 
 		<section id="cta" class="wp-section homepage-conversion-cta" data-track-section="homepage_cta">
 			<div class="wp-container wp-home-shell">
-				<div class="nx-cta-box nx-reveal homepage-conversion-cta__box">
+				<div class="nx-cta-box homepage-conversion-cta__box">
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
 					<h2>Lassen Sie uns prüfen, wo Ihre Website Anfragen verliert.</h2>
 					<p class="homepage-conversion-cta__lead">Eine URL reicht. Schriftlich, manuell geprüft, in 48 Stunden.</p>
@@ -204,7 +204,7 @@ get_header();
 
 		<section id="knowledge" class="wp-section homepage-blog-section homepage-blog-section--quiet" data-track-section="homepage_knowledge">
 			<div class="wp-container wp-home-shell">
-				<div class="wp-home-section-title text-center nx-reveal">
+				<div class="wp-home-section-title text-center">
 					<span class="nx-badge nx-badge--ghost">Knowledge Base</span>
 					<h2 class="wp-section-h2">Wenn Sie zuerst die Denkweise prüfen wollen: hier sind die Analysen.</h2>
 					<p class="wp-section-p">Die Artikel sind bewusst der längere Nebenpfad. Der direkte Einstieg bleibt das Growth Audit.</p>
@@ -228,7 +228,7 @@ get_header();
 							$categories = get_the_category();
 							$cat_name   = ! empty( $categories ) ? $categories[0]->name : 'Knowledge Base';
 							?>
-							<article class="homepage-blog-card nx-reveal">
+							<article class="homepage-blog-card">
 								<a href="<?php the_permalink(); ?>" class="homepage-blog-card__link">
 									<?php if ( $thumb_url ) : ?>
 										<div class="homepage-blog-card__media">
@@ -254,7 +254,7 @@ get_header();
 					?>
 				</div>
 
-				<p class="homepage-blog-section__link nx-reveal"><a href="<?php echo esc_url( $blog_url ); ?>" data-track-action="cta_home_blog_archive" data-track-category="navigation">Zum vollständigen Knowledge Base Archiv</a></p>
+				<p class="homepage-blog-section__link"><a href="<?php echo esc_url( $blog_url ); ?>" data-track-action="cta_home_blog_archive" data-track-category="navigation">Zum vollständigen Knowledge Base Archiv</a></p>
 			</div>
 		</section>
 	</div>
