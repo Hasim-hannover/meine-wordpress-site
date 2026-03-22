@@ -385,7 +385,7 @@ foreach ( $faq_items as $faq_item ) {
 			</div>
 		</section>
 
-		<section id="problem" class="wgos-section wgos-section--white nx-reveal">
+		<section id="problem" class="wgos-section wgos-section--white">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">WGOS-Kurzform</span>
@@ -403,7 +403,7 @@ foreach ( $faq_items as $faq_item ) {
 			</div>
 		</section>
 
-		<section id="system" class="wgos-section wgos-section--gray nx-reveal">
+		<section id="system" class="wgos-section wgos-section--gray">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Systemdiagramm</span>
@@ -421,7 +421,7 @@ foreach ( $faq_items as $faq_item ) {
 			</div>
 		</section>
 
-		<section id="module" class="wgos-section wgos-section--white nx-reveal">
+		<section id="module" class="wgos-section wgos-section--white">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Kernbereiche</span>
@@ -431,7 +431,7 @@ foreach ( $faq_items as $faq_item ) {
 
 				<div class="wgos-component-grid">
 					<?php foreach ( $core_areas as $core_area ) : ?>
-						<article class="wgos-core-area-card nx-reveal">
+						<article class="wgos-core-area-card">
 							<div class="wgos-core-area-card__top">
 								<span class="wgos-core-card__number"><?php echo esc_html( $core_area['number'] ); ?></span>
 								<div>
@@ -460,7 +460,7 @@ foreach ( $faq_items as $faq_item ) {
 			</div>
 		</section>
 
-		<section id="pakete" class="wgos-section wgos-section--packages nx-reveal">
+		<section id="pakete" class="wgos-section wgos-section--packages">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Pakete + Credits</span>
@@ -470,7 +470,7 @@ foreach ( $faq_items as $faq_item ) {
 
 				<div class="wgos-pricing-grid">
 					<?php foreach ( $packages as $package ) : ?>
-						<article class="wgos-pricing-card<?php echo esc_attr( $package['featured'] ? ' wgos-pricing-card--featured' : '' ); ?> nx-reveal">
+						<article class="wgos-pricing-card<?php echo esc_attr( $package['featured'] ? ' wgos-pricing-card--featured' : '' ); ?>">
 							<?php if ( $package['featured'] ) : ?>
 								<span class="wgos-pricing-badge">Häufigster Start</span>
 							<?php endif; ?>
@@ -494,7 +494,7 @@ foreach ( $faq_items as $faq_item ) {
 					<?php endforeach; ?>
 				</div>
 
-				<div id="credits" class="wgos-credit-summary nx-reveal">
+				<div id="credits" class="wgos-credit-summary">
 					<div class="wgos-credit-summary__copy">
 						<h3>Credits sind die operative Einheit im WGOS.</h3>
 						<p>Jedes Asset und Arbeitspaket hat einen definierten Credit-Wert. So lassen sich Maßnahmen, Prioritäten und Weiterentwicklung klar planen - unabhängig davon, ob es um Tracking, SEO, CRO oder technische Optimierung geht.</p>
@@ -526,7 +526,7 @@ foreach ( $faq_items as $faq_item ) {
 			</div>
 		</section>
 
-		<section id="proof" class="wgos-section wgos-section--white nx-reveal">
+		<section id="proof" class="wgos-section wgos-section--white">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Ergebnisse</span>
@@ -551,7 +551,7 @@ foreach ( $faq_items as $faq_item ) {
 			</div>
 		</section>
 
-		<section id="faq" class="wgos-section wgos-section--gray nx-reveal">
+		<section id="faq" class="wgos-section wgos-section--gray">
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">FAQ</span>
@@ -569,7 +569,7 @@ foreach ( $faq_items as $faq_item ) {
 			</div>
 		</section>
 
-		<section id="audit" class="wgos-section wgos-section--white wgos-final-cta nx-reveal">
+		<section id="audit" class="wgos-section wgos-section--white wgos-final-cta">
 			<div class="wgos-container">
 				<div class="wgos-final-cta__inner">
 					<span class="wgos-principle-kicker">Nächster Schritt</span>
