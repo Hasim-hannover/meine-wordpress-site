@@ -641,7 +641,18 @@ function nexus_render_share_buttons() {
 
 // Audit Live Assets: zentral in inc/enqueue.php (Section H) verwaltet.
 
-// ── WGOS VIDEO PREVIEW: Zugriffsschutz ──────────────────────────
+// ── WGOS VIDEO PREVIEW: Template + Zugriffsschutz ───────────────
+// Template programmatisch zuweisen (Gutenberg zeigt den Dropdown nicht)
+add_filter( 'page_template', function ( $template ) {
+	if ( is_page( 'wgos-preview' ) ) {
+		$custom = get_stylesheet_directory() . '/template-wgos-video.php';
+		if ( file_exists( $custom ) ) {
+			return $custom;
+		}
+	}
+	return $template;
+} );
+
 add_action( 'template_redirect', function () {
 	if ( is_page( 'wgos-preview' ) ) {
 		if ( ! is_user_logged_in() && ! isset( $_GET['preview'] ) ) {
