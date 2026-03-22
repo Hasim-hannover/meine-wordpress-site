@@ -120,7 +120,7 @@ if ($featured_query->have_posts()) {
 
             <div class="pillar-hero__meta">
                 <span class="pillar-meta-item">
-                    <strong><?php echo (int) $cat_count; ?></strong> <?php echo $cat_count === 1 ? 'Beitrag' : 'Beiträge'; ?>
+                    <strong><?php echo (int) $cat_count; ?></strong> <?php echo esc_html( $cat_count === 1 ? 'Beitrag' : 'Beiträge' ); ?>
                 </span>
                 <span class="pillar-meta-divider">·</span>
                 <span class="pillar-meta-item">Pillar Content Hub</span>

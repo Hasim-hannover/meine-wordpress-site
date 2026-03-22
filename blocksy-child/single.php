@@ -20,7 +20,7 @@ get_template_part( 'template-parts/blog-header' );
 
 		<?php $has_hero_image = has_post_thumbnail(); ?>
 
-		<header class="nexus-article-hero<?php echo $has_hero_image ? '' : ' nexus-article-hero--text-only'; ?>" data-track-section="article_hero">
+		<header class="nexus-article-hero<?php echo esc_attr( $has_hero_image ? '' : ' nexus-article-hero--text-only' ); ?>" data-track-section="article_hero">
 
 			<?php if ( $has_hero_image ) : ?>
 			<div class="nexus-hero-image">

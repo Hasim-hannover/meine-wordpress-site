@@ -625,7 +625,7 @@ get_header();
 										?>
 										<section
 											id="<?php echo esc_attr( 'energy-step-' . $step_id ); ?>"
-											class="review-step energy-step<?php echo $is_active ? ' is-active' : ''; ?>"
+											class="review-step energy-step<?php echo esc_attr( $is_active ? ' is-active' : '' ); ?>"
 											data-energy-step-id="<?php echo esc_attr( $step_id ); ?>"
 											data-energy-step-index="<?php echo esc_attr( (string) $index ); ?>"
 											data-energy-step-label="<?php echo esc_attr( $step['title_short'] ); ?>"
@@ -706,7 +706,7 @@ get_header();
 																<p class="energy-field-error" id="<?php echo esc_attr( $field_error_id ); ?>" data-energy-field-error="<?php echo esc_attr( $field_name ); ?>"></p>
 															</div>
 														<?php else : ?>
-															<div class="review-field<?php echo $is_textarea || 'page_url' === $field_name ? ' review-field-full' : ''; ?>">
+															<div class="review-field<?php echo esc_attr( $is_textarea || 'page_url' === $field_name ? ' review-field-full' : '' ); ?>">
 																<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 																<?php if ( ! empty( $field['help'] ) ) : ?>
 																	<p class="review-field-help" id="<?php echo esc_attr( $field_help_id ); ?>"><?php echo esc_html( $field['help'] ); ?></p>

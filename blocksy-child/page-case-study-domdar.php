@@ -355,7 +355,7 @@ get_header();
 
 		<div class="nx-grid nx-grid-3" style="margin-top:3rem;">
 			<?php foreach ( $problem_cards as $problem_card ) : ?>
-				<article class="nx-card nx-card--flat cs-constraint-card<?php echo $problem_card['accented'] ? ' cs-constraint-card--highlight' : ''; ?>">
+				<article class="nx-card nx-card--flat cs-constraint-card<?php echo esc_attr( $problem_card['accented'] ? ' cs-constraint-card--highlight' : '' ); ?>">
 					<div class="cs-constraint-num"><?php echo esc_html( $problem_card['number'] ); ?></div>
 					<h3 class="nx-card__title"><?php echo esc_html( $problem_card['title'] ); ?></h3>
 					<p class="nx-card__text"><?php echo esc_html( $problem_card['copy'] ); ?></p>
@@ -382,7 +382,7 @@ get_header();
 
 		<div class="cs-results-grid" style="margin-top:3rem;">
 			<?php foreach ( $results as $result ) : ?>
-				<article class="cs-result-card<?php echo $result['primary'] ? ' cs-result-card--primary' : ''; ?>">
+				<article class="cs-result-card<?php echo esc_attr( $result['primary'] ? ' cs-result-card--primary' : '' ); ?>">
 					<span class="cs-result-value"><?php echo esc_html( $result['value'] ); ?></span>
 					<span class="cs-result-label"><?php echo esc_html( $result['label'] ); ?></span>
 					<span class="cs-result-note"><?php echo esc_html( $result['note'] ); ?></span>
@@ -436,7 +436,7 @@ get_header();
 
 		<div class="cs-phases" style="margin-top:3rem;">
 			<?php foreach ( $architecture as $phase ) : ?>
-				<article class="cs-phase-item<?php echo $phase['highlight'] ? ' cs-phase-item--highlight' : ''; ?>">
+				<article class="cs-phase-item<?php echo esc_attr( $phase['highlight'] ? ' cs-phase-item--highlight' : '' ); ?>">
 					<div class="cs-phase-header">
 						<div class="nx-step__number"><?php echo esc_html( $phase['step'] ); ?></div>
 						<div>
