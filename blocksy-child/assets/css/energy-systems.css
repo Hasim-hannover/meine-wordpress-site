@@ -85,12 +85,19 @@
   max-width: 720px;
 }
 
-.energy-proof__layout,
-.energy-form-shell {
+.energy-proof__layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
   gap: 2rem;
   align-items: start;
+}
+
+.energy-form-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 760px;
+  margin-inline: auto;
 }
 
 .energy-hero__copy,
@@ -533,7 +540,7 @@
 }
 
 .energy-form-shell__aside {
-  align-content: start;
+  display: none;
 }
 
 .energy-review-success {
@@ -570,13 +577,8 @@
 
 @media (max-width: 1100px) {
   .energy-proof__layout,
-  .energy-form-shell,
   .energy-understanding-grid {
     grid-template-columns: 1fr;
-  }
-
-  .energy-form-shell__aside {
-    position: static;
   }
 
   .energy-proof-kpi-grid {
