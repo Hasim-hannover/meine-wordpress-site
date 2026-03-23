@@ -66,8 +66,8 @@ $proof_kpis = [
 
 $faq_items = [
 	[
-		'question' => 'Arbeiten Sie für Endkunden oder für Unternehmen aus dem Energie-Umfeld?',
-		'answer'   => 'Ich arbeite B2B. Die Seite richtet sich an Unternehmen, die selbst an Privatkunden, Gewerbe oder KMU verkaufen und ihre Website als Anfrage-System nutzen wollen.',
+		'question' => 'Was unterscheidet das hier von einer klassischen Agenturleistung?',
+		'answer'   => 'Klassische Agenturen liefern Gewerke: eine neue Website, eine SEO-Kampagne oder ein Tracking-Setup. Hier greifen Website-Struktur, Tracking, Vorqualifizierung und Conversion als zusammenhängendes System ineinander — mit dem Ziel, aus vorhandener Nachfrage messbar bessere Anfragen zu machen.',
 	],
 	[
 		'question' => 'Brauchen wir dafür sofort einen Relaunch?',
