@@ -77,12 +77,18 @@
   padding-top: calc(var(--nx-space-section) + 1.5rem);
 }
 
-.energy-hero__grid,
+.energy-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+  max-width: 720px;
+}
+
 .energy-proof__layout,
-.energy-fit-layout,
 .energy-form-shell {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
   gap: 2rem;
   align-items: start;
 }
@@ -297,6 +303,10 @@
   gap: 1rem;
 }
 
+.energy-section > .nx-container > .energy-journey-shell {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .energy-fit-card {
   display: flex;
   align-items: flex-start;
@@ -427,9 +437,19 @@
 }
 
 .energy-choice-block legend {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--nx-text);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.energy-choice-block .review-choice-help {
+  display: none;
 }
 
 .energy-choice-block {
@@ -549,35 +569,25 @@
 }
 
 @media (max-width: 1100px) {
-  .energy-hero__grid,
   .energy-proof__layout,
-  .energy-fit-layout,
   .energy-form-shell,
   .energy-understanding-grid {
     grid-template-columns: 1fr;
   }
 
-  .energy-hero__panel,
   .energy-form-shell__aside {
     position: static;
   }
 
-  .energy-hero__signals,
-  .energy-fit-grid,
-  .energy-proof-kpi-grid,
-  .energy-form-points {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .energy-proof-kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 820px) {
   .energy-pain-grid,
-  .energy-solution-grid,
-  .energy-process-grid,
-  .energy-hero__signals,
-  .energy-fit-grid,
   .energy-proof-kpi-grid,
-  .energy-form-points {
+  .energy-section > .nx-container > .energy-journey-shell {
     grid-template-columns: 1fr;
   }
 
@@ -599,7 +609,6 @@
     padding-top: calc(var(--nx-space-section) * 0.72);
   }
 
-  .energy-hero__panel,
   .energy-proof__panel,
   .energy-form-shell__main,
   .energy-form-shell__aside {
