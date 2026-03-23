@@ -323,20 +323,8 @@ function nexus_get_energy_intake_flow_definition() {
 			'description'  => 'B2C und B2B ticken auf Landingpages, im Proof und in Formularen oft komplett unterschiedlich.',
 			'summary_label'=> 'Zielmarkt',
 			'auto_advance' => true,
-			'next'         => 'region',
-			'options'      => $options['sales_audience'],
-		],
-		[
-			'id'           => 'region',
-			'name'         => 'region_scope',
-			'kind'         => 'single_choice',
-			'title_short'  => 'Region',
-			'question'     => 'In welcher Region sind Sie aktiv?',
-			'description'  => 'Regionale Tiefe, Routing und Vertrauen wirken anders als deutschlandweite Nachfrage.',
-			'summary_label'=> 'Region',
-			'auto_advance' => true,
 			'next'         => 'challenge',
-			'options'      => $options['region_scope'],
+			'options'      => $options['sales_audience'],
 		],
 		[
 			'id'            => 'challenge',
@@ -344,43 +332,11 @@ function nexus_get_energy_intake_flow_definition() {
 			'kind'          => 'single_choice',
 			'title_short'   => 'Hauptengpass',
 			'question'      => 'Was ist aktuell die größte Reibung?',
-			'description'   => 'Ich nutze diese Antwort, um den Rest des Flows sinnvoll zu gewichten statt alles linear abzufragen.',
+			'description'   => 'So wird klar, wo im Anfrageprozess der größte Hebel liegt.',
 			'summary_label' => 'Hauptengpass',
 			'auto_advance'  => true,
-			'next'          => 'acquisition',
-			'next_by_value' => [
-				'tracking_fehlt' => 'measurement',
-				'potenzial_unklar' => 'measurement',
-			],
-			'options'       => $options['primary_challenge'],
-		],
-		[
-			'id'            => 'measurement',
-			'name'          => 'measurement_state',
-			'kind'          => 'single_choice',
-			'title_short'   => 'Messbarkeit',
-			'question'      => 'Wie gut ist heute messbar, wo eine qualifizierte Anfrage entsteht oder verloren geht?',
-			'description'   => 'Diesen Schritt zeige ich nur, wenn Messbarkeit selbst Teil des Problems ist.',
-			'summary_label' => 'Messbarkeit',
-			'auto_advance'  => true,
-			'next'          => 'acquisition',
-			'show_when'     => [
-				'field'  => 'primary_challenge',
-				'values' => [ 'tracking_fehlt', 'potenzial_unklar' ],
-			],
-			'options'       => $options['measurement_state'],
-		],
-		[
-			'id'            => 'acquisition',
-			'name'          => 'acquisition_mix',
-			'kind'          => 'single_choice',
-			'title_short'   => 'Anfragemix',
-			'question'      => 'Wie gewinnen Sie aktuell Anfragen?',
-			'description'   => 'Hier trennt sich schnell, ob eher Nachfrage, Übergabe oder die Website-Struktur limitiert.',
-			'summary_label' => 'Anfragemix',
-			'auto_advance'  => true,
 			'next'          => 'site-state',
-			'options'       => $options['acquisition_mix'],
+			'options'       => $options['primary_challenge'],
 		],
 		[
 			'id'            => 'site-state',
@@ -391,20 +347,8 @@ function nexus_get_energy_intake_flow_definition() {
 			'description'   => 'So wird klar, ob eher Optimierung, Neuordnung oder ein sauberer Erstaufbau gebraucht wird.',
 			'summary_label' => 'Aktueller Status',
 			'auto_advance'  => true,
-			'next'          => 'improvement',
-			'options'       => $options['site_state'],
-		],
-		[
-			'id'            => 'improvement',
-			'name'          => 'improvement_goal',
-			'kind'          => 'single_choice',
-			'title_short'   => 'Wunschbild',
-			'question'      => 'Was soll sich konkret zuerst verbessern?',
-			'description'   => 'Ein klarer Zielpunkt verhindert später generische Lösungen ohne Priorität.',
-			'summary_label' => 'Wunschbild',
-			'auto_advance'  => true,
 			'next'          => 'timing',
-			'options'       => $options['improvement_goal'],
+			'options'       => $options['site_state'],
 		],
 		[
 			'id'            => 'timing',
@@ -1193,7 +1137,9 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 	$email                 = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
 	$phone                 = isset( $payload['phone'] ) ? sanitize_text_field( (string) $payload['phone'] ) : '';
 	$consent_privacy       = isset( $payload['consent_privacy'] ) ? sanitize_key( (string) $payload['consent_privacy'] ) : '';
-	$measurement_required  = in_array( $primary_challenge, [ 'tracking_fehlt', 'potenzial_unklar' ], true );
+	// Region, measurement, acquisition mix and improvement goal are no longer
+	// collected in the reduced 6-step flow but kept as optional fields for
+	// backward compatibility with existing CRM entries.
 
 	if ( empty( $solution_focus ) || ! isset( $field_options['solution_focus'][ $solution_focus ] ) ) {
 		return new WP_Error( 'missing_solution_focus', 'Bitte auswählen, welche Leistungen Sie hauptsächlich verkaufen.' );
@@ -1203,34 +1149,28 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 		return new WP_Error( 'missing_sales_audience', 'Bitte auswählen, an wen Sie hauptsächlich verkaufen.' );
 	}
 
-	if ( empty( $region_scope ) || ! isset( $field_options['region_scope'][ $region_scope ] ) ) {
-		return new WP_Error( 'missing_region_scope', 'Bitte auswählen, in welcher Region Sie aktiv sind.' );
+	if ( '' !== $region_scope && ! isset( $field_options['region_scope'][ $region_scope ] ) ) {
+		$region_scope = '';
 	}
 
 	if ( empty( $primary_challenge ) || ! isset( $field_options['primary_challenge'][ $primary_challenge ] ) ) {
 		return new WP_Error( 'missing_primary_challenge', 'Bitte die größte aktuelle Reibung auswählen.' );
 	}
 
-	if ( $measurement_required && ( empty( $measurement_state ) || ! isset( $field_options['measurement_state'][ $measurement_state ] ) ) ) {
-		return new WP_Error( 'missing_measurement_state', 'Bitte kurz einordnen, wie gut die Messbarkeit heute bereits steht.' );
-	}
-
-	if ( ! $measurement_required ) {
+	if ( '' !== $measurement_state && ! isset( $field_options['measurement_state'][ $measurement_state ] ) ) {
 		$measurement_state = '';
-	} elseif ( ! isset( $field_options['measurement_state'][ $measurement_state ] ) ) {
-		return new WP_Error( 'invalid_measurement_state', 'Bitte eine gültige Einordnung zur Messbarkeit auswählen.' );
 	}
 
-	if ( empty( $acquisition_mix ) || ! isset( $field_options['acquisition_mix'][ $acquisition_mix ] ) ) {
-		return new WP_Error( 'missing_acquisition_mix', 'Bitte auswählen, wie Sie aktuell Anfragen gewinnen.' );
+	if ( '' !== $acquisition_mix && ! isset( $field_options['acquisition_mix'][ $acquisition_mix ] ) ) {
+		$acquisition_mix = '';
 	}
 
 	if ( empty( $site_state ) || ! isset( $field_options['site_state'][ $site_state ] ) ) {
 		return new WP_Error( 'missing_site_state', 'Bitte den Status Ihrer aktuellen Website oder Landingpage auswählen.' );
 	}
 
-	if ( empty( $improvement_goal ) || ! isset( $field_options['improvement_goal'][ $improvement_goal ] ) ) {
-		return new WP_Error( 'missing_improvement_goal', 'Bitte auswählen, was sich zuerst verbessern soll.' );
+	if ( '' !== $improvement_goal && ! isset( $field_options['improvement_goal'][ $improvement_goal ] ) ) {
+		$improvement_goal = '';
 	}
 
 	if ( empty( $project_timing ) || ! isset( $field_options['project_timing'][ $project_timing ] ) ) {
@@ -1310,17 +1250,17 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 		'sales_audience'              => $sales_audience,
 		'sales_audience_label'        => $field_options['sales_audience'][ $sales_audience ]['label'],
 		'region_scope'                => $region_scope,
-		'region_scope_label'          => $field_options['region_scope'][ $region_scope ]['label'],
+		'region_scope_label'          => '' !== $region_scope && isset( $field_options['region_scope'][ $region_scope ] ) ? $field_options['region_scope'][ $region_scope ]['label'] : '',
 		'primary_challenge'           => $primary_challenge,
 		'primary_challenge_label'     => $field_options['primary_challenge'][ $primary_challenge ]['label'],
 		'measurement_state'           => $measurement_state,
 		'measurement_state_label'     => $measurement_state ? $field_options['measurement_state'][ $measurement_state ]['label'] : '',
 		'acquisition_mix'             => $acquisition_mix,
-		'acquisition_mix_label'       => $field_options['acquisition_mix'][ $acquisition_mix ]['label'],
+		'acquisition_mix_label'       => '' !== $acquisition_mix && isset( $field_options['acquisition_mix'][ $acquisition_mix ] ) ? $field_options['acquisition_mix'][ $acquisition_mix ]['label'] : '',
 		'site_state'                  => $site_state,
 		'site_state_label'            => $field_options['site_state'][ $site_state ]['label'],
 		'improvement_goal'            => $improvement_goal,
-		'improvement_goal_label'      => $field_options['improvement_goal'][ $improvement_goal ]['label'],
+		'improvement_goal_label'      => '' !== $improvement_goal && isset( $field_options['improvement_goal'][ $improvement_goal ] ) ? $field_options['improvement_goal'][ $improvement_goal ]['label'] : '',
 		'project_timing'              => $project_timing,
 		'project_timing_label'        => $field_options['project_timing'][ $project_timing ]['label'],
 	];
@@ -1650,28 +1590,12 @@ function nexus_get_review_request_detail_rows( $payload ) {
 				'value' => (string) ( $payload['sales_audience_label'] ?? '' ),
 			],
 			[
-				'label' => 'Region',
-				'value' => (string) ( $payload['region_scope_label'] ?? '' ),
-			],
-			[
 				'label' => 'Hauptengpass',
 				'value' => (string) ( $payload['primary_challenge_label'] ?? $payload['focus_area_label'] ?? '' ),
 			],
 			[
-				'label' => 'Messbarkeit',
-				'value' => (string) ( $payload['measurement_state_label'] ?? '' ),
-			],
-			[
-				'label' => 'Anfragemix',
-				'value' => (string) ( $payload['acquisition_mix_label'] ?? '' ),
-			],
-			[
 				'label' => 'Aktueller Status',
 				'value' => (string) ( $payload['site_state_label'] ?? '' ),
-			],
-			[
-				'label' => 'Wunschbild',
-				'value' => (string) ( $payload['improvement_goal_label'] ?? $payload['primary_goal_label'] ?? '' ),
 			],
 			[
 				'label' => 'Timing',
