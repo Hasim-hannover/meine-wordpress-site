@@ -1,12 +1,12 @@
 # System Map
 
-Stand: 2026-03-20. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-03-31. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
 | System | Zweck | Repo-Orte | Externe Abhaengigkeiten | Status |
 | --- | --- | --- | --- | --- |
-| Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/deploy.yml` | WordPress, Blocksy Parent Theme, ACF | live |
+| Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/ci.yml`, `.github/workflows/deploy.yml`, `docs/architecture/DEPLOYMENT.md` | WordPress, Blocksy Parent Theme, ACF | live |
 | Audit-Funnel | Diagnose-Einstieg, Audit-Intake und interne Folgequalifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/page-solar-waermepumpen-leadgenerierung.php`, `blocksy-child/page-website-fuer-solar-und-waermepumpen-anbieter.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/assets/js/energy-intake.js`, `blocksy-child/assets/js/cal-embed.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
 | Nexus CRM & Blog Notify | gemeinsames CRM fuer Audit-, Folgeanalyse-, Umsetzungs- und Bestandskunden-Anfragen plus DOI- und Artikel-Mail-Logik | `blocksy-child/inc/crm.php`, `blocksy-child/inc/blog-notify.php`, `blocksy-child/template-parts/blog-notify.php`, `blocksy-child/page-blog-notify.php`, `docs/systems/blog-notify.md` | WordPress CPT/Meta, WordPress REST, wp_mail, Brevo | repo-seitig live, End-to-End offen |
 | SEO Cockpit | Search-Console-basiertes SEO-Dashboard mit optionalem Koko- und Audit-Lead-Layer | `blocksy-child/inc/seo-cockpit.php`, `blocksy-child/assets/css/seo-cockpit-admin.css`, `docs/systems/seo-cockpit.md` | Google Search Console API, optional Koko Analytics, Nexus CRM / Audit-CRM | repo-seitig vorbereitet, OAuth und Live-Daten offen |
@@ -20,7 +20,7 @@ Stand: 2026-03-20. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 
 ## Website
 
-Die Website ist aktuell der stabilste Teil des Repos. `blocksy-child/` ist der deploybare Kern und wird bei Push auf `main` per SSH-Rsync nach WordPress ausgeliefert.
+Die Website ist aktuell der stabilste Teil des Repos. `blocksy-child/` ist der deploybare Kern; CI und Production-Deploy sind jetzt getrennt, und der Live-Deploy erfolgt erst nach erfolgreichem CI-Lauf fuer einen Push auf `main`.
 
 Wichtige Merkmale:
 
@@ -188,7 +188,7 @@ Risiko:
 - Website -> Tracking-Layer -> GTM / GA4 / Consent -> Reporting / Optimierung
 - Blog / SEO -> interne Verlinkung -> Service-Seiten / Audit -> Leadflow
 - WordPress-Editor -> Theme-Struktur -> Live-Seiten
-- GitHub Actions -> `blocksy-child/` -> Live-Theme
+- GitHub Actions CI -> Build-Paket aus `blocksy-child/` -> GitHub Actions Deploy -> Live-Theme
 
 ## Kritische Abhaengigkeiten
 
@@ -199,7 +199,7 @@ Risiko:
 - Fluent Forms fuer die vertiefte Folgeanalyse
 - n8n Cloud fuer den optionalen Instant-Results-Audit
 - Cal.com fuer direkte Gespraechsbuchung
-- SSH-Deploy auf Basis von `blocksy-child/`
+- SSH-Deploy auf Basis des gebauten `blocksy-child/`-Pakets
 
 ## Groesste Risiken
 

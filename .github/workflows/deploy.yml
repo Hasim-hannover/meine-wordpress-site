@@ -1,52 +1,124 @@
-name: Deploy Theme (SSH)
+name: Deploy Theme (Production)
 
 on:
-  push:
-    branches:
-      - main
-      - 'hotfix/**'
-    paths:
-      - 'blocksy-child/**'
-      - '.github/workflows/deploy.yml'
+  workflow_run:
+    workflows:
+      - CI
+    types:
+      - completed
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref to deploy
+        required: false
+        default: main
+        type: string
+      dry_run:
+        description: Preview rsync changes without writing to the server
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  DEPLOY_HOST: ${{ vars.SSH_HOST != '' && vars.SSH_HOST || secrets.SSH_HOST }}
+  DEPLOY_USER: ${{ vars.SSH_USER != '' && vars.SSH_USER || secrets.SSH_USER }}
+  SSH_PORT: ${{ vars.SSH_PORT != '' && vars.SSH_PORT || '22' }}
+  DEPLOY_PATH: ${{ vars.DEPLOY_PATH != '' && vars.DEPLOY_PATH || 'www/wp-content/themes/blocksy-child/' }}
+  BUILD_OUTPUT_DIR: .build/blocksy-child
 
 jobs:
   deploy:
+    if: >
+      (github.event_name == 'workflow_run' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main') ||
+      github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    timeout-minutes: 20
+    environment: production
 
-      - name: Setup Node.js
+    steps:
+      - name: Checkout deployment ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || inputs.ref }}
+
+      - name: Validate deploy config
+        run: bash scripts/verify-deploy-config.sh "$SSH_PORT" "$DEPLOY_PATH"
+
+      - name: Check required deploy credentials
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          missing=0
+          for name in SSH_PRIVATE_KEY DEPLOY_HOST DEPLOY_USER; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error title=Missing deploy setting::$name is required for deployment."
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: PHP syntax check
+        run: find blocksy-child -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Minify CSS & JS
-        run: |
-          npm install --no-save lightningcss-cli terser
-          # CSS minification
-          find blocksy-child/assets/css -name '*.css' ! -name '*.min.css' -exec sh -c '
-            npx lightningcss --minify --bundle "$1" -o "$1"
-          ' _ {} \;
-          # Minify style.css (preserve header comment)
-          if [ -f blocksy-child/style.css ]; then
-            npx lightningcss --minify blocksy-child/style.css -o blocksy-child/style.css
-          fi
-          # JS minification
-          find blocksy-child/assets/js -name '*.js' ! -name '*.min.js' -exec sh -c '
-            npx terser "$1" --compress --mangle -o "$1"
-          ' _ {} \;
+      - name: Install Node build tooling
+        run: npm ci
 
-      - name: Prepare SSH key
+      - name: Build theme distribution
+        run: npm run build:theme -- "$BUILD_OUTPUT_DIR"
+
+      - name: Prepare SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         run: |
           mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p 22 "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          if [ -n "$SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            ssh-keyscan -p "$SSH_PORT" -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          fi
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Verify SSH connectivity and target path
+        run: |
+          safe_deploy_path=${DEPLOY_PATH//\'/\'\\\'\'}
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o BatchMode=yes -o ConnectTimeout=15 -o StrictHostKeyChecking=yes \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "mkdir -p '$safe_deploy_path' && test -d '$safe_deploy_path'"
+
+      - name: Preview rsync changes
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: |
+          rsync -azvn --delete-delay --itemize-changes --exclude '.DS_Store' \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o BatchMode=yes -o StrictHostKeyChecking=yes" \
+            "$BUILD_OUTPUT_DIR/" \
+            "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH"
 
       - name: Deploy via rsync over SSH
+        if: ${{ github.event_name != 'workflow_dispatch' || !inputs.dry_run }}
         run: |
-          rsync -az --delete \
-            -e "ssh -i ~/.ssh/id_rsa -p 22 -o StrictHostKeyChecking=yes" \
-            ./blocksy-child/ \
-            "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:www/wp-content/themes/blocksy-child/"
+          rsync -az --delete-delay --itemize-changes --exclude '.DS_Store' \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o BatchMode=yes -o StrictHostKeyChecking=yes" \
+            "$BUILD_OUTPUT_DIR/" \
+            "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH"

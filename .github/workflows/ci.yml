@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    paths:
+      - 'blocksy-child/**'
+      - '.github/workflows/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'composer.json'
+      - 'composer.lock'
+  pull_request:
+    paths:
+      - 'blocksy-child/**'
+      - '.github/workflows/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'composer.json'
+      - 'composer.lock'
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate GitHub Actions workflows
+        uses: rhysd/actionlint@v1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Node build tooling
+        run: npm ci
+
+      - name: PHP syntax check
+        run: find blocksy-child -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Validate deploy config fallback
+        run: bash scripts/verify-deploy-config.sh 22 "www/wp-content/themes/blocksy-child/"
+
+      - name: Build theme distribution
+        run: npm run build:theme -- .build/blocksy-child
+
+      - name: Verify built style.css keeps the theme header
+        run: grep -q '^Theme Name: Blocksy Child$' .build/blocksy-child/style.css

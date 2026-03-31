@@ -101,7 +101,7 @@ Agenten lesen diese Reihenfolge:
 
 ## Wichtige Realitaeten
 
-- `blocksy-child/` wird ueber GitHub Actions per SSH-Rsync deployt. Der Deploy-Pfad bleibt deshalb vorerst unveraendert.
+- `blocksy-child/` wird ueber getrennte GitHub-Workflows fuer CI und SSH-Rsync-Deploy ausgeliefert; Host, Port und Zielpfad sind repo-seitig ueber GitHub-Variables/Secrets abstrahierbar.
 - Ein Teil des Live-Contents liegt im WordPress-Editor und ist nicht im Repo versioniert.
 - Externe Systeme wie n8n, GTM, GA4, Consent, CRM und Cal.com sind aktuell nur teilweise im Repo dokumentiert.
 - `AGENTS.md` ist die einzige Root-Datei fuer globalen Agentenkontext.

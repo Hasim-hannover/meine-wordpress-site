@@ -2,3 +2,5 @@
 !.ai/memory/.gitkeep
 .DS_Store
 vendor/
+.build/
+node_modules/

@@ -1,0 +1,17 @@
+{
+  "name": "meine-wordpress-site-tooling",
+  "private": true,
+  "description": "Build tooling for the Blocksy child theme deployment package.",
+  "engines": {
+    "node": ">=20 <23",
+    "npm": ">=10 <11"
+  },
+  "scripts": {
+    "build:theme": "bash scripts/build-theme-dist.sh",
+    "lint:php": "find blocksy-child -name '*.php' -print0 | xargs -0 -n1 php -l"
+  },
+  "devDependencies": {
+    "lightningcss-cli": "1.32.0",
+    "terser": "5.46.1"
+  }
+}

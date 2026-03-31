@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-21.
+Stand: 2026-03-31.
 
 Basis dieses Status:
 
@@ -16,7 +16,7 @@ Nicht verifiziert:
 ## Live
 
 - `blocksy-child/` ist der deploybare Website-Code.
-- Push auf `main` und `hotfix/*` deployt das Theme per SSH-Rsync ueber `.github/workflows/deploy.yml`; zusaetzlich ist ein manueller Start per GitHub Actions moeglich.
+- Das Theme laeuft jetzt ueber einen getrennten CI/CD-Pfad: `.github/workflows/ci.yml` prueft PHP-Syntax, Workflow-YAML und das deploybare Theme-Paket; `.github/workflows/deploy.yml` deployed erst nach erfolgreichem CI-Run fuer einen Push auf `main` oder optional manuell per Dry-Run bzw. `workflow_dispatch`.
 - Zentrale Theme-Module fuer Assets, SEO-Meta, Schema, Shortcodes, Portal und Snippets sind versioniert.
 - Die versionierte Homepage folgt jetzt einem kompakteren 7-Sektionen-CRO-Flow: Hero mit Audit-CTA, Ergebnis-Stats und Trust-Line, verdichteter E3-Proof mit Legacy-Anchor `#audit`, ein gekürzter Zwei-Wege-Vergleich, ein reiner WGOS-Teaser, reduzierte FAQ, kurzer finaler Audit-CTA und der bestehende Knowledge-Base-Nebenpfad; Audit-Prüffelder, Fit-Gating, öffentliche Community-Signale und die Sticky-Seitennavigation sind repo-seitig entfernt.
 - Die lokale Money Page `/wordpress-agentur-hannover/` folgt repo-seitig jetzt einem gestrafften CRO-Flow: Hero mit konservativem Proof, drei Problemkarten, gekürzte Vergleichstabelle, konkrete Leistungsbereiche statt 3-Step-Prozess, Fit-Check ohne Negativ-Absatz, E3-Proof, kurze Standort-Sektion für Hannover/DACH, reduzierte lokale FAQ und bestehender finaler Audit-CTA.
