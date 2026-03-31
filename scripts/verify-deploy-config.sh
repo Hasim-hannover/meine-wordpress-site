@@ -5,6 +5,12 @@ set -euo pipefail
 ssh_port="${1:-${SSH_PORT:-22}}"
 deploy_path="${2:-${DEPLOY_PATH:-}}"
 
+deploy_path="$(printf '%s' "$deploy_path" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+deploy_path="${deploy_path#\"}"
+deploy_path="${deploy_path%\"}"
+deploy_path="${deploy_path#\'}"
+deploy_path="${deploy_path%\'}"
+
 if ! [[ "$ssh_port" =~ ^[0-9]+$ ]] || [ "$ssh_port" -lt 1 ] || [ "$ssh_port" -gt 65535 ]; then
   echo "Invalid SSH_PORT value: $ssh_port" >&2
   exit 1
@@ -25,7 +31,7 @@ case "$normalized_path" in
 esac
 
 if [ "$normalized_path" = "blocksy-child" ] || [ "${normalized_path##*/}" != "blocksy-child" ]; then
-  echo "DEPLOY_PATH must resolve to the child theme directory and end with /blocksy-child/." >&2
+  echo "DEPLOY_PATH must resolve to the child theme directory and end with /blocksy-child/. Received: $deploy_path" >&2
   exit 1
 fi
 
