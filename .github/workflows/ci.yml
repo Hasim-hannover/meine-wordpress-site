@@ -59,4 +59,5 @@ jobs:
         run: npm run build:theme -- .build/blocksy-child
 
       - name: Verify built style.css keeps the theme header
-        run: grep -q '^Theme Name: Blocksy Child$' .build/blocksy-child/style.css
+        run: |
+          grep -q '^Theme Name: Blocksy Child$' .build/blocksy-child/style.css
