@@ -21,61 +21,73 @@ $flow_steps  = function_exists( 'nexus_get_energy_intake_flow_definition' ) ? ne
 
 $pain_cards = [
 	[
-		'title' => 'Formulare sammeln zu viel, qualifizieren zu wenig.',
-		'text'  => 'Der Vertrieb bekommt Neugier und Kaufabsicht im selben Prozess, weil Übergänge und Friktion nicht sauber gebaut sind.',
+		'title' => '80 € pro Lead — und die Hälfte geht nicht ans Telefon.',
+		'text'  => 'Sie kaufen Anfragen bei Aroundhome, Check24 oder DAA. Aber die Hälfte sind Mieter ohne Dach, Preisvergleicher ohne Budget oder Kontakte, die schon bei drei anderen Anbietern angefragt haben. Ihr Vertrieb verliert Stunden mit Leuten, die nie kaufen werden.',
 	],
 	[
-		'title' => 'Tracking beantwortet die wichtigen Vertriebsfragen nicht.',
-		'text'  => 'Unklar welche Seite, welche Anfragequalität und welcher Kanal wirtschaftlich tragen.',
+		'title' => 'Kein Überblick, welcher Kanal sich wirklich lohnt.',
+		'text'  => 'Google Ads, Portal-Leads, Empfehlungen — aber niemand kann sauber sagen, wo die guten Abschlüsse herkommen. Ohne diese Klarheit investieren Sie blind.',
+	],
+	[
+		'title' => 'Seit 2024 kommen die Anfragen nicht mehr von allein.',
+		'text'  => 'Der PV-Boom ist vorbei. Der Markt normalisiert sich. Wer jetzt keine eigene Anfrage-Infrastruktur hat, ist abhängig von Portalen — und deren Preisen.',
 	],
 ];
 
 
 $journey_cards = [
 	[
-		'label' => 'Frühe Phase',
-		'title' => 'Noch Orientierung',
-		'text'  => 'Hier braucht es Klarheit, Vergleichbarkeit und schnelle Relevanz. Zu breite Seiten verlieren diese Nutzer früh.',
+		'label' => 'Phase 1',
+		'title' => '„Lohnt sich das überhaupt?"',
+		'text'  => 'Googelt Kosten, liest Vergleiche, ist skeptisch. Hier entscheidet sich in 8 Sekunden, ob Ihre Seite relevant wirkt.',
 	],
 	[
-		'label' => 'Mittlere Phase',
-		'title' => 'Konkretes Interesse',
-		'text'  => 'Jetzt zählen Proof, regionale Passung, klare Leistungslogik und ein sauberer nächster Schritt.',
+		'label' => 'Phase 2',
+		'title' => '„Wer macht das bei uns in der Region?"',
+		'text'  => 'Sucht lokale Anbieter, vergleicht Bewertungen, will Referenzen sehen. Wenn Ihre Seite hier keinen Proof liefert, geht er zum Nächsten.',
 	],
 	[
-		'label' => 'Späte Phase',
-		'title' => 'Anfragebereit',
-		'text'  => 'Hier darf das Formular nicht bremsen. Komfort, Vorqualifizierung und Vertrauen müssen direkt ineinandergreifen.',
+		'label' => 'Phase 3',
+		'title' => '„Ich will ein Angebot — aber einfach."',
+		'text'  => 'Will nicht 20 Felder ausfüllen. Will nicht 3 Tage auf einen Rückruf warten. Hier verlieren Sie die meisten Anfragen.',
 	],
 ];
 
 $proof_kpis = [
 	[
 		'value' => '1.750+',
-		'label' => 'Leads im System',
+		'label' => 'qualifizierte Anfragen',
 	],
 	[
-		'value' => '-83 %',
-		'label' => 'Cost per Lead',
+		'value' => '–83 %',
+		'label' => 'Kosten pro Anfrage',
 	],
 	[
 		'value' => '12 %',
-		'label' => 'Sales-Conversion',
+		'label' => 'Abschlussquote',
 	],
 ];
 
 $faq_items = [
 	[
-		'question' => 'Was unterscheidet das hier von einer klassischen Agenturleistung?',
-		'answer'   => 'Klassische Agenturen liefern Gewerke: eine neue Website, eine SEO-Kampagne oder ein Tracking-Setup. Hier greifen Website-Struktur, Tracking, Vorqualifizierung und Conversion als zusammenhängendes System ineinander — mit dem Ziel, aus vorhandener Nachfrage messbar bessere Anfragen zu machen.',
+		'question' => 'Was kostet das?',
+		'answer'   => 'Das hängt vom Umfang ab. Typische Retainer starten bei 2.500–4.000 €/Monat. Bei einem CPL von 80 € und 50 Anfragen/Monat investieren Sie aktuell 4.000 € in Portal-Leads mit 10 % Abschlussquote. Mein System zielt darauf, diese Kosten um 50–80 % zu senken — der Retainer refinanziert sich in den meisten Fällen innerhalb von 8–12 Wochen.',
 	],
 	[
-		'question' => 'Brauchen wir dafür sofort einen Relaunch?',
-		'answer'   => 'Oft nicht. Häufig reicht zuerst eine saubere Priorisierung: Landingpages, Tracking, CTA-Logik oder Formularprozess. Ein Relaunch ist nur sinnvoll, wenn die Struktur selbst der Engpass ist.',
+		'question' => 'Funktioniert das auch für kleinere Betriebe mit 5–10 Mitarbeitern?',
+		'answer'   => 'Ja, wenn Sie aktuell mindestens 20 Anfragen pro Monat verarbeiten und Kosten pro Anfrage spürbar sind. Unter dieser Schwelle ist oft ein schlankerer Ansatz sinnvoller — das klären wir im Erstgespräch.',
 	],
 	[
-		'question' => 'Was passiert nach dem Formular?',
-		'answer'   => 'Sie erhalten eine persönliche Einordnung. Wenn ein Growth Audit der sinnvollste nächste Schritt ist, wird das klar benannt. Wenn zuerst eine andere Priorität zählt, wird auch das sauber eingeordnet.',
+		'question' => 'Warum nicht einfach mehr Google Ads schalten?',
+		'answer'   => 'Mehr Budget auf schlechte Seiten heißt mehr Geld für dieselben unqualifizierten Anfragen. Erst wenn Seite, Formular und Tracking sauber arbeiten, lohnt sich mehr Reichweite.',
+	],
+	[
+		'question' => 'Brauchen wir eine neue Website?',
+		'answer'   => 'Meistens nicht. In 80 % der Fälle reicht eine Optimierung der bestehenden Seite: bessere Formulare, klarere Struktur, sauberes Tracking. Ob ein Relaunch nötig ist, zeigt der erste Audit.',
+	],
+	[
+		'question' => 'Wir nutzen schon eine Agentur — warum sollten wir wechseln?',
+		'answer'   => 'Müssen Sie nicht. Ich ergänze oft bestehende Setups — besonders bei Tracking, Vorqualifizierung und Seitenstruktur. Wenn Ihre aktuelle Agentur alles abdeckt und Ihre Abschlussquote stimmt, brauchen Sie mich nicht.',
 	],
 ];
 
@@ -86,7 +98,7 @@ $service_schema = [
 	'name'        => 'Website als Vertriebssystem für Solar- und Wärmepumpen-Anbieter',
 	'serviceType' => 'B2B Website-, Tracking- und Conversion-System für Solar-, Wärmepumpen-, Speicher- und Energie-Anbieter',
 	'url'         => $page_url,
-	'description' => 'B2B-Landingpage für Solar-, Wärmepumpen- und Speicher-Anbieter: Website als Vertriebssystem mit Tracking, CRO, SEO und intelligenter Vorqualifizierung.',
+	'description' => 'Eigenes Anfrage-System für Solar- und Wärmepumpen-Betriebe: Schluss mit teuren Portal-Leads. Referenz E3 New Energy — 83 % weniger Kosten pro Anfrage in 9 Monaten.',
 	'provider'    => [
 		'@type' => 'Person',
 		'name'  => 'Haşim Üner',
@@ -210,15 +222,14 @@ get_header();
 			<div class="nx-container">
 				<div class="energy-hero__grid">
 					<div class="energy-hero__copy">
-						<span class="nx-badge nx-badge--gold">B2B für Solar, Wärmepumpe, Speicher und Energielösungen</span>
-						<h1 class="nx-hero__title">Website für Solar- und Wärmepumpen-Anbieter, die qualifizierte Anfragen erzeugt.</h1>
-						<p class="nx-hero__subtitle">Wenn Nachfrage da ist, aber Landingpages, Tracking und Nutzerführung Potenzial verlieren &mdash; genau dort setze ich an.</p>
+						<span class="nx-badge nx-badge--gold">Für Solar- und Wärmepumpen-Betriebe mit 10–25 Mitarbeitern</span>
+						<h1 class="nx-hero__title">Schluss mit teuren Portal-Leads, die nicht ans Telefon gehen.</h1>
+						<p class="nx-hero__subtitle">Ich baue Solar- und Wärmepumpen-Anbietern ein eigenes Anfrage-System &mdash; damit Ihr Vertrieb nur noch mit Interessenten spricht, die wirklich kaufen wollen.</p>
+						<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
 						<div class="energy-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
-							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_hero_case" data-track-category="trust">E3 Case Study ansehen</a>
-							<a href="#energie-anfrage" class="energy-text-link" data-track-action="cta_energy_hero_form" data-track-category="lead_gen">Oder direkt Ihr Setup einordnen</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Kostenloses Erstgespräch — 15 Min.</a>
+							<a href="<?php echo esc_url( $e3_url ); ?>" class="energy-text-link" data-track-action="cta_energy_hero_case" data-track-category="trust">E3-Ergebnis ansehen →</a>
 						</div>
-						<p class="nx-cta-microcopy">B2B-only &middot; Diagnose vor Pitch &middot; E3 als Proof</p>
 					</div>
 
 				</div>
@@ -231,7 +242,7 @@ get_header();
 					<div class="energy-proof__copy">
 						<span class="nx-badge nx-badge--gold">Proof / Case Study</span>
 						<h2>E3 New Energy.</h2>
-						<p>Vom Lead-Einkauf zum eigenen Nachfragesystem &mdash; im Energiemarkt, mit derselben Logik.</p>
+						<p>E3 New Energy ist ein regionaler Energieanbieter für Photovoltaik, Wärmepumpen und Speicherlösungen. Ausgangslage: Hohe Kosten pro Anfrage durch Portal-Zukauf, keine eigene digitale Anfrage-Infrastruktur. In 9 Monaten: eigenes System aufgebaut, Kosten pro Anfrage um 83 % gesenkt, Vertrieb arbeitet nur noch mit vorqualifizierten Anfragen.</p>
 						<div class="energy-proof__actions">
 							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_case" data-track-category="trust">Case Study lesen</a>
 						</div>
@@ -254,8 +265,8 @@ get_header();
 		<section class="nx-section energy-section energy-section--alt" id="reibung">
 			<div class="nx-container">
 				<div class="energy-section__head">
-					<span class="nx-badge nx-badge--ghost">Problem / Reibung</span>
-					<h2>Was im Energie-Vertrieb digital oft bremst.</h2>
+					<span class="nx-badge nx-badge--ghost">Alltag im Vertrieb</span>
+					<h2>Kommt Ihnen das bekannt vor?</h2>
 				</div>
 				<div class="energy-pain-grid">
 					<?php foreach ( $pain_cards as $index => $pain_card ) : ?>
@@ -272,8 +283,8 @@ get_header();
 		<section class="nx-section energy-section" id="branchenverstaendnis">
 			<div class="nx-container">
 				<div class="energy-section__head energy-section__head--narrow">
-					<span class="nx-badge nx-badge--gold">Branchenverständnis</span>
-					<h2>Im Energie-Vertrieb muss die Website Vertrauen, Orientierung und Vorqualifizierung gleichzeitig leisten.</h2>
+					<span class="nx-badge nx-badge--gold">So denkt Ihr Kunde</span>
+					<h2>Was ein Hausbesitzer durchmacht, bevor er bei Ihnen anfragt.</h2>
 				</div>
 
 				<div class="energy-journey-shell" aria-label="Entscheidungsphasen">
@@ -284,6 +295,18 @@ get_header();
 							<p><?php echo esc_html( $journey_card['text'] ); ?></p>
 						</article>
 					<?php endforeach; ?>
+				</div>
+			</div>
+		</section>
+
+		<section class="nx-section energy-section energy-section--alt" id="erstgespraech">
+			<div class="nx-container">
+				<div class="nx-cta-box energy-cta-box">
+					<h2>Nicht sicher, ob das für Sie passt?</h2>
+					<p>15 Minuten. Kein Pitch. Ich schaue mir Ihre aktuelle Situation an und sage Ihnen ehrlich, ob und wo ich einen Hebel sehe.</p>
+					<div class="energy-cta-box__actions">
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen">Termin vereinbaren — kostenlos</a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -327,7 +350,7 @@ get_header();
 									<div class="review-progress energy-progress" aria-label="Fortschritt im Branchen-Flow">
 										<div class="review-progress-head">
 											<div class="review-progress-copy">
-												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Abschnitt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?>: <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_html( $flow_steps[0]['title_short'] ) : 'Leistung'; ?></strong>
+												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">In 2 Minuten: Wo liegt bei Ihnen der größte Hebel? — Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?></strong>
 											</div>
 										</div>
 										<div
@@ -547,8 +570,8 @@ get_header();
 		<section class="nx-section energy-section" id="faq">
 			<div class="nx-container">
 				<div class="energy-section__head energy-section__head--narrow">
-					<span class="nx-badge nx-badge--ghost">FAQ</span>
-					<h2>Häufige Fragen zur Zusammenarbeit im Energie-Umfeld.</h2>
+					<span class="nx-badge nx-badge--ghost">Häufige Fragen</span>
+					<h2>Was Solar- und Wärmepumpen-Betriebe vor dem Erstgespräch wissen wollen.</h2>
 				</div>
 				<div class="nx-faq energy-faq">
 					<?php foreach ( $faq_items as $index => $faq_item ) : ?>
@@ -565,10 +588,10 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-cta-box energy-cta-box">
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2>Wenn Nachfrage da ist, sollte die Website sie nicht verlieren.</h2>
+					<h2>Eigene Anfragen statt Portal-Abhängigkeit. In 15 Minuten klären, ob das für Sie passt.</h2>
 					<div class="energy-cta-box__actions">
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
-						<a href="#energie-anfrage" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_footer_form" data-track-category="lead_gen">Setup einordnen</a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Kostenloses Erstgespräch — 15 Min.</a>
+						<a href="#energie-anfrage" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_footer_form" data-track-category="lead_gen">Situation einordnen</a>
 					</div>
 				</div>
 			</div>
