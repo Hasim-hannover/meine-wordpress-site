@@ -144,12 +144,12 @@ function hu_get_forced_singular_seo_map() {
 				'description' => 'KI-Features direkt in WordPress: Chatbots, Lead-Qualifizierung, Wissenssuche, Automatisierung – auf eigener Infrastruktur, ohne Datenabfluss.',
 			],
 			'solar-waermepumpen-leadgenerierung' => [
-				'title'       => 'Leadgenerierung für Solar- und Wärmepumpen-Anbieter | B2B-System',
-				'description' => 'B2B-Landingpage für Solar-, Wärmepumpen- und Speicher-Anbieter: Website, Tracking, SEO und Conversion als System für qualifizierte Anfragen.',
+				'title'       => 'Leadgenerierung für Solar & Wärmepumpen | Weniger Kosten, bessere Anfragen',
+				'description' => 'Schluss mit teuren Portal-Leads. Eigenes Anfrage-System für Solarteure und Wärmepumpen-Installateure. Referenz: –83 % Kosten pro Anfrage. Kostenloses Erstgespräch.',
 			],
 			'website-fuer-solar-und-waermepumpen-anbieter' => [
-				'title'       => 'Leadgenerierung für Solar- und Wärmepumpen-Anbieter | B2B-System',
-				'description' => 'B2B-Landingpage für Solar-, Wärmepumpen- und Speicher-Anbieter: Website, Tracking, SEO und Conversion als System für qualifizierte Anfragen.',
+				'title'       => 'Leadgenerierung für Solar & Wärmepumpen | Weniger Kosten, bessere Anfragen',
+				'description' => 'Schluss mit teuren Portal-Leads. Eigenes Anfrage-System für Solarteure und Wärmepumpen-Installateure. Referenz: –83 % Kosten pro Anfrage. Kostenloses Erstgespräch.',
 			],
 		]
 	);
