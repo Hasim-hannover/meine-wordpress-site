@@ -14,7 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Suppress global wp_body_open elements — isolated landing page.
-remove_action( 'wp_body_open', 'nexus_render_theme_toggle', 15 );
 remove_action( 'wp_body_open', 'nexus_render_site_header', 20 );
 ?>
 <!DOCTYPE html>

@@ -376,22 +376,9 @@ add_action(
 		?>
 		<script>
 		(function () {
-			var theme = 'dark';
-			var isMobileThemeLocked = false;
-
-			if (window.matchMedia) {
-				isMobileThemeLocked = window.matchMedia('(max-width: 1180px)').matches;
-			} else if (typeof window.innerWidth === 'number') {
-				isMobileThemeLocked = window.innerWidth <= 1180;
-			}
-
-			if (!isMobileThemeLocked && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-				theme = 'light';
-			}
-
-			document.documentElement.setAttribute('data-nx-theme', theme);
-			document.documentElement.setAttribute('data-theme', theme);
-			document.documentElement.style.colorScheme = theme;
+			document.documentElement.setAttribute('data-nx-theme', 'dark');
+			document.documentElement.setAttribute('data-theme', 'dark');
+			document.documentElement.style.colorScheme = 'dark';
 		})();
 		</script>
 		<?php
@@ -514,43 +501,6 @@ add_action( 'template_redirect', function() {
 add_action( 'wp_body_open', 'hasim_skip_to_content' );
 function hasim_skip_to_content() {
 	echo '<a href="#main" class="skip-to-content" style="position:absolute;top:-100px;left:16px;background:#b46a3c;color:#fff8f3;padding:10px 16px;border:1px solid rgba(255,248,243,0.18);border-radius:999px;font-weight:800;font-size:13px;letter-spacing:0.01em;box-shadow:0 16px 34px rgba(180,106,60,0.28);z-index:99999;text-decoration:none;transition:top 0.2s ease;" onfocus="this.style.top=\'16px\'" onblur="this.style.top=\'-100px\'">Zum Hauptinhalt springen</a>';
-}
-
-function nexus_get_theme_toggle_html( $args = [] ) {
-	$args   = wp_parse_args(
-		$args,
-		[
-			'source' => 'default',
-		]
-	);
-	$source = sanitize_key( $args['source'] );
-
-	ob_start();
-	?>
-	<div class="nx-theme-toggle" data-nx-theme-toggle data-nx-theme-toggle-source="<?php echo esc_attr( $source ); ?>">
-		<div class="nx-theme-toggle__group" role="group" aria-label="<?php esc_attr_e( 'Farbschema wählen', 'blocksy-child' ); ?>">
-			<button type="button" class="nx-theme-toggle__button" data-theme-value="dark" aria-pressed="false" aria-label="<?php esc_attr_e( 'Dunkles Farbschema aktivieren', 'blocksy-child' ); ?>" title="<?php esc_attr_e( 'Dunkel', 'blocksy-child' ); ?>">
-				<span class="nx-theme-toggle__icon" aria-hidden="true">D</span>
-				<span><?php esc_html_e( 'Dunkel', 'blocksy-child' ); ?></span>
-			</button>
-			<button type="button" class="nx-theme-toggle__button" data-theme-value="light" aria-pressed="false" aria-label="<?php esc_attr_e( 'Helles Farbschema aktivieren', 'blocksy-child' ); ?>" title="<?php esc_attr_e( 'Hell', 'blocksy-child' ); ?>">
-				<span class="nx-theme-toggle__icon" aria-hidden="true">H</span>
-				<span><?php esc_html_e( 'Hell', 'blocksy-child' ); ?></span>
-			</button>
-		</div>
-	</div>
-	<?php
-
-	return trim( ob_get_clean() );
-}
-
-add_action( 'wp_body_open', 'nexus_render_theme_toggle', 15 );
-function nexus_render_theme_toggle() {
-	echo nexus_get_theme_toggle_html(
-		[
-			'source' => 'fallback',
-		]
-	);
 }
 
 /**

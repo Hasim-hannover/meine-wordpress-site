@@ -843,116 +843,13 @@
 
         /**
          * 13. THEME TOGGLE
-         * Wechselt Dark/Light ohne Browser-Storage und synchronisiert alle Toggle-Buttons.
+         * Erzwingt das globale Dark-Theme.
          */
         initThemeToggle: function () {
             var root = document.documentElement;
-            var buttons = document.querySelectorAll('[data-nx-theme-toggle] [data-theme-value]');
-            var systemLightMedia = window.matchMedia ? window.matchMedia('(prefers-color-scheme: light)') : null;
-            var desktopThemeMedia = window.matchMedia ? window.matchMedia('(min-width: 1181px)') : null;
-            var hasManualDesktopTheme = false;
-            var manualDesktopTheme = null;
-
-            function isDesktopThemeEnabled() {
-                if (desktopThemeMedia) {
-                    return desktopThemeMedia.matches;
-                }
-
-                if (typeof window.innerWidth === 'number') {
-                    return window.innerWidth >= 1181;
-                }
-
-                return true;
-            }
-
-            function resolveSystemTheme() {
-                if (systemLightMedia && systemLightMedia.matches) {
-                    return 'light';
-                }
-
-                return 'dark';
-            }
-
-            function resolveTheme() {
-                if (!isDesktopThemeEnabled()) {
-                    return 'dark';
-                }
-
-                if (manualDesktopTheme) {
-                    return manualDesktopTheme;
-                }
-
-                return resolveSystemTheme();
-            }
-
-            function syncButtons(theme) {
-                buttons.forEach(function (button) {
-                    var isActive = button.getAttribute('data-theme-value') === theme;
-                    button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-                    button.classList.toggle('is-active', isActive);
-                });
-            }
-
-            function applyTheme(theme, withTransition) {
-                if (withTransition) {
-                    root.classList.add('theme-transitioning');
-                }
-
-                root.setAttribute('data-nx-theme', theme);
-                root.setAttribute('data-theme', theme);
-                root.style.colorScheme = theme;
-                syncButtons(theme);
-
-                if (withTransition) {
-                    window.setTimeout(function () {
-                        root.classList.remove('theme-transitioning');
-                    }, 350);
-                }
-            }
-
-            function applyResolvedTheme(withTransition) {
-                applyTheme(resolveTheme(), withTransition);
-            }
-
-            buttons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    manualDesktopTheme = button.getAttribute('data-theme-value');
-                    hasManualDesktopTheme = true;
-                    applyResolvedTheme(true);
-                });
-            });
-
-            if (systemLightMedia) {
-                var handleSystemThemeChange = function () {
-                    if (!hasManualDesktopTheme && isDesktopThemeEnabled()) {
-                        applyResolvedTheme(false);
-                    }
-                };
-
-                if (typeof systemLightMedia.addEventListener === 'function') {
-                    systemLightMedia.addEventListener('change', handleSystemThemeChange);
-                } else if (typeof systemLightMedia.addListener === 'function') {
-                    systemLightMedia.addListener(handleSystemThemeChange);
-                }
-            }
-
-            if (desktopThemeMedia) {
-                var handleViewportThemeChange = function () {
-                    applyResolvedTheme(false);
-                };
-
-                if (typeof desktopThemeMedia.addEventListener === 'function') {
-                    desktopThemeMedia.addEventListener('change', handleViewportThemeChange);
-                } else if (typeof desktopThemeMedia.addListener === 'function') {
-                    desktopThemeMedia.addListener(handleViewportThemeChange);
-                }
-            } else {
-                window.addEventListener('resize', function () {
-                    applyResolvedTheme(false);
-                }, { passive: true });
-            }
-
-            applyResolvedTheme(false);
+            root.setAttribute('data-nx-theme', 'dark');
+            root.setAttribute('data-theme', 'dark');
+            root.style.colorScheme = 'dark';
         },
 
 
@@ -1084,12 +981,7 @@
 
             runAfterNextPaint(function () {
                 self.initThemeToggle();
-                self.initThemeToggleVisibility();
             });
-
-            runWhenIdle(function () {
-                self.mountThemeToggle();
-            }, 1000);
 
             // Header Flight Mode
             this.initHeaderFlight();

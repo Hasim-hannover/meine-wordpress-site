@@ -28,20 +28,13 @@ add_shortcode( 'nexus_header_cta', function() {
 } );
 
 /**
- * NEXUS THEME TOGGLE
- * Shortcode: [nexus_theme_toggle]
- * Kompakter Hell/Dunkel-Schalter für Header oder freie HTML-Slots.
+ * Legacy-Kompatibilitaet fuer alten Theme-Toggle-Shortcode.
+ *
+ * Das Frontend ist fest auf Dark gesetzt; der Shortcode bleibt als no-op,
+ * damit Altinhalte kein sichtbares Raw-Shortcode-Fragment rendern.
  */
 add_shortcode( 'nexus_theme_toggle', function() {
-    if ( ! function_exists( 'nexus_get_theme_toggle_html' ) ) {
-        return '';
-    }
-
-    return nexus_get_theme_toggle_html(
-        [
-            'source' => 'shortcode',
-        ]
-    );
+    return '';
 } );
 
 /**
