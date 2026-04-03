@@ -316,6 +316,7 @@
     var subtitle = document.createElement('p');
     var timestamp = formatTimestamp(data.timestamp);
     var quickWins = Array.isArray(data.quickWins) ? data.quickWins.slice(0, 3) : [];
+    var displayUrl = data.url || stripUrlProtocol(data.fullUrl) || 'Ihre Website';
 
     meta.className = 'cja-score-meta';
     kicker.className = 'cja-score-kicker';
@@ -323,7 +324,7 @@
     subtitle.className = 'cja-score-sub';
 
     kicker.textContent = 'Growth Audit Ergebnis';
-    title.textContent = (data.fullUrl || data.url || 'Ihre Website') + ' im Überblick';
+    title.textContent = displayUrl + ' im Überblick';
     subtitle.textContent = timestamp ? 'Stand: ' + timestamp : 'Die stärksten Hebel aus Performance, Tracking, SEO und Content.';
 
     wrap.appendChild(ring);
@@ -713,6 +714,10 @@
     node.className = 'cja-empty';
     node.textContent = text;
     return node;
+  }
+
+  function stripUrlProtocol(value) {
+    return String(value || '').replace(/^https?:\/\//i, '');
   }
 
   function toScore(value) {

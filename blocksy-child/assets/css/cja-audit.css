@@ -309,14 +309,14 @@
 .cja-quickwins {
 	display: grid;
 	width: 100%;
-	gap: 16px;
+	gap: 0;
 }
 
 .cja-quickwins-header {
 	display: flex;
 	align-items: center;
 	gap: 12px;
-	margin-bottom: 0;
+	margin-bottom: 16px;
 	text-align: left;
 }
 
