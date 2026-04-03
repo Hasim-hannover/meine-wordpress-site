@@ -128,17 +128,7 @@ body.nx-blog-header-active .ct-header {
 }
 
 .nx-site-header__audit-link--primary {
-    color: var(--text-inverse);
-    border-color: transparent;
-    background: linear-gradient(180deg, var(--accent-hover) 0%, var(--accent) 100%);
-    box-shadow: 0 16px 34px hsl(var(--accent-hsl) / 0.2);
-}
-
-.nx-site-header__audit-link--primary:hover,
-.nx-site-header__audit-link--primary:focus-visible {
-    color: var(--text-inverse);
-    border-color: transparent;
-    background: linear-gradient(180deg, color-mix(in srgb, var(--accent-hover) 82%, white) 0%, var(--accent-hover) 100%);
+    display: none !important;
 }
 
 .nx-site-header.nexus-flight-mode .nx-site-header__shell {
