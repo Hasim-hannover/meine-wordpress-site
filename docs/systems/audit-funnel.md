@@ -1,6 +1,6 @@
 # Audit Funnel
 
-Stand: 2026-04-03.
+Stand: 2026-04-04.
 
 Diese Doku beschreibt den aktuell aktiven Funnel rund um den `Growth Audit`.
 
@@ -28,10 +28,12 @@ Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 1. Besucher landet auf `/growth-audit/`.
 2. `blocksy-child/page-audit.php` rendert die Route ueber `blocksy-child/inc/audit-page.php`, das aktiv den Shortcode `cja_audit` ausgibt.
 3. Das Frontend zeigt ein einzelnes URL-Feld, einen kurzen Loading-State und danach ein Ergebnis-Dashboard.
-4. `blocksy-child/assets/js/cja-audit.js` bereinigt die URL, validiert sie clientseitig und sendet `POST https://n8n.hasimuener.de/webhook/cja-analyze` mit JSON-Body `{ "url": "<bereinigte-url>" }`.
-5. n8n liefert ein JSON mit `overall_score`, Modul-Scores, Detail-Items, Revenue-Summary und `quickWins`.
-6. Das Frontend rendert die Analyse sofort auf der Seite und zeigt als naechsten Schritt einen CTA nach `/kontakt/`.
-7. Nachgelagerte persoenliche Qualifizierung laeuft nur noch ueber Kontakt-/Call-Pfade, nicht mehr ueber einen Pflicht-CRM-Intake auf der Hauptroute.
+4. `blocksy-child/assets/js/cja-audit.js` bereinigt die URL, validiert sie clientseitig und startet bevorzugt `POST https://n8n.hasimuener.de/webhook/audit` mit JSON-Body `{ "url": "<bereinigte-url>" }`.
+5. Der Start-Webhook antwortet sofort mit `jobId + processing`; das Frontend pollt danach `GET https://n8n.hasimuener.de/webhook/audit-status?jobId=...`, bis das Ergebnis fertig ist.
+6. Falls der Async-Start-Endpoint nicht verfuegbar ist, faellt das Frontend kontrolliert auf den Legacy-Webhook `https://n8n.hasimuener.de/webhook/cja-analyze` zurueck.
+7. Das Frontend akzeptiert sowohl den aktuellen V3-Result-Contract aus dem Polling als auch den bisherigen Direkt-Payload mit `overall_score`, Modulen, Revenue-Summary und `quickWins`.
+8. Die Analyse rendert direkt auf der Seite und zeigt als naechsten Schritt einen CTA nach `/kontakt/`.
+9. Nachgelagerte persoenliche Qualifizierung laeuft nur noch ueber Kontakt-/Call-Pfade, nicht mehr ueber einen Pflicht-CRM-Intake auf der Hauptroute.
 
 ## Nutzerseitige Inputs
 
@@ -63,7 +65,7 @@ Pflichtfeld:
 
 ## Externe Abhaengigkeiten
 
-- n8n Webhook `https://n8n.hasimuener.de/webhook/cja-analyze`
+- n8n Webhooks `https://n8n.hasimuener.de/webhook/audit`, `https://n8n.hasimuener.de/webhook/audit-status` und als Fallback `https://n8n.hasimuener.de/webhook/cja-analyze`
 - WordPress fuer Route, Shortcode und CTA-Ziel
 - Cal.com nur fuer nachgelagerte Gespraechswege
 
@@ -80,7 +82,7 @@ Dieser Layer ist fachlich weiter relevant, aber derzeit nicht die aktive Landing
 
 ## Risiken
 
-- Der aktive n8n-Payload-Contract ist noch nicht als vollstaendig versionierter Workflow-Export plus Flow-Map im Repo beschrieben.
+- Der aktive Frontend-Flow ist jetzt robuster, aber der produktive `n8n.hasimuener.de`-Stand fuer den Async-Runner ist repo-seitig noch nicht als vollstaendig versionierter Export plus Flow-Map beschrieben.
 - Der Legacy-48h-Intake und der aktive Instant-Results-Layer leben parallel im Repo und muessen bewusst getrennt bleiben.
 - CRM- und Follow-up-Logik fuer den alten Intake bleibt im Theme vorhanden, obwohl sie auf der Hauptroute nicht mehr aktiv ist.
 

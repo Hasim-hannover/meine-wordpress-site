@@ -5,16 +5,23 @@
   var state = {
     loadingPromise: null,
     loadingTimeouts: [],
-    revealObserver: null
+    revealObserver: null,
+    activeController: null
   };
+  var DEFAULT_POLL_INTERVAL = 4500;
+  var DEFAULT_POLL_TIMEOUT = 180000;
+  var DEFAULT_REQUEST_TIMEOUT = 20000;
+  var DEFAULT_LEGACY_TIMEOUT = 120000;
+  var LOADING_STEP_DELAY = 1200;
   var steps = [
     'Website wird geladen...',
     'Performance wird gemessen...',
     'Tracking & Datenschutz wird geprüft...',
     'SEO-Grundlagen werden analysiert...',
     'Content wird ausgewertet...',
-    'Revenue Impact wird berechnet...'
+    'Ergebnis wird zusammengestellt...'
   ];
+  var loadingProgressMarks = [12, 28, 44, 60, 74, 88];
   var statusLabels = {
     red: 'kritisch',
     yellow: 'mittel',
@@ -62,7 +69,7 @@
 
     clearError();
 
-    if (!window.cjaConfig || !window.cjaConfig.webhookUrl) {
+    if (!hasWebhookConfig()) {
       showError('Die Analyse ist gerade nicht verfügbar. Bitte versuchen Sie es später erneut.');
       return;
     }
@@ -75,6 +82,33 @@
     }
 
     runAnalysis(cleanedUrl);
+  }
+
+  function hasWebhookConfig() {
+    var config = getConfig();
+    return Boolean((config.webhookStartUrl && config.webhookStatusUrl) || getLegacyWebhookUrl());
+  }
+
+  function getConfig() {
+    return window.cjaConfig || {};
+  }
+
+  function getLegacyWebhookUrl() {
+    var config = getConfig();
+    return String(config.legacyWebhookUrl || config.webhookUrl || '').trim();
+  }
+
+  function getPollInterval() {
+    return sanitizeDuration(getConfig().pollInterval, DEFAULT_POLL_INTERVAL);
+  }
+
+  function getPollTimeout() {
+    return sanitizeDuration(getConfig().pollTimeout, DEFAULT_POLL_TIMEOUT);
+  }
+
+  function sanitizeDuration(value, fallback) {
+    var parsed = Number(value);
+    return !isNaN(parsed) && parsed > 0 ? parsed : fallback;
   }
 
   function normalizeUrl(value) {
@@ -102,38 +136,244 @@
     showLoading(url);
 
     try {
-      var controller = new AbortController();
-      var timeout = window.setTimeout(function () {
-        controller.abort();
-      }, 60000);
+      var data = await requestAnalysis(url);
+      await waitForMinLoadingTime();
+      showResults(data || {});
+    } catch (error) {
+      showError(resolveUserErrorMessage(error));
+    }
+  }
 
-      var response = await fetch(window.cjaConfig.webhookUrl, {
+  async function requestAnalysis(url) {
+    var config = getConfig();
+
+    if (config.webhookStartUrl && config.webhookStatusUrl) {
+      try {
+        return await runAsyncAnalysis(url);
+      } catch (error) {
+        if (!shouldFallbackToLegacy(error) || !getLegacyWebhookUrl()) {
+          throw error;
+        }
+      }
+    }
+
+    if (!getLegacyWebhookUrl()) {
+      var configError = new Error('Die Analyse ist gerade nicht verfügbar. Bitte versuchen Sie es später erneut.');
+      configError.code = 'CONFIG_MISSING';
+      throw configError;
+    }
+
+    return runLegacyAnalysis(url);
+  }
+
+  async function runAsyncAnalysis(url) {
+    var data = await fetchJson(
+      getConfig().webhookStartUrl,
+      {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: url }),
-        mode: 'cors',
-        signal: controller.signal
-      });
+        mode: 'cors'
+      },
+      DEFAULT_REQUEST_TIMEOUT,
+      'ASYNC_START'
+    );
 
-      window.clearTimeout(timeout);
+    if (looksLikeAuditResult(data)) {
+      return unwrapAuditPayload(data);
+    }
+
+    if (!data || data.ok !== true || !data.jobId) {
+      var invalidError = new Error('Die Analyse konnte nicht gestartet werden.');
+      invalidError.code = 'ASYNC_START_INVALID';
+      throw invalidError;
+    }
+
+    return pollAnalysis(data.jobId, data.pollUrl);
+  }
+
+  async function runLegacyAnalysis(url) {
+    return fetchJson(
+      getLegacyWebhookUrl(),
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: url }),
+        mode: 'cors'
+      },
+      DEFAULT_LEGACY_TIMEOUT,
+      'LEGACY'
+    );
+  }
+
+  async function pollAnalysis(jobId, pollUrl) {
+    var startedAt = Date.now();
+
+    while (Date.now() - startedAt < getPollTimeout()) {
+      await delay(getPollInterval());
+
+      try {
+        var data = await fetchJson(
+          buildStatusUrl(jobId, pollUrl),
+          {
+            method: 'GET',
+            mode: 'cors'
+          },
+          DEFAULT_REQUEST_TIMEOUT,
+          'ASYNC_STATUS'
+        );
+
+        if (data && data.status === 'done' && data.data) {
+          return data.data;
+        }
+
+        if (looksLikeAuditResult(data)) {
+          return unwrapAuditPayload(data);
+        }
+
+        if (!data || !data.status || data.status === 'processing' || data.status === 'queued') {
+          continue;
+        }
+
+        if (data.status === 'error' || data.status === 'expired') {
+          var resultError = new Error(data.error || 'Die Analyse konnte nicht abgeschlossen werden.');
+          resultError.code = 'ASYNC_RESULT_ERROR';
+          throw resultError;
+        }
+      } catch (error) {
+        if (error && error.name === 'AbortError') {
+          throw error;
+        }
+
+        if (error && error.code && (/_HTTP$/.test(error.code) || /_PARSE$/.test(error.code))) {
+          throw error;
+        }
+      }
+    }
+
+    var timeoutError = new Error('Die Analyse braucht heute länger als erwartet. Bitte versuchen Sie es in ein bis zwei Minuten erneut.');
+    timeoutError.code = 'POLL_TIMEOUT';
+    throw timeoutError;
+  }
+
+  async function fetchJson(url, options, timeoutMs, context) {
+    if (!url) {
+      var missingUrlError = new Error('Webhook-URL fehlt.');
+      missingUrlError.code = context + '_CONFIG';
+      throw missingUrlError;
+    }
+
+    var controller = createRequestController();
+    var timeout = window.setTimeout(function () {
+      controller.abort();
+    }, timeoutMs);
+
+    try {
+      var response = await fetch(url, Object.assign({}, options, { signal: controller.signal }));
 
       if (!response.ok) {
-        throw new Error('Server-Fehler: ' + response.status);
+        var httpError = new Error('Server-Fehler: ' + response.status);
+        httpError.code = context + '_HTTP';
+        httpError.status = response.status;
+        throw httpError;
       }
 
-      var data = await response.json();
-      await waitForMinLoadingTime();
-      showResults(data);
+      try {
+        return await response.json();
+      } catch (error) {
+        var parseError = new Error('Die Server-Antwort ist ungültig.');
+        parseError.code = context + '_PARSE';
+        throw parseError;
+      }
     } catch (error) {
       if (error && error.name === 'AbortError') {
-        showError('Die Analyse dauert ungewöhnlich lange. Bitte versuchen Sie es später erneut.');
-      } else {
-        showError('Die Analyse konnte nicht durchgeführt werden. Bitte versuchen Sie es erneut.');
+        throw error;
+      }
+
+      if (error && error.code) {
+        throw error;
+      }
+
+      var fetchError = new Error('Netzwerkfehler.');
+      fetchError.code = context + '_FETCH';
+      throw fetchError;
+    } finally {
+      window.clearTimeout(timeout);
+      if (state.activeController === controller) {
+        state.activeController = null;
       }
     }
   }
 
+  function buildStatusUrl(jobId, pollUrl) {
+    var config = getConfig();
+
+    if (pollUrl) {
+      try {
+        return new URL(pollUrl, config.webhookStatusUrl).toString();
+      } catch (error) {
+        return String(pollUrl);
+      }
+    }
+
+    try {
+      var statusUrl = new URL(config.webhookStatusUrl);
+      statusUrl.searchParams.set('jobId', jobId);
+      return statusUrl.toString();
+    } catch (error) {
+      return String(config.webhookStatusUrl) + (String(config.webhookStatusUrl).indexOf('?') === -1 ? '?' : '&') + 'jobId=' + encodeURIComponent(jobId);
+    }
+  }
+
+  function createRequestController() {
+    abortActiveRequest();
+    state.activeController = new AbortController();
+    return state.activeController;
+  }
+
+  function abortActiveRequest() {
+    if (!state.activeController) return;
+
+    state.activeController.abort();
+    state.activeController = null;
+  }
+
+  function shouldFallbackToLegacy(error) {
+    return Boolean(error && typeof error.code === 'string' && error.code.indexOf('ASYNC_START_') === 0);
+  }
+
+  function resolveUserErrorMessage(error) {
+    if (error && error.code === 'CONFIG_MISSING') {
+      return error.message;
+    }
+
+    if (error && error.code === 'POLL_TIMEOUT') {
+      return error.message;
+    }
+
+    if (error && error.name === 'AbortError') {
+      return 'Die Verbindung wurde unterbrochen. Bitte versuchen Sie es erneut.';
+    }
+
+    if (error && error.code && error.code.indexOf('ASYNC_RESULT_ERROR') === 0) {
+      return error.message || 'Die Analyse konnte nicht abgeschlossen werden. Bitte versuchen Sie es erneut.';
+    }
+
+    if (error && error.code && error.code.indexOf('ASYNC_STATUS_') === 0) {
+      return 'Die Analyse konnte nicht sauber zugestellt werden. Bitte versuchen Sie es erneut.';
+    }
+
+    return 'Die Analyse konnte nicht durchgeführt werden. Bitte versuchen Sie es erneut.';
+  }
+
+  function delay(duration) {
+    return new Promise(function (resolve) {
+      window.setTimeout(resolve, duration);
+    });
+  }
+
   function showInput() {
+    abortActiveRequest();
     stopLoadingAnimation();
     resetLoadingState();
 
@@ -159,22 +399,31 @@
 
   function startLoadingAnimation() {
     stopLoadingAnimation();
-    refs.progress.style.width = '0%';
+
+    if (refs.progress) {
+      refs.progress.style.width = '0%';
+    }
 
     state.loadingPromise = new Promise(function (resolve) {
       var index = 0;
+      var minResolved = false;
 
       function advance() {
-        refs.loadingStep.textContent = steps[index];
-        refs.progress.style.width = Math.round(((index + 1) / steps.length) * 100) + '%';
-
-        if (index === steps.length - 1) {
-          state.loadingTimeouts.push(window.setTimeout(resolve, 700));
-          return;
+        if (refs.loadingStep) {
+          refs.loadingStep.textContent = steps[index];
         }
 
-        index += 1;
-        state.loadingTimeouts.push(window.setTimeout(advance, 700));
+        if (refs.progress) {
+          refs.progress.style.width = loadingProgressMarks[index] + '%';
+        }
+
+        if (!minResolved && index === steps.length - 1) {
+          minResolved = true;
+          resolve();
+        }
+
+        index = (index + 1) % steps.length;
+        state.loadingTimeouts.push(window.setTimeout(advance, LOADING_STEP_DELAY));
       }
 
       advance();
@@ -199,6 +448,10 @@
     setPhaseVisibility(refs.loadingPhase, false, 'flex');
     setPhaseVisibility(refs.resultsPhase, true, 'block');
     refs.submit.disabled = false;
+
+    if (refs.progress) {
+      refs.progress.style.width = '100%';
+    }
 
     renderResults(data || {});
     initReveals();
@@ -302,9 +555,12 @@
   }
 
   function renderResults(data) {
-    renderScoreHeader(data);
-    renderModules(data.modules || {});
-    renderRevenueCard((data.modules || {}).revenue);
+    var normalized = normalizeAuditPayload(data);
+
+    clearResults();
+    renderScoreHeader(normalized);
+    renderModules(normalized.modules || {});
+    renderRevenueCard((normalized.modules || {}).revenue);
   }
 
   function renderScoreHeader(data) {
@@ -376,7 +632,9 @@
     var fallbackKeys = Object.keys(modules).filter(function (key) {
       return key !== 'revenue';
     });
-    var order = keys.filter(function (key) { return modules[key]; });
+    var order = keys.filter(function (key) {
+      return modules[key];
+    });
 
     if (!order.length) {
       order = fallbackKeys;
@@ -436,6 +694,13 @@
     header.appendChild(ring);
     header.appendChild(chevron);
     root.appendChild(header);
+
+    if (module && module.note) {
+      var note = document.createElement('div');
+      note.className = 'cja-module-note';
+      note.textContent = module.note;
+      body.appendChild(note);
+    }
 
     if (items.length) {
       items.forEach(function (item) {
@@ -607,6 +872,229 @@
     return normalized + ' mehr Leads möglich';
   }
 
+  function normalizeAuditPayload(data) {
+    var payload = unwrapAuditPayload(data);
+
+    if (looksLikeV3Payload(payload)) {
+      return normalizeV3Payload(payload);
+    }
+
+    return normalizeCurrentPayload(payload || {});
+  }
+
+  function unwrapAuditPayload(data) {
+    if (data && data.data && (looksLikeCurrentPayload(data.data) || looksLikeV3Payload(data.data))) {
+      return data.data;
+    }
+
+    if (data && data.frontendData && looksLikeV3Payload(data.frontendData)) {
+      return data.frontendData;
+    }
+
+    return data || {};
+  }
+
+  function looksLikeAuditResult(data) {
+    return looksLikeCurrentPayload(data) || looksLikeV3Payload(data) || Boolean(data && data.data && (looksLikeCurrentPayload(data.data) || looksLikeV3Payload(data.data)));
+  }
+
+  function looksLikeCurrentPayload(data) {
+    return Boolean(data && (typeof data.overall_score !== 'undefined' || data.modules || Array.isArray(data.quickWins)));
+  }
+
+  function looksLikeV3Payload(data) {
+    return Boolean(data && data.verdict && Array.isArray(data.findings));
+  }
+
+  function normalizeCurrentPayload(data) {
+    return {
+      overall_score: parseScore(data.overall_score),
+      timestamp: data.timestamp || data.generatedAt || '',
+      fullUrl: String(data.fullUrl || data.url || data.domain || '').trim(),
+      url: stripUrlProtocol(data.url || data.fullUrl || data.domain || ''),
+      quickWins: normalizeTextList(data.quickWins),
+      modules: data && typeof data.modules === 'object' && data.modules ? data.modules : {}
+    };
+  }
+
+  function normalizeV3Payload(data) {
+    var meta = data.meta || {};
+    var sections = data.details && Array.isArray(data.details.sections) ? data.details.sections : [];
+    var modules = buildV3Modules(sections);
+    var revenue = normalizeRevenueModule(data.opportunity || data.revenue);
+    var scores = Object.keys(modules)
+      .filter(function (key) { return key !== 'revenue'; })
+      .map(function (key) { return parseScore(modules[key].score); })
+      .filter(function (score) { return typeof score === 'number'; });
+    var overallScore = scores.length ? Math.round(average(scores)) : scoreFromTone(data.verdict && data.verdict.status);
+
+    if (revenue) {
+      modules.revenue = revenue;
+    }
+
+    return {
+      overall_score: overallScore,
+      timestamp: meta.generatedAt || '',
+      fullUrl: String(meta.url || meta.domain || '').trim(),
+      url: stripUrlProtocol(meta.url || meta.domain || ''),
+      quickWins: buildV3QuickWins(data),
+      modules: modules
+    };
+  }
+
+  function buildV3Modules(sections) {
+    var modules = {};
+
+    sections.forEach(function (section, index) {
+      var key = getSectionKey(section.title, index);
+      var rows = Array.isArray(section.rows) ? section.rows : [];
+
+      modules[key] = {
+        label: formatSectionTitle(section.title),
+        icon: getSectionIcon(section.title),
+        score: getSectionScore(rows),
+        note: section.note || '',
+        items: rows.map(function (row) {
+          return {
+            metric: row.label || 'Prüfpunkt',
+            value: row.value || 'n/a',
+            status: mapItemStatus(row.status),
+            hint: row.help || ''
+          };
+        })
+      };
+    });
+
+    return modules;
+  }
+
+  function normalizeRevenueModule(revenue) {
+    if (!revenue || !revenue.summary) {
+      return null;
+    }
+
+    return {
+      label: revenue.label || 'Revenue Impact',
+      icon: revenue.icon || '€',
+      summary: revenue.summary
+    };
+  }
+
+  function buildV3QuickWins(data) {
+    var wins = normalizeTextList((data.findings || []).map(function (item) {
+      return item && (item.action || item.summary || item.title);
+    }));
+
+    if (wins.length) {
+      return wins;
+    }
+
+    return normalizeTextList((data.highlights || []).map(function (item) {
+      return item && (item.help || item.value || item.label);
+    }));
+  }
+
+  function normalizeTextList(list) {
+    return (Array.isArray(list) ? list : [])
+      .map(function (item) {
+        return String(item || '').trim();
+      })
+      .filter(Boolean)
+      .slice(0, 3);
+  }
+
+  function getSectionKey(title, index) {
+    var normalized = normalizePlainText(title);
+
+    if (normalized === 'versprechen') return 'promise';
+    if (normalized === 'proof') return 'proof';
+    if (normalized === 'naechster schritt') return 'next_step';
+    if (normalized === 'mobiler eindruck') return 'mobile';
+
+    return 'module_' + index;
+  }
+
+  function formatSectionTitle(title) {
+    var normalized = normalizePlainText(title);
+
+    if (normalized === 'naechster schritt') return 'Nächster Schritt';
+    if (normalized === 'mobiler eindruck') return 'Mobiler Eindruck';
+    if (normalized === 'versprechen') return 'Versprechen';
+    if (normalized === 'proof') return 'Proof';
+
+    return title || 'Modul';
+  }
+
+  function getSectionIcon(title) {
+    var normalized = normalizePlainText(title);
+
+    if (normalized === 'versprechen') return '✍️';
+    if (normalized === 'proof') return '🤝';
+    if (normalized === 'naechster schritt') return '🎯';
+    if (normalized === 'mobiler eindruck') return '📱';
+
+    return '•';
+  }
+
+  function normalizePlainText(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/ä/g, 'ae')
+      .replace(/ö/g, 'oe')
+      .replace(/ü/g, 'ue')
+      .replace(/ß/g, 'ss')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function mapItemStatus(status) {
+    if (status === 'green' || status === 'yellow' || status === 'red') {
+      return status;
+    }
+
+    if (status === 'good') return 'green';
+    if (status === 'bad') return 'red';
+
+    return 'yellow';
+  }
+
+  function getSectionScore(rows) {
+    var values = (Array.isArray(rows) ? rows : [])
+      .map(function (row) {
+        return scoreFromTone(row && row.status);
+      })
+      .filter(function (score) {
+        return typeof score === 'number';
+      });
+
+    return values.length ? Math.round(average(values)) : scoreFromTone('warning');
+  }
+
+  function scoreFromTone(status) {
+    if (status === 'green' || status === 'good') return 84;
+    if (status === 'red' || status === 'bad') return 32;
+    return 58;
+  }
+
+  function average(values) {
+    if (!values.length) return null;
+
+    var sum = values.reduce(function (total, value) {
+      return total + value;
+    }, 0);
+
+    return sum / values.length;
+  }
+
+  function parseScore(value) {
+    if (typeof value === 'number' && !isNaN(value)) {
+      return value;
+    }
+
+    var parsed = Number(value);
+    return !isNaN(parsed) ? parsed : null;
+  }
+
   function createScoreRing(score, size, strokeWidth) {
     var safeScore = typeof score === 'number' && !isNaN(score) ? Math.max(0, Math.min(score, 100)) : null;
     var radius = (size - strokeWidth) / 2;
@@ -721,7 +1209,7 @@
   }
 
   function toScore(value) {
-    return typeof value === 'number' ? value : null;
+    return parseScore(value);
   }
 
   function normalizeStatus(status) {

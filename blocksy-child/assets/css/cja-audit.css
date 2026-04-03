@@ -431,6 +431,12 @@
 	opacity: 1;
 }
 
+.cja-module-note {
+	font-size: 13px;
+	line-height: 1.55;
+	color: var(--cja-text-sec);
+}
+
 .cja-item {
 	padding: 14px 16px;
 	border: 1px solid;

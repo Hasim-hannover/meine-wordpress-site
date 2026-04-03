@@ -1,6 +1,6 @@
 # System Map
 
-Stand: 2026-04-03. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-04-04. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
@@ -44,7 +44,7 @@ Kritische Dateien:
 
 Im Repo liegen erste n8n-Artefakte, aber der aktive Contract ist noch nicht vollstaendig exportiert. Die Rolle von n8n ist bereits sichtbar:
 
-- aktiver Instant-Results-Layer fuer den Growth Audit ueber `https://n8n.hasimuener.de/webhook/cja-analyze`
+- aktiver Instant-Results-Layer fuer den Growth Audit ueber `https://n8n.hasimuener.de/webhook/audit` plus `https://n8n.hasimuener.de/webhook/audit-status`, mit `https://n8n.hasimuener.de/webhook/cja-analyze` als Legacy-Fallback
 - kuenftiges Lead-Routing und Nurture
 - Reporting- oder CRM-Bridges, die in Texten und Angebotslogik bereits angedeutet werden
 
@@ -59,8 +59,8 @@ Bekannte technische Touchpoints:
 - `blocksy-child/inc/cja-shortcode.php`
 - `blocksy-child/assets/js/cja-audit.js`
 - `blocksy-child/assets/js/audit-live.js`
-- Webhook `cja-analyze`
-- Legacy-Webhooks `audit` und `audit-status`
+- aktive Webhooks `audit` und `audit-status`
+- Legacy-Fallback `cja-analyze`
 
 Fachliche Regel:
 
@@ -76,8 +76,8 @@ Aktuelle Logik:
 
 1. Besucher kommen ueber Homepage, WGOS, Service-Seiten, Blog oder Kategorie-Hubs.
 2. Primaerer CTA fuehrt in den `Growth Audit`.
-3. Die aktive Audit-Landingpage nimmt nur die URL auf und sendet sie erst nach explizitem Klick an den n8n-Webhook `cja-analyze`.
-4. Das Frontend rendert das Ergebnis direkt auf der Seite als Modul-Dashboard fuer Performance, Tracking, SEO, Content und Revenue Impact.
+3. Die aktive Audit-Landingpage nimmt nur die URL auf, startet den n8n-Job erst nach explizitem Klick ueber `audit` und pollt den Status anschliessend ueber `audit-status`.
+4. Das Frontend rendert das Ergebnis direkt auf der Seite als Modul-Dashboard; der Client akzeptiert sowohl den neuen V3-Payload als auch den bisherigen Direkt-Payload und nutzt `cja-analyze` nur noch als Fallback.
 5. Die Branchen-Landingpage fuer Solar-/Waermepumpen-Anbieter nutzt weiter einen separaten Multi-Step-Intake mit WordPress-CRM-Stack und serverseitigem Fallback.
 6. Direkte Eskalation nach dem Ergebnis laeuft ueber `/kontakt/` oder je nach Kontext ueber `Cal.com`.
 7. Direkte Gespraechs-CTAs bleiben als normale Links erhalten, werden im Frontend aber per `blocksy-child/assets/js/cal-embed.js` event-typ-spezifisch zu einem Modal-Embed im Seitenkontext erweitert.
@@ -199,7 +199,7 @@ Risiko:
 - Theme-eigener SEO-Layer (seo-meta.php) für Title, Description, OG, Canonical und Robots
 - Native WordPress-Sitemap (/wp-sitemap.xml)
 - Fluent Forms fuer die vertiefte Folgeanalyse
-- n8n auf `n8n.hasimuener.de` fuer den aktiven Instant-Results-Audit
+- n8n auf `n8n.hasimuener.de` fuer den aktiven Instant-Results-Audit inklusive Start-, Status- und Legacy-Fallback-Webhook
 - Cal.com fuer direkte Gespraechsbuchung
 - SSH-Deploy auf Basis des gebauten `blocksy-child/`-Pakets
 

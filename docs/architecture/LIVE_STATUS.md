@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-04-03.
+Stand: 2026-04-04.
 
 Basis dieses Status:
 
@@ -24,8 +24,8 @@ Nicht verifiziert:
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Repo-seitig gibt es jetzt einen zentralen oeffentlichen Proof- und Vokabular-Layer: `1.750+ qualifizierte Leads`, `12 % Sales-Conversion` und `-83 % CPL` sind das konservative Standard-Proof-Set; `WGOS = WordPress Growth Operating System` bleibt als erklaertes Framework hinter dem oeffentlichen Hauptbegriff `WordPress als Nachfrage-System fuer B2B`.
 - Der versionierte Ergebnisse-Hub priorisiert jetzt eine klarere Hero-Einordnung, schnellere Proof-Selbstselektion, E3 als primaeren B2B-Einstieg, DOMDAR als Commerce-Ergaenzung, einen konkreteren Whitelabel-Vertrauensbeleg und eine segmentierte Audit-/WGOS-Abschluss-CTA.
-- Die aktive `Growth Audit`-Route `/growth-audit/` rendert repo-seitig jetzt einen shortcode-getriebenen Instant-Results-Flow: URL-Eingabe, 60-Sekunden-Analyse, Ergebnis-Dashboard fuer Performance, Tracking, SEO, Content und Revenue Impact sowie CTA ueber den zentralen Kontakt-/Kalenderpfad.
-- Der aktive Instant-Results-Flow auf `/growth-audit/` blendet Loading und Ergebnisse repo-seitig initial aus, scrollt bei Analyse-Start, Ergebniswechsel und Retry wieder an den App-Anfang, haelt im Results-State mehr Luft unter dem fixen Header, zeigt Quick Wins mit Kontextkopf, rundet Revenue-Metriken sichtbar auf ganze Werte und fuehrt die oeffentliche Timing-Copy jetzt konsistent mit `60 Sekunden`.
+- Die aktive `Growth Audit`-Route `/growth-audit/` rendert repo-seitig jetzt einen shortcode-getriebenen Instant-Results-Flow: URL-Eingabe, asynchron gestartete 60-Sekunden-Analyse mit Status-Polling, Ergebnis-Dashboard fuer Performance, Tracking, SEO, Content und je nach Payload Revenue Impact sowie CTA ueber den zentralen Kontakt-/Kalenderpfad.
+- Der aktive Instant-Results-Flow auf `/growth-audit/` blendet Loading und Ergebnisse repo-seitig initial aus, scrollt bei Analyse-Start, Ergebniswechsel und Retry wieder an den App-Anfang, haelt im Results-State mehr Luft unter dem fixen Header, zeigt Quick Wins mit Kontextkopf, rundet Revenue-Metriken sichtbar auf ganze Werte, fuehrt die oeffentliche Timing-Copy jetzt konsistent mit `60 Sekunden` und startet n8n bevorzugt ueber `audit + audit-status`, damit erfolgreiche Jobs nicht mehr clientseitig nach 60 Sekunden abgebrochen werden.
 - Der fixe Header auf `/growth-audit/` fuehrt im aktiven Instant-Results-Flow repo-seitig jetzt nur noch den Proof-Link `Einblicke`; der redundante Sprunglink `Zur Analyse` ist entfernt und der Hero startet mit mehr Abstand unter dem Header.
 - Die noindex-Kampagnenseite `/audit-linkedin/` bleibt als eigene LinkedIn-Landingpage im Theme hinterlegt und ist repo-seitig jetzt zusaetzlich als native WordPress-Seite mit Template-Zuweisung und festem Featured Image abgesichert.
 - Repo-seitig liegt jetzt zusaetzlich eine B2B-Branchen-Landingpage fuer Solar-, Waermepumpen- und Speicher-Anbieter kanonisch unter `/solar-waermepumpen-leadgenerierung/`; der Intake nutzt denselben Audit-/CRM-Stack mit eigener Branchen-Variante.
@@ -36,7 +36,7 @@ Nicht verifiziert:
 - Die kanonischen Cluster-Routen und die Kontaktseite `/kontakt/` werden repo-seitig jetzt zusaetzlich als veroeffentlichte WordPress-Seiten mit zugewiesenem Template abgesichert, damit oeffentliche URL, native Sitemap, Canonical-Logik und Admin-Aufloesung konsistent bleiben.
 - Repo-seitige Primary-Links auf diese Clusterseiten zeigen jetzt direkt auf ihre kanonischen Routen und fallen nicht mehr auf kuerzere Legacy-Slugs wie `/seo/` zurueck.
 - Ergebnisse laufen repo-seitig kanonisch ueber `/ergebnisse/`; alte Proof-Slugs bleiben nur als Legacy-Redirects bestehen.
-- Der aktive `Growth Audit`-Pfad nutzt jetzt einen privacy-first Shortcode-Flow ohne E-Mail-Pflicht: erst nach Klick auf `Jetzt analysieren` sendet das Frontend die bereinigte URL per `POST` an `https://n8n.hasimuener.de/webhook/cja-analyze`; Ergebnis und CTA bleiben direkt auf der Seite.
+- Der aktive `Growth Audit`-Pfad nutzt jetzt einen privacy-first Shortcode-Flow ohne E-Mail-Pflicht: erst nach Klick auf `Jetzt analysieren` sendet das Frontend die bereinigte URL bevorzugt an `https://n8n.hasimuener.de/webhook/audit`, pollt danach `https://n8n.hasimuener.de/webhook/audit-status` und faellt nur bei Bedarf auf `https://n8n.hasimuener.de/webhook/cja-analyze` zurueck; Ergebnis und CTA bleiben direkt auf der Seite.
 - Direkte Gespraechs-CTAs fuer Audit-, Kontakt- und WGOS-Kontexte nutzen theme-seitig zentral `https://cal.com/hasim-uener/30min?overlayCalendar=true`; die Whitelabel-Seite nutzt fuer Partner- und Agentur-Fit jetzt zusaetzlich `https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true`.
 - Diese Gespraechs-CTAs oeffnen bei verfuegbarem JavaScript ein eingebettetes Cal.com-Popup im Seitenkontext; der direkte Kalender-Link bleibt pro Event-Typ als robuster Fallback erhalten.
 - Die Kontaktseite fuehrt oeffentlich jetzt ueber sechs saubere Anfragearten: `Erstdiagnose / Growth Audit`, `Fokussierte Folgeanalyse`, `Umsetzung / Optimierung`, `Laufende Weiterentwicklung`, `Allgemeine Anfrage` und `Bestehender Kunde`; die Frontend-Ausgabe von `/kontakt/` ist repo-seitig am nativen Theme-Template verankert.

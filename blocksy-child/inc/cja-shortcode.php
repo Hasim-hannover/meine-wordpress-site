@@ -15,13 +15,25 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string
  */
 function cja_audit_shortcode() {
-	$css_path     = get_stylesheet_directory() . '/assets/css/cja-audit.css';
-	$js_path      = get_stylesheet_directory() . '/assets/js/cja-audit.js';
-	$contact_url  = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
-	$cta_url      = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : '';
-	$webhook_url  = (string) apply_filters( 'cja_audit_webhook_url', 'https://n8n.hasimuener.de/webhook/cja-analyze' );
-	$css_version  = file_exists( $css_path ) ? (string) filemtime( $css_path ) : '1.0.0';
-	$js_version   = file_exists( $js_path ) ? (string) filemtime( $js_path ) : '1.0.0';
+	$css_path            = get_stylesheet_directory() . '/assets/css/cja-audit.css';
+	$js_path             = get_stylesheet_directory() . '/assets/js/cja-audit.js';
+	$contact_url         = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+	$cta_url             = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : '';
+	$legacy_webhook_url  = (string) apply_filters( 'cja_audit_webhook_url', 'https://n8n.hasimuener.de/webhook/cja-analyze' );
+	$default_start_url   = (string) preg_replace( '#/webhook/[^/?]+$#', '/webhook/audit', $legacy_webhook_url );
+	$default_status_url  = (string) preg_replace( '#/webhook/[^/?]+$#', '/webhook/audit-status', $legacy_webhook_url );
+	$webhook_start_url   = (string) apply_filters( 'cja_audit_webhook_start_url', $default_start_url );
+	$webhook_status_url  = (string) apply_filters( 'cja_audit_webhook_status_url', $default_status_url );
+	$css_version         = file_exists( $css_path ) ? (string) filemtime( $css_path ) : '1.0.0';
+	$js_version          = file_exists( $js_path ) ? (string) filemtime( $js_path ) : '1.0.0';
+
+	if ( $default_start_url === $legacy_webhook_url ) {
+		$webhook_start_url = (string) apply_filters( 'cja_audit_webhook_start_url', 'https://n8n.hasimuener.de/webhook/audit' );
+	}
+
+	if ( $default_status_url === $legacy_webhook_url ) {
+		$webhook_status_url = (string) apply_filters( 'cja_audit_webhook_status_url', 'https://n8n.hasimuener.de/webhook/audit-status' );
+	}
 
 	if ( '' === $cta_url ) {
 		$cta_url = $contact_url;
@@ -48,7 +60,12 @@ function cja_audit_shortcode() {
 		'cja-audit',
 		'cjaConfig',
 		[
-			'webhookUrl' => esc_url_raw( $webhook_url ),
+			'webhookStartUrl' => esc_url_raw( $webhook_start_url ),
+			'webhookStatusUrl' => esc_url_raw( $webhook_status_url ),
+			'legacyWebhookUrl' => esc_url_raw( $legacy_webhook_url ),
+			'webhookUrl' => esc_url_raw( $legacy_webhook_url ),
+			'pollInterval' => 4500,
+			'pollTimeout' => 180000,
 		]
 	);
 
