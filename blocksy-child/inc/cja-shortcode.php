@@ -17,10 +17,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 function cja_audit_shortcode() {
 	$css_path     = get_stylesheet_directory() . '/assets/css/cja-audit.css';
 	$js_path      = get_stylesheet_directory() . '/assets/js/cja-audit.js';
-	$contact_url  = home_url( '/kontakt/' );
+	$contact_url  = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
+	$cta_url      = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : '';
 	$webhook_url  = (string) apply_filters( 'cja_audit_webhook_url', 'https://n8n.hasimuener.de/webhook/cja-analyze' );
 	$css_version  = file_exists( $css_path ) ? (string) filemtime( $css_path ) : '1.0.0';
 	$js_version   = file_exists( $js_path ) ? (string) filemtime( $js_path ) : '1.0.0';
+
+	if ( '' === $cta_url ) {
+		$cta_url = $contact_url;
+	}
 
 	wp_enqueue_style(
 		'cja-audit',
@@ -88,8 +93,12 @@ function cja_audit_shortcode() {
 			<div class="cja-cta-section cja-reveal">
 				<h2>Diese Probleme lösen?</h2>
 				<p>Sie erhalten einen ausführlichen Report mit priorisierten Handlungsempfehlungen, abgestimmt auf Ihre Branche und Ihre Ziele.</p>
-				<a href="<?php echo esc_url( $contact_url ); ?>" class="cja-cta-button" data-track-action="cja_results_contact" data-track-category="lead_gen" data-track-section="growth_audit_results">Kostenloses Strategiegespräch buchen</a>
+				<a href="<?php echo esc_url( $cta_url ); ?>" class="cja-cta-button" data-track-action="cja_results_contact" data-track-category="lead_gen" data-track-section="growth_audit_results">Kostenloses Strategiegespräch buchen</a>
 				<div class="cja-cta-meta">15 Min · Unverbindlich · Konkrete nächste Schritte</div>
+			</div>
+
+			<div class="cja-retry-section">
+				<button id="cja-retry" class="cja-retry-button" type="button">Andere Website analysieren</button>
 			</div>
 
 			<div class="cja-footer-line">Powered by WGOS — WordPress Growth Operating System</div>

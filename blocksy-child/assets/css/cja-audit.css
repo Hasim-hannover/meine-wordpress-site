@@ -38,6 +38,10 @@
 	width: 100%;
 }
 
+.cja-phase[hidden] {
+	display: none !important;
+}
+
 .cja-hero {
 	padding: clamp(7rem, 10vw, 8rem) 0 80px;
 	display: flex;
@@ -303,6 +307,39 @@
 }
 
 .cja-quickwins {
+	display: grid;
+	width: 100%;
+	gap: 16px;
+}
+
+.cja-quickwins-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 0;
+	text-align: left;
+}
+
+.cja-quickwins-icon {
+	font-size: 22px;
+	line-height: 1;
+}
+
+.cja-quickwins-title {
+	margin: 0;
+	font-family: 'Outfit', var(--nx-font-heading, 'Satoshi', sans-serif);
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--cja-text);
+}
+
+.cja-quickwins-subtitle {
+	margin: 4px 0 0;
+	font-size: 14px;
+	color: var(--cja-text-sec);
+}
+
+.cja-quickwins-list {
 	display: grid;
 	width: 100%;
 	gap: 10px;
@@ -611,6 +648,31 @@
 	color: var(--cja-text-muted);
 }
 
+.cja-retry-section {
+	margin-top: 32px;
+	text-align: center;
+}
+
+.cja-retry-button {
+	padding: 12px 28px;
+	border: 1px solid var(--cja-border);
+	border-radius: 10px;
+	background: none;
+	color: var(--cja-text-sec);
+	font-family: var(--nx-font, 'Figtree', sans-serif);
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.cja-retry-button:hover,
+.cja-retry-button:focus-visible {
+	border-color: var(--cja-accent);
+	color: var(--cja-text);
+	transform: translateY(-1px);
+}
+
 .cja-footer-line {
 	margin-top: 32px;
 	font-size: 12px;
@@ -680,6 +742,10 @@
 
 	.cja-item-header {
 		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.cja-quickwins-header {
 		align-items: flex-start;
 	}
 }

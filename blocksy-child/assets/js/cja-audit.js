@@ -39,12 +39,16 @@
     refs.scoreHeader = document.getElementById('cja-score-header');
     refs.modules = document.getElementById('cja-modules');
     refs.revenue = document.getElementById('cja-revenue');
+    refs.retry = document.getElementById('cja-retry');
 
     if (!refs.urlInput || !refs.submit) return;
 
     showInput();
 
     refs.submit.addEventListener('click', handleSubmit);
+    if (refs.retry) {
+      refs.retry.addEventListener('click', handleRetry);
+    }
     refs.urlInput.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -131,6 +135,7 @@
 
   function showInput() {
     stopLoadingAnimation();
+    resetLoadingState();
 
     setPhaseVisibility(refs.inputPhase, true, 'flex');
     setPhaseVisibility(refs.loadingPhase, false, 'flex');
@@ -233,6 +238,20 @@
     refs.revenue.innerHTML = '';
   }
 
+  function resetLoadingState() {
+    if (refs.loadingStep) {
+      refs.loadingStep.textContent = steps[0];
+    }
+
+    if (refs.loadingUrl) {
+      refs.loadingUrl.textContent = '';
+    }
+
+    if (refs.progress) {
+      refs.progress.style.width = '0%';
+    }
+  }
+
   function setPhaseVisibility(element, isVisible, displayValue) {
     if (!element) return;
 
@@ -254,6 +273,31 @@
     window.scrollTo({
       top: 0,
       behavior: behavior
+    });
+  }
+
+  function handleRetry() {
+    clearResults();
+    clearError();
+    showInput();
+
+    if (state.revealObserver) {
+      state.revealObserver.disconnect();
+      state.revealObserver = null;
+    }
+
+    if (refs.urlInput) {
+      refs.urlInput.value = '';
+    }
+
+    window.requestAnimationFrame(function () {
+      scrollAppToTop();
+
+      if (refs.urlInput) {
+        window.setTimeout(function () {
+          refs.urlInput.focus();
+        }, prefersReducedMotion() ? 0 : 180);
+      }
     });
   }
 
@@ -290,15 +334,36 @@
 
     if (quickWins.length) {
       var quickWinsWrap = document.createElement('div');
+      var quickWinsHeader = document.createElement('div');
+      var quickWinsIcon = document.createElement('span');
+      var quickWinsCopy = document.createElement('div');
+      var quickWinsTitle = document.createElement('h2');
+      var quickWinsSubtitle = document.createElement('p');
+      var quickWinsList = document.createElement('div');
+
       quickWinsWrap.className = 'cja-quickwins';
+      quickWinsHeader.className = 'cja-quickwins-header';
+      quickWinsIcon.className = 'cja-quickwins-icon';
+      quickWinsIcon.textContent = '🎯';
+      quickWinsTitle.className = 'cja-quickwins-title';
+      quickWinsTitle.textContent = 'Ihre Top 3 Quick Wins';
+      quickWinsSubtitle.className = 'cja-quickwins-subtitle';
+      quickWinsSubtitle.textContent = 'Die wirkungsvollsten Maßnahmen für sofortige Verbesserungen.';
+      quickWinsList.className = 'cja-quickwins-list';
 
       quickWins.forEach(function (item) {
         var card = document.createElement('div');
         card.className = 'cja-quickwin';
         card.textContent = item;
-        quickWinsWrap.appendChild(card);
+        quickWinsList.appendChild(card);
       });
 
+      quickWinsCopy.appendChild(quickWinsTitle);
+      quickWinsCopy.appendChild(quickWinsSubtitle);
+      quickWinsHeader.appendChild(quickWinsIcon);
+      quickWinsHeader.appendChild(quickWinsCopy);
+      quickWinsWrap.appendChild(quickWinsHeader);
+      quickWinsWrap.appendChild(quickWinsList);
       wrap.appendChild(quickWinsWrap);
     }
 
@@ -447,10 +512,10 @@
     var uplift = document.createElement('div');
     var summary = revenue.summary;
     var statItems = [
-      { label: 'Traffic', value: summary.estimated_traffic },
-      { label: 'Conversion', value: summary.estimated_conversion },
-      { label: 'Leads aktuell', value: summary.current_leads },
-      { label: 'Leads Potenzial', value: summary.potential_leads, highlight: true }
+      { label: 'Traffic', value: normalizeRevenueValue(summary.estimated_traffic) },
+      { label: 'Conversion', value: normalizeRevenueValue(summary.estimated_conversion) },
+      { label: 'Leads aktuell', value: normalizeRevenueValue(summary.current_leads) },
+      { label: 'Leads Potenzial', value: normalizeRevenueValue(summary.potential_leads), highlight: true }
     ];
 
     card.className = 'cja-revenue cja-reveal';
@@ -479,7 +544,7 @@
     card.appendChild(detail);
 
     uplift.className = 'cja-revenue-uplift';
-    uplift.textContent = summary.potential_uplift || '';
+    uplift.textContent = formatRevenueUplift(summary.potential_uplift);
     card.appendChild(uplift);
 
     refs.revenue.appendChild(card);
@@ -510,6 +575,35 @@
     }
 
     return value;
+  }
+
+  function normalizeRevenueValue(value) {
+    if (typeof value === 'number' && !isNaN(value)) {
+      return String(Math.round(value));
+    }
+
+    if (value === null || typeof value === 'undefined' || value === '') {
+      return 'n/a';
+    }
+
+    return String(value).replace(/\d+\.\d{1,2}|\d+,\d{1,2}/g, function (match) {
+      var parsed = parseFloat(match.replace(',', '.'));
+      return isNaN(parsed) ? match : String(Math.round(parsed));
+    });
+  }
+
+  function formatRevenueUplift(value) {
+    var normalized = normalizeRevenueValue(value).trim();
+
+    if (!normalized || normalized === 'n/a') {
+      return '';
+    }
+
+    if (/mehr\s+leads\s+m[öo]glich/i.test(normalized)) {
+      return normalized;
+    }
+
+    return normalized + ' mehr Leads möglich';
   }
 
   function createScoreRing(score, size, strokeWidth) {
