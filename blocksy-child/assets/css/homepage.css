@@ -1443,7 +1443,7 @@
 }
 
 .wp-home-hero {
-    padding: clamp(5rem, 7vw, 6.6rem) 0 clamp(2rem, 3vw, 2.6rem);
+    padding: clamp(6.4rem, 8vw, 8rem) 0 clamp(2rem, 3vw, 2.6rem);
 }
 
 .wp-home-hero__grid {
@@ -2416,7 +2416,7 @@
     }
 
     .wp-home-hero {
-        padding-top: 4.8rem;
+        padding-top: 5.8rem;
         padding-bottom: 1.8rem;
     }
 
