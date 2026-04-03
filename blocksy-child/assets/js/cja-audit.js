@@ -42,6 +42,8 @@
 
     if (!refs.urlInput || !refs.submit) return;
 
+    showInput();
+
     refs.submit.addEventListener('click', handleSubmit);
     refs.urlInput.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
@@ -129,9 +131,10 @@
 
   function showInput() {
     stopLoadingAnimation();
-    refs.inputPhase.hidden = false;
-    refs.loadingPhase.hidden = true;
-    refs.resultsPhase.hidden = true;
+
+    setPhaseVisibility(refs.inputPhase, true, 'flex');
+    setPhaseVisibility(refs.loadingPhase, false, 'flex');
+    setPhaseVisibility(refs.resultsPhase, false, 'block');
     refs.submit.disabled = false;
   }
 
@@ -139,13 +142,14 @@
     clearResults();
     clearError();
 
-    refs.inputPhase.hidden = true;
-    refs.loadingPhase.hidden = false;
-    refs.resultsPhase.hidden = true;
+    setPhaseVisibility(refs.inputPhase, false, 'flex');
+    setPhaseVisibility(refs.loadingPhase, true, 'flex');
+    setPhaseVisibility(refs.resultsPhase, false, 'block');
     refs.submit.disabled = true;
     refs.loadingUrl.textContent = 'Analysiert: ' + url;
 
     startLoadingAnimation();
+    scrollAppToTop();
   }
 
   function startLoadingAnimation() {
@@ -185,17 +189,15 @@
   }
 
   function showResults(data) {
-    refs.loadingPhase.hidden = true;
-    refs.resultsPhase.hidden = false;
+    stopLoadingAnimation();
+    setPhaseVisibility(refs.inputPhase, false, 'flex');
+    setPhaseVisibility(refs.loadingPhase, false, 'flex');
+    setPhaseVisibility(refs.resultsPhase, true, 'block');
     refs.submit.disabled = false;
 
     renderResults(data || {});
     initReveals();
-
-    refs.resultsPhase.scrollIntoView({
-      behavior: prefersReducedMotion() ? 'auto' : 'smooth',
-      block: 'start'
-    });
+    window.requestAnimationFrame(scrollAppToTop);
   }
 
   function showError(message) {
@@ -217,6 +219,7 @@
 
     refs.error.appendChild(text);
     refs.error.appendChild(retry);
+    window.requestAnimationFrame(scrollAppToTop);
   }
 
   function clearError() {
@@ -228,6 +231,30 @@
     refs.scoreHeader.innerHTML = '';
     refs.modules.innerHTML = '';
     refs.revenue.innerHTML = '';
+  }
+
+  function setPhaseVisibility(element, isVisible, displayValue) {
+    if (!element) return;
+
+    element.hidden = !isVisible;
+    element.style.display = isVisible ? displayValue : 'none';
+  }
+
+  function scrollAppToTop() {
+    var behavior = prefersReducedMotion() ? 'auto' : 'smooth';
+
+    if (refs.app && typeof refs.app.scrollIntoView === 'function') {
+      refs.app.scrollIntoView({
+        behavior: behavior,
+        block: 'start'
+      });
+      return;
+    }
+
+    window.scrollTo({
+      top: 0,
+      behavior: behavior
+    });
   }
 
   function renderResults(data) {

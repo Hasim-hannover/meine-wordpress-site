@@ -55,7 +55,7 @@ function cja_audit_shortcode() {
 		<div class="cja-phase cja-hero" id="cja-input">
 			<span class="cja-overline">Kostenloser Growth Audit</span>
 			<h1 class="cja-headline">Was kostet Sie Ihre Website an Leads?</h1>
-			<p class="cja-subtitle">Performance, SEO, Tracking, Content: in 30 Sekunden sehen Sie, wo Ihr größtes Wachstumspotenzial liegt.</p>
+			<p class="cja-subtitle">Performance, SEO, Tracking, Content — in 60 Sekunden sehen Sie, wo Ihr größtes Wachstumspotenzial liegt.</p>
 
 			<div class="cja-input-group">
 				<label class="screen-reader-text" for="cja-url-input">Website-URL</label>

@@ -121,7 +121,7 @@ function hu_get_forced_singular_seo_map() {
 			],
 			'growth-audit' => [
 				'title'       => 'Kostenloser Growth Audit | Hasim Üner — WordPress Growth Architect',
-				'description' => 'Performance, SEO, Tracking, Content — in 30 Sekunden erfahren Sie, wo Ihr größtes Wachstumspotenzial liegt. Kostenlose Analyse ohne E-Mail.',
+				'description' => 'Performance, SEO, Tracking, Content — in 60 Sekunden erfahren Sie, wo Ihr größtes Wachstumspotenzial liegt. Kostenlose Analyse ohne E-Mail.',
 			],
 			'case-studies-e-commerce' => [
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
@@ -782,7 +782,7 @@ function hu_get_seo_meta() {
 
 		if ( hu_is_audit_offer_page() ) {
 			$meta['og_title']    = 'Kostenloser Growth Audit | Hasim Üner — WordPress Growth Architect';
-			$meta['description'] = 'Performance, SEO, Tracking, Content — in 30 Sekunden erfahren Sie, wo Ihr größtes Wachstumspotenzial liegt. Kostenlose Analyse ohne E-Mail.';
+			$meta['description'] = 'Performance, SEO, Tracking, Content — in 60 Sekunden erfahren Sie, wo Ihr größtes Wachstumspotenzial liegt. Kostenlose Analyse ohne E-Mail.';
 		}
 
 		if ( hu_is_domdar_case_study_page() ) {

@@ -169,6 +169,11 @@
 	text-align: center;
 }
 
+#cja-loading,
+#cja-results {
+	display: none;
+}
+
 .cja-spinner {
 	width: 80px;
 	height: 80px;

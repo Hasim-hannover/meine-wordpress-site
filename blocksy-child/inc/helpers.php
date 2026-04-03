@@ -182,12 +182,12 @@ function nexus_get_audit_cta_copy() {
 
 	$copy = [
 		'label'             => 'Growth Audit starten',
-		'compact_microcopy' => '30 Sek. · Sofort-Ergebnis · keine E-Mail',
+		'compact_microcopy' => '60 Sek. · Sofort-Ergebnis · keine E-Mail',
 		'header_meta_items' => [
-			'30-Sekunden-Analyse',
+			'60-Sekunden-Analyse',
 			'Sofort-Ergebnis ohne E-Mail',
 		],
-		'footer_note'       => 'Growth Audit: Performance, SEO, Tracking und Content in ca. 30 Sekunden analysieren, sofortiges Ergebnis, kein Pflicht-Call.',
+		'footer_note'       => 'Growth Audit: Performance, SEO, Tracking und Content in ca. 60 Sekunden analysieren, sofortiges Ergebnis, kein Pflicht-Call.',
 	];
 
 	return $copy;
