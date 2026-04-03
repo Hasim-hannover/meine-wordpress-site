@@ -61,7 +61,6 @@ if ( empty( $audit_header_meta_items ) ) {
 
 			<div class="nx-site-header__audit-actions">
 				<a class="nx-site-header__audit-link" href="<?php echo esc_url( $cases_url ); ?>">Einblicke</a>
-				<a class="nx-site-header__audit-link nx-site-header__audit-link--primary" href="#form">Zur Analyse</a>
 			</div>
 		</div>
 	</div>
