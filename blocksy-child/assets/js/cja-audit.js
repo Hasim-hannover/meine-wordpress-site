@@ -458,7 +458,7 @@
 
     head.className = 'cja-revenue-head';
     icon.className = 'cja-module-icon';
-    icon.textContent = revenue.icon || '💰';
+    icon.textContent = normalizeRevenueIcon(revenue.icon);
 
     title.textContent = revenue.label || 'Revenue Impact';
     subtitle.textContent = 'Welcher Hebel geschäftlich am meisten wirken kann.';
@@ -500,6 +500,16 @@
     card.appendChild(amount);
     card.appendChild(text);
     return card;
+  }
+
+  function normalizeRevenueIcon(icon) {
+    var value = String(icon || '').trim();
+
+    if (!value || value === '$' || value === '💰' || value === '💵' || value === '💲') {
+      return '€';
+    }
+
+    return value;
   }
 
   function createScoreRing(score, size, strokeWidth) {

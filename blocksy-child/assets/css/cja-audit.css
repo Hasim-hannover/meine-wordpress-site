@@ -215,7 +215,7 @@
 }
 
 .cja-results {
-	padding: 40px 0 80px;
+	padding: clamp(5.75rem, 9vw, 7rem) 0 80px;
 }
 
 .cja-score-header {
