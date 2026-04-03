@@ -1,13 +1,13 @@
 # System Map
 
-Stand: 2026-03-31. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-04-03. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
 | System | Zweck | Repo-Orte | Externe Abhaengigkeiten | Status |
 | --- | --- | --- | --- | --- |
 | Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/ci.yml`, `.github/workflows/deploy.yml`, `docs/architecture/DEPLOYMENT.md` | WordPress, Blocksy Parent Theme, ACF | live |
-| Audit-Funnel | Diagnose-Einstieg, Audit-Intake und interne Folgequalifizierung | `blocksy-child/page-audit.php`, `blocksy-child/template-parts/audit-page-shell.php`, `blocksy-child/page-solar-waermepumpen-leadgenerierung.php`, `blocksy-child/page-website-fuer-solar-und-waermepumpen-anbieter.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/assets/js/energy-intake.js`, `blocksy-child/assets/js/cal-embed.js`, `blocksy-child/inc/review-crm.php`, `blocksy-child/page-360-deep-dive.php`, `docs/systems/audit-funnel.md` | WordPress REST, wp_mail, Cal.com, optional n8n | live |
+| Audit-Funnel | Diagnose-Einstieg, Instant-Results-Audit und nachgelagerte Qualifizierung | `blocksy-child/page-audit.php`, `blocksy-child/inc/cja-shortcode.php`, `blocksy-child/assets/css/cja-audit.css`, `blocksy-child/assets/js/cja-audit.js`, `blocksy-child/page-solar-waermepumpen-leadgenerierung.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/assets/js/energy-intake.js`, `blocksy-child/assets/js/cal-embed.js`, `blocksy-child/inc/review-crm.php`, `docs/systems/audit-funnel.md` | n8n Webhook, WordPress, Cal.com, optional WordPress CRM auf Legacy-/Branchenpfaden | live |
 | Nexus CRM & Blog Notify | gemeinsames CRM fuer Audit-, Folgeanalyse-, Umsetzungs- und Bestandskunden-Anfragen plus DOI- und Artikel-Mail-Logik | `blocksy-child/inc/crm.php`, `blocksy-child/inc/blog-notify.php`, `blocksy-child/template-parts/blog-notify.php`, `blocksy-child/page-blog-notify.php`, `docs/systems/blog-notify.md` | WordPress CPT/Meta, WordPress REST, wp_mail, Brevo | repo-seitig live, End-to-End offen |
 | SEO Cockpit | Search-Console-basiertes SEO-Dashboard mit optionalem Koko- und Audit-Lead-Layer | `blocksy-child/inc/seo-cockpit.php`, `blocksy-child/assets/css/seo-cockpit-admin.css`, `docs/systems/seo-cockpit.md` | Google Search Console API, optional Koko Analytics, Nexus CRM / Audit-CRM | repo-seitig vorbereitet, OAuth und Live-Daten offen |
 | Tracking | Tracking-ready Markup, CTA-Events, SEO-/Schema-Layer | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/seo-meta.php`, `blocksy-child/inc/org-schema.php`, Templates mit `data-track-*` | GTM, sGTM, GA4, Consent Mode v2, Meta CAPI | teils im Repo, teils extern |
@@ -15,7 +15,7 @@ Stand: 2026-03-31. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 | Public Proof Layer | zentraler oeffentlicher Proof- und Vokabular-Layer fuer kaufnahe Seiten | `blocksy-child/inc/helpers.php`, `blocksy-child/inc/shortcodes.php`, `blocksy-child/front-page.php`, `blocksy-child/page-wordpress-agentur.php`, `blocksy-child/page-wgos.php`, `blocksy-child/page-kontakt.php`, `blocksy-child/inc/contact-page.php` | WordPress-Editor, oeffentliche Cases und Profile | live |
 | Content- und SEO-System | Blog, Pillar-Hubs, Cornerstone-Content, interne Verlinkung | `blocksy-child/category.php`, `blocksy-child/single.php`, `blocksy-child/page-seo-cornerstone.php`, `content/blog-drafts/` | WordPress-Editor | live plus Ausbau |
 | Client Portal | Kunden-Cockpit mit Login, Upload und Roadmap-Slots | `blocksy-child/template-portal.php`, `blocksy-child/inc/client-portal.php`, `blocksy-child/inc/snippets.php` | WordPress-User-System, Media Library | live, aber aktuell mit Mock-Daten |
-| n8n-Automationen | Workflow-Logik fuer Analyse, Routing, Reporting, Nurture | kuenftig `automations/n8n/` | n8n Cloud, CRM, Mail, evtl. Sheets | geplant als versionierter Layer |
+| n8n-Automationen | Workflow-Logik fuer Analyse, Routing, Reporting, Nurture | `automations/n8n/`, `blocksy-child/assets/js/cja-audit.js`, `blocksy-child/assets/js/audit-live.js` | n8n auf `n8n.hasimuener.de`, CRM, Mail, evtl. Sheets | aktiv, aber Export-/Doku-Layer unvollstaendig |
 | Agenten- und Prompt-System | Kontext, Guardrails, Skills und minimale Legacy-Briefings | `AGENTS.md`, `agents/skills/`, `prompts/README.md` | keine direkte Laufzeitabhaengigkeit | in Aufbau |
 
 ## Website
@@ -42,9 +42,9 @@ Kritische Dateien:
 
 ## n8n-Automationen
 
-Im Repo liegen aktuell noch keine exportierten n8n-Workflows. Die Rolle von n8n ist aber bereits sichtbar:
+Im Repo liegen erste n8n-Artefakte, aber der aktive Contract ist noch nicht vollstaendig exportiert. Die Rolle von n8n ist bereits sichtbar:
 
-- versionierter Instant-Results-Layer fuer den Growth Audit
+- aktiver Instant-Results-Layer fuer den Growth Audit ueber `https://n8n.hasimuener.de/webhook/cja-analyze`
 - kuenftiges Lead-Routing und Nurture
 - Reporting- oder CRM-Bridges, die in Texten und Angebotslogik bereits angedeutet werden
 
@@ -56,8 +56,11 @@ Aktuell dokumentierter Workflow:
 
 Bekannte technische Touchpoints:
 
+- `blocksy-child/inc/cja-shortcode.php`
+- `blocksy-child/assets/js/cja-audit.js`
 - `blocksy-child/assets/js/audit-live.js`
-- Webhooks `audit` und `audit-status`
+- Webhook `cja-analyze`
+- Legacy-Webhooks `audit` und `audit-status`
 
 Fachliche Regel:
 
@@ -73,13 +76,12 @@ Aktuelle Logik:
 
 1. Besucher kommen ueber Homepage, WGOS, Service-Seiten, Blog oder Kategorie-Hubs.
 2. Primaerer CTA fuehrt in den `Growth Audit`.
-3. Die aktive Audit-Landingpage sammelt Seite plus Kontext ueber ein natives Multi-Step-Formular.
-4. Die Branchen-Landingpage fuer Solar-/Waermepumpen-Anbieter nutzt denselben Request-Stack mit eigenem, branch-faehigem Multi-Step-Intake und serverseitigem Fallback.
-5. WordPress speichert die Anfrage direkt im internen Audit-CRM, schreibt zusaetzlich interne Landing-/Entry-/Referrer-Attribution fuer neue Leads mit und versendet Benachrichtigungen ueber `wp_mail`.
-6. Danach folgt bei Bedarf ein vertiefter Folgeschritt, aber erst nach der persoenlichen Rueckmeldung und direktem Kontakt.
-7. Alternative direkte Eskalation: `Cal.com`-Call ueber `https://cal.com/hasim-uener/30min?overlayCalendar=true`; fuer Agentur-/Partner-Fit auf der Whitelabel-Seite zusaetzlich `https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true`.
-8. Direkte Gespraechs-CTAs bleiben als normale Links erhalten, werden im Frontend aber per `blocksy-child/assets/js/cal-embed.js` event-typ-spezifisch zu einem Modal-Embed im Seitenkontext erweitert.
-9. `audit-live.js` bleibt als vorbereiteter Instant-Results-Layer im Repo, ist aber nicht der aktive Default-Flow.
+3. Die aktive Audit-Landingpage nimmt nur die URL auf und sendet sie erst nach explizitem Klick an den n8n-Webhook `cja-analyze`.
+4. Das Frontend rendert das Ergebnis direkt auf der Seite als Modul-Dashboard fuer Performance, Tracking, SEO, Content und Revenue Impact.
+5. Die Branchen-Landingpage fuer Solar-/Waermepumpen-Anbieter nutzt weiter einen separaten Multi-Step-Intake mit WordPress-CRM-Stack und serverseitigem Fallback.
+6. Direkte Eskalation nach dem Ergebnis laeuft ueber `/kontakt/` oder je nach Kontext ueber `Cal.com`.
+7. Direkte Gespraechs-CTAs bleiben als normale Links erhalten, werden im Frontend aber per `blocksy-child/assets/js/cal-embed.js` event-typ-spezifisch zu einem Modal-Embed im Seitenkontext erweitert.
+8. Der fruehere 48h-Intake fuer die Hauptroute bleibt im Repo als Legacy-Layer, ist aber nicht mehr der Default-Flow.
 
 ## Nexus CRM und Blog Notify
 
@@ -197,7 +199,7 @@ Risiko:
 - Theme-eigener SEO-Layer (seo-meta.php) für Title, Description, OG, Canonical und Robots
 - Native WordPress-Sitemap (/wp-sitemap.xml)
 - Fluent Forms fuer die vertiefte Folgeanalyse
-- n8n Cloud fuer den optionalen Instant-Results-Audit
+- n8n auf `n8n.hasimuener.de` fuer den aktiven Instant-Results-Audit
 - Cal.com fuer direkte Gespraechsbuchung
 - SSH-Deploy auf Basis des gebauten `blocksy-child/`-Pakets
 
@@ -205,6 +207,6 @@ Risiko:
 
 - `page-wgos.php` ist fachlich wichtig und inzwischen deutlich verschlankt, bleibt aber technisch template-driven statt editor- oder ACF-getrieben.
 - Kaufnahe Inhalte liegen weiter teils im Repo und teils im WordPress-Editor; Titel, Excerpts, Karten und manuell kuratierte Related-Module koennen die neue Proof- und Tonalitaetslogik unterlaufen, wenn sie nicht separat gepflegt werden.
-- `audit-live.js` haengt an harten Webhook-URLs und an einem impliziten n8n-Payload-Contract, solange der Instant-Results-Flow nicht voll aktiviert ist.
+- Der aktive CJA-Flow haengt an einem impliziten n8n-Payload-Contract; ohne versionierten Workflow-Export und Response-Schema bleibt die Schnittstelle dokumentatorisch fragil.
 - Tracking-, Consent- und CRM-Logik sind operativ relevant, aber noch nicht als Repo-System dokumentiert.
 - Manuelle WordPress-Admin-Schritte existieren noch als Betriebswissen und muessen weiter systematisiert werden.

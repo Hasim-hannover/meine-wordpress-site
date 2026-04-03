@@ -1,14 +1,14 @@
 # Audit Funnel
 
-Stand: 2026-03-20.
+Stand: 2026-04-03.
 
 Diese Doku beschreibt den aktuell aktiven Funnel rund um den `Growth Audit`.
 
 Wichtig:
 
-- Der aktive Funnel ist kein Instant-Results-Flow.
-- Die aktuelle Landingpage arbeitet als persoenlicher Audit-Intake mit Rueckmeldung in 48 Stunden.
-- `audit-live.js` und die n8n-Strecke liegen weiter im Repo, sind aber aktuell nicht an den aktiven Landing-Shell gebunden.
+- Der aktive Funnel fuer `/growth-audit/` ist jetzt ein Instant-Results-Flow.
+- Die Route rendert den Shortcode `cja_audit` und sendet erst nach explizitem Nutzerklick eine URL an n8n.
+- Der fruehere 48h-Intake und `audit-live.js` liegen weiter im Repo, sind aber nicht mehr der aktive Default der Hauptroute.
 
 ## Zweck des Funnels
 
@@ -17,119 +17,75 @@ Der `Growth Audit` ist der wichtigste Diagnose-Einstieg des Systems.
 Sein Job:
 
 - Reibung fuer Erstkontakt senken
-- die richtige Seite plus den richtigen Kontext einsammeln
+- die groessten Bremsen sofort sichtbar machen
 - Botschaft, Proof, CTA und Anfragefuehrung priorisieren
-- unqualifizierte Gratis-Relaunch-Anfragen filtern
-- passende Leads in Rueckmeldung, Folgeprozess, Call oder Umsetzung ueberfuehren
+- einen klaren naechsten Schritt nach `/kontakt/` oder Call vorbereiten
 
 Der Funnel verkauft nicht sofort. Er schafft Klarheit und Priorisierung.
 
 ## Aktiver Flow
 
 1. Besucher landet auf `/growth-audit/`.
-2. `blocksy-child/page-audit.php` rendert die versionierte Shell direkt aus `blocksy-child/template-parts/audit-page-shell.php`; `blocksy-child/inc/audit-page.php` haelt zusaetzlich einen Fallback fuer `the_content()`-basierte Renderpfade.
-3. Das Frontend zeigt einen fokussierten nativen 4-Schritt-Flow mit:
-   - konkreter Seiten-URL
-   - groesstem Klaerungsbedarf
-   - primaerem Ziel
-   - leichtem Kontaktabschluss mit optionalem Kurzkontext
-4. `blocksy-child/assets/js/review-funnel.js` validiert die Schritte und sendet die Daten an `POST /wp-json/nexus/v1/audit-request`.
-5. `blocksy-child/inc/review-crm.php` prueft Honeypot, Rate Limit und Payload und speichert die Anfrage als `nexus_review_request`.
-6. WordPress versendet eine interne Benachrichtigung und eine kurze Bestaetigung an den Anfragenden ueber `wp_mail`; der zentrale Theme-Mailer routed diese Mails bei gesetzter Brevo-API-Konfiguration ueber Brevo.
-7. Im Backend landet der Lead im `Nexus CRM` im Audit-Bereich mit Status, Prioritaet, Faelligkeit und internen Notizen.
-8. Danach folgt die persoenliche Rueckmeldung innerhalb von 48 Stunden.
-9. Je nach Lage geht der Lead weiter in:
-   - kleine Korrektur
-   - vertiefte Folgeanalyse nach dem Audit
-   - Umsetzung / Retainer
-   - direkten Strategiecall ueber Cal.com
+2. `blocksy-child/page-audit.php` rendert die Route ueber `blocksy-child/inc/audit-page.php`, das aktiv den Shortcode `cja_audit` ausgibt.
+3. Das Frontend zeigt ein einzelnes URL-Feld, einen kurzen Loading-State und danach ein Ergebnis-Dashboard.
+4. `blocksy-child/assets/js/cja-audit.js` bereinigt die URL, validiert sie clientseitig und sendet `POST https://n8n.hasimuener.de/webhook/cja-analyze` mit JSON-Body `{ "url": "<bereinigte-url>" }`.
+5. n8n liefert ein JSON mit `overall_score`, Modul-Scores, Detail-Items, Revenue-Summary und `quickWins`.
+6. Das Frontend rendert die Analyse sofort auf der Seite und zeigt als naechsten Schritt einen CTA nach `/kontakt/`.
+7. Nachgelagerte persoenliche Qualifizierung laeuft nur noch ueber Kontakt-/Call-Pfade, nicht mehr ueber einen Pflicht-CRM-Intake auf der Hauptroute.
 
 ## Nutzerseitige Inputs
 
-Pflichtfelder:
+Pflichtfeld:
 
-- `page_url`
-- `focus_area`
-- `primary_goal`
-- `name`
-- `email`
-
-Implizite Felder:
-
-- `audit_type=growth_audit`
-- `company_website` als Honeypot
-- `started_at` fuer einfaches Frontend-Timing
-- `landing_page_url` als aktuelle Formularseite
-- `entry_page_url` als erster interner Seitenaufruf der Session
-- `previous_internal_url` als letzte interne Seite vor dem Audit-Formular
-- `referrer_url` als technischer Referrer, falls vorhanden
-
-Optionale Felder:
-
-- `company`
-- `current_challenge`
-- `linkedin`
-- `extra_context`
+- `url`
 
 ## Nutzerseitige Outputs
 
-- Erfolgszustand direkt auf der Seite
-- Bestaetigung per E-Mail
-- optionaler Direktpfad zu Cal.com
+- Ergebnis-Dashboard direkt auf der Seite
+- priorisierte Quick Wins
+- CTA nach `/kontakt/`
 
 ## Systemseitige Outputs
 
-- WordPress-CPT-Eintrag `nexus_review_request`
-- Metadaten zu Seite, Kontakt, Audit-Typ und Status
-- zusaetzliche Attributions-Metadaten fuer kuenftige SEO-/Lead-Auswertung im `SEO Cockpit`
-- interne Benachrichtigungs-Mail
-- Bestaetigungs-Mail an den Lead
+- n8n-Response fuer das Dashboard
+- kein Pflicht-CRM-Eintrag auf der Hauptroute
 
 ## Repo-Touchpoints
 
 - `blocksy-child/page-audit.php`
 - `blocksy-child/inc/audit-page.php`
-- `blocksy-child/template-parts/audit-page-shell.php`
-- `blocksy-child/assets/js/review-funnel.js`
-- `blocksy-child/assets/js/audit.js`
-- `blocksy-child/inc/review-crm.php`
+- `blocksy-child/inc/cja-shortcode.php`
+- `blocksy-child/assets/js/cja-audit.js`
+- `blocksy-child/assets/css/cja-audit.css`
 - `blocksy-child/inc/enqueue.php`
-- `blocksy-child/assets/css/audit.css`
-- `blocksy-child/assets/css/review-funnel.css`
 - `blocksy-child/inc/seo-meta.php`
 - `blocksy-child/inc/org-schema.php`
 
 ## Externe Abhaengigkeiten
 
-- WordPress REST API
-- Brevo API fuer die technische Zustellung der Transaktionsmails
-- Cal.com
-
-Optional, aber aktuell nicht aktiv im aktiven Landing-Flow:
-
-- n8n Cloud
-- `audit-live.js`
-- Webhooks `audit`, `audit-status`, `audit-consultation`
+- n8n Webhook `https://n8n.hasimuener.de/webhook/cja-analyze`
+- WordPress fuer Route, Shortcode und CTA-Ziel
+- Cal.com nur fuer nachgelagerte Gespraechswege
 
 ## Nicht aktiver Repo-Layer
 
-Im Repo liegt weiterhin ein vorbereiteter Instant-Results-Pfad:
+Im Repo liegt weiterhin ein aelterer oder alternativer Audit-Layer:
 
 - `blocksy-child/assets/js/audit-live.js`
 - `blocksy-child/assets/css/audit-results.css`
+- `blocksy-child/template-parts/audit-page-shell.php`
 - `automations/n8n/workflows/audit-funnel__customer-journey-audit__refactor.json`
 
-Dieser Layer ist fachlich weiter relevant, aber derzeit nicht die aktive Landingpage-Logik.
+Dieser Layer ist fachlich weiter relevant, aber derzeit nicht die aktive Landingpage-Logik der Hauptroute.
 
 ## Risiken
 
-- Der Repo-Layer routed Mail nun bevorzugt ueber die Brevo API, braucht dafuer aber gueltigen API-Key und verifizierte Senderdaten ausserhalb des Repos.
-- Der Post-Type-Slug `nexus_review_request` ist historisch und fachlich inzwischen breiter als nur `Review`.
-- Der Instant-Results-Layer und der aktive 48h-Intake leben parallel im Repo und muessen bewusst getrennt bleiben.
-- CRM- und Follow-up-Logik endet aktuell im WordPress-Backend; externes Routing ist noch nicht versioniert.
+- Der aktive n8n-Payload-Contract ist noch nicht als vollstaendig versionierter Workflow-Export plus Flow-Map im Repo beschrieben.
+- Der Legacy-48h-Intake und der aktive Instant-Results-Layer leben parallel im Repo und muessen bewusst getrennt bleiben.
+- CRM- und Follow-up-Logik fuer den alten Intake bleibt im Theme vorhanden, obwohl sie auf der Hauptroute nicht mehr aktiv ist.
 
 ## Naechste sinnvolle Schritte
 
-1. Live-Credentials fuer Brevo prueffest in `wp-config.php` oder Server-Env hinterlegen und Versand einmal end-to-end testen.
-2. Den Audit-Bereich im `Nexus CRM` um Follow-up-Felder und Delivery-Templates erweitern.
-3. Entscheiden, ob `audit-live.js` spaeter den aktiven Intake ersetzt oder ein separater Angebotszweig bleibt.
+1. Den aktiven n8n-Workflow `cja-analyze` als Export, Doku und Flow-Map versionieren.
+2. Das Response-Schema der Analyse explizit dokumentieren, damit Frontend und n8n nicht still auseinanderlaufen.
+3. Entscheiden, ob der Legacy-48h-Intake fuer andere Einstiege erhalten bleibt oder repo-seitig bereinigt werden soll.

@@ -1,6 +1,6 @@
 # Live Status
 
-Stand: 2026-03-31.
+Stand: 2026-04-03.
 
 Basis dieses Status:
 
@@ -24,17 +24,17 @@ Nicht verifiziert:
 - Der `Growth Audit` ist als Primaer-CTA systemweit verankert.
 - Repo-seitig gibt es jetzt einen zentralen oeffentlichen Proof- und Vokabular-Layer: `1.750+ qualifizierte Leads`, `12 % Sales-Conversion` und `-83 % CPL` sind das konservative Standard-Proof-Set; `WGOS = WordPress Growth Operating System` bleibt als erklaertes Framework hinter dem oeffentlichen Hauptbegriff `WordPress als Nachfrage-System fuer B2B`.
 - Der versionierte Ergebnisse-Hub priorisiert jetzt eine klarere Hero-Einordnung, schnellere Proof-Selbstselektion, E3 als primaeren B2B-Einstieg, DOMDAR als Commerce-Ergaenzung, einen konkreteren Whitelabel-Vertrauensbeleg und eine segmentierte Audit-/WGOS-Abschluss-CTA.
-- Die aktive `Growth Audit`-Landingpage ist repo-seitig jetzt als kompakter 5-Sektionen-Shell hinterlegt: Hero, oeffentlicher Proof, 1-Schritt-Formular, reduzierte FAQ und finaler CTA.
+- Die aktive `Growth Audit`-Route `/growth-audit/` rendert repo-seitig jetzt einen shortcode-getriebenen Instant-Results-Flow: URL-Eingabe, 30-Sekunden-Analyse, Ergebnis-Dashboard fuer Performance, Tracking, SEO, Content und Revenue Impact sowie CTA nach `/kontakt/`.
 - Die noindex-Kampagnenseite `/audit-linkedin/` bleibt als eigene LinkedIn-Landingpage im Theme hinterlegt und ist repo-seitig jetzt zusaetzlich als native WordPress-Seite mit Template-Zuweisung und festem Featured Image abgesichert.
 - Repo-seitig liegt jetzt zusaetzlich eine B2B-Branchen-Landingpage fuer Solar-, Waermepumpen- und Speicher-Anbieter kanonisch unter `/solar-waermepumpen-leadgenerierung/`; der Intake nutzt denselben Audit-/CRM-Stack mit eigener Branchen-Variante.
 - `page-wgos.php` ist repo-seitig jetzt als 8-Sektionen-WGOS-Page versioniert: Hero mit Audit- und Gespraechs-CTA, WGOS-Kurzform, inline Systemdiagramm, gestraffte Kernbereiche, frueher platzierte Pakete/Credits, kondensierter Proof, reduzierte FAQ und finaler CTA; die Sticky-Navigation fuehrt nur noch ueber System, Kernbereiche, Pakete, Wirkung und FAQ.
 - Die wichtigsten Legacy-Clusterseiten fuer SEO, Core Web Vitals, CRO, GA4 und Performance Marketing sind jetzt als versionierte WGOS-Clusterseiten im Theme hinterlegt.
-- `inc/enqueue.php` nutzt fuer CSS- und JS-Assets jetzt in Live-Umgebungen eine statische Theme-Version und faellt nur in `local`/`development` auf `filemtime()` zurueck; `/growth-audit/` laedt den kompakten Landingpage-Stack ueber `audit.css` und `audit.js`, waehrend `review-funnel.css` nur noch fuer die Branchen-Landingpage mit Multi-Step-Intake genutzt wird.
+- `inc/enqueue.php` nutzt fuer CSS- und JS-Assets jetzt in Live-Umgebungen eine statische Theme-Version und faellt nur in `local`/`development` auf `filemtime()` zurueck; `/growth-audit/` laedt den neuen Instant-Results-Stack ueber den Shortcode `cja_audit` mit `cja-audit.css` und `cja-audit.js`, waehrend `review-funnel.css` nur noch fuer die Branchen-Landingpage mit Multi-Step-Intake genutzt wird.
 - Die WGOS-Clusterseiten zeigen im Proof-Block jetzt bewusst belastbare System-Beweise (`100 % B2B-Fokus`, `48h` Diagnosezeit, `3 Proof-Routen`) statt uebergreifend wiederholter Leistungszahlen, die als generischer Platzhalter gelesen werden koennten.
 - Die kanonischen Cluster-Routen und die Kontaktseite `/kontakt/` werden repo-seitig jetzt zusaetzlich als veroeffentlichte WordPress-Seiten mit zugewiesenem Template abgesichert, damit oeffentliche URL, native Sitemap, Canonical-Logik und Admin-Aufloesung konsistent bleiben.
 - Repo-seitige Primary-Links auf diese Clusterseiten zeigen jetzt direkt auf ihre kanonischen Routen und fallen nicht mehr auf kuerzere Legacy-Slugs wie `/seo/` zurueck.
 - Ergebnisse laufen repo-seitig kanonisch ueber `/ergebnisse/`; alte Proof-Slugs bleiben nur als Legacy-Redirects bestehen.
-- Der aktive `Growth Audit`-Pfad nutzt jetzt ein natives 1-Schritt-Formular, WordPress-REST und das interne Audit-CRM; der vereinfachte Intake schreibt nur URL, Name, E-Mail, optionalen Hinweis und Datenschutz in denselben CRM-/Mail-Stack.
+- Der aktive `Growth Audit`-Pfad nutzt jetzt einen privacy-first Shortcode-Flow ohne E-Mail-Pflicht: erst nach Klick auf `Jetzt analysieren` sendet das Frontend die bereinigte URL per `POST` an `https://n8n.hasimuener.de/webhook/cja-analyze`; Ergebnis und CTA bleiben direkt auf der Seite.
 - Direkte Gespraechs-CTAs fuer Audit-, Kontakt- und WGOS-Kontexte nutzen theme-seitig zentral `https://cal.com/hasim-uener/30min?overlayCalendar=true`; die Whitelabel-Seite nutzt fuer Partner- und Agentur-Fit jetzt zusaetzlich `https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true`.
 - Diese Gespraechs-CTAs oeffnen bei verfuegbarem JavaScript ein eingebettetes Cal.com-Popup im Seitenkontext; der direkte Kalender-Link bleibt pro Event-Typ als robuster Fallback erhalten.
 - Die Kontaktseite fuehrt oeffentlich jetzt ueber sechs saubere Anfragearten: `Erstdiagnose / Growth Audit`, `Fokussierte Folgeanalyse`, `Umsetzung / Optimierung`, `Laufende Weiterentwicklung`, `Allgemeine Anfrage` und `Bestehender Kunde`; die Frontend-Ausgabe von `/kontakt/` ist repo-seitig am nativen Theme-Template verankert.
@@ -62,7 +62,7 @@ Nicht verifiziert:
 - Teile der Homepage- und Navigationslogik haengen noch an manuellen WordPress-Admin-Schritten oder editorgetriebenen Default-Seiten ausserhalb der route-forced Clusterpages.
 - Editorgetriebene Seitentitel, Excerpts, Karten und `the_content()`-Bereiche koennen weiter alte Proof-, Tonalitaets- oder Du/Sie-Brueche enthalten und muessen im WordPress-Admin separat verifiziert werden.
 - Blog-Artikel koennen jetzt theme-seitig passende WGOS-Assets als Anschlussblock ausgeben; weitere Post-Mappings bleiben ausbaubar.
-- `audit-live.js` und die n8n-V3-Strecke liegen als versionierter Instant-Results-Layer im Repo, sind aber nicht der aktive Landing-Flow.
+- Der fruehere 48h-Intake fuer `/growth-audit/` liegt repo-seitig weiter als Legacy-Shell und CRM-Stack vor, ist aber nicht mehr der aktive Renderpfad dieser Route.
 - CRM-, Mail- und Follow-up-Logik fuer den Audit sind jetzt im Theme sichtbar; `wp_mail`-basierte Transaktionsmails koennen repo-seitig zentral ueber die Brevo API geroutet werden, sobald die Live-Credentials ausserhalb des Repos gesetzt sind.
 - Neue Audit-Anfragen speichern repo-seitig jetzt zusaetzlich Formular-Landingpage, ersten internen Einstieg, vorherige interne Seite und Referrer fuer kuenftige Lead-Attribution im SEO-Cockpit.
 - Die neue Energie-Landingpage bringt einen branch-faehigen Multi-Step-Intake mit serverseitigem Fallback; der kanonische Slug wird theme-seitig jetzt bei Bedarf als WordPress-Seite angelegt und der alte Pfad `/website-fuer-solar-und-waermepumpen-anbieter/` per Redirect auf `/solar-waermepumpen-leadgenerierung/` gefuehrt.
@@ -81,7 +81,7 @@ Nicht verifiziert:
 - sauberer Prompt- und Agenten-Layer fuer wiederverwendbare Arbeitskontexte
 - weitere Systemdoku fuer Tracking, CRM-Routing, Offer-Logik und CTA-Inventar
 - Ausbau des SEO Cockpits um echte Koko-Daten, Page-Level-Korrelationen und spaetere URL-Inspection-Sichten
-- optionaler Ausbau des Growth Audit von persoenlichem Intake zu Instant-Results-Flow
+- weiterer Ausbau der n8n-Analyse inklusive dokumentierter Payload-Contracts, Monitoring und Workflow-Exporten
 - Ausbau des Decision Logs fuer strukturelle Repo- und Systementscheidungen
 
 ## Deprecated

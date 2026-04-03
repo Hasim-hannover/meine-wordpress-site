@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Growth Audit
- * Description: Landing Page für einen persönlichen Growth Audit mit Rückmeldung innerhalb von 48 Stunden
+ * Description: Landing Page für den instantanen Growth Audit mit Sofort-Ergebnis
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *
@@ -11,7 +11,7 @@
 get_header();
 ?>
 <!-- nexus-audit-template-active -->
-<div class="audit-page-wrapper" data-track-section="audit_landing">
+<div class="audit-page-wrapper" data-track-section="growth_audit_instant">
 
 	<?php
 	while ( have_posts() ) :

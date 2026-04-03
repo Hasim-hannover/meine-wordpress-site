@@ -14,11 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Render the versioned audit shell from the theme.
+ * Render the active audit experience from the theme.
  *
  * @return string
  */
 function nexus_get_audit_shell_markup() {
+	if ( shortcode_exists( 'cja_audit' ) ) {
+		return do_shortcode( '[cja_audit]' );
+	}
+
 	ob_start();
 	get_template_part( 'template-parts/audit-page-shell' );
 
@@ -26,10 +30,10 @@ function nexus_get_audit_shell_markup() {
 }
 
 /**
- * Replace audit page content with the versioned theme shell as a fallback.
+ * Replace audit page content with the active audit experience as a fallback.
  *
- * This keeps the live funnel coupled to versioned theme code instead of fragile
- * HTML snippets in the page editor when the page is rendered via the_content().
+ * This keeps the live funnel coupled to versioned theme code even if the page
+ * is rendered through a regular `the_content()` path.
  *
  * @param string $content Rendered page content.
  * @return string
@@ -45,12 +49,10 @@ function nexus_replace_audit_page_content_with_shell( $content ) {
 add_filter( 'the_content', 'nexus_replace_audit_page_content_with_shell', 20 );
 
 /**
- * Output critical audit-page CSS directly in <head>.
+ * Output minimal audit-page CSS directly in <head>.
  *
- * This is the most reliable CSS delivery method because it does not depend
- * on any wp_enqueue_style handle and cannot be stripped by caching plugins.
- * It ensures the audit shell breaks out of Blocksy's container constraints
- * even when page-audit.php template is not loaded.
+ * The active audit route uses a shortcode-driven shell, but we still keep a
+ * light fallback that hides duplicated page titles on non-template paths.
  */
 function nexus_audit_head_styles() {
 	if ( ! nexus_is_audit_page() ) {
@@ -58,36 +60,6 @@ function nexus_audit_head_styles() {
 	}
 	?>
 	<style id="nexus-audit-breakout">
-		/* Break .audit-wrapper out of Blocksy entry-content container */
-		.audit-wrapper {
-			width: 100vw !important;
-			max-width: 100vw !important;
-			margin-left: calc(-50vw + 50%) !important;
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-			box-sizing: border-box !important;
-		}
-		/* Remove constraints from Blocksy parent containers */
-		.entry-content:has(.audit-wrapper),
-		.ct-container:has(.audit-wrapper) {
-			max-width: none !important;
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-			overflow: visible !important;
-		}
-		/* Fallback without :has() — target by body slug class */
-		body.page-growth-audit .entry-content,
-		body.page-growth-audit .ct-container,
-		body.page-growth-audit .site-main,
-		body.page-growth-audit .content-area {
-			max-width: none !important;
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-			margin-left: 0 !important;
-			margin-right: 0 !important;
-			width: 100% !important;
-			overflow: visible !important;
-		}
 		body.page-growth-audit .entry-header,
 		body.page-growth-audit .ct-page-title {
 			display: none !important;

@@ -119,6 +119,10 @@ function hu_get_forced_singular_seo_map() {
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
 				'description' => 'Ergebnisse aus WordPress-, SEO-, Tracking- und CRO-Projekten: E3, DOMDAR und Whitelabel-Proof mit klarem naechsten Schritt.',
 			],
+			'growth-audit' => [
+				'title'       => 'Kostenloser Growth Audit | Hasim Üner — WordPress Growth Architect',
+				'description' => 'Performance, SEO, Tracking, Content — in 30 Sekunden erfahren Sie, wo Ihr größtes Wachstumspotenzial liegt. Kostenlose Analyse ohne E-Mail.',
+			],
 			'case-studies-e-commerce' => [
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
 				'description' => 'Ergebnisse aus WordPress-, SEO-, Tracking- und CRO-Projekten: E3, DOMDAR und Whitelabel-Proof mit klarem naechsten Schritt.',
@@ -488,7 +492,7 @@ function hu_document_title_overrides( $parts ) {
 	}
 
 	if ( hu_is_audit_offer_page() ) {
-		$parts['title'] = 'Growth Audit für B2B-WordPress-Seiten';
+		$parts['title'] = 'Kostenloser Growth Audit | Hasim Üner — WordPress Growth Architect';
 		return $parts;
 	}
 
@@ -777,8 +781,8 @@ function hu_get_seo_meta() {
 		}
 
 		if ( hu_is_audit_offer_page() ) {
-			$meta['og_title']    = 'Growth Audit für B2B-WordPress-Seiten';
-			$meta['description'] = 'Persönlicher Growth Audit für Startseiten und kaufnahe Angebotsseiten: drei Anfragebremsen, eine klare Priorität und Rückmeldung innerhalb von 48 Stunden.';
+			$meta['og_title']    = 'Kostenloser Growth Audit | Hasim Üner — WordPress Growth Architect';
+			$meta['description'] = 'Performance, SEO, Tracking, Content — in 30 Sekunden erfahren Sie, wo Ihr größtes Wachstumspotenzial liegt. Kostenlose Analyse ohne E-Mail.';
 		}
 
 		if ( hu_is_domdar_case_study_page() ) {

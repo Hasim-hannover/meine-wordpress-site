@@ -27,8 +27,8 @@ if ( '' === $mobile_eyebrow_text ) {
 
 if ( empty( $audit_header_meta_items ) ) {
 	$audit_header_meta_items = [
-		'manuelle Ersteinschätzung',
-		'schriftliche Rückmeldung in 48h',
+		'30-Sekunden-Analyse',
+		'Sofort-Ergebnis ohne E-Mail',
 	];
 }
 ?>
@@ -61,7 +61,7 @@ if ( empty( $audit_header_meta_items ) ) {
 
 			<div class="nx-site-header__audit-actions">
 				<a class="nx-site-header__audit-link" href="<?php echo esc_url( $cases_url ); ?>">Einblicke</a>
-				<a class="nx-site-header__audit-link nx-site-header__audit-link--primary" href="#form">Zum Flow</a>
+				<a class="nx-site-header__audit-link nx-site-header__audit-link--primary" href="#form">Zur Analyse</a>
 			</div>
 		</div>
 	</div>
