@@ -46,16 +46,12 @@
     refs.scoreHeader = document.getElementById('cja-score-header');
     refs.modules = document.getElementById('cja-modules');
     refs.revenue = document.getElementById('cja-revenue');
-    refs.retry = document.getElementById('cja-retry');
 
     if (!refs.urlInput || !refs.submit) return;
 
     showInput();
 
     refs.submit.addEventListener('click', handleSubmit);
-    if (refs.retry) {
-      refs.retry.addEventListener('click', handleRetry);
-    }
     refs.urlInput.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -526,31 +522,6 @@
     window.scrollTo({
       top: 0,
       behavior: behavior
-    });
-  }
-
-  function handleRetry() {
-    clearResults();
-    clearError();
-    showInput();
-
-    if (state.revealObserver) {
-      state.revealObserver.disconnect();
-      state.revealObserver = null;
-    }
-
-    if (refs.urlInput) {
-      refs.urlInput.value = '';
-    }
-
-    window.requestAnimationFrame(function () {
-      scrollAppToTop();
-
-      if (refs.urlInput) {
-        window.setTimeout(function () {
-          refs.urlInput.focus();
-        }, prefersReducedMotion() ? 0 : 180);
-      }
     });
   }
 

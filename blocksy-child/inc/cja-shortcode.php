@@ -114,10 +114,6 @@ function cja_audit_shortcode() {
 				<div class="cja-cta-meta">15 Min · Unverbindlich · Konkrete nächste Schritte</div>
 			</div>
 
-			<div class="cja-retry-section">
-				<button id="cja-retry" class="cja-retry-button" type="button">Andere Website analysieren</button>
-			</div>
-
 			<div class="cja-footer-line">Powered by WGOS — WordPress Growth Operating System</div>
 		</div>
 	</div>
