@@ -23,9 +23,10 @@ $implementation_contact_url = add_query_arg(
 );
 $e3_url    = nexus_get_page_url( [ 'e3-new-energy' ] );
 $seo_url   = nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) );
+$tracking_url = nexus_get_primary_public_url( 'tracking', home_url( '/ga4-tracking-setup/' ) );
 $wartung_url = nexus_get_primary_public_url( 'wartung', home_url( '/wordpress-wartung-hannover/' ) );
 $measurement_url = nexus_get_wgos_asset_anchor_url( 'tracking-audit' );
-$cro_url   = nexus_get_page_url( [ 'conversion-rate-optimization' ] );
+$cro_url   = nexus_get_primary_public_url( 'cro', home_url( '/conversion-rate-optimization/' ) );
 $tools_url = nexus_get_primary_public_url( 'tools', home_url( '/kostenlose-tools/' ) );
 $proof_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [];
 $canonical_ownership_sentence = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
@@ -36,11 +37,11 @@ $audit_compact_microcopy     = function_exists( 'nexus_get_audit_compact_microco
 $hero_highlights = [
 	[
 		'label' => 'Für wen',
-		'text'  => 'B2B-Unternehmen in Hannover und der Region, für die WordPress oder WooCommerce ein echter Nachfragekanal ist.',
+		'text'  => 'B2B-Unternehmen aus Hannover, Pattensen und der Region Hannover, für die WordPress oder WooCommerce ein echter Nachfragekanal ist.',
 	],
 	[
 		'label' => 'Typisches Ergebnis',
-		'text'  => 'Klarere Angebotsseiten, belastbare Datensignale und weniger Reibung zwischen erstem Besuch und qualifizierter Anfrage.',
+		'text'  => 'Klarere Angebotsseiten, belastbare Datensignale und weniger Reibung zwischen erstem Besuch, qualifiziertem Lead und nächstem Gespräch.',
 	],
 	[
 		'label' => 'Nächster Schritt',
@@ -87,25 +88,29 @@ $fit_items = [
 ];
 
 $service_items = [
-	'WordPress-Websites, die Anfragen generieren — nicht nur gut aussehen',
-	'Technische SEO für regionale und überregionale Sichtbarkeit',
-	'Tracking-Setups, die DSGVO-konform echte Entscheidungen ermöglichen',
-	'Conversion-Optimierung bestehender Seiten ohne Relaunch',
+	'WordPress-Websites, die qualifizierte B2B-Anfragen generieren — nicht nur gut aussehen',
+	'Technische SEO für lokale und kaufnahe Sichtbarkeit in WordPress',
+	'GA4-, GTM- und Server-Side-Tracking-Setups, die DSGVO-konform echte Entscheidungen ermöglichen',
+	'Conversion Rate Optimierung für bestehende WordPress-Landingpages und Angebotsseiten',
 	'Laufende Weiterentwicklung mit klarer Priorisierung statt Relaunch-Zyklen',
 ];
 
 $faq_items = [
 	[
-		'question' => 'Was unterscheidet einen WordPress Growth Architect von einer Agentur?',
-		'answer'   => 'Eine Agentur liefert Seiten und Pakete. Ein Growth Architect ordnet WordPress als Nachfrage-System: Angebotsseiten, Tracking, Conversion und Betrieb greifen als zusammenhängender Prozess ineinander, nicht als Einzelmaßnahmen.',
+		'question' => 'Welche WordPress Agentur in Hannover hilft bei Leadgenerierung für B2B?',
+		'answer'   => 'Die passende Agentur verbindet nicht nur Design und Entwicklung, sondern auch Angebotsseiten, technische SEO, Tracking und Conversion-Führung. Genau darauf ist diese Seite ausgerichtet: WordPress als Nachfrage-System für B2B statt isolierter Einzelleistungen.',
 	],
 	[
-		'question' => 'Für welche Unternehmensgrößen ist die Zusammenarbeit geeignet?',
-		'answer'   => 'Für B2B-Unternehmen, bei denen WordPress ein echter Geschäftskanal ist — typischerweise ab 10 Mitarbeitenden oder einem klaren Anfrageziel. Entscheidend ist nicht die Größe, sondern ob die Website Anfragen liefern soll.',
+		'question' => 'Arbeiten Sie nur in Hannover oder auch in Pattensen und der Region Hannover?',
+		'answer'   => 'Der Standort ist Pattensen bei Hannover. Workshops, Reviews und persönliche Termine sind in Hannover und der Region problemlos möglich. Die Umsetzung funktioniert zusätzlich DACH-weit remote.',
 	],
 	[
-		'question' => 'Wie lange dauert es, bis erste Ergebnisse sichtbar sind?',
-		'answer'   => 'Das hängt vom Ausgangszustand ab. Technische Fixes und Tracking-Korrekturen wirken oft in Wochen. SEO-Sichtbarkeit und Conversion-Verbesserungen zeigen sich typischerweise in 2–4 Monaten. Der Growth Audit klärt, was bei Ihnen zuerst greift.',
+		'question' => 'Unterstützen Sie auch Tracking und Conversion-Optimierung oder nur WordPress-Entwicklung?',
+		'answer'   => 'Ja. Die Arbeit umfasst nicht nur WordPress-Entwicklung, sondern auch technische SEO, GA4- und Tracking-Setups, Conversion Rate Optimierung und die Priorisierung kaufnaher Seiten. Genau diese Kombination ist für Leadgenerierung im B2B meist entscheidend.',
+	],
+	[
+		'question' => 'Wann ist die Agentur-Seite der richtige Einstieg und wann der Growth Audit?',
+		'answer'   => 'Die Agentur-Seite ist richtig, wenn Sie den Gesamtkontext verstehen wollen. Der Growth Audit ist der bessere nächste Schritt, wenn klar werden soll, ob zuerst SEO, Tracking, Performance oder Conversion den größten Hebel hat.',
 	],
 ];
 
@@ -122,7 +127,7 @@ get_header();
 						<span class="nx-badge nx-badge--gold">WordPress Agentur Hannover für B2B</span>
 						<h1 class="nx-hero__title">WordPress Agentur Hannover: B2B-Websites, die Anfragen liefern.</h1>
 						<p class="nx-hero__subtitle">
-							WordPress Agentur in Hannover heißt hier: <?php echo esc_html( $primary_term ); ?> statt Einzelmaßnahmen. Angebotsseiten, technische SEO, Tracking und Conversion-Führung greifen als ein sauberes System zusammen, auch bei WooCommerce- oder Hybrid-Setups mit echtem Anfragebezug.
+							WordPress Agentur in Hannover heißt hier: <?php echo esc_html( $primary_term ); ?> statt Einzelmaßnahmen. Angebotsseiten, technische SEO, GA4-Tracking und Conversion Rate Optimierung greifen als ein sauberes System zusammen, wenn Ihre Website nicht nur bestehen, sondern qualifizierte B2B-Leads liefern soll.
 						</p>
 						<div class="wp-agentur-actions wp-agentur-actions--hero">
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary wp-agentur-hero__primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
@@ -314,6 +319,14 @@ get_header();
 						<span class="wp-agentur-spoke-card__title">WordPress SEO Hannover</span>
 						<span class="wp-agentur-spoke-card__desc">Crawlability, Seitenstruktur, interne Verlinkung und technische Fixes für kaufnahe Rankings.</span>
 					</a>
+					<a href="<?php echo esc_url( $tracking_url ); ?>" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_tracking" data-track-category="navigation">
+						<span class="wp-agentur-spoke-card__title">GA4 Tracking Setup</span>
+						<span class="wp-agentur-spoke-card__desc">GA4, GTM, Consent und serverseitige Signale für belastbare Lead- und Nachfrage-Daten.</span>
+					</a>
+					<a href="<?php echo esc_url( $cro_url ); ?>" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_cro" data-track-category="navigation">
+						<span class="wp-agentur-spoke-card__title">Conversion Rate Optimierung für WordPress</span>
+						<span class="wp-agentur-spoke-card__desc">Angebotsseiten, Proof, CTA-Führung und Formulare so ordnen, dass aus Besuchern Anfragen werden.</span>
+					</a>
 					<a href="<?php echo esc_url( $wartung_url ); ?>" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_wartung" data-track-category="navigation">
 						<span class="wp-agentur-spoke-card__title">WordPress Wartung Hannover</span>
 						<span class="wp-agentur-spoke-card__desc">Updates, Sicherheit, Backups und stabile Betriebsroutinen als WGOS-Fundament.</span>
@@ -370,8 +383,8 @@ get_header();
 				<div class="nx-section-header">
 					<h2 class="nx-headline-section">Standort Hannover. Arbeitsgebiet DACH.</h2>
 				</div>
-				<p class="wp-agentur-location-note">Persönliche Termine, Workshops und Reviews sind in Hannover und Umgebung jederzeit möglich. Die Zusammenarbeit funktioniert genauso sauber remote.</p>
-				<p class="wp-agentur-location-note"><strong>Standort:</strong> Pattensen bei Hannover.</p>
+				<p class="wp-agentur-location-note">Persönliche Termine, Workshops und Reviews sind in Hannover, Pattensen und der Region Hannover jederzeit möglich. Die Zusammenarbeit funktioniert genauso sauber remote.</p>
+				<p class="wp-agentur-location-note"><strong>Standort:</strong> Pattensen bei Hannover. Das hilft für lokale Abstimmung, ohne die Arbeit künstlich auf Stadtgrenzen zu begrenzen.</p>
 			</div>
 		</section>
 

@@ -340,3 +340,11 @@ Leads → Case Studies
 Case Studies → mehr Rankings
 
 Das System verstärkt sich selbst.
+
+---
+
+## 15. PRAKTISCHE PRIORISIERUNG
+
+Die dauerhafte Umsetzungsdoku für Money-Keyword-Fit, Zielseiten und 90-Tage-Rollout liegt in:
+
+- `docs/seo/money-keyword-implementation.md`

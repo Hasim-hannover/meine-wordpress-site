@@ -265,17 +265,17 @@ function hu_output_schema()
         ],
 
         'conversion-rate-optimization' => [
-            'name'        => 'Conversion Rate Optimization',
-            'description' => 'Vom Chaos zur Klarheit: Wir analysieren Nutzerverhalten und bauen den direktesten Weg zum messbaren Ergebnis.',
-            'serviceType' => 'Conversion Rate Optimization',
-            'serviceOutput' => 'Verbesserung von Anfragequalität, Sales-Conversion und Effizienz durch datenbasierte Tests und Optimierungen'
+            'name'        => 'Conversion Rate Optimierung für WordPress',
+            'description' => 'WGOS-Cluster für Conversion Rate Optimierung auf WordPress: Angebotsseiten, Proof, CTA-Führung und Formulare für mehr qualifizierte B2B-Anfragen.',
+            'serviceType' => 'Conversion Rate Optimierung für WordPress',
+            'serviceOutput' => 'Klarere Angebotsseiten, bessere Anfragequalität und belastbarere Leadpfade auf B2B-WordPress-Websites'
         ],
 
         'ga4-tracking-setup' => [
-            'name'        => 'GA4 & Tracking Setup',
-            'description' => 'Vom Daten-Nebel zur Klarheit: DSGVO-konformes GA4 und Server-Side Tracking.',
-            'serviceType' => 'Tracking & Analytics',
-            'serviceOutput' => 'Lückenloses Tracking-Fundament mit GA4/GTM, Consent-Management und individuellen Dashboards'
+            'name'        => 'GA4 Tracking Setup für B2B-WordPress-Websites',
+            'description' => 'WGOS-Cluster für GA4 Tracking Setup: Event-Logik, GTM, Consent Mode und Server Side Tracking für belastbare Leadsignale in WordPress.',
+            'serviceType' => 'GA4 Tracking Setup & Server Side Tracking',
+            'serviceOutput' => 'Belastbare Lead- und Nachfrage-Signale mit GA4, GTM, Consent und serverseitiger Messung für B2B-Websites'
         ],
 
         'performance-marketing' => [
@@ -455,6 +455,24 @@ function hu_output_schema()
             }
 
             $schemas[] = $service;
+        }
+
+        if ( $slug && function_exists( 'nexus_get_wgos_cluster_page_faq_entities' ) ) {
+            $cluster_faq_entities = nexus_get_wgos_cluster_page_faq_entities( $slug );
+
+            if ( ! empty( $cluster_faq_entities ) ) {
+                $faq_schema = [
+                    '@context'   => 'https://schema.org',
+                    '@type'      => 'FAQPage',
+                    '@id'        => home_url( '/' . $slug . '/#faq' ),
+                    'url'        => home_url( '/' . $slug . '/' ),
+                    'inLanguage' => 'de',
+                    'publisher'  => [ '@id' => home_url( '/#organization' ) ],
+                    'mainEntity' => $cluster_faq_entities,
+                ];
+
+                $schemas[] = $faq_schema;
+            }
         }
 
         // Über mich: Person + ProfilePage
@@ -664,7 +682,10 @@ function hu_output_schema()
                 (stripos($raw, 'faq-item') !== false);
 
             // Einige Templates rendern ihr FAQPage JSON-LD bewusst direkt im Template.
-            if (in_array($slug, ['wordpress-agentur-hannover', 'wgos', 'wordpress-growth-operating-system'], true)) {
+            if (
+                in_array($slug, ['wordpress-agentur-hannover', 'wgos', 'wordpress-growth-operating-system'], true) ||
+                ( function_exists( 'nexus_is_wgos_cluster_page' ) && nexus_is_wgos_cluster_page( $slug ) )
+            ) {
                 $maybe_has_faq = false;
             }
 

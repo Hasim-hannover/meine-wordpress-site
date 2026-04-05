@@ -180,16 +180,17 @@ function nexus_get_wgos_cluster_page_data() {
 		],
 		'ga4-tracking-setup' => [
 			'eyebrow'          => 'Messbarkeit im WGOS',
-			'title'            => 'GA4 Tracking Setup',
-			'lead'             => 'Tracking soll Entscheidungen ermöglichen, nicht nur Dashboards füllen. Ohne saubere Daten bleibt Optimierung Vermutung.',
+			'title'            => 'GA4 Tracking Setup für B2B-WordPress-Websites',
+			'lead'             => 'GA4 Tracking Setup heißt hier: Event-Logik, Consent, GTM und serverseitige Signale so bauen, dass Sie Anfragen, Einstiegsseiten und Leadqualität belastbar sehen.',
 			'intro'            => [
-				'Viele Unternehmen haben GA4, GTM und Consent technisch installiert. Trotzdem fehlen belastbare Antworten auf einfache Fragen: Welche Seiten erzeugen Nachfrage, welcher Kanal bringt die besseren Leads und wo bricht die Nutzerführung weg?',
-				'Das Problem liegt selten in einem einzigen Tag. Meist fehlen Event-Logik, Consent-Verhalten, UTM-Standards und eine sinnvolle Management-Sicht auf dieselben Daten.',
-				'Im WGOS wird Messbarkeit deshalb als eigener Kernbereich behandelt. Erst mit sauberen Signalen wird aus Website-Arbeit eine steuerbare Wachstumslogik.',
+				'Viele B2B-Unternehmen haben Google Analytics 4 technisch aktiv, aber kein belastbares Setup. Events feuern, Conversions sind unklar und das Team diskutiert über Zahlen statt über Entscheidungen.',
+				'Ein sauberes GA4 Tracking Setup für WordPress besteht nicht nur aus Tags. Es braucht klare Event-Logik, sauberes Consent-Verhalten, UTM-Disziplin und einen Blick darauf, welche Seiten und Formulare wirklich Nachfrage erzeugen.',
+				'Sobald SEO, Paid und Vertrieb auf dieselben Daten schauen sollen, wird aus "Analytics installiert" schnell ein strukturelles Problem. Genau deshalb gehören GA4, GTM und Server Side Tracking in einen gemeinsamen Messbarkeits-Cluster.',
 			],
 			'system'           => [
-				'Messbarkeit folgt im WGOS auf ein stabiles technisches Fundament und läuft vor größeren Conversion- oder Reporting-Schritten. Sonst werden Entscheidungen auf verrauschten Daten getroffen.',
-				'Wir koppeln Tracking nicht von der Website ab. Audit, Event-Blueprint, Consent, serverseitige Signalverarbeitung und Dashboards gehören zusammen.',
+				'Im WGOS ist GA4 kein Report-Tool, sondern der Einstieg in belastbare Lead- und Nachfrage-Signale. Erst wenn Einstiegsseiten, Formulare und Conversion-Schritte sauber modelliert sind, werden Daten wirklich steuerbar.',
+				'Wir koppeln das Setup deshalb an WordPress, nicht nur an Tags. Tracking Audit, Event-Blueprint, Consent Mode, serverseitige Signalverarbeitung und die Management-Sicht auf dieselben Daten gehören zusammen.',
+				'Wenn zusätzlich Angebotsseiten, Conversion-Führung oder lokale Money Pages bremsen, ist die Agentur-Seite der bessere Einstieg als ein isolierter Tracking-Fix.',
 			],
 			'assets'           => [
 				'tracking-audit'       => 'Prüft, wo Daten fehlen, doppelt feuern oder an Consent und Setups scheitern.',
@@ -217,23 +218,43 @@ function nexus_get_wgos_cluster_page_data() {
 				'url'    => $seo_url,
 				'text'   => 'Wenn organische Nachfrage sichtbar ist, aber nicht sauber gemessen oder priorisiert wird, schliesst die SEO-Seite die Luecke zwischen Sichtbarkeit und Datensignalen.',
 			],
-			'meta_title'       => 'GA4 Tracking Setup | WGOS-Cluster von Haşim Üner',
-			'meta_description' => 'GA4 Tracking Setup als WGOS-Cluster: Tracking Audit, Event-Blueprint, Consent und serverseitige Messung für belastbare Daten.',
-			'schema_name'      => 'GA4 Tracking Setup',
-			'schema_description' => 'WGOS-Cluster für GA4, GTM und Tracking: belastbare Messbarkeit für B2B-WordPress-Websites.',
+			'proof_note'       => 'Tracking wird erst dann kaufnah wertvoll, wenn Einstiegsseiten, Formulare und Leadquellen sauber unterscheidbar werden. Genau dort zahlt ein gutes GA4-Setup auf bessere Entscheidungen in SEO, Paid und Vertrieb ein.',
+			'faq_items'        => [
+				[
+					'question' => 'Wie richtet man ein sauberes GA4 Tracking Setup für eine B2B-Website ein?',
+					'answer'   => 'Mit klaren Conversion-Zielen, einem Event-Blueprint, sauberem Consent-Verhalten, GTM-Struktur und einer Management-Sicht auf die relevanten Schritte. Ohne diese Reihenfolge bleibt GA4 schnell ein Datenarchiv statt einer Entscheidungsgrundlage.',
+				],
+				[
+					'question' => 'Wann lohnt sich Server Side Tracking mit Google Tag Manager?',
+					'answer'   => 'Wenn Browser-Signale wegbrechen, Consent das Bild verzieht oder Kampagnen und Leadquellen sauberer gemessen werden müssen. Server Side Tracking ist vor allem dann sinnvoll, wenn Datenqualität für operative Entscheidungen relevant wird.',
+				],
+				[
+					'question' => 'Brauche ich nur GA4 oder zuerst ein Tracking Audit?',
+					'answer'   => 'Wenn bereits Tags, Formulare oder mehrere Kanäle im Spiel sind, ist ein Tracking Audit meist der bessere Start. Es klärt, wo Daten fehlen, doppelt feuern oder falsch interpretiert werden, bevor neue Logik aufgebaut wird.',
+				],
+				[
+					'question' => 'Ist das auch für Google Ads und Leadgenerierung relevant?',
+					'answer'   => 'Ja. Ohne belastbare Messung bleiben Einstiegsseiten, Kampagnenqualität und Leadpfade unscharf. Gerade für B2B-Leadgenerierung ist ein sauberes GA4- und Tracking-Setup die Grundlage für sinnvolle Optimierung.',
+				],
+			],
+			'meta_title'       => 'GA4 Tracking Setup für B2B | Haşim Üner',
+			'meta_description' => 'GA4 Tracking Setup für B2B-Websites: Event-Blueprint, Consent Mode und Server Side Tracking für belastbare Leadsignale in WordPress.',
+			'schema_name'      => 'GA4 Tracking Setup für B2B-WordPress-Websites',
+			'schema_description' => 'WGOS-Cluster für GA4 Tracking Setup: Event-Logik, GTM, Consent Mode und Server Side Tracking für B2B-WordPress-Websites.',
 		],
 		'conversion-rate-optimization' => [
 			'eyebrow'          => 'Conversion im WGOS',
-			'title'            => 'Conversion Rate Optimization',
-			'lead'             => 'Conversion entsteht nicht am Formularende. Sie beginnt dort, wo Besucher in wenigen Sekunden verstehen, warum sie hier richtig sind.',
+			'title'            => 'Conversion Rate Optimierung für WordPress',
+			'lead'             => 'Conversion Rate Optimierung für WordPress bedeutet hier: Angebotsseiten, Proof, CTA-Führung und Formulare so ordnen, dass aus Besuchern qualifizierte B2B-Anfragen werden.',
 			'intro'            => [
-				'Viele Seiten haben Traffic, aber keine klare Nutzerführung. Angebot, Proof, CTA und Einwandabbau arbeiten dann nicht als System, sondern nebeneinander.',
-				'Das führt zu vermeidbaren Verlusten: zu viele irrelevante Klicks, zu wenig qualifizierte Anfragen und eine Website, die zwar informiert, aber nicht führt.',
-				'Im WGOS behandeln wir Conversion deshalb als Architektur. Die richtige Seite, das richtige Versprechen und der nächste sinnvolle Schritt müssen zusammenpassen.',
+				'Viele WordPress-Seiten bekommen Sichtbarkeit, aber zu wenig qualifizierte Anfragen. Das Problem ist selten nur Design. Meist erklärt die Seite, statt zu führen.',
+				'Conversion Rate Optimierung für WordPress ist deshalb mehr als Button-Farbtesten. Entscheidend ist, ob Headline, Proof, Seitenstruktur und nächster Schritt zur Suchintention und zum Reifegrad des Besuchers passen.',
+				'Gerade im B2B entsteht Conversion nicht auf einer isolierten Landing Page. Sie entsteht im Zusammenspiel aus Angebotsseite, Tracking, Einwandabbau und einem klaren Weg in den richtigen Kontaktpunkt.',
 			],
 			'system'           => [
-				'Conversion folgt im WGOS auf ein technisches und messbares Fundament. Erst wenn Daten und Performance stimmen, lassen sich Angebotsseiten, Landing Pages und Formulare belastbar optimieren.',
-				'Wir denken CRO dabei nicht als Testlabor ohne Kontext, sondern als Verbindung aus Angebotslogik, Seitenrollen, Botschaft, Proof und klarer CTA-Hierarchie.',
+				'Im WGOS folgt CRO auf Performance und Messbarkeit. Erst wenn Daten stimmen, lassen sich Landing Pages, Angebotsseiten und Formulare nach belastbaren Signalen statt nach Bauchgefühl priorisieren.',
+				'Wir denken Conversion Rate Optimierung für WordPress deshalb als Seitenarchitektur. Message Match, Proof, CTA-Hierarchie, Formulare und interne Anschlüsse müssen als System zusammenarbeiten.',
+				'Wenn organische Einstiege schon da sind, aber zu wenig qualifizierte Leads entstehen, wird CRO zum Bindeglied zwischen SEO, Tracking und dem eigentlichen Anfragepfad.',
 			],
 			'assets'           => [
 				'landing-page-neu'            => 'Baut neue Landing Pages mit sauberem Message Match und klarer Zielhandlung auf.',
@@ -269,10 +290,29 @@ function nexus_get_wgos_cluster_page_data() {
 				'url'    => $seo_url,
 				'text'   => 'Wenn Sichtbarkeit vorhanden ist, aber organische Einstiege nicht sauber in Anfragen uebergehen, fuehrt die SEO-Seite in den passenden Service-Kontext.',
 			],
-			'meta_title'       => 'Conversion Rate Optimization | WGOS von Haşim Üner',
-			'meta_description' => 'CRO als WGOS-Cluster: Landing Pages, Angebotsseiten, Formulare und Proof für mehr qualifizierte WordPress-Anfragen.',
-			'schema_name'      => 'Conversion Rate Optimization',
-			'schema_description' => 'WGOS-Cluster für Conversion Rate Optimization: Angebotslogik, Landing Pages und CTA-Führung für B2B-WordPress-Websites.',
+			'proof_note'       => 'CRO ist hier keine Design-Politur. Relevant wird das Thema, wenn Angebotsseiten, Einwaende und CTA-Pfade spuerbar klarer werden und aus bestehendem Traffic mehr qualifizierte Anfragen entstehen.',
+			'faq_items'        => [
+				[
+					'question' => 'Was bedeutet Conversion Rate Optimierung bei WordPress konkret?',
+					'answer'   => 'Es bedeutet, Angebotsseiten, Landing Pages, Proof, CTA-Führung und Formulare so zu ordnen, dass Besucher schneller verstehen, warum sie hier richtig sind und welcher nächste Schritt sinnvoll ist.',
+				],
+				[
+					'question' => 'Ist CRO nur für Shops oder auch für B2B-Leadgenerierung relevant?',
+					'answer'   => 'CRO ist gerade für B2B-Leadgenerierung relevant. Dort geht es nicht um spontane Käufe, sondern um Klarheit, Vertrauen, Einwandabbau und einen sauberen Weg zur qualifizierten Anfrage.',
+				],
+				[
+					'question' => 'Ab wann lohnt sich Conversion Rate Optimierung statt eines Relaunchs?',
+					'answer'   => 'Oft früher als gedacht. Wenn die technische Basis trägt, lassen sich viele Bremsen in Headline, Seitenstruktur, Proof, CTA-Hierarchie und Formularen auch ohne kompletten Relaunch lösen.',
+				],
+				[
+					'question' => 'Wie hängt CRO mit Tracking und SEO zusammen?',
+					'answer'   => 'SEO bringt die richtigen Besucher, Tracking macht die Wirkung sichtbar und CRO sorgt dafür, dass aus Sichtbarkeit und Klicks qualifizierte Anfragen werden. Ohne dieses Zusammenspiel bleibt jede Einzeldisziplin begrenzt.',
+				],
+			],
+			'meta_title'       => 'Conversion Rate Optimierung für WordPress | Haşim Üner',
+			'meta_description' => 'Conversion Rate Optimierung für WordPress: Angebotsseiten, Proof, CTA-Führung und Formulare für mehr qualifizierte B2B-Anfragen.',
+			'schema_name'      => 'Conversion Rate Optimierung für WordPress',
+			'schema_description' => 'WGOS-Cluster für Conversion Rate Optimierung: Angebotsseiten, Landing Pages, Proof und CTA-Führung für B2B-WordPress-Websites.',
 		],
 		'performance-marketing' => [
 			'eyebrow'          => 'Paid-Kontext im WGOS',
@@ -382,6 +422,42 @@ function nexus_get_wgos_cluster_page_seo_defaults( $value = null ) {
 }
 
 /**
+ * Return FAQ entities for one cluster page.
+ *
+ * @param string|WP_Post|null $value Page slug or post object.
+ * @return array<int, array<string, mixed>>
+ */
+function nexus_get_wgos_cluster_page_faq_entities( $value = null ) {
+	$page = nexus_get_wgos_cluster_page( $value );
+
+	if ( ! is_array( $page ) ) {
+		return [];
+	}
+
+	$entities = [];
+
+	foreach ( (array) ( $page['faq_items'] ?? [] ) as $item ) {
+		$question = isset( $item['question'] ) ? trim( wp_strip_all_tags( (string) $item['question'] ) ) : '';
+		$answer   = isset( $item['answer'] ) ? trim( wp_strip_all_tags( (string) $item['answer'] ) ) : '';
+
+		if ( '' === $question || '' === $answer ) {
+			continue;
+		}
+
+		$entities[] = [
+			'@type'          => 'Question',
+			'name'           => $question,
+			'acceptedAnswer' => [
+				'@type' => 'Answer',
+				'text'  => $answer,
+			],
+		];
+	}
+
+	return $entities;
+}
+
+/**
  * Build render-ready asset cards for a cluster page.
  *
  * @param array<string, mixed> $page Cluster page definition.
@@ -460,6 +536,7 @@ function nexus_render_wgos_cluster_page( $page ) {
 	$results_url   = nexus_get_primary_public_url( 'results', home_url( '/ergebnisse/' ) );
 	$cards         = nexus_get_wgos_cluster_page_asset_cards( $page );
 	$blogs         = isset( $page['blogs'] ) && is_array( $page['blogs'] ) ? $page['blogs'] : [];
+	$faq_items     = isset( $page['faq_items'] ) && is_array( $page['faq_items'] ) ? $page['faq_items'] : [];
 	$proof_metrics = nexus_get_wgos_cluster_page_proof_metrics();
 	$method_steps  = nexus_get_wgos_cluster_page_method_steps();
 	$proof_note    = isset( $page['proof_note'] ) ? (string) $page['proof_note'] : '';
@@ -640,6 +717,26 @@ function nexus_render_wgos_cluster_page( $page ) {
 				</ul>
 			</div>
 		</section>
+
+		<?php if ( ! empty( $faq_items ) ) : ?>
+			<section class="nx-section nx-cluster-section">
+				<div class="nx-container nx-cluster-stack">
+					<div class="nx-section-header">
+						<span class="nx-badge nx-badge--ghost">FAQ</span>
+						<h2 class="nx-headline-section">Häufige Fragen zum Thema</h2>
+					</div>
+
+					<div class="nx-faq">
+						<?php foreach ( $faq_items as $index => $item ) : ?>
+							<details class="nx-faq__item"<?php echo 0 === $index ? ' open' : ''; ?>>
+								<summary><?php echo esc_html( (string) ( $item['question'] ?? '' ) ); ?></summary>
+								<div class="nx-faq__content"><?php echo esc_html( (string) ( $item['answer'] ?? '' ) ); ?></div>
+							</details>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</section>
+		<?php endif; ?>
 
 		<section class="nx-section nx-cluster-section">
 			<div class="nx-container">
