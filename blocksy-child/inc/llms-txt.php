@@ -28,39 +28,144 @@ function nexus_is_llms_txt_request() {
 }
 
 /**
+ * Normalize a public URL into the markdown path used inside llms.txt.
+ *
+ * @param string $url Absolute public URL.
+ * @return string
+ */
+function nexus_get_llms_txt_markdown_path( $url ) {
+	$path = wp_parse_url( (string) $url, PHP_URL_PATH );
+	$path = is_string( $path ) && '' !== $path ? $path : '/';
+
+	return '/' === $path ? '/' : trailingslashit( '/' . ltrim( $path, '/' ) );
+}
+
+/**
+ * Build the structured sections for llms.txt from the primary public URL map.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function nexus_get_llms_txt_sections() {
+	$urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
+
+	return [
+		[
+			'heading' => 'Primäre Einstiege',
+			'links'   => [
+				[
+					'label'       => 'Startseite',
+					'url'         => $urls['home'] ?? home_url( '/' ),
+					'description' => 'Überblick über Positionierung, Proof und primäre Einstiege.',
+				],
+				[
+					'label'       => 'Growth Audit',
+					'url'         => $urls['audit'] ?? home_url( '/growth-audit/' ),
+					'description' => 'Diagnose von SEO, Tracking, Performance und Conversion-Prioritäten.',
+				],
+				[
+					'label'       => 'WordPress Agentur Hannover',
+					'url'         => $urls['agentur'] ?? home_url( '/wordpress-agentur-hannover/' ),
+					'description' => 'Lokale B2B-Service-Seite für WordPress, Leadgenerierung und strukturierte Weiterentwicklung.',
+				],
+				[
+					'label'       => 'WordPress Growth Operating System',
+					'url'         => $urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
+					'description' => 'Angebots- und Systemseite für Audit, Blueprint und Umsetzung.',
+				],
+			],
+		],
+		[
+			'heading' => 'Service-Cluster',
+			'links'   => [
+				[
+					'label'       => 'WordPress SEO Hannover',
+					'url'         => $urls['seo'] ?? home_url( '/wordpress-seo-hannover/' ),
+					'description' => 'Technical SEO Audit, Informationsarchitektur und Suchnachfrage für B2B-Seiten.',
+				],
+				[
+					'label'       => 'GA4 Tracking Setup',
+					'url'         => $urls['tracking'] ?? home_url( '/ga4-tracking-setup/' ),
+					'description' => 'GA4, GTM und serverseitiges Tracking für saubere Messbarkeit.',
+				],
+				[
+					'label'       => 'Conversion Rate Optimierung',
+					'url'         => $urls['cro'] ?? home_url( '/conversion-rate-optimization/' ),
+					'description' => 'CRO für WordPress mit Fokus auf Leads, Reibung und Formularpfade.',
+				],
+				[
+					'label'       => 'Core Web Vitals',
+					'url'         => $urls['cwv'] ?? home_url( '/core-web-vitals/' ),
+					'description' => 'Performance-Analyse für langsame WordPress-Seiten und Web-Vitals-Probleme.',
+				],
+			],
+		],
+		[
+			'heading' => 'Proof und Relevanz',
+			'links'   => [
+				[
+					'label'       => 'Ergebnisse',
+					'url'         => $urls['results'] ?? home_url( '/ergebnisse/' ),
+					'description' => 'Kuratierter Proof-Hub mit Cases, Kennzahlen und Einordnung.',
+				],
+				[
+					'label'       => 'E3 New Energy',
+					'url'         => $urls['e3'] ?? home_url( '/e3-new-energy/' ),
+					'description' => 'B2B-Case für Nachfrageaufbau, Tracking und Conversion-Verbesserung.',
+				],
+				[
+					'label'       => 'Leadgenerierung für Energie-Systeme',
+					'url'         => $urls['energy'] ?? home_url( '/solar-waermepumpen-leadgenerierung/' ),
+					'description' => 'Branchen-Landingpage für Solar-, Wärmepumpen- und Speicher-Anbieter.',
+				],
+			],
+		],
+		[
+			'heading' => 'Wissen und Kontakt',
+			'links'   => [
+				[
+					'label'       => 'Blog',
+					'url'         => $urls['blog'] ?? home_url( '/blog/' ),
+					'description' => 'Artikel zu SEO, Tracking, WordPress-Performance und B2B-Wachstum.',
+				],
+				[
+					'label'       => 'Glossar',
+					'url'         => $urls['glossary'] ?? home_url( '/glossar/' ),
+					'description' => 'Begriffe und Definitionen für SEO, Tracking, CRO und Demand-Architektur.',
+				],
+				[
+					'label'       => 'Kontakt',
+					'url'         => $urls['contact'] ?? home_url( '/kontakt/' ),
+					'description' => 'Direkter Kontakt für Audit, Folgeanalyse oder Umsetzung.',
+				],
+			],
+		],
+	];
+}
+
+/**
  * Build the markdown response for llms.txt from the primary public URL map.
  *
  * @return string
  */
 function nexus_get_llms_txt_content() {
-	$urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
-	$links = [
-		'Startseite'                         => $urls['home'] ?? home_url( '/' ),
-		'Growth Audit'                      => $urls['audit'] ?? home_url( '/growth-audit/' ),
-		'WordPress Agentur Hannover'        => $urls['agentur'] ?? home_url( '/wordpress-agentur-hannover/' ),
-		'WordPress Growth Operating System' => $urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
-		'Ergebnisse'                        => $urls['results'] ?? home_url( '/ergebnisse/' ),
-		'Blog'                              => $urls['blog'] ?? home_url( '/blog/' ),
-	];
-
 	$lines = [
 		'# Haşim Üner',
 		'',
-		'> WordPress Growth Architect für B2B in Hannover. Einstieg über den Growth Audit: Diagnose von SEO, Tracking, Core Web Vitals und Conversion-Reibung mit priorisierten nächsten Schritten statt isolierten Einzelmaßnahmen.',
-		'',
-		'## Wichtige URLs',
+		'> Audit-first WordPress Growth Architect für B2B in Hannover. Schwerpunkte: Technical SEO, GA4/Tracking, Core Web Vitals und Conversion-Optimierung. Primärer Einstieg ist der Growth Audit.',
 	];
 
-	foreach ( $links as $label => $url ) {
-		$path = wp_parse_url( (string) $url, PHP_URL_PATH );
-		$path = is_string( $path ) && '' !== $path ? $path : '/';
-		$path = '/' === $path ? '/' : trailingslashit( '/' . ltrim( $path, '/' ) );
+	foreach ( nexus_get_llms_txt_sections() as $section ) {
+		$lines[] = '';
+		$lines[] = '## ' . (string) $section['heading'];
 
-		$lines[] = sprintf(
-			'- [%1$s](%2$s)',
-			(string) $label,
-			$path
-		);
+		foreach ( (array) $section['links'] as $link ) {
+			$lines[] = sprintf(
+				'- [%1$s](%2$s) - %3$s',
+				(string) ( $link['label'] ?? '' ),
+				nexus_get_llms_txt_markdown_path( (string) ( $link['url'] ?? home_url( '/' ) ) ),
+				(string) ( $link['description'] ?? '' )
+			);
+		}
 	}
 
 	return implode( "\n", $lines ) . "\n";

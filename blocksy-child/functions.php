@@ -34,6 +34,7 @@ $modules = [
 	'contact-page.php',   // Kontakt-Route, schlanke Kontaktform und Mailversand
 	'audit-linkedin-page.php', // LinkedIn Audit Landing Page (virtuelle Route, noindex)
 	'blog-notify.php',    // Blog-Benachrichtigungen, DOI und Artikel-Mails
+	'robots-txt.php',     // Dynamische /robots.txt-Route für Search- und KI-Crawler
 	'llms-txt.php',       // Dynamische /llms.txt-Route für KI-Agenten und Entitätskontext
 	'seo-cockpit.php',    // Search Console basiertes SEO-Cockpit mit optionaler Koko-Erkennung
 	'enqueue.php',        // CSS/JS Asset-Management

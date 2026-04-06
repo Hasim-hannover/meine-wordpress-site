@@ -1,11 +1,25 @@
 # Haşim Üner
 
-> WordPress Growth Architect für B2B in Hannover. Einstieg über den Growth Audit: Diagnose von SEO, Tracking, Core Web Vitals und Conversion-Reibung mit priorisierten nächsten Schritten statt isolierten Einzelmaßnahmen.
+> Audit-first WordPress Growth Architect für B2B in Hannover. Schwerpunkte: Technical SEO, GA4/Tracking, Core Web Vitals und Conversion-Optimierung. Primärer Einstieg ist der Growth Audit.
 
-## Wichtige URLs
-- [Startseite](/)
-- [Growth Audit](/growth-audit/)
-- [WordPress Agentur Hannover](/wordpress-agentur-hannover/)
-- [WordPress Growth Operating System](/wordpress-growth-operating-system/)
-- [Ergebnisse](/ergebnisse/)
-- [Blog](/blog/)
+## Primäre Einstiege
+- [Startseite](/) - Überblick über Positionierung, Proof und primäre Einstiege.
+- [Growth Audit](/growth-audit/) - Diagnose von SEO, Tracking, Performance und Conversion-Prioritäten.
+- [WordPress Agentur Hannover](/wordpress-agentur-hannover/) - Lokale B2B-Service-Seite für WordPress, Leadgenerierung und strukturierte Weiterentwicklung.
+- [WordPress Growth Operating System](/wordpress-growth-operating-system/) - Angebots- und Systemseite für Audit, Blueprint und Umsetzung.
+
+## Service-Cluster
+- [WordPress SEO Hannover](/wordpress-seo-hannover/) - Technical SEO Audit, Informationsarchitektur und Suchnachfrage für B2B-Seiten.
+- [GA4 Tracking Setup](/ga4-tracking-setup/) - GA4, GTM und serverseitiges Tracking für saubere Messbarkeit.
+- [Conversion Rate Optimierung](/conversion-rate-optimization/) - CRO für WordPress mit Fokus auf Leads, Reibung und Formularpfade.
+- [Core Web Vitals](/core-web-vitals/) - Performance-Analyse für langsame WordPress-Seiten und Web-Vitals-Probleme.
+
+## Proof und Relevanz
+- [Ergebnisse](/ergebnisse/) - Kuratierter Proof-Hub mit Cases, Kennzahlen und Einordnung.
+- [E3 New Energy](/e3-new-energy/) - B2B-Case für Nachfrageaufbau, Tracking und Conversion-Verbesserung.
+- [Leadgenerierung für Energie-Systeme](/solar-waermepumpen-leadgenerierung/) - Branchen-Landingpage für Solar-, Wärmepumpen- und Speicher-Anbieter.
+
+## Wissen und Kontakt
+- [Blog](/blog/) - Artikel zu SEO, Tracking, WordPress-Performance und B2B-Wachstum.
+- [Glossar](/glossar/) - Begriffe und Definitionen für SEO, Tracking, CRO und Demand-Architektur.
+- [Kontakt](/kontakt/) - Direkter Kontakt für Audit, Folgeanalyse oder Umsetzung.

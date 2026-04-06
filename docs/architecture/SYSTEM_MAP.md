@@ -1,12 +1,13 @@
 # System Map
 
-Stand: 2026-04-04. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
+Stand: 2026-04-06. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live-Verifikation externer Systeme.
 
 ## Hauptsysteme
 
 | System | Zweck | Repo-Orte | Externe Abhaengigkeiten | Status |
 | --- | --- | --- | --- | --- |
 | Website | deploybarer WordPress-Theme-Code | `blocksy-child/`, `.github/workflows/ci.yml`, `.github/workflows/deploy.yml`, `docs/architecture/DEPLOYMENT.md` | WordPress, Blocksy Parent Theme, ACF | live |
+| Crawl- und KI-Signale | textbasierte Discovery- und Crawl-Signale für Search- und KI-Crawler | `blocksy-child/inc/robots-txt.php`, `blocksy-child/inc/llms-txt.php`, `llms.txt` | Search-/KI-Crawler, native WordPress-Sitemap | repo-seitig live |
 | Audit-Funnel | Diagnose-Einstieg, Instant-Results-Audit und nachgelagerte Qualifizierung | `blocksy-child/page-audit.php`, `blocksy-child/inc/cja-shortcode.php`, `blocksy-child/assets/css/cja-audit.css`, `blocksy-child/assets/js/cja-audit.js`, `blocksy-child/page-solar-waermepumpen-leadgenerierung.php`, `blocksy-child/assets/js/review-funnel.js`, `blocksy-child/assets/js/energy-intake.js`, `blocksy-child/assets/js/cal-embed.js`, `blocksy-child/inc/review-crm.php`, `docs/systems/audit-funnel.md` | n8n Webhook, WordPress, Cal.com, optional WordPress CRM auf Legacy-/Branchenpfaden | live |
 | Nexus CRM & Blog Notify | gemeinsames CRM fuer Audit-, Folgeanalyse-, Umsetzungs- und Bestandskunden-Anfragen plus DOI- und Artikel-Mail-Logik | `blocksy-child/inc/crm.php`, `blocksy-child/inc/blog-notify.php`, `blocksy-child/template-parts/blog-notify.php`, `blocksy-child/page-blog-notify.php`, `docs/systems/blog-notify.md` | WordPress CPT/Meta, WordPress REST, wp_mail, Brevo | repo-seitig live, End-to-End offen |
 | SEO Cockpit | Search-Console-basiertes SEO-Dashboard mit optionalem Koko- und Audit-Lead-Layer | `blocksy-child/inc/seo-cockpit.php`, `blocksy-child/assets/css/seo-cockpit-admin.css`, `docs/systems/seo-cockpit.md` | Google Search Console API, optional Koko Analytics, Nexus CRM / Audit-CRM | repo-seitig vorbereitet, OAuth und Live-Daten offen |
@@ -26,6 +27,7 @@ Wichtige Merkmale:
 
 - `functions.php` laedt die Module aus `inc/` zentral.
 - `inc/enqueue.php` ist der Asset-Hub fuer CSS und JS pro Seitentyp.
+- `inc/robots-txt.php` und `inc/llms-txt.php` liefern textbasierte Crawl- und Zitat-Signale für Search- und KI-Crawler direkt aus dem Theme.
 - Ein Teil der Seiten ist editor-getrieben und nutzt `the_content()`.
 - Ein anderer Teil ist hart codiert und traegt Business-Logik direkt im Template.
 - Die kanonische Kontaktseite `/kontakt/` rendert im Frontend jetzt immer das versionierte Theme-Template statt editorgetriebener Altinhalte.
@@ -35,10 +37,26 @@ Wichtige Merkmale:
 Kritische Dateien:
 
 - `blocksy-child/functions.php`
+- `blocksy-child/inc/robots-txt.php`
+- `blocksy-child/inc/llms-txt.php`
 - `blocksy-child/inc/enqueue.php`
 - `blocksy-child/inc/seo-meta.php`
 - `blocksy-child/inc/org-schema.php`
 - `blocksy-child/page-wgos.php`
+
+## Crawl- und KI-Signale
+
+Die Website stellt repo-seitig drei komplementäre Discovery-Flächen bereit:
+
+- `/robots.txt` für generelle Crawl-Regeln inklusive expliziter KI-User-Agents
+- `/llms.txt` für kompakte Entity-, Angebots- und URL-Signale in Markdown-Form
+- `/wp-sitemap.xml` als native XML-Sitemap für kanonische URL-Discovery
+
+Systemische Rolle:
+
+- Search- und KI-Crawler bekommen eine saubere text/plain-Crawl-Oberfläche ohne Editor-Abhängigkeit.
+- `llms.txt` verweist bewusst auf Money-Pages, Proof-Routen und Kontaktpfade statt auf eine lose URL-Liste.
+- Die native Sitemap bleibt die kanonische URL-Quelle; `robots.txt` und `llms.txt` sind zusaetzliche Signale, kein Ersatz.
 
 ## n8n-Automationen
 
@@ -198,6 +216,7 @@ Risiko:
 - ACF fuer SEO- und Content-Fallbacks
 - Theme-eigener SEO-Layer (seo-meta.php) für Title, Description, OG, Canonical und Robots
 - Native WordPress-Sitemap (/wp-sitemap.xml)
+- Theme-eigene Crawl-Signale für `/robots.txt` und `/llms.txt`
 - Fluent Forms fuer die vertiefte Folgeanalyse
 - n8n auf `n8n.hasimuener.de` fuer den aktiven Instant-Results-Audit inklusive Start-, Status- und Legacy-Fallback-Webhook
 - Cal.com fuer direkte Gespraechsbuchung
