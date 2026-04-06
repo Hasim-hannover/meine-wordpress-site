@@ -16,16 +16,34 @@ Scope: `agents/skills/`
 - Prefer scripts that consume repo state over long prose instructions.
 - If a skill replaces a playbook, update references and delete the old playbook.
 
-## Current High-Value Skills
+## Quick Reference
 
+See `SKILLS_MATRIX.md` for the full routing table with cost, triggers, and model hints.
+
+## Shared Standards
+
+All skills reference `docs/standards/BRAND_AND_COPY.md` for positioning, tone, and copy direction.
+Do not duplicate brand rules in individual `SKILL.md` files.
+
+## SEO Routing
+
+Use `seo-agent` as the entry point for any SEO task. It dispatches to the correct sub-skill.
+
+## Current Skills
+
+- `seo-agent` (dispatcher)
+- `seo-live-qa`
+- `seo-cockpit-hardening`
+- `internal-linking-audit`
 - `pillar-cornerstone-writer`
 - `wordpress-performance-marketing`
 - `homepage-proof-monitoring`
 - `registry-release-qa`
 - `navigation-migration`
-- `seo-live-qa`
-- `seo-cockpit-hardening`
 - `pre-deploy-smoke`
 - `landing-page-builder`
 - `page-speed-audit`
-- `internal-linking-audit`
+- `b2b-design-system`
+- `growth-audit-optimizer`
+- `wordpress-growth-architecture`
+- `wordpress-cro-content-design-audit`

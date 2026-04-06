@@ -31,9 +31,8 @@ sh agents/skills/growth-audit-optimizer/scripts/print-scope.sh
 
 ## Copy Direction
 
-- Tone: clear, premium, direct, strategic
-- Prefer: `Website`, `Nachfrage`, `Leads`, `Anfragen`, `Wachstumspotenzial`, `priorisierte Hebel`, `Diagnose`, `Klarheit`, `Conversion`, `Tracking`, `SEO`, `WordPress`, `B2B`
-- Avoid: Shopify as live positioning, generic buzzwords, `kostenlos` as the only value proposition, tool-like framing, inflated revenue promises, old 48h/manual-review language in the active flow
+See `docs/standards/BRAND_AND_COPY.md` for full tone, preferred terms, and anti-patterns.
+Additional audit-specific rule: avoid old 48h/manual-review language in the active flow.
 
 ## Deliver
 

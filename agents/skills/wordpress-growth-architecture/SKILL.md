@@ -23,10 +23,9 @@ The skill exists to keep those layers clean while pushing the brand toward one c
 
 ## Strategic Defaults
 
-- Optimize for `WordPress Growth Architect`, not for `Agentur`, `Leistungen`, or equal-weight services.
+See `docs/standards/BRAND_AND_COPY.md` for positioning, offer ladder, and copy anti-patterns.
+
 - Keep the business outcome explicit: planable B2B inquiries from owned assets.
-- Treat SEO, tracking, privacy/consent, CRO, and WordPress implementation as one connected system.
-- Prefer the offer ladder `Audit -> Blueprint -> Implementation/Retainer`.
 - Demote or remove broad side topics unless the user explicitly wants them foregrounded.
 
 ## Non-Negotiables

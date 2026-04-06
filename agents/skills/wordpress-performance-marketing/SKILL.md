@@ -17,10 +17,7 @@ Supported modes: `full`, `seo`, `cro`, `content`, `tracking`.
 
 ## Project Defaults
 
-- Owned-first before paid scaling
-- Audit-first CTA hierarchy
-- Decision-maker copy over generic agency language
-- Technical fixes before cosmetic polish
+See `docs/standards/BRAND_AND_COPY.md` for positioning, tone, and copy direction.
 
 ## Delivery Format
 
