@@ -66,81 +66,33 @@ $work_modes = [
 	],
 ];
 
-$skill_items = [
-	'Technical SEO',
-	'CRO & Conversion-Architektur',
-	'WordPress-Systemaufbau',
-	'Privacy-first Tracking',
-	'Page Messaging',
-	'Performance-Fundament',
-	'Weiterentwicklungs-Setup',
-	'Whitelabel Delivery',
-];
 ?>
 
 <main id="main" class="site-main wl-proof-page" data-track-section="whitelabel_proof">
 	<section class="nx-section wl-hero">
 		<div class="nx-container">
-			<div class="wl-hero__grid">
-				<div class="wl-hero__copy">
-					<span class="nx-badge nx-badge--gold">Whitelabel &amp; laufende Weiterentwicklung</span>
-					<h1 class="wl-hero__title">Whitelabel-Arbeit und laufende Weiterentwicklung. Viel Wirkung bleibt im Hintergrund.</h1>
-					<p class="wl-hero__subtitle">
-						Ein Teil meiner stärksten Arbeit darf nicht als öffentliche Case Study erscheinen.
-						Nicht weil sie schwächer wäre, sondern weil sie in Agentur-Setups, laufender Systemarbeit
-						oder sensiblen Projekten bewusst unsichtbar bleibt. Genau deshalb ist diese Seite wichtig.
-					</p>
-					<p class="results-cta__copy">
-						Wenn Sie agenturseitig oder als Partner prüfen wollen, ob ich im Hintergrund zu Ihrem Fall passe,
-						ist ein kurzes Whitelabel-Fit-Gespräch der direkteste Einstieg.
-					</p>
+			<div class="wl-hero__content">
+				<span class="nx-badge nx-badge--gold">Whitelabel · Weiterentwicklung · WordPress</span>
+				<h1 class="wl-hero__title">Starke Ergebnisse. Im Hintergrund.</h1>
+				<p class="wl-hero__subtitle">
+					Für Agenturen und Teams, die einen verlässlichen WordPress-Partner brauchen — für Strategie, SEO, Tracking und Conversion, ohne eigenen Headcount.
+				</p>
 
-					<div class="wl-metrics" role="list" aria-label="Whitelabel-Kennzahlen">
-						<div class="wl-metric" role="listitem">
-							<strong>Whitelabel</strong>
-							<span>unsichtbare Delivery im Hintergrund</span>
-						</div>
-						<div class="wl-metric" role="listitem">
-							<strong>laufend</strong>
-							<span>kontrollierte Weiterentwicklung statt Einzelfix</span>
-						</div>
-						<div class="wl-metric" role="listitem">
-							<strong>klar</strong>
-							<span>Rolle: im Hintergrund Wirkung erzeugen</span>
-						</div>
-					</div>
-
-					<ul class="results-bullet-list wl-hero__list">
-						<li>für Agenturen, Inhouse-Teams und Gründer mit komplexeren WordPress-Fällen</li>
-						<li>mit Fokus auf Struktur, Messbarkeit, Performance und Conversion statt Einzeldisziplinen</li>
-						<li>als Delivery, Sparring oder laufende Systempflege</li>
-					</ul>
-
-					<div class="wl-hero__actions">
-						<a href="<?php echo esc_url( $whitelabel_fit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_whitelabel_hero_fit_call" data-track-category="lead_gen">Whitelabel-Fit-Gespräch buchen</a>
-						<a href="<?php echo esc_url( $results_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_whitelabel_hero_results" data-track-category="trust">Alle Ergebnisse</a>
-					</div>
+				<div class="wl-hero__actions">
+					<a href="<?php echo esc_url( $whitelabel_fit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_whitelabel_hero_fit_call" data-track-category="lead_gen">Whitelabel-Fit-Gespräch buchen</a>
+					<a href="<?php echo esc_url( $results_url ); ?>" class="wl-text-link" data-track-action="cta_whitelabel_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
 				</div>
 
-				<aside class="nx-card wl-portrait-card">
-					<div class="wl-portrait-card__media">
-						<img
-							src="<?php echo esc_url( $portrait_url ); ?>"
-							alt="Haşim Üner Portrait für die Whitelabel- und Weiterentwicklungs-Seite"
-							loading="eager"
-							width="960"
-							height="1200"
-						>
-					</div>
-					<div class="wl-portrait-card__body">
-						<span class="wl-portrait-card__eyebrow">Haşim Üner</span>
-						<h2 class="wl-portrait-card__title">Proof ohne Logos funktioniert nur mit klarer Haltung.</h2>
-						<p class="wl-portrait-card__copy">
-							Wenn Arbeit nicht öffentlich werden darf, muss die Seite etwas anderes leisten:
-							sie muss Verantwortung, Eingriffstiefe und Wiederholbarkeit sichtbar machen.
-						</p>
-					</div>
-				</aside>
+				<figure class="wl-hero__portrait">
+					<img
+						src="<?php echo esc_url( $portrait_url ); ?>"
+						alt="Haşim Üner – Whitelabel WordPress Partner"
+						loading="eager"
+						width="120"
+						height="148"
+					>
+					<figcaption>Haşim Üner · WordPress Growth Architect</figcaption>
+				</figure>
 			</div>
 		</div>
 	</section>
@@ -148,9 +100,8 @@ $skill_items = [
 	<section class="nx-section wl-section-alt" id="arbeitsfelder">
 		<div class="nx-container">
 			<div class="nx-section-header">
-				<span class="nx-badge nx-badge--ghost">Typische Eingriffstiefe</span>
-				<h2 class="nx-headline-section">Woran ich im Hintergrund meist arbeite</h2>
-				<p class="nx-subheadline">Nicht als Skill-Folie, sondern als reale Verantwortung in Projekten, die laufen müssen.</p>
+				<span class="nx-badge nx-badge--ghost">Eingriffstiefe</span>
+				<h2 class="nx-headline-section">Woran ich im Hintergrund arbeite</h2>
 			</div>
 
 			<div class="results-card-grid">
@@ -167,9 +118,8 @@ $skill_items = [
 	<section class="nx-section" id="muster">
 		<div class="nx-container">
 			<div class="nx-section-header">
-				<span class="nx-badge nx-badge--gold">Anonymisierte Ergebnismuster</span>
-				<h2 class="nx-headline-section">Was sich in diesen Projekten typischerweise verbessert</h2>
-				<p class="nx-subheadline">Keine erfundenen Logos. Keine geschönten Slides. Sondern die Muster, die in Whitelabel-Arbeit und laufender Weiterentwicklung immer wieder auftauchen.</p>
+				<span class="nx-badge nx-badge--gold">Ergebnismuster</span>
+				<h2 class="nx-headline-section">Was sich typischerweise verbessert</h2>
 			</div>
 
 			<div class="results-framework__grid">
@@ -180,45 +130,14 @@ $skill_items = [
 					</article>
 				<?php endforeach; ?>
 			</div>
-		</div>
-	</section>
 
-	<section class="nx-section wl-section-alt" id="zusammenarbeit">
-		<div class="nx-container">
-			<div class="nx-section-header">
-				<span class="nx-badge nx-badge--ghost">Zusammenarbeit</span>
-				<h2 class="nx-headline-section">In welchen Modi diese Arbeit meist passiert</h2>
-				<p class="nx-subheadline">Je nach Fall als operative Unterstützung, laufende Optimierung oder strategischer Sparringspartner.</p>
-			</div>
-
-			<div class="results-framework__grid">
+			<div class="results-framework__grid" style="margin-top: var(--space-8, 2rem);">
 				<?php foreach ( $work_modes as $mode ) : ?>
 					<article class="nx-card nx-card--flat results-framework__card">
 						<h3 class="results-framework__title"><?php echo esc_html( $mode['title'] ); ?></h3>
 						<p class="results-framework__copy"><?php echo esc_html( $mode['copy'] ); ?></p>
 					</article>
 				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
-
-	<section class="nx-section" id="skills">
-		<div class="nx-container">
-			<div class="results-cro-card results-cro-card--compact">
-				<div>
-					<span class="results-cro-card__eyebrow">Wenn man es Skills nennen will</span>
-					<h2 class="results-cro-card__title">Die Themen wiederholen sich. Die Verantwortung auch.</h2>
-					<p class="results-cta__copy">
-						Der Unterschied ist nicht, dass diese Begriffe irgendwo auf einer Folie stehen.
-						Der Unterschied ist, dass sie in echten Projekten unter Zeitdruck, mit Übergaben
-						und ohne öffentliche Sichtbarkeit funktionieren müssen.
-					</p>
-				</div>
-				<div class="wl-skill-cloud" aria-label="Typische Arbeitsfelder">
-					<?php foreach ( $skill_items as $skill_item ) : ?>
-						<span><?php echo esc_html( $skill_item ); ?></span>
-					<?php endforeach; ?>
-				</div>
 			</div>
 		</div>
 	</section>
@@ -236,7 +155,7 @@ $skill_items = [
 				</div>
 				<div class="results-cta__actions">
 					<a href="<?php echo esc_url( $whitelabel_fit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_whitelabel_footer_fit_call" data-track-category="lead_gen">Whitelabel-Fit-Gespräch buchen</a>
-					<a href="<?php echo esc_url( $wgos_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_whitelabel_footer_wgos" data-track-category="trust">WGOS ansehen</a>
+					<a href="<?php echo esc_url( $results_url ); ?>" class="wl-text-link" data-track-action="cta_whitelabel_footer_results" data-track-category="trust">Ergebnisse ansehen</a>
 				</div>
 			</div>
 		</div>
