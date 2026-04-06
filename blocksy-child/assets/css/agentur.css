@@ -11,7 +11,7 @@
 }
 
 .wp-agentur-hero {
-  padding-top: calc(var(--nx-space-section) + 20px);
+  padding-top: calc(var(--nx-header-height) + clamp(2rem, 4vw, 3rem));
 }
 
 .wp-agentur-hero .nx-hero__title {

@@ -71,7 +71,7 @@
 }
 
 /* --- 2. HERO & KPIs (Das Vertikale) --- */
-.wp-hero { padding: clamp(5.5rem, 9vw, 8rem) 0 0; min-height: auto; display: flex; align-items: center; justify-content: center; position: relative; }
+.wp-hero { padding: calc(var(--nx-header-height) + clamp(2rem, 4vw, 3rem)) 0 0; min-height: auto; display: flex; align-items: center; justify-content: center; position: relative; }
 .wp-container,
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
@@ -863,7 +863,7 @@
     }
 
     .wp-hero {
-        padding-top: 4.75rem;
+        padding-top: calc(var(--nx-header-height) + clamp(1.5rem, 4vw, 2rem));
     }
 
     .wp-hero-subtitle,

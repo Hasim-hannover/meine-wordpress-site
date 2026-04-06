@@ -371,7 +371,7 @@
 
 /* Hero */
 .wgos-hero {
-	padding: 96px 0 72px;
+	padding: calc(var(--nx-header-height) + clamp(2rem, 4vw, 3rem)) 0 72px;
 	background: transparent;
 }
 
@@ -2099,7 +2099,7 @@ details[open].wgos-hub-section-card > .wgos-hub-section-card__head::after {
 	}
 
 	.wgos-hero {
-		padding: 82px 0 60px;
+		padding: calc(var(--nx-header-height) + clamp(1.5rem, 4vw, 2rem)) 0 60px;
 	}
 
 	.wgos-h2 {
