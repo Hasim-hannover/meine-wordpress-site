@@ -16,12 +16,13 @@
   var steps = [
     'Website wird geladen...',
     'Performance wird gemessen...',
-    'Tracking & Datenschutz wird geprüft...',
+    'Messbarkeit & Datenschutz wird geprüft...',
     'SEO-Grundlagen werden analysiert...',
-    'Content wird ausgewertet...',
+    'Conversion & Klarheit wird bewertet...',
+    'Inhalt & Positionierung wird ausgewertet...',
     'Ergebnis wird zusammengestellt...'
   ];
-  var loadingProgressMarks = [12, 28, 44, 60, 74, 88];
+  var loadingProgressMarks = [10, 24, 38, 52, 66, 80, 92];
   var statusLabels = {
     red: 'kritisch',
     yellow: 'mittel',
@@ -531,7 +532,7 @@
     clearResults();
     renderScoreHeader(normalized);
     renderModules(normalized.modules || {});
-    renderRevenueCard((normalized.modules || {}).revenue);
+    renderInsightCard(normalized.strategic_assessment, (normalized.modules || {}).revenue);
   }
 
   function renderScoreHeader(data) {
@@ -552,7 +553,7 @@
 
     kicker.textContent = 'Growth Audit Ergebnis';
     title.textContent = displayUrl + ' im Überblick';
-    subtitle.textContent = timestamp ? 'Stand: ' + timestamp + ' · priorisierte Hebel aus Performance, Tracking, SEO und Content.' : 'Wo Ihre Website heute Nachfrage verliert und was zuerst Wirkung verspricht.';
+    subtitle.textContent = timestamp ? 'Stand: ' + timestamp + ' · priorisierte Hebel über alle Diagnose-Bereiche hinweg.' : 'Wo Ihre Website heute Nachfrage verliert und welche Bereiche zuerst Wirkung versprechen.';
 
     wrap.appendChild(ring);
     meta.appendChild(kicker);
@@ -599,7 +600,7 @@
   }
 
   function renderModules(modules) {
-    var keys = ['performance', 'tracking', 'seo', 'content'];
+    var keys = ['performance', 'tracking', 'seo', 'conversion', 'content'];
     var fallbackKeys = Object.keys(modules).filter(function (key) {
       return key !== 'revenue';
     });
@@ -607,9 +608,11 @@
       return modules[key];
     });
 
-    if (!order.length) {
-      order = fallbackKeys;
-    }
+    fallbackKeys.forEach(function (key) {
+      if (order.indexOf(key) === -1) {
+        order.push(key);
+      }
+    });
 
     if (!order.length) {
       refs.modules.appendChild(createEmptyState('Für diese Analyse wurden keine Modul-Daten geliefert.'));
@@ -733,6 +736,116 @@
     }
 
     return card;
+  }
+
+  function renderInsightCard(strategicAssessment, revenue) {
+    if (hasStrategicAssessment(strategicAssessment)) {
+      renderStrategicCard(strategicAssessment);
+      return;
+    }
+
+    renderRevenueCard(revenue);
+  }
+
+  function renderStrategicCard(strategy) {
+    if (!hasStrategicAssessment(strategy)) return;
+
+    var card = document.createElement('section');
+    var head = document.createElement('div');
+    var icon = document.createElement('span');
+    var title = document.createElement('h2');
+    var biggest = strategy.biggest_bottleneck;
+    var priorities = Array.isArray(strategy.priorities) ? strategy.priorities : [];
+
+    card.className = 'cja-strategic cja-reveal';
+    card.style.transitionDelay = '600ms';
+
+    head.className = 'cja-strategic-header';
+    icon.textContent = strategy.icon || '💡';
+    title.textContent = strategy.label || 'Strategische Einschätzung';
+    head.appendChild(icon);
+    head.appendChild(title);
+    card.appendChild(head);
+
+    if (biggest && (biggest.area || biggest.description)) {
+      var bottleneck = document.createElement('div');
+      var bottleneckLabel = document.createElement('div');
+      var labelText = document.createTextNode('Größter Hebel: ');
+      var area = document.createElement('strong');
+      var description = document.createElement('p');
+
+      bottleneck.className = 'cja-bottleneck';
+      bottleneckLabel.className = 'cja-bottleneck-label';
+      area.textContent = biggest.area || 'Unklar';
+      description.textContent = biggest.description || 'Für diesen Hebel liegt noch keine Beschreibung vor.';
+
+      bottleneckLabel.appendChild(labelText);
+      bottleneckLabel.appendChild(area);
+      bottleneckLabel.appendChild(createPriorityBadge(biggest.priority));
+      bottleneck.appendChild(bottleneckLabel);
+      bottleneck.appendChild(description);
+      card.appendChild(bottleneck);
+    }
+
+    if (priorities.length) {
+      var prioritiesWrap = document.createElement('div');
+      var prioritiesTitle = document.createElement('h3');
+
+      prioritiesWrap.className = 'cja-priorities';
+      prioritiesTitle.textContent = 'Alle Bereiche nach Priorität';
+      prioritiesWrap.appendChild(prioritiesTitle);
+
+      priorities.forEach(function (item) {
+        var row = document.createElement('div');
+        var area = document.createElement('span');
+
+        row.className = 'cja-priority-row';
+        area.className = 'cja-priority-area';
+        area.textContent = item.area || 'Bereich';
+
+        if (item.bottleneck) {
+          row.title = item.bottleneck;
+        }
+
+        row.appendChild(area);
+        row.appendChild(createPriorityBadge(item.priority));
+        prioritiesWrap.appendChild(row);
+      });
+
+      card.appendChild(prioritiesWrap);
+    }
+
+    if (strategy.summary) {
+      var summary = document.createElement('div');
+      var summaryText = document.createElement('p');
+
+      summary.className = 'cja-strategic-summary';
+      summaryText.textContent = strategy.summary;
+      summary.appendChild(summaryText);
+      card.appendChild(summary);
+    }
+
+    refs.revenue.appendChild(card);
+  }
+
+  function createPriorityBadge(priority) {
+    var badge = document.createElement('span');
+    var normalized = normalizePriority(priority);
+
+    badge.className = 'cja-priority-badge priority-' + normalized;
+    badge.textContent = normalized;
+    return badge;
+  }
+
+  function hasStrategicAssessment(strategy) {
+    return Boolean(
+      strategy &&
+      (
+        strategy.summary ||
+        (strategy.biggest_bottleneck && (strategy.biggest_bottleneck.area || strategy.biggest_bottleneck.description)) ||
+        (Array.isArray(strategy.priorities) && strategy.priorities.length)
+      )
+    );
   }
 
   function renderRevenueCard(revenue) {
@@ -897,13 +1010,21 @@
   }
 
   function normalizeCurrentPayload(data) {
+    var modules = data && typeof data.modules === 'object' && data.modules ? Object.assign({}, data.modules) : {};
+    var fallbackRevenue = normalizeRevenueModule(data && data.revenue ? data.revenue : null);
+
+    if (!modules.revenue && fallbackRevenue) {
+      modules.revenue = fallbackRevenue;
+    }
+
     return {
       overall_score: parseScore(data.overall_score),
       timestamp: data.timestamp || data.generatedAt || '',
       fullUrl: String(data.fullUrl || data.url || data.domain || '').trim(),
       url: stripUrlProtocol(data.url || data.fullUrl || data.domain || ''),
       quickWins: normalizeTextList(data.quickWins),
-      modules: data && typeof data.modules === 'object' && data.modules ? data.modules : {}
+      strategic_assessment: normalizeStrategicAssessment(data.strategic_assessment),
+      modules: modules
     };
   }
 
@@ -928,7 +1049,48 @@
       fullUrl: String(meta.url || meta.domain || '').trim(),
       url: stripUrlProtocol(meta.url || meta.domain || ''),
       quickWins: buildV3QuickWins(data),
+      strategic_assessment: null,
       modules: modules
+    };
+  }
+
+  function normalizeStrategicAssessment(strategy) {
+    if (!strategy || typeof strategy !== 'object') {
+      return null;
+    }
+
+    var biggest = strategy.biggest_bottleneck && typeof strategy.biggest_bottleneck === 'object'
+      ? {
+        area: String(strategy.biggest_bottleneck.area || '').trim(),
+        description: String(strategy.biggest_bottleneck.description || '').trim(),
+        priority: normalizePriority(strategy.biggest_bottleneck.priority)
+      }
+      : null;
+    var priorities = (Array.isArray(strategy.priorities) ? strategy.priorities : [])
+      .map(function (item) {
+        return {
+          area: String(item && item.area || '').trim(),
+          priority: normalizePriority(item && item.priority),
+          bottleneck: String(item && item.bottleneck || '').trim()
+        };
+      })
+      .filter(function (item) {
+        return item.area;
+      });
+    var summary = String(strategy.summary || '').trim();
+    var label = String(strategy.label || '').trim();
+    var icon = String(strategy.icon || '').trim();
+
+    if (!summary && !priorities.length && !(biggest && (biggest.area || biggest.description))) {
+      return null;
+    }
+
+    return {
+      label: label || 'Strategische Einschätzung',
+      icon: icon || '💡',
+      biggest_bottleneck: biggest,
+      priorities: priorities,
+      summary: summary
     };
   }
 
@@ -1035,6 +1197,14 @@
       .replace(/ß/g, 'ss')
       .replace(/\s+/g, ' ')
       .trim();
+  }
+
+  function normalizePriority(value) {
+    var normalized = normalizePlainText(value);
+
+    if (normalized === 'hoch' || normalized === 'high') return 'hoch';
+    if (normalized === 'niedrig' || normalized === 'low') return 'niedrig';
+    return 'mittel';
   }
 
   function mapItemStatus(status) {

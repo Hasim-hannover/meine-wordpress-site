@@ -77,7 +77,7 @@ function cja_audit_shortcode() {
 		<div class="cja-phase cja-hero" id="cja-input">
 			<span class="cja-overline">60-Sekunden-Diagnose für WordPress-B2B-Websites</span>
 			<h1 class="cja-headline">In 60 Sekunden sehen Sie, wo Ihre Website Leads verliert.</h1>
-			<p class="cja-subtitle">Der Audit zeigt direkt, wo Performance, Tracking, SEO und Content Nachfrage bremsen und welche Hebel zuerst Wirkung versprechen.</p>
+			<p class="cja-subtitle">Der Audit zeigt direkt, wo Performance, Messbarkeit, SEO, Conversion und Inhalt Nachfrage bremsen und welche Hebel zuerst Wirkung versprechen.</p>
 
 			<div class="cja-input-group">
 				<label class="screen-reader-text" for="cja-url-input">Website-URL</label>
@@ -107,7 +107,7 @@ function cja_audit_shortcode() {
 					<article class="cja-preview-item">
 						<span class="cja-preview-index">02</span>
 						<h3>Welche Signale fehlen</h3>
-						<p>Tracking, SEO, Content und Performance dort, wo Nachfrage messbar werden sollte.</p>
+						<p>Messbarkeit, SEO, Angebotsklarheit und Performance dort, wo Nachfrage messbar werden sollte.</p>
 					</article>
 					<article class="cja-preview-item">
 						<span class="cja-preview-index">03</span>
