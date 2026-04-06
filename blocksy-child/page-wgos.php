@@ -58,30 +58,6 @@ $nav_items = [
 	],
 ];
 
-$hero_snapshot = [
-	[
-		'phase' => 'Phase 01',
-		'title' => 'Strategie + Fundament',
-		'text'  => 'Angebotslogik, Prioritäten und technische Tragfähigkeit werden zuerst geklärt.',
-	],
-	[
-		'phase' => 'Phase 02',
-		'title' => 'Messbarkeit + Sichtbarkeit',
-		'text'  => 'Datenqualität und Nachfrageaufbau greifen kontrolliert ineinander.',
-	],
-	[
-		'phase' => 'Phase 03',
-		'title' => 'Conversion + Weiterentwicklung',
-		'text'  => 'Die Website lernt aus Signalen und führt klarer zur Anfrage.',
-	],
-];
-
-$hero_badges = [
-	'Klare Reihenfolge',
-	'Messbare Entwicklung',
-	'Volle Ownership',
-];
-
 $hero_proof = [
 	[
 		'context' => 'E3 New Energy',
@@ -97,25 +73,6 @@ $hero_proof = [
 		'context' => 'E3 New Energy',
 		'value'   => $public_proof['metrics']['cpl_reduction']['value'] ?? '-83 %',
 		'label'   => 'CPL gegenüber Lead-Einkauf',
-	],
-];
-
-$shortform_items = [
-	[
-		'label' => 'Was',
-		'text'  => 'Ein System, das Strategie, Technik, Daten, Sichtbarkeit und Conversion in eine belastbare Reihenfolge bringt.',
-	],
-	[
-		'label' => 'Für wen',
-		'text'  => 'Für Unternehmen mit bestehender WordPress-Website, Nachfragepotenzial und dem Bedarf an klarer Priorisierung.',
-	],
-	[
-		'label' => 'Welches Problem',
-		'text'  => 'Viele Websites sammeln Maßnahmen, aber führen keine planbare Nachfrage über einen klaren Anfragepfad.',
-	],
-	[
-		'label' => 'Was ist anders',
-		'text'  => 'Ein zusammenhängendes Nachfrage-System mit klarer Reihenfolge.',
 	],
 ];
 
@@ -339,67 +296,23 @@ foreach ( $faq_items as $faq_item ) {
 
 		<section class="wgos-hero">
 			<div class="wgos-container">
-				<div class="wgos-hero-grid">
-					<div class="wgos-hero-copy">
-						<span class="wgos-kicker"><?php echo esc_html( $framework_label ); ?></span>
-						<h1 class="wgos-hero__title"><?php echo esc_html( $framework_label ); ?> für planbare Nachfrage.</h1>
-						<p class="wgos-hero__subtitle">WGOS beschreibt die Reihenfolge hinter planbarer Nachfrage: Strategie und Fundament zuerst, dann Messbarkeit und Sichtbarkeit, danach Conversion und Weiterentwicklung.</p>
+				<div class="wgos-hero__content">
+					<span class="wgos-kicker">WordPress · B2B · Nachfrage-System</span>
+					<h1 class="wgos-hero__title">Planbare Nachfrage statt Maßnahmensammlung.</h1>
+					<p class="wgos-hero__subtitle">WGOS bringt Strategie, Technik, SEO, Tracking und Conversion in eine belastbare Reihenfolge — damit WordPress qualifizierte B2B-Anfragen liefert.</p>
 
-						<ul class="wgos-hero__bullets">
-							<?php foreach ( $hero_badges as $hero_badge ) : ?>
-								<li><?php echo esc_html( $hero_badge ); ?></li>
-							<?php endforeach; ?>
-						</ul>
-
-						<div class="wgos-trust-strip wgos-trust-strip--hero" aria-label="Ausgewählte Ergebnisbelege">
-							<?php foreach ( $hero_proof as $hero_proof_item ) : ?>
-								<div class="wgos-trust-item">
-									<span class="wgos-trust-context"><?php echo esc_html( $hero_proof_item['context'] ); ?></span>
-									<span class="wgos-trust-value"><?php echo esc_html( $hero_proof_item['value'] ); ?></span>
-									<span class="wgos-trust-label"><?php echo esc_html( $hero_proof_item['label'] ); ?></span>
-								</div>
-							<?php endforeach; ?>
-						</div>
-
-						<div class="wgos-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit" data-track-action="cta_click_audit" data-track-category="lead_gen" data-track-section="hero"><?php echo esc_html( $audit_cta_label ); ?></a>
-							<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" data-track-action="cta_click_calendar" data-track-category="lead_gen" data-track-section="hero">Strategiegespräch vereinbaren</a>
-						</div>
-						<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
+					<div class="wgos-hero__actions">
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit" data-track-action="cta_click_audit" data-track-category="lead_gen" data-track-section="hero"><?php echo esc_html( $audit_cta_label ); ?></a>
+						<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-text-link" data-track="cta_click_calendar" data-track-action="cta_click_calendar" data-track-category="lead_gen" data-track-section="hero">Strategiegespräch vereinbaren</a>
 					</div>
+					<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 
-					<aside class="wgos-hero-card" aria-label="WGOS System-Snapshot">
-						<span class="wgos-principle-kicker">System-Snapshot</span>
-						<div class="wgos-phase-list">
-							<?php foreach ( $hero_snapshot as $snapshot_item ) : ?>
-								<article class="wgos-phase-list__item">
-									<span class="wgos-phase-list__label"><?php echo esc_html( $snapshot_item['phase'] ); ?></span>
-									<h3><?php echo esc_html( $snapshot_item['title'] ); ?></h3>
-									<p><?php echo esc_html( $snapshot_item['text'] ); ?></p>
-								</article>
-							<?php endforeach; ?>
-						</div>
-						<p class="wgos-hero-card__note">Sechs Bereiche. Drei Phasen. Eine Reihenfolge, die Nachfrage steuerbar macht.</p>
-					</aside>
+					<div class="wgos-trust-strip wgos-trust-strip--hero" role="list" aria-label="Proof-Signale">
+						<?php foreach ( $hero_proof as $hero_proof_item ) : ?>
+							<span role="listitem"><?php echo esc_html( $hero_proof_item['value'] . ' ' . $hero_proof_item['label'] ); ?></span>
+						<?php endforeach; ?>
+					</div>
 				</div>
-			</div>
-		</section>
-
-		<section id="problem" class="wgos-section wgos-section--white">
-			<div class="wgos-container">
-				<div class="wgos-section-head">
-					<span class="wgos-principle-kicker">WGOS-Kurzform</span>
-					<h2 class="wgos-h2">Die Kurzform für schnelle Einordnung.</h2>
-				</div>
-
-				<dl class="wgos-shortform-grid">
-					<?php foreach ( $shortform_items as $shortform_item ) : ?>
-						<div class="wgos-shortform-card">
-							<dt><?php echo esc_html( $shortform_item['label'] ); ?></dt>
-							<dd><?php echo esc_html( $shortform_item['text'] ); ?></dd>
-						</div>
-					<?php endforeach; ?>
-				</dl>
 			</div>
 		</section>
 
@@ -456,6 +369,12 @@ foreach ( $faq_items as $faq_item ) {
 						<p>Die WGOS-Systemlandkarte zeigt die zugehörigen Assets strukturiert, gruppiert und direkt verlinkt.</p>
 						<a href="<?php echo esc_url( $asset_hub_url ); ?>" class="wgos-link--arrow" data-track="cta_click_explorer" data-track-action="cta_click_explorer" data-track-category="navigation" data-track-section="core_areas">Zur WGOS Asset-Landkarte</a>
 					</div>
+				</div>
+
+				<div class="wgos-mid-cta">
+					<p>Sie sehen das System. Der Growth Audit zeigt, welcher Bereich bei Ihnen zuerst den größten Hebel hat.</p>
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit" data-track-action="cta_click_audit" data-track-category="lead_gen" data-track-section="mid_cta"><?php echo esc_html( $audit_cta_label ); ?></a>
+					<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 				</div>
 			</div>
 		</section>
@@ -530,22 +449,13 @@ foreach ( $faq_items as $faq_item ) {
 			<div class="wgos-container">
 				<div class="wgos-section-head">
 					<span class="wgos-principle-kicker">Ergebnisse</span>
-					<h2 class="wgos-h2">Ergebnisse.</h2>
+					<h2 class="wgos-h2">Was passiert, wenn die Reihenfolge stimmt.</h2>
 				</div>
 
 				<div class="wgos-proof-band">
-					<div class="wgos-proof-grid wgos-proof-grid--compact">
-						<?php foreach ( $proof_metrics as $proof_metric ) : ?>
-							<article class="wgos-proof-card">
-								<strong class="wgos-proof-card__value"><?php echo esc_html( $proof_metric['value'] ); ?></strong>
-								<p class="wgos-proof-card__label"><?php echo esc_html( $proof_metric['label'] ); ?></p>
-								<span class="wgos-proof-card__case"><?php echo esc_html( $proof_metric['case'] ); ?></span>
-							</article>
-						<?php endforeach; ?>
-					</div>
-
+					<p class="wgos-prose">E3 New Energy setzte auf dieselbe Logik: Erst Fundament und Tracking ordnen, dann Conversion-Pfade schärfen, dann skalieren. Das Ergebnis steht offen dokumentiert.</p>
 					<div class="wgos-proof-link-row">
-						<a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow" data-track="cta_click_results" data-track-action="cta_click_results" data-track-category="trust" data-track-section="proof">Ergebnisse ansehen</a>
+						<a href="<?php echo esc_url( $cases_url ); ?>" class="wgos-link--arrow" data-track="cta_click_results" data-track-action="cta_click_results" data-track-category="trust" data-track-section="proof">Ergebnisse und Case Studies ansehen</a>
 					</div>
 				</div>
 			</div>
@@ -578,8 +488,8 @@ foreach ( $faq_items as $faq_item ) {
 
 					<div class="wgos-hero__actions">
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit" data-track-action="cta_click_audit" data-track-category="lead_gen" data-track-section="final_cta"><?php echo esc_html( $audit_cta_label ); ?></a>
-						<a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-btn wgos-btn--outline" data-track="cta_click_calendar" data-track-action="cta_click_calendar" data-track-category="lead_gen" data-track-section="final_cta">Strategiegespräch vereinbaren</a>
 					</div>
+					<p class="nx-cta-microcopy">Wenn der Scope schon klar ist: <a href="<?php echo esc_url( $calendar_url ); ?>" class="wgos-text-link" data-track="cta_click_calendar" data-track-action="cta_click_calendar" data-track-category="lead_gen" data-track-section="final_cta">Strategiegespräch vereinbaren</a></p>
 				</div>
 			</div>
 		</section>
