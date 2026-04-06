@@ -179,7 +179,7 @@ function nexus_get_wgos_cluster_page_data() {
 			'schema_description' => 'WGOS-Cluster für Core Web Vitals: Performance-Diagnose, Optimierung und technisches Fundament für B2B-WordPress-Websites.',
 		],
 		'ga4-tracking-setup' => [
-			'eyebrow'          => 'Messbarkeit im WGOS',
+			'eyebrow'          => 'GA4 Tracking Setup · Messbarkeit im WGOS',
 			'title'            => 'GA4 Tracking Setup für B2B-WordPress-Websites',
 			'lead'             => 'GA4 Tracking Setup heißt hier: Event-Logik, Consent, GTM und serverseitige Signale so bauen, dass Sie Anfragen, Einstiegsseiten und Leadqualität belastbar sehen.',
 			'intro'            => [
@@ -236,9 +236,13 @@ function nexus_get_wgos_cluster_page_data() {
 					'question' => 'Ist das auch für Google Ads und Leadgenerierung relevant?',
 					'answer'   => 'Ja. Ohne belastbare Messung bleiben Einstiegsseiten, Kampagnenqualität und Leadpfade unscharf. Gerade für B2B-Leadgenerierung ist ein sauberes GA4- und Tracking-Setup die Grundlage für sinnvolle Optimierung.',
 				],
+				[
+					'question' => 'Brauche ich eine Agentur für das Google Analytics 4 Setup oder kann ich das selbst einrichten?',
+					'answer'   => 'Einfache GA4-Installationen sind selbst machbar. Sobald Consent Mode, serverseitige Signalverarbeitung, Event-Blueprint und die Verknüpfung mit Formularen, Leadpfaden und Kampagnen ins Spiel kommen, lohnt sich eine erfahrene Begleitung. Fehler im Setup zeigen sich oft erst dann, wenn Entscheidungen auf falschen Daten aufbauen.',
+				],
 			],
 			'meta_title'       => 'GA4 Tracking Setup für B2B | Haşim Üner',
-			'meta_description' => 'GA4 Tracking Setup für B2B-Websites: Event-Blueprint, Consent Mode und Server Side Tracking für belastbare Leadsignale in WordPress.',
+			'meta_description' => 'GA4 Tracking Setup für B2B-WordPress: Google Analytics 4 einrichten, Consent Mode, GTM-Struktur und Server Side Tracking für belastbare Leadsignale.',
 			'schema_name'      => 'GA4 Tracking Setup für B2B-WordPress-Websites',
 			'schema_description' => 'WGOS-Cluster für GA4 Tracking Setup: Event-Logik, GTM, Consent Mode und Server Side Tracking für B2B-WordPress-Websites.',
 		],
