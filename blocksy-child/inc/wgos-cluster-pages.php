@@ -247,7 +247,7 @@ function nexus_get_wgos_cluster_page_data() {
 			'schema_description' => 'WGOS-Cluster für GA4 Tracking Setup: Event-Logik, GTM, Consent Mode und Server Side Tracking für B2B-WordPress-Websites.',
 		],
 		'conversion-rate-optimization' => [
-			'eyebrow'          => 'Conversion im WGOS',
+			'eyebrow'          => 'Conversion Rate Optimierung für WordPress · WGOS',
 			'title'            => 'Conversion Rate Optimierung für WordPress',
 			'lead'             => 'Conversion Rate Optimierung für WordPress bedeutet hier: Angebotsseiten, Proof, CTA-Führung und Formulare so ordnen, dass aus Besuchern qualifizierte B2B-Anfragen werden.',
 			'intro'            => [
@@ -312,9 +312,13 @@ function nexus_get_wgos_cluster_page_data() {
 					'question' => 'Wie hängt CRO mit Tracking und SEO zusammen?',
 					'answer'   => 'SEO bringt die richtigen Besucher, Tracking macht die Wirkung sichtbar und CRO sorgt dafür, dass aus Sichtbarkeit und Klicks qualifizierte Anfragen werden. Ohne dieses Zusammenspiel bleibt jede Einzeldisziplin begrenzt.',
 				],
+				[
+					'question' => 'Wie verbessert Conversion Rate Optimierung die Leadgenerierung auf einer B2B-Website?',
+					'answer'   => 'Indem die Seite nicht nur erklärt, sondern führt. Suchintention trifft auf klaren Nutzen, Proof und Einwandabbau bauen Vertrauen auf, und ein strukturierter CTA-Pfad führt zum richtigen nächsten Schritt – statt zu einem Formular, das am Seitenende versteckt ist.',
+				],
 			],
 			'meta_title'       => 'Conversion Rate Optimierung für WordPress | Haşim Üner',
-			'meta_description' => 'Conversion Rate Optimierung für WordPress: Angebotsseiten, Proof, CTA-Führung und Formulare für mehr qualifizierte B2B-Anfragen.',
+			'meta_description' => 'Conversion Rate Optimierung für WordPress und B2B-Leadgenerierung: Landing Pages, Proof, CTA-Führung und Formulare für mehr qualifizierte Anfragen.',
 			'schema_name'      => 'Conversion Rate Optimierung für WordPress',
 			'schema_description' => 'WGOS-Cluster für Conversion Rate Optimierung: Angebotsseiten, Landing Pages, Proof und CTA-Führung für B2B-WordPress-Websites.',
 		],
