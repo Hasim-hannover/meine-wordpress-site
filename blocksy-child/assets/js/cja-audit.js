@@ -583,7 +583,7 @@
       quickWins.forEach(function (item) {
         var card = document.createElement('div');
         card.className = 'cja-quickwin';
-        card.textContent = item;
+        card.textContent = formatDisplayText(item);
         quickWinsList.appendChild(card);
       });
 
@@ -652,7 +652,7 @@
 
     copy.className = 'cja-module-copy';
     label.className = 'cja-module-label';
-    label.textContent = module && module.label ? module.label : 'Modul';
+    label.textContent = formatDisplayText(module && module.label ? module.label : 'Modul');
     problems.className = 'cja-module-problems';
     problems.textContent = items.length ? buildProblemLabel(items.length) : 'Keine Detailpunkte verfügbar';
 
@@ -672,7 +672,7 @@
     if (module && module.note) {
       var note = document.createElement('div');
       note.className = 'cja-module-note';
-      note.textContent = module.note;
+      note.textContent = formatDisplayText(module.note);
       body.appendChild(note);
     }
 
@@ -707,7 +707,7 @@
     head.className = 'cja-item-header';
     copy.className = 'cja-item-copy';
     metric.className = 'cja-item-metric';
-    metric.textContent = item && item.metric ? item.metric : 'Prüfpunkt';
+    metric.textContent = formatDisplayText(item && item.metric ? item.metric : 'Prüfpunkt');
     copy.appendChild(metric);
 
     badge.className = 'cja-item-badge';
@@ -715,7 +715,7 @@
     copy.appendChild(badge);
 
     value.className = 'cja-item-value';
-    value.textContent = item && item.value ? item.value : 'n/a';
+    value.textContent = formatDisplayText(item && item.value ? item.value : 'n/a');
 
     head.appendChild(copy);
     head.appendChild(value);
@@ -724,14 +724,14 @@
     if (item && item.hint) {
       var hint = document.createElement('div');
       hint.className = 'cja-item-hint';
-      hint.textContent = item.hint;
+      hint.textContent = formatDisplayText(item.hint);
       card.appendChild(hint);
     }
 
     if (item && item.target) {
       var target = document.createElement('div');
       target.className = 'cja-item-target';
-      target.textContent = 'Ziel: ' + item.target;
+      target.textContent = 'Ziel: ' + formatDisplayText(item.target);
       card.appendChild(target);
     }
 
@@ -762,7 +762,7 @@
 
     head.className = 'cja-strategic-header';
     icon.textContent = strategy.icon || '💡';
-    title.textContent = strategy.label || 'Strategische Einschätzung';
+    title.textContent = formatDisplayText(strategy.label || 'Strategische Einschätzung');
     head.appendChild(icon);
     head.appendChild(title);
     card.appendChild(head);
@@ -776,8 +776,8 @@
 
       bottleneck.className = 'cja-bottleneck';
       bottleneckLabel.className = 'cja-bottleneck-label';
-      area.textContent = biggest.area || 'Unklar';
-      description.textContent = biggest.description || 'Für diesen Hebel liegt noch keine Beschreibung vor.';
+      area.textContent = formatDisplayText(biggest.area || 'Unklar');
+      description.textContent = formatDisplayText(biggest.description || 'Für diesen Hebel liegt noch keine Beschreibung vor.');
 
       bottleneckLabel.appendChild(labelText);
       bottleneckLabel.appendChild(area);
@@ -801,7 +801,7 @@
 
         row.className = 'cja-priority-row';
         area.className = 'cja-priority-area';
-        area.textContent = item.area || 'Bereich';
+        area.textContent = formatDisplayText(item.area || 'Bereich');
 
         if (item.bottleneck) {
           row.title = item.bottleneck;
@@ -820,7 +820,7 @@
       var summaryText = document.createElement('p');
 
       summary.className = 'cja-strategic-summary';
-      summaryText.textContent = strategy.summary;
+      summaryText.textContent = formatDisplayText(strategy.summary);
       summary.appendChild(summaryText);
       card.appendChild(summary);
     }
@@ -876,7 +876,7 @@
     icon.className = 'cja-module-icon';
     icon.textContent = normalizeRevenueIcon(revenue.icon);
 
-    title.textContent = normalizeRevenueTitle(revenue.label);
+    title.textContent = formatDisplayText(normalizeRevenueTitle(revenue.label));
     subtitle.textContent = 'Modellierte Orientierung auf Basis der gelieferten Daten, keine Forecast-Zusage.';
     titleWrap.appendChild(title);
     titleWrap.appendChild(subtitle);
@@ -891,11 +891,11 @@
     card.appendChild(stats);
 
     detail.className = 'cja-revenue-detail';
-    detail.textContent = summary.detail || 'Für dieses Potenzial liegt keine Zusatzbeschreibung vor.';
+    detail.textContent = formatDisplayText(summary.detail || 'Für dieses Potenzial liegt keine Zusatzbeschreibung vor.');
     card.appendChild(detail);
 
     uplift.className = 'cja-revenue-uplift';
-    uplift.textContent = formatRevenueUplift(summary.potential_uplift);
+    uplift.textContent = formatDisplayText(formatRevenueUplift(summary.potential_uplift));
     card.appendChild(uplift);
 
     note.className = 'cja-revenue-note';
@@ -1174,7 +1174,7 @@
     if (normalized === 'versprechen') return 'Versprechen';
     if (normalized === 'proof') return 'Proof';
 
-    return title || 'Modul';
+    return formatDisplayText(title || 'Modul');
   }
 
   function getSectionIcon(title) {
@@ -1197,6 +1197,74 @@
       .replace(/ß/g, 'ss')
       .replace(/\s+/g, ' ')
       .trim();
+  }
+
+  // Backend payloads can arrive ASCII-transliterated; restore German copy without touching hosts or URLs.
+  function formatDisplayText(value) {
+    var text = String(value || '').trim();
+
+    if (!text || looksLikeProtectedText(text)) {
+      return text;
+    }
+
+    return text.replace(/\b[A-Za-z][A-Za-z-]*\b/g, function (word) {
+      return restoreGermanWord(word);
+    });
+  }
+
+  function looksLikeProtectedText(text) {
+    return /^(https?:\/\/|www\.|#)/i.test(text) ||
+      /^[\w.-]+\.[a-z]{2,}(?:[/?#].*)?$/i.test(text) ||
+      /^[A-Z0-9_-]+$/.test(text) ||
+      /^[\w/-]+\.(?:css|js|json|php|html?|svg|png|jpe?g|webp)$/i.test(text);
+  }
+
+  function restoreGermanWord(word) {
+    if (!/(ae|oe|ue|ss)/i.test(word) || /[ÄÖÜäöüß]/.test(word)) {
+      return word;
+    }
+
+    var lower = word.toLowerCase();
+    var restored = lower
+      .replace(/ae/g, 'ä')
+      .replace(/oe/g, 'ö');
+
+    if (!shouldKeepUe(lower)) {
+      restored = restored.replace(/ue/g, 'ü');
+    }
+
+    restored = restored
+      .replace(/gröss/g, 'größ')
+      .replace(/gross/g, 'groß')
+      .replace(/heiss/g, 'heiß')
+      .replace(/weiss/g, 'weiß')
+      .replace(/ausser/g, 'außer')
+      .replace(/strass/g, 'straß')
+      .replace(/massnahm/g, 'maßnahm')
+      .replace(/fliess/g, 'fließ');
+
+    return applyWordCase(word, restored);
+  }
+
+  function shouldKeepUe(word) {
+    return /^neu/.test(word) ||
+      /(eue|euer|euen|euem|eues|uell|queue|teuer|feuer|steuer|treu|reue|heuer|abenteuer|ungeheuer)/.test(word);
+  }
+
+  function applyWordCase(source, target) {
+    if (!target) {
+      return source;
+    }
+
+    if (source === source.toUpperCase()) {
+      return target.toUpperCase();
+    }
+
+    if (source.charAt(0) === source.charAt(0).toUpperCase()) {
+      return target.charAt(0).toUpperCase() + target.slice(1);
+    }
+
+    return target;
   }
 
   function normalizePriority(value) {
