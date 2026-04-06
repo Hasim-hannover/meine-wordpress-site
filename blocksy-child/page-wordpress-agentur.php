@@ -34,21 +34,6 @@ $primary_term                = function_exists( 'nexus_get_public_primary_term' 
 $audit_cta_label             = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
 $audit_compact_microcopy     = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '60 Sek. · priorisierte Hebel · keine E-Mail';
 
-$hero_highlights = [
-	[
-		'label' => 'Für wen',
-		'text'  => 'B2B-Unternehmen aus Hannover, Pattensen und der Region Hannover, für die WordPress oder WooCommerce ein echter Nachfragekanal ist.',
-	],
-	[
-		'label' => 'Typisches Ergebnis',
-		'text'  => 'Klarere Angebotsseiten, belastbare Datensignale und weniger Reibung zwischen erstem Besuch, qualifiziertem Lead und nächstem Gespräch.',
-	],
-	[
-		'label' => 'Nächster Schritt',
-		'text'  => 'Erst ein Growth Audit. Danach erst die Entscheidung, welche Maßnahme wirklich zuerst zählt.',
-	],
-];
-
 $pain_cards = [
 	[
 		'icon'  => '01',
@@ -130,49 +115,33 @@ get_header();
 
 		<section id="hero" class="nx-section nx-hero wp-agentur-hero">
 			<div class="nx-container">
-				<div class="wp-agentur-hero__grid">
-					<div class="wp-agentur-hero__copy">
-						<span class="nx-badge nx-badge--gold">WordPress Agentur Hannover für B2B</span>
-						<h1 class="nx-hero__title">WordPress Agentur Hannover: B2B-Websites, die Anfragen liefern.</h1>
-						<p class="nx-hero__subtitle">
-							WordPress Agentur in Hannover heißt hier: <?php echo esc_html( $primary_term ); ?> statt Einzelmaßnahmen. Angebotsseiten, technische SEO, GA4-Tracking und Conversion Rate Optimierung greifen als ein sauberes System zusammen, wenn Ihre Website nicht nur bestehen, sondern qualifizierte B2B-Leads liefern soll.
-						</p>
-						<div class="wp-agentur-actions wp-agentur-actions--hero">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary wp-agentur-hero__primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
-							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-agentur-text-link" data-track-action="cta_agentur_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
-						</div>
-						<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
-						<figure class="wp-agentur-hero-portrait">
-							<img
-								src="<?php echo esc_url( hu_get_profile_image_url() ); ?>"
-								alt="Haşim Üner – WordPress Agentur Hannover, Growth Architect für B2B-Websites"
-								loading="eager"
-								fetchpriority="high"
-								width="120"
-								height="148"
-							/>
-							<figcaption>Haşim Üner · Growth Architect · Hannover<br/>Workshops und Reviews vor Ort möglich. DACH-weit remote umsetzbar.</figcaption>
-						</figure>
+				<div class="wp-agentur-hero__content">
+					<span class="nx-badge nx-badge--gold">Hannover · B2B · WordPress</span>
+					<h1 class="nx-hero__title">Anfragen statt nur Sichtbarkeit.</h1>
+					<p class="nx-hero__subtitle">
+						Angebotsseiten, SEO, Tracking und Conversion als ein System — damit Ihre WordPress-Website qualifizierte B2B-Leads liefert.
+					</p>
+					<div class="wp-agentur-actions wp-agentur-actions--hero">
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary wp-agentur-hero__primary" data-track-action="cta_agentur_hero_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+						<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-agentur-text-link" data-track-action="cta_agentur_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
 					</div>
-
-					<aside class="wp-agentur-hero-card" aria-labelledby="agentur-hero-card-title">
-						<span class="wp-agentur-hero-card__eyebrow">Sofort orientiert</span>
-						<h2 id="agentur-hero-card-title" class="wp-agentur-hero-card__title">Für wen, mit welchem Ergebnis und wie der Einstieg aussieht.</h2>
-						<div class="wp-agentur-hero-card__items" aria-label="Hero Zusammenfassung">
-							<?php foreach ( $hero_highlights as $highlight ) : ?>
-								<div class="wp-agentur-hero-card__item">
-									<span class="wp-agentur-hero-card__label"><?php echo esc_html( $highlight['label'] ); ?></span>
-									<p><?php echo esc_html( $highlight['text'] ); ?></p>
-								</div>
-							<?php endforeach; ?>
-						</div>
-						<div class="wp-agentur-hero-card__proof" role="list" aria-label="Frühe Proof-Signale">
-							<?php foreach ( $proof_metrics as $proof_metric ) : ?>
-								<span role="listitem"><?php echo esc_html( $proof_metric['value'] . ' ' . $proof_metric['label'] ); ?></span>
-							<?php endforeach; ?>
-						</div>
-						<p class="wp-agentur-hero-card__note">Lokale Nähe hilft. Entscheidend bleibt, ob aus WordPress ein steuerbares Nachfrage-System wird.</p>
-					</aside>
+					<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
+					<div class="wp-agentur-hero__proof" role="list" aria-label="Proof-Signale">
+						<?php foreach ( $proof_metrics as $proof_metric ) : ?>
+							<span role="listitem"><?php echo esc_html( $proof_metric['value'] . ' ' . $proof_metric['label'] ); ?></span>
+						<?php endforeach; ?>
+					</div>
+					<figure class="wp-agentur-hero-portrait">
+						<img
+							src="<?php echo esc_url( hu_get_profile_image_url() ); ?>"
+							alt="Haşim Üner – WordPress Growth Architect Hannover"
+							loading="eager"
+							fetchpriority="high"
+							width="120"
+							height="148"
+						/>
+						<figcaption>Haşim Üner · Growth Architect · Hannover</figcaption>
+					</figure>
 				</div>
 			</div>
 		</section>
