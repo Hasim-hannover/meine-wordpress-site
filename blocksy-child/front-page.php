@@ -62,10 +62,10 @@ get_header();
 			<div class="wp-container wp-home-shell">
 				<div class="wp-home-hero__grid">
 					<div class="wp-hero-copy wp-home-hero__copy">
-						<span class="wp-badge">WordPress Growth Architect für B2B</span>
-						<h1 class="wp-hero-title">Ich mache aus Ihrer WordPress-Website ein planbares Nachfrage-System für B2B.</h1>
+						<span class="wp-badge">WordPress · B2B · Nachfrage-System</span>
+						<h1 class="wp-hero-title">Planbare B2B-Anfragen. Direkt aus WordPress.</h1>
 						<p class="wp-hero-subtitle wp-home-hero__subtitle">
-							Für Unternehmen, die klare Positionierung, belastbare Messbarkeit und einen nächsten Schritt brauchen, der aus Besuchern qualifizierte Anfragen macht.
+							Positionierung, Tracking und Conversion als ein System — damit aus Besuchern qualifizierte Anfragen werden.
 						</p>
 
 						<div class="wp-home-hero__actions">
@@ -100,24 +100,14 @@ get_header();
 				<article class="wp-success-card homepage-track-record__card homepage-track-record__card--primary" aria-labelledby="homepage-proof-case-title">
 					<div class="homepage-track-record__case-head">
 						<p class="wp-success-subtitle">E3 New Energy</p>
-						<h3 id="homepage-proof-case-title" class="wp-success-title">Ausgangslage</h3>
-						<p class="homepage-track-record__lead">Hohe Leadkosten, unklare Qualität, Reibung im Anfragepfad.</p>
+						<h3 id="homepage-proof-case-title" class="wp-success-title">Hohe Leadkosten, unklare Qualität, Reibung im Anfragepfad.</h3>
 					</div>
 
-					<p class="homepage-track-record__summary">Ergebnis nach Neuordnung von Positionierung, Tracking und Conversion-Führung:</p>
-
-					<div class="homepage-track-record__metrics" role="list" aria-label="E3 Kennzahlen">
-						<?php foreach ( $hero_metrics as $metric ) : ?>
-							<div class="homepage-track-record__metric" role="listitem">
-								<span class="homepage-track-record__metric-value"><?php echo esc_html( $metric['value'] ); ?></span>
-								<span class="homepage-track-record__metric-label"><?php echo esc_html( $metric['label'] ); ?></span>
-							</div>
-						<?php endforeach; ?>
-					</div>
+					<p class="homepage-track-record__summary">Erst Fundament und Tracking ordnen, dann Conversion-Pfade schärfen, dann skalieren. Die offene Case Study zeigt, wie dieselbe Logik in der Praxis gewirkt hat.</p>
 
 					<div class="homepage-track-record__actions">
-						<a href="<?php echo esc_url( $e3_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_proof_case" data-track-category="trust">Case Study lesen</a>
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_proof_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+						<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_proof_case" data-track-category="trust">Case Study lesen</a>
+						<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_proof_results" data-track-category="trust">Weitere Ergebnisse</a>
 					</div>
 				</article>
 			</div>
@@ -152,8 +142,10 @@ get_header();
 					</article>
 				</div>
 
-				<p class="homepage-problem-frame__link">Welches Modell passt? <a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_models_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a></p>
-				<p class="homepage-problem-frame__link">Lokaler Ansprechpartner gesucht? <a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_home_models_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></p>
+				<div class="homepage-problem-frame__cta">
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_models_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+					<a href="<?php echo esc_url( $agentur_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_models_agentur" data-track-category="navigation">WordPress Agentur Hannover</a>
+				</div>
 			</div>
 		</section>
 
@@ -165,39 +157,9 @@ get_header();
 				</div>
 
 				<div class="homepage-system-teaser__card">
-					<p class="homepage-system-teaser__lead">Drei Ebenen, eine Logik:</p>
-					<p class="homepage-system-teaser__text">Erst den Anfragepfad klären, dann Messbarkeit schaffen, dann kontrolliert umsetzen.</p>
+					<p class="homepage-system-teaser__lead">WGOS verbindet Strategie, Technik, SEO, Tracking und Conversion in einer klaren Reihenfolge.</p>
+					<p class="homepage-system-teaser__text">Sechs Bereiche, drei Phasen: Erst Fundament und Angebotslogik, dann Messbarkeit und Sichtbarkeit, dann Conversion und kontrollierte Weiterentwicklung.</p>
 					<a href="<?php echo esc_url( $wgos_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_system_wgos" data-track-category="navigation">WGOS im Detail ansehen</a>
-				</div>
-			</div>
-		</section>
-
-		<section id="faq" class="homepage-faq-section homepage-faq-section--home" aria-labelledby="faq-heading">
-			<div class="nx-container wp-home-shell">
-				<div class="wp-home-section-title text-center">
-					<span class="nx-badge nx-badge--gold">FAQ</span>
-					<h2 id="faq-heading" class="wp-section-h2">Häufige Fragen</h2>
-					<p class="wp-section-p">Klarheit vor dem nächsten Schritt.</p>
-				</div>
-				<div class="nx-faq">
-					<?php foreach ( $faq_items as $index => $item ) : ?>
-						<details class="nx-faq__item"<?php echo 0 === $index ? ' open' : ''; ?>>
-							<summary><?php echo esc_html( $item['question'] ); ?></summary>
-							<div class="nx-faq__content"><?php echo esc_html( $item['answer'] ); ?></div>
-						</details>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-
-		<section id="cta" class="wp-section homepage-conversion-cta" data-track-section="homepage_cta">
-			<div class="wp-container wp-home-shell">
-				<div class="nx-cta-box homepage-conversion-cta__box">
-					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2>Lassen Sie uns prüfen, wo Ihre Website Anfragen verliert.</h2>
-					<p class="homepage-conversion-cta__lead">Eine URL reicht. Sofort-Analyse ohne E-Mail, mit klar priorisierten Hebeln.</p>
-					<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
-					<p class="homepage-conversion-cta__microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 				</div>
 			</div>
 		</section>
@@ -206,8 +168,7 @@ get_header();
 			<div class="wp-container wp-home-shell">
 				<div class="wp-home-section-title text-center">
 					<span class="nx-badge nx-badge--ghost">Knowledge Base</span>
-					<h2 class="wp-section-h2">Wenn Sie zuerst die Denkweise prüfen wollen: hier sind die Analysen.</h2>
-					<p class="wp-section-p">Die Artikel sind bewusst der längere Nebenpfad. Der direkte Einstieg bleibt das Growth Audit.</p>
+					<h2 class="wp-section-h2">Analysen und Einordnungen aus der Praxis.</h2>
 				</div>
 
 				<div class="homepage-blog-grid">
@@ -254,7 +215,36 @@ get_header();
 					?>
 				</div>
 
-				<p class="homepage-blog-section__link"><a href="<?php echo esc_url( $blog_url ); ?>" data-track-action="cta_home_blog_archive" data-track-category="navigation">Zum vollständigen Knowledge Base Archiv</a></p>
+				<p class="homepage-blog-section__link"><a href="<?php echo esc_url( $blog_url ); ?>" data-track-action="cta_home_blog_archive" data-track-category="navigation">Alle Artikel ansehen</a></p>
+			</div>
+		</section>
+
+		<section id="faq" class="homepage-faq-section homepage-faq-section--home" aria-labelledby="faq-heading">
+			<div class="nx-container wp-home-shell">
+				<div class="wp-home-section-title text-center">
+					<span class="nx-badge nx-badge--gold">FAQ</span>
+					<h2 id="faq-heading" class="wp-section-h2">Häufige Fragen</h2>
+				</div>
+				<div class="nx-faq">
+					<?php foreach ( $faq_items as $index => $item ) : ?>
+						<details class="nx-faq__item"<?php echo 0 === $index ? ' open' : ''; ?>>
+							<summary><?php echo esc_html( $item['question'] ); ?></summary>
+							<div class="nx-faq__content"><?php echo esc_html( $item['answer'] ); ?></div>
+						</details>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</section>
+
+		<section id="cta" class="wp-section homepage-conversion-cta" data-track-section="homepage_cta">
+			<div class="wp-container wp-home-shell">
+				<div class="nx-cta-box homepage-conversion-cta__box">
+					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
+					<h2>Prüfen wir, wo Ihre Website Anfragen verliert.</h2>
+					<p class="homepage-conversion-cta__lead">Eine URL reicht. Sofort-Analyse ohne E-Mail, mit klar priorisierten Hebeln.</p>
+					<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+					<p class="homepage-conversion-cta__microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
+				</div>
 			</div>
 		</section>
 	</div>
