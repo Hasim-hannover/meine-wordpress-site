@@ -109,11 +109,11 @@ function hu_get_forced_singular_seo_map() {
 			],
 			'wordpress-agentur-hannover' => [
 				'title'       => 'WordPress Agentur Hannover für B2B | Haşim Üner',
-				'description' => 'WordPress Agentur in Hannover: Angebotsseiten, technische SEO, Tracking und Conversion-Optimierung fuer B2B- und WooCommerce-Websites. Growth Audit als 60-Sekunden-Diagnose-Einstieg.',
+				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, GA4-Tracking und Conversion-Optimierung als System. Growth Audit als Einstieg – 60 Sek., keine E-Mail.',
 			],
 			'wordpress-agentur' => [
 				'title'       => 'WordPress Agentur Hannover für B2B | Haşim Üner',
-				'description' => 'WordPress Agentur in Hannover: Angebotsseiten, technische SEO, Tracking und Conversion-Optimierung fuer B2B- und WooCommerce-Websites. Growth Audit als 60-Sekunden-Diagnose-Einstieg.',
+				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, GA4-Tracking und Conversion-Optimierung als System. Growth Audit als Einstieg – 60 Sek., keine E-Mail.',
 			],
 			'ergebnisse' => [
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
