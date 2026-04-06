@@ -75,19 +75,46 @@ function cja_audit_shortcode() {
 		<span id="form" class="cja-anchor" aria-hidden="true"></span>
 
 		<div class="cja-phase cja-hero" id="cja-input">
-			<span class="cja-overline">Kostenloser Growth Audit</span>
-			<h1 class="cja-headline">Was kostet Sie Ihre Website an Leads?</h1>
-			<p class="cja-subtitle">Performance, SEO, Tracking, Content — in 60 Sekunden sehen Sie, wo Ihr größtes Wachstumspotenzial liegt.</p>
+			<span class="cja-overline">60-Sekunden-Diagnose für WordPress-B2B-Websites</span>
+			<h1 class="cja-headline">In 60 Sekunden sehen Sie, wo Ihre Website Leads verliert.</h1>
+			<p class="cja-subtitle">Der Audit zeigt direkt, wo Performance, Tracking, SEO und Content Nachfrage bremsen und welche Hebel zuerst Wirkung versprechen.</p>
 
 			<div class="cja-input-group">
 				<label class="screen-reader-text" for="cja-url-input">Website-URL</label>
-				<input type="text" id="cja-url-input" placeholder="ihre-website.de" autocomplete="off" inputmode="url" autocapitalize="off" spellcheck="false" aria-describedby="cja-error">
-				<button id="cja-submit" type="button" data-track-action="cja_start_analysis" data-track-category="lead_gen" data-track-section="growth_audit_input">Jetzt analysieren</button>
+				<input type="text" id="cja-url-input" placeholder="ihre-domain.de" autocomplete="off" inputmode="url" autocapitalize="off" spellcheck="false" aria-describedby="cja-error">
+				<button id="cja-submit" type="button" data-track-action="cja_start_analysis" data-track-category="lead_gen" data-track-section="growth_audit_input">Diagnose starten</button>
+			</div>
+			<p class="cja-input-help">Starten Sie mit Ihrer Startseite oder der wichtigsten Angebotsseite. Sie sehen direkt die größten Reibungen und priorisierten Hebel.</p>
+
+			<div class="cja-trust-line" aria-label="Audit-Vertrauen">
+				<span>Keine E-Mail nötig</span>
+				<span>WordPress- und B2B-Fokus</span>
+				<span>Priorisierte Hebel statt Tool-Score</span>
 			</div>
 
-			<div class="cja-trust-line">
-				<span aria-hidden="true">🔒</span>
-				<span>Keine E-Mail nötig · Ergebnis sofort · 100% kostenlos</span>
+			<div class="cja-preview" aria-label="Ergebnisvorschau">
+				<div class="cja-preview-head">
+					<p class="cja-preview-kicker">Sie sehen direkt</p>
+					<h2 class="cja-preview-title">Kein generischer Score, sondern ein klarer Diagnose-Einstieg.</h2>
+				</div>
+
+				<div class="cja-preview-grid">
+					<article class="cja-preview-item">
+						<span class="cja-preview-index">01</span>
+						<h3>Wo Anfragen verloren gehen</h3>
+						<p>Versprechen, Proof, CTA und Reibung im Anfragepfad Ihrer Website.</p>
+					</article>
+					<article class="cja-preview-item">
+						<span class="cja-preview-index">02</span>
+						<h3>Welche Signale fehlen</h3>
+						<p>Tracking, SEO, Content und Performance dort, wo Nachfrage messbar werden sollte.</p>
+					</article>
+					<article class="cja-preview-item">
+						<span class="cja-preview-index">03</span>
+						<h3>Was zuerst Sinn ergibt</h3>
+						<p>Priorisierte Hebel statt Maßnahmenliste ohne Reihenfolge oder Kontext.</p>
+					</article>
+				</div>
 			</div>
 
 			<div class="cja-error" id="cja-error" aria-live="polite" hidden></div>
@@ -108,13 +135,19 @@ function cja_audit_shortcode() {
 			<div class="cja-revenue-shell" id="cja-revenue"></div>
 
 			<div class="cja-cta-section cja-reveal">
-				<h2>Diese Probleme lösen?</h2>
-				<p>Sie erhalten einen ausführlichen Report mit priorisierten Handlungsempfehlungen, abgestimmt auf Ihre Branche und Ihre Ziele.</p>
-				<a href="<?php echo esc_url( $cta_url ); ?>" class="cja-cta-button" data-track-action="cja_results_contact" data-track-category="lead_gen" data-track-section="growth_audit_results">Kostenloses Strategiegespräch buchen</a>
-				<div class="cja-cta-meta">15 Min · Unverbindlich · Konkrete nächste Schritte</div>
+				<p class="cja-cta-kicker">Nächster Schritt</p>
+				<h2>Wenn Sie diese Hebel sauber priorisieren wollen</h2>
+				<p>Wir ordnen das Ergebnis gemeinsam ein, trennen Quick Wins von strukturellen Themen und klären, welcher nächste Schritt wirklich sinnvoll ist.</p>
+				<div class="cja-cta-actions">
+					<a href="<?php echo esc_url( $cta_url ); ?>" class="cja-cta-button" data-track-action="cja_results_contact" data-track-category="lead_gen" data-track-section="growth_audit_results">Ergebnis gemeinsam einordnen</a>
+					<?php if ( $contact_url !== $cta_url ) : ?>
+						<a href="<?php echo esc_url( $contact_url ); ?>" class="cja-cta-link" data-track-action="cja_results_contact_alt" data-track-category="lead_gen" data-track-section="growth_audit_results">Lieber erst eine Frage schicken</a>
+					<?php endif; ?>
+				</div>
+				<div class="cja-cta-meta">15 Min · konkrete Prioritäten · ohne Verpflichtungsdruck</div>
 			</div>
 
-			<div class="cja-footer-line">Powered by WGOS — WordPress Growth Operating System</div>
+			<div class="cja-footer-line">Basierend auf WGOS — WordPress Growth Operating System</div>
 		</div>
 	</div>
 	<?php

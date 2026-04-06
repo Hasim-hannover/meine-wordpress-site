@@ -552,7 +552,7 @@
 
     kicker.textContent = 'Growth Audit Ergebnis';
     title.textContent = displayUrl + ' im Überblick';
-    subtitle.textContent = timestamp ? 'Stand: ' + timestamp : 'Die stärksten Hebel aus Performance, Tracking, SEO und Content.';
+    subtitle.textContent = timestamp ? 'Stand: ' + timestamp + ' · priorisierte Hebel aus Performance, Tracking, SEO und Content.' : 'Wo Ihre Website heute Nachfrage verliert und was zuerst Wirkung verspricht.';
 
     wrap.appendChild(ring);
     meta.appendChild(kicker);
@@ -574,9 +574,9 @@
       quickWinsIcon.className = 'cja-quickwins-icon';
       quickWinsIcon.textContent = '🎯';
       quickWinsTitle.className = 'cja-quickwins-title';
-      quickWinsTitle.textContent = 'Ihre Top 3 Quick Wins';
+      quickWinsTitle.textContent = 'Priorisierte Hebel';
       quickWinsSubtitle.className = 'cja-quickwins-subtitle';
-      quickWinsSubtitle.textContent = 'Die wirkungsvollsten Maßnahmen für sofortige Verbesserungen.';
+      quickWinsSubtitle.textContent = 'Keine generische Scorecard, sondern die nächsten sinnvollen Eingriffe für Nachfrage, Leads und Klarheit.';
       quickWinsList.className = 'cja-quickwins-list';
 
       quickWins.forEach(function (item) {
@@ -747,10 +747,11 @@
     var stats = document.createElement('div');
     var detail = document.createElement('div');
     var uplift = document.createElement('div');
+    var note = document.createElement('p');
     var summary = revenue.summary;
     var statItems = [
-      { label: 'Traffic', value: normalizeRevenueValue(summary.estimated_traffic) },
-      { label: 'Conversion', value: normalizeRevenueValue(summary.estimated_conversion) },
+      { label: 'Traffic-Schätzung', value: normalizeRevenueValue(summary.estimated_traffic) },
+      { label: 'Conversion-Schätzung', value: normalizeRevenueValue(summary.estimated_conversion) },
       { label: 'Leads aktuell', value: normalizeRevenueValue(summary.current_leads) },
       { label: 'Leads Potenzial', value: normalizeRevenueValue(summary.potential_leads), highlight: true }
     ];
@@ -762,8 +763,8 @@
     icon.className = 'cja-module-icon';
     icon.textContent = normalizeRevenueIcon(revenue.icon);
 
-    title.textContent = revenue.label || 'Revenue Impact';
-    subtitle.textContent = 'Welcher Hebel geschäftlich am meisten wirken kann.';
+    title.textContent = normalizeRevenueTitle(revenue.label);
+    subtitle.textContent = 'Modellierte Orientierung auf Basis der gelieferten Daten, keine Forecast-Zusage.';
     titleWrap.appendChild(title);
     titleWrap.appendChild(subtitle);
     head.appendChild(icon);
@@ -777,12 +778,16 @@
     card.appendChild(stats);
 
     detail.className = 'cja-revenue-detail';
-    detail.textContent = summary.detail || 'Für dieses Modul liegt keine Zusatzbeschreibung vor.';
+    detail.textContent = summary.detail || 'Für dieses Potenzial liegt keine Zusatzbeschreibung vor.';
     card.appendChild(detail);
 
     uplift.className = 'cja-revenue-uplift';
     uplift.textContent = formatRevenueUplift(summary.potential_uplift);
     card.appendChild(uplift);
+
+    note.className = 'cja-revenue-note';
+    note.textContent = 'Orientierungswert auf Basis der gelieferten Daten und heuristischer Annahmen. Keine Umsatzgarantie.';
+    card.appendChild(note);
 
     refs.revenue.appendChild(card);
   }
@@ -814,6 +819,16 @@
     return value;
   }
 
+  function normalizeRevenueTitle(label) {
+    var value = normalizePlainText(label);
+
+    if (!value || value === 'revenue impact' || value === 'opportunity') {
+      return 'Lead-Potenzial';
+    }
+
+    return label;
+  }
+
   function normalizeRevenueValue(value) {
     if (typeof value === 'number' && !isNaN(value)) {
       return String(Math.round(value));
@@ -836,11 +851,15 @@
       return '';
     }
 
-    if (/mehr\s+leads\s+m[öo]glich/i.test(normalized)) {
+    if (/potenzial/i.test(normalized)) {
       return normalized;
     }
 
-    return normalized + ' mehr Leads möglich';
+    if (/mehr\s+leads\s+m[öo]glich/i.test(normalized)) {
+      return normalized.replace(/mehr\s+leads\s+m[öo]glich/i, 'zusätzliche Leads als Orientierungswert');
+    }
+
+    return 'Potenzial laut Modell: ' + normalized;
   }
 
   function normalizeAuditPayload(data) {
@@ -945,7 +964,7 @@
     }
 
     return {
-      label: revenue.label || 'Revenue Impact',
+      label: revenue.label || 'Lead-Potenzial',
       icon: revenue.icon || '€',
       summary: revenue.summary
     };

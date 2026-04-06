@@ -27,8 +27,8 @@ if ( '' === $mobile_eyebrow_text ) {
 
 if ( empty( $audit_header_meta_items ) ) {
 	$audit_header_meta_items = [
-		'30-Sekunden-Analyse',
-		'Sofort-Ergebnis ohne E-Mail',
+		'60-Sekunden-Diagnose',
+		'WordPress- und B2B-Fokus',
 	];
 }
 ?>
