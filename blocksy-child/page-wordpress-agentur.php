@@ -112,6 +112,14 @@ $faq_items = [
 		'question' => 'Wann ist die Agentur-Seite der richtige Einstieg und wann der Growth Audit?',
 		'answer'   => 'Die Agentur-Seite ist richtig, wenn Sie den Gesamtkontext verstehen wollen. Der Growth Audit ist der bessere nächste Schritt, wenn klar werden soll, ob zuerst SEO, Tracking, Performance oder Conversion den größten Hebel hat.',
 	],
+	[
+		'question' => 'Warum rankt eine WordPress-Seite, liefert aber keine Anfragen?',
+		'answer'   => 'Ranking und Konversion sind zwei verschiedene Probleme. Oft rankt eine Seite für Begriffe mit Informations-Intent, nicht für kaufnahe Suchen. Dazu kommen fehlende Proof-Signale, kein klarer nächster Schritt und Formulare, die zu spät im Seitenfluss erscheinen. Genau dort setzt die Kombination aus technischer SEO, Angebotsseiten-Struktur und Conversion-Führung an.',
+	],
+	[
+		'question' => 'Bieten Sie WordPress-Optimierung auch in Pattensen und der Region Hannover an?',
+		'answer'   => 'Ja. Der Standort ist Pattensen bei Hannover. Persönliche Termine, Workshops und Reviews sind in der gesamten Region Hannover möglich. Gleichzeitig funktioniert die Zusammenarbeit vollständig remote für Kunden in ganz Deutschland, Österreich und der Schweiz.',
+	],
 ];
 
 get_header();
