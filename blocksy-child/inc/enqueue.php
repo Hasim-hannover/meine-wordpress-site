@@ -227,7 +227,7 @@ function hu_enqueue_assets() {
 			'NexusEnergyFormConfig',
 			[
 				'restEndpoint' => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
-				'submitLabel'  => 'Growth Audit passend einordnen',
+				'submitLabel'  => 'Anfrage-Analyse einordnen',
 				'errorMessage' => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
 			]
 		);

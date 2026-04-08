@@ -632,3 +632,103 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Energy LP: Reduced footer ───────────────────────── */
+
+.ft--energy-minimal {
+  padding: var(--nx-space-section) 0 2rem;
+  background: hsl(30 5% 6%);
+  border-top: 1px solid var(--nx-border);
+}
+
+.ft__energy-shell {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: center;
+  text-align: center;
+  max-width: var(--nx-max-width, 1200px);
+  margin-inline: auto;
+  padding-inline: var(--nx-gutter, 1.5rem);
+}
+
+.ft__energy-brand {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: center;
+}
+
+.ft__energy-tag {
+  margin: 0;
+  color: var(--nx-text-secondary);
+  font-size: 0.95rem;
+}
+
+.ft--energy-minimal .ft__cta {
+  display: inline-flex;
+}
+
+.ft__energy-legal {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--nx-text-dim);
+}
+
+.ft__energy-legal a {
+  color: var(--nx-text-dim);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+.ft__energy-legal a:hover,
+.ft__energy-legal a:focus-visible {
+  color: var(--nx-text);
+}
+
+.ft__social--energy {
+  justify-content: center;
+}
+
+/* ── Energy LP: Testimonial section ──────────────────── */
+
+.energy-testimonial {
+  text-align: center;
+}
+
+.energy-testimonial__card {
+  position: relative;
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 2.5rem 2rem 2rem;
+}
+
+.energy-testimonial__quote-mark {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--nx-accent-text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(3.5rem, 6vw, 5rem);
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.energy-testimonial__text {
+  margin: 0 0 1.25rem;
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--nx-text);
+}
+
+.energy-testimonial__attribution {
+  margin: 0 0 0.75rem;
+  color: var(--nx-text-secondary);
+  font-size: 0.95rem;
+}
+
+.energy-testimonial__note {
+  margin: 0;
+  color: var(--nx-text-dim);
+  font-size: 0.82rem;
+}

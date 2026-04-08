@@ -128,13 +128,26 @@ function nexus_get_site_header_fallback_items() {
 			'track'  => 'about',
 		],
 		[
-			'label'  => __( 'Audit starten', 'blocksy-child' ),
+			'label'  => nexus_is_energy_systems_context()
+				? __( 'Anfrage-Analyse starten', 'blocksy-child' )
+				: __( 'Audit starten', 'blocksy-child' ),
 			'url'    => $primary_urls['audit'] ?? nexus_get_audit_url(),
 			'active' => nexus_is_audit_page(),
 			'class'  => 'nav-cta-button',
 			'track'  => 'audit',
 		],
 	];
+}
+
+/**
+ * Check whether the current page is the energy systems landing page.
+ *
+ * @return bool
+ */
+function nexus_is_energy_systems_context() {
+	return is_page( 'solar-waermepumpen-leadgenerierung' )
+		|| is_page( 'website-fuer-solar-und-waermepumpen-anbieter' )
+		|| is_page_template( 'page-solar-waermepumpen-leadgenerierung.php' );
 }
 
 /**
@@ -187,6 +200,29 @@ function nexus_render_site_header_menu( $context = 'desktop' ) {
 
 	echo '</ul>';
 }
+
+/**
+ * Swap the nav CTA label on the energy systems landing page when a WordPress
+ * menu is assigned (wp_nav_menu path).
+ *
+ * @param array $items Sorted menu item objects.
+ * @return array
+ */
+function nexus_energy_nav_cta_label( $items ) {
+	if ( ! function_exists( 'nexus_is_energy_systems_context' ) || ! nexus_is_energy_systems_context() ) {
+		return $items;
+	}
+
+	foreach ( $items as $item ) {
+		if ( 'Audit starten' === $item->title ) {
+			$item->title = __( 'Anfrage-Analyse starten', 'blocksy-child' );
+			break;
+		}
+	}
+
+	return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'nexus_energy_nav_cta_label' );
 
 /**
  * Resolve the compact header eyebrow text.
