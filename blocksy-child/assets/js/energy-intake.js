@@ -358,6 +358,7 @@
     updateProgress(activeSteps, currentIndex);
     updateActionButtons(activeSteps, currentIndex);
     syncSummary();
+    syncContactPreference();
 
     if (options.focus) {
       focusCurrentStep();
@@ -372,10 +373,16 @@
     var fill = document.getElementById('energy-progress-fill');
     var current = document.getElementById('energy-progress-current');
     var track = document.getElementById('energy-progress-track');
-    var label = activeSteps[currentIndex] ? activeSteps[currentIndex].label : '';
+    var stepItem = activeSteps[currentIndex];
+    var label = stepItem ? stepItem.label : '';
+    var stepId = stepItem ? stepItem.id : '';
     var total = activeSteps.length || 1;
     var width = ((currentIndex + 1) / total) * 100;
-    var currentText = 'Abschnitt ' + (currentIndex + 1) + ' von ' + total + ': ' + label;
+    var messages = config.progressMessages || {};
+    var contextMessage = messages[stepId] || '';
+    var currentText = contextMessage
+      ? 'Schritt ' + (currentIndex + 1) + ' von ' + total + ' — ' + contextMessage
+      : 'Schritt ' + (currentIndex + 1) + ' von ' + total + ': ' + label;
 
     if (fill) {
       fill.style.width = width + '%';
@@ -695,7 +702,7 @@
 
     if (submitButton) {
       submitButton.disabled = true;
-      submitButton.textContent = 'Anfrage wird gesendet ...';
+      submitButton.textContent = config.submittingLabel || 'Anfrage wird gesendet …';
     }
 
     clearFeedback();
@@ -819,6 +826,25 @@
     var value = (field.value || '').trim();
     if (value && !/^https?:\/\//i.test(value)) {
       field.value = 'https://' + value;
+    }
+  }
+
+  function syncContactPreference() {
+    var pref = getFieldValue('contact_preference');
+    var phoneWrapper = state.form ? state.form.querySelector('[data-energy-phone-field]') : null;
+
+    if (!phoneWrapper) {
+      return;
+    }
+
+    var phoneInput = phoneWrapper.querySelector('input');
+    var isPhone = pref === 'email_und_telefon';
+
+    phoneWrapper.hidden = !isPhone;
+    phoneWrapper.style.display = isPhone ? '' : 'none';
+
+    if (!isPhone && phoneInput) {
+      phoneInput.value = '';
     }
   }
 

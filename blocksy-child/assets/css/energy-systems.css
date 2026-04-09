@@ -551,6 +551,23 @@
   display: grid;
 }
 
+.review-success-timeline {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--nx-text);
+}
+
+.review-success-timeline strong {
+  color: var(--nx-accent-text);
+}
+
+.review-success-inbox-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--nx-text-dim);
+}
+
 .energy-faq {
   max-width: 62rem;
 }

@@ -227,7 +227,7 @@ get_header();
 						<p class="nx-hero__subtitle">Ich baue Solar- und Wärmepumpen-Anbietern ein eigenes Anfrage-System &mdash; damit Ihr Vertrieb nur noch mit Interessenten spricht, die wirklich kaufen wollen.</p>
 						<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
 						<div class="energy-hero__actions">
-							<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse — 15 Min.</a>
+							<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse starten</a>
 							<a href="<?php echo esc_url( $e3_url ); ?>" class="energy-text-link" data-track-action="cta_energy_hero_case" data-track-category="trust">E3-Ergebnis ansehen →</a>
 						</div>
 					</div>
@@ -318,7 +318,7 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-cta-box energy-cta-box">
 					<h2>Nicht sicher, ob das für Sie passt?</h2>
-					<p>15 Minuten. Kein Pitch. Ich schaue mir Ihre aktuelle Situation an und sage Ihnen ehrlich, ob und wo ich einen Hebel sehe.</p>
+					<p>2 Minuten. Kein Pitch. Sie beschreiben Ihre Situation — ich melde mich innerhalb von 48 Stunden mit einer konkreten Einordnung per E-Mail.</p>
 					<div class="energy-cta-box__actions">
 						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen">Jetzt Anfragen-Check starten — kostenlos</a>
 					</div>
@@ -334,16 +334,17 @@ get_header();
 							<?php if ( $form_success ) : ?>
 								<div id="energy-request-success" class="review-success energy-review-success is-server-success" role="status" aria-live="polite" aria-atomic="true">
 									<div class="review-success-pill">Anfrage eingegangen</div>
-									<h3>Die Einordnung ist jetzt im System.</h3>
+									<h3>Ihre Einordnung wird geprüft.</h3>
 									<p class="review-success-copy"><?php echo esc_html( $form_success['message'] ?? 'Danke. Die Anfrage ist eingegangen.' ); ?></p>
+									<p class="review-success-timeline">Sie erhalten innerhalb von <strong>48 Stunden</strong> eine persönliche Ersteinschätzung per E-Mail — mit konkreten Hebeln für Website, Tracking und Anfrageprozess.</p>
 									<div class="review-success-meta">
-										<span>persönliche Rückmeldung</span>
-										<span>diagnose vor pitch</span>
-										<span>keine generische agenturstrecke</span>
+										<span>persönliche Rückmeldung per E-Mail</span>
+										<span>konkrete Hebel statt generischem Score</span>
+										<span>kein Pflicht-Call</span>
 									</div>
+									<p class="review-success-inbox-hint">Prüfen Sie Ihr Postfach (auch Spam-Ordner) für die Eingangsbestätigung.</p>
 									<div class="review-success-actions">
-										<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">E3 Case Study lesen</a>
-										<a class="audit-text-link" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit ansehen</a>
+										<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">In der Zwischenzeit: E3 Case Study lesen</a>
 									</div>
 								</div>
 							<?php else : ?>
@@ -365,7 +366,7 @@ get_header();
 									<div class="review-progress energy-progress" aria-label="Fortschritt im Branchen-Flow">
 										<div class="review-progress-head">
 											<div class="review-progress-copy">
-												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">In 2 Minuten: Wo liegt bei Ihnen der größte Hebel? — Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?></strong>
+												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?> — Gleich wird klar, wo der größte Hebel liegt.</strong>
 											</div>
 										</div>
 										<div
@@ -491,7 +492,7 @@ get_header();
 																<p class="energy-field-error" id="<?php echo esc_attr( $field_error_id ); ?>" data-energy-field-error="<?php echo esc_attr( $field_name ); ?>"></p>
 															</div>
 														<?php else : ?>
-															<div class="review-field<?php echo esc_attr( $is_textarea || 'page_url' === $field_name ? ' review-field-full' : '' ); ?>">
+															<div class="review-field<?php echo esc_attr( $is_textarea || 'page_url' === $field_name ? ' review-field-full' : '' ); ?>"<?php echo 'phone' === $field_name ? ' data-energy-phone-field hidden' : ''; ?>>
 																<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 																<?php if ( ! empty( $field['help'] ) ) : ?>
 																	<p class="review-field-help" id="<?php echo esc_attr( $field_help_id ); ?>"><?php echo esc_html( $field['help'] ); ?></p>
@@ -547,16 +548,17 @@ get_header();
 
 								<div id="energy-request-success" class="review-success energy-review-success" role="status" aria-live="polite" aria-atomic="true" hidden>
 									<div class="review-success-pill">Anfrage eingegangen</div>
-									<h3>Die Einordnung ist jetzt im System.</h3>
-									<p id="energy-success-message" class="review-success-copy">Danke. Ich melde mich mit einer priorisierten ersten Einschätzung zu Website, Tracking und Anfrageprozess.</p>
+									<h3>Ihre Einordnung wird geprüft.</h3>
+									<p id="energy-success-message" class="review-success-copy">Danke. Ich prüfe Ihre Angaben und melde mich mit einer priorisierten Ersteinschätzung.</p>
+									<p class="review-success-timeline">Sie erhalten innerhalb von <strong>48 Stunden</strong> eine persönliche Ersteinschätzung per E-Mail — mit konkreten Hebeln für Website, Tracking und Anfrageprozess.</p>
 									<div class="review-success-meta">
-										<span>persönliche Rückmeldung</span>
-										<span>diagnose vor pitch</span>
-										<span>keine generische agenturstrecke</span>
+										<span>persönliche Rückmeldung per E-Mail</span>
+										<span>konkrete Hebel statt generischem Score</span>
+										<span>kein Pflicht-Call</span>
 									</div>
+									<p class="review-success-inbox-hint">Prüfen Sie Ihr Postfach (auch Spam-Ordner) für die Eingangsbestätigung.</p>
 									<div class="review-success-actions">
-										<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">E3 Case Study lesen</a>
-										<a class="audit-text-link" href="<?php echo esc_url( $audit_url ); ?>">Growth Audit ansehen</a>
+										<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">In der Zwischenzeit: E3 Case Study lesen</a>
 									</div>
 								</div>
 							<?php endif; ?>
@@ -603,9 +605,9 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-cta-box energy-cta-box">
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2>Eigene Anfragen statt Portal-Abhängigkeit. In 15 Minuten klären, ob das für Sie passt.</h2>
+					<h2>Eigene Anfragen statt Portal-Abhängigkeit. In 2 Minuten Situation einordnen — Ergebnis per E-Mail.</h2>
 					<div class="energy-cta-box__actions">
-						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse — 15 Min.</a>
+						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse starten</a>
 						<a href="#energie-anfrage" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_footer_form" data-track-category="lead_gen">Situation einordnen</a>
 					</div>
 				</div>

@@ -290,6 +290,16 @@ function nexus_get_energy_intake_field_options() {
 				'description' => 'Zuerst soll klar werden, wo Nachfrage und Conversion heute verloren gehen.',
 			],
 		],
+		'contact_preference' => [
+			'email_only' => [
+				'label'       => 'Einordnung per E-Mail reicht',
+				'description' => 'Sie bekommen die Ersteinschätzung schriftlich — klar, konkret, ohne Pflicht-Call.',
+			],
+			'email_und_telefon' => [
+				'label'       => 'Gerne auch telefonisch',
+				'description' => 'Falls ein kurzer Austausch die Einordnung beschleunigt, rufe ich Sie an.',
+			],
+		],
 	];
 }
 
@@ -359,8 +369,20 @@ function nexus_get_energy_intake_flow_definition() {
 			'description'   => 'Timing hilft bei Einordnung, Priorisierung und der Frage, wie tief der nächste Schritt direkt gehen sollte.',
 			'summary_label' => 'Timing',
 			'auto_advance'  => true,
-			'next'          => 'contact',
+			'next'          => 'contact-pref',
 			'options'       => $options['project_timing'],
+		],
+		[
+			'id'            => 'contact-pref',
+			'name'          => 'contact_preference',
+			'kind'          => 'single_choice',
+			'title_short'   => 'Kontaktweg',
+			'question'      => 'Wie soll die Rückmeldung ankommen?',
+			'description'   => 'Die Ersteinschätzung kommt immer per E-Mail. Hier entscheiden Sie, ob zusätzlich ein kurzes Telefonat sinnvoll ist.',
+			'summary_label' => 'Kontaktweg',
+			'auto_advance'  => true,
+			'next'          => 'contact',
+			'options'       => $options['contact_preference'],
 		],
 		[
 			'id'            => 'contact',

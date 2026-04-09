@@ -226,9 +226,19 @@ function hu_enqueue_assets() {
 			'nexus-energy-intake-js',
 			'NexusEnergyFormConfig',
 			[
-				'restEndpoint' => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
-				'submitLabel'  => 'Anfrage-Analyse einordnen',
-				'errorMessage' => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
+				'restEndpoint'    => esc_url_raw( rest_url( 'nexus/v1/audit-request' ) ),
+				'submitLabel'     => 'Anfrage-Analyse einordnen',
+				'submittingLabel' => 'Wird gesendet …',
+				'errorMessage'    => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
+				'progressMessages' => [
+					'solution'     => 'Gleich wird klar, wo der größte Hebel liegt.',
+					'audience'     => 'Zielmarkt bestimmt die Formular-Logik.',
+					'challenge'    => 'Fast da — noch wenige kurze Fragen.',
+					'site-state'   => 'Noch 3 Schritte bis zur Einordnung.',
+					'timing'       => 'Gleich geschafft — dann folgen Ihre Kontaktdaten.',
+					'contact-pref' => 'Letzter Schritt: Wohin soll die Einordnung?',
+					'contact'      => 'Ihre Kontaktdaten — dann wird eingeordnet.',
+				],
 			]
 		);
 	}
