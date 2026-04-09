@@ -262,21 +262,6 @@ get_header();
 			</div>
 		</section>
 
-		<section class="nx-section energy-section energy-testimonial" id="testimonial">
-			<div class="nx-container">
-				<div class="energy-testimonial__card energy-proof-quote">
-					<span class="energy-testimonial__quote-mark" aria-hidden="true">&ldquo;</span>
-					<blockquote>
-						<p class="energy-testimonial__text">Seit wir unser eigenes Anfrage-System haben, rufen wir nur noch Interessenten an, die wirklich kaufen wollen. Das hat unseren Vertrieb komplett verändert.</p>
-						<footer>
-							<cite class="energy-testimonial__attribution">— [Name], Geschäftsführer · [Firmenname], [Ort]</cite>
-						</footer>
-					</blockquote>
-					<p class="energy-testimonial__note">Referenz auf Anfrage verfügbar.</p>
-				</div>
-			</div>
-		</section>
-
 		<section class="nx-section energy-section energy-section--alt" id="reibung">
 			<div class="nx-container">
 				<div class="energy-section__head">
