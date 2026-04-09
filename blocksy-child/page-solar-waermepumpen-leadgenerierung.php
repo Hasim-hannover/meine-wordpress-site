@@ -227,7 +227,7 @@ get_header();
 						<p class="nx-hero__subtitle">Ich baue Solar- und Wärmepumpen-Anbietern ein eigenes Anfrage-System &mdash; damit Ihr Vertrieb nur noch mit Interessenten spricht, die wirklich kaufen wollen.</p>
 						<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
 						<div class="energy-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse — 15 Min.</a>
+							<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse — 15 Min.</a>
 							<a href="<?php echo esc_url( $e3_url ); ?>" class="energy-text-link" data-track-action="cta_energy_hero_case" data-track-category="trust">E3-Ergebnis ansehen →</a>
 						</div>
 					</div>
@@ -320,7 +320,7 @@ get_header();
 					<h2>Nicht sicher, ob das für Sie passt?</h2>
 					<p>15 Minuten. Kein Pitch. Ich schaue mir Ihre aktuelle Situation an und sage Ihnen ehrlich, ob und wo ich einen Hebel sehe.</p>
 					<div class="energy-cta-box__actions">
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen">Jetzt Anfragen-Check starten — kostenlos</a>
+						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen">Jetzt Anfragen-Check starten — kostenlos</a>
 					</div>
 				</div>
 			</div>
@@ -605,7 +605,7 @@ get_header();
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
 					<h2>Eigene Anfragen statt Portal-Abhängigkeit. In 15 Minuten klären, ob das für Sie passt.</h2>
 					<div class="energy-cta-box__actions">
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse — 15 Min.</a>
+						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse — 15 Min.</a>
 						<a href="#energie-anfrage" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_footer_form" data-track-category="lead_gen">Situation einordnen</a>
 					</div>
 				</div>
