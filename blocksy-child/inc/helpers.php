@@ -83,17 +83,17 @@ function nexus_get_public_proof_data() {
 		'metrics'             => [
 			'lead_count'       => [
 				'value'   => '1.750+',
-				'label'   => 'qualifizierte Leads',
+				'label'   => 'qualifizierte Anfragen',
 				'context' => 'im aufgebauten System',
 			],
 			'sales_conversion' => [
 				'value'   => '12 %',
-				'label'   => 'Sales-Conversion',
+				'label'   => 'Abschlussquote',
 				'context' => 'vom Lead bis zum Abschluss',
 			],
 			'cpl_reduction'    => [
 				'value'   => '-83 %',
-				'label'   => 'CPL',
+				'label'   => 'Kosten pro Anfrage',
 				'context' => 'gegenüber Lead-Einkauf',
 			],
 		],

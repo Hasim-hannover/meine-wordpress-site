@@ -26,15 +26,15 @@ $audit_compact_microcopy = function_exists( 'nexus_get_audit_compact_microcopy' 
 $hero_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [
 	[
 		'value' => '1.750+',
-		'label' => 'qualifizierte Leads',
+		'label' => 'qualifizierte Anfragen',
 	],
 	[
 		'value' => '12 %',
-		'label' => 'Sales-Conversion',
+		'label' => 'Abschlussquote',
 	],
 	[
 		'value' => '-83 %',
-		'label' => 'CPL',
+		'label' => 'Kosten pro Anfrage',
 	],
 ];
 
@@ -62,17 +62,17 @@ get_header();
 			<div class="wp-container wp-home-shell">
 				<div class="wp-home-hero__grid">
 					<div class="wp-hero-copy wp-home-hero__copy">
-						<span class="wp-badge">WordPress · B2B · Nachfrage-System</span>
-						<h1 class="wp-hero-title">Planbare B2B-Anfragen. Direkt aus WordPress.</h1>
+						<span class="wp-badge">Für Solar- und Wärmepumpen-Betriebe mit 10–25 Mitarbeitern</span>
+						<h1 class="wp-hero-title">Schluss mit teuren Portal-Leads, die nicht ans Telefon gehen.</h1>
 						<p class="wp-hero-subtitle wp-home-hero__subtitle">
-							Positionierung, Tracking und Conversion als ein System — damit aus Besuchern qualifizierte Anfragen werden.
+							Ich baue Solar- und Wärmepumpen-Anbietern ein eigenes Anfrage-System — damit Ihr Vertrieb nur noch mit Interessenten spricht, die wirklich kaufen wollen.
 						</p>
 
 						<div class="wp-home-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
-							<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_hero_results" data-track-category="trust">Ergebnisse ansehen</a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse starten</a>
+							<a href="<?php echo esc_url( $e3_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_hero_e3" data-track-category="trust">E3-Ergebnis ansehen</a>
 						</div>
-						<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
+						<p class="nx-cta-microcopy">2 Minuten · priorisierte Hebel · keine E-Mail nötig</p>
 
 						<?php if ( ! empty( $hero_metrics ) ) : ?>
 							<div class="wp-home-kpi-row" role="list" aria-label="Zentrale Ergebniskennzahlen">
