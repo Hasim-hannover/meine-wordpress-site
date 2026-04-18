@@ -3,7 +3,7 @@
  * NEXUS MENU SETUP
  *
  * Erstellt das fokussierte Hauptmenü für die Neukunden-Navigation:
- * System | Ergebnisse | Insights | Über mich | Audit starten
+ * Solar & Wärmepumpen | Ergebnisse | Über mich | Audit starten
  *
  * Einmal-Setup: Wird beim Theme-Switch oder manuell via ?nexus_rebuild_menu=1 ausgelöst.
  *
@@ -101,14 +101,14 @@ function nexus_setup_main_menu() {
 		return;
 	}
 
-	// ── 1. System (Top-Level) ──────────────────────────────────────
-	$system_id = nexus_get_page_id( [ 'wordpress-growth-operating-system', 'wgos' ] );
+	// ── 1. Solar & Wärmepumpen (Top-Level) ────────────────────────
+	$solar_id = nexus_get_page_id( [ 'solar-waermepumpen-leadgenerierung' ] );
 	wp_update_nav_menu_item( $menu_id, 0, [
-		'menu-item-title'     => 'System',
+		'menu-item-title'     => 'Solar & Wärmepumpen',
 		'menu-item-object'    => 'page',
-		'menu-item-object-id' => $system_id,
-		'menu-item-type'      => $system_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $system_id ? '' : ( $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ) ),
+		'menu-item-object-id' => $solar_id,
+		'menu-item-type'      => $solar_id ? 'post_type' : 'custom',
+		'menu-item-url'       => $solar_id ? '' : home_url( '/solar-waermepumpen-leadgenerierung/' ),
 		'menu-item-status'    => 'publish',
 	] );
 
@@ -124,18 +124,7 @@ function nexus_setup_main_menu() {
 		'menu-item-classes'   => 'nav-results-link',
 	] );
 
-	// ── 3. Insights (Top-Level) ────────────────────────────────────
-	$blog_page_id = get_option( 'page_for_posts' );
-	wp_update_nav_menu_item( $menu_id, 0, [
-		'menu-item-title'     => 'Insights',
-		'menu-item-object'    => $blog_page_id ? 'page' : '',
-		'menu-item-object-id' => $blog_page_id ?: 0,
-		'menu-item-type'      => $blog_page_id ? 'post_type' : 'custom',
-		'menu-item-url'       => $blog_page_id ? '' : ( $primary_urls['blog'] ?? home_url( '/blog/' ) ),
-		'menu-item-status'    => 'publish',
-	] );
-
-	// ── 4. Über mich (Top-Level) ──────────────────────────────────
+	// ── 3. Über mich (Top-Level) ──────────────────────────────────
 	$about_id = nexus_get_page_id( [ 'uber-mich' ] );
 	wp_update_nav_menu_item( $menu_id, 0, [
 		'menu-item-title'     => 'Über mich',
@@ -146,7 +135,7 @@ function nexus_setup_main_menu() {
 		'menu-item-status'    => 'publish',
 	] );
 
-	// ── 5. Audit CTA (Top-Level) ───────────────────────────────────
+	// ── 4. Audit CTA (Top-Level) ───────────────────────────────────
 	$audit_id = nexus_get_audit_page_id();
 	wp_update_nav_menu_item( $menu_id, 0, [
 		'menu-item-title'     => 'Audit starten',
@@ -317,10 +306,9 @@ add_filter( 'nav_menu_link_attributes', function ( $atts, $item ) {
 
 	$title_lower = strtolower( wp_strip_all_tags( (string) $item->title ) );
 	$track_map   = [
-		'system'     => 'system',
-		'ergebnisse' => 'results',
-		'insights'   => 'insights',
-		'über mich'  => 'about',
+		'solar & wärmepumpen' => 'solar',
+		'ergebnisse'          => 'results',
+		'über mich'           => 'about',
 	];
 
 	foreach ( $track_map as $label => $track_key ) {

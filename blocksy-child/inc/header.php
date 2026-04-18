@@ -93,18 +93,17 @@ function nexus_get_site_header_menu_location() {
  * @return array<int, array<string, mixed>>
  */
 function nexus_get_site_header_fallback_items() {
-	$blog_page_id = (int) get_option( 'page_for_posts' );
-	$wgos_page_id = nexus_get_page_id( [ 'wordpress-growth-operating-system', 'wgos' ] );
+	$solar_page_id = nexus_get_page_id( [ 'solar-waermepumpen-leadgenerierung' ] );
 	$about_page_id = nexus_get_page_id( [ 'uber-mich' ] );
 	$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
 
 	return [
 		[
-			'label'  => __( 'System', 'blocksy-child' ),
-			'url'    => $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
-			'active' => $wgos_page_id ? is_page( $wgos_page_id ) : false,
+			'label'  => __( 'Solar & Wärmepumpen', 'blocksy-child' ),
+			'url'    => $solar_page_id ? get_permalink( $solar_page_id ) : home_url( '/solar-waermepumpen-leadgenerierung/' ),
+			'active' => $solar_page_id ? is_page( $solar_page_id ) : false,
 			'class'  => '',
-			'track'  => 'system',
+			'track'  => 'solar',
 		],
 		[
 			'label'  => __( 'Ergebnisse', 'blocksy-child' ),
@@ -112,13 +111,6 @@ function nexus_get_site_header_fallback_items() {
 			'active' => nexus_is_results_context(),
 			'class'  => '',
 			'track'  => 'results',
-		],
-		[
-			'label'  => __( 'Insights', 'blocksy-child' ),
-			'url'    => $blog_page_id ? get_permalink( $blog_page_id ) : ( $primary_urls['blog'] ?? home_url( '/blog/' ) ),
-			'active' => is_home() || is_archive() || is_singular( 'post' ),
-			'class'  => '',
-			'track'  => 'insights',
 		],
 		[
 			'label'  => __( 'Über mich', 'blocksy-child' ),
