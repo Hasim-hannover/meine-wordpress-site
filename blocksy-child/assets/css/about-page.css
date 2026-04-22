@@ -585,6 +585,10 @@ body.page-template-template-about-php .ft__privacy-note {
     grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.74fr);
   }
 
+  .about-priority {
+    margin-top: -1rem;
+  }
+
   .about-priority__grid {
     grid-template-columns: minmax(0, 0.88fr) minmax(340px, 0.92fr);
   }

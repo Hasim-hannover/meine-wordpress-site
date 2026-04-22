@@ -120,14 +120,14 @@ get_header();
 						<p class="about-hero__actions">
 							<a
 								href="<?php echo esc_url( $audit_url ); ?>"
-							class="nx-btn nx-btn--ghost"
-							data-track-action="cta_about_hero_audit"
-							data-track-category="lead_gen"
-							data-track-section="about_hero"
-						>
-							Growth Audit starten
-						</a>
-					</p>
+								class="nx-btn nx-btn--ghost"
+								data-track-action="cta_about_hero_audit"
+								data-track-category="lead_gen"
+								data-track-section="about_hero"
+							>
+								Growth Audit starten
+							</a>
+						</p>
 					</div>
 
 					<aside class="about-profile-card" aria-label="Profil">
