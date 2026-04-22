@@ -222,6 +222,10 @@ add_filter( 'wp_nav_menu_objects', 'nexus_energy_nav_cta_label' );
  * @return string
  */
 function nexus_get_site_header_eyebrow() {
+	if ( function_exists( 'nexus_is_energy_systems_context' ) && nexus_is_energy_systems_context() ) {
+		return '';
+	}
+
 	$description = trim( (string) get_bloginfo( 'description' ) );
 
 	if ( '' !== $description ) {
