@@ -14,7 +14,7 @@ get_header();
 
 $whitelabel_fit_url = function_exists( 'nexus_get_whitelabel_calendar_url' ) ? nexus_get_whitelabel_calendar_url() : 'https://cal.com/hasim-uener/whitelabel-fit-gesprach?overlayCalendar=true';
 $proof_anchor_url   = '#proof';
-$mailto_url         = 'mailto:hasimuener@gmail.com';
+$mailto_url         = 'mailto:hallo@hasimuener.de';
 
 $proof_metrics = [
 	[
@@ -139,7 +139,7 @@ $contract_cards = [
 				</div>
 				<div class="results-cta__actions">
 					<a href="<?php echo esc_url( $whitelabel_fit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_whitelabel_footer_fit_call" data-track-category="lead_gen">Whitelabel-Fit-Gespräch buchen</a>
-					<a href="<?php echo esc_url( $mailto_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_whitelabel_footer_mail" data-track-category="contact">hasimuener@gmail.com</a>
+					<a href="<?php echo esc_url( $mailto_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_whitelabel_footer_mail" data-track-category="contact">hallo@hasimuener.de</a>
 				</div>
 			</div>
 		</div>
