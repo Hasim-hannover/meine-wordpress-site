@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Nexus Über Mich
- * Description: Persönliche Positionsseite — kompakt, praxisnah, 5 Sektionen
+ * Description: Nischen-Positionsseite für Solar- und Wärmepumpen-Anbieter
  *
  * @package Blocksy_Child
  */
@@ -10,32 +10,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$audit_url   = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
-$agentur_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
-$contact_url = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
-$analysis_contact_url = add_query_arg(
-	[
-		'type' => 'analysis',
-	],
-	$contact_url
-);
+$audit_url      = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
+$whitelabel_url = function_exists( 'nexus_get_whitelabel_page_url' ) ? nexus_get_whitelabel_page_url() : home_url( '/whitelabel-retainer/' );
 
 $hero_facts = [
 	[
 		'label' => 'Rolle',
-		'text'  => 'Growth Architect mit B2B-Fokus',
+		'text'  => 'Spezialist für Anfrage-Systeme in der Solar- und Wärmepumpen-Nische',
 	],
 	[
 		'label' => 'Fokus',
-		'text'  => 'WordPress, technische SEO, privacy-first Messbarkeit und klare Nutzerführung',
+		'text'  => 'Landingpages, technisches SEO, GTM Server-Side, CRM-Attribution',
 	],
 	[
 		'label' => 'Arbeitsweise',
-		'text'  => 'Diagnostisch und priorisiert',
+		'text'  => 'Diagnose, Priorisierung nach CPL-Hebel, iterative Umsetzung',
 	],
 	[
 		'label' => 'Standort',
-		'text'  => 'Region Hannover, Projekte im DACH-Raum',
+		'text'  => 'Pattensen bei Hannover, Projekte DACH-weit',
+	],
+];
+
+$proof_stats = [
+	[
+		'label' => 'CPL vorher:',
+		'value' => '120 €',
+	],
+	[
+		'label' => 'CPL nachher:',
+		'value' => '20 €',
+	],
+	[
+		'label' => 'Leads:',
+		'value' => '1.750+',
 	],
 ];
 
@@ -44,40 +52,43 @@ $project_phases = [
 		'label' => 'Woche 1–2',
 		'title' => 'Audit',
 		'text'  => [
-			'Ein Maschinenbauer aus Niedersachsen, 40 Mitarbeiter. Website seit 2019, nie strategisch angefasst. Ich schaue mir Startseite, Angebotsseiten, Tracking-Setup und Search Console an.',
-			'Ergebnis: Die Website rankt für den Firmennamen, aber für kein kaufnahes Keyword. Das Kontaktformular hat kein Event-Tracking. Die Startseite erzählt die Firmengeschichte statt das Angebot.',
+			'Ein regionaler Wärmepumpen-Anbieter, 18 Mitarbeiter. Website generiert Traffic, aber kaum Anfragen. Ich prüfe Landingpage-Struktur, Tracking-Setup, Anzeigen-Attribution und Search Console.',
+			'Typischer Befund: Die Seite rankt für Marke, nicht für kaufnahe Keywords. Conversion-Events fehlen oder sind doppelt. Die Landingpage erklärt Technik statt Entscheidungslogik.',
 		],
 	],
 	[
 		'label' => 'Woche 3–4',
 		'title' => 'Priorisierung',
 		'text'  => [
-			'Drei Hebel zuerst: H1 und Subtext auf allen Angebotsseiten umschreiben. Tracking-Events für Formular und Telefonklicks einrichten. Eine Pillar Page für das Haupt-Keyword aufbauen.',
+			'Drei Hebel zuerst: Landingpage auf Entscheidungslogik umbauen (Nutzen, Proof, Einwandabbau, klare CTA). GTM Server-Side aufsetzen, Consent Mode V2 sauberziehen. CRM-Anbindung mit vollständiger Attribution von Klick bis Vertragsabschluss.',
 		],
 	],
 	[
 		'label' => 'Monat 2–3',
 		'title' => 'Umsetzung',
 		'text'  => [
-			'Angebotsseiten umgebaut, Tracking live, Pillar Page veröffentlicht. Erste organische Anfragen nach 8 Wochen.',
+			'Neue Landingpage live, Tracking sauber, CRM-Pipeline sichtbar. Leadkosten beginnen zu fallen, sobald die Datenrückmeldung an die Anzeigenplattformen stabil ist.',
 		],
 	],
 	[
 		'label' => 'Monat 4+',
 		'title' => 'Weiterentwicklung',
 		'text'  => [
-			'Datenbasiert weiterarbeiten: Welche Seiten konvertieren? Wo springen Besucher ab? Was ist der nächste Hebel?',
+			'Datenbasiert weiterarbeiten: welche Landingpage-Varianten konvertieren besser, welche Regionen sind effizient, welches Angebot senkt CPL weiter. Kein Dauer-Retainer aus Gewohnheit, sondern weil der nächste Hebel bereits sichtbar ist.',
 		],
 	],
 ];
 
-$services = [
-	'Positionierung und Angebotsklarheit auf Startseiten und Angebotsseiten',
-	'Informationsarchitektur und Seitenstruktur',
-	'Technische SEO und Core Web Vitals',
-	'Privacy-first Tracking und Consent',
-	'Conversion-Optimierung bestehender Seiten',
-	'WordPress als steuerbare, wartbare Infrastruktur',
+$background_paragraphs = [
+	'Mein Zugang ist Medienwissenschaften, nicht Design. Ich habe über Jahre B2B-WordPress-Systeme gebaut – von Maschinenbau bis Dienstleistung.',
+	'Der Punkt, an dem die Nische unvermeidlich wurde, war ein Solar-Mandat: 120 € CPL, frustrierter Inhaber, defektes Tracking. Als die Leadkosten auf 20 € fielen, wurde klar, wo meine Methode am besten greift. Seitdem konzentriere ich mich auf Solar- und Wärmepumpen-Anbieter im DACH-Raum.',
+];
+
+$not_fit_points = [
+	'Reine Design-Relaunches ohne Vertriebsziel.',
+	'Unternehmen, die keine eigene Leadgenerierung wollen, sondern ausschließlich auf Leadportale setzen.',
+	'Projekte außerhalb von Solar und Wärmepumpen, es sei denn als Whitelabel für eine Agentur.',
+	'Kunden, die ein Tracking-Setup wollen, aber keine Consent-Konsequenzen akzeptieren.',
 ];
 
 get_header();
@@ -91,10 +102,10 @@ get_header();
 			<div class="nx-container">
 				<div class="about-hero__grid">
 					<div class="about-hero__copy">
-						<span class="nx-badge nx-badge--gold">Über mich</span>
-						<h1 class="about-hero__title">Ich entwickle Websites, die für Unternehmen mehr leisten als Präsenz.</h1>
+						<span class="nx-badge nx-badge--gold">ÜBER MICH</span>
+						<h1 class="about-hero__title">Ich baue Anfrage-Systeme für Solar- und Wärmepumpen-Anbieter.</h1>
 						<p class="about-hero__lead">
-							WordPress-Systeme für B2B, die Klarheit, Struktur und messbare Wirkung verbinden.
+							WordPress-Systeme, die qualifizierte Anfragen liefern statt nur Besucher zu zählen. Spezialisiert auf die Nische, messbar in Leadkosten und Pipeline.
 						</p>
 
 						<dl class="about-hero__facts">
@@ -109,21 +120,21 @@ get_header();
 						<p class="about-hero__actions">
 							<a
 								href="<?php echo esc_url( $audit_url ); ?>"
-								class="nx-btn nx-btn--ghost"
-								data-track-action="cta_about_hero_audit"
-								data-track-category="lead_gen"
-								data-track-section="about_hero"
-							>
-								<?php echo esc_html( nexus_get_audit_cta_label() ); ?>
-							</a>
-						</p>
+							class="nx-btn nx-btn--ghost"
+							data-track-action="cta_about_hero_audit"
+							data-track-category="lead_gen"
+							data-track-section="about_hero"
+						>
+							Growth Audit starten
+						</a>
+					</p>
 					</div>
 
 					<aside class="about-profile-card" aria-label="Profil">
 						<figure class="about-profile-card__media">
 							<img
 								src="<?php echo esc_url( hu_get_profile_image_url() ); ?>"
-								alt="Haşim Üner, Growth Architect"
+								alt="Porträt von Haşim Üner"
 								loading="eager"
 								width="340"
 								height="420"
@@ -137,7 +148,36 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Sektion 2: Ein typisches Projekt -->
+		<!-- Sektion 2: Warum diese Nische + Proof -->
+		<section id="about-priority" class="nx-section about-section about-priority">
+			<div class="nx-container">
+				<div class="about-priority__grid">
+					<div class="about-why">
+						<h2 class="nx-headline-section">Warum diese Nische.</h2>
+						<p>
+							Der Markt ist überhitzt: viele Anbieter, steigende Leadkosten, schlechte Qualität aus Leadportalen. Wer heute wachsen will, braucht ein eigenes Anfrage-System mit sauberer Technik, nicht den nächsten Portal-Vertrag. Genau das baue ich.
+						</p>
+					</div>
+
+					<div class="about-proof" aria-labelledby="about-proof-title">
+						<h2 id="about-proof-title" class="nx-headline-section">Das bisher stärkste Ergebnis.</h2>
+						<div class="about-proof__stats" aria-label="Proof-Zahlen">
+							<?php foreach ( $proof_stats as $stat ) : ?>
+								<div class="about-proof__stat">
+									<span class="about-proof__stat-label"><?php echo esc_html( $stat['label'] ); ?></span>
+									<strong class="about-proof__stat-value"><?php echo esc_html( $stat['value'] ); ?></strong>
+								</div>
+							<?php endforeach; ?>
+						</div>
+						<p>
+							Mandat in der Solar-Nische. Hebel: überarbeitete Landingpages, GTM Server-Side, Consent Mode V2, CRM-Attribution über Bitrix24. Laufendes Projekt, die Zahl ist nicht das Finale.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Sektion 3: Ein typisches Projekt -->
 		<section id="about-project" class="nx-section about-section">
 			<div class="nx-container">
 				<div class="nx-section-header about-section__header">
@@ -158,50 +198,77 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Sektion 3: Was ich anfasse -->
-		<section id="about-services" class="nx-section about-section">
-			<div class="nx-container">
-				<div class="nx-section-header about-section__header">
-					<h2 class="nx-headline-section">Was ich anfasse.</h2>
-				</div>
-
-				<ul class="about-services-list">
-					<?php foreach ( $services as $service ) : ?>
-						<li><?php echo esc_html( $service ); ?></li>
-					<?php endforeach; ?>
-				</ul>
-			</div>
-		</section>
-
 		<!-- Sektion 4: Hintergrund -->
 		<section id="about-background" class="nx-section about-section">
 			<div class="nx-container">
 				<div class="about-background">
-					<h2 class="nx-headline-section">Hintergrund.</h2>
-					<p>
-						Mein Zugang kommt aus Medienwissenschaften und B2B-Projektarbeit, nicht aus Design.
-						Ich denke in Systemen: Kommunikation, Technik, Daten und Nutzerführung als zusammenhängende Aufgabe.
-					</p>
-					<dl class="about-background__meta">
-						<div class="about-background__meta-item">
-							<dt>Standort</dt>
-							<dd>Pattensen bei Hannover. <a href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_about_bg_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></dd>
-						</div>
-						<div class="about-background__meta-item">
-							<dt>Projekte</dt>
-							<dd>DACH-weit, remote und vor Ort.</dd>
-						</div>
-					</dl>
+					<h2 class="nx-headline-section">Wie ich zur Nische gekommen bin.</h2>
+					<?php foreach ( $background_paragraphs as $paragraph ) : ?>
+						<p><?php echo esc_html( $paragraph ); ?></p>
+					<?php endforeach; ?>
 				</div>
 			</div>
 		</section>
 
-		<!-- Sektion 5: Finaler CTA -->
+		<!-- Sektion 5: Zwei Wege -->
+		<section id="about-paths" class="nx-section about-section">
+			<div class="nx-container">
+				<div class="nx-section-header about-section__header">
+					<h2 class="nx-headline-section">Zwei Wege der Zusammenarbeit.</h2>
+				</div>
+
+				<div class="about-paths">
+					<article class="about-path about-path--primary">
+						<h3>Direkt für Solar- und Wärmepumpen-Anbieter</h3>
+						<p>Wenn Sie als Anbieter Ihre eigene Leadgenerierung aufbauen wollen: Growth Audit als Einstieg, danach Umsetzung oder laufende Weiterentwicklung.</p>
+						<a
+							href="<?php echo esc_url( $audit_url ); ?>"
+							class="nx-btn nx-btn--ghost"
+							data-track-action="cta_about_paths_audit"
+							data-track-category="lead_gen"
+							data-track-section="about_paths"
+						>
+							Growth Audit starten
+						</a>
+					</article>
+
+					<article class="about-path">
+						<h3>Whitelabel für Agenturen</h3>
+						<p>Wenn Sie als Performance- oder SEO-Agentur einen technischen Partner für GTM Server-Side, Landingpages und Attribution brauchen: ich liefere im Hintergrund, Ihre Kundenbeziehung bleibt unangetastet.</p>
+						<a
+							href="<?php echo esc_url( $whitelabel_url ); ?>"
+							class="nx-btn nx-btn--ghost"
+							data-track-action="cta_about_paths_whitelabel"
+							data-track-category="navigation"
+							data-track-section="about_paths"
+						>
+							Whitelabel &amp; Retainer
+						</a>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- Sektion 6: Anti-Pitch -->
+		<section id="about-not-fit" class="nx-section about-section">
+			<div class="nx-container">
+				<div class="about-not-fit">
+					<h2 class="nx-headline-section">Wofür ich nicht der Richtige bin.</h2>
+					<ul class="about-not-fit__list">
+						<?php foreach ( $not_fit_points as $point ) : ?>
+							<li><?php echo esc_html( $point ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<!-- Sektion 7: Finaler CTA -->
 		<section id="about-close" class="nx-section about-close">
 			<div class="nx-container">
 				<div class="about-close__inner">
 					<h2 class="nx-headline-section">Prüfen wir Ihren Status quo.</h2>
-					<p>Der Growth Audit zeigt, wo Ihre Website geschäftlich mehr leisten kann. Für Agenturen und laufende Projekte gibt es einen eigenen Einstieg.</p>
+					<p>Der Growth Audit zeigt in 30–45 Minuten, wo Ihr Anfrage-System konkret klemmt – von der Landingpage bis zur Attribution. Kein Verkaufsgespräch, keine Präsentation. Entweder der Fit passt, oder ich sage Ihnen, welcher Partner besser wäre.</p>
 					<p class="about-close__actions">
 						<a
 							href="<?php echo esc_url( $audit_url ); ?>"
@@ -210,20 +277,11 @@ get_header();
 							data-track-category="lead_gen"
 							data-track-section="about_close"
 						>
-							<?php echo esc_html( nexus_get_audit_cta_label() ); ?>
+							Growth Audit starten
 						</a>
 						<a
-							href="<?php echo esc_url( $analysis_contact_url ); ?>"
-							class="nx-btn nx-btn--ghost"
-							data-track-action="cta_about_final_contact"
-							data-track-category="navigation"
-							data-track-section="about_close"
-						>
-							Kontakt
-						</a>
-						<a
-							href="<?php echo esc_url( home_url( '/whitelabel-retainer/' ) ); ?>"
-							class="nx-btn nx-btn--ghost"
+							href="<?php echo esc_url( $whitelabel_url ); ?>"
+							class="about-close__secondary-link"
 							data-track-action="cta_about_final_whitelabel"
 							data-track-category="navigation"
 							data-track-section="about_close"
