@@ -9,9 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$cases_url       = nexus_get_results_url();
+$request_url     = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' );
 $privacy_url     = nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) );
-$audit_cta_label = 'Kostenlosen Growth Audit anfragen';
+$audit_cta_label = 'Audit starten';
 ?>
 
 <div class="audit-wrapper" id="audit-main-wrapper">
@@ -56,7 +56,7 @@ $audit_cta_label = 'Kostenlosen Growth Audit anfragen';
 					</p>
 
 					<div class="ga-proof__foot">
-						<a class="ga-text-link" href="<?php echo esc_url( $cases_url ); ?>">Ergebnisse ansehen &rarr;</a>
+						<a class="ga-text-link" href="<?php echo esc_url( $request_url ); ?>">Anfrage stellen &rarr;</a>
 						<p class="ga-proof__note">Persönlich geprüft. Keine automatisierte Standardauswertung.</p>
 					</div>
 				</div>
@@ -123,7 +123,7 @@ $audit_cta_label = 'Kostenlosen Growth Audit anfragen';
 
 							<div class="ga-form__actions">
 								<button type="submit" class="ga-btn ga-btn--primary ga-btn--full" data-track-action="cta_form_growth_audit" data-track-category="lead_gen" data-track-section="form">
-									<span class="ga-btn__label">Kostenlosen Growth Audit anfragen</span>
+									<span class="ga-btn__label">Audit starten</span>
 									<span class="ga-btn__spinner" aria-hidden="true"></span>
 								</button>
 								<p class="ga-form__microcopy">Schriftliche Rückmeldung in 48h. Kein Pflicht-Call.</p>
@@ -136,7 +136,7 @@ $audit_cta_label = 'Kostenlosen Growth Audit anfragen';
 							<p id="ga-success-message">Die Rückmeldung kommt innerhalb von 48 Stunden per E-Mail.</p>
 							<div class="ga-success__next">
 								<p class="ga-success__next-label">In der Zwischenzeit:</p>
-								<a href="<?php echo esc_url( $cases_url ); ?>" class="ga-success__link" data-track-action="cta_audit_success_results" data-track-category="trust">Ergebnisse ansehen</a>
+								<a href="<?php echo esc_url( $request_url ); ?>" class="ga-success__link" data-track-action="cta_audit_success_request" data-track-category="lead_gen">Anfrage stellen</a>
 							</div>
 						</div>
 					</div>
@@ -172,8 +172,8 @@ $audit_cta_label = 'Kostenlosen Growth Audit anfragen';
 					</div>
 
 					<div class="ga-cta-actions">
-						<a class="ga-btn ga-btn--primary" href="#form" data-track-action="cta_final_growth_audit" data-track-category="lead_gen" data-track-section="final_cta">Growth Audit anfragen</a>
-						<a class="ga-btn ga-btn--secondary" href="<?php echo esc_url( $cases_url ); ?>" data-track-action="cta_final_results" data-track-category="lead_gen" data-track-section="final_cta">Ergebnisse ansehen</a>
+						<a class="ga-btn ga-btn--primary" href="<?php echo esc_url( $request_url ); ?>" data-track-action="cta_final_request" data-track-category="lead_gen" data-track-section="final_cta">Anfrage stellen</a>
+						<a class="ga-btn ga-btn--secondary" href="#form" data-track-action="cta_final_growth_audit" data-track-category="lead_gen" data-track-section="final_cta">Audit starten</a>
 					</div>
 				</div>
 			</section>

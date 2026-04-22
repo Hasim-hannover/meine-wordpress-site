@@ -88,6 +88,20 @@ function nexus_get_site_header_menu_location() {
 }
 
 /**
+ * Check whether wp_nav_menu args target the primary header navigation.
+ *
+ * @param stdClass|array|string $args wp_nav_menu arguments.
+ * @return bool
+ */
+function nexus_is_primary_header_menu_args( $args ) {
+	if ( ! is_object( $args ) || empty( $args->theme_location ) ) {
+		return false;
+	}
+
+	return in_array( (string) $args->theme_location, [ 'primary-slim', 'primary' ], true );
+}
+
+/**
  * Provide a sane navigation fallback if no WordPress menu is assigned.
  *
  * @return array<int, array<string, mixed>>
@@ -96,6 +110,8 @@ function nexus_get_site_header_fallback_items() {
 	$solar_page_id = nexus_get_page_id( [ 'solar-waermepumpen-leadgenerierung' ] );
 	$about_page_id = nexus_get_page_id( [ 'uber-mich' ] );
 	$primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
+	$request_url  = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' );
+	$request_cta  = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
 
 	return [
 		[
@@ -121,9 +137,11 @@ function nexus_get_site_header_fallback_items() {
 		],
 		[
 			'label'  => nexus_is_energy_systems_context()
-				? __( 'Anfrage-Analyse starten', 'blocksy-child' )
+				? $request_cta
 				: __( 'Audit starten', 'blocksy-child' ),
-			'url'    => $primary_urls['audit'] ?? nexus_get_audit_url(),
+			'url'    => nexus_is_energy_systems_context()
+				? $request_url
+				: ( $primary_urls['audit'] ?? nexus_get_audit_url() ),
 			'active' => nexus_is_audit_page(),
 			'class'  => 'nav-cta-button',
 			'track'  => 'audit',
@@ -194,27 +212,74 @@ function nexus_render_site_header_menu( $context = 'desktop' ) {
 }
 
 /**
- * Swap the nav CTA label on the energy systems landing page when a WordPress
- * menu is assigned (wp_nav_menu path).
+ * Remove side-funnel destinations from the primary header navigation.
  *
- * @param array $items Sorted menu item objects.
+ * @param array           $items Sorted menu item objects.
+ * @param stdClass|string $args  Menu arguments.
  * @return array
  */
-function nexus_energy_nav_cta_label( $items ) {
-	if ( ! function_exists( 'nexus_is_energy_systems_context' ) || ! nexus_is_energy_systems_context() ) {
+function nexus_strip_side_funnel_nav_items( $items, $args ) {
+	if ( is_admin() || ! nexus_is_primary_header_menu_args( $args ) ) {
 		return $items;
 	}
 
+	$blocked_paths = [
+		'/whitelabel-retainer/',
+		'/wordpress-agentur-hannover/',
+	];
+
+	$filtered_items = [];
+
+	foreach ( $items as $item ) {
+		$item_url  = isset( $item->url ) ? (string) $item->url : '';
+		$item_path = (string) wp_parse_url( $item_url, PHP_URL_PATH );
+
+		if ( '' !== $item_path ) {
+			$item_path = trailingslashit( untrailingslashit( $item_path ) );
+		}
+
+		if ( in_array( $item_path, $blocked_paths, true ) ) {
+			continue;
+		}
+
+		$filtered_items[] = $item;
+	}
+
+	return $filtered_items;
+}
+add_filter( 'wp_nav_menu_objects', 'nexus_strip_side_funnel_nav_items', 10, 2 );
+
+/**
+ * Swap the nav CTA label on the energy systems landing page when a WordPress
+ * menu is assigned (wp_nav_menu path).
+ *
+ * @param array           $items Sorted menu item objects.
+ * @param stdClass|string $args  Menu arguments.
+ * @return array
+ */
+function nexus_energy_nav_cta_label( $items, $args ) {
+	if (
+		! nexus_is_primary_header_menu_args( $args )
+		|| ! function_exists( 'nexus_is_energy_systems_context' )
+		|| ! nexus_is_energy_systems_context()
+	) {
+		return $items;
+	}
+
+	$request_url = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' );
+	$request_cta = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
+
 	foreach ( $items as $item ) {
 		if ( 'Audit starten' === $item->title ) {
-			$item->title = __( 'Anfrage-Analyse starten', 'blocksy-child' );
+			$item->title = $request_cta;
+			$item->url   = $request_url;
 			break;
 		}
 	}
 
 	return $items;
 }
-add_filter( 'wp_nav_menu_objects', 'nexus_energy_nav_cta_label' );
+add_filter( 'wp_nav_menu_objects', 'nexus_energy_nav_cta_label', 20, 2 );
 
 /**
  * Resolve the compact header eyebrow text.
@@ -232,5 +297,5 @@ function nexus_get_site_header_eyebrow() {
 		return $description;
 	}
 
-	return __( 'WordPress Growth Architect', 'blocksy-child' );
+	return __( 'Anfrage-Systeme für B2B. Spezialisiert auf Solar & Wärmepumpen.', 'blocksy-child' );
 }

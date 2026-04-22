@@ -17,8 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function cja_audit_shortcode() {
 	$css_path            = get_stylesheet_directory() . '/assets/css/cja-audit.css';
 	$js_path             = get_stylesheet_directory() . '/assets/js/cja-audit.js';
-	$contact_url         = function_exists( 'nexus_get_contact_url' ) ? nexus_get_contact_url() : home_url( '/kontakt/' );
-	$cta_url             = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : '';
+	$request_url         = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' );
 	$legacy_webhook_url  = (string) apply_filters( 'cja_audit_webhook_url', 'https://n8n.hasimuener.de/webhook/cja-analyze' );
 	$default_start_url   = (string) preg_replace( '#/webhook/[^/?]+$#', '/webhook/audit', $legacy_webhook_url );
 	$default_status_url  = (string) preg_replace( '#/webhook/[^/?]+$#', '/webhook/audit-status', $legacy_webhook_url );
@@ -33,10 +32,6 @@ function cja_audit_shortcode() {
 
 	if ( $default_status_url === $legacy_webhook_url ) {
 		$webhook_status_url = (string) apply_filters( 'cja_audit_webhook_status_url', 'https://n8n.hasimuener.de/webhook/audit-status' );
-	}
-
-	if ( '' === $cta_url ) {
-		$cta_url = $contact_url;
 	}
 
 	wp_enqueue_style(
@@ -136,18 +131,16 @@ function cja_audit_shortcode() {
 
 			<div class="cja-cta-section cja-reveal">
 				<p class="cja-cta-kicker">Nächster Schritt</p>
-				<h2>Wenn Sie diese Hebel sauber priorisieren wollen</h2>
-				<p>Wir ordnen das Ergebnis gemeinsam ein, trennen Quick Wins von strukturellen Themen und klären, welcher nächste Schritt wirklich sinnvoll ist.</p>
+				<h2>Wenn das nach Ihrem Setup klingt, ist jetzt die Anfrage dran.</h2>
+				<p>Der Audit war die Einordnung. Der nächste Schritt ist das qualifizierte Formular für Solar- und Wärmepumpen-Anbieter, damit aus Diagnose ein konkretes Projekt wird.</p>
 				<div class="cja-cta-actions">
-					<a href="<?php echo esc_url( $cta_url ); ?>" class="cja-cta-button" data-track-action="cja_results_contact" data-track-category="lead_gen" data-track-section="growth_audit_results">Ergebnis gemeinsam einordnen</a>
-					<?php if ( $contact_url !== $cta_url ) : ?>
-						<a href="<?php echo esc_url( $contact_url ); ?>" class="cja-cta-link" data-track-action="cja_results_contact_alt" data-track-category="lead_gen" data-track-section="growth_audit_results">Lieber erst eine Frage schicken</a>
-					<?php endif; ?>
+					<a href="<?php echo esc_url( $request_url ); ?>" class="cja-cta-button" data-track-action="cja_results_request" data-track-category="lead_gen" data-track-section="growth_audit_results">Anfrage stellen</a>
+					<a href="#form" class="cja-cta-link" data-track-action="cja_results_restart" data-track-category="lead_gen" data-track-section="growth_audit_results">Audit erneut starten</a>
 				</div>
-				<div class="cja-cta-meta">15 Min · konkrete Prioritäten · ohne Verpflichtungsdruck</div>
+				<div class="cja-cta-meta">2 Minuten · qualifizierte Anfrage · klarer nächster Schritt</div>
 			</div>
 
-			<div class="cja-footer-line">Basierend auf WGOS — WordPress Growth Operating System</div>
+			<div class="cja-footer-line">Diagnose für Solar- und Wärmepumpen-Anbieter.</div>
 		</div>
 	</div>
 	<?php

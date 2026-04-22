@@ -549,6 +549,7 @@ function nexus_get_primary_public_url_map() {
 			home_url( '/e3-new-energy/' )
 		),
 		'energy'               => function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_energy_systems_url() : home_url( '/solar-waermepumpen-leadgenerierung/' ),
+		'request'              => function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' ),
 		'domdar'               => nexus_get_page_url(
 			[ 'case-study-domdar', 'domdar' ],
 			home_url( '/case-study-domdar/' )
@@ -655,6 +656,28 @@ function nexus_get_energy_systems_url() {
 	}
 
 	return home_url( '/solar-waermepumpen-leadgenerierung/' );
+}
+
+/**
+ * Resolve the canonical hard-CTA URL for the solar inquiry form.
+ *
+ * @return string
+ */
+function nexus_get_primary_request_url() {
+	if ( function_exists( 'nexus_is_energy_systems_context' ) && nexus_is_energy_systems_context() ) {
+		return '#energie-anfrage';
+	}
+
+	return trailingslashit( nexus_get_energy_systems_url() ) . '#energie-anfrage';
+}
+
+/**
+ * Return the canonical hard-CTA label for the solar inquiry flow.
+ *
+ * @return string
+ */
+function nexus_get_primary_request_cta_label() {
+	return 'Anfrage stellen';
 }
 
 /**

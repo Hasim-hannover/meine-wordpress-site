@@ -11,11 +11,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $audit_url   = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
-$e3_url      = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'e3-new-energy' ], home_url( '/e3-new-energy/' ) ) : home_url( '/e3-new-energy/' );
-$wgos_url    = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ], home_url( '/wordpress-growth-operating-system/' ) ) : home_url( '/wordpress-growth-operating-system/' );
-$agentur_url = function_exists( 'nexus_get_primary_public_url' ) ? nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) ) : home_url( '/wordpress-agentur-hannover/' );
+$request_url = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : '#energie-anfrage';
+$request_cta = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
 $privacy_url = function_exists( 'nexus_get_page_url' ) ? nexus_get_page_url( [ 'datenschutz' ], home_url( '/datenschutz/' ) ) : home_url( '/datenschutz/' );
-$results_url = function_exists( 'nexus_get_results_url' ) ? nexus_get_results_url() : home_url( '/ergebnisse/' );
 $page_url    = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_energy_systems_url() : home_url( '/solar-waermepumpen-leadgenerierung/' );
 $flow_steps  = function_exists( 'nexus_get_energy_intake_flow_definition' ) ? nexus_get_energy_intake_flow_definition() : [];
 
@@ -227,8 +225,8 @@ get_header();
 						<p class="nx-hero__subtitle">Ich baue Solar- und Wärmepumpen-Anbietern ein eigenes Anfrage-System &mdash; damit Ihr Vertrieb nur noch mit Interessenten spricht, die wirklich kaufen wollen.</p>
 						<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
 						<div class="energy-hero__actions">
-							<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse starten</a>
-							<a href="<?php echo esc_url( $e3_url ); ?>" class="energy-text-link" data-track-action="cta_energy_hero_case" data-track-category="trust">E3-Ergebnis ansehen →</a>
+							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="energy-text-link" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Audit starten</a>
 						</div>
 					</div>
 
@@ -244,7 +242,8 @@ get_header();
 						<h2>E3 New Energy.</h2>
 						<p>E3 New Energy ist ein regionaler Energieanbieter für Photovoltaik, Wärmepumpen und Speicherlösungen. Ausgangslage: Hohe Kosten pro Anfrage durch Portal-Zukauf, keine eigene digitale Anfrage-Infrastruktur. In 9 Monaten: eigenes System aufgebaut, Kosten pro Anfrage um 83 % gesenkt, Vertrieb arbeitet nur noch mit vorqualifizierten Anfragen.</p>
 						<div class="energy-proof__actions">
-							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_case" data-track-category="trust">Case Study lesen</a>
+							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_proof_audit" data-track-category="lead_gen">Audit starten</a>
 						</div>
 					</div>
 
@@ -305,7 +304,7 @@ get_header();
 					<h2>Nicht sicher, ob das für Sie passt?</h2>
 					<p>2 Minuten. Kein Pitch. Sie beschreiben Ihre Situation — ich melde mich innerhalb von 48 Stunden mit einer konkreten Einordnung per E-Mail.</p>
 					<div class="energy-cta-box__actions">
-						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen">Jetzt Anfragen-Check starten — kostenlos</a>
+						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
 					</div>
 				</div>
 			</div>
@@ -328,9 +327,6 @@ get_header();
 										<span>kein Pflicht-Call</span>
 									</div>
 									<p class="review-success-inbox-hint">Prüfen Sie Ihr Postfach (auch Spam-Ordner) für die Eingangsbestätigung.</p>
-									<div class="review-success-actions">
-										<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">In der Zwischenzeit: E3 Case Study lesen</a>
-									</div>
 								</div>
 							<?php else : ?>
 								<form
@@ -542,9 +538,6 @@ get_header();
 										<span>kein Pflicht-Call</span>
 									</div>
 									<p class="review-success-inbox-hint">Prüfen Sie Ihr Postfach (auch Spam-Ordner) für die Eingangsbestätigung.</p>
-									<div class="review-success-actions">
-										<a class="cta-btn" href="<?php echo esc_url( $e3_url ); ?>">In der Zwischenzeit: E3 Case Study lesen</a>
-									</div>
 								</div>
 							<?php endif; ?>
 						</div>
@@ -592,8 +585,8 @@ get_header();
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
 					<h2>Eigene Anfragen statt Portal-Abhängigkeit. In 2 Minuten Situation einordnen — Ergebnis per E-Mail.</h2>
 					<div class="energy-cta-box__actions">
-						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse starten</a>
-						<a href="#energie-anfrage" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_footer_form" data-track-category="lead_gen">Situation einordnen</a>
+						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Audit starten</a>
 					</div>
 				</div>
 			</div>

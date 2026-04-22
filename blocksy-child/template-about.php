@@ -10,8 +10,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$audit_url      = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
-$whitelabel_url = function_exists( 'nexus_get_whitelabel_page_url' ) ? nexus_get_whitelabel_page_url() : home_url( '/whitelabel-retainer/' );
+$audit_url    = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
+$request_url  = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' );
+$request_cta  = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
 
 $hero_facts = [
 	[
@@ -122,7 +123,7 @@ $background_paragraphs = [
 $not_fit_points = [
 	'Reine Design-Relaunches ohne Vertriebsziel.',
 	'Unternehmen, die keine eigene Leadgenerierung wollen, sondern ausschließlich auf Leadportale setzen.',
-	'Projekte außerhalb von Solar und Wärmepumpen, es sei denn als Whitelabel für eine Agentur.',
+	'Projekte außerhalb von Solar und Wärmepumpen.',
 	'Kunden, die ein Tracking-Setup wollen, aber keine Consent-Konsequenzen akzeptieren.',
 ];
 
@@ -154,13 +155,22 @@ get_header();
 
 						<p class="about-hero__actions">
 							<a
+								href="<?php echo esc_url( $request_url ); ?>"
+								class="nx-btn nx-btn--primary"
+								data-track-action="cta_about_hero_request"
+								data-track-category="lead_gen"
+								data-track-section="about_hero"
+							>
+								<?php echo esc_html( $request_cta ); ?>
+							</a>
+							<a
 								href="<?php echo esc_url( $audit_url ); ?>"
-								class="nx-btn nx-btn--ghost"
+								class="about-close__secondary-link"
 								data-track-action="cta_about_hero_audit"
 								data-track-category="lead_gen"
 								data-track-section="about_hero"
 							>
-								Growth Audit starten
+								Audit starten
 							</a>
 						</p>
 					</div>
@@ -270,17 +280,31 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Sektion 6: Zwei Wege -->
+		<!-- Sektion 6: Nächste Schritte -->
 		<section id="about-paths" class="nx-section about-section">
 			<div class="nx-container">
 				<div class="nx-section-header about-section__header">
-					<h2 class="nx-headline-section">Zwei Wege der Zusammenarbeit.</h2>
+					<h2 class="nx-headline-section">Die zwei sinnvollen nächsten Schritte.</h2>
 				</div>
 
 				<div class="about-paths">
 					<article class="about-path about-path--primary">
-						<h3>Direkt für Solar- und Wärmepumpen-Anbieter</h3>
-						<p>Wenn Sie als Anbieter Ihre eigene Leadgenerierung aufbauen wollen: Growth Audit als Einstieg, danach Umsetzung oder laufende Weiterentwicklung.</p>
+						<h3>Anfrage stellen</h3>
+						<p>Wenn klar ist, dass Sie Ihr eigenes Anfrage-System für Solar oder Wärmepumpe aufbauen wollen, gehen Sie direkt ins qualifizierte Formular.</p>
+						<a
+							href="<?php echo esc_url( $request_url ); ?>"
+							class="nx-btn nx-btn--ghost"
+							data-track-action="cta_about_paths_request"
+							data-track-category="lead_gen"
+							data-track-section="about_paths"
+						>
+							<?php echo esc_html( $request_cta ); ?>
+						</a>
+					</article>
+
+					<article class="about-path">
+						<h3>Audit starten</h3>
+						<p>Wenn Sie erst sehen wollen, wo Ihr Setup Nachfrage verliert, nehmen Sie den Soft-Einstieg über das KI-Audit und gehen danach ins Formular.</p>
 						<a
 							href="<?php echo esc_url( $audit_url ); ?>"
 							class="nx-btn nx-btn--ghost"
@@ -288,21 +312,7 @@ get_header();
 							data-track-category="lead_gen"
 							data-track-section="about_paths"
 						>
-							Growth Audit starten
-						</a>
-					</article>
-
-					<article class="about-path">
-						<h3>Whitelabel für Agenturen</h3>
-						<p>Wenn Sie als Performance- oder SEO-Agentur einen technischen Partner für GTM Server-Side, Landingpages und Attribution brauchen: ich liefere im Hintergrund, Ihre Kundenbeziehung bleibt unangetastet.</p>
-						<a
-							href="<?php echo esc_url( $whitelabel_url ); ?>"
-							class="nx-btn nx-btn--ghost"
-							data-track-action="cta_about_paths_whitelabel"
-							data-track-category="navigation"
-							data-track-section="about_paths"
-						>
-							Whitelabel &amp; Retainer
+							Audit starten
 						</a>
 					</article>
 				</div>
@@ -331,22 +341,22 @@ get_header();
 					<p>Der Growth Audit zeigt in 30–45 Minuten, wo Ihr Anfrage-System konkret klemmt – von der Landingpage bis zur Attribution. Kein Verkaufsgespräch, keine Präsentation. Entweder der Fit passt, oder ich sage Ihnen, welcher Partner besser wäre.</p>
 					<p class="about-close__actions">
 						<a
-							href="<?php echo esc_url( $audit_url ); ?>"
+							href="<?php echo esc_url( $request_url ); ?>"
 							class="nx-btn nx-btn--ghost"
+							data-track-action="cta_about_final_request"
+							data-track-category="lead_gen"
+							data-track-section="about_close"
+						>
+							<?php echo esc_html( $request_cta ); ?>
+						</a>
+						<a
+							href="<?php echo esc_url( $audit_url ); ?>"
+							class="about-close__secondary-link"
 							data-track-action="cta_about_final_audit"
 							data-track-category="lead_gen"
 							data-track-section="about_close"
 						>
-							Growth Audit starten
-						</a>
-						<a
-							href="<?php echo esc_url( $whitelabel_url ); ?>"
-							class="about-close__secondary-link"
-							data-track-action="cta_about_final_whitelabel"
-							data-track-category="navigation"
-							data-track-section="about_close"
-						>
-							Whitelabel &amp; Weiterentwicklung
+							Audit starten
 						</a>
 					</p>
 				</div>

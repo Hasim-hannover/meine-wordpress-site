@@ -14,13 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $urls = function_exists( 'hu_home_urls' ) ? hu_home_urls() : [];
 
-$audit_url             = $urls['audit'] ?? home_url( '/growth-audit/' );
-$wgos_url              = $urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
-$cases_url             = $urls['cases'] ?? home_url( '/ergebnisse/' );
-$blog_url              = $urls['blog'] ?? home_url( '/blog/' );
-$e3_url                = $urls['e3'] ?? home_url( '/e3-new-energy/' );
-$agentur_url           = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
-$audit_cta_label       = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+$audit_url               = $urls['audit'] ?? home_url( '/growth-audit/' );
+$request_url             = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' );
+$request_cta_label       = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
 $audit_compact_microcopy = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '60 Sek. · priorisierte Hebel · keine E-Mail';
 
 $hero_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [
@@ -69,10 +65,10 @@ get_header();
 						</p>
 
 						<div class="wp-home-hero__actions">
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_audit" data-track-category="lead_gen">Kostenlose Anfrage-Analyse starten</a>
-							<a href="<?php echo esc_url( $e3_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_hero_e3" data-track-category="trust">E3-Ergebnis ansehen</a>
+							<a href="<?php echo esc_url( $request_url ); ?>" class="wp-btn wp-btn-primary wp-home-hero__primary" data-track-action="cta_home_hero_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta_label ); ?></a>
+							<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-home-text-link wp-home-text-link--quiet" data-track-action="cta_home_hero_audit" data-track-category="lead_gen">Audit starten</a>
 						</div>
-						<p class="nx-cta-microcopy">2 Minuten · priorisierte Hebel · keine E-Mail nötig</p>
+						<p class="nx-cta-microcopy">Wenn der Fit klar ist, direkt anfragen. Wenn zuerst die Hebel priorisiert werden sollen, Audit starten.</p>
 
 						<?php if ( ! empty( $hero_metrics ) ) : ?>
 							<div class="wp-home-kpi-row" role="list" aria-label="Zentrale Ergebniskennzahlen">
@@ -103,11 +99,11 @@ get_header();
 						<h3 id="homepage-proof-case-title" class="wp-success-title">Hohe Leadkosten, unklare Qualität, Reibung im Anfragepfad.</h3>
 					</div>
 
-					<p class="homepage-track-record__summary">Erst Fundament und Tracking ordnen, dann Conversion-Pfade schärfen, dann skalieren. Die offene Case Study zeigt, wie dieselbe Logik in der Praxis gewirkt hat.</p>
+					<p class="homepage-track-record__summary">Erst Fundament und Tracking ordnen, dann Conversion-Pfade schärfen, dann skalieren. Wenn diese Ausgangslage nach Ihrem Markt klingt, ist der nächste sinnvolle Schritt nicht noch ein Proof-Klick, sondern Anfrage oder Audit.</p>
 
 					<div class="homepage-track-record__actions">
-						<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_proof_case" data-track-category="trust">Case Study lesen</a>
-						<a href="<?php echo esc_url( $cases_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_proof_results" data-track-category="trust">Weitere Ergebnisse</a>
+						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_proof_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta_label ); ?></a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_proof_audit" data-track-category="lead_gen">Audit starten</a>
 					</div>
 				</article>
 			</div>
@@ -143,8 +139,8 @@ get_header();
 				</div>
 
 				<div class="homepage-problem-frame__cta">
-					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_models_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
-					<a href="<?php echo esc_url( $agentur_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_models_agentur" data-track-category="navigation">WordPress Agentur Hannover</a>
+					<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_models_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta_label ); ?></a>
+					<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_models_audit" data-track-category="lead_gen">Audit starten</a>
 				</div>
 			</div>
 		</section>
@@ -152,70 +148,18 @@ get_header();
 		<section id="system" class="wp-section homepage-system-teaser" data-track-section="homepage_wgos">
 			<div class="wp-container wp-home-shell">
 				<div class="wp-section-title wp-home-section-title text-center">
-					<span class="wp-badge">WGOS</span>
-					<h2 class="wp-section-h2">Das System dahinter: WGOS</h2>
+					<span class="wp-badge">System</span>
+					<h2 class="wp-section-h2">Das System muss nicht Ihr erster Klick sein.</h2>
 				</div>
 
 				<div class="homepage-system-teaser__card">
-					<p class="homepage-system-teaser__lead">WGOS verbindet Strategie, Technik, SEO, Tracking und Conversion in einer klaren Reihenfolge.</p>
-					<p class="homepage-system-teaser__text">Sechs Bereiche, drei Phasen: Erst Fundament und Angebotslogik, dann Messbarkeit und Sichtbarkeit, dann Conversion und kontrollierte Weiterentwicklung.</p>
-					<a href="<?php echo esc_url( $wgos_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_system_wgos" data-track-category="navigation">WGOS im Detail ansehen</a>
+					<p class="homepage-system-teaser__lead">Die Logik dahinter ist immer gleich: erst Anfragepfad und Datenebene ordnen, dann skalieren.</p>
+					<p class="homepage-system-teaser__text">Sie müssen dafür nicht erst durch ein Framework klicken. Wenn der Fit passt, geht es direkt ins Formular. Wenn noch unklar ist, wo der größte Hebel liegt, zuerst ins Audit.</p>
+					<div class="homepage-track-record__actions">
+						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_system_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta_label ); ?></a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_system_audit" data-track-category="lead_gen">Audit starten</a>
+					</div>
 				</div>
-			</div>
-		</section>
-
-		<section id="knowledge" class="wp-section homepage-blog-section homepage-blog-section--quiet" data-track-section="homepage_knowledge">
-			<div class="wp-container wp-home-shell">
-				<div class="wp-home-section-title text-center">
-					<span class="nx-badge nx-badge--ghost">Knowledge Base</span>
-					<h2 class="wp-section-h2">Analysen und Einordnungen aus der Praxis.</h2>
-				</div>
-
-				<div class="homepage-blog-grid">
-					<?php
-					$blog_query = new WP_Query(
-						[
-							'post_type'           => 'post',
-							'posts_per_page'      => 3,
-							'post_status'         => 'publish',
-							'ignore_sticky_posts' => true,
-						]
-					);
-
-					if ( $blog_query->have_posts() ) :
-						while ( $blog_query->have_posts() ) :
-							$blog_query->the_post();
-							$thumb_url  = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
-							$categories = get_the_category();
-							$cat_name   = ! empty( $categories ) ? $categories[0]->name : 'Knowledge Base';
-							?>
-							<article class="homepage-blog-card">
-								<a href="<?php the_permalink(); ?>" class="homepage-blog-card__link">
-									<?php if ( $thumb_url ) : ?>
-										<div class="homepage-blog-card__media">
-											<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy">
-										</div>
-									<?php endif; ?>
-									<div class="homepage-blog-card__body">
-										<span class="homepage-blog-card__eyebrow"><?php echo esc_html( $cat_name ); ?></span>
-										<h3><?php the_title(); ?></h3>
-										<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 18 ) ); ?></p>
-										<span class="homepage-blog-card__cta">Analyse lesen</span>
-									</div>
-								</a>
-							</article>
-							<?php
-						endwhile;
-						wp_reset_postdata();
-					else :
-						?>
-						<p class="homepage-blog-section__empty">Aktuell werden neue Analysen vorbereitet.</p>
-						<?php
-					endif;
-					?>
-				</div>
-
-				<p class="homepage-blog-section__link"><a href="<?php echo esc_url( $blog_url ); ?>" data-track-action="cta_home_blog_archive" data-track-category="navigation">Alle Artikel ansehen</a></p>
 			</div>
 		</section>
 
@@ -240,9 +184,12 @@ get_header();
 			<div class="wp-container wp-home-shell">
 				<div class="nx-cta-box homepage-conversion-cta__box">
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2>Prüfen wir, wo Ihre Website Anfragen verliert.</h2>
-					<p class="homepage-conversion-cta__lead">Eine URL reicht. Sofort-Analyse ohne E-Mail, mit klar priorisierten Hebeln.</p>
-					<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_home_final_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+					<h2>Erst Anfrage. Oder zuerst Audit.</h2>
+					<p class="homepage-conversion-cta__lead">Wenn der Fit klar ist, gehen Sie direkt ins qualifizierte Formular. Wenn erst die Hebel priorisiert werden sollen, starten Sie das KI-Audit.</p>
+					<div class="homepage-track-record__actions">
+						<a class="nx-btn nx-btn--primary homepage-conversion-cta__button" href="<?php echo esc_url( $request_url ); ?>" data-track-action="cta_home_final_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta_label ); ?></a>
+						<a href="<?php echo esc_url( $audit_url ); ?>" class="wp-home-text-link" data-track-action="cta_home_final_audit" data-track-category="lead_gen">Audit starten</a>
+					</div>
 					<p class="homepage-conversion-cta__microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 				</div>
 			</div>
