@@ -272,8 +272,64 @@
   line-height: 1.05;
 }
 
+.about-proof__story {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.about-proof-story,
+.about-diagnosis-card {
+  padding: 1rem 1.05rem;
+  border-radius: var(--nx-radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.about-proof-story__label {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  color: var(--nx-accent-text);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-proof-story h3,
+.about-diagnosis-card h3 {
+  margin: 0 0 0.45rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.04rem, 1.7vw, 1.18rem);
+  line-height: 1.24;
+  color: var(--nx-text);
+}
+
+.about-proof-story p,
+.about-diagnosis-card p {
+  margin: 0;
+}
+
 /* -----------------------------------------
-   Projekt-Timeline (Sektion 3)
+   Diagnose (Sektion 3)
+   ----------------------------------------- */
+
+.about-diagnosis__lead {
+  margin: 1rem auto 0;
+  max-width: 63ch;
+  color: var(--nx-text-secondary);
+  line-height: 1.8;
+  text-align: center;
+}
+
+.about-diagnosis__grid {
+  display: grid;
+  gap: 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* -----------------------------------------
+   Projekt-Timeline (Sektion 4)
    ----------------------------------------- */
 
 .about-project-timeline {
@@ -361,7 +417,7 @@
 }
 
 /* -----------------------------------------
-   Hintergrund (Sektion 4)
+   Hintergrund (Sektion 5)
    ----------------------------------------- */
 
 .about-background {
@@ -406,7 +462,7 @@
 }
 
 /* -----------------------------------------
-   Zwei Wege (Sektion 5)
+   Zwei Wege (Sektion 6)
    ----------------------------------------- */
 
 .about-paths {
@@ -450,7 +506,7 @@
 }
 
 /* -----------------------------------------
-   Anti-Pitch (Sektion 6)
+   Anti-Pitch (Sektion 7)
    ----------------------------------------- */
 
 .about-not-fit__list {
@@ -480,7 +536,7 @@
 }
 
 /* -----------------------------------------
-   CTA Close (Sektion 7)
+   CTA Close (Sektion 8)
    ----------------------------------------- */
 
 .about-close {
@@ -591,6 +647,11 @@ body.page-template-template-about-php .ft__privacy-note {
 
   .about-priority__grid {
     grid-template-columns: minmax(0, 0.88fr) minmax(340px, 0.92fr);
+  }
+
+  .about-proof__story,
+  .about-diagnosis__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .about-paths {

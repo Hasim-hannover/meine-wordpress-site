@@ -47,6 +47,39 @@ $proof_stats = [
 	],
 ];
 
+$proof_story_steps = [
+	[
+		'label' => 'Vorher',
+		'title' => '120 € CPL und ein Vertrieb, der falsche Anfragen abarbeitet.',
+		'text'  => 'Das Mandat kam nicht wegen Design. Es kam wegen zu teurer Leads, defektem Tracking und einer Website, die zwar erklärt, aber nicht vorqualifiziert.',
+	],
+	[
+		'label' => 'Eingriff',
+		'title' => 'Nicht mehr Traffic. Erst ein sauberes System.',
+		'text'  => 'Landingpages neu aufgebaut. GTM Server-Side und Consent Mode V2 sauber gezogen. Bitrix24 so angebunden, dass aus Klicks wieder belastbare Vertriebssignale werden.',
+	],
+	[
+		'label' => 'Danach',
+		'title' => '20 € CPL. 1.750+ Leads.',
+		'text'  => 'Das Projekt läuft weiter. Genau deshalb ist die Zahl nicht die Story. Die Story ist, dass das System wieder lernt, welcher Klick am Ende Umsatz bringt.',
+	],
+];
+
+$diagnostic_signals = [
+	[
+		'title' => 'Marke statt Kaufabsicht.',
+		'text'  => 'Die Seite zieht Marken-Traffic. Für kaufnahe Suchanfragen kurz vor der Entscheidung fehlt Sichtbarkeit. Dann kommen Besuche, aber kaum gute Anfragen.',
+	],
+	[
+		'title' => 'Events ohne Abschlussbezug.',
+		'text'  => 'Im Werbekonto gibt es Conversions. Im CRM fehlt, welche Anfrage gekauft hat. Dann optimiert das Team auf Aktivität statt auf Umsatz.',
+	],
+	[
+		'title' => 'Technik statt Entscheidungslogik.',
+		'text'  => 'Die Seite erklärt Module, Förderungen oder COP-Werte. Aber sie baut keinen klaren Weg aus Nutzen, Proof, Einwandabbau und CTA.',
+	],
+];
+
 $project_phases = [
 	[
 		'label' => 'Woche 1–2',
@@ -80,8 +113,10 @@ $project_phases = [
 ];
 
 $background_paragraphs = [
-	'Mein Zugang ist Medienwissenschaften, nicht Design. Ich habe über Jahre B2B-WordPress-Systeme gebaut – von Maschinenbau bis Dienstleistung.',
-	'Der Punkt, an dem die Nische unvermeidlich wurde, war ein Solar-Mandat: 120 € CPL, frustrierter Inhaber, defektes Tracking. Als die Leadkosten auf 20 € fielen, wurde klar, wo meine Methode am besten greift. Seitdem konzentriere ich mich auf Solar- und Wärmepumpen-Anbieter im DACH-Raum.',
+	'Mein Zugang ist Medienwissenschaften, nicht Design. Deshalb schaue ich zuerst auf Sprache, Entscheidung und Signalqualität.',
+	'Über Jahre habe ich B2B-WordPress-Systeme für Maschinenbau und Dienstleistung gebaut. Technisch sauber war selten das eigentliche Problem.',
+	'Das Solar-Mandat hat die Richtung festgezogen. 120 € CPL, frustrierter Inhaber, Tracking ohne belastbare Rückmeldung.',
+	'Als der CPL auf 20 € fiel, war klar, wo die Methode am stärksten greift. Seitdem konzentriere ich mich auf Solar- und Wärmepumpen-Anbieter im DACH-Raum.',
 ];
 
 $not_fit_points = [
@@ -169,15 +204,40 @@ get_header();
 								</div>
 							<?php endforeach; ?>
 						</div>
-						<p>
-							Mandat in der Solar-Nische. Hebel: überarbeitete Landingpages, GTM Server-Side, Consent Mode V2, CRM-Attribution über Bitrix24. Laufendes Projekt, die Zahl ist nicht das Finale.
-						</p>
+						<div class="about-proof__story" aria-label="Proof-Verlauf">
+							<?php foreach ( $proof_story_steps as $step ) : ?>
+								<article class="about-proof-story">
+									<span class="about-proof-story__label"><?php echo esc_html( $step['label'] ); ?></span>
+									<h3><?php echo esc_html( $step['title'] ); ?></h3>
+									<p><?php echo esc_html( $step['text'] ); ?></p>
+								</article>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Sektion 3: Ein typisches Projekt -->
+		<!-- Sektion 3: Diagnose -->
+		<section id="about-diagnosis" class="nx-section about-section">
+			<div class="nx-container">
+				<div class="nx-section-header about-section__header">
+					<h2 class="nx-headline-section">Woran ich schnell sehe, dass ein Setup Geld verliert.</h2>
+					<p class="about-diagnosis__lead">Nicht an Farben. Nicht an einem fehlenden Button. Sondern an wiederkehrenden Mustern in Suchintention, Tracking und Landingpage-Logik.</p>
+				</div>
+
+				<div class="about-diagnosis__grid">
+					<?php foreach ( $diagnostic_signals as $signal ) : ?>
+						<article class="about-diagnosis-card">
+							<h3><?php echo esc_html( $signal['title'] ); ?></h3>
+							<p><?php echo esc_html( $signal['text'] ); ?></p>
+						</article>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</section>
+
+		<!-- Sektion 4: Ein typisches Projekt -->
 		<section id="about-project" class="nx-section about-section">
 			<div class="nx-container">
 				<div class="nx-section-header about-section__header">
@@ -198,7 +258,7 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Sektion 4: Hintergrund -->
+		<!-- Sektion 5: Hintergrund -->
 		<section id="about-background" class="nx-section about-section">
 			<div class="nx-container">
 				<div class="about-background">
@@ -210,7 +270,7 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Sektion 5: Zwei Wege -->
+		<!-- Sektion 6: Zwei Wege -->
 		<section id="about-paths" class="nx-section about-section">
 			<div class="nx-container">
 				<div class="nx-section-header about-section__header">
@@ -249,7 +309,7 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Sektion 6: Anti-Pitch -->
+		<!-- Sektion 7: Anti-Pitch -->
 		<section id="about-not-fit" class="nx-section about-section">
 			<div class="nx-container">
 				<div class="about-not-fit">
@@ -263,7 +323,7 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Sektion 7: Finaler CTA -->
+		<!-- Sektion 8: Finaler CTA -->
 		<section id="about-close" class="nx-section about-close">
 			<div class="nx-container">
 				<div class="about-close__inner">
