@@ -58,7 +58,7 @@ function nexus_get_llms_txt_sections() {
 					'description' => 'Überblick über Positionierung, Proof und primäre Einstiege.',
 				],
 				[
-					'label'       => 'Growth Audit',
+					'label'       => 'System-Diagnose',
 					'url'         => $urls['audit'] ?? home_url( '/growth-audit/' ),
 					'description' => 'Diagnose von SEO, Tracking, Performance und Conversion-Prioritäten.',
 				],
@@ -151,7 +151,7 @@ function nexus_get_llms_txt_content() {
 	$lines = [
 		'# Haşim Üner',
 		'',
-		'> Audit-first WordPress Growth Architect für B2B in Hannover. Schwerpunkte: Technical SEO, GA4/Tracking, Core Web Vitals und Conversion-Optimierung. Primärer Einstieg ist der Growth Audit.',
+		'> Architekt für eigene Anfrage-Systeme für Solar- und Wärmepumpen-Anbieter im DACH-Raum. Ablösung von Portal-Abhängigkeit durch Website, Tracking, Vorqualifizierung und Werbekanal-Steuerung als ein verbundenes System. Primärer Einstieg ist die System-Diagnose.',
 	];
 
 	foreach ( nexus_get_llms_txt_sections() as $section ) {

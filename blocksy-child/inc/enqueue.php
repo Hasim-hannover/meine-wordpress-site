@@ -332,7 +332,7 @@ function hu_enqueue_assets() {
 		);
 	}
 
-	// ── H) Template: Growth Audit Funnel ──────────────────────────
+	// ── H) Template: System-Diagnose Funnel ──────────────────────────
 	if ( nexus_is_audit_page() ) {
 		wp_add_inline_style(
 			'blocksy-child-style',

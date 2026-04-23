@@ -2,7 +2,7 @@
  * LinkedIn Audit Landing Page — Form Handling
  *
  * Lean single-step form that submits to the existing nexus/v1/audit-request
- * endpoint. Reuses the same CRM pipeline as the main Growth Audit funnel.
+ * endpoint. Reuses the same CRM pipeline as the main System-Diagnose funnel.
  *
  * @package Blocksy_Child
  */

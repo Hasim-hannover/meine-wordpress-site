@@ -26,7 +26,7 @@ function nexus_get_tools_hub_items() {
 	return [
 		[
 			'eyebrow'      => 'Diagnose',
-			'title'        => 'Growth Audit',
+			'title'        => 'System-Diagnose',
 			'description'  => 'Wenn zuerst klar werden soll, wo Positionierung, Proof, CTA oder Tracking auf einer konkreten Seite Nachfrage verlieren.',
 			'use_case'     => 'Eine Seite wirtschaftlich priorisieren statt mehrere Symptome parallel zu behandeln.',
 			'outcome'      => 'Schriftliche Rückmeldung in 48 Stunden mit stärkster Bremse, Priorität und nächstem sinnvollen Schritt.',

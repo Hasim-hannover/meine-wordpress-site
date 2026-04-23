@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Growth Audit
- * Description: Landing Page für den instantanen Growth Audit mit Sofort-Ergebnis
+ * Template Name: System-Diagnose
+ * Description: Landing Page für den instantanen System-Diagnose mit Sofort-Ergebnis
  *
  * SEO-Meta: zentral in inc/seo-meta.php (ACF-Felder: seo_title, seo_description, og_image)
  *

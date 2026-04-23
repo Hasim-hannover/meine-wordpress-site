@@ -25,7 +25,7 @@ $asset_count     = isset( $summary['totalAssets'] ) ? (int) $summary['totalAsset
 $phase_count     = isset( $payload['wgosAssetPhases'] ) && is_array( $payload['wgosAssetPhases'] ) ? count( $payload['wgosAssetPhases'] ) : 0;
 $module_count    = isset( $payload['wgosAssetModules'] ) && is_array( $payload['wgosAssetModules'] ) ? count( $payload['wgosAssetModules'] ) : 0;
 $hub_sections    = function_exists( 'nexus_get_wgos_asset_hub_sections' ) ? nexus_get_wgos_asset_hub_sections() : [];
-$audit_cta_label = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+$audit_cta_label = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'System-Diagnose starten';
 $hero_subtitle   = sprintf(
 	'%1$d Assets in %2$d Modulen, nach Phasen geordnet. Jedes Asset direkt klickbar.',
 	$asset_count,
@@ -164,7 +164,7 @@ $hero_subtitle   = sprintf(
 				<div class="wgos-final-cta__inner">
 					<span class="wgos-principle-kicker">Audit</span>
 					<h2 class="wgos-h2">Welches Asset zuerst?</h2>
-					<p class="wgos-prose">Der Growth Audit klärt die Reihenfolge für Ihre Situation.</p>
+					<p class="wgos-prose">Die System-Diagnose klärt die Reihenfolge für Ihre Situation.</p>
 
 					<div class="wgos-hero__actions">
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit" data-track-action="cta_click_audit" data-track-category="lead_gen" data-track-section="asset_hub_cta"><?php echo esc_html( $audit_cta_label ); ?></a>

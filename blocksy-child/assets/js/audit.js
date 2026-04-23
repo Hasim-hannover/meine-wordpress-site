@@ -1,5 +1,5 @@
 /**
- * Growth Audit page logic.
+ * System-Diagnose page logic.
  *
  * Handles attribution capture, one-step form submission and FAQ schema.
  */

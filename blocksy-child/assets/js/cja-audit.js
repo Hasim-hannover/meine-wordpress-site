@@ -551,7 +551,7 @@
     title.className = 'cja-score-title';
     subtitle.className = 'cja-score-sub';
 
-    kicker.textContent = 'Growth Audit Ergebnis';
+    kicker.textContent = 'System-Diagnose Ergebnis';
     title.textContent = displayUrl + ' im Überblick';
     subtitle.textContent = timestamp ? 'Stand: ' + timestamp + ' · priorisierte Hebel über alle Diagnose-Bereiche hinweg.' : 'Wo Ihre Website heute Nachfrage verliert und welche Bereiche zuerst Wirkung versprechen.';
 

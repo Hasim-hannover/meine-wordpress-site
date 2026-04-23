@@ -14,10 +14,10 @@ function hu_output_schema()
         '@context' => 'https://schema.org',
         '@type'    => 'LocalBusiness',
         '@id'      => home_url('/#organization'),
-        'name'     => 'Haşim Üner – Growth Architect',
-        'alternateName' => 'Haşim Üner - WordPress Growth Architect',
+        'name'     => 'Haşim Üner – Architekt für eigene Anfrage-Systeme',
+        'alternateName' => 'Haşim Üner',
         'url'      => home_url(),
-        'description' => 'WordPress Growth Architect für B2B-Unternehmen: Positionierung, technische SEO, privacy-first Measurement und Conversion-Logik als Nachfrage-System.',
+        'description' => 'Architekt für eigene Anfrage-Systeme: Solar- und Wärmepumpen-Anbieter im DACH-Raum lösen Portal-Abhängigkeit ab und senken Leadkosten messbar — durch Website, Tracking, Vorqualifizierung und Kanal-Steuerung als ein verbundenes System.',
         'telephone'   => '+49 176 81407134',
         'email'       => 'info@hasimuener.de',
         'logo'        => function_exists( 'hu_get_brand_logo_url' ) ? hu_get_brand_logo_url() : content_url( '/uploads/2025/08/cropped-Logo-hasim-uener-1.webp' ),
@@ -92,7 +92,7 @@ function hu_output_schema()
             'itemListElement' => [
                 [
                     '@type'       => 'Offer',
-                    'name'        => 'Growth Audit',
+                    'name'        => 'System-Diagnose',
                     'description' => 'Kostenloser Ersteinstieg: persönliche Analyse der drei größten Anfragebremsen auf einer B2B-Website.',
                     'url'         => home_url('/growth-audit/'),
                 ],
@@ -142,50 +142,50 @@ function hu_output_schema()
         ],
 
         'customer-journey-audit' => [
-            'name'        => 'Growth Audit',
-            'description' => 'Persönlicher Growth Audit für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
-            'serviceType' => 'Growth Audit',
+            'name'        => 'System-Diagnose',
+            'description' => 'Persönliche System-Diagnose für Solar- und Wärmepumpen-Anbieter: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
+            'serviceType' => 'System-Diagnose',
             'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Growth Audit',
+                    'name'          => 'System-Diagnose',
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Kostenloser Ersteinstieg für B2B-WordPress-Seiten mit unklarer Lead-Performance'
+                    'description'   => 'Kostenloser Ersteinstieg für Solar- und Wärmepumpen-Anbieter mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'growth-audit' => [
-            'name'        => 'Growth Audit',
-            'description' => 'Persönlicher Growth Audit für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
-            'serviceType' => 'Growth Audit',
+            'name'        => 'System-Diagnose',
+            'description' => 'Persönliche System-Diagnose für Solar- und Wärmepumpen-Anbieter: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
+            'serviceType' => 'System-Diagnose',
             'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite',
             'offers'      => [
                 [
                     '@type'         => 'Offer',
-                    'name'          => 'Growth Audit',
+                    'name'          => 'System-Diagnose',
                     'price'         => 0,
                     'priceCurrency' => 'EUR',
                     'isAccessibleForFree' => true,
-                    'description'   => 'Kostenloser Ersteinstieg für B2B-WordPress-Seiten mit unklarer Lead-Performance'
+                    'description'   => 'Kostenloser Ersteinstieg für Solar- und Wärmepumpen-Anbieter mit unklarer Lead-Performance'
                 ]
             ]
         ],
 
         'audit' => [
-            'name'        => 'Growth Audit',
-            'description' => 'Persönlicher Growth Audit für B2B-Unternehmen mit WordPress: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
-            'serviceType' => 'Growth Audit',
+            'name'        => 'System-Diagnose',
+            'description' => 'Persönliche System-Diagnose für Solar- und Wärmepumpen-Anbieter: drei priorisierte Anfragebremsen, eine klare Priorität und der nächste sinnvolle Schritt.',
+            'serviceType' => 'System-Diagnose',
             'serviceOutput' => 'Persönliche Einschätzung der größten Anfragebremsen auf einer Startseite oder kaufnahen Angebotsseite'
         ],
 
         '360-deep-dive' => [
-            'name'        => 'Vertiefte Folgeanalyse nach dem Growth Audit',
+            'name'        => 'Vertiefte Folgeanalyse nach der System-Diagnose',
             'description' => 'Persönliche Folgeanalyse nach dem Audit mit priorisierter Entscheidungsvorlage für Positionierung, IA, Measurement und Conversion.',
-            'serviceType' => 'Folgeanalyse nach dem Growth Audit',
+            'serviceType' => 'Folgeanalyse nach der System-Diagnose',
             'serviceOutput' => 'Priorisierte Entscheidungsvorlage für die nächsten sinnvollen Struktur- und Umsetzungsentscheidungen'
         ],
 
@@ -482,7 +482,7 @@ function hu_output_schema()
                 '@type'    => 'Person',
                 '@id'      => home_url('/uber-mich/#person'),
                 'name'     => 'Haşim Üner',
-                'jobTitle' => 'Growth Architect & Medienwissenschaftler',
+                'jobTitle' => 'Architekt für eigene Anfrage-Systeme',
                 'url'      => home_url('/uber-mich/'),
                 'image'    => hu_get_profile_image_url(),
                 'worksFor' => ['@id' => home_url('/#organization')],
@@ -490,7 +490,7 @@ function hu_output_schema()
                     'https://www.linkedin.com/in/hasim-%C3%BCner/',
                     'https://github.com/Hasim-hannover/'
                 ],
-                'description' => 'Growth Architect & Medienwissenschaftler mit Fokus auf WordPress-Systeme, technische SEO, privacy-first Measurement, Conversion-Logik und kontrollierte Weiterentwicklung für B2B-Unternehmen.'
+                'description' => 'Architekt für eigene Anfrage-Systeme mit Fokus auf Solar- und Wärmepumpen-Anbieter im DACH-Raum: Website, Tracking, Vorqualifizierung und Werbekanal-Steuerung als ein verbundenes System zur Ablösung von Portal-Abhängigkeit.'
             ];
 
             $profilePage = [
@@ -634,7 +634,7 @@ function hu_output_schema()
                 $toolParts = [
                     [
                         '@type' => 'WebPage',
-                        'name'  => 'Growth Audit',
+                        'name'  => 'System-Diagnose',
                         'description' => 'Persönlicher Diagnose-Einstieg für Nachfrage, Conversion, Tracking und Priorisierung.',
                         'url'   => home_url('/growth-audit/')
                     ],

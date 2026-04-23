@@ -2,21 +2,21 @@
 
 return [
 	'growth-audit' => [
-		'title'           => 'Growth Audit',
+		'title'           => 'System-Diagnose',
 		'slug'            => 'growth-audit',
 		'status'          => 'publish',
 		'core_area'       => 'Strategie',
 		'credits'         => '10',
-		'keyword'         => 'Growth Audit',
-		'excerpt'         => 'Der Growth Audit zeigt, welche Bremsen Ihre WordPress-Seite zuerst lösen muss.',
+		'keyword'         => 'System-Diagnose',
+		'excerpt'         => 'Die System-Diagnose zeigt, welche Bremsen Ihre WordPress-Seite zuerst lösen muss.',
 		'goal'            => 'Prioritäten für Wachstum, Technik, Messbarkeit und Conversion sauber festlegen.',
 		'result'          => 'Sie erhalten eine priorisierte Einschätzung mit klaren nächsten Schritten.',
 		'prerequisite'    => 'Keine - Einstiegs-Asset',
-		'seo_title'       => 'Growth Audit - WGOS Asset | Haşim Üner',
-		'seo_description' => 'Growth Audit für B2B-WordPress-Seiten: Engpässe priorisieren, Reihenfolge klären und den richtigen nächsten Schritt wählen.',
+		'seo_title'       => 'System-Diagnose - WGOS Asset | Haşim Üner',
+		'seo_description' => 'System-Diagnose für B2B-WordPress-Seiten: Engpässe priorisieren, Reihenfolge klären und den richtigen nächsten Schritt wählen.',
 		'problem'         => [
 			'Viele Teams spüren, dass die Website nicht sauber liefert, können die Ursache aber nicht priorisieren. Dann laufen Technik, Tracking, Inhalte und Conversion nebeneinander her.',
-			'Der Growth Audit schafft zuerst Ordnung. Sie sehen, welcher Engpass heute Leads, Datenqualität oder Sichtbarkeit am stärksten bremst.',
+			'Die System-Diagnose schafft zuerst Ordnung. Sie sehen, welcher Engpass heute Leads, Datenqualität oder Sichtbarkeit am stärksten bremst.',
 		],
 		'deliverables'    => [
 			[
@@ -37,7 +37,7 @@ return [
 			],
 		],
 		'system_context'  => [
-			'Der Growth Audit steht ganz am Anfang der WGOS-Reihenfolge. Er schafft die gemeinsame Diagnose, auf der Positionierungs-Check, CWV Speed Audit oder Tracking Audit sinnvoll priorisiert werden können.',
+			'Die System-Diagnose steht ganz am Anfang der WGOS-Reihenfolge. Er schafft die gemeinsame Diagnose, auf der Positionierungs-Check, CWV Speed Audit oder Tracking Audit sinnvoll priorisiert werden können.',
 			'Ohne diese Vorarbeit werden Maßnahmen schnell politisch statt systemisch entschieden. Mit dem Audit wird aus einer losen Aufgabenliste eine belastbare Reihenfolge.',
 		],
 		'priority'        => [
@@ -62,7 +62,7 @@ return [
 		'excerpt'         => 'Der Positionierungs-Check prüft, ob Angebot, Zielgruppe und Nutzenversprechen auf der Website klar genug sind.',
 		'goal'            => 'Angebot, Nutzenversprechen und Zielgruppe so schärfen, dass die Website nicht beliebig wirkt.',
 		'result'          => 'Sie erhalten eine klare Positionierungsdiagnose mit konkreter Korrekturrichtung.',
-		'prerequisite'    => 'Growth Audit ist sinnvoll, aber nicht zwingend',
+		'prerequisite'    => 'System-Diagnose ist sinnvoll, aber nicht zwingend',
 		'seo_title'       => 'Positionierungs-Check - WGOS Asset | Haşim Üner',
 		'seo_description' => 'Positionierungs-Check für B2B-WordPress-Seiten: Angebot schärfen, Missverständnisse abbauen und Message-Match verbessern.',
 		'problem'         => [
@@ -88,7 +88,7 @@ return [
 			],
 		],
 		'system_context'  => [
-			'Der Positionierungs-Check gehört in der Strategiephase früh nach vorne, weil unklare Botschaften spätere SEO-, Landing-Page- und CRO-Arbeit ausbremsen. Er setzt nicht zwingend andere Assets voraus, ist aber nach dem Growth Audit deutlich zielgerichteter.',
+			'Der Positionierungs-Check gehört in der Strategiephase früh nach vorne, weil unklare Botschaften spätere SEO-, Landing-Page- und CRO-Arbeit ausbremsen. Er setzt nicht zwingend andere Assets voraus, ist aber nach der System-Diagnose deutlich zielgerichteter.',
 			'Wenn die Positionierung steht, werden Seitenrollen-Mapping, Wettbewerbs-Analyse und Keyword-Strategie erheblich präziser. Erst dann greifen Inhalte, Proof und Conversion sauber ineinander.',
 		],
 		'priority'        => [
@@ -215,7 +215,7 @@ return [
 		'excerpt'         => 'Roadmap & Priorisierung bringt WGOS-Assets in eine Reihenfolge, die wirklich wirkt.',
 		'goal'            => 'Die richtigen Bausteine nach Impact, Abhängigkeit und Umsetzbarkeit staffeln.',
 		'result'          => 'Sie erhalten eine abgestimmte Umsetzungsroadmap statt einer losen Wunschliste.',
-		'prerequisite'    => 'Growth Audit oder klare Discovery sollte abgeschlossen sein',
+		'prerequisite'    => 'System-Diagnose oder klare Discovery sollte abgeschlossen sein',
 		'seo_title'       => 'Roadmap Priorisierung - WGOS Asset | Haşim Üner',
 		'seo_description' => 'Roadmap & Priorisierung für WGOS: Maßnahmen nach Impact, Abhängigkeiten und Teamkapazität sauber staffeln.',
 		'problem'         => [
@@ -241,7 +241,7 @@ return [
 			],
 		],
 		'system_context'  => [
-			'Roadmap & Priorisierung steht in WGOS zwischen Diagnose und Umsetzung. Sie setzt meist auf Growth Audit, Positionierungs-Check oder Discovery-Ergebnissen auf und übersetzt diese in einen belastbaren Arbeitsplan.',
+			'Roadmap & Priorisierung steht in WGOS zwischen Diagnose und Umsetzung. Sie setzt meist auf System-Diagnose, Positionierungs-Check oder Discovery-Ergebnissen auf und übersetzt diese in einen belastbaren Arbeitsplan.',
 			'Danach können einzelne Assets wie CWV Speed Audit, Tracking Audit oder Landing Page Neu ohne Richtungsverlust umgesetzt werden. Die Roadmap ist damit das Bindeglied zwischen Einsicht und Ausführung.',
 		],
 		'priority'        => [
@@ -266,7 +266,7 @@ return [
 		'excerpt'         => 'Der CWV Speed Audit zeigt, was Ihre WordPress-Seite langsam macht und wo der Hebel wirklich liegt.',
 		'goal'            => 'Performance-Bremsen sichtbar machen, die Ladezeit, Rankings und Nutzererlebnis schädigen.',
 		'result'          => 'Sie erhalten eine priorisierte Performance-Diagnose mit klaren Optimierungsfeldern.',
-		'prerequisite'    => 'Growth Audit oder klare Priorisierung liegt vor',
+		'prerequisite'    => 'System-Diagnose oder klare Priorisierung liegt vor',
 		'seo_title'       => 'CWV Speed Audit - WGOS Asset | Haşim Üner',
 		'seo_description' => 'CWV Speed Audit für WordPress: Ladezeitbremsen finden, Prioritäten setzen und die Basis für Rankings und Conversion stärken.',
 		'problem'         => [
@@ -292,7 +292,7 @@ return [
 			],
 		],
 		'system_context'  => [
-			'Der CWV Speed Audit gehört früh ins technische Fundament und kommt oft direkt nach Growth Audit oder Roadmap. Er schafft die Diagnose, auf der CWV Optimierung und Server-Tuning sauber aufsetzen.',
+			'Der CWV Speed Audit gehört früh ins technische Fundament und kommt oft direkt nach System-Diagnose oder Roadmap. Er schafft die Diagnose, auf der CWV Optimierung und Server-Tuning sauber aufsetzen.',
 			'Wenn die Performance-Basis steht, profitieren danach auch Technical SEO Audit, Landing Pages und Conversion-Arbeit. Langsame Seiten bremsen sonst jede spätere Investition aus.',
 		],
 		'priority'        => [
@@ -573,7 +573,7 @@ return [
 		'excerpt'         => 'Der Tracking Audit zeigt, ob Ihre Datenbasis für Entscheidungen überhaupt belastbar ist.',
 		'goal'            => 'Fehler in Tracking, Events, Attribution und Consent sichtbar machen, bevor falsche Entscheidungen darauf aufbauen.',
 		'result'          => 'Sie erhalten eine priorisierte Tracking-Diagnose mit konkreten Fixes und Folgeempfehlungen.',
-		'prerequisite'    => 'Growth Audit oder klare Priorisierung liegt vor',
+		'prerequisite'    => 'System-Diagnose oder klare Priorisierung liegt vor',
 		'seo_title'       => 'Tracking Audit - WGOS Asset | Haşim Üner',
 		'seo_description' => 'Tracking Audit für B2B-Websites: Messfehler finden, Datenqualität absichern und die Basis für Reporting und Optimierung legen.',
 		'problem'         => [

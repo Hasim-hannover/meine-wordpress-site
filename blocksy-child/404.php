@@ -60,7 +60,7 @@ $primary_urls = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_ge
 							<a href="<?php echo esc_url( nexus_get_audit_url() ); ?>"
 							   data-track-action="404_nav_audit"
 							   data-track-category="error_recovery">
-								<?php esc_html_e( 'Growth Audit', 'blocksy-child' ); ?>
+								<?php esc_html_e( 'System-Diagnose', 'blocksy-child' ); ?>
 							</a>
 						</li>
 						<li>

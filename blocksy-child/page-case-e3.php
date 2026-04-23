@@ -575,7 +575,7 @@ $energy_url  = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_ene
                     Die Ergebnisse entstanden in einem Setup für KMU + B2C mit
                     klarer Leistungsfähigkeit und belastbaren internen Prozessen.
                     Besonders relevant wird das Modell ab etwa &gt;5 Mio.&nbsp;€ Jahresumsatz.
-                    Ob ähnliche Hebel bei Ihnen vorhanden sind, zeigt der Growth Audit
+                    Ob ähnliche Hebel bei Ihnen vorhanden sind, zeigt die System-Diagnose
                     klar priorisiert und ohne Pitch.
                 </div>
             </details>
@@ -652,7 +652,7 @@ $energy_url  = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_ene
                 Welche Hebel liegen bei Ihnen brach?
             </h2>
             <p style="color:var(--nx-text-muted);max-width:560px;margin:0 auto 2rem;line-height:1.6;">
-                Im Growth Audit analysieren wir Ihre WordPress-Präsenz
+                In der System-Diagnose analysieren wir Ihre Website
                 auf die größten Wachstumspotenziale&nbsp;— klar priorisiert und ohne Pitch.
             </p>
 

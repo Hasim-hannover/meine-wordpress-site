@@ -31,7 +31,7 @@ $tools_url = nexus_get_primary_public_url( 'tools', home_url( '/kostenlose-tools
 $proof_metrics = function_exists( 'nexus_get_public_proof_metric_list' ) ? nexus_get_public_proof_metric_list( [ 'lead_count', 'sales_conversion', 'cpl_reduction' ] ) : [];
 $canonical_ownership_sentence = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
 $primary_term                = function_exists( 'nexus_get_public_primary_term' ) ? nexus_get_public_primary_term() : 'WordPress als Nachfrage-System für B2B';
-$audit_cta_label             = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+$audit_cta_label             = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'System-Diagnose starten';
 $audit_compact_microcopy     = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '60 Sek. · priorisierte Hebel · keine E-Mail';
 
 $pain_cards = [
@@ -94,8 +94,8 @@ $faq_items = [
 		'answer'   => 'Ja. Die Arbeit umfasst nicht nur WordPress-Entwicklung, sondern auch technische SEO, GA4- und Tracking-Setups, Conversion Rate Optimierung und die Priorisierung kaufnaher Seiten. Genau diese Kombination ist für Leadgenerierung im B2B meist entscheidend.',
 	],
 	[
-		'question' => 'Wann ist die Agentur-Seite der richtige Einstieg und wann der Growth Audit?',
-		'answer'   => 'Die Agentur-Seite ist richtig, wenn Sie den Gesamtkontext verstehen wollen. Der Growth Audit ist der bessere nächste Schritt, wenn klar werden soll, ob zuerst SEO, Tracking, Performance oder Conversion den größten Hebel hat.',
+		'question' => 'Wann ist die Agentur-Seite der richtige Einstieg und wann die System-Diagnose?',
+		'answer'   => 'Die Agentur-Seite ist richtig, wenn Sie den Gesamtkontext verstehen wollen. Die System-Diagnose ist der bessere nächste Schritt, wenn klar werden soll, ob zuerst SEO, Tracking, Performance oder Conversion den größten Hebel hat.',
 	],
 	[
 		'question' => 'Warum rankt eine WordPress-Seite, liefert aber keine Anfragen?',
@@ -385,7 +385,7 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-cta-box wp-agentur-cta-box">
 					<h2>Prüfen wir, an welcher Stelle Ihr WordPress-System heute Nachfrage verliert.</h2>
-					<p>Der Growth Audit zeigt, ob Angebotsseiten, Datenlage, CTA-Führung oder technische Reibung zuerst angegangen werden sollten und ob ein tieferer Umbau überhaupt sinnvoll ist.</p>
+					<p>Die System-Diagnose zeigt, ob Angebotsseiten, Datenlage, CTA-Führung oder technische Reibung zuerst angegangen werden sollten und ob ein tieferer Umbau überhaupt sinnvoll ist.</p>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_agentur_final_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 					<p class="wp-cta-desc mt-1">Kein Pitch. Klare Priorisierung. Wenn fachlich sinnvoll, kann daraus als nächster Schritt eine vertiefte Analyse, eine fokussierte Korrektur oder eine laufende Weiterentwicklung entstehen.</p>
 					<p class="wp-cta-desc mb-0">

@@ -131,7 +131,7 @@ $faq_items = [
 	],
 	[
 		'question' => 'Welcher KI-Baustein ist der richtige für mich?',
-		'answer'   => 'Das klärt der Growth Audit. Die Empfehlung hängt davon ab, wo Ihre Website heute steht und welches Problem zuerst gelöst werden soll.',
+		'answer'   => 'Das klärt die System-Diagnose. Die Empfehlung hängt davon ab, wo Ihre Website heute steht und welches Problem zuerst gelöst werden soll.',
 	],
 ];
 
@@ -384,7 +384,7 @@ foreach ( $faq_items as $faq_item ) {
 				<div class="wgos-asset-hub-bridge">
 					<div class="wgos-note-card">
 						<h3>WGOS verstehen</h3>
-						<p>Die KI-Bausteine sind Teil eines größeren Systems mit sechs Modulen und drei Phasen. Der Growth Audit klärt, welcher Baustein zuerst Sinn macht.</p>
+						<p>Die KI-Bausteine sind Teil eines größeren Systems mit sechs Modulen und drei Phasen. Die System-Diagnose klärt, welcher Baustein zuerst Sinn macht.</p>
 						<a href="<?php echo esc_url( $wgos_url ); ?>" class="wgos-link--arrow">WordPress Growth Operating System ansehen</a>
 					</div>
 				</div>
@@ -424,7 +424,7 @@ foreach ( $faq_items as $faq_item ) {
 						<span class="wgos-principle-kicker">Nächster Schritt</span>
 						<h2 class="wgos-h2">Prüfen wir, ob KI auf Ihrer WordPress-Seite heute Sinn macht.</h2>
 						<div class="wgos-prose">
-							<p>Der Growth Audit zeigt, wo Ihre Website steht, welcher Engpass zuerst gelöst werden muss und ob KI dabei eine Rolle spielt. Persönliche Rückmeldung in 48 Stunden.</p>
+							<p>Die System-Diagnose zeigt, wo Ihre Website steht, welcher Engpass zuerst gelöst werden muss und ob KI dabei eine Rolle spielt. Persönliche Rückmeldung in 48 Stunden.</p>
 						</div>
 
 						<div class="wgos-hero__actions">

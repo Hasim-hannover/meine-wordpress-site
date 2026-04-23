@@ -19,7 +19,7 @@ $audit_cta_label = 'Audit starten';
 		<main class="audit-content">
 			<section id="start" class="audit-section ga-hero nx-reveal" aria-labelledby="ga-hero-title">
 				<div class="ga-hero__inner">
-					<p class="ga-kicker">Growth Audit für B2B-WordPress-Seiten</p>
+					<p class="ga-kicker">System-Diagnose für Solar- und Wärmepumpen-Anbieter</p>
 					<h1 id="ga-hero-title">Wo Ihre Seite gerade Anfragen ausbremst.</h1>
 					<p class="ga-hero__sub">
 						Ich prüfe Ihre Startseite oder Angebotsseite manuell und KI-unterstützt.
@@ -27,7 +27,7 @@ $audit_cta_label = 'Audit starten';
 						und einen klaren nächsten Schritt.
 					</p>
 
-					<div class="ga-trust-badges" aria-label="Audit im Überblick">
+					<div class="ga-trust-badges" aria-label="System-Diagnose im Überblick">
 						<span>0 € Einstieg</span>
 						<span>manuell geprüft</span>
 						<span>Rückmeldung in 48h</span>
@@ -66,7 +66,7 @@ $audit_cta_label = 'Audit starten';
 				<div class="ga-form-shell">
 					<div class="ga-form-intro">
 						<div class="ga-section-head ga-section-head--compact">
-							<p class="ga-section-kicker">Growth Audit anfragen</p>
+							<p class="ga-section-kicker">System-Diagnose anfragen</p>
 							<h2 id="ga-form-title">Seite einreichen.</h2>
 							<p>Startseite oder Angebotsseite genügt. Ich melde mich schriftlich zurück.</p>
 						</div>
@@ -112,7 +112,7 @@ $audit_cta_label = 'Audit starten';
 								<label class="ga-form__consent">
 									<input id="ga-consent-privacy" name="consent_privacy" type="checkbox" value="accepted" required>
 									<span>
-										Ich stimme zu, dass meine Angaben zur Bearbeitung des Growth Audits verarbeitet werden.
+										Ich stimme zu, dass meine Angaben zur Bearbeitung der System-Diagnose verarbeitet werden.
 										Details stehen in der <a href="<?php echo esc_url( $privacy_url ); ?>">Datenschutzerklärung</a>.
 									</span>
 								</label>
@@ -123,7 +123,7 @@ $audit_cta_label = 'Audit starten';
 
 							<div class="ga-form__actions">
 								<button type="submit" class="ga-btn ga-btn--primary ga-btn--full" data-track-action="cta_form_growth_audit" data-track-category="lead_gen" data-track-section="form">
-									<span class="ga-btn__label">Audit starten</span>
+									<span class="ga-btn__label">System-Diagnose starten</span>
 									<span class="ga-btn__spinner" aria-hidden="true"></span>
 								</button>
 								<p class="ga-form__microcopy">Schriftliche Rückmeldung in 48h. Kein Pflicht-Call.</p>

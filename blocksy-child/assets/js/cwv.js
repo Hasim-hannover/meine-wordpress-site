@@ -24,7 +24,7 @@
         '@type': 'Person',
         name: 'Haşim Üner',
         url: 'https://hasimuener.de',
-        jobTitle: 'Growth Architect',
+        jobTitle: 'Architekt für eigene Anfrage-Systeme',
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Hannover',

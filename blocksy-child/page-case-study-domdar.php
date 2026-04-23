@@ -202,7 +202,7 @@ $faq_items = [
 $author_points = [
 	'Ich optimiere keine hübschen Oberflächen, sondern Nachfrage-Systeme mit klarer wirtschaftlicher Funktion.',
 	'WordPress, CRO, Performance und Prozesse greifen bei mir als ein Verbund statt als getrennte Disziplinen.',
-	'Der Einstieg bleibt bewusst diagnosegetrieben: erst der Growth Audit, dann Prioritäten und erst danach Umsetzung.',
+	'Der Einstieg bleibt bewusst diagnosegetrieben: erst die System-Diagnose, dann Prioritäten und erst danach Umsetzung.',
 ];
 
 get_header();
@@ -469,7 +469,7 @@ get_header();
 				</div>
 				<div class="cs-domdar-portrait-meta">
 					<span class="cs-domdar-portrait-label">Haşim Üner</span>
-					<span class="cs-domdar-portrait-text">Growth Architect für WordPress, CRO, Performance und systemische Nachfrage-Logik</span>
+					<span class="cs-domdar-portrait-text">Architekt für eigene Anfrage-Systeme: Solar, Wärmepumpe und systemische Nachfrage-Logik</span>
 				</div>
 			</div>
 
@@ -539,7 +539,7 @@ get_header();
 				Welche Reibung kostet Sie gerade Marge?
 			</h2>
 			<p style="color:var(--nx-text-muted);max-width:560px;margin:0 auto 2rem;line-height:1.6;">
-				Im Growth Audit sehen Sie, wo Warenkorb, Conversion oder operative
+				Im System-Diagnose sehen Sie, wo Warenkorb, Conversion oder operative
 				Prozesse aktuell Ertrag kosten und welche Reihenfolge für Ihr Setup
 				wirklich Sinn ergibt.
 			</p>
@@ -558,7 +558,7 @@ get_header();
 			<div class="cs-internal-links">
 				<a href="<?php echo esc_url( $cases_url ); ?>" class="cs-internal-link">Weitere Ergebnisse</a>
 				<a href="<?php echo esc_url( $wgos_url ); ?>" class="cs-internal-link">WGOS: Das System dahinter</a>
-				<a href="<?php echo esc_url( $local_wp_url ); ?>" class="cs-internal-link">WordPress Growth Architect</a>
+				<a href="<?php echo esc_url( $local_wp_url ); ?>" class="cs-internal-link">WordPress Agentur Hannover</a>
 			</div>
 		</div>
 

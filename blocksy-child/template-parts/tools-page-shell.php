@@ -91,13 +91,13 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 			<span class="tools-kicker">Wenn Sie nicht raten wollen</span>
 			<h2 id="tools-bridge-title" class="tools-section__title">Nicht sicher, welcher Einstieg zuerst Sinn ergibt?</h2>
 			<p class="tools-section__intro">
-				Dann starten Sie nicht mit dem falschen Tool. Der Growth Audit ordnet zuerst ein, ob das Problem eher in Botschaft,
+				Dann starten Sie nicht mit dem falschen Tool. Die System-Diagnose ordnet zuerst ein, ob das Problem eher in Botschaft,
 				Proof, Performance, Tracking oder im nächsten Schritt liegt.
 			</p>
 		</div>
 
 		<div class="tools-bridge__actions">
-			<a href="<?php echo esc_url( $audit_url ); ?>" class="tools-btn tools-btn--primary" data-track-action="cta_tools_footer_audit" data-track-category="lead_gen">Zum Growth Audit</a>
+			<a href="<?php echo esc_url( $audit_url ); ?>" class="tools-btn tools-btn--primary" data-track-action="cta_tools_footer_audit" data-track-category="lead_gen">Zur System-Diagnose</a>
 			<a href="<?php echo esc_url( $wgos_url ); ?>" class="tools-btn tools-btn--secondary" data-track-action="cta_tools_footer_wgos" data-track-category="navigation">Erst das System verstehen</a>
 		</div>
 	</section>

@@ -109,19 +109,19 @@ function hu_get_forced_singular_seo_map() {
 			],
 			'wordpress-agentur-hannover' => [
 				'title'       => 'WordPress Agentur Hannover für B2B | Haşim Üner',
-				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, GA4-Tracking und Conversion-Optimierung als System. Growth Audit als Einstieg – 60 Sek., keine E-Mail.',
+				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, GA4-Tracking und Conversion-Optimierung als System. System-Diagnose als Einstieg – 60 Sek., keine E-Mail.',
 			],
 			'wordpress-agentur' => [
 				'title'       => 'WordPress Agentur Hannover für B2B | Haşim Üner',
-				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, GA4-Tracking und Conversion-Optimierung als System. Growth Audit als Einstieg – 60 Sek., keine E-Mail.',
+				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, GA4-Tracking und Conversion-Optimierung als System. System-Diagnose als Einstieg – 60 Sek., keine E-Mail.',
 			],
 			'ergebnisse' => [
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
 				'description' => 'Ergebnisse aus WordPress-, SEO-, Tracking- und CRO-Projekten: E3, DOMDAR und Whitelabel-Proof mit klarem naechsten Schritt.',
 			],
 			'growth-audit' => [
-				'title'       => 'Growth Audit für WordPress-B2B | Haşim Üner',
-				'description' => 'In 60 Sekunden sehen Sie, wo Ihre WordPress-Website Nachfrage verliert. Diagnose für Performance, Tracking, SEO und Content mit priorisierten Hebeln statt Tool-Score.',
+				'title'       => 'System-Diagnose für Solar- und Wärmepumpen-Anbieter | Haşim Üner',
+				'description' => 'In 60 Sekunden sehen Sie, wo Ihre Website Anfragen verliert. Diagnose für Performance, Tracking, SEO und Content mit priorisierten Hebeln statt Tool-Score.',
 			],
 			'case-studies-e-commerce' => [
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
@@ -141,7 +141,7 @@ function hu_get_forced_singular_seo_map() {
 			],
 			'wordpress-seo-hannover' => [
 				'title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
-				'description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability und interne Verlinkung fuer kaufnahe Seiten. Growth Audit als 60-Sekunden-Diagnose fuer priorisierte Hebel.',
+				'description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability und interne Verlinkung fuer kaufnahe Seiten. System-Diagnose als 60-Sekunden-Diagnose fuer priorisierte Hebel.',
 			],
 			'ki-integration-wordpress' => [
 				'title'       => 'KI-Integration für WordPress – DSGVO-konform | Haşim Üner',
@@ -492,7 +492,7 @@ function hu_document_title_overrides( $parts ) {
 	}
 
 	if ( hu_is_audit_offer_page() ) {
-		$parts['title'] = 'Kostenloser Growth Audit | Hasim Üner — WordPress Growth Architect';
+		$parts['title'] = 'Kostenlose System-Diagnose | Haşim Üner';
 		return $parts;
 	}
 
@@ -781,8 +781,8 @@ function hu_get_seo_meta() {
 		}
 
 		if ( hu_is_audit_offer_page() ) {
-			$meta['og_title']    = 'Growth Audit für WordPress-B2B | Haşim Üner';
-			$meta['description'] = 'In 60 Sekunden sehen Sie, wo Ihre WordPress-Website Nachfrage verliert. Diagnose für Performance, Tracking, SEO und Content mit priorisierten Hebeln statt Tool-Score.';
+			$meta['og_title']    = 'System-Diagnose für Solar- und Wärmepumpen-Anbieter | Haşim Üner';
+			$meta['description'] = 'In 60 Sekunden sehen Sie, wo Ihre Website Anfragen verliert. Diagnose für Performance, Tracking, SEO und Content mit priorisierten Hebeln statt Tool-Score.';
 		}
 
 		if ( hu_is_domdar_case_study_page() ) {
