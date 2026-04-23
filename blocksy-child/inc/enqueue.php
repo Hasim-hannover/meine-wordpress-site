@@ -407,6 +407,7 @@ function hu_enqueue_assets() {
 	// ── O) Template: Kostenlose Tools Hub ─────────────────────────
 	if ( function_exists( 'nexus_is_tools_page' ) && nexus_is_tools_page() ) {
 		hu_enqueue_css( 'nexus-tools-css', 'tools.css', [ 'nexus-design-system' ] );
+		hu_enqueue_js( 'nexus-tools-js', 'tools.js', [ 'nexus-core-js' ] );
 		wp_add_inline_style(
 			'blocksy-child-style',
 			'
