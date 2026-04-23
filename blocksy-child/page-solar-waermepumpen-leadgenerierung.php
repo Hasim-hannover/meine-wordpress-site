@@ -226,7 +226,6 @@ get_header();
 						<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
 						<div class="energy-hero__actions">
 							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="energy-text-link" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Audit starten</a>
 						</div>
 					</div>
 
@@ -243,7 +242,6 @@ get_header();
 						<p>E3 New Energy ist ein regionaler Energieanbieter für Photovoltaik, Wärmepumpen und Speicherlösungen. Ausgangslage: Hohe Kosten pro Anfrage durch Portal-Zukauf, keine eigene digitale Anfrage-Infrastruktur. In 9 Monaten: eigenes System aufgebaut, Kosten pro Anfrage um 83 % gesenkt, Vertrieb arbeitet nur noch mit vorqualifizierten Anfragen.</p>
 						<div class="energy-proof__actions">
 							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
-							<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_proof_audit" data-track-category="lead_gen">Audit starten</a>
 						</div>
 					</div>
 
@@ -586,7 +584,6 @@ get_header();
 					<h2>Eigene Anfragen statt Portal-Abhängigkeit. In 2 Minuten Situation einordnen — Ergebnis per E-Mail.</h2>
 					<div class="energy-cta-box__actions">
 						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
-						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_footer_audit" data-track-category="lead_gen">Audit starten</a>
 					</div>
 				</div>
 			</div>

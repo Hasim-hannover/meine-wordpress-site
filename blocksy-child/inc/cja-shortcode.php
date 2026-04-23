@@ -131,16 +131,15 @@ function cja_audit_shortcode() {
 
 			<div class="cja-cta-section cja-reveal">
 				<p class="cja-cta-kicker">Nächster Schritt</p>
-				<h2>Wenn das nach Ihrem Setup klingt, ist jetzt die Anfrage dran.</h2>
-				<p>Der Audit war die Einordnung. Der nächste Schritt ist das qualifizierte Formular für Solar- und Wärmepumpen-Anbieter, damit aus Diagnose ein konkretes Projekt wird.</p>
+				<h2>Wenn das nach Ihrem Setup klingt, ist jetzt die Einordnung dran.</h2>
+				<p>Der Audit war die Diagnose. Der nächste Schritt ist ein kurzes Formular — Sie erhalten eine persönliche Einschätzung per E-Mail, ohne Pitch.</p>
 				<div class="cja-cta-actions">
-					<a href="<?php echo esc_url( $request_url ); ?>" class="cja-cta-button" data-track-action="cja_results_request" data-track-category="lead_gen" data-track-section="growth_audit_results">Anfrage stellen</a>
-					<a href="#form" class="cja-cta-link" data-track-action="cja_results_restart" data-track-category="lead_gen" data-track-section="growth_audit_results">Audit erneut starten</a>
+					<a href="<?php echo esc_url( $request_url ); ?>" class="cja-cta-button" data-track-action="cja_results_request" data-track-category="lead_gen" data-track-section="growth_audit_results">Einordnung anfordern</a>
 				</div>
-				<div class="cja-cta-meta">2 Minuten · qualifizierte Anfrage · klarer nächster Schritt</div>
+				<div class="cja-cta-meta">2 Minuten · persönliche Rückmeldung · kein Pflicht-Call</div>
 			</div>
 
-			<div class="cja-footer-line">Diagnose für Solar- und Wärmepumpen-Anbieter.</div>
+			<div class="cja-footer-line">Diagnose für WordPress-B2B-Websites.</div>
 		</div>
 	</div>
 	<?php
