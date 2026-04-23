@@ -417,7 +417,7 @@
 
     if (submitButton) {
       setDisplayed(submitButton, isLast, 'inline-flex');
-      submitButton.textContent = config.submitLabel || 'Growth Audit passend einordnen';
+      submitButton.textContent = config.submitLabel || 'System-Diagnose passend einordnen';
     }
   }
 
@@ -742,7 +742,7 @@
 
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = config.submitLabel || 'Growth Audit passend einordnen';
+          submitButton.textContent = config.submitLabel || 'System-Diagnose passend einordnen';
         }
       });
   }

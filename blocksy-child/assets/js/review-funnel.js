@@ -7,7 +7,7 @@
   'use strict';
 
   var config = window.NexusReviewConfig || {};
-  var auditLabel = config.auditLabel || 'Growth Audit';
+  var auditLabel = config.auditLabel || 'System-Diagnose';
   var submitLabel = config.submitLabel || (auditLabel + ' anfragen');
   var AUTO_ADVANCE_DELAY = 500;
   var FEEDBACK_ID = 'review-form-feedback';

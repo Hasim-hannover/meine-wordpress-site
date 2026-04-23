@@ -115,7 +115,7 @@ $project_phases = [
 
 $background_paragraphs = [
 	'Mein Zugang ist Medienwissenschaften, nicht Design. Deshalb schaue ich zuerst auf Sprache, Entscheidung und Signalqualität.',
-	'Über Jahre habe ich B2B-WordPress-Systeme für Maschinenbau und Dienstleistung gebaut. Technisch sauber war selten das eigentliche Problem.',
+	'Über Jahre habe ich B2B-Anfrage-Systeme für Maschinenbau und Dienstleistung gebaut. Technisch sauber war selten das eigentliche Problem.',
 	'Das Solar-Mandat hat die Richtung festgezogen. 120 € CPL, frustrierter Inhaber, Tracking ohne belastbare Rückmeldung.',
 	'Als der CPL auf 20 € fiel, war klar, wo die Methode am stärksten greift. Seitdem konzentriere ich mich auf Solar- und Wärmepumpen-Anbieter im DACH-Raum.',
 ];
@@ -338,7 +338,7 @@ get_header();
 			<div class="nx-container">
 				<div class="about-close__inner">
 					<h2 class="nx-headline-section">Prüfen wir Ihren Status quo.</h2>
-					<p>Der Growth Audit zeigt in 30–45 Minuten, wo Ihr Anfrage-System konkret klemmt – von der Landingpage bis zur Attribution. Kein Verkaufsgespräch, keine Präsentation. Entweder der Fit passt, oder ich sage Ihnen, welcher Partner besser wäre.</p>
+					<p>Die System-Diagnose zeigt in 30–45 Minuten, wo Ihr Anfrage-System konkret klemmt – von der Landingpage bis zur Attribution. Kein Verkaufsgespräch, keine Präsentation. Entweder der Fit passt, oder ich sage Ihnen, welcher Partner besser wäre.</p>
 					<p class="about-close__actions">
 						<a
 							href="<?php echo esc_url( $request_url ); ?>"

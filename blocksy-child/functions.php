@@ -26,7 +26,7 @@ $modules = [
 	'glossary-autolink.php', // Auto-Linking: Glossar-Begriffe in Blog-Posts verlinken
 	'wgos-cluster-pages.php', // Versionierte Cluster-/Pillar-Pages und Blog-Asset-Bridges
 	'acf.php',            // ACF Feldgruppen-Registrierung (SEO, KPI, Comparison)
-	'cja-shortcode.php',  // Instant-Results Growth Audit als Shortcode
+	'cja-shortcode.php',  // Instant-Results System-Diagnose als Shortcode
 	'audit-page.php',     // Audit-Shell-Fallback für die Audit-Landing-Page
 	'tools-page.php',     // Versionierter Tools-Hub + Fallback für die Tools-Seite
 	'header.php',         // Eigener globaler Header + Navigation

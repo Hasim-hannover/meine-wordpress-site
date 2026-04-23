@@ -42,7 +42,7 @@ if ( empty( $audit_header_meta_items ) ) {
 	<div class="nx-container">
 		<div class="nx-site-header__shell nx-site-header__shell--audit">
 			<div class="nx-site-header__brand-block">
-				<span class="nx-site-header__eyebrow">Growth Audit</span>
+				<span class="nx-site-header__eyebrow">System-Diagnose</span>
 				<a
 					class="site-logo nx-site-header__brand"
 					href="<?php echo esc_url( home_url( '/' ) ); ?>"

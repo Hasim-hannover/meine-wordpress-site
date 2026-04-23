@@ -30,7 +30,7 @@
  *         'actions' => [
  *           [
  *             'url'      => home_url( '/growth-audit/' ),
- *             'label'    => 'Growth Audit starten',
+ *             'label'    => 'System-Diagnose starten',
  *             'class'    => 'nx-btn nx-btn--primary',
  *             'action'   => 'cta_service_system_audit',
  *             'category' => 'lead_gen',

@@ -94,7 +94,7 @@ $service_schema = [
 	'@type'       => 'Service',
 	'@id'         => trailingslashit( $page_url ) . '#service',
 	'name'        => 'Website als Vertriebssystem für Solar- und Wärmepumpen-Anbieter',
-	'serviceType' => 'B2B Website-, Tracking- und Conversion-System für Solar-, Wärmepumpen-, Speicher- und Energie-Anbieter',
+	'serviceType' => 'Aufbau eigener Anfrage-Systeme zur Ablösung von Portal-Leads für Solar-, Wärmepumpen-, Speicher- und Energie-Anbieter',
 	'url'         => $page_url,
 	'description' => 'Eigenes Anfrage-System für Solar- und Wärmepumpen-Betriebe: Schluss mit teuren Portal-Leads. Referenz E3 New Energy — 83 % weniger Kosten pro Anfrage in 9 Monaten.',
 	'provider'    => [
@@ -104,7 +104,7 @@ $service_schema = [
 	],
 	'audience'    => [
 		'@type'        => 'Audience',
-		'audienceType' => 'B2B-Unternehmen aus Solar, Wärmepumpe, Speicher und Energielösungen',
+		'audienceType' => 'Solar-, Wärmepumpen-, Speicher- und Energie-Anbieter im DACH-Raum',
 	],
 	'areaServed'  => [
 		[
@@ -116,7 +116,7 @@ $service_schema = [
 		'@type'         => 'Offer',
 		'price'         => '0',
 		'priceCurrency' => 'EUR',
-		'description'   => 'Growth Audit als diagnostischer Einstieg in Website-, Tracking- und Conversion-Optimierung.',
+		'description'   => 'Diagnostische System-Einordnung für Ihre Anfrage-Prozesse.',
 	],
 ];
 

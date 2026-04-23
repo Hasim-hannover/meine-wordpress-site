@@ -68,7 +68,7 @@ $pillar = $pillar_map[$cat_slug] ?? [
     'icon'        => '📄',
     'badge'       => $cat_name,
     'subtitle'    => wp_strip_all_tags($cat_description) ?: 'Analysen und Insights zu ' . esc_html($cat_name) . '.',
-    'cta_label'   => 'Growth Audit',
+    'cta_label'   => 'System-Diagnose',
     'cta_url'     => $audit_url,
     'cta_text'    => 'Finden Sie heraus, wo Ihre Website Potenzial liegen lässt.',
 ];
@@ -255,12 +255,12 @@ if ($featured_query->have_posts()) {
                         </ul>
                     </div>
 
-                    <!-- Newsletter / Audit CTA -->
+                    <!-- Newsletter / Diagnose CTA -->
                     <div class="pillar-sidebar__audit">
                         <h4>Wo verbrennt Ihre Website Geld?</h4>
-                        <p>Der Growth Audit zeigt, wo Technik, SEO und Conversion im Zusammenspiel Reibung erzeugen.</p>
+                        <p>Die System-Diagnose zeigt, wo Technik, SEO und Conversion im Zusammenspiel Reibung erzeugen.</p>
                         <a href="<?php echo esc_url($audit_url); ?>" class="nx-btn nx-btn--ghost nx-btn--full nx-btn--sm">
-                            Audit starten →
+                            System-Diagnose starten →
                         </a>
                     </div>
                 </aside>

@@ -339,7 +339,7 @@ return [
 			],
 			[
 				'key'    => 'audit',
-				'label'  => 'Growth Audit',
+				'label'  => 'System-Diagnose',
 				'reason' => 'Ist der richtige Einstieg, wenn Owned Leads gewünscht sind, das System aber noch keine saubere Reihenfolge hat.',
 			],
 		],

@@ -22,7 +22,7 @@ $page_url                     = get_permalink( get_queried_object_id() );
 $public_proof                 = function_exists( 'nexus_get_public_proof_data' ) ? nexus_get_public_proof_data() : [];
 $canonical_ownership_sentence = function_exists( 'nexus_get_public_ownership_sentence' ) ? nexus_get_public_ownership_sentence() : 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.';
 $framework_label              = function_exists( 'nexus_get_public_framework_label' ) ? nexus_get_public_framework_label() : 'WGOS = WordPress Growth Operating System';
-$audit_cta_label              = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+$audit_cta_label              = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'System-Diagnose starten';
 $audit_compact_microcopy      = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '60 Sek. · priorisierte Hebel · keine E-Mail';
 $diagram_svg_markup           = '';
 $diagram_svg_path             = get_stylesheet_directory() . '/assets/brand/wgos-system-diagram.svg';
@@ -250,7 +250,7 @@ $faq_items = [
 	],
 	[
 		'question' => 'Was kostet die Zusammenarbeit?',
-		'answer'   => 'Der Einstieg beginnt ab 1.500 €/Monat. Die passende Tiefe ergibt sich aus dem Growth Audit. Details stehen in der Paket-Übersicht oben.',
+		'answer'   => 'Der Einstieg beginnt ab 1.500 €/Monat. Die passende Tiefe ergibt sich aus der System-Diagnose. Details stehen in der Paket-Übersicht oben.',
 	],
 ];
 
@@ -372,7 +372,7 @@ foreach ( $faq_items as $faq_item ) {
 				</div>
 
 				<div class="wgos-mid-cta">
-					<p>Sie sehen das System. Der Growth Audit zeigt, welcher Bereich bei Ihnen zuerst den größten Hebel hat.</p>
+					<p>Sie sehen das System. Die System-Diagnose zeigt, welcher Bereich bei Ihnen zuerst den größten Hebel hat.</p>
 					<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track="cta_click_audit" data-track-action="cta_click_audit" data-track-category="lead_gen" data-track-section="mid_cta"><?php echo esc_html( $audit_cta_label ); ?></a>
 					<p class="nx-cta-microcopy"><?php echo esc_html( $audit_compact_microcopy ); ?></p>
 				</div>

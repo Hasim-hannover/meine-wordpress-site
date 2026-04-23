@@ -148,10 +148,10 @@ get_header();
 					</div>
 				<?php endif; ?>
 
-				<!-- Audit CTA am Ende aller Artikel -->
-				<div class="blog-archive-infeed-cta" aria-label="Kostenloser Growth Audit">
+				<!-- Diagnose CTA am Ende aller Artikel -->
+				<div class="blog-archive-infeed-cta" aria-label="Kostenlose System-Diagnose">
 					<div class="blog-archive-infeed-cta__inner">
-						<span class="blog-archive-infeed-cta__tag">Kostenloser Audit</span>
+						<span class="blog-archive-infeed-cta__tag">Kostenlose Diagnose</span>
 						<h2 class="blog-archive-infeed-cta__headline">Lassen Sie es uns konkret machen.</h2>
 						<p class="blog-archive-infeed-cta__sub">
 							Persönliche Analyse Ihrer Website. Schriftliche Rückmeldung mit den 3 stärksten Bremsen — in 48 Stunden.
@@ -162,7 +162,7 @@ get_header();
 							data-track-action="cta_blog_archive_end"
 							data-track-category="lead_gen"
 						>
-							Audit starten
+							System-Diagnose starten
 						</a>
 					</div>
 				</div>

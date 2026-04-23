@@ -1,6 +1,6 @@
 <?php
 /**
- * Growth Audit shortcode for the instant analysis flow.
+ * System-Diagnose shortcode for the instant analysis flow.
  *
  * @package Blocksy_Child
  */
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Render the instant Growth Audit app.
+ * Render the instant System-Diagnose app.
  *
  * @return string
  */
@@ -70,9 +70,9 @@ function cja_audit_shortcode() {
 		<span id="form" class="cja-anchor" aria-hidden="true"></span>
 
 		<div class="cja-phase cja-hero" id="cja-input">
-			<span class="cja-overline">60-Sekunden-Diagnose für WordPress-B2B-Websites</span>
-			<h1 class="cja-headline">In 60 Sekunden sehen Sie, wo Ihre Website Leads verliert.</h1>
-			<p class="cja-subtitle">Der Audit zeigt direkt, wo Performance, Messbarkeit, SEO, Conversion und Inhalt Nachfrage bremsen und welche Hebel zuerst Wirkung versprechen.</p>
+			<span class="cja-overline">60-Sekunden-Diagnose für Solar- und Wärmepumpen-Anbieter</span>
+			<h1 class="cja-headline">In 60 Sekunden sehen Sie, wo Ihre Website Anfragen verliert.</h1>
+			<p class="cja-subtitle">Die Diagnose zeigt direkt, wo Performance, Messbarkeit, Vertrauen, Anfragepfad und Vorqualifizierung qualifizierte Anfragen bremsen — und welche Hebel zuerst Wirkung versprechen.</p>
 
 			<div class="cja-input-group">
 				<label class="screen-reader-text" for="cja-url-input">Website-URL</label>
@@ -81,9 +81,9 @@ function cja_audit_shortcode() {
 			</div>
 			<p class="cja-input-help">Starten Sie mit Ihrer Startseite oder der wichtigsten Angebotsseite. Sie sehen direkt die größten Reibungen und priorisierten Hebel.</p>
 
-			<div class="cja-trust-line" aria-label="Audit-Vertrauen">
+			<div class="cja-trust-line" aria-label="Diagnose-Vertrauen">
 				<span>Keine E-Mail nötig</span>
-				<span>WordPress- und B2B-Fokus</span>
+				<span>Fokus: Solar, Wärmepumpe, Speicher</span>
 				<span>Priorisierte Hebel statt Tool-Score</span>
 			</div>
 
@@ -131,15 +131,15 @@ function cja_audit_shortcode() {
 
 			<div class="cja-cta-section cja-reveal">
 				<p class="cja-cta-kicker">Nächster Schritt</p>
-				<h2>Wenn das nach Ihrem Setup klingt, ist jetzt die Einordnung dran.</h2>
-				<p>Der Audit war die Diagnose. Der nächste Schritt ist ein kurzes Formular — Sie erhalten eine persönliche Einschätzung per E-Mail, ohne Pitch.</p>
+				<h2>Wenn das nach Ihrer Situation klingt, folgt jetzt die persönliche Einordnung.</h2>
+				<p>Kurz beschreiben, wo Ihr Anfrageprozess heute steht — Sie erhalten eine persönliche Einschätzung per E-Mail, ohne Pitch.</p>
 				<div class="cja-cta-actions">
 					<a href="<?php echo esc_url( $request_url ); ?>" class="cja-cta-button" data-track-action="cja_results_request" data-track-category="lead_gen" data-track-section="growth_audit_results">Einordnung anfordern</a>
 				</div>
 				<div class="cja-cta-meta">2 Minuten · persönliche Rückmeldung · kein Pflicht-Call</div>
 			</div>
 
-			<div class="cja-footer-line">Diagnose für WordPress-B2B-Websites.</div>
+			<div class="cja-footer-line">System-Diagnose für Solar- und Wärmepumpen-Anbieter.</div>
 		</div>
 	</div>
 	<?php

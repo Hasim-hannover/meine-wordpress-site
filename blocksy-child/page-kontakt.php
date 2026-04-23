@@ -61,7 +61,7 @@ $type_copy_map         = [
 		'message_label'       => 'Kurzbeschreibung',
 		'message_help'        => 'Welche URL ist relevant? Was ist unklar? Welches Ergebnis wünschen Sie sich?',
 		'message_placeholder' => "1. Seite: Welche URL ist relevant?\n2. Unklarheit: Was bremst gerade?\n3. Ziel: Was soll sich verbessern?",
-		'submit_label'        => 'Growth Audit anfragen',
+		'submit_label'        => 'System-Diagnose anfragen',
 		'timeline_label'      => 'Zeitfenster',
 	],
 	'analysis'       => [
@@ -124,10 +124,10 @@ $is_scoped_landing     = $has_explicit_type && ! $is_general_type && ! $is_clien
 $current_type_label    = isset( $request_type_options[ $selected_type ]['label'] ) ? (string) $request_type_options[ $selected_type ]['label'] : 'Kontakt';
 
 $hero_eyebrow = $is_scoped_landing ? $current_type_label : 'Kontakt';
-$hero_title   = $is_scoped_landing ? $current_type_label : 'Growth Audit, Folgeanalyse oder Weiterentwicklung.';
+$hero_title   = $is_scoped_landing ? $current_type_label : 'System-Diagnose, Folgeanalyse oder Weiterentwicklung.';
 $hero_lead    = $is_scoped_landing
 	? 'Beschreiben Sie Ihr Anliegen in wenigen Feldern. Sie erhalten eine persönliche Einschätzung und eine saubere Einordnung ohne Sales-Nebel.'
-	: 'Ein zentraler Einstieg für Growth Audit, fokussierte Folgeanalyse, Umsetzung / Optimierung, laufende Weiterentwicklung, allgemeine Anfragen und Bestandskunden.';
+	: 'Ein zentraler Einstieg für System-Diagnose, fokussierte Folgeanalyse, Umsetzung / Optimierung, laufende Weiterentwicklung, allgemeine Anfragen und Bestandskunden.';
 $hero_cta     = $is_scoped_landing ? 'Anfrage ausfüllen' : 'Anfrage starten';
 
 $auto_scroll  = $has_explicit_type || '' !== $selected_focus;

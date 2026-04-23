@@ -418,7 +418,7 @@ while ( have_posts() ) :
 
 						<h3>Growth-Audit-Anfrage</h3>
 						<p>
-							Auf der Seite zum Growth Audit können Sie eine Anfrage stellen. Dabei werden
+							Auf der Seite zur System-Diagnose können Sie eine Anfrage stellen. Dabei werden
 							insbesondere Name, geschäftliche E-Mail-Adresse, Unternehmen, URL der zu
 							prüfenden Seite sowie Ihre inhaltlichen Angaben zur Anfrage verarbeitet.
 						</p>

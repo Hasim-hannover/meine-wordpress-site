@@ -5,50 +5,58 @@ Skills reference this file instead of duplicating brand rules.
 
 ## Identity
 
-- Role: **WordPress Growth Architect fuer B2B**
-- Entity: Hasim Uener, hasimuener.de
-- Not: Agentur, WordPress Specialist, Webdesign-Dienstleister
+- Role: **Architekt für eigene Anfrage-Systeme**
+- Entity: Haşim Üner, hasimuener.de
+- Not: WordPress-Agentur, B2B-Generalist, Performance-Marketing-Agentur, Webdesign-Dienstleister
 
 ## Positioning
 
-- WordPress, B2B, Leads, Conversion, Tracking, SEO, Nachfrage-Systeme
-- SEO, Tracking, Privacy/Consent, CRO, and WordPress implementation are one connected system
-- Owned-first before paid scaling
-- Diagnose before pitch
-- Clarity before feature count
+**Ich baue Solar- und Wärmepumpen-Anbietern im DACH-Raum eigene Anfrage-Systeme, die Portal-Abhängigkeit ablösen und Leadkosten messbar senken.**
+
+- Zielgruppe: Solar-, Wärmepumpen-, Speicher- und Energie-Anbieter mit eigenem Vertrieb (typ. 10–25 Mitarbeiter)
+- Wettbewerb: Lead-Portale (Aroundhome, Check24, DAA) — nicht Webdesign-Agenturen
+- Website, Tracking, Vorqualifizierung und Werbekanal-Steuerung sind ein verbundenes System
+- Eigene Nachfrage-Infrastruktur vor Portal-Zukauf
+- Diagnose vor Pitch
+- Klarheit vor Feature-Count
 
 ## Offer Ladder
 
 ```
-Audit -> Blueprint -> Implementation/Retainer
+System-Diagnose -> Blueprint -> Umsetzung / Retainer
 ```
 
-- Primary CTA: `/growth-audit/`
-- Secondary paths: `/wordpress-growth-operating-system/`, `/ergebnisse/`, `/blog/`
-- Frame the audit as a strategic diagnosis entry point, not a gimmicky free tool
+- Primary CTA: Anfrage stellen (`/solar-waermepumpen-leadgenerierung/#energie-anfrage`)
+- Sekundärer Pfad: System-Diagnose (URL-Slug `/growth-audit/` bleibt aus SEO-Gründen; Label ist "System-Diagnose")
+- Die System-Diagnose ist diagnostischer Einstieg, kein gimmicky Gratis-Tool
 
 ## Tone
 
-- Clear, premium, direct, strategic
-- Decision-maker copy over generic agency language
-- Technical fixes before cosmetic polish
+- Klar, direkt, handwerklich, entscheidungssicher
+- Sprache für Geschäftsführer und Vertriebsleiter, nicht für Marketing-Abteilungen
+- Technische Klarheit vor kosmetischer Politur
 
 ## Preferred Terms
 
-`Website`, `Nachfrage`, `Leads`, `Anfragen`, `Wachstumspotenzial`,
-`priorisierte Hebel`, `Diagnose`, `Klarheit`, `Conversion`, `Tracking`,
-`SEO`, `WordPress`, `B2B`, `Nachfrage-Systeme`
+`Anfrage-System`, `eigene Anfragen`, `Portal-Abhängigkeit`, `Leadkosten`,
+`Kosten pro Anfrage`, `qualifizierte Anfragen`, `Abschlussquote`,
+`Vorqualifizierung`, `Tracking`, `Nachfrage-Infrastruktur`,
+`System-Diagnose`, `Potenzial-Check`, `priorisierte Hebel`,
+`Solar`, `Wärmepumpe`, `Speicher`, `Energie-Anbieter`, `Handwerk`
 
 ## Anti-Patterns (Hard Bans)
 
-- Shopify as live positioning
-- Generic buzzwords without specifics
-- `kostenlos` as the only value proposition
-- Tool-like framing for the audit
-- Inflated revenue promises
-- Broad agency wording: `Leistungen`, `WordPress Specialist`, `Webdesign`
-- Equal-weight service catalog instead of diagnosis-first funnel
-- Copy that sells tactics before diagnosis
+- `Growth Audit` als user-facing Label (interne URL/IDs dürfen bleiben)
+- `WordPress` als Angebot oder Rolle (nur als Technologie im Nebensatz erlaubt)
+- `B2B` als Positionierung (zu generisch — wir sprechen Solar/Wärmepumpe)
+- `WordPress Specialist`, `WordPress-Agentur`, `Webdesign`, `Leistungen`
+- `Growth Architect`, generische Growth-/Marketing-Blasen-Begriffe
+- Shopify als Live-Positionierung
+- `kostenlos` als alleiniges Wertversprechen
+- Tool-artige Rahmung der Diagnose
+- Überhöhte Umsatzversprechen
+- Gleichgewichtiger Leistungskatalog statt Diagnose-first-Funnel
+- Copy, die Taktik vor Diagnose verkauft
 
 ## Brand Colors (Project Override)
 

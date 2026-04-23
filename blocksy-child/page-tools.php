@@ -242,10 +242,10 @@ get_header();
 				<div class="tools-card tools-cta-card">
 					<div class="tools-section-head">
 						<h2>Bereit für tiefere Einblicke?</h2>
-						<p>Unsere Tools zeigen erste Ansätze. Ein vollständiger Audit liefert Ihnen detaillierte Empfehlungen für messbare Verbesserungen.</p>
+						<p>Unsere Tools zeigen erste Ansätze. Eine vollständige System-Diagnose liefert Ihnen detaillierte Empfehlungen für messbare Verbesserungen.</p>
 					</div>
 					<div class="tools-cta-actions">
-						<a class="tool-btn tool-btn--primary" href="<?php echo esc_url(home_url('/growth-audit/')); ?>" data-track-action="cta_tools_page_audit" data-track-category="lead_gen" data-track-section="tools_cta">Growth Audit anfragen</a>
+						<a class="tool-btn tool-btn--primary" href="<?php echo esc_url(home_url('/growth-audit/')); ?>" data-track-action="cta_tools_page_audit" data-track-category="lead_gen" data-track-section="tools_cta">System-Diagnose anfragen</a>
 					</div>
 				</div>
 			</section>

@@ -79,7 +79,7 @@ function nexus_get_wgos_cluster_page_data() {
 				],
 			],
 			'meta_title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
-			'meta_description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability und interne Verlinkung fuer kaufnahe Seiten. Growth Audit als 60-Sekunden-Diagnose fuer priorisierte Hebel.',
+			'meta_description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability und interne Verlinkung fuer kaufnahe Seiten. System-Diagnose als 60-Sekunden-Diagnose fuer priorisierte Hebel.',
 			'schema_name'      => 'WordPress SEO Hannover – technisch sauber, messbar, B2B-ready',
 			'schema_description' => 'WGOS-Cluster für technisches SEO auf WordPress in Hannover: technische Basis, Seitenstruktur und conversion-nahe Sichtbarkeit für B2B-Websites.',
 		],
@@ -500,7 +500,7 @@ function nexus_get_wgos_cluster_page_proof_metrics() {
 		],
 		[
 			'value' => '60 Sek.',
-			'label' => 'Diagnose-Einstieg mit priorisierten Hebeln im Growth Audit',
+			'label' => 'Diagnose-Einstieg mit priorisierten Hebeln in der System-Diagnose',
 		],
 		[
 			'value' => '3 Proof-Routen',
@@ -549,7 +549,7 @@ function nexus_render_wgos_cluster_page( $page ) {
 	$method_steps  = nexus_get_wgos_cluster_page_method_steps();
 	$proof_note    = isset( $page['proof_note'] ) ? (string) $page['proof_note'] : '';
 	$proof_links   = isset( $page['proof_links'] ) && is_array( $page['proof_links'] ) ? $page['proof_links'] : [];
-	$audit_cta_label         = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'Growth Audit starten';
+	$audit_cta_label         = function_exists( 'nexus_get_audit_cta_label' ) ? nexus_get_audit_cta_label() : 'System-Diagnose starten';
 	$audit_compact_microcopy = function_exists( 'nexus_get_audit_compact_microcopy' ) ? nexus_get_audit_compact_microcopy() : '60 Sek. · priorisierte Hebel · keine E-Mail';
 
 	ob_start();
@@ -650,7 +650,7 @@ function nexus_render_wgos_cluster_page( $page ) {
 						echo esc_html(
 							'' !== $proof_note
 								? $proof_note
-								: 'Wenn Sie die öffentlichen Beispiele und die Herleitung dazu sehen wollen, gehen Sie zuerst in die Ergebnisse. Der Growth Audit klärt danach, welche dieser Hebel in Ihrer Lage wirklich zuerst zählen.'
+								: 'Wenn Sie die öffentlichen Beispiele und die Herleitung dazu sehen wollen, gehen Sie zuerst in die Ergebnisse. Die System-Diagnose klärt danach, welche dieser Hebel in Ihrer Lage wirklich zuerst zählen.'
 						);
 						?>
 					</p>
@@ -751,7 +751,7 @@ function nexus_render_wgos_cluster_page( $page ) {
 				<div class="nx-card nx-card--flat nx-cluster-cta">
 					<span class="nx-cluster-cta__kicker">Nächster Schritt</span>
 					<h2 class="nx-headline-section">Erst die Lage klären. Dann den richtigen Baustein priorisieren.</h2>
-					<p>Der Growth Audit zeigt, ob dieses Cluster jetzt dran ist oder ob Fundament, Messbarkeit oder Angebotslogik zuerst korrigiert werden müssen.</p>
+					<p>Die System-Diagnose zeigt, ob dieses Cluster jetzt dran ist oder ob Fundament, Messbarkeit oder Angebotslogik zuerst korrigiert werden müssen.</p>
 					<div class="nx-cluster-hero__actions">
 						<a href="<?php echo esc_url( $audit_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_cluster_footer_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
 						<a href="<?php echo esc_url( $asset_hub_url ); ?>" class="nx-btn nx-btn--ghost">Alle WGOS-Assets ansehen</a>

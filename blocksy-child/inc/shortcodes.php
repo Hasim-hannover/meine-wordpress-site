@@ -256,7 +256,7 @@ function hu_hero_section_shortcode() {
 			<div class="wp-container">
 				<div class="wp-hero-grid">
 					<div class="wp-hero-copy">
-						<span class="wp-badge nx-reveal">WordPress Growth Architect für B2B</span>
+						<span class="wp-badge nx-reveal">Architekt für eigene Anfrage-Systeme</span>
 						<h1 class="wp-hero-title nx-reveal">
 							Ich mache aus Ihrer<br><span>WordPress-Website ein planbares Nachfrage-System.</span>
 						</h1>
@@ -289,7 +289,7 @@ function hu_hero_section_shortcode() {
 					<div class="wp-hero-panel nx-reveal">
 						<div class="audit-card-premium" id="audit">
 							<div class="audit-card-premium__intro">
-								<span class="audit-card-premium__eyebrow">Growth Audit</span>
+								<span class="audit-card-premium__eyebrow">System-Diagnose</span>
 							</div>
 							<h2 class="audit-card-premium__title">Erster Schritt: Diagnose statt Pitch</h2>
 							<p class="audit-card-premium__copy">
@@ -512,7 +512,7 @@ function hu_wgos_block_shortcode() {
 			<div class="wp-process">
 				<div class="wp-step nx-reveal">
 					<div class="wp-step-num">1</div>
-					<h3>Growth Audit</h3>
+					<h3>System-Diagnose</h3>
 					<p>Der niedrigschwellige Einstieg. Wir machen sichtbar, wo Sichtbarkeit, Vertrauen, Datenqualität oder Lead-Capture wegbrechen und ob sich ein tieferer Eingriff lohnt.</p>
 				</div>
 				<div class="wp-step highlight-step nx-reveal">
@@ -705,7 +705,7 @@ function hu_faq_section_shortcode() {
 				</details>
 				<details class="nx-faq__item nx-reveal">
 					<summary>Wie startet die Zusammenarbeit?</summary>
-					<div class="nx-faq__content">Mit dem Growth Audit. Danach gibt es eine klare Priorität und den nächsten sinnvollen Schritt. Größere Folgeprojekte ergeben sich erst nach der Rückmeldung und persönlichem Kontakt.</div>
+					<div class="nx-faq__content">Mit der System-Diagnose. Danach gibt es eine klare Priorität und den nächsten sinnvollen Schritt. Größere Folgeprojekte ergeben sich erst nach der Rückmeldung und persönlichem Kontakt.</div>
 				</details>
 			</div>
 		</div>
@@ -808,7 +808,7 @@ function hu_cta_section_shortcode() {
 			<div class="nx-cta-box nx-reveal">
 				<span class="nx-badge nx-badge--gold" style="display:inline-block; margin-bottom:1.5rem;">Nächster Schritt</span>
 				<h2 id="cta-heading" style="font-size:clamp(1.8rem,3vw,2.4rem); margin-bottom:1rem; color:#fff;">Prüfen wir, wo Ihre WordPress-Seite Anfragen verliert.</h2>
-				<p>Im Growth Audit sehen Sie, wo Sichtbarkeit, Vertrauen, Datensignale oder Conversion wegbrechen und ob Ihre Website heute schon als Plattform trägt.</p>
+				<p>Im System-Diagnose sehen Sie, wo Sichtbarkeit, Vertrauen, Datensignale oder Conversion wegbrechen und ob Ihre Website heute schon als Plattform trägt.</p>
 
 				<div role="group" aria-label="Audit-Merkmale" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.75rem 1.5rem; margin-bottom:2rem;">
 					<span style="font-size:0.85rem; color:var(--nx-text-muted);">✓ klare Einschätzung statt Bauchgefühl</span>

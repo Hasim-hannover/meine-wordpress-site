@@ -1,6 +1,6 @@
 <?php
 /**
- * Audit CRM and intake funnel for the Growth Audit.
+ * Audit CRM and intake funnel for the System-Diagnose.
  *
  * @package Blocksy_Child
  */
@@ -75,7 +75,7 @@ function nexus_get_review_primary_goal_options() {
  */
 function nexus_get_audit_request_type_options() {
 	return [
-		'growth_audit'     => 'Growth Audit',
+		'growth_audit'     => 'System-Diagnose',
 		'growth_blueprint' => 'Growth Blueprint',
 		'implementation'   => 'Umsetzung / Weiterentwicklung',
 	];
@@ -91,7 +91,7 @@ function nexus_get_energy_intake_variant_label() {
 }
 
 /**
- * Check whether the request comes from the simplified Growth Audit landing page.
+ * Check whether the request comes from the simplified System-Diagnose landing page.
  *
  * @param string $variant Intake variant slug.
  * @return bool
@@ -101,12 +101,12 @@ function nexus_is_growth_audit_simple_intake_variant( $variant ) {
 }
 
 /**
- * Return the public label for the simplified Growth Audit intake.
+ * Return the public label for the simplified System-Diagnose intake.
  *
  * @return string
  */
 function nexus_get_growth_audit_simple_intake_variant_label() {
-	return 'Growth Audit Landingpage';
+	return 'System-Diagnose Landingpage';
 }
 
 /**
@@ -766,7 +766,7 @@ function nexus_get_review_request_success_message( $payload ) {
 	$variant = isset( $payload['intake_variant'] ) ? sanitize_key( (string) $payload['intake_variant'] ) : '';
 
 	if ( 'energy_systems' === $variant ) {
-		return 'Danke. Ich prüfe Ihre Angaben als B2B-Energiesystem und melde mich mit einer priorisierten ersten Einordnung. Wenn ein Growth Audit der sinnvollste nächste Schritt ist, sehen Sie das direkt in der Rückmeldung.';
+		return 'Danke. Ich prüfe Ihre Angaben als B2B-Energiesystem und melde mich mit einer priorisierten ersten Einordnung. Wenn ein System-Diagnose der sinnvollste nächste Schritt ist, sehen Sie das direkt in der Rückmeldung.';
 	}
 
 	if ( nexus_is_growth_audit_simple_intake_variant( $variant ) ) {
@@ -1052,7 +1052,7 @@ function nexus_validate_review_request_payload( $payload ) {
 }
 
 /**
- * Validate and sanitize the simplified Growth Audit landing page payload.
+ * Validate and sanitize the simplified System-Diagnose landing page payload.
  *
  * @param array $payload Raw request payload.
  * @return array|WP_Error
@@ -1967,7 +1967,7 @@ function nexus_render_review_request_details_meta_box( $post ) {
 	<div class="nexus-review-meta">
 		<div class="nexus-review-meta-group">
 			<strong>Audit-Typ</strong>
-			<p><?php echo esc_html( $audit_type ?: 'Growth Audit' ); ?></p>
+			<p><?php echo esc_html( $audit_type ?: 'System-Diagnose' ); ?></p>
 		</div>
 		<div class="nexus-review-meta-group">
 			<strong>Unternehmen</strong>
@@ -2246,7 +2246,7 @@ function nexus_render_review_request_columns( $column, $post_id ) {
 
 	switch ( $column ) {
 		case 'audit_type':
-			echo esc_html( (string) get_post_meta( $post_id, '_nexus_review_audit_type_label', true ) ?: 'Growth Audit' );
+			echo esc_html( (string) get_post_meta( $post_id, '_nexus_review_audit_type_label', true ) ?: 'System-Diagnose' );
 			break;
 
 		case 'review_status':

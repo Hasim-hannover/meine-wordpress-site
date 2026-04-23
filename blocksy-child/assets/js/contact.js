@@ -85,7 +85,7 @@
                 messageLabel: 'Kurzbeschreibung',
                 messageHelp: 'Welche URL ist relevant? Was ist unklar? Welches Ergebnis wünschen Sie sich?',
                 messagePlaceholder: '1. Seite: Welche URL ist relevant?\n2. Unklarheit: Was bremst gerade?\n3. Ziel: Was soll sich verbessern?',
-                submitLabel: 'Growth Audit anfragen',
+                submitLabel: 'System-Diagnose anfragen',
                 messageMinlength: 24,
                 timelineLabel: 'Zeitfenster',
                 showTimeline: false,
@@ -482,14 +482,14 @@
                 var statusValue = typeStatusBar.querySelector('.contact-type-status__value');
                 if (statusValue) {
                     var labels = {
-                        audit: 'Erstdiagnose / Growth Audit',
+                        audit: 'Erstdiagnose / System-Diagnose',
                         analysis: 'Fokussierte Folgeanalyse',
                         implementation: 'Umsetzung / Optimierung',
                         ongoing: 'Laufende Weiterentwicklung',
                         general: 'Allgemeine Anfrage',
                         client: 'Bestandskunde'
                     };
-                    statusValue.textContent = labels[requestType] || 'Erstdiagnose / Growth Audit';
+                    statusValue.textContent = labels[requestType] || 'Erstdiagnose / System-Diagnose';
                 }
             }
         }

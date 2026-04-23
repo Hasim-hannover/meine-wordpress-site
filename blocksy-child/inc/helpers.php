@@ -98,11 +98,11 @@ function nexus_get_public_proof_data() {
 			],
 		],
 		'ownership_sentence'  => 'Code, Inhalte, Zugänge und Setups bleiben bei Ihnen. Laufende Zusammenarbeit bedeutet Weiterentwicklung, nicht Abhängigkeit.',
-		'primary_term'        => 'WordPress als Nachfrage-System für B2B',
+		'primary_term'        => 'Eigenes Anfrage-System für Solar- und Wärmepumpen-Anbieter',
 		'framework_label'     => 'WGOS = WordPress Growth Operating System',
 		'framework_long'      => 'WordPress Growth Operating System',
 		'allowed_subterms'    => [
-			'Growth Audit',
+			'System-Diagnose',
 			'priorisierte Folgeanalyse',
 			'kontrollierte Weiterentwicklung',
 			'planbare Growth-Kapazität',
@@ -166,7 +166,7 @@ function nexus_get_public_framework_label() {
 }
 
 /**
- * Return the canonical entry CTA copy for the Growth Audit.
+ * Return the canonical entry CTA copy for the System-Diagnose.
  *
  * Keep purchase-intent copy in one place so the primary CTA label and its
  * supporting promise stay aligned across key surfaces.
@@ -181,31 +181,31 @@ function nexus_get_audit_cta_copy() {
 	}
 
 	$copy = [
-		'label'             => 'Growth Audit starten',
+		'label'             => 'System-Diagnose starten',
 		'compact_microcopy' => '60 Sek. · priorisierte Hebel · keine E-Mail',
 		'header_meta_items' => [
 			'60-Sekunden-Diagnose',
-			'WordPress- und B2B-Fokus',
+			'Fokus: Solar, Wärmepumpe, Speicher',
 		],
-		'footer_note'       => 'Growth Audit: In ca. 60 Sekunden sehen, wo Performance, Tracking, SEO und Content Nachfrage verlieren — mit priorisierten Hebeln statt generischem Score.',
+		'footer_note'       => 'System-Diagnose: In ca. 60 Sekunden sehen, wo Performance, Tracking, SEO und Content Anfragen verlieren — mit priorisierten Hebeln statt generischem Score.',
 	];
 
 	return $copy;
 }
 
 /**
- * Return the canonical primary CTA label for the Growth Audit.
+ * Return the canonical primary CTA label for the System-Diagnose.
  *
  * @return string
  */
 function nexus_get_audit_cta_label() {
 	$copy = nexus_get_audit_cta_copy();
 
-	return isset( $copy['label'] ) ? (string) $copy['label'] : 'Growth Audit starten';
+	return isset( $copy['label'] ) ? (string) $copy['label'] : 'System-Diagnose starten';
 }
 
 /**
- * Return the compact Growth Audit CTA microcopy.
+ * Return the compact System-Diagnose CTA microcopy.
  *
  * @return string
  */
@@ -216,7 +216,7 @@ function nexus_get_audit_compact_microcopy() {
 }
 
 /**
- * Return the compact metadata items used in the audit header.
+ * Return the compact metadata items used in the System-Diagnose header.
  *
  * @return array<int, string>
  */
@@ -237,7 +237,7 @@ function nexus_get_audit_header_meta_items() {
 }
 
 /**
- * Return the full Growth Audit footer note.
+ * Return the full System-Diagnose footer note.
  *
  * @return string
  */
