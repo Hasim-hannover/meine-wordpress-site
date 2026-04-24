@@ -877,12 +877,18 @@ add_action( 'init', 'nexus_maybe_ensure_energy_systems_page', 27 );
  * @return array<string, string>
  */
 function nexus_get_legacy_offer_redirect_map() {
+	$agentur_url = nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) );
+
 	return [
 		// /meta-ads/ ehemals WGOS-Landung. WGOS ist deprecated in der neuen Positionierung;
 		// Redirect zur System-Diagnose, damit Handwerker nicht im alten Systemlogik-Hub landen.
 		'/meta-ads/'                   => nexus_get_audit_url(),
-		'/seo/'                        => nexus_get_primary_public_url( 'seo', home_url( '/wordpress-seo-hannover/' ) ),
-		'/wordpress-agentur/'          => nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) ),
+		// SEO- und Wartungs-Seiten konsolidiert auf die Agentur-Money-Page (Anker-Sektionen).
+		// Löst Kannibalisierung für "wordpress agentur hannover" + transferiert SEO-Equity.
+		'/wordpress-seo-hannover/'     => trailingslashit( $agentur_url ) . '#technisches-seo',
+		'/wordpress-wartung-hannover/' => trailingslashit( $agentur_url ) . '#wordpress-wartung',
+		'/seo/'                        => trailingslashit( $agentur_url ) . '#technisches-seo',
+		'/wordpress-agentur/'          => $agentur_url,
 		'/roi-rechner/'                => nexus_get_primary_public_url( 'tools', home_url( '/kostenlose-tools/' ) ),
 	];
 }

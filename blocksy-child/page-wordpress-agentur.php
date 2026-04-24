@@ -38,7 +38,7 @@ $pain_cards = [
 	[
 		'icon'  => '01',
 		'title' => 'Sichtbarkeit ohne Richtung',
-		'text'  => 'Es gibt Inhalte, aber keine saubere Verbindung zwischen Suchintention, Angebotsseite und nächstem Schritt. Genau dort greifen <a href="' . esc_url( $seo_url ) . '">technische SEO</a> und Angebotslogik ineinander.',
+		'text'  => 'Es gibt Inhalte, aber keine saubere Verbindung zwischen Suchintention, Angebotsseite und nächstem Schritt. Genau dort greifen <a href="#technisches-seo">technisches SEO</a> und Angebotslogik ineinander.',
 	],
 	[
 		'icon'  => '02',
@@ -292,8 +292,8 @@ get_header();
 					<h2 class="nx-headline-section">Spezialisierte Leistungen</h2>
 				</div>
 				<div class="wp-agentur-spoke-grid">
-					<a href="<?php echo esc_url( $seo_url ); ?>" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_seo" data-track-category="navigation">
-						<span class="wp-agentur-spoke-card__title">WordPress SEO Hannover</span>
+					<a href="#technisches-seo" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_seo" data-track-category="navigation">
+						<span class="wp-agentur-spoke-card__title">Technisches SEO</span>
 						<span class="wp-agentur-spoke-card__desc">Crawlability, Seitenstruktur, interne Verlinkung und technische Fixes für kaufnahe Rankings.</span>
 					</a>
 					<a href="<?php echo esc_url( $tracking_url ); ?>" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_tracking" data-track-category="navigation">
@@ -304,10 +304,73 @@ get_header();
 						<span class="wp-agentur-spoke-card__title">Conversion Rate Optimierung für WordPress</span>
 						<span class="wp-agentur-spoke-card__desc">Angebotsseiten, Proof, CTA-Führung und Formulare so ordnen, dass aus Besuchern Anfragen werden.</span>
 					</a>
-					<a href="<?php echo esc_url( $wartung_url ); ?>" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_wartung" data-track-category="navigation">
+					<a href="#wordpress-wartung" class="wp-agentur-spoke-card" data-track-action="cta_agentur_spoke_wartung" data-track-category="navigation">
 						<span class="wp-agentur-spoke-card__title">WordPress Wartung Hannover</span>
-						<span class="wp-agentur-spoke-card__desc">Updates, Sicherheit, Backups und stabile Betriebsroutinen als WGOS-Fundament.</span>
+						<span class="wp-agentur-spoke-card__desc">Updates, Sicherheit, Backups und stabile Betriebsroutinen als Fundament für alles andere.</span>
 					</a>
+				</div>
+			</div>
+		</section>
+
+		<section id="technisches-seo" class="nx-section">
+			<div class="nx-container">
+				<div class="nx-section-header">
+					<h2 class="nx-headline-section">Technisches WordPress-SEO für Hannover und DACH</h2>
+					<p class="wp-agentur-section-intro">
+						Technisches SEO ist hier kein Meta-Feintuning, sondern Arbeit an Crawlability, Seitenstruktur und interner Verlinkung — priorisiert für kaufnahe Seitentypen wie Angebotsseiten, Audit-Einstiege und zentrale Proof-Seiten.
+					</p>
+				</div>
+				<div class="nx-prose wp-agentur-prose">
+					<h3>Was typischerweise klemmt</h3>
+					<ul class="premium-list">
+						<li><span class="check-icon">→</span><div>Kaufnahe Seiten indexieren schlecht, weil Crawlability und interne Verlinkung unklar sind.</div></li>
+						<li><span class="check-icon">→</span><div>Meta-Titel und Beschreibungen treffen die Suchintention nicht — Impressionen ohne Klicks.</div></li>
+						<li><span class="check-icon">→</span><div>Pillar- und Cluster-Logik fehlt: Inhalte bleiben Einzelseiten ohne Themen-Rückgrat.</div></li>
+						<li><span class="check-icon">→</span><div>Schema-Markup, Core Web Vitals und Server-Tuning sind isoliert statt als ein System verzahnt.</div></li>
+					</ul>
+
+					<h3>Wie ich das als WordPress-Agentur löse</h3>
+					<ul class="premium-list">
+						<li><span class="check-icon">✓</span><div>Technical SEO Audit mit priorisierter Hebel-Liste statt generischer Checkliste.</div></li>
+						<li><span class="check-icon">✓</span><div>Keyword-Strategie nach Suchintention und Seitentypen, nicht nach Suchvolumen.</div></li>
+						<li><span class="check-icon">✓</span><div>Pillar Pages und Content Hubs mit stringenter interner Verlinkung.</div></li>
+						<li><span class="check-icon">✓</span><div>On-Page-SEO: Snippets, Seitentitel und Headlines gegen die Suchintention geschärft.</div></li>
+						<li><span class="check-icon">✓</span><div>Local SEO für Hannover, wenn regionale Nachfrage relevant ist.</div></li>
+					</ul>
+					<p class="wp-agentur-section-intro">
+						Ob technisches SEO bei Ihrer Website heute den größten Hebel hat, zeigt die <a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_agentur_seo_audit" data-track-category="lead_gen">System-Diagnose</a> in ca. 60 Sekunden.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="wordpress-wartung" class="nx-section">
+			<div class="nx-container">
+				<div class="nx-section-header">
+					<h2 class="nx-headline-section">WordPress Wartung und Wartungsvertrag in Hannover</h2>
+					<p class="wp-agentur-section-intro">
+						Wartung ist hier kein Ticket-System, sondern der Betriebsblock aus Updates, Sicherheit, Backups, Performance und klaren Rollback-Prozessen — Fundament für alles, was darauf an SEO, Conversion und bezahlter Nachfrage aufbaut.
+					</p>
+				</div>
+				<div class="nx-prose wp-agentur-prose">
+					<h3>Was ein belastbarer WordPress-Wartungsvertrag abdeckt</h3>
+					<ul class="premium-list">
+						<li><span class="check-icon">✓</span><div>Security Hardening: Zugriffe, Rechte und Wiederherstellungswege abgesichert.</div></li>
+						<li><span class="check-icon">✓</span><div>Update-Management: planbar, testbar, rollback-fähig — kein Ad-hoc-Risiko.</div></li>
+						<li><span class="check-icon">✓</span><div>Backups und Monitoring mit verifizierter Wiederherstellung, nicht nur Dump-Dateien.</div></li>
+						<li><span class="check-icon">✓</span><div>Plugin-Audit: Reduktion von Wartungslast und Konflikten.</div></li>
+						<li><span class="check-icon">✓</span><div>Performance-Diagnose und bei Bedarf Server-Tuning.</div></li>
+					</ul>
+
+					<h3>Warum das kein generischer Wartungsvertrag ist</h3>
+					<ul class="premium-list">
+						<li><span class="check-icon">→</span><div>Direkter Ansprechpartner statt Support-Pipeline.</div></li>
+						<li><span class="check-icon">→</span><div>Wartung als Fundament — erst stabiler Betrieb, dann SEO, Conversion und Ads.</div></li>
+						<li><span class="check-icon">→</span><div>Für Unternehmen mit relevanter Website und regelmäßigem Traffic, nicht für Low-Traffic-Projekte.</div></li>
+					</ul>
+					<p class="wp-agentur-section-intro">
+						Wartungsvertrag anfragen: über den <a href="<?php echo esc_url( $contact_url ); ?>" data-track-action="cta_agentur_wartung_contact" data-track-category="lead_gen">Kontaktpfad</a> oder direkt in der <a href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_agentur_wartung_audit" data-track-category="lead_gen">System-Diagnose</a> einordnen.
+					</p>
 				</div>
 			</div>
 		</section>
