@@ -88,25 +88,25 @@ function hu_output_schema()
         ],
         'hasOfferCatalog' => [
             '@type'           => 'OfferCatalog',
-            'name'            => 'Leistungen für B2B-Unternehmen',
+            'name'            => 'Leistungen für Solar-, Wärmepumpen- und B2B-Anbieter',
             'itemListElement' => [
                 [
                     '@type'       => 'Offer',
                     'name'        => 'System-Diagnose',
-                    'description' => 'Kostenloser Ersteinstieg: persönliche Analyse der drei größten Anfragebremsen auf einer B2B-Website.',
+                    'description' => 'Kostenloser Ersteinstieg: persönliche Analyse der drei größten Anfragebremsen für Solar-, Wärmepumpen- und B2B-Websites.',
                     'url'         => home_url('/growth-audit/'),
                 ],
                 [
                     '@type'       => 'Offer',
-                    'name'        => 'WordPress Growth Operating System (WGOS)',
-                    'description' => 'Strukturiertes Nachfrage-System: Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion auf WordPress-Basis.',
-                    'url'         => home_url('/wordpress-growth-operating-system/'),
+                    'name'        => 'Eigenes Anfrage-System für Solar- und Wärmepumpen-Anbieter',
+                    'description' => 'Aufbau eigener Anfrage-Systeme zur Ablösung von Portal-Leads: Website, Tracking, Vorqualifizierung und Kanal-Steuerung als verbundenes System.',
+                    'url'         => home_url('/solar-waermepumpen-leadgenerierung/'),
                 ],
                 [
                     '@type'       => 'Offer',
-                    'name'        => 'Technische SEO',
-                    'description' => 'Technische Suchmaschinenoptimierung: Core Web Vitals, Crawlability, Schema-Markup und Seitenarchitektur.',
-                    'url'         => home_url('/seo-fuer-b2b-unternehmen/'),
+                    'name'        => 'WordPress Agentur Hannover',
+                    'description' => 'WordPress-Entwicklung für B2B in Hannover: technisches SEO, Wartungsvertrag, Tracking und Conversion als verbundenes System.',
+                    'url'         => home_url('/wordpress-agentur-hannover/'),
                 ],
                 [
                     '@type'       => 'Offer',
@@ -117,14 +117,8 @@ function hu_output_schema()
                 [
                     '@type'       => 'Offer',
                     'name'        => 'Conversion-Optimierung',
-                    'description' => 'Systematische Optimierung von Angebotsseiten und Nutzerpfaden für mehr qualifizierte B2B-Anfragen.',
+                    'description' => 'Systematische Optimierung von Angebotsseiten und Nutzerpfaden für mehr qualifizierte Anfragen.',
                     'url'         => home_url('/conversion-optimierung/'),
-                ],
-                [
-                    '@type'       => 'Offer',
-                    'name'        => 'WordPress Agentur Hannover',
-                    'description' => 'WordPress-Entwicklung und Weiterentwicklung als Nachfragesystem für B2B-Unternehmen in Hannover und der Region.',
-                    'url'         => home_url('/wordpress-agentur-hannover/'),
                 ],
             ],
         ],
@@ -136,9 +130,9 @@ function hu_output_schema()
     $service_definitions = [
         'wordpress-agentur-hannover' => [
             'name'        => 'WordPress Agentur Hannover',
-            'description' => 'WordPress Agentur in Hannover für B2B-Unternehmen: Angebotsseiten, technische SEO, privacy-first Measurement, Conversion-Logik und kontrollierte Weiterentwicklung als Nachfrage-System.',
+            'description' => 'WordPress Agentur in Hannover für B2B-Unternehmen: technisches SEO, Wartungsvertrag, Tracking, Conversion und Angebotsseiten als ein verbundenes System mit kontrollierter Weiterentwicklung.',
             'serviceType' => 'WordPress Agentur',
-            'serviceOutput' => 'Steuerbares WordPress-System mit Angebotsseiten, Datenebene, KPI-Klarheit und vollen Zugängen'
+            'serviceOutput' => 'Steuerbares WordPress-System mit Angebotsseiten, technischem SEO, Wartung, Datenebene, KPI-Klarheit und vollen Zugängen'
         ],
 
         'customer-journey-audit' => [
@@ -189,26 +183,9 @@ function hu_output_schema()
             'serviceOutput' => 'Priorisierte Entscheidungsvorlage für die nächsten sinnvollen Struktur- und Umsetzungsentscheidungen'
         ],
 
-        'wordpress-wartung-hannover' => [
-            'name'        => 'WordPress Wartung Hannover',
-            'description' => 'WGOS-Cluster für WordPress-Wartung in Hannover: Updates, Sicherheit, Backups, Performance und kontrollierbare Betriebsroutinen für B2B-Websites.',
-            'serviceType' => 'WordPress Betrieb & Wartung',
-            'serviceOutput' => 'Stabiler, abgesicherter und kontrollierbarer WordPress-Betrieb als Fundament für Sichtbarkeit und Conversion'
-        ],
-
-        'wordpress-seo' => [
-            'name'        => 'WordPress SEO',
-            'description' => 'SEO-Optimierung für WordPress-Websites – von technischer SEO bis Content-Strategie.',
-            'serviceType' => 'SEO-Dienstleistung',
-            'serviceOutput' => 'Verbesserte Rankings & Conversion Rates'
-        ],
-
-        'wordpress-seo-hannover' => [
-            'name'        => 'Technisches SEO für WordPress in Hannover',
-            'description' => 'WGOS-Cluster für technisches SEO auf WordPress in Hannover: technische Basis, Seitenstruktur und conversion-nahe Sichtbarkeit für B2B-Websites.',
-            'serviceType' => 'Technisches SEO für WordPress',
-            'serviceOutput' => 'Priorisierte SEO-Bausteine aus Technical SEO, Keyword-Strategie, Pillar Pages und interner Verlinkung'
-        ],
+        // Legacy-Services wordpress-wartung-hannover, wordpress-seo, wordpress-seo-hannover entfernt:
+        // Seiten sind 301 auf /wordpress-agentur-hannover/#wordpress-wartung bzw. #technisches-seo konsolidiert,
+        // daher keine eigenständigen Service-Schemas mehr — gehören jetzt in die Agentur-Service-Beschreibung.
 
         'core-web-vitals-optimierung' => [
             'name'        => 'Speed & Core Web Vitals Optimierung',
@@ -285,42 +262,9 @@ function hu_output_schema()
             'serviceOutput' => 'Kampagnenfähige Zielseiten und belastbare Tracking-Signale für effiziente Paid-Aktivierung'
         ],
 
-        'wordpress-growth-operating-system' => [
-            'name'        => 'WordPress Growth Operating System (WGOS)',
-            'description' => 'Strukturiertes Nachfrage-System für Unternehmen: Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion in einer klaren WordPress-Logik.',
-            'serviceType' => 'Growth Operating System',
-            'serviceOutput' => 'Strukturiertes Nachfrage-System auf WordPress-Basis mit klarer Reihenfolge, voller Ownership und planbarer Weiterentwicklung.',
-            'offers'      => [
-                [
-                    '@type'         => 'Offer',
-                    'name'          => 'Fundament',
-                    'price'         => 1500,
-                    'priceCurrency' => 'EUR',
-                    'description'   => '30 Credits/Monat. Fundament, Messbarkeit und technische Stabilität ordnen.'
-                ],
-                [
-                    '@type'         => 'Offer',
-                    'name'          => 'Systemaufbau',
-                    'price'         => 2800,
-                    'priceCurrency' => 'EUR',
-                    'description'   => '60 Credits/Monat. Sichtbarkeit und Conversion auf saubere Basis setzen.'
-                ],
-                [
-                    '@type'         => 'Offer',
-                    'name'          => 'Weiterentwicklung',
-                    'price'         => 4500,
-                    'priceCurrency' => 'EUR',
-                    'description'   => '100+ Credits/Monat. Das System kontrolliert ausbauen und weiter nachschärfen.'
-                ]
-            ]
-        ],
-
-        'wgos' => [
-            'name'        => 'WordPress Growth Operating System (WGOS)',
-            'description' => 'Strukturiertes Nachfrage-System für Unternehmen: WordPress als verbindende Architektur für Strategie, Fundament, Messbarkeit, Sichtbarkeit und Conversion.',
-            'serviceType' => 'Growth Operating System',
-            'serviceOutput' => 'Strukturiertes Nachfrage-System mit klarer Priorisierung, messbarer Entwicklung und voller Kontrolle'
-        ],
+        // Legacy-Services wordpress-growth-operating-system + wgos entfernt:
+        // WGOS ist in der neuen Positionierung Hard-Ban, Seite ist noindex,
+        // daher keine Service-Schema-Signale mehr zur WGOS-URL.
     ];
 
     /**
@@ -427,7 +371,8 @@ function hu_output_schema()
                     'serviceType'   => 'WGOS Asset',
                     'serviceOutput' => (string) ($asset['result'] ?? ''),
                     'areaServed'    => ['@type' => 'AdministrativeArea', 'name' => 'DACH'],
-                    'isPartOf'      => ['@id' => home_url('/wordpress-growth-operating-system/#service')],
+                    // isPartOf-Referenz auf WGOS-Hub entfernt (noindex);
+                    // Asset wird via provider an Organization gebunden.
                 ];
 
                 $schemas[] = $service;
@@ -640,9 +585,9 @@ function hu_output_schema()
                     ],
                     [
                         '@type' => 'WebPage',
-                        'name'  => 'WordPress Growth Operating System',
-                        'description' => 'Systemlogik für Sichtbarkeit, Tracking, Conversion und kontrollierte Weiterentwicklung.',
-                        'url'   => home_url('/wordpress-growth-operating-system/')
+                        'name'  => 'Eigenes Anfrage-System für Solar- und Wärmepumpen-Anbieter',
+                        'description' => 'Aufbau eigener Anfrage-Systeme zur Ablösung von Portal-Leads für Solar-, Wärmepumpen- und Energie-Anbieter im DACH-Raum.',
+                        'url'   => home_url('/solar-waermepumpen-leadgenerierung/')
                     ],
                 ];
             }
@@ -824,15 +769,15 @@ function hu_output_schema()
             ];
 
         } elseif ( is_singular( 'wgos_asset' ) ) {
-            // WGOS > Asset
-            $wgos_url = function_exists( 'nexus_get_primary_public_url' )
-                ? nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) )
-                : home_url( '/wordpress-growth-operating-system/' );
+            // Agentur > Asset — WGOS-Hub-Crumb entfernt (noindex).
+            $agentur_url = function_exists( 'nexus_get_primary_public_url' )
+                ? nexus_get_primary_public_url( 'agentur', home_url( '/wordpress-agentur-hannover/' ) )
+                : home_url( '/wordpress-agentur-hannover/' );
             $breadcrumb_items[] = [
                 '@type'    => 'ListItem',
                 'position' => $bc_position++,
-                'name'     => 'WGOS',
-                'item'     => $wgos_url,
+                'name'     => 'WordPress Agentur Hannover',
+                'item'     => $agentur_url,
             ];
             $breadcrumb_items[] = [
                 '@type'    => 'ListItem',
