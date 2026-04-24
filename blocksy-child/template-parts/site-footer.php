@@ -66,7 +66,7 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 				<a class="ft__logo site-logo site-logo--accent" href="<?php echo esc_url( $home_url ); ?>" aria-label="Startseite - HAŞIM ÜNER">HAŞIM ÜNER</a>
 				<p class="ft__energy-tag">Leadgenerierung für Solar- und Wärmepumpen-Betriebe.</p>
 			</div>
-			<a class="ft__cta" href="#energie-anfrage" data-track-action="cta_energy_footer_request" data-track-category="lead_gen">Anfrage stellen</a>
+			<a class="ft__cta" href="<?php echo esc_url( $request_url ); ?>" data-track-action="cta_energy_footer_request" data-track-category="lead_gen" data-track-section="footer_energy" data-track-funnel-stage="energy_footer">Anfrage stellen</a>
 			<nav class="ft__energy-legal" aria-label="Rechtliches">
 			<a href="<?php echo esc_url( $imprint_url ); ?>" rel="nofollow">Impressum</a>
 			<span aria-hidden="true">·</span>

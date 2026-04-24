@@ -659,16 +659,40 @@ function nexus_get_energy_systems_url() {
 }
 
 /**
- * Resolve the canonical hard-CTA URL for the solar inquiry form.
+ * Resolve the canonical URL for the dedicated request page.
+ *
+ * @return string
+ */
+function nexus_get_anfrage_url() {
+	$page_id = nexus_get_page_id( [ 'anfrage' ] );
+
+	if ( $page_id ) {
+		return get_permalink( $page_id );
+	}
+
+	$template_page_id = nexus_get_page_id_by_template( 'page-anfrage.php' );
+
+	if ( $template_page_id ) {
+		return get_permalink( $template_page_id );
+	}
+
+	return home_url( '/anfrage/' );
+}
+
+/**
+ * Resolve the canonical hard-CTA URL for the qualified request form.
+ *
+ * Form lives on the dedicated /anfrage/ page — CTAs across the site
+ * route there. When already on /anfrage/, collapse to the form anchor.
  *
  * @return string
  */
 function nexus_get_primary_request_url() {
-	if ( function_exists( 'nexus_is_energy_systems_context' ) && nexus_is_energy_systems_context() ) {
+	if ( is_page( 'anfrage' ) || is_page_template( 'page-anfrage.php' ) ) {
 		return '#energie-anfrage';
 	}
 
-	return trailingslashit( nexus_get_energy_systems_url() ) . '#energie-anfrage';
+	return trailingslashit( nexus_get_anfrage_url() ) . '#energie-anfrage';
 }
 
 /**
