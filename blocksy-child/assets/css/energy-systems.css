@@ -749,3 +749,86 @@
   color: var(--nx-text-dim);
   font-size: 0.82rem;
 }
+
+/* ── Diagram: Modell A vs. Modell B ─────────────────────────── */
+.energy-diagram-section {
+  padding-top: 0;
+}
+
+.energy-diagram {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 138, 0, 0.08) 0%, rgba(10, 10, 10, 1) 70%);
+  border-radius: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  position: relative;
+}
+
+.energy-diagram__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.energy-diagram__legend {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2.5rem;
+  display: flex;
+  gap: 2.5rem;
+  color: #b0b8c1;
+  font-size: 0.8rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  background: rgba(10, 10, 10, 0.65);
+  padding: 0.75rem 1.5rem;
+  border-radius: 3rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.energy-diagram__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.energy-diagram__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 4px;
+}
+
+.energy-diagram__legend-dot--alt {
+  background: #6b7280;
+  box-shadow: 0 0 8px #ff4444;
+}
+
+.energy-diagram__legend-dot--system {
+  background: #06b6d4;
+  box-shadow: 0 0 10px #06b6d4;
+}
+
+.energy-diagram__legend-dot--convert {
+  background: #ff8a00;
+  box-shadow: 0 0 10px #ff8a00;
+}
+
+.energy-diagram__legend-dot--scale {
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+@media (max-width: 768px) {
+  .energy-diagram {
+    border-radius: 1.25rem;
+  }
+
+  .energy-diagram__legend {
+    display: none;
+  }
+}
