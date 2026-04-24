@@ -215,7 +215,7 @@ $get_summary_value = static function( $field_name ) use ( $get_value, $option_la
 get_header();
 ?>
 <main id="main" class="site-main">
-	<div class="energy-page-wrapper" data-track-section="energy_service_landing">
+	<div class="energy-page-wrapper" data-track-section="energy_service_landing" data-track-funnel-stage="energy_landing">
 		<section class="nx-section nx-hero energy-hero" id="hero">
 			<div class="nx-container">
 				<div class="energy-hero__grid">
@@ -225,7 +225,7 @@ get_header();
 						<p class="nx-hero__subtitle">Ich baue Solar- und Wärmepumpen-Anbietern ein eigenes Anfrage-System &mdash; damit Ihr Vertrieb nur noch mit Interessenten spricht, die wirklich kaufen wollen.</p>
 						<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
 						<div class="energy-hero__actions">
-							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
+							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_request" data-track-category="lead_gen" data-track-section="energy_hero" data-track-funnel-stage="energy_hero"><?php echo esc_html( $request_cta ); ?></a>
 						</div>
 					</div>
 
@@ -241,7 +241,7 @@ get_header();
 						<h2>E3 New Energy.</h2>
 						<p>E3 New Energy ist ein regionaler Energieanbieter für Photovoltaik, Wärmepumpen und Speicherlösungen. Ausgangslage: Hohe Kosten pro Anfrage durch Portal-Zukauf, keine eigene digitale Anfrage-Infrastruktur. In 9 Monaten: eigenes System aufgebaut, Kosten pro Anfrage um 83 % gesenkt, Vertrieb arbeitet nur noch mit vorqualifizierten Anfragen.</p>
 						<div class="energy-proof__actions">
-							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
+							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_request" data-track-category="lead_gen" data-track-section="energy_proof" data-track-funnel-stage="energy_proof"><?php echo esc_html( $request_cta ); ?></a>
 						</div>
 					</div>
 
@@ -302,7 +302,7 @@ get_header();
 					<h2>Nicht sicher, ob das für Sie passt?</h2>
 					<p>2 Minuten. Kein Pitch. Sie beschreiben Ihre Situation — ich melde mich innerhalb von 48 Stunden mit einer konkreten Einordnung per E-Mail.</p>
 					<div class="energy-cta-box__actions">
-						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
+						<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen" data-track-section="energy_midpage" data-track-funnel-stage="energy_midpage"><?php echo esc_html( $request_cta ); ?></a>
 					</div>
 				</div>
 			</div>
@@ -345,7 +345,7 @@ get_header();
 									<div class="review-progress energy-progress" aria-label="Fortschritt im Branchen-Flow">
 										<div class="review-progress-head">
 											<div class="review-progress-copy">
-												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?> — Gleich wird klar, wo der größte Hebel liegt.</strong>
+												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?> — Ihre Leistung, ca. 60 Sekunden bis zur Einordnung.</strong>
 											</div>
 										</div>
 										<div
@@ -582,8 +582,9 @@ get_header();
 				<div class="nx-cta-box energy-cta-box">
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
 					<h2>Eigene Anfragen statt Portal-Abhängigkeit. In 2 Minuten Situation einordnen — Ergebnis per E-Mail.</h2>
+					<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
 					<div class="energy-cta-box__actions">
-						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_request" data-track-category="lead_gen"><?php echo esc_html( $request_cta ); ?></a>
+						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_request" data-track-category="lead_gen" data-track-section="energy_footer" data-track-funnel-stage="energy_footer"><?php echo esc_html( $request_cta ); ?></a>
 					</div>
 				</div>
 			</div>

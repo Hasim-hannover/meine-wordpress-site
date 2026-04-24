@@ -232,12 +232,12 @@ function hu_enqueue_assets() {
 				'submittingLabel' => 'Wird gesendet …',
 				'errorMessage'    => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
 				'progressMessages' => [
-					'solution'     => 'Gleich wird klar, wo der größte Hebel liegt.',
-					'audience'     => 'Zielmarkt bestimmt die Formular-Logik.',
-					'challenge'    => 'Fast da — noch wenige kurze Fragen.',
-					'site-state'   => 'Noch 3 Schritte bis zur Einordnung.',
-					'timing'       => 'Gleich geschafft — dann folgen Ihre Kontaktdaten.',
-					'contact-pref' => 'Letzter Schritt: Wohin soll die Einordnung?',
+					'solution'     => 'Ihre Leistung — ca. 60 Sekunden bis zur Einordnung.',
+					'audience'     => 'Ihr Zielmarkt — kurz einsortieren.',
+					'challenge'    => 'Ihr Hauptengpass — wo klemmt es aktuell?',
+					'site-state'   => 'Ihr Status — noch 3 Schritte bis zur Einordnung.',
+					'timing'       => 'Ihr Timing — gleich folgen die Kontaktdaten.',
+					'contact-pref' => 'Rückmeldung — letzter Schritt vor Kontakt.',
 					'contact'      => 'Ihre Kontaktdaten — dann wird eingeordnet.',
 				],
 			]
