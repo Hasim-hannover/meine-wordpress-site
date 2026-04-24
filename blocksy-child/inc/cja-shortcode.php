@@ -66,7 +66,7 @@ function cja_audit_shortcode() {
 
 	ob_start();
 	?>
-	<div class="cja-wrapper" id="cja-app" data-track-section="growth_audit_instant">
+	<div class="cja-wrapper" id="cja-app" data-track-section="growth_audit_instant" data-track-funnel-stage="audit_input">
 		<span id="form" class="cja-anchor" aria-hidden="true"></span>
 
 		<div class="cja-phase cja-hero" id="cja-input">
@@ -77,7 +77,7 @@ function cja_audit_shortcode() {
 			<div class="cja-input-group">
 				<label class="screen-reader-text" for="cja-url-input">Website-URL</label>
 				<input type="text" id="cja-url-input" placeholder="ihre-domain.de" autocomplete="off" inputmode="url" autocapitalize="off" spellcheck="false" aria-describedby="cja-error">
-				<button id="cja-submit" type="button" data-track-action="cja_start_analysis" data-track-category="lead_gen" data-track-section="growth_audit_input">Diagnose starten</button>
+				<button id="cja-submit" type="button" data-track-action="cja_start_analysis" data-track-category="lead_gen" data-track-section="growth_audit_input" data-track-funnel-stage="audit_input">Diagnose starten</button>
 			</div>
 			<p class="cja-input-help">Starten Sie mit Ihrer Startseite oder der wichtigsten Angebotsseite. Sie sehen direkt die größten Reibungen und priorisierten Hebel.</p>
 
@@ -134,7 +134,7 @@ function cja_audit_shortcode() {
 				<h2>Wenn das nach Ihrer Situation klingt, folgt jetzt die persönliche Einordnung.</h2>
 				<p>Kurz beschreiben, wo Ihr Anfrageprozess heute steht — Sie erhalten eine persönliche Einschätzung per E-Mail, ohne Pitch.</p>
 				<div class="cja-cta-actions">
-					<a href="<?php echo esc_url( $request_url ); ?>" class="cja-cta-button" data-track-action="cja_results_request" data-track-category="lead_gen" data-track-section="growth_audit_results">Einordnung anfordern</a>
+					<a href="<?php echo esc_url( $request_url ); ?>" class="cja-cta-button" data-track-action="cja_results_request" data-track-category="lead_gen" data-track-section="growth_audit_results" data-track-funnel-stage="audit_results">Einordnung anfordern</a>
 				</div>
 				<div class="cja-cta-meta">2 Minuten · persönliche Rückmeldung · kein Pflicht-Call</div>
 			</div>
