@@ -47,6 +47,8 @@ System-Diagnose -> Blueprint -> Umsetzung / Retainer
 ## Anti-Patterns (Hard Bans)
 
 - `Growth Audit` als user-facing Label (interne URL/IDs dürfen bleiben)
+- `WGOS` und `WordPress Growth Operating System` — Legacy-Framework, wird nicht mehr aktiv verkauft, zugehörige Seite ist noindex
+- `KI-Integration` als Angebot — Legacy-Thema, zugehörige Seite ist noindex
 - `WordPress` als Angebot oder Rolle (nur als Technologie im Nebensatz erlaubt)
 - `B2B` als Positionierung (zu generisch — wir sprechen Solar/Wärmepumpe)
 - `WordPress Specialist`, `WordPress-Agentur`, `Webdesign`, `Leistungen`

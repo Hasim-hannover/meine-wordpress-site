@@ -11,6 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Legacy-Seite: aus Index entkoppeln, damit keine Mischsignale zur neuen Solar/Wärmepumpen-Positionierung entstehen.
+if ( ! headers_sent() ) {
+	header( 'X-Robots-Tag: noindex, nofollow', true );
+}
+add_action( 'wp_head', static function () {
+	echo '<meta name="robots" content="noindex,nofollow" />' . "\n";
+}, 1 );
+
 $audit_url     = nexus_get_audit_url();
 $wgos_url      = nexus_get_page_url( [ 'wordpress-growth-operating-system', 'wgos' ] );
 $cases_url     = nexus_get_results_url();

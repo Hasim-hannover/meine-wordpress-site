@@ -23,10 +23,10 @@ $pillar_map = [
     'strategie' => [
         'icon'        => '🧭',
         'badge'       => 'Strategie & Growth',
-        'subtitle'    => 'Assets bauen statt Kampagnen verbrennen. Frameworks, Systeme und Denkmodelle für nachhaltiges B2B-Wachstum.',
-        'cta_label'   => 'WGOS kennenlernen',
-        'cta_url'     => $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' ),
-        'cta_text'    => 'Das WordPress Growth Operating System (WGOS) ist der Rahmen, in dem Strategie operativ wird.',
+        'subtitle'    => 'Eigene Anfrage-Systeme für Solar- und Wärmepumpen-Anbieter. Keine Portal-Abhängigkeit, messbar niedrigere Leadkosten.',
+        'cta_label'   => 'System-Diagnose starten',
+        'cta_url'     => $audit_url,
+        'cta_text'    => 'Die System-Diagnose zeigt in 60 Sekunden, wo Ihre Website Anfragen verliert und welche Hebel zuerst Wirkung versprechen.',
     ],
     'seo' => [
         'icon'        => '🔍',

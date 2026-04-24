@@ -210,8 +210,7 @@ function hu_home_system_section_markup() {
 					</ul>
 
 					<div class="homepage-system-economics__actions">
-						<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_system_map_audit" data-track-category="lead_gen">Audit starten</a>
-						<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_system_map_system" data-track-category="lead_gen">Erst das System verstehen</a>
+						<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_system_map_audit" data-track-category="lead_gen">System-Diagnose starten</a>
 					</div>
 
 					<p class="homepage-system-economics__note">
@@ -305,11 +304,8 @@ function hu_hero_section_shortcode() {
 								Kein Verkaufsgespräch. Klare Einschätzung. Sinnvolle nächste Entscheidung.
 							</div>
 							<div class="wp-btn-wrapper audit-card-premium__actions">
-								<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary full-width" data-track-action="cta_hero_audit" data-track-category="lead_gen">Audit starten</a>
+								<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary full-width" data-track-action="cta_hero_audit" data-track-category="lead_gen">System-Diagnose starten</a>
 							</div>
-							<p class="audit-card-premium__microcopy">
-								<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="micro-cta-link">Erst das System verstehen -></a>
-							</p>
 						</div>
 					</div>
 				</div>
@@ -433,7 +429,6 @@ function hu_owned_section_shortcode() {
 			<div class="text-center" style="margin-top:2rem;">
 				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-secondary" data-track-action="cta_owned_audit" data-track-category="lead_gen">Prüfen, wo Ihre Seite heute Reibung erzeugt</a>
 			</div>
-			<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="micro-cta-link">Noch nicht sicher? Erst das System verstehen -></a>
 
 			<div class="homepage-github-proof nx-reveal" data-track-section="homepage_github_proof" aria-label="Öffentliches GitHub-Repo als Vertrauenssignal">
 				<div class="homepage-github-proof__copy">
@@ -530,8 +525,7 @@ function hu_wgos_block_shortcode() {
 			<div id="homepage-mindmap-teaser-root" class="homepage-mindmap-section" aria-label="WGOS Mindmap Teaser"></div>
 
 			<div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:2.5rem;">
-				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_wgos_audit" data-track-category="lead_gen">Mit dem Audit starten</a>
-				<a href="<?php echo esc_url( $urls['wgos'] ); ?>" class="wp-btn wp-btn-secondary">WGOS im Detail</a>
+				<a href="<?php echo esc_url( $urls['audit'] ); ?>" class="wp-btn wp-btn-primary" data-track-action="cta_wgos_audit" data-track-category="lead_gen">Mit der System-Diagnose starten</a>
 			</div>
 		</div>
 	</section>
@@ -821,10 +815,6 @@ function hu_cta_section_shortcode() {
 					<a class="nx-btn nx-btn--ghost" href="<?php echo esc_url( $urls['cases'] ); ?>" data-track-action="cta_footer_cases" data-track-category="lead_gen">Ergebnisse ansehen</a>
 				</div>
 
-				<p style="font-size:0.8rem; color:var(--nx-text-muted); margin-top:1.5rem; margin-bottom:0;">
-					Wenn Sie erst das Modell verstehen wollen:
-					<a href="<?php echo esc_url( $urls['wgos'] ); ?>" style="color:var(--nx-gold); text-decoration:underline; font-weight:600;">WGOS ansehen -></a>
-				</p>
 			</div>
 		</div>
 	</section>

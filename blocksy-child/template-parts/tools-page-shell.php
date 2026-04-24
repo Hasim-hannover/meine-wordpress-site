@@ -11,7 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $primary_urls  = function_exists( 'nexus_get_primary_public_url_map' ) ? nexus_get_primary_public_url_map() : [];
 $audit_url     = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
-$wgos_url      = $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
 $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tools_hub_items() : [];
 ?>
 
@@ -27,7 +26,6 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 
 			<div class="tools-hero__actions">
 				<a href="<?php echo esc_url( $audit_url ); ?>" class="tools-btn tools-btn--primary" data-track-action="cta_tools_hero_audit" data-track-category="lead_gen"><?php echo esc_html( nexus_get_audit_cta_label() ); ?></a>
-				<a href="<?php echo esc_url( $wgos_url ); ?>" class="tools-btn tools-btn--text" data-track-action="cta_tools_hero_wgos" data-track-category="navigation">WGOS verstehen</a>
 			</div>
 
 			<div class="tools-hero__meta" aria-label="Arbeitsprinzip">
@@ -98,7 +96,6 @@ $tools_cards   = function_exists( 'nexus_get_tools_hub_items' ) ? nexus_get_tool
 
 		<div class="tools-bridge__actions">
 			<a href="<?php echo esc_url( $audit_url ); ?>" class="tools-btn tools-btn--primary" data-track-action="cta_tools_footer_audit" data-track-category="lead_gen">Zur System-Diagnose</a>
-			<a href="<?php echo esc_url( $wgos_url ); ?>" class="tools-btn tools-btn--secondary" data-track-action="cta_tools_footer_wgos" data-track-category="navigation">Erst das System verstehen</a>
 		</div>
 	</section>
 </main>

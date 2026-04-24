@@ -134,9 +134,10 @@ function hu_enqueue_assets() {
 			'nexus-home-mindmap-teaser-js',
 			'NexusHomeMindmapConfig',
 			[
-				'wgosUrl' => function_exists( 'nexus_get_primary_public_url' )
-					? nexus_get_primary_public_url( 'wgos', home_url( '/wordpress-growth-operating-system/' ) )
-					: home_url( '/wordpress-growth-operating-system/' ),
+				// WGOS ist deprecated in der neuen Positionierung — CTA-Exit auf System-Diagnose umgeleitet
+				'wgosUrl' => function_exists( 'nexus_get_audit_url' )
+					? nexus_get_audit_url()
+					: home_url( '/growth-audit/' ),
 			]
 		);
 	}

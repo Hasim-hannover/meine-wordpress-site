@@ -35,7 +35,6 @@ $hub_sections = function_exists( 'nexus_get_glossary_hub_sections' ) ? nexus_get
 						</ul>
 
 						<div class="wgos-hero__actions">
-							<a href="<?php echo esc_url( $wgos_url ); ?>" class="wgos-btn wgos-btn--outline">Zum WGOS-System</a>
 							<a href="<?php echo esc_url( $audit_url ); ?>" class="wgos-btn wgos-btn--primary" data-track-action="cta_glossary_hub_audit" data-track-category="lead_gen">Mit der System-Diagnose starten</a>
 						</div>
 

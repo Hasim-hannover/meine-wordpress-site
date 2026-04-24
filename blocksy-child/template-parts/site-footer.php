@@ -18,7 +18,6 @@ $home_url     = $primary_urls['home'] ?? home_url( '/' );
 $audit_url    = $primary_urls['audit'] ?? nexus_get_audit_url();
 $request_url  = $primary_urls['request'] ?? ( function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' ) );
 $agentur_url  = $primary_urls['agentur'] ?? home_url( '/wordpress-agentur-hannover/' );
-$wgos_url     = $primary_urls['wgos'] ?? home_url( '/wordpress-growth-operating-system/' );
 $cases_url    = $primary_urls['results'] ?? nexus_get_results_url();
 $blog_url     = $primary_urls['blog'] ?? home_url( '/blog/' );
 $seo_url      = $primary_urls['seo'] ?? home_url( '/wordpress-seo-hannover/' );
@@ -114,9 +113,7 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 				<ul class="ft__list">
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_nav_audit" data-track-category="lead_gen">System-Diagnose</a></li>
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_footer_nav_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></li>
-					<li><a href="<?php echo esc_url( $wgos_url ); ?>" data-track-action="cta_footer_nav_wgos" data-track-category="navigation">Systemlogik (WGOS)</a></li>
 					<li><a href="<?php echo esc_url( $whitelabel_url ); ?>" data-track-action="cta_footer_nav_whitelabel" data-track-category="navigation">Whitelabel &amp; Weiterentwicklung</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/loesungen/' ) ); ?>" data-track-action="cta_footer_nav_loesungen" data-track-category="navigation">Alle Lösungen</a></li>
 				</ul>
 			</section>
 
@@ -128,7 +125,6 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 					<li><a href="<?php echo esc_url( $seo_url ); ?>" data-track-action="cta_footer_nav_seo" data-track-category="navigation">WordPress SEO</a></li>
 					<li><a href="<?php echo esc_url( $cwv_url ); ?>" data-track-action="cta_footer_nav_cwv" data-track-category="navigation">Core Web Vitals</a></li>
 					<li><a href="<?php echo esc_url( $tools_url ); ?>" data-track-action="cta_footer_nav_tools" data-track-category="navigation">Kostenlose Tools</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/ki-integration/' ) ); ?>" data-track-action="cta_footer_nav_ki" data-track-category="navigation">KI-Integration</a></li>
 				</ul>
 			</section>
 
