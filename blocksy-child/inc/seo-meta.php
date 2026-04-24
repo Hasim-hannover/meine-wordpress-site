@@ -91,14 +91,8 @@ function hu_get_forced_singular_seo_map() {
 				'title'       => 'Über Haşim Üner | WordPress, SEO und klare Systeme',
 				'description' => 'Über Haşim Üner: WordPress, technische SEO, privacy-first Messbarkeit und klare Nutzerführung für B2B-Websites mit Diagnose vor Aktion.',
 			],
-			'wgos' => [
-				'title'       => 'WordPress Growth Operating System | Haşim Üner',
-				'description' => 'Das WordPress Growth Operating System verbindet SEO, Tracking, Conversion und Angebotslogik zu einem strukturierten Nachfrage-System für B2B-Websites.',
-			],
-			'wordpress-growth-operating-system' => [
-				'title'       => 'WordPress Growth Operating System | Haşim Üner',
-				'description' => 'Das WordPress Growth Operating System verbindet SEO, Tracking, Conversion und Angebotslogik zu einem strukturierten Nachfrage-System für B2B-Websites.',
-			],
+			// 'wgos' / 'wordpress-growth-operating-system' Meta-Einträge entfernt:
+			// Seiten sind noindex, daher keine öffentlichen Meta-Signale mehr.
 			'tools' => [
 				'title'       => 'Kostenlose Website- und ROI-Tools | Haşim Üner',
 				'description' => 'Kostenlose Tools für ROI, Website-Analyse und Performance: schnelle Checks für Marketing-, Website- und WordPress-Entscheidungen.',
@@ -135,18 +129,9 @@ function hu_get_forced_singular_seo_map() {
 				'title'       => 'Kostenloses Website Audit für mehr Anfragen | Haşim Üner',
 				'description' => 'Ich analysiere, wo Klarheit, Vertrauen, Struktur und Conversion-Logik auf deiner Website bremsen – mit fundierter Ersteinschätzung ohne Pflicht-Call.',
 			],
-			'wordpress-wartung-hannover' => [
-				'title'       => 'WordPress Wartung Hannover – B2B Wartungsvertrag',
-				'description' => 'Sicherheits-Updates, Backups und Performance für B2B WordPress-Websites. Kein Ticket-System – direkter Ansprechpartner. Wartungspaket anfragen.',
-			],
-			'wordpress-seo-hannover' => [
-				'title'       => 'WordPress SEO Hannover für B2B | Technisches SEO & Audit',
-				'description' => 'WordPress SEO in Hannover fuer B2B: technisches SEO, Crawlability und interne Verlinkung fuer kaufnahe Seiten. System-Diagnose als 60-Sekunden-Diagnose fuer priorisierte Hebel.',
-			],
-			'ki-integration-wordpress' => [
-				'title'       => 'KI-Integration für WordPress – DSGVO-konform | Haşim Üner',
-				'description' => 'KI-Features direkt in WordPress: Chatbots, Lead-Qualifizierung, Wissenssuche, Automatisierung – auf eigener Infrastruktur, ohne Datenabfluss.',
-			],
+			// 'wordpress-wartung-hannover' + 'wordpress-seo-hannover' + 'ki-integration-wordpress' entfernt:
+			// /wordpress-seo-hannover/ und /wordpress-wartung-hannover/ sind 301 auf die Agentur-Page (Anker-Sektionen);
+			// /ki-integration-wordpress/ ist noindex. Keine eigenständigen SEO-Signale mehr nötig.
 			'solar-waermepumpen-leadgenerierung' => [
 				'title'       => 'Leadgenerierung für Solar & Wärmepumpen | Weniger Kosten, bessere Anfragen',
 				'description' => 'Schluss mit teuren Portal-Leads. Eigenes Anfrage-System für Solarteure und Wärmepumpen-Installateure. Referenz: –83 % Kosten pro Anfrage. Kostenloses Erstgespräch.',
@@ -881,4 +866,84 @@ add_action( 'template_redirect', function () {
 	if ( ! defined( 'WPSEO_VERSION' ) && ! defined( 'SEOPRESS_VERSION' ) ) {
 		remove_action( 'wp_head', 'rel_canonical' );
 	}
+} );
+
+/**
+ * Slugs deprecated in der neuen Positionierung:
+ * - wgos / wordpress-growth-operating-system: noindex (Legacy-Hub)
+ * - ki-integration-wordpress / ki-integration: noindex (Legacy-Thema)
+ * - loesungen: noindex (interne Angebotsübersicht, nicht mehr beworben)
+ * - wordpress-seo-hannover / wordpress-wartung-hannover: 301 auf Agentur-Page-Anker
+ *
+ * @return array<int, string>
+ */
+function nexus_get_sitemap_excluded_slugs() {
+	return [
+		'wordpress-growth-operating-system',
+		'wgos',
+		'ki-integration-wordpress',
+		'ki-integration',
+		'loesungen',
+		'wordpress-seo-hannover',
+		'wordpress-wartung-hannover',
+	];
+}
+
+/**
+ * Resolve excluded slugs to page IDs once per request.
+ *
+ * @return array<int, int>
+ */
+function nexus_get_sitemap_excluded_ids() {
+	static $ids = null;
+
+	if ( null !== $ids ) {
+		return $ids;
+	}
+
+	$ids = [];
+	foreach ( nexus_get_sitemap_excluded_slugs() as $slug ) {
+		$page = get_page_by_path( $slug );
+		if ( $page instanceof WP_Post ) {
+			$ids[] = (int) $page->ID;
+		}
+	}
+
+	$ids = array_values( array_unique( $ids ) );
+	return $ids;
+}
+
+/**
+ * Exclude deprecated/noindex pages from WordPress core sitemap (wp-sitemap.xml).
+ *
+ * Verhindert Mischsignale: Sitemap-Eintrag ("crawl mich") vs. noindex-Header
+ * oder 301-Redirect. Google würde sonst Crawl-Budget auf Dead-End-URLs verschwenden.
+ */
+add_filter( 'wp_sitemaps_posts_query_args', function ( $args, $post_type ) {
+	if ( 'page' !== $post_type ) {
+		return $args;
+	}
+
+	$excluded_ids = nexus_get_sitemap_excluded_ids();
+	if ( empty( $excluded_ids ) ) {
+		return $args;
+	}
+
+	$existing               = $args['post__not_in'] ?? [];
+	$args['post__not_in']   = array_values( array_unique( array_merge( (array) $existing, $excluded_ids ) ) );
+
+	return $args;
+}, 10, 2 );
+
+/**
+ * Exclude deprecated/noindex pages from Rank Math sitemap (sitemap_index.xml).
+ *
+ * Rank Math erkennt noindex-Meta in der eigenen Settings-Oberfläche automatisch,
+ * unser noindex wird aber per HTTP-Header + wp_head gesetzt — daher explizite
+ * ID-basierte Exclusion als Safety-Net.
+ */
+add_filter( 'rank_math/sitemap/exclude_posts', function ( $excluded ) {
+	$excluded = is_array( $excluded ) ? $excluded : [];
+	$excluded = array_values( array_unique( array_merge( $excluded, nexus_get_sitemap_excluded_ids() ) ) );
+	return $excluded;
 } );
