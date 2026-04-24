@@ -108,12 +108,12 @@ function hu_get_forced_singular_seo_map() {
 				'description' => 'Kostenlose Tools für ROI, Website-Analyse und Performance: schnelle Checks für Marketing-, Website- und WordPress-Entscheidungen.',
 			],
 			'wordpress-agentur-hannover' => [
-				'title'       => 'WordPress Agentur Hannover für B2B | Haşim Üner',
-				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, GA4-Tracking und Conversion-Optimierung als System. System-Diagnose als Einstieg – 60 Sek., keine E-Mail.',
+				'title'       => 'WordPress Agentur Hannover – SEO, Wartung & Conversion',
+				'description' => 'WordPress Agentur in Hannover: technisches SEO, Wartungsvertrag, Tracking und Conversion für B2B-Websites als verbundenes System. Referenz E3 — -83 % Leadkosten.',
 			],
 			'wordpress-agentur' => [
-				'title'       => 'WordPress Agentur Hannover für B2B | Haşim Üner',
-				'description' => 'WordPress Agentur Hannover für B2B: Angebotsseiten, SEO, GA4-Tracking und Conversion-Optimierung als System. System-Diagnose als Einstieg – 60 Sek., keine E-Mail.',
+				'title'       => 'WordPress Agentur Hannover – SEO, Wartung & Conversion',
+				'description' => 'WordPress Agentur in Hannover: technisches SEO, Wartungsvertrag, Tracking und Conversion für B2B-Websites als verbundenes System. Referenz E3 — -83 % Leadkosten.',
 			],
 			'ergebnisse' => [
 				'title'       => 'Ergebnisse & Case Studies | WordPress, SEO, CRO',
