@@ -74,15 +74,15 @@ get_header();
 		</section>
 
 		<!-- Task 3: Pain-Block -->
-		<section id="pain" class="wp-section homepage-pain" data-track-section="homepage_pain" style="background: var(--nx-bg-muted, #f9f9f9); padding: 4rem 0;">
+		<section id="pain" class="wp-section homepage-pain" data-track-section="homepage_pain" style="background: var(--nx-bg-glass-light, rgba(255, 255, 255, 0.02)); padding: 4rem 0; border-top: 1px solid var(--nx-border, rgba(255, 255, 255, 0.05)); border-bottom: 1px solid var(--nx-border, rgba(255, 255, 255, 0.05));">
 			<div class="wp-container wp-home-shell">
 				<div class="wp-section-title wp-home-section-title text-center">
 					<h2 class="wp-section-h2">Die Realität im Lead-Einkauf</h2>
 				</div>
 				<ul class="premium-list" style="max-width: 600px; margin: 0 auto 2rem; list-style: none; padding: 0;">
-					<li style="margin-bottom: 1rem;"><span class="check-icon" style="color: red; margin-right: 10px;">✕</span>80 &euro; pro Lead &mdash; Hälfte geht nicht ans Telefon</li>
-					<li style="margin-bottom: 1rem;"><span class="check-icon" style="color: red; margin-right: 10px;">✕</span>Kein Überblick, welcher Kanal wirklich konvertiert</li>
-					<li style="margin-bottom: 1rem;"><span class="check-icon" style="color: red; margin-right: 10px;">✕</span>Seit 2024: Anfragen kommen nicht mehr von allein</li>
+					<li style="margin-bottom: 1rem;"><span class="check-icon" style="color: #ff6b6b; margin-right: 10px;">✕</span>80 &euro; pro Lead &mdash; Hälfte geht nicht ans Telefon</li>
+					<li style="margin-bottom: 1rem;"><span class="check-icon" style="color: #ff6b6b; margin-right: 10px;">✕</span>Kein Überblick, welcher Kanal wirklich konvertiert</li>
+					<li style="margin-bottom: 1rem;"><span class="check-icon" style="color: #ff6b6b; margin-right: 10px;">✕</span>Seit 2024: Anfragen kommen nicht mehr von allein</li>
 				</ul>
 				<div class="text-center">
 					<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_home_pain_diagnose" data-track-category="lead_gen"><?php echo esc_html( $primary_cta_label ); ?></a>
@@ -157,7 +157,7 @@ get_header();
 							<li><span class="check-icon homepage-problem-frame__arrow">→</span><div>Reports ohne Entscheidungssignale</div></li>
 							<li><span class="check-icon homepage-problem-frame__arrow">→</span><div>Budgetstop = Nachfrage-Stopp</div></li>
 						</ul>
-						<div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--nx-border-color, #eaeaea); font-weight: 600;">
+						<div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--nx-border-color, rgba(255, 255, 255, 0.1)); font-weight: 600;">
 							24 Monate &approx; 26.000 &euro; &middot; 0 &euro; Asset
 						</div>
 					</article>
@@ -217,7 +217,7 @@ get_header();
 		</section>
 
 		<!-- Task 6 & 8: Drei Prüffragen + Trust-Elemente -->
-		<section id="prueffragen" class="wp-section homepage-prueffragen" style="background: var(--nx-bg-muted, #f9f9f9); padding: 4rem 0;">
+		<section id="prueffragen" class="wp-section homepage-prueffragen" style="background: var(--nx-bg-glass-light, rgba(255, 255, 255, 0.02)); padding: 4rem 0; border-top: 1px solid var(--nx-border, rgba(255, 255, 255, 0.05)); border-bottom: 1px solid var(--nx-border, rgba(255, 255, 255, 0.05));">
 			<div class="wp-container wp-home-shell">
 				<div style="display: flex; flex-wrap: wrap; gap: 3rem; align-items: center;">
 					<div style="flex: 1; min-width: 300px;">
@@ -233,8 +233,7 @@ get_header();
 						</p>
 					</div>
 					<div style="flex: 1; min-width: 300px; text-align: center;">
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/brand/hasim-uener-dark-copper.svg' ); ?>" alt="Hasim Üner" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; background: #fff; border: 1px solid #eaeaea;">
-						<div style="text-align: left; max-width: 280px; margin: 0 auto; font-size: 0.95rem; line-height: 1.5;">
+						<div style="text-align: left; max-width: 280px; margin: 0 auto; font-size: 0.95rem; line-height: 1.5; background: var(--nx-bg-glass-light, rgba(255, 255, 255, 0.05)); padding: 2rem; border-radius: 12px; border: 1px solid var(--nx-border, rgba(255, 255, 255, 0.1));">
 							<strong>Hasim Üner.</strong><br>
 							Experte für B2B-Leadgenerierung und Tracking.<br>
 							Baut Systeme, die unabhängig machen.
