@@ -98,10 +98,10 @@ get_header();
 		<section class="nx-section nx-hero energy-hero energy-hero--compact" id="hero">
 			<div class="nx-container">
 				<div class="energy-hero__copy energy-hero__copy--centered">
-					<span class="nx-badge nx-badge--gold">Anfrage-Einordnung</span>
-					<h1 class="nx-hero__title">In 2 Minuten Situation einordnen — Ergebnis per E-Mail.</h1>
-					<p class="nx-hero__subtitle">Sie klicken sich durch 7 kurze Schritte. Keine generischen Felder, keine Sales-Hotline im Nachgang. Innerhalb von 48 Stunden eine persönliche Ersteinschätzung per E-Mail.</p>
-					<p class="nx-cta-microcopy">Referenz E3 New Energy: &minus;83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
+					<span class="nx-badge nx-badge--gold">Standortbestimmung</span>
+					<h1 class="nx-hero__title">5 Fragen, ca. 90 Sekunden &mdash; Antwort innerhalb von 48 Stunden per E-Mail.</h1>
+					<p class="nx-hero__subtitle">Region, Lead-Volumen, CPL, Engpass, Kontakt. Keine Pflicht-Calls, keine Sales-Hotline im Nachgang. Wir prüfen, ob Infrastruktur statt Miete für Ihren Betrieb ein realistischer Hebel ist &mdash; bei Nicht-Eignung erhalten Sie einen ehrlichen Hinweis auf eine realistischere Alternative.</p>
+					<p class="nx-cta-microcopy">&minus;83 % CPL &middot; 1.750+ qualifizierte Anfragen &middot; 12 % Abschlussquote &mdash; Referenz E3 New Energy, 9 Monate</p>
 				</div>
 			</div>
 		</section>
@@ -113,16 +113,16 @@ get_header();
 						<div class="energy-form-shell__main">
 							<?php if ( $form_success ) : ?>
 								<div id="energy-request-success" class="review-success energy-review-success is-server-success" role="status" aria-live="polite" aria-atomic="true">
-									<div class="review-success-pill">Anfrage eingegangen</div>
-									<h3>Ihre Einordnung wird geprüft.</h3>
-									<p class="review-success-copy"><?php echo esc_html( $form_success['message'] ?? 'Danke. Die Anfrage ist eingegangen.' ); ?></p>
-									<p class="review-success-timeline">Sie erhalten innerhalb von <strong>48 Stunden</strong> eine persönliche Ersteinschätzung per E-Mail — mit konkreten Hebeln für Website, Tracking und Anfrageprozess.</p>
-									<div class="review-success-meta">
-										<span>persönliche Rückmeldung per E-Mail</span>
-										<span>konkrete Hebel statt generischem Score</span>
-										<span>kein Pflicht-Call</span>
-									</div>
-									<p class="review-success-inbox-hint">Prüfen Sie Ihr Postfach (auch Spam-Ordner) für die Eingangsbestätigung.</p>
+									<div class="review-success-pill">Eingegangen</div>
+									<h3>Ihre Standortbestimmung liegt in der Bearbeitung.</h3>
+									<p class="review-success-copy"><?php echo esc_html( $form_success['message'] ?? 'Eingegangen. Ihre Standortbestimmung liegt in der Bearbeitung.' ); ?></p>
+									<p class="review-success-timeline">Sie erhalten innerhalb von <strong>48 Werktagsstunden</strong> eine E-Mail von <strong>hasim@hasimuener.de</strong>.</p>
+									<ul class="review-success-list">
+										<li>ehrliche Einschätzung, ob WGOS für Ihren Betrieb der richtige Hebel ist</li>
+										<li>bei Eignung: Vorschlag für ein 30-minütiges Erstgespräch per Telefon oder Video</li>
+										<li>bei Nicht-Eignung: konkreter Hinweis, welche Alternative für Ihre Situation realistischer ist</li>
+									</ul>
+									<p class="review-success-inbox-hint">Falls die E-Mail nicht ankommt, prüfen Sie bitte den Spam-Ordner oder schreiben direkt an <a href="mailto:hasim@hasimuener.de">hasim@hasimuener.de</a>.</p>
 								</div>
 							<?php else : ?>
 								<form
@@ -143,7 +143,7 @@ get_header();
 									<div class="review-progress energy-progress" aria-label="Fortschritt im Branchen-Flow">
 										<div class="review-progress-head">
 											<div class="review-progress-copy">
-												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?> — Ihre Leistung, ca. 60 Sekunden bis zur Einordnung.</strong>
+												<strong id="energy-progress-current" aria-live="polite" aria-atomic="true">Schritt 1 von <?php echo esc_html( (string) count( $flow_steps ) ); ?> &mdash; <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_html( $flow_steps[0]['title_short'] ) : 'Region'; ?></strong>
 											</div>
 										</div>
 										<div
@@ -154,7 +154,7 @@ get_header();
 											aria-valuemin="1"
 											aria-valuemax="<?php echo esc_attr( (string) count( $flow_steps ) ); ?>"
 											aria-valuenow="1"
-											aria-valuetext="Abschnitt 1 von <?php echo esc_attr( (string) count( $flow_steps ) ); ?>: <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_attr( $flow_steps[0]['title_short'] ) : 'Leistung'; ?>"
+											aria-valuetext="Abschnitt 1 von <?php echo esc_attr( (string) count( $flow_steps ) ); ?>: <?php echo ! empty( $flow_steps[0]['title_short'] ) ? esc_attr( $flow_steps[0]['title_short'] ) : 'Region'; ?>"
 										>
 											<div class="review-progress-fill" id="energy-progress-fill"></div>
 										</div>
@@ -236,6 +236,35 @@ get_header();
 													</div>
 													<p class="energy-field-error energy-choice-error" id="<?php echo esc_attr( $choice_error_id ); ?>" data-energy-choice-error="<?php echo esc_attr( $field_key ); ?>"></p>
 												</fieldset>
+											<?php elseif ( 'text_input' === $step['kind'] && ! empty( $step['field'] ) ) : ?>
+												<?php
+												$field         = $step['field'];
+												$field_name    = (string) $field['name'];
+												$field_id      = 'energy-field-' . $field_name;
+												$field_value   = $get_value( $field_name );
+												$field_help_id = $field_id . '-help';
+												$field_error_id = $field_id . '-error';
+												?>
+												<div class="energy-text-input-step">
+													<p class="review-choice-help" id="<?php echo esc_attr( $field_help_id ); ?>"><?php echo esc_html( $step['description'] ); ?></p>
+													<div class="review-field energy-text-input-step__field">
+														<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
+														<input
+															id="<?php echo esc_attr( $field_id ); ?>"
+															name="<?php echo esc_attr( $field_name ); ?>"
+															type="<?php echo esc_attr( $field['type'] ); ?>"
+															value="<?php echo esc_attr( $field_value ); ?>"
+															<?php echo ! empty( $field['autocomplete'] ) ? 'autocomplete="' . esc_attr( $field['autocomplete'] ) . '"' : ''; ?>
+															<?php echo ! empty( $field['inputmode'] ) ? 'inputmode="' . esc_attr( $field['inputmode'] ) . '"' : ''; ?>
+															<?php echo ! empty( $field['pattern'] ) ? 'pattern="' . esc_attr( $field['pattern'] ) . '"' : ''; ?>
+															<?php echo ! empty( $field['maxlength'] ) ? 'maxlength="' . esc_attr( (string) $field['maxlength'] ) . '"' : ''; ?>
+															<?php echo ! empty( $field['placeholder'] ) ? 'placeholder="' . esc_attr( $field['placeholder'] ) . '"' : ''; ?>
+															<?php echo ! empty( $field['required'] ) ? 'required' : ''; ?>
+															aria-describedby="<?php echo esc_attr( trim( $field_help_id . ' ' . $field_error_id ) ); ?>"
+														>
+														<p class="energy-field-error" id="<?php echo esc_attr( $field_error_id ); ?>" data-energy-field-error="<?php echo esc_attr( $field_name ); ?>"></p>
+													</div>
+												</div>
 											<?php elseif ( 'contact' === $step['kind'] ) : ?>
 												<div class="review-field-grid energy-field-grid">
 													<?php foreach ( $step['fields'] as $field ) : ?>
@@ -269,7 +298,7 @@ get_header();
 																<p class="energy-field-error" id="<?php echo esc_attr( $field_error_id ); ?>" data-energy-field-error="<?php echo esc_attr( $field_name ); ?>"></p>
 															</div>
 														<?php else : ?>
-															<div class="review-field<?php echo esc_attr( $is_textarea || 'page_url' === $field_name ? ' review-field-full' : '' ); ?>"<?php echo 'phone' === $field_name ? ' data-energy-phone-field hidden' : ''; ?>>
+															<div class="review-field<?php echo esc_attr( $is_textarea || 'page_url' === $field_name ? ' review-field-full' : '' ); ?>">
 																<label for="<?php echo esc_attr( $field_id ); ?>"><?php echo esc_html( $field['label'] ); ?></label>
 																<?php if ( ! empty( $field['help'] ) ) : ?>
 																	<p class="review-field-help" id="<?php echo esc_attr( $field_help_id ); ?>"><?php echo esc_html( $field['help'] ); ?></p>
@@ -317,30 +346,30 @@ get_header();
 									<div class="review-actions energy-actions">
 										<button type="button" class="review-prev-btn" data-energy-prev hidden>Zurück</button>
 										<button type="button" class="audit-submit-btn" data-energy-next-button>Weiter</button>
-										<button type="submit" class="audit-submit-btn" data-energy-submit hidden>Anfrage-Analyse einordnen</button>
+										<button type="submit" class="audit-submit-btn" data-energy-submit hidden>Standortbestimmung absenden</button>
 									</div>
 
-									<p class="energy-form-meta">Nur Rückmeldungen zu dieser Anfrage. Kein Newsletter-Opt-in, keine Weitergabe, kein Sales-Call als Pflichtschritt.</p>
+									<p class="energy-form-meta">Ihre Antworten werden ausschließlich für die Vorbereitung der Standortbestimmung verwendet. Keine Weitergabe an Dritte, kein Newsletter, kein automatisierter Anruf.</p>
 								</form>
 
 								<div id="energy-request-success" class="review-success energy-review-success" role="status" aria-live="polite" aria-atomic="true" hidden>
-									<div class="review-success-pill">Anfrage eingegangen</div>
-									<h3>Ihre Einordnung wird geprüft.</h3>
-									<p id="energy-success-message" class="review-success-copy">Danke. Ich prüfe Ihre Angaben und melde mich mit einer priorisierten Ersteinschätzung.</p>
-									<p class="review-success-timeline">Sie erhalten innerhalb von <strong>48 Stunden</strong> eine persönliche Ersteinschätzung per E-Mail — mit konkreten Hebeln für Website, Tracking und Anfrageprozess.</p>
-									<div class="review-success-meta">
-										<span>persönliche Rückmeldung per E-Mail</span>
-										<span>konkrete Hebel statt generischem Score</span>
-										<span>kein Pflicht-Call</span>
-									</div>
-									<p class="review-success-inbox-hint">Prüfen Sie Ihr Postfach (auch Spam-Ordner) für die Eingangsbestätigung.</p>
+									<div class="review-success-pill">Eingegangen</div>
+									<h3>Ihre Standortbestimmung liegt in der Bearbeitung.</h3>
+									<p id="energy-success-message" class="review-success-copy">Eingegangen. Ihre Standortbestimmung liegt in der Bearbeitung.</p>
+									<p class="review-success-timeline">Sie erhalten innerhalb von <strong>48 Werktagsstunden</strong> eine E-Mail von <strong>hasim@hasimuener.de</strong>.</p>
+									<ul class="review-success-list">
+										<li>ehrliche Einschätzung, ob WGOS für Ihren Betrieb der richtige Hebel ist</li>
+										<li>bei Eignung: Vorschlag für ein 30-minütiges Erstgespräch per Telefon oder Video</li>
+										<li>bei Nicht-Eignung: konkreter Hinweis, welche Alternative für Ihre Situation realistischer ist</li>
+									</ul>
+									<p class="review-success-inbox-hint">Falls die E-Mail nicht ankommt, prüfen Sie bitte den Spam-Ordner oder schreiben direkt an <a href="mailto:hasim@hasimuener.de">hasim@hasimuener.de</a>.</p>
 								</div>
 							<?php endif; ?>
 						</div>
 
 						<aside class="energy-form-shell__aside" aria-labelledby="energy-aside-title">
-							<h3 id="energy-aside-title">Ihre Anfrage in Klartext</h3>
-							<p>So lässt sich sofort erkennen, ob eher Nachfrage, Website-Struktur, Messbarkeit oder Vorqualifizierung zuerst zählt.</p>
+							<h3 id="energy-aside-title">Ihre Angaben im Überblick</h3>
+							<p>Region, Lead-Volumen, CPL und Engpass zusammen ergeben die Grundlage für eine ehrliche Einordnung &mdash; ohne Pflicht-Call und ohne generische Antwort.</p>
 							<dl class="review-brief-list">
 								<?php foreach ( $flow_steps as $step ) : ?>
 									<?php if ( empty( $step['name'] ) || empty( $step['summary_label'] ) ) : ?>

@@ -29,6 +29,35 @@ $pain_cards = [
 	],
 ];
 
+$tco_rows = [
+	[
+		'label'         => 'Initiales Setup',
+		'rental'        => 'ca. 2.000 €',
+		'ownership'     => '12.000–18.000 € einmalig',
+	],
+	[
+		'label'         => 'Monatlich (ohne Werbebudget)',
+		'rental'        => 'ca. 850 € Honorar + ca. 150 € SaaS / CRM',
+		'ownership'     => 'ca. 50 € Hochleistungs-Hosting',
+	],
+	[
+		'label'         => 'TCO über 24 Monate',
+		'rental'        => 'ca. 26.000 €',
+		'ownership'     => 'ca. 13.200–19.200 €',
+		'highlight'     => true,
+	],
+	[
+		'label'         => 'Bilanzwirkung',
+		'rental'        => 'OPEX — fließt durch die GuV ab',
+		'ownership'     => 'CAPEX — aktivierbares Asset',
+	],
+	[
+		'label'         => 'Eigentum nach Vertragsende',
+		'rental'        => '0 % (Funnel, CRM, Tracking abgeschaltet)',
+		'ownership'     => '100 % (Code, Tracking, Daten bleiben)',
+	],
+];
+
 
 $journey_cards = [
 	[
@@ -65,24 +94,24 @@ $proof_kpis = [
 
 $faq_items = [
 	[
-		'question' => 'Was kostet das?',
-		'answer'   => 'Das hängt vom Umfang ab. Typische Retainer starten bei 2.500–4.000 €/Monat. Bei einem CPL von 80 € und 50 Anfragen/Monat investieren Sie aktuell 4.000 € in Portal-Leads mit 10 % Abschlussquote. Mein System zielt darauf, diese Kosten um 50–80 % zu senken — der Retainer refinanziert sich in den meisten Fällen innerhalb von 8–12 Wochen.',
+		'question' => 'Was kostet das im Vergleich zur Performance-Agentur?',
+		'answer'   => 'Initiales Setup: 12.000–18.000 € einmalig. Laufend: ca. 50 €/Monat Hochleistungs-Hosting. TCO über 24 Monate: 13.200–19.200 € — und Sie besitzen Code, Tracking und Daten. Eine Performance-Agentur mit Paket „Regio+" kostet im gleichen Zeitraum rund 26.000 € und Sie besitzen am Ende nichts. Bilanziell: CAPEX statt OPEX.',
 	],
 	[
 		'question' => 'Funktioniert das auch für kleinere Betriebe mit 5–10 Mitarbeitern?',
-		'answer'   => 'Ja, wenn Sie aktuell mindestens 20 Anfragen pro Monat verarbeiten und Kosten pro Anfrage spürbar sind. Unter dieser Schwelle ist oft ein schlankerer Ansatz sinnvoller — das klären wir im Erstgespräch.',
+		'answer'   => 'Belastbar ab 10 Mitarbeitern und mindestens 20 qualifizierten Anfragen pro Monat. Darunter trägt die Investition den TCO-Vorteil nicht — ehrlicher Hinweis: ein schlankerer Ansatz mit klarer Landingpage und sauberem Tracking ist dann der bessere Hebel.',
 	],
 	[
 		'question' => 'Warum nicht einfach mehr Google Ads schalten?',
-		'answer'   => 'Mehr Budget auf schlechte Seiten heißt mehr Geld für dieselben unqualifizierten Anfragen. Erst wenn Seite, Formular und Tracking sauber arbeiten, lohnt sich mehr Reichweite.',
+		'answer'   => 'Mehr Budget auf schlechte Seiten heißt mehr Geld für dieselben unqualifizierten Anfragen. Erst wenn Seite, Formular und serverseitiges Tracking sauber arbeiten, lohnt sich mehr Reichweite. Ohne eigene Datenebene bleiben Sie zudem bei den Performance-Daten der Plattform — und damit in deren Logik.',
 	],
 	[
 		'question' => 'Brauchen wir eine neue Website?',
-		'answer'   => 'Meistens nicht. In 80 % der Fälle reicht eine Optimierung der bestehenden Seite: bessere Formulare, klarere Struktur, sauberes Tracking. Ob ein Relaunch nötig ist, zeigt der erste Audit.',
+		'answer'   => 'Meistens nicht im Komplettumfang. Was Sie brauchen: hardcoded WordPress (kein Page-Builder, kein Plugin-Stack), serverseitiges Tracking auf eigenem Server, Conversion-Pfad ohne Mietsysteme. Ob das ein Teil-Umbau oder ein sauberer Erstaufbau wird, zeigt der erste Audit.',
 	],
 	[
-		'question' => 'Wir nutzen schon eine Agentur — warum sollten wir wechseln?',
-		'answer'   => 'Müssen Sie nicht. Ich ergänze oft bestehende Setups — besonders bei Tracking, Vorqualifizierung und Seitenstruktur. Wenn Ihre aktuelle Agentur alles abdeckt und Ihre Abschlussquote stimmt, brauchen Sie mich nicht.',
+		'question' => 'Wir nutzen schon eine Performance-Agentur — warum sollten wir wechseln?',
+		'answer'   => 'Müssen Sie nicht. Drei Prüffragen: 1) Wem gehört der Code Ihrer Landingpage? 2) Wem gehört das CRM, in dem Ihre Leads liegen? 3) Wem gehört der Tracking-Account? Wenn die Antwort dreimal „uns" ist, brauchen Sie mich nicht. Wenn die Antwort dreimal „der Agentur" ist, mieten Sie ein System.',
 	],
 ];
 
@@ -144,13 +173,14 @@ get_header();
 			<div class="nx-container">
 				<div class="energy-hero__grid">
 					<div class="energy-hero__copy">
-						<span class="nx-badge nx-badge--gold">Für Solar- und Wärmepumpen-Betriebe mit 10–25 Mitarbeitern</span>
-						<h1 class="nx-hero__title">Schluss mit teuren Portal-Leads, die nicht ans Telefon gehen.</h1>
-						<p class="nx-hero__subtitle">Ich baue Solar- und Wärmepumpen-Anbietern ein eigenes Anfrage-System &mdash; damit Ihr Vertrieb nur noch mit Interessenten spricht, die wirklich kaufen wollen.</p>
-						<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
+						<span class="nx-badge nx-badge--gold">Für Solar- und Wärmepumpen-Betriebe ab 10 Mitarbeitern</span>
+						<h1 class="nx-hero__title">Eigene Anfrage-Infrastruktur statt geteilter Portal-Leads und gemieteter Agentur-Funnel.</h1>
+						<p class="nx-hero__subtitle">Sie bekommen ein hardcodes WordPress-System mit serverseitigem Tracking. Code, Tracking-Setup und Lead-Daten gehören Ihrem Betrieb &mdash; nicht einer Plattform und nicht uns.</p>
+						<p class="nx-cta-microcopy">&minus;83 % CPL &middot; 1.750+ qualifizierte Anfragen &middot; 12 % Abschlussquote &mdash; Referenz E3 New Energy, 9 Monate</p>
 						<div class="energy-hero__actions">
-							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_request" data-track-category="lead_gen" data-track-section="energy_hero" data-track-funnel-stage="energy_hero"><?php echo esc_html( $request_cta ); ?></a>
+							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_request" data-track-category="lead_gen" data-track-section="energy_hero" data-track-funnel-stage="energy_hero">Standortbestimmung anfordern</a>
 						</div>
+						<p class="energy-hero__cta-microcopy">5 Fragen, ca. 90 Sekunden. Keine Verkaufsgespräche per Cold Call &mdash; Antwort innerhalb von 48 Stunden per E-Mail.</p>
 					</div>
 
 				</div>
@@ -250,10 +280,49 @@ get_header();
 						</div>
 					</div>
 					<div class="energy-compare__outcome-actions">
-						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_compare_request" data-track-category="lead_gen" data-track-section="energy_compare" data-track-funnel-stage="energy_compare"><?php echo esc_html( $request_cta ); ?></a>
-						<span class="energy-compare__outcome-microcopy">2 Minuten &middot; kein Pitch &middot; Antwort per E-Mail in 48 h</span>
+						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_compare_request" data-track-category="lead_gen" data-track-section="energy_compare" data-track-funnel-stage="energy_compare">Standortbestimmung anfordern</a>
+						<span class="energy-compare__outcome-microcopy">5 Fragen &middot; ca. 90 Sekunden &middot; Antwort per E-Mail in 48 Stunden</span>
 					</div>
 				</aside>
+			</div>
+		</section>
+
+		<section class="nx-section energy-section energy-tco" id="tco" aria-labelledby="tco-title">
+			<div class="nx-container">
+				<header class="energy-section__head energy-section__head--narrow">
+					<span class="nx-badge nx-badge--ghost">CAPEX statt OPEX</span>
+					<h2 id="tco-title">Der gleiche Hebel, zwei Bilanzwirkungen: Miete oder Werkzeug.</h2>
+					<p>Performance-Agenturen verkaufen Ihnen Reichweite zur Miete: Funnel auf deren Server, CRM unter deren Lizenz, Tracking unter deren Account. Vertrag endet, Hebel weg. Der gleiche monatliche Betrag fließt 24 Monate lang in ein System, das Ihnen am Ende nicht gehört.</p>
+				</header>
+
+				<div class="energy-tco__table-wrap">
+					<table class="energy-tco__table" aria-describedby="tco-title">
+						<caption class="screen-reader-text">TCO-Vergleich über 24 Monate: Performance-Agentur (Miete) gegenüber Infrastruktur-Aufbau (Eigentum).</caption>
+						<thead>
+							<tr>
+								<th scope="col">Kostenpunkt</th>
+								<th scope="col" class="energy-tco__col energy-tco__col--rental">Mietsystem<small>Performance-Agentur, Paket „Regio+"</small></th>
+								<th scope="col" class="energy-tco__col energy-tco__col--ownership">Infrastruktur-Aufbau<small>WGOS &middot; Code im Eigentum</small></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ( $tco_rows as $tco_row ) : ?>
+								<tr<?php echo ! empty( $tco_row['highlight'] ) ? ' class="is-highlight"' : ''; ?>>
+									<th scope="row"><?php echo esc_html( $tco_row['label'] ); ?></th>
+									<td class="energy-tco__col energy-tco__col--rental"><?php echo esc_html( $tco_row['rental'] ); ?></td>
+									<td class="energy-tco__col energy-tco__col--ownership"><?php echo esc_html( $tco_row['ownership'] ); ?></td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+
+				<p class="energy-tco__pointe">Nach 24 Monaten haben Sie im Mietmodell rund 26.000 € ausgegeben und besitzen nichts. Im Infrastruktur-Modell haben Sie weniger ausgegeben und ein laufendes System in Ihrer Bilanz. Der Unterschied ist nicht der Preis &mdash; der Unterschied ist, was am Tag der Vertragskündigung übrig bleibt.</p>
+
+				<div class="energy-tco__cta">
+					<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--ghost" data-track-action="cta_energy_tco_request" data-track-category="lead_gen" data-track-section="energy_tco" data-track-funnel-stage="energy_tco">TCO-Rechnung für Ihren Betrieb anfordern</a>
+					<span class="energy-tco__cta-microcopy">Sie erhalten eine Aufstellung mit den Annahmen für Ihre Region und Ihr aktuelles Lead-Volumen. Kein Vertriebsgespräch erforderlich.</span>
+				</div>
 			</div>
 		</section>
 
@@ -265,7 +334,7 @@ get_header();
 						<h2>E3 New Energy.</h2>
 						<p>E3 New Energy ist ein regionaler Energieanbieter für Photovoltaik, Wärmepumpen und Speicherlösungen. Ausgangslage: Hohe Kosten pro Anfrage durch Portal-Zukauf, keine eigene digitale Anfrage-Infrastruktur. In 9 Monaten: eigenes System aufgebaut, Kosten pro Anfrage um 83 % gesenkt, Vertrieb arbeitet nur noch mit vorqualifizierten Anfragen.</p>
 						<div class="energy-proof__actions">
-							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_request" data-track-category="lead_gen" data-track-section="energy_proof" data-track-funnel-stage="energy_proof"><?php echo esc_html( $request_cta ); ?></a>
+							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_request" data-track-category="lead_gen" data-track-section="energy_proof" data-track-funnel-stage="energy_proof">Standortbestimmung anfordern</a>
 						</div>
 					</div>
 
@@ -323,10 +392,10 @@ get_header();
 		<section class="nx-section energy-section energy-section--alt" id="erstgespraech">
 			<div class="nx-container">
 				<div class="nx-cta-box energy-cta-box">
-					<h2>Nicht sicher, ob das für Sie passt?</h2>
-					<p>2 Minuten. Kein Pitch. Sie beschreiben Ihre Situation — ich melde mich innerhalb von 48 Stunden mit einer konkreten Einordnung per E-Mail.</p>
+					<h2>Unsicher, ob Infrastruktur statt Miete für Ihren Betrieb passt?</h2>
+					<p>5 Fragen, ca. 90 Sekunden. Sie beschreiben Region, Lead-Volumen und aktuellen Engpass — ich melde mich innerhalb von 48 Stunden mit einer ehrlichen Einordnung per E-Mail. Bei Nicht-Eignung bekommen Sie einen konkreten Hinweis auf eine realistischere Alternative.</p>
 					<div class="energy-cta-box__actions">
-						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen" data-track-section="energy_midpage" data-track-funnel-stage="energy_midpage"><?php echo esc_html( $request_cta ); ?></a>
+						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_erstgespraech" data-track-category="lead_gen" data-track-section="energy_midpage" data-track-funnel-stage="energy_midpage">Standortbestimmung anfordern</a>
 					</div>
 				</div>
 			</div>
@@ -354,11 +423,12 @@ get_header();
 			<div class="nx-container">
 				<div class="nx-cta-box energy-cta-box">
 					<span class="nx-badge nx-badge--gold">Nächster Schritt</span>
-					<h2>Eigene Anfragen statt Portal-Abhängigkeit. In 2 Minuten Situation einordnen — Ergebnis per E-Mail.</h2>
-					<p class="nx-cta-microcopy">Referenz E3 New Energy: –83 % Kosten pro Anfrage &middot; 1.750+ qualifizierte Anfragen in 9 Monaten &middot; 12 % Abschlussquote</p>
+					<h2>Eigene Infrastruktur statt geteilter Portal-Leads und gemieteter Agentur-Funnel.</h2>
+					<p class="nx-cta-microcopy">&minus;83 % CPL &middot; 1.750+ qualifizierte Anfragen &middot; 12 % Abschlussquote &mdash; Referenz E3 New Energy, 9 Monate</p>
 					<div class="energy-cta-box__actions">
-						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_request" data-track-category="lead_gen" data-track-section="energy_footer" data-track-funnel-stage="energy_footer"><?php echo esc_html( $request_cta ); ?></a>
+						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_footer_request" data-track-category="lead_gen" data-track-section="energy_footer" data-track-funnel-stage="energy_footer">Standortbestimmung anfordern</a>
 					</div>
+					<p class="energy-final-cta__microcopy">5 Fragen, ca. 90 Sekunden. Antwort innerhalb von 48 Stunden per E-Mail. Aktuell ehrlich kommuniziert: Einzelperson &mdash; begrenzte Slots pro Quartal.</p>
 				</div>
 			</div>
 		</section>

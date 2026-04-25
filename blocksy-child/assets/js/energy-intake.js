@@ -417,7 +417,7 @@
 
     if (submitButton) {
       setDisplayed(submitButton, isLast, 'inline-flex');
-      submitButton.textContent = config.submitLabel || 'System-Diagnose passend einordnen';
+      submitButton.textContent = config.submitLabel || 'Standortbestimmung absenden';
     }
   }
 
@@ -525,10 +525,11 @@
 
   function getFieldMessage(name, field) {
     var messages = {
-      name: 'Bitte Ihren Namen angeben.',
+      name: 'Bitte Vor- und Nachname angeben.',
       company: 'Bitte Ihr Unternehmen angeben.',
       email: 'Bitte eine gültige geschäftliche E-Mail-Adresse angeben.',
       page_url: 'Bitte eine gültige URL angeben oder das Feld leer lassen.',
+      postal_code: 'Bitte eine gültige fünfstellige deutsche Postleitzahl angeben.',
       consent_privacy: 'Bitte bestätigen Sie den Datenschutzhinweis.'
     };
 
@@ -742,7 +743,7 @@
 
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = config.submitLabel || 'System-Diagnose passend einordnen';
+          submitButton.textContent = config.submitLabel || 'Standortbestimmung absenden';
         }
       });
   }

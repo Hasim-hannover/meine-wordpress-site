@@ -116,6 +116,60 @@ function nexus_get_growth_audit_simple_intake_variant_label() {
  */
 function nexus_get_energy_intake_field_options() {
 	return [
+		'lead_volume' => [
+			'unter_20'    => [
+				'label'       => 'Unter 20 pro Monat',
+				'description' => 'Vertrieb hat freie Kapazität, aber zu wenige qualifizierte Anfragen kommen rein.',
+			],
+			'20_bis_50'   => [
+				'label'       => '20–50 pro Monat',
+				'description' => 'Volumen vorhanden, aber unklar, welcher Anteil tragend ist und welcher verpufft.',
+			],
+			'51_bis_120'  => [
+				'label'       => '51–120 pro Monat',
+				'description' => 'Stabiler Anfrage-Korridor — der Hebel liegt bei Qualität, Zuordnung und Eigentum.',
+			],
+			'ueber_120'   => [
+				'label'       => 'Über 120 pro Monat',
+				'description' => 'Hohes Volumen — Skalierung greift nur, wenn Tracking, Datenebene und Vertriebsfluss sauber sind.',
+			],
+		],
+		'cpl_range' => [
+			'unter_80'    => [
+				'label'       => 'Unter 80 €',
+				'description' => 'Niedriger CPL — meist organisch, Empfehlungen oder bestehende Eigenkanäle.',
+			],
+			'80_bis_150'  => [
+				'label'       => '80–150 €',
+				'description' => 'Typischer Korridor für Portal-Zukauf oder ungeöffnete Performance-Kampagnen.',
+			],
+			'151_bis_300' => [
+				'label'       => '151–300 €',
+				'description' => 'Spürbar hoher CPL — meist Mischung aus Portal-Leads, Streuverlust und schwacher Conversion.',
+			],
+			'ueber_300'   => [
+				'label'       => 'Über 300 €',
+				'description' => 'Akut unwirtschaftlich — Skalierung ist ohne strukturellen Eingriff nicht tragfähig.',
+			],
+		],
+		'primary_bottleneck' => [
+			'lead_menge'           => [
+				'label'       => 'Lead-Menge',
+				'description' => 'Vertrieb hat freie Kapazität, aber zu wenige Anfragen.',
+			],
+			'lead_qualitaet'       => [
+				'label'       => 'Lead-Qualität',
+				'description' => 'Anfragen kommen rein, aber zu viele unpassende Kontakte landen beim Vertrieb.',
+			],
+			'tracking_klarheit'    => [
+				'label'       => 'Tracking-Klarheit',
+				'description' => 'Unklar, welcher Kanal welche Abschlüsse bringt — Entscheidungen im Nebel.',
+			],
+			'eigentum_abhaengigkeit' => [
+				'label'       => 'Eigentum / Abhängigkeit',
+				'description' => 'System läuft, aber liegt bei Portal oder Agentur — Sie mieten den Hebel.',
+			],
+		],
 		'solution_focus' => [
 			'photovoltaik' => [
 				'label'       => 'Photovoltaik',
@@ -313,92 +367,70 @@ function nexus_get_energy_intake_flow_definition() {
 
 	return [
 		[
-			'id'           => 'solution',
-			'name'         => 'solution_focus',
-			'kind'         => 'single_choice',
-			'title_short'  => 'Leistung',
-			'question'     => 'Welche Leistungen verkaufen Sie hauptsächlich?',
-			'description'  => 'So wird direkt klar, wie kaufnah, erklärungsbedürftig und segmentiert Ihr Anfrageprozess sein muss.',
-			'summary_label'=> 'Leistung',
-			'auto_advance' => true,
-			'next'         => 'audience',
-			'options'      => $options['solution_focus'],
+			'id'            => 'region',
+			'name'          => 'postal_code',
+			'kind'          => 'text_input',
+			'title_short'   => 'Region',
+			'question'      => 'In welcher Region arbeitet Ihr Betrieb?',
+			'description'   => 'Wir prüfen, ob Ihr Einzugsgebiet im aktuellen Kapazitätsfenster liegt. Eine PLZ reicht — Filialstandorte besprechen wir im Erstgespräch.',
+			'summary_label' => 'Region (PLZ)',
+			'next'          => 'lead-volume',
+			'field'         => [
+				'name'         => 'postal_code',
+				'label'        => 'Postleitzahl',
+				'type'         => 'text',
+				'inputmode'    => 'numeric',
+				'autocomplete' => 'postal-code',
+				'pattern'      => '[0-9]{5}',
+				'maxlength'    => 5,
+				'placeholder'  => 'z. B. 30159',
+				'required'     => true,
+			],
 		],
 		[
-			'id'           => 'audience',
-			'name'         => 'sales_audience',
-			'kind'         => 'single_choice',
-			'title_short'  => 'Zielmarkt',
-			'question'     => 'An wen verkaufen Sie hauptsächlich?',
-			'description'  => 'B2C und B2B ticken auf Landingpages, im Proof und in Formularen oft komplett unterschiedlich.',
-			'summary_label'=> 'Zielmarkt',
-			'auto_advance' => true,
-			'next'         => 'challenge',
-			'options'      => $options['sales_audience'],
-		],
-		[
-			'id'            => 'challenge',
-			'name'          => 'primary_challenge',
+			'id'            => 'lead-volume',
+			'name'          => 'lead_volume',
 			'kind'          => 'single_choice',
-			'title_short'   => 'Hauptengpass',
-			'question'      => 'Was ist aktuell die größte Reibung?',
-			'description'   => 'So wird klar, wo im Anfrageprozess der größte Hebel liegt.',
-			'summary_label' => 'Hauptengpass',
+			'title_short'   => 'Lead-Volumen',
+			'question'      => 'Wie viele qualifizierte Anfragen erreichen Ihren Vertrieb aktuell pro Monat?',
+			'description'   => 'Gemeint sind ausschließlich Anfragen, die Ihr Vertrieb tatsächlich kontaktieren kann — nicht Klicks, nicht Newsletter-Abonnenten.',
+			'summary_label' => 'Lead-Volumen',
 			'auto_advance'  => true,
-			'next'          => 'site-state',
-			'options'       => $options['primary_challenge'],
+			'next'          => 'cpl-range',
+			'options'       => $options['lead_volume'],
 		],
 		[
-			'id'            => 'site-state',
-			'name'          => 'site_state',
+			'id'            => 'cpl-range',
+			'name'          => 'cpl_range',
 			'kind'          => 'single_choice',
-			'title_short'   => 'Aktueller Status',
-			'question'      => 'Gibt es bereits eine Website oder Landingpage, die aktiv Anfragen generiert?',
-			'description'   => 'So wird klar, ob eher Optimierung, Neuordnung oder ein sauberer Erstaufbau gebraucht wird.',
-			'summary_label' => 'Aktueller Status',
+			'title_short'   => 'CPL',
+			'question'      => 'Was kostet Sie eine qualifizierte Anfrage im Schnitt aktuell?',
+			'description'   => 'Wenn Sie überwiegend Portal-Leads einkaufen, nehmen Sie den durchschnittlichen Einkaufspreis. Wenn Sie selbst Werbung schalten: Werbebudget geteilt durch qualifizierte Anfragen.',
+			'summary_label' => 'CPL',
 			'auto_advance'  => true,
-			'next'          => 'timing',
-			'options'       => $options['site_state'],
+			'next'          => 'bottleneck',
+			'options'       => $options['cpl_range'],
 		],
 		[
-			'id'            => 'timing',
-			'name'          => 'project_timing',
+			'id'            => 'bottleneck',
+			'name'          => 'primary_bottleneck',
 			'kind'          => 'single_choice',
-			'title_short'   => 'Timing',
-			'question'      => 'Wie zeitnah möchten Sie das Thema angehen?',
-			'description'   => 'Timing hilft bei Einordnung, Priorisierung und der Frage, wie tief der nächste Schritt direkt gehen sollte.',
-			'summary_label' => 'Timing',
-			'auto_advance'  => true,
-			'next'          => 'contact-pref',
-			'options'       => $options['project_timing'],
-		],
-		[
-			'id'            => 'contact-pref',
-			'name'          => 'contact_preference',
-			'kind'          => 'single_choice',
-			'title_short'   => 'Kontaktweg',
-			'question'      => 'Wie soll die Rückmeldung ankommen?',
-			'description'   => 'Die Ersteinschätzung kommt immer per E-Mail. Hier entscheiden Sie, ob zusätzlich ein kurzes Telefonat sinnvoll ist.',
-			'summary_label' => 'Kontaktweg',
+			'title_short'   => 'Engpass',
+			'question'      => 'Wo liegt aktuell Ihr größter Engpass?',
+			'description'   => 'Eine Auswahl. Wenn mehrere zutreffen, nennen Sie den, dessen Lösung Ihrem Betrieb in den nächsten 6 Monaten am meisten bringt.',
+			'summary_label' => 'Engpass',
 			'auto_advance'  => true,
 			'next'          => 'contact',
-			'options'       => $options['contact_preference'],
+			'options'       => $options['primary_bottleneck'],
 		],
 		[
 			'id'            => 'contact',
 			'kind'          => 'contact',
 			'title_short'   => 'Kontakt',
-			'question'      => 'Wohin soll die Einordnung gehen?',
-			'description'   => 'Name, Unternehmen und geschäftliche E-Mail reichen. Telefon und Zusatzkontext bleiben optional.',
+			'question'      => 'An wen senden wir die Standortbestimmung?',
+			'description'   => 'Ihre Antworten werden ausschließlich für die Vorbereitung der Standortbestimmung verwendet. Keine Weitergabe an Dritte, kein Newsletter, kein automatisierter Anruf.',
 			'summary_label' => 'Kontakt',
 			'fields'        => [
-				[
-					'name'         => 'name',
-					'label'        => 'Name',
-					'type'         => 'text',
-					'autocomplete' => 'name',
-					'required'     => true,
-				],
 				[
 					'name'         => 'company',
 					'label'        => 'Unternehmen',
@@ -407,11 +439,19 @@ function nexus_get_energy_intake_flow_definition() {
 					'required'     => true,
 				],
 				[
+					'name'         => 'name',
+					'label'        => 'Vor- und Nachname',
+					'type'         => 'text',
+					'autocomplete' => 'name',
+					'required'     => true,
+				],
+				[
 					'name'         => 'email',
 					'label'        => 'Geschäftliche E-Mail',
 					'type'         => 'email',
 					'autocomplete' => 'email',
 					'inputmode'    => 'email',
+					'help'         => 'Bitte Firmen-Domain angeben. Bei Freemail-Adressen (gmail, gmx, web.de) verzögert sich die Antwort.',
 					'required'     => true,
 				],
 				[
@@ -423,23 +463,12 @@ function nexus_get_energy_intake_flow_definition() {
 					'required'     => false,
 				],
 				[
-					'name'         => 'page_url',
-					'label'        => 'Website oder relevante Landingpage (optional)',
-					'type'         => 'url',
-					'autocomplete' => 'url',
-					'inputmode'    => 'url',
-					'placeholder'  => 'https://www.beispiel.de',
-					'help'         => 'Hilft, wenn ich die aktuelle Struktur direkt im Kontext Ihrer Angaben sehen soll.',
-					'required'     => false,
-				],
-				[
 					'name'         => 'current_challenge',
-					'label'        => 'Optionale Nachricht',
+					'label'        => 'Anmerkung — falls Sie etwas vorab wissen sollten (optional)',
 					'type'         => 'textarea',
-					'rows'         => 5,
-					'maxlength'    => 1400,
-					'help'         => 'Zum Beispiel regionale Besonderheiten, Vertriebsrealität oder bereits laufende Kampagnen.',
-					'placeholder'  => 'Was sollte ich im ersten Blick nicht übersehen?',
+					'rows'         => 4,
+					'maxlength'    => 500,
+					'placeholder'  => 'Zum Beispiel regionale Besonderheiten, laufende Kampagnen oder bestehende Vertragsbindungen.',
 					'required'     => false,
 				],
 				[
@@ -766,7 +795,7 @@ function nexus_get_review_request_success_message( $payload ) {
 	$variant = isset( $payload['intake_variant'] ) ? sanitize_key( (string) $payload['intake_variant'] ) : '';
 
 	if ( 'energy_systems' === $variant ) {
-		return 'Danke. Ich prüfe Ihre Angaben als B2B-Energiesystem und melde mich mit einer priorisierten ersten Einordnung. Wenn ein System-Diagnose der sinnvollste nächste Schritt ist, sehen Sie das direkt in der Rückmeldung.';
+		return 'Eingegangen. Ihre Standortbestimmung liegt in der Bearbeitung. Sie erhalten innerhalb von 48 Werktagsstunden eine E-Mail von hasim@hasimuener.de — bei Eignung mit Vorschlag für ein 30-minütiges Erstgespräch, bei Nicht-Eignung mit konkretem Hinweis auf eine realistischere Alternative.';
 	}
 
 	if ( nexus_is_growth_audit_simple_intake_variant( $variant ) ) {
@@ -1143,6 +1172,10 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 	$type_options          = nexus_get_audit_request_type_options();
 	$field_options         = nexus_get_energy_intake_field_options();
 	$audit_type            = isset( $payload['audit_type'] ) ? sanitize_key( (string) $payload['audit_type'] ) : 'growth_audit';
+	$postal_code           = isset( $payload['postal_code'] ) ? preg_replace( '/\D/', '', (string) $payload['postal_code'] ) : '';
+	$lead_volume           = isset( $payload['lead_volume'] ) ? sanitize_key( (string) $payload['lead_volume'] ) : '';
+	$cpl_range             = isset( $payload['cpl_range'] ) ? sanitize_key( (string) $payload['cpl_range'] ) : '';
+	$primary_bottleneck    = isset( $payload['primary_bottleneck'] ) ? sanitize_key( (string) $payload['primary_bottleneck'] ) : '';
 	$solution_focus        = isset( $payload['solution_focus'] ) ? sanitize_key( (string) $payload['solution_focus'] ) : '';
 	$sales_audience        = isset( $payload['sales_audience'] ) ? sanitize_key( (string) $payload['sales_audience'] ) : '';
 	$region_scope          = isset( $payload['region_scope'] ) ? sanitize_key( (string) $payload['region_scope'] ) : '';
@@ -1159,24 +1192,45 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 	$email                 = isset( $payload['email'] ) ? sanitize_email( (string) $payload['email'] ) : '';
 	$phone                 = isset( $payload['phone'] ) ? sanitize_text_field( (string) $payload['phone'] ) : '';
 	$consent_privacy       = isset( $payload['consent_privacy'] ) ? sanitize_key( (string) $payload['consent_privacy'] ) : '';
-	// Region, measurement, acquisition mix and improvement goal are no longer
-	// collected in the reduced 6-step flow but kept as optional fields for
-	// backward compatibility with existing CRM entries.
+	// Solution focus, sales audience, site state, project timing, contact preference,
+	// measurement state, acquisition mix, improvement goal and region scope are
+	// not collected in the 5-step v1 flow. They remain optional in the payload
+	// so legacy entries and future variants stay compatible.
 
-	if ( empty( $solution_focus ) || ! isset( $field_options['solution_focus'][ $solution_focus ] ) ) {
-		return new WP_Error( 'missing_solution_focus', 'Bitte auswählen, welche Leistungen Sie hauptsächlich verkaufen.' );
+	if ( '' === $postal_code || ! preg_match( '/^[0-9]{5}$/', $postal_code ) ) {
+		return new WP_Error( 'invalid_postal_code', 'Bitte eine gültige fünfstellige deutsche Postleitzahl angeben.' );
 	}
 
-	if ( empty( $sales_audience ) || ! isset( $field_options['sales_audience'][ $sales_audience ] ) ) {
-		return new WP_Error( 'missing_sales_audience', 'Bitte auswählen, an wen Sie hauptsächlich verkaufen.' );
+	if ( (int) $postal_code < 1000 || (int) $postal_code > 99999 ) {
+		return new WP_Error( 'invalid_postal_code_range', 'Bitte eine deutsche Postleitzahl im gültigen Bereich angeben.' );
+	}
+
+	if ( empty( $lead_volume ) || ! isset( $field_options['lead_volume'][ $lead_volume ] ) ) {
+		return new WP_Error( 'missing_lead_volume', 'Bitte das aktuelle Lead-Volumen auswählen.' );
+	}
+
+	if ( empty( $cpl_range ) || ! isset( $field_options['cpl_range'][ $cpl_range ] ) ) {
+		return new WP_Error( 'missing_cpl_range', 'Bitte den aktuellen CPL-Bereich auswählen.' );
+	}
+
+	if ( empty( $primary_bottleneck ) || ! isset( $field_options['primary_bottleneck'][ $primary_bottleneck ] ) ) {
+		return new WP_Error( 'missing_primary_bottleneck', 'Bitte den größten aktuellen Engpass auswählen.' );
+	}
+
+	if ( '' !== $solution_focus && ! isset( $field_options['solution_focus'][ $solution_focus ] ) ) {
+		$solution_focus = '';
+	}
+
+	if ( '' !== $sales_audience && ! isset( $field_options['sales_audience'][ $sales_audience ] ) ) {
+		$sales_audience = '';
 	}
 
 	if ( '' !== $region_scope && ! isset( $field_options['region_scope'][ $region_scope ] ) ) {
 		$region_scope = '';
 	}
 
-	if ( empty( $primary_challenge ) || ! isset( $field_options['primary_challenge'][ $primary_challenge ] ) ) {
-		return new WP_Error( 'missing_primary_challenge', 'Bitte die größte aktuelle Reibung auswählen.' );
+	if ( '' !== $primary_challenge && ! isset( $field_options['primary_challenge'][ $primary_challenge ] ) ) {
+		$primary_challenge = '';
 	}
 
 	if ( '' !== $measurement_state && ! isset( $field_options['measurement_state'][ $measurement_state ] ) ) {
@@ -1187,16 +1241,16 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 		$acquisition_mix = '';
 	}
 
-	if ( empty( $site_state ) || ! isset( $field_options['site_state'][ $site_state ] ) ) {
-		return new WP_Error( 'missing_site_state', 'Bitte den Status Ihrer aktuellen Website oder Landingpage auswählen.' );
+	if ( '' !== $site_state && ! isset( $field_options['site_state'][ $site_state ] ) ) {
+		$site_state = '';
 	}
 
 	if ( '' !== $improvement_goal && ! isset( $field_options['improvement_goal'][ $improvement_goal ] ) ) {
 		$improvement_goal = '';
 	}
 
-	if ( empty( $project_timing ) || ! isset( $field_options['project_timing'][ $project_timing ] ) ) {
-		return new WP_Error( 'missing_project_timing', 'Bitte auswählen, wie zeitnah Sie das Thema angehen möchten.' );
+	if ( '' !== $project_timing && ! isset( $field_options['project_timing'][ $project_timing ] ) ) {
+		$project_timing = '';
 	}
 
 	if ( '' !== $page_url ) {
@@ -1241,6 +1295,14 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 		? (string) wp_parse_url( $page_url, PHP_URL_HOST )
 		: nexus_get_review_request_domain_from_email( $email );
 
+	$lookup_label = static function( $group, $key ) use ( $field_options ) {
+		if ( '' === $key || ! isset( $field_options[ $group ][ $key ]['label'] ) ) {
+			return '';
+		}
+
+		return (string) $field_options[ $group ][ $key ]['label'];
+	};
+
 	return [
 		'intake_variant'               => 'energy_systems',
 		'intake_variant_label'         => nexus_get_energy_intake_variant_label(),
@@ -1249,11 +1311,11 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 		'page_url'                    => $page_url,
 		'domain'                      => $resolved_domain,
 		'company'                     => $company,
-		'focus_area'                  => $primary_challenge,
-		'focus_area_label'            => $field_options['primary_challenge'][ $primary_challenge ]['label'],
+		'focus_area'                  => $primary_bottleneck,
+		'focus_area_label'            => $lookup_label( 'primary_bottleneck', $primary_bottleneck ),
 		'current_challenge'           => $current_challenge,
 		'primary_goal'                => $improvement_goal,
-		'primary_goal_label'          => $field_options['improvement_goal'][ $improvement_goal ]['label'],
+		'primary_goal_label'          => $lookup_label( 'improvement_goal', $improvement_goal ),
 		'extra_context'               => '',
 		'name'                        => $name,
 		'email'                       => $email,
@@ -1267,24 +1329,31 @@ function nexus_validate_energy_review_request_payload( $payload ) {
 		'previous_internal_url'       => $previous_internal_url,
 		'referrer_url'                => $referrer_url,
 		'referrer_host'               => $referrer_url ? sanitize_text_field( strtolower( (string) wp_parse_url( $referrer_url, PHP_URL_HOST ) ) ) : '',
+		'postal_code'                 => $postal_code,
+		'lead_volume'                 => $lead_volume,
+		'lead_volume_label'           => $lookup_label( 'lead_volume', $lead_volume ),
+		'cpl_range'                   => $cpl_range,
+		'cpl_range_label'             => $lookup_label( 'cpl_range', $cpl_range ),
+		'primary_bottleneck'          => $primary_bottleneck,
+		'primary_bottleneck_label'    => $lookup_label( 'primary_bottleneck', $primary_bottleneck ),
 		'solution_focus'              => $solution_focus,
-		'solution_focus_label'        => $field_options['solution_focus'][ $solution_focus ]['label'],
+		'solution_focus_label'        => $lookup_label( 'solution_focus', $solution_focus ),
 		'sales_audience'              => $sales_audience,
-		'sales_audience_label'        => $field_options['sales_audience'][ $sales_audience ]['label'],
+		'sales_audience_label'        => $lookup_label( 'sales_audience', $sales_audience ),
 		'region_scope'                => $region_scope,
-		'region_scope_label'          => '' !== $region_scope && isset( $field_options['region_scope'][ $region_scope ] ) ? $field_options['region_scope'][ $region_scope ]['label'] : '',
+		'region_scope_label'          => $lookup_label( 'region_scope', $region_scope ),
 		'primary_challenge'           => $primary_challenge,
-		'primary_challenge_label'     => $field_options['primary_challenge'][ $primary_challenge ]['label'],
+		'primary_challenge_label'     => $lookup_label( 'primary_challenge', $primary_challenge ),
 		'measurement_state'           => $measurement_state,
-		'measurement_state_label'     => $measurement_state ? $field_options['measurement_state'][ $measurement_state ]['label'] : '',
+		'measurement_state_label'     => $lookup_label( 'measurement_state', $measurement_state ),
 		'acquisition_mix'             => $acquisition_mix,
-		'acquisition_mix_label'       => '' !== $acquisition_mix && isset( $field_options['acquisition_mix'][ $acquisition_mix ] ) ? $field_options['acquisition_mix'][ $acquisition_mix ]['label'] : '',
+		'acquisition_mix_label'       => $lookup_label( 'acquisition_mix', $acquisition_mix ),
 		'site_state'                  => $site_state,
-		'site_state_label'            => $field_options['site_state'][ $site_state ]['label'],
+		'site_state_label'            => $lookup_label( 'site_state', $site_state ),
 		'improvement_goal'            => $improvement_goal,
-		'improvement_goal_label'      => '' !== $improvement_goal && isset( $field_options['improvement_goal'][ $improvement_goal ] ) ? $field_options['improvement_goal'][ $improvement_goal ]['label'] : '',
+		'improvement_goal_label'      => $lookup_label( 'improvement_goal', $improvement_goal ),
 		'project_timing'              => $project_timing,
-		'project_timing_label'        => $field_options['project_timing'][ $project_timing ]['label'],
+		'project_timing_label'        => $lookup_label( 'project_timing', $project_timing ),
 	];
 }
 
@@ -1354,6 +1423,13 @@ function nexus_create_review_request_post( $payload ) {
 	update_post_meta( $post_id, '_nexus_review_referrer_host', sanitize_text_field( (string) ( $payload['referrer_host'] ?? '' ) ) );
 
 	if ( 'energy_systems' === ( $payload['intake_variant'] ?? '' ) ) {
+		update_post_meta( $post_id, '_nexus_review_energy_postal_code', sanitize_text_field( (string) ( $payload['postal_code'] ?? '' ) ) );
+		update_post_meta( $post_id, '_nexus_review_energy_lead_volume', sanitize_key( (string) ( $payload['lead_volume'] ?? '' ) ) );
+		update_post_meta( $post_id, '_nexus_review_energy_lead_volume_label', sanitize_text_field( (string) ( $payload['lead_volume_label'] ?? '' ) ) );
+		update_post_meta( $post_id, '_nexus_review_energy_cpl_range', sanitize_key( (string) ( $payload['cpl_range'] ?? '' ) ) );
+		update_post_meta( $post_id, '_nexus_review_energy_cpl_range_label', sanitize_text_field( (string) ( $payload['cpl_range_label'] ?? '' ) ) );
+		update_post_meta( $post_id, '_nexus_review_energy_primary_bottleneck', sanitize_key( (string) ( $payload['primary_bottleneck'] ?? '' ) ) );
+		update_post_meta( $post_id, '_nexus_review_energy_primary_bottleneck_label', sanitize_text_field( (string) ( $payload['primary_bottleneck_label'] ?? '' ) ) );
 		update_post_meta( $post_id, '_nexus_review_energy_solution_focus', sanitize_key( (string) ( $payload['solution_focus'] ?? '' ) ) );
 		update_post_meta( $post_id, '_nexus_review_energy_solution_focus_label', sanitize_text_field( (string) ( $payload['solution_focus_label'] ?? '' ) ) );
 		update_post_meta( $post_id, '_nexus_review_energy_sales_audience', sanitize_key( (string) ( $payload['sales_audience'] ?? '' ) ) );
@@ -1604,16 +1680,28 @@ function nexus_get_review_request_detail_rows( $payload ) {
 	} elseif ( 'energy_systems' === $variant ) {
 		$rows = [
 			[
+				'label' => 'Region (PLZ)',
+				'value' => (string) ( $payload['postal_code'] ?? '' ),
+			],
+			[
+				'label' => 'Lead-Volumen',
+				'value' => (string) ( $payload['lead_volume_label'] ?? '' ),
+			],
+			[
+				'label' => 'CPL',
+				'value' => (string) ( $payload['cpl_range_label'] ?? '' ),
+			],
+			[
+				'label' => 'Engpass',
+				'value' => (string) ( $payload['primary_bottleneck_label'] ?? $payload['focus_area_label'] ?? '' ),
+			],
+			[
 				'label' => 'Leistung',
 				'value' => (string) ( $payload['solution_focus_label'] ?? '' ),
 			],
 			[
 				'label' => 'Zielmarkt',
 				'value' => (string) ( $payload['sales_audience_label'] ?? '' ),
-			],
-			[
-				'label' => 'Hauptengpass',
-				'value' => (string) ( $payload['primary_challenge_label'] ?? $payload['focus_area_label'] ?? '' ),
 			],
 			[
 				'label' => 'Aktueller Status',
@@ -1628,7 +1716,7 @@ function nexus_get_review_request_detail_rows( $payload ) {
 				'value' => (string) ( $payload['page_url'] ?? '' ),
 			],
 			[
-				'label' => 'Nachricht',
+				'label' => 'Anmerkung',
 				'value' => (string) ( $payload['current_challenge'] ?? '' ),
 			],
 		];
