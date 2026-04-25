@@ -128,7 +128,9 @@ function hu_enqueue_assets() {
 	// ── A) Startseite (homepage.css nur auf Front, nicht Blog-Index) ──
 	if ( is_front_page() ) {
 		hu_enqueue_css( 'nexus-home-css', 'homepage.css', [ 'nexus-design-system' ] );
+		hu_enqueue_css( 'nexus-home-cro-css', 'homepage-cro.css', [ 'nexus-home-css' ] );
 		hu_enqueue_js( 'nexus-home-js', 'homepage.js', [ 'nexus-core-js' ] );
+		hu_enqueue_js( 'nexus-home-cro-js', 'homepage-cro.js', [ 'nexus-home-js' ] );
 		hu_enqueue_js( 'nexus-home-mindmap-teaser-js', 'homepage-mindmap-teaser.js', [ 'nexus-home-js' ] );
 		wp_localize_script(
 			'nexus-home-mindmap-teaser-js',
