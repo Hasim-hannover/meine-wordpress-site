@@ -159,130 +159,101 @@ get_header();
 
 		<section class="nx-section energy-section energy-diagram-section" id="modell" aria-labelledby="modell-title">
 			<div class="nx-container">
-				<h2 id="modell-title" class="screen-reader-text">Modell A: Nachfrage mieten vs. Modell B: Infrastruktur aufbauen</h2>
-				<div class="energy-diagram" role="img" aria-label="Vergleichsdiagramm: Modell A (Portal-Leads) vs. Modell B (eigenes Anfrage-System) mit den drei Schritten Fundament, Conversion und Skalierung. Referenz E3 New Energy: &minus;83 % Kosten, 1.750 Anfragen, 12 % Abschlussquote.">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 730" class="energy-diagram__svg" aria-hidden="true" focusable="false">
-						<defs>
-							<linearGradient id="energyDiagramSystemGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-								<stop offset="0%" stop-color="#06b6d4" stop-opacity="0.9" />
-								<stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.7" />
-							</linearGradient>
-							<filter id="energyDiagramGlow" x="-30%" y="-30%" width="160%" height="160%">
-								<feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1" />
-								<feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur2" />
-								<feMerge>
-									<feMergeNode in="blur2" />
-									<feMergeNode in="blur1" />
-									<feMergeNode in="SourceGraphic" />
-								</feMerge>
-							</filter>
-							<pattern id="energyDiagramGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-								<path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.8" />
-							</pattern>
-						</defs>
+				<header class="energy-section__head energy-section__head--narrow">
+					<span class="nx-badge nx-badge--ghost">Zwei Wege</span>
+					<h2 id="modell-title">Nachfrage mieten — oder eigene Anfrage-Infrastruktur aufbauen.</h2>
+					<p>Zwei Modelle, zwei Wirtschaftlichkeiten. Das eine setzt jeden Monat neu auf Portal-Budget. Das andere baut ein Anfrage-System, das in 9 Monaten 83 % günstiger arbeitet.</p>
+				</header>
 
-						<rect x="0" y="0" width="1300" height="730" fill="url(#energyDiagramGrid)" />
+				<div class="energy-compare" role="group" aria-label="Vergleich: Modell A Portal-Leads vs. Modell B eigenes Anfrage-System">
+					<article class="energy-compare__card energy-compare__card--alt">
+						<header class="energy-compare__head">
+							<span class="energy-compare__label energy-compare__label--alt">Modell A</span>
+							<h3>Nachfrage mieten</h3>
+							<p class="energy-compare__sub">Aroundhome &middot; Check24 &middot; DAA</p>
+						</header>
+						<ul class="energy-compare__list">
+							<li>
+								<strong>bis 150 € pro Lead</strong>
+								<span>50 % gehen nicht ans Telefon</span>
+							</li>
+							<li>
+								<strong>Kein Überblick</strong>
+								<span>Welcher Kanal lohnt sich wirklich?</span>
+							</li>
+							<li>
+								<strong>Abhängigkeit</strong>
+								<span>Budget-Stopp = Nachfrage-Stopp</span>
+							</li>
+						</ul>
+						<footer class="energy-compare__verdict energy-compare__verdict--alt">
+							Status quo: teuer &amp; kurzlebig
+						</footer>
+					</article>
 
-						<text x="45" y="55" fill="#ffffff" font-size="28" font-weight="800" letter-spacing="-0.5">Eigenes Anfrage-System für Solar &amp; Wärmepumpen</text>
-						<text x="45" y="82" fill="#64748b" font-size="15" font-weight="450">Haşim Üner · Unabhängig von Portal-Leads</text>
-
-						<g transform="translate(80, 200)">
-							<rect x="-10" y="-10" width="300" height="200" rx="24" fill="#1f1f1f" fill-opacity="0.4" stroke="#ff4444" stroke-width="2" stroke-dasharray="6 4" />
-							<text x="15" y="20" fill="#ff4444" font-size="14" font-weight="700" letter-spacing="0.5">MODELL A: NACHFRAGE MIETEN</text>
-
-							<circle cx="50" cy="65" r="18" fill="none" stroke="#6b7280" stroke-width="1.8" />
-							<text x="85" y="62" fill="#9ca3af" font-size="13" font-weight="500">bis 150 € pro Lead</text>
-							<text x="85" y="80" fill="#6b7280" font-size="11">50 % gehen nicht ans Telefon</text>
-
-							<circle cx="50" cy="115" r="18" fill="none" stroke="#6b7280" stroke-width="1.8" />
-							<text x="85" y="112" fill="#9ca3af" font-size="13" font-weight="500">Kein Überblick</text>
-							<text x="85" y="130" fill="#6b7280" font-size="11">Welcher Kanal lohnt sich?</text>
-
-							<circle cx="50" cy="165" r="18" fill="none" stroke="#6b7280" stroke-width="1.8" />
-							<text x="85" y="162" fill="#9ca3af" font-size="13" font-weight="500">Abhängigkeit</text>
-							<text x="85" y="180" fill="#6b7280" font-size="11">Budget-Stopp = Nachfrage-Stopp</text>
-
-							<text x="140" y="210" fill="#4b5563" font-size="10" text-anchor="middle">Aroundhome · Check24 · DAA</text>
-						</g>
-
-						<g transform="translate(880, 120)">
-							<rect x="-10" y="-10" width="370" height="520" rx="24" fill="#1a2a1a" fill-opacity="0.3" stroke="#22c55e" stroke-width="2" stroke-dasharray="6 4" />
-							<text x="15" y="20" fill="#22c55e" font-size="14" font-weight="700" letter-spacing="0.5">MODELL B: INFRASTRUKTUR AUFBAUEN</text>
-
-							<rect x="15" y="45" width="320" height="100" rx="12" fill="#192a3d" fill-opacity="0.5" stroke="rgba(6,182,212,0.4)" stroke-width="1.2" />
-							<circle cx="55" cy="85" r="16" fill="none" stroke="#06b6d4" stroke-width="2" />
-							<text x="55" y="90" fill="#06b6d4" font-size="12" text-anchor="middle" font-weight="700">1</text>
-							<text x="85" y="76" fill="#ffffff" font-size="14" font-weight="700">Fundament ordnen</text>
-							<text x="85" y="96" fill="#94a3b8" font-size="11">Tracking &amp; Datenebene</text>
-							<text x="85" y="114" fill="#64748b" font-size="10">Privacy-first · Entscheidungssignale</text>
-
-							<path d="M 175 150 L 175 170" fill="none" stroke="#06b6d4" stroke-width="2" stroke-dasharray="4 4">
-								<animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1s" repeatCount="indefinite" />
-							</path>
-
-							<rect x="15" y="175" width="320" height="100" rx="12" fill="#192a3d" fill-opacity="0.5" stroke="rgba(255,138,0,0.4)" stroke-width="1.2" />
-							<circle cx="55" cy="215" r="16" fill="none" stroke="#ff8a00" stroke-width="2" />
-							<text x="55" y="220" fill="#ff8a00" font-size="12" text-anchor="middle" font-weight="700">2</text>
-							<text x="85" y="206" fill="#ffffff" font-size="14" font-weight="700">Conversion-Pfade schärfen</text>
-							<text x="85" y="226" fill="#94a3b8" font-size="11">Formular · Call · Buchung</text>
-							<text x="85" y="244" fill="#64748b" font-size="10">Reibung entfernen · 8-Sekunden-Regel</text>
-
-							<path d="M 175 280 L 175 300" fill="none" stroke="#ff8a00" stroke-width="2" stroke-dasharray="4 4">
-								<animate attributeName="stroke-dashoffset" from="0" to="-16" dur="1s" repeatCount="indefinite" />
-							</path>
-
-							<rect x="15" y="305" width="320" height="100" rx="12" fill="#192a3d" fill-opacity="0.5" stroke="rgba(34,197,94,0.4)" stroke-width="1.2" />
-							<circle cx="55" cy="345" r="16" fill="none" stroke="#22c55e" stroke-width="2" />
-							<text x="55" y="350" fill="#22c55e" font-size="12" text-anchor="middle" font-weight="700">3</text>
-							<text x="85" y="336" fill="#ffffff" font-size="14" font-weight="700">Skalieren</text>
-							<text x="85" y="356" fill="#94a3b8" font-size="11">Money Pages &amp; Proof</text>
-							<text x="85" y="374" fill="#64748b" font-size="10">Bleibende Assets · Unabhängigkeit</text>
-
-							<rect x="15" y="425" width="320" height="65" rx="12" fill="#0a0a0a" fill-opacity="0.8" stroke="rgba(255,138,0,0.5)" stroke-width="1.5" />
-							<text x="175" y="450" fill="#ff8a00" font-size="16" font-weight="800" text-anchor="middle">-83% Kosten · 1.750 Anfragen</text>
-							<text x="175" y="474" fill="#22c55e" font-size="13" font-weight="700" text-anchor="middle">12% Abschlussquote</text>
-							<text x="175" y="485" fill="#64748b" font-size="9" text-anchor="middle">Referenz: E3 New Energy</text>
-						</g>
-
-						<g transform="translate(520, 310)">
-							<circle cx="60" cy="30" r="55" fill="#0a0a0a" stroke="url(#energyDiagramSystemGradient)" stroke-width="2.5" filter="url(#energyDiagramGlow)">
-								<animate attributeName="r" values="55;58;55" dur="3s" repeatCount="indefinite" />
-							</circle>
-							<text x="60" y="15" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">System-</text>
-							<text x="60" y="33" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">Diagnose</text>
-							<text x="60" y="48" fill="#ff8a00" font-size="10" font-weight="700" text-anchor="middle">Priorisierte</text>
-							<text x="60" y="60" fill="#ff8a00" font-size="10" font-weight="700" text-anchor="middle">Hebel</text>
-
-							<path d="M 120 30 C 250 30, 380 130, 510 130" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="8 6">
-								<animate attributeName="stroke-dashoffset" from="0" to="-28" dur="1s" repeatCount="indefinite" />
-							</path>
-							<text x="350" y="70" fill="#22c55e" font-size="12" font-weight="600">Direkter Weg</text>
-
-							<line x1="20" y1="80" x2="-100" y2="150" stroke="#ff4444" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
-							<text x="-150" y="170" fill="#ff4444" font-size="10" transform="rotate(-30 -150 170)">vermeiden</text>
-						</g>
-
-						<path d="M 380 300 C 300 300, 250 300, 200 300" fill="none" stroke="#ff4444" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.5">
-							<animate attributeName="stroke-dashoffset" from="0" to="-20" dur="2s" repeatCount="indefinite" />
-						</path>
-						<text x="280" y="280" fill="#ff4444" font-size="10">Status Quo: teuer &amp; ineffektiv</text>
-
-						<g transform="translate(80, 650)">
-							<rect x="0" y="0" width="280" height="30" rx="15" fill="#0a0a0a" fill-opacity="0.7" stroke="rgba(255,255,255,0.1)" />
-							<circle cx="15" cy="15" r="5" fill="#ff4444" />
-							<text x="30" y="19" fill="#9ca3af" font-size="10">Altes Modell: Portal-Abhängigkeit</text>
-							<circle cx="150" cy="15" r="5" fill="#22c55e" />
-							<text x="165" y="19" fill="#9ca3af" font-size="10">Eigenes System</text>
-						</g>
-					</svg>
-
-					<div class="energy-diagram__legend" aria-hidden="true">
-						<div class="energy-diagram__legend-item"><span class="energy-diagram__legend-dot energy-diagram__legend-dot--alt"></span> Portale &amp; Abhängigkeit</div>
-						<div class="energy-diagram__legend-item"><span class="energy-diagram__legend-dot energy-diagram__legend-dot--system"></span> Fundament &amp; Daten</div>
-						<div class="energy-diagram__legend-item"><span class="energy-diagram__legend-dot energy-diagram__legend-dot--convert"></span> Conversion schärfen</div>
-						<div class="energy-diagram__legend-item"><span class="energy-diagram__legend-dot energy-diagram__legend-dot--scale"></span> Skalierung &amp; Assets</div>
+					<div class="energy-compare__bridge" aria-hidden="true">
+						<span class="energy-compare__bridge-pill">System-Diagnose<small>priorisierte Hebel</small></span>
 					</div>
+
+					<article class="energy-compare__card energy-compare__card--success">
+						<header class="energy-compare__head">
+							<span class="energy-compare__label energy-compare__label--success">Modell B</span>
+							<h3>Eigenes Anfrage-System</h3>
+							<p class="energy-compare__sub">Fundament &middot; Conversion &middot; Skalierung</p>
+						</header>
+						<ol class="energy-compare__steps">
+							<li>
+								<span class="energy-compare__step-num">1</span>
+								<div>
+									<strong>Fundament ordnen</strong>
+									<span>Tracking &amp; Datenebene &middot; Privacy-first &middot; Entscheidungssignale</span>
+								</div>
+							</li>
+							<li>
+								<span class="energy-compare__step-num">2</span>
+								<div>
+									<strong>Conversion-Pfade schärfen</strong>
+									<span>Formular &middot; Call &middot; Buchung &middot; 8-Sekunden-Regel</span>
+								</div>
+							</li>
+							<li>
+								<span class="energy-compare__step-num">3</span>
+								<div>
+									<strong>Skalieren</strong>
+									<span>Money Pages &amp; Proof &middot; bleibende Assets &middot; Unabhängigkeit</span>
+								</div>
+							</li>
+						</ol>
+						<footer class="energy-compare__verdict energy-compare__verdict--success">
+							Bleibendes Anfrage-Asset
+						</footer>
+					</article>
 				</div>
+
+				<aside class="energy-compare__outcome" aria-label="Referenz E3 New Energy">
+					<div class="energy-compare__outcome-head">
+						<span class="nx-badge nx-badge--gold">Referenz E3 New Energy &middot; 9 Monate</span>
+						<h3>Was das in der Praxis bedeutet.</h3>
+					</div>
+					<div class="energy-compare__outcome-grid">
+						<div class="energy-compare__outcome-stat">
+							<strong>&minus;83 %</strong>
+							<span>Kosten pro Anfrage</span>
+						</div>
+						<div class="energy-compare__outcome-stat">
+							<strong>1.750+</strong>
+							<span>qualifizierte Anfragen</span>
+						</div>
+						<div class="energy-compare__outcome-stat">
+							<strong>12 %</strong>
+							<span>Abschlussquote</span>
+						</div>
+					</div>
+					<div class="energy-compare__outcome-actions">
+						<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_compare_request" data-track-category="lead_gen" data-track-section="energy_compare" data-track-funnel-stage="energy_compare"><?php echo esc_html( $request_cta ); ?></a>
+						<span class="energy-compare__outcome-microcopy">2 Minuten &middot; kein Pitch &middot; Antwort per E-Mail in 48 h</span>
+					</div>
+				</aside>
 			</div>
 		</section>
 
