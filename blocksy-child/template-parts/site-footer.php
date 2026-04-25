@@ -90,9 +90,9 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 			<a class="ft__logo site-logo site-logo--accent" href="<?php echo esc_url( $home_url ); ?>" aria-label="Startseite - HAŞIM ÜNER">HAŞIM ÜNER</a>
 			<p class="ft__tag">Eigenes Anfrage-System für Solar- und Wärmepumpen-Anbieter.</p>
 			<?php if ( ! $hide_primary_cta ) : ?>
-			<a class="ft__cta" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_audit" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+			<a class="ft__cta" href="<?php echo esc_url( $request_url ); ?>" data-track-action="cta_footer_request" data-track-category="lead_gen">Anfrage stellen</a>
 			<?php else : ?>
-			<a class="ft__cta ft__cta--mobile-only" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_audit_mobile" data-track-category="lead_gen"><?php echo esc_html( $audit_cta_label ); ?></a>
+			<a class="ft__cta ft__cta--mobile-only" href="<?php echo esc_url( $request_url ); ?>" data-track-action="cta_footer_request_mobile" data-track-category="lead_gen">Anfrage stellen</a>
 			<?php endif; ?>
 			<p class="ft__privacy-note">
 				<span class="ft__privacy-badge" aria-hidden="true">
@@ -111,7 +111,6 @@ $audit_footer_note = function_exists( 'nexus_get_audit_footer_note' ) ? nexus_ge
 			<section class="ft__col" aria-labelledby="ft-einstieg">
 				<h3 id="ft-einstieg">Einstieg</h3>
 				<ul class="ft__list">
-					<li><a class="ft__link-strong" href="<?php echo esc_url( $audit_url ); ?>" data-track-action="cta_footer_nav_audit" data-track-category="lead_gen">System-Diagnose</a></li>
 					<li><a class="ft__link-strong" href="<?php echo esc_url( $agentur_url ); ?>" data-track-action="cta_footer_nav_agentur" data-track-category="navigation">WordPress Agentur Hannover</a></li>
 					<li><a href="<?php echo esc_url( $whitelabel_url ); ?>" data-track-action="cta_footer_nav_whitelabel" data-track-category="navigation">Whitelabel &amp; Weiterentwicklung</a></li>
 				</ul>

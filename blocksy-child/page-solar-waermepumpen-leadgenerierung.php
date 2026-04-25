@@ -107,7 +107,7 @@ $faq_items = [
 	],
 	[
 		'question' => 'Brauchen wir eine neue Website?',
-		'answer'   => 'Meistens nicht im Komplettumfang. Was Sie brauchen: hardcoded WordPress (kein Page-Builder, kein Plugin-Stack), serverseitiges Tracking auf eigenem Server, Conversion-Pfad ohne Mietsysteme. Ob das ein Teil-Umbau oder ein sauberer Erstaufbau wird, zeigt der erste Audit.',
+		'answer'   => 'Meistens nicht im Komplettumfang. Was Sie brauchen: hardcoded WordPress (kein Page-Builder, kein Plugin-Stack), serverseitiges Tracking auf eigenem Server, Conversion-Pfad ohne Mietsysteme. Ob das ein Teil-Umbau oder ein sauberer Erstaufbau wird, zeigt sich im ersten Schritt.',
 	],
 	[
 		'question' => 'Wir nutzen schon eine Performance-Agentur — warum sollten wir wechseln?',
@@ -220,10 +220,6 @@ get_header();
 							Status quo: teuer &amp; kurzlebig
 						</footer>
 					</article>
-
-					<div class="energy-compare__bridge" aria-hidden="true">
-						<span class="energy-compare__bridge-pill">System-Diagnose<small>priorisierte Hebel</small></span>
-					</div>
 
 					<article class="energy-compare__card energy-compare__card--success">
 						<header class="energy-compare__head">

@@ -136,15 +136,11 @@ function nexus_get_site_header_fallback_items() {
 			'track'  => 'about',
 		],
 		[
-			'label'  => nexus_is_energy_systems_context()
-				? $request_cta
-				: __( 'Audit starten', 'blocksy-child' ),
-			'url'    => nexus_is_energy_systems_context()
-				? $request_url
-				: ( $primary_urls['audit'] ?? nexus_get_audit_url() ),
-			'active' => nexus_is_audit_page(),
+			'label'  => $request_cta,
+			'url'    => $request_url,
+			'active' => false,
 			'class'  => 'nav-cta-button',
-			'track'  => 'audit',
+			'track'  => 'request',
 		],
 	];
 }
@@ -258,11 +254,7 @@ add_filter( 'wp_nav_menu_objects', 'nexus_strip_side_funnel_nav_items', 10, 2 );
  * @return array
  */
 function nexus_energy_nav_cta_label( $items, $args ) {
-	if (
-		! nexus_is_primary_header_menu_args( $args )
-		|| ! function_exists( 'nexus_is_energy_systems_context' )
-		|| ! nexus_is_energy_systems_context()
-	) {
+	if ( ! nexus_is_primary_header_menu_args( $args ) ) {
 		return $items;
 	}
 
@@ -270,7 +262,7 @@ function nexus_energy_nav_cta_label( $items, $args ) {
 	$request_cta = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
 
 	foreach ( $items as $item ) {
-		if ( 'Audit starten' === $item->title ) {
+		if ( in_array( $item->title, ['Audit starten', 'System-Diagnose', 'System-Diagnose starten', 'Audit', 'AI-Audit'], true ) ) {
 			$item->title = $request_cta;
 			$item->url   = $request_url;
 			break;
