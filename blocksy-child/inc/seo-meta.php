@@ -88,8 +88,8 @@ function hu_get_forced_singular_seo_map() {
 				'description' => 'Projekt starten oder Frage stellen: Formular ausfuellen, Rueckmeldung in 48 h. Kein Pflicht-Call, kein Sales-Druck – nur eine fundierte Ersteinschaetzung.',
 			],
 			'uber-mich' => [
-				'title'       => 'Über Haşim Üner | WordPress, SEO und klare Systeme',
-				'description' => 'Über Haşim Üner: WordPress, technische SEO, privacy-first Messbarkeit und klare Nutzerführung für B2B-Websites mit Diagnose vor Aktion.',
+				'title'       => 'Über Haşim Üner — Brunnenbauer für digitale Anfrage-Systeme',
+				'description' => 'Ich baue Solar- und Wärmepumpen-Anbietern eigene Anfrage-Systeme. Weg von gemieteten Portal-Leads, hin zu Infrastruktur im eigenen Eigentum.',
 			],
 			// 'wgos' / 'wordpress-growth-operating-system' Meta-Einträge entfernt:
 			// Seiten sind noindex, daher keine öffentlichen Meta-Signale mehr.

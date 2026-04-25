@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Nexus Über Mich
- * Description: Nischen-Positionsseite für Solar- und Wärmepumpen-Anbieter
+ * Description: Storytelling-Positionsseite für Solar- und Wärmepumpen-Anbieter
  *
  * @package Blocksy_Child
  */
@@ -10,121 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$audit_url    = function_exists( 'nexus_get_audit_url' ) ? nexus_get_audit_url() : home_url( '/growth-audit/' );
-$request_url  = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/solar-waermepumpen-leadgenerierung/#energie-anfrage' );
-$request_cta  = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
-
-$hero_facts = [
-	[
-		'label' => 'Rolle',
-		'text'  => 'Spezialist für Anfrage-Systeme in der Solar- und Wärmepumpen-Nische',
-	],
-	[
-		'label' => 'Fokus',
-		'text'  => 'Landingpages, technisches SEO, GTM Server-Side, CRM-Attribution',
-	],
-	[
-		'label' => 'Arbeitsweise',
-		'text'  => 'Diagnose, Priorisierung nach CPL-Hebel, iterative Umsetzung',
-	],
-	[
-		'label' => 'Standort',
-		'text'  => 'Pattensen bei Hannover, Projekte DACH-weit',
-	],
-];
-
-$proof_stats = [
-	[
-		'label' => 'CPL vorher:',
-		'value' => '120 €',
-	],
-	[
-		'label' => 'CPL nachher:',
-		'value' => '20 €',
-	],
-	[
-		'label' => 'Leads:',
-		'value' => '1.750+',
-	],
-];
-
-$proof_story_steps = [
-	[
-		'label' => 'Vorher',
-		'title' => '120 € CPL und ein Vertrieb, der falsche Anfragen abarbeitet.',
-		'text'  => 'Das Mandat kam nicht wegen Design. Es kam wegen zu teurer Leads, defektem Tracking und einer Website, die zwar erklärt, aber nicht vorqualifiziert.',
-	],
-	[
-		'label' => 'Eingriff',
-		'title' => 'Nicht mehr Traffic. Erst ein sauberes System.',
-		'text'  => 'Landingpages neu aufgebaut. GTM Server-Side und Consent Mode V2 sauber gezogen. Bitrix24 so angebunden, dass aus Klicks wieder belastbare Vertriebssignale werden.',
-	],
-	[
-		'label' => 'Danach',
-		'title' => '20 € CPL. 1.750+ Leads.',
-		'text'  => 'Das Projekt läuft weiter. Genau deshalb ist die Zahl nicht die Story. Die Story ist, dass das System wieder lernt, welcher Klick am Ende Umsatz bringt.',
-	],
-];
-
-$diagnostic_signals = [
-	[
-		'title' => 'Marke statt Kaufabsicht.',
-		'text'  => 'Die Seite zieht Marken-Traffic. Für kaufnahe Suchanfragen kurz vor der Entscheidung fehlt Sichtbarkeit. Dann kommen Besuche, aber kaum gute Anfragen.',
-	],
-	[
-		'title' => 'Events ohne Abschlussbezug.',
-		'text'  => 'Im Werbekonto gibt es Conversions. Im CRM fehlt, welche Anfrage gekauft hat. Dann optimiert das Team auf Aktivität statt auf Umsatz.',
-	],
-	[
-		'title' => 'Technik statt Entscheidungslogik.',
-		'text'  => 'Die Seite erklärt Module, Förderungen oder COP-Werte. Aber sie baut keinen klaren Weg aus Nutzen, Proof, Einwandabbau und CTA.',
-	],
-];
-
-$project_phases = [
-	[
-		'label' => 'Woche 1–2',
-		'title' => 'Audit',
-		'text'  => [
-			'Ein regionaler Wärmepumpen-Anbieter, 18 Mitarbeiter. Website generiert Traffic, aber kaum Anfragen. Ich prüfe Landingpage-Struktur, Tracking-Setup, Anzeigen-Attribution und Search Console.',
-			'Typischer Befund: Die Seite rankt für Marke, nicht für kaufnahe Keywords. Conversion-Events fehlen oder sind doppelt. Die Landingpage erklärt Technik statt Entscheidungslogik.',
-		],
-	],
-	[
-		'label' => 'Woche 3–4',
-		'title' => 'Priorisierung',
-		'text'  => [
-			'Drei Hebel zuerst: Landingpage auf Entscheidungslogik umbauen (Nutzen, Proof, Einwandabbau, klare CTA). GTM Server-Side aufsetzen, Consent Mode V2 sauberziehen. CRM-Anbindung mit vollständiger Attribution von Klick bis Vertragsabschluss.',
-		],
-	],
-	[
-		'label' => 'Monat 2–3',
-		'title' => 'Umsetzung',
-		'text'  => [
-			'Neue Landingpage live, Tracking sauber, CRM-Pipeline sichtbar. Leadkosten beginnen zu fallen, sobald die Datenrückmeldung an die Anzeigenplattformen stabil ist.',
-		],
-	],
-	[
-		'label' => 'Monat 4+',
-		'title' => 'Weiterentwicklung',
-		'text'  => [
-			'Datenbasiert weiterarbeiten: welche Landingpage-Varianten konvertieren besser, welche Regionen sind effizient, welches Angebot senkt CPL weiter. Kein Dauer-Retainer aus Gewohnheit, sondern weil der nächste Hebel bereits sichtbar ist.',
-		],
-	],
-];
-
-$background_paragraphs = [
-	'Mein Zugang ist Medienwissenschaften, nicht Design. Deshalb schaue ich zuerst auf Sprache, Entscheidung und Signalqualität.',
-	'Über Jahre habe ich B2B-Anfrage-Systeme für Maschinenbau und Dienstleistung gebaut. Technisch sauber war selten das eigentliche Problem.',
-	'Das Solar-Mandat hat die Richtung festgezogen. 120 € CPL, frustrierter Inhaber, Tracking ohne belastbare Rückmeldung.',
-	'Als der CPL auf 20 € fiel, war klar, wo die Methode am stärksten greift. Seitdem konzentriere ich mich auf Solar- und Wärmepumpen-Anbieter im DACH-Raum.',
-];
+$request_url = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/anfrage/#energie-anfrage' );
+$request_cta = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
 
 $not_fit_points = [
-	'Reine Design-Relaunches ohne Vertriebsziel.',
-	'Unternehmen, die keine eigene Leadgenerierung wollen, sondern ausschließlich auf Leadportale setzen.',
-	'Projekte außerhalb von Solar und Wärmepumpen.',
-	'Kunden, die ein Tracking-Setup wollen, aber keine Consent-Konsequenzen akzeptieren.',
+	'Reinen Design-Relaunches ohne Vertriebsziel.',
+	'Betrieben, die ausschließlich auf Leadportale setzen wollen.',
+	'Projekten außerhalb von Solar und Wärmepumpe.',
+	'Setups, in denen Tracking gewünscht ist, aber Consent-Konsequenzen nicht akzeptiert werden.',
 ];
 
 get_header();
@@ -133,45 +26,15 @@ get_header();
 <main id="main" class="site-main">
 	<div class="nexus-about" data-track-section="about_page">
 
-		<!-- Sektion 1: Hero -->
+		<!-- Hero -->
 		<section id="about-hero" class="nx-section about-hero">
 			<div class="nx-container">
 				<div class="about-hero__grid">
 					<div class="about-hero__copy">
 						<span class="nx-badge nx-badge--gold">ÜBER MICH</span>
-						<h1 class="about-hero__title">Ich baue Anfrage-Systeme für Solar- und Wärmepumpen-Anbieter.</h1>
+						<h1 class="about-hero__title">Ich bohre Brunnen. Digital.</h1>
 						<p class="about-hero__lead">
-							WordPress-Systeme, die qualifizierte Anfragen liefern statt nur Besucher zu zählen. Spezialisiert auf die Nische, messbar in Leadkosten und Pipeline.
-						</p>
-
-						<dl class="about-hero__facts">
-							<?php foreach ( $hero_facts as $fact ) : ?>
-								<div class="about-hero__fact">
-									<dt><?php echo esc_html( $fact['label'] ); ?></dt>
-									<dd><?php echo esc_html( $fact['text'] ); ?></dd>
-								</div>
-							<?php endforeach; ?>
-						</dl>
-
-						<p class="about-hero__actions">
-							<a
-								href="<?php echo esc_url( $request_url ); ?>"
-								class="nx-btn nx-btn--primary"
-								data-track-action="cta_about_hero_request"
-								data-track-category="lead_gen"
-								data-track-section="about_hero"
-							>
-								<?php echo esc_html( $request_cta ); ?>
-							</a>
-							<a
-								href="<?php echo esc_url( $audit_url ); ?>"
-								class="about-close__secondary-link"
-								data-track-action="cta_about_hero_audit"
-								data-track-category="lead_gen"
-								data-track-section="about_hero"
-							>
-								Audit starten
-							</a>
+							Eigene Anfrage-Infrastruktur für Solar- und Wärmepumpen-Anbieter, statt Anfragen aus gemieteten Portalen zu kaufen.
 						</p>
 					</div>
 
@@ -193,170 +56,74 @@ get_header();
 			</div>
 		</section>
 
-		<!-- Sektion 2: Warum diese Nische + Proof -->
-		<section id="about-priority" class="nx-section about-section about-priority">
+		<!-- Warum jetzt. -->
+		<section id="about-warum" class="nx-section about-section about-narrative">
 			<div class="nx-container">
-				<div class="about-priority__grid">
-					<div class="about-why">
-						<h2 class="nx-headline-section">Warum diese Nische.</h2>
-						<p>
-							Der Markt ist überhitzt: viele Anbieter, steigende Leadkosten, schlechte Qualität aus Leadportalen. Wer heute wachsen will, braucht ein eigenes Anfrage-System mit sauberer Technik, nicht den nächsten Portal-Vertrag. Genau das baue ich.
-						</p>
-					</div>
-
-					<div class="about-proof" aria-labelledby="about-proof-title">
-						<h2 id="about-proof-title" class="nx-headline-section">Das bisher stärkste Ergebnis.</h2>
-						<div class="about-proof__stats" aria-label="Proof-Zahlen">
-							<?php foreach ( $proof_stats as $stat ) : ?>
-								<div class="about-proof__stat">
-									<span class="about-proof__stat-label"><?php echo esc_html( $stat['label'] ); ?></span>
-									<strong class="about-proof__stat-value"><?php echo esc_html( $stat['value'] ); ?></strong>
-								</div>
-							<?php endforeach; ?>
-						</div>
-						<div class="about-proof__story" aria-label="Proof-Verlauf">
-							<?php foreach ( $proof_story_steps as $step ) : ?>
-								<article class="about-proof-story">
-									<span class="about-proof-story__label"><?php echo esc_html( $step['label'] ); ?></span>
-									<h3><?php echo esc_html( $step['title'] ); ?></h3>
-									<p><?php echo esc_html( $step['text'] ); ?></p>
-								</article>
-							<?php endforeach; ?>
-						</div>
-					</div>
+				<div class="about-narrative__inner">
+					<h2 class="nx-headline-section">Warum jetzt.</h2>
+					<p>Solar- und Wärmepumpen-Anbieter verkaufen ihren Kunden eine einfache Idee: weg von der Versorgung, die jemand anderem gehört. Hin zur Anlage auf dem eigenen Dach.</p>
+					<p>Ich verkaufe Ihnen denselben Gedanken — eine Etage tiefer, im Vertrieb. Weg von Portal-Leads, die jemand anderem gehören. Hin zur Anfrage-Infrastruktur, die in Ihrem eigenen Server liegt.</p>
+					<p>Bis 2023 lief der Markt von selbst. Wer eine Website hatte und ein Portal-Abo, bekam Anfragen. Seit dem Boom-Ende ist diese Logik gebrochen. Anfragen werden teurer, schlechter und unvorhersehbarer. Wer wachsen will, kann nicht mehr Wasser nachkaufen. Er braucht einen Brunnen.</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- Sektion 3: Diagnose -->
-		<section id="about-diagnosis" class="nx-section about-section">
+		<!-- Wie ich arbeite. -->
+		<section id="about-arbeit" class="nx-section about-section about-narrative">
 			<div class="nx-container">
-				<div class="nx-section-header about-section__header">
-					<h2 class="nx-headline-section">Woran ich schnell sehe, dass ein Setup Geld verliert.</h2>
-					<p class="about-diagnosis__lead">Nicht an Farben. Nicht an einem fehlenden Button. Sondern an wiederkehrenden Mustern in Suchintention, Tracking und Landingpage-Logik.</p>
-				</div>
-
-				<div class="about-diagnosis__grid">
-					<?php foreach ( $diagnostic_signals as $signal ) : ?>
-						<article class="about-diagnosis-card">
-							<h3><?php echo esc_html( $signal['title'] ); ?></h3>
-							<p><?php echo esc_html( $signal['text'] ); ?></p>
-						</article>
-					<?php endforeach; ?>
+				<div class="about-narrative__inner">
+					<h2 class="nx-headline-section">Wie ich arbeite.</h2>
+					<p>Wenn ein neuer Brunnen gebohrt werden soll, kommt zuerst der Geologe. Nicht der Bohrer. Wer ohne Geologie bohrt, trifft Stein oder zieht Schlamm. Die Arbeit, die der Geologe macht, sieht aus wie nichts: er liest Karten, klopft den Boden ab, redet mit Nachbarn, die schon gebohrt haben.</p>
+					<p>Genau das ist die erste Phase mit mir. Bevor irgendetwas an Ihrer Website verändert wird, lese ich Ihren Untergrund: Welche Suchanfragen kommen wirklich an? An welchen Stellen versickert Aufmerksamkeit? Wo ist das Tracking taub? Wo erklärt die Seite Technik, statt Entscheidungen zu führen?</p>
+					<p>Erst danach kommt der Bohrer: hardcoded WordPress, kein Page-Builder. Serverseitiges Tracking auf Ihrem Server. Eine Pipeline, die zeigt, welcher Klick am Ende Umsatz wurde.</p>
+					<p>Und erst, wenn das Wasser sauber kommt, drehen wir die Pumpe hoch. Vorher Geld auf Anzeigen zu kippen, ist wie mehr Strom auf eine kaputte Pumpe geben. Es macht das Problem lauter, nicht besser.</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- Sektion 4: Ein typisches Projekt -->
-		<section id="about-project" class="nx-section about-section">
+		<!-- Was ich nicht bin. -->
+		<section id="about-nicht" class="nx-section about-section about-narrative">
 			<div class="nx-container">
-				<div class="nx-section-header about-section__header">
-					<h2 class="nx-headline-section">Wie ein Projekt mit mir aussieht.</h2>
-				</div>
-
-				<div class="about-project-timeline">
-					<?php foreach ( $project_phases as $phase ) : ?>
-						<div class="about-project-phase">
-							<span class="about-project-phase__label"><?php echo esc_html( $phase['label'] ); ?></span>
-							<h3><?php echo esc_html( $phase['title'] ); ?></h3>
-							<?php foreach ( $phase['text'] as $paragraph ) : ?>
-								<p><?php echo esc_html( $paragraph ); ?></p>
-							<?php endforeach; ?>
-						</div>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-
-		<!-- Sektion 5: Hintergrund -->
-		<section id="about-background" class="nx-section about-section">
-			<div class="nx-container">
-				<div class="about-background">
-					<h2 class="nx-headline-section">Wie ich zur Nische gekommen bin.</h2>
-					<?php foreach ( $background_paragraphs as $paragraph ) : ?>
-						<p><?php echo esc_html( $paragraph ); ?></p>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-
-		<!-- Sektion 6: Nächste Schritte -->
-		<section id="about-paths" class="nx-section about-section">
-			<div class="nx-container">
-				<div class="nx-section-header about-section__header">
-					<h2 class="nx-headline-section">Die zwei sinnvollen nächsten Schritte.</h2>
-				</div>
-
-				<div class="about-paths">
-					<article class="about-path about-path--primary">
-						<h3>Anfrage stellen</h3>
-						<p>Wenn klar ist, dass Sie Ihr eigenes Anfrage-System für Solar oder Wärmepumpe aufbauen wollen, gehen Sie direkt ins qualifizierte Formular.</p>
-						<a
-							href="<?php echo esc_url( $request_url ); ?>"
-							class="nx-btn nx-btn--ghost"
-							data-track-action="cta_about_paths_request"
-							data-track-category="lead_gen"
-							data-track-section="about_paths"
-						>
-							<?php echo esc_html( $request_cta ); ?>
-						</a>
-					</article>
-
-					<article class="about-path">
-						<h3>Audit starten</h3>
-						<p>Wenn Sie erst sehen wollen, wo Ihr Setup Nachfrage verliert, nehmen Sie den Soft-Einstieg über das KI-Audit und gehen danach ins Formular.</p>
-						<a
-							href="<?php echo esc_url( $audit_url ); ?>"
-							class="nx-btn nx-btn--ghost"
-							data-track-action="cta_about_paths_audit"
-							data-track-category="lead_gen"
-							data-track-section="about_paths"
-						>
-							Audit starten
-						</a>
-					</article>
-				</div>
-			</div>
-		</section>
-
-		<!-- Sektion 7: Anti-Pitch -->
-		<section id="about-not-fit" class="nx-section about-section">
-			<div class="nx-container">
-				<div class="about-not-fit">
-					<h2 class="nx-headline-section">Wofür ich nicht der Richtige bin.</h2>
+				<div class="about-narrative__inner">
+					<h2 class="nx-headline-section">Was ich nicht bin.</h2>
+					<p>Ich bin nicht der, der Ihnen mehr Klicks verkauft. Ich bin nicht der, der jeden Monat einen neuen Funnel mietet. Ich bin nicht der, der einen Design-Relaunch verkauft, ohne zu fragen, was an der alten Seite eigentlich kaputt war.</p>
+					<p>Ich passe nicht zu:</p>
 					<ul class="about-not-fit__list">
 						<?php foreach ( $not_fit_points as $point ) : ?>
 							<li><?php echo esc_html( $point ); ?></li>
 						<?php endforeach; ?>
 					</ul>
+					<p>Ich bin der, der prüft, ob auf Ihrem Grundstück überhaupt Wasser liegt. Manchmal ist die ehrliche Antwort: Nein, hier nicht. Dann sage ich das, und Sie sparen sich die Bohrung.</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- Sektion 8: Finaler CTA -->
+		<!-- Wer ich bin. -->
+		<section id="about-wer" class="nx-section about-section about-narrative">
+			<div class="nx-container">
+				<div class="about-narrative__inner">
+					<h2 class="nx-headline-section">Wer ich bin.</h2>
+					<p>Mein Zugang zu dieser Arbeit ist Medienwissenschaft, nicht Webdesign. Ich denke zuerst über Sprache, Entscheidung und Signal nach — und erst danach über Code. Über Jahre habe ich Anfrage-Systeme für Maschinenbau und Dienstleistung gebaut. Die technische Schicht war selten das Problem. Das Problem war fast immer: jemand hat gebohrt, ohne vorher die Karte zu lesen.</p>
+					<p>Seit dem ersten Solar-Mandat — frustrierter Inhaber, taubes Tracking, 120 € pro Anfrage — weiß ich, wo die Methode am stärksten greift. Seitdem arbeite ich nur in dieser Nische.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Der nächste Schritt. -->
 		<section id="about-close" class="nx-section about-close">
 			<div class="nx-container">
 				<div class="about-close__inner">
-					<h2 class="nx-headline-section">Prüfen wir Ihren Status quo.</h2>
-					<p>Die System-Diagnose zeigt in 30–45 Minuten, wo Ihr Anfrage-System konkret klemmt – von der Landingpage bis zur Attribution. Kein Verkaufsgespräch, keine Präsentation. Entweder der Fit passt, oder ich sage Ihnen, welcher Partner besser wäre.</p>
+					<h2 class="nx-headline-section">Der nächste Schritt.</h2>
+					<p>Wenn Sie wissen, dass Sie bohren wollen, gehen Sie direkt ins qualifizierte Formular. Fünf Fragen, etwa 90 Sekunden. Antwort innerhalb von 48 Stunden per E-Mail. Kein Verkaufsgespräch.</p>
 					<p class="about-close__actions">
 						<a
 							href="<?php echo esc_url( $request_url ); ?>"
-							class="nx-btn nx-btn--ghost"
-							data-track-action="cta_about_final_request"
-							data-track-category="lead_gen"
-							data-track-section="about_close"
+							class="nx-btn nx-btn--primary"
+							data-track-action="cta_anfrage_uber_mich"
+							data-track-category="cta"
+							data-track-section="final"
 						>
 							<?php echo esc_html( $request_cta ); ?>
-						</a>
-						<a
-							href="<?php echo esc_url( $audit_url ); ?>"
-							class="about-close__secondary-link"
-							data-track-action="cta_about_final_audit"
-							data-track-category="lead_gen"
-							data-track-section="about_close"
-						>
-							Audit starten
 						</a>
 					</p>
 				</div>
