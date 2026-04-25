@@ -233,6 +233,7 @@ get_header();
 						</p>
 					</div>
 					<div style="flex: 1; min-width: 300px; text-align: center;">
+						<img src="https://hasimuener.de/wp-content/uploads/2026/04/Hasim_Uener_Portrait.png" alt="Hasim Üner" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 1.5rem; border: 2px solid var(--nx-border, rgba(255, 255, 255, 0.1)); box-shadow: var(--nx-shadow-md, 0 10px 30px rgba(0,0,0,0.5));">
 						<div style="text-align: left; max-width: 280px; margin: 0 auto; font-size: 0.95rem; line-height: 1.5; background: var(--nx-bg-glass-light, rgba(255, 255, 255, 0.05)); padding: 2rem; border-radius: 12px; border: 1px solid var(--nx-border, rgba(255, 255, 255, 0.1));">
 							<strong>Hasim Üner.</strong><br>
 							Experte für B2B-Leadgenerierung und Tracking.<br>
