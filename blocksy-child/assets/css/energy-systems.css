@@ -1105,3 +1105,189 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ── TCO comparison block ─────────────────────────────────── */
+.energy-tco {
+  padding-top: 0;
+}
+
+.energy-tco__table-wrap {
+  margin-top: 1.75rem;
+  overflow-x: auto;
+  border-radius: var(--nx-radius-xl);
+  border: 1px solid var(--audit-border-strong);
+  background: var(--audit-surface-strong);
+  box-shadow: var(--audit-shadow-card, var(--nx-shadow-sm));
+}
+
+.energy-tco__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  color: var(--nx-text);
+}
+
+.energy-tco__table thead th {
+  padding: 1rem 1.1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--nx-text-secondary);
+  background: hsl(30 10% 100% / 0.04);
+  border-bottom: 1px solid var(--audit-border-strong);
+  vertical-align: bottom;
+}
+
+.energy-tco__table thead th small {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--nx-text-dim);
+}
+
+.energy-tco__table tbody th {
+  width: 36%;
+  padding: 1rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-align: left;
+  color: var(--nx-text-secondary);
+  border-bottom: 1px solid var(--audit-border-strong);
+  background: hsl(30 10% 100% / 0.015);
+}
+
+.energy-tco__table tbody td {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--audit-border-strong);
+  vertical-align: top;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.energy-tco__table tbody tr:last-child th,
+.energy-tco__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.energy-tco__col--rental {
+  color: var(--red);
+  background: var(--audit-danger-bg);
+  border-left: 1px solid var(--audit-danger-border);
+}
+
+.energy-tco__col--ownership {
+  color: var(--audit-success-text);
+  background: var(--audit-success-bg);
+  border-left: 1px solid var(--audit-success-border);
+}
+
+.energy-tco__table thead .energy-tco__col--rental,
+.energy-tco__table thead .energy-tco__col--ownership {
+  color: var(--nx-text);
+}
+
+.energy-tco__table tbody tr.is-highlight th,
+.energy-tco__table tbody tr.is-highlight td {
+  font-weight: 700;
+  background: hsl(30 10% 100% / 0.05);
+}
+
+.energy-tco__table tbody tr.is-highlight .energy-tco__col--rental {
+  background: hsl(8 82% 64% / 0.16);
+}
+
+.energy-tco__table tbody tr.is-highlight .energy-tco__col--ownership {
+  background: hsl(145 43% 58% / 0.18);
+}
+
+.energy-tco__pointe {
+  margin: 1.5rem 0 0;
+  max-width: 56rem;
+  color: var(--nx-text-secondary);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.energy-tco__cta {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.25rem;
+}
+
+.energy-tco__cta-microcopy {
+  color: var(--nx-text-dim);
+  font-size: 0.85rem;
+  max-width: 32rem;
+}
+
+@media (max-width: 720px) {
+  .energy-tco__table {
+    font-size: 0.88rem;
+  }
+
+  .energy-tco__table thead th,
+  .energy-tco__table tbody th,
+  .energy-tco__table tbody td {
+    padding: 0.85rem 0.8rem;
+  }
+
+  .energy-tco__table tbody th {
+    width: 38%;
+  }
+}
+
+/* ── Hero CTA microcopy + final CTA microcopy ─────────────── */
+.energy-hero__cta-microcopy,
+.energy-final-cta__microcopy {
+  margin: 0.5rem 0 0;
+  color: var(--nx-text-dim);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  max-width: 36rem;
+}
+
+.energy-final-cta__microcopy {
+  margin-top: 0.75rem;
+}
+
+/* ── Funnel: text_input step (PLZ) ────────────────────────── */
+.energy-text-input-step {
+  display: grid;
+  gap: 1rem;
+}
+
+.energy-text-input-step__field {
+  max-width: 14rem;
+}
+
+.energy-text-input-step__field input {
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  text-align: left;
+}
+
+/* ── Success block: bullet list (replaces meta tags) ──────── */
+.review-success-list {
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.45rem;
+  color: var(--nx-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.review-success-list li {
+  list-style: disc;
+}
+
+.review-success-list li::marker {
+  color: var(--nx-accent-text);
+}
