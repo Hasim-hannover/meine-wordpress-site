@@ -721,7 +721,7 @@ function nexus_match_wgos_asset_module_key( $raw_value ) {
  * @return array<string, string>
  */
 function nexus_get_wgos_asset_explorer_links() {
-	$calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' );
+	$calendar_url = function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/kontakt/' );
 	$cases_url    = nexus_get_results_url();
 
 	return [

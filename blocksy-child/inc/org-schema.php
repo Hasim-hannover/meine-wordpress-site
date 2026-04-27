@@ -94,7 +94,7 @@ function hu_output_schema()
                     '@type'       => 'Offer',
                     'name'        => 'System-Diagnose',
                     'description' => 'Kostenloser Ersteinstieg: persönliche Analyse der drei größten Anfragebremsen für Solar-, Wärmepumpen- und B2B-Websites.',
-                    'url'         => home_url('/growth-audit/'),
+                    'url'         => home_url('/kontakt/'),
                 ],
                 [
                     '@type'       => 'Offer',
@@ -581,7 +581,7 @@ function hu_output_schema()
                         '@type' => 'WebPage',
                         'name'  => 'System-Diagnose',
                         'description' => 'Persönlicher Diagnose-Einstieg für Nachfrage, Conversion, Tracking und Priorisierung.',
-                        'url'   => home_url('/growth-audit/')
+                        'url'   => home_url('/kontakt/')
                     ],
                     [
                         '@type' => 'WebPage',

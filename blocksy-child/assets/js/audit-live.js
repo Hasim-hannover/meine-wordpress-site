@@ -16,7 +16,7 @@
     webhookStart: injectedConfig.webhookStart || 'https://hasim.app.n8n.cloud/webhook/audit',
     webhookStatus: injectedConfig.webhookStatus || 'https://hasim.app.n8n.cloud/webhook/audit-status',
     webhookConsultation: injectedConfig.webhookConsultation || 'https://hasim.app.n8n.cloud/webhook/audit-consultation',
-    consultationAltUrl: injectedConfig.consultationAltUrl || '/growth-audit/',
+    consultationAltUrl: injectedConfig.consultationAltUrl || '/kontakt/',
     pollInterval: 4500,
     pollTimeout: 180000,
     animDelay: 110

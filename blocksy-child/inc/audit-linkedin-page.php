@@ -85,13 +85,7 @@ function nexus_is_audit_linkedin_page() {
  * @return string
  */
 function nexus_get_audit_linkedin_url() {
-	$page_id = nexus_get_page_id( [ 'audit-linkedin' ] );
-
-	if ( $page_id ) {
-		return get_permalink( $page_id );
-	}
-
-	return home_url( '/audit-linkedin/' );
+	return home_url( '/kontakt/' );
 }
 
 /**

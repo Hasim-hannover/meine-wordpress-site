@@ -76,7 +76,7 @@ get_template_part( 'template-parts/blog-header' );
 						   <span class="nexus-inline-cta__tag">Kostenlose Diagnose</span>
 						   <h3 class="nexus-inline-cta__headline">Was bremst Ihr Wachstum?</h3>
 						   <p class="nexus-inline-cta__sub">Persönliche Analyse Ihrer Website — schriftliche Rückmeldung in 48 Stunden.</p>
-						   <a href="<?php echo esc_url( home_url( '/growth-audit/' ) ); ?>"
+						   <a href="<?php echo esc_url( home_url( '/kontakt/' ) ); ?>"
 							  class="nexus-btn nexus-btn--primary nexus-inline-cta__btn"
 							  data-track-action="cta_blog_inline"
 							  data-track-category="lead_gen">

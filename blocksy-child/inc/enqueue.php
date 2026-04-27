@@ -139,7 +139,7 @@ function hu_enqueue_assets() {
 				// WGOS ist deprecated in der neuen Positionierung — CTA-Exit auf System-Diagnose umgeleitet
 				'wgosUrl' => function_exists( 'nexus_get_audit_url' )
 					? nexus_get_audit_url()
-					: home_url( '/growth-audit/' ),
+					: home_url( '/kontakt/' ),
 			]
 		);
 	}
@@ -208,7 +208,7 @@ function hu_enqueue_assets() {
 				'restEndpoint'     => esc_url_raw( rest_url( 'nexus/v1/contact-request' ) ),
 				'successMessage'   => 'Danke. Ihre Anfrage ist eingegangen. Sie erhalten innerhalb von 24 Stunden eine Rückmeldung.',
 				'errorMessage'     => 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut.',
-				'callUrl'          => esc_url_raw( function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/growth-audit/' ) ),
+				'callUrl'          => esc_url_raw( function_exists( 'nexus_get_audit_calendar_url' ) ? nexus_get_audit_calendar_url() : home_url( '/kontakt/' ) ),
 				'isScopedLanding'  => $contact_is_scoped_landing,
 			]
 		);

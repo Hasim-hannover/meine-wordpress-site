@@ -59,7 +59,7 @@ function nexus_get_llms_txt_sections() {
 				],
 				[
 					'label'       => 'System-Diagnose',
-					'url'         => $urls['audit'] ?? home_url( '/growth-audit/' ),
+					'url'         => $urls['audit'] ?? home_url( '/kontakt/' ),
 					'description' => 'Diagnose von SEO, Tracking, Performance und Conversion-Prioritäten.',
 				],
 				[

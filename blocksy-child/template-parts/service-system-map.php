@@ -29,7 +29,7 @@
  *         'note'    => '...',
  *         'actions' => [
  *           [
- *             'url'      => home_url( '/growth-audit/' ),
+ *             'url'      => home_url( '/kontakt/' ),
  *             'label'    => 'System-Diagnose starten',
  *             'class'    => 'nx-btn nx-btn--primary',
  *             'action'   => 'cta_service_system_audit',
