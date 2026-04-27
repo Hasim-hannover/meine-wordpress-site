@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $request_url = function_exists( 'nexus_get_primary_request_url' ) ? nexus_get_primary_request_url() : home_url( '/anfrage/#energie-anfrage' );
 $request_cta = function_exists( 'nexus_get_primary_request_cta_label' ) ? nexus_get_primary_request_cta_label() : 'Anfrage stellen';
 $page_url    = function_exists( 'nexus_get_energy_systems_url' ) ? nexus_get_energy_systems_url() : home_url( '/solar-waermepumpen-leadgenerierung/' );
+$e3_url      = home_url( '/e3-new-energy/' );
 
 $pain_cards = [
 	[
@@ -113,6 +114,18 @@ $faq_items = [
 		'question' => 'Wir nutzen schon eine Performance-Agentur — warum sollten wir wechseln?',
 		'answer'   => 'Müssen Sie nicht. Drei Prüffragen: 1) Wem gehört der Code Ihrer Landingpage? 2) Wem gehört das CRM, in dem Ihre Leads liegen? 3) Wem gehört der Tracking-Account? Wenn die Antwort dreimal „uns" ist, brauchen Sie mich nicht. Wenn die Antwort dreimal „der Agentur" ist, mieten Sie ein System.',
 	],
+	[
+		'question' => 'Wie schnell sieht man Ergebnisse?',
+		'answer'   => 'Erste Verbesserungen entstehen oft nach den ersten Optimierungen an Tracking, Formularen und Conversion-Pfaden. Belastbare Skalierung braucht in der Regel mehrere Wochen bis Monate, weil Daten, Tests und Kanäle zusammenspielen müssen.',
+	],
+	[
+		'question' => 'Was unterscheidet Sie von Lead-Portalen?',
+		'answer'   => 'Portale vermieten Nachfrage. Sie zahlen für jeden Kontakt, den auch 3-4 Mitbewerber erhalten. Das System hier baut eigene Nachfrage-Infrastruktur auf, die Ihrem Betrieb gehört und langfristig für exklusive Anfragen sorgt.',
+	],
+	[
+		'question' => 'Arbeiten Sie mit meinem bestehenden CRM?',
+		'answer'   => 'Ja, sofern technisch sinnvoll. Ziel ist nicht ein neues Tool um jeden Preis, sondern ein System, in dem Anfragen, Quellen und Status sauber messbar werden und Leads nicht manuell abgetippt werden müssen.',
+	],
 ];
 
 $service_schema = [
@@ -173,14 +186,15 @@ get_header();
 			<div class="nx-container">
 				<div class="energy-hero__grid">
 					<div class="energy-hero__copy">
-						<span class="nx-badge nx-badge--gold">Für Solar- und Wärmepumpen-Betriebe ab 10 Mitarbeitern</span>
-						<h1 class="nx-hero__title">Eigene Anfrage-Infrastruktur statt geteilter Portal-Leads und gemieteter Agentur-Funnel.</h1>
-						<p class="nx-hero__subtitle">Sie bekommen ein hardcodes WordPress-System mit serverseitigem Tracking. Code, Tracking-Setup und Lead-Daten gehören Ihrem Betrieb &mdash; nicht einer Plattform und nicht uns.</p>
-						<p class="nx-cta-microcopy">&minus;83 % CPL &middot; 1.750+ qualifizierte Anfragen &middot; 12 % Abschlussquote &mdash; Referenz E3 New Energy, 9 Monate</p>
+						<span class="nx-badge nx-badge--gold">Für Solar- und Wärmepumpen-Betriebe mit 10–25 Mitarbeitern</span>
+						<h1 class="nx-hero__title">Bauen Sie ein eigenes Anfrage-System statt weiter teure Leads zu mieten.</h1>
+						<p class="nx-hero__subtitle">Ich helfe B2B-Betrieben, unabhängiger von Portal-Leads zu werden &mdash; mit eigener WordPress-Infrastruktur, sauberem Tracking, Vorqualifizierung und CRM-Anbindung.</p>
+						<p class="nx-cta-microcopy">Referenz E3 New Energy: 1.750+ qualifizierte Anfragen &middot; 12 % Abschlussquote &middot; &ndash;83 % Kosten pro Anfrage (von 150 € auf ~25 €)</p>
 						<div class="energy-hero__actions">
-							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_request" data-track-category="lead_gen" data-track-section="energy_hero" data-track-funnel-stage="energy_hero">Standortbestimmung anfordern</a>
+							<a href="#energie-anfrage" class="nx-btn nx-btn--primary" data-track-action="cta_energy_hero_audit" data-track-category="lead_gen">Kostenlose System-Diagnose starten</a>
+							<a href="<?php echo esc_url( $e3_url ); ?>" class="energy-text-link" data-track-action="cta_energy_hero_case" data-track-category="trust">E3-Ergebnis ansehen →</a>
 						</div>
-						<p class="energy-hero__cta-microcopy">5 Fragen, ca. 90 Sekunden. Keine Verkaufsgespräche per Cold Call &mdash; Antwort innerhalb von 48 Stunden per E-Mail.</p>
+						<p class="nx-cta-microcopy" style="margin-top: 1rem;">3 Fragen. 60 Sekunden. Sofortige Einschätzung &mdash; ohne Verkaufsgespräch.</p>
 					</div>
 
 				</div>
@@ -328,9 +342,14 @@ get_header();
 					<div class="energy-proof__copy">
 						<span class="nx-badge nx-badge--gold">Proof / Case Study</span>
 						<h2>E3 New Energy.</h2>
-						<p>E3 New Energy ist ein regionaler Energieanbieter für Photovoltaik, Wärmepumpen und Speicherlösungen. Ausgangslage: Hohe Kosten pro Anfrage durch Portal-Zukauf, keine eigene digitale Anfrage-Infrastruktur. In 9 Monaten: eigenes System aufgebaut, Kosten pro Anfrage um 83 % gesenkt, Vertrieb arbeitet nur noch mit vorqualifizierten Anfragen.</p>
-						<div class="energy-proof__actions">
-							<a href="<?php echo esc_url( $request_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_request" data-track-category="lead_gen" data-track-section="energy_proof" data-track-funnel-stage="energy_proof">Standortbestimmung anfordern</a>
+						<p><strong>Vorher:</strong> Hohe Abhängigkeit von externen Leadquellen (ø 150 €/Lead). Leads waren oft schwer erreichbar, nicht qualifiziert und es fehlte ein klarer Überblick, welche Kanäle tatsächlich Termine und Abschlüsse erzeugten.</p>
+						<p><strong>Umsetzung:</strong> Tracking-Fundament aufgebaut, Anfragepfade optimiert, smarte Vorqualifizierung eingeführt und eine strukturierte CRM-Übergabe eingerichtet.</p>
+						<p><strong>Ergebnis nach 9 Monaten:</strong> 1.750+ qualifizierte Anfragen, 12 % Abschlussquote und &ndash;83 % Kosten pro Anfrage (auf ~25 € gesenkt).</p>
+						<blockquote style="margin: 1.5rem 0; padding: 1rem 1.5rem; border-left: 3px solid var(--nx-gold); background: rgba(0,0,0,0.02); font-style: italic; font-size: 1.05rem; line-height: 1.5;">
+							„Seit dem System sehen wir endlich, welche Kanäle wirklich Anfragen und Abschlüsse bringen. Wir konnten den teuren Lead-Einkauf massiv reduzieren und haben jetzt eine eigene Pipeline.“
+						</blockquote>
+						<div class="energy-proof__actions" style="margin-top: 1.5rem;">
+							<a href="<?php echo esc_url( $e3_url ); ?>" class="nx-btn nx-btn--primary" data-track-action="cta_energy_proof_case" data-track-category="trust">Case Study lesen</a>
 						</div>
 					</div>
 
@@ -366,7 +385,35 @@ get_header();
 			</div>
 		</section>
 
-		<section class="nx-section energy-section" id="branchenverstaendnis">
+		<section class="nx-section energy-section" id="was-sie-besitzen">
+			<div class="nx-container">
+				<div class="energy-section__head energy-section__head--narrow">
+					<span class="nx-badge nx-badge--gold">Keine Miet-Leads</span>
+					<h2>Was Ihr Betrieb danach besitzt</h2>
+					<p class="nx-subheadline" style="margin:1rem auto 0; text-align: center;">Kein Leadpaket. Keine gemietete Landingpage. Kein Agentur-Blindflug. Sie erhalten ein eigenes Anfrage-System.</p>
+				</div>
+				<div class="nx-grid nx-grid-2" style="margin-top:3rem;">
+					<div class="nx-card nx-card--flat">
+						<h3 class="nx-card__title">1. Eigene WordPress-Assets</h3>
+						<p class="nx-card__text">Eine conversion-optimierte Seite sowie Proof- und Angebotsseiten, die langfristig in Ihrem Besitz bleiben.</p>
+					</div>
+					<div class="nx-card nx-card--flat">
+						<h3 class="nx-card__title">2. Vorqualifizierung &amp; CRM</h3>
+						<p class="nx-card__text">Smarte Formulare filtern unpassende Anfragen heraus und übergeben die Leads sauber an Ihr CRM-System.</p>
+					</div>
+					<div class="nx-card nx-card--flat">
+						<h3 class="nx-card__title">3. Echtes Tracking</h3>
+						<p class="nx-card__text">Sie sehen genau, welche Kampagne Anfragen und Termine erzeugt — volle Messbarkeit der Leadquellen.</p>
+					</div>
+					<div class="nx-card nx-card--flat">
+						<h3 class="nx-card__title">4. Grundlage für Skalierung</h3>
+						<p class="nx-card__text">Mit diesem Fundament können Sie Google Ads, Meta Ads und SEO endlich wirtschaftlich skalieren.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="nx-section energy-section energy-section--alt" id="branchenverstaendnis">
 			<div class="nx-container">
 				<div class="energy-section__head energy-section__head--narrow">
 					<span class="nx-badge nx-badge--gold">So denkt Ihr Kunde</span>
@@ -385,7 +432,7 @@ get_header();
 			</div>
 		</section>
 
-		<section class="nx-section energy-section energy-section--alt" id="erstgespraech">
+		<section class="nx-section energy-section" id="erstgespraech">
 			<div class="nx-container">
 				<div class="nx-cta-box energy-cta-box">
 					<h2>Unsicher, ob Infrastruktur statt Miete für Ihren Betrieb passt?</h2>
@@ -411,6 +458,23 @@ get_header();
 							<div class="nx-faq__content"><?php echo esc_html( $faq_item['answer'] ); ?></div>
 						</details>
 					<?php endforeach; ?>
+				</div>
+			</div>
+		</section>
+
+		<section class="nx-section energy-section energy-section--alt" id="trust-hasim">
+			<div class="nx-container">
+				<div class="energy-section__head energy-section__head--narrow" style="text-align: center;">
+					<span class="nx-badge nx-badge--ghost">Über den Umsetzer</span>
+					<h2 style="margin-top: 1rem;">Messbare Infrastruktur statt digitaler Broschüren.</h2>
+				</div>
+				<div class="nx-card nx-card--flat" style="max-width: 800px; margin: 3rem auto 0; padding: 3rem; text-align: center;">
+					<p style="font-size: 1.125rem; line-height: 1.6; margin-bottom: 1.5rem;">
+						Ich bin Haşim Üner und baue WordPress-basierte Anfrage-Systeme für Betriebe in der Erneuerbaren-Energien-Branche. Mein Fokus liegt nicht auf "schönem Webdesign", sondern auf echter Nachfrage-Architektur: Tracking, Vorqualifizierung, CRM-Anbindung und Conversion-Optimierung.
+					</p>
+					<p style="color: var(--nx-text-muted);">
+						<strong>Mit Sitz in Hannover. Spezialisiert auf Lead-Autonomie im B2B-Handwerk.</strong>
+					</p>
 				</div>
 			</div>
 		</section>
