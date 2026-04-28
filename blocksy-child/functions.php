@@ -1,14 +1,3 @@
-// Header gezielt für Energie-Fahrplan-Demo ausblenden
-add_action('template_redirect', function() {
-	if (is_page_template('page-energie-fahrplan-demo.php')) {
-		add_filter('body_class', function($classes) {
-			$classes[] = 'no-header no-menu';
-			return $classes;
-		});
-		// Optional: Custom-Header-Disabler für Blocksy
-		remove_action('wp_body_open', 'nexus_render_site_header', 20);
-	}
-});
 <?php
 /**
  * Blocksy Child – Growth Architect Edition

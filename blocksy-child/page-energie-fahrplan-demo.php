@@ -1,4 +1,4 @@
-
+<?php
 /**
  * Template Name: Energie Fahrplan Demo
  * Description: Provisorische Implementierung der Energie-Fahrplan App.
@@ -6,20 +6,8 @@
  * @package Blocksy_Child
  */
 
-?><style>
-body.no-header .nx-site-header,
-body.no-header header,
-body.no-menu nav,
-body.no-header .site-header,
-body.no-header .ct-header,
-body.no-header .main-header,
-body.no-header .nx-site-header--audit,
-body.no-header .nx-site-header__shell,
-body.no-header .nx-site-header__brand-block,
-body.no-header .nx-site-header__audit-meta {
-	display: none !important;
-}
-</style>
+get_header();
+?>
 
 <div class="demo-page-wrapper" style="min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;">
 	<h1>Energie-Fahrplan Demo</h1>
@@ -37,4 +25,4 @@ body.no-header .nx-site-header__audit-meta {
 	</a>
 </div>
 
-
+<?php get_footer(); ?>
