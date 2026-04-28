@@ -49,10 +49,10 @@ ChartJS.register(
 
 // --- CONFIGURATION ---
 const CONFIG = {
-  aiEndpoint: null,
-  trackingEndpoint: null,
-  metaPixelId: null,
-  isDemo: true, // Default to demo mode
+  webhookUrl: null,
+  isDemo: true,
+  crm: { type: 'email', key: '', customMapping: null },
+  tracking: { enabled: false, type: null, key: '' }
 };
 
 // --- TYPES ---
@@ -82,14 +82,13 @@ const trackEvent = (name: string, data: any) => {
     console.log(`[Demo Track] ${name}`, data);
     return;
   }
-  if (CONFIG.trackingEndpoint) {
-    fetch(CONFIG.trackingEndpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ event: name, data, timestamp: new Date().toISOString() }),
-    }).catch(console.error);
+  // Optional: Tracking-Integration über CONFIG.tracking
+  if (CONFIG.tracking && CONFIG.tracking.enabled && CONFIG.tracking.type && CONFIG.tracking.key) {
+    // Hier könnte ein Tracking-Request erfolgen, z.B. fetch(...)
+    // fetch(CONFIG.tracking.key, ...) // Beispiel
   }
 };
+
 
 const getAIAdvice = async (userData: UserData): Promise<string> => {
   if (CONFIG.isDemo) {
@@ -99,17 +98,37 @@ Ihr gewählter Speicher von ${userData.storageSize} kWh ist optimal dimensionier
     
 Besonders attraktiv ist die Kombination mit einer Wallbox, da Sie so Ihren Eigenverbrauch weiter maximieren können. Die prognostizierte Amortisationszeit von ca. 10-12 Jahren macht dieses Projekt zu einer exzellenten finanziellen Entscheidung.`;
   }
+  // In Live-Modus: KI-Endpoint ggf. anpassen (hier nicht implementiert)
+  return "Die KI-Beratung ist momentan nicht verfügbar. Bitte versuchen Sie es später erneut.";
+};
 
+// --- SUBMIT LEAD ---
+const submitLead = async (leadData: any) => {
+  if (CONFIG.isDemo || !CONFIG.webhookUrl) {
+    console.log('[Demo] Lead submitted:', leadData);
+    return { success: true };
+  }
   try {
-    const response = await fetch(CONFIG.aiEndpoint || "", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userData),
+    const response = await fetch(CONFIG.webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lead: {
+          name: leadData.name,
+          email: leadData.email,
+          phone: leadData.phone,
+          ...leadData.userData,
+          results: calculateSolarSystem(leadData.userData)
+        },
+        config: {
+          crm: CONFIG.crm,
+          tracking: CONFIG.tracking
+        }
+      })
     });
-    const data = await response.json();
-    return data.advice;
-  } catch (error) {
-    return "Die KI-Beratung ist momentan nicht verfügbar. Bitte versuchen Sie es später erneut.";
+    return await response.json();
+  } catch (e) {
+    return { success: false, error: 'Verbindungsfehler' };
   }
 };
 
@@ -189,8 +208,15 @@ export default function App() {
     storageSize: 5,
     hasWallbox: true
   });
+
   const [aiAdvice, setAiAdvice] = useState<string>("");
   const [loadingAi, setLoadingAi] = useState(false);
+  // Lead-Form States
+  const [leadName, setLeadName] = useState('');
+  const [leadEmail, setLeadEmail] = useState('');
+  const [leadPhone, setLeadPhone] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const results = useMemo(() => calculateSolarSystem(userData), [userData]);
 
@@ -713,26 +739,93 @@ export default function App() {
                            <h4 className="text-xl font-black mb-2 tracking-tight">Angebot erhalten</h4>
                            <p className="text-slate-500 text-sm font-medium">Unverbindlich & regional.</p>
                         </div>
-                        
                         <div className="space-y-4">
-                          <div className="space-y-1.5">
-                            <label className="text-[10px] font-black text-slate-400 uppercase ml-2">Vollständiger Name</label>
-                            <input type="text" className="input-field" placeholder="z.B. Max Mustermann" />
-                          </div>
-                          <div className="space-y-1.5">
-                            <label className="text-[10px] font-black text-slate-400 uppercase ml-2">E-Mail Adresse</label>
-                            <input type="email" className="input-field" placeholder="name@beispiel.de" />
-                          </div>
-                          <button className="w-full py-4 bg-brand-primary hover:bg-emerald-600 text-white font-black rounded-2xl shadow-xl shadow-brand-primary/20 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3">
-                            MEIN PROJEKT STARTEN
-                            <ChevronRight className="w-5 h-5" />
-                          </button>
-                          <div className="flex flex-col items-center gap-2 pt-2">
-                             <div className="flex gap-1">
-                                {[1, 2, 3, 4, 5].map(i => <Sun key={i} className="w-3 h-3 text-amber-400 fill-current" />)}
-                             </div>
-                             <span className="text-[10px] font-bold text-slate-400">Bereits von 4.8/5 Kunden empfohlen.</span>
-                          </div>
+                          {submitted === false ? (
+                            <form
+                              onSubmit={async (e) => {
+                                e.preventDefault();
+                                if (!leadName.trim() || !leadEmail.trim()) {
+                                  alert('Bitte Name und E-Mail angeben.');
+                                  return;
+                                }
+                                setSubmitting(true);
+                                const result = await submitLead({
+                                  name: leadName,
+                                  email: leadEmail,
+                                  phone: leadPhone,
+                                  userData
+                                });
+                                setSubmitting(false);
+                                if (result.success) {
+                                  setSubmitted(true);
+                                  trackEvent('lead_submitted', { name: leadName, email: leadEmail });
+                                } else {
+                                  alert(result.error || 'Fehler beim Absenden.');
+                                }
+                              }}
+                              className="space-y-4"
+                            >
+                              <div className="space-y-1.5">
+                                <label className="text-[10px] font-black text-slate-400 uppercase ml-2">Vollständiger Name</label>
+                                <input
+                                  type="text"
+                                  className="input-field"
+                                  placeholder="z.B. Max Mustermann"
+                                  value={leadName}
+                                  onChange={e => setLeadName(e.target.value)}
+                                  disabled={submitting}
+                                />
+                              </div>
+                              <div className="space-y-1.5">
+                                <label className="text-[10px] font-black text-slate-400 uppercase ml-2">E-Mail Adresse</label>
+                                <input
+                                  type="email"
+                                  className="input-field"
+                                  placeholder="name@beispiel.de"
+                                  value={leadEmail}
+                                  onChange={e => setLeadEmail(e.target.value)}
+                                  disabled={submitting}
+                                />
+                              </div>
+                              <div className="space-y-1.5">
+                                <label className="text-[10px] font-black text-slate-400 uppercase ml-2">Telefon (optional)</label>
+                                <input
+                                  type="text"
+                                  className="input-field"
+                                  placeholder="z.B. 0171 1234567"
+                                  value={leadPhone}
+                                  onChange={e => setLeadPhone(e.target.value)}
+                                  disabled={submitting}
+                                />
+                              </div>
+                              <button
+                                type="submit"
+                                className="w-full py-4 bg-brand-primary hover:bg-emerald-600 text-white font-black rounded-2xl shadow-xl shadow-brand-primary/20 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-60"
+                                disabled={submitting}
+                              >
+                                {submitting ? 'Wird gesendet…' : 'MEIN PROJEKT STARTEN'}
+                                <ChevronRight className="w-5 h-5" />
+                              </button>
+                              <div className="flex flex-col items-center gap-2 pt-2">
+                                 <div className="flex gap-1">
+                                    {[1, 2, 3, 4, 5].map(i => <Sun key={i} className="w-3 h-3 text-amber-400 fill-current" />)}
+                                 </div>
+                                 <span className="text-[10px] font-bold text-slate-400">Bereits von 4.8/5 Kunden empfohlen.</span>
+                              </div>
+                            </form>
+                          ) : (
+                            <div className="flex flex-col items-center justify-center py-8">
+                              <CheckCircle2 className="w-14 h-14 text-emerald-500 mb-4" />
+                              <h5 className="text-2xl font-black mb-2">Vielen Dank, {leadName}!</h5>
+                              <p className="text-slate-600 text-base font-medium text-center mb-2">Ihr persönlicher Report wurde an <span className="font-bold">{leadEmail}</span> gesendet.<br />Ein Fachbetrieb aus Ihrer Region wird sich in Kürze melden.</p>
+                              <div className="flex flex-col items-center gap-2 pt-4">
+                                 <div className="flex gap-1">
+                                    {[1, 2, 3, 4, 5].map(i => <Sun key={i} className="w-3 h-3 text-amber-400 fill-current" />)}
+                                 </div>
+                                 <span className="text-[10px] font-bold text-slate-400">Bereits von 4.8/5 Kunden empfohlen.</span>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
