@@ -6,7 +6,7 @@
  * @package Blocksy_Child
  */
 
-get_header();
+
 ?>
 
 <div class="demo-page-wrapper" style="min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px;">
@@ -25,4 +25,4 @@ get_header();
 	</a>
 </div>
 
-<?php get_footer(); ?>
+
