@@ -45,20 +45,35 @@ Global contract for agents working in this repository. Keep this file short. Loa
 
 ## Product Defaults
 
-- Primary CTA: `/growth-audit/`
-- Secondary paths: `/wordpress-growth-operating-system/`, `/ergebnisse/`, `/blog/`
-- Offer ladder: `Audit -> Blueprint -> Implementation/Retainer`
-- Diagnose before pitch
+- Primary CTA for cold B2B traffic: `/readiness-diagnose/`
+- Warm-intent intake: `/anfrage/`
+- Secondary paths: `/energie-fahrplan-demo/`, `/ergebnisse/`, `/wordpress-agentur-hannover/`, `/blog/`
+- Diagnose before Foundation pitch
 - Clarity before feature count
-- Do not reintroduce broad agency wording if it weakens the audit-first funnel
+- Do not reintroduce broad agency wording if it weakens the diagnosis-first funnel
+
+## Funnel Ladder
+
+1. EnergieFahrplan-Demo (`/energie-fahrplan-demo/`): showroom asset, not a lead.
+2. Readiness-Diagnose (`/readiness-diagnose/`): paid, form-first. Canon: `blocksy-child/inc/canon/diagnose-canon.php`.
+3. Tiefendiagnose: paid, credited toward implementation. Canon: `blocksy-child/inc/canon/diagnose-canon.php`.
+4. WGOS Foundation plus optional Performance and optional Premium-Layer.
+
+Readiness and demo interactions do not jump directly to Foundation sales. They qualify the next diagnosis or explicitly disqualify the fit.
+
+## Messaging Canon
+
+- Pricing, diagnosis, Founding Cohort, and value-anchor copy live in `blocksy-child/inc/canon/`.
+- Customer-facing forbidden terms live in `blocksy-child/inc/canon/messaging-canon.php`.
+- Use `Founding Cohort 2026`, `Founding-Partner`, and `Founding-Konditionen` for the 2026 offer frame.
 
 ## Required Patterns
 
 Internal URLs:
 
 ```php
-$audit_url = home_url('/growth-audit/');
-echo esc_url($audit_url);
+$readiness_url = home_url('/readiness-diagnose/');
+echo esc_url($readiness_url);
 ```
 
 Escaping:
