@@ -69,4 +69,6 @@ Optionaler Zustellungspfad:
 
 ## Folge-PR
 
-PR 5 definiert Payload-Contract, Consent-Text, Submit-Mechanik und n8n-Routing. PR 4 darf keine Daten versenden.
+Der Payload-Contract liegt unter `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json`.
+
+Submit bleibt deaktiviert, bis Formularlogik, Consent-UI und n8n-IF-Branch gegen diesen Contract umgesetzt und geprüft sind.

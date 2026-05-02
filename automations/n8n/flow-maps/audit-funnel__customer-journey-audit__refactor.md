@@ -45,6 +45,12 @@
    - zweiter Webhook liest `jobId`
    - gibt `processing`, `done` oder `error` zurueck
 
+## Readiness-Kompatibilität
+
+Falls dieser Workflow den bestehenden `audit-consultation`-Pfad übernimmt, wird Readiness über `meta.intake_variant == "readiness_diagnosis"` geroutet.
+
+Der Payload muss gegen `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json` validiert werden. Ohne `delivery` darf der Branch keinen Klarnamen, keine Telefonnummer und keine E-Mail erwarten.
+
 ## Fail States
 
 - Request ungueltig

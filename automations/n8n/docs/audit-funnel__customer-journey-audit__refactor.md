@@ -127,6 +127,15 @@ Wenn das Audit noch nicht fertig ist, antwortet der Workflow mit `processing` st
 - optional `url`
 - `step: 'email_capture'`
 
+### Readiness-Diagnose Compatibility
+
+Wenn dieser Workflow später den bestehenden `audit-consultation`-Pfad übernimmt, muss er Readiness-Payloads über denselben Branch-Key erkennen:
+
+- `meta.intake_variant = readiness_diagnosis`
+- Contract: `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json`
+- Default-Pfad: kein Klarname, keine Telefonnummer, keine E-Mail
+- Optionaler E-Mail-Pfad nur über `delivery` mit separatem Consent
+
 ## Persistenz
 
 Speicherort:

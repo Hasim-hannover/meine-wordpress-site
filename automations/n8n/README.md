@@ -20,6 +20,7 @@ Bekannte Touchpoints:
 - `automations/n8n/docs/audit-funnel__instant-results__target.md`
 - `automations/n8n/flow-maps/audit-funnel__instant-results__target.md`
 - `automations/n8n/data-models/audit-frontend-payload.v3.contract.json`
+- `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json`
 
 ## Zielstruktur
 
@@ -39,6 +40,7 @@ automations/n8n/
 - Jeder kritische Workflow braucht eine Flow-Map unter `flow-maps/`.
 - Jeder stabile Frontend- oder System-Contract gehoert unter `data-models/`.
 - Statusaenderungen muessen auch in `docs/architecture/LIVE_STATUS.md` und bei Bedarf in `docs/architecture/SYSTEM_MAP.md` auftauchen.
+- Readiness-Submits nutzen den bestehenden `audit-consultation`-Pfad mit `meta.intake_variant = readiness_diagnosis`; kein neuer Webhook ohne explizite Freigabe.
 
 ## Dokumentationspflicht pro Workflow
 
