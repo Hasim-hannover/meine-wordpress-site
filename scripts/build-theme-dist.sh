@@ -30,9 +30,18 @@ if [ ! -x "$lightningcss_bin" ] || [ ! -x "$terser_bin" ]; then
 fi
 
 mkdir -p "$output_dir"
-rsync -a --delete --exclude '.DS_Store' "$source_dir/" "$output_dir/"
+rsync -a --delete \
+  --exclude '.DS_Store' \
+  --exclude 'node_modules' \
+  --exclude '.env' \
+  --exclude '.env.*' \
+  "$source_dir/" "$output_dir/"
 
 style_file="$output_dir/style.css"
+react_funnels=(
+  "energie-fahrplan"
+  "readiness"
+)
 
 minify_css_file() {
   local file="$1"
@@ -45,6 +54,29 @@ minify_js_file() {
 
   "$terser_bin" "$file" --compress --mangle -o "$file"
 }
+
+build_react_funnel() {
+  local funnel_name="$1"
+  local funnel_dir="$output_dir/$funnel_name"
+
+  if [ ! -f "$funnel_dir/package.json" ]; then
+    return
+  fi
+
+  if [ ! -f "$funnel_dir/package-lock.json" ]; then
+    echo "Missing package-lock.json for React funnel: $funnel_name" >&2
+    exit 1
+  fi
+
+  echo "Building React funnel: $funnel_name"
+  npm --prefix "$funnel_dir" ci --include=dev --ignore-scripts --no-audit --no-fund
+  npm --prefix "$funnel_dir" run build
+  rm -rf "$funnel_dir/node_modules"
+}
+
+for funnel in "${react_funnels[@]}"; do
+  build_react_funnel "$funnel"
+done
 
 if [ -f "$style_file" ]; then
   style_header="$(awk 'NR == 1 && /^\/\*/ { in_header = 1 } in_header { print; if ($0 ~ /\*\//) exit }' "$style_file")"

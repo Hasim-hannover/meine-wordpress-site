@@ -678,6 +678,7 @@ function hu_get_seo_meta() {
 		'login',
 		'kunden-login',
 		'360-deep-dive',
+		'readiness-diagnose',
 	];
 
 	if ( is_front_page() ) {
@@ -884,6 +885,7 @@ function nexus_get_sitemap_excluded_slugs() {
 		'ki-integration-wordpress',
 		'ki-integration',
 		'loesungen',
+		'readiness-diagnose',
 		'wordpress-seo-hannover',
 		'wordpress-wartung-hannover',
 	];
