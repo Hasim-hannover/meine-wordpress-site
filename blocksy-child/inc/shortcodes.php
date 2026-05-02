@@ -10,6 +10,117 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Format a canon value for shortcodes.
+ *
+ * @param mixed  $value  Canon value.
+ * @param string $format Output format.
+ * @return string
+ */
+function hu_format_canon_shortcode_value( $value, $format = 'text' ) {
+	if ( is_array( $value ) ) {
+		$value = implode( ', ', array_map( 'strval', $value ) );
+	}
+
+	if ( is_numeric( $value ) && 'price' === $format ) {
+		return esc_html( number_format_i18n( (float) $value, 0 ) . ' €' );
+	}
+
+	return esc_html( (string) $value );
+}
+
+/**
+ * Resolve a scalar canon value by key.
+ *
+ * @param array<string, mixed> $canon  Canon map.
+ * @param string              $key    Requested key.
+ * @param string              $format Output format.
+ * @return string
+ */
+function hu_render_canon_shortcode_value( $canon, $key, $format = 'text' ) {
+	$key = sanitize_key( (string) $key );
+
+	if ( '' === $key || ! array_key_exists( $key, $canon ) ) {
+		return '';
+	}
+
+	return hu_format_canon_shortcode_value( $canon[ $key ], $format );
+}
+
+/**
+ * Render canonical prices and diagnosis prices.
+ *
+ * @param array<string, mixed> $atts Shortcode attributes.
+ * @return string
+ */
+function hu_price_shortcode( $atts ) {
+	$atts = shortcode_atts(
+		[
+			'key' => '',
+		],
+		$atts,
+		'hu_price'
+	);
+
+	$canon = [];
+
+	if ( function_exists( 'hu_pricing_canon' ) ) {
+		$canon = array_merge( $canon, hu_pricing_canon() );
+	}
+
+	if ( function_exists( 'hu_diagnose_canon' ) ) {
+		$canon = array_merge( $canon, hu_diagnose_canon() );
+	}
+
+	$key    = sanitize_key( (string) $atts['key'] );
+	$format = preg_match( '/(price|retainer|setup|market)/', $key ) ? 'price' : 'text';
+
+	return hu_render_canon_shortcode_value( $canon, $key, $format );
+}
+add_shortcode( 'hu_price', 'hu_price_shortcode' );
+
+/**
+ * Render canonical Founding Cohort values.
+ *
+ * @param array<string, mixed> $atts Shortcode attributes.
+ * @return string
+ */
+function hu_founding_shortcode( $atts ) {
+	$atts = shortcode_atts(
+		[
+			'key' => '',
+		],
+		$atts,
+		'hu_founding'
+	);
+
+	$canon = function_exists( 'hu_founding_canon' ) ? hu_founding_canon() : [];
+
+	return hu_render_canon_shortcode_value( $canon, $atts['key'] );
+}
+add_shortcode( 'hu_founding', 'hu_founding_shortcode' );
+
+/**
+ * Render canonical messaging values.
+ *
+ * @param array<string, mixed> $atts Shortcode attributes.
+ * @return string
+ */
+function hu_message_shortcode( $atts ) {
+	$atts = shortcode_atts(
+		[
+			'key' => '',
+		],
+		$atts,
+		'hu_message'
+	);
+
+	$canon = function_exists( 'hu_messaging_canon' ) ? hu_messaging_canon() : [];
+
+	return hu_render_canon_shortcode_value( $canon, $atts['key'] );
+}
+add_shortcode( 'hu_message', 'hu_message_shortcode' );
+
+/**
  * Resolve key URLs once for homepage shortcodes.
  *
  * @return array<string, string>
