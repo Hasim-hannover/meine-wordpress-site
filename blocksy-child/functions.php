@@ -17,6 +17,10 @@ $inc_dir = get_stylesheet_directory() . '/inc/';
 
 $modules = [
 	'helpers.php',        // Utility-Funktionen (muss zuerst geladen werden)
+	'canon/diagnose-canon.php', // Kanonische Diagnose-Stufen, Preise und Scope-Grenzen
+	'canon/pricing-canon.php', // Kanonische Foundation-, Performance- und Premium-Preise
+	'canon/founding-canon.php', // Founding Cohort 2026: Plätze, Frist und Labels
+	'canon/messaging-canon.php', // Zentrale Wertanker, Abgrenzungen und Begriffsschutz
 	'mail.php',           // Zentraler Brevo-Mail-Router für Transaktionsmails
 	'crm.php',            // Gemeinsame CRM-Grundlage für Kontakte, Blog-Abos und Projektanfragen
 	'wgos-assets.php',    // CPT + Helper für WGOS Asset-Spokes
