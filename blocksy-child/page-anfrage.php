@@ -106,6 +106,17 @@ get_header();
 			</div>
 		</section>
 
+		<?php
+		if ( function_exists( 'hu_render_founding_cohort_block' ) ) {
+			echo hu_render_founding_cohort_block(
+				[
+					'variant' => 'full',
+					'id'      => 'founding-cohort-anfrage',
+				]
+			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+		?>
+
 		<section class="nx-section energy-section energy-form-section" id="energie-anfrage">
 			<div class="nx-container">
 				<div class="energy-form-shell">

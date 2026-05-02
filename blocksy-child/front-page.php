@@ -49,6 +49,17 @@ get_header();
 						&minus;83 % Kosten pro Anfrage in 9 Monaten &mdash; Referenz E3 New Energy. Eigenes Anfrage-System statt Portal-Abhängigkeit.
 					</p>
 
+					<?php
+					if ( function_exists( 'hu_render_founding_cohort_block' ) ) {
+						echo hu_render_founding_cohort_block(
+							[
+								'variant' => 'compact',
+								'id'      => 'founding-cohort-home',
+							]
+						); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					}
+					?>
+
 					<div class="cro-hero__kpi-ribbon" role="list" aria-label="Kennzahlen aus der Referenz E3 New Energy">
 						<div class="cro-hero__kpi" role="listitem">
 							<span class="cro-hero__kpi-value">1.750+</span>

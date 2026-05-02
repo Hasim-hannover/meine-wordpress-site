@@ -105,10 +105,21 @@ get_header();
 				<div class="about-narrative__inner">
 					<h2 class="nx-headline-section">Wer ich bin.</h2>
 					<p>Mein Zugang zu dieser Arbeit ist Medienwissenschaft, nicht Webdesign. Ich denke zuerst über Sprache, Entscheidung und Signal nach — und erst danach über Code. Über Jahre habe ich Anfrage-Systeme für Maschinenbau und Dienstleistung gebaut. Die technische Schicht war selten das Problem. Das Problem war fast immer: jemand hat gebohrt, ohne vorher die Karte zu lesen.</p>
-					<p>Seit dem ersten Solar-Mandat — frustrierter Inhaber, taubes Tracking, 120 € pro Anfrage — weiß ich, wo die Methode am stärksten greift. Seitdem arbeite ich nur in dieser Nische.</p>
+					<p>Seit E3 New Energy als erstem Solar-Case weiß ich, wo die Methode am stärksten greift. Seitdem arbeite ich nur in dieser Nische.</p>
 				</div>
 			</div>
 		</section>
+
+		<?php
+		if ( function_exists( 'hu_render_founding_cohort_block' ) ) {
+			echo hu_render_founding_cohort_block(
+				[
+					'variant' => 'about',
+					'id'      => 'founding-cohort-about',
+				]
+			); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+		?>
 
 		<!-- Der nächste Schritt. -->
 		<section id="about-close" class="nx-section about-close">
