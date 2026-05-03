@@ -283,12 +283,12 @@ function App() {
             </button>
             <a
               className="energy-demo-btn energy-demo-btn--ghost"
-              href="/readiness-diagnose/"
-              data-track-action="demo_cta_readiness"
+              href="/anfrage-system-analyse/"
+              data-track-action="demo_cta_request_analysis"
               data-track-category="lead_gen"
-              data-track-funnel-stage="readiness_diagnosis"
+              data-track-funnel-stage="request_analysis"
             >
-              Readiness-Diagnose ansehen
+              Analyse anfragen
             </a>
           </div>
         </div>
@@ -523,17 +523,17 @@ function App() {
                   <span className="energy-demo-kicker">Nächster Schritt</span>
                   <h3>So könnte Ihr eigener Anfrageprozess aussehen.</h3>
                   <p>
-                    In der Readiness-Diagnose klären wir, ob sich ein solcher Funnel für Ihren Betrieb lohnt,
-                    welche Datenfelder wirklich nötig sind und wo CRM, n8n oder Tracking sinnvoll angeschlossen werden.
+                    In der Anfrage-System-Analyse klären wir, ob sich ein solcher Funnel für Ihren Betrieb lohnt,
+                    welcher Leadkosten-Korridor realistisch ist und wo CRM, n8n oder Tracking sinnvoll angeschlossen werden.
                   </p>
                   <a
                     className="energy-demo-btn energy-demo-btn--primary"
-                    href="/readiness-diagnose/"
+                    href="/anfrage-system-analyse/"
                     data-track-action="demo_cta_book_consult"
                     data-track-category="lead_gen"
-                    data-track-funnel-stage="readiness_diagnosis"
+                    data-track-funnel-stage="request_analysis"
                   >
-                    Readiness-Diagnose ansehen
+                    Analyse anfragen
                   </a>
                 </div>
               </div>

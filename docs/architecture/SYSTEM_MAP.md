@@ -17,7 +17,7 @@ Stand: 2026-04-06. Diese Karte basiert auf dem Repo-Inhalt, nicht auf einer Live
 | Content- und SEO-System | Blog, Pillar-Hubs, Cornerstone-Content, interne Verlinkung | `blocksy-child/category.php`, `blocksy-child/single.php`, `blocksy-child/page-seo-cornerstone.php`, `content/blog-drafts/` | WordPress-Editor | live plus Ausbau |
 | Client Portal | Kunden-Cockpit mit Login, Upload und Roadmap-Slots | `blocksy-child/template-portal.php`, `blocksy-child/inc/client-portal.php`, `blocksy-child/inc/snippets.php` | WordPress-User-System, Media Library | live, aber aktuell mit Mock-Daten |
 | n8n-Automationen | Workflow-Logik fuer Analyse, Routing, Reporting, Nurture | `automations/n8n/`, `blocksy-child/assets/js/cja-audit.js`, `blocksy-child/assets/js/audit-live.js` | n8n auf `n8n.hasimuener.de`, CRM, Mail, evtl. Sheets | aktiv, aber Export-/Doku-Layer unvollstaendig |
-| Readiness-Diagnose | bezahlter Diagnose-Einstieg mit Privacy-first Submit-Contract | `blocksy-child/readiness/`, `blocksy-child/page-readiness-diagnose.php`, `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json`, `docs/architecture/PRIVACY.md` | n8n auf `n8n.hasimuener.de`, später manueller Zustellweg | repo-seitig vorbereitet, Submit noch deaktiviert |
+| Anfrage-System-Analyse | evidenzbasierter Founding-Partner-Fitcheck mit Marktbild und Privacy-first Submit-Contract | `blocksy-child/readiness/`, `blocksy-child/page-readiness-diagnose.php`, `blocksy-child/inc/anfrage-system-analyse-page.php`, `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json`, `docs/architecture/PRIVACY.md` | n8n auf `n8n.hasimuener.de`, später manueller Zustellweg | repo-seitig vorbereitet, `/readiness-diagnose/` als Legacy-Redirect, Submit noch deaktiviert |
 | EnergieFahrplan Demo | interaktive Showroom-Demo für Anfrageprozess, lokale Berechnung und PDF-Ausgabe | `blocksy-child/energie-fahrplan/`, `blocksy-child/page-energie-fahrplan-demo.php`, `blocksy-child/inc/energy-demo-page.php` | Browser-PDF via `jspdf`/`html2canvas`; kein CRM-, E-Mail- oder n8n-Submit | repo-seitig eingebettet, virtuelle Route aktiv |
 | Agenten- und Prompt-System | Kontext, Guardrails, Skills und minimale Legacy-Briefings | `AGENTS.md`, `agents/skills/`, `prompts/README.md` | keine direkte Laufzeitabhaengigkeit | in Aufbau |
 
@@ -74,10 +74,12 @@ Aktuell dokumentierter Workflow:
 - Doku: `automations/n8n/docs/audit-funnel__customer-journey-audit__refactor.md`
 - Flow-Map: `automations/n8n/flow-maps/audit-funnel__customer-journey-audit__refactor.md`
 
-Readiness-Diagnose:
+Anfrage-System-Analyse:
 
-- Contract: `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json`
-- Route: bestehender `audit-consultation`-Pfad mit `meta.intake_variant = readiness_diagnosis`
+- Route: `/anfrage-system-analyse/`
+- Legacy: `/readiness-diagnose/` leitet per 301 weiter
+- Contract: `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json` bleibt bis zur nächsten Contract-Version intern stabil
+- n8n-Route: bestehender `audit-consultation`-Pfad mit `meta.intake_variant = readiness_diagnosis`
 - Produktions-Webhook: `https://n8n.hasimuener.de/webhook/audit-consultation`
 - Default: kein Klarname, keine Telefonnummer, keine E-Mail, keine personenbezogenen Endkundendaten
 - Retention: maximal 30 Tage in n8n
@@ -175,10 +177,10 @@ Systemische Rolle:
 
 Die CTA-Hierarchie ist klar und sollte nicht verwischt werden.
 
-- Primärer CTA für kalten B2B-Traffic: `Readiness-Diagnose`
+- Primärer CTA für kalten B2B-Traffic: `Anfrage-System-Analyse`
 - Warm-intent Intake: `/anfrage/`
 - Proof- und Demo-Pfade: `/e3-new-energy/`, `/ergebnisse/`, `/energie-fahrplan-demo/`
-- Folgeeinstieg nur nach Diagnose: `Tiefendiagnose`
+- Kein separater öffentlicher Tiefendiagnose-Schritt im Hauptfunnel
 - Umsetzungsnahe Kontaktwege: `Umsetzung / Optimierung`, `Laufende Weiterentwicklung`
 - Partner-/Agentur-Einstieg auf der Whitelabel-Seite: `Whitelabel-Fit-Gespraech`
 - Kein oeffentlicher 360-/Blueprint-CTA mehr im Erstkontakt

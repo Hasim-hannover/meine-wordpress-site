@@ -1,18 +1,18 @@
 const steps = [
   'Betrieb',
   'Region',
+  'Angebot',
   'Budget',
   'Website',
   'Tracking',
-  'CRM',
-  'Anfragen',
-  'Befund',
+  'Anfrageprozess',
+  'Marktbild',
 ];
 
 const checks = [
   'Keine Admin-Zugänge',
-  'Kein Klarname im Default-Pfad',
-  'Keine Telefonnummer im Default-Pfad',
+  'Keine Endkundendaten',
+  'Leadkosten nur als Korridor',
   'E-Mail erst mit separater Zustimmung',
 ];
 
@@ -20,10 +20,11 @@ export function App() {
   return (
     <main className="readiness-shell" aria-labelledby="readiness-title">
       <section className="readiness-hero">
-        <div className="readiness-kicker">Readiness-Diagnose</div>
-        <h1 id="readiness-title">Der bezahlte Einstieg in Ihr Anfrage-System.</h1>
+        <div className="readiness-kicker">Anfrage-System-Analyse</div>
+        <h1 id="readiness-title">Prüfen, ob ein eigenes Anfrage-System wirtschaftlich Sinn macht.</h1>
         <p>
-          14 Tage, formulargetrieben, ohne Admin-Zugänge. Am Ende steht ein schriftlicher Befund mit Ampel und klarer Empfehlung.
+          Evidenzbasierter Fit-Check für passende Solar-, SHK- und Wärmepumpenbetriebe:
+          Marktbild, Anfragepfad, Leadkosten-Korridor und klare Empfehlung für oder gegen die Umsetzung.
         </p>
       </section>
 
@@ -55,9 +56,9 @@ export function App() {
 
         <div className="readiness-card readiness-card--accent">
           <h2>Stub-Status</h2>
-          <p>Route, Build und Tracking-Hooks stehen. Formularlogik, Consent und Submit folgen im nächsten Block.</p>
-          <button type="button" disabled data-track-action="readiness_submit_disabled" data-track-category="lead_funnel" data-track-funnel-stage="readiness_submit_disabled">
-            Submit noch deaktiviert
+          <p>Route, Build und Tracking-Hooks stehen. Formularlogik, Consent und Submit folgen erst, wenn das Analyse-Angebot final formuliert ist.</p>
+          <button type="button" disabled data-track-action="request_analysis_submit_disabled" data-track-category="lead_funnel" data-track-funnel-stage="request_analysis_submit_disabled">
+            Analyse-Submit noch deaktiviert
           </button>
         </div>
       </section>

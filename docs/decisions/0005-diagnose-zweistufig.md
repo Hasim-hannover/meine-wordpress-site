@@ -1,7 +1,7 @@
 # 0005 Diagnose wird zweistufig
 
 - Datum: 2026-05-02
-- Status: proposed
+- Status: superseded by `0010-anfrage-system-analyse-single-entry.md`
 
 ## Entscheidung
 

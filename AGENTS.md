@@ -45,21 +45,21 @@ Global contract for agents working in this repository. Keep this file short. Loa
 
 ## Product Defaults
 
-- Primary CTA for cold B2B traffic: `/readiness-diagnose/`
+- Primary CTA for cold B2B traffic: `/anfrage-system-analyse/`
 - Warm-intent intake: `/anfrage/`
 - Secondary paths: `/energie-fahrplan-demo/`, `/ergebnisse/`, `/wordpress-agentur-hannover/`, `/blog/`
-- Diagnose before Foundation pitch
+- Analyse vor Umsetzungs-Pitch
 - Clarity before feature count
 - Do not reintroduce broad agency wording if it weakens the diagnosis-first funnel
 
 ## Funnel Ladder
 
 1. EnergieFahrplan-Demo (`/energie-fahrplan-demo/`): showroom asset, not a lead.
-2. Readiness-Diagnose (`/readiness-diagnose/`): paid, form-first. Canon: `blocksy-child/inc/canon/diagnose-canon.php`.
-3. Tiefendiagnose: paid, credited toward implementation. Canon: `blocksy-child/inc/canon/diagnose-canon.php`.
-4. WGOS Foundation plus optional Performance and optional Premium-Layer.
+2. Anfrage-System-Analyse (`/anfrage-system-analyse/`): evidenzbasierter Fit- und Marktcheck für passende Founding-Partner. Canon: `blocksy-child/inc/canon/diagnose-canon.php`.
+3. Anfrage-System-Umsetzung: Bau des Systems, wenn Analyse und Fit grün oder gelb sind.
+4. Optional Performance und optional Premium-Layer.
 
-Readiness and demo interactions do not jump directly to Foundation sales. They qualify the next diagnosis or explicitly disqualify the fit.
+Demo- und Analyse-Interaktionen springen nicht direkt in einen generischen Verkauf. Sie qualifizieren den Founding-Partner-Fit oder disqualifizieren den Fall ausdrücklich.
 
 ## Messaging Canon
 
@@ -72,8 +72,8 @@ Readiness and demo interactions do not jump directly to Foundation sales. They q
 Internal URLs:
 
 ```php
-$readiness_url = home_url('/readiness-diagnose/');
-echo esc_url($readiness_url);
+$analysis_url = home_url('/anfrage-system-analyse/');
+echo esc_url($analysis_url);
 ```
 
 Escaping:

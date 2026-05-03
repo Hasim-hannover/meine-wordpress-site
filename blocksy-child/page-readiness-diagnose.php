@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Readiness Diagnose
- * Description: Staged React shell for the paid Readiness-Diagnose.
+ * Template Name: Anfrage-System-Analyse
+ * Description: Staged React shell for the Anfrage-System-Analyse.
  *
  * @package Blocksy_Child
  */
@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! defined( 'HU_FEATURE_READINESS_DIAGNOSIS_ROUTE' ) || ! HU_FEATURE_READINESS_DIAGNOSIS_ROUTE ) {
+if ( ! defined( 'HU_FEATURE_REQUEST_ANALYSIS_ROUTE' ) || ! HU_FEATURE_REQUEST_ANALYSIS_ROUTE ) {
 	global $wp_query;
 
 	if ( $wp_query instanceof WP_Query ) {
@@ -22,7 +22,7 @@ if ( ! defined( 'HU_FEATURE_READINESS_DIAGNOSIS_ROUTE' ) || ! HU_FEATURE_READINE
 
 	get_header();
 	?>
-	<main id="main" class="site-main" data-track-section="readiness_disabled">
+	<main id="main" class="site-main" data-track-section="request_analysis_disabled">
 		<section class="wp-section">
 			<div class="wp-container">
 				<span class="wp-badge"><?php esc_html_e( '404', 'blocksy-child' ); ?></span>
@@ -51,20 +51,20 @@ if ( file_exists( $manifest_path ) ) {
 get_header();
 ?>
 
-<main id="main" class="site-main readiness-diagnosis-page" data-track-section="readiness_diagnosis">
-	<div id="readiness-root" data-track-action="readiness_diagnosis_view" data-track-category="lead_funnel" data-track-section="readiness_diagnosis" data-track-funnel-stage="readiness_diagnosis_view">
+<main id="main" class="site-main readiness-diagnosis-page" data-track-section="request_analysis">
+	<div id="readiness-root" data-track-action="request_analysis_view" data-track-category="lead_funnel" data-track-section="request_analysis" data-track-funnel-stage="request_analysis_view">
 		<section class="wp-section">
 			<div class="wp-container">
-				<span class="wp-badge"><?php esc_html_e( 'Readiness-Diagnose', 'blocksy-child' ); ?></span>
-				<h1><?php esc_html_e( 'Readiness-Diagnose wird geladen.', 'blocksy-child' ); ?></h1>
+				<span class="wp-badge"><?php esc_html_e( 'Anfrage-System-Analyse', 'blocksy-child' ); ?></span>
+				<h1><?php esc_html_e( 'Anfrage-System-Analyse wird geladen.', 'blocksy-child' ); ?></h1>
 			</div>
 		</section>
 	</div>
 
 	<?php if ( empty( $entry['file'] ) ) : ?>
-		<section class="wp-section" data-track-section="readiness_build_missing">
+		<section class="wp-section" data-track-section="request_analysis_build_missing">
 			<div class="wp-container">
-				<p><?php esc_html_e( 'Der Readiness-Build fehlt. Bitte Theme-Distribution neu bauen.', 'blocksy-child' ); ?></p>
+				<p><?php esc_html_e( 'Der Analyse-Build fehlt. Bitte Theme-Distribution neu bauen.', 'blocksy-child' ); ?></p>
 			</div>
 		</section>
 	<?php endif; ?>

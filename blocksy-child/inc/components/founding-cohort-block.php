@@ -55,7 +55,7 @@ function hu_render_founding_cohort_block( $args = [] ) {
 	$performance_founding    = hu_format_founding_money( $pricing['performance_founding_retainer'] ?? 1000 );
 	$performance_months      = (int) ( $pricing['performance_founding_months'] ?? 6 );
 	$discount_percent        = (int) ( $pricing['founding_discount_percent'] ?? 33 );
-	$readiness_url           = home_url( '/readiness-diagnose/' );
+	$analysis_url            = function_exists( 'hu_get_request_analysis_url' ) ? hu_get_request_analysis_url() : home_url( '/anfrage-system-analyse/' );
 	$section_id              = sanitize_html_class( (string) $args['id'] );
 	$slot_line               = sprintf( '%1$d von %2$d Plätzen offen', $slots_remaining, $slots_total );
 
@@ -78,12 +78,12 @@ function hu_render_founding_cohort_block( $args = [] ) {
 			</div>
 			<a
 				class="hu-founding__link"
-				href="<?php echo esc_url( $readiness_url ); ?>"
+				href="<?php echo esc_url( $analysis_url ); ?>"
 				data-track-action="founding_cohort_cta_click"
 				data-track-category="lead_gen"
 				data-track-section="founding_cohort"
-				data-track-funnel-stage="readiness_diagnosis"
-			>Readiness-Diagnose ansehen</a>
+				data-track-funnel-stage="request_analysis"
+			>Analyse anfragen</a>
 		</aside>
 	<?php elseif ( 'about' === $variant ) : ?>
 		<section
@@ -99,17 +99,17 @@ function hu_render_founding_cohort_block( $args = [] ) {
 				<div class="hu-founding__about-inner">
 					<span class="hu-founding__eyebrow"><?php echo esc_html( $label ); ?></span>
 					<h2 id="<?php echo esc_attr( $section_id . '-title' ); ?>">E3 New Energy war der erste Case, nicht die Grenze.</h2>
-					<p>Die Cohort erweitert diese Arbeitsweise auf maximal drei passende Solar- oder Wärmepumpen-Betriebe. Der Einstieg bleibt die Readiness-Diagnose, damit vor einer Foundation klar ist, ob Markt, Budget und Tracking-Realität zusammenpassen.</p>
+					<p>Die Cohort erweitert diese Arbeitsweise auf maximal drei passende Solar- oder Wärmepumpen-Betriebe. Der Einstieg bleibt die Anfrage-System-Analyse, damit vor einer Umsetzung klar ist, ob Markt, Budget und Tracking-Realität zusammenpassen.</p>
 					<div class="hu-founding__about-footer">
 						<span><?php echo esc_html( $slot_line ); ?></span>
 						<a
 							class="nx-btn nx-btn--primary"
-							href="<?php echo esc_url( $readiness_url ); ?>"
+							href="<?php echo esc_url( $analysis_url ); ?>"
 							data-track-action="founding_cohort_cta_click"
 							data-track-category="lead_gen"
 							data-track-section="founding_cohort"
-							data-track-funnel-stage="readiness_diagnosis"
-						>Readiness-Diagnose starten</a>
+							data-track-funnel-stage="request_analysis"
+						>Analyse anfragen</a>
 					</div>
 				</div>
 			</div>
@@ -144,7 +144,7 @@ function hu_render_founding_cohort_block( $args = [] ) {
 							</thead>
 							<tbody>
 								<tr>
-									<th scope="row">WGOS Foundation</th>
+									<th scope="row">Anfrage-System-Umsetzung</th>
 									<td><?php echo esc_html( $foundation_standard ); ?> fix</td>
 									<td><strong><?php echo esc_html( $foundation_founding ); ?> fix</strong></td>
 								</tr>
@@ -156,7 +156,7 @@ function hu_render_founding_cohort_block( $args = [] ) {
 								<tr>
 									<th scope="row">Preisvorteil</th>
 									<td>Reguläre Konditionen</td>
-									<td>ca. <?php echo esc_html( (string) $discount_percent ); ?> % auf das Foundation-Setup</td>
+									<td>ca. <?php echo esc_html( (string) $discount_percent ); ?> % auf das Umsetzungs-Setup</td>
 								</tr>
 								<tr>
 									<th scope="row">Gegenleistung</th>
@@ -180,7 +180,7 @@ function hu_render_founding_cohort_block( $args = [] ) {
 						</details>
 						<details>
 							<summary>Was bekomme ich anders als später?</summary>
-							<p>Die Foundation bleibt inhaltlich gleich. Anders sind Preis, Performance-Rate in den ersten sechs Monaten und die gemeinsame Referenzarbeit.</p>
+							<p>Die Umsetzung bleibt inhaltlich gleich. Anders sind Preis, Performance-Rate in den ersten sechs Monaten und die gemeinsame Referenzarbeit.</p>
 						</details>
 						<details>
 							<summary>Was ist die Gegenleistung?</summary>
@@ -188,12 +188,12 @@ function hu_render_founding_cohort_block( $args = [] ) {
 						</details>
 						<a
 							class="nx-btn nx-btn--primary hu-founding__cta"
-							href="<?php echo esc_url( $readiness_url ); ?>"
+							href="<?php echo esc_url( $analysis_url ); ?>"
 							data-track-action="founding_cohort_cta_click"
 							data-track-category="lead_gen"
 							data-track-section="founding_cohort"
-							data-track-funnel-stage="readiness_diagnosis"
-						>Readiness-Diagnose starten</a>
+							data-track-funnel-stage="request_analysis"
+						>Analyse anfragen</a>
 					</div>
 				</div>
 			</div>

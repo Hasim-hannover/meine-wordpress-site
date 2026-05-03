@@ -5,9 +5,9 @@
 
 ## Entscheidung
 
-Diagnosen verlangen keinen Admin-Zugang zu GA4, GTM, Ads, CRM, Pixeln oder Kundensystemen.
+Die Anfrage-System-Analyse verlangt keinen Admin-Zugang zu GA4, GTM, Ads, CRM, Pixeln oder Kundensystemen.
 
-Die Readiness-Diagnose arbeitet mit Formular-Selbstauskunft und öffentlichen Prüfsignalen wie Pixel-/Tag-Sichtbarkeit, PageSpeed, SERP-Stichprobe und Schema. In der Tiefendiagnose ist optional eine 30-Minuten-Screen-Share-Session möglich, bei der der Kunde klickt und wir zuschauen.
+Die Anfrage-System-Analyse arbeitet mit Formular-Selbstauskunft und öffentlichen Prüfsignalen wie Pixel-/Tag-Sichtbarkeit, PageSpeed, SERP-Stichprobe, Schema, Wettbewerbsbild und marktbasierter Leadkosten-Einordnung.
 
 ## Begründung
 
@@ -16,6 +16,6 @@ Admin-Zugänge erhöhen Reibung, Datenschutzaufwand und Sicherheitsrisiko, bevor
 ## Konsequenzen
 
 - Beweisartefakte wie Screenshots, Exports oder Read-only-Audit-User sind keine Diagnose-Voraussetzung.
-- Beweisartefakte gehören in die erste Foundation-Arbeitswoche.
+- Beweisartefakte gehören in die erste Umsetzungswoche.
 - AGB, AVV und Intake-Copy dürfen keine Admin-Zugangspflicht für die Diagnose suggerieren.
-- Readiness-Submit darf im Default-Pfad keine personenbezogenen Endkunden-Daten enthalten.
+- Analyse-Submit darf im Default-Pfad keine personenbezogenen Endkunden-Daten enthalten.

@@ -679,6 +679,7 @@ function hu_get_seo_meta() {
 		'kunden-login',
 		'360-deep-dive',
 		'readiness-diagnose',
+		'anfrage-system-analyse',
 		'energie-fahrplan-demo',
 	];
 
@@ -708,6 +709,12 @@ function hu_get_seo_meta() {
 		$meta['og_title']    = 'EnergieFahrplan-Demo | Haşim Üner';
 		$meta['description'] = 'Interaktive Showroom-Demo für einen geführten Energie-Anfrageprozess mit lokaler Berechnung, PDF-Ausgabe und Prozesskarte.';
 		$meta['canonical']   = home_url( '/energie-fahrplan-demo/' );
+		$meta['robots']      = 'noindex, follow';
+
+	} elseif ( function_exists( 'hu_is_request_analysis_request_path' ) && hu_is_request_analysis_request_path() ) {
+		$meta['og_title']    = 'Anfrage-System-Analyse | Haşim Üner';
+		$meta['description'] = 'Evidenzbasierte Analyse für Solar-, SHK- und Wärmepumpenbetriebe: Marktbild, Anfragepfad, Leadkosten-Korridor und Empfehlung für oder gegen ein eigenes Anfrage-System.';
+		$meta['canonical']   = home_url( '/anfrage-system-analyse/' );
 		$meta['robots']      = 'noindex, follow';
 
 	} elseif ( function_exists( 'nexus_get_current_wgos_cluster_route_slug' ) && '' !== nexus_get_current_wgos_cluster_route_slug() ) {
@@ -893,6 +900,7 @@ function nexus_get_sitemap_excluded_slugs() {
 		'ki-integration',
 		'loesungen',
 		'readiness-diagnose',
+		'anfrage-system-analyse',
 		'energie-fahrplan-demo',
 		'wordpress-seo-hannover',
 		'wordpress-wartung-hannover',

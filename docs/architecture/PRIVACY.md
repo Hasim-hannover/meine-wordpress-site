@@ -1,10 +1,10 @@
 # Privacy
 
-Stand: 2026-05-02
+Stand: 2026-05-04
 
-## Readiness-Diagnose
+## Anfrage-System-Analyse
 
-Die Readiness-Diagnose ist ein eigener Verarbeitungsvorgang. Sie dient der bezahlten Vorprüfung, ob ein Solar-, Wärmepumpen- oder SHK-Betrieb für die nächste Diagnose- oder Umsetzungsstufe geeignet ist.
+Die Anfrage-System-Analyse ist ein eigener Verarbeitungsvorgang. Sie dient der evidenzbasierten Prüfung, ob ein Solar-, Wärmepumpen- oder SHK-Betrieb als Founding-Partner für ein eigenes Anfrage-System geeignet ist.
 
 ## Verarbeitete Daten
 
@@ -32,7 +32,7 @@ Der Default-Pfad verarbeitet nur grobe Betriebs- und Selbstauskunftsdaten:
 
 ## Consent-Logik
 
-Der Submit-Schritt braucht eine sichtbare Zustimmung direkt im Readiness-Formular. Es gibt keinen globalen Banner als Ersatz für diese Zustimmung.
+Der Submit-Schritt braucht eine sichtbare Zustimmung direkt im Analyse-Formular. Es gibt keinen globalen Banner als Ersatz für diese Zustimmung.
 
 Der Payload speichert:
 
@@ -60,7 +60,7 @@ Telefonnummern und Klarnamen bleiben auch in diesem Pfad ausgeschlossen.
 
 ## n8n-Retention
 
-Readiness-Intakes dürfen in n8n maximal 30 Tage gespeichert werden. Danach werden sie gelöscht oder so anonymisiert, dass kein Rückschluss auf den konkreten Betrieb möglich ist.
+Analyse-Intakes dürfen in n8n maximal 30 Tage gespeichert werden. Danach werden sie gelöscht oder so anonymisiert, dass kein Rückschluss auf den konkreten Betrieb möglich ist.
 
 Der aktive n8n-Branch darf nicht mehr Daten speichern, als im Contract `automations/n8n/data-models/readiness-diagnosis-payload.v1.contract.json` erlaubt sind.
 
@@ -68,4 +68,4 @@ Der aktive n8n-Branch darf nicht mehr Daten speichern, als im Contract `automati
 
 n8n ist für diesen Prozess Workflow-Engine und technischer Empfänger des Payloads. Brevo, CRM oder weitere Systeme dürfen erst angebunden werden, wenn der konkrete Zustellweg dokumentiert ist.
 
-Kein neuer Drittland-Default wird durch die Readiness-Diagnose eingeführt.
+Kein neuer Drittland-Default wird durch die Anfrage-System-Analyse eingeführt.

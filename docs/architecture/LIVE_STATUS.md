@@ -57,7 +57,7 @@ Nicht verifiziert:
 
 ## In Arbeit
 
-- `/readiness-diagnose/` ist repo-seitig als noindex React-Funnel-Stub öffentlich aktiv (`HU_FEATURE_READINESS_DIAGNOSIS_ROUTE=true`). Der Stub baut nach `blocksy-child/readiness/dist/`; der Submit-Contract `readiness-diagnosis-payload.v1` und das n8n-Routing über den bestehenden `audit-consultation`-Pfad sind dokumentiert, aber `HU_FEATURE_READINESS_SUBMIT=false` bleibt der Default.
+- `/anfrage-system-analyse/` ist repo-seitig als noindex React-Funnel-Stub öffentlich aktiv (`HU_FEATURE_REQUEST_ANALYSIS_ROUTE=true`). `/readiness-diagnose/` wird als Legacy-Route per 301 weitergeleitet. Der Stub baut nach `blocksy-child/readiness/dist/`; der bestehende Submit-Contract `readiness-diagnosis-payload.v1` bleibt bis zur nächsten Contract-Version intern stabil, aber `HU_FEATURE_READINESS_SUBMIT=false` bleibt der Default.
 - Das Repo wird gerade von einem Theme-Repo zu einem Website Operating System erweitert.
 - `page-wgos.php` bleibt template-driven; eine spaetere Auslagerung des Content-Layers in Editor oder ACF ist weiter offen.
 - WGOS Asset-Detailseiten laufen jetzt ueber den hierarchischen CPT `wgos_asset` mit ACF-Meta und Single-Template; die redaktionelle Befuellung der Spokes passiert weiter im WordPress-Admin.
