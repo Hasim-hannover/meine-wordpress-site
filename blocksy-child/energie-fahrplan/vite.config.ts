@@ -7,6 +7,10 @@ export default defineConfig({
   plugins: [react()],
   build: {
     manifest: true,
+    outDir: 'dist',
+    rollupOptions: {
+      input: 'src/main.tsx',
+    },
   },
   resolve: {
     alias: {
