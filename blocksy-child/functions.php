@@ -38,6 +38,7 @@ $modules = [
 	'header.php',         // Eigener globaler Header + Navigation
 	'review-crm.php',     // Growth-Audit-Intake + WordPress CRM
 	'contact-page.php',   // Kontakt-Route, schlanke Kontaktform und Mailversand
+	'energy-demo-page.php', // EnergieFahrplan-Demo als stabile virtuelle Showroom-Route
 	'audit-linkedin-page.php', // LinkedIn Audit Landing Page (virtuelle Route, noindex)
 	'blog-notify.php',    // Blog-Benachrichtigungen, DOI und Artikel-Mails
 	'robots-txt.php',     // Dynamische /robots.txt-Route für Search- und KI-Crawler
