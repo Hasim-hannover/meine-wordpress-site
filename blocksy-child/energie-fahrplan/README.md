@@ -1,20 +1,27 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# EnergieFahrplan Demo
 
-# Run and deploy your AI Studio app
+Interaktive Showroom-App für `hasimuener.de/energie-fahrplan-demo/`.
 
-This contains everything you need to run your app locally.
+Zweck:
 
-View your app in AI Studio: https://ai.studio/apps/bf592e18-1207-4e5f-a758-7985a87aff36
+- Käufer-Sicht auf einen geführten Energie-Anfrageprozess zeigen.
+- PV-/Speicher-Ergebnis lokal im Browser berechnen.
+- Lokales PDF ausgeben, ohne E-Mail- oder CRM-Submit.
+- Sichtbar erklären, was in einer echten Kundenimplementation danach passieren kann: CRM-Karte, n8n-Routing, serverseitiges Tracking.
 
-## Run Locally
+Nicht-Ziele:
 
-**Prerequisites:**  Node.js
+- kein SaaS
+- kein Kunden-Dashboard
+- kein E-Mail-Workflow
+- kein CRM-Submit
+- keine Speicherung personenbezogener Daten
 
+Lokale Befehle:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev
+npm run build
+npm run lint
+```
